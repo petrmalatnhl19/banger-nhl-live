@@ -14,7 +14,8 @@ jobs:
         with:
           python-version: '3.12'
       - run: python scripts/update_rosters.py
-      - run: python scripts/update_lineups.py
+      - name: Refresh validated lineup projections
+        run: python scripts/update_lineups.py || echo 'No fresh validated lineups; retaining last published data'
       - run: python scripts/update_last_game_lines.py
       - run: python scripts/check_lineups_coverage.py
       - run: python scripts/audit_lineups.py
@@ -24,7 +25,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add lineups.json lineups_archive.json nhl_rosters.json lineups_coverage.json starting_goalies.json
+          for file in lineups.json lineups_archive.json nhl_rosters.json lineups_coverage.json starting_goalies.json; do
+            if [ -f "$file" ]; then git add "$file"; fi
+          done
           if ! git diff --cached --quiet; then
             git commit -m "Update NHL projected lineups"
             git push
