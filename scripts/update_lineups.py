@@ -204,6 +204,37 @@ for key,team in teams.items():
   continue
  archive["teams"][key]=record
 with open(ARCHIVE_FILE,"w",encoding="utf-8") as af:json.dump(archive,af,ensure_ascii=False,indent=2)
+# Compare only two validated projections for the same team, never roster fallbacks.
+try:
+ with open("lineups.json",encoding="utf-8") as oldfile:old_teams=json.load(oldfile).get("teams",{})
+except (OSError,ValueError):old_teams={}
+try:
+ with open("lineups_changes.json",encoding="utf-8") as changesfile:changes=json.load(changesfile).get("teams",{})
+except (OSError,ValueError):changes={}
+def positions(record):
+ result={}
+ for group,label in (("forwards","Útok"),("defense","Obrana")):
+  for i,line in enumerate(record.get(group,[])):
+   for player in line:result[normalize(player)]=(player,label+" "+str(i+1))
+ return result
+for key,team in teams.items():
+ previous=old_teams.get(key)
+ if not previous:continue
+ # The comparison must not create alerts from an older source publication.
+ previous_date=previous.get("publishedAt") or previous.get("asOf") or ""
+ current_date=team.get("publishedAt") or team.get("asOf") or ""
+ if previous_date and current_date and current_date<previous_date:continue
+ before=positions(previous);after=positions(team)
+ events=[]
+ for player,(display,pos) in after.items():
+  if player not in before:events.append({"type":"added","player":display,"to":pos})
+  elif before[player][1]!=pos:events.append({"type":"moved","player":display,"from":before[player][1],"to":pos})
+ for player,(display,pos) in before.items():
+  if player not in after:events.append({"type":"removed","player":display,"from":pos})
+ if events:
+  changes[key]={"updatedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"previousPublishedAt":previous_date,"publishedAt":current_date,"source":team.get("source",URL),"events":events[:40],"basis":"Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"}
+with open("lineups_changes.json","w",encoding="utf-8") as changesfile:
+ json.dump({"teams":changes},changesfile,ensure_ascii=False,indent=2)
 out={"source":URL,"fetchedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"teams":teams,"rosterValidated":True}
 with open("lineups.json","w",encoding="utf-8") as f:json.dump(out,f,ensure_ascii=False,indent=2)
 print("Saved",len(teams),"projected lineups")
