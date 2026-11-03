@@ -29,6 +29,32 @@ for i,line in enumerate(lines):
   elif len(names)==2 and len(forwards)>=3 and len(defense)<3:defense.append(names)
   elif len(names)==1 and len(forwards)>=3 and len(defense)>=2 and len(goalies)<2 and re.fullmatch(r"[\wÀ-ž.'’ -]{5,55}",x):goalies.append(x)
  if len(forwards)>=3 and len(defense)>=2:teams[name.lower()]={"name":name,"forwards":forwards,"defense":defense,"goalies":goalies,"injured":injured,"scratched":scratched}
+# Verify projected players against the NHL's current roster for the named club.
+# This prevents mixed-up article sections from appearing as trusted lineups.
+TEAM_ABBREVS={"golden knights":"VGK","bruins":"BOS","red wings":"DET","panthers":"FLA","avalanche":"COL","blackhawks":"CHI","flames":"CGY","sharks":"SJS","mammoth":"UTA","maple leafs":"TOR","jets":"WPG","canadiens":"MTL","stars":"DAL","rangers":"NYR","islanders":"NYI","devils":"NJD","hurricanes":"CAR","lightning":"TBL","senators":"OTT","sabres":"BUF","penguins":"PIT","flyers":"PHI","capitals":"WSH","ducks":"ANA","kings":"LAK","kraken":"SEA","wild":"MIN","blues":"STL","predators":"NSH","oilers":"EDM","canucks":"VAN","blue jackets":"CBJ"}
+def normalize(name):
+ return re.sub(r"[^a-z]","",name.casefold().replace("’","'"))
+validated={}
+for name,team in teams.items():
+ abbr=TEAM_ABBREVS.get(name)
+ if not abbr:continue
+ try:
+  req=urllib.request.Request("https://api-web.nhle.com/v1/roster/"+abbr+"/current",headers={"User-Agent":"BangerNHL/1.0"})
+  with urllib.request.urlopen(req,timeout=12) as resp: roster=json.load(resp)
+  names=set()
+  for group in ("forwards","defensemen","goalies"):
+   for player in roster.get(group,[]):
+    first=player.get("firstName",{});last=player.get("lastName",{})
+    first=first.get("default","") if isinstance(first,dict) else first
+    last=last.get("default","") if isinstance(last,dict) else last
+    names.add(normalize(str(first)+" "+str(last)))
+  projected=[x for line in team["forwards"]+team["defense"] for x in line]
+  matches=sum(normalize(x) in names for x in projected)
+  if matches>=int(len(projected)*0.8):
+   validated[name]=team
+  else:print("Skipped",name,"roster match",matches,"/",len(projected))
+ except Exception as e:print("Roster validation unavailable for",name,str(e))
+teams=validated
 if len(teams)<2:raise SystemExit("Parser found fewer than 2 teams; retaining previous data")
 out={"source":URL,"fetchedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"teams":teams}
 with open("lineups.json","w",encoding="utf-8") as f:json.dump(out,f,ensure_ascii=False,indent=2)
