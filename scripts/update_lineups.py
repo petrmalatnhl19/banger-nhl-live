@@ -164,9 +164,22 @@ for name,team in teams.items():
   groups={}
   for role,group in (("forwards","forwards"),("defense","defensemen"),("goalies","goalies")):
    groups[role]={normalize(str((p.get("firstName",{}).get("default","") if isinstance(p.get("firstName"),dict) else p.get("firstName","")))+" "+str((p.get("lastName",{}).get("default","") if isinstance(p.get("lastName"),dict) else p.get("lastName","")))) for p in roster.get(group,[])}
-  forwards_ok=all(len(line)==3 and all(normalize(x) in groups["forwards"] for x in line) for line in team["forwards"])
-  defense_ok=all(len(line)==2 and all(normalize(x) in groups["defense"] for x in line) for line in team["defense"])
-  goalies_ok=all(normalize(x) in groups["goalies"] for x in team.get("goalies",[]))
+  # Classify each parsed row by NHL roster position, not by its order in HTML.
+  # An unrelated two-name line must never become a defensive pair.
+  all_rows=team.get("forwards",[])+team.get("defense",[])
+  forwards=[row for row in all_rows if len(row)==3 and all(normalize(x) in groups["forwards"] for x in row)]
+  defense=[row for row in all_rows if len(row)==2 and all(normalize(x) in groups["defense"] for x in row)]
+  goalies=[x for x in team.get("goalies",[]) if normalize(x) in groups["goalies"]]
+  # If a defender was incorrectly parsed as a goalie, discard it.
+  # Preserve the source order and do not invent missing lines.
+  team["forwards"]=forwards[:4]
+  team["defense"]=defense[:3]
+  team["goalies"]=goalies[:2]
+  forwards_ok=len(forwards)>=3
+  defense_ok=len(defense)>=2
+  goalies_ok=True
+  if not forwards_ok or not defense_ok:
+   print("Incomplete verified lines",name,"forwards",len(forwards),"defense",len(defense))
   if forwards_ok and defense_ok and goalies_ok:
    validated[name]=team
   else:print("Skipped",name,"invalid position assignment (F/D/G)")
