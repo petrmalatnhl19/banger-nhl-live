@@ -31,7 +31,7 @@ def main():
  records={}
  # Match only full goalie names against NHL's official current roster.
  # A player name is attributed only if a team heading appears close to it.
- teams={k:[normalize(x) for x in [abbr,key,rosters.get(key,{}).get("abbrev",abbr)]] for abbr,key in ABBR.items()}
+ # Team identifiers are read directly from ABBR below; no unused dictionary needed.
  for abbr,key in ABBR.items():
   goalies=rosters.get(key,{}).get("goalies",[])
   if not goalies:continue
