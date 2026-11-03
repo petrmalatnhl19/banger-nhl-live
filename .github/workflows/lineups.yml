@@ -20,7 +20,7 @@ jobs:
       - run: python scripts/check_lineups_coverage.py
       - run: python scripts/audit_lineups.py
       - name: Fetch projected starting goalies (optional source)
-        run: python scripts/update_starting_goalies.py || echo 'Goalie source unavailable; keeping prior snapshot'
+        run: python scripts/update_starting_goalies.py
       - name: Commit changed lineups
         run: |
           git config user.name "github-actions[bot]"
