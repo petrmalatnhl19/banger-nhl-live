@@ -1,0 +1,50 @@
+"""Fetch dated projected NHL starting goalies. Never infer confirmed starts."""
+import json,re,datetime,urllib.request,html
+from html.parser import HTMLParser
+SOURCE="https://themorningpuck.com/starting-goalies"
+ABBR={"ANA":"ducks","BOS":"bruins","BUF":"sabres","CAR":"hurricanes","CBJ":"blue jackets","CGY":"flames","CHI":"blackhawks","COL":"avalanche","DAL":"stars","DET":"red wings","EDM":"oilers","FLA":"panthers","LAK":"kings","MIN":"wild","MTL":"canadiens","NJD":"devils","NSH":"predators","NYI":"islanders","NYR":"rangers","OTT":"senators","PHI":"flyers","PIT":"penguins","SEA":"kraken","SJS":"sharks","STL":"blues","TBL":"lightning","TOR":"maple leafs","UTA":"mammoth","VAN":"canucks","VGK":"golden knights","WPG":"jets","WSH":"capitals"}
+class Extract(HTMLParser):
+ def __init__(self):super().__init__();self.parts=[];self.hidden=0
+ def handle_starttag(self,tag,attrs):
+  if tag in ("script","style"):self.hidden+=1
+  if tag in ("h1","h2","h3","h4","p","div","li","br","tr"):self.parts.append("\n")
+ def handle_endtag(self,tag):
+  if tag in ("script","style"):self.hidden=max(0,self.hidden-1)
+  if tag in ("h1","h2","h3","h4","p","div","li","tr"):self.parts.append("\n")
+ def handle_data(self,value):
+  if not self.hidden:self.parts.append(value)
+def normalize(value):
+ import unicodedata
+ return re.sub("[^a-z]","",unicodedata.normalize("NFKD",value.casefold()).encode("ascii","ignore").decode())
+def main():
+ with open("nhl_rosters.json",encoding="utf-8") as f:rosters=json.load(f).get("teams",{})
+ today=datetime.datetime.now(datetime.timezone.utc).date().isoformat()
+ req=urllib.request.Request(SOURCE,headers={"User-Agent":"Mozilla/5.0","Accept":"text/html"})
+ with urllib.request.urlopen(req,timeout=20) as r:page=r.read().decode("utf-8","replace")
+ parser=Extract();parser.feed(page)
+ lines=[re.sub(r"\s+"," ",html.unescape(x)).strip() for x in "".join(parser.parts).splitlines()]
+ lines=[x for x in lines if x]
+ # A date must be present. The source may serve yesterday's page.
+ date_tokens=[today,datetime.datetime.now(datetime.timezone.utc).strftime("%B %-d, %Y")]
+ if not any(t.lower() in " ".join(lines[:150]).lower() for t in date_tokens):
+  raise ValueError("Source does not show today's date")
+ records={}
+ # Match only full goalie names against NHL's official current roster.
+ # A player name is attributed only if a team heading appears close to it.
+ teams={k:[normalize(x) for x in [abbr,key,rosters.get(key,{}).get("abbrev",abbr)]] for abbr,key in ABBR.items()}
+ for abbr,key in ABBR.items():
+  goalies=rosters.get(key,{}).get("goalies",[])
+  if not goalies:continue
+  for i,line in enumerate(lines):
+   if not any(normalize(line)==normalize(g) for g in goalies):continue
+   neighborhood=" ".join(lines[max(0,i-7):i])
+   # Require the team name in preceding text, not just the goalie.
+   if not (re.search(r"\b"+re.escape(abbr)+r"\b",neighborhood,re.I) or re.search(re.escape(key),neighborhood,re.I)):continue
+   status="projected"
+   context=" ".join(lines[i+1:i+4]).upper()
+   if "PROJECTED" not in context and "LIKELY" not in context:continue
+   records[abbr]={"name":line,"status":status,"date":today,"source":SOURCE,"sourceLabel":"The Morning Puck","checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat()}
+   break
+ with open("starting_goalies.json","w",encoding="utf-8") as f:json.dump({"date":today,"updatedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"teams":records},f,ensure_ascii=False,indent=2)
+ print("Verified source-matched projected goalies:",len(records))
+if __name__=="__main__":main()
