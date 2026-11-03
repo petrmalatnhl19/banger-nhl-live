@@ -56,6 +56,6 @@ for name,team in teams.items():
  except Exception as e:print("Roster validation unavailable for",name,str(e))
 teams=validated
 if len(teams)<2:raise SystemExit("Parser found fewer than 2 teams; retaining previous data")
-out={"source":URL,"fetchedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"teams":teams}
+out={"source":URL,"fetchedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"teams":teams,"rosterValidated":True}
 with open("lineups.json","w",encoding="utf-8") as f:json.dump(out,f,ensure_ascii=False,indent=2)
 print("Saved",len(teams),"projected lineups")
