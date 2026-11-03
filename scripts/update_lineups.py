@@ -132,7 +132,7 @@ def parse_secondary(raw):
    fw.append(names[1:4])
   elif section=="defense" and len(names)>=3 and len(df)<3 and re.search(r"pair\\s*\\d",names[0],re.I):
    df.append(names[1:3])
-  elif section=="powerplay" and len(names)>=2 and len(pp)<2 and re.search(r"PP[12]",names[0],re.I):pp.append(names[1])
+  elif section=="powerplay" and len(names)>=6 and len(pp)<2 and re.search(r"PP\s*[12]|power\s*play\s*[12]",names[0],re.I):pp.append(names[1:6])
  return fw,df,pp,len(parser.rows)
 for key,slug in SLUGS.items():
  if key in teams:continue
