@@ -1,0 +1,1122 @@
+{
+  "teams": {
+    "ducks": {
+      "forwards": [
+        "Leo Carlsson",
+        "Judd Caulfield",
+        "Sam Colangelo",
+        "Cutter Gauthier",
+        "Mikael Granlund",
+        "A.J. Greer",
+        "Alex Killorn",
+        "Jeff Malott",
+        "Roger McQueen",
+        "Nico Myatovic",
+        "Nikita Nesterenko",
+        "Ryan Poehling",
+        "Beckett Sennecke",
+        "Troy Terry",
+        "Frank Vatrano",
+        "Tim Washe"
+      ],
+      "defense": [
+        "Drew Helleson",
+        "Tyson Hinds",
+        "Jackson LaCombe",
+        "Tristan Luneau",
+        "Pavel Mintyukov",
+        "Travis Mitchell",
+        "Ian Moore",
+        "Noah Warren"
+      ],
+      "goalies": [
+        "Laurent Brossoit",
+        "Lukas Dostal",
+        "Ville Husso"
+      ],
+      "updatedAt": "2026-11-03T08:57:50.846021+00:00",
+      "abbrev": "ANA"
+    },
+    "bruins": {
+      "forwards": [
+        "Morgan Geekie",
+        "James Hagens",
+        "Tanner Jeannot",
+        "Mark Kastelic",
+        "Marat Khusnutdinov",
+        "Sean Kuraly",
+        "Elias Lindholm",
+        "Fraser Minten",
+        "Casey Mittelstadt",
+        "David Pastrnak",
+        "JJ Peterka",
+        "Matthew Poitras",
+        "Pavel Zacha"
+      ],
+      "defense": [
+        "Jonathan Aspirot",
+        "Will Borgen",
+        "Frederic Brunet",
+        "Connor Clifton",
+        "Hampus Lindholm",
+        "Mason Lohrei",
+        "Charlie McAvoy",
+        "Nikita Zadorov"
+      ],
+      "goalies": [
+        "Michael DiPietro",
+        "Jeremy Swayman"
+      ],
+      "updatedAt": "2026-11-03T08:57:50.912333+00:00",
+      "abbrev": "BOS"
+    },
+    "sabres": {
+      "forwards": [
+        "Zach Benson",
+        "Sam Carrick",
+        "Justin Danforth",
+        "Josh Doan",
+        "Konsta Helenius",
+        "Tyson Kozak",
+        "Peyton Krebs",
+        "Jiri Kulich",
+        "Beck Malenstyn",
+        "Ryan McLeod",
+        "Josh Norris",
+        "Noah Ostlund",
+        "Jack Quinn",
+        "Tage Thompson",
+        "Jason Zucker"
+      ],
+      "defense": [
+        "Louis Crevier",
+        "Rasmus Dahlin",
+        "Matt Grzelcyk",
+        "Zach Metsa",
+        "Owen Power",
+        "Mattias Samuelsson",
+        "Conor Timmins",
+        "Olen Zellweger"
+      ],
+      "goalies": [
+        "Colten Ellis",
+        "Ukko-Pekka Luukkonen",
+        "Alex Lyon"
+      ],
+      "updatedAt": "2026-11-03T08:57:51.046566+00:00",
+      "abbrev": "BUF"
+    },
+    "hurricanes": {
+      "forwards": [
+        "Sebastian Aho",
+        "Jackson Blake",
+        "William Carrier",
+        "Nicolas Deslauriers",
+        "Nikolaj Ehlers",
+        "Taylor Hall",
+        "Mark Jankowski",
+        "Seth Jarvis",
+        "Jesperi Kotkaniemi",
+        "Jordan Martinook",
+        "Eric Robinson",
+        "Jordan Staal",
+        "Logan Stankoven",
+        "Andrei Svechnikov"
+      ],
+      "defense": [
+        "Jalen Chatfield",
+        "Shayne Gostisbehere",
+        "K'Andre Miller",
+        "Alexander Nikishin",
+        "Mike Reilly",
+        "Jaccob Slavin",
+        "Juuso Välimäki",
+        "Sean Walker"
+      ],
+      "goalies": [
+        "Brandon Bussi",
+        "Pyotr Kochetkov"
+      ],
+      "updatedAt": "2026-11-03T08:57:51.178978+00:00",
+      "abbrev": "CAR"
+    },
+    "blue jackets": {
+      "forwards": [
+        "Charlie Coyle",
+        "Luca Del Bel Belluz",
+        "Adam Fantilli",
+        "Conor Garland",
+        "Danton Heinen",
+        "Kent Johnson",
+        "Matthew Knies",
+        "Ryan Lomberg",
+        "Sean Monahan",
+        "Valeri Nichushkin",
+        "Mathieu Olivier",
+        "Cole Sillinger",
+        "Dmitri Voronkov"
+      ],
+      "defense": [
+        "Emil Andrae",
+        "Jake Christiansen",
+        "Dante Fabbro",
+        "Erik Gudbranson",
+        "Denton Mateychuk",
+        "Ivan Provorov",
+        "Damon Severson",
+        "Zach Werenski"
+      ],
+      "goalies": [
+        "Jet Greaves",
+        "Cam Talbot"
+      ],
+      "updatedAt": "2026-11-03T08:57:51.313121+00:00",
+      "abbrev": "CBJ"
+    },
+    "flames": {
+      "forwards": [
+        "Mikael Backlund",
+        "Jonathan Castagna",
+        "Matt Coronato",
+        "Joel Farabee",
+        "Morgan Frost",
+        "Matvei Gridin",
+        "Samuel Honzek",
+        "Jonathan Huberdeau",
+        "Ben Jones",
+        "Adam Klapka",
+        "Brennan Othmann",
+        "Martin Pospisil",
+        "Yegor Sharangovich",
+        "Ryan Strome",
+        "William Stromgren",
+        "Aydar Suniev",
+        "Maxim Tsyplakov"
+      ],
+      "defense": [
+        "Kevin Bahl",
+        "Joel Hanley",
+        "Yan Kuznetsov",
+        "Jake Middleton",
+        "Simon Nemec",
+        "Zayne Parekh",
+        "Zach Whitecloud"
+      ],
+      "goalies": [
+        "Devin Cooley",
+        "Arsenii Sergeev",
+        "Dustin Wolf"
+      ],
+      "updatedAt": "2026-11-03T08:57:51.376252+00:00",
+      "abbrev": "CGY"
+    },
+    "blackhawks": {
+      "forwards": [
+        "Connor Bedard",
+        "Tyler Bertuzzi",
+        "Ryan Donato",
+        "Anton Frondell",
+        "Ryan Greene",
+        "Jordan Greenway",
+        "Patrick Kane",
+        "Roman Kantserov",
+        "Andrew Mangiapane",
+        "Oliver Moore",
+        "Frank Nazar",
+        "Cole Smith",
+        "Teuvo Teravainen",
+        "Dominic Toninato"
+      ],
+      "defense": [
+        "Bowen Byram",
+        "Ian Cole",
+        "Ethan Del Mastro",
+        "Wyatt Kaiser",
+        "Kevin Korchinski",
+        "Artyom Levshunov",
+        "Sam Rinzel",
+        "Alex Vlasic"
+      ],
+      "goalies": [
+        "Spencer Knight",
+        "Arvid Soderblom"
+      ],
+      "updatedAt": "2026-11-03T08:57:51.444902+00:00",
+      "abbrev": "CHI"
+    },
+    "avalanche": {
+      "forwards": [
+        "T.J. Hughes",
+        "Nazem Kadri",
+        "Parker Kelly",
+        "Zachary L'Heureux",
+        "Gabriel Landeskog",
+        "Artturi Lehkonen",
+        "Nathan MacKinnon",
+        "Martin Necas",
+        "Brock Nelson",
+        "Logan O'Connor",
+        "Nicolas Roy",
+        "Jaden Schwartz",
+        "Fedor Svechkov"
+      ],
+      "defense": [
+        "Brent Burns",
+        "Noah Juulsen",
+        "Brett Kulak",
+        "Cale Makar",
+        "Sam Malinski",
+        "Josh Manson",
+        "Keaton Middleton",
+        "Devon Toews"
+      ],
+      "goalies": [
+        "Mackenzie Blackwood",
+        "Scott Wedgewood"
+      ],
+      "updatedAt": "2026-11-03T08:57:51.512375+00:00",
+      "abbrev": "COL"
+    },
+    "stars": {
+      "forwards": [
+        "Jamie Benn",
+        "Colin Blackwell",
+        "Oskar Bäck",
+        "Matt Duchene",
+        "Radek Faksa",
+        "Roope Hintz",
+        "Justin Hryckowian",
+        "Arttu Hyry",
+        "Wyatt Johnston",
+        "Joel Kiviranta",
+        "David Perron",
+        "Mikko Rantanen",
+        "Jason Robertson",
+        "Tyler Seguin",
+        "Sam Steel"
+      ],
+      "defense": [
+        "Lian Bichsel",
+        "Kyle Capobianco",
+        "Thomas Harley",
+        "Miro Heiskanen",
+        "Esa Lindell",
+        "Nils Lundkvist",
+        "Tyler Myers"
+      ],
+      "goalies": [
+        "Casey DeSmith",
+        "Jake Oettinger"
+      ],
+      "updatedAt": "2026-11-03T08:57:51.645146+00:00",
+      "abbrev": "DAL"
+    },
+    "red wings": {
+      "forwards": [
+        "Mason Appleton",
+        "Viktor Arvidsson",
+        "Michael Brandsegg-Nygård",
+        "J.T. Compher",
+        "Andrew Copp",
+        "Nate Danielson",
+        "Alex DeBrincat",
+        "Sheldon Dries",
+        "Emmitt Finnie",
+        "Marco Kasper",
+        "Keegan Kolesar",
+        "John Leonard",
+        "Carter Mazur",
+        "Michael Rasmussen",
+        "Lucas Raymond"
+      ],
+      "defense": [
+        "Jacob Bernard-Docker",
+        "Ben Chiarot",
+        "Andreas Englund",
+        "Justin Faulk",
+        "Albert Johansson",
+        "Anton Johansson",
+        "Moritz Seider",
+        "William Wallinder"
+      ],
+      "goalies": [
+        "John Gibson",
+        "Daniil Tarasov"
+      ],
+      "updatedAt": "2026-11-03T08:57:51.712425+00:00",
+      "abbrev": "DET"
+    },
+    "oilers": {
+      "forwards": [
+        "Colton Dach",
+        "Jason Dickinson",
+        "Leon Draisaitl",
+        "Alex Formenton",
+        "Trent Frederic",
+        "Filip Hallander",
+        "Isaac Howard",
+        "Zach Hyman",
+        "Mattias Janmark",
+        "Max Jones",
+        "Mathieu Joseph",
+        "Kasperi Kapanen",
+        "Connor McDavid",
+        "Owen Michaels",
+        "Ryan Nugent-Hopkins",
+        "Vasily Podkolzin",
+        "Matt Savoie"
+      ],
+      "defense": [
+        "Evan Bouchard",
+        "Mattias Ekholm",
+        "Ty Emberson",
+        "Shakir Mukhamadullin",
+        "Connor Murphy",
+        "Alec Regula",
+        "Ryan Shea",
+        "Jake Walman"
+      ],
+      "goalies": [
+        "Frederik Andersen",
+        "Tristan Jarry",
+        "Devon Levi",
+        "Matt Tomkins"
+      ],
+      "updatedAt": "2026-11-03T08:57:51.848103+00:00",
+      "abbrev": "EDM"
+    },
+    "panthers": {
+      "forwards": [
+        "Aleksander Barkov",
+        "Sam Bennett",
+        "Lars Eller",
+        "Jonah Gadjovich",
+        "Garnet Hathaway",
+        "Bokondji Imama",
+        "Anton Lundell",
+        "Eetu Luostarinen",
+        "Brad Marchand",
+        "Cole Reinhardt",
+        "Sam Reinhart",
+        "Cole Schwindt",
+        "Brady Tkachuk",
+        "Matthew Tkachuk",
+        "Carter Verhaeghe",
+        "Sandis Vilmanis"
+      ],
+      "defense": [
+        "Uvis Balinskis",
+        "Aaron Ekblad",
+        "Gustav Forsling",
+        "Radko Gudas",
+        "Seth Jones",
+        "Dmitry Kulikov",
+        "Niko Mikkola"
+      ],
+      "goalies": [
+        "Jacob Markstrom",
+        "Akira Schmid"
+      ],
+      "updatedAt": "2026-11-03T08:57:51.919643+00:00",
+      "abbrev": "FLA"
+    },
+    "kings": {
+      "forwards": [
+        "Joel Armia",
+        "Quinton Byfield",
+        "Martin Chromiak",
+        "Kevin Fiala",
+        "Erik Haula",
+        "Samuel Helenius",
+        "Adrian Kempe",
+        "Alex Laferriere",
+        "Scott Laughton",
+        "Andre Lee",
+        "Trevor Moore",
+        "Artemi Panarin",
+        "Corey Perry",
+        "Alex Turcotte",
+        "Taylor Ward",
+        "Mats Zuccarello"
+      ],
+      "defense": [
+        "Mikey Anderson",
+        "Cody Ceci",
+        "Brandt Clarke",
+        "Drew Doughty",
+        "Brian Dumoulin",
+        "Joel Edmundson",
+        "Erik Gustafsson"
+      ],
+      "goalies": [
+        "Anton Forsberg",
+        "Darcy Kuemper"
+      ],
+      "updatedAt": "2026-11-03T08:57:52.058126+00:00",
+      "abbrev": "LAK"
+    },
+    "wild": {
+      "forwards": [
+        "Matt Boldy",
+        "Bobby Brink",
+        "Blake Coleman",
+        "Joel Eriksson Ek",
+        "Marcus Foligno",
+        "Nick Foligno",
+        "Ryan Hartman",
+        "Kirill Kaprizov",
+        "Michael McCarron",
+        "Tyler Pitlick",
+        "Maxim Shabanov",
+        "Mason Shaw",
+        "Nico Sturm",
+        "Yakov Trenin",
+        "Danila Yurov"
+      ],
+      "defense": [
+        "Zach Bogosian",
+        "Jonas Brodin",
+        "Cameron Crotty",
+        "Brock Faber",
+        "Quinn Hughes",
+        "Matt Kiersted",
+        "Olli Maatta",
+        "David Spacek",
+        "Jared Spurgeon"
+      ],
+      "goalies": [
+        "Filip Gustavsson",
+        "Calvin Pickard",
+        "Jesper Wallstedt"
+      ],
+      "updatedAt": "2026-11-03T08:57:52.128736+00:00",
+      "abbrev": "MIN"
+    },
+    "canadiens": {
+      "forwards": [
+        "Josh Anderson",
+        "Owen Beck",
+        "Zachary Bolduc",
+        "Cole Caufield",
+        "Kirby Dach",
+        "Phillip Danault",
+        "Ivan Demidov",
+        "Jake Evans",
+        "Oliver Kapanen",
+        "Chris Kreider",
+        "Alex Newhook",
+        "Juraj Slafkovský",
+        "Nick Suzuki",
+        "Alexandre Texier",
+        "Florian Xhekaj"
+      ],
+      "defense": [
+        "Alexandre Carrier",
+        "Noah Dobson",
+        "Adam Engstrom",
+        "Kaiden Guhle",
+        "Lane Hutson",
+        "Mike Matheson",
+        "Arber Xhekaj"
+      ],
+      "goalies": [
+        "Jakub Dobes",
+        "Jacob Fowler",
+        "Samuel Montembeault"
+      ],
+      "updatedAt": "2026-11-03T08:57:52.271628+00:00",
+      "abbrev": "MTL"
+    },
+    "devils": {
+      "forwards": [
+        "Jesper Boqvist",
+        "Jesper Bratt",
+        "Connor Brown",
+        "Luke Evangelista",
+        "Cody Glass",
+        "Arseny Gritsyuk",
+        "Nico Hischier",
+        "Jack Hughes",
+        "Amadeus Lombardi",
+        "Anthony Mantha",
+        "Timo Meier",
+        "Stefan Noesen",
+        "Evan Rodrigues"
+      ],
+      "defense": [
+        "Declan Chisholm",
+        "Brenden Dillon",
+        "Dougie Hamilton",
+        "Luke Hughes",
+        "Johnathan Kovacevic",
+        "Brett Pesce",
+        "Jonas Siegenthaler"
+      ],
+      "goalies": [
+        "Jake Allen",
+        "Connor Hellebuyck"
+      ],
+      "updatedAt": "2026-11-03T08:57:52.405234+00:00",
+      "abbrev": "NJD"
+    },
+    "predators": {
+      "forwards": [
+        "Mavrik Bourque",
+        "Ross Colton",
+        "Jack Drury",
+        "Adam Edstrom",
+        "Filip Forsberg",
+        "Nils Hoglander",
+        "Alexander Kerfoot",
+        "Jonathan Marchessault",
+        "Ryan O'Reilly",
+        "Vitali Pinchuk",
+        "Reid Schaefer",
+        "Steven Stamkos",
+        "Shane Wright"
+      ],
+      "defense": [
+        "Nicolas Hague",
+        "Daemon Hunt",
+        "Roman Josi",
+        "Ilya Lyubushkin",
+        "Nick Perbix",
+        "Brady Skjei",
+        "Jayden Struble",
+        "William Trudeau",
+        "Adam Wilsby"
+      ],
+      "goalies": [
+        "Justus Annunen",
+        "Juuse Saros"
+      ],
+      "updatedAt": "2026-11-03T08:57:52.541541+00:00",
+      "abbrev": "NSH"
+    },
+    "islanders": {
+      "forwards": [
+        "Mitchell Chaffee",
+        "Casey Cizikas",
+        "Anthony Duclair",
+        "Victor Eklund",
+        "Emil Heineman",
+        "Simon Holmstrom",
+        "Bo Horvat",
+        "Matias Maccelli",
+        "Kyle MacLean",
+        "Jean-Gabriel Pageau",
+        "Ondrej Palat",
+        "Kyle Palmieri",
+        "Calum Ritchie",
+        "Brayden Schenn"
+      ],
+      "defense": [
+        "Tony DeAngelo",
+        "Matthew Kessel",
+        "Scott Mayfield",
+        "Adam Pelech",
+        "Ryan Pulock",
+        "Alexander Romanov",
+        "Matthew Schaefer",
+        "Logan Stanley"
+      ],
+      "goalies": [
+        "Ilya Sorokin",
+        "Semyon Varlamov"
+      ],
+      "updatedAt": "2026-11-03T08:57:52.676834+00:00",
+      "abbrev": "NYI"
+    },
+    "rangers": {
+      "forwards": [
+        "Oliver Bjorkstrand",
+        "Jaroslav Chmelar",
+        "Will Cuylle",
+        "Pavel Dorofeyev",
+        "Luke Glendening",
+        "Tye Kartye",
+        "Noah Laba",
+        "Alexis Lafrenière",
+        "J.T. Miller",
+        "Gabe Perreault",
+        "Matt Rempe",
+        "Adam Sykora",
+        "Eeli Tolvanen",
+        "Joseph Veleno",
+        "Mika Zibanejad"
+      ],
+      "defense": [
+        "Sean Durzi",
+        "Adam Fox",
+        "Vladislav Gavrikov",
+        "Scott Morrow",
+        "Marcus Pettersson",
+        "Matthew Robertson",
+        "Braden Schneider",
+        "Alberts Smits"
+      ],
+      "goalies": [
+        "Dylan Garand",
+        "Joonas Korpisalo",
+        "James Reimer",
+        "Igor Shesterkin"
+      ],
+      "updatedAt": "2026-11-03T08:57:52.815704+00:00",
+      "abbrev": "NYR"
+    },
+    "senators": {
+      "forwards": [
+        "Michael Amadio",
+        "Drake Batherson",
+        "Andre Burakovsky",
+        "Nick Cousins",
+        "Dylan Cozens",
+        "William Eklund",
+        "Warren Foegele",
+        "Claude Giroux",
+        "Ridly Greig",
+        "Stephen Halliday",
+        "Hayden Hodgson",
+        "Shane Pinto",
+        "Tim Stützle",
+        "Fabian Zetterlund"
+      ],
+      "defense": [
+        "Thomas Chabot",
+        "Tyler Kleven",
+        "Nikolas Matinpalo",
+        "Jake Sanderson",
+        "Jordan Spence",
+        "Carter Yakemchuk",
+        "Artem Zub"
+      ],
+      "goalies": [
+        "Samuel Ersson",
+        "Jonas Johansson",
+        "Linus Ullmark"
+      ],
+      "updatedAt": "2026-11-03T08:57:52.950848+00:00",
+      "abbrev": "OTT"
+    },
+    "flyers": {
+      "forwards": [
+        "Noel Acciari",
+        "Denver Barkey",
+        "Michael Bunting",
+        "Noah Cates",
+        "Sean Couturier",
+        "Christian Dvorak",
+        "Tyson Foerster",
+        "Nikita Grebenkin",
+        "Cole Knuble",
+        "Travis Konecny",
+        "Porter Martone",
+        "Matvei Michkov",
+        "Jack Studnicka",
+        "Owen Tippett",
+        "Trevor Zegras"
+      ],
+      "defense": [
+        "Simon Benoit",
+        "Oliver Bonk",
+        "Jamie Drysdale",
+        "David Jiricek",
+        "Rasmus Ristolainen",
+        "Travis Sanheim",
+        "Nick Seeler",
+        "Cam York"
+      ],
+      "goalies": [
+        "Dan Vladar",
+        "Joseph Woll"
+      ],
+      "updatedAt": "2026-11-03T08:57:53.094963+00:00",
+      "abbrev": "PHI"
+    },
+    "penguins": {
+      "forwards": [
+        "Justin Brazeau",
+        "Egor Chinakhov",
+        "Sidney Crosby",
+        "Connor Dewar",
+        "Ben Kindel",
+        "Ville Koivunen",
+        "Andrei Kuzmenko",
+        "Hendrix Lapierre",
+        "Blake Lizotte",
+        "Evgeni Malkin",
+        "Tommy Novak",
+        "Rickard Rakell",
+        "Nick Robertson",
+        "Bryan Rust",
+        "Elmer Soderblom"
+      ],
+      "defense": [
+        "Declan Carlile",
+        "Samuel Girard",
+        "Erik Karlsson",
+        "Kaedan Korczak",
+        "Kris Letang",
+        "Ilya Solovyov",
+        "Spencer Stastney",
+        "Trevor van Riemsdyk"
+      ],
+      "goalies": [
+        "Sergei Murashov",
+        "Arturs Silovs"
+      ],
+      "updatedAt": "2026-11-03T08:57:53.227748+00:00",
+      "abbrev": "PIT"
+    },
+    "kraken": {
+      "forwards": [
+        "Matty Beniers",
+        "Berkly Catton",
+        "Curtis Douglas",
+        "Jordan Eberle",
+        "Frederick Gaudreau",
+        "Kaapo Kakko",
+        "Jared McCann",
+        "Bobby McMann",
+        "Jacob Melanson",
+        "Ben Meyers",
+        "Jani Nyman",
+        "Jake O'Brien",
+        "Mackie Samoskevich",
+        "Chandler Stephenson",
+        "Ryan Winterton",
+        "Matthew Wood"
+      ],
+      "defense": [
+        "Vince Dunn",
+        "Ryker Evans",
+        "Cale Fleury",
+        "Adam Larsson",
+        "Ryan Lindgren",
+        "Josh Mahura",
+        "Brandon Montour",
+        "Ville Ottavainen"
+      ],
+      "goalies": [
+        "Joey Daccord",
+        "Philipp Grubauer"
+      ],
+      "updatedAt": "2026-11-03T08:57:53.373153+00:00",
+      "abbrev": "SEA"
+    },
+    "sharks": {
+      "forwards": [
+        "Filip Bystedt",
+        "Macklin Celebrini",
+        "Igor Chernyshov",
+        "Ty Dellandrea",
+        "Adam Gaudette",
+        "Barclay Goodrow",
+        "Collin Graf",
+        "Mason Marchment",
+        "Michael Misa",
+        "Zack Ostapchuk",
+        "Kiefer Sherwood",
+        "Will Smith",
+        "Ivar Stenberg",
+        "Tyler Toffoli",
+        "Alexander Wennberg"
+      ],
+      "defense": [
+        "Nolan Allan",
+        "Sam Dickinson",
+        "Libor Hajek",
+        "Michael Kesselring",
+        "Darnell Nurse",
+        "Dmitry Orlov",
+        "Jacob Trouba"
+      ],
+      "goalies": [
+        "Yaroslav Askarov",
+        "Alex Nedeljkovic"
+      ],
+      "updatedAt": "2026-11-03T08:57:53.445334+00:00",
+      "abbrev": "SJS"
+    },
+    "blues": {
+      "forwards": [
+        "Jonatan Berggren",
+        "Pavel Buchnevich",
+        "Dillon Dube",
+        "Dalibor Dvorsky",
+        "Dylan Holloway",
+        "Ross Johnston",
+        "Aleksanteri Kaskimaki",
+        "Connor McMichael",
+        "Mason McTavish",
+        "Jake Neighbours",
+        "Jimmy Snuggerud",
+        "Pius Suter",
+        "Robert Thomas",
+        "Alexey Toropchenko"
+      ],
+      "defense": [
+        "Justin Barron",
+        "Philip Broberg",
+        "Quinton Burns",
+        "Brandon Carlo",
+        "Cam Fowler",
+        "Adam Jiricek",
+        "Theo Lindstein",
+        "Colton Parayko",
+        "Tyler Tucker"
+      ],
+      "goalies": [
+        "Jordan Binnington",
+        "Joel Hofer"
+      ],
+      "updatedAt": "2026-11-03T08:57:53.577506+00:00",
+      "abbrev": "STL"
+    },
+    "lightning": {
+      "forwards": [
+        "Anthony Cirelli",
+        "Conor Geekie",
+        "Zemgus Girgensons",
+        "Gage Goncalves",
+        "Yanni Gourde",
+        "Jake Guentzel",
+        "Brandon Hagel",
+        "Pontus Holmberg",
+        "Dominic James",
+        "Nikita Kucherov",
+        "Ilya Mikheyev",
+        "Brayden Point",
+        "Scott Sabourin",
+        "Jeffrey Viel"
+      ],
+      "defense": [
+        "John Carlson",
+        "Erik Cernak",
+        "Max Crozier",
+        "Charle-Edouard D'Astous",
+        "Victor Hedman",
+        "Emil Lilleberg",
+        "Ryan McDonagh",
+        "J.J. Moser"
+      ],
+      "goalies": [
+        "Dennis Hildeby",
+        "Andrei Vasilevskiy"
+      ],
+      "updatedAt": "2026-11-03T08:57:53.712925+00:00",
+      "abbrev": "TBL"
+    },
+    "maple leafs": {
+      "forwards": [
+        "Teddy Blueger",
+        "Easton Cowan",
+        "Brandon Duhaime",
+        "Bo Groulx",
+        "Dakota Joshua",
+        "Vinni Lettieri",
+        "Zack MacEwen",
+        "Kirill Marchenko",
+        "Auston Matthews",
+        "Gavin McKenna",
+        "William Nylander",
+        "Nick Paul",
+        "Jack Roslovic",
+        "Colton Sissons",
+        "John Tavares",
+        "Miles Wood"
+      ],
+      "defense": [
+        "Nick Blankenburg",
+        "Oliver Ekman-Larsson",
+        "Jake McCabe",
+        "Cole McWard",
+        "Dakota Mermis",
+        "Darren Raddysh",
+        "Morgan Rielly",
+        "Marshall Rifai",
+        "Troy Stecher",
+        "Chris Tanev"
+      ],
+      "goalies": [
+        "Sergei Bobrovsky",
+        "Anthony Stolarz"
+      ],
+      "updatedAt": "2026-11-03T08:57:53.863232+00:00",
+      "abbrev": "TOR"
+    },
+    "mammoth": {
+      "forwards": [
+        "Michael Carcone",
+        "Logan Cooley",
+        "Lawson Crouse",
+        "Dylan Guenther",
+        "Barrett Hayton",
+        "Clayton Keller",
+        "Anders Lee",
+        "Jack McBain",
+        "Liam O'Brien",
+        "Nick Schmaltz",
+        "Kevin Stenlund",
+        "Vincent Trocheck",
+        "Kailer Yamamoto"
+      ],
+      "defense": [
+        "Nick DeSimone",
+        "Maveric Lamoureux",
+        "John Marino",
+        "Andrew Peeke",
+        "Nate Schmidt",
+        "Mikhail Sergachev",
+        "Dmitri Simashev",
+        "MacKenzie Weegar"
+      ],
+      "goalies": [
+        "Sebastian Cossa",
+        "Karel Vejmelka"
+      ],
+      "updatedAt": "2026-11-03T08:57:53.991891+00:00",
+      "abbrev": "UTA"
+    },
+    "canucks": {
+      "forwards": [
+        "Arshdeep Bains",
+        "Brock Boeser",
+        "Filip Chytil",
+        "Paul Cotter",
+        "Jake DeBrusk",
+        "Brendan Gallagher",
+        "Linus Karlsson",
+        "Jonathan Lekkerimäki",
+        "Drew O'Connor",
+        "Liam Ohgren",
+        "Elias Pettersson",
+        "Jacob Quillan",
+        "Marco Rossi",
+        "Max Sasson"
+      ],
+      "defense": [
+        "Guillaume Brisebois",
+        "Zeev Buium",
+        "Filip Hronek",
+        "Victor Mancini",
+        "Jamie Oleksiak",
+        "Elias Pettersson",
+        "Luke Schenn",
+        "Tom Willander"
+      ],
+      "goalies": [
+        "Thatcher Demko",
+        "Kevin Lankinen",
+        "Leevi Meriläinen"
+      ],
+      "updatedAt": "2026-11-03T08:57:54.128214+00:00",
+      "abbrev": "VAN"
+    },
+    "golden knights": {
+      "forwards": [
+        "Ivan Barbashev",
+        "Braeden Bowman",
+        "Trevor Connelly",
+        "Nic Dowd",
+        "Jack Eichel",
+        "Marc Gatcomb",
+        "Tomas Hertl",
+        "Brett Howden",
+        "William Karlsson",
+        "Raphael Lavoie",
+        "Mitch Marner",
+        "Victor Olofsson",
+        "Jonas Rondbjerg",
+        "Mark Stone"
+      ],
+      "defense": [
+        "Rasmus Andersson",
+        "Dylan Coghlan",
+        "Noah Hanifin",
+        "Jeremy Lauzon",
+        "Brayden McNabb",
+        "Shea Theodore",
+        "Parker Wotherspoon"
+      ],
+      "goalies": [
+        "Carter Hart",
+        "Adin Hill"
+      ],
+      "updatedAt": "2026-11-03T08:57:54.197176+00:00",
+      "abbrev": "VGK"
+    },
+    "jets": {
+      "forwards": [
+        "Morgan Barron",
+        "Viggo Björck",
+        "Kyle Connor",
+        "Alex Iafallo",
+        "Cole Koepke",
+        "Brad Lambert",
+        "Adam Lowry",
+        "Dawson Mercer",
+        "Vladislav Namestnikov",
+        "Nino Niederreiter",
+        "Cole Perfetti",
+        "Isak Rosen",
+        "Mark Scheifele",
+        "Gabriel Vilardi"
+      ],
+      "defense": [
+        "Tyrel Bauer",
+        "Dylan DeMelo",
+        "Mario Ferraro",
+        "Haydn Fleury",
+        "Josh Morrissey",
+        "Neal Pionk",
+        "Elias Salomonsson",
+        "Dylan Samberg"
+      ],
+      "goalies": [
+        "Nico Daws",
+        "Stuart Skinner",
+        "Clay Stevenson"
+      ],
+      "updatedAt": "2026-11-03T08:57:54.323913+00:00",
+      "abbrev": "WPG"
+    },
+    "capitals": {
+      "forwards": [
+        "Anthony Beauvillier",
+        "Pierre-Luc Dubois",
+        "Ethen Frank",
+        "Boone Jenner",
+        "Jordan Kyrou",
+        "Ryan Leonard",
+        "Ivan Miroshnichenko",
+        "Alex Ovechkin",
+        "Aliaksei Protas",
+        "Ilya Protas",
+        "Justin Sourdif",
+        "Dylan Strome",
+        "Alex Tuch",
+        "Tom Wilson"
+      ],
+      "defense": [
+        "Jakob Chychrun",
+        "Vincent Desharnais",
+        "Martin Fehérváry",
+        "Cole Hutson",
+        "Timothy Liljegren",
+        "Dylan McIlrath",
+        "Matt Roy",
+        "Rasmus Sandin",
+        "Jack St. Ivany"
+      ],
+      "goalies": [
+        "Charlie Lindgren",
+        "Rémi Poirier",
+        "Logan Thompson"
+      ],
+      "updatedAt": "2026-11-03T08:57:54.454820+00:00",
+      "abbrev": "WSH"
+    }
+  },
+  "fetchedAt": "2026-11-03T08:57:54.454840+00:00"
+}
