@@ -50,7 +50,7 @@ def run():
   entries[current]=record;count+=1
  for line in p.lines:
   lowered=line.lower()
-  found=next((key for key,city in TEAM_NAMES.items() if re.search(r"\\b"+re.escape(city)+r"\\s+"+re.escape(key)+r"\\b",lowered)),None)
+  found=next((key for key,city in TEAM_NAMES.items() if re.search(r"\\b"+re.escape(city)+(r"\\s+"+re.escape(key) if not city.endswith(key) else "")+r"\\b",lowered)),None)
   if found:
    save();current=found;candidate={"forwards":[],"defense":[],"powerplay":[]};continue
   if not current:continue
