@@ -473,9 +473,19 @@ async function analyzeGame(id){
   try{const res=await fetch('https://api-web.nhle.com/v1/club-schedule-season/'+encodeURIComponent(code)+'/'+season,{signal:ctrl.signal});if(!res.ok)throw Error('Schedule HTTP '+res.status);const data=await res.json();if(!Array.isArray(data.games))throw Error('Schedule shape');return data}
   finally{clearTimeout(timer)}
  };
- const scheduleResults=await Promise.allSettled([schedule(ac),schedule(hc)]);
- // Avoid 18 parallel fallback requests: they could leave the analysis loading indefinitely.
- // A failed schedule is optional; the season-based report still renders.
+ let scheduleResults=await Promise.allSettled([schedule(ac),schedule(hc)]);
+ // NHL schedules may be blocked by browser CORS. Use the app's working
+ // Supabase score proxy for recent games, with a strict overall timeout.
+ const scheduleUsable=r=>r.status==='fulfilled'&&Array.isArray(r.value?.games)&&r.value.games.some(g=>g.gameDate<(detail.gameDate||'9999-12-31')&&['OFF','FINAL'].includes(g.gameState));
+ if(!scheduleResults.every(scheduleUsable)){
+  const cutoff=detail.gameDate||new Date().toISOString().slice(0,10);
+  const dates=Array.from({length:15},(_,i)=>{const d=new Date(cutoff+'T12:00:00Z');d.setUTCDate(d.getUTCDate()-i-1);return d.toISOString().slice(0,10)});
+  const requests=dates.map(date=>get('https://api-web.nhle.com/v1/score/'+date).then(data=>Array.isArray(data.games)?data.games.map(g=>({...g,gameDate:g.gameDate||date})):[]).catch(()=>[]));
+  const recent=await Promise.race([Promise.all(requests).then(all=>all.flat()),new Promise(resolve=>setTimeout(()=>resolve([]),4200))]);
+  if(recent.length){
+   scheduleResults=scheduleResults.map((result,i)=>scheduleUsable(result)?result:{status:'fulfilled',value:{games:recent.filter(g=>g.awayTeam?.abbrev===(i===0?ac:hc)||g.homeTeam?.abbrev===(i===0?ac:hc))}});
+  }
+ }
  if(!root.isConnected)return;
  const gameDay=detail.gameDate||new Date().toISOString().slice(0,10);
  function form(result,code){
