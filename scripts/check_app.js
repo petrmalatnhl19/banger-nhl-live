@@ -2,7 +2,7 @@
 const fs = require('node:fs');
 const vm = require('node:vm');
 const html = fs.readFileSync('index.html', 'utf8');
-const scripts = [...html.matchAll(/<script(?:\\s[^>]*)?>([\\s\\S]*?)<\\/script>/gi)];
+const scripts = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)];
 if (scripts.length !== 1) throw Error('Expected exactly one inline app script, got ' + scripts.length);
 const js = scripts[0][1];
 new vm.Script(js, { filename: 'index.html:inline-script' });
