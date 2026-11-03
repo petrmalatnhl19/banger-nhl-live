@@ -51,13 +51,13 @@ class LinkParser(HTMLParser):
 def parse_preview(article_url):
  request=urllib.request.Request(article_url,headers={"User-Agent":"Mozilla/5.0"})
  with urllib.request.urlopen(request,timeout=14) as resp:raw=resp.read().decode("utf-8","replace")
- published=re.search(r'"datePublished"\\s*:\\s*"([^"]+)"',raw)
+ published=re.search(r'"datePublished"\s*:\s*"([^"]+)"',raw)
  if not published:return {}
  try:stamp=datetime.datetime.fromisoformat(published.group(1).replace("Z","+00:00"))
  except ValueError:return {}
  if abs((datetime.datetime.now(datetime.timezone.utc)-stamp).total_seconds())>14*24*3600:return {}
- parser=Parser();parser.feed(re.sub(r"<(script|style)\\b[^>]*>[\\s\\S]*?</\\1>","",raw,flags=re.I))
- content=[re.sub(r"\\s+"," ",html.unescape(x)).strip() for x in "".join(parser.parts).splitlines()]
+ parser=Parser();parser.feed(re.sub(r"<(script|style)\b[^>]*>[\s\S]*?</\1>","",raw,flags=re.I))
+ content=[re.sub(r"\s+"," ",html.unescape(x)).strip() for x in "".join(parser.parts).splitlines()]
  content=[x for x in content if x]
  found={}
  for idx,line in enumerate(content):
@@ -70,10 +70,10 @@ def parse_preview(article_url):
    if re.search(r"projected lineup$|^Status report|^RELATED",item,re.I):break
    if item.startswith("Injured:"):injured=item[8:].strip();continue
    if item.startswith("Scratched:"):scratched=item[10:].strip();continue
-   names=[x.strip() for x in re.split(r"\\s+[-–—]{1,2}\\s+",item) if x.strip()]
+   names=[x.strip() for x in re.split(r"\s+[-–—]{1,2}\s+",item) if x.strip()]
    if len(names)==3 and len(forwards)<4:forwards.append(names)
    elif len(names)==2 and len(forwards)>=3 and len(defense)<3:defense.append(names)
-   elif len(names)==1 and len(forwards)>=3 and len(defense)>=2 and len(goalies)<2 and re.fullmatch(r"[\\wÀ-ž.'’ -]{5,55}",item):goalies.append(item)
+   elif len(names)==1 and len(forwards)>=3 and len(defense)>=2 and len(goalies)<2 and re.fullmatch(r"[\wÀ-ž.'’ -]{5,55}",item):goalies.append(item)
   if len(forwards)>=3 and len(defense)>=2:
    found[key]={"name":match.group(1).strip(),"forwards":forwards,"defense":defense,"goalies":goalies,"injured":injured,"scratched":scratched,"source":article_url,"publishedAt":stamp.isoformat()}
  return found
