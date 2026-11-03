@@ -1,0 +1,366 @@
+{
+  "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+  "fetchedAt": "2026-11-03T07:03:53.181105+00:00",
+  "teams": {
+    "golden knights": {
+      "name": "Golden Knights",
+      "forwards": [
+        [
+          "Ivan Barbashev",
+          "Jack Eichel",
+          "Mark Stone"
+        ],
+        [
+          "Brett Howden",
+          "William Karlsson",
+          "Mitch Marner"
+        ],
+        [
+          "Trevor Connelly",
+          "Tomas Hertl",
+          "Braeden Bowman"
+        ],
+        [
+          "Jonas Rondbjerg",
+          "Nic Dowd",
+          "Marc Gatcomb"
+        ]
+      ],
+      "defense": [
+        [
+          "Brayden McNabb",
+          "Shea Theodore"
+        ],
+        [
+          "Jeremy Lauzon",
+          "Rasmus Andersson"
+        ],
+        [
+          "Noah Hanifin",
+          "Dylan Coghlan"
+        ]
+      ],
+      "goalies": [
+        "Carter Hart",
+        "Adin Hill"
+      ],
+      "injured": "Victor Olofsson (lower body), Parker Wotherspoon (upper body)",
+      "scratched": "Raphael Lavoie, Viliam Kmec"
+    },
+    "bruins": {
+      "name": "Bruins",
+      "forwards": [
+        [
+          "JJ Peterka",
+          "Pavel Zacha",
+          "David Pastrnak"
+        ],
+        [
+          "Marat Khusnutdinov",
+          "Fraser Minten",
+          "Morgan Geekie"
+        ],
+        [
+          "Casey Mittelstadt",
+          "Elias Lindholm",
+          "James Hagens"
+        ],
+        [
+          "Tanner Jeannot",
+          "Matthew Poitras",
+          "Mark Kastelic"
+        ]
+      ],
+      "defense": [
+        [
+          "Hampus Lindholm",
+          "Charlie McAvoy"
+        ],
+        [
+          "Nikita Zadorov",
+          "Will Borgen"
+        ],
+        [
+          "Jonathan Aspirot",
+          "Mason Lohrei"
+        ]
+      ],
+      "goalies": [
+        "Jeremy Swayman",
+        "Michael DiPietro"
+      ],
+      "injured": "None",
+      "scratched": "Connor Clifton, Sean Kuraly, Frederic Brunet"
+    },
+    "red wings": {
+      "name": "Red Wings",
+      "forwards": [
+        [
+          "Alex DeBrincat",
+          "Emmitt Finnie",
+          "Viktor Arvidsson"
+        ],
+        [
+          "Michael Brandsegg-Nygard",
+          "Andrew Copp",
+          "Lucas Raymond"
+        ],
+        [
+          "Michael Rasmussen",
+          "Nate Danielson",
+          "J.T. Compher"
+        ],
+        [
+          "John Leonard",
+          "Sheldon Dries",
+          "Keegan Kolesar"
+        ]
+      ],
+      "defense": [
+        [
+          "Ben Chiarot",
+          "Moritz Seider"
+        ],
+        [
+          "William Wallinder",
+          "Justin Faulk"
+        ],
+        [
+          "Andreas Englund",
+          "Anton Johansson"
+        ]
+      ],
+      "goalies": [
+        "Daniil Tarasov",
+        "John Gibson"
+      ],
+      "injured": "Mason Appleton (undisclosed), Marco Kasper (upper body), Albert Johansson (undisclosed)",
+      "scratched": "Jacob Bernard-Docker, Carter Mazur"
+    },
+    "panthers": {
+      "name": "Panthers",
+      "forwards": [
+        [
+          "Brady Tkachuk",
+          "Sam Bennett",
+          "Matthew Tkachuk"
+        ],
+        [
+          "Carter Verhaeghe",
+          "Sam Reinhart",
+          "Sandis Vilmanis"
+        ],
+        [
+          "Eetu Luostarinen",
+          "Anton Lundell",
+          "Lars Eller"
+        ],
+        [
+          "Bokondji Imama",
+          "Cole Schwindt",
+          "Garnet Hathaway"
+        ]
+      ],
+      "defense": [
+        [
+          "Gustav Forsling",
+          "Aaron Ekblad"
+        ],
+        [
+          "Niko Mikkola",
+          "Seth Jones"
+        ],
+        [
+          "Dmitry Kulikov",
+          "Radko Gudas"
+        ]
+      ],
+      "goalies": [
+        "Jacob Markstrom",
+        "Akira Schmid"
+      ],
+      "injured": "Aleksander Barkov (knee), Brad Marchand (knee), Jonah Gadjovich (neck)",
+      "scratched": "Uvis Balinskis, Cole Reinhardt, Cooper Black"
+    },
+    "avalanche": {
+      "name": "Avalanche",
+      "forwards": [
+        [
+          "Artturi Lehkonen",
+          "Nathan MacKinnon",
+          "Martin Necas"
+        ],
+        [
+          "Gabriel Landeskog",
+          "Brock Nelson",
+          "Nicolas Roy"
+        ],
+        [
+          "Jaden Schwartz",
+          "Nazem Kadri",
+          "T.J. Hughes"
+        ],
+        [
+          "Parker Kelly",
+          "Fedor Svechkov",
+          "Logan O’Connor"
+        ]
+      ],
+      "defense": [
+        [
+          "Devon Toews",
+          "Cale Makar"
+        ],
+        [
+          "Brett Kulak",
+          "Sam Malinski"
+        ],
+        [
+          "Noah Juulsen",
+          "Brent Burns"
+        ]
+      ],
+      "goalies": [
+        "Scott Wedgewood",
+        "Mackenzie Blackwood"
+      ],
+      "injured": "Zachary L’Heureux (upper body), Josh Manson (lower body)",
+      "scratched": "None"
+    },
+    "blackhawks": {
+      "name": "Blackhawks",
+      "forwards": [
+        [
+          "Roman Kantserov",
+          "Connor Bedard",
+          "Ryan Donato"
+        ],
+        [
+          "Tyler Bertuzzi",
+          "Anton Frondell",
+          "Andrew Mangiapane"
+        ],
+        [
+          "Oliver Moore",
+          "Frank Nazar",
+          "Patrick Kane"
+        ],
+        [
+          "Cole Smith",
+          "Ryan Greene",
+          "Teuvo Teravainen"
+        ]
+      ],
+      "defense": [
+        [
+          "Alex Vlasic",
+          "Ian Cole"
+        ],
+        [
+          "Wyatt Kaiser",
+          "Artyom Levshunov"
+        ],
+        [
+          "Ethan Del Mastro",
+          "Sam Rinzel"
+        ]
+      ],
+      "goalies": [
+        "Spencer Knight",
+        "Arvid Soderblom"
+      ],
+      "injured": "Bowen Byram (upper body)",
+      "scratched": "Kevin Korchinski, Jordan Greenway"
+    },
+    "flames": {
+      "name": "Flames",
+      "forwards": [
+        [
+          "Joel Farabee",
+          "Mikael Backlund",
+          "Matt Coronato"
+        ],
+        [
+          "Yegor Sharangovich",
+          "Morgan Frost",
+          "Aydar Suniev"
+        ],
+        [
+          "Matvei Gridin",
+          "Martin Pospisil",
+          "Ryan Strome"
+        ],
+        [
+          "William Stromgren",
+          "Jonathan Castagna",
+          "Adam Klapka"
+        ]
+      ],
+      "defense": [
+        [
+          "Kevin Bahl",
+          "Simon Nemec"
+        ],
+        [
+          "Jake Middleton",
+          "Zach Whitecloud"
+        ],
+        [
+          "Yan Kuznetsov",
+          "Zayne Parekh"
+        ]
+      ],
+      "goalies": [
+        "Dustin Wolf",
+        "Arsenii Sergeev"
+      ],
+      "injured": "Devin Cooley (lower body), Brennan Othmann (upper body), Jonathan Huberdeau (hip), Samuel Honzek (lower body)",
+      "scratched": "Maksim Tsyplakov, Joel Hanley"
+    },
+    "sharks": {
+      "name": "Sharks",
+      "forwards": [
+        [
+          "Tyler Toffoli",
+          "Macklin Celebrini",
+          "Will Smith"
+        ],
+        [
+          "Mason Marchment",
+          "Michael Misa",
+          "Kiefer Sherwood"
+        ],
+        [
+          "Ivar Stenberg",
+          "Filip Bystedt",
+          "Collin Graf"
+        ],
+        [
+          "Barclay Goodrow",
+          "Zack Ostapchuk",
+          "Adam Gaudette"
+        ]
+      ],
+      "defense": [
+        [
+          "Darnell Nurse",
+          "Michael Kesselring"
+        ],
+        [
+          "Sam Dickinson",
+          "Jacob Trouba"
+        ],
+        [
+          "Nolan Allan",
+          "Dmitry Orlov"
+        ]
+      ],
+      "goalies": [
+        "Yaroslav Askarov",
+        "Alex Nedeljkovic"
+      ],
+      "injured": "Alexander Wennberg (upper body), Igor Chernyshov (upper body)",
+      "scratched": "Libor Hajek, Ty Dellandrea"
+    }
+  }
+}
