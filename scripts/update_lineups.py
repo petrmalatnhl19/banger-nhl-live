@@ -198,6 +198,10 @@ for key,team in teams.items():
  record["source"]=record.get("source",URL)
  record["sourceLabel"]="NHL.com" if "nhl.com" in record["source"] else "Externí zdroj"
  record["basis"]="Archiv projekce NHL (nemusí platit pro další zápas)"
+ previous=archive["teams"].get(key,{})
+ if previous and str(previous.get("asOf",""))>str(record["asOf"]):
+  print("Keeping newer archived projection for",key,previous.get("asOf"))
+  continue
  archive["teams"][key]=record
 with open(ARCHIVE_FILE,"w",encoding="utf-8") as af:json.dump(archive,af,ensure_ascii=False,indent=2)
 out={"source":URL,"fetchedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"teams":teams,"rosterValidated":True}
