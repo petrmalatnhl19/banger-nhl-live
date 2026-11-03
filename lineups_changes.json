@@ -582,26 +582,22 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "ducks": {
-      "updatedAt": "2026-11-03T19:50:03.583243+00:00",
-      "previousPublishedAt": "2026-11-01T20:27:00+00:00",
+      "updatedAt": "2026-11-03T20:43:39.724018+00:00",
+      "previousPublishedAt": "",
       "publishedAt": "",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
           "type": "moved",
-          "player": "Jeff Malott",
+          "player": "Nico Myatovic",
           "from": "Útok 4",
           "to": "Útok 3"
         },
         {
-          "type": "added",
-          "player": "Nico Myatovic",
+          "type": "moved",
+          "player": "Jeff Malott",
+          "from": "Útok 3",
           "to": "Útok 4"
-        },
-        {
-          "type": "removed",
-          "player": "A.J. Greer",
-          "from": "Útok 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
