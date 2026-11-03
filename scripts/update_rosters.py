@@ -14,7 +14,7 @@ for abbr,key in teams.items():
  try:
   req=urllib.request.Request("https://api-web.nhle.com/v1/roster/"+abbr+"/current",headers={"User-Agent":"BangerNHL/1.0","Accept":"application/json"})
   with urllib.request.urlopen(req,timeout=12) as r:raw=json.load(r)
-  record={"forwards":[player_name(p) for p in raw.get("forwards",[])],"defense":[player_name(p) for p in raw.get("defensemen",[])],"goalies":[player_name(p) for p in raw.get("goalies",[])],"updatedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"abbrev":abbr}
+  record={"forwards":[player_name(p) for p in raw.get("forwards",[])],"defense":[player_name(p) for p in raw.get("defensemen",[])],"goalies":[player_name(p) for p in raw.get("goalies",[])],"playerIds":{player_name(p):p["id"] for p in raw.get("forwards",[])+raw.get("defensemen",[])+raw.get("goalies",[]) if player_name(p) and isinstance(p.get("id"),int)},"updatedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"abbrev":abbr}
   if len(record["forwards"])>=8 and len(record["defense"])>=4:
    out["teams"][key]=record;ok+=1
  except Exception as e:print("Roster unavailable",abbr,str(e))
