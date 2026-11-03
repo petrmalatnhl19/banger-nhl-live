@@ -472,17 +472,17 @@ async function analyzeGame(id){
  const gameDay=detail.gameDate||new Date().toISOString().slice(0,10);
  function form(result,code){
   if(result.status!=='fulfilled'||!Array.isArray(result.value?.games))return null;
-  const games=result.value.games.filter(g=>g.gameDate<gameDay&&['OFF','FINAL'].includes(g.gameState)&&Number.isFinite(Number(g.homeTeam?.score))&&Number.isFinite(Number(g.awayTeam?.score))).sort((a,b)=>b.gameDate.localeCompare(a.gameDate)).slice(0,5);
+  const games=result.value.games.filter(g=>g.gameDate<gameDay&&['OFF','FINAL'].includes(g.gameState)&&g.homeTeam?.score!=null&&g.awayTeam?.score!=null&&Number.isFinite(Number(g.homeTeam.score))&&Number.isFinite(Number(g.awayTeam.score))).sort((a,b)=>b.gameDate.localeCompare(a.gameDate)).slice(0,5);
   if(games.length<3)return null;
   const wins=games.filter(g=>{const isHome=g.homeTeam?.abbrev===code;return (isHome?Number(g.homeTeam?.score):Number(g.awayTeam?.score))>(isHome?Number(g.awayTeam?.score):Number(g.homeTeam?.score))}).length;
-  const goals=games.reduce((s,g)=>s+Number((g.homeTeam?.abbrev===code?g.homeTeam:g.awayTeam)?.score||0),0)/games.length;
+  const goals=games.reduce((s,g)=>s+Number((g.homeTeam?.abbrev===code?g.homeTeam:g.awayTeam)?.score||0),0)/games.length;const against=games.reduce((s,g)=>s+Number((g.homeTeam?.abbrev===code?g.awayTeam:g.homeTeam)?.score||0),0)/games.length;
   const last=games[0]?.gameDate;
-  return {games:games.length,wins,goals,last,rest:Math.round((Date.parse(gameDay)-Date.parse(last))/86400000)};
+  return {games:games.length,wins,goals,against,last,rest:Math.round((Date.parse(gameDay)-Date.parse(last))/86400000)};
  }
  const aform=form(scheduleResults[0],ac),hform=form(scheduleResults[1],hc);
  let html='<button class="analysis-close" type="button">✕ Zavřít</button><div class="tag">STATISTICKÉ CENTRUM · NHL</div><h2>◈ BANGER ANALYST PRO</h2><div class="analysis-match"><span>'+escText(ac)+'</span><b>VS</b><span>'+escText(hc)+'</span></div><p class="analysis-small">Analýza pro '+escText(gameDay)+' · '+(detail.gameState==='FUT'||detail.gameState==='PRE'?'Před zápasem':'Zápas probíhá nebo již skončil – model je založen na sezónních datech, nikoli na aktuálním skóre')+'</p>';
  if(valid){
-  const ax=Math.max(.4,Math.min(6,(af+ha)/2)),hx=Math.max(.4,Math.min(6,(hf+aa)/2));
+  const baseAway=(af+ha)/2,baseHome=(hf+aa)/2;const blend=0.2;const recentAway=aform&&hform?(aform.goals+hform.against)/2:null,recentHome=aform&&hform?(hform.goals+aform.against)/2:null;const ax=Math.max(.4,Math.min(6,recentAway!=null?baseAway*(1-blend)+recentAway*blend:baseAway)),hx=Math.max(.4,Math.min(6,recentHome!=null?baseHome*(1-blend)+recentHome*blend:baseHome));
   function factorial(n){let v=1;for(let i=2;i<=n;i++)v*=i;return v}
   function pois(k,lambda){return Math.exp(-lambda)*Math.pow(lambda,k)/factorial(k)}
   let aw=0,hw=0,tie=0,over=0,both=0;const scenarios=[];
@@ -492,7 +492,7 @@ async function analyzeGame(id){
   const balanced=Math.abs(aw-hw)<.1;
   const p1=balanced?'Gólový profil naznačuje vyrovnaný zápas bez výrazného favorita.':'Podle sezónního gólového profilu má mírnou výhodu '+fav+'.';
   const p2=ax+hx>=6.3?'Součet gólových průměrů ukazuje na spíše otevřený zápas s vyšší produktivitou.':ax+hx<=5.2?'Sezónní čísla naznačují opatrnější zápas, ve kterém může rozhodnout jediná branka.':'Očekává se středně produktivní zápas, ve kterém mohou rozhodnout krátké silné pasáže.';
-  const formText=(f,name)=>f?name+': '+f.wins+' výher z posledních '+f.games+' zápasů, '+fmt(f.goals)+' gólu na zápas.':name+': aktuální forma není z dostupného rozpisu ověřena.';
+  const formText=(f,name)=>f?name+': '+f.wins+' výher z posledních '+f.games+' zápasů, '+fmt(f.goals)+' vstřelených a '+fmt(f.against)+' inkasovaných gólů na zápas.':name+': aktuální forma není z dostupného rozpisu ověřena.';
   html+='<section class="analysis-summary"><h3>Hlavní závěr</h3><p>'+escText(p1)+' '+escText(p2)+'</p></section>';
   html+='<div class="analysis-prob"><div><span>'+escText(ac)+'</span><strong>'+percent(aw)+'</strong></div><div><span>REMÍZA PO 60 MIN</span><strong>'+percent(tie)+'</strong></div><div><span>'+escText(hc)+'</span><strong>'+percent(hw)+'</strong></div></div>';
   html+='<div class="analysis-meter"><i style="width:'+Math.round(aw*100)+'%"></i><i style="width:'+Math.round(tie*100)+'%"></i><i style="width:'+Math.round(hw*100)+'%"></i></div>';
@@ -500,13 +500,13 @@ async function analyzeGame(id){
   html+='<div class="analysis-grid"><div>Gólový průměr modelu<strong>'+fmt(ax)+' : '+fmt(hx)+'</strong><span class="analysis-small">Hosté : domácí · není to xG</span></div><div>Bodová úspěšnost<strong>'+percent(ap)+' : '+percent(hp)+'</strong><span class="analysis-small">Hosté : domácí</span></div><div>6+ gólů v zápase<strong>'+percent(over)+'</strong><span class="analysis-small">Modelový scénář</span></div><div>Oba týmy skórují<strong>'+percent(both)+'</strong><span class="analysis-small">Modelový scénář</span></div></div>';
   html+='<section class="analysis-section"><h3>Nejpravděpodobnější skóre po 60 minutách</h3><div class="analysis-scenarios">'+scenarios.slice(0,3).map(s=>'<span>'+s.i+' : '+s.j+' <small>'+percent(s.p)+'</small></span>').join('')+'</div><p class="analysis-small">Hosté : domácí. Jednotlivé výsledky mají i při vysokém pořadí relativně nízkou pravděpodobnost.</p></section>';
   html+='<section class="analysis-section"><h3>Útok a obrana</h3><p><b>'+escText(ac)+'</b> vstřeluje '+fmt(af)+' a inkasuje '+fmt(aa)+' gólu na zápas. <b>'+escText(hc)+'</b> vstřeluje '+fmt(hf)+' a inkasuje '+fmt(ha)+' gólu na zápas.</p></section>';
-  html+='<section class="analysis-section"><h3>Aktuální forma a odpočinek</h3><p>'+escText(formText(aform,ac))+' '+escText(formText(hform,hc))+'</p><p class="analysis-small">'+(aform&&hform?'Od posledního evidovaného zápasu: '+escText(ac)+' '+aform.rest+' dní, '+escText(hc)+' '+hform.rest+' dní. Údaj nezohledňuje cestování.':'Údaje o odpočinku nejsou u obou týmů ověřené.')+'</p></section>';
+  html+='<section class="analysis-section"><h3>Jak model pracuje s formou</h3><p>'+(aform&&hform?'Výpočet kombinuje 80 % sezónního gólového profilu a 20 % průměrů z posledních pěti utkání obou týmů. Jde o experimentální váhy, nikoli o statisticky ověřenou optimalizaci.':'Model používá pouze sezónní gólové průměry, protože u obou týmů nebyla ověřena dostatečná nedávná forma.')+'</p></section>';html+='<section class="analysis-section"><h3>Aktuální forma a odpočinek</h3><p>'+escText(formText(aform,ac))+' '+escText(formText(hform,hc))+'</p><p class="analysis-small">'+(aform&&hform?'Od posledního evidovaného zápasu: '+escText(ac)+' '+aform.rest+' dní, '+escText(hc)+' '+hform.rest+' dní. Údaj nezohledňuje cestování.':'Údaje o odpočinku nejsou u obou týmů ověřené.')+'</p></section>';
   html+='<section class="analysis-section"><h3>Jak se zápas může vyvíjet</h3><p>'+escText(p2)+' '+(aform&&hform&&Math.abs(aform.wins-hform.wins)>=2?'Posledních pět utkání naznačuje rozdíl v aktuální formě, který může sezónní průměry částečně zkreslovat.':'Rozhodující mohou být výkon brankářů a speciální týmy; tyto faktory zatím nejsou statisticky vyhodnocené.')+'</p></section>';
  }else{
  html+='<section class="analysis-section"><h3>Statistiky zatím nestačí</h3><p>Pro oba týmy nejsou dostupné úplné sezónní výsledky. Model proto nepočítá odhad skóre ani pravděpodobnosti.</p></section>';
  }
  html+='<section class="analysis-section"><h3>Co zatím není ověřeno</h3><p>Potvrzení brankáři, aktuální zranění a sestavy, pokročilé xG, Corsi, Fenwick, přesilovky a oslabení. Tyto faktory nejsou součástí modelu. Bez spolehlivých dat je nebudeme předstírat.</p></section>';
- html+='<p class="analysis-small">Zdroj: NHL API a sezónní tabulka přes datové rozhraní aplikace. Model: nezávislé Poissonovo rozdělení z průměrů vstřelených a inkasovaných gólů. Bez domácí výhody, prodloužení a úprav podle formy. Informativní sportovní rozbor.</p>';
+ html+='<p class="analysis-small">Zdroj: NHL API a sezónní tabulka přes datové rozhraní aplikace. Model: nezávislé Poissonovo rozdělení ze sezónních průměrů gólů a při dostupnosti dat také 20% příměsi formy. Bez domácí výhody a prodloužení. Informativní sportovní rozbor.</p>';
  card.innerHTML=html;
  }catch(e){
  if(root.isConnected)card.innerHTML='<button class="analysis-close" type="button">✕ Zavřít</button><h2>Analýzu nelze načíst</h2><p>Nepodařilo se získat údaje o zápasu. Zkus to později.</p>';
