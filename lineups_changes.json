@@ -48,6 +48,398 @@
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "red wings": {
+      "updatedAt": "2026-11-03T17:46:39.606022+00:00",
+      "previousPublishedAt": "2026-11-02T17:12:15.904000+00:00",
+      "publishedAt": "",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "events": [
+        {
+          "type": "moved",
+          "player": "John Leonard",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "added",
+          "player": "Carter Mazur",
+          "to": "Útok 3"
+        },
+        {
+          "type": "removed",
+          "player": "Nate Danielson",
+          "from": "Útok 2"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "lightning": {
+      "updatedAt": "2026-11-03T17:46:39.606085+00:00",
+      "previousPublishedAt": "2026-10-30T19:33:37.655000+00:00",
+      "publishedAt": "",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "events": [
+        {
+          "type": "moved",
+          "player": "Gage Goncalves",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Pontus Holmberg",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "blues": {
+      "updatedAt": "2026-11-03T17:46:39.606149+00:00",
+      "previousPublishedAt": "2026-10-30T17:18:36.660000+00:00",
+      "publishedAt": "",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "events": [
+        {
+          "type": "moved",
+          "player": "Connor McMichael",
+          "from": "Útok 3",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Mason McTavish",
+          "from": "Útok 2",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Jonatan Berggren",
+          "from": "Útok 2",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Jake Neighbours",
+          "from": "Útok 1",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Dalibor Dvorsky",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Alexey Toropchenko",
+          "from": "Útok 4",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Pius Suter",
+          "from": "Útok 4",
+          "to": "Útok 3"
+        },
+        {
+          "type": "added",
+          "player": "Ross Johnston",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Adam Jiricek",
+          "from": "Obrana 3",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "added",
+          "player": "Theo Lindstein",
+          "to": "Obrana 3"
+        },
+        {
+          "type": "removed",
+          "player": "Robert Thomas",
+          "from": "Útok 1"
+        },
+        {
+          "type": "removed",
+          "player": "Jimmy Snuggerud",
+          "from": "Útok 1"
+        },
+        {
+          "type": "removed",
+          "player": "Dylan Holloway",
+          "from": "Útok 3"
+        },
+        {
+          "type": "removed",
+          "player": "Aleksanteri Kaskimaki",
+          "from": "Útok 4"
+        },
+        {
+          "type": "removed",
+          "player": "Colton Parayko",
+          "from": "Obrana 2"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "stars": {
+      "updatedAt": "2026-11-03T17:46:39.606331+00:00",
+      "previousPublishedAt": "2026-10-31T17:53:00+00:00",
+      "publishedAt": "",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "events": [
+        {
+          "type": "moved",
+          "player": "Jamie Benn",
+          "from": "Útok 3",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Wyatt Johnston",
+          "from": "Útok 2",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Mikko Rantanen",
+          "from": "Útok 2",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Jason Robertson",
+          "from": "Útok 1",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Roope Hintz",
+          "from": "Útok 1",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Arttu Hyry",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Justin Hryckowian",
+          "from": "Útok 4",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Tyler Seguin",
+          "from": "Útok 1",
+          "to": "Útok 3"
+        },
+        {
+          "type": "added",
+          "player": "Radek Faksa",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Sam Steel",
+          "from": "Útok 2",
+          "to": "Útok 4"
+        },
+        {
+          "type": "removed",
+          "player": "Colin Blackwell",
+          "from": "Útok 4"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "capitals": {
+      "updatedAt": "2026-11-03T17:46:39.606379+00:00",
+      "previousPublishedAt": "2026-11-01T18:42:00+00:00",
+      "publishedAt": "",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "events": [
+        {
+          "type": "moved",
+          "player": "Justin Sourdif",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Ilya Protas",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "blue jackets": {
+      "updatedAt": "2026-11-03T17:46:39.606592+00:00",
+      "previousPublishedAt": "2026-10-31T17:53:00+00:00",
+      "publishedAt": "",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "events": [
+        {
+          "type": "moved",
+          "player": "Matthew Knies",
+          "from": "Útok 2",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Valeri Nichushkin",
+          "from": "Útok 1",
+          "to": "Útok 2"
+        },
+        {
+          "type": "added",
+          "player": "Luca Del Bel Belluz",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Conor Garland",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Charlie Coyle",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Mathieu Olivier",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "added",
+          "player": "Ryan Lomberg",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Sean Monahan",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
+          "player": "Dmitri Voronkov",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
+          "player": "Ivan Provorov",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "moved",
+          "player": "Jake Christiansen",
+          "from": "Obrana 2",
+          "to": "Obrana 3"
+        },
+        {
+          "type": "added",
+          "player": "Dante Fabbro",
+          "to": "Obrana 3"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "flyers": {
+      "updatedAt": "2026-11-03T17:46:39.606743+00:00",
+      "previousPublishedAt": "2026-11-01T18:56:00+00:00",
+      "publishedAt": "",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "events": [
+        {
+          "type": "added",
+          "player": "Cole Knuble",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
+          "player": "Sean Couturier",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
+          "player": "Noel Acciari",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Oliver Bonk",
+          "from": "Obrana 3",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "moved",
+          "player": "Nick Seeler",
+          "from": "Obrana 2",
+          "to": "Obrana 3"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "oilers": {
+      "updatedAt": "2026-11-03T17:46:39.606818+00:00",
+      "previousPublishedAt": "2026-10-31T21:29:00+00:00",
+      "publishedAt": "",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "events": [
+        {
+          "type": "added",
+          "player": "Max Jones",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
+          "player": "Jake Walman",
+          "to": "Obrana 3"
+        },
+        {
+          "type": "removed",
+          "player": "Trent Frederic",
+          "from": "Útok 4"
+        },
+        {
+          "type": "removed",
+          "player": "Ty Emberson",
+          "from": "Obrana 3"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "devils": {
+      "updatedAt": "2026-11-03T17:46:39.606879+00:00",
+      "previousPublishedAt": "2026-10-29T19:45:29.810000+00:00",
+      "publishedAt": "",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "events": [
+        {
+          "type": "added",
+          "player": "Johnathan Kovacevic",
+          "to": "Obrana 3"
+        },
+        {
+          "type": "removed",
+          "player": "Brenden Dillon",
+          "from": "Obrana 3"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     }
   }
 }
