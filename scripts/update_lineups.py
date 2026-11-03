@@ -55,7 +55,7 @@ def parse_preview(article_url):
  if not published:return {}
  try:stamp=datetime.datetime.fromisoformat(published.group(1).replace("Z","+00:00"))
  except ValueError:return {}
- if abs((datetime.datetime.now(datetime.timezone.utc)-stamp).total_seconds())>36*3600:return {}
+ if abs((datetime.datetime.now(datetime.timezone.utc)-stamp).total_seconds())>14*24*3600:return {}
  parser=Parser();parser.feed(re.sub(r"<(script|style)\\b[^>]*>[\\s\\S]*?</\\1>","",raw,flags=re.I))
  content=[re.sub(r"\\s+"," ",html.unescape(x)).strip() for x in "".join(parser.parts).splitlines()]
  content=[x for x in content if x]
@@ -86,7 +86,7 @@ try:
   if "projected lineups" in label.lower():
    link=urljoin("https://www.nhl.com",href)
    if link.startswith("https://www.nhl.com/news/") and link not in urls:urls.append(link)
- for link in urls[:20]:
+ for link in urls[:45]:
   try:
    for key,value in parse_preview(link).items():
     if key not in teams:teams[key]=value
@@ -177,10 +177,10 @@ try:
 except (FileNotFoundError,ValueError):archive={"teams":{}}
 for key,team in teams.items():
  record=dict(team)
- record["asOf"]=datetime.datetime.now(datetime.timezone.utc).date().isoformat()
+ record["asOf"]=(record.get("publishedAt") or datetime.datetime.now(datetime.timezone.utc).isoformat())[:10]
  record["source"]=record.get("source",URL)
- record["sourceLabel"]="NHL.com" if record["source"]==URL else "Externí zdroj"
- record["basis"]="Archiv ověřené projekce (nemusí platit pro další zápas)"
+ record["sourceLabel"]="NHL.com" if "nhl.com" in record["source"] else "Externí zdroj"
+ record["basis"]="Archiv projekce NHL (nemusí platit pro další zápas)"
  archive["teams"][key]=record
 with open(ARCHIVE_FILE,"w",encoding="utf-8") as af:json.dump(archive,af,ensure_ascii=False,indent=2)
 out={"source":URL,"fetchedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"teams":teams,"rosterValidated":True}
