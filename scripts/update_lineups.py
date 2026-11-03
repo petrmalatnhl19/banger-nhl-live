@@ -120,17 +120,17 @@ class TableParser(HTMLParser):
   if tag=="tr" and self.row is not None:
    self.rows.append((self.section,self.row));self.row=None
 def strip_player(cell):
- cell=re.sub(r"\\s*#\\d+\\b.*$","",cell).strip()
- cell=re.sub(r"\\s*\\([^)]*\\)","",cell).strip()
+ cell=re.sub(r"\s*#\d+\b.*$","",cell).strip()
+ cell=re.sub(r"\s*\([^)]*\)","",cell).strip()
  return cell
 def parse_secondary(raw):
- parser=TableParser();parser.feed(re.sub(r"<(script|style)\\b[^>]*>[\\s\\S]*?</\\1>","",raw,flags=re.I))
+ parser=TableParser();parser.feed(re.sub(r"<(script|style)\b[^>]*>[\s\S]*?</\1>","",raw,flags=re.I))
  fw=[];df=[];pp=[]
  for section,cells in parser.rows:
   names=[strip_player(c) for c in cells]
-  if section=="forwards" and len(names)>=4 and len(fw)<4 and re.search(r"line\\s*\\d",names[0],re.I):
+  if section=="forwards" and len(names)>=4 and len(fw)<4 and re.search(r"line\s*\d",names[0],re.I):
    fw.append(names[1:4])
-  elif section=="defense" and len(names)>=3 and len(df)<3 and re.search(r"pair\\s*\\d",names[0],re.I):
+  elif section=="defense" and len(names)>=3 and len(df)<3 and re.search(r"pair\s*\d",names[0],re.I):
    df.append(names[1:3])
   elif section=="powerplay" and len(names)>=6 and len(pp)<2 and re.search(r"PP\s*[12]|power\s*play\s*[12]",names[0],re.I):pp.append(names[1:6])
  return fw,df,pp,len(parser.rows)
