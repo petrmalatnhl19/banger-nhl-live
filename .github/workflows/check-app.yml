@@ -5,11 +5,13 @@ on:
     paths:
       - 'index.html'
       - 'scripts/check_app.js'
+      - 'scripts/browser_smoke.js'
       - '.github/workflows/check-app.yml'
   pull_request:
     paths:
       - 'index.html'
       - 'scripts/check_app.js'
+      - 'scripts/browser_smoke.js'
       - '.github/workflows/check-app.yml'
   workflow_dispatch:
 
@@ -20,7 +22,7 @@ jobs:
   validate:
     name: Syntaxe a základní kontrola
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
