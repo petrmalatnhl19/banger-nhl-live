@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-03T07:03:53.181105+00:00",
+  "fetchedAt": "2026-11-03T07:34:25.676909+00:00",
   "teams": {
     "golden knights": {
       "name": "Golden Knights",
@@ -362,5 +362,6 @@
       "injured": "Alexander Wennberg (upper body), Igor Chernyshov (upper body)",
       "scratched": "Libor Hajek, Ty Dellandrea"
     }
-  }
+  },
+  "rosterValidated": true
 }
