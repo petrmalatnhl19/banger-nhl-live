@@ -1,3 +1,28 @@
 {
-  "teams": {}
+  "teams": {
+    "kings": {
+      "updatedAt": "2026-11-03T14:55:36.641037+00:00",
+      "previousPublishedAt": "2026-10-30T21:02:46.495000+00:00",
+      "publishedAt": "2026-10-30T21:02:46.495000+00:00",
+      "source": "https://www.nhl.com/news/buffalo-sabres-los-angeles-kings-game-preview-october-31-2026",
+      "events": [
+        {
+          "type": "removed",
+          "player": "Andre Lee",
+          "from": "Útok 4"
+        },
+        {
+          "type": "removed",
+          "player": "Samuel Helenius",
+          "from": "Útok 4"
+        },
+        {
+          "type": "removed",
+          "player": "Taylor Ward",
+          "from": "Útok 4"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    }
+  }
 }
