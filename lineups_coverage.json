@@ -1,8 +1,14 @@
 {
-  "generatedAt": "2026-11-03T09:39:07.539580+00:00",
+  "generatedAt": "2026-11-03T10:07:48.698507+00:00",
   "totalTeams": 32,
-  "withProjectedLines": 32,
-  "missing": [],
+  "withProjectedLines": 27,
+  "missing": [
+    "hurricanes",
+    "jets",
+    "predators",
+    "rangers",
+    "senators"
+  ],
   "teams": {
     "avalanche": {
       "hasProjectedLines": true,
@@ -97,11 +103,8 @@
       ]
     },
     "hurricanes": {
-      "hasProjectedLines": true,
-      "sources": [
-        "automatic",
-        "archive"
-      ]
+      "hasProjectedLines": false,
+      "sources": []
     },
     "islanders": {
       "hasProjectedLines": true,
@@ -111,11 +114,8 @@
       ]
     },
     "jets": {
-      "hasProjectedLines": true,
-      "sources": [
-        "automatic",
-        "archive"
-      ]
+      "hasProjectedLines": false,
+      "sources": []
     },
     "kings": {
       "hasProjectedLines": true,
@@ -176,18 +176,12 @@
       ]
     },
     "predators": {
-      "hasProjectedLines": true,
-      "sources": [
-        "automatic",
-        "archive"
-      ]
+      "hasProjectedLines": false,
+      "sources": []
     },
     "rangers": {
-      "hasProjectedLines": true,
-      "sources": [
-        "automatic",
-        "archive"
-      ]
+      "hasProjectedLines": false,
+      "sources": []
     },
     "red wings": {
       "hasProjectedLines": true,
@@ -204,11 +198,8 @@
       ]
     },
     "senators": {
-      "hasProjectedLines": true,
-      "sources": [
-        "automatic",
-        "archive"
-      ]
+      "hasProjectedLines": false,
+      "sources": []
     },
     "sharks": {
       "hasProjectedLines": true,
