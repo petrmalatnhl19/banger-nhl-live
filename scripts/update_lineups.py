@@ -92,6 +92,57 @@ try:
     if key not in teams:teams[key]=value
   except Exception as err:print("Preview unavailable",link,str(err))
 except Exception as err:print("Preview index unavailable",str(err))
+
+# Secondary source: dedicated per-team line combinations. A lineup is kept only
+# when enough players match the NHL roster (validation below).
+SLUGS={"mammoth":"utah-mammoth","maple leafs":"toronto-maple-leafs","stars":"dallas-stars","jets":"winnipeg-jets","canadiens":"montreal-canadiens","oilers":"edmonton-oilers","hurricanes":"carolina-hurricanes","capitals":"washington-capitals","wild":"minnesota-wild","predators":"nashville-predators","devils":"new-jersey-devils","rangers":"new-york-rangers","blues":"st-louis-blues","flyers":"philadelphia-flyers","ducks":"anaheim-ducks","canucks":"vancouver-canucks","lightning":"tampa-bay-lightning","penguins":"pittsburgh-penguins","blue jackets":"columbus-blue-jackets","kings":"los-angeles-kings","islanders":"new-york-islanders","senators":"ottawa-senators","sabres":"buffalo-sabres","kraken":"seattle-kraken"}
+SLUGS.update({"golden knights":"vegas-golden-knights","bruins":"boston-bruins","red wings":"detroit-red-wings","panthers":"florida-panthers","avalanche":"colorado-avalanche","blackhawks":"chicago-blackhawks","flames":"calgary-flames","sharks":"san-jose-sharks"})
+class TableParser(HTMLParser):
+ def __init__(self):super().__init__();self.rows=[];self.row=None;self.cell=None;self.section="";self.parts=[]
+ def handle_starttag(self,tag,attrs):
+  if tag in ("h2","h3"):self.parts=[]
+  if tag=="tr":self.row=[]
+  if tag in ("td","th") and self.row is not None:self.cell=[]
+ def handle_data(self,data):
+  if self.cell is not None:self.cell.append(data)
+  if self.parts is not None:self.parts.append(data)
+ def handle_endtag(self,tag):
+  if tag in ("h2","h3"):
+   title=" ".join(" ".join(self.parts).lower().split())
+   if "forward" in title:self.section="forwards"
+   elif "defense" in title or "defence" in title:self.section="defense"
+   elif "goalie" in title:self.section="goalies"
+   elif "power play" in title:self.section="powerplay"
+   elif "penalty kill" in title:self.section="penaltykill"
+   elif "injur" in title:self.section="injured"
+  if tag in ("td","th") and self.cell is not None:
+   self.row.append(" ".join(" ".join(self.cell).split()));self.cell=None
+  if tag=="tr" and self.row is not None:
+   self.rows.append((self.section,self.row));self.row=None
+def strip_player(cell):
+ cell=re.sub(r"\\s*#\\d+\\b.*$","",cell).strip()
+ cell=re.sub(r"\\s*\\([^)]*\\)","",cell).strip()
+ return cell
+for key,slug in SLUGS.items():
+ if key in teams:continue
+ url="https://www.fsroundup.com/nhl/line-combinations/"+slug
+ try:
+  req=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0"})
+  with urllib.request.urlopen(req,timeout=9) as resp:raw=resp.read().decode("utf-8","replace")
+  parser=TableParser();parser.feed(re.sub(r"<(script|style)\\b[^>]*>[\\s\\S]*?</\\1>","",raw,flags=re.I))
+  fw=[];df=[];pp=[]
+  for section,cells in parser.rows:
+   names=[strip_player(c) for c in cells]
+   if section=="forwards" and len(names)>=4 and len(fw)<4:
+    if re.search(r"line\\s*\\d",names[0],re.I) and all(" " in n for n in names[1:4]):fw.append(names[1:4])
+   elif section=="defense" and len(names)>=3 and len(df)<3:
+    if re.search(r"pair\\s*\\d",names[0],re.I) and all(" " in n for n in names[1:3]):df.append(names[1:3])
+   elif section=="powerplay" and len(names)>=2 and len(pp)<2:
+    if re.search(r"PP[12]",names[0],re.I):pp.append(names[1])
+  if len(fw)>=3 and len(df)>=2:
+   teams[key]={"name":key.title(),"forwards":fw,"defense":df,"goalies":[],"injured":"","scratched":"","powerplay":pp,"source":url,"sourceType":"secondary","publishedAt":datetime.datetime.now(datetime.timezone.utc).isoformat()}
+   print("Secondary lineup parsed",key)
+ except Exception as err:print("Secondary unavailable",key,str(err))
 validated={}
 for name,team in teams.items():
  abbr=TEAM_ABBREVS.get(name)
