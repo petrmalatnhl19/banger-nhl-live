@@ -210,6 +210,15 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid 
 .top .brand{display:block;width:100%}
 .top .brand-logo{display:block;width:100%!important;height:clamp(190px,34vw,360px)!important;max-width:none;border:0;border-radius:25px;overflow:hidden}
 .top .brand-logo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+
+/* Fullscreen portrait splash: original logo stays sharp and uncropped */
+.brand-splash{padding:0!important;gap:0!important;width:100vw;height:100vh;height:100dvh;overflow:hidden;isolation:isolate}
+.brand-splash:before{content:"";position:absolute;inset:-28px;background:url("banger-logo.png") center / cover no-repeat;filter:blur(34px) brightness(.35) saturate(1.3);transform:scale(1.08);z-index:-1}
+.brand-splash img{width:100vw!important;height:100vh!important;height:100dvh!important;max-height:none!important;object-fit:contain!important;object-position:center;filter:drop-shadow(0 0 28px #22bfff99)}
+.brand-splash-glow{pointer-events:none}
+.brand-splash-loader{position:absolute;bottom:max(38px,env(safe-area-inset-bottom) + 20px);left:50%;transform:translateX(-50%);z-index:3;width:min(58vw,260px)}
+.brand-splash-caption{display:none}
+@media(orientation:portrait){.brand-splash img{width:100vw!important;height:100dvh!important}}
 </style></head><body><div class="wrap">
 <div id="brandSplash" class="brand-splash" aria-label="Načítání BANGER NHL LIVE"><div class="brand-splash-glow"></div><img src="banger-logo.png" alt="BANGER NHL LIVE 3D logo"><div class="brand-splash-loader"><span></span></div><div class="brand-splash-caption">VSTUP DO HOKEJOVÉ ARÉNY</div></div><header class="top"><div class="brand"><div class="brand-logo"><img src="banger-logo.png" alt="BANGER NHL LIVE"></div></div></header>
 
