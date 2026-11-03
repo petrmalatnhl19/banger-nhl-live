@@ -469,18 +469,13 @@ async function analyzeGame(id){
  // The app's get() proxy only routes scores, gamecenter and skater stats.
  // Season schedules must use the NHL endpoint directly; fall back to proxied daily scores.
  const schedule=async code=>{
-  const ctrl=new AbortController();const timer=setTimeout(()=>ctrl.abort(),5500);
+  const ctrl=new AbortController();const timer=setTimeout(()=>ctrl.abort(),3500);
   try{const res=await fetch('https://api-web.nhle.com/v1/club-schedule-season/'+encodeURIComponent(code)+'/'+season,{signal:ctrl.signal});if(!res.ok)throw Error('Schedule HTTP '+res.status);const data=await res.json();if(!Array.isArray(data.games))throw Error('Schedule shape');return data}
   finally{clearTimeout(timer)}
  };
- let scheduleResults=await Promise.allSettled([schedule(ac),schedule(hc)]);
- if(scheduleResults.some(r=>r.status!=='fulfilled'||!Array.isArray(r.value?.games))){
-  const gameDate=detail.gameDate||new Date().toISOString().slice(0,10);
-  const dates=Array.from({length:18},(_,i)=>{const d=new Date(gameDate+'T12:00:00Z');d.setUTCDate(d.getUTCDate()-i-1);return d.toISOString().slice(0,10)});
-  const fallback=await Promise.allSettled(dates.map(date=>get('https://api-web.nhle.com/v1/score/'+date)));
-  const recent=fallback.flatMap((r,i)=>r.status==='fulfilled'?(r.value.games||[]).map(g=>({...g,gameDate:g.gameDate||dates[i]})):[]);
-  scheduleResults=scheduleResults.map((r,i)=>r.status==='fulfilled'&&Array.isArray(r.value?.games)?r:{status:'fulfilled',value:{games:recent.filter(g=>g.awayTeam?.abbrev===(i===0?ac:hc)||g.homeTeam?.abbrev===(i===0?ac:hc))}}});
- }
+ const scheduleResults=await Promise.allSettled([schedule(ac),schedule(hc)]);
+ // Avoid 18 parallel fallback requests: they could leave the analysis loading indefinitely.
+ // A failed schedule is optional; the season-based report still renders.
  if(!root.isConnected)return;
  const gameDay=detail.gameDate||new Date().toISOString().slice(0,10);
  function form(result,code){
