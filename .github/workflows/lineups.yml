@@ -17,6 +17,7 @@ jobs:
       - run: python scripts/update_lineups.py
       - run: python scripts/update_last_game_lines.py
       - run: python scripts/check_lineups_coverage.py
+      - run: python scripts/audit_lineups.py
       - name: Commit changed lineups
         run: |
           git config user.name "github-actions[bot]"
