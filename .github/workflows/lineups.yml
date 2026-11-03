@@ -13,8 +13,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python scripts/update_lineups.py
       - run: python scripts/update_rosters.py
+      - run: python scripts/update_lineups.py
       - run: python scripts/update_last_game_lines.py
       - run: python scripts/check_lineups_coverage.py
       - name: Commit changed lineups
