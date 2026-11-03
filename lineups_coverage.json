@@ -1,0 +1,236 @@
+{
+  "generatedAt": "2026-11-03T09:39:07.539580+00:00",
+  "totalTeams": 32,
+  "withProjectedLines": 32,
+  "missing": [],
+  "teams": {
+    "avalanche": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "blackhawks": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "blue jackets": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "blues": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "bruins": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "canadiens": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "canucks": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "capitals": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive",
+        "manual"
+      ]
+    },
+    "devils": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "ducks": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "flames": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "flyers": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "golden knights": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "hurricanes": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "islanders": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "jets": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "kings": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "kraken": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "lightning": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "mammoth": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive",
+        "manual"
+      ]
+    },
+    "maple leafs": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive",
+        "manual"
+      ]
+    },
+    "oilers": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "panthers": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "penguins": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "predators": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "rangers": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "red wings": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "sabres": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "senators": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "sharks": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    },
+    "stars": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive",
+        "manual"
+      ]
+    },
+    "wild": {
+      "hasProjectedLines": true,
+      "sources": [
+        "automatic",
+        "archive"
+      ]
+    }
+  }
+}
