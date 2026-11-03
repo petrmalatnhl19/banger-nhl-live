@@ -47,4 +47,14 @@ def main():
    break
  with open("starting_goalies.json","w",encoding="utf-8") as f:json.dump({"date":today,"updatedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"teams":records},f,ensure_ascii=False,indent=2)
  print("Verified source-matched projected goalies:",len(records))
-if __name__=="__main__":main()
+if __name__=="__main__":
+ try:
+  main()
+ except Exception as exc:
+  print("GOALIE SOURCE ERROR:",type(exc).__name__,str(exc))
+  # Publish a transparent empty feed rather than silently reusing yesterday's starters.
+  now=datetime.datetime.now(datetime.timezone.utc)
+  with open("starting_goalies.json","w",encoding="utf-8") as f:
+   json.dump({"date":now.date().isoformat(),"updatedAt":now.isoformat(),"teams":{},"status":"source_unavailable","errorType":type(exc).__name__},f,indent=2)
+  print("Published empty goalie feed; no starter is claimed as confirmed or projected")
+
