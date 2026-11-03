@@ -401,12 +401,12 @@
           "Beckett Sennecke"
         ],
         [
-          "A.J. Greer",
+          "Jeff Malott",
           "Tim Washe",
           "Sam Colangelo"
         ],
         [
-          "Jeff Malott",
+          "Nico Myatovic",
           "Roger McQueen",
           "Nikita Nesterenko"
         ]
@@ -429,11 +429,10 @@
         "Laurent Brossoit",
         "Lukas Dostal"
       ],
-      "injured": "Ian Moore (lower body), Troy Terry (hip), Ryan Poehling (knee)",
+      "injured": "Ian Moore (lower body), Troy Terry (hip), Ryan Poehling (knee), A.J. Greer (upper body)",
       "scratched": "Ville Husso, Frank Vatrano, Tyson Hinds",
-      "source": "https://www.nhl.com/news/ottawa-senators-anaheim-ducks-game-preview-november-1-2026",
-      "publishedAt": "2026-11-01T20:27:00+00:00",
-      "asOf": "2026-11-01",
+      "asOf": "2026-11-03",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
     },
@@ -1058,7 +1057,7 @@
         [
           "Paul Cotter",
           "Max Sasson",
-          "Arshdeep Bains"
+          "Brendan Gallagher"
         ]
       ],
       "defense": [
@@ -1075,10 +1074,9 @@
         "Kevin Lankinen"
       ],
       "injured": "Filip Chytil (shoulder), Thatcher Demko (hip)",
-      "scratched": "Guillaume Brisebois, Luke Schenn, Brendan Gallagher",
-      "source": "https://www.nhl.com/news/toronto-maple-leafs-vancouver-canucks-game-preview-october-31-2026",
-      "publishedAt": "2026-10-31T15:27:00+00:00",
-      "asOf": "2026-10-31",
+      "scratched": "Guillaume Brisebois, Luke Schenn, Arshdeep Bains",
+      "asOf": "2026-11-03",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
     },
@@ -1255,6 +1253,55 @@
       "source": "https://www.nhl.com/news/edmonton-oilers-new-york-islanders-game-preview-october-31-2026",
       "publishedAt": "2026-10-30T15:11:41.242000+00:00",
       "asOf": "2026-10-30",
+      "sourceLabel": "NHL.com",
+      "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
+    },
+    "predators": {
+      "name": "Predators",
+      "forwards": [
+        [
+          "Steven Stamkos",
+          "Ryan O’Reilly",
+          "Mavrik Bourque"
+        ],
+        [
+          "Filip Forsberg",
+          "Shane Wright",
+          "Nils Hoglander"
+        ],
+        [
+          "Vitali Pinchuk",
+          "Alexander Kerfoot",
+          "Reid Schaefer"
+        ],
+        [
+          "Ross Colton",
+          "Jack Drury",
+          "Adam Edstrom"
+        ]
+      ],
+      "defense": [
+        [
+          "Roman Josi",
+          "Adam Wilsby"
+        ],
+        [
+          "Brady Skjei",
+          "Nick Perbix"
+        ],
+        [
+          "Daemon Hunt",
+          "Jayden Struble"
+        ]
+      ],
+      "goalies": [
+        "Juuse Saros",
+        "Justus Annunen"
+      ],
+      "injured": "William Trudeau (upper body)",
+      "scratched": "Nicolas Hague, Ilya Lyubushkin, Jonathan Marchessault",
+      "asOf": "2026-11-03",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
     }

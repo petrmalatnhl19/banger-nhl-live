@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-03T18:46:17.561722+00:00",
+  "fetchedAt": "2026-11-03T19:50:03.584563+00:00",
   "teams": {
     "red wings": {
       "name": "Red Wings",
@@ -679,6 +679,131 @@
       "injured": "None",
       "scratched": "Brenden Dillon"
     },
+    "predators": {
+      "name": "Predators",
+      "forwards": [
+        [
+          "Steven Stamkos",
+          "Ryan O’Reilly",
+          "Mavrik Bourque"
+        ],
+        [
+          "Filip Forsberg",
+          "Shane Wright",
+          "Nils Hoglander"
+        ],
+        [
+          "Vitali Pinchuk",
+          "Alexander Kerfoot",
+          "Reid Schaefer"
+        ],
+        [
+          "Ross Colton",
+          "Jack Drury",
+          "Adam Edstrom"
+        ]
+      ],
+      "defense": [
+        [
+          "Roman Josi",
+          "Adam Wilsby"
+        ],
+        [
+          "Brady Skjei",
+          "Nick Perbix"
+        ],
+        [
+          "Daemon Hunt",
+          "Jayden Struble"
+        ]
+      ],
+      "goalies": [
+        "Juuse Saros",
+        "Justus Annunen"
+      ],
+      "injured": "William Trudeau (upper body)",
+      "scratched": "Nicolas Hague, Ilya Lyubushkin, Jonathan Marchessault"
+    },
+    "ducks": {
+      "name": "Ducks",
+      "forwards": [
+        [
+          "Alex Killorn",
+          "Leo Carlsson",
+          "Judd Caulfield"
+        ],
+        [
+          "Cutter Gauthier",
+          "Mikael Granlund",
+          "Beckett Sennecke"
+        ],
+        [
+          "Jeff Malott",
+          "Tim Washe",
+          "Sam Colangelo"
+        ],
+        [
+          "Nico Myatovic",
+          "Roger McQueen",
+          "Nikita Nesterenko"
+        ]
+      ],
+      "defense": [
+        [
+          "Jackson LaCombe",
+          "Drew Helleson"
+        ],
+        [
+          "Pavel Mintyukov",
+          "Noah Warren"
+        ],
+        [
+          "Travis Mitchell",
+          "Tristan Luneau"
+        ]
+      ],
+      "goalies": [
+        "Laurent Brossoit",
+        "Lukas Dostal"
+      ],
+      "injured": "Ian Moore (lower body), Troy Terry (hip), Ryan Poehling (knee), A.J. Greer (upper body)",
+      "scratched": "Ville Husso, Frank Vatrano, Tyson Hinds"
+    },
+    "canucks": {
+      "name": "Canucks",
+      "forwards": [
+        [
+          "Jake DeBrusk",
+          "Elias Pettersson",
+          "Brock Boeser"
+        ],
+        [
+          "Liam Ohgren",
+          "Marco Rossi",
+          "Linus Karlsson"
+        ],
+        [
+          "Paul Cotter",
+          "Max Sasson",
+          "Brendan Gallagher"
+        ]
+      ],
+      "defense": [
+        [
+          "Jamie Oleksiak",
+          "Tom Willander"
+        ],
+        [
+          "Zeev Buium",
+          "Victor Mancini"
+        ]
+      ],
+      "goalies": [
+        "Kevin Lankinen"
+      ],
+      "injured": "Filip Chytil (shoulder), Thatcher Demko (hip)",
+      "scratched": "Guillaume Brisebois, Luke Schenn, Arshdeep Bains"
+    },
     "flames": {
       "name": "Flames",
       "forwards": [
@@ -913,90 +1038,6 @@
       "scratched": "Uvis Balinskis, Cole Reinhardt, Cooper Black",
       "source": "https://www.nhl.com/news/detroit-red-wings-florida-panthers-game-preview-november-2-2026",
       "publishedAt": "2026-11-02T17:12:15.904000+00:00"
-    },
-    "ducks": {
-      "name": "Ducks",
-      "forwards": [
-        [
-          "Alex Killorn",
-          "Leo Carlsson",
-          "Judd Caulfield"
-        ],
-        [
-          "Cutter Gauthier",
-          "Mikael Granlund",
-          "Beckett Sennecke"
-        ],
-        [
-          "A.J. Greer",
-          "Tim Washe",
-          "Sam Colangelo"
-        ],
-        [
-          "Jeff Malott",
-          "Roger McQueen",
-          "Nikita Nesterenko"
-        ]
-      ],
-      "defense": [
-        [
-          "Jackson LaCombe",
-          "Drew Helleson"
-        ],
-        [
-          "Pavel Mintyukov",
-          "Noah Warren"
-        ],
-        [
-          "Travis Mitchell",
-          "Tristan Luneau"
-        ]
-      ],
-      "goalies": [
-        "Laurent Brossoit",
-        "Lukas Dostal"
-      ],
-      "injured": "Ian Moore (lower body), Troy Terry (hip), Ryan Poehling (knee)",
-      "scratched": "Ville Husso, Frank Vatrano, Tyson Hinds",
-      "source": "https://www.nhl.com/news/ottawa-senators-anaheim-ducks-game-preview-november-1-2026",
-      "publishedAt": "2026-11-01T20:27:00+00:00"
-    },
-    "canucks": {
-      "name": "Canucks",
-      "forwards": [
-        [
-          "Jake DeBrusk",
-          "Elias Pettersson",
-          "Brock Boeser"
-        ],
-        [
-          "Liam Ohgren",
-          "Marco Rossi",
-          "Linus Karlsson"
-        ],
-        [
-          "Paul Cotter",
-          "Max Sasson",
-          "Arshdeep Bains"
-        ]
-      ],
-      "defense": [
-        [
-          "Jamie Oleksiak",
-          "Tom Willander"
-        ],
-        [
-          "Zeev Buium",
-          "Victor Mancini"
-        ]
-      ],
-      "goalies": [
-        "Kevin Lankinen"
-      ],
-      "injured": "Filip Chytil (shoulder), Thatcher Demko (hip)",
-      "scratched": "Guillaume Brisebois, Luke Schenn, Brendan Gallagher",
-      "source": "https://www.nhl.com/news/toronto-maple-leafs-vancouver-canucks-game-preview-october-31-2026",
-      "publishedAt": "2026-10-31T15:27:00+00:00"
     },
     "sabres": {
       "name": "Sabres",
