@@ -440,6 +440,146 @@
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "canadiens": {
+      "updatedAt": "2026-11-03T18:46:17.560562+00:00",
+      "previousPublishedAt": "2026-10-31T16:52:42.410000+00:00",
+      "publishedAt": "",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "events": [
+        {
+          "type": "moved",
+          "player": "Jake Evans",
+          "from": "Útok 3",
+          "to": "Útok 1"
+        },
+        {
+          "type": "added",
+          "player": "Florian Xhekaj",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Oliver Kapanen",
+          "from": "Útok 1",
+          "to": "Útok 3"
+        },
+        {
+          "type": "removed",
+          "player": "Kirby Dach",
+          "from": "Útok 3"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "mammoth": {
+      "updatedAt": "2026-11-03T18:46:17.560601+00:00",
+      "previousPublishedAt": "2026-11-01T18:56:00+00:00",
+      "publishedAt": "",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "events": [
+        {
+          "type": "moved",
+          "player": "Dylan Guenther",
+          "from": "Útok 2",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Lawson Crouse",
+          "from": "Útok 1",
+          "to": "Útok 2"
+        },
+        {
+          "type": "added",
+          "player": "Michael Carcone",
+          "to": "Útok 3"
+        },
+        {
+          "type": "removed",
+          "player": "Kailer Yamamoto",
+          "from": "Útok 3"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "maple leafs": {
+      "updatedAt": "2026-11-03T18:46:17.560639+00:00",
+      "previousPublishedAt": "2026-10-31T15:27:00+00:00",
+      "publishedAt": "",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "events": [
+        {
+          "type": "moved",
+          "player": "Easton Cowan",
+          "from": "Útok 2",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Dakota Joshua",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Brandon Duhaime",
+          "from": "Útok 4",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Teddy Blueger",
+          "from": "Útok 4",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Zack MacEwen",
+          "from": "Útok 4",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Morgan Rielly",
+          "from": "Obrana 2",
+          "to": "Obrana 1"
+        },
+        {
+          "type": "moved",
+          "player": "Chris Tanev",
+          "from": "Obrana 2",
+          "to": "Obrana 1"
+        },
+        {
+          "type": "moved",
+          "player": "Jake McCabe",
+          "from": "Obrana 1",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "moved",
+          "player": "Darren Raddysh",
+          "from": "Obrana 1",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "removed",
+          "player": "Gavin McKenna",
+          "from": "Útok 1"
+        },
+        {
+          "type": "removed",
+          "player": "Colton Sissons",
+          "from": "Útok 3"
+        },
+        {
+          "type": "removed",
+          "player": "Vinni Lettieri",
+          "from": "Útok 3"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     }
   }
 }
