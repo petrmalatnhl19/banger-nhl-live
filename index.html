@@ -271,6 +271,13 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid 
 .dash-score-colon{color:#75a4c5;font-size:.8em}
 .dash-game-hint{align-self:flex-end;color:#8dbbd7;font-size:11px;font-weight:650}
 @media(max-width:430px){.dash-game{padding:11px!important;min-height:120px!important}.dash-game-teams{grid-template-columns:27px minmax(24px,1fr) auto minmax(24px,1fr) 27px!important;gap:5px!important}.dash-game-teams img{width:27px!important;height:27px!important}.dash-game-teams b{font-size:12px!important}}
+
+/* BANGER ANALYST – educational matchup analysis, not betting advice */
+.dash-analyze{min-height:38px;width:100%;margin:0 0 9px;border:1px solid #41d8ff66;border-radius:10px;background:#0c3155;color:#bceeff;font-weight:800;cursor:pointer}
+.analysis-panel{position:fixed;inset:0;z-index:999999;background:#010815d9;display:flex;justify-content:center;align-items:center;padding:16px;overflow:auto}
+.analysis-card{width:min(720px,100%);max-height:90dvh;overflow:auto;padding:22px;border:1px solid #4ad8ff66;border-radius:20px;background:linear-gradient(140deg,#102b4c,#071328);box-shadow:0 20px 80px #000a}
+.analysis-card h2{margin:8px 0}.analysis-card p{line-height:1.65;color:#d3e7f4}.analysis-card .analysis-small{font-size:12px;color:#96b5ca}.analysis-close{float:right;min-height:42px;padding:8px 14px;border:1px solid #4ad8ff77;border-radius:10px;background:#102b4c;color:white;cursor:pointer}
+.analysis-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.analysis-grid>div{padding:13px;background:#123354;border-radius:12px}.analysis-grid strong{display:block;font-size:20px}
 </style></head><body><div class="wrap">
 <div id="brandSplash" class="brand-splash" aria-label="Načítání BANGER NHL LIVE"><div class="brand-splash-glow"></div><picture><source media="(orientation: portrait)" srcset="splash-portrait.png"><img src="splash-landscape.png" alt="BANGER NHL LIVE" fetchpriority="high" decoding="async"></picture><div class="brand-splash-loader"><span></span></div><div class="brand-splash-caption">VSTUP DO HOKEJOVÉ ARÉNY</div></div><header class="top"><div class="brand"><div class="brand-logo" aria-label="BANGER NHL LIVE"><span class="brand-mark">BANGER</span><span class="brand-sub">NHL <b>LIVE</b></span></div></div><span class="header-status"><i></i> NHL 2026/27</span></header>
 
@@ -355,7 +362,7 @@ const playerRow=(p,i)=>'<div class="dash-row"><span class="dash-position">'+(i+1
 const teamRow=(r,i)=>{const c=tn(r.teamAbbrev);return '<button class="dash-row dash-row-button" data-team="'+safe(c)+'"><span class="dash-position">'+(i+1)+'</span><img src="'+safe(r.teamLogo||teamLogo(c))+'" alt=""><span class="dash-player">'+safe(tn(r.teamName)||c)+'</span><b>'+safe(r.points??'—')+' b</b></button>'};
 $('status').textContent='NHL LIVE Dashboard · aktualizováno '+new Date().toLocaleTimeString('cs-CZ');
 $('content').innerHTML='<div class="dash-heading"><div><div class="tag">NHL · ŽIVÝ PŘEHLED</div><h2>Dnešní NHL</h2><p>'+safe(new Date().toLocaleDateString('cs-CZ',{weekday:'long',day:'numeric',month:'long'}))+' · '+games.length+' zápasů · '+live.length+' živě</p></div><button class="btn" id="dashRefresh">↻ Obnovit</button></div><div class="dash-quick"><button class="dash-quick-btn" id="dashQuickGames">🏒 Zápasy dnes</button><button class="dash-quick-btn" id="dashQuickStats">📊 Statistiky</button><button class="dash-quick-btn" id="dashQuickTable">🏆 Tabulky</button></div><div class="dash-layout"><section class="dash-panel dash-wide"><div class="dash-panel-title"><h3>⚡ Dnešní zápasy</h3><button class="dash-link" id="dashAllGames">Všechny zápasy ↗</button></div><div class="dash-game-grid">'+(games.length?games.map(matchCard).join(''):'<p>Na dnešek nejsou naplánované zápasy.</p>')+'</div></section><section class="dash-panel"><div class="dash-panel-title"><h3>🏒 Lídři produktivity</h3><button class="dash-link" id="dashAllPlayers">Statistiky ↗</button></div>'+(skaters.length?skaters.map(playerRow).join(''):'<p>Statistiky hráčů nejsou momentálně dostupné.</p>')+'</section><section class="dash-panel"><div class="dash-panel-title"><h3>🏆 Nejlepší týmy</h3><button class="dash-link" id="dashAllStandings">Tabulky ↗</button></div>'+(topTeams.length?topTeams.map(teamRow).join(''):'<p>Tabulka není momentálně dostupná.</p>')+'</section><section class="dash-panel dash-wide"><div class="dash-panel-title"><h3>🕘 Včerejší výsledky</h3></div><div class="dash-game-grid">'+(recent.length?recent.map(matchCard).join(''):'<p>Včerejší výsledky nejsou dostupné.</p>')+'</div></section></div>';
-$('content').querySelectorAll('.dash-game[data-game]').forEach(b=>b.onclick=()=>detail(b.dataset.game,b));$('dashRefresh').onclick=dashboard;$('dashQuickGames').onclick=()=>activate('games');$('dashQuickStats').onclick=()=>activate('skaters');$('dashQuickTable').onclick=()=>activate('standings');$('dashAllGames').onclick=()=>activate('games');$('dashAllPlayers').onclick=()=>activate('skaters');$('dashAllStandings').onclick=()=>activate('standings');
+$('content').querySelectorAll('.dash-game[data-game]').forEach(b=>b.onclick=()=>detail(b.dataset.game,b));$('content').querySelectorAll('.dash-analyze[data-analyze]').forEach(b=>b.onclick=()=>analyzeGame(b.dataset.analyze));$('dashRefresh').onclick=dashboard;$('dashQuickGames').onclick=()=>activate('games');$('dashQuickStats').onclick=()=>activate('skaters');$('dashQuickTable').onclick=()=>activate('standings');$('dashAllGames').onclick=()=>activate('games');$('dashAllPlayers').onclick=()=>activate('skaters');$('dashAllStandings').onclick=()=>activate('standings');
 }
 
 
@@ -413,4 +420,45 @@ $('tabDashboard').onclick=()=>activate('dashboard');$('tabGames').onclick=()=>ac
  else if(image){image.addEventListener('load',finish,{once:true});image.addEventListener('error',finish,{once:true})}
  setTimeout(finish,2600);
 })();
+</script>
+<script>
+/* Experimental pre-game team-strength report using available official standings. */
+async function analyzeGame(id){
+ const root=document.createElement('div');root.className='analysis-panel';root.setAttribute('role','dialog');root.setAttribute('aria-modal','true');root.setAttribute('aria-label','Analýza zápasu');
+ root.innerHTML='<div class="analysis-card"><button class="analysis-close">✕ Zavřít</button><h2>◈ BANGER ANALYST</h2><p>Vyhodnocuji dostupné týmové statistiky…</p></div>';
+ document.body.appendChild(root);
+ const close=()=>root.remove();root.querySelector('.analysis-close').onclick=close;root.onclick=e=>{if(e.target===root)close()};
+ const esc=e=>{if(e.key==='Escape'){close();document.removeEventListener('keydown',esc)}};document.addEventListener('keydown',esc);
+ const escText=s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+ try{
+ const [detail,standing]=await Promise.all([get('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(id)+'/landing'),teamApi('standings','')]);
+ if(!root.isConnected)return;
+ const a=detail.awayTeam||{},h=detail.homeTeam||{},code=t=>t.abbrev||'',rows=standing?.standings||[];
+ const find=t=>rows.find(x=>x.teamAbbrev?.default===code(t)||x.teamAbbrev===code(t));
+ const ar=find(a),hr=find(h);
+ const gp=x=>Number(x?.gamesPlayed)||0;
+ const avg=(x,k)=>gp(x)>0?Number(x[k]||0)/gp(x):null;
+ const af=avg(ar,'goalFor'),aa=avg(ar,'goalAgainst'),hf=avg(hr,'goalFor'),ha=avg(hr,'goalAgainst');
+ const ap=gp(ar)>0?Number(ar.points||0)/(2*gp(ar)):null,hp=gp(hr)>0?Number(hr.points||0)/(2*gp(hr)):null;
+ const valid=[af,aa,hf,ha,ap,hp].every(x=>Number.isFinite(x));
+ const card=root.querySelector('.analysis-card');
+ const pre=detail.gameState==='FUT'||detail.gameState==='PRE';
+ const label=(t)=>escText(code(t)||'NHL');
+ let html='<button class="analysis-close">✕ Zavřít</button><h2>◈ BANGER ANALYST</h2><p><strong>'+label(a)+' vs '+label(h)+'</strong> · '+(pre?'Předzápasová analýza':'Zápas již začal nebo skončil')+'</p>';
+ if(valid){
+ const x=Math.max(.4,Math.min(6,(af+ha)/2)),y=Math.max(.4,Math.min(6,(hf+aa)/2));
+ const fact=(n)=>{let r=1;for(let j=2;j<=n;j++)r*=j;return r};
+ const pois=(n,l)=>Math.exp(-l)*Math.pow(l,n)/fact(n);
+ let aw=0,hw=0,tie=0;for(let i=0;i<=13;i++)for(let j=0;j<=13;j++){const p=pois(i,x)*pois(j,y);if(i>j)aw+=p;else if(j>i)hw+=p;else tie+=p}
+ const pct=v=>Math.round(v*100)+' %';
+ const fav=aw>hw?label(a):label(h);
+ html+='<div class="analysis-grid"><div>Očekávané góly (orientačně)<strong>'+x.toFixed(2)+' : '+y.toFixed(2)+'</strong><span class="analysis-small">Hosté : domácí</span></div><div>Body ze sezóny / maximum<strong>'+pct(ap)+' : '+pct(hp)+'</strong><span class="analysis-small">Hosté : domácí</span></div></div>';
+ html+='<h3>Model vývoje zápasu</h3><p>Model odhaduje v základní hrací době přibližně <strong>'+pct(aw)+'</strong> pro vedení '+label(a)+', <strong>'+pct(tie)+'</strong> pro nerozhodný stav a <strong>'+pct(hw)+'</strong> pro vedení '+label(h)+'. Jde o experimentální výpočet, nikoli kalibrovanou pravděpodobnost skutečného výsledku.</p>';
+ html+='<p><strong>Co se může stát:</strong> '+(Math.abs(x-y)<.35?'Podle sezónního gólového profilu se nabízí vyrovnaný průběh.':'Gólové průměry mírně zvýhodňují '+fav+'.')+' Pokud utkání zůstane dlouho vyrovnané, důležitá může být produktivita přesilových her, výkon brankářů a závěr třetí třetiny.</p>';
+ html+='<p><strong>Faktory, které model zahrnuje:</strong> sezónní vstřelené a inkasované góly, počet odehraných utkání a bodovou úspěšnost. <strong>Neověřené faktory:</strong> potvrzení brankáři, zranění, sestavy, únava, forma posledních zápasů, xG a speciální týmy. Tyto údaje se do výpočtu nezapočítávají.</p>';
+ }else html+='<p>Pro oba týmy nejsou dostupné kompletní sezónní statistiky. Nechci zobrazovat vymyšlené pravděpodobnosti. Zkus analýzu později.</p>';
+ html+='<p class="analysis-small">Zdroj: NHL výsledky a sezónní tabulka. Zjednodušený Poissonův model bez domácí výhody a bez korekce pro prodloužení. Pouze informativní sportovní rozbor.</p>';
+ card.innerHTML=html;card.querySelector('.analysis-close').onclick=close;
+ }catch(e){if(root.isConnected){root.querySelector('.analysis-card').innerHTML='<button class="analysis-close">✕ Zavřít</button><h2>Analýza není dostupná</h2><p>Statistiky se nepodařilo načíst. Zkus to znovu později.</p>';root.querySelector('.analysis-close').onclick=close}}
+}
 </script></body></html>
