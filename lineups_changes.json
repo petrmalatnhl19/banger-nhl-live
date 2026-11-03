@@ -23,6 +23,31 @@
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "penguins": {
+      "updatedAt": "2026-11-03T16:52:15.015002+00:00",
+      "previousPublishedAt": "2026-10-31T16:52:42.410000+00:00",
+      "publishedAt": "",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "events": [
+        {
+          "type": "moved",
+          "player": "Andrei Kuzmenko",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "added",
+          "player": "Justin Brazeau",
+          "to": "Útok 3"
+        },
+        {
+          "type": "removed",
+          "player": "Evgeni Malkin",
+          "from": "Útok 2"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     }
   }
 }
