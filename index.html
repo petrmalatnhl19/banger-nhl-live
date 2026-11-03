@@ -220,13 +220,13 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid 
 .brand-splash-caption{display:none}
 @media(orientation:portrait){.brand-splash img{width:100vw!important;height:100dvh!important}}
 
-/* Responsive loading artwork: portrait PNG and landscape PNG (SVG fallback) */
+/* Responsive loading artwork: portrait and landscape PNG */
 .brand-splash{background:#030b1b url("splash-portrait.png") center center / cover no-repeat!important}
 .brand-splash:before{display:none!important}
 .brand-splash > img{display:none!important}
 .brand-splash-loader{bottom:max(8%,env(safe-area-inset-bottom) + 24px)!important}
 @media(orientation:landscape){
- .brand-splash{background-image:url("splash-landscape.png"),url("splash-landscape.svg")!important}
+ .brand-splash{background-image:url("splash-landscape.png")!important}
 
  .brand-splash-loader{bottom:5%!important}
 }
