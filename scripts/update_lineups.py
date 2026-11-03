@@ -161,11 +161,15 @@ for name,team in teams.items():
     first=first.get("default","") if isinstance(first,dict) else first
     last=last.get("default","") if isinstance(last,dict) else last
     names.add(normalize(str(first)+" "+str(last)))
-  projected=[x for line in team["forwards"]+team["defense"] for x in line]
-  matches=sum(normalize(x) in names for x in projected)
-  if matches>=int(len(projected)*0.8):
+  groups={}
+  for role,group in (("forwards","forwards"),("defense","defensemen"),("goalies","goalies")):
+   groups[role]={normalize(str((p.get("firstName",{}).get("default","") if isinstance(p.get("firstName"),dict) else p.get("firstName","")))+" "+str((p.get("lastName",{}).get("default","") if isinstance(p.get("lastName"),dict) else p.get("lastName","")))) for p in roster.get(group,[])}
+  forwards_ok=all(len(line)==3 and all(normalize(x) in groups["forwards"] for x in line) for line in team["forwards"])
+  defense_ok=all(len(line)==2 and all(normalize(x) in groups["defense"] for x in line) for line in team["defense"])
+  goalies_ok=all(normalize(x) in groups["goalies"] for x in team.get("goalies",[]))
+  if forwards_ok and defense_ok and goalies_ok:
    validated[name]=team
-  else:print("Skipped",name,"roster match",matches,"/",len(projected))
+  else:print("Skipped",name,"invalid position assignment (F/D/G)")
  except Exception as e:print("Roster validation unavailable for",name,str(e))
 teams=validated
 if len(teams)<1:raise SystemExit("No validated projections; retaining previous data")
