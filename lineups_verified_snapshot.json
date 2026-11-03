@@ -1,0 +1,99 @@
+{
+  "updatedAt": "2026-11-03T08:30:00Z",
+  "teams": {
+    "mammoth": {
+      "name": "Utah Mammoth",
+      "forwards": [
+        [
+          "Clayton Keller",
+          "Nick Schmaltz",
+          "Dylan Guenther"
+        ],
+        [
+          "Lawson Crouse",
+          "Vincent Trocheck",
+          "Logan Cooley"
+        ],
+        [
+          "Anders Lee",
+          "Barrett Hayton",
+          "Michael Carcone"
+        ],
+        [
+          "Liam O'Brien",
+          "Kevin Stenlund",
+          "Jack McBain"
+        ]
+      ],
+      "defense": [
+        [
+          "Mikhail Sergachev",
+          "MacKenzie Weegar"
+        ],
+        [
+          "Nate Schmidt",
+          "Andrew Peeke"
+        ],
+        [
+          "Dmitri Simashev",
+          "Nick DeSimone"
+        ]
+      ],
+      "goalies": [
+        "Karel Vejmelka",
+        "Sebastian Cossa"
+      ],
+      "source": "https://www.fsroundup.com/nhl/line-combinations/utah-mammoth",
+      "sourceLabel": "Fantasy Roundup",
+      "basis": "Sestava podle posledního zápasu 1. 11.; není potvrzená pro další utkání",
+      "asOf": "2026-11-01"
+    },
+    "maple leafs": {
+      "name": "Toronto Maple Leafs",
+      "forwards": [
+        [
+          "Easton Cowan",
+          "Auston Matthews",
+          "Jack Roslovic"
+        ],
+        [
+          "Dakota Joshua",
+          "Nick Paul",
+          "William Nylander"
+        ],
+        [
+          "Gavin McKenna",
+          "Colton Sissons",
+          "Vinni Lettieri"
+        ],
+        [
+          "Brandon Duhaime",
+          "Teddy Blueger",
+          "Zack MacEwen"
+        ]
+      ],
+      "defense": [
+        [
+          "Jake McCabe",
+          "Darren Raddysh"
+        ],
+        [
+          "Morgan Rielly",
+          "Chris Tanev"
+        ],
+        [
+          "Oliver Ekman-Larsson",
+          "Troy Stecher"
+        ]
+      ],
+      "goalies": [
+        "Sergei Bobrovsky",
+        "Anthony Stolarz"
+      ],
+      "source": "https://theleafsnation.com/news/leafs-practice-notes-forward-lines-shuffled-sergei-bobrovsky-gets-the-start-vs-mammoth",
+      "sourceLabel": "The Leafs Nation",
+      "basis": "Projekce ze zprávy o tréninku 2. 11.; není potvrzená sestava",
+      "asOf": "2026-11-02"
+    }
+  }
+}
