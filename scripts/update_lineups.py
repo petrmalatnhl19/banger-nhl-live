@@ -169,6 +169,20 @@ for name,team in teams.items():
  except Exception as e:print("Roster validation unavailable for",name,str(e))
 teams=validated
 if len(teams)<1:raise SystemExit("No validated projections; retaining previous data")
+# Keep a dated archive of validated projections for teams not featured today.
+# Historical records remain explicitly labelled and are never promoted to today's projection.
+ARCHIVE_FILE="lineups_archive.json"
+try:
+ with open(ARCHIVE_FILE,encoding="utf-8") as af:archive=json.load(af)
+except (FileNotFoundError,ValueError):archive={"teams":{}}
+for key,team in teams.items():
+ record=dict(team)
+ record["asOf"]=datetime.datetime.now(datetime.timezone.utc).date().isoformat()
+ record["source"]=record.get("source",URL)
+ record["sourceLabel"]="NHL.com" if record["source"]==URL else "Externí zdroj"
+ record["basis"]="Archiv ověřené projekce (nemusí platit pro další zápas)"
+ archive["teams"][key]=record
+with open(ARCHIVE_FILE,"w",encoding="utf-8") as af:json.dump(archive,af,ensure_ascii=False,indent=2)
 out={"source":URL,"fetchedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"teams":teams,"rosterValidated":True}
 with open("lineups.json","w",encoding="utf-8") as f:json.dump(out,f,ensure_ascii=False,indent=2)
 print("Saved",len(teams),"projected lineups")
