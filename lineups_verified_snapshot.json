@@ -94,6 +94,129 @@
       "sourceLabel": "The Leafs Nation",
       "basis": "Projekce ze zprávy o tréninku 2. 11.; není potvrzená sestava",
       "asOf": "2026-11-02"
+    },
+    "stars": {
+      "name": "Dallas Stars",
+      "forwards": [
+        [
+          "Jamie Benn",
+          "Wyatt Johnston",
+          "Mikko Rantanen"
+        ],
+        [
+          "Jason Robertson",
+          "Roope Hintz",
+          "Arttu Hyry"
+        ],
+        [
+          "Sam Steel",
+          "Justin Hryckowian",
+          "Tyler Seguin"
+        ],
+        [
+          "Joel Kiviranta",
+          "Radek Faksa",
+          "David Perron"
+        ]
+      ],
+      "defense": [
+        [
+          "Esa Lindell",
+          "Miro Heiskanen"
+        ],
+        [
+          "Thomas Harley",
+          "Nils Lundkvist"
+        ],
+        [
+          "Lian Bichsel",
+          "Tyler Myers"
+        ]
+      ],
+      "goalies": [
+        "Jake Oettinger",
+        "Casey DeSmith"
+      ],
+      "powerplay": [
+        [
+          "Mikko Rantanen",
+          "Jason Robertson",
+          "Wyatt Johnston",
+          "Roope Hintz",
+          "Miro Heiskanen"
+        ],
+        [
+          "Justin Hryckowian",
+          "Thomas Harley",
+          "Tyler Seguin",
+          "Nils Lundkvist",
+          "Jamie Benn"
+        ]
+      ],
+      "source": "https://www.fsroundup.com/nhl/line-combinations/dallas-stars",
+      "sourceLabel": "Fantasy Roundup",
+      "basis": "Projekce podle tréninku z 2. 11. 2026, start brankáře není potvrzen",
+      "asOf": "2026-11-02"
+    },
+    "capitals": {
+      "name": "Washington Capitals",
+      "forwards": [
+        [
+          "Aliaksei Protas",
+          "Pierre-Luc Dubois",
+          "Tom Wilson"
+        ],
+        [
+          "Alex Tuch",
+          "Dylan Strome",
+          "Jordan Kyrou"
+        ],
+        [
+          "Alex Ovechkin",
+          "Ilya Protas",
+          "Anthony Beauvillier"
+        ],
+        [
+          "Boone Jenner",
+          "Justin Sourdif",
+          "Ryan Leonard"
+        ]
+      ],
+      "defense": [
+        [
+          "Jakob Chychrun",
+          "Matt Roy"
+        ],
+        [
+          "Cole Hutson",
+          "Jack St. Ivany"
+        ],
+        [
+          "Martin Fehervary",
+          "Timothy Liljegren"
+        ]
+      ],
+      "goalies": [],
+      "powerplay": [
+        [
+          "Tom Wilson",
+          "Dylan Strome",
+          "Jordan Kyrou",
+          "Alex Ovechkin",
+          "Jakob Chychrun"
+        ],
+        [
+          "Pierre-Luc Dubois",
+          "Alex Tuch",
+          "Ilya Protas",
+          "Ryan Leonard",
+          "Cole Hutson"
+        ]
+      ],
+      "source": "https://aisportsmetrics.com/nhl-team.php?season=2026&team=WSH",
+      "sourceLabel": "AISportsMetrics / DailyFaceoff",
+      "basis": "Neověřená projekce pro 3. 11. 2026; možné změny v sestavě",
+      "asOf": "2026-11-03"
     }
   }
 }
