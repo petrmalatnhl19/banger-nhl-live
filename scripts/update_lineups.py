@@ -88,10 +88,17 @@ try:
  links=LinkParser();links.feed(preview_index)
  urls=[]
  for href,label in links.links:
-  if "projected lineups" in label.lower():
+  # NHL headlines use both singular and plural forms, e.g. "Jets at Canadiens projected lineups".
+  if re.search(r"projected\\s+lineups?",label,re.I) or re.search(r"game-preview|projected-lineups?",href,re.I):
    link=urljoin("https://www.nhl.com",href)
    if link.startswith("https://www.nhl.com/news/") and link not in urls:urls.append(link)
- for link in urls[:45]:
+ # Some NHL.com article cards are rendered as JSON instead of ordinary <a> tags.
+ # Extract only article paths; the article itself must still pass timestamp and roster checks.
+ for path in re.findall(r'(?:https://www\\.nhl\\.com)?(/news/[a-z0-9-]+(?:game-preview|projected-lineups?)[a-z0-9-]*)',preview_index,re.I):
+  link=urljoin("https://www.nhl.com",path)
+  if link not in urls:urls.append(link)
+ print("NHL preview candidates:",len(urls))
+ for link in urls[:60]:
   try:
    for key,value in parse_preview(link).items():
     if key not in teams or (value.get("publishedAt") and value["publishedAt"]>str(teams[key].get("publishedAt") or "")):teams[key]=value
