@@ -34,7 +34,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for file in lineups.json lineups_archive.json nhl_rosters.json lineups_coverage.json starting_goalies.json lineups_changes.json lineups_diagnostics.md; do
+          for file in lineups.json lineups_archive.json nhl_rosters.json lineups_coverage.json starting_goalies.json lineups_changes.json lineups_diagnostics.md lineups_source_diagnostics.json; do
             if [ -f "$file" ]; then git add "$file"; fi
           done
           if ! git diff --cached --quiet; then
