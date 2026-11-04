@@ -1,0 +1,632 @@
+{
+  "updatedAt": "2026-11-04T22:13:09.036516+00:00",
+  "rostersUpdatedAt": "2026-11-04T22:12:43.518931+00:00",
+  "projectionDate": "2026-11-04",
+  "teamCount": 32,
+  "goalieCount": 77,
+  "goalies": [
+    {
+      "name": "Mackenzie Blackwood",
+      "team": "COL",
+      "teamKey": "avalanche",
+      "playerId": 8478406,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Scott Wedgewood",
+      "team": "COL",
+      "teamKey": "avalanche",
+      "playerId": 8475809,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Spencer Knight",
+      "team": "CHI",
+      "teamKey": "blackhawks",
+      "playerId": 8481519,
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-04",
+      "starterSource": "https://themorningpuck.com/starting-goalies"
+    },
+    {
+      "name": "Arvid Soderblom",
+      "team": "CHI",
+      "teamKey": "blackhawks",
+      "playerId": 8482821,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Jet Greaves",
+      "team": "CBJ",
+      "teamKey": "blue jackets",
+      "playerId": 8482982,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Cam Talbot",
+      "team": "CBJ",
+      "teamKey": "blue jackets",
+      "playerId": 8475660,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Jordan Binnington",
+      "team": "STL",
+      "teamKey": "blues",
+      "playerId": 8476412,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Joel Hofer",
+      "team": "STL",
+      "teamKey": "blues",
+      "playerId": 8480981,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Michael DiPietro",
+      "team": "BOS",
+      "teamKey": "bruins",
+      "playerId": 8480022,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Jeremy Swayman",
+      "team": "BOS",
+      "teamKey": "bruins",
+      "playerId": 8480280,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Jakub Dobes",
+      "team": "MTL",
+      "teamKey": "canadiens",
+      "playerId": 8482487,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Jacob Fowler",
+      "team": "MTL",
+      "teamKey": "canadiens",
+      "playerId": 8484170,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Samuel Montembeault",
+      "team": "MTL",
+      "teamKey": "canadiens",
+      "playerId": 8478470,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Thatcher Demko",
+      "team": "VAN",
+      "teamKey": "canucks",
+      "playerId": 8477967,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Kevin Lankinen",
+      "team": "VAN",
+      "teamKey": "canucks",
+      "playerId": 8480947,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Leevi Meriläinen",
+      "team": "VAN",
+      "teamKey": "canucks",
+      "playerId": 8482447,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Charlie Lindgren",
+      "team": "WSH",
+      "teamKey": "capitals",
+      "playerId": 8479292,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Rémi Poirier",
+      "team": "WSH",
+      "teamKey": "capitals",
+      "playerId": 8482465,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Logan Thompson",
+      "team": "WSH",
+      "teamKey": "capitals",
+      "playerId": 8480313,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Jake Allen",
+      "team": "NJD",
+      "teamKey": "devils",
+      "playerId": 8474596,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Connor Hellebuyck",
+      "team": "NJD",
+      "teamKey": "devils",
+      "playerId": 8476945,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Laurent Brossoit",
+      "team": "ANA",
+      "teamKey": "ducks",
+      "playerId": 8476316,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Lukas Dostal",
+      "team": "ANA",
+      "teamKey": "ducks",
+      "playerId": 8480843,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Ville Husso",
+      "team": "ANA",
+      "teamKey": "ducks",
+      "playerId": 8478024,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Devin Cooley",
+      "team": "CGY",
+      "teamKey": "flames",
+      "playerId": 8482445,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Arsenii Sergeev",
+      "team": "CGY",
+      "teamKey": "flames",
+      "playerId": 8482949,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Dustin Wolf",
+      "team": "CGY",
+      "teamKey": "flames",
+      "playerId": 8481692,
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-04",
+      "starterSource": "https://themorningpuck.com/starting-goalies"
+    },
+    {
+      "name": "Dan Vladar",
+      "team": "PHI",
+      "teamKey": "flyers",
+      "playerId": 8478435,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Joseph Woll",
+      "team": "PHI",
+      "teamKey": "flyers",
+      "playerId": 8479361,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Carter Hart",
+      "team": "VGK",
+      "teamKey": "golden knights",
+      "playerId": 8479394,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Adin Hill",
+      "team": "VGK",
+      "teamKey": "golden knights",
+      "playerId": 8478499,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Brandon Bussi",
+      "team": "CAR",
+      "teamKey": "hurricanes",
+      "playerId": 8483548,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Pyotr Kochetkov",
+      "team": "CAR",
+      "teamKey": "hurricanes",
+      "playerId": 8481611,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Ilya Sorokin",
+      "team": "NYI",
+      "teamKey": "islanders",
+      "playerId": 8478009,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Semyon Varlamov",
+      "team": "NYI",
+      "teamKey": "islanders",
+      "playerId": 8473575,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Nico Daws",
+      "team": "WPG",
+      "teamKey": "jets",
+      "playerId": 8482076,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Stuart Skinner",
+      "team": "WPG",
+      "teamKey": "jets",
+      "playerId": 8479973,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Clay Stevenson",
+      "team": "WPG",
+      "teamKey": "jets",
+      "playerId": 8483532,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Anton Forsberg",
+      "team": "LAK",
+      "teamKey": "kings",
+      "playerId": 8476341,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Darcy Kuemper",
+      "team": "LAK",
+      "teamKey": "kings",
+      "playerId": 8475311,
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-04",
+      "starterSource": "https://themorningpuck.com/starting-goalies"
+    },
+    {
+      "name": "Joey Daccord",
+      "team": "SEA",
+      "teamKey": "kraken",
+      "playerId": 8478916,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Philipp Grubauer",
+      "team": "SEA",
+      "teamKey": "kraken",
+      "playerId": 8475831,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Dennis Hildeby",
+      "team": "TBL",
+      "teamKey": "lightning",
+      "playerId": 8483710,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Andrei Vasilevskiy",
+      "team": "TBL",
+      "teamKey": "lightning",
+      "playerId": 8476883,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Sebastian Cossa",
+      "team": "UTA",
+      "teamKey": "mammoth",
+      "playerId": 8482657,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Karel Vejmelka",
+      "team": "UTA",
+      "teamKey": "mammoth",
+      "playerId": 8478872,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Sergei Bobrovsky",
+      "team": "TOR",
+      "teamKey": "maple leafs",
+      "playerId": 8475683,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Anthony Stolarz",
+      "team": "TOR",
+      "teamKey": "maple leafs",
+      "playerId": 8476932,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Frederik Andersen",
+      "team": "EDM",
+      "teamKey": "oilers",
+      "playerId": 8475883,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Tristan Jarry",
+      "team": "EDM",
+      "teamKey": "oilers",
+      "playerId": 8477465,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Devon Levi",
+      "team": "EDM",
+      "teamKey": "oilers",
+      "playerId": 8482221,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Matt Tomkins",
+      "team": "EDM",
+      "teamKey": "oilers",
+      "playerId": 8477035,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Jacob Markstrom",
+      "team": "FLA",
+      "teamKey": "panthers",
+      "playerId": 8474593,
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-04",
+      "starterSource": "https://themorningpuck.com/starting-goalies"
+    },
+    {
+      "name": "Akira Schmid",
+      "team": "FLA",
+      "teamKey": "panthers",
+      "playerId": 8481033,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Sergei Murashov",
+      "team": "PIT",
+      "teamKey": "penguins",
+      "playerId": 8483703,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Arturs Silovs",
+      "team": "PIT",
+      "teamKey": "penguins",
+      "playerId": 8481668,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Justus Annunen",
+      "team": "NSH",
+      "teamKey": "predators",
+      "playerId": 8481020,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Juuse Saros",
+      "team": "NSH",
+      "teamKey": "predators",
+      "playerId": 8477424,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Dylan Garand",
+      "team": "NYR",
+      "teamKey": "rangers",
+      "playerId": 8482193,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Joonas Korpisalo",
+      "team": "NYR",
+      "teamKey": "rangers",
+      "playerId": 8476914,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "James Reimer",
+      "team": "NYR",
+      "teamKey": "rangers",
+      "playerId": 8473503,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Igor Shesterkin",
+      "team": "NYR",
+      "teamKey": "rangers",
+      "playerId": 8478048,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "John Gibson",
+      "team": "DET",
+      "teamKey": "red wings",
+      "playerId": 8476434,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Daniil Tarasov",
+      "team": "DET",
+      "teamKey": "red wings",
+      "playerId": 8480193,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Colten Ellis",
+      "team": "BUF",
+      "teamKey": "sabres",
+      "playerId": 8481551,
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-04",
+      "starterSource": "https://themorningpuck.com/starting-goalies"
+    },
+    {
+      "name": "Ukko-Pekka Luukkonen",
+      "team": "BUF",
+      "teamKey": "sabres",
+      "playerId": 8480045,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Alex Lyon",
+      "team": "BUF",
+      "teamKey": "sabres",
+      "playerId": 8479312,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Samuel Ersson",
+      "team": "OTT",
+      "teamKey": "senators",
+      "playerId": 8481035,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Jonas Johansson",
+      "team": "OTT",
+      "teamKey": "senators",
+      "playerId": 8477992,
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-04",
+      "starterSource": "https://themorningpuck.com/starting-goalies"
+    },
+    {
+      "name": "Linus Ullmark",
+      "team": "OTT",
+      "teamKey": "senators",
+      "playerId": 8476999,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Yaroslav Askarov",
+      "team": "SJS",
+      "teamKey": "sharks",
+      "playerId": 8482137,
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-04",
+      "starterSource": "https://themorningpuck.com/starting-goalies"
+    },
+    {
+      "name": "Alex Nedeljkovic",
+      "team": "SJS",
+      "teamKey": "sharks",
+      "playerId": 8477968,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Casey DeSmith",
+      "team": "DAL",
+      "teamKey": "stars",
+      "playerId": 8479193,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Jake Oettinger",
+      "team": "DAL",
+      "teamKey": "stars",
+      "playerId": 8479979,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Filip Gustavsson",
+      "team": "MIN",
+      "teamKey": "wild",
+      "playerId": 8479406,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Calvin Pickard",
+      "team": "MIN",
+      "teamKey": "wild",
+      "playerId": 8475717,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Jesper Wallstedt",
+      "team": "MIN",
+      "teamKey": "wild",
+      "playerId": 8482661,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    }
+  ]
+}
