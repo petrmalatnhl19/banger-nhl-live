@@ -15,7 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 URL = "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
 TEAMS = re.compile(r"^(ANA|BOS|BUF|CAR|CBJ|CGY|CHI|COL|DAL|DET|EDM|FLA|LAK|MIN|MTL|NJD|NSH|NYI|NYR|OTT|PHI|PIT|SEA|SJS|STL|TBL|TOR|UTA|VAN|VGK|WPG|WSH)$")
-OPPONENT = re.compile(r"^(@|vs\\.)\\s*(ANA|BOS|BUF|CAR|CBJ|CGY|CHI|COL|DAL|DET|EDM|FLA|LAK|MIN|MTL|NJD|NSH|NYI|NYR|OTT|PHI|PIT|SEA|SJS|STL|TBL|TOR|UTA|VAN|VGK|WPG|WSH)$")
+OPPONENT = re.compile(r"^(@|vs\.)\s*(ANA|BOS|BUF|CAR|CBJ|CGY|CHI|COL|DAL|DET|EDM|FLA|LAK|MIN|MTL|NJD|NSH|NYI|NYR|OTT|PHI|PIT|SEA|SJS|STL|TBL|TOR|UTA|VAN|VGK|WPG|WSH)$")
 STATUS = {"expected": "projected", "confirmed": "confirmed", "unknown": "unknown"}
 
 class Visible(HTMLParser):
@@ -27,12 +27,12 @@ class Visible(HTMLParser):
         if tag in ("script", "style", "noscript"):
             self.hidden += 1
         if tag in ("div", "td", "tr", "li", "br", "p", "h2", "h3"):
-            self.chunks.append("\\n")
+            self.chunks.append("\n")
     def handle_endtag(self, tag):
         if tag in ("script", "style", "noscript"):
             self.hidden = max(0, self.hidden - 1)
         if tag in ("div", "td", "tr", "li", "p", "h2", "h3"):
-            self.chunks.append("\\n")
+            self.chunks.append("\n")
     def handle_data(self, value):
         if not self.hidden:
             self.chunks.append(value)
@@ -48,7 +48,7 @@ def load(url):
 def extract(page, rosters):
     parser = Visible()
     parser.feed(page)
-    lines = [re.sub(r"\\s+", " ", html.unescape(x)).strip() for x in "".join(parser.chunks).splitlines()]
+    lines = [re.sub(r"\s+", " ", html.unescape(x)).strip() for x in "".join(parser.chunks).splitlines()]
     lines = [x for x in lines if x]
     # Never parse the explanatory legend as game data.
     for i, line in enumerate(lines):
@@ -64,7 +64,7 @@ def extract(page, rosters):
     team = None
     for i, line in enumerate(lines):
         # Team headers may be repeated visually (ANAANA).
-        header = re.fullmatch(r"([A-Z]{3})\\1", line)
+        header = re.fullmatch(r"([A-Z]{3})\1", line)
         abbr = header.group(1) if header else line
         if TEAMS.fullmatch(abbr):
             team = abbr
