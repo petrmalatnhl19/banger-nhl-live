@@ -54,5 +54,5 @@ for key,abbr in focus.items():
  else:
   status="SOURCE PUBLICATION OLDER THAN 36 HOURS OR FUTURE-DATED"
  report.append(f"- {abbr}: {status}; publishedAt={record.get('publishedAt') or 'unknown'}; source={record.get('source') or 'unknown'}; archive={'yes' if key in archive else 'no'}")
-Path("lineups_diagnostics.md").write_text("\\n".join(report)+"\\n",encoding="utf-8")
-print("\\n".join(report))
+Path("lineups_diagnostics.md").write_text("\n".join(report)+"\n",encoding="utf-8")
+print("\n".join(report))
