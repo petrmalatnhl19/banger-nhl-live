@@ -607,7 +607,29 @@ async function analyzeGame(id){
  const venueText=(games,code,homeSide)=>{const list=games.filter(g=>(homeSide?g.homeTeam:g.awayTeam).abbrev===code).slice(0,12);if(!list.length)return 'Bilance '+clean(code)+' není dostupná.';const wins=list.filter(g=>Number((homeSide?g.homeTeam:g.awayTeam).score)>Number((homeSide?g.awayTeam:g.homeTeam).score)).length;return clean(code)+' má '+wins+' výher z '+list.length+' dostupných '+(homeSide?'domácích':'venkovních')+' utkání'+(list.length<3?' (velmi malý vzorek).':'.')};
  section('Domácí a venkovní prostředí',venueText(ga,ac,false)+' '+venueText(gh,hc,true)+' Výsledky z omezeného vzorku nemusí odpovídat celosezónní bilanci.');
  section('Klíčoví hráči a střelecká aktivita',leaderText(skaters[0],ac)+' '+leaderText(skaters[1],hc)+' '+skaters.map((s,i)=>s?'V posledním utkání '+clean(i===0?ac:hc)+' zaznamenali sledovaní hráči '+s.shots+' střel, '+s.hits+' hitů a '+s.blocks+' bloků.':'').join(' ')+' Jde pouze o jeden zápas; nejde o sezónní pořadí ani o potvrzení účasti hráčů v příštím utkání.');
- section('Brankářský faktor',goalies.map((g,i)=>g?'Za '+clean(i===0?ac:hc)+' měl v posledním dostupném utkání '+clean(g.name)+' úspěšnost zákroků '+clean(g.save)+'.':'Brankářská data pro '+clean(i===0?ac:hc)+' nejsou dostupná.').join(' ')+' Nejde o potvrzené startující brankáře ani sezónní úspěšnost.');
+ const projectedGoalies=async()=>{
+  const read=async path=>{try{const response=await fetch('./'+path+'?t='+Math.floor(Date.now()/900000),{cache:'no-store'});return response.ok?await response.json():null}catch(e){return null}};
+  const [starterData,lineupData,rosterData]=await Promise.all([read('starting_goalies.json'),read('lineups.json'),read('nhl_rosters.json')]);
+  const alias={OTT:'senators',BUF:'sabres',ANA:'ducks',BOS:'bruins',CAR:'hurricanes',CBJ:'blue jackets',CGY:'flames',CHI:'blackhawks',COL:'avalanche',DAL:'stars',DET:'red wings',EDM:'oilers',FLA:'panthers',LAK:'kings',MIN:'wild',MTL:'canadiens',NJD:'devils',NSH:'predators',NYI:'islanders',NYR:'rangers',PHI:'flyers',PIT:'penguins',SEA:'kraken',SJS:'sharks',STL:'blues',TBL:'lightning',TOR:'maple leafs',UTA:'mammoth',VAN:'canucks',VGK:'golden knights',WPG:'jets',WSH:'capitals'};
+  const team=(obj,code)=>Object.entries(obj||{}).find(([key])=>key.toLowerCase()===String(alias[code]||code).toLowerCase())?.[1]||null;
+  return [ac,hc].map(code=>{
+   const s=starterData?.teams?.[code],l=team(lineupData?.teams,code),roster=team(rosterData?.teams,code);
+   const name=s?.name||l?.startingGoalie;
+   const status=s?.status||l?.startingGoalieStatus;
+   const checked=s?.checkedAt||l?.startingGoalieCheckedAt;
+   const source=s?.source||l?.startingGoalieSource;
+   const rosterNames=roster?.goalies||[];
+   const lineupNames=l?.goalies||[];
+   const listed=[...rosterNames,...lineupNames].some(x=>String(x).trim().toLowerCase()===String(name||'').trim().toLowerCase());
+   const recent=checked&&Number.isFinite(Date.parse(checked))&&Date.now()-Date.parse(checked)>=0&&Date.now()-Date.parse(checked)<24*3600000;
+   const valid=(status==='confirmed'||status==='projected')&&listed&&recent&&/^https:\/\//.test(String(source||''));
+   return valid?{name,status,source,checked,code}:null;
+  });
+ };
+ const projected=await projectedGoalies();
+ const projectedSentence=projected.map((p,i)=>p?'Za '+clean(i===0?ac:hc)+' je v aktuální projekci '+clean(p.name)+' ('+(p.status==='confirmed'?'potvrzený start':'předpokládaný start')+').':'U '+clean(i===0?ac:hc)+' není dostupný aktuálně ověřený projektovaný brankář.').join(' ');
+ section('Brankářský faktor',projectedSentence+' Hodnocení se řídí ověřenou projekcí, nikoli automaticky brankářem z minulého utkání. Pokud není projekce dostupná, nepřiřazujeme minulému brankáři předpokládaný start.');
+
  const days=games=>games.length?Math.round((Date.parse(day)-Date.parse(games[0].gameDate))/86400000):null;
  const da=days(ga),dh=days(gh);
  section('Odpočinek a rozpis',(da!=null?'Od posledního dostupného zápasu hostů uplynulo '+da+' kalendářních dní. ':'U hostů chybí historie odpočinku. ')+(dh!=null?'U domácích jde o '+dh+' dní. ':'U domácích chybí historie odpočinku. ')+' Únava hráčů, cestování a zdravotní stav nejsou ověřeny.');
