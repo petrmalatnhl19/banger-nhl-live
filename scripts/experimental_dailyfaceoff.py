@@ -61,7 +61,7 @@ def parse_lines(lines,abbr,url,raw=""):
   value=value.strip()
   if value in markers:
    current=markers[value];sections[current]=[];continue
-  if value.startswith("Click player jersey") or value.startswith("Ottawa Senators Team Cap Summary"):
+  if value.startswith("Click player jersey") or "Team Cap Summary" in value or value in ("Cap Summary","Projected Cap Hit","Projected Cap Space","Current Cap Space","Active Players","Draft Picks"):
    current=None;continue
   if current and value:sections[current].append(value)
  forwards=[s for s in sections.get("forwards",[]) if s not in ("LW","C","RW")]
