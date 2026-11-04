@@ -620,6 +620,25 @@
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "sabres": {
+      "updatedAt": "2026-11-04T17:51:24.029255+00:00",
+      "previousPublishedAt": "2026-10-30T21:02:46.495000+00:00",
+      "publishedAt": "",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "events": [
+        {
+          "type": "added",
+          "player": "Zach Metsa",
+          "to": "Obrana 3"
+        },
+        {
+          "type": "added",
+          "player": "Louis Crevier",
+          "to": "Obrana 3"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     }
   }
 }

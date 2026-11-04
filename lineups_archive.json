@@ -1084,9 +1084,9 @@
       "name": "Sabres",
       "forwards": [
         [
+          "Zach Benson",
           "Peyton Krebs",
-          "Tage Thompson",
-          "Zach Benson"
+          "Tage Thompson"
         ],
         [
           "Josh Doan",
@@ -1094,35 +1094,38 @@
           "Jack Quinn"
         ],
         [
-          "Jason Zucker",
           "Ryan McLeod",
-          "Josh Norris"
+          "Josh Norris",
+          "Jason Zucker"
         ],
         [
+          "Beck Malenstyn",
           "Tyson Kozak",
-          "Sam Carrick",
-          "Beck Malenstyn"
+          "Sam Carrick"
         ]
       ],
       "defense": [
         [
-          "Mattias Samuelsson",
-          "Rasmus Dahlin"
+          "Rasmus Dahlin",
+          "Mattias Samuelsson"
         ],
         [
           "Olen Zellweger",
           "Owen Power"
+        ],
+        [
+          "Zach Metsa",
+          "Louis Crevier"
         ]
       ],
       "goalies": [
-        "Ukko-Pekka Luukkonen",
-        "Colten Ellis"
+        "Colten Ellis",
+        "Ukko-Pekka Luukkonen"
       ],
-      "injured": "Jiri Kulich (concussion protocol), Justin Danforth (upper body), Matt Grzelcyk (lower body), Alex Lyon (upper body), Conor Timmins (lower body), Konsta Helenius (upper body)",
-      "scratched": "Zach Metsa",
-      "source": "https://www.nhl.com/news/buffalo-sabres-los-angeles-kings-game-preview-october-31-2026",
-      "publishedAt": "2026-10-30T21:02:46.495000+00:00",
-      "asOf": "2026-10-30",
+      "injured": "Konsta Helenius (upper body), Jiri Kulich (concussion protocol), Justin Danforth (upper body), Matt Grzelcyk (lower body), Alex Lyon (upper body), Conor Timmins (lower body)",
+      "scratched": "None",
+      "asOf": "2026-11-04",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
     },
