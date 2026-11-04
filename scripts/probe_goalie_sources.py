@@ -74,16 +74,14 @@ def probe(name, url):
             match = re.search(r"\b" + label + r"\b", text, re.I)
             if match:
                 result["statusContexts"][label] = text[max(0, match.start()-75):match.end()+75]
-        # Inspect HTML around real status labels, without claiming that nearby names are starters.
+        # Show structural HTML near the first three status labels, without publishing guesses.
         result["htmlStatusSamples"] = {}
         for label in ("Confirmed", "Expected", "Projected"):
             samples = []
-            for match in list(re.finditer(r"\\b" + label + r"\\b", page, re.I))[:3]:
-                fragment = page[max(0, match.start()-450):match.end()+450]
-                fragment = re.sub(r"<script\\b[^>]*>.*?</script>", " ", fragment, flags=re.I|re.S)
-                fragment = re.sub(r"<style\\b[^>]*>.*?</style>", " ", fragment, flags=re.I|re.S)
-                fragment = re.sub(r"\\s+", " ", fragment)
-                samples.append(fragment[:900])
+            for match in list(re.finditer(r"\b" + label + r"\b", page, re.I))[:3]:
+                fragment = page[max(0, match.start()-250):match.end()+350]
+                fragment = re.sub(r"\s+", " ", fragment)
+                samples.append(fragment[:650])
             result["htmlStatusSamples"][label] = samples
         result["ok"] = result["httpStatus"] == 200
         result["note"] = "Availability only; labels may be explanations, not game records."
