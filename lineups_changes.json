@@ -1,25 +1,37 @@
 {
   "teams": {
     "kings": {
-      "updatedAt": "2026-11-03T14:55:36.641037+00:00",
+      "updatedAt": "2026-11-04T20:19:22.535592+00:00",
       "previousPublishedAt": "2026-10-30T21:02:46.495000+00:00",
-      "publishedAt": "2026-10-30T21:02:46.495000+00:00",
-      "source": "https://www.nhl.com/news/buffalo-sabres-los-angeles-kings-game-preview-october-31-2026",
+      "publishedAt": "2026-11-04T20:13:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
-          "type": "removed",
+          "type": "added",
           "player": "Andre Lee",
-          "from": "Útok 4"
+          "to": "Útok 3"
         },
         {
-          "type": "removed",
-          "player": "Samuel Helenius",
-          "from": "Útok 4"
+          "type": "added",
+          "player": "Martin Chromiak",
+          "to": "Útok 3"
         },
         {
-          "type": "removed",
-          "player": "Taylor Ward",
-          "from": "Útok 4"
+          "type": "moved",
+          "player": "Erik Haula",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
+          "player": "Kenny Connors",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Joel Armia",
+          "from": "Útok 3",
+          "to": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -799,6 +811,35 @@
           "type": "removed",
           "player": "Marc Gatcomb",
           "from": "Útok 4"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "sharks": {
+      "updatedAt": "2026-11-04T20:19:22.535538+00:00",
+      "previousPublishedAt": "2026-11-02T19:19:05.216000+00:00",
+      "publishedAt": "2026-11-04T20:13:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "events": [
+        {
+          "type": "added",
+          "player": "Ty Dellandrea",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
+          "player": "Eric Pohlkamp",
+          "to": "Obrana 3"
+        },
+        {
+          "type": "removed",
+          "player": "Adam Gaudette",
+          "from": "Útok 4"
+        },
+        {
+          "type": "removed",
+          "player": "Nolan Allan",
+          "from": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
