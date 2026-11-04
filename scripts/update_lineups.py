@@ -195,6 +195,8 @@ for name,team in teams.items():
   original_forwards=[list(row) for row in team.get("forwards",[])]
   original_defense=[list(row) for row in team.get("defense",[])]
   all_rows=original_forwards+original_defense
+  # Do not let an invalid 2-player forward fragment masquerade as a D pair.
+  # Recover only complete 3-player rows already present in source data.
   forwards=[row for row in all_rows if len(row)==3 and all(normalize(x) in groups["forwards"] for x in row)]
   defense=[row for row in all_rows if len(row)==2 and all(normalize(x) in groups["defense"] for x in row)]
   goalies=[x for x in team.get("goalies",[]) if normalize(x) in groups["goalies"]]
@@ -205,6 +207,13 @@ for name,team in teams.items():
   team["goalies"]=goalies[:2]
   # Explain rejected lines without weakening roster validation.
   if name in source_diagnostics:
+   # Diagnose role mismatches explicitly (e.g. Winnipeg forward fragments
+   # accidentally captured in the defense section).
+   role_mismatches=[]
+   for index,row in enumerate(original_defense,1):
+    if any(normalize(player) in groups["forwards"] for player in row):
+     role_mismatches.append({"sourcePair":index,"players":row,"reason":"forward_in_defense_row"})
+   source_diagnostics[name]["roleMismatches"]=role_mismatches
    rejected=[]
    for role,rows,allowed in (("forwards",original_forwards,groups["forwards"]),("defense",original_defense,groups["defense"])):
     for index,row in enumerate(rows,1):
