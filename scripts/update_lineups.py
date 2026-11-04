@@ -92,7 +92,7 @@ try:
  urls=[]
  for href,label in links.links:
   # NHL headlines use both singular and plural forms, e.g. "Jets at Canadiens projected lineups".
-  if re.search(r"projected\\s+lineups?",label,re.I) or re.search(r"game-preview|projected-lineups?",href,re.I):
+  if re.search(r"projected\\s+lineups?",label,re.I) or re.search(r"game-preview|projected-lineups?",href,re.I) or (re.search(r"/news/",href,re.I) and re.search(r"islanders|senators|bruins",href+" "+label,re.I)):
    link=urljoin("https://www.nhl.com",href)
    if link.startswith("https://www.nhl.com/news/") and link not in urls:urls.append(link)
  # Some NHL.com article cards are rendered as JSON instead of ordinary <a> tags.
@@ -112,6 +112,8 @@ except Exception as err:print("Preview index unavailable",str(err))
 # These are still subject to publication-date and NHL roster validation.
 DIRECT_PREVIEWS=[
  "https://www.nhl.com/news/ottawa-senators-buffalo-sabres-game-preview-november-4-2026",
+ # Historical NYI projection: can improve archive, never counts as fresh.
+ "https://www.nhl.com/news/edmonton-oilers-new-york-islanders-game-preview-october-31-2026",
 ]
 for direct_url in DIRECT_PREVIEWS:
  try:
