@@ -10,6 +10,11 @@ class Parser(HTMLParser):
  def handle_data(self,data):self.parts.append(data)
 req=urllib.request.Request(URL,headers={"User-Agent":"Mozilla/5.0 (compatible; BangerNHL/1.0)","Accept":"text/html"})
 with urllib.request.urlopen(req,timeout=25) as resp: page=resp.read().decode("utf-8","replace")
+main_published=re.search(r'"datePublished"\s*:\s*"([^"]+)"',page)
+main_stamp=None
+if main_published:
+ try:main_stamp=datetime.datetime.fromisoformat(main_published.group(1).replace("Z","+00:00"))
+ except ValueError:pass
 p=Parser();p.feed(re.sub(r"<(script|style)\b[^>]*>[\s\S]*?</\1>","",page,flags=re.I))
 lines=[re.sub(r"\s+"," ",html.unescape(x)).strip() for x in "".join(p.parts).splitlines()]
 lines=[x for x in lines if x]
@@ -28,7 +33,7 @@ for i,line in enumerate(lines):
   if len(names)==3 and len(forwards)<4:forwards.append(names)
   elif len(names)==2 and len(forwards)>=3 and len(defense)<3:defense.append(names)
   elif len(names)==1 and len(forwards)>=3 and len(defense)>=2 and len(goalies)<2 and re.fullmatch(r"[\wÀ-ž.'’ -]{5,55}",x):goalies.append(x)
- if len(forwards)>=3 and len(defense)>=2:teams[name.lower()]={"name":name,"forwards":forwards,"defense":defense,"goalies":goalies,"injured":injured,"scratched":scratched}
+ if len(forwards)>=3 and len(defense)>=2:teams[name.lower()]={"name":name,"forwards":forwards,"defense":defense,"goalies":goalies,"injured":injured,"scratched":scratched,"source":URL,"publishedAt":main_stamp.isoformat() if main_stamp else None}
 # Verify projected players against the NHL's current roster for the named club.
 # This prevents mixed-up article sections from appearing as trusted lineups.
 TEAM_ABBREVS={"golden knights":"VGK","bruins":"BOS","red wings":"DET","panthers":"FLA","avalanche":"COL","blackhawks":"CHI","flames":"CGY","sharks":"SJS","mammoth":"UTA","maple leafs":"TOR","jets":"WPG","canadiens":"MTL","stars":"DAL","rangers":"NYR","islanders":"NYI","devils":"NJD","hurricanes":"CAR","lightning":"TBL","senators":"OTT","sabres":"BUF","penguins":"PIT","flyers":"PHI","capitals":"WSH","ducks":"ANA","kings":"LAK","kraken":"SEA","wild":"MIN","blues":"STL","predators":"NSH","oilers":"EDM","canucks":"VAN","blue jackets":"CBJ"}
@@ -89,7 +94,7 @@ try:
  for link in urls[:45]:
   try:
    for key,value in parse_preview(link).items():
-    if key not in teams:teams[key]=value
+    if key not in teams or (value.get("publishedAt") and value["publishedAt"]>str(teams[key].get("publishedAt") or "")):teams[key]=value
   except Exception as err:print("Preview unavailable",link,str(err))
 except Exception as err:print("Preview index unavailable",str(err))
 
