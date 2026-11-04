@@ -59,7 +59,10 @@ def main():
                          "date": today, "source": diagnostic["source"],
                          "sourceLabel": "RotoWire", "checkedAt": now.isoformat(),
                          "gameId": item["gameId"]}
-    starters.setdefault("conflicts", []).extend(conflicts)
+    confirmed_teams = {item["team"] for item in valid if item["date"] == today and item["status"] == "confirmed"}
+    # A verified confirmation resolves older projection disagreements for that team.
+    starters["conflicts"] = [issue for issue in starters.get("conflicts", [])
+                             if issue.get("team") not in confirmed_teams] + conflicts
     starters["updatedAt"] = now.isoformat()
     starters["status"] = "partial" if starters.get("conflicts") or starters.get("sourceErrors") else "ok"
     with (ROOT / "starting_goalies.json").open("w", encoding="utf-8") as file:
