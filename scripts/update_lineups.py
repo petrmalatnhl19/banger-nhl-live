@@ -199,10 +199,14 @@ try:
 except (FileNotFoundError,ValueError):archive={"teams":{}}
 for key,team in teams.items():
  record=dict(team)
- record["asOf"]=(record.get("publishedAt") or datetime.datetime.now(datetime.timezone.utc).isoformat())[:10]
+ # Never label an undated secondary snapshot as published today.
+ record["asOf"]=(record.get("publishedAt") or record.get("asOf") or "")[:10]
+ record["dateVerified"]=bool(record["asOf"])
+ if not record["dateVerified"]:
+  record["basis"]="Nedatovaná sestava externího zdroje; aktuálnost neověřena"
  record["source"]=record.get("source",URL)
  record["sourceLabel"]="NHL.com" if "nhl.com" in record["source"] else "Externí zdroj"
- record["basis"]="Archiv projekce NHL (nemusí platit pro další zápas)"
+ if record.get("dateVerified"):record["basis"]="Archiv projekce NHL (nemusí platit pro další zápas)"
  previous=archive["teams"].get(key,{})
  if previous and str(previous.get("asOf",""))>str(record["asOf"]):
   print("Keeping newer archived projection for",key,previous.get("asOf"))
