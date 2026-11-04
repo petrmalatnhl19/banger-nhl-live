@@ -83,6 +83,29 @@ def probe(name, url):
                 fragment = re.sub(r"\s+", " ", fragment)
                 samples.append(fragment[:650])
             result["htmlStatusSamples"][label] = samples
+        # Match known NHL goalie names in rendered page text, rather than navigation labels.
+        # These are diagnostic contexts, not verified game-day assignments.
+        try:
+            with open("nhl_rosters.json", encoding="utf-8") as roster_file:
+                roster_data = json.load(roster_file).get("teams", {})
+            names = sorted({
+                goalie for team in roster_data.values()
+                for goalie in team.get("goalies", [])
+                if isinstance(goalie, str) and len(goalie) >= 6
+            }, key=len, reverse=True)
+            matches = []
+            for goalie in names:
+                match = re.search(r"(?<![A-Za-z])" + re.escape(goalie) + r"(?![A-Za-z])", text, re.I)
+                if match:
+                    matches.append((match.start(), goalie, text[max(0, match.start()-60):match.end()+105]))
+            matches.sort()
+            result["rosterGoaliesFound"] = len(matches)
+            result["goalieContexts"] = [
+                {"goalie": goalie, "context": context}
+                for _, goalie, context in matches[:24]
+            ]
+        except (OSError, ValueError, TypeError, KeyError) as error:
+            result["rosterMatchError"] = type(error).__name__ + ": " + str(error)[:120]
         result["ok"] = result["httpStatus"] == 200
         result["note"] = "Availability only; labels may be explanations, not game records."
     except (urllib.error.URLError, TimeoutError, ValueError, OSError) as error:
