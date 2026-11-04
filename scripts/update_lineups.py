@@ -235,6 +235,14 @@ for name,team in teams.items():
      if missing:
       rejected.append({"group":role,"line":index,"players":missing,"sourceLine":row})
    source_diagnostics[name]["rejectedLines"]=rejected
+   # Distinguish a player absent from the current roster from one listed
+   # in a different position group; never auto-approve either case.
+   source_diagnostics[name]["rejectedPlayerReasons"]=[
+    {"name":player,"expectedRole":role,
+     "reason":("other_position_group" if any(normalize(player) in roster_names for group_name,roster_names in groups.items() if group_name!=role) else "not_in_current_roster")}
+    for role,rows,allowed in (("forwards",original_forwards,groups["forwards"]),("defense",original_defense,groups["defense"]))
+    for row in rows for player in row if normalize(player) not in allowed
+   ]
   forwards_ok=len(forwards)>=3
   defense_ok=len(defense)>=2
   goalies_ok=True
