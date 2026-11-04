@@ -1,0 +1,178 @@
+{
+  "generatedAt": "2026-11-04T21:03:53.541796+00:00",
+  "checked": 22,
+  "articlesFound": 1,
+  "errors": [],
+  "fixtures": [
+    {
+      "date": "2026-11-04",
+      "away": "OTT",
+      "home": "BUF"
+    },
+    {
+      "date": "2026-11-05",
+      "away": "BOS",
+      "home": "PIT"
+    },
+    {
+      "date": "2026-11-05",
+      "away": "CAR",
+      "home": "NYI"
+    },
+    {
+      "date": "2026-11-07",
+      "away": "NJD",
+      "home": "NYI"
+    },
+    {
+      "date": "2026-11-07",
+      "away": "UTA",
+      "home": "OTT"
+    },
+    {
+      "date": "2026-11-08",
+      "away": "FLA",
+      "home": "BOS"
+    },
+    {
+      "date": "2026-11-09",
+      "away": "NYI",
+      "home": "SJS"
+    },
+    {
+      "date": "2026-11-10",
+      "away": "WSH",
+      "home": "OTT"
+    },
+    {
+      "date": "2026-11-12",
+      "away": "COL",
+      "home": "OTT"
+    },
+    {
+      "date": "2026-11-12",
+      "away": "MTL",
+      "home": "BOS"
+    },
+    {
+      "date": "2026-11-12",
+      "away": "NYI",
+      "home": "LAK"
+    }
+  ],
+  "attempts": [
+    {
+      "url": "https://www.nhl.com/news/ottawa-senators-buffalo-sabres-game-preview-november-4-2026",
+      "result": "parsed",
+      "teams": [
+        "senators",
+        "sabres"
+      ]
+    },
+    {
+      "url": "https://www.nhl.com/news/buffalo-sabres-ottawa-senators-game-preview-november-4-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/boston-bruins-pittsburgh-penguins-game-preview-november-5-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/pittsburgh-penguins-boston-bruins-game-preview-november-5-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/carolina-hurricanes-new-york-islanders-game-preview-november-5-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/new-york-islanders-carolina-hurricanes-game-preview-november-5-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/new-jersey-devils-new-york-islanders-game-preview-november-7-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/new-york-islanders-new-jersey-devils-game-preview-november-7-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/utah-mammoth-ottawa-senators-game-preview-november-7-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/ottawa-senators-utah-mammoth-game-preview-november-7-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/florida-panthers-boston-bruins-game-preview-november-8-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/boston-bruins-florida-panthers-game-preview-november-8-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/new-york-islanders-san-jose-sharks-game-preview-november-9-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/san-jose-sharks-new-york-islanders-game-preview-november-9-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/washington-capitals-ottawa-senators-game-preview-november-10-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/ottawa-senators-washington-capitals-game-preview-november-10-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/colorado-avalanche-ottawa-senators-game-preview-november-12-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/ottawa-senators-colorado-avalanche-game-preview-november-12-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/montreal-canadiens-boston-bruins-game-preview-november-12-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/boston-bruins-montreal-canadiens-game-preview-november-12-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/new-york-islanders-los-angeles-kings-game-preview-november-12-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/los-angeles-kings-new-york-islanders-game-preview-november-12-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    }
+  ]
+}
