@@ -127,7 +127,7 @@ for direct_url in DIRECT_PREVIEWS:
 # article with its own publication timestamp and complete projected lines.
 TEAM_SLUGS={"ANA":"anaheim-ducks","BOS":"boston-bruins","BUF":"buffalo-sabres","CAR":"carolina-hurricanes","CBJ":"columbus-blue-jackets","CGY":"calgary-flames","CHI":"chicago-blackhawks","COL":"colorado-avalanche","DAL":"dallas-stars","DET":"detroit-red-wings","EDM":"edmonton-oilers","FLA":"florida-panthers","LAK":"los-angeles-kings","MIN":"minnesota-wild","MTL":"montreal-canadiens","NJD":"new-jersey-devils","NSH":"nashville-predators","NYI":"new-york-islanders","NYR":"new-york-rangers","OTT":"ottawa-senators","PHI":"philadelphia-flyers","PIT":"pittsburgh-penguins","SEA":"seattle-kraken","SJS":"san-jose-sharks","STL":"st-louis-blues","TBL":"tampa-bay-lightning","TOR":"toronto-maple-leafs","UTA":"utah-mammoth","VAN":"vancouver-canucks","VGK":"vegas-golden-knights","WPG":"winnipeg-jets","WSH":"washington-capitals"}
 DISCOVERY_TARGETS={"BOS","NYI","OTT"}
-schedule_discovery={"checked":0,"articlesFound":0,"errors":[]}
+schedule_discovery={"checked":0,"articlesFound":0,"errors":[],"fixtures":[],"attempts":[]}
 today=datetime.datetime.now(datetime.timezone.utc).date()
 schedule_games=set()
 for offset in (-1,0,1,2):
@@ -143,6 +143,7 @@ for offset in (-1,0,1,2):
     if away in TEAM_SLUGS and home in TEAM_SLUGS and (away in DISCOVERY_TARGETS or home in DISCOVERY_TARGETS) and day:
      schedule_games.add((day,away,home))
  except Exception as err:schedule_discovery["errors"].append("schedule "+date.isoformat()+": "+str(err)[:120])
+schedule_discovery["fixtures"]=[{"date":d,"away":a,"home":h} for d,a,h in sorted(schedule_games)]
 for day,away,home in sorted(schedule_games):
  try:date_label=datetime.date.fromisoformat(day).strftime("%B-%-d-%Y").lower()
  except (ValueError,TypeError):continue
@@ -151,11 +152,15 @@ for day,away,home in sorted(schedule_games):
   schedule_discovery["checked"]+=1
   try:
    discovered=parse_preview(url)
+   schedule_discovery["attempts"].append({"url":url,"result":"parsed" if discovered else "no_complete_projection","teams":list(discovered)})
    if discovered:schedule_discovery["articlesFound"]+=1
    for key,value in discovered.items():
     if key not in teams or (value.get("publishedAt") and value["publishedAt"]>str(teams[key].get("publishedAt") or "")):
      teams[key]=value
-  except Exception:pass # A guessed URL is not evidence an article exists.
+  except Exception as err:
+   schedule_discovery["attempts"].append({"url":url,"result":"fetch_or_parse_error","error":str(err)[:160]})
+with open("lineups_discovery_diagnostics.json","w",encoding="utf-8") as discovery_file:
+ json.dump({"generatedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),**schedule_discovery},discovery_file,ensure_ascii=False,indent=2)
 print("Schedule-driven preview discovery",json.dumps(schedule_discovery))
 # Secondary source: dedicated per-team line combinations. A lineup is kept only
 # when enough players match the NHL roster (validation below).
