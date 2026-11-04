@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-04T19:16:04.846760+00:00",
+  "fetchedAt": "2026-11-04T20:05:44.661039+00:00",
   "teams": {
     "sabres": {
       "name": "Sabres",
@@ -46,8 +46,8 @@
       ],
       "injured": "Konsta Helenius (upper body), Jiri Kulich (concussion protocol), Justin Danforth (upper body), Matt Grzelcyk (lower body), Alex Lyon (upper body), Conor Timmins (lower body)",
       "scratched": "None",
-      "source": "https://www.nhl.com/news/ottawa-senators-buffalo-sabres-game-preview-november-4-2026",
-      "publishedAt": "2026-11-04T17:37:08.585000+00:00"
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-04T19:54:00+00:00"
     },
     "blackhawks": {
       "name": "Blackhawks",
@@ -93,8 +93,8 @@
       ],
       "injured": "Bowen Byram (upper body), Patrick Kane (upper body)",
       "scratched": "Kevin Korchinski, Andrew Mangiapane",
-      "source": "https://www.nhl.com/news/chicago-blackhawks-florida-panthers-game-preview-november-4-2026",
-      "publishedAt": "2026-11-04T18:35:21.038000+00:00"
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-04T19:54:00+00:00"
     },
     "panthers": {
       "name": "Panthers",
@@ -140,8 +140,97 @@
       ],
       "injured": "Aleksander Barkov (knee), Brad Marchand (knee), Jonah Gadjovich (neck)",
       "scratched": "Radko Gudas, Cole Reinhardt",
-      "source": "https://www.nhl.com/news/chicago-blackhawks-florida-panthers-game-preview-november-4-2026",
-      "publishedAt": "2026-11-04T18:35:21.038000+00:00"
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-04T19:54:00+00:00"
+    },
+    "flames": {
+      "name": "Flames",
+      "forwards": [
+        [
+          "Joel Farabee",
+          "Mikael Backlund",
+          "Matt Coronato"
+        ],
+        [
+          "Yegor Sharangovich",
+          "Morgan Frost",
+          "Aydar Suniev"
+        ],
+        [
+          "Matvei Gridin",
+          "Martin Pospisil",
+          "Ryan Strome"
+        ],
+        [
+          "William Stromgren",
+          "Jonathan Castagna",
+          "Adam Klapka"
+        ]
+      ],
+      "defense": [
+        [
+          "Kevin Bahl",
+          "Simon Nemec"
+        ],
+        [
+          "Jake Middleton",
+          "Zach Whitecloud"
+        ],
+        [
+          "Yan Kuznetsov",
+          "Zayne Parekh"
+        ]
+      ],
+      "goalies": [
+        "Dustin Wolf",
+        "Arsenii Sergeev"
+      ],
+      "injured": "Devin Cooley (lower body), Brennan Othmann (upper body), Jonathan Huberdeau (hip), Samuel Honzek (lower body)",
+      "scratched": "Maksim Tsyplakov, Joel Hanley",
+      "source": "https://www.nhl.com/news/calgary-flames-seattle-kraken-game-preview-november-4-2026",
+      "publishedAt": "2026-11-04T20:03:02.892000+00:00"
+    },
+    "kraken": {
+      "name": "Kraken",
+      "forwards": [
+        [
+          "Bobby McMann",
+          "Matty Beniers",
+          "Jordan Eberle"
+        ],
+        [
+          "Kaapo Kakko",
+          "Berkly Catton",
+          "Mackie Samoskevich"
+        ],
+        [
+          "Jani Nyman",
+          "Ben Meyers",
+          "Ryan Winterton"
+        ]
+      ],
+      "defense": [
+        [
+          "Vince Dunn",
+          "Adam Larsson"
+        ],
+        [
+          "Ryker Evans",
+          "Brandon Montour"
+        ],
+        [
+          "Josh Mahura",
+          "Ville Ottavainen"
+        ]
+      ],
+      "goalies": [
+        "Joey Daccord",
+        "Philipp Grubauer"
+      ],
+      "injured": "Jacob Melanson (upper body), Ryan Lindgren (upper body), Jared McCann (lower body), Curtis Douglas (upper body)",
+      "scratched": "Cale Fleury",
+      "source": "https://www.nhl.com/news/calgary-flames-seattle-kraken-game-preview-november-4-2026",
+      "publishedAt": "2026-11-04T20:03:02.892000+00:00"
     },
     "ducks": {
       "name": "Ducks",
@@ -906,11 +995,6 @@
           "Trevor Connelly",
           "Tomas Hertl",
           "Braeden Bowman"
-        ],
-        [
-          "Jonas Rondbjerg",
-          "Nic Dowd",
-          "Marc Gatcomb"
         ]
       ],
       "defense": [
@@ -982,53 +1066,6 @@
       "scratched": "Jake Livanavage, Ilya Solovyov",
       "source": "https://www.nhl.com/news/vegas-golden-knights-pittsburgh-penguins-game-preview-november-3-2026",
       "publishedAt": "2026-11-03T16:32:11.100000+00:00"
-    },
-    "flames": {
-      "name": "Flames",
-      "forwards": [
-        [
-          "Joel Farabee",
-          "Mikael Backlund",
-          "Matt Coronato"
-        ],
-        [
-          "Yegor Sharangovich",
-          "Morgan Frost",
-          "Aydar Suniev"
-        ],
-        [
-          "Matvei Gridin",
-          "Martin Pospisil",
-          "Ryan Strome"
-        ],
-        [
-          "William Stromgren",
-          "Jonathan Castagna",
-          "Adam Klapka"
-        ]
-      ],
-      "defense": [
-        [
-          "Kevin Bahl",
-          "Simon Nemec"
-        ],
-        [
-          "Jake Middleton",
-          "Zach Whitecloud"
-        ],
-        [
-          "Yan Kuznetsov",
-          "Zayne Parekh"
-        ]
-      ],
-      "goalies": [
-        "Dustin Wolf",
-        "Arsenii Sergeev"
-      ],
-      "injured": "Devin Cooley (lower body), Brennan Othmann (upper body), Jonathan Huberdeau (hip), Samuel Honzek (lower body)",
-      "scratched": "Maksim Tsyplakov, Joel Hanley",
-      "source": "https://www.nhl.com/news/calgary-flames-san-jose-sharks-game-preview-november-2-2026",
-      "publishedAt": "2026-11-02T19:19:05.216000+00:00"
     },
     "sharks": {
       "name": "Sharks",
@@ -1165,48 +1202,6 @@
       "scratched": "Martin Chromiak, Cody Ceci",
       "source": "https://www.nhl.com/news/buffalo-sabres-los-angeles-kings-game-preview-october-31-2026",
       "publishedAt": "2026-10-30T21:02:46.495000+00:00"
-    },
-    "kraken": {
-      "name": "Kraken",
-      "forwards": [
-        [
-          "Bobby McMann",
-          "Matty Beniers",
-          "Jordan Eberle"
-        ],
-        [
-          "Chandler Stephenson",
-          "Frederick Gaudreau",
-          "Mackie Samoskevich"
-        ],
-        [
-          "Ben Meyers",
-          "Ryan Winterton",
-          "Curtis Douglas"
-        ]
-      ],
-      "defense": [
-        [
-          "Vince Dunn",
-          "Adam Larsson"
-        ],
-        [
-          "Ryker Evans",
-          "Brandon Montour"
-        ],
-        [
-          "Josh Mahura",
-          "Cale Fleury"
-        ]
-      ],
-      "goalies": [
-        "Philipp Grubauer",
-        "Joey Daccord"
-      ],
-      "injured": "Jacob Melanson (upper body), Ryan Lindgren (upper body), Jared McCann (lower body)",
-      "scratched": "Jani Nyman, Ville Ottavainen",
-      "source": "https://www.nhl.com/news/seattle-kraken-calgary-flames-game-preview-october-30-2026",
-      "publishedAt": "2026-10-30T18:16:02.069000+00:00"
     }
   },
   "rosterValidated": true

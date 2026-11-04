@@ -729,6 +729,79 @@
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "kraken": {
+      "updatedAt": "2026-11-04T20:05:44.659862+00:00",
+      "previousPublishedAt": "2026-10-30T18:16:02.069000+00:00",
+      "publishedAt": "2026-11-04T20:03:02.892000+00:00",
+      "source": "https://www.nhl.com/news/calgary-flames-seattle-kraken-game-preview-november-4-2026",
+      "events": [
+        {
+          "type": "added",
+          "player": "Kaapo Kakko",
+          "to": "Útok 2"
+        },
+        {
+          "type": "added",
+          "player": "Berkly Catton",
+          "to": "Útok 2"
+        },
+        {
+          "type": "added",
+          "player": "Jani Nyman",
+          "to": "Útok 3"
+        },
+        {
+          "type": "added",
+          "player": "Ville Ottavainen",
+          "to": "Obrana 3"
+        },
+        {
+          "type": "removed",
+          "player": "Chandler Stephenson",
+          "from": "Útok 2"
+        },
+        {
+          "type": "removed",
+          "player": "Frederick Gaudreau",
+          "from": "Útok 2"
+        },
+        {
+          "type": "removed",
+          "player": "Curtis Douglas",
+          "from": "Útok 3"
+        },
+        {
+          "type": "removed",
+          "player": "Cale Fleury",
+          "from": "Obrana 3"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "golden knights": {
+      "updatedAt": "2026-11-04T20:05:44.660427+00:00",
+      "previousPublishedAt": "2026-11-03T16:32:11.100000+00:00",
+      "publishedAt": "2026-11-03T16:32:11.100000+00:00",
+      "source": "https://www.nhl.com/news/vegas-golden-knights-pittsburgh-penguins-game-preview-november-3-2026",
+      "events": [
+        {
+          "type": "removed",
+          "player": "Jonas Rondbjerg",
+          "from": "Útok 4"
+        },
+        {
+          "type": "removed",
+          "player": "Nic Dowd",
+          "from": "Útok 4"
+        },
+        {
+          "type": "removed",
+          "player": "Marc Gatcomb",
+          "from": "Útok 4"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     }
   }
 }

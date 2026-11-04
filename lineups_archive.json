@@ -186,9 +186,10 @@
       ],
       "injured": "Aleksander Barkov (knee), Brad Marchand (knee), Jonah Gadjovich (neck)",
       "scratched": "Radko Gudas, Cole Reinhardt",
-      "source": "https://www.nhl.com/news/chicago-blackhawks-florida-panthers-game-preview-november-4-2026",
-      "publishedAt": "2026-11-04T18:35:21.038000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-04T19:54:00+00:00",
       "asOf": "2026-11-04",
+      "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
     },
@@ -285,9 +286,10 @@
       ],
       "injured": "Bowen Byram (upper body), Patrick Kane (upper body)",
       "scratched": "Kevin Korchinski, Andrew Mangiapane",
-      "source": "https://www.nhl.com/news/chicago-blackhawks-florida-panthers-game-preview-november-4-2026",
-      "publishedAt": "2026-11-04T18:35:21.038000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-04T19:54:00+00:00",
       "asOf": "2026-11-04",
+      "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
     },
@@ -335,8 +337,10 @@
       ],
       "injured": "Devin Cooley (lower body), Brennan Othmann (upper body), Jonathan Huberdeau (hip), Samuel Honzek (lower body)",
       "scratched": "Maksim Tsyplakov, Joel Hanley",
-      "asOf": "2026-11-03",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "source": "https://www.nhl.com/news/calgary-flames-seattle-kraken-game-preview-november-4-2026",
+      "publishedAt": "2026-11-04T20:03:02.892000+00:00",
+      "asOf": "2026-11-04",
+      "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
     },
@@ -764,6 +768,7 @@
       "source": "https://www.nhl.com/news/buffalo-sabres-los-angeles-kings-game-preview-october-31-2026",
       "publishedAt": "2026-10-30T21:02:46.495000+00:00",
       "asOf": "2026-10-30",
+      "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
     },
@@ -1126,9 +1131,10 @@
       ],
       "injured": "Konsta Helenius (upper body), Jiri Kulich (concussion protocol), Justin Danforth (upper body), Matt Grzelcyk (lower body), Alex Lyon (upper body), Conor Timmins (lower body)",
       "scratched": "None",
-      "source": "https://www.nhl.com/news/ottawa-senators-buffalo-sabres-game-preview-november-4-2026",
-      "publishedAt": "2026-11-04T17:37:08.585000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-04T19:54:00+00:00",
       "asOf": "2026-11-04",
+      "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
     },
@@ -1180,14 +1186,14 @@
           "Jordan Eberle"
         ],
         [
-          "Chandler Stephenson",
-          "Frederick Gaudreau",
+          "Kaapo Kakko",
+          "Berkly Catton",
           "Mackie Samoskevich"
         ],
         [
+          "Jani Nyman",
           "Ben Meyers",
-          "Ryan Winterton",
-          "Curtis Douglas"
+          "Ryan Winterton"
         ]
       ],
       "defense": [
@@ -1201,18 +1207,19 @@
         ],
         [
           "Josh Mahura",
-          "Cale Fleury"
+          "Ville Ottavainen"
         ]
       ],
       "goalies": [
-        "Philipp Grubauer",
-        "Joey Daccord"
+        "Joey Daccord",
+        "Philipp Grubauer"
       ],
-      "injured": "Jacob Melanson (upper body), Ryan Lindgren (upper body), Jared McCann (lower body)",
-      "scratched": "Jani Nyman, Ville Ottavainen",
-      "source": "https://www.nhl.com/news/seattle-kraken-calgary-flames-game-preview-october-30-2026",
-      "publishedAt": "2026-10-30T18:16:02.069000+00:00",
-      "asOf": "2026-10-30",
+      "injured": "Jacob Melanson (upper body), Ryan Lindgren (upper body), Jared McCann (lower body), Curtis Douglas (upper body)",
+      "scratched": "Cale Fleury",
+      "source": "https://www.nhl.com/news/calgary-flames-seattle-kraken-game-preview-november-4-2026",
+      "publishedAt": "2026-11-04T20:03:02.892000+00:00",
+      "asOf": "2026-11-04",
+      "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
     },
