@@ -44,7 +44,7 @@ class Text(HTMLParser):
 
 def parse(html,abbr,url):
  p=Text();p.feed(html)
- lines=[re.sub(r"\\s+"," ",s).strip() for s in "".join(p.parts).splitlines()]
+ lines=[re.sub(r"\s+"," ",s).strip() for s in "".join(p.parts).splitlines()]
  lines=[s for s in lines if s]
  return parse_lines(lines,abbr,url,html)
 
@@ -69,14 +69,14 @@ def parse_lines(lines,abbr,url,raw=""):
  goalies=sections.get("goalies",[])
  def names(values,n):
   if len(values)!=n:return []
-  if not all(2<=len(s)<=65 and re.fullmatch(r"[\\wÀ-ž.'’ -]+",s) and len(s.split())>=2 for s in values):return []
+  if not all(2<=len(s)<=65 and re.fullmatch(r"[\wÀ-ž.'’ -]+",s) and len(s.split())>=2 for s in values):return []
   return values
  fw=[names(forwards[i:i+3],3) for i in range(0,12,3)] if len(forwards)==12 else []
  df=[names(defense[i:i+2],2) for i in range(0,6,2)] if len(defense)==6 else []
  pp=[names(sections.get(k,[]),5) for k in ("pp1","pp2")]
  pk=[names(sections.get(k,[]),4) for k in ("pk1","pk2")]
  goalie_names=names(goalies,2)
- stamp=re.search(r"Last updated:\\s*(\\d{4}-\\d\\d-\\d\\dT[^\\s<]+)",raw or "\\n".join(lines))
+ stamp=re.search(r"Last updated:\s*(\d{4}-\d\d-\d\dT[^\s<]+)",raw or "\n".join(lines))
  updated=stamp.group(1).rstrip('",') if stamp else None
  complete=bool(fw and df and goalie_names and all(fw) and all(df))
  return {"team":abbr,"source":url,"sourceUpdatedAt":updated,
