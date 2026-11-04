@@ -1,0 +1,99 @@
+{
+  "generatedAt": "2026-11-04T20:24:49.819512+00:00",
+  "teams": {
+    "bruins": {
+      "team": "BOS",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/vegas-golden-knights-boston-bruins-game-preview-november-2-2026",
+      "candidatePublishedAt": "2026-11-02T19:13:32.938000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "hurricanes": {
+      "team": "CAR",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/carolina-hurricanes-nashville-predators-game-preview-november-3-2026",
+      "candidatePublishedAt": "2026-11-03T18:45:28.353000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "insufficient_position_matched_lines",
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 1,
+      "accepted": false
+    },
+    "kings": {
+      "team": "LAK",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/san-jose-sharks-los-angeles-kings-game-preview-november-4-2026",
+      "candidatePublishedAt": "2026-11-04T20:17:46.883000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "islanders": {
+      "team": "NYI",
+      "candidateFound": false,
+      "candidateSource": null,
+      "candidatePublishedAt": null,
+      "candidateForwardLines": 0,
+      "candidateDefensePairs": 0,
+      "rosterValidation": "no_complete_source_candidate",
+      "accepted": false
+    },
+    "rangers": {
+      "team": "NYR",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/st-louis-blues-new-york-rangers-game-preview-november-3-2026",
+      "candidatePublishedAt": "2026-11-03T17:14:56.036000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "insufficient_position_matched_lines",
+      "validatedForwardLines": 2,
+      "validatedDefensePairs": 3,
+      "accepted": false
+    },
+    "senators": {
+      "team": "OTT",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-04T20:13:00+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "insufficient_position_matched_lines",
+      "validatedForwardLines": 1,
+      "validatedDefensePairs": 3,
+      "accepted": false
+    },
+    "sharks": {
+      "team": "SJS",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/san-jose-sharks-los-angeles-kings-game-preview-november-4-2026",
+      "candidatePublishedAt": "2026-11-04T20:17:46.883000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "jets": {
+      "team": "WPG",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/winnipeg-jets-montreal-canadiens-game-preview-november-3-2026",
+      "candidatePublishedAt": "2026-11-03T18:06:18.771000+00:00",
+      "candidateForwardLines": 3,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "insufficient_position_matched_lines",
+      "validatedForwardLines": 2,
+      "validatedDefensePairs": 1,
+      "accepted": false
+    }
+  }
+}
