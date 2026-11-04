@@ -44,43 +44,71 @@ class Text(HTMLParser):
 
 def parse(html,abbr,url):
  p=Text();p.feed(html)
- lines=[re.sub(r"\s+"," ",s).strip() for s in "".join(p.parts).splitlines()]
+ lines=[re.sub(r"\\s+"," ",s).strip() for s in "".join(p.parts).splitlines()]
  lines=[s for s in lines if s]
- # Guard against reading marketing/SEO prose as player names.
- def section(start,ends):
-  try:i=next(i for i,s in enumerate(lines) if s.casefold()==start.casefold())
-  except StopIteration:return []
-  result=[]
-  for s in lines[i+1:]:
-   if any(s.casefold()==end.casefold() for end in ends):break
-   result.append(s)
-  return result
- fw=section("Forwards",["Defensive Pairings","Defense","Goalies"])
- df=section("Defensive Pairings",["Click player jersey for news, stats and more!","1st Powerplay Unit","Goalies"])
- # This plain-text parser intentionally does not guess player boundaries.
- # The structured team chart needs DOM-aware extraction and roster validation.
- updated=re.search(r"Last updated:\s*(\d{4}-\d\d-\d\dT[^\s<]+)",html)
- stamp=updated.group(1).rstrip('",') if updated else None
- return {"team":abbr,"source":url,"sourceUpdatedAt":stamp,
-         "retrievedAt":dt.datetime.now(dt.timezone.utc).isoformat(),
-         "forwards":[],"defense":[],"goalies":[],
-         "status":"needs_structured_parser_and_roster_validation",
-         "diagnostic":{"forwardsTextEntries":len(fw),"defenseTextEntries":len(df)}}
+ return parse_lines(lines,abbr,url,html)
+
+def parse_lines(lines,abbr,url,raw=""):
+ """Strict offline extraction: only complete position groups; no inferred starter."""
+ sections={}
+ markers={
+  "Forwards":"forwards","Defensive Pairings":"defense",
+  "1st Powerplay Unit":"pp1","2nd Powerplay Unit":"pp2",
+  "1st Penalty Kill Unit":"pk1","2nd Penalty Kill Unit":"pk2",
+  "Goalies":"goalies","Injuries":"injuries"}
+ current=None
+ for value in lines:
+  value=value.strip()
+  if value in markers:
+   current=markers[value];sections[current]=[];continue
+  if value.startswith("Click player jersey") or value.startswith("Ottawa Senators Team Cap Summary"):
+   current=None;continue
+  if current and value:sections[current].append(value)
+ forwards=[s for s in sections.get("forwards",[]) if s not in ("LW","C","RW")]
+ defense=sections.get("defense",[])
+ goalies=sections.get("goalies",[])
+ def names(values,n):
+  if len(values)!=n:return []
+  if not all(2<=len(s)<=65 and re.fullmatch(r"[\\wÀ-ž.'’ -]+",s) and len(s.split())>=2 for s in values):return []
+  return values
+ fw=[names(forwards[i:i+3],3) for i in range(0,12,3)] if len(forwards)==12 else []
+ df=[names(defense[i:i+2],2) for i in range(0,6,2)] if len(defense)==6 else []
+ pp=[names(sections.get(k,[]),5) for k in ("pp1","pp2")]
+ pk=[names(sections.get(k,[]),4) for k in ("pk1","pk2")]
+ goalie_names=names(goalies,2)
+ stamp=re.search(r"Last updated:\\s*(\\d{4}-\\d\\d-\\d\\dT[^\\s<]+)",raw or "\\n".join(lines))
+ updated=stamp.group(1).rstrip('",') if stamp else None
+ complete=bool(fw and df and goalie_names and all(fw) and all(df))
+ return {"team":abbr,"source":url,"sourceUpdatedAt":updated,
+  "retrievedAt":dt.datetime.now(dt.timezone.utc).isoformat(),
+  "forwards":fw if complete else [],"defense":df if complete else [],
+  "goalies":goalie_names if complete else [],
+  "powerplay":pp if complete and all(pp) else [],
+  "penaltykill":pk if complete and all(pk) else [],
+  "startingGoalie":None,"startingGoalieStatus":"unconfirmed",
+  "status":"parsed_unverified_do_not_publish" if complete else "incomplete_or_unrecognized",
+  "diagnostic":{"forwards":len(forwards),"defense":len(defense),"goalies":len(goalies),
+                "needsRosterValidation":True,"sourceReusePermissionVerified":False}}
 
 def main():
  ap=argparse.ArgumentParser()
  ap.add_argument("--team",choices=sorted(TEAMS),default="OTT")
+ ap.add_argument("--input-text",help="Use a locally supplied plain-text chart instead of fetching the website")
  ap.add_argument("--output",default="dailyfaceoff_preview.json")
  args=ap.parse_args()
  url="https://www.dailyfaceoff.com/teams/"+TEAMS[args.team]+"/line-combinations"
- req=urllib.request.Request(url,headers={"User-Agent":"BangerNHL-Experimental-Importer/0.1","Accept":"text/html"})
- with urllib.request.urlopen(req,timeout=20) as response:
-  if response.status!=200:raise RuntimeError("HTTP "+str(response.status))
-  raw=response.read(2_000_000).decode("utf-8","replace")
- result=parse(raw,args.team,url)
+ if args.input_text:
+  with open(args.input_text,encoding="utf-8") as f:raw=f.read()
+  result=parse_lines([line.strip() for line in raw.splitlines() if line.strip()],args.team,url,raw)
+ else:
+  req=urllib.request.Request(url,headers={"User-Agent":"BangerNHL-Experimental-Importer/0.1","Accept":"text/html"})
+  with urllib.request.urlopen(req,timeout=20) as response:
+   if response.status!=200:raise RuntimeError("HTTP "+str(response.status))
+   raw=response.read(2_000_000).decode("utf-8","replace")
+  result=parse(raw,args.team,url)
  with open(args.output,"w",encoding="utf-8") as f:
   json.dump(result,f,ensure_ascii=False,indent=2)
  print("Saved diagnostic preview:",args.output)
- print("No lineup data published. Requires permission review and DOM/roster validation.")
+ print("Preview only; never published. Requires permission review and NHL roster validation.")
 
 if __name__=="__main__":main()
