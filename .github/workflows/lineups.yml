@@ -1,24 +1,29 @@
 name: Refresh NHL projected lineups
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '7,22,37,52 * * * *'
   workflow_dispatch:
 permissions:
   contents: write
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python scripts/update_rosters.py
+      - name: Refresh NHL rosters
+        run: python scripts/update_rosters.py
       - name: Refresh validated lineup projections
-        run: python scripts/update_lineups.py || echo 'No fresh validated lineups; retaining last published data'
-      - run: python scripts/update_last_game_lines.py
-      - run: python scripts/check_lineups_coverage.py
-      - run: python scripts/audit_lineups.py
+        run: python scripts/update_lineups.py
+      - name: Refresh recent lineups
+        run: python scripts/update_last_game_lines.py
+      - name: Verify lineup coverage
+        run: python scripts/check_lineups_coverage.py
+      - name: Audit lineup data
+        run: python scripts/audit_lineups.py
       - name: Fetch projected starting goalies (optional source)
         run: python scripts/update_starting_goalies.py
       - name: Commit changed lineups
