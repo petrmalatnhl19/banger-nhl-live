@@ -1,7 +1,70 @@
 {
   "date": "2026-11-04",
-  "updatedAt": "2026-11-04T05:30:21.092718+00:00",
-  "teams": {},
-  "status": "source_unavailable",
-  "errorType": "ValueError"
+  "updatedAt": "2026-11-04T06:45:52.271731+00:00",
+  "teams": {
+    "BUF": {
+      "name": "Colten Ellis",
+      "status": "projected",
+      "date": "2026-11-04",
+      "source": "https://themorningpuck.com/starting-goalies",
+      "sourceLabel": "The Morning Puck",
+      "checkedAt": "2026-11-04T06:45:52.257364+00:00"
+    },
+    "CGY": {
+      "name": "Dustin Wolf",
+      "status": "projected",
+      "date": "2026-11-04",
+      "source": "https://themorningpuck.com/starting-goalies",
+      "sourceLabel": "The Morning Puck",
+      "checkedAt": "2026-11-04T06:45:52.258873+00:00"
+    },
+    "CHI": {
+      "name": "Spencer Knight",
+      "status": "projected",
+      "date": "2026-11-04",
+      "source": "https://themorningpuck.com/starting-goalies",
+      "sourceLabel": "The Morning Puck",
+      "checkedAt": "2026-11-04T06:45:52.259233+00:00"
+    },
+    "FLA": {
+      "name": "Jacob Markstrom",
+      "status": "projected",
+      "date": "2026-11-04",
+      "source": "https://themorningpuck.com/starting-goalies",
+      "sourceLabel": "The Morning Puck",
+      "checkedAt": "2026-11-04T06:45:52.261693+00:00"
+    },
+    "LAK": {
+      "name": "Anton Forsberg",
+      "status": "projected",
+      "date": "2026-11-04",
+      "source": "https://themorningpuck.com/starting-goalies",
+      "sourceLabel": "The Morning Puck",
+      "checkedAt": "2026-11-04T06:45:52.262089+00:00"
+    },
+    "OTT": {
+      "name": "Jonas Johansson",
+      "status": "projected",
+      "date": "2026-11-04",
+      "source": "https://themorningpuck.com/starting-goalies",
+      "sourceLabel": "The Morning Puck",
+      "checkedAt": "2026-11-04T06:45:52.265929+00:00"
+    },
+    "SEA": {
+      "name": "Philipp Grubauer",
+      "status": "projected",
+      "date": "2026-11-04",
+      "source": "https://themorningpuck.com/starting-goalies",
+      "sourceLabel": "The Morning Puck",
+      "checkedAt": "2026-11-04T06:45:52.267168+00:00"
+    },
+    "SJS": {
+      "name": "Yaroslav Askarov",
+      "status": "projected",
+      "date": "2026-11-04",
+      "source": "https://themorningpuck.com/starting-goalies",
+      "sourceLabel": "The Morning Puck",
+      "checkedAt": "2026-11-04T06:45:52.267556+00:00"
+    }
+  }
 }
