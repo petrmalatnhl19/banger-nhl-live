@@ -488,33 +488,43 @@ async function analyzeGame(id){
  // Optional data must never delay the primary report.
  const season=String(d.season||'20262027');
  const schedule=async code=>{
-  const response=await fetch('https://api-web.nhle.com/v1/club-schedule-season/'+encodeURIComponent(code)+'/'+encodeURIComponent(season));
-  if(!response.ok)throw Error('Rozpis '+response.status);
+  const url='https://api-web.nhle.com/v1/club-schedule-season/'+encodeURIComponent(code)+'/'+encodeURIComponent(season);
+  try{
+   const data=await get(url);
+   if(Array.isArray(data?.games))return data.games;
+  }catch(e){}
+  const response=await fetch(url);if(!response.ok)throw Error('Rozpis '+response.status);
   const data=await response.json();if(!Array.isArray(data.games))throw Error('Neplatný rozpis');return data.games;
  };
- const schedules=await Promise.all([safe(()=>schedule(ac),2800),safe(()=>schedule(hc),2800)]);
+ const schedules=await Promise.all([safe(()=>schedule(ac),4500),safe(()=>schedule(hc),4500)]);
  if(!root.isConnected)return;
  const completed=(games,code)=>games.filter(g=>g.gameDate<day&&['OFF','FINAL'].includes(g.gameState)&&g.homeTeam?.score!=null&&g.awayTeam?.score!=null&&(g.homeTeam?.abbrev===code||g.awayTeam?.abbrev===code)).sort((a,b)=>b.gameDate.localeCompare(a.gameDate));
+ const unique=games=>Array.from(new Map(games.filter(g=>g.id).map(g=>[String(g.id),g])).values());
  let ga=schedules[0].ok?completed(schedules[0].data,ac):[],gh=schedules[1].ok?completed(schedules[1].data,hc):[];
- // Browser access to NHL schedules can fail. The already-working Supabase score
- // proxy supplies an independent fallback. Process small batches, retain partial results.
- if(ga.length<3||gh.length<3){
+ // Expand history only when season schedules are missing or insufficient.
+ // Bound network requests and keep any successfully retrieved partial results.
+ const needsHistory=()=>ga.length<12||gh.length<12||ga.filter(g=>g.homeTeam?.abbrev===ac||g.awayTeam?.abbrev===ac).length<12;
+ if(needsHistory()){
   const fetched=[];
-  for(let batch=0;batch<5;batch++){
+  for(let batch=0;batch<10;batch++){
    if(!root.isConnected)break;
    const dates=Array.from({length:4},(_,i)=>{const dt=new Date(day+'T12:00:00Z');dt.setUTCDate(dt.getUTCDate()-1-batch*4-i);return dt.toISOString().slice(0,10)});
-   const part=await Promise.all(dates.map(date=>safe(()=>get('https://api-web.nhle.com/v1/score/'+date),2500)));
+   const part=await Promise.all(dates.map(date=>safe(()=>get('https://api-web.nhle.com/v1/score/'+date),2200)));
    for(let i=0;i<part.length;i++)if(part[i].ok&&Array.isArray(part[i].data?.games))fetched.push(...part[i].data.games.map(g=>({...g,gameDate:g.gameDate||dates[i]})));
-   if(completed(fetched,ac).length>=5&&completed(fetched,hc).length>=5)break;
+   ga=completed(unique([...ga,...fetched]),ac);
+   gh=completed(unique([...gh,...fetched]),hc);
+   const awayGames=ga.filter(g=>g.awayTeam?.abbrev===ac).length;
+   const homeGames=gh.filter(g=>g.homeTeam?.abbrev===hc).length;
+   const headToHead=ga.some(g=>g.awayTeam?.abbrev===hc||g.homeTeam?.abbrev===hc);
+   if(ga.length>=12&&gh.length>=12&&awayGames>=5&&homeGames>=5&&headToHead)break;
+   if(schedules[0].ok&&schedules[1].ok&&ga.length>=12&&gh.length>=12)break;
   }
-  if(ga.length<3)ga=completed(fetched,ac);
-  if(gh.length<3)gh=completed(fetched,hc);
  }
  if(!root.isConnected)return;
  const recent=(games,code)=>{const list=games.slice(0,5);if(list.length<3)return null;let wins=0,scored=0,allowed=0;for(const g of list){const own=g.homeTeam.abbrev===code?g.homeTeam:g.awayTeam,opp=g.homeTeam.abbrev===code?g.awayTeam:g.homeTeam;scored+=Number(own.score);allowed+=Number(opp.score);if(Number(own.score)>Number(opp.score))wins++}return {wins,n:list.length,scored:scored/list.length,allowed:allowed/list.length,last:list[0].gameDate}};
  const fa=recent(ga,ac),fh=recent(gh,hc);
  state('form',!!(fa&&fh));
- const venue=(games,code,homeSide)=>{const list=games.filter(g=>(homeSide?g.homeTeam:g.awayTeam).abbrev===code).slice(0,12);if(list.length<3)return null;const wins=list.filter(g=>Number((homeSide?g.homeTeam:g.awayTeam).score)>Number((homeSide?g.awayTeam:g.homeTeam).score)).length;return wins+'/'+list.length};
+ const venue=(games,code,homeSide)=>{const list=games.filter(g=>(homeSide?g.homeTeam:g.awayTeam).abbrev===code).slice(0,12);if(!list.length)return null;const wins=list.filter(g=>Number((homeSide?g.homeTeam:g.awayTeam).score)>Number((homeSide?g.awayTeam:g.homeTeam).score)).length;return wins+'/'+list.length+' výher ('+list.length+' zápasů)'+(list.length<3?' · malý vzorek':'')};
  const h2h=ga.filter(g=>[g.awayTeam.abbrev,g.homeTeam.abbrev].includes(hc)).slice(0,5);
  let extra='<details class="analyst-fold"><summary>📈 Forma posledních zápasů</summary><div class="analyst-fold-body">'+[ [ac,fa],[hc,fh] ].map(([code,f])=>'<p><b>'+clean(code)+':</b> '+(f?f.wins+'/'+f.n+' výher · '+fmt(f.scored)+' vstřelených a '+fmt(f.allowed)+' inkasovaných gólů/zápas · naposledy '+clean(f.last):'Nedostatečná nebo nedostupná data')+'</p>').join('')+'<p class="analysis-small">Forma se zobrazuje samostatně a nemění hlavní model.</p></div></details>';
  const restDays=f=>f?.last?Math.round((Date.parse(day)-Date.parse(f.last))/86400000):null;
@@ -550,7 +560,7 @@ async function analyzeGame(id){
  const loadRow=(code,w)=>'<div class="analyst-load-row"><b>'+clean(code)+'</b>'+(w?'<span>'+w.week+' utkání za posledních 7 dní</span><strong>'+w.daysBefore+' d.</strong><small>'+(w.daysBefore===1?'Zápas druhý den po sobě':w.compact?'3 zápasy v krátkém úseku':'Bez potvrzené výrazné krátkodobé zátěže')+'</small>':'<span>Chybí předchozí dokončené zápasy.</span>')+'</div>';
  extra+='<details class="analyst-fold"><summary>🧭 Zápasová zátěž <small>Back-to-back a 7 dní</small></summary><div class="analyst-fold-body">'+loadRow(ac,wa)+loadRow(hc,wh)+'<p class="analysis-small">Počítáno pouze z dostupných dokončených zápasů před termínem utkání. Údaj vpravo je počet kalendářních dní od posledního zápasu. Nezahrnuje cestování, časové zóny ani skutečnou regeneraci. Při neúplném rozpisu může být zátěž podhodnocena.</p></div></details>';
  extra+='<details class="analyst-fold"><summary>🏟️ Doma a venku</summary><div class="analyst-fold-body"><p>'+clean(ac)+' venku: '+clean(venue(ga,ac,false)||'nedostupné')+'</p><p>'+clean(hc)+' doma: '+clean(venue(gh,hc,true)||'nedostupné')+'</p></div></details>';
- extra+='<details class="analyst-fold"><summary>🤝 Vzájemné zápasy</summary><div class="analyst-fold-body">'+(h2h.length?h2h.map(g=>'<p>'+clean(g.gameDate)+' · '+clean(g.awayTeam.abbrev)+' '+Number(g.awayTeam.score)+' : '+Number(g.homeTeam.score)+' '+clean(g.homeTeam.abbrev)+'</p>').join(''):'<p>V dostupném rozpisu nebyly nalezeny dokončené vzájemné zápasy.</p>')+'</div></details>';
+ extra+='<details class="analyst-fold"><summary>🤝 Vzájemné zápasy</summary><div class="analyst-fold-body">'+(h2h.length?h2h.map(g=>'<p>'+clean(g.gameDate)+' · '+clean(g.awayTeam.abbrev)+' '+Number(g.awayTeam.score)+' : '+Number(g.homeTeam.score)+' '+clean(g.homeTeam.abbrev)+'</p>').join(''):'<p>V načtené historii nebyl nalezen vzájemný zápas. Neznamená to, že týmy spolu nehrály.</p>')+'</div></details>';
  const extraRoot=card.querySelector('#analyst-extras');if(extraRoot)extraRoot.innerHTML=extra;
  const lastIds=[ga[0]?.id,gh[0]?.id];
  const boxes=await Promise.all(lastIds.map(gid=>gid?safe(()=>get('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(gid)+'/boxscore'),3500):Promise.resolve({ok:false})));
