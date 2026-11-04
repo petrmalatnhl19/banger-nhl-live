@@ -22,6 +22,7 @@ def main():
  records={}
  conflicts=[]
  source_errors=[]
+ blocked=set()
  try:
   req=urllib.request.Request(SOURCE,headers={"User-Agent":"Mozilla/5.0","Accept":"text/html"})
   with urllib.request.urlopen(req,timeout=20) as r:page=r.read().decode("utf-8","replace")
@@ -67,6 +68,7 @@ def main():
      if abbr in ABBR:playing.add(abbr)
   with open("lineups.json",encoding="utf-8") as lineup_file:lineups=json.load(lineup_file).get("teams",{})
   records={abbr:entry for abbr,entry in records.items() if abbr in playing}
+  # Do not present a goalie for a team whose game cannot be verified.
   for abbr in playing:
    key=ABBR[abbr]
    lineup=lineups.get(key,{})
@@ -87,11 +89,12 @@ def main():
     conflicts.append({"team":abbr,"specialist":old["name"],"nhl":name,"nhlSource":lineup["source"]})
     # Contradictory evidence is not a reliable starter prediction.
     records.pop(abbr,None)
-   elif not old:records[abbr]=nhl_entry
+    blocked.add(abbr)
+   elif not old and abbr not in blocked:records[abbr]=nhl_entry
  except Exception as err:
   source_errors.append("NHL fallback: "+type(err).__name__+": "+str(err)[:160])
   print("NHL lineup goalie fallback unavailable:",type(err).__name__,str(err)[:160])
- with open("starting_goalies.json","w",encoding="utf-8") as f:json.dump({"date":today,"updatedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"teams":records,"conflicts":conflicts,"sourceErrors":source_errors,"status":"partial" if source_errors else "ok"},f,ensure_ascii=False,indent=2)
+ with open("starting_goalies.json","w",encoding="utf-8") as f:json.dump({"date":today,"updatedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"teams":records,"conflicts":conflicts,"sourceErrors":source_errors,"status":"partial" if source_errors or conflicts else "ok"},f,ensure_ascii=False,indent=2)
  print("Game-day goalie projections:",len(records))
 if __name__=="__main__":
  try:
