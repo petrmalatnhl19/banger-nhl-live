@@ -198,6 +198,15 @@ for name,team in teams.items():
   team["forwards"]=forwards[:4]
   team["defense"]=defense[:3]
   team["goalies"]=goalies[:2]
+  # Explain rejected lines without weakening roster validation.
+  if name in source_diagnostics:
+   rejected=[]
+   for role,rows,allowed in (("forwards",team.get("forwards",[]),groups["forwards"]),("defense",team.get("defense",[]),groups["defense"])):
+    for index,row in enumerate(rows,1):
+     missing=[player for player in row if normalize(player) not in allowed]
+     if missing:
+      rejected.append({"group":role,"line":index,"players":missing,"sourceLine":row})
+   source_diagnostics[name]["rejectedLines"]=rejected
   forwards_ok=len(forwards)>=3
   defense_ok=len(defense)>=2
   goalies_ok=True
