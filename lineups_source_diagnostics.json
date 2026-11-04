@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T20:40:04.753663+00:00",
+  "generatedAt": "2026-11-04T20:44:36.848571+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -11,6 +11,7 @@
       "rosterValidation": "passed",
       "roleMismatches": [],
       "rejectedLines": [],
+      "rejectedPlayerReasons": [],
       "validatedForwardLines": 4,
       "validatedDefensePairs": 3,
       "accepted": true
@@ -37,6 +38,13 @@
           ]
         }
       ],
+      "rejectedPlayerReasons": [
+        {
+          "name": "Jacob Slavin",
+          "expectedRole": "defense",
+          "reason": "not_in_current_roster"
+        }
+      ],
       "validatedForwardLines": 4,
       "validatedDefensePairs": 2,
       "accepted": true
@@ -51,6 +59,7 @@
       "rosterValidation": "passed",
       "roleMismatches": [],
       "rejectedLines": [],
+      "rejectedPlayerReasons": [],
       "validatedForwardLines": 4,
       "validatedDefensePairs": 3,
       "accepted": true
@@ -86,6 +95,13 @@
             "Will Cuyle",
             "Oliver Bjorkstrand"
           ]
+        }
+      ],
+      "rejectedPlayerReasons": [
+        {
+          "name": "Will Cuyle",
+          "expectedRole": "forwards",
+          "reason": "not_in_current_roster"
         }
       ],
       "validatedForwardLines": 3,
@@ -127,6 +143,18 @@
           ]
         }
       ],
+      "rejectedPlayerReasons": [
+        {
+          "name": "Philip Tomasino",
+          "expectedRole": "forwards",
+          "reason": "not_in_current_roster"
+        },
+        {
+          "name": "Samuel Blais",
+          "expectedRole": "forwards",
+          "reason": "not_in_current_roster"
+        }
+      ],
       "validatedForwardLines": 2,
       "validatedDefensePairs": 3,
       "accepted": false
@@ -141,6 +169,7 @@
       "rosterValidation": "passed",
       "roleMismatches": [],
       "rejectedLines": [],
+      "rejectedPlayerReasons": [],
       "validatedForwardLines": 4,
       "validatedDefensePairs": 3,
       "accepted": true
@@ -194,6 +223,23 @@
             "Cole Koepke",
             "Tyrel Bauer"
           ]
+        }
+      ],
+      "rejectedPlayerReasons": [
+        {
+          "name": "Nino Niederreiter",
+          "expectedRole": "defense",
+          "reason": "other_position_group"
+        },
+        {
+          "name": "Isak Rosen",
+          "expectedRole": "defense",
+          "reason": "other_position_group"
+        },
+        {
+          "name": "Cole Koepke",
+          "expectedRole": "defense",
+          "reason": "other_position_group"
         }
       ],
       "validatedForwardLines": 3,
