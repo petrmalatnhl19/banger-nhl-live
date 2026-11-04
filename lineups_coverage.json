@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T17:51:24.370105+00:00",
+  "generatedAt": "2026-11-04T18:54:37.895200+00:00",
   "totalTeams": 32,
   "withProjectedLines": 28,
   "missing": [
@@ -108,7 +108,6 @@
     "islanders": {
       "hasProjectedLines": true,
       "sources": [
-        "automatic",
         "archive"
       ]
     },

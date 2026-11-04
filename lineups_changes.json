@@ -639,6 +639,96 @@
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "blackhawks": {
+      "updatedAt": "2026-11-04T18:54:37.505373+00:00",
+      "previousPublishedAt": "2026-11-02T17:49:12.147000+00:00",
+      "publishedAt": "",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "events": [
+        {
+          "type": "moved",
+          "player": "Tyler Bertuzzi",
+          "from": "Útok 2",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Oliver Moore",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Frank Nazar",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Ryan Donato",
+          "from": "Útok 1",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Cole Smith",
+          "from": "Útok 4",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Anton Frondell",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Teuvo Teravainen",
+          "from": "Útok 4",
+          "to": "Útok 3"
+        },
+        {
+          "type": "added",
+          "player": "Dillon Boucher",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
+          "player": "Jordan Greenway",
+          "to": "Útok 4"
+        },
+        {
+          "type": "removed",
+          "player": "Andrew Mangiapane",
+          "from": "Útok 2"
+        },
+        {
+          "type": "removed",
+          "player": "Patrick Kane",
+          "from": "Útok 3"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "panthers": {
+      "updatedAt": "2026-11-04T18:54:37.505437+00:00",
+      "previousPublishedAt": "2026-11-02T17:12:15.904000+00:00",
+      "publishedAt": "",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "events": [
+        {
+          "type": "added",
+          "player": "Uvis Balinskis",
+          "to": "Obrana 3"
+        },
+        {
+          "type": "removed",
+          "player": "Radko Gudas",
+          "from": "Obrana 3"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     }
   }
 }
