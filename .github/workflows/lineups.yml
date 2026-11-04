@@ -22,6 +22,10 @@ jobs:
         run: python scripts/update_last_game_lines.py
       - name: Verify lineup coverage
         run: python scripts/check_lineups_coverage.py
+      - name: Publish readable projection diagnostics
+        if: always()
+        run: |
+          if [ -f lineups_diagnostics.md ]; then cat lineups_diagnostics.md >> "$GITHUB_STEP_SUMMARY"; fi
       - name: Audit lineup data
         run: python scripts/audit_lineups.py
       - name: Fetch projected starting goalies (optional source)
@@ -30,7 +34,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for file in lineups.json lineups_archive.json nhl_rosters.json lineups_coverage.json starting_goalies.json lineups_changes.json; do
+          for file in lineups.json lineups_archive.json nhl_rosters.json lineups_coverage.json starting_goalies.json lineups_changes.json lineups_diagnostics.md; do
             if [ -f "$file" ]; then git add "$file"; fi
           done
           if ! git diff --cached --quiet; then
