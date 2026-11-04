@@ -1,4 +1,4 @@
-import json,re,datetime,urllib.request,html
+import json,re,datetime,urllib.request,html,unicodedata
 from html.parser import HTMLParser
 URL="https://www.nhl.com/news/nhl-lineup-projections-2026-27-season"
 class Parser(HTMLParser):
@@ -38,7 +38,10 @@ for i,line in enumerate(lines):
 # This prevents mixed-up article sections from appearing as trusted lineups.
 TEAM_ABBREVS={"golden knights":"VGK","bruins":"BOS","red wings":"DET","panthers":"FLA","avalanche":"COL","blackhawks":"CHI","flames":"CGY","sharks":"SJS","mammoth":"UTA","maple leafs":"TOR","jets":"WPG","canadiens":"MTL","stars":"DAL","rangers":"NYR","islanders":"NYI","devils":"NJD","hurricanes":"CAR","lightning":"TBL","senators":"OTT","sabres":"BUF","penguins":"PIT","flyers":"PHI","capitals":"WSH","ducks":"ANA","kings":"LAK","kraken":"SEA","wild":"MIN","blues":"STL","predators":"NSH","oilers":"EDM","canucks":"VAN","blue jackets":"CBJ"}
 def normalize(name):
- return re.sub(r"[^a-z]","",name.casefold().replace("’","'"))
+ # NHL articles frequently omit accents (Stutzle vs Stützle, Valimaki vs Välimäki).
+ # Fold accents, but never accept a different player solely by surname.
+ folded=unicodedata.normalize("NFKD",str(name).casefold().replace("’","'"))
+ return re.sub(r"[^a-z]","", "".join(ch for ch in folded if not unicodedata.combining(ch)))
 
 # Also collect individual NHL.com matchup previews, but only those published
 # within the last 36 hours. Never mix historical lineups into today's games.
