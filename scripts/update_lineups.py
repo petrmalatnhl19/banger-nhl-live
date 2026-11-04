@@ -31,7 +31,7 @@ for i,line in enumerate(lines):
   if x.startswith("Scratched:"):scratched=x[10:].strip();continue
   names=[y.strip() for y in re.split(r"\s+[-–—]{1,2}\s+",x) if y.strip()]
   if len(names)==3 and len(forwards)<4:forwards.append(names)
-  elif len(names)==2 and len(forwards)>=3 and len(defense)<3:defense.append(names)
+  elif len(names)==2 and len(forwards)>=3 and len(defense)<8:defense.append(names)
   elif len(names)==1 and len(forwards)>=3 and len(defense)>=2 and len(goalies)<2 and re.fullmatch(r"[\wÀ-ž.'’ -]{5,55}",x):goalies.append(x)
  if len(forwards)>=3 and len(defense)>=2:teams[name.lower()]={"name":name,"forwards":forwards,"defense":defense,"goalies":goalies,"injured":injured,"scratched":scratched,"source":URL,"publishedAt":main_stamp.isoformat() if main_stamp else None}
 # Verify projected players against the NHL's current roster for the named club.
@@ -80,7 +80,7 @@ def parse_preview(article_url):
    if item.startswith("Scratched:"):scratched=item[10:].strip();continue
    names=[x.strip() for x in re.split(r"\s+[-–—]{1,2}\s+",item) if x.strip()]
    if len(names)==3 and len(forwards)<4:forwards.append(names)
-   elif len(names)==2 and len(forwards)>=3 and len(defense)<3:defense.append(names)
+   elif len(names)==2 and len(forwards)>=3 and len(defense)<8:defense.append(names)
    elif len(names)==1 and len(forwards)>=3 and len(defense)>=2 and len(goalies)<2 and re.fullmatch(r"[\wÀ-ž.'’ -]{5,55}",item):goalies.append(item)
   if len(forwards)>=3 and len(defense)>=2:
    found[key]={"name":match.group(1).strip(),"forwards":forwards,"defense":defense,"goalies":goalies,"injured":injured,"scratched":scratched,"source":article_url,"publishedAt":stamp.isoformat()}
@@ -190,6 +190,8 @@ for name,team in teams.items():
   groups={}
   for role,group in (("forwards","forwards"),("defense","defensemen"),("goalies","goalies")):
    groups[role]={normalize(str((p.get("firstName",{}).get("default","") if isinstance(p.get("firstName"),dict) else p.get("firstName","")))+" "+str((p.get("lastName",{}).get("default","") if isinstance(p.get("lastName"),dict) else p.get("lastName","")))) for p in roster.get(group,[])}
+  # Collect up to eight 2-name source rows, because some are forward fragments.
+  # Only NHL-roster-verified defender pairs become published defense lines.
   # Classify each parsed row by NHL roster position, not by its order in HTML.
   # An unrelated two-name line must never become a defensive pair.
   original_forwards=[list(row) for row in team.get("forwards",[])]
