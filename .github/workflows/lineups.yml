@@ -32,6 +32,17 @@ jobs:
         run: python scripts/audit_lineups.py
       - name: Fetch projected starting goalies (optional source)
         run: python scripts/update_starting_goalies.py
+      - name: Probe public goalie sources (diagnostic only)
+        if: always()
+        run: |
+          python scripts/probe_goalie_sources.py > goalie_sources_probe.json
+          cat goalie_sources_probe.json
+          {
+            echo '### Goalie source connectivity test'
+            echo '\`\`\`json'
+            cat goalie_sources_probe.json
+            echo '\`\`\`'
+          } >> "$GITHUB_STEP_SUMMARY"
       - name: Commit changed lineups
         run: |
           git config user.name "github-actions[bot]"
