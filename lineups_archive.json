@@ -1457,6 +1457,71 @@
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
+    },
+    "senators": {
+      "name": "Senators",
+      "forwards": [
+        [
+          "Fabian Zetterlund",
+          "Tim Stützle",
+          "Dylan Cozens"
+        ],
+        [
+          "Philip Tomasino",
+          "Shane Pinto",
+          "Drake Batherson"
+        ],
+        [
+          "Michael Amadio",
+          "Ridly Greig",
+          "Claude Giroux"
+        ],
+        [
+          "Samuel Blais",
+          "Stephen Halliday",
+          "Nick Cousins"
+        ]
+      ],
+      "defense": [
+        [
+          "Jake Sanderson",
+          "Artem Zub"
+        ],
+        [
+          "Thomas Chabot",
+          "Jordan Spence"
+        ],
+        [
+          "Nikolas Matinpalo",
+          "Carter Yakemchuk"
+        ]
+      ],
+      "goalies": [
+        "Samuel Ersson",
+        "Jonas Johansson"
+      ],
+      "powerplay": [
+        [
+          "Drake Batherson",
+          "Stephen Halliday",
+          "Dylan Cozens",
+          "Tim Stützle",
+          "Jake Sanderson"
+        ],
+        [
+          "Ridly Greig",
+          "Shane Pinto",
+          "Claude Giroux",
+          "Fabian Zetterlund",
+          "Thomas Chabot"
+        ]
+      ],
+      "injured": "Tyler Kleven (nemoc), Warren Foegele, Linus Ullmark, William Eklund, Kurtis MacDermid, Andre Burakovsky",
+      "scratched": "Hayden Hodgson",
+      "asOf": "2026-11-04",
+      "source": "https://www.nhl.com/news/ottawa-senators-buffalo-sabres-game-preview-november-4-2026",
+      "sourceLabel": "NHL.com",
+      "basis": "Projekce NHL.com pro utkání Ottawa – Buffalo dne 4. 11. 2026; nejde o potvrzenou sestavu"
     }
   }
 }
