@@ -90,11 +90,51 @@ def parse_lines(lines,abbr,url,raw=""):
   "diagnostic":{"forwards":len(forwards),"defense":len(defense),"goalies":len(goalies),
                 "needsRosterValidation":True,"sourceReusePermissionVerified":False}}
 
+def normalize_name(value):
+ import unicodedata
+ value=unicodedata.normalize("NFKD",value)
+ return re.sub(r"[^a-z]","",value.encode("ascii","ignore").decode("ascii").lower())
+
+def roster_player_names(roster):
+ """Extract current NHL roster names, supporting official API formats."""
+ players=[]
+ for group in ("forwards","defensemen","goalies"):
+  players.extend(roster.get(group,[]))
+ names=set()
+ for p in players:
+  first=p.get("firstName",{})
+  last=p.get("lastName",{})
+  first=first.get("default","") if isinstance(first,dict) else first
+  last=last.get("default","") if isinstance(last,dict) else last
+  name=(str(first)+" "+str(last)).strip()
+  if name:names.add(normalize_name(name))
+ return names
+
+def validate_roster(result,roster):
+ """Never mark source lines verified unless every player is on NHL current roster."""
+ known=roster_player_names(roster)
+ groups=result["forwards"]+result["defense"]+[result["goalies"]]
+ missing=sorted({name for group in groups for name in group
+                 if normalize_name(name) not in known})
+ result["diagnostic"]["missingFromNhlRoster"]=missing
+ result["diagnostic"]["rosterPlayerCount"]=len(known)
+ if result["status"]=="parsed_unverified_do_not_publish" and known and not missing:
+  result["status"]="roster_validated_source_permission_pending"
+  result["diagnostic"]["needsRosterValidation"]=False
+ return result
+
+def fetch_nhl_roster(team):
+ url="https://api-web.nhle.com/v1/roster/"+team+"/current"
+ req=urllib.request.Request(url,headers={"User-Agent":"BangerNHL-RosterValidator/0.1"})
+ with urllib.request.urlopen(req,timeout=15) as response:
+  return json.load(response)
+
 def main():
  ap=argparse.ArgumentParser()
  ap.add_argument("--team",choices=sorted(TEAMS),default="OTT")
  ap.add_argument("--input-text",help="Use a locally supplied plain-text chart instead of fetching the website")
  ap.add_argument("--output",default="dailyfaceoff_preview.json")
+ ap.add_argument("--validate-roster",action="store_true",help="Check all extracted names against NHL API")
  args=ap.parse_args()
  url="https://www.dailyfaceoff.com/teams/"+TEAMS[args.team]+"/line-combinations"
  if args.input_text:
@@ -106,6 +146,10 @@ def main():
    if response.status!=200:raise RuntimeError("HTTP "+str(response.status))
    raw=response.read(2_000_000).decode("utf-8","replace")
   result=parse(raw,args.team,url)
+ if args.validate_roster and result["status"]=="parsed_unverified_do_not_publish":
+  try:validate_roster(result,fetch_nhl_roster(args.team))
+  except Exception as exc:
+   result["diagnostic"]["rosterValidationError"]=str(exc)
  with open(args.output,"w",encoding="utf-8") as f:
   json.dump(result,f,ensure_ascii=False,indent=2)
  print("Saved diagnostic preview:",args.output)
