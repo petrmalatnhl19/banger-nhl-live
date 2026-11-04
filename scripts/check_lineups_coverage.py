@@ -28,12 +28,17 @@ for name in sorted(set(rosters)|set(live)|set(archive)|set(snapshots)):
               "currentProjection":is_fresh,
               "publishedAt":record.get("publishedAt") if isinstance(record,dict) else None,
               "source":record.get("source") if isinstance(record,dict) else None,
-              "needsFreshProjection":not is_fresh}
+              "needsFreshProjection":not is_fresh,
+              "status":("recent_verified" if is_fresh else "older_verified" if name in live or name in archive else "manual_snapshot" if name in snapshots else "missing")}
 out={"generatedAt":now.isoformat(),"totalTeams":len(teams),
      "withProjectedLines":sum(t["hasProjectedLines"] for t in teams.values()),
      "currentProjections":sum(t["currentProjection"] for t in teams.values()),
      "needsFreshProjection":[name for name,t in teams.items() if t["needsFreshProjection"]],
-     "missing":[name for name,t in teams.items() if not t["hasProjectedLines"]],"teams":teams}
+     "missing":[name for name,t in teams.items() if not t["hasProjectedLines"]],
+     "olderVerified":[name for name,t in teams.items() if t["status"]=="older_verified"],
+     "manualSnapshots":[name for name,t in teams.items() if t["status"]=="manual_snapshot"],
+     "freshnessDefinition":"Publication within 36h; not a confirmed next-game lineup",
+     "teams":teams}
 Path("lineups_coverage.json").write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding="utf-8")
 print("COVERAGE",out["withProjectedLines"],"/",out["totalTeams"])
 print("CURRENT (published within 36h)",out["currentProjections"],"/",out["totalTeams"])
@@ -41,7 +46,7 @@ print("NEEDS FRESH PROJECTION:",", ".join(out["needsFreshProjection"]) or "none"
 print("MISSING:",", ".join(out["missing"]) or "none")
 # Human-readable diagnostic for the eight teams previously shown as archive-only.
 focus={"bruins":"BOS","hurricanes":"CAR","kings":"LAK","islanders":"NYI","rangers":"NYR","senators":"OTT","sharks":"SJS","jets":"WPG"}
-report=["# NHL projection diagnostics","",f"Generated (UTC): {now.isoformat()}","",f"Fresh: {out['currentProjections']}/{out['totalTeams']}",""]
+report=["# NHL projection diagnostics","",f"Generated (UTC): {now.isoformat()}","",f"Available (including historical): {out['withProjectedLines']}/{out['totalTeams']}",f"Recent verified (source published within 36h): {out['currentProjections']}/{out['totalTeams']}","","> Recent does not mean confirmed for the next game.",""]
 source_diag=read("lineups_source_diagnostics.json")
 for key,abbr in focus.items():
  entry=teams.get(key,{})
