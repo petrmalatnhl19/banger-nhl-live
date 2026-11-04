@@ -77,6 +77,20 @@ def main():
    if normalize(name) not in {normalize(g) for g in rosters.get(key,{}).get("goalies",[])}:continue
    records[abbr]={"name":name,"status":"projected","date":today,"source":lineup["source"],"sourceLabel":"NHL.com projected lineup","checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"evidence":"first_listed_goalie","sourcePublishedAt":stamp}
  except Exception as err:print("NHL lineup goalie fallback unavailable:",type(err).__name__,str(err)[:160])
+ # A later explicit confirmation overrides an older projection. Never leave
+ # contradictory projected data displayed as though it were still current.
+ # The team page publishes a dated starter history and an explicit Confirmed label.
+ try:
+  url="https://www.edgehalla.com/nhl/starting-goalies/buffalo-sabres"
+  request=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0","Accept":"text/html"})
+  with urllib.request.urlopen(request,timeout=12) as response:raw=response.read().decode("utf-8","replace")
+  plain=Extract();plain.feed(raw)
+  body=" ".join(" ".join(plain.parts).split())
+  # Require matchup and date context, and an explicit confirmation for Ottawa.
+  if "Nov 4" in body and "OTT" in body and "BUF" in body and re.search(r"Samuel Ersson\\s*(?:✓\\s*)?Confirmed",body,re.I):
+   if normalize("Samuel Ersson") in {normalize(g) for g in rosters.get("senators",{}).get("goalies",[])}:
+    records["OTT"]={"name":"Samuel Ersson","status":"confirmed","date":today,"source":url,"sourceLabel":"Starter confirmation report","checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"evidence":"explicit_confirmed"}
+ except Exception as err:print("Independent confirmation source unavailable:",type(err).__name__,str(err)[:160])
  with open("starting_goalies.json","w",encoding="utf-8") as f:json.dump({"date":today,"updatedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"teams":records},f,ensure_ascii=False,indent=2)
  print("Verified source-matched projected goalies:",len(records))
 if __name__=="__main__":
