@@ -19,32 +19,35 @@ def normalize(value):
 def main():
  with open("nhl_rosters.json",encoding="utf-8") as f:rosters=json.load(f).get("teams",{})
  today=datetime.datetime.now(datetime.timezone.utc).date().isoformat()
- req=urllib.request.Request(SOURCE,headers={"User-Agent":"Mozilla/5.0","Accept":"text/html"})
- with urllib.request.urlopen(req,timeout=20) as r:page=r.read().decode("utf-8","replace")
- parser=Extract();parser.feed(page)
- lines=[re.sub(r"\s+"," ",html.unescape(x)).strip() for x in "".join(parser.parts).splitlines()]
- lines=[x for x in lines if x]
- # A date must be present. The source may serve yesterday's page.
- date_tokens=[today,datetime.datetime.now(datetime.timezone.utc).strftime("%B %-d, %Y")]
- if not any(t.lower() in " ".join(lines[:150]).lower() for t in date_tokens):
-  raise ValueError("Source does not show today's date")
  records={}
- # Match only full goalie names against NHL's official current roster.
- # A player name is attributed only if a team heading appears close to it.
- # Team identifiers are read directly from ABBR below; no unused dictionary needed.
- for abbr,key in ABBR.items():
-  goalies=rosters.get(key,{}).get("goalies",[])
-  if not goalies:continue
-  for i,line in enumerate(lines):
-   if not any(normalize(line)==normalize(g) for g in goalies):continue
-   neighborhood=" ".join(lines[max(0,i-7):i])
-   # Require the team name in preceding text, not just the goalie.
-   if not (re.search(r"\b"+re.escape(abbr)+r"\b",neighborhood,re.I) or re.search(re.escape(key),neighborhood,re.I)):continue
-   status="projected"
-   context=" ".join(lines[i+1:i+4]).upper()
-   if "PROJECTED" not in context and "LIKELY" not in context:continue
-   records[abbr]={"name":line,"status":status,"date":today,"source":SOURCE,"sourceLabel":"The Morning Puck","checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat()}
-   break
+ try:
+  req=urllib.request.Request(SOURCE,headers={"User-Agent":"Mozilla/5.0","Accept":"text/html"})
+  with urllib.request.urlopen(req,timeout=20) as r:page=r.read().decode("utf-8","replace")
+  parser=Extract();parser.feed(page)
+  lines=[re.sub(r"\s+"," ",html.unescape(x)).strip() for x in "".join(parser.parts).splitlines()]
+  lines=[x for x in lines if x]
+  # A date must be present. The source may serve yesterday's page.
+  date_tokens=[today,datetime.datetime.now(datetime.timezone.utc).strftime("%B %-d, %Y")]
+  if not any(t.lower() in " ".join(lines[:150]).lower() for t in date_tokens):
+   raise ValueError("Source does not show today's date")
+  # Match only full goalie names against NHL's official current roster.
+  # A player name is attributed only if a team heading appears close to it.
+  # Team identifiers are read directly from ABBR below; no unused dictionary needed.
+  for abbr,key in ABBR.items():
+   goalies=rosters.get(key,{}).get("goalies",[])
+   if not goalies:continue
+   for i,line in enumerate(lines):
+    if not any(normalize(line)==normalize(g) for g in goalies):continue
+    neighborhood=" ".join(lines[max(0,i-7):i])
+    # Require the team name in preceding text, not just the goalie.
+    if not (re.search(r"\b"+re.escape(abbr)+r"\b",neighborhood,re.I) or re.search(re.escape(key),neighborhood,re.I)):continue
+    status="projected"
+    context=" ".join(lines[i+1:i+4]).upper()
+    if "PROJECTED" not in context and "LIKELY" not in context:continue
+    records[abbr]={"name":line,"status":status,"date":today,"source":SOURCE,"sourceLabel":"The Morning Puck","checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat()}
+    break
+ except Exception as err:
+  print("Specialist source failed; using NHL fallback:",type(err).__name__,str(err)[:160])
  # Supplement the specialist feed with NHL.com's own dated projected lineups.
  # Only use a source article published recently AND a team scheduled today.
  # The first goalie listed in an NHL projected lineup is a projection, not confirmation.
@@ -60,6 +63,7 @@ def main():
      abbr=game.get(side,{}).get("abbrev")
      if abbr in ABBR:playing.add(abbr)
   with open("lineups.json",encoding="utf-8") as lineup_file:lineups=json.load(lineup_file).get("teams",{})
+  records={abbr:entry for abbr,entry in records.items() if abbr in playing}
   for abbr in playing:
    if abbr in records:continue
    key=ABBR[abbr]
@@ -77,22 +81,8 @@ def main():
    if normalize(name) not in {normalize(g) for g in rosters.get(key,{}).get("goalies",[])}:continue
    records[abbr]={"name":name,"status":"projected","date":today,"source":lineup["source"],"sourceLabel":"NHL.com projected lineup","checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"evidence":"first_listed_goalie","sourcePublishedAt":stamp}
  except Exception as err:print("NHL lineup goalie fallback unavailable:",type(err).__name__,str(err)[:160])
- # A later explicit confirmation overrides an older projection. Never leave
- # contradictory projected data displayed as though it were still current.
- # The team page publishes a dated starter history and an explicit Confirmed label.
- try:
-  url="https://www.edgehalla.com/nhl/starting-goalies/buffalo-sabres"
-  request=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0","Accept":"text/html"})
-  with urllib.request.urlopen(request,timeout=12) as response:raw=response.read().decode("utf-8","replace")
-  plain=Extract();plain.feed(raw)
-  body=" ".join(" ".join(plain.parts).split())
-  # Require matchup and date context, and an explicit confirmation for Ottawa.
-  if today=="2026-11-04" and "Nov 4" in body and "OTT" in body and "BUF" in body and re.search(r"Samuel Ersson\\s*(?:✓\\s*)?Confirmed",body,re.I):
-   if normalize("Samuel Ersson") in {normalize(g) for g in rosters.get("senators",{}).get("goalies",[])}:
-    records["OTT"]={"name":"Samuel Ersson","status":"confirmed","date":today,"source":url,"sourceLabel":"Starter confirmation report","checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"evidence":"explicit_confirmed"}
- except Exception as err:print("Independent confirmation source unavailable:",type(err).__name__,str(err)[:160])
  with open("starting_goalies.json","w",encoding="utf-8") as f:json.dump({"date":today,"updatedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"teams":records},f,ensure_ascii=False,indent=2)
- print("Verified source-matched projected goalies:",len(records))
+ print("Game-day goalie projections:",len(records))
 if __name__=="__main__":
  try:
   main()
