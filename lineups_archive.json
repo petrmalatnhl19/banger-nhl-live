@@ -1342,14 +1342,6 @@
           "Alex Iafallo",
           "Morgan Barron",
           "Viggo Bjorck"
-        ],
-        [
-          "Nino Niederreiter",
-          "Isak Rosen"
-        ],
-        [
-          "Cole Koepke",
-          "Tyrel Bauer"
         ]
       ],
       "defense": [
@@ -1367,13 +1359,14 @@
         ]
       ],
       "goalies": [
-        "Stuart Skinner",
-        "Clay Stevenson"
+        "Stuart Skinner"
       ],
-      "injured": "Garrett Brown, Josh Morrissey, Nick Bjugstad, Vladislav Namestnikov",
+      "injured": "Garrett Brown (lower body), Josh Morrissey (upper body), Nick Bjugstad (upper body), Vladislav Namestnikov (undisclosed)",
       "scratched": "Nico Daws, Brad Lambert, Cole Koepke",
+      "source": "https://www.nhl.com/news/winnipeg-jets-montreal-canadiens-game-preview-november-3-2026",
+      "publishedAt": "2026-11-03T18:06:18.771000+00:00",
       "asOf": "2026-11-03",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
     },

@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-04T20:34:48.376928+00:00",
+  "fetchedAt": "2026-11-04T20:37:26.599047+00:00",
   "teams": {
     "sabres": {
       "name": "Sabres",
@@ -505,6 +505,47 @@
       "scratched": "Nicolas Hague, Ilya Lyubushkin, Jonathan Marchessault",
       "source": "https://www.nhl.com/news/carolina-hurricanes-nashville-predators-game-preview-november-3-2026",
       "publishedAt": "2026-11-03T18:45:28.353000+00:00"
+    },
+    "jets": {
+      "name": "Jets",
+      "forwards": [
+        [
+          "Kyle Connor",
+          "Mark Scheifele",
+          "Gabriel Vilardi"
+        ],
+        [
+          "Cole Perfetti",
+          "Adam Lowry",
+          "Dawson Mercer"
+        ],
+        [
+          "Alex Iafallo",
+          "Morgan Barron",
+          "Viggo Bjorck"
+        ]
+      ],
+      "defense": [
+        [
+          "Dylan Samberg",
+          "Neal Pionk"
+        ],
+        [
+          "Mario Ferraro",
+          "Dylan DeMelo"
+        ],
+        [
+          "Haydn Fleury",
+          "Elias Salomonsson"
+        ]
+      ],
+      "goalies": [
+        "Stuart Skinner"
+      ],
+      "injured": "Garrett Brown (lower body), Josh Morrissey (upper body), Nick Bjugstad (upper body), Vladislav Namestnikov (undisclosed)",
+      "scratched": "Nico Daws, Brad Lambert, Cole Koepke",
+      "source": "https://www.nhl.com/news/winnipeg-jets-montreal-canadiens-game-preview-november-3-2026",
+      "publishedAt": "2026-11-03T18:06:18.771000+00:00"
     },
     "canadiens": {
       "name": "Canadiens",
@@ -1167,6 +1208,10 @@
         [
           "Ryan McDonagh",
           "Erik Cernak"
+        ],
+        [
+          "Victor Hedman",
+          "Emil Lilleberg"
         ]
       ],
       "goalies": [

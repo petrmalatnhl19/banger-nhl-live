@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T20:34:48.371876+00:00",
+  "generatedAt": "2026-11-04T20:37:26.592412+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -151,8 +151,8 @@
       "candidateSource": "https://www.nhl.com/news/winnipeg-jets-montreal-canadiens-game-preview-november-3-2026",
       "candidatePublishedAt": "2026-11-03T18:06:18.771000+00:00",
       "candidateForwardLines": 3,
-      "candidateDefensePairs": 3,
-      "rosterValidation": "insufficient_position_matched_lines",
+      "candidateDefensePairs": 5,
+      "rosterValidation": "passed",
       "roleMismatches": [
         {
           "sourcePair": 1,
@@ -197,8 +197,8 @@
         }
       ],
       "validatedForwardLines": 3,
-      "validatedDefensePairs": 1,
-      "accepted": false
+      "validatedDefensePairs": 3,
+      "accepted": true
     }
   }
 }

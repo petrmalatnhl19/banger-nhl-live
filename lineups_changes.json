@@ -122,22 +122,20 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "lightning": {
-      "updatedAt": "2026-11-03T17:46:39.606085+00:00",
-      "previousPublishedAt": "2026-10-30T19:33:37.655000+00:00",
-      "publishedAt": "",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-04T20:37:26.597766+00:00",
+      "previousPublishedAt": "2026-11-03T17:02:00+00:00",
+      "publishedAt": "2026-11-03T17:02:00+00:00",
+      "source": "https://www.nhl.com/news/detroit-red-wings-tampa-bay-lightning-game-preview-november-3-2026",
       "events": [
         {
-          "type": "moved",
-          "player": "Gage Goncalves",
-          "from": "Útok 3",
-          "to": "Útok 2"
+          "type": "added",
+          "player": "Victor Hedman",
+          "to": "Obrana 3"
         },
         {
-          "type": "moved",
-          "player": "Pontus Holmberg",
-          "from": "Útok 2",
-          "to": "Útok 3"
+          "type": "added",
+          "player": "Emil Lilleberg",
+          "to": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
