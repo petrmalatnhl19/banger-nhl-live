@@ -215,6 +215,9 @@ for key,team in teams.items():
  record["sourceLabel"]="NHL.com" if "nhl.com" in record["source"] else "Externí zdroj"
  if record.get("dateVerified"):record["basis"]="Archiv projekce NHL (nemusí platit pro další zápas)"
  previous=archive["teams"].get(key,{})
+ if previous and not record.get("dateVerified") and previous.get("dateVerified",bool(previous.get("asOf"))):
+  print("Keeping dated archive instead of undated secondary data for",key)
+  continue
  if previous and str(previous.get("asOf",""))>str(record["asOf"]):
   print("Keeping newer archived projection for",key,previous.get("asOf"))
   continue
