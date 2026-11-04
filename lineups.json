@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-04T20:28:25.156907+00:00",
+  "fetchedAt": "2026-11-04T20:34:48.376928+00:00",
   "teams": {
     "sabres": {
       "name": "Sabres",
@@ -387,6 +387,11 @@
           "Linus Karlsson"
         ],
         [
+          "Drew O'Connor",
+          "Jacob Quillan",
+          "Jonathan Lekkerimaki"
+        ],
+        [
           "Paul Cotter",
           "Max Sasson",
           "Brendan Gallagher"
@@ -403,12 +408,56 @@
         ]
       ],
       "goalies": [
-        "Kevin Lankinen"
+        "Kevin Lankinen",
+        "Leevi Merilainen"
       ],
       "injured": "Filip Chytil (shoulder), Thatcher Demko (hip)",
       "scratched": "Guillaume Brisebois, Luke Schenn, Arshdeep Bains",
       "source": "https://www.nhl.com/news/anaheim-ducks-vancouver-canucks-game-preview-november-3-2026",
       "publishedAt": "2026-11-03T19:43:35.256000+00:00"
+    },
+    "hurricanes": {
+      "name": "Hurricanes",
+      "forwards": [
+        [
+          "William Carrier",
+          "Sebastian Aho",
+          "Andrei Svechnikov"
+        ],
+        [
+          "Nikolaj Ehlers",
+          "Logan Stankoven",
+          "Jackson Blake"
+        ],
+        [
+          "Jordan Martinook",
+          "Mark Jankowski",
+          "Seth Jarvis"
+        ],
+        [
+          "Eric Robinson",
+          "Jesperi Kotkaniemi",
+          "Nicolas Deslauriers"
+        ]
+      ],
+      "defense": [
+        [
+          "K’Andre Miller",
+          "Sean Walker"
+        ],
+        [
+          "Shayne Gostisbehere",
+          "Juuso Valimaki"
+        ]
+      ],
+      "goalies": [
+        "Pyotr Kochetkov",
+        "Brandon Bussi"
+      ],
+      "injured": "Jordan Staal (calf), Taylor Hall (upper body)",
+      "scratched": "Mike Reilly",
+      "source": "https://www.nhl.com/news/carolina-hurricanes-nashville-predators-game-preview-november-3-2026",
+      "publishedAt": "2026-11-03T18:45:28.353000+00:00"
     },
     "predators": {
       "name": "Predators",
@@ -460,6 +509,11 @@
     "canadiens": {
       "name": "Canadiens",
       "forwards": [
+        [
+          "Cole Caufield",
+          "Alex Newhook",
+          "Juraj Slafkovsky"
+        ],
         [
           "Chris Kreider",
           "Jake Evans",
@@ -654,6 +708,10 @@
         [
           "Jakob Chychrun",
           "Matt Roy"
+        ],
+        [
+          "Martin Fehervary",
+          "Timothy Liljegren"
         ],
         [
           "Cole Hutson",
@@ -993,6 +1051,48 @@
       "source": "https://www.nhl.com/news/st-louis-blues-new-york-rangers-game-preview-november-3-2026",
       "publishedAt": "2026-11-03T17:14:56.036000+00:00"
     },
+    "rangers": {
+      "name": "Rangers",
+      "forwards": [
+        [
+          "Pavel Dorofeyev",
+          "Mika Zibanejad",
+          "Alexis Lafreniere"
+        ],
+        [
+          "Tye Kartye",
+          "J.T. Miller",
+          "Gabe Perreault"
+        ],
+        [
+          "Jaroslav Chmelar",
+          "Noah Laba",
+          "Matt Rempe"
+        ]
+      ],
+      "defense": [
+        [
+          "Vladislav Gavrikov",
+          "Adam Fox"
+        ],
+        [
+          "Marcus Pettersson",
+          "Braden Schneider"
+        ],
+        [
+          "Alberts Smits",
+          "Scott Morrow"
+        ]
+      ],
+      "goalies": [
+        "Dylan Garand",
+        "James Reimer"
+      ],
+      "injured": "Igor Shesterkin (lower body), Joonas Korpisalo (lower body), Joseph Veleno (lower body), Sean Durzi (undisclosed)",
+      "scratched": "Luke Glendenning, Matthew Robertson",
+      "source": "https://www.nhl.com/news/st-louis-blues-new-york-rangers-game-preview-november-3-2026",
+      "publishedAt": "2026-11-03T17:14:56.036000+00:00"
+    },
     "red wings": {
       "name": "Red Wings",
       "forwards": [
@@ -1000,6 +1100,11 @@
           "Alex DeBrincat",
           "Emmitt Finnie",
           "Viktor Arvidsson"
+        ],
+        [
+          "Michael Brandsegg-Nygard",
+          "Andrew Copp",
+          "Lucas Raymond"
         ],
         [
           "Michael Rasmussen",

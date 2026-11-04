@@ -62,26 +62,61 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "red wings": {
-      "updatedAt": "2026-11-03T17:46:39.606022+00:00",
-      "previousPublishedAt": "2026-11-02T17:12:15.904000+00:00",
-      "publishedAt": "",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-04T20:34:48.375805+00:00",
+      "previousPublishedAt": "2026-11-03T17:02:00+00:00",
+      "publishedAt": "2026-11-03T17:02:00+00:00",
+      "source": "https://www.nhl.com/news/detroit-red-wings-tampa-bay-lightning-game-preview-november-3-2026",
       "events": [
         {
-          "type": "moved",
-          "player": "John Leonard",
-          "from": "Útok 3",
+          "type": "added",
+          "player": "Michael Brandsegg-Nygard",
           "to": "Útok 2"
         },
         {
           "type": "added",
-          "player": "Carter Mazur",
+          "player": "Andrew Copp",
+          "to": "Útok 2"
+        },
+        {
+          "type": "added",
+          "player": "Lucas Raymond",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Michael Rasmussen",
+          "from": "Útok 2",
           "to": "Útok 3"
         },
         {
-          "type": "removed",
-          "player": "Nate Danielson",
-          "from": "Útok 2"
+          "type": "moved",
+          "player": "J.T. Compher",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "John Leonard",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Carter Mazur",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Sheldon Dries",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Keegan Kolesar",
+          "from": "Útok 3",
+          "to": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -273,22 +308,32 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "capitals": {
-      "updatedAt": "2026-11-03T17:46:39.606379+00:00",
-      "previousPublishedAt": "2026-11-01T18:42:00+00:00",
-      "publishedAt": "",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-04T20:34:48.375148+00:00",
+      "previousPublishedAt": "2026-11-03T17:31:29.960000+00:00",
+      "publishedAt": "2026-11-03T17:31:29.960000+00:00",
+      "source": "https://www.nhl.com/news/dallas-stars-washington-capitals-game-preview-november-3-2026",
       "events": [
         {
-          "type": "moved",
-          "player": "Justin Sourdif",
-          "from": "Útok 3",
-          "to": "Útok 2"
+          "type": "added",
+          "player": "Martin Fehervary",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "added",
+          "player": "Timothy Liljegren",
+          "to": "Obrana 2"
         },
         {
           "type": "moved",
-          "player": "Ilya Protas",
-          "from": "Útok 2",
-          "to": "Útok 3"
+          "player": "Cole Hutson",
+          "from": "Obrana 2",
+          "to": "Obrana 3"
+        },
+        {
+          "type": "moved",
+          "player": "Jack St. Ivany",
+          "from": "Obrana 2",
+          "to": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -454,32 +499,79 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "canadiens": {
-      "updatedAt": "2026-11-03T18:46:17.560562+00:00",
-      "previousPublishedAt": "2026-10-31T16:52:42.410000+00:00",
-      "publishedAt": "",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-04T20:34:48.374850+00:00",
+      "previousPublishedAt": "2026-11-03T18:06:18.771000+00:00",
+      "publishedAt": "2026-11-03T18:06:18.771000+00:00",
+      "source": "https://www.nhl.com/news/winnipeg-jets-montreal-canadiens-game-preview-november-3-2026",
       "events": [
         {
-          "type": "moved",
-          "player": "Jake Evans",
-          "from": "Útok 3",
+          "type": "added",
+          "player": "Cole Caufield",
           "to": "Útok 1"
         },
         {
           "type": "added",
-          "player": "Florian Xhekaj",
+          "player": "Alex Newhook",
+          "to": "Útok 1"
+        },
+        {
+          "type": "added",
+          "player": "Juraj Slafkovsky",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Chris Kreider",
+          "from": "Útok 1",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Jake Evans",
+          "from": "Útok 1",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Josh Anderson",
+          "from": "Útok 1",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Zachary Bolduc",
+          "from": "Útok 2",
           "to": "Útok 3"
         },
         {
           "type": "moved",
-          "player": "Oliver Kapanen",
-          "from": "Útok 1",
+          "player": "Phillip Danault",
+          "from": "Útok 2",
           "to": "Útok 3"
         },
         {
-          "type": "removed",
-          "player": "Kirby Dach",
-          "from": "Útok 3"
+          "type": "moved",
+          "player": "Alexandre Texier",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Florian Xhekaj",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Oliver Kapanen",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Owen Beck",
+          "from": "Útok 3",
+          "to": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -615,20 +707,43 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "canucks": {
-      "updatedAt": "2026-11-03T19:50:03.583301+00:00",
-      "previousPublishedAt": "2026-10-31T15:27:00+00:00",
-      "publishedAt": "",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-04T20:34:48.374675+00:00",
+      "previousPublishedAt": "2026-11-03T19:43:35.256000+00:00",
+      "publishedAt": "2026-11-03T19:43:35.256000+00:00",
+      "source": "https://www.nhl.com/news/anaheim-ducks-vancouver-canucks-game-preview-november-3-2026",
       "events": [
         {
           "type": "added",
-          "player": "Brendan Gallagher",
+          "player": "Drew O'Connor",
           "to": "Útok 3"
         },
         {
-          "type": "removed",
-          "player": "Arshdeep Bains",
-          "from": "Útok 3"
+          "type": "added",
+          "player": "Jacob Quillan",
+          "to": "Útok 3"
+        },
+        {
+          "type": "added",
+          "player": "Jonathan Lekkerimaki",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Paul Cotter",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Max Sasson",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Brendan Gallagher",
+          "from": "Útok 3",
+          "to": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

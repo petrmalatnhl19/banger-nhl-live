@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T20:28:25.152062+00:00",
+  "generatedAt": "2026-11-04T20:34:48.371876+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -9,6 +9,7 @@
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
+      "roleMismatches": [],
       "rejectedLines": [],
       "validatedForwardLines": 4,
       "validatedDefensePairs": 3,
@@ -21,7 +22,8 @@
       "candidatePublishedAt": "2026-11-03T18:45:28.353000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
-      "rosterValidation": "insufficient_position_matched_lines",
+      "rosterValidation": "passed",
+      "roleMismatches": [],
       "rejectedLines": [
         {
           "group": "defense",
@@ -33,22 +35,11 @@
             "Jacob Slavin",
             "Jalen Chatfield"
           ]
-        },
-        {
-          "group": "defense",
-          "line": 3,
-          "players": [
-            "Juuso Valimaki"
-          ],
-          "sourceLine": [
-            "Shayne Gostisbehere",
-            "Juuso Valimaki"
-          ]
         }
       ],
       "validatedForwardLines": 4,
-      "validatedDefensePairs": 1,
-      "accepted": false
+      "validatedDefensePairs": 2,
+      "accepted": true
     },
     "kings": {
       "team": "LAK",
@@ -58,6 +49,7 @@
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
+      "roleMismatches": [],
       "rejectedLines": [],
       "validatedForwardLines": 4,
       "validatedDefensePairs": 3,
@@ -80,20 +72,9 @@
       "candidatePublishedAt": "2026-11-03T17:14:56.036000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
-      "rosterValidation": "insufficient_position_matched_lines",
+      "rosterValidation": "passed",
+      "roleMismatches": [],
       "rejectedLines": [
-        {
-          "group": "forwards",
-          "line": 1,
-          "players": [
-            "Alexis Lafreniere"
-          ],
-          "sourceLine": [
-            "Pavel Dorofeyev",
-            "Mika Zibanejad",
-            "Alexis Lafreniere"
-          ]
-        },
         {
           "group": "forwards",
           "line": 3,
@@ -107,9 +88,9 @@
           ]
         }
       ],
-      "validatedForwardLines": 2,
+      "validatedForwardLines": 3,
       "validatedDefensePairs": 3,
-      "accepted": false
+      "accepted": true
     },
     "senators": {
       "team": "OTT",
@@ -119,19 +100,8 @@
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "insufficient_position_matched_lines",
+      "roleMismatches": [],
       "rejectedLines": [
-        {
-          "group": "forwards",
-          "line": 1,
-          "players": [
-            "Tim Stutzle"
-          ],
-          "sourceLine": [
-            "Fabian Zetterlund",
-            "Tim Stutzle",
-            "Dylan Cozens"
-          ]
-        },
         {
           "group": "forwards",
           "line": 2,
@@ -157,7 +127,7 @@
           ]
         }
       ],
-      "validatedForwardLines": 1,
+      "validatedForwardLines": 2,
       "validatedDefensePairs": 3,
       "accepted": false
     },
@@ -169,6 +139,7 @@
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
+      "roleMismatches": [],
       "rejectedLines": [],
       "validatedForwardLines": 4,
       "validatedDefensePairs": 3,
@@ -182,19 +153,25 @@
       "candidateForwardLines": 3,
       "candidateDefensePairs": 3,
       "rosterValidation": "insufficient_position_matched_lines",
-      "rejectedLines": [
+      "roleMismatches": [
         {
-          "group": "forwards",
-          "line": 3,
+          "sourcePair": 1,
           "players": [
-            "Viggo Bjorck"
+            "Nino Niederreiter",
+            "Isak Rosen"
           ],
-          "sourceLine": [
-            "Alex Iafallo",
-            "Morgan Barron",
-            "Viggo Bjorck"
-          ]
+          "reason": "forward_in_defense_row"
         },
+        {
+          "sourcePair": 2,
+          "players": [
+            "Cole Koepke",
+            "Tyrel Bauer"
+          ],
+          "reason": "forward_in_defense_row"
+        }
+      ],
+      "rejectedLines": [
         {
           "group": "defense",
           "line": 1,
@@ -219,7 +196,7 @@
           ]
         }
       ],
-      "validatedForwardLines": 2,
+      "validatedForwardLines": 3,
       "validatedDefensePairs": 1,
       "accepted": false
     }

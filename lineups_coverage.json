@@ -1,14 +1,12 @@
 {
-  "generatedAt": "2026-11-04T20:28:25.617956+00:00",
+  "generatedAt": "2026-11-04T20:34:48.763194+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 26,
+  "currentProjections": 28,
   "needsFreshProjection": [
     "bruins",
-    "hurricanes",
     "islanders",
     "jets",
-    "rangers",
     "senators"
   ],
   "missing": [],
@@ -160,12 +158,13 @@
     "hurricanes": {
       "hasProjectedLines": true,
       "sources": [
+        "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": null,
-      "source": null,
-      "needsFreshProjection": true
+      "currentProjection": true,
+      "publishedAt": "2026-11-03T18:45:28.353000+00:00",
+      "source": "https://www.nhl.com/news/carolina-hurricanes-nashville-predators-game-preview-november-3-2026",
+      "needsFreshProjection": false
     },
     "islanders": {
       "hasProjectedLines": true,
@@ -291,12 +290,13 @@
     "rangers": {
       "hasProjectedLines": true,
       "sources": [
+        "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": null,
-      "source": null,
-      "needsFreshProjection": true
+      "currentProjection": true,
+      "publishedAt": "2026-11-03T17:14:56.036000+00:00",
+      "source": "https://www.nhl.com/news/st-louis-blues-new-york-rangers-game-preview-november-3-2026",
+      "needsFreshProjection": false
     },
     "red wings": {
       "hasProjectedLines": true,

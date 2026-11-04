@@ -1391,11 +1391,6 @@
           "Gabe Perreault"
         ],
         [
-          "Eeli Tolvanen",
-          "Will Cuylle",
-          "Oliver Bjorkstrand"
-        ],
-        [
           "Jaroslav Chmelar",
           "Noah Laba",
           "Matt Rempe"
@@ -1419,10 +1414,12 @@
         "Dylan Garand",
         "James Reimer"
       ],
-      "injured": "Igor Shesterkin, Joonas Korpisalo, Joseph Veleno, Sean Durzi",
+      "injured": "Igor Shesterkin (lower body), Joonas Korpisalo (lower body), Joseph Veleno (lower body), Sean Durzi (undisclosed)",
       "scratched": "Luke Glendenning, Matthew Robertson",
+      "source": "https://www.nhl.com/news/st-louis-blues-new-york-rangers-game-preview-november-3-2026",
+      "publishedAt": "2026-11-03T17:14:56.036000+00:00",
       "asOf": "2026-11-03",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
     },
@@ -1452,11 +1449,7 @@
       ],
       "defense": [
         [
-          "Jacob Slavin",
-          "Jalen Chatfield"
-        ],
-        [
-          "K'Andre Miller",
+          "K’Andre Miller",
           "Sean Walker"
         ],
         [
@@ -1468,10 +1461,12 @@
         "Pyotr Kochetkov",
         "Brandon Bussi"
       ],
-      "injured": "Jordan Staal, Taylor Hall",
+      "injured": "Jordan Staal (calf), Taylor Hall (upper body)",
       "scratched": "Mike Reilly",
+      "source": "https://www.nhl.com/news/carolina-hurricanes-nashville-predators-game-preview-november-3-2026",
+      "publishedAt": "2026-11-03T18:45:28.353000+00:00",
       "asOf": "2026-11-03",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
     },
