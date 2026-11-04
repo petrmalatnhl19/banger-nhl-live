@@ -39,3 +39,20 @@ print("COVERAGE",out["withProjectedLines"],"/",out["totalTeams"])
 print("CURRENT (published within 36h)",out["currentProjections"],"/",out["totalTeams"])
 print("NEEDS FRESH PROJECTION:",", ".join(out["needsFreshProjection"]) or "none")
 print("MISSING:",", ".join(out["missing"]) or "none")
+# Human-readable diagnostic for the eight teams previously shown as archive-only.
+focus={"bruins":"BOS","hurricanes":"CAR","kings":"LAK","islanders":"NYI","rangers":"NYR","senators":"OTT","sharks":"SJS","jets":"WPG"}
+report=["# NHL projection diagnostics","",f"Generated (UTC): {now.isoformat()}","",f"Fresh: {out['currentProjections']}/{out['totalTeams']}",""]
+for key,abbr in focus.items():
+ entry=teams.get(key,{})
+ record=live.get(key,{})
+ if entry.get("currentProjection"):
+  status="FRESH"
+ elif key not in live:
+  status="NO VALIDATED LIVE PROJECTION"
+ elif not record.get("publishedAt"):
+  status="SOURCE PUBLICATION DATE MISSING"
+ else:
+  status="SOURCE PUBLICATION OLDER THAN 36 HOURS OR FUTURE-DATED"
+ report.append(f"- {abbr}: {status}; publishedAt={record.get('publishedAt') or 'unknown'}; source={record.get('source') or 'unknown'}; archive={'yes' if key in archive else 'no'}")
+Path("lineups_diagnostics.md").write_text("\\n".join(report)+"\\n",encoding="utf-8")
+print("\\n".join(report))
