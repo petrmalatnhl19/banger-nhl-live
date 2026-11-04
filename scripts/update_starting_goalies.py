@@ -87,7 +87,7 @@ def main():
   plain=Extract();plain.feed(raw)
   body=" ".join(" ".join(plain.parts).split())
   # Require matchup and date context, and an explicit confirmation for Ottawa.
-  if "Nov 4" in body and "OTT" in body and "BUF" in body and re.search(r"Samuel Ersson\\s*(?:✓\\s*)?Confirmed",body,re.I):
+  if today=="2026-11-04" and "Nov 4" in body and "OTT" in body and "BUF" in body and re.search(r"Samuel Ersson\\s*(?:✓\\s*)?Confirmed",body,re.I):
    if normalize("Samuel Ersson") in {normalize(g) for g in rosters.get("senators",{}).get("goalies",[])}:
     records["OTT"]={"name":"Samuel Ersson","status":"confirmed","date":today,"source":url,"sourceLabel":"Starter confirmation report","checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"evidence":"explicit_confirmed"}
  except Exception as err:print("Independent confirmation source unavailable:",type(err).__name__,str(err)[:160])
