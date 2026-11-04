@@ -1,62 +1,78 @@
 {
   "date": "2026-11-04",
-  "updatedAt": "2026-11-04T22:16:56.611981+00:00",
+  "updatedAt": "2026-11-04T22:20:54.965972+00:00",
   "teams": {
     "BUF": {
       "name": "Colten Ellis",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-04",
-      "source": "https://themorningpuck.com/starting-goalies",
-      "sourceLabel": "The Morning Puck",
-      "checkedAt": "2026-11-04T22:16:56.558713+00:00"
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-04T22:20:54.965972+00:00",
+      "gameId": 2026020247
     },
     "CGY": {
       "name": "Dustin Wolf",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-04",
-      "source": "https://themorningpuck.com/starting-goalies",
-      "sourceLabel": "The Morning Puck",
-      "checkedAt": "2026-11-04T22:16:56.560105+00:00"
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-04T22:20:54.965972+00:00",
+      "gameId": 2026020250
     },
     "CHI": {
       "name": "Spencer Knight",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-04",
-      "source": "https://themorningpuck.com/starting-goalies",
-      "sourceLabel": "The Morning Puck",
-      "checkedAt": "2026-11-04T22:16:56.560468+00:00"
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-04T22:20:54.965972+00:00",
+      "gameId": 2026020248
     },
     "FLA": {
       "name": "Jacob Markstrom",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-04",
-      "source": "https://themorningpuck.com/starting-goalies",
-      "sourceLabel": "The Morning Puck",
-      "checkedAt": "2026-11-04T22:16:56.562750+00:00"
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-04T22:20:54.965972+00:00",
+      "gameId": 2026020248
     },
     "LAK": {
       "name": "Darcy Kuemper",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-04",
-      "source": "https://themorningpuck.com/starting-goalies",
-      "sourceLabel": "The Morning Puck",
-      "checkedAt": "2026-11-04T22:16:56.563103+00:00"
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-04T22:20:54.965972+00:00",
+      "gameId": 2026020249
     },
     "OTT": {
-      "name": "Jonas Johansson",
-      "status": "projected",
+      "name": "Samuel Ersson",
+      "status": "confirmed",
       "date": "2026-11-04",
-      "source": "https://themorningpuck.com/starting-goalies",
-      "sourceLabel": "The Morning Puck",
-      "checkedAt": "2026-11-04T22:16:56.566583+00:00"
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-04T22:20:54.965972+00:00",
+      "gameId": 2026020247
     },
     "SJS": {
       "name": "Yaroslav Askarov",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-04",
-      "source": "https://themorningpuck.com/starting-goalies",
-      "sourceLabel": "The Morning Puck",
-      "checkedAt": "2026-11-04T22:16:56.568129+00:00"
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-04T22:20:54.965972+00:00",
+      "gameId": 2026020249
+    },
+    "SEA": {
+      "name": "Joey Daccord",
+      "status": "confirmed",
+      "date": "2026-11-04",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-04T22:20:54.965972+00:00",
+      "gameId": 2026020250
     }
   },
   "conflicts": [

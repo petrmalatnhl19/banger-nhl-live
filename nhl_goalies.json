@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-04T22:16:59.150715+00:00",
-  "rostersUpdatedAt": "2026-11-04T22:16:36.410557+00:00",
+  "updatedAt": "2026-11-04T22:20:55.000804+00:00",
+  "rostersUpdatedAt": "2026-11-04T22:20:24.852716+00:00",
   "projectionDate": "2026-11-04",
   "teamCount": 32,
   "goalieCount": 77,
@@ -26,9 +26,9 @@
       "team": "CHI",
       "teamKey": "blackhawks",
       "playerId": 8481519,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-04",
-      "starterSource": "https://themorningpuck.com/starting-goalies"
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Arvid Soderblom",
@@ -219,9 +219,9 @@
       "team": "CGY",
       "teamKey": "flames",
       "playerId": 8481692,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-04",
-      "starterSource": "https://themorningpuck.com/starting-goalies"
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Dan Vladar",
@@ -324,17 +324,18 @@
       "team": "LAK",
       "teamKey": "kings",
       "playerId": 8475311,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-04",
-      "starterSource": "https://themorningpuck.com/starting-goalies"
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Joey Daccord",
       "team": "SEA",
       "teamKey": "kraken",
       "playerId": 8478916,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-04",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Philipp Grubauer",
@@ -429,9 +430,9 @@
       "team": "FLA",
       "teamKey": "panthers",
       "playerId": 8474593,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-04",
-      "starterSource": "https://themorningpuck.com/starting-goalies"
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Akira Schmid",
@@ -526,9 +527,9 @@
       "team": "BUF",
       "teamKey": "sabres",
       "playerId": 8481551,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-04",
-      "starterSource": "https://themorningpuck.com/starting-goalies"
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Ukko-Pekka Luukkonen",
@@ -551,17 +552,17 @@
       "team": "OTT",
       "teamKey": "senators",
       "playerId": 8481035,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-04",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Jonas Johansson",
       "team": "OTT",
       "teamKey": "senators",
       "playerId": 8477992,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-04",
-      "starterSource": "https://themorningpuck.com/starting-goalies"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Linus Ullmark",
@@ -576,9 +577,9 @@
       "team": "SJS",
       "teamKey": "sharks",
       "playerId": 8482137,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-04",
-      "starterSource": "https://themorningpuck.com/starting-goalies"
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Alex Nedeljkovic",
