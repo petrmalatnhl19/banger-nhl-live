@@ -108,6 +108,18 @@ try:
   except Exception as err:print("Preview unavailable",link,str(err))
 except Exception as err:print("Preview index unavailable",str(err))
 
+# Direct NHL.com matchup articles can appear before the game-preview index updates.
+# These are still subject to publication-date and NHL roster validation.
+DIRECT_PREVIEWS=[
+ "https://www.nhl.com/news/ottawa-senators-buffalo-sabres-game-preview-november-4-2026",
+]
+for direct_url in DIRECT_PREVIEWS:
+ try:
+  for key,value in parse_preview(direct_url).items():
+   if key not in teams or (value.get("publishedAt") and value["publishedAt"]>str(teams[key].get("publishedAt") or "")):
+    teams[key]=value
+ except Exception as err:print("Direct NHL preview unavailable",direct_url,str(err))
+
 # Secondary source: dedicated per-team line combinations. A lineup is kept only
 # when enough players match the NHL roster (validation below).
 SLUGS={"mammoth":"utah-mammoth","maple leafs":"toronto-maple-leafs","stars":"dallas-stars","jets":"winnipeg-jets","canadiens":"montreal-canadiens","oilers":"edmonton-oilers","hurricanes":"carolina-hurricanes","capitals":"washington-capitals","wild":"minnesota-wild","predators":"nashville-predators","devils":"new-jersey-devils","rangers":"new-york-rangers","blues":"st-louis-blues","flyers":"philadelphia-flyers","ducks":"anaheim-ducks","canucks":"vancouver-canucks","lightning":"tampa-bay-lightning","penguins":"pittsburgh-penguins","blue jackets":"columbus-blue-jackets","kings":"los-angeles-kings","islanders":"new-york-islanders","senators":"ottawa-senators","sabres":"buffalo-sabres","kraken":"seattle-kraken"}
