@@ -96,29 +96,34 @@ def normalize_name(value):
  return re.sub(r"[^a-z]","",value.encode("ascii","ignore").decode("ascii").lower())
 
 def roster_player_names(roster):
- """Extract current NHL roster names, supporting official API formats."""
- players=[]
- for group in ("forwards","defensemen","goalies"):
-  players.extend(roster.get(group,[]))
- names=set()
- for p in players:
-  first=p.get("firstName",{})
-  last=p.get("lastName",{})
-  first=first.get("default","") if isinstance(first,dict) else first
-  last=last.get("default","") if isinstance(last,dict) else last
-  name=(str(first)+" "+str(last)).strip()
-  if name:names.add(normalize_name(name))
- return names
+ """Build name sets per official NHL roster position group."""
+ result={}
+ for key in ("forwards","defensemen","goalies"):
+  names=set()
+  for p in roster.get(key,[]):
+   first=p.get("firstName",{})
+   last=p.get("lastName",{})
+   first=first.get("default","") if isinstance(first,dict) else first
+   last=last.get("default","") if isinstance(last,dict) else last
+   full=(str(first)+" "+str(last)).strip()
+   if full:names.add(normalize_name(full))
+  result[key]=names
+ return result
 
 def validate_roster(result,roster):
- """Never mark source lines verified unless every player is on NHL current roster."""
+ """Reject wrong-team and wrong-position entries; no partial publishing."""
  known=roster_player_names(roster)
- groups=result["forwards"]+result["defense"]+[result["goalies"]]
- missing=sorted({name for group in groups for name in group
-                 if normalize_name(name) not in known})
- result["diagnostic"]["missingFromNhlRoster"]=missing
- result["diagnostic"]["rosterPlayerCount"]=len(known)
- if result["status"]=="parsed_unverified_do_not_publish" and known and not missing:
+ missing=[]
+ for field,group in (("forwards","forwards"),("defense","defensemen"),("goalies","goalies")):
+  for lineup in result[field]:
+   members=lineup if isinstance(lineup,list) else [lineup]
+   for name in members:
+    if normalize_name(name) not in known[group]:
+     missing.append({"name":name,"expectedPositionGroup":group})
+ result["diagnostic"]["notOnCurrentRosterInExpectedPosition"]=missing
+ result["diagnostic"]["rosterPlayerCounts"]={k:len(v) for k,v in known.items()}
+ if (result["status"]=="parsed_unverified_do_not_publish"
+     and all(known.values()) and not missing):
   result["status"]="roster_validated_source_permission_pending"
   result["diagnostic"]["needsRosterValidation"]=False
  return result
