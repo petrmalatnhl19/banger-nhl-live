@@ -58,11 +58,11 @@ def probe(name, url):
         }
         # Structural hints only; never publish unverified goalie predictions.
         result["statusOccurrencesHtml"] = {
-            label: len(re.findall(r"\\b" + label + r"\\b", page, re.I))
+            label: len(re.findall(r"\b" + label + r"\b", page, re.I))
             for label in ("Confirmed", "Expected", "Projected", "Unknown", "Likely")
         }
         result["statusOccurrencesText"] = {
-            label: len(re.findall(r"\\b" + label + r"\\b", text, re.I))
+            label: len(re.findall(r"\b" + label + r"\b", text, re.I))
             for label in ("Confirmed", "Expected", "Projected", "Unknown", "Likely")
         }
         result["htmlMarkers"] = {
@@ -71,7 +71,7 @@ def probe(name, url):
         }
         result["statusContexts"] = {}
         for label in ("Confirmed", "Expected", "Projected", "Unknown"):
-            match = re.search(r"\\b" + label + r"\\b", text, re.I)
+            match = re.search(r"\b" + label + r"\b", text, re.I)
             if match:
                 result["statusContexts"][label] = text[max(0, match.start()-75):match.end()+75]
         result["ok"] = result["httpStatus"] == 200
