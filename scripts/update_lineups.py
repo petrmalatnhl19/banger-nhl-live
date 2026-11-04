@@ -203,7 +203,7 @@ for name,team in teams.items():
   # Explain rejected lines without weakening roster validation.
   if name in source_diagnostics:
    rejected=[]
-   for role,rows,allowed in (("forwards",original_forwards,groups["forwards"]),("defense",original_defense,groups["defensemen"])):
+   for role,rows,allowed in (("forwards",original_forwards,groups["forwards"]),("defense",original_defense,groups["defense"])):
     for index,row in enumerate(rows,1):
      missing=[player for player in row if normalize(player) not in allowed]
      if missing:
