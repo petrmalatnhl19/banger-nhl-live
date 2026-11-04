@@ -127,7 +127,7 @@ for direct_url in DIRECT_PREVIEWS:
 # article with its own publication timestamp and complete projected lines.
 TEAM_SLUGS={"ANA":"anaheim-ducks","BOS":"boston-bruins","BUF":"buffalo-sabres","CAR":"carolina-hurricanes","CBJ":"columbus-blue-jackets","CGY":"calgary-flames","CHI":"chicago-blackhawks","COL":"colorado-avalanche","DAL":"dallas-stars","DET":"detroit-red-wings","EDM":"edmonton-oilers","FLA":"florida-panthers","LAK":"los-angeles-kings","MIN":"minnesota-wild","MTL":"montreal-canadiens","NJD":"new-jersey-devils","NSH":"nashville-predators","NYI":"new-york-islanders","NYR":"new-york-rangers","OTT":"ottawa-senators","PHI":"philadelphia-flyers","PIT":"pittsburgh-penguins","SEA":"seattle-kraken","SJS":"san-jose-sharks","STL":"st-louis-blues","TBL":"tampa-bay-lightning","TOR":"toronto-maple-leafs","UTA":"utah-mammoth","VAN":"vancouver-canucks","VGK":"vegas-golden-knights","WPG":"winnipeg-jets","WSH":"washington-capitals"}
 DISCOVERY_TARGETS={"BOS","NYI","OTT"}
-schedule_discovery={"checked":0,"articlesFound":0,"errors":[],"fixtures":[],"attempts":[]}
+schedule_discovery={"checked":0,"articlesFound":0,"errors":[],"fixtures":[],"attempts":[],"note":"Only today and tomorrow are checked; future matchup preview URLs are not assumed published."}
 today=datetime.datetime.now(datetime.timezone.utc).date()
 schedule_games=set()
 for offset in (-1,0,1,2):
@@ -140,7 +140,7 @@ for offset in (-1,0,1,2):
     away=game.get("awayTeam",{}).get("abbrev")
     home=game.get("homeTeam",{}).get("abbrev")
     day=game.get("gameDate") or week.get("date")
-    if away in TEAM_SLUGS and home in TEAM_SLUGS and (away in DISCOVERY_TARGETS or home in DISCOVERY_TARGETS) and day:
+    if away in TEAM_SLUGS and home in TEAM_SLUGS and (away in DISCOVERY_TARGETS or home in DISCOVERY_TARGETS) and day and day <= (today+datetime.timedelta(days=1)).isoformat():
      schedule_games.add((day,away,home))
  except Exception as err:schedule_discovery["errors"].append("schedule "+date.isoformat()+": "+str(err)[:120])
 schedule_discovery["fixtures"]=[{"date":d,"away":a,"home":h} for d,a,h in sorted(schedule_games)]
