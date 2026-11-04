@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T20:44:36.848571+00:00",
+  "generatedAt": "2026-11-04T20:47:51.360049+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -66,13 +66,36 @@
     },
     "islanders": {
       "team": "NYI",
-      "candidateFound": false,
-      "candidateSource": null,
-      "candidatePublishedAt": null,
-      "candidateForwardLines": 0,
-      "candidateDefensePairs": 0,
-      "rosterValidation": "no_complete_source_candidate",
-      "accepted": false
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/edmonton-oilers-new-york-islanders-game-preview-october-31-2026",
+      "candidatePublishedAt": "2026-10-30T15:11:41.242000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [
+        {
+          "group": "defense",
+          "line": 3,
+          "players": [
+            "Matt Kessel"
+          ],
+          "sourceLine": [
+            "Matt Kessel",
+            "Scott Mayfield"
+          ]
+        }
+      ],
+      "rejectedPlayerReasons": [
+        {
+          "name": "Matt Kessel",
+          "expectedRole": "defense",
+          "reason": "not_in_current_roster"
+        }
+      ],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 2,
+      "accepted": true
     },
     "rangers": {
       "team": "NYR",

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T20:44:37.363583+00:00",
+  "generatedAt": "2026-11-04T20:47:51.894518+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
   "currentProjections": 29,
@@ -168,11 +168,12 @@
     "islanders": {
       "hasProjectedLines": true,
       "sources": [
+        "automatic",
         "archive"
       ],
       "currentProjection": false,
-      "publishedAt": null,
-      "source": null,
+      "publishedAt": "2026-10-30T15:11:41.242000+00:00",
+      "source": "https://www.nhl.com/news/edmonton-oilers-new-york-islanders-game-preview-october-31-2026",
       "needsFreshProjection": true
     },
     "jets": {
