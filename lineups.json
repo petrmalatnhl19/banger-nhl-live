@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-04T18:54:37.508784+00:00",
+  "fetchedAt": "2026-11-04T19:16:04.846760+00:00",
   "teams": {
     "sabres": {
       "name": "Sabres",
@@ -45,7 +45,9 @@
         "Ukko-Pekka Luukkonen"
       ],
       "injured": "Konsta Helenius (upper body), Jiri Kulich (concussion protocol), Justin Danforth (upper body), Matt Grzelcyk (lower body), Alex Lyon (upper body), Conor Timmins (lower body)",
-      "scratched": "None"
+      "scratched": "None",
+      "source": "https://www.nhl.com/news/ottawa-senators-buffalo-sabres-game-preview-november-4-2026",
+      "publishedAt": "2026-11-04T17:37:08.585000+00:00"
     },
     "blackhawks": {
       "name": "Blackhawks",
@@ -90,7 +92,9 @@
         "Arvid Soderblom"
       ],
       "injured": "Bowen Byram (upper body), Patrick Kane (upper body)",
-      "scratched": "Kevin Korchinski, Andrew Mangiapane"
+      "scratched": "Kevin Korchinski, Andrew Mangiapane",
+      "source": "https://www.nhl.com/news/chicago-blackhawks-florida-panthers-game-preview-november-4-2026",
+      "publishedAt": "2026-11-04T18:35:21.038000+00:00"
     },
     "panthers": {
       "name": "Panthers",
@@ -135,7 +139,9 @@
         "Akira Schmid"
       ],
       "injured": "Aleksander Barkov (knee), Brad Marchand (knee), Jonah Gadjovich (neck)",
-      "scratched": "Radko Gudas, Cole Reinhardt"
+      "scratched": "Radko Gudas, Cole Reinhardt",
+      "source": "https://www.nhl.com/news/chicago-blackhawks-florida-panthers-game-preview-november-4-2026",
+      "publishedAt": "2026-11-04T18:35:21.038000+00:00"
     },
     "ducks": {
       "name": "Ducks",
