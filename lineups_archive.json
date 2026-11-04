@@ -1307,6 +1307,156 @@
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
+    },
+    "jets": {
+      "name": "Jets",
+      "forwards": [
+        [
+          "Kyle Connor",
+          "Mark Scheifele",
+          "Gabriel Vilardi"
+        ],
+        [
+          "Cole Perfetti",
+          "Adam Lowry",
+          "Dawson Mercer"
+        ],
+        [
+          "Alex Iafallo",
+          "Morgan Barron",
+          "Viggo Bjorck"
+        ],
+        [
+          "Nino Niederreiter",
+          "Isak Rosen"
+        ],
+        [
+          "Cole Koepke",
+          "Tyrel Bauer"
+        ]
+      ],
+      "defense": [
+        [
+          "Dylan Samberg",
+          "Neal Pionk"
+        ],
+        [
+          "Mario Ferraro",
+          "Dylan DeMelo"
+        ],
+        [
+          "Haydn Fleury",
+          "Elias Salomonsson"
+        ]
+      ],
+      "goalies": [
+        "Stuart Skinner",
+        "Clay Stevenson"
+      ],
+      "injured": "Garrett Brown, Josh Morrissey, Nick Bjugstad, Vladislav Namestnikov",
+      "scratched": "Nico Daws, Brad Lambert, Cole Koepke",
+      "asOf": "2026-11-03",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "sourceLabel": "NHL.com",
+      "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
+    },
+    "rangers": {
+      "name": "Rangers",
+      "forwards": [
+        [
+          "Pavel Dorofeyev",
+          "Mika Zibanejad",
+          "Alexis Lafreniere"
+        ],
+        [
+          "Tye Kartye",
+          "J.T. Miller",
+          "Gabe Perreault"
+        ],
+        [
+          "Eeli Tolvanen",
+          "Will Cuylle",
+          "Oliver Bjorkstrand"
+        ],
+        [
+          "Jaroslav Chmelar",
+          "Noah Laba",
+          "Matt Rempe"
+        ]
+      ],
+      "defense": [
+        [
+          "Vladislav Gavrikov",
+          "Adam Fox"
+        ],
+        [
+          "Marcus Pettersson",
+          "Braden Schneider"
+        ],
+        [
+          "Alberts Smits",
+          "Scott Morrow"
+        ]
+      ],
+      "goalies": [
+        "Dylan Garand",
+        "James Reimer"
+      ],
+      "injured": "Igor Shesterkin, Joonas Korpisalo, Joseph Veleno, Sean Durzi",
+      "scratched": "Luke Glendenning, Matthew Robertson",
+      "asOf": "2026-11-03",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "sourceLabel": "NHL.com",
+      "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
+    },
+    "hurricanes": {
+      "name": "Hurricanes",
+      "forwards": [
+        [
+          "William Carrier",
+          "Sebastian Aho",
+          "Andrei Svechnikov"
+        ],
+        [
+          "Nikolaj Ehlers",
+          "Logan Stankoven",
+          "Jackson Blake"
+        ],
+        [
+          "Jordan Martinook",
+          "Mark Jankowski",
+          "Seth Jarvis"
+        ],
+        [
+          "Eric Robinson",
+          "Jesperi Kotkaniemi",
+          "Nicolas Deslauriers"
+        ]
+      ],
+      "defense": [
+        [
+          "Jacob Slavin",
+          "Jalen Chatfield"
+        ],
+        [
+          "K'Andre Miller",
+          "Sean Walker"
+        ],
+        [
+          "Shayne Gostisbehere",
+          "Juuso Valimaki"
+        ]
+      ],
+      "goalies": [
+        "Pyotr Kochetkov",
+        "Brandon Bussi"
+      ],
+      "injured": "Jordan Staal, Taylor Hall",
+      "scratched": "Mike Reilly",
+      "asOf": "2026-11-03",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "sourceLabel": "NHL.com",
+      "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
     }
   }
 }
