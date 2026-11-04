@@ -189,7 +189,9 @@ for name,team in teams.items():
    groups[role]={normalize(str((p.get("firstName",{}).get("default","") if isinstance(p.get("firstName"),dict) else p.get("firstName","")))+" "+str((p.get("lastName",{}).get("default","") if isinstance(p.get("lastName"),dict) else p.get("lastName","")))) for p in roster.get(group,[])}
   # Classify each parsed row by NHL roster position, not by its order in HTML.
   # An unrelated two-name line must never become a defensive pair.
-  all_rows=team.get("forwards",[])+team.get("defense",[])
+  original_forwards=[list(row) for row in team.get("forwards",[])]
+  original_defense=[list(row) for row in team.get("defense",[])]
+  all_rows=original_forwards+original_defense
   forwards=[row for row in all_rows if len(row)==3 and all(normalize(x) in groups["forwards"] for x in row)]
   defense=[row for row in all_rows if len(row)==2 and all(normalize(x) in groups["defense"] for x in row)]
   goalies=[x for x in team.get("goalies",[]) if normalize(x) in groups["goalies"]]
@@ -201,7 +203,7 @@ for name,team in teams.items():
   # Explain rejected lines without weakening roster validation.
   if name in source_diagnostics:
    rejected=[]
-   for role,rows,allowed in (("forwards",team.get("forwards",[]),groups["forwards"]),("defense",team.get("defense",[]),groups["defense"])):
+   for role,rows,allowed in (("forwards",original_forwards,groups["forwards"]),("defense",original_defense,groups["defensemen"])):
     for index,row in enumerate(rows,1):
      missing=[player for player in row if normalize(player) not in allowed]
      if missing:
