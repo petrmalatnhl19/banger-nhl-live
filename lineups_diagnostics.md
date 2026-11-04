@@ -1,6 +1,6 @@
 # NHL projection diagnostics
 
-Generated (UTC): 2026-11-04T21:03:58.589076+00:00
+Generated (UTC): 2026-11-04T21:04:44.672757+00:00
 
 Fresh: 29/32
 
