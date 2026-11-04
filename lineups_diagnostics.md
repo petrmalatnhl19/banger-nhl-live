@@ -1,8 +1,11 @@
 # NHL projection diagnostics
 
-Generated (UTC): 2026-11-04T21:04:44.672757+00:00
+Generated (UTC): 2026-11-04T21:25:01.327074+00:00
 
-Fresh: 29/32
+Available (including historical): 32/32
+Recent verified (source published within 36h): 29/32
+
+> Recent does not mean confirmed for the next game.
 
 - BOS: SOURCE PUBLICATION OLDER THAN 36 HOURS OR FUTURE-DATED; reason=passed; candidate=True; verified lines=4F/3D; publishedAt=2026-11-02T19:13:32.938000+00:00; source=https://www.nhl.com/news/vegas-golden-knights-boston-bruins-game-preview-november-2-2026; archive=yes
 - CAR: FRESH; reason=passed; candidate=True; verified lines=4F/2D; publishedAt=2026-11-03T18:45:28.353000+00:00; source=https://www.nhl.com/news/carolina-hurricanes-nashville-predators-game-preview-november-3-2026; archive=yes
