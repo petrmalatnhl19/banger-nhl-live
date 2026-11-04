@@ -159,6 +159,17 @@ for key,slug in SLUGS.items():
   if len(fw)>=3 and len(df)>=2:
    teams[key]={"name":key.title(),"forwards":fw,"defense":df,"goalies":[],"injured":"","scratched":"","powerplay":pp,"source":url,"sourceType":"secondary"}
  except Exception as err:print("Secondary unavailable",key,str(err))
+# Diagnostic: distinguish source discovery failures from roster validation failures.
+FOCUS={"bruins":"BOS","hurricanes":"CAR","kings":"LAK","islanders":"NYI","rangers":"NYR","senators":"OTT","sharks":"SJS","jets":"WPG"}
+source_diagnostics={}
+for key,abbr in FOCUS.items():
+ candidate=teams.get(key)
+ source_diagnostics[key]={"team":abbr,"candidateFound":bool(candidate),
+  "candidateSource":candidate.get("source") if candidate else None,
+  "candidatePublishedAt":candidate.get("publishedAt") if candidate else None,
+  "candidateForwardLines":len(candidate.get("forwards",[])) if candidate else 0,
+  "candidateDefensePairs":len(candidate.get("defense",[])) if candidate else 0,
+  "rosterValidation":"not_run" if candidate else "no_complete_source_candidate"}
 validated={}
 for name,team in teams.items():
  abbr=TEAM_ABBREVS.get(name)
@@ -192,11 +203,22 @@ for name,team in teams.items():
   goalies_ok=True
   if not forwards_ok or not defense_ok:
    print("Incomplete verified lines",name,"forwards",len(forwards),"defense",len(defense))
+  if name in source_diagnostics:
+   source_diagnostics[name]["validatedForwardLines"]=len(forwards)
+   source_diagnostics[name]["validatedDefensePairs"]=len(defense)
+   source_diagnostics[name]["rosterValidation"]="passed" if forwards_ok and defense_ok else "insufficient_position_matched_lines"
   if forwards_ok and defense_ok and goalies_ok:
    validated[name]=team
   else:print("Skipped",name,"invalid position assignment (F/D/G)")
- except Exception as e:print("Roster validation unavailable for",name,str(e))
+ except Exception as e:
+  if name in source_diagnostics:source_diagnostics[name]["rosterValidation"]="roster_api_unavailable";source_diagnostics[name]["error"]=str(e)[:160]
+  print("Roster validation unavailable for",name,str(e))
 teams=validated
+for key,entry in source_diagnostics.items():
+ entry["accepted"]=key in teams
+with open("lineups_source_diagnostics.json","w",encoding="utf-8") as diagnostic_file:
+ json.dump({"generatedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"teams":source_diagnostics},diagnostic_file,ensure_ascii=False,indent=2)
+print("SOURCE DIAGNOSTICS:",json.dumps(source_diagnostics,ensure_ascii=False))
 if len(teams)<1:raise SystemExit("No validated projections; retaining previous data")
 # Keep a dated archive of validated projections for teams not featured today.
 # Historical records remain explicitly labelled and are never promoted to today's projection.
