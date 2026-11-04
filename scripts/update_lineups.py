@@ -122,6 +122,41 @@ for direct_url in DIRECT_PREVIEWS:
     teams[key]=value
  except Exception as err:print("Direct NHL preview unavailable",direct_url,str(err))
 
+# Schedule-driven discovery: build game-preview URLs from actual NHL fixtures.
+# Never infer that an article exists: parse_preview must fetch a real NHL.com
+# article with its own publication timestamp and complete projected lines.
+TEAM_SLUGS={"ANA":"anaheim-ducks","BOS":"boston-bruins","BUF":"buffalo-sabres","CAR":"carolina-hurricanes","CBJ":"columbus-blue-jackets","CGY":"calgary-flames","CHI":"chicago-blackhawks","COL":"colorado-avalanche","DAL":"dallas-stars","DET":"detroit-red-wings","EDM":"edmonton-oilers","FLA":"florida-panthers","LAK":"los-angeles-kings","MIN":"minnesota-wild","MTL":"montreal-canadiens","NJD":"new-jersey-devils","NSH":"nashville-predators","NYI":"new-york-islanders","NYR":"new-york-rangers","OTT":"ottawa-senators","PHI":"philadelphia-flyers","PIT":"pittsburgh-penguins","SEA":"seattle-kraken","SJS":"san-jose-sharks","STL":"st-louis-blues","TBL":"tampa-bay-lightning","TOR":"toronto-maple-leafs","UTA":"utah-mammoth","VAN":"vancouver-canucks","VGK":"vegas-golden-knights","WPG":"winnipeg-jets","WSH":"washington-capitals"}
+DISCOVERY_TARGETS={"BOS","NYI","OTT"}
+schedule_discovery={"checked":0,"articlesFound":0,"errors":[]}
+today=datetime.datetime.now(datetime.timezone.utc).date()
+schedule_games=set()
+for offset in (-1,0,1,2):
+ date=today+datetime.timedelta(days=offset)
+ try:
+  request=urllib.request.Request("https://api-web.nhle.com/v1/schedule/"+date.isoformat(),headers={"User-Agent":"BangerNHL/1.0"})
+  with urllib.request.urlopen(request,timeout=12) as resp:schedule=json.load(resp)
+  for week in schedule.get("gameWeek",[]):
+   for game in week.get("games",[]):
+    away=game.get("awayTeam",{}).get("abbrev")
+    home=game.get("homeTeam",{}).get("abbrev")
+    day=game.get("gameDate") or week.get("date")
+    if away in TEAM_SLUGS and home in TEAM_SLUGS and (away in DISCOVERY_TARGETS or home in DISCOVERY_TARGETS) and day:
+     schedule_games.add((day,away,home))
+ except Exception as err:schedule_discovery["errors"].append("schedule "+date.isoformat()+": "+str(err)[:120])
+for day,away,home in sorted(schedule_games):
+ try:date_label=datetime.date.fromisoformat(day).strftime("%B-%-d-%Y").lower()
+ except (ValueError,TypeError):continue
+ for first,second in ((away,home),(home,away)):
+  url="https://www.nhl.com/news/"+TEAM_SLUGS[first]+"-"+TEAM_SLUGS[second]+"-game-preview-"+date_label
+  schedule_discovery["checked"]+=1
+  try:
+   discovered=parse_preview(url)
+   if discovered:schedule_discovery["articlesFound"]+=1
+   for key,value in discovered.items():
+    if key not in teams or (value.get("publishedAt") and value["publishedAt"]>str(teams[key].get("publishedAt") or "")):
+     teams[key]=value
+  except Exception:pass # A guessed URL is not evidence an article exists.
+print("Schedule-driven preview discovery",json.dumps(schedule_discovery))
 # Secondary source: dedicated per-team line combinations. A lineup is kept only
 # when enough players match the NHL roster (validation below).
 SLUGS={"mammoth":"utah-mammoth","maple leafs":"toronto-maple-leafs","stars":"dallas-stars","jets":"winnipeg-jets","canadiens":"montreal-canadiens","oilers":"edmonton-oilers","hurricanes":"carolina-hurricanes","capitals":"washington-capitals","wild":"minnesota-wild","predators":"nashville-predators","devils":"new-jersey-devils","rangers":"new-york-rangers","blues":"st-louis-blues","flyers":"philadelphia-flyers","ducks":"anaheim-ducks","canucks":"vancouver-canucks","lightning":"tampa-bay-lightning","penguins":"pittsburgh-penguins","blue jackets":"columbus-blue-jackets","kings":"los-angeles-kings","islanders":"new-york-islanders","senators":"ottawa-senators","sabres":"buffalo-sabres","kraken":"seattle-kraken"}
