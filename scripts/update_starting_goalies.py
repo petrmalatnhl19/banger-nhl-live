@@ -20,6 +20,8 @@ def main():
  with open("nhl_rosters.json",encoding="utf-8") as f:rosters=json.load(f).get("teams",{})
  today=datetime.datetime.now(datetime.timezone.utc).date().isoformat()
  records={}
+ conflicts=[]
+ source_errors=[]
  try:
   req=urllib.request.Request(SOURCE,headers={"User-Agent":"Mozilla/5.0","Accept":"text/html"})
   with urllib.request.urlopen(req,timeout=20) as r:page=r.read().decode("utf-8","replace")
@@ -47,6 +49,7 @@ def main():
     records[abbr]={"name":line,"status":status,"date":today,"source":SOURCE,"sourceLabel":"The Morning Puck","checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat()}
     break
  except Exception as err:
+  source_errors.append("specialist: "+type(err).__name__+": "+str(err)[:160])
   print("Specialist source failed; using NHL fallback:",type(err).__name__,str(err)[:160])
  # Supplement the specialist feed with NHL.com's own dated projected lineups.
  # Only use a source article published recently AND a team scheduled today.
@@ -65,7 +68,6 @@ def main():
   with open("lineups.json",encoding="utf-8") as lineup_file:lineups=json.load(lineup_file).get("teams",{})
   records={abbr:entry for abbr,entry in records.items() if abbr in playing}
   for abbr in playing:
-   if abbr in records:continue
    key=ABBR[abbr]
    lineup=lineups.get(key,{})
    stamp=lineup.get("publishedAt")
@@ -79,9 +81,17 @@ def main():
    if not candidates:continue
    name=candidates[0]
    if normalize(name) not in {normalize(g) for g in rosters.get(key,{}).get("goalies",[])}:continue
-   records[abbr]={"name":name,"status":"projected","date":today,"source":lineup["source"],"sourceLabel":"NHL.com projected lineup","checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"evidence":"first_listed_goalie","sourcePublishedAt":stamp}
- except Exception as err:print("NHL lineup goalie fallback unavailable:",type(err).__name__,str(err)[:160])
- with open("starting_goalies.json","w",encoding="utf-8") as f:json.dump({"date":today,"updatedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"teams":records},f,ensure_ascii=False,indent=2)
+   nhl_entry={"name":name,"status":"projected","date":today,"source":lineup["source"],"sourceLabel":"NHL.com projected lineup","checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"evidence":"first_listed_goalie","sourcePublishedAt":stamp}
+   old=records.get(abbr)
+   if old and normalize(old["name"])!=normalize(name):
+    conflicts.append({"team":abbr,"specialist":old["name"],"nhl":name,"nhlSource":lineup["source"]})
+    # Contradictory evidence is not a reliable starter prediction.
+    records.pop(abbr,None)
+   elif not old:records[abbr]=nhl_entry
+ except Exception as err:
+  source_errors.append("NHL fallback: "+type(err).__name__+": "+str(err)[:160])
+  print("NHL lineup goalie fallback unavailable:",type(err).__name__,str(err)[:160])
+ with open("starting_goalies.json","w",encoding="utf-8") as f:json.dump({"date":today,"updatedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"teams":records,"conflicts":conflicts,"sourceErrors":source_errors,"status":"partial" if source_errors else "ok"},f,ensure_ascii=False,indent=2)
  print("Game-day goalie projections:",len(records))
 if __name__=="__main__":
  try:
