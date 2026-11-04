@@ -48,14 +48,32 @@ def probe(name, url):
         page = raw.decode("utf-8", "replace")
         parser = Text()
         parser.feed(page)
-        text = re.sub(r"\\s+", " ", " ".join(parser.parts))
+        text = re.sub(r"\s+", " ", " ".join(parser.parts))
         result["bytes"] = len(raw)
         result["visibleTextLength"] = len(text)
         result["hasGoalieTerms"] = bool(re.search(r"starting goalies|projected.*goalie", text, re.I))
         result["hasStatusLabels"] = {
-            label: bool(re.search(r"\\b" + label + r"\\b", text, re.I))
+            label: bool(re.search(r"\b" + label + r"\b", text, re.I))
             for label in ("Confirmed", "Expected", "Projected", "Unknown")
         }
+        # Structural hints only; never publish unverified goalie predictions.
+        result["statusOccurrencesHtml"] = {
+            label: len(re.findall(r"\\b" + label + r"\\b", page, re.I))
+            for label in ("Confirmed", "Expected", "Projected", "Unknown", "Likely")
+        }
+        result["statusOccurrencesText"] = {
+            label: len(re.findall(r"\\b" + label + r"\\b", text, re.I))
+            for label in ("Confirmed", "Expected", "Projected", "Unknown", "Likely")
+        }
+        result["htmlMarkers"] = {
+            marker: marker.lower() in page.lower()
+            for marker in ("__NEXT_DATA__", "application/ld+json", "starting-goalies", "goalie-card", "data-status", "iframe")
+        }
+        result["statusContexts"] = {}
+        for label in ("Confirmed", "Expected", "Projected", "Unknown"):
+            match = re.search(r"\\b" + label + r"\\b", text, re.I)
+            if match:
+                result["statusContexts"][label] = text[max(0, match.start()-75):match.end()+75]
         result["ok"] = result["httpStatus"] == 200
         result["note"] = "Availability only; labels may be explanations, not game records."
     except (urllib.error.URLError, TimeoutError, ValueError, OSError) as error:
