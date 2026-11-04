@@ -1,0 +1,60 @@
+name: Check live Daily Faceoff (manual only)
+on:
+  workflow_dispatch:
+    inputs:
+      team:
+        description: 'NHL team code (e.g. OTT, DAL)'
+        required: true
+        default: 'OTT'
+        type: choice
+        options:
+          - OTT
+          - DAL
+          - BOS
+          - NYR
+permissions:
+  contents: read
+jobs:
+  live-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check syntax and offline parser
+        run: |
+          python -m py_compile scripts/experimental_dailyfaceoff.py
+          python -m unittest discover -s scripts -p 'test_experimental_dailyfaceoff.py' -v
+      - name: Attempt one live source read and NHL roster validation
+        id: preview
+        continue-on-error: true
+        env:
+          TEAM: ${{ inputs.team }}
+        run: |
+          python scripts/experimental_dailyfaceoff.py --team "$TEAM" --validate-roster --output dailyfaceoff_preview.json
+      - name: Print diagnostic summary
+        if: steps.preview.outcome == 'success'
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open('dailyfaceoff_preview.json',encoding='utf-8'))
+          print('Team:',p['team'])
+          print('Source:',p['source'])
+          print('Status:',p['status'])
+          print('Forward lines:',len(p['forwards']))
+          print('Defense pairs:',len(p['defense']))
+          print('Goalies:',len(p['goalies']))
+          print('Diagnostic:',json.dumps(p['diagnostic'],ensure_ascii=False))
+          PY
+      - name: Upload preview for inspection (not production data)
+        if: steps.preview.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: dailyfaceoff-preview-${{ inputs.team }}
+          path: dailyfaceoff_preview.json
+          retention-days: 3
+      - name: Report blocked or failed source
+        if: steps.preview.outcome == 'failure'
+        run: echo "::warning::Live Daily Faceoff read failed or was blocked; no production data changed."
