@@ -892,6 +892,23 @@ async function analyzeGame(id){
    updated++;
   }
   if(!root.isConnected)return 'Kontrola předpovědí přerušena.';
+  const pending=records.filter(x=>x.status==='pending'&&x.id!==gameId&&x.day<=new Date().toISOString().slice(0,10)).slice(0,8);
+  const refreshed=await Promise.all(pending.map(async row=>{
+   const result=await safe(()=>get('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(row.id)+'/landing'),4500);
+   return {row,data:result.ok?result.data:null};
+  }));
+  let updated=0;
+  for(const {row,data:game} of refreshed){
+   if(!game||!['OFF','FINAL'].includes(String(game.gameState||'')))continue;
+   if(!Number.isFinite(Number(game.awayTeam?.score))||!Number.isFinite(Number(game.homeTeam?.score)))continue;
+   if(String(game.awayTeam?.abbrev)!==row.ac||String(game.homeTeam?.abbrev)!==row.hc)continue;
+   row.status='final';row.actualAway=Number(game.awayTeam.score);row.actualHome=Number(game.homeTeam.score);
+   row.goalError=Math.abs(row.away-row.actualAway)+Math.abs(row.home-row.actualHome);
+   const diff=row.away-row.home,actual=row.actualAway-row.actualHome;
+   row.correctSide=Math.abs(diff)<.001||actual===0?null:Math.sign(diff)===Math.sign(actual);
+   updated++;
+  }
+  if(!root.isConnected)return 'Kontrola předpovědí přerušena.';
   records=records.slice(-150);
   try{localStorage.setItem(key,JSON.stringify(records))}catch(e){}
   const finished=records.filter(x=>x.status==='final');
@@ -937,6 +954,7 @@ async function analyzeGame(id){
   return caution+'Sezonní základ '+clean(ac)+' '+fmt(baseAway)+', '+clean(hc)+' '+fmt(baseHome)+'. Po korekcích '+clean(ac)+' '+fmt(m.away)+', '+clean(hc)+' '+fmt(m.home)+'. Změna oproti základu: '+clean(ac)+' '+fmt(m.away-baseAway)+', '+clean(hc)+' '+fmt(m.home-baseHome)+' gólu. Výsledek je orientační, bez zpětného ověření přesnosti. Chybějící statistiky se nenahrazují odhady.';
  })());
  section('Vzájemné zápasy',bangerH2HReport());
+
 
 
 
@@ -994,7 +1012,29 @@ async function analyzeGame(id){
  section('Možný průběh po třetinách','V úvodní třetině může rozhodnout disciplinovanost a první proměněné šance. Ve druhé části se mohou projevit rozdíly v útočné produktivitě a hloubce sestavy, kterou ale dostupná data plně neměří. Ve třetí třetině by tým ztrácející gól mohl zvýšit útočné riziko. Jde o obecné podmíněné scénáře, nikoli o znalost konkrétní taktiky.');
  section('Závěrečný pohled',completeSeason?'Podle sezónních gólových průměrů '+(Math.abs((af+ha)-(hf+aa))<0.4?'nelze jednoznačně zvýhodnit jeden tým.':'má mírnou výhodu '+clean((af+ha)>(hf+aa)?ac:hc)+'.')+' Největší nejistotou zůstávají skutečné sestavy, speciální týmy a výkon brankářů. Textový rozbor vysvětluje dostupné statistiky, ale sám o sobě nezvyšuje přesnost pravděpodobnostního modelu.':'Kvůli neúplným sezónním datům nelze odpovědně určit favorita.');
  const expert='<details class="analyst-fold analyst-expert-report" open><summary>📝 BANGER EXPERT REPORT <small>Podrobná česká analýza</small></summary><div class="analyst-fold-body"><p class="analysis-small">Automatický datový rozbor · '+clean(ac)+' vs '+clean(hc)+' · '+clean(day)+'</p>'+expertGoalieSection+narrative.join('')+'<p class="analysis-small">Založeno na dostupných NHL datech. Nejde o generativní AI, kalibrovanou predikci ani potvrzené informace o sestavách.</p></div></details>';
- if(extraRoot&&extraRoot.isConnected)extraRoot.insertAdjacentHTML('afterbegin',expert);
+ if(extraRoot&&extraRoot.isConnected){
+  extraRoot.insertAdjacentHTML('afterbegin',expert);
+  let saved=[];
+  try{const parsed=JSON.parse(localStorage.getItem('banger-prediction-tracker-v1')||'[]');if(Array.isArray(parsed))saved=parsed.filter(x=>x&&x.id&&Number.isFinite(x.away)&&Number.isFinite(x.home)).slice(-150)}catch(e){}
+  const evaluated=saved.filter(x=>x.status==='final');
+  const rated=evaluated.filter(x=>typeof x.correctSide==='boolean');
+  const successes=rated.filter(x=>x.correctSide).length;
+  const avgErr=evaluated.length?evaluated.reduce((sum,x)=>sum+(Number(x.goalError)||0),0)/evaluated.length:null;
+  const pendingCount=saved.filter(x=>x.status==='pending').length;
+  const trackerRows=saved.slice().sort((a,b)=>String(b.day).localeCompare(String(a.day))).slice(0,30).map(x=>{
+   const done=x.status==='final';
+   const actual=done?' · skutečně '+clean(x.actualAway)+' : '+clean(x.actualHome):'';
+   const statusText=done?'Vyhodnoceno':'Čeká na výsledek';
+   return '<tr><td>'+clean(x.day)+'</td><td>'+clean(x.ac)+' – '+clean(x.hc)+'</td><td>'+fmt(x.away)+' : '+fmt(x.home)+actual+'</td><td>'+statusText+'</td></tr>';
+  }).join('');
+  const trackerPanel='<details class="analyst-fold analyst-tracker-panel" open><summary>📊 BANGER PREDICTION TRACKER <small>Historie předpovědí</small></summary><div class="analyst-fold-body">'+
+   '<p><b>'+saved.length+'</b> uložených · <b>'+evaluated.length+'</b> vyhodnocených · <b>'+pendingCount+'</b> čekajících</p>'+
+   '<p>Úspěšnost směru gólové převahy: '+(rated.length?successes+' / '+rated.length+' ('+fmt(100*successes/rated.length)+' %)':'zatím bez vyhodnocených srovnatelných zápasů')+'.'+(avgErr===null?'':' Průměrná absolutní odchylka obou skóre: '+fmt(avgErr)+' gólu.')+'</p>'+
+   (trackerRows?'<div style="overflow-x:auto"><table style="width:100%;font-size:12px;text-align:left;border-spacing:8px"><thead><tr><th>Datum</th><th>Zápas</th><th>Predikce / výsledek</th><th>Stav</th></tr></thead><tbody>'+trackerRows+'</tbody></table></div>':'<p>Historie je zatím prázdná. Otevři Analyst nadcházejícího zápasu, aby se uložila první predikce.</p>')+
+   '<p class="analysis-small">Zobrazeno nejvýše 30 posledních záznamů. Data jsou uložena jen v tomto prohlížeči; nejsou synchronizována mezi zařízeními. Predikce se neukládají zpětně.</p></div></details>';
+  extraRoot.insertAdjacentHTML('afterbegin',trackerPanel);
+ }
+
  const diag=Array.from(card.querySelectorAll('details')).find(el=>el.querySelector('summary')?.textContent.includes('Diagnostika dat'));
  if(diag){const tmp=document.createElement('div');tmp.innerHTML=diagnostics();diag.replaceWith(tmp.firstElementChild)}
 }
