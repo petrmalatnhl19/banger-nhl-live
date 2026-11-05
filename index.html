@@ -671,14 +671,26 @@ async function analyzeGame(id){
   const expectedAway=seasonGoals?Math.max(.4,Math.min(6,(af+ha)/2)):null;
   const expectedHome=seasonGoals?Math.max(.4,Math.min(6,(hf+aa)/2)):null;
   const total=expectedAway!=null?expectedAway+expectedHome:null;
+  const poissonTail=(lambda,threshold)=>{
+   let probability=0,term=Math.exp(-lambda);
+   for(let n=0;n<threshold;n++){probability+=term;term*=lambda/(n+1)}
+   return Math.max(0,Math.min(1,1-probability));
+  };
+  const goalChances=total!=null?
+   'Podle nezávislého Poissonova modelu je pravděpodobnost alespoň pěti gólů '+fmt(100*poissonTail(total,5))+' procent a alespoň šesti gólů '+fmt(100*poissonTail(total,6))+' procent. Jde o nekalibrované modelové odhady, nikoli jistotu. ':'';
   const expectedGoals=total!=null?'Zjednodušený sezonní model očekává přibližně '+fmt(total)+' gólu celkem, z toho '+fmt(expectedAway)+' pro '+clean(ac)+' a '+fmt(expectedHome)+' pro '+clean(hc)+'.':'Odhad počtu gólů zatím není dostupný.';
   const favorite=expectedAway==null?'Favorita zatím nelze určit.':Math.abs(expectedAway-expectedHome)<.35?'Gólové profily naznačují vyrovnaný zápas.':'Gólové profily mírně zvýhodňují '+clean(expectedAway>expectedHome?ac:hc)+'.';
   const a=skaters[0],h=skaters[1];
   const shots=a?.shots>0&&h?.shots>0?'V posledním dostupném utkání zaznamenal '+clean(ac)+' '+a.shots+' střel hráčů na branku a '+clean(hc)+' '+h.shots+'. Jde o minulý výkon, nikoli predikci počtu střel.':'Pro spolehlivou predikci počtu střel chybí sezonní střelecké průměry obou týmů.';
   const physical=a&&h&&Number.isFinite(a.hits)&&Number.isFinite(h.hits)?'V posledním dostupném utkání zaznamenal '+clean(ac)+' '+a.hits+' hitů a '+clean(hc)+' '+h.hits+' hitů. Z jednoho utkání nelze určit, zda příští zápas bude tvrdý.':'Tvrdost zápasu zatím nelze spolehlivě odhadnout bez dlouhodobých statistik hitů a trestů.';
   const direct=h2h.filter(g=>[g.homeTeam?.abbrev,g.awayTeam?.abbrev].includes(ac)&&[g.homeTeam?.abbrev,g.awayTeam?.abbrev].includes(hc));
+  const meetings=direct.filter(g=>Number.isFinite(Number(g.homeTeam?.score))&&Number.isFinite(Number(g.awayTeam?.score)));
+  const meetingStats=meetings.length>=2?
+   'V posledních '+meetings.length+' dostupných vzájemných zápasech padlo průměrně '+
+   fmt(meetings.reduce((sum,g)=>sum+Number(g.homeTeam.score)+Number(g.awayTeam.score),0)/meetings.length)+
+   ' gólu na utkání. Malý vzorek nemusí předpovídat příští výsledek. ':'';
   const rivalry=direct.length?'V dostupné historii je '+direct.length+' posledních vzájemných utkání. Jejich výsledky samy o sobě nedokazují rivalitu ani zvýšenou tvrdost zápasu.':'Vzájemná historie v dostupném vzorku chybí; rivalitu nelze z dat potvrdit.';
-  return expectedGoals+' '+favorite+' '+shots+' '+physical+' '+rivalry;
+  return expectedGoals+' '+goalChances+favorite+' '+shots+' '+physical+' '+meetingStats+rivalry;
  };
  const narrative=[];
  const section=(heading,body)=>narrative.push('<h4>'+heading+'</h4><p>'+body+'</p>');
