@@ -330,6 +330,50 @@ if snapshot_return in html:
     html=html.replace(snapshot_return,"  return expectedGoals+' '+goalChances+favorite+' '+shots+' '+physical+' '+bangerSampleText(bangerSamples[0],ac)+bangerSampleText(bangerSamples[1],hc)+' '+bangerPhysicalOutlook()+' '+meetingStats+rivalry;",1)
     changes+=1
 
+# Sample actual goalie boxscore data from the same recent games (not projected starters).
+goalie_sample_anchor = " const skaterSection='<details class="
+goalie_sample_code = """ const bangerGoalieSample=async(games,code)=>{
+  const ids=games.slice(0,5).map(g=>g.id).filter(Boolean);
+  const results=await Promise.all(ids.map(id=>safe(()=>get('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(id)+'/boxscore'),3500)));
+  let saves=0,shots=0,starts=0;
+  for(const result of results){
+   if(!result.ok||!result.data)continue;
+   const data=result.data;
+   const side=data.awayTeam?.abbrev===code?'awayTeam':data.homeTeam?.abbrev===code?'homeTeam':null;
+   const goalies=side?data.playerByGameStats?.[side]?.goalies:null;
+   if(!Array.isArray(goalies))continue;
+   const starter=goalies.find(g=>g.starter)||goalies[0];
+   const match=String(starter?.saveShotsAgainst||'').match(/(\\d+)\\s*\\/\\s*(\\d+)/);
+   if(!match||Number(match[2])<=0)continue;
+   saves+=Number(match[1]);shots+=Number(match[2]);starts++;
+  }
+  return starts>=3&&shots>0?{starts,saves,shots,pct:100*saves/shots}:null;
+ };
+ const bangerGoalieSamples=await Promise.all([bangerGoalieSample(ga,ac),bangerGoalieSample(gh,hc)]);
+ if(!root.isConnected)return;
+"""
+if goalie_sample_anchor in html and "const bangerGoalieSample=" not in html:
+    html=html.replace(goalie_sample_anchor,goalie_sample_code+goalie_sample_anchor,1)
+    changes+=1
+goalie_text_anchor = " const narrative=[];"
+goalie_text_code = """ const bangerGoalieText=(sample,code)=>sample?
+  'Brankáři, kteří nastoupili od začátku za '+clean(code)+', měli v '+sample.starts+' posledních dostupných utkáních souhrnnou úspěšnost zákroků '+fmt(sample.pct)+' procent ('+sample.saves+' z '+sample.shots+' střel). ':
+  'Pro '+clean(code)+' není dost údajů o zákrocích brankářů v posledních zápasech. ';
+"""
+if goalie_text_anchor in html and "const bangerGoalieText=" not in html:
+    html=html.replace(goalie_text_anchor,goalie_text_code+goalie_text_anchor,1)
+    changes+=1
+goalie_section_anchor = " section('Celkový obraz utkání',"
+goalie_section = """ section('Aktuální výkonnost brankářů',bangerGoalieText(bangerGoalieSamples[0],ac)+bangerGoalieText(bangerGoalieSamples[1],hc)+' Statistiky se vztahují ke skutečně nasazeným brankářům v minulých zápasech, nikoli k potvrzenému startérovi příštího utkání.');
+"""
+if goalie_section_anchor in html and "section('Aktuální výkonnost brankářů'" not in html:
+    html=html.replace(goalie_section_anchor,goalie_section+goalie_section_anchor,1)
+    changes+=1
+snapshot_return = "  return expectedGoals+' '+goalChances+favorite+' '+shots+' '+physical+' '+bangerSampleText(bangerSamples[0],ac)+bangerSampleText(bangerSamples[1],hc)+' '+bangerPhysicalOutlook()+' '+meetingStats+rivalry;"
+if snapshot_return in html:
+    html=html.replace(snapshot_return,"  return expectedGoals+' '+goalChances+favorite+' '+shots+' '+physical+' '+bangerSampleText(bangerSamples[0],ac)+bangerSampleText(bangerSamples[1],hc)+' '+bangerGoalieText(bangerGoalieSamples[0],ac)+bangerGoalieText(bangerGoalieSamples[1],hc)+' '+bangerPhysicalOutlook()+' '+meetingStats+rivalry;",1)
+    changes+=1
+
 # Install the voice player once; it observes Expert Reports rendered dynamically.
 voice_tag = '<script defer src="./expert-voice.js"></script>'
 if voice_tag not in html:
