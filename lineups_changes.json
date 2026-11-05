@@ -1094,6 +1094,39 @@
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "avalanche": {
+      "updatedAt": "2026-11-05T20:05:33.996928+00:00",
+      "previousPublishedAt": "2026-11-03T17:17:53.296000+00:00",
+      "publishedAt": "2026-11-05T19:30:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "events": [
+        {
+          "type": "moved",
+          "player": "Nazem Kadri",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Brock Nelson",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Noah Juulsen",
+          "from": "Obrana 3",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "moved",
+          "player": "Sam Malinski",
+          "from": "Obrana 2",
+          "to": "Obrana 3"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     }
   }
 }
