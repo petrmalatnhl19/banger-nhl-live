@@ -1167,6 +1167,21 @@ async function analyzeGame(id){
  intelligenceMetric('Corsi % · 5v5',mpFmt(mpTeams[0],'corsiPercentage'),mpFmt(mpTeams[1],'corsiPercentage'),'MoneyPuck · podíl střeleckých pokusů')+
  intelligenceMetric('Fenwick % · 5v5',mpFmt(mpTeams[0],'fenwickPercentage'),mpFmt(mpTeams[1],'fenwickPercentage'),'MoneyPuck · podíl neblokovaných pokusů')+
  '<p class="analysis-small">'+(mpComplete?'Zdroj: MoneyPuck přes nhl-feed · 5v5. Údaje nejsou započteny do stávajícího modelu očekávaných gólů.':'Některé týmové záznamy 5v5 nejsou dostupné. Chybějící hodnoty nejsou odhadovány.')+'</p>';
+
+ const experimentalModel=(()=>{
+  if(!intelligenceModel||!mpComplete)return null;
+  const v=[mpField(mpTeams[0],'xGoalsFor'),mpField(mpTeams[0],'xGoalsAgainst'),mpField(mpTeams[1],'xGoalsFor'),mpField(mpTeams[1],'xGoalsAgainst')];
+  if(!v.every(x=>Number.isFinite(x)&&x>=0)||v[0]+v[1]<=0||v[2]+v[3]<=0)return null;
+  const shares=[v[0]/(v[0]+v[1]),v[2]/(v[2]+v[3])];
+  const correction=Math.max(-.08,Math.min(.08,(shares[0]-shares[1])*.4));
+  return {away:Math.max(.4,Math.min(6,intelligenceModel.away*(1+correction))),home:Math.max(.4,Math.min(6,intelligenceModel.home*(1-correction))),shares};
+ })();
+ const experimentalSection='<details class="analyst-fold" open><summary>🧠 PREDICTION ENGINE 2.0 <small>Experimentální · nevalidováno</small></summary><div class="analyst-fold-body">'+
+ (experimentalModel?intelligenceMetric('Původní model · očekávané góly',intelligenceNum(intelligenceModel.away),intelligenceNum(intelligenceModel.home),'Sezonní góly a aktuální forma')+
+ intelligenceMetric('Experimentální model · očekávané góly',intelligenceNum(experimentalModel.away),intelligenceNum(experimentalModel.home),'Korekce podle 5v5 xG podílu, maximálně ±8 %')+
+ intelligenceMetric('Podíl xG při 5v5',(experimentalModel.shares[0]*100).toFixed(1)+' %',(experimentalModel.shares[1]*100).toFixed(1)+' %','MoneyPuck · xGF / (xGF + xGA)'):
+ '<p>Chybí ověřená xG data pro oba týmy. Experimentální model není dostupný.</p>')+
+ '<p class="analysis-small"><b>Experimentální model není zpětně otestovaný.</b> Nejde o kalibrovanou pravděpodobnost ani prokázané zlepšení přesnosti. Start brankáře tento výpočet zatím nemění.</p></div></details>';
  const intelligencePanel='<section class="analysis-section" style="border:1px solid rgba(89,210,249,.5);border-radius:18px;padding:16px;margin:14px 0;background:linear-gradient(145deg,rgba(8,37,69,.96),rgba(10,25,50,.97))">'+
  '<div style="font-size:12px;letter-spacing:1.5px;color:#67e4ff">BANGER ANALYST 2.0 · MATCH INTELLIGENCE</div><h3 style="margin:8px 0 4px">Přehled zápasu na jednom místě</h3>'+
  '<p class="analysis-small">'+clean(ac)+' (hosté) vs '+clean(hc)+' (domácí) · '+clean(day)+'</p>'+
@@ -1182,7 +1197,7 @@ async function analyzeGame(id){
  intelligenceMetric('Hity / zápas · posledních 5',intelligenceNum(bangerSamples[0]?.hits),intelligenceNum(bangerSamples[1]?.hits),'Pouze dostupné boxscore')+
  intelligenceMetric('Bloky / zápas · posledních 5',intelligenceNum(bangerSamples[0]?.blocks),intelligenceNum(bangerSamples[1]?.blocks),'Pouze dostupné boxscore')+
  mpComparison+
- '</div></details>'+
+ '</div></details>'+experimentalSection+
  '<details class="analyst-fold" open><summary>🥅 Brankáři, únava a sestavy <small>Aktuální kontext</small></summary><div class="analyst-fold-body">'+
  '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'+intelligenceGoalie+'</div>'+
  intelligenceMetric('Dny od posledního utkání',intelligenceRestDays[0]??'—',intelligenceRestDays[1]??'—','1 den = utkání předchozí kalendářní den')+
