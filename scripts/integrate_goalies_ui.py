@@ -282,6 +282,54 @@ if snapshot_return in html:
     html = html.replace(snapshot_return,"  return expectedGoals+' '+goalChances+favorite+' '+shots+' '+physical+' '+bangerSampleText(bangerSamples[0],ac)+bangerSampleText(bangerSamples[1],hc)+' '+meetingStats+rivalry;",1)
     changes += 1
 
+# Include penalty minutes from real boxscores and describe physical intensity conservatively.
+penalty_old = "  const blocks=skaters.reduce((sum,p)=>sum+numeric(p.blockedShots??p.blocks),0);"
+penalty_new = """  const blocks=skaters.reduce((sum,p)=>sum+numeric(p.blockedShots??p.blocks),0);
+  const penaltyMinutes=skaters.reduce((sum,p)=>sum+numeric(p.pim??p.penaltyMinutes),0);"""
+if penalty_old in html and "const penaltyMinutes=skaters.reduce" not in html:
+    html=html.replace(penalty_old,penalty_new,1)
+    changes+=1
+skater_return_old = "return {leaders,shots,goals,hits,blocks,date:data.gameDate||null};"
+skater_return_new = "return {leaders,shots,goals,hits,blocks,penaltyMinutes,date:data.gameDate||null};"
+if skater_return_old in html:
+    html=html.replace(skater_return_old,skater_return_new,1)
+    changes+=1
+sample_return_old = "return {n:records.length,shots:sum('shots')/records.length,hits:sum('hits')/records.length,blocks:sum('blocks')/records.length};"
+sample_return_new = "return {n:records.length,shots:sum('shots')/records.length,hits:sum('hits')/records.length,blocks:sum('blocks')/records.length,penaltyMinutes:sum('penaltyMinutes')/records.length};"
+if sample_return_old in html:
+    html=html.replace(sample_return_old,sample_return_new,1)
+    changes+=1
+sample_text_old = "fmt(sample.blocks)+' bloků na zápas. ':"
+sample_text_new = "fmt(sample.blocks)+' bloků a '+fmt(sample.penaltyMinutes)+' trestných minut hráčů na zápas. ':"
+if sample_text_old in html:
+    html=html.replace(sample_text_old,sample_text_new,1)
+    changes+=1
+physical_anchor = " const narrative=[];"
+physical_code = """ const bangerPhysicalOutlook=()=>{
+  const a=bangerSamples[0],h=bangerSamples[1];
+  if(!a||!h)return 'Pro hodnocení fyzické náročnosti chybí dostatek nedávných zápasů obou týmů.';
+  const hits=a.hits+h.hits;
+  const minutes=a.penaltyMinutes+h.penaltyMinutes;
+  return 'Oba týmy v posledních dostupných zápasech dohromady zaznamenávaly v průměru '+
+   fmt(hits)+' hitů a '+fmt(minutes)+' trestných minut hráčů na dva týmové zápasy. '+
+   'To popisuje jejich nedávný herní styl, nikoli předpověď konkrétního počtu hitů nebo vyloučení. '+
+   'Hity a trestné minuty nejsou samy o sobě důkazem rivality.';
+ };
+"""
+if physical_anchor in html and "const bangerPhysicalOutlook=" not in html:
+    html=html.replace(physical_anchor,physical_code+physical_anchor,1)
+    changes+=1
+physical_section_anchor = " section('Celkový obraz utkání',"
+physical_section = """ section('Fyzická náročnost a trestné minuty',bangerPhysicalOutlook());
+"""
+if physical_section_anchor in html and "section('Fyzická náročnost a trestné minuty'" not in html:
+    html=html.replace(physical_section_anchor,physical_section+physical_section_anchor,1)
+    changes+=1
+snapshot_return = "  return expectedGoals+' '+goalChances+favorite+' '+shots+' '+physical+' '+bangerSampleText(bangerSamples[0],ac)+bangerSampleText(bangerSamples[1],hc)+' '+meetingStats+rivalry;"
+if snapshot_return in html:
+    html=html.replace(snapshot_return,"  return expectedGoals+' '+goalChances+favorite+' '+shots+' '+physical+' '+bangerSampleText(bangerSamples[0],ac)+bangerSampleText(bangerSamples[1],hc)+' '+bangerPhysicalOutlook()+' '+meetingStats+rivalry;",1)
+    changes+=1
+
 # Install the voice player once; it observes Expert Reports rendered dynamically.
 voice_tag = '<script defer src="./expert-voice.js"></script>'
 if voice_tag not in html:
