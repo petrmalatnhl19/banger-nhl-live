@@ -592,6 +592,63 @@ if old_h2h_report in html:
     html=html.replace(old_h2h_report,new_h2h_report,1)
     changes+=1
 
+# Conservative weighted forecast: season baseline + recent form, with bounded situational adjustments.
+weighted_anchor = " const bangerVerdict=()=>{"
+weighted_code = """ const bangerWeightedForecast=()=>{
+  if(![af,aa,hf,ha].every(Number.isFinite))return null;
+  const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
+  const recentA=bangerRecentForm(ga,ac,5),recentH=bangerRecentForm(gh,hc,5);
+  const baselineA=clamp((af+ha)/2,.4,6),baselineH=clamp((hf+aa)/2,.4,6);
+  let away=baselineA,home=baselineH;
+  const factors=['sezonní góly a inkasované branky'];
+  if(recentA&&recentH){
+   const recentAway=clamp((recentA.goalsFor/recentA.n+recentH.goalsAgainst/recentH.n)/2,.4,6);
+   const recentHome=clamp((recentH.goalsFor/recentH.n+recentA.goalsAgainst/recentA.n)/2,.4,6);
+   away=.8*away+.2*recentAway;home=.8*home+.2*recentHome;
+   factors.push('forma posledních pěti utkání (20 %)');
+  }
+  // Mild home-ice factor, not a claim of a calibrated empirical advantage.
+  away*=.985;home*=1.015;
+  factors.push('malá výhoda domácího prostředí (±1,5 %)');
+  if(bangerGoalieSamples[0]&&bangerGoalieSamples[1]){
+   // A higher recent save percentage of opposing goalies slightly lowers expected goals.
+   away*=clamp(1+(90-bangerGoalieSamples[1].pct)*.006,.96,1.04);
+   home*=clamp(1+(90-bangerGoalieSamples[0].pct)*.006,.96,1.04);
+   factors.push('nedávná úspěšnost brankářů (nejvýše ±4 %)');
+  }
+  if(bangerSpecial[0]&&bangerSpecial[1]){
+   const a=bangerSpecial[0],h=bangerSpecial[1];
+   if(a.ppPct!=null&&h.pkPct!=null)away*=clamp(1+(a.ppPct-(100-h.pkPct))*.001,.97,1.03);
+   if(h.ppPct!=null&&a.pkPct!=null)home*=clamp(1+(h.ppPct-(100-a.pkPct))*.001,.97,1.03);
+   factors.push('přesilovky a oslabení (nejvýše ±3 %)');
+  }
+  // Recent H2H is descriptive only: older rosters are not predictive evidence.
+  return {away:clamp(away,.4,6),home:clamp(home,.4,6),factors,form:!!(recentA&&recentH)};
+ };
+"""
+if weighted_anchor in html and "const bangerWeightedForecast=()=>{" not in html:
+    html=html.replace(weighted_anchor,weighted_code+weighted_anchor,1)
+    changes+=1
+old_verdict_goal = "  const away=complete?Math.max(.4,Math.min(6,(af+ha)/2)):null;\n  const home=complete?Math.max(.4,Math.min(6,(hf+aa)/2)):null;"
+new_verdict_goal = "  const weighted=bangerWeightedForecast();\n  const away=weighted?.away??null;\n  const home=weighted?.home??null;"
+if old_verdict_goal in html:
+    html=html.replace(old_verdict_goal,new_verdict_goal,1)
+    changes+=1
+old_verdict_label = "fmt(total)+' očekávaných celkem (zjednodušený sezonní model; '"
+if old_verdict_label in html:
+    html=html.replace(old_verdict_label,"fmt(total)+' očekávaných celkem (vážený orientační model; '",1)
+    changes+=1
+weighted_section_anchor = " section('Vzájemné zápasy',bangerH2HReport());"
+weighted_section = """ section('Vážený predikční model',(()=>{
+  const m=bangerWeightedForecast();
+  if(!m)return 'Pro vážený model chybí úplné sezonní gólové průměry.';
+  return 'Orientační očekávání: '+clean(ac)+' '+fmt(m.away)+' gólu, '+clean(hc)+' '+fmt(m.home)+' gólu, dohromady '+fmt(m.away+m.home)+'. Zohledněno: '+m.factors.join(', ')+'. Historické vzájemné zápasy zůstávají popisným kontextem, nikoli automatickou úpravou skóre. Koeficienty jsou konzervativní návrhové váhy, zatím bez zpětné kalibrace na výsledcích; nejde o garantovanou přesnost.';
+ })());
+"""
+if weighted_section_anchor in html and "section('Vážený predikční model'," not in html:
+    html=html.replace(weighted_section_anchor,weighted_section+weighted_section_anchor,1)
+    changes+=1
+
 # Install the voice player once; it observes Expert Reports rendered dynamically.
 voice_tag = '<script defer src="./expert-voice.js"></script>'
 if voice_tag not in html:
