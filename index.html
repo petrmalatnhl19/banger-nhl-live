@@ -1063,26 +1063,20 @@ async function analyzeGame(id){
    return valid?{name,status,source,checked,code}:null;
   });
  };
- const seasonPlayerStats=await Promise.all([ac,hc].map(async code=>{
-  const label=String(code||'').trim();
-  const normalized=label.toLowerCase();
-  const teamCode=normalized.includes('utah')?'UTA':normalized.includes('montreal')||normalized.includes('montréal')?'MTL':NHL_TEAMS.find(t=>t[0].toLowerCase()===normalized||t[1].toLowerCase()===normalized)?.[0];
-  if(!teamCode)return {ok:false,data:null,teamCode:'NEZNAMY',attempts:[],reason:'Nerozpoznaný tým: '+label};
-  const base='https://api-web.nhle.com/v1/club-stats/'+teamCode+'/';
-  const paths=[base+encodeURIComponent(season)+'/2',base+'now'];
-  const attempts=[];
-  for(const url of paths){
-   const result=await safe(async()=>{const response=await fetch(url);if(!response.ok)throw Error('NHL HTTP '+response.status);return response.json()},6500),data=result.data;
-   const skaters=Array.isArray(data?.skaters)?data.skaters.length:null;
-   const goalies=Array.isArray(data?.goalies)?data.goalies.length:null;
-   attempts.push({url,skaters,goalies,error:result.error||null});
-   if(result.ok&&(skaters!==null||goalies!==null))return {...result,source:url,teamCode};
-  }
-  return {ok:false,data:null,teamCode,attempts};
+ const seasonPlayerStats=await Promise.all([ac,hc].map(async (name,i)=>{
+  const raw=String(name||'').toLowerCase();
+  const teamCode=raw.includes('utah')?'UTA':raw.includes('montreal')||raw.includes('montréal')?'MTL':NHL_TEAMS.find(t=>t[0].toLowerCase()===raw||t[1].toLowerCase()===raw)?.[0];
+  if(!teamCode)return {ok:false,data:null,teamCode:'NEZNAMY',attempts:[],reason:'Neznámý tým: '+name};
+  const result=await safe(()=>teamApi('clubstats',teamCode),8500);
+  const data=result.data;
+  const skaters=Array.isArray(data?.skaters)?data.skaters.length:null;
+  const goalies=Array.isArray(data?.goalies)?data.goalies.length:null;
+  const attempts=[{url:'Supabase nhl-feed?kind=clubstats&team='+teamCode,skaters,goalies,error:result.error||null}];
+  return result.ok&&(skaters!==null||goalies!==null)?{...result,teamCode,attempts}:{ok:false,data:null,teamCode,attempts};
  }));
  const seasonPlayerSection='<section class="analysis-section"><h3>📈 Sezonní hráči a brankáři · NHL</h3><p class="analysis-small">Oficiální sezonní souhrny. Hodnoty na 60 minut se nepočítají bez ověřeného celkového času na ledě.</p>'+seasonPlayerStats.map((result,i)=>{
   const code=i===0?ac:hc;
-  if(!result.ok||!result.data)return '<h4>'+clean(code)+'</h4><p>Sezonní statistiky NHL nejsou dostupné. <b>Diagnostika v19</b></p><p class="analysis-small">Diagnostika v19: kód '+clean(result.teamCode||'—')+'. '+(result.attempts||[]).map(a=>clean(a.url.replace('https://api-web.nhle.com/v1',''))+' — '+(a.error?'chyba: '+clean(a.error):'hráči: '+(a.skaters??'—')+', brankáři: '+(a.goalies??'—'))).join('; ')+'</p>';
+  if(!result.ok||!result.data)return '<h4>'+clean(code)+'</h4><p>Sezonní statistiky NHL nejsou dostupné. <b>Diagnostika v20</b></p><p class="analysis-small">Diagnostika v20: kód '+clean(result.teamCode||'—')+'. '+(result.attempts||[]).map(a=>clean(a.url.replace('https://api-web.nhle.com/v1',''))+' — '+(a.error?'chyba: '+clean(a.error):'hráči: '+(a.skaters??'—')+', brankáři: '+(a.goalies??'—'))).join('; ')+'</p>';
   const data=result.data;
   const name=p=>p.firstName?.default&&p.lastName?.default?p.firstName.default+' '+p.lastName.default:p.name?.default||p.lastName?.default||'Hráč';
   const n=v=>Number.isFinite(Number(v))?Number(v):null;
