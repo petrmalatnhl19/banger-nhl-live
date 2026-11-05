@@ -46,6 +46,29 @@ if needle in html and 'href="./goalies.html"' not in html:
     html = html.replace(needle, needle + '<a class="btn" href="./goalies.html" style="text-decoration:none">🥅 Brankáři NHL</a>', 1)
     changes += 1
 
+# Expert Report: show a date-scoped starting-goalie dashboard with source and freshness.
+needle = " const projected=await projectedGoalies();"
+replacement = """ const projected=await projectedGoalies();
+ const expertGoalieCards=projected.map((p,i)=>{const code=i===0?ac:hc;const state=p?.status==='confirmed'?'✓ CONFIRMED':p?.status==='projected'?'◷ PROJECTED':'? UNKNOWN';const color=p?.status==='confirmed'?'#75edb3':p?.status==='projected'?'#ffce81':'#9db2c6';return '<div style="padding:14px;border:1px solid #306a8c;border-radius:13px;background:#0b1b35;flex:1;min-width:180px"><b>'+clean(code)+'</b><p style="margin:8px 0;color:'+color+'">'+state+'</p><strong>'+clean(p?.name||'Start zatím neznámý')+'</strong>'+(p?'<p class="analysis-small">Ověřeno: '+clean(new Date(p.checked).toLocaleString('cs-CZ'))+'</p><a href="'+clean(p.source)+'" target="_blank" rel="noopener noreferrer">RotoWire / zdroj ↗</a>':'<p class="analysis-small">Bez aktuálně ověřeného startu pro tento zápas.</p>')+'</div>'}).join('');
+ const expertGoalieSection='<section class="analysis-section"><h3>🥅 Brankáři a sestavy · '+clean(day)+'</h3><p>Stav startu se vztahuje výhradně k tomuto zápasu. PROJECTED není potvrzení.</p><div style="display:flex;flex-wrap:wrap;gap:12px">'+expertGoalieCards+'</div><p class="analysis-small">Kompletní seznam: <a href="./goalies.html" target="_blank" rel="noopener noreferrer">BANGER GOALIE CENTER ↗</a></p></section>';"""
+if needle in html and "const expertGoalieSection=" not in html:
+    html = html.replace(needle, replacement, 1)
+    changes += 1
+
+needle = "'+narrative.join('')+'<p class=\\"analysis-small\\">"
+# Replace only the report-specific expression.
+needle = "'+narrative.join('')+'<p class=\\\"analysis-small\\\">"
+if needle in html and "expertGoalieSection+narrative.join" not in html:
+    html = html.replace(needle, "'+expertGoalieSection+narrative.join('')+'<p class=\\\"analysis-small\\\">", 1)
+    changes += 1
+
+# Prevent old lineup data being used as an apparently current projected starter.
+needle = "const name=selected?.name||l?.startingGoalie;\\n   const status=selected?.status||l?.startingGoalieStatus;\\n   const checked=selected?.checkedAt||l?.startingGoalieCheckedAt;\\n   const source=selected?.source||l?.startingGoalieSource;"
+replacement = "const name=selected?.name;\\n   const status=selected?.status;\\n   const checked=selected?.checkedAt;\\n   const source=selected?.source;"
+if needle in html:
+    html = html.replace(needle, replacement, 1)
+    changes += 1
+
 if changes:
     path.write_text(html, encoding="utf-8")
 print("Applied NHL goalie UI patches:", changes)
