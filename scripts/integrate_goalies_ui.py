@@ -191,6 +191,33 @@ if form_section_anchor in html and "section('Forma za pět a deset zápasů a s�
     html = html.replace(form_section_anchor, form_section + form_section_anchor, 1)
     changes += 1
 
+# Add an honest short pregame snapshot to the narrative, using only already fetched data.
+snapshot_anchor = " const narrative=[];"
+snapshot_code = """ const bangerSnapshot=()=>{
+  const seasonGoals=[af,aa,hf,ha].every(Number.isFinite);
+  const expectedAway=seasonGoals?Math.max(.4,Math.min(6,(af+ha)/2)):null;
+  const expectedHome=seasonGoals?Math.max(.4,Math.min(6,(hf+aa)/2)):null;
+  const total=expectedAway!=null?expectedAway+expectedHome:null;
+  const expectedGoals=total!=null?'Zjednodušený sezonní model očekává přibližně '+fmt(total)+' gólu celkem, z toho '+fmt(expectedAway)+' pro '+clean(ac)+' a '+fmt(expectedHome)+' pro '+clean(hc)+'.':'Odhad počtu gólů zatím není dostupný.';
+  const favorite=expectedAway==null?'Favorita zatím nelze určit.':Math.abs(expectedAway-expectedHome)<.35?'Gólové profily naznačují vyrovnaný zápas.':'Gólové profily mírně zvýhodňují '+clean(expectedAway>expectedHome?ac:hc)+'.';
+  const a=skaters[0],h=skaters[1];
+  const shots=a?.shots>0&&h?.shots>0?'V posledním dostupném utkání zaznamenal '+clean(ac)+' '+a.shots+' střel hráčů na branku a '+clean(hc)+' '+h.shots+'. Jde o minulý výkon, nikoli predikci počtu střel.':'Pro spolehlivou predikci počtu střel chybí sezonní střelecké průměry obou týmů.';
+  const physical=a&&h&&Number.isFinite(a.hits)&&Number.isFinite(h.hits)?'V posledním dostupném utkání zaznamenal '+clean(ac)+' '+a.hits+' hitů a '+clean(hc)+' '+h.hits+' hitů. Z jednoho utkání nelze určit, zda příští zápas bude tvrdý.':'Tvrdost zápasu zatím nelze spolehlivě odhadnout bez dlouhodobých statistik hitů a trestů.';
+  const direct=h2h.filter(g=>[g.homeTeam?.abbrev,g.awayTeam?.abbrev].includes(ac)&&[g.homeTeam?.abbrev,g.awayTeam?.abbrev].includes(hc));
+  const rivalry=direct.length?'V dostupné historii je '+direct.length+' posledních vzájemných utkání. Jejich výsledky samy o sobě nedokazují rivalitu ani zvýšenou tvrdost zápasu.':'Vzájemná historie v dostupném vzorku chybí; rivalitu nelze z dat potvrdit.';
+  return expectedGoals+' '+favorite+' '+shots+' '+physical+' '+rivalry;
+ };
+"""
+if snapshot_anchor in html and "const bangerSnapshot=" not in html:
+    html = html.replace(snapshot_anchor, snapshot_code + snapshot_anchor, 1)
+    changes += 1
+snapshot_section_anchor = " section('Tabulková síla a dlouhodobá stabilita',"
+snapshot_section = """ section('Rychlá předzápasová predikce',bangerSnapshot());
+"""
+if snapshot_section_anchor in html and "section('Rychlá předzápasová predikce'" not in html:
+    html = html.replace(snapshot_section_anchor, snapshot_section + snapshot_section_anchor, 1)
+    changes += 1
+
 # Install the voice player once; it observes Expert Reports rendered dynamically.
 voice_tag = '<script defer src="./expert-voice.js"></script>'
 if voice_tag not in html:
