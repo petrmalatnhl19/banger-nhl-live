@@ -892,23 +892,7 @@ async function analyzeGame(id){
    updated++;
   }
   if(!root.isConnected)return 'Kontrola předpovědí přerušena.';
-  const pending=records.filter(x=>x.status==='pending'&&x.id!==gameId&&x.day<=new Date().toISOString().slice(0,10)).slice(0,8);
-  const refreshed=await Promise.all(pending.map(async row=>{
-   const result=await safe(()=>get('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(row.id)+'/landing'),4500);
-   return {row,data:result.ok?result.data:null};
-  }));
-  let updated=0;
-  for(const {row,data:game} of refreshed){
-   if(!game||!['OFF','FINAL'].includes(String(game.gameState||'')))continue;
-   if(!Number.isFinite(Number(game.awayTeam?.score))||!Number.isFinite(Number(game.homeTeam?.score)))continue;
-   if(String(game.awayTeam?.abbrev)!==row.ac||String(game.homeTeam?.abbrev)!==row.hc)continue;
-   row.status='final';row.actualAway=Number(game.awayTeam.score);row.actualHome=Number(game.homeTeam.score);
-   row.goalError=Math.abs(row.away-row.actualAway)+Math.abs(row.home-row.actualHome);
-   const diff=row.away-row.home,actual=row.actualAway-row.actualHome;
-   row.correctSide=Math.abs(diff)<.001||actual===0?null:Math.sign(diff)===Math.sign(actual);
-   updated++;
-  }
-  if(!root.isConnected)return 'Kontrola předpovědí přerušena.';
+
   records=records.slice(-150);
   try{localStorage.setItem(key,JSON.stringify(records))}catch(e){}
   const finished=records.filter(x=>x.status==='final');
