@@ -721,6 +721,17 @@ if tracker_section_anchor in html and "section('BANGER Prediction Tracker'," not
     html=html.replace(tracker_section_anchor," section('BANGER Prediction Tracker',bangerTracker);\n"+tracker_section_anchor,1)
     changes+=1
 
+# Automatically reconcile locally stored predictions when opening any Analyst.
+if " const bangerTracker=(()=>{" in html:
+    html=html.replace(" const bangerTracker=(()=>{"," const bangerTracker=await (async()=>{",1)
+    changes+=1
+if "  records=records.slice(-150);\n  try{localStorage.setItem(key,JSON.stringify(records))}catch(e){}" in html:
+    html=html.replace("  records=records.slice(-150);\n  try{localStorage.setItem(key,JSON.stringify(records))}catch(e){}","  const pending=records.filter(x=>x.status==='pending'&&x.id!==gameId&&x.day<=new Date().toISOString().slice(0,10)).slice(0,8);\n  const refreshed=await Promise.all(pending.map(async row=>{\n   const result=await safe(()=>get('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(row.id)+'/landing'),4500);\n   return {row,data:result.ok?result.data:null};\n  }));\n  let updated=0;\n  for(const {row,data:game} of refreshed){\n   if(!game||!['OFF','FINAL'].includes(String(game.gameState||'')))continue;\n   if(!Number.isFinite(Number(game.awayTeam?.score))||!Number.isFinite(Number(game.homeTeam?.score)))continue;\n   if(String(game.awayTeam?.abbrev)!==row.ac||String(game.homeTeam?.abbrev)!==row.hc)continue;\n   row.status='final';row.actualAway=Number(game.awayTeam.score);row.actualHome=Number(game.homeTeam.score);\n   row.goalError=Math.abs(row.away-row.actualAway)+Math.abs(row.home-row.actualHome);\n   const diff=row.away-row.home,actual=row.actualAway-row.actualHome;\n   row.correctSide=Math.abs(diff)<.001||actual===0?null:Math.sign(diff)===Math.sign(actual);\n   updated++;\n  }\n  if(!root.isConnected)return 'Kontrola předpovědí přerušena.';\n  records=records.slice(-150);\n  try{localStorage.setItem(key,JSON.stringify(records))}catch(e){}",1)
+    changes+=1
+if "K vyhodnocení zatím dochází při opětovném otevření stejného dokončeného utkání." in html:
+    html=html.replace("K vyhodnocení zatím dochází při opětovném otevření stejného dokončeného utkání.","Při otevření Analystu se automaticky zkontroluje až osm dříve uložených utkání a doplní se jejich výsledky.",1)
+    changes+=1
+
 # Install the voice player once; it observes Expert Reports rendered dynamically.
 voice_tag = '<script defer src="./expert-voice.js"></script>'
 if voice_tag not in html:
