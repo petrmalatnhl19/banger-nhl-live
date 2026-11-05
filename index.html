@@ -1062,7 +1062,15 @@ async function analyzeGame(id){
    return valid?{name,status,source,checked,code}:null;
   });
  };
- const seasonPlayerStats=await Promise.all([ac,hc].map(code=>safe(()=>get('https://api-web.nhle.com/v1/club-stats/'+encodeURIComponent(code)+'/'+encodeURIComponent(season)+'/2'),4500)));
+ const seasonPlayerStats=await Promise.all([ac,hc].map(async code=>{
+  const base='https://api-web.nhle.com/v1/club-stats/'+encodeURIComponent(code)+'/';
+  const paths=[base+encodeURIComponent(season)+'/2',base+'now'];
+  for(const url of paths){
+   const result=await safe(()=>get(url),6500);
+   if(result.ok&&result.data&&(Array.isArray(result.data.skaters)||Array.isArray(result.data.goalies)))return {...result,source:url};
+  }
+  return {ok:false,data:null};
+ }));
  const seasonPlayerSection='<section class="analysis-section"><h3>📈 Sezonní hráči a brankáři · NHL</h3><p class="analysis-small">Oficiální sezonní souhrny. Hodnoty na 60 minut se nepočítají bez ověřeného celkového času na ledě.</p>'+seasonPlayerStats.map((result,i)=>{
   const code=i===0?ac:hc;
   if(!result.ok||!result.data)return '<h4>'+clean(code)+'</h4><p>Sezonní hráčské statistiky momentálně nejsou dostupné.</p>';
