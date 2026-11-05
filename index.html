@@ -866,7 +866,7 @@ async function analyzeGame(id){
   // Mild home-ice factor, not a claim of a calibrated empirical advantage.
   away*=.985;home*=1.015;
   factors.push('malá výhoda domácího prostředí (±1,5 %)');
-  if(bangerGoalieSamples[0]&&bangerGoalieSamples[1]){
+  if(bangerGoalieSamples[0]?.starts>=3&&bangerGoalieSamples[1]?.starts>=3&&Number.isFinite(bangerGoalieSamples[0].pct)&&Number.isFinite(bangerGoalieSamples[1].pct)){
    // A higher recent save percentage of opposing goalies slightly lowers expected goals.
    away*=clamp(1+(90-bangerGoalieSamples[1].pct)*.006,.96,1.04);
    home*=clamp(1+(90-bangerGoalieSamples[0].pct)*.006,.96,1.04);
