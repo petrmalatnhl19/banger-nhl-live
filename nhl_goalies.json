@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-05T15:14:11.341693+00:00",
-  "rostersUpdatedAt": "2026-11-05T15:13:53.707684+00:00",
+  "updatedAt": "2026-11-05T16:19:37.083456+00:00",
+  "rostersUpdatedAt": "2026-11-05T16:19:10.016333+00:00",
   "projectionDate": "2026-11-05",
   "teamCount": 32,
   "goalieCount": 78,
@@ -51,8 +51,9 @@
       "team": "CBJ",
       "teamKey": "blue jackets",
       "playerId": 8475660,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-05",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Jordan Binnington",
@@ -93,17 +94,17 @@
       "team": "MTL",
       "teamKey": "canadiens",
       "playerId": 8482487,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-05",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Jacob Fowler",
       "team": "MTL",
       "teamKey": "canadiens",
       "playerId": 8484170,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-05",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Samuel Montembeault",
@@ -175,7 +176,7 @@
       "team": "NJD",
       "teamKey": "devils",
       "playerId": 8476945,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-05",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -282,17 +283,17 @@
       "team": "NYI",
       "teamKey": "islanders",
       "playerId": 8478009,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-05",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Semyon Varlamov",
       "team": "NYI",
       "teamKey": "islanders",
       "playerId": 8473575,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-05",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Nico Daws",
@@ -307,7 +308,7 @@
       "team": "WPG",
       "teamKey": "jets",
       "playerId": 8479973,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-05",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -462,7 +463,7 @@
       "team": "PIT",
       "teamKey": "penguins",
       "playerId": 8481668,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-05",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -488,8 +489,9 @@
       "team": "NYR",
       "teamKey": "rangers",
       "playerId": 8482193,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-05",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Joonas Korpisalo",
@@ -520,9 +522,8 @@
       "team": "DET",
       "teamKey": "red wings",
       "playerId": 8476434,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-05",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Michal Postava",

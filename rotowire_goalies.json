@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T15:14:11.305654+00:00",
+  "updatedAt": "2026-11-05T16:19:37.030478+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "goalieCount": 96,
   "games": [
@@ -35,10 +35,10 @@
     },
     {
       "team": "CBJ",
-      "goalie": "Jet Greaves",
+      "goalie": "Cam Talbot",
       "opponent": "DAL",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-05",
       "gameId": 2026020258,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -75,7 +75,7 @@
     },
     {
       "team": "DET",
-      "goalie": "John Gibson",
+      "goalie": "Daniil Tarasov",
       "opponent": "VGK",
       "venue": "home",
       "status": "projected",
@@ -95,10 +95,10 @@
     },
     {
       "team": "MTL",
-      "goalie": "Jacob Fowler",
+      "goalie": "Jakub Dobes",
       "opponent": "UTA",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-05",
       "gameId": 2026020251,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -108,7 +108,7 @@
       "goalie": "Connor Hellebuyck",
       "opponent": "STL",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-05",
       "gameId": 2026020254,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -125,20 +125,20 @@
     },
     {
       "team": "NYI",
-      "goalie": "Ilya Sorokin",
+      "goalie": "Semyon Varlamov",
       "opponent": "CAR",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-05",
       "gameId": 2026020255,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "team": "NYR",
-      "goalie": "James Reimer",
+      "goalie": "Dylan Garand",
       "opponent": "PHI",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-05",
       "gameId": 2026020256,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -158,7 +158,7 @@
       "goalie": "Arturs Silovs",
       "opponent": "BOS",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-05",
       "gameId": 2026020257,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -218,7 +218,7 @@
       "goalie": "Stuart Skinner",
       "opponent": "VAN",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-05",
       "gameId": 2026020259,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
