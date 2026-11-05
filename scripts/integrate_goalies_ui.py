@@ -80,6 +80,12 @@ if needle in html:
     html = html.replace(needle, replacement, 1)
     changes += 1
 
+# Install the voice player once; it observes Expert Reports rendered dynamically.
+voice_tag = '<script defer src="./expert-voice.js"></script>'
+if voice_tag not in html:
+    html = html.replace('</body>', voice_tag + '</body>', 1)
+    changes += 1
+
 if changes:
     path.write_text(html, encoding="utf-8")
 print("Applied NHL goalie UI patches:", changes)
