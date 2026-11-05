@@ -485,6 +485,39 @@ if special_start >= 0 and special_end > special_start:
         html = html[:special_start] + fixed_block + html[special_end:]
         changes += 1
 
+# Concise expert verdict, with explicit data coverage and uncertainty.
+verdict_anchor = " const narrative=[];"
+verdict_code = """ const bangerVerdict=()=>{
+  const complete=[af,aa,hf,ha].every(Number.isFinite);
+  const away=complete?Math.max(.4,Math.min(6,(af+ha)/2)):null;
+  const home=complete?Math.max(.4,Math.min(6,(hf+aa)/2)):null;
+  const total=away==null?null:away+home;
+  const shots=bangerSamples;
+  const goalies=bangerGoalieSamples;
+  const special=bangerSpecial;
+  const covered=[complete,!!shots[0],!!shots[1],!!goalies[0],!!goalies[1],!!special[0],!!special[1]];
+  const coverage=covered.filter(Boolean).length;
+  const confidence=coverage>=7?'vyšší pokrytí dat':coverage>=4?'střední pokrytí dat':'omezené pokrytí dat';
+  const lines=[];
+  lines.push('Góly: '+(total==null?'nedostatek sezonních údajů':fmt(total)+' očekávaných celkem (zjednodušený sezonní model; '+clean(ac)+' '+fmt(away)+', '+clean(hc)+' '+fmt(home)+')')+'.');
+  lines.push('Průběh: '+(total==null?'bez jasného favorita podle gólových průměrů':Math.abs(away-home)<.35?'vyrovnaný podle gólových profilů':'mírná modelová výhoda '+clean(away>home?ac:hc))+'.');
+  lines.push('Střely: '+(shots[0]&&shots[1]?clean(ac)+' '+fmt(shots[0].shots)+', '+clean(hc)+' '+fmt(shots[1].shots)+' na zápas v posledních '+shots[0].n+' a '+shots[1].n+' utkáních':'nedostatek srovnatelných posledních utkání')+'.');
+  lines.push('Fyzická hra: '+(shots[0]&&shots[1]?fmt(shots[0].hits+shots[1].hits)+' hitů obou týmů v součtu jejich průměrů; tvrdost příštího zápasu není jistá':'nedostatek údajů o hitech')+'.');
+  lines.push('Brankáři: '+(goalies[0]&&goalies[1]?clean(ac)+' '+fmt(goalies[0].pct)+' %, '+clean(hc)+' '+fmt(goalies[1].pct)+' % zákroků v nedávných startech':'chybí srovnatelná forma brankářů')+'.');
+  lines.push('Speciální týmy: '+(special[0]&&special[1]?clean(ac)+' PP '+(special[0].ppPct==null?'bez dat':fmt(special[0].ppPct)+' %')+', '+clean(hc)+' PP '+(special[1].ppPct==null?'bez dat':fmt(special[1].ppPct)+' %'):'neúplná data o přesilovkách')+'.');
+  lines.push('Spolehlivost: '+confidence+' ('+coverage+'/7 dostupných datových oblastí). Nejde o statisticky kalibrovanou pravděpodobnost správné předpovědi; rivalitu ani výsledek nelze z těchto čísel potvrdit.');
+  return lines.join(' ');
+ };
+"""
+if verdict_anchor in html and "const bangerVerdict=()=>{" not in html:
+    html=html.replace(verdict_anchor,verdict_code+verdict_anchor,1)
+    changes+=1
+old_verdict=" section('Rychlá předzápasová predikce',bangerSnapshot());"
+new_verdict=" section('Závěrečný expertní verdikt',bangerVerdict());"
+if old_verdict in html:
+    html=html.replace(old_verdict,new_verdict,1)
+    changes+=1
+
 # Install the voice player once; it observes Expert Reports rendered dynamically.
 voice_tag = '<script defer src="./expert-voice.js"></script>'
 if voice_tag not in html:
