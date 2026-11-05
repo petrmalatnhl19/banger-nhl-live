@@ -1123,9 +1123,43 @@ async function analyzeGame(id){
  section('Odpočinek a rozpis',(da!=null?'Od posledního dostupného zápasu hostů uplynulo '+da+' kalendářních dní. ':'U hostů chybí historie odpočinku. ')+(dh!=null?'U domácích jde o '+dh+' dní. ':'U domácích chybí historie odpočinku. ')+' Únava hráčů, cestování a zdravotní stav nejsou ověřeny.');
  section('Možný průběh po třetinách','V úvodní třetině může rozhodnout disciplinovanost a první proměněné šance. Ve druhé části se mohou projevit rozdíly v útočné produktivitě a hloubce sestavy, kterou ale dostupná data plně neměří. Ve třetí třetině by tým ztrácející gól mohl zvýšit útočné riziko. Jde o obecné podmíněné scénáře, nikoli o znalost konkrétní taktiky.');
  section('Závěrečný pohled',completeSeason?'Podle sezónních gólových průměrů '+(Math.abs((af+ha)-(hf+aa))<0.4?'nelze jednoznačně zvýhodnit jeden tým.':'má mírnou výhodu '+clean((af+ha)>(hf+aa)?ac:hc)+'.')+' Největší nejistotou zůstávají skutečné sestavy, speciální týmy a výkon brankářů. Textový rozbor vysvětluje dostupné statistiky, ale sám o sobě nezvyšuje přesnost pravděpodobnostního modelu.':'Kvůli neúplným sezónním datům nelze odpovědně určit favorita.');
+
+ // ANALYST 2.0: compact comparison, verified metrics and context, no fabricated xG.
+ const intelligenceModel=bangerWeightedForecast();
+ const intelligenceNum=v=>v==null||!Number.isFinite(Number(v))?'—':fmt(Number(v));
+ const intelligenceRecent=[bangerRecentForm(ga,ac,5),bangerRecentForm(gh,hc,5)];
+ const intelligenceRest=games=>{const date=games.find(g=>g.gameDate&&g.gameDate<day)?.gameDate;return date?Math.round((Date.parse(day+'T12:00:00Z')-Date.parse(date+'T12:00:00Z'))/86400000):null};
+ const intelligenceRestDays=[intelligenceRest(ga),intelligenceRest(gh)];
+ const intelligenceMetric=(label,left,right,note)=>'<div style="padding:12px 0;border-bottom:1px solid rgba(114,184,217,.18)"><div style="font-size:12px;color:#b4d6ed;margin-bottom:6px">'+clean(label)+'</div><div style="display:grid;grid-template-columns:minmax(0,1fr) 16px minmax(0,1fr);gap:8px;text-align:center;align-items:center"><b style="color:#79dfff">'+clean(left)+'</b><span style="opacity:.5">:</span><b style="color:#f5c18b">'+clean(right)+'</b></div>'+(note?'<small style="display:block;text-align:center;opacity:.7;margin-top:5px">'+clean(note)+'</small>':'')+'</div>';
+ const intelligenceGoalie=projected.map((p,i)=>'<div style="padding:12px;border:1px solid rgba(108,189,225,.3);border-radius:12px;min-width:0"><b>'+clean(i===0?ac:hc)+'</b><p style="margin:6px 0">'+clean(p?.name||'Start není ověřen')+'</p><small style="color:'+(p?.status==='confirmed'?'#80eab4':'#f5ca8d')+'">'+(p?.status==='confirmed'?'✓ Potvrzený start':p?.status==='projected'?'◷ Předpokládaný start':'? Neověřený start')+'</small></div>').join('');
+ const intelligencePanel='<section class="analysis-section" style="border:1px solid rgba(89,210,249,.5);border-radius:18px;padding:16px;margin:14px 0;background:linear-gradient(145deg,rgba(8,37,69,.96),rgba(10,25,50,.97))">'+
+ '<div style="font-size:12px;letter-spacing:1.5px;color:#67e4ff">BANGER ANALYST 2.0 · MATCH INTELLIGENCE</div><h3 style="margin:8px 0 4px">Přehled zápasu na jednom místě</h3>'+
+ '<p class="analysis-small">'+clean(ac)+' (hosté) vs '+clean(hc)+' (domácí) · '+clean(day)+'</p>'+
+ '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0">'+
+ '<div style="padding:12px;border-radius:12px;background:rgba(58,166,208,.12)"><small>Očekávané góly hostů</small><div style="font-size:27px;font-weight:800;color:#80e5ff">'+intelligenceNum(intelligenceModel?.away)+'</div></div>'+
+ '<div style="padding:12px;border-radius:12px;background:rgba(235,158,97,.12)"><small>Očekávané góly domácích</small><div style="font-size:27px;font-weight:800;color:#ffd09a">'+intelligenceNum(intelligenceModel?.home)+'</div></div></div>'+
+ '<p class="analysis-small">Orientační model, nikoliv kalibrovaná pravděpodobnost výsledku. '+(intelligenceModel?'Základ: sezonní góly, poslední forma a dostupné doplňkové faktory.':'Chybí potřebné sezonní údaje.')+'</p>'+
+ '<details class="analyst-fold" open><summary>📊 Přímé srovnání týmů <small>Sezona a forma</small></summary><div class="analyst-fold-body">'+
+ intelligenceMetric('Vstřelené góly / zápas',intelligenceNum(af),intelligenceNum(hf),'Sezonní průměr')+
+ intelligenceMetric('Inkasované góly / zápas',intelligenceNum(aa),intelligenceNum(ha),'Nižší je lepší')+
+ intelligenceMetric('Bodová úspěšnost',ap==null?'—':pct(ap),hp==null?'—':pct(hp),'Podíl získaných bodů')+
+ intelligenceMetric('Střely / zápas · posledních 5',intelligenceNum(bangerSamples[0]?.shots),intelligenceNum(bangerSamples[1]?.shots),'Pouze dostupné boxscore')+
+ intelligenceMetric('Hity / zápas · posledních 5',intelligenceNum(bangerSamples[0]?.hits),intelligenceNum(bangerSamples[1]?.hits),'Pouze dostupné boxscore')+
+ intelligenceMetric('Bloky / zápas · posledních 5',intelligenceNum(bangerSamples[0]?.blocks),intelligenceNum(bangerSamples[1]?.blocks),'Pouze dostupné boxscore')+
+ intelligenceMetric('xG / xGA · 5v5','Nedostupné','Nedostupné','Bez ověřených dat MoneyPuck nelze počítat')+
+ intelligenceMetric('Corsi / Fenwick · 5v5','Nedostupné','Nedostupné','Vyžadují ověřené střelecké pokusy')+
+ '</div></details>'+
+ '<details class="analyst-fold" open><summary>🥅 Brankáři, únava a sestavy <small>Aktuální kontext</small></summary><div class="analyst-fold-body">'+
+ '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'+intelligenceGoalie+'</div>'+
+ intelligenceMetric('Dny od posledního utkání',intelligenceRestDays[0]??'—',intelligenceRestDays[1]??'—','1 den = utkání předchozí kalendářní den')+
+ intelligenceMetric('Výhry · posledních 5',intelligenceRecent[0]?.wins??'—',intelligenceRecent[1]?.wins??'—','Pouze dostupné dokončené zápasy')+
+ '<p class="analysis-small">'+(intelligenceRestDays.some(x=>x===1)?'⚠ Minimálně jeden tým hrál předchozí den. Zvaž možné zatížení, jeho dopad není kvantifikován.':'Back-to-back není podle dostupných termínů potvrzeno.')+'</p>'+
+ '<p class="analysis-small">Absence, kompletní sestavy, vzdálenost cestování a GSAx nejsou v tomto panelu ověřeny; nejsou proto zahrnuty jako potvrzené faktory.</p>'+
+ '</div></details>'+
+ '<p class="analysis-small">Datová transparentnost: týmové průměry = NHL tabulka; střely/hity/bloky = dostupné boxscore; brankáři = aktuální projekce; xG/Corsi/Fenwick = zatím bez ověřeného napojení.</p></section>';
  const expert='<details class="analyst-fold analyst-expert-report"><summary>📝 BANGER EXPERT REPORT <small>Podrobná česká analýza</small></summary><div class="analyst-fold-body"><p class="analysis-small">Automatický datový rozbor · '+clean(ac)+' vs '+clean(hc)+' · '+clean(day)+'</p>'+expertGoalieSection+seasonPlayerSection+playerFormSection+narrative.join('')+'<p class="analysis-small">Založeno na dostupných NHL datech. Nejde o generativní AI, kalibrovanou predikci ani potvrzené informace o sestavách.</p></div></details>';
  if(extraRoot&&extraRoot.isConnected){
-  extraRoot.insertAdjacentHTML('afterbegin',expert);
+  extraRoot.insertAdjacentHTML('afterbegin',intelligencePanel+expert);
   let saved=[];
   try{const parsed=JSON.parse(localStorage.getItem('banger-prediction-tracker-v1')||'[]');if(Array.isArray(parsed))saved=parsed.filter(x=>x&&x.id&&Number.isFinite(x.away)&&Number.isFinite(x.home)).slice(-150)}catch(e){}
   const evaluated=saved.filter(x=>x.status==='final');
