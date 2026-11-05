@@ -1261,6 +1261,33 @@ async function analyzeGame(id){
  if(bangerGoalieSamples[0]&&bangerGoalieSamples[1])advancedFactors.push('Brankáři · korekce nejvýše ±4 %');
  if(bangerSpecial[0]&&bangerSpecial[1])advancedFactors.push('Přesilovky a oslabení · korekce nejvýše ±3 %');
  const advancedModel=localIntelligenceModel&&advancedFactors.length?localIntelligenceModel:null;
+ // CORE 3.2 preview: match the current projected starter to his own recent boxscore,
+ // never substitute a team-wide average or an unrelated former teammate.
+ const normalizeGoalieName=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z ]/g,' ').replace(/\s+/g,' ').trim();
+ const starterSamples=projected.map((p,i)=>{
+   if(!p?.name||!['confirmed','projected'].includes(p.status))return null;
+   const target=normalizeGoalieName(p.name);
+   const parts=target.split(' ').filter(Boolean);
+   const matches=(bangerGoalieSamples[i]?.players||[]).filter(x=>{
+     const name=normalizeGoalieName(x.name),tokens=name.split(' ').filter(Boolean);
+     return name===target||(parts.length>=2&&tokens.length>=2&&parts[parts.length-1]===tokens[tokens.length-1]&&parts[0][0]===tokens[0][0]);
+   });
+   return matches.length===1?{...matches[0],status:p.status}:null;
+ });
+ const core32Base=canonicalSnapshot?.advanced_away!=null&&canonicalSnapshot?.advanced_home!=null?
+   {away:Number(canonicalSnapshot.advanced_away),home:Number(canonicalSnapshot.advanced_home)}:coreForecast;
+ const core32Available=starterSamples.every(s=>s&&s.starts>=2&&s.shots>=35&&Number.isFinite(s.pct));
+ const core32Forecast=core32Base&&core32Available?(()=>{
+   const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
+   const a=starterSamples[0],h=starterSamples[1];
+   return {away:clamp(core32Base.away*clamp(1+(90-h.pct)*.006,.96,1.04),.4,6),
+     home:clamp(core32Base.home*clamp(1+(90-a.pct)*.006,.96,1.04),.4,6)};
+ })():null;
+ const core32Section='<details class="analyst-fold" open style="margin-top:12px"><summary>🧪 BANGER CORE 3.2 <small>Testovací model · konkrétní brankáři</small></summary><div class="analyst-fold-body">'+
+ '<p class="analysis-small">Výpočet v prohlížeči, nikoliv serverová předzápasová predikce. Vychází z CORE 3.1, pokud je uložený, jinak z CORE 3.0. Brankářský faktor vyžaduje u obou projektovaných startujících alespoň 2 doložené starty a 35 střel.</p>'+
+ '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="metric"><span>'+clean(ac)+' · očekávané góly</span><b>'+intelligenceNum(core32Forecast?.away)+'</b></div><div class="metric"><span>'+clean(hc)+' · očekávané góly</span><b>'+intelligenceNum(core32Forecast?.home)+'</b></div></div>'+
+ [ac,hc].map((code,i)=>'<p class="analysis-small"><b>'+clean(code)+':</b> '+clean(projected[i]?.name||'Start neověřen')+' · '+(starterSamples[i]?'SV% '+fmt(starterSamples[i].pct)+' % · '+starterSamples[i].starts+' startů · '+starterSamples[i].shots+' střel':'není dostatek spárovaných individuálních statistik')+'</p>').join('')+
+ '<p class="analysis-small">'+(core32Forecast?'Korekce brankářů je omezená na ±4 %. Výsledek není zpětně otestován.':'Model 3.2 zatím nevydává číselný odhad, dokud nejsou splněny podmínky pro oba brankáře.')+'</p></div></details>';
  const advancedSection='<details style="margin-top:12px;border-top:1px solid #54eaff44;padding-top:12px"><summary style="cursor:pointer;color:#8feeff;font-weight:700">🔬 Rozšířený model · forma, brankáři a speciální týmy</summary>'+
  '<p class="analysis-small">Experimentální výpočet přímo v aplikaci. Není součástí uložené serverové předpovědi ani hodnocení přesnosti. Využívá pouze dostupná data.</p>'+
  (advancedModel?'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="metric"><span>Hosté · rozšířený model</span><b>'+intelligenceNum(advancedModel.away)+'</b></div><div class="metric"><span>Domácí · rozšířený model</span><b>'+intelligenceNum(advancedModel.home)+'</b></div></div>':'<p class="analysis-small">Zatím nejsou dostupná dostatečná doplňková data. Zůstává základní CORE 3.0.</p>')+
@@ -1275,7 +1302,7 @@ async function analyzeGame(id){
  '<div class="metric"><span>Očekávané góly · domácí</span><b>'+intelligenceNum(intelligenceModel?.home)+'</b></div>'+
  '<div class="metric"><span>xG model · hosté</span><b>'+intelligenceNum(experimentalModel?.away)+'</b></div>'+
  '<div class="metric"><span>xG model · domácí</span><b>'+intelligenceNum(experimentalModel?.home)+'</b></div></div>'+
- core31Panel+
+ core31Panel+core32Section+
  '<details style="margin-top:12px"><summary style="cursor:pointer;color:#8feeff;font-weight:700">⚙️ Verze modelu a započtené faktory</summary>'+
  '<p class="analysis-small">Základ: '+clean(coreVersion)+'<br>Varianta xG: '+clean(coreXgVersion)+'</p>'+
  '<p class="analysis-small">Základní CORE v3 používá sezonní góly, inkasované branky a korekci domácího prostředí ±1,5 %. xG varianta přidává podíl xG při 5v5 (korekce maximálně ±8 %). Brankáři, forma a speciální týmy jsou zatím kontextové údaje mimo společný model.</p>'+
