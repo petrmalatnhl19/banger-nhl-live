@@ -1,9 +1,30 @@
 (function(){
 'use strict';
 let utterance=null,paused=false,segments=[],index=0,activeRoot=null;
+let aiAudio=null,aiUrl=null;
+const aiEndpoint=window.BANGER_AZURE_SPEECH_ENDPOINT||'';
+function clearAi(){if(aiAudio){aiAudio.pause();aiAudio.src='';aiAudio=null}if(aiUrl){URL.revokeObjectURL(aiUrl);aiUrl=null}}
+async function playAi(root){
+ if(!aiEndpoint){alert('AI komentátor zatím čeká na nastavení bezpečného hlasového serveru. Do té doby použij běžné hlasové čtení.');return}
+ const report=root.querySelector('.analyst-expert-report .analyst-fold-body');if(!report)return;
+ const children=Array.from(report.children);
+ const first=children.findIndex(e=>e.tagName==='H4'&&e.textContent.trim().toLocaleLowerCase('cs-CZ').includes('celkový obraz utkání'));
+ if(first<0)return;
+ const paragraphs=children.slice(first).filter(e=>e.tagName==='H4'||(e.tagName==='P'&&e.previousElementSibling?.tagName==='H4')).map(e=>spoken(e.textContent||'')).filter(Boolean);
+ reset();clearAi();activeRoot=root;
+ const status=root.querySelector('[data-banger-voice-status]');if(status)status.textContent='Připravuji mužský AI komentář…';
+ try{
+ const response=await fetch(aiEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({paragraphs})});
+ if(!response.ok)throw new Error('Služba není dostupná');
+ aiUrl=URL.createObjectURL(await response.blob());aiAudio=new Audio(aiUrl);
+ aiAudio.onended=()=>{clearAi();update()};await aiAudio.play();
+ if(status)status.textContent='Přehrává AI komentátor Antonín';
+ }catch(e){clearAi();if(status)status.textContent='AI komentátor nedostupný: '+e.message}
+}
+
 const synth=()=>window.speechSynthesis;
 const supported=()=>typeof SpeechSynthesisUtterance!=='undefined'&&!!synth();
-function reset(){if(supported())synth().cancel();utterance=null;paused=false;segments=[];index=0;update()}
+function reset(){clearAi();if(supported())synth().cancel();utterance=null;paused=false;segments=[];index=0;update()}
 function update(){document.querySelectorAll('[data-banger-voice-status]').forEach(e=>{e.textContent=!utterance?'Připraveno k poslechu':paused?'Pozastaveno':'Přehrává se';});document.querySelectorAll('[data-banger-voice-pause]').forEach(b=>{b.textContent=paused?'▶ Pokračovat':'⏸ Pauza';b.disabled=!utterance});}
 function selectVoice(){
  const voices=synth().getVoices();
@@ -49,8 +70,8 @@ function start(root){
  }
  index=0;if(segments.length)speakNext();else update();
 }
-document.addEventListener('click',e=>{const button=e.target.closest('[data-banger-voice]');if(!button)return;const root=button.closest('.analysis-panel');if(!root)return;const action=button.dataset.bangerVoice;if(action==='play')start(root);else if(action==='stop')reset();else if(action==='pause'&&utterance){if(paused){synth().resume();paused=false}else{synth().pause();paused=true}update()}});
-const observer=new MutationObserver(()=>{if(activeRoot&&!activeRoot.isConnected)reset();document.querySelectorAll('.analyst-expert-report:not([data-banger-voice-ready])').forEach(report=>{report.dataset.bangerVoiceReady='1';const body=report.querySelector('.analyst-fold-body');if(!body)return;const controls=document.createElement('div');controls.className='banger-voice-controls';controls.style.cssText='display:flex;flex-wrap:wrap;align-items:center;gap:9px;padding:12px;margin:10px 0 18px;border:1px solid #347a9c;border-radius:12px;background:#0b1b35';controls.innerHTML='<button type="button" class="btn" data-banger-voice="play">▶ Přehrát analýzu</button><button type="button" class="btn" data-banger-voice="pause" data-banger-voice-pause disabled>⏸ Pauza</button><button type="button" class="btn" data-banger-voice="stop">⏹ Stop</button><label style="font-size:13px">Rychlost <select data-banger-voice-rate style="background:#112c49;color:white;padding:7px;border-radius:8px"><option value="0.8">0,8×</option><option value="0.92" selected>0,92× · komentátor</option><option value="1">1×</option><option value="1.2">1,2×</option><option value="1.5">1,5×</option></select></label><small data-banger-voice-status style="color:#9db2c6">Připraveno k poslechu</small>';body.prepend(controls);if(!supported()){controls.querySelector('[data-banger-voice="play"]').disabled=true;controls.querySelector('[data-banger-voice-status]').textContent='Tento prohlížeč nepodporuje hlasové čtení.'}})});
+document.addEventListener('click',e=>{const button=e.target.closest('[data-banger-voice]');if(!button)return;const root=button.closest('.analysis-panel');if(!root)return;const action=button.dataset.bangerVoice;if(action==='ai')playAi(root);else if(action==='play')start(root);else if(action==='stop')reset();else if(action==='pause'&&aiAudio){if(aiAudio.paused)aiAudio.play();else aiAudio.pause()}else if(action==='pause'&&utterance){if(paused){synth().resume();paused=false}else{synth().pause();paused=true}update()}});
+const observer=new MutationObserver(()=>{if(activeRoot&&!activeRoot.isConnected)reset();document.querySelectorAll('.analyst-expert-report:not([data-banger-voice-ready])').forEach(report=>{report.dataset.bangerVoiceReady='1';const body=report.querySelector('.analyst-fold-body');if(!body)return;const controls=document.createElement('div');controls.className='banger-voice-controls';controls.style.cssText='display:flex;flex-wrap:wrap;align-items:center;gap:9px;padding:12px;margin:10px 0 18px;border:1px solid #347a9c;border-radius:12px;background:#0b1b35';controls.innerHTML='<button type="button" class="btn" data-banger-voice="ai">🎙️ AI komentátor</button><button type="button" class="btn" data-banger-voice="play">▶ Přehrát analýzu</button><button type="button" class="btn" data-banger-voice="pause" data-banger-voice-pause disabled>⏸ Pauza</button><button type="button" class="btn" data-banger-voice="stop">⏹ Stop</button><label style="font-size:13px">Rychlost <select data-banger-voice-rate style="background:#112c49;color:white;padding:7px;border-radius:8px"><option value="0.8">0,8×</option><option value="0.92" selected>0,92× · komentátor</option><option value="1">1×</option><option value="1.2">1,2×</option><option value="1.5">1,5×</option></select></label><small data-banger-voice-status style="color:#9db2c6">Připraveno k poslechu</small>';body.prepend(controls);if(!supported()){controls.querySelector('[data-banger-voice="play"]').disabled=true;controls.querySelector('[data-banger-voice-status]').textContent='Tento prohlížeč nepodporuje hlasové čtení.'}})});
 observer.observe(document.documentElement,{childList:true,subtree:true});
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&utterance&&!paused){synth().pause();paused=true;update()}});
 })();
