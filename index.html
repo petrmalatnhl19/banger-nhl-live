@@ -1066,11 +1066,8 @@ async function analyzeGame(id){
  const seasonPlayerStats=await Promise.all([ac,hc].map(async code=>{
   const label=String(code||'').trim();
   const normalized=label.toLowerCase();
-  let teamCode;
-  if(normalized.includes('utah')||normalized==='uta')teamCode='UTA';
-  else if(normalized.includes('montreal')||normalized.includes('montréal')||normalized==='mtl')teamCode='MTL';
-  else teamCode=NHL_TEAMS.find(t=>t[0].toLowerCase()===normalized||t[1].toLowerCase()===normalized)?.[0];
-  if(!teamCode||!/^[A-Z]{3}$/.test(teamCode))return {ok:false,data:null,teamCode:null,attempts:[],reason:'Neznámý NHL tým: '+label};
+  const teamCode=normalized.includes('utah')?'UTA':normalized.includes('montreal')||normalized.includes('montréal')?'MTL':NHL_TEAMS.find(t=>t[0].toLowerCase()===normalized||t[1].toLowerCase()===normalized)?.[0];
+  if(!teamCode)return {ok:false,data:null,teamCode:'NEZNAMY',attempts:[],reason:'Nerozpoznaný tým: '+label};
   const base='https://api-web.nhle.com/v1/club-stats/'+teamCode+'/';
   const paths=[base+encodeURIComponent(season)+'/2',base+'now'];
   const attempts=[];
@@ -1085,7 +1082,7 @@ async function analyzeGame(id){
  }));
  const seasonPlayerSection='<section class="analysis-section"><h3>📈 Sezonní hráči a brankáři · NHL</h3><p class="analysis-small">Oficiální sezonní souhrny. Hodnoty na 60 minut se nepočítají bez ověřeného celkového času na ledě.</p>'+seasonPlayerStats.map((result,i)=>{
   const code=i===0?ac:hc;
-  if(!result.ok||!result.data)return '<h4>'+clean(code)+'</h4><p>Sezonní statistiky NHL nejsou dostupné. <b>Diagnostika v17</b></p><p class="analysis-small">Diagnostika: kód '+clean(result.teamCode||'—')+'. '+(result.attempts||[]).map(a=>clean(a.url.replace('https://api-web.nhle.com/v1',''))+' — '+(a.error?'chyba: '+clean(a.error):'hráči: '+(a.skaters??'—')+', brankáři: '+(a.goalies??'—'))).join('; ')+'</p>';
+  if(!result.ok||!result.data)return '<h4>'+clean(code)+'</h4><p>Sezonní statistiky NHL nejsou dostupné. <b>Diagnostika v18</b></p><p class="analysis-small">Diagnostika v18: kód '+clean(result.teamCode||'—')+'. '+(result.attempts||[]).map(a=>clean(a.url.replace('https://api-web.nhle.com/v1',''))+' — '+(a.error?'chyba: '+clean(a.error):'hráči: '+(a.skaters??'—')+', brankáři: '+(a.goalies??'—'))).join('; ')+'</p>';
   const data=result.data;
   const name=p=>p.firstName?.default&&p.lastName?.default?p.firstName.default+' '+p.lastName.default:p.name?.default||p.lastName?.default||'Hráč';
   const n=v=>Number.isFinite(Number(v))?Number(v):null;
