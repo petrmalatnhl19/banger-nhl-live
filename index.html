@@ -629,7 +629,7 @@ async function analyzeGame(id){
   const results=await Promise.all(ids.map(id=>safe(()=>get('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(id)+'/landing'),3500)));
   let ppGoals=0,ppChances=0,pkAllowed=0,pkFaced=0,n=0;
   const fraction=v=>{
-   const m=String(v??'').match(/(\\d+)\\s*\\/\\s*(\\d+)/);
+   const m=String(v??'').match(/(\d+)\s*\/\s*(\d+)/);
    return m?[Number(m[1]),Number(m[2])]:null;
   };
   for(const result of results){
