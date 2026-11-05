@@ -399,6 +399,38 @@ body.ux-arena-open .arena{z-index:10020}
 .analysis-panel .banger-advanced-table tbody tr:nth-child(odd){background:#ffffff08}
 @media(max-width:600px){.analysis-panel .banger-advanced-table{font-size:12px}.analysis-panel .banger-advanced-table th,.analysis-panel .banger-advanced-table td{padding:8px 4px}}
 </style>
+<!-- BANGER HOLOGRAPHIC 5.0 / visual layer 1 -->
+<style id="banger-holographic-v5">
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Exo+2:wght@400;500;600;700;800;900&display=swap');
+:root{--cyan:#56edff;--ink:#f0faff;--muted:#a5c4dc;--panel:#0a1c36;--v5-line:rgba(94,222,255,.31);--v5-glow:rgba(34,206,255,.22)}
+body{font-family:'Exo 2',system-ui,Segoe UI,sans-serif;background:radial-gradient(ellipse at 52% -15%,#18588c 0%,#091c39 34%,#040a19 77%),#040a19}
+body:before{background-image:linear-gradient(transparent 97%,#48d9ff0a 98%),linear-gradient(90deg,transparent 97%,#48d9ff0a 98%);background-size:54px 54px}
+h1,h2,h3,.team,.nums,.arenanum,.metric b,.profilegrid b{font-family:'Barlow Condensed','Exo 2',sans-serif;letter-spacing:.035em}
+h1{font-weight:900;letter-spacing:.065em;text-transform:uppercase;text-shadow:0 0 30px #29caff70}
+h2,h3{font-weight:800}
+.tag,.gamehead,.live{letter-spacing:.12em;text-transform:uppercase}
+.hero{border:1px solid #55dfff77;border-radius:25px;background:linear-gradient(115deg,rgba(18,56,92,.94),rgba(7,18,40,.94));box-shadow:0 18px 60px #0007,0 0 48px #00c8ff12,inset 0 1px 0 #c2f7ff45}
+.hero:before{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 30%,#ffffff0b 47%,transparent 60%);transform:translateX(-100%);animation:v5-hero-sheen 13s ease-in-out infinite}
+@keyframes v5-hero-sheen{0%,72%,100%{transform:translateX(-100%)}84%{transform:translateX(100%)}}
+.game,.metric,.profilecard,.arenacard,.tablewrap,.analysis-panel{border-color:var(--v5-line);box-shadow:0 16px 38px #0006,inset 0 1px 0 #ffffff20}
+.game{position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(18,53,87,.97),rgba(7,20,42,.98));transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+.game:before{content:'';position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,transparent,#64eeffb0,transparent);pointer-events:none}
+.game:hover{transform:translateY(-3px);border-color:#5deaffaa;box-shadow:0 18px 44px #0008,0 0 28px #1de3ff18}
+.team img,.arenateam img{filter:drop-shadow(0 5px 11px #0009) drop-shadow(0 0 12px #53dfff30)}
+.nums,.arenanum{font-size:clamp(32px,4vw,48px);font-weight:900;font-variant-numeric:tabular-nums;text-shadow:0 0 24px #24d8ff75}
+.metric{background:linear-gradient(150deg,#123957,#081a33);border-radius:16px}
+.metric b{font-weight:900;font-size:clamp(25px,3vw,36px);line-height:1.1}
+.btn,.sort,.date,.search{font-family:'Exo 2',system-ui,sans-serif;transition:background .18s,border-color .18s,box-shadow .18s,transform .18s}
+.btn{background:linear-gradient(160deg,#15416a,#0a2645);border-color:#3b9dbd;box-shadow:inset 0 1px #ffffff18}
+.btn:hover{transform:translateY(-1px);box-shadow:0 0 20px #27d8ff30,inset 0 1px #ffffff30}
+.btn.active{background:linear-gradient(145deg,#17668c,#0c3e68);border-color:#6af1ff}
+.btn:focus-visible,.game button:focus-visible,.match-tab:focus-visible{outline:2px solid #f3fdff;outline-offset:3px}
+th{background:#103657;letter-spacing:.045em}
+td{font-variant-numeric:tabular-nums}
+.profilecard,.arenacard{background:linear-gradient(150deg,#12385d,#06142b 82%);box-shadow:0 25px 75px #000c,0 0 45px #16cfff22}
+@media(max-width:760px){.wrap{padding-left:12px;padding-right:12px}.hero{border-radius:18px;padding:18px}.game:hover{transform:none}.nums,.arenanum{font-size:clamp(29px,8vw,42px)}}
+@media(prefers-reduced-motion:reduce){.hero:before{animation:none}.game,.btn{transition:none}.game:hover,.btn:hover{transform:none}}
+</style>
 </head><body><div class="wrap">
 <div id="brandSplash" class="brand-splash" aria-label="Načítání BANGER NHL LIVE"><div class="brand-splash-glow"></div><picture><source media="(orientation: portrait)" srcset="splash-portrait.png"><img src="splash-landscape.png" alt="BANGER NHL LIVE" fetchpriority="high" decoding="async"></picture><div class="brand-splash-loader"><span></span></div><div class="brand-splash-caption">VSTUP DO HOKEJOVÉ ARÉNY</div></div><header class="top"><div class="brand"><div class="brand-logo" aria-label="BANGER NHL LIVE"><span class="brand-mark">BANGER</span><span class="brand-sub">NHL <b>LIVE</b></span></div></div><span class="header-status"><i></i> NHL 2026/27</span></header>
 
