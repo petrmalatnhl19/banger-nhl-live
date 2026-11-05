@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-05T18:11:21.114532+00:00",
-  "rostersUpdatedAt": "2026-11-05T18:10:54.797721+00:00",
+  "updatedAt": "2026-11-05T19:12:48.022545+00:00",
+  "rostersUpdatedAt": "2026-11-05T19:12:25.204146+00:00",
   "projectionDate": "2026-11-05",
   "teamCount": 32,
-  "goalieCount": 78,
+  "goalieCount": 77,
   "goalies": [
     {
       "name": "Mackenzie Blackwood",
@@ -209,14 +209,6 @@
       "team": "CGY",
       "teamKey": "flames",
       "playerId": 8482445,
-      "starterStatus": "unknown",
-      "starterGameDate": null
-    },
-    {
-      "name": "Arsenii Sergeev",
-      "team": "CGY",
-      "teamKey": "flames",
-      "playerId": 8482949,
       "starterStatus": "unknown",
       "starterGameDate": null
     },
@@ -539,8 +531,9 @@
       "team": "DET",
       "teamKey": "red wings",
       "playerId": 8480193,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-05",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Colten Ellis",
