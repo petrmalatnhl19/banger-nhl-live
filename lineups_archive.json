@@ -783,9 +783,14 @@
       "name": "Blues",
       "forwards": [
         [
+          "Dylan Holloway",
+          "Robert Thomas",
+          "Jimmy Snuggerud"
+        ],
+        [
           "Connor McMichael",
           "Mason McTavish",
-          "Jonatan Berggren"
+          "Aleksanteri Kaskimaki"
         ],
         [
           "Jake Neighbours",
@@ -808,18 +813,20 @@
           "Adam Jiricek"
         ],
         [
-          "Theo Lindstein",
+          "Colton Parayko",
           "Justin Barron"
         ]
       ],
       "goalies": [
-        "Joel Hofer",
-        "Jordan Binnington"
+        "Jordan Binnington",
+        "Joel Hofer"
       ],
-      "injured": "Tyler Tucker (knee), Dillon Dube (neck), Colton Parayko (upper body)",
-      "scratched": "Aleksanteri Kaskimaki",
-      "asOf": "2026-11-04",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "injured": "Tyler Tucker (knee), Dillon Dube (neck)",
+      "scratched": "Jonatan Berggren, Theo Lindstein",
+      "source": "https://www.nhl.com/news/st-louis-blues-new-jersey-devils-game-preview-november-5-2026",
+      "publishedAt": "2026-11-05T18:05:34.044000+00:00",
+      "asOf": "2026-11-05",
+      "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
     },
@@ -867,8 +874,10 @@
       ],
       "injured": "None",
       "scratched": "Brenden Dillon",
-      "asOf": "2026-11-04",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "source": "https://www.nhl.com/news/st-louis-blues-new-jersey-devils-game-preview-november-5-2026",
+      "publishedAt": "2026-11-05T18:05:34.044000+00:00",
+      "asOf": "2026-11-05",
+      "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
     },

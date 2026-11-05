@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-05T17:28:21.803595+00:00",
+  "fetchedAt": "2026-11-05T18:11:17.974082+00:00",
   "teams": {
     "hurricanes": {
       "name": "Hurricanes",
@@ -271,6 +271,100 @@
       "scratched": "Jake Livanavage, Ilya Solovyov, Andrei Kuzmenko",
       "source": "https://www.nhl.com/news/boston-bruins-pittsburgh-penguins-game-preview-november-5-2026",
       "publishedAt": "2026-11-05T16:53:27.782000+00:00"
+    },
+    "blues": {
+      "name": "Blues",
+      "forwards": [
+        [
+          "Dylan Holloway",
+          "Robert Thomas",
+          "Jimmy Snuggerud"
+        ],
+        [
+          "Connor McMichael",
+          "Mason McTavish",
+          "Aleksanteri Kaskimaki"
+        ],
+        [
+          "Jake Neighbours",
+          "Dalibor Dvorsky",
+          "Pavel Buchnevich"
+        ],
+        [
+          "Alexey Toropchenko",
+          "Pius Suter",
+          "Ross Johnston"
+        ]
+      ],
+      "defense": [
+        [
+          "Philip Broberg",
+          "Brandon Carlo"
+        ],
+        [
+          "Cam Fowler",
+          "Adam Jiricek"
+        ],
+        [
+          "Colton Parayko",
+          "Justin Barron"
+        ]
+      ],
+      "goalies": [
+        "Jordan Binnington",
+        "Joel Hofer"
+      ],
+      "injured": "Tyler Tucker (knee), Dillon Dube (neck)",
+      "scratched": "Jonatan Berggren, Theo Lindstein",
+      "source": "https://www.nhl.com/news/st-louis-blues-new-jersey-devils-game-preview-november-5-2026",
+      "publishedAt": "2026-11-05T18:05:34.044000+00:00"
+    },
+    "devils": {
+      "name": "Devils",
+      "forwards": [
+        [
+          "Arseny Gritsyuk",
+          "Jack Hughes",
+          "Jesper Bratt"
+        ],
+        [
+          "Timo Meier",
+          "Nico Hischier",
+          "Luke Evangelista"
+        ],
+        [
+          "Anthony Mantha",
+          "Evan Rodrigues",
+          "Jesper Boqvist"
+        ],
+        [
+          "Amadeus Lombardi",
+          "Cody Glass",
+          "Connor Brown"
+        ]
+      ],
+      "defense": [
+        [
+          "Luke Hughes",
+          "Brett Pesce"
+        ],
+        [
+          "Jonas Siegenthaler",
+          "Dougie Hamilton"
+        ],
+        [
+          "Declan Chisholm",
+          "Johnathan Kovacevic"
+        ]
+      ],
+      "goalies": [
+        "Connor Hellebuyck",
+        "Jake Allen"
+      ],
+      "injured": "None",
+      "scratched": "Brenden Dillon",
+      "source": "https://www.nhl.com/news/st-louis-blues-new-jersey-devils-game-preview-november-5-2026",
+      "publishedAt": "2026-11-05T18:05:34.044000+00:00"
     },
     "sharks": {
       "name": "Sharks",
@@ -1042,53 +1136,6 @@
       "source": "https://www.nhl.com/news/edmonton-oilers-new-jersey-devils-game-preview-november-3-2026",
       "publishedAt": "2026-11-03T17:25:23.187000+00:00"
     },
-    "devils": {
-      "name": "Devils",
-      "forwards": [
-        [
-          "Arseny Gritsyuk",
-          "Jack Hughes",
-          "Jesper Bratt"
-        ],
-        [
-          "Timo Meier",
-          "Nico Hischier",
-          "Luke Evangelista"
-        ],
-        [
-          "Anthony Mantha",
-          "Evan Rodrigues",
-          "Jesper Boqvist"
-        ],
-        [
-          "Amadeus Lombardi",
-          "Cody Glass",
-          "Connor Brown"
-        ]
-      ],
-      "defense": [
-        [
-          "Luke Hughes",
-          "Brett Pesce"
-        ],
-        [
-          "Jonas Siegenthaler",
-          "Dougie Hamilton"
-        ],
-        [
-          "Declan Chisholm",
-          "Johnathan Kovacevic"
-        ]
-      ],
-      "goalies": [
-        "Connor Hellebuyck",
-        "Jake Allen"
-      ],
-      "injured": "None",
-      "scratched": "Brenden Dillon",
-      "source": "https://www.nhl.com/news/edmonton-oilers-new-jersey-devils-game-preview-november-3-2026",
-      "publishedAt": "2026-11-03T17:25:23.187000+00:00"
-    },
     "wild": {
       "name": "Wild",
       "forwards": [
@@ -1229,48 +1276,6 @@
       "scratched": "Emil Andrae, Danton Heinen, Erik Gudbranson",
       "source": "https://www.nhl.com/news/colorado-avalanche-columbus-blue-jackets-game-preview-november-3-2026",
       "publishedAt": "2026-11-03T17:17:53.296000+00:00"
-    },
-    "blues": {
-      "name": "Blues",
-      "forwards": [
-        [
-          "Connor McMichael",
-          "Mason McTavish",
-          "Jonatan Berggren"
-        ],
-        [
-          "Jake Neighbours",
-          "Dalibor Dvorsky",
-          "Pavel Buchnevich"
-        ],
-        [
-          "Alexey Toropchenko",
-          "Pius Suter",
-          "Ross Johnston"
-        ]
-      ],
-      "defense": [
-        [
-          "Philip Broberg",
-          "Brandon Carlo"
-        ],
-        [
-          "Cam Fowler",
-          "Adam Jiricek"
-        ],
-        [
-          "Theo Lindstein",
-          "Justin Barron"
-        ]
-      ],
-      "goalies": [
-        "Joel Hofer",
-        "Jordan Binnington"
-      ],
-      "injured": "Tyler Tucker (knee), Dillon Dube (neck), Colton Parayko (upper body)",
-      "scratched": "Aleksanteri Kaskimaki",
-      "source": "https://www.nhl.com/news/st-louis-blues-new-york-rangers-game-preview-november-3-2026",
-      "publishedAt": "2026-11-03T17:14:56.036000+00:00"
     },
     "red wings": {
       "name": "Red Wings",

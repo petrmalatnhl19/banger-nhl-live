@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-05T17:28:24.441264+00:00",
-  "rostersUpdatedAt": "2026-11-05T17:28:06.330531+00:00",
+  "updatedAt": "2026-11-05T18:11:21.114532+00:00",
+  "rostersUpdatedAt": "2026-11-05T18:10:54.797721+00:00",
   "projectionDate": "2026-11-05",
   "teamCount": 32,
   "goalieCount": 78,
@@ -10,7 +10,7 @@
       "team": "COL",
       "teamKey": "avalanche",
       "playerId": 8478406,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-05",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },

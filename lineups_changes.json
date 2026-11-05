@@ -147,93 +147,93 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "blues": {
-      "updatedAt": "2026-11-03T17:46:39.606149+00:00",
-      "previousPublishedAt": "2026-10-30T17:18:36.660000+00:00",
-      "publishedAt": "",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-05T18:11:17.970592+00:00",
+      "previousPublishedAt": "2026-11-03T17:14:56.036000+00:00",
+      "publishedAt": "2026-11-05T18:05:34.044000+00:00",
+      "source": "https://www.nhl.com/news/st-louis-blues-new-jersey-devils-game-preview-november-5-2026",
       "events": [
+        {
+          "type": "added",
+          "player": "Dylan Holloway",
+          "to": "Útok 1"
+        },
+        {
+          "type": "added",
+          "player": "Robert Thomas",
+          "to": "Útok 1"
+        },
+        {
+          "type": "added",
+          "player": "Jimmy Snuggerud",
+          "to": "Útok 1"
+        },
         {
           "type": "moved",
           "player": "Connor McMichael",
-          "from": "Útok 3",
-          "to": "Útok 1"
-        },
-        {
-          "type": "moved",
-          "player": "Mason McTavish",
-          "from": "Útok 2",
-          "to": "Útok 1"
-        },
-        {
-          "type": "moved",
-          "player": "Jonatan Berggren",
-          "from": "Útok 2",
-          "to": "Útok 1"
-        },
-        {
-          "type": "moved",
-          "player": "Jake Neighbours",
           "from": "Útok 1",
           "to": "Útok 2"
         },
         {
           "type": "moved",
-          "player": "Dalibor Dvorsky",
-          "from": "Útok 3",
+          "player": "Mason McTavish",
+          "from": "Útok 1",
+          "to": "Útok 2"
+        },
+        {
+          "type": "added",
+          "player": "Aleksanteri Kaskimaki",
           "to": "Útok 2"
         },
         {
           "type": "moved",
-          "player": "Alexey Toropchenko",
-          "from": "Útok 4",
+          "player": "Jake Neighbours",
+          "from": "Útok 2",
           "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Dalibor Dvorsky",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Pavel Buchnevich",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Alexey Toropchenko",
+          "from": "Útok 3",
+          "to": "Útok 4"
         },
         {
           "type": "moved",
           "player": "Pius Suter",
-          "from": "Útok 4",
-          "to": "Útok 3"
-        },
-        {
-          "type": "added",
-          "player": "Ross Johnston",
-          "to": "Útok 3"
+          "from": "Útok 3",
+          "to": "Útok 4"
         },
         {
           "type": "moved",
-          "player": "Adam Jiricek",
-          "from": "Obrana 3",
-          "to": "Obrana 2"
+          "player": "Ross Johnston",
+          "from": "Útok 3",
+          "to": "Útok 4"
         },
         {
           "type": "added",
-          "player": "Theo Lindstein",
+          "player": "Colton Parayko",
           "to": "Obrana 3"
         },
         {
           "type": "removed",
-          "player": "Robert Thomas",
+          "player": "Jonatan Berggren",
           "from": "Útok 1"
         },
         {
           "type": "removed",
-          "player": "Jimmy Snuggerud",
-          "from": "Útok 1"
-        },
-        {
-          "type": "removed",
-          "player": "Dylan Holloway",
-          "from": "Útok 3"
-        },
-        {
-          "type": "removed",
-          "player": "Aleksanteri Kaskimaki",
-          "from": "Útok 4"
-        },
-        {
-          "type": "removed",
-          "player": "Colton Parayko",
-          "from": "Obrana 2"
+          "player": "Theo Lindstein",
+          "from": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
