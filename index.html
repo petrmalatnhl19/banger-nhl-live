@@ -773,11 +773,32 @@ async function analyzeGame(id){
    (sample.ppPct==null?'bez dostatku příležitostí':fmt(sample.ppPct)+' procent ('+sample.ppGoals+' z '+sample.ppChances+')')+
    ', oslabení '+(sample.pkPct==null?'bez dostatku příležitostí':fmt(sample.pkPct)+' procent ('+(sample.pkFaced-sample.pkAllowed)+' ubráněných z '+sample.pkFaced+')')+'. ';
  };
+ const bangerVerdict=()=>{
+  const complete=[af,aa,hf,ha].every(Number.isFinite);
+  const away=complete?Math.max(.4,Math.min(6,(af+ha)/2)):null;
+  const home=complete?Math.max(.4,Math.min(6,(hf+aa)/2)):null;
+  const total=away==null?null:away+home;
+  const shots=bangerSamples;
+  const goalies=bangerGoalieSamples;
+  const special=bangerSpecial;
+  const covered=[complete,!!shots[0],!!shots[1],!!goalies[0],!!goalies[1],!!special[0],!!special[1]];
+  const coverage=covered.filter(Boolean).length;
+  const confidence=coverage>=7?'vyšší pokrytí dat':coverage>=4?'střední pokrytí dat':'omezené pokrytí dat';
+  const lines=[];
+  lines.push('Góly: '+(total==null?'nedostatek sezonních údajů':fmt(total)+' očekávaných celkem (zjednodušený sezonní model; '+clean(ac)+' '+fmt(away)+', '+clean(hc)+' '+fmt(home)+')')+'.');
+  lines.push('Průběh: '+(total==null?'bez jasného favorita podle gólových průměrů':Math.abs(away-home)<.35?'vyrovnaný podle gólových profilů':'mírná modelová výhoda '+clean(away>home?ac:hc))+'.');
+  lines.push('Střely: '+(shots[0]&&shots[1]?clean(ac)+' '+fmt(shots[0].shots)+', '+clean(hc)+' '+fmt(shots[1].shots)+' na zápas v posledních '+shots[0].n+' a '+shots[1].n+' utkáních':'nedostatek srovnatelných posledních utkání')+'.');
+  lines.push('Fyzická hra: '+(shots[0]&&shots[1]?fmt(shots[0].hits+shots[1].hits)+' hitů obou týmů v součtu jejich průměrů; tvrdost příštího zápasu není jistá':'nedostatek údajů o hitech')+'.');
+  lines.push('Brankáři: '+(goalies[0]&&goalies[1]?clean(ac)+' '+fmt(goalies[0].pct)+' %, '+clean(hc)+' '+fmt(goalies[1].pct)+' % zákroků v nedávných startech':'chybí srovnatelná forma brankářů')+'.');
+  lines.push('Speciální týmy: '+(special[0]&&special[1]?clean(ac)+' PP '+(special[0].ppPct==null?'bez dat':fmt(special[0].ppPct)+' %')+', '+clean(hc)+' PP '+(special[1].ppPct==null?'bez dat':fmt(special[1].ppPct)+' %'):'neúplná data o přesilovkách')+'.');
+  lines.push('Spolehlivost: '+confidence+' ('+coverage+'/7 dostupných datových oblastí). Nejde o statisticky kalibrovanou pravděpodobnost správné předpovědi; rivalitu ani výsledek nelze z těchto čísel potvrdit.');
+  return lines.join(' ');
+ };
  const narrative=[];
  const section=(heading,body)=>narrative.push('<h4>'+heading+'</h4><p>'+body+'</p>');
  const completeSeason=[af,aa,hf,ha].every(Number.isFinite);
  const leaderText=(s,code)=>s?.leaders?.length?'Za '+clean(code)+' v posledním dostupném zápase vynikl '+clean(s.leaders[0].name)+' s '+s.leaders[0].points+' body, '+s.leaders[0].shots+' střelami.':'U '+clean(code)+' nejsou dostupné ověřené individuální statistiky z posledního utkání.';
- section('Rychlá předzápasová predikce',bangerSnapshot());
+ section('Závěrečný expertní verdikt',bangerVerdict());
  section('Tabulková síla a dlouhodobá stabilita',bangerMetrics(ar,ac)+' '+bangerMetrics(hr,hc)+' '+bangerCompare()+' Jde o popis dosavadní sezony, nikoli jistotu výsledku.');
  section('Střelecká aktivita a efektivita',bangerShotReport(skaters[0],ac)+' '+bangerShotReport(skaters[1],hc)+' Vyšší úspěšnost střelby z jediného utkání sama o sobě neznamená lepší útok.');
  section('Odpočinek a náročnost programu',bangerRestReport(ga,ac)+' '+bangerRestReport(gh,hc));
