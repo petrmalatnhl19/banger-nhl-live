@@ -1262,21 +1262,46 @@ async function analyzeGame(id){
 
   // Central archive is read-only in the browser. Trusted server-side publishing
   // is a separate step; never grant anonymous clients INSERT/UPDATE access.
+  // Server snapshots are the canonical pre-game comparison; never rewrite them from the browser.
+  const accuracyPanel=document.createElement('section');
+  accuracyPanel.className='analyst-fold-body';
+  accuracyPanel.innerHTML='<details class="analyst-fold" open><summary>🎯 PREDICTION ACCURACY <small>Centrální vyhodnocení · pouze dokončené zápasy</small></summary><div class="analyst-fold-body"><p id="bangerAccuracyStatus">Načítám výsledky…</p><div id="bangerAccuracyStats" class="metrics"></div><div id="bangerAccuracyComparison"></div><p class="analysis-small">MAE = průměrná absolutní chyba očekávaných gólů na tým. Porovnáváme pouze stejné zápasy s oběma předzápasovými predikcemi. Nerozhodné zápasy v základní hrací době zde nerozlišujeme; vyhodnocujeme konečné skóre NHL.</p></div></details>';
+  extraRoot.insertAdjacentElement('afterbegin',accuracyPanel);
+  (async()=>{
+    const label=accuracyPanel.querySelector('#bangerAccuracyStatus');
+    const metrics=accuracyPanel.querySelector('#bangerAccuracyStats');
+    const comparison=accuracyPanel.querySelector('#bangerAccuracyComparison');
+    try{
+      const endpoint='https://xxwqeiuyislnoxsmjuul.supabase.co/rest/v1/nhl_prediction_archive?select=game_id,game_date,away_team,home_team,baseline_away,baseline_home,experimental_away,experimental_home,model_version,experimental_version,status,actual_away,actual_home&order=game_date.desc&limit=1000';
+      const response=await fetch(endpoint,{headers:{apikey:'sb_publishable_SfeHMIvUkYTuD3jCrWub8w_fPIY0B-G'}});
+      if(!response.ok)throw Error('HTTP '+response.status);
+      const rows=await response.json();
+      if(!Array.isArray(rows))throw Error('Neplatný archiv');
+      const valid=rows.filter(x=>x.status==='final'&&[x.actual_away,x.actual_home,x.baseline_away,x.baseline_home].every(v=>v!==null&&Number.isFinite(Number(v))));
+      const paired=valid.filter(x=>x.experimental_away!==null&&x.experimental_home!==null&&Number.isFinite(Number(x.experimental_away))&&Number.isFinite(Number(x.experimental_home)));
+      const mae=(data,a,h)=>data.length?data.reduce((s,x)=>s+Math.abs(Number(x[a])-Number(x.actual_away))+Math.abs(Number(x[h])-Number(x.actual_home)),0)/(2*data.length):null;
+      const wins=(data,a,h)=>data.filter(x=>Math.sign(Number(x[a])-Number(x[h]))===Math.sign(Number(x.actual_away)-Number(x.actual_home))).length;
+      const fmtNum=v=>v===null?'—':v.toFixed(3);
+      label.textContent='Vyhodnoceno '+valid.length+' zápasů z '+rows.length+' uložených · společný vzorek '+paired.length;
+      metrics.innerHTML='<div class="metric"><b>'+valid.length+'</b><span>Dokončené zápasy</span></div><div class="metric"><b>'+fmtNum(mae(valid,'baseline_away','baseline_home'))+'</b><span>MAE základního modelu</span></div><div class="metric"><b>'+fmtNum(mae(paired,'experimental_away','experimental_home'))+'</b><span>MAE xG modelu · společný vzorek</span></div>';
+      comparison.innerHTML=paired.length?'<p><b>Stejný vzorek '+paired.length+' zápasů:</b> základní model MAE '+fmtNum(mae(paired,'baseline_away','baseline_home'))+' · xG MAE '+fmtNum(mae(paired,'experimental_away','experimental_home'))+'.</p><p>Správná strana konečného výsledku: základní '+wins(paired,'baseline_away','baseline_home')+'/'+paired.length+' · xG '+wins(paired,'experimental_away','experimental_home')+'/'+paired.length+'.</p><p class="analysis-small">Modely mají verzované záznamy; statistiky zatím zahrnují více verzí. Rozhodující je nižší MAE na stejném vzorku.</p>':'<p>Zatím žádné dokončené zápasy se dvěma předzápasovými predikcemi. Přesnost neodhadujeme bez výsledků.</p>';
+    }catch(e){label.textContent='Přesnost nyní nelze načíst: '+e.message}
+  })();
   const archiveContainer=document.createElement('div');
   archiveContainer.className='analyst-fold-body';
-  archiveContainer.innerHTML='<details class="analyst-fold"><summary>☁️ Centrální archiv <small>Supabase · sdílená historie</small></summary><div class="analyst-fold-body"><p id="bangerCentralStatus">Načítám centrální archiv…</p><div id="bangerCentralRows"></div><p class="analysis-small">Archiv je pouze pro čtení. Zápis ze serveru se připravuje; lokální předpovědi se automaticky nesynchronizují.</p></div></details>';
+  archiveContainer.innerHTML='<details class="analyst-fold"><summary>☁️ Centrální archiv <small>Supabase · sdílená historie</small></summary><div class="analyst-fold-body"><p id="bangerCentralStatus">Načítám centrální archiv…</p><div id="bangerCentralRows"></div><p class="analysis-small">Archiv je pouze pro čtení. Server automaticky ukládá předzápasové snímky; lokální tracker je samostatný.</p></div></details>';
   extraRoot.insertAdjacentElement('afterbegin',archiveContainer);
   (async()=>{
    const status=archiveContainer.querySelector('#bangerCentralStatus');
    const target=archiveContainer.querySelector('#bangerCentralRows');
    try{
-    const response=await fetch('https://xxwqeiuyislnoxsmjuul.supabase.co/rest/v1/nhl_prediction_archive?select=game_id,game_date,away_team,home_team,baseline_away,baseline_home,experimental_away,experimental_home,status,actual_away,actual_home&order=game_date.desc&limit=20',{headers:{apikey:'sb_publishable_SfeHMIvUkYTuD3jCrWub8w_fPIY0B-G'}});
+    const response=await fetch('https://xxwqeiuyislnoxsmjuul.supabase.co/rest/v1/nhl_prediction_archive?select=game_id,game_date,away_team,home_team,baseline_away,baseline_home,experimental_away,experimental_home,model_version,experimental_version,status,actual_away,actual_home&order=game_date.desc&limit=20',{headers:{apikey:'sb_publishable_SfeHMIvUkYTuD3jCrWub8w_fPIY0B-G'}});
     if(!response.ok)throw Error('HTTP '+response.status);
     const rows=await response.json();
     if(!Array.isArray(rows))throw Error('Neplatná odpověď archivu');
     if(!archiveContainer.isConnected)return;
     status.textContent=rows.length?'Posledních '+rows.length+' centrálně uložených zápasů':'Centrální archiv je zatím prázdný. Lokální tracker nadále funguje samostatně.';
-    target.innerHTML=rows.map(x=>'<div style="border-bottom:1px solid rgba(114,184,217,.18);padding:10px 0"><b>'+clean(x.game_date)+' · '+clean(x.away_team)+' vs '+clean(x.home_team)+'</b><div>Model '+fmt(x.baseline_away)+' : '+fmt(x.baseline_home)+(Number.isFinite(x.experimental_away)&&Number.isFinite(x.experimental_home)?' · xG '+fmt(x.experimental_away)+' : '+fmt(x.experimental_home):'')+'</div><small>'+(x.status==='final'?'Výsledek '+clean(x.actual_away)+' : '+clean(x.actual_home):'Čeká na výsledek')+'</small></div>').join('');
+    target.innerHTML=rows.map(x=>'<div style="border-bottom:1px solid rgba(114,184,217,.18);padding:10px 0"><b>'+clean(x.game_date)+' · '+clean(x.away_team)+' vs '+clean(x.home_team)+'</b><div>Model '+fmt(x.baseline_away)+' : '+fmt(x.baseline_home)+(Number.isFinite(x.experimental_away)&&Number.isFinite(x.experimental_home)?' · '+clean(x.experimental_version||'xG')+' '+fmt(x.experimental_away)+' : '+fmt(x.experimental_home):'')+'</div><small>'+(x.status==='final'?'Výsledek '+clean(x.actual_away)+' : '+clean(x.actual_home):'Čeká na výsledek')+'</small></div>').join('');
    }catch(e){if(archiveContainer.isConnected)status.textContent='Centrální archiv nyní nelze načíst: '+e.message}
   })();
 
