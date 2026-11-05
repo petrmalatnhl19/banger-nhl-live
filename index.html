@@ -1230,6 +1230,17 @@ async function analyzeGame(id){
  const coreVersion=canonicalSnapshot?String(canonicalSnapshot.model_version||'Archiv bez verze'):'banger-core-v3-season-home · lokální výpočet';
  const coreSource=canonicalSnapshot?'Centrální archiv Supabase · předzápasová predikce':'Lokální výpočet · zápas bez serverového snímku';
  const coreXgVersion=experimentalModel?(experimentalModel.server?String(canonicalSnapshot.experimental_version||'server-xg'):'banger-core-v3-xg-share · lokální'):'xG data nejsou dostupná';
+ const advancedFactors=[];
+ const recentAway=bangerRecentForm(ga,ac,5),recentHome=bangerRecentForm(gh,hc,5);
+ if(recentAway&&recentHome)advancedFactors.push('Forma posledních pěti zápasů · váha 20 %');
+ if(bangerGoalieSamples[0]&&bangerGoalieSamples[1])advancedFactors.push('Brankáři · korekce nejvýše ±4 %');
+ if(bangerSpecial[0]&&bangerSpecial[1])advancedFactors.push('Přesilovky a oslabení · korekce nejvýše ±3 %');
+ const advancedModel=localIntelligenceModel&&advancedFactors.length?localIntelligenceModel:null;
+ const advancedSection='<details style="margin-top:12px;border-top:1px solid #54eaff44;padding-top:12px"><summary style="cursor:pointer;color:#8feeff;font-weight:700">🔬 Rozšířený model · forma, brankáři a speciální týmy</summary>'+
+ '<p class="analysis-small">Experimentální výpočet přímo v aplikaci. Není součástí uložené serverové předpovědi ani hodnocení přesnosti. Využívá pouze dostupná data.</p>'+
+ (advancedModel?'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="metric"><span>Hosté · rozšířený model</span><b>'+intelligenceNum(advancedModel.away)+'</b></div><div class="metric"><span>Domácí · rozšířený model</span><b>'+intelligenceNum(advancedModel.home)+'</b></div></div>':'<p class="analysis-small">Zatím nejsou dostupná dostatečná doplňková data. Zůstává základní CORE 3.0.</p>')+
+ '<p class="analysis-small"><b>Započtené faktory:</b> '+(advancedFactors.length?advancedFactors.map(clean).join(' · '):'žádné doplňkové faktory')+'</p>'+
+ '<p class="analysis-small">Základní výpočet vždy zahrnuje sezonní góly a domácí prostředí. Brankářská statistika není potvrzením dnešního startujícího brankáře.</p></details>';
  const corePanel='<section id="banger-core-3" class="analysis-section" style="margin:14px 0;border:1px solid #54eaff;border-radius:18px;padding:17px;background:linear-gradient(145deg,#0b3655,#08152e);box-shadow:0 0 24px #21cfff2b">'+
  '<div style="font-size:11px;letter-spacing:2px;color:#71eaff;font-weight:800">BANGER CORE 3.0 · PREDIKČNÍ CENTRUM</div>'+
  '<h3 style="margin:7px 0 5px">🏒 '+clean(ac)+' vs '+clean(hc)+'</h3>'+
@@ -1242,7 +1253,7 @@ async function analyzeGame(id){
  '<details style="margin-top:12px"><summary style="cursor:pointer;color:#8feeff;font-weight:700">⚙️ Verze modelu a započtené faktory</summary>'+
  '<p class="analysis-small">Základ: '+clean(coreVersion)+'<br>Varianta xG: '+clean(coreXgVersion)+'</p>'+
  '<p class="analysis-small">Základní CORE v3 používá sezonní góly, inkasované branky a korekci domácího prostředí ±1,5 %. xG varianta přidává podíl xG při 5v5 (korekce maximálně ±8 %). Brankáři, forma a speciální týmy jsou zatím kontextové údaje mimo společný model.</p>'+
- '</details></section>';
+ '</details>'+advancedSection+'</section>';
  const intelligencePanel='<section class="analysis-section" style="border:1px solid rgba(89,210,249,.5);border-radius:18px;padding:16px;margin:14px 0;background:linear-gradient(145deg,rgba(8,37,69,.96),rgba(10,25,50,.97))">'+
  '<div style="font-size:12px;letter-spacing:1.5px;color:#67e4ff">BANGER ANALYST 2.0 · MATCH INTELLIGENCE</div><h3 style="margin:8px 0 4px">Přehled zápasu na jednom místě</h3>'+
  '<p class="analysis-small">'+clean(ac)+' (hosté) vs '+clean(hc)+' (domácí) · '+clean(day)+'</p>'+
