@@ -38,6 +38,17 @@ const teamNames={
 function expandTeams(text){
  return text.replace(/\b(?:ANA|BOS|BUF|CAR|CBJ|CGY|CHI|COL|DAL|DET|EDM|FLA|LAK|MIN|MTL|NJD|NSH|NYI|NYR|OTT|PHI|PIT|SEA|SJS|STL|TBL|TOR|UTA|VAN|VGK|WPG|WSH)\b/g,code=>teamNames[code]||code);
 }
+function expandReportText(report){
+ const walker=document.createTreeWalker(report,NodeFilter.SHOW_TEXT);
+ const nodes=[];
+ while(walker.nextNode())nodes.push(walker.currentNode);
+ for(const node of nodes){
+  if(node.parentElement?.closest('.banger-voice-controls,script,style'))continue;
+  const original=node.nodeValue||'';
+  const expanded=expandTeams(original);
+  if(expanded!==original)node.nodeValue=expanded;
+ }
+}
 function pronounce(text){
  return expandTeams(text)
   .replace(/\bPROJECTED\b/gi,'předpokládaný start')
@@ -118,6 +129,7 @@ const observer=new MutationObserver(()=>{
  if(activeRoot&&!activeRoot.isConnected)stop();
  document.querySelectorAll('.analyst-expert-report:not([data-banger-voice-ready])').forEach(report=>{
   report.dataset.bangerVoiceReady='1';
+  expandReportText(report);
   const body=report.querySelector('.analyst-fold-body');
   if(!body)return;
   const bar=document.createElement('div');
