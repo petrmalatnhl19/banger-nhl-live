@@ -732,6 +732,35 @@ if "K vyhodnocení zatím dochází při opětovném otevření stejného dokon�
     html=html.replace("K vyhodnocení zatím dochází při opětovném otevření stejného dokončeného utkání.","Při otevření Analystu se automaticky zkontroluje až osm dříve uložených utkání a doplní se jejich výsledky.",1)
     changes+=1
 
+# Separate visible Prediction Tracker card above the detailed Expert Report.
+panel_anchor = " if(extraRoot&&extraRoot.isConnected)extraRoot.insertAdjacentHTML('afterbegin',expert);"
+panel_code = """ if(extraRoot&&extraRoot.isConnected){
+  extraRoot.insertAdjacentHTML('afterbegin',expert);
+  let saved=[];
+  try{const parsed=JSON.parse(localStorage.getItem('banger-prediction-tracker-v1')||'[]');if(Array.isArray(parsed))saved=parsed.filter(x=>x&&x.id&&Number.isFinite(x.away)&&Number.isFinite(x.home)).slice(-150)}catch(e){}
+  const evaluated=saved.filter(x=>x.status==='final');
+  const rated=evaluated.filter(x=>typeof x.correctSide==='boolean');
+  const successes=rated.filter(x=>x.correctSide).length;
+  const avgErr=evaluated.length?evaluated.reduce((sum,x)=>sum+(Number(x.goalError)||0),0)/evaluated.length:null;
+  const pendingCount=saved.filter(x=>x.status==='pending').length;
+  const trackerRows=saved.slice().sort((a,b)=>String(b.day).localeCompare(String(a.day))).slice(0,30).map(x=>{
+   const done=x.status==='final';
+   const actual=done?' · skutečně '+clean(x.actualAway)+' : '+clean(x.actualHome):'';
+   const statusText=done?'Vyhodnoceno':'Čeká na výsledek';
+   return '<tr><td>'+clean(x.day)+'</td><td>'+clean(x.ac)+' – '+clean(x.hc)+'</td><td>'+fmt(x.away)+' : '+fmt(x.home)+actual+'</td><td>'+statusText+'</td></tr>';
+  }).join('');
+  const trackerPanel='<details class="analyst-fold analyst-tracker-panel" open><summary>📊 BANGER PREDICTION TRACKER <small>Historie předpovědí</small></summary><div class="analyst-fold-body">'+
+   '<p><b>'+saved.length+'</b> uložených · <b>'+evaluated.length+'</b> vyhodnocených · <b>'+pendingCount+'</b> čekajících</p>'+
+   '<p>Úspěšnost směru gólové převahy: '+(rated.length?successes+' / '+rated.length+' ('+fmt(100*successes/rated.length)+' %)':'zatím bez vyhodnocených srovnatelných zápasů')+'.'+(avgErr===null?'':' Průměrná absolutní odchylka obou skóre: '+fmt(avgErr)+' gólu.')+'</p>'+
+   (trackerRows?'<div style="overflow-x:auto"><table style="width:100%;font-size:12px;text-align:left;border-spacing:8px"><thead><tr><th>Datum</th><th>Zápas</th><th>Predikce / výsledek</th><th>Stav</th></tr></thead><tbody>'+trackerRows+'</tbody></table></div>':'<p>Historie je zatím prázdná. Otevři Analyst nadcházejícího zápasu, aby se uložila první predikce.</p>')+
+   '<p class="analysis-small">Zobrazeno nejvýše 30 posledních záznamů. Data jsou uložena jen v tomto prohlížeči; nejsou synchronizována mezi zařízeními. Predikce se neukládají zpětně.</p></div></details>';
+  extraRoot.insertAdjacentHTML('afterbegin',trackerPanel);
+ }
+"""
+if panel_anchor in html and "analyst-tracker-panel" not in html:
+    html=html.replace(panel_anchor,panel_code,1)
+    changes+=1
+
 # Install the voice player once; it observes Expert Reports rendered dynamically.
 voice_tag = '<script defer src="./expert-voice.js"></script>'
 if voice_tag not in html:
