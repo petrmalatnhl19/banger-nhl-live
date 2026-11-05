@@ -671,18 +671,31 @@ async function analyzeGame(id){
   const ids=games.slice(0,5).map(g=>g.id).filter(Boolean);
   const results=await Promise.all(ids.map(id=>safe(()=>get('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(id)+'/boxscore'),3500)));
   let saves=0,shots=0,starts=0;
-  for(const result of results){
+  const byGoalie=new Map();
+  for(let i=0;i<results.length;i++){
+   const result=results[i];
    if(!result.ok||!result.data)continue;
    const data=result.data;
    const side=data.awayTeam?.abbrev===code?'awayTeam':data.homeTeam?.abbrev===code?'homeTeam':null;
    const goalies=side?data.playerByGameStats?.[side]?.goalies:null;
-   if(!Array.isArray(goalies))continue;
-   const starter=goalies.find(g=>g.starter)||goalies[0];
-   const match=String(starter?.saveShotsAgainst||'').match(/(\d+)\s*\/\s*(\d+)/);
+   if(!Array.isArray(goalies)||!goalies.length)continue;
+   const starter=goalies.find(g=>g.starter===true||g.starter==='Y'||g.starter===1);
+   if(!starter)continue; // Never infer the starting goalie from array order.
+   const match=String(starter.saveShotsAgainst||'').match(/(\d+)\s*\/\s*(\d+)/);
    if(!match||Number(match[2])<=0)continue;
-   saves+=Number(match[1]);shots+=Number(match[2]);starts++;
+   const saved=Number(match[1]),faced=Number(match[2]);
+   if(saved>faced)continue;
+   const playerId=String(starter.playerId||starter.id||starter.name?.default||starter.lastName?.default||'unknown');
+   const playerName=starter.name?.default||[starter.firstName?.default,starter.lastName?.default].filter(Boolean).join(' ')||'Neznámý brankář';
+   const row=byGoalie.get(playerId)||{id:playerId,name:playerName,starts:0,saves:0,shots:0,lastDate:null};
+   row.starts++;row.saves+=saved;row.shots+=faced;
+   const date=games.find(g=>String(g.id)===String(ids[i]))?.gameDate||null;
+   if(date&&(!row.lastDate||date>row.lastDate))row.lastDate=date;
+   byGoalie.set(playerId,row);
+   saves+=saved;shots+=faced;starts++;
   }
-  return starts>=3&&shots>0?{starts,saves,shots,pct:100*saves/shots}:null;
+  const players=[...byGoalie.values()].map(x=>({...x,pct:100*x.saves/x.shots})).sort((a,b)=>b.starts-a.starts||b.shots-a.shots);
+  return {starts,saves,shots,pct:shots>0?100*saves/shots:null,players,coverage:ids.length};
  };
  const bangerGoalieSamples=await Promise.all([bangerGoalieSample(ga,ac),bangerGoalieSample(gh,hc)]);
  if(!root.isConnected)return;
@@ -1164,6 +1177,13 @@ async function analyzeGame(id){
  const intelligenceRest=games=>{const date=games.find(g=>g.gameDate&&g.gameDate<day)?.gameDate;return date?Math.round((Date.parse(day+'T12:00:00Z')-Date.parse(date+'T12:00:00Z'))/86400000):null};
  const intelligenceRestDays=[intelligenceRest(ga),intelligenceRest(gh)];
  const intelligenceMetric=(label,left,right,note)=>'<div style="padding:12px 0;border-bottom:1px solid rgba(114,184,217,.18)"><div style="font-size:12px;color:#b4d6ed;margin-bottom:6px">'+clean(label)+'</div><div style="display:grid;grid-template-columns:minmax(0,1fr) 16px minmax(0,1fr);gap:8px;text-align:center;align-items:center"><b style="color:#79dfff">'+clean(left)+'</b><span style="opacity:.5">:</span><b style="color:#f5c18b">'+clean(right)+'</b></div>'+(note?'<small style="display:block;text-align:center;opacity:.7;margin-top:5px">'+clean(note)+'</small>':'')+'</div>';
+ const goalieCenterCards=[ac,hc].map((code,i)=>{
+  const projectedGoalie=projected[i],sample=bangerGoalieSamples[i];
+  const state=projectedGoalie?.status==='confirmed'?'✓ Potvrzený start':projectedGoalie?.status==='projected'?'◷ Předpokládaný start':'? Start nepotvrzen';
+  const goalieRows=(sample?.players||[]).map(p=>'<div style="padding:9px 0;border-top:1px solid #ffffff22"><b>'+clean(p.name)+'</b><div class="analysis-small">'+p.starts+' startů · '+p.saves+'/'+p.shots+' zákroků · SV% '+fmt(p.pct)+' %'+(p.lastDate?' · naposledy '+clean(p.lastDate):'')+'</div></div>').join('');
+  return '<div style="border:1px solid #4ab4d066;border-radius:13px;padding:12px;min-width:0;background:#091d34"><b style="color:#8feeff">'+clean(code)+'</b><p style="margin:7px 0"><strong>'+clean(projectedGoalie?.name||'Jméno není ověřeno')+'</strong></p><small>'+state+'</small><p class="analysis-small">Posledních 5 týmových utkání · '+(sample?.starts||0)+' doložených startů. Souhrnná SV%: '+(sample?.pct!=null?fmt(sample.pct)+' %':'—')+'</p>'+ (goalieRows||'<p class="analysis-small">Nedostatek ověřených boxscore pro jednotlivé brankáře.</p>')+'</div>';
+ }).join('');
+ const goalieCenterSection='<details class="analyst-fold" open><summary>🥅 BANGER GOALIE MODULE <small>Starty · zákroky · SV%</small></summary><div class="analyst-fold-body"><p class="analysis-small">Stav startu pochází z aktuální projekce pro tento zápas; statistiky níže z posledních pěti utkání týmu. Minulé starty nejsou potvrzením dnešní sestavy.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:10px">'+goalieCenterCards+'</div><p class="analysis-small">Přesné statistiky jednotlivých brankářů se počítají pouze ze zápasů s explicitně označeným startujícím brankářem a dostupnými zákroky. Procento je vážené počtem střel. Zatím není započteno do serverového CORE 3.1.</p></div></details>';
  const intelligenceGoalie=projected.map((p,i)=>'<div style="padding:12px;border:1px solid rgba(108,189,225,.3);border-radius:12px;min-width:0"><b>'+clean(i===0?ac:hc)+'</b><p style="margin:6px 0">'+clean(p?.name||'Start není ověřen')+'</p><small style="color:'+(p?.status==='confirmed'?'#80eab4':'#f5ca8d')+'">'+(p?.status==='confirmed'?'✓ Potvrzený start':p?.status==='projected'?'◷ Předpokládaný start':'? Neověřený start')+'</small></div>').join('');
 
  // Reuse the verified MoneyPuck CSV feed already used in Advanced > xG.
@@ -1274,6 +1294,7 @@ async function analyzeGame(id){
  intelligenceMetric('Bloky / zápas · posledních 5',intelligenceNum(bangerSamples[0]?.blocks),intelligenceNum(bangerSamples[1]?.blocks),'Pouze dostupné boxscore')+
  mpComparison+
  '</div></details>'+experimentalSection+
+ goalieCenterSection+
  '<details class="analyst-fold" open><summary>🥅 Brankáři, únava a sestavy <small>Aktuální kontext</small></summary><div class="analyst-fold-body">'+
  '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'+intelligenceGoalie+'</div>'+
  intelligenceMetric('Dny od posledního utkání',intelligenceRestDays[0]??'—',intelligenceRestDays[1]??'—','1 den = utkání předchozí kalendářní den')+
