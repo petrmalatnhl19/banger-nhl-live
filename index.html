@@ -1259,6 +1259,27 @@ async function analyzeGame(id){
    (trackerRows?'<div class="banger-tracker-cards" style="min-width:0">'+trackerRows+'</div>':'<p>Historie je zatím prázdná. Otevři Analyst nadcházejícího zápasu, aby se uložila první predikce.</p>')+
    '<p class="analysis-small">Zobrazeno nejvýše 30 posledních záznamů. Data jsou uložena jen v tomto prohlížeči; nejsou synchronizována mezi zařízeními. Predikce se neukládají zpětně.</p></div></details>';
   extraRoot.insertAdjacentHTML('afterbegin',trackerPanel);
+
+  // Central archive is read-only in the browser. Trusted server-side publishing
+  // is a separate step; never grant anonymous clients INSERT/UPDATE access.
+  const archiveContainer=document.createElement('div');
+  archiveContainer.className='analyst-fold-body';
+  archiveContainer.innerHTML='<details class="analyst-fold"><summary>☁️ Centrální archiv <small>Supabase · sdílená historie</small></summary><div class="analyst-fold-body"><p id="bangerCentralStatus">Načítám centrální archiv…</p><div id="bangerCentralRows"></div><p class="analysis-small">Archiv je pouze pro čtení. Zápis ze serveru se připravuje; lokální předpovědi se automaticky nesynchronizují.</p></div></details>';
+  extraRoot.insertAdjacentElement('afterbegin',archiveContainer);
+  (async()=>{
+   const status=archiveContainer.querySelector('#bangerCentralStatus');
+   const target=archiveContainer.querySelector('#bangerCentralRows');
+   try{
+    const response=await fetch('https://xxwqeiuyislnoxsmjuul.supabase.co/rest/v1/nhl_prediction_archive?select=game_id,game_date,away_team,home_team,baseline_away,baseline_home,experimental_away,experimental_home,status,actual_away,actual_home&order=game_date.desc&limit=20',{headers:{apikey:'sb_publishable_SfeHMIvUkYTuD3jCrWub8w_fPIY0B-G'}});
+    if(!response.ok)throw Error('HTTP '+response.status);
+    const rows=await response.json();
+    if(!Array.isArray(rows))throw Error('Neplatná odpověď archivu');
+    if(!archiveContainer.isConnected)return;
+    status.textContent=rows.length?'Posledních '+rows.length+' centrálně uložených zápasů':'Centrální archiv je zatím prázdný. Lokální tracker nadále funguje samostatně.';
+    target.innerHTML=rows.map(x=>'<div style="border-bottom:1px solid rgba(114,184,217,.18);padding:10px 0"><b>'+clean(x.game_date)+' · '+clean(x.away_team)+' vs '+clean(x.home_team)+'</b><div>Model '+fmt(x.baseline_away)+' : '+fmt(x.baseline_home)+(Number.isFinite(x.experimental_away)&&Number.isFinite(x.experimental_home)?' · xG '+fmt(x.experimental_away)+' : '+fmt(x.experimental_home):'')+'</div><small>'+(x.status==='final'?'Výsledek '+clean(x.actual_away)+' : '+clean(x.actual_home):'Čeká na výsledek')+'</small></div>').join('');
+   }catch(e){if(archiveContainer.isConnected)status.textContent='Centrální archiv nyní nelze načíst: '+e.message}
+  })();
+
  }
 
  const diag=Array.from(card.querySelectorAll('details')).find(el=>el.querySelector('summary')?.textContent.includes('Diagnostika dat'));
