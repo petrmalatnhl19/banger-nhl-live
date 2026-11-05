@@ -1182,6 +1182,25 @@ async function analyzeGame(id){
  intelligenceMetric('Podíl xG při 5v5',(experimentalModel.shares[0]*100).toFixed(1)+' %',(experimentalModel.shares[1]*100).toFixed(1)+' %','MoneyPuck · xGF / (xGF + xGA)'):
  '<p>Chybí ověřená xG data pro oba týmy. Experimentální model není dostupný.</p>')+
  '<p class="analysis-small"><b>Experimentální model není zpětně otestovaný.</b> Nejde o kalibrovanou pravděpodobnost ani prokázané zlepšení přesnosti. Start brankáře tento výpočet zatím nemění.</p></div></details>';
+
+ // Capture the experimental forecast only before a game starts. Never retroactively
+ // calculate historical experimental forecasts using current MoneyPuck season totals.
+ if(experimentalModel&&['FUT','PRE'].includes(String(d.gameState||''))){
+  try{
+   const key='banger-prediction-tracker-v1';
+   const records=JSON.parse(localStorage.getItem(key)||'[]');
+   if(Array.isArray(records)){
+    const row=records.find(x=>String(x.id)===String(id)&&x.status==='pending');
+    if(row&&!Number.isFinite(Number(row.experimentalAway))&&!Object.prototype.hasOwnProperty.call(row,'experimentalAway')){
+     row.experimentalAway=experimentalModel.away;
+     row.experimentalHome=experimentalModel.home;
+     row.experimentalSavedAt=new Date().toISOString();
+     row.experimentalVersion='xg-share-v1';
+     localStorage.setItem(key,JSON.stringify(records));
+    }
+   }
+  }catch(e){console.warn('Experimental prediction snapshot unavailable',e)}
+ }
  const intelligencePanel='<section class="analysis-section" style="border:1px solid rgba(89,210,249,.5);border-radius:18px;padding:16px;margin:14px 0;background:linear-gradient(145deg,rgba(8,37,69,.96),rgba(10,25,50,.97))">'+
  '<div style="font-size:12px;letter-spacing:1.5px;color:#67e4ff">BANGER ANALYST 2.0 · MATCH INTELLIGENCE</div><h3 style="margin:8px 0 4px">Přehled zápasu na jednom místě</h3>'+
  '<p class="analysis-small">'+clean(ac)+' (hosté) vs '+clean(hc)+' (domácí) · '+clean(day)+'</p>'+
@@ -1216,6 +1235,12 @@ async function analyzeGame(id){
   const successes=rated.filter(x=>x.correctSide).length;
   const avgErr=evaluated.length?evaluated.reduce((sum,x)=>sum+(Number(x.goalError)||0),0)/evaluated.length:null;
   const pendingCount=saved.filter(x=>x.status==='pending').length;
+  const paired=evaluated.filter(x=>Number.isFinite(x.experimentalAway)&&Number.isFinite(x.experimentalHome));
+  const mae=(rows,a,b)=>rows.length?rows.reduce((sum,x)=>sum+Math.abs(x[a]-x.actualAway)+Math.abs(x[b]-x.actualHome),0)/(2*rows.length):null;
+  const baselineMae=mae(paired,'away','home'),experimentalMae=mae(paired,'experimentalAway','experimentalHome');
+  const modelComparison='<div style="padding:12px;border:1px solid rgba(98,213,255,.35);border-radius:12px;margin:12px 0"><b>🧪 Srovnání na stejných zápasech</b><p>Společný vzorek: <b>'+paired.length+'</b> dokončených utkání s oběma předzápasovými predikcemi.</p>'+
+   (paired.length?'Průměrná absolutní chyba na tým: původní model <b>'+fmt(baselineMae)+'</b> gólu · xG model <b>'+fmt(experimentalMae)+'</b> gólu.':'Zatím nemáme dokončené zápasy se záznamem obou modelů. Nezobrazujeme smyšlené výsledky.')+
+   '<p class="analysis-small">Nižší chyba je lepší. Ukládáme první předzápasovou predikci; historické hodnoty nedopočítáváme zpětně. Vzorek je uložen pouze v tomto prohlížeči.</p></div>';
   const trackerRows=saved.slice().sort((a,b)=>String(b.day).localeCompare(String(a.day))).slice(0,30).map(x=>{
    const done=x.status==='final';
    const statusText=done?'✓ Vyhodnoceno':'◷ Čeká na výsledek';
@@ -1224,11 +1249,13 @@ async function analyzeGame(id){
    return '<article style="min-width:0;padding:14px;margin:10px 0;border:1px solid rgba(74,204,244,.4);border-radius:16px;background:linear-gradient(135deg,rgba(18,60,99,.85),rgba(7,23,45,.85));box-shadow:inset 0 1px 0 rgba(255,255,255,.08)">'+
     '<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;font-size:12px;color:#a7c6df"><span>'+clean(x.day)+'</span><span>'+statusText+'</span></div>'+
     '<div style="margin-top:12px;font-size:19px;font-weight:800;letter-spacing:.4px;color:#f2fbff">'+clean(x.ac)+' <span style="color:#54d7ff">vs</span> '+clean(x.hc)+'</div>'+
+    (Number.isFinite(x.experimentalAway)&&Number.isFinite(x.experimentalHome)?'<div style="margin-top:7px;font-size:12px;color:#b4e9e4">xG model '+fmt(x.experimentalAway)+' : '+fmt(x.experimentalHome)+'</div>':'')+
     '<div style="margin-top:9px;font-size:14px">Predikce <strong style="color:#67e6ff;font-size:19px">'+fmt(x.away)+' : '+fmt(x.home)+'</strong></div>'+actual+comparison+'</article>';
   }).join('');
   const trackerPanel='<details class="analyst-fold analyst-tracker-panel" open><summary>📊 BANGER PREDICTION TRACKER <small>Historie předpovědí</small></summary><div class="analyst-fold-body">'+
    '<p><b>'+saved.length+'</b> uložených · <b>'+evaluated.length+'</b> vyhodnocených · <b>'+pendingCount+'</b> čekajících</p>'+
    '<p>Úspěšnost směru gólové převahy: '+(rated.length?successes+' / '+rated.length+' ('+fmt(100*successes/rated.length)+' %)':'zatím bez vyhodnocených srovnatelných zápasů')+'.'+(avgErr===null?'':' Průměrná absolutní odchylka obou skóre: '+fmt(avgErr)+' gólu.')+'</p>'+
+   modelComparison+
    (trackerRows?'<div class="banger-tracker-cards" style="min-width:0">'+trackerRows+'</div>':'<p>Historie je zatím prázdná. Otevři Analyst nadcházejícího zápasu, aby se uložila první predikce.</p>')+
    '<p class="analysis-small">Zobrazeno nejvýše 30 posledních záznamů. Data jsou uložena jen v tomto prohlížeči; nejsou synchronizována mezi zařízeními. Predikce se neukládají zpětně.</p></div></details>';
   extraRoot.insertAdjacentHTML('afterbegin',trackerPanel);
