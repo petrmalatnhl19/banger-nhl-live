@@ -57,11 +57,13 @@ jobs:
           fi
       - name: Build complete NHL goalie catalog
         run: python scripts/build_goalie_catalog.py
+      - name: Integrate verified goalie data into lineup UI
+        run: python scripts/integrate_goalies_ui.py
       - name: Commit changed lineups
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for file in lineups.json lineups_archive.json nhl_rosters.json lineups_coverage.json starting_goalies.json nhl_goalies.json rotowire_goalies.json rotowire_goalies_diagnostic.json lineups_changes.json lineups_diagnostics.md lineups_source_diagnostics.json lineups_discovery_diagnostics.json; do
+          for file in index.html lineups.json lineups_archive.json nhl_rosters.json lineups_coverage.json starting_goalies.json nhl_goalies.json rotowire_goalies.json rotowire_goalies_diagnostic.json lineups_changes.json lineups_diagnostics.md lineups_source_diagnostics.json lineups_discovery_diagnostics.json; do
             if [ -f "$file" ]; then git add "$file"; fi
           done
           if ! git diff --cached --quiet; then
