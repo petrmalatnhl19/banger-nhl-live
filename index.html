@@ -1265,7 +1265,7 @@ async function analyzeGame(id){
   // Server snapshots are the canonical pre-game comparison; never rewrite them from the browser.
   const accuracyPanel=document.createElement('section');
   accuracyPanel.className='analyst-fold-body';
-  accuracyPanel.innerHTML='<details class="analyst-fold" open><summary>🎯 PREDICTION ACCURACY <small>Centrální vyhodnocení · pouze dokončené zápasy</small></summary><div class="analyst-fold-body"><p id="bangerAccuracyStatus">Načítám výsledky…</p><div id="bangerAccuracyStats" class="metrics"></div><div id="bangerAccuracyComparison"></div><p class="analysis-small">MAE = průměrná absolutní chyba očekávaných gólů na tým. Porovnáváme pouze stejné zápasy s oběma předzápasovými predikcemi. Nerozhodné zápasy v základní hrací době zde nerozlišujeme; vyhodnocujeme konečné skóre NHL.</p></div></details>';
+  accuracyPanel.innerHTML='<details class="analyst-fold" open><summary>🎯 PREDICTION ACCURACY <small>Centrální vyhodnocení · pouze dokončené zápasy</small></summary><div class="analyst-fold-body"><p id="bangerAccuracyStatus">Načítám výsledky…</p><div id="bangerAccuracyStats" class="metrics"></div><div id="bangerAccuracyComparison"></div><details style="margin-top:12px"><summary style="cursor:pointer;color:#9bbdd3">ℹ️ Jak číst statistiky</summary><p class="analysis-small">MAE = průměrná absolutní chyba očekávaných gólů na tým. Nižší je lepší. Porovnáváme pouze stejné zápasy s oběma předzápasovými predikcemi. Vyhodnocujeme konečné skóre NHL.</p></details></div></details>';
   extraRoot.insertAdjacentElement('afterbegin',accuracyPanel);
   (async()=>{
     const label=accuracyPanel.querySelector('#bangerAccuracyStatus');
@@ -1281,10 +1281,25 @@ async function analyzeGame(id){
       const paired=valid.filter(x=>x.experimental_away!==null&&x.experimental_home!==null&&Number.isFinite(Number(x.experimental_away))&&Number.isFinite(Number(x.experimental_home)));
       const mae=(data,a,h)=>data.length?data.reduce((s,x)=>s+Math.abs(Number(x[a])-Number(x.actual_away))+Math.abs(Number(x[h])-Number(x.actual_home)),0)/(2*data.length):null;
       const wins=(data,a,h)=>data.filter(x=>Math.sign(Number(x[a])-Number(x[h]))===Math.sign(Number(x.actual_away)-Number(x.actual_home))).length;
-      const fmtNum=v=>v===null?'—':v.toFixed(3);
       label.textContent='Vyhodnoceno '+valid.length+' zápasů z '+rows.length+' uložených · společný vzorek '+paired.length;
-      metrics.innerHTML='<div class="metric"><b>'+valid.length+'</b><span>Dokončené zápasy</span></div><div class="metric"><b>'+fmtNum(mae(valid,'baseline_away','baseline_home'))+'</b><span>MAE základního modelu</span></div><div class="metric"><b>'+fmtNum(mae(paired,'experimental_away','experimental_home'))+'</b><span>MAE xG modelu · společný vzorek</span></div>';
-      comparison.innerHTML=paired.length?'<p><b>Stejný vzorek '+paired.length+' zápasů:</b> základní model MAE '+fmtNum(mae(paired,'baseline_away','baseline_home'))+' · xG MAE '+fmtNum(mae(paired,'experimental_away','experimental_home'))+'.</p><p>Správná strana konečného výsledku: základní '+wins(paired,'baseline_away','baseline_home')+'/'+paired.length+' · xG '+wins(paired,'experimental_away','experimental_home')+'/'+paired.length+'.</p><p class="analysis-small">Modely mají verzované záznamy; statistiky zatím zahrnují více verzí. Rozhodující je nižší MAE na stejném vzorku.</p>':'<p>Zatím žádné dokončené zápasy se dvěma předzápasovými predikcemi. Přesnost neodhadujeme bez výsledků.</p>';
+      const fmtNum=v=>v===null?'—':v.toFixed(3);
+      const baseAll=mae(valid,'baseline_away','baseline_home');
+      const basePaired=mae(paired,'baseline_away','baseline_home');
+      const xgPaired=mae(paired,'experimental_away','experimental_home');
+      metrics.innerHTML='<div class="metric"><b>'+valid.length+'</b><span>Dokončené zápasy</span></div><div class="metric"><b>'+fmtNum(baseAll)+'</b><span>MAE základního modelu</span></div><div class="metric"><b>'+fmtNum(xgPaired)+'</b><span>MAE xG · společný vzorek</span></div>';
+      const activeModel='base';
+      comparison.innerHTML='<div class="toolbar" style="margin:10px 0"><button type="button" class="btn active" data-model="base">Základní model</button><button type="button" class="btn" data-model="xg">xG model</button></div><div id="bangerAccuracySelected"></div>';
+      const selected=comparison.querySelector('#bangerAccuracySelected');
+      const showModel=model=>{
+        comparison.querySelectorAll('[data-model]').forEach(btn=>btn.classList.toggle('active',btn.dataset.model===model));
+        if(!paired.length){selected.textContent='Zatím žádné dokončené zápasy s oběma předzápasovými predikcemi. Po dohrání se zde objeví přesnost.';return}
+        const isXg=model==='xg';
+        const error=isXg?xgPaired:basePaired;
+        const right=wins(paired,isXg?'experimental_away':'baseline_away',isXg?'experimental_home':'baseline_home');
+        selected.innerHTML='<p><b>'+ (isXg?'xG model':'Základní model') +'</b> · MAE '+fmtNum(error)+' · správná strana výsledku '+right+'/'+paired.length+'</p><p class="analysis-small">Srovnání na stejných '+paired.length+' dokončených zápasech. Základní model: '+fmtNum(basePaired)+' · xG: '+fmtNum(xgPaired)+'.</p>';
+      };
+      comparison.querySelectorAll('[data-model]').forEach(btn=>btn.addEventListener('click',()=>showModel(btn.dataset.model)));
+      showModel(activeModel);
     }catch(e){label.textContent='Přesnost nyní nelze načíst: '+e.message}
   })();
   const archiveContainer=document.createElement('div');
