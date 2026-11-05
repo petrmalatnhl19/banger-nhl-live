@@ -319,6 +319,15 @@ nav.toolbar>.btn.active{border-color:#65eaff;box-shadow:0 0 0 1px #65eaff55,0 5p
  .ux-section-jump button{flex:0 0 auto}
 }
 @media(prefers-reduced-motion:reduce){.ux-action,.ux-day,#uxMobileNav button{scroll-behavior:auto;transition:none!important}}
+
+/* Analyst UX 4.1: section navigation and readable match hierarchy */
+.analysis-panel .ux-section-jump{position:sticky;top:0;z-index:5;background:#071a31f5;padding:10px 5px;border-bottom:1px solid #49d9f544;backdrop-filter:blur(12px)}
+.analysis-panel .ux-section-jump button{min-height:40px}
+.analysis-panel #banger-core-3{border-color:#66edff!important;box-shadow:0 0 25px #28dfff2b!important}
+.analysis-panel #banger-prediction-hub{border-color:#4c9cbb!important}
+.analysis-panel .analyst-expert-report{scroll-margin-top:80px}
+.analysis-panel #banger-core-3,.analysis-panel #banger-prediction-hub,.analysis-panel .analysis-section{scroll-margin-top:86px}
+@media(max-width:760px){.analysis-panel .ux-section-jump{margin:0 -5px 12px;gap:6px}.analysis-panel .ux-section-jump button{padding:9px 11px;font-size:12px}.analysis-panel .analysis-card{padding:13px!important}}
 </style>
 <!-- BANGER Analyst compact tracker v3 -->
 <style id="banger-analyst-compact-v3">
@@ -1450,6 +1459,35 @@ async function analyzeGame(id){
   predictionHub.innerHTML='<div style="font-size:11px;letter-spacing:1.8px;color:#71eaff;font-weight:800">BANGER · PREDIKČNÍ CENTRUM</div><h3 style="margin:7px 0 4px">🎯 Předpovědi a přesnost</h3><p class="analysis-small">Centrální předpovědi CORE 3.0, xG, CORE 3.1 a CORE 3.2, jejich vyhodnocení i historie v tomto zařízení. Experimentální výpočty jsou odlišeny od uložených serverových predikcí.</p><div id="bangerPredictionHubContent"></div>';
   extraRoot.insertAdjacentElement('afterbegin',predictionHub);
   const predictionHubContent=predictionHub.querySelector('#bangerPredictionHubContent');
+  // UX 4.1: quick section navigator for the long match analysis.
+  // Built from the already rendered panels, so it does not alter NHL data or predictions.
+  const uxAnalystNav=document.createElement('nav');
+  uxAnalystNav.className='ux-section-jump';
+  uxAnalystNav.setAttribute('aria-label','Rychlá navigace v analýze');
+  const uxAnalystDestinations=[
+    ['🎯 Předpověď','#banger-core-3'],
+    ['📊 Přehled zápasu','.analysis-section:not(#banger-core-3):not(#banger-prediction-hub)'],
+    ['🥅 Brankáři','.analyst-fold'],
+    ['📈 Přesnost','#banger-prediction-hub'],
+    ['📝 Podrobný report','.analyst-expert-report']
+  ];
+  uxAnalystNav.innerHTML=uxAnalystDestinations.map(([label],i)=>'<button type="button" data-ux-jump="'+i+'">'+label+'</button>').join('');
+  uxAnalystNav.addEventListener('click',event=>{
+    const button=event.target.closest('[data-ux-jump]');
+    if(!button)return;
+    const item=uxAnalystDestinations[Number(button.dataset.uxJump)];
+    if(!item)return;
+    let target;
+    if(Number(button.dataset.uxJump)===2){
+      target=[...extraRoot.querySelectorAll('.analyst-fold')].find(el=>/GOALIE MODULE|Brankáři a sestavy/i.test(el.querySelector('summary')?.textContent||''));
+    }else target=extraRoot.querySelector(item[1]);
+    if(!target)return;
+    // Opening a collapsed report is intentional; preserve all other accordion states.
+    if(target.tagName==='DETAILS')target.open=true;
+    target.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  extraRoot.insertAdjacentElement('afterbegin',uxAnalystNav);
+
   const localTracker=extraRoot.querySelector('.analyst-tracker-panel');
   if(localTracker){
     const summary=localTracker.querySelector('summary');
