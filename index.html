@@ -1373,6 +1373,32 @@ async function analyzeGame(id){
       };
       comparison.querySelectorAll('[data-model]').forEach(btn=>btn.addEventListener('click',()=>showModel(btn.dataset.model)));
       showModel('advanced');
+      const ranking=document.createElement('div');
+      ranking.style.cssText='margin:16px 0;padding:12px;border:1px solid #56d8ff55;border-radius:12px';
+      const recent=document.createElement('div');
+      recent.style.cssText='margin:14px 0';
+      comparison.insertAdjacentElement('afterend',ranking);
+      ranking.insertAdjacentElement('afterend',recent);
+      const models=[['CORE 3.0','baseline_away','baseline_home'],['xG','experimental_away','experimental_home'],['CORE 3.1','advanced_away','advanced_home']];
+      if(triple.length){
+        const ranked=models.map(([name,a,h])=>({name,score:mae(triple,a,h),correct:wins(triple,a,h)})).sort((a,b)=>a.score-b.score);
+        ranking.innerHTML='<h4 style="margin:0 0 8px">🏆 Žebříček přesnosti modelů</h4><p class="analysis-small">Všechny tři modely na stejných '+triple.length+' dokončených zápasech. Nižší MAE znamená přesnější odhad počtu gólů.</p>'+
+          ranked.map((m,i)=>'<p style="margin:8px 0"><b>'+(i+1)+'. '+m.name+'</b> · MAE '+fmtNum(m.score)+' · správná strana '+m.correct+'/'+triple.length+'</p>').join('');
+      }else{
+        ranking.innerHTML='<h4 style="margin:0 0 8px">🏆 Žebříček přesnosti modelů</h4><p class="analysis-small">Čekáme na dokončené zápasy se všemi třemi předzápasovými predikcemi. Pořadí zatím neurčujeme.</p>';
+      }
+      const escapeHtml=v=>String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+      const last=valid.slice().sort((a,b)=>String(b.game_date).localeCompare(String(a.game_date))).slice(0,8);
+      recent.innerHTML='<details class="analyst-fold"><summary>📋 Poslední vyhodnocené zápasy <small>'+valid.length+' dokončených · posledních '+last.length+'</small></summary><div class="analyst-fold-body">'+
+       (last.length?last.map(x=>{
+         const actual=Number(x.actual_away)+' : '+Number(x.actual_home);
+         const detail=models.filter(([,a,h])=>available(x,a,h)).map(([name,a,h])=>{
+           const err=(Math.abs(Number(x[a])-Number(x.actual_away))+Math.abs(Number(x[h])-Number(x.actual_home)))/2;
+           return '<div style="margin:5px 0">'+name+': '+fmtNum(Number(x[a]))+' : '+fmtNum(Number(x[h]))+' · MAE zápasu '+fmtNum(err)+'</div>';
+         }).join('');
+         return '<div style="padding:10px 0;border-bottom:1px solid #ffffff20"><b>'+escapeHtml(x.game_date)+' · '+escapeHtml(x.away_team)+' – '+escapeHtml(x.home_team)+'</b><div>Skutečný výsledek: <b>'+actual+'</b></div><div class="analysis-small">'+detail+'</div></div>';
+       }).join(''):'<p>Žádný zápas zatím nemá potvrzený konečný výsledek v centrálním archivu.</p>')+'</div></details>';
+
     }catch(e){label.textContent='Přesnost nyní nelze načíst: '+e.message}
   })();
   const archiveContainer=document.createElement('div');
