@@ -525,7 +525,21 @@ async function analyzeGame(id){
  const fa=recent(ga,ac),fh=recent(gh,hc);
  state('form',!!(fa&&fh));
  const venue=(games,code,homeSide)=>{const list=games.filter(g=>(homeSide?g.homeTeam:g.awayTeam).abbrev===code).slice(0,12);if(!list.length)return null;const wins=list.filter(g=>Number((homeSide?g.homeTeam:g.awayTeam).score)>Number((homeSide?g.awayTeam:g.homeTeam).score)).length;return wins+'/'+list.length+' výher ('+list.length+' zápasů)'+(list.length<3?' · malý vzorek':'')};
- const h2h=unique([...ga,...gh]).filter(g=>[g.awayTeam?.abbrev,g.homeTeam?.abbrev].includes(ac)&&[g.awayTeam?.abbrev,g.homeTeam?.abbrev].includes(hc)).sort((a,b)=>b.gameDate.localeCompare(a.gameDate)).slice(0,10);
+ let h2h=unique([...ga,...gh]).filter(g=>[g.awayTeam?.abbrev,g.homeTeam?.abbrev].includes(ac)&&[g.awayTeam?.abbrev,g.homeTeam?.abbrev].includes(hc)).sort((a,b)=>b.gameDate.localeCompare(a.gameDate)).slice(0,10);
+ // Four earlier regular seasons; season history is descriptive, not an input to the goal model.
+ const firstYear=Number(season.slice(0,4));
+ if(Number.isInteger(firstYear)&&firstYear>=2010&&firstYear<=2100){
+  const olderSeasons=Array.from({length:4},(_,i)=>{const y=firstYear-i-1;return String(y)+String(y+1)});
+  const historyResults=await Promise.all(olderSeasons.map(y=>safe(()=>get('https://api-web.nhle.com/v1/club-schedule-season/'+encodeURIComponent(ac)+'/'+y),4000)));
+  const historical=[];
+  for(let i=0;i<historyResults.length;i++){
+   const res=historyResults[i];
+   if(!res.ok||!Array.isArray(res.data?.games))continue;
+   historical.push(...res.data.games.filter(g=>g.gameDate<day&&['OFF','FINAL'].includes(g.gameState)&&g.homeTeam?.score!=null&&g.awayTeam?.score!=null).map(g=>({...g,bangerSeason:olderSeasons[i]})));
+  }
+  h2h=unique([...h2h,...historical]).filter(g=>[g.awayTeam?.abbrev,g.homeTeam?.abbrev].includes(ac)&&[g.awayTeam?.abbrev,g.homeTeam?.abbrev].includes(hc)).sort((a,b)=>b.gameDate.localeCompare(a.gameDate)).slice(0,25);
+ }
+ if(!root.isConnected)return;
  let extra='<details class="analyst-fold"><summary>📈 Forma posledních zápasů</summary><div class="analyst-fold-body">'+[ [ac,fa],[hc,fh] ].map(([code,f])=>'<p><b>'+clean(code)+':</b> '+(f?f.wins+'/'+f.n+' výher · '+fmt(f.scored)+' vstřelených a '+fmt(f.allowed)+' inkasovaných gólů/zápas · naposledy '+clean(f.last):'Nedostatečná nebo nedostupná data')+'</p>').join('')+'<p class="analysis-small">Forma se zobrazuje samostatně a nemění hlavní model.</p></div></details>';
  const restDays=f=>f?.last?Math.round((Date.parse(day)-Date.parse(f.last))/86400000):null;
  const recentTiles=(games,code)=>games.slice(0,5).map(g=>{
@@ -802,7 +816,11 @@ async function analyzeGame(id){
   const hw=games.length-aw;
   const avg=games.reduce((sum,g)=>sum+Number(g.homeTeam.score)+Number(g.awayTeam.score),0)/games.length;
   const results=games.slice(0,5).map(g=>clean(g.gameDate)+': '+clean(g.awayTeam.abbrev)+' '+Number(g.awayTeam.score)+' : '+Number(g.homeTeam.score)+' '+clean(g.homeTeam.abbrev)).join('; ');
-  return 'Posledních '+games.length+' dostupných vzájemných zápasů: '+clean(ac)+' '+aw+' výher, '+clean(hc)+' '+hw+' výher. Průměr '+fmt(avg)+' gólu na utkání. Výsledky (hosté : domácí): '+results+'. '+(games.length<3?'Velmi malý vzorek. ':'')+'Historické výsledky samy o sobě nedokazují rivalitu ani neurčují výsledek dalšího utkání.';
+  const homeWins=games.filter(g=>g.homeTeam.abbrev===hc&&Number(g.homeTeam.score)>Number(g.awayTeam.score)).length;
+  const homeGames=games.filter(g=>g.homeTeam.abbrev===hc).length;
+  const seasons=[...new Set(games.map(g=>String(g.bangerSeason||g.season||((Number(g.gameDate.slice(5,7))>=9?Number(g.gameDate.slice(0,4)):Number(g.gameDate.slice(0,4))-1))+'-'+(Number(g.gameDate.slice(5,7))>=9?Number(g.gameDate.slice(0,4))+1:Number(g.gameDate.slice(0,4)))))))];
+  const bySeason=seasons.map(y=>{const list=games.filter(g=>String(g.bangerSeason||g.season||((Number(g.gameDate.slice(5,7))>=9?Number(g.gameDate.slice(0,4)):Number(g.gameDate.slice(0,4))-1))+'-'+(Number(g.gameDate.slice(5,7))>=9?Number(g.gameDate.slice(0,4))+1:Number(g.gameDate.slice(0,4)))))===y);return y+': '+list.length+' utkání'}).join('; ');
+  return 'Posledních '+games.length+' dostupných vzájemných zápasů: '+clean(ac)+' '+aw+' výher, '+clean(hc)+' '+hw+' výher. Průměr '+fmt(avg)+' gólu na utkání. '+clean(hc)+' doma: '+homeWins+' výher z '+homeGames+' vzájemných utkání. Historie podle sezon: '+bySeason+'. Výsledky (hosté : domácí): '+results+'. '+(games.length<3?'Velmi malý vzorek. ':'')+'Starší sezony mají pro současnou formu omezenou vypovídací hodnotu; tato historie zatím nemění gólový model.';
  };
  const narrative=[];
  const section=(heading,body)=>narrative.push('<h4>'+heading+'</h4><p>'+body+'</p>');
@@ -810,6 +828,7 @@ async function analyzeGame(id){
  const leaderText=(s,code)=>s?.leaders?.length?'Za '+clean(code)+' v posledním dostupném zápase vynikl '+clean(s.leaders[0].name)+' s '+s.leaders[0].points+' body, '+s.leaders[0].shots+' střelami.':'U '+clean(code)+' nejsou dostupné ověřené individuální statistiky z posledního utkání.';
  section('Závěrečný expertní verdikt',bangerVerdict());
  section('Vzájemné zápasy',bangerH2HReport());
+
 
  section('Tabulková síla a dlouhodobá stabilita',bangerMetrics(ar,ac)+' '+bangerMetrics(hr,hc)+' '+bangerCompare()+' Jde o popis dosavadní sezony, nikoli jistotu výsledku.');
  section('Střelecká aktivita a efektivita',bangerShotReport(skaters[0],ac)+' '+bangerShotReport(skaters[1],hc)+' Vyšší úspěšnost střelby z jediného utkání sama o sobě neznamená lepší útok.');
