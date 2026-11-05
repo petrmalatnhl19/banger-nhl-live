@@ -80,6 +80,45 @@ if needle in html:
     html = html.replace(needle, replacement, 1)
     changes += 1
 
+# Add data-backed comparative metrics to the written Expert Report, once.
+metrics_anchor = " const narrative=[];"
+metrics_code = """ const bangerMetrics=(row,code)=>{
+  if(!row)return clean(code)+': aktuální tabulkové statistiky nejsou dostupné.';
+  const n=Number(row.gamesPlayed)||0;
+  if(!n)return clean(code)+': zatím není dost odehraných utkání.';
+  const number=(v)=>Number.isFinite(Number(v))?Number(v):null;
+  const goalsFor=number(row.goalFor),goalsAgainst=number(row.goalAgainst);
+  const shotsFor=number(row.shotsForPerGame),shotsAgainst=number(row.shotsAgainstPerGame);
+  const diff=goalsFor!=null&&goalsAgainst!=null?goalsFor-goalsAgainst:null;
+  const points=number(row.points);
+  const recent=row.l10Wins!=null&&row.l10Losses!=null?
+    'Bilance posledních deseti zápasů: '+row.l10Wins+' výher, '+row.l10Losses+' porážek'+(row.l10OtLosses!=null?' a '+row.l10OtLosses+' proher po prodloužení':'')+'. ':'';
+  const streak=row.streakCode&&row.streakCount?'Aktuální série: '+clean(row.streakCode)+' '+Number(row.streakCount)+'. ':'';
+  return clean(code)+' má '+n+' odehraných zápasů'+(points!=null?', '+points+' bodů':'')+
+   (diff!=null?' a gólový rozdíl '+(diff>0?'+':'')+diff+'. ':'. ')+
+   (goalsFor!=null&&goalsAgainst!=null?'Celkem vstřelil '+goalsFor+' a inkasoval '+goalsAgainst+' gólů. ':'')+
+   recent+streak;
+ };
+ const bangerCompare=()=>{
+  if(!ar||!hr)return 'Pro srovnání tabulkové síly nejsou dostupná úplná data obou týmů.';
+  const a=Number(ar.pointPctg),h=Number(hr.pointPctg);
+  if(!Number.isFinite(a)||!Number.isFinite(h))return 'Bodová úspěšnost v tabulce není pro oba týmy dostupná.';
+  const delta=Math.abs(a-h)*100;
+  return delta<3?'Bodová úspěšnost obou týmů je podobná.':
+   'Podle bodové úspěšnosti má zatím navrch '+clean(a>h?ac:hc)+' o přibližně '+delta.toFixed(1).replace('.',',')+' procentního bodu.';
+ };
+"""
+if metrics_anchor in html and "const bangerMetrics=" not in html:
+    html = html.replace(metrics_anchor, metrics_code + metrics_anchor, 1)
+    changes += 1
+
+metrics_section_anchor = " section('Celkový obraz utkání',"
+metrics_section = """ section('Tabulková síla a dlouhodobá stabilita',bangerMetrics(ar,ac)+' '+bangerMetrics(hr,hc)+' '+bangerCompare()+' Jde o popis dosavadní sezony, nikoli jistotu výsledku.');
+"""
+if metrics_section_anchor in html and "section('Tabulková síla a dlouhodobá stabilita'" not in html:
+    html = html.replace(metrics_section_anchor, metrics_section + metrics_section_anchor, 1)
+    changes += 1
+
 # Install the voice player once; it observes Expert Reports rendered dynamically.
 voice_tag = '<script defer src="./expert-voice.js"></script>'
 if voice_tag not in html:
