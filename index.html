@@ -1152,7 +1152,7 @@ async function analyzeGame(id){
  let canonicalSnapshot=null;
  if(['FUT','PRE'].includes(String(d.gameState||''))){
   try{
-   const endpoint='https://xxwqeiuyislnoxsmjuul.supabase.co/rest/v1/nhl_prediction_archive?select=game_id,baseline_away,baseline_home,experimental_away,experimental_home,model_version,experimental_version,status&game_id=eq.'+encodeURIComponent(String(id))+'&limit=1';
+   const endpoint='https://xxwqeiuyislnoxsmjuul.supabase.co/rest/v1/nhl_prediction_archive?select=game_id,baseline_away,baseline_home,experimental_away,experimental_home,model_version,experimental_version,advanced_away,advanced_home,advanced_version,advanced_factors,status&game_id=eq.'+encodeURIComponent(String(id))+'&limit=1';
    const result=await safe(async()=>{const response=await fetch(endpoint,{headers:{apikey:'sb_publishable_SfeHMIvUkYTuD3jCrWub8w_fPIY0B-G'}});if(!response.ok)throw Error('Archive '+response.status);return response.json()},5500);
    const row=result.ok&&Array.isArray(result.data)?result.data[0]:null;
    if(row&&Number.isFinite(Number(row.baseline_away))&&Number.isFinite(Number(row.baseline_home))&&row.baseline_away!==null&&row.baseline_home!==null)canonicalSnapshot=row;
@@ -1230,6 +1230,9 @@ async function analyzeGame(id){
  const coreVersion=canonicalSnapshot?String(canonicalSnapshot.model_version||'Archiv bez verze'):'banger-core-v3-season-home · lokální výpočet';
  const coreSource=canonicalSnapshot?'Centrální archiv Supabase · předzápasová predikce':'Lokální výpočet · zápas bez serverového snímku';
  const coreXgVersion=experimentalModel?(experimentalModel.server?String(canonicalSnapshot.experimental_version||'server-xg'):'banger-core-v3-xg-share · lokální'):'xG data nejsou dostupná';
+ const core31Saved=canonicalSnapshot&&canonicalSnapshot.advanced_away!==null&&canonicalSnapshot.advanced_home!==null&&Number.isFinite(Number(canonicalSnapshot.advanced_away))&&Number.isFinite(Number(canonicalSnapshot.advanced_home));
+ const core31Panel='<div style="margin:12px 0;padding:12px;border:1px solid #71eaff77;border-radius:12px;background:#07243c"><b style="color:#8feeff">🚀 CORE 3.1 · SERVEROVÁ PŘEDPOVĚĎ</b>'+
+ (core31Saved?'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px"><div class="metric"><span>Hosté</span><b>'+intelligenceNum(canonicalSnapshot.advanced_away)+'</b></div><div class="metric"><span>Domácí</span><b>'+intelligenceNum(canonicalSnapshot.advanced_home)+'</b></div></div><p class="analysis-small">Verze: '+clean(canonicalSnapshot.advanced_version||'CORE 3.1')+' · posledních 5 zápasů (20 %), sezona a domácí prostředí. Brankáři ani přesilovky nejsou zahrnuté.</p>':'<p class="analysis-small">Pro tento zápas zatím není v centrálním archivu uložená predikce CORE 3.1.</p>')+'</div>';
  const advancedFactors=[];
  const recentAway=bangerRecentForm(ga,ac,5),recentHome=bangerRecentForm(gh,hc,5);
  if(recentAway&&recentHome)advancedFactors.push('Forma posledních pěti zápasů · váha 20 %');
@@ -1250,6 +1253,7 @@ async function analyzeGame(id){
  '<div class="metric"><span>Očekávané góly · domácí</span><b>'+intelligenceNum(intelligenceModel?.home)+'</b></div>'+
  '<div class="metric"><span>xG model · hosté</span><b>'+intelligenceNum(experimentalModel?.away)+'</b></div>'+
  '<div class="metric"><span>xG model · domácí</span><b>'+intelligenceNum(experimentalModel?.home)+'</b></div></div>'+
+ core31Panel+
  '<details style="margin-top:12px"><summary style="cursor:pointer;color:#8feeff;font-weight:700">⚙️ Verze modelu a započtené faktory</summary>'+
  '<p class="analysis-small">Základ: '+clean(coreVersion)+'<br>Varianta xG: '+clean(coreXgVersion)+'</p>'+
  '<p class="analysis-small">Základní CORE v3 používá sezonní góly, inkasované branky a korekci domácího prostředí ±1,5 %. xG varianta přidává podíl xG při 5v5 (korekce maximálně ±8 %). Brankáři, forma a speciální týmy jsou zatím kontextové údaje mimo společný model.</p>'+
@@ -1325,34 +1329,34 @@ async function analyzeGame(id){
     const metrics=accuracyPanel.querySelector('#bangerAccuracyStats');
     const comparison=accuracyPanel.querySelector('#bangerAccuracyComparison');
     try{
-      const endpoint='https://xxwqeiuyislnoxsmjuul.supabase.co/rest/v1/nhl_prediction_archive?select=game_id,game_date,away_team,home_team,baseline_away,baseline_home,experimental_away,experimental_home,model_version,experimental_version,status,actual_away,actual_home&order=game_date.desc&limit=1000';
+      const endpoint='https://xxwqeiuyislnoxsmjuul.supabase.co/rest/v1/nhl_prediction_archive?select=game_id,game_date,away_team,home_team,baseline_away,baseline_home,experimental_away,experimental_home,model_version,experimental_version,advanced_away,advanced_home,advanced_version,advanced_factors,status,actual_away,actual_home&order=game_date.desc&limit=1000';
       const response=await fetch(endpoint,{headers:{apikey:'sb_publishable_SfeHMIvUkYTuD3jCrWub8w_fPIY0B-G'}});
       if(!response.ok)throw Error('HTTP '+response.status);
       const rows=await response.json();
       if(!Array.isArray(rows))throw Error('Neplatný archiv');
       const valid=rows.filter(x=>x.status==='final'&&[x.actual_away,x.actual_home,x.baseline_away,x.baseline_home].every(v=>v!==null&&Number.isFinite(Number(v))));
-      const paired=valid.filter(x=>x.experimental_away!==null&&x.experimental_home!==null&&Number.isFinite(Number(x.experimental_away))&&Number.isFinite(Number(x.experimental_home)));
+      const available=(x,a,h)=>x[a]!==null&&x[h]!==null&&Number.isFinite(Number(x[a]))&&Number.isFinite(Number(x[h]));
+      const paired=valid.filter(x=>available(x,'experimental_away','experimental_home'));
+      const advanced=valid.filter(x=>available(x,'advanced_away','advanced_home'));
+      const triple=valid.filter(x=>available(x,'experimental_away','experimental_home')&&available(x,'advanced_away','advanced_home'));
       const mae=(data,a,h)=>data.length?data.reduce((s,x)=>s+Math.abs(Number(x[a])-Number(x.actual_away))+Math.abs(Number(x[h])-Number(x.actual_home)),0)/(2*data.length):null;
       const wins=(data,a,h)=>data.filter(x=>Math.sign(Number(x[a])-Number(x[h]))===Math.sign(Number(x.actual_away)-Number(x.actual_home))).length;
-      label.textContent='Vyhodnoceno '+valid.length+' zápasů z '+rows.length+' uložených · společný vzorek '+paired.length;
       const fmtNum=v=>v===null?'—':v.toFixed(3);
-      const baseAll=mae(valid,'baseline_away','baseline_home');
-      const basePaired=mae(paired,'baseline_away','baseline_home');
-      const xgPaired=mae(paired,'experimental_away','experimental_home');
-      metrics.innerHTML='<div class="metric"><b>'+valid.length+'</b><span>Dokončené zápasy</span></div><div class="metric"><b>'+fmtNum(baseAll)+'</b><span>MAE základního modelu</span></div><div class="metric"><b>'+fmtNum(xgPaired)+'</b><span>MAE xG · společný vzorek</span></div>';
-      const activeModel='base';
-      comparison.innerHTML='<div class="toolbar" style="margin:10px 0"><button type="button" class="btn active" data-model="base">Základní model</button><button type="button" class="btn" data-model="xg">xG model</button></div><div id="bangerAccuracySelected"></div>';
+      label.textContent='Dokončeno '+valid.length+' z '+rows.length+' zápasů · CORE 3.1 u '+rows.filter(x=>available(x,'advanced_away','advanced_home')).length+' záznamů';
+      metrics.innerHTML='<div class="metric"><b>'+valid.length+'</b><span>Dokončené zápasy</span></div><div class="metric"><b>'+fmtNum(mae(valid,'baseline_away','baseline_home'))+'</b><span>MAE základního modelu</span></div><div class="metric"><b>'+fmtNum(mae(advanced,'advanced_away','advanced_home'))+'</b><span>MAE CORE 3.1</span></div>';
+      comparison.innerHTML='<div class="toolbar" style="display:flex;flex-wrap:wrap;gap:6px;margin:10px 0"><button type="button" class="btn active" data-model="base">CORE 3.0</button><button type="button" class="btn" data-model="xg">xG</button><button type="button" class="btn" data-model="advanced">CORE 3.1</button></div><div id="bangerAccuracySelected"></div>';
       const selected=comparison.querySelector('#bangerAccuracySelected');
+      const specs={base:['CORE 3.0','baseline_away','baseline_home'],xg:['xG','experimental_away','experimental_home'],advanced:['CORE 3.1','advanced_away','advanced_home']};
       const showModel=model=>{
         comparison.querySelectorAll('[data-model]').forEach(btn=>btn.classList.toggle('active',btn.dataset.model===model));
-        if(!paired.length){selected.textContent='Zatím žádné dokončené zápasy s oběma předzápasovými predikcemi. Po dohrání se zde objeví přesnost.';return}
-        const isXg=model==='xg';
-        const error=isXg?xgPaired:basePaired;
-        const right=wins(paired,isXg?'experimental_away':'baseline_away',isXg?'experimental_home':'baseline_home');
-        selected.innerHTML='<p><b>'+ (isXg?'xG model':'Základní model') +'</b> · MAE '+fmtNum(error)+' · správná strana výsledku '+right+'/'+paired.length+'</p><p class="analysis-small">Srovnání na stejných '+paired.length+' dokončených zápasech. Základní model: '+fmtNum(basePaired)+' · xG: '+fmtNum(xgPaired)+'.</p>';
+        const [name,a,h]=specs[model];
+        const data=valid.filter(x=>available(x,a,h));
+        if(!data.length){selected.textContent='Model '+name+' zatím nemá dokončené zápasy. Přesnost vyhodnotíme až po dohrání.';return}
+        const common=triple.length?'<p class="analysis-small">Společný vzorek všech tří modelů: '+triple.length+' zápasů. MAE CORE 3.0 '+fmtNum(mae(triple,'baseline_away','baseline_home'))+' · xG '+fmtNum(mae(triple,'experimental_away','experimental_home'))+' · CORE 3.1 '+fmtNum(mae(triple,'advanced_away','advanced_home'))+'.</p>':'<p class="analysis-small">Zatím není společný dokončený vzorek všech tří modelů.</p>';
+        selected.innerHTML='<p><b>'+name+'</b> · MAE '+fmtNum(mae(data,a,h))+' · správná strana výsledku '+wins(data,a,h)+'/'+data.length+'</p>'+common;
       };
       comparison.querySelectorAll('[data-model]').forEach(btn=>btn.addEventListener('click',()=>showModel(btn.dataset.model)));
-      showModel(activeModel);
+      showModel('advanced');
     }catch(e){label.textContent='Přesnost nyní nelze načíst: '+e.message}
   })();
   const archiveContainer=document.createElement('div');
