@@ -1,4 +1,4 @@
-/* BANGER Expert Report UX 5.1 — presentation only, prediction math untouched */
+/* BANGER Expert Report UX 6.0 — presentation only, prediction math untouched */
 (()=>{'use strict';
 const CSS=`
 .analysis-panel .analyst-expert-report{border:1px solid #4bd8f588!important;border-radius:19px!important;overflow:hidden;background:linear-gradient(150deg,#0d2946,#091529)!important;box-shadow:0 12px 35px #0005}
@@ -20,31 +20,49 @@ const CSS=`
 .banger-report-audio button{font-size:12px!important;padding:8px 10px!important;min-height:35px!important}
 .banger-report-audio select{max-width:100%;font-size:12px!important}
 .banger-report-audio h3{font-size:13px!important}
+.banger-report-section-body>h4{padding-top:10px;border-top:1px solid #23465e}
+.banger-report-section-body>h4:first-child{border-top:0;padding-top:0}
 .banger-report-section-body .analysis-section{max-width:100%;overflow-wrap:anywhere}
 @media(max-width:600px){.analysis-panel .analyst-expert-report>summary{font-size:15px!important}.banger-report-section>summary{min-height:48px}}
 `;
 function section(title,items,open){const el=document.createElement('details');el.className='banger-report-section';el.open=!!open;const summary=document.createElement('summary');summary.textContent=title;const body=document.createElement('div');body.className='banger-report-section-body';items.forEach(n=>body.appendChild(n));el.append(summary,body);return el}
 function enhance(report){
- if(report.dataset.bangerReportUx==='5.1')return;
+ if(report.dataset.bangerReportUx==='6')return;
  const body=report.querySelector(':scope > .analyst-fold-body');if(!body)return;
  const nodes=Array.from(body.children);if(nodes.length<2)return;
- const intro=document.createElement('div');intro.className='banger-report-intro';intro.innerHTML='<strong>🧠 BANGER | Expertní rozbor</strong><span>Čti nejdřív hlavní závěry. Detailní podklady rozbal podle potřeby. Neověřené údaje zůstávají označené.</span>';
- const groups=[[],[],[],[],[]];let group=0;
- nodes.forEach(node=>{
- const heading=(node.matches('h4,h3')?node.textContent:(node.querySelector('h3,h4')?.textContent||'')).toLowerCase();
- const txt=(node.textContent||'').toLowerCase();
- if(/brankář|goalie|gólman|sestav/.test(heading))group=2;
- else if(/hráč|útoční|obránc|player/.test(heading))group=3;
- else if(/založeno na dostupných|nejde o generativní ai/.test(txt))group=4;
- else if(/verdikt|závěr|predikční model|očekáv|favorit/.test(heading))group=0;
- else if(node.matches('h4'))group=1;
- if(node.querySelector('button') && /poslech|přehr|pauza|tempo|stop/i.test(txt.slice(0,350))){node.classList.add('banger-report-audio');groups[4].unshift(node);return}
- groups[group].push(node);
- });
+ const groups=Array.from({length:6},()=>[]),notes=[];let current=0;
+ const classify=title=>{
+  const t=title.toLowerCase();
+  if(/tracker|kontrola dat|diagnostik|vážený predikční model|advanced stats|přesnost|kalibrac|datové zdroje/.test(t))return 5;
+  if(/přesilov|oslaben|trest|fyzická náročnost|speciální týmy/.test(t))return 4;
+  if(/brankář|goalie|gólman|sestav/.test(t))return 2;
+  if(/hráč|útoční|obránc|individual|individuál|střelc/.test(t))return 3;
+  if(/vzájemn|forma|tabulkov|odpočinek|program|střelecká aktivita|střely, hity|celkový obraz|srovnání týmů/.test(t))return 1;
+  if(/verdikt|predikc|favorit|očekáv|výsledek/.test(t))return 0;
+  return 1;
+ };
+ for(let i=0;i<nodes.length;i++){
+  const node=nodes[i];
+  if(node.classList.contains('banger-match-story')){groups[0].unshift(node);continue}
+  if(node.classList.contains('banger-voice-controls')){notes.push(node);continue}
+  if(node.tagName==='H4'){
+   current=classify(node.textContent||'');groups[current].push(node);
+   if(nodes[i+1]?.tagName==='P')groups[current].push(nodes[++i]);
+   continue;
+  }
+  if(node.matches('section.analysis-section')){
+   current=classify(node.querySelector('h3,h4')?.textContent||'');groups[current].push(node);continue;
+  }
+  if(node.matches('p.analysis-small')&&(/Automatický datový rozbor|Založeno na dostupných/.test(node.textContent||''))){notes.push(node);continue}
+  groups[current].push(node);
+ }
+ const intro=document.createElement('div');intro.className='banger-report-intro';
+ intro.innerHTML='<strong>🏒 BANGER | Analýza zápasu</strong><span>Nejdřív projekce, potom důvody. Každý údaj zůstává dohledatelný v příslušné sekci.</span>';
  body.replaceChildren(intro);
- const titles=['🎯 Verdikt a predikce','📊 Podrobná analýza zápasu','🥅 Brankáři a sestavy','🏒 Hráči a jejich forma','🔊 Poslech a informace'];
+ const titles=['🎯 Predikce zápasu','📊 Srovnání týmů','🥅 Brankáři a sestavy','🏒 Hráči','⚡ Speciální týmy','🧠 BANGER AI Engine'];
  groups.forEach((items,i)=>{if(items.length)body.appendChild(section(titles[i],items,i===0))});
- report.dataset.bangerReportUx='5.1';
+ if(notes.length)body.appendChild(section('🔊 Poslech a informace',notes,false));
+ report.dataset.bangerReportUx='6';
 }
 function scan(){document.querySelectorAll('.analysis-panel .analyst-expert-report').forEach(enhance)}
 function start(){if(!document.getElementById('banger-report-ux-style')){const style=document.createElement('style');style.id='banger-report-ux-style';style.textContent=CSS;document.head.appendChild(style)}scan();let pending=false;new MutationObserver(()=>{if(pending)return;pending=true;requestAnimationFrame(()=>{pending=false;scan()})}).observe(document.body,{childList:true,subtree:true})}
