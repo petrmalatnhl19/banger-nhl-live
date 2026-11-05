@@ -119,6 +119,38 @@ if metrics_section_anchor in html and "section('Tabulková síla a dlouhodobá s
     html = html.replace(metrics_section_anchor, metrics_section + metrics_section_anchor, 1)
     changes += 1
 
+# Enhance the written report with verified last-game shooting and recovery context.
+extra_anchor = " const narrative=[];"
+extra_code = """ const bangerShotReport=(skaters,code)=>{
+  if(!skaters)return clean(code)+': střelecká data posledního zápasu nejsou dostupná.';
+  const attempts=Number(skaters.shots),goals=Number(skaters.goals);
+  if(!Number.isFinite(attempts)||attempts<=0)return clean(code)+': počet střel v posledním utkání není ověřen.';
+  return clean(code)+' v posledním dostupném zápase vyslal '+attempts+' střel na branku a skóroval '+goals+'krát. Úspěšnost zakončení byla '+fmt(100*goals/attempts)+' procenta. Jde o jediné utkání, ne o dlouhodobou střeleckou úroveň.';
+ };
+ const bangerRestReport=(games,code)=>{
+  const played=games.filter(g=>g.gameDate&&[g.awayTeam?.abbrev,g.homeTeam?.abbrev].includes(code))
+   .map(g=>g.gameDate).sort().reverse();
+  const unique=[...new Set(played)];
+  if(!unique.length)return clean(code)+': datum posledního utkání není k dispozici.';
+  const days=Math.round((Date.parse(day+'T12:00:00Z')-Date.parse(unique[0]+'T12:00:00Z'))/86400000);
+  if(!Number.isFinite(days)||days<0)return clean(code)+': odpočinek nelze spolehlivě určit.';
+  const between=unique.length>1?Math.round((Date.parse(unique[0]+'T12:00:00Z')-Date.parse(unique[1]+'T12:00:00Z'))/86400000):null;
+  return clean(code)+' odehrál poslední dostupné utkání '+clean(unique[0])+'. Do dne zápasu uplynulo '+days+' kalendářních dní'+(days===1?', což odpovídá druhému zápasu ve dvou dnech':'.')+
+   (between===1?' Také předchozí dvojice zápasů následovala ve dvou dnech.':'')+
+   ' Bez informací o cestování a skutečném nasazení hráčů nejde únavu přesně kvantifikovat.';
+ };
+"""
+if extra_anchor in html and "const bangerShotReport=" not in html:
+    html = html.replace(extra_anchor, extra_code + extra_anchor, 1)
+    changes += 1
+section_anchor = " section('Celkový obraz utkání',"
+new_sections = """ section('Střelecká aktivita a efektivita',bangerShotReport(skaters[0],ac)+' '+bangerShotReport(skaters[1],hc)+' Vyšší úspěšnost střelby z jediného utkání sama o sobě neznamená lepší útok.');
+ section('Odpočinek a náročnost programu',bangerRestReport(ga,ac)+' '+bangerRestReport(gh,hc));
+"""
+if section_anchor in html and "section('Střelecká aktivita a efektivita'" not in html:
+    html = html.replace(section_anchor, new_sections + section_anchor, 1)
+    changes += 1
+
 # Install the voice player once; it observes Expert Reports rendered dynamically.
 voice_tag = '<script defer src="./expert-voice.js"></script>'
 if voice_tag not in html:
