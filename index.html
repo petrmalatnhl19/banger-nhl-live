@@ -632,12 +632,12 @@ async function analyzeGame(id){
    const m=String(v??'').match(/(\d+)\s*\/\s*(\d+)/);
    return m?[Number(m[1]),Number(m[2])]:null;
   };
-  for(const result of results){
+  for(let index=0;index<results.length;index++){\n   const result=results[index];\n   const game=games.find(g=>String(g.id)===String(ids[index]));
    if(!result.ok||!result.data)continue;
    const data=result.data;
-   const side=data.awayTeam?.abbrev===code?'away':'home';
+   const side=game?.awayTeam?.abbrev===code?'away':game?.homeTeam?.abbrev===code?'home':null;
    const other=side==='away'?'home':'away';
-   if(data[side+'Team']?.abbrev!==code)continue;
+   if(!side)continue;
    const rows=data.teamGameStats??data.summary?.teamGameStats;
    if(!Array.isArray(rows))continue;
    const row=rows.find(x=>/power.?play/i.test(String(x.category||x.name||'')));
