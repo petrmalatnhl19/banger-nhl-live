@@ -787,10 +787,42 @@ async function analyzeGame(id){
    (sample.ppPct==null?'bez dostatku příležitostí':fmt(sample.ppPct)+' procent ('+sample.ppGoals+' z '+sample.ppChances+')')+
    ', oslabení '+(sample.pkPct==null?'bez dostatku příležitostí':fmt(sample.pkPct)+' procent ('+(sample.pkFaced-sample.pkAllowed)+' ubráněných z '+sample.pkFaced+')')+'. ';
  };
+ const bangerWeightedForecast=()=>{
+  if(![af,aa,hf,ha].every(Number.isFinite))return null;
+  const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
+  const recentA=bangerRecentForm(ga,ac,5),recentH=bangerRecentForm(gh,hc,5);
+  const baselineA=clamp((af+ha)/2,.4,6),baselineH=clamp((hf+aa)/2,.4,6);
+  let away=baselineA,home=baselineH;
+  const factors=['sezonní góly a inkasované branky'];
+  if(recentA&&recentH){
+   const recentAway=clamp((recentA.goalsFor/recentA.n+recentH.goalsAgainst/recentH.n)/2,.4,6);
+   const recentHome=clamp((recentH.goalsFor/recentH.n+recentA.goalsAgainst/recentA.n)/2,.4,6);
+   away=.8*away+.2*recentAway;home=.8*home+.2*recentHome;
+   factors.push('forma posledních pěti utkání (20 %)');
+  }
+  // Mild home-ice factor, not a claim of a calibrated empirical advantage.
+  away*=.985;home*=1.015;
+  factors.push('malá výhoda domácího prostředí (±1,5 %)');
+  if(bangerGoalieSamples[0]&&bangerGoalieSamples[1]){
+   // A higher recent save percentage of opposing goalies slightly lowers expected goals.
+   away*=clamp(1+(90-bangerGoalieSamples[1].pct)*.006,.96,1.04);
+   home*=clamp(1+(90-bangerGoalieSamples[0].pct)*.006,.96,1.04);
+   factors.push('nedávná úspěšnost brankářů (nejvýše ±4 %)');
+  }
+  if(bangerSpecial[0]&&bangerSpecial[1]){
+   const a=bangerSpecial[0],h=bangerSpecial[1];
+   if(a.ppPct!=null&&h.pkPct!=null)away*=clamp(1+(a.ppPct-(100-h.pkPct))*.001,.97,1.03);
+   if(h.ppPct!=null&&a.pkPct!=null)home*=clamp(1+(h.ppPct-(100-a.pkPct))*.001,.97,1.03);
+   factors.push('přesilovky a oslabení (nejvýše ±3 %)');
+  }
+  // Recent H2H is descriptive only: older rosters are not predictive evidence.
+  return {away:clamp(away,.4,6),home:clamp(home,.4,6),factors,form:!!(recentA&&recentH)};
+ };
  const bangerVerdict=()=>{
   const complete=[af,aa,hf,ha].every(Number.isFinite);
-  const away=complete?Math.max(.4,Math.min(6,(af+ha)/2)):null;
-  const home=complete?Math.max(.4,Math.min(6,(hf+aa)/2)):null;
+  const weighted=bangerWeightedForecast();
+  const away=weighted?.away??null;
+  const home=weighted?.home??null;
   const total=away==null?null:away+home;
   const shots=bangerSamples;
   const goalies=bangerGoalieSamples;
@@ -799,7 +831,7 @@ async function analyzeGame(id){
   const coverage=covered.filter(Boolean).length;
   const confidence=coverage>=7?'vyšší pokrytí dat':coverage>=4?'střední pokrytí dat':'omezené pokrytí dat';
   const lines=[];
-  lines.push('Góly: '+(total==null?'nedostatek sezonních údajů':fmt(total)+' očekávaných celkem (zjednodušený sezonní model; '+clean(ac)+' '+fmt(away)+', '+clean(hc)+' '+fmt(home)+')')+'.');
+  lines.push('Góly: '+(total==null?'nedostatek sezonních údajů':fmt(total)+' očekávaných celkem (vážený orientační model; '+clean(ac)+' '+fmt(away)+', '+clean(hc)+' '+fmt(home)+')')+'.');
   lines.push('Průběh: '+(total==null?'bez jasného favorita podle gólových průměrů':Math.abs(away-home)<.35?'vyrovnaný podle gólových profilů':'mírná modelová výhoda '+clean(away>home?ac:hc))+'.');
   lines.push('Střely: '+(shots[0]&&shots[1]?clean(ac)+' '+fmt(shots[0].shots)+', '+clean(hc)+' '+fmt(shots[1].shots)+' na zápas v posledních '+shots[0].n+' a '+shots[1].n+' utkáních':'nedostatek srovnatelných posledních utkání')+'.');
   lines.push('Fyzická hra: '+(shots[0]&&shots[1]?fmt(shots[0].hits+shots[1].hits)+' hitů obou týmů v součtu jejich průměrů; tvrdost příštího zápasu není jistá':'nedostatek údajů o hitech')+'.');
@@ -827,7 +859,13 @@ async function analyzeGame(id){
  const completeSeason=[af,aa,hf,ha].every(Number.isFinite);
  const leaderText=(s,code)=>s?.leaders?.length?'Za '+clean(code)+' v posledním dostupném zápase vynikl '+clean(s.leaders[0].name)+' s '+s.leaders[0].points+' body, '+s.leaders[0].shots+' střelami.':'U '+clean(code)+' nejsou dostupné ověřené individuální statistiky z posledního utkání.';
  section('Závěrečný expertní verdikt',bangerVerdict());
+ section('Vážený predikční model',(()=>{
+  const m=bangerWeightedForecast();
+  if(!m)return 'Pro vážený model chybí úplné sezonní gólové průměry.';
+  return 'Orientační očekávání: '+clean(ac)+' '+fmt(m.away)+' gólu, '+clean(hc)+' '+fmt(m.home)+' gólu, dohromady '+fmt(m.away+m.home)+'. Zohledněno: '+m.factors.join(', ')+'. Historické vzájemné zápasy zůstávají popisným kontextem, nikoli automatickou úpravou skóre. Koeficienty jsou konzervativní návrhové váhy, zatím bez zpětné kalibrace na výsledcích; nejde o garantovanou přesnost.';
+ })());
  section('Vzájemné zápasy',bangerH2HReport());
+
 
 
  section('Tabulková síla a dlouhodobá stabilita',bangerMetrics(ar,ac)+' '+bangerMetrics(hr,hc)+' '+bangerCompare()+' Jde o popis dosavadní sezony, nikoli jistotu výsledku.');
