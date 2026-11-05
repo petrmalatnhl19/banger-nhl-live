@@ -1000,6 +1000,25 @@ async function analyzeGame(id){
  section('Střelecká aktivita a efektivita',bangerShotReport(skaters[0],ac)+' '+bangerShotReport(skaters[1],hc)+' Vyšší úspěšnost střelby z jediného utkání sama o sobě neznamená lepší útok.');
  section('Odpočinek a náročnost programu',bangerRestReport(ga,ac)+' '+bangerRestReport(gh,hc));
  section('Forma za 5, 10 a 15 zápasů, trend a síla soupeřů',bangerFormText(ga,ac)+' '+bangerFormText(gh,hc)+' Výkonnost proti silnějším soupeřům může mít jinou váhu než stejné výsledky proti slabším týmům.');
+ section('ADVANCED STATS · ověřené týmové ukazatele',(()=>{
+  const row=(sample,goalie,special,code)=>{
+   if(!sample)return clean(code)+': detailní vzorek není dostupný.';
+   const shot=Number(sample.shots),hit=Number(sample.hits),block=Number(sample.blocks);
+   const values=[
+    'Střely na branku / zápas: '+fmt(shot),
+    'Hity / zápas: '+fmt(hit),
+    'Bloky / zápas: '+fmt(block),
+    'Hity na 10 střel: '+(shot>0?fmt(10*hit/shot):'nedostupné'),
+    'Bloky na 10 střel: '+(shot>0?fmt(10*block/shot):'nedostupné'),
+    'Trestné minuty / zápas: '+fmt(sample.penaltyMinutes)
+   ];
+   if(goalie&&goalie.shots>0)values.push('Souhrnné SV% startujících brankářů ve vzorku: '+fmt(100*goalie.saves/goalie.shots)+' %');
+   if(special?.ppPct!=null)values.push('PP% ve vzorku: '+fmt(special.ppPct)+' %');
+   if(special?.pkPct!=null)values.push('PK% ve vzorku: '+fmt(special.pkPct)+' %');
+   return clean(code)+' ('+sample.n+' zápasů): '+values.join('; ')+'.';
+  };
+  return row(bangerSamples[0],bangerGoalieSamples[0],bangerSpecial[0],ac)+' '+row(bangerSamples[1],bangerGoalieSamples[1],bangerSpecial[1],hc)+' Jde o ukazatele odvozené z dostupných zápasových statistik, nikoli o hodnoty přepočtené na 60 minut. Corsi%, Fenwick%, xGF%, HDCF% a individuální G/60, P/60 bez ověřených dat o pokusech, šancích a čase na ledě neuvádíme.';
+ })());
  section('Střely, hity a bloky z posledních utkání',bangerSampleText(bangerSamples[0],ac)+bangerSampleText(bangerSamples[1],hc)+' Jde o průměry malého vzorku, ne o potvrzenou předpověď příštího utkání.');
  section('Fyzická náročnost a trestné minuty',bangerPhysicalOutlook());
  section('Aktuální výkonnost brankářů',bangerGoalieText(bangerGoalieSamples[0],ac)+bangerGoalieText(bangerGoalieSamples[1],hc)+' Statistiky se vztahují ke skutečně nasazeným brankářům v minulých zápasech, nikoli k potvrzenému startérovi příštího utkání.');
