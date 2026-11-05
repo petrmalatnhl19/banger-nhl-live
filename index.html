@@ -855,6 +855,39 @@ async function analyzeGame(id){
   const bySeason=seasons.map(y=>y+': '+games.filter(g=>seasonOf(g)===y).length+' utkání').join('; ');
   return 'Posledních '+games.length+' dostupných vzájemných zápasů: '+clean(ac)+' '+aw+' výher, '+clean(hc)+' '+hw+' výher. Průměr '+fmt(avg)+' gólu na utkání. '+clean(hc)+' doma: '+homeWins+' výher z '+homeGames+' vzájemných utkání. Historie podle sezon: '+bySeason+'. Výsledky (hosté : domácí): '+results+'. '+(games.length<3?'Velmi malý vzorek. ':'')+'Starší sezony mají pro současnou formu omezenou vypovídací hodnotu; tato historie zatím nemění gólový model.';
  };
+ const bangerTracker=(()=>{
+  const key='banger-prediction-tracker-v1';
+  let records=[];
+  try{const parsed=JSON.parse(localStorage.getItem(key)||'[]');if(Array.isArray(parsed))records=parsed.filter(x=>x&&x.id&&Number.isFinite(x.away)&&Number.isFinite(x.home)).slice(-150)}catch(e){}
+  const forecast=bangerWeightedForecast();
+  const gameId=String(id);
+  const final=['OFF','FINAL'].includes(String(d.gameState||''))&&Number.isFinite(Number(d.awayTeam?.score))&&Number.isFinite(Number(d.homeTeam?.score));
+  const existing=records.find(x=>x.id===gameId);
+  if(!existing&&forecast&&!final&&day>=new Date().toISOString().slice(0,10)){
+   records.push({id:gameId,day,ac,hc,away:forecast.away,home:forecast.home,savedAt:new Date().toISOString(),status:'pending'});
+  }
+  if(final){
+   const row=records.find(x=>x.id===gameId);
+   if(row&&row.status==='pending'){
+    row.status='final';row.actualAway=Number(d.awayTeam.score);row.actualHome=Number(d.homeTeam.score);
+    row.goalError=Math.abs(row.away-row.actualAway)+Math.abs(row.home-row.actualHome);
+    const predDiff=row.away-row.home,realDiff=row.actualAway-row.actualHome;
+    row.correctSide=Math.abs(predDiff)<.001||realDiff===0?null:Math.sign(predDiff)===Math.sign(realDiff);
+   }
+  }
+  records=records.slice(-150);
+  try{localStorage.setItem(key,JSON.stringify(records))}catch(e){}
+  const finished=records.filter(x=>x.status==='final');
+  const scored=finished.filter(x=>x.correctSide!==null);
+  const correct=scored.filter(x=>x.correctSide).length;
+  const avgError=finished.length?finished.reduce((sum,x)=>sum+x.goalError,0)/finished.length:null;
+  const current=records.find(x=>x.id===gameId);
+  return 'Uložené předzápasové predikce v tomto prohlížeči: '+records.length+'. Vyhodnocené zápasy: '+finished.length+'. '+
+   (scored.length?'Správně určený tým s vyšším očekáváním gólů: '+correct+' z '+scored.length+'. ':'')+
+   (avgError!==null?'Průměrný součet absolutních odchylek gólů obou týmů: '+fmt(avgError)+'. ':'')+
+   (current?'Tento zápas: '+(current.status==='final'?'vyhodnocen':'předzápasová predikce uložena')+' ('+fmt(current.away)+' : '+fmt(current.home)+'). ':'')+
+   'Záznamy jsou pouze v místním úložišti tohoto prohlížeče; neukládají se zpětně pro již odehrané zápasy. K vyhodnocení zatím dochází při opětovném otevření stejného dokončeného utkání. Nejde o ověřenou dlouhodobou přesnost.';
+ })();
  const narrative=[];
  const section=(heading,body)=>narrative.push('<h4>'+heading+'</h4><p>'+body+'</p>');
  const completeSeason=[af,aa,hf,ha].every(Number.isFinite);
@@ -865,6 +898,7 @@ async function analyzeGame(id){
   if(!m)return 'Pro vážený model chybí úplné sezonní gólové průměry.';
   return 'Orientační očekávání: '+clean(ac)+' '+fmt(m.away)+' gólu, '+clean(hc)+' '+fmt(m.home)+' gólu, dohromady '+fmt(m.away+m.home)+'. Zohledněno: '+m.factors.join(', ')+'. Historické vzájemné zápasy zůstávají popisným kontextem, nikoli automatickou úpravou skóre. Koeficienty jsou konzervativní návrhové váhy, zatím bez zpětné kalibrace na výsledcích; nejde o garantovanou přesnost.';
  })());
+ section('BANGER Prediction Tracker',bangerTracker);
  section('Kontrola dat predikce',(()=>{
   const m=bangerWeightedForecast();
   const hasSeason=[af,aa,hf,ha].every(Number.isFinite);
@@ -886,6 +920,7 @@ async function analyzeGame(id){
   return caution+'Sezonní základ '+clean(ac)+' '+fmt(baseAway)+', '+clean(hc)+' '+fmt(baseHome)+'. Po korekcích '+clean(ac)+' '+fmt(m.away)+', '+clean(hc)+' '+fmt(m.home)+'. Změna oproti základu: '+clean(ac)+' '+fmt(m.away-baseAway)+', '+clean(hc)+' '+fmt(m.home-baseHome)+' gólu. Výsledek je orientační, bez zpětného ověření přesnosti. Chybějící statistiky se nenahrazují odhady.';
  })());
  section('Vzájemné zápasy',bangerH2HReport());
+
 
 
 
