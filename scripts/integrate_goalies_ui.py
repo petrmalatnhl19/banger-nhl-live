@@ -677,6 +677,50 @@ if audit_anchor in html and "section('Kontrola dat predikce'," not in html:
     html=html.replace(audit_anchor,audit_code+audit_anchor,1)
     changes+=1
 
+# First prediction tracker: immutable pregame snapshots stored locally and scored against NHL final.
+tracker_anchor = " const narrative=[];"
+tracker_code = """ const bangerTracker=(()=>{
+  const key='banger-prediction-tracker-v1';
+  let records=[];
+  try{const parsed=JSON.parse(localStorage.getItem(key)||'[]');if(Array.isArray(parsed))records=parsed.filter(x=>x&&x.id&&Number.isFinite(x.away)&&Number.isFinite(x.home)).slice(-150)}catch(e){}
+  const forecast=bangerWeightedForecast();
+  const gameId=String(id);
+  const final=['OFF','FINAL'].includes(String(d.gameState||''))&&Number.isFinite(Number(d.awayTeam?.score))&&Number.isFinite(Number(d.homeTeam?.score));
+  const existing=records.find(x=>x.id===gameId);
+  if(!existing&&forecast&&!final&&day>=new Date().toISOString().slice(0,10)){
+   records.push({id:gameId,day,ac,hc,away:forecast.away,home:forecast.home,savedAt:new Date().toISOString(),status:'pending'});
+  }
+  if(final){
+   const row=records.find(x=>x.id===gameId);
+   if(row&&row.status==='pending'){
+    row.status='final';row.actualAway=Number(d.awayTeam.score);row.actualHome=Number(d.homeTeam.score);
+    row.goalError=Math.abs(row.away-row.actualAway)+Math.abs(row.home-row.actualHome);
+    const predDiff=row.away-row.home,realDiff=row.actualAway-row.actualHome;
+    row.correctSide=Math.abs(predDiff)<.001||realDiff===0?null:Math.sign(predDiff)===Math.sign(realDiff);
+   }
+  }
+  records=records.slice(-150);
+  try{localStorage.setItem(key,JSON.stringify(records))}catch(e){}
+  const finished=records.filter(x=>x.status==='final');
+  const scored=finished.filter(x=>x.correctSide!==null);
+  const correct=scored.filter(x=>x.correctSide).length;
+  const avgError=finished.length?finished.reduce((sum,x)=>sum+x.goalError,0)/finished.length:null;
+  const current=records.find(x=>x.id===gameId);
+  return 'Uložené předzápasové predikce v tomto prohlížeči: '+records.length+'. Vyhodnocené zápasy: '+finished.length+'. '+
+   (scored.length?'Správně určený tým s vyšším očekáváním gólů: '+correct+' z '+scored.length+'. ':'')+
+   (avgError!==null?'Průměrný součet absolutních odchylek gólů obou týmů: '+fmt(avgError)+'. ':'')+
+   (current?'Tento zápas: '+(current.status==='final'?'vyhodnocen':'předzápasová predikce uložena')+' ('+fmt(current.away)+' : '+fmt(current.home)+'). ':'')+
+   'Záznamy jsou pouze v místním úložišti tohoto prohlížeče; neukládají se zpětně pro již odehrané zápasy. K vyhodnocení zatím dochází při opětovném otevření stejného dokončeného utkání. Nejde o ověřenou dlouhodobou přesnost.';
+ })();
+"""
+if tracker_anchor in html and "banger-prediction-tracker-v1" not in html:
+    html=html.replace(tracker_anchor,tracker_code+tracker_anchor,1)
+    changes+=1
+tracker_section_anchor = " section('Kontrola dat predikce',(()=>{"
+if tracker_section_anchor in html and "section('BANGER Prediction Tracker'," not in html:
+    html=html.replace(tracker_section_anchor," section('BANGER Prediction Tracker',bangerTracker);\n"+tracker_section_anchor,1)
+    changes+=1
+
 # Install the voice player once; it observes Expert Reports rendered dynamically.
 voice_tag = '<script defer src="./expert-voice.js"></script>'
 if voice_tag not in html:
