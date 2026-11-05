@@ -218,6 +218,34 @@ if snapshot_section_anchor in html and "section('Rychlá předzápasová predikc
     html = html.replace(snapshot_section_anchor, snapshot_section + snapshot_section_anchor, 1)
     changes += 1
 
+# Add explicitly model-based total-goal probabilities and observed head-to-head scoring.
+prob_anchor = "  const expectedGoals=total!=null?"
+prob_code = """  const poissonTail=(lambda,threshold)=>{
+   let probability=0,term=Math.exp(-lambda);
+   for(let n=0;n<threshold;n++){probability+=term;term*=lambda/(n+1)}
+   return Math.max(0,Math.min(1,1-probability));
+  };
+  const goalChances=total!=null?
+   'Podle nezávislého Poissonova modelu je pravděpodobnost alespoň pěti gólů '+fmt(100*poissonTail(total,5))+' procent a alespoň šesti gólů '+fmt(100*poissonTail(total,6))+' procent. Jde o nekalibrované modelové odhady, nikoli jistotu. ':'';
+"""
+if prob_anchor in html and "const goalChances=" not in html:
+    html = html.replace(prob_anchor,prob_code+prob_anchor,1)
+    changes += 1
+h2h_anchor = "  const rivalry=direct.length?"
+h2h_code = """  const meetings=direct.filter(g=>Number.isFinite(Number(g.homeTeam?.score))&&Number.isFinite(Number(g.awayTeam?.score)));
+  const meetingStats=meetings.length>=2?
+   'V posledních '+meetings.length+' dostupných vzájemných zápasech padlo průměrně '+
+   fmt(meetings.reduce((sum,g)=>sum+Number(g.homeTeam.score)+Number(g.awayTeam.score),0)/meetings.length)+
+   ' gólu na utkání. Malý vzorek nemusí předpovídat příští výsledek. ':'';
+"""
+if h2h_anchor in html and "const meetingStats=" not in html:
+    html = html.replace(h2h_anchor,h2h_code+h2h_anchor,1)
+    changes += 1
+return_anchor = "  return expectedGoals+' '+favorite+' '+shots+' '+physical+' '+rivalry;"
+if return_anchor in html:
+    html=html.replace(return_anchor,"  return expectedGoals+' '+goalChances+favorite+' '+shots+' '+physical+' '+meetingStats+rivalry;",1)
+    changes+=1
+
 # Install the voice player once; it observes Expert Reports rendered dynamically.
 voice_tag = '<script defer src="./expert-voice.js"></script>'
 if voice_tag not in html:
