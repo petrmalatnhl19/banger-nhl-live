@@ -1,8 +1,8 @@
 {
-  "checkedAt": "2026-11-04T23:54:51.586684+00:00",
+  "checkedAt": "2026-11-05T00:56:32.000728+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "candidateCount": 92,
-  "matchedCount": 92,
+  "matchedCount": 84,
   "matches": [
     {
       "team": "ANA",
@@ -52,16 +52,6 @@
       "status": "projected",
       "date": "2026-11-08",
       "gameId": 2026020277,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "BUF",
-      "goalie": "Colten Ellis",
-      "opponent": "OTT",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-04",
-      "gameId": 2026020247,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -137,16 +127,6 @@
     {
       "team": "CGY",
       "goalie": "Dustin Wolf",
-      "opponent": "SEA",
-      "venue": "away",
-      "status": "confirmed",
-      "date": "2026-11-04",
-      "gameId": 2026020250,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "CGY",
-      "goalie": "Dustin Wolf",
       "opponent": "ANA",
       "venue": "home",
       "status": "projected",
@@ -162,16 +142,6 @@
       "status": "projected",
       "date": "2026-11-08",
       "gameId": 2026020281,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "CHI",
-      "goalie": "Spencer Knight",
-      "opponent": "FLA",
-      "venue": "away",
-      "status": "confirmed",
-      "date": "2026-11-04",
-      "gameId": 2026020248,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -307,16 +277,6 @@
     {
       "team": "FLA",
       "goalie": "Jacob Markstrom",
-      "opponent": "CHI",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-04",
-      "gameId": 2026020248,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "FLA",
-      "goalie": "Jacob Markstrom",
       "opponent": "WSH",
       "venue": "away",
       "status": "projected",
@@ -342,16 +302,6 @@
       "status": "projected",
       "date": "2026-11-10",
       "gameId": 2026020289,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "LAK",
-      "goalie": "Darcy Kuemper",
-      "opponent": "SJS",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-04",
-      "gameId": 2026020249,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -567,16 +517,6 @@
     {
       "team": "OTT",
       "goalie": "Samuel Ersson",
-      "opponent": "BUF",
-      "venue": "away",
-      "status": "confirmed",
-      "date": "2026-11-04",
-      "gameId": 2026020247,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "OTT",
-      "goalie": "Samuel Ersson",
       "opponent": "UTA",
       "venue": "home",
       "status": "projected",
@@ -656,32 +596,12 @@
     },
     {
       "team": "SEA",
-      "goalie": "Joey Daccord",
-      "opponent": "CGY",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-04",
-      "gameId": 2026020250,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "SEA",
       "goalie": "Philipp Grubauer",
       "opponent": "NYR",
       "venue": "home",
       "status": "projected",
       "date": "2026-11-07",
       "gameId": 2026020267,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "SJS",
-      "goalie": "Yaroslav Askarov",
-      "opponent": "LAK",
-      "venue": "away",
-      "status": "confirmed",
-      "date": "2026-11-04",
-      "gameId": 2026020249,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -925,5 +845,62 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     }
   ],
-  "unmatched": []
+  "unmatched": [
+    {
+      "team": "BUF",
+      "goalie": "Colten Ellis",
+      "opponent": "OTT",
+      "venue": "home",
+      "status": "confirmed"
+    },
+    {
+      "team": "CGY",
+      "goalie": "Dustin Wolf",
+      "opponent": "SEA",
+      "venue": "away",
+      "status": "confirmed"
+    },
+    {
+      "team": "CHI",
+      "goalie": "Spencer Knight",
+      "opponent": "FLA",
+      "venue": "away",
+      "status": "confirmed"
+    },
+    {
+      "team": "FLA",
+      "goalie": "Jacob Markstrom",
+      "opponent": "CHI",
+      "venue": "home",
+      "status": "confirmed"
+    },
+    {
+      "team": "LAK",
+      "goalie": "Darcy Kuemper",
+      "opponent": "SJS",
+      "venue": "home",
+      "status": "confirmed"
+    },
+    {
+      "team": "OTT",
+      "goalie": "Samuel Ersson",
+      "opponent": "BUF",
+      "venue": "away",
+      "status": "confirmed"
+    },
+    {
+      "team": "SEA",
+      "goalie": "Joey Daccord",
+      "opponent": "CGY",
+      "venue": "home",
+      "status": "confirmed"
+    },
+    {
+      "team": "SJS",
+      "goalie": "Yaroslav Askarov",
+      "opponent": "LAK",
+      "venue": "away",
+      "status": "confirmed"
+    }
+  ]
 }
