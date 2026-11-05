@@ -518,6 +518,41 @@ if old_verdict in html:
     html=html.replace(old_verdict,new_verdict,1)
     changes+=1
 
+# H2H: merge the teams' season schedules and show real scorelines, not only a count.
+h2h_old = " const h2h=ga.filter(g=>[g.awayTeam.abbrev,g.homeTeam.abbrev].includes(hc)).slice(0,5);"
+h2h_new = """ const h2h=unique([...ga,...gh]).filter(g=>[g.awayTeam?.abbrev,g.homeTeam?.abbrev].includes(ac)&&[g.awayTeam?.abbrev,g.homeTeam?.abbrev].includes(hc)).sort((a,b)=>b.gameDate.localeCompare(a.gameDate)).slice(0,10);"""
+if h2h_old in html:
+    html=html.replace(h2h_old,h2h_new,1)
+    changes+=1
+
+h2h_report_anchor = " const narrative=[];"
+h2h_report_code = """ const bangerH2HReport=()=>{
+  const games=h2h.filter(g=>Number.isFinite(Number(g.homeTeam?.score))&&Number.isFinite(Number(g.awayTeam?.score)));
+  if(!games.length)return 'V dostupných sezonních rozpisech nejsou nalezena dokončená vzájemná utkání. Neznamená to, že týmy spolu nikdy nehrály.';
+  const aw=games.filter(g=>(g.awayTeam.abbrev===ac?Number(g.awayTeam.score)>Number(g.homeTeam.score):Number(g.homeTeam.score)>Number(g.awayTeam.score))).length;
+  const hw=games.length-aw;
+  const avg=games.reduce((sum,g)=>sum+Number(g.homeTeam.score)+Number(g.awayTeam.score),0)/games.length;
+  const results=games.slice(0,5).map(g=>clean(g.gameDate)+': '+clean(g.awayTeam.abbrev)+' '+Number(g.awayTeam.score)+' : '+Number(g.homeTeam.score)+' '+clean(g.homeTeam.abbrev)).join('; ');
+  return 'Posledních '+games.length+' dostupných vzájemných zápasů: '+clean(ac)+' '+aw+' výher, '+clean(hc)+' '+hw+' výher. Průměr '+fmt(avg)+' gólu na utkání. Výsledky (hosté : domácí): '+results+'. '+(games.length<3?'Velmi malý vzorek. ':'')+'Historické výsledky samy o sobě nedokazují rivalitu ani neurčují výsledek dalšího utkání.';
+ };
+"""
+if h2h_report_anchor in html and "const bangerH2HReport=()=>{" not in html:
+    html=html.replace(h2h_report_anchor,h2h_report_code+h2h_report_anchor,1)
+    changes+=1
+h2h_section_anchor = " section('Tabulková síla a dlouhodobá stabilita',"
+if h2h_section_anchor in html and "section('Vzájemné zápasy'," not in html:
+    html=html.replace(h2h_section_anchor," section('Vzájemné zápasy',bangerH2HReport());\n"+h2h_section_anchor,1)
+    changes+=1
+# Eliminate accidental duplicate verdict and make the history visible in the short verdict.
+duplicate_verdict = " section('Závěrečný expertní verdikt',bangerVerdict());\n section('Závěrečný expertní verdikt',bangerVerdict());"
+if duplicate_verdict in html:
+    html=html.replace(duplicate_verdict," section('Závěrečný expertní verdikt',bangerVerdict());",1)
+    changes+=1
+verdict_last = "  lines.push('Spolehlivost: '+confidence"
+if verdict_last in html and "lines.push('Vzájemné zápasy: '" not in html:
+    html=html.replace(verdict_last,"  lines.push('Vzájemné zápasy: '+(h2h.length?h2h.length+' dostupných utkání, podrobné výsledky v samostatné sekci':'v dostupném vzorku nejsou')+'.');\n"+verdict_last,1)
+    changes+=1
+
 # Install the voice player once; it observes Expert Reports rendered dynamically.
 voice_tag = '<script defer src="./expert-voice.js"></script>'
 if voice_tag not in html:
