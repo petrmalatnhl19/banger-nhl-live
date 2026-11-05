@@ -596,10 +596,36 @@ async function analyzeGame(id){
  const skaters=[skaterSummary(boxes[0],ac),skaterSummary(boxes[1],hc)];
  const skaterSection='<details class="analyst-fold"><summary>🏒 Hráči a týmové ukazatele <small>Poslední dostupný zápas</small></summary><div class="analyst-fold-body">'+skaters.map((s,i)=>'<div class="analyst-skater-team"><h4>'+clean(i===0?ac:hc)+'</h4>'+(s?'<p>Střely hráčů: <b>'+s.shots+'</b> · Góly: <b>'+s.goals+'</b> · Hity: <b>'+s.hits+'</b> · Bloky: <b>'+s.blocks+'</b></p>'+(s.shots>0?'<p>Úspěšnost střelby v tomto utkání: <b>'+fmt(100*s.goals/s.shots)+' %</b></p>':'')+'<p><b>Nejproduktivnější hráči zápasu</b></p>'+s.leaders.map(p=>'<p>'+clean(p.name)+' · '+p.points+' bodů ('+p.goals+'+'+p.assists+') · '+p.shots+' střel'+(p.toi?' · čas na ledě '+clean(p.toi):'')+'</p>').join('')+'<p class="analysis-small">Datum: '+clean(s.date||'neuvedeno')+'</p>':'<p>Individuální statistiky nejsou dostupné.</p>')+'</div>').join('')+'<p class="analysis-small">Jedná se o údaje z posledního dostupného utkání, nikoli sezónní průměry. Součet hráčských statistik nemusí odpovídat všem oficiálním týmovým metrikám. xG, Corsi a Fenwick nelze bez ověřených dat o střeleckých pokusech spolehlivě vypočítat.</p></div></details>';
  if(extraRoot&&extraRoot.isConnected)extraRoot.insertAdjacentHTML('beforeend',skaterSection);
+ const bangerMetrics=(row,code)=>{
+  if(!row)return clean(code)+': aktuální tabulkové statistiky nejsou dostupné.';
+  const n=Number(row.gamesPlayed)||0;
+  if(!n)return clean(code)+': zatím není dost odehraných utkání.';
+  const number=(v)=>Number.isFinite(Number(v))?Number(v):null;
+  const goalsFor=number(row.goalFor),goalsAgainst=number(row.goalAgainst);
+  const shotsFor=number(row.shotsForPerGame),shotsAgainst=number(row.shotsAgainstPerGame);
+  const diff=goalsFor!=null&&goalsAgainst!=null?goalsFor-goalsAgainst:null;
+  const points=number(row.points);
+  const recent=row.l10Wins!=null&&row.l10Losses!=null?
+    'Bilance posledních deseti zápasů: '+row.l10Wins+' výher, '+row.l10Losses+' porážek'+(row.l10OtLosses!=null?' a '+row.l10OtLosses+' proher po prodloužení':'')+'. ':'';
+  const streak=row.streakCode&&row.streakCount?'Aktuální série: '+clean(row.streakCode)+' '+Number(row.streakCount)+'. ':'';
+  return clean(code)+' má '+n+' odehraných zápasů'+(points!=null?', '+points+' bodů':'')+
+   (diff!=null?' a gólový rozdíl '+(diff>0?'+':'')+diff+'. ':'. ')+
+   (goalsFor!=null&&goalsAgainst!=null?'Celkem vstřelil '+goalsFor+' a inkasoval '+goalsAgainst+' gólů. ':'')+
+   recent+streak;
+ };
+ const bangerCompare=()=>{
+  if(!ar||!hr)return 'Pro srovnání tabulkové síly nejsou dostupná úplná data obou týmů.';
+  const a=Number(ar.pointPctg),h=Number(hr.pointPctg);
+  if(!Number.isFinite(a)||!Number.isFinite(h))return 'Bodová úspěšnost v tabulce není pro oba týmy dostupná.';
+  const delta=Math.abs(a-h)*100;
+  return delta<3?'Bodová úspěšnost obou týmů je podobná.':
+   'Podle bodové úspěšnosti má zatím navrch '+clean(a>h?ac:hc)+' o přibližně '+delta.toFixed(1).replace('.',',')+' procentního bodu.';
+ };
  const narrative=[];
  const section=(heading,body)=>narrative.push('<h4>'+heading+'</h4><p>'+body+'</p>');
  const completeSeason=[af,aa,hf,ha].every(Number.isFinite);
  const leaderText=(s,code)=>s?.leaders?.length?'Za '+clean(code)+' v posledním dostupném zápase vynikl '+clean(s.leaders[0].name)+' s '+s.leaders[0].points+' body, '+s.leaders[0].shots+' střelami.':'U '+clean(code)+' nejsou dostupné ověřené individuální statistiky z posledního utkání.';
+ section('Tabulková síla a dlouhodobá stabilita',bangerMetrics(ar,ac)+' '+bangerMetrics(hr,hc)+' '+bangerCompare()+' Jde o popis dosavadní sezony, nikoli jistotu výsledku.');
  section('Celkový obraz utkání',completeSeason?'V zápase '+clean(ac)+' proti '+clean(hc)+' se střetnou dva odlišné sezónní gólové profily. Hosté dávají průměrně '+fmt(af)+' gólu a inkasují '+fmt(aa)+' na zápas. Domácí skórují '+fmt(hf)+'krát a inkasují '+fmt(ha)+'krát na utkání. '+(Math.abs((af+ha)-(hf+aa))<0.4?'Gólové průměry naznačují poměrně vyrovnaný souboj.':'Zjednodušené porovnání gólových průměrů mírně zvýhodňuje '+clean((af+ha)>(hf+aa)?ac:hc)+'.'):'Chybí úplné sezónní průměry obou týmů, proto nelze spolehlivě určit výhodu podle útoku a obrany.');
  section('Útočná síla a obrana',completeSeason?'Útok '+clean(ac)+' s '+fmt(af)+' góly na zápas narazí na obranu '+clean(hc)+', která inkasuje '+fmt(ha)+' gólu. Opačná dvojice má hodnoty '+fmt(hf)+' vstřelených a '+fmt(aa)+' inkasovaných gólů. Tyto průměry neříkají, kolik střel nebo vyložených šancí týmy vytvářejí. Efektivitu mohou zásadně ovlivnit brankáři, přesilovky a aktuální sestavy.':'Porovnání útoku s obranou je omezeno chybějícími sezónními údaji.');
  const formDescription=(code,f)=>f?clean(code)+' vyhrál '+f.wins+' z posledních '+f.n+' dostupných utkání a v nich vstřelil průměrně '+fmt(f.scored)+' a inkasoval '+fmt(f.allowed)+' gólu.':'Pro '+clean(code)+' nejsou k dispozici alespoň tři dokončené zápasy.';
