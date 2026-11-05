@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-05T06:28:11.249434+00:00",
+  "generatedAt": "2026-11-05T06:45:37.699715+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 11,
+  "currentProjections": 9,
   "needsFreshProjection": [
     "avalanche",
     "blue jackets",
@@ -13,6 +13,7 @@
     "devils",
     "flyers",
     "golden knights",
+    "hurricanes",
     "islanders",
     "jets",
     "lightning",
@@ -20,6 +21,7 @@
     "maple leafs",
     "oilers",
     "penguins",
+    "predators",
     "rangers",
     "red wings",
     "senators",
@@ -37,6 +39,7 @@
     "devils",
     "flyers",
     "golden knights",
+    "hurricanes",
     "islanders",
     "jets",
     "lightning",
@@ -44,6 +47,7 @@
     "maple leafs",
     "oilers",
     "penguins",
+    "predators",
     "rangers",
     "red wings",
     "senators",
@@ -216,11 +220,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-03T18:45:28.353000+00:00",
       "source": "https://www.nhl.com/news/carolina-hurricanes-nashville-predators-game-preview-november-3-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "islanders": {
       "hasProjectedLines": true,
@@ -350,11 +354,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-03T18:45:28.353000+00:00",
       "source": "https://www.nhl.com/news/carolina-hurricanes-nashville-predators-game-preview-november-3-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "rangers": {
       "hasProjectedLines": true,
