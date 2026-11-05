@@ -553,6 +553,14 @@ if verdict_last in html and "lines.push('Vzájemné zápasy: '" not in html:
     html=html.replace(verdict_last,"  lines.push('Vzájemné zápasy: '+(h2h.length?h2h.length+' dostupných utkání, podrobné výsledky v samostatné sekci':'v dostupném vzorku nejsou')+'.');\n"+verdict_last,1)
     changes+=1
 
+# Deduplicate verdict sections even if previous runs inserted them apart.
+verdict_line = " section('Závěrečný expertní verdikt',bangerVerdict());"
+if html.count(verdict_line) > 1:
+    first = html.find(verdict_line)
+    before, after = html[:first+len(verdict_line)], html[first+len(verdict_line):]
+    html = before + after.replace(verdict_line, "")
+    changes += 1
+
 # Install the voice player once; it observes Expert Reports rendered dynamically.
 voice_tag = '<script defer src="./expert-voice.js"></script>'
 if voice_tag not in html:
