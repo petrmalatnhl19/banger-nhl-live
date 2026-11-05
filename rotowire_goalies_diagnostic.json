@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-05T16:19:36.331136+00:00",
+  "checkedAt": "2026-11-05T17:28:23.789979+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "candidateCount": 96,
   "matchedCount": 96,
@@ -226,10 +226,10 @@
     },
     {
       "team": "DAL",
-      "goalie": "Jake Oettinger",
+      "goalie": "Casey DeSmith",
       "opponent": "CBJ",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-05",
       "gameId": 2026020258,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -276,10 +276,10 @@
     },
     {
       "team": "EDM",
-      "goalie": "Tristan Jarry",
+      "goalie": "Matt Tomkins",
       "opponent": "ANA",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-05",
       "gameId": 2026020260,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -596,10 +596,10 @@
     },
     {
       "team": "PHI",
-      "goalie": "Dan Vladar",
+      "goalie": "Joseph Woll",
       "opponent": "NYR",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-05",
       "gameId": 2026020256,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -726,10 +726,10 @@
     },
     {
       "team": "STL",
-      "goalie": "Joel Hofer",
+      "goalie": "Jordan Binnington",
       "opponent": "NJD",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-05",
       "gameId": 2026020254,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -826,10 +826,10 @@
     },
     {
       "team": "UTA",
-      "goalie": "Karel Vejmelka",
+      "goalie": "Sebastian Cossa",
       "opponent": "MTL",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-05",
       "gameId": 2026020251,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -859,7 +859,7 @@
       "goalie": "Leevi Meriläinen",
       "opponent": "WPG",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-05",
       "gameId": 2026020259,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"

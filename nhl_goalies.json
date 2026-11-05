@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-05T16:19:37.083456+00:00",
-  "rostersUpdatedAt": "2026-11-05T16:19:10.016333+00:00",
+  "updatedAt": "2026-11-05T17:28:24.441264+00:00",
+  "rostersUpdatedAt": "2026-11-05T17:28:06.330531+00:00",
   "projectionDate": "2026-11-05",
   "teamCount": 32,
   "goalieCount": 78,
@@ -60,17 +60,17 @@
       "team": "STL",
       "teamKey": "blues",
       "playerId": 8476412,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-05",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Joel Hofer",
       "team": "STL",
       "teamKey": "blues",
       "playerId": 8480981,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-05",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Michael DiPietro",
@@ -135,7 +135,7 @@
       "team": "VAN",
       "teamKey": "canucks",
       "playerId": 8482447,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-05",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -233,17 +233,17 @@
       "team": "PHI",
       "teamKey": "flyers",
       "playerId": 8478435,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-05",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Joseph Woll",
       "team": "PHI",
       "teamKey": "flyers",
       "playerId": 8479361,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-05",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Carter Hart",
@@ -374,8 +374,9 @@
       "team": "UTA",
       "teamKey": "mammoth",
       "playerId": 8482657,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-05",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Karel Vejmelka",
@@ -414,9 +415,8 @@
       "team": "EDM",
       "teamKey": "oilers",
       "playerId": 8477465,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-05",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Devon Levi",
@@ -431,8 +431,9 @@
       "team": "EDM",
       "teamKey": "oilers",
       "playerId": 8477035,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-05",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Jacob Markstrom",
@@ -610,17 +611,17 @@
       "team": "DAL",
       "teamKey": "stars",
       "playerId": 8479193,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-05",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Jake Oettinger",
       "team": "DAL",
       "teamKey": "stars",
       "playerId": 8479979,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-05",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Filip Gustavsson",

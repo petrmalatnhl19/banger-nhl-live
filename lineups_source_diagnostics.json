@@ -1,26 +1,44 @@
 {
-  "generatedAt": "2026-11-05T16:19:33.613366+00:00",
+  "generatedAt": "2026-11-05T17:28:21.797079+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/vegas-golden-knights-boston-bruins-game-preview-november-2-2026",
-      "candidatePublishedAt": "2026-11-02T19:13:32.938000+00:00",
+      "candidateSource": "https://www.nhl.com/news/boston-bruins-pittsburgh-penguins-game-preview-november-5-2026",
+      "candidatePublishedAt": "2026-11-05T16:53:27.782000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
       "roleMismatches": [],
-      "rejectedLines": [],
-      "rejectedPlayerReasons": [],
+      "rejectedLines": [
+        {
+          "group": "defense",
+          "line": 2,
+          "players": [
+            "William Borgen"
+          ],
+          "sourceLine": [
+            "Nikita Zadorov",
+            "William Borgen"
+          ]
+        }
+      ],
+      "rejectedPlayerReasons": [
+        {
+          "name": "William Borgen",
+          "expectedRole": "defense",
+          "reason": "not_in_current_roster"
+        }
+      ],
       "validatedForwardLines": 4,
-      "validatedDefensePairs": 3,
+      "validatedDefensePairs": 2,
       "accepted": true
     },
     "hurricanes": {
       "team": "CAR",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/carolina-hurricanes-nashville-predators-game-preview-november-3-2026",
-      "candidatePublishedAt": "2026-11-03T18:45:28.353000+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-05T16:51:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -67,8 +85,8 @@
     "islanders": {
       "team": "NYI",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/edmonton-oilers-new-york-islanders-game-preview-october-31-2026",
-      "candidatePublishedAt": "2026-10-30T15:11:41.242000+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-05T16:51:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -100,42 +118,23 @@
     "rangers": {
       "team": "NYR",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/st-louis-blues-new-york-rangers-game-preview-november-3-2026",
-      "candidatePublishedAt": "2026-11-03T17:14:56.036000+00:00",
+      "candidateSource": "https://www.nhl.com/news/philadelphia-flyers-new-york-rangers-game-preview-november-5-2026",
+      "candidatePublishedAt": "2026-11-05T17:25:56.262000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
       "roleMismatches": [],
-      "rejectedLines": [
-        {
-          "group": "forwards",
-          "line": 3,
-          "players": [
-            "Will Cuyle"
-          ],
-          "sourceLine": [
-            "Eeli Tolvanen",
-            "Will Cuyle",
-            "Oliver Bjorkstrand"
-          ]
-        }
-      ],
-      "rejectedPlayerReasons": [
-        {
-          "name": "Will Cuyle",
-          "expectedRole": "forwards",
-          "reason": "not_in_current_roster"
-        }
-      ],
-      "validatedForwardLines": 3,
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
       "validatedDefensePairs": 3,
       "accepted": true
     },
     "senators": {
       "team": "OTT",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-04T20:13:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/ottawa-senators-buffalo-sabres-game-preview-november-4-2026",
+      "candidatePublishedAt": "2026-11-04T17:37:08.585000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "insufficient_position_matched_lines",

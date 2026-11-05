@@ -37,25 +37,31 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "penguins": {
-      "updatedAt": "2026-11-03T16:52:15.015002+00:00",
-      "previousPublishedAt": "2026-10-31T16:52:42.410000+00:00",
-      "publishedAt": "",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-05T17:28:21.800504+00:00",
+      "previousPublishedAt": "2026-11-03T16:32:11.100000+00:00",
+      "publishedAt": "2026-11-05T16:53:27.782000+00:00",
+      "source": "https://www.nhl.com/news/boston-bruins-pittsburgh-penguins-game-preview-november-5-2026",
       "events": [
         {
-          "type": "moved",
-          "player": "Andrei Kuzmenko",
-          "from": "Útok 3",
+          "type": "added",
+          "player": "Evgeni Malkin",
           "to": "Útok 2"
         },
         {
-          "type": "added",
-          "player": "Justin Brazeau",
-          "to": "Útok 3"
+          "type": "moved",
+          "player": "Samuel Girard",
+          "from": "Obrana 2",
+          "to": "Obrana 1"
+        },
+        {
+          "type": "moved",
+          "player": "Spencer Stastney",
+          "from": "Obrana 1",
+          "to": "Obrana 2"
         },
         {
           "type": "removed",
-          "player": "Evgeni Malkin",
+          "player": "Andrei Kuzmenko",
           "from": "Útok 2"
         }
       ],
@@ -413,37 +419,34 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "flyers": {
-      "updatedAt": "2026-11-03T17:46:39.606743+00:00",
-      "previousPublishedAt": "2026-11-01T18:56:00+00:00",
-      "publishedAt": "",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-05T17:28:21.800140+00:00",
+      "previousPublishedAt": "2026-11-03T17:21:41.534000+00:00",
+      "publishedAt": "2026-11-05T17:25:56.262000+00:00",
+      "source": "https://www.nhl.com/news/philadelphia-flyers-new-york-rangers-game-preview-november-5-2026",
       "events": [
         {
-          "type": "added",
+          "type": "moved",
+          "player": "Tyson Foerster",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Porter Martone",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
           "player": "Cole Knuble",
-          "to": "Útok 4"
-        },
-        {
-          "type": "added",
-          "player": "Sean Couturier",
-          "to": "Útok 4"
-        },
-        {
-          "type": "added",
-          "player": "Noel Acciari",
-          "to": "Útok 4"
+          "from": "Útok 4",
+          "to": "Útok 3"
         },
         {
           "type": "moved",
-          "player": "Oliver Bonk",
-          "from": "Obrana 3",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "moved",
-          "player": "Nick Seeler",
-          "from": "Obrana 2",
-          "to": "Obrana 3"
+          "player": "Denver Barkey",
+          "from": "Útok 3",
+          "to": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -952,6 +955,93 @@
         {
           "type": "removed",
           "player": "Nolan Allan",
+          "from": "Obrana 3"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "rangers": {
+      "updatedAt": "2026-11-05T17:28:21.800257+00:00",
+      "previousPublishedAt": "2026-11-03T17:14:56.036000+00:00",
+      "publishedAt": "2026-11-05T17:25:56.262000+00:00",
+      "source": "https://www.nhl.com/news/philadelphia-flyers-new-york-rangers-game-preview-november-5-2026",
+      "events": [
+        {
+          "type": "added",
+          "player": "Eeli Tolvanen",
+          "to": "Útok 3"
+        },
+        {
+          "type": "added",
+          "player": "Will Cuylle",
+          "to": "Útok 3"
+        },
+        {
+          "type": "added",
+          "player": "Oliver Bjorkstrand",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Jaroslav Chmelar",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Noah Laba",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Matt Rempe",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "bruins": {
+      "updatedAt": "2026-11-05T17:28:21.800376+00:00",
+      "previousPublishedAt": "2026-11-02T19:13:32.938000+00:00",
+      "publishedAt": "2026-11-05T16:53:27.782000+00:00",
+      "source": "https://www.nhl.com/news/boston-bruins-pittsburgh-penguins-game-preview-november-5-2026",
+      "events": [
+        {
+          "type": "added",
+          "player": "Sean Kuraly",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
+          "player": "Frederic Brunet",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "moved",
+          "player": "Mason Lohrei",
+          "from": "Obrana 3",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "removed",
+          "player": "Matthew Poitras",
+          "from": "Útok 4"
+        },
+        {
+          "type": "removed",
+          "player": "Nikita Zadorov",
+          "from": "Obrana 2"
+        },
+        {
+          "type": "removed",
+          "player": "Will Borgen",
+          "from": "Obrana 2"
+        },
+        {
+          "type": "removed",
+          "player": "Jonathan Aspirot",
           "from": "Obrana 3"
         }
       ],

@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-05T16:19:28.309728+00:00",
+  "generatedAt": "2026-11-05T17:28:19.291423+00:00",
   "checked": 6,
-  "articlesFound": 1,
+  "articlesFound": 3,
   "errors": [],
   "fixtures": [
     {
@@ -36,8 +36,11 @@
     },
     {
       "url": "https://www.nhl.com/news/boston-bruins-pittsburgh-penguins-game-preview-november-5-2026",
-      "result": "no_complete_projection",
-      "teams": []
+      "result": "parsed",
+      "teams": [
+        "bruins",
+        "penguins"
+      ]
     },
     {
       "url": "https://www.nhl.com/news/pittsburgh-penguins-boston-bruins-game-preview-november-5-2026",
@@ -46,8 +49,11 @@
     },
     {
       "url": "https://www.nhl.com/news/carolina-hurricanes-new-york-islanders-game-preview-november-5-2026",
-      "result": "no_complete_projection",
-      "teams": []
+      "result": "parsed",
+      "teams": [
+        "hurricanes",
+        "islanders"
+      ]
     },
     {
       "url": "https://www.nhl.com/news/new-york-islanders-carolina-hurricanes-game-preview-november-5-2026",

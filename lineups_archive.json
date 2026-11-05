@@ -69,7 +69,7 @@
         ],
         [
           "Tanner Jeannot",
-          "Matthew Poitras",
+          "Sean Kuraly",
           "Mark Kastelic"
         ]
       ],
@@ -79,11 +79,7 @@
           "Charlie McAvoy"
         ],
         [
-          "Nikita Zadorov",
-          "Will Borgen"
-        ],
-        [
-          "Jonathan Aspirot",
+          "Frederic Brunet",
           "Mason Lohrei"
         ]
       ],
@@ -91,10 +87,12 @@
         "Jeremy Swayman",
         "Michael DiPietro"
       ],
-      "injured": "None",
-      "scratched": "Connor Clifton, Sean Kuraly, Frederic Brunet",
-      "asOf": "2026-11-03",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "injured": "Matthew Poitras (upper body)",
+      "scratched": "Connor Clifton, Jonathan Aspirot",
+      "source": "https://www.nhl.com/news/boston-bruins-pittsburgh-penguins-game-preview-november-5-2026",
+      "publishedAt": "2026-11-05T16:53:27.782000+00:00",
+      "asOf": "2026-11-05",
+      "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
     },
@@ -186,8 +184,8 @@
       ],
       "injured": "Aleksander Barkov (knee), Brad Marchand (knee), Jonah Gadjovich (neck)",
       "scratched": "Radko Gudas, Cole Reinhardt",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-04T20:13:00+00:00",
+      "source": "https://www.nhl.com/news/chicago-blackhawks-florida-panthers-game-preview-november-4-2026",
+      "publishedAt": "2026-11-04T18:35:21.038000+00:00",
       "asOf": "2026-11-04",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -286,8 +284,8 @@
       ],
       "injured": "Bowen Byram (upper body), Patrick Kane (upper body)",
       "scratched": "Kevin Korchinski, Andrew Mangiapane",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-04T20:13:00+00:00",
+      "source": "https://www.nhl.com/news/chicago-blackhawks-florida-panthers-game-preview-november-4-2026",
+      "publishedAt": "2026-11-04T18:35:21.038000+00:00",
       "asOf": "2026-11-04",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -337,8 +335,8 @@
       ],
       "injured": "Devin Cooley (lower body), Brennan Othmann (upper body), Jonathan Huberdeau (hip), Samuel Honzek (lower body)",
       "scratched": "Maksim Tsyplakov, Joel Hanley",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-04T20:13:00+00:00",
+      "source": "https://www.nhl.com/news/calgary-flames-seattle-kraken-game-preview-november-4-2026",
+      "publishedAt": "2026-11-04T20:03:02.892000+00:00",
       "asOf": "2026-11-04",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -600,9 +598,9 @@
           "Rickard Rakell"
         ],
         [
-          "Andrei Kuzmenko",
+          "Egor Chinakhov",
           "Ben Kindel",
-          "Egor Chinakhov"
+          "Evgeni Malkin"
         ],
         [
           "Ville Koivunen",
@@ -617,11 +615,11 @@
       ],
       "defense": [
         [
-          "Spencer Stastney",
+          "Samuel Girard",
           "Erik Karlsson"
         ],
         [
-          "Samuel Girard",
+          "Spencer Stastney",
           "Kaedan Korczak"
         ],
         [
@@ -633,10 +631,12 @@
         "Arturs Silovs",
         "Sergei Murashov"
       ],
-      "injured": "Evgeni Malkin, (lower body), Ryan Graves (knee), Trevor van Riemsdyk (lower body), Bryan Rust (lower body), Elmer Soderblom (upper body)",
-      "scratched": "Jake Livanavage, Ilya Solovyov",
-      "asOf": "2026-11-04",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "injured": "Ryan Graves (knee), Trevor van Riemsdyk (lower body), Bryan Rust (lower body), Elmer Soderblom (upper body)",
+      "scratched": "Jake Livanavage, Ilya Solovyov, Andrei Kuzmenko",
+      "source": "https://www.nhl.com/news/boston-bruins-pittsburgh-penguins-game-preview-november-5-2026",
+      "publishedAt": "2026-11-05T16:53:27.782000+00:00",
+      "asOf": "2026-11-05",
+      "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
     },
@@ -926,17 +926,17 @@
           "Travis Konecny"
         ],
         [
-          "Porter Martone",
+          "Tyson Foerster",
           "Noah Cates",
           "Matvei Michkov"
         ],
         [
-          "Tyson Foerster",
-          "Denver Barkey",
+          "Porter Martone",
+          "Cole Knuble",
           "Owen Tippett"
         ],
         [
-          "Cole Knuble",
+          "Denver Barkey",
           "Sean Couturier",
           "Noel Acciari"
         ]
@@ -956,13 +956,15 @@
         ]
       ],
       "goalies": [
-        "Dan Vladar",
-        "Joseph Woll"
+        "Joseph Woll",
+        "Dan Vladar"
       ],
       "injured": "Nikita Grebenkin (back), Rasmus Ristolainen (upper body)",
       "scratched": "David Jiricek, Michael Bunting",
-      "asOf": "2026-11-04",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "source": "https://www.nhl.com/news/philadelphia-flyers-new-york-rangers-game-preview-november-5-2026",
+      "publishedAt": "2026-11-05T17:25:56.262000+00:00",
+      "asOf": "2026-11-05",
+      "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
     },
@@ -1138,8 +1140,8 @@
       ],
       "injured": "Konsta Helenius (upper body), Jiri Kulich (concussion protocol), Justin Danforth (upper body), Matt Grzelcyk (lower body), Alex Lyon (upper body), Conor Timmins (lower body)",
       "scratched": "None",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-04T20:13:00+00:00",
+      "source": "https://www.nhl.com/news/ottawa-senators-buffalo-sabres-game-preview-november-4-2026",
+      "publishedAt": "2026-11-04T17:37:08.585000+00:00",
       "asOf": "2026-11-04",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1223,8 +1225,8 @@
       ],
       "injured": "Jacob Melanson (upper body), Ryan Lindgren (upper body), Jared McCann (lower body), Curtis Douglas (upper body)",
       "scratched": "Cale Fleury",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-04T20:13:00+00:00",
+      "source": "https://www.nhl.com/news/calgary-flames-seattle-kraken-game-preview-november-4-2026",
+      "publishedAt": "2026-11-04T20:03:02.892000+00:00",
       "asOf": "2026-11-04",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1265,14 +1267,14 @@
         ]
       ],
       "goalies": [
-        "Ilya Sorokin",
-        "Semyon Varlamov"
+        "Semyon Varlamov",
+        "Ilya Sorokin"
       ],
-      "injured": "Mathew Barzal (knee), Alexander Romanov (torn right ACL), Ryan Pulock (upper body), Matias Maccelli (lower body), Calum Ritchie (lower body)",
-      "scratched": "None",
-      "source": "https://www.nhl.com/news/edmonton-oilers-new-york-islanders-game-preview-october-31-2026",
-      "publishedAt": "2026-10-30T15:11:41.242000+00:00",
-      "asOf": "2026-10-30",
+      "injured": "Mathew Barzal (knee), Alexander Romanov (torn right ACL), Ryan Pulock (upper body), Matias Maccelli (lower body), Cal Ritchie (lower body)",
+      "scratched": "Ben Hutton",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-05T16:51:00+00:00",
+      "asOf": "2026-11-05",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -1385,6 +1387,11 @@
           "Gabe Perreault"
         ],
         [
+          "Eeli Tolvanen",
+          "Will Cuylle",
+          "Oliver Bjorkstrand"
+        ],
+        [
           "Jaroslav Chmelar",
           "Noah Laba",
           "Matt Rempe"
@@ -1409,10 +1416,10 @@
         "James Reimer"
       ],
       "injured": "Igor Shesterkin (lower body), Joonas Korpisalo (lower body), Joseph Veleno (lower body), Sean Durzi (undisclosed)",
-      "scratched": "Luke Glendenning, Matthew Robertson",
-      "source": "https://www.nhl.com/news/st-louis-blues-new-york-rangers-game-preview-november-3-2026",
-      "publishedAt": "2026-11-03T17:14:56.036000+00:00",
-      "asOf": "2026-11-03",
+      "scratched": "Luke Glendening, Matthew Robertson",
+      "source": "https://www.nhl.com/news/philadelphia-flyers-new-york-rangers-game-preview-november-5-2026",
+      "publishedAt": "2026-11-05T17:25:56.262000+00:00",
+      "asOf": "2026-11-05",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -1452,14 +1459,14 @@
         ]
       ],
       "goalies": [
-        "Pyotr Kochetkov",
-        "Brandon Bussi"
+        "Brandon Bussi",
+        "Pyotr Kochetkov"
       ],
       "injured": "Jordan Staal (calf), Taylor Hall (upper body)",
       "scratched": "Mike Reilly",
-      "source": "https://www.nhl.com/news/carolina-hurricanes-nashville-predators-game-preview-november-3-2026",
-      "publishedAt": "2026-11-03T18:45:28.353000+00:00",
-      "asOf": "2026-11-03",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-05T16:51:00+00:00",
+      "asOf": "2026-11-05",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
