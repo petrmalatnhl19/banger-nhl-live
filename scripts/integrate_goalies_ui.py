@@ -374,6 +374,61 @@ if snapshot_return in html:
     html=html.replace(snapshot_return,"  return expectedGoals+' '+goalChances+favorite+' '+shots+' '+physical+' '+bangerSampleText(bangerSamples[0],ac)+bangerSampleText(bangerSamples[1],hc)+' '+bangerGoalieText(bangerGoalieSamples[0],ac)+bangerGoalieText(bangerGoalieSamples[1],hc)+' '+bangerPhysicalOutlook()+' '+meetingStats+rivalry;",1)
     changes+=1
 
+# Special teams: read actual power-play conversion fractions from NHL game landing summaries.
+special_anchor = " const skaterSection='<details class="
+special_code = """ const bangerSpecialTeams=async(games,code)=>{
+  const ids=games.slice(0,5).map(g=>g.id).filter(Boolean);
+  const results=await Promise.all(ids.map(id=>safe(()=>get('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(id)+'/landing'),3500)));
+  let ppGoals=0,ppChances=0,pkAllowed=0,pkFaced=0,n=0;
+  const fraction=v=>{
+   const m=String(v??'').match(/(\\\\d+)\\\\s*\\\\/\\\\s*(\\\\d+)/);
+   return m?[Number(m[1]),Number(m[2])]:null;
+  };
+  for(const result of results){
+   if(!result.ok||!result.data)continue;
+   const data=result.data;
+   const side=data.awayTeam?.abbrev===code?'away':'home';
+   const other=side==='away'?'home':'away';
+   if(data[side+'Team']?.abbrev!==code)continue;
+   const rows=data.summary?.teamGameStats;
+   if(!Array.isArray(rows))continue;
+   const row=rows.find(x=>/power.?play/i.test(String(x.category||x.name||'')));
+   if(!row)continue;
+   const own=fraction(row[side+'Value']??row[side+'Team']);
+   const opp=fraction(row[other+'Value']??row[other+'Team']);
+   if(!own||!opp||own[1]<0||opp[1]<0)continue;
+   ppGoals+=own[0];ppChances+=own[1];pkAllowed+=opp[0];pkFaced+=opp[1];n++;
+  }
+  return n>=3?{n,ppGoals,ppChances,pkAllowed,pkFaced,ppPct:ppChances>0?100*ppGoals/ppChances:null,pkPct:pkFaced>0?100*(pkFaced-pkAllowed)/pkFaced:null}:null;
+ };
+ const bangerSpecial=await Promise.all([bangerSpecialTeams(ga,ac),bangerSpecialTeams(gh,hc)]);
+ if(!root.isConnected)return;
+"""
+if special_anchor in html and "const bangerSpecialTeams=" not in html:
+    html=html.replace(special_anchor,special_code+special_anchor,1)
+    changes+=1
+special_text_anchor = " const narrative=[];"
+special_text_code = """ const bangerSpecialText=(sample,code)=>{
+  if(!sample)return clean(code)+': nedostatek ověřených údajů o přesilovkách a oslabeních v posledních zápasech. ';
+  return clean(code)+': za '+sample.n+' dostupných utkání přesilovky '+
+   (sample.ppPct==null?'bez dostatku příležitostí':fmt(sample.ppPct)+' procent ('+sample.ppGoals+' z '+sample.ppChances+')')+
+   ', oslabení '+(sample.pkPct==null?'bez dostatku příležitostí':fmt(sample.pkPct)+' procent ('+(sample.pkFaced-sample.pkAllowed)+' ubráněných z '+sample.pkFaced+')')+'. ';
+ };
+"""
+if special_text_anchor in html and "const bangerSpecialText=" not in html:
+    html=html.replace(special_text_anchor,special_text_code+special_text_anchor,1)
+    changes+=1
+special_section_anchor = " section('Celkový obraz utkání',"
+special_section = """ section('Přesilovky a oslabení',bangerSpecialText(bangerSpecial[0],ac)+bangerSpecialText(bangerSpecial[1],hc)+' Hodnoty vycházejí z malého vzorku dokončených zápasů, nikoli ze sezonních souhrnů. Příští počet vyloučení není znám.');
+"""
+if special_section_anchor in html and "section('Přesilovky a oslabení'" not in html:
+    html=html.replace(special_section_anchor,special_section+special_section_anchor,1)
+    changes+=1
+snapshot_return = "  return expectedGoals+' '+goalChances+favorite+' '+shots+' '+physical+' '+bangerSampleText(bangerSamples[0],ac)+bangerSampleText(bangerSamples[1],hc)+' '+bangerGoalieText(bangerGoalieSamples[0],ac)+bangerGoalieText(bangerGoalieSamples[1],hc)+' '+bangerPhysicalOutlook()+' '+meetingStats+rivalry;"
+if snapshot_return in html:
+    html=html.replace(snapshot_return,"  return expectedGoals+' '+goalChances+favorite+' '+shots+' '+physical+' '+bangerSampleText(bangerSamples[0],ac)+bangerSampleText(bangerSamples[1],hc)+' '+bangerGoalieText(bangerGoalieSamples[0],ac)+bangerGoalieText(bangerGoalieSamples[1],hc)+' '+bangerSpecialText(bangerSpecial[0],ac)+bangerSpecialText(bangerSpecial[1],hc)+' '+bangerPhysicalOutlook()+' '+meetingStats+rivalry;",1)
+    changes+=1
+
 # Install the voice player once; it observes Expert Reports rendered dynamically.
 voice_tag = '<script defer src="./expert-voice.js"></script>'
 if voice_tag not in html:
