@@ -626,7 +626,7 @@ async function analyzeGame(id){
  if(!root.isConnected)return;
  const bangerSpecialTeams=async(games,code)=>{
   const ids=games.slice(0,5).map(g=>g.id).filter(Boolean);
-  const results=await Promise.all(ids.map(id=>safe(()=>get('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(id)+'/landing'),3500)));
+  const results=await Promise.all(ids.map(id=>safe(()=>get('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(id)+'/right-rail'),3500)));
   let ppGoals=0,ppChances=0,pkAllowed=0,pkFaced=0,n=0;
   const fraction=v=>{
    const m=String(v??'').match(/(\d+)\s*\/\s*(\d+)/);
@@ -638,7 +638,7 @@ async function analyzeGame(id){
    const side=data.awayTeam?.abbrev===code?'away':'home';
    const other=side==='away'?'home':'away';
    if(data[side+'Team']?.abbrev!==code)continue;
-   const rows=data.summary?.teamGameStats;
+   const rows=data.teamGameStats??data.summary?.teamGameStats;
    if(!Array.isArray(rows))continue;
    const row=rows.find(x=>/power.?play/i.test(String(x.category||x.name||'')));
    if(!row)continue;
