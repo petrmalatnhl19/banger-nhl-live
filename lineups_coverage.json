@@ -1,16 +1,18 @@
 {
-  "generatedAt": "2026-11-05T06:45:37.699715+00:00",
+  "generatedAt": "2026-11-05T07:59:44.924107+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 9,
+  "currentProjections": 7,
   "needsFreshProjection": [
     "avalanche",
     "blue jackets",
     "blues",
     "bruins",
     "canadiens",
+    "canucks",
     "capitals",
     "devils",
+    "ducks",
     "flyers",
     "golden knights",
     "hurricanes",
@@ -35,8 +37,10 @@
     "blues",
     "bruins",
     "canadiens",
+    "canucks",
     "capitals",
     "devils",
+    "ducks",
     "flyers",
     "golden knights",
     "hurricanes",
@@ -135,11 +139,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-03T19:43:35.256000+00:00",
       "source": "https://www.nhl.com/news/anaheim-ducks-vancouver-canucks-game-preview-november-3-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "capitals": {
       "hasProjectedLines": true,
@@ -172,11 +176,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-03T19:43:35.256000+00:00",
       "source": "https://www.nhl.com/news/anaheim-ducks-vancouver-canucks-game-preview-november-3-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "flames": {
       "hasProjectedLines": true,
