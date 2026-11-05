@@ -22,8 +22,24 @@ function voice(){
         voices.find(v=>/^cs-CZ$/i.test(v.lang))||
         voices.find(v=>/^cs\b/i.test(v.lang))||null;
 }
+const teamNames={
+ ANA:'Anaheim Ducks',BOS:'Boston Bruins',BUF:'Buffalo Sabres',CAR:'Carolina Hurricanes',
+ CBJ:'Columbus Blue Jackets',CGY:'Calgary Flames',CHI:'Chicago Blackhawks',
+ COL:'Colorado Avalanche',DAL:'Dallas Stars',DET:'Detroit Red Wings',
+ EDM:'Edmonton Oilers',FLA:'Florida Panthers',LAK:'Los Angeles Kings',
+ MIN:'Minnesota Wild',MTL:'Montreal Canadiens',NJD:'New Jersey Devils',
+ NSH:'Nashville Predators',NYI:'New York Islanders',NYR:'New York Rangers',
+ OTT:'Ottawa Senators',PHI:'Philadelphia Flyers',PIT:'Pittsburgh Penguins',
+ SEA:'Seattle Kraken',SJS:'San Jose Sharks',STL:'St. Louis Blues',
+ TBL:'Tampa Bay Lightning',TOR:'Toronto Maple Leafs',UTA:'Utah Mammoth',
+ VAN:'Vancouver Canucks',VGK:'Vegas Golden Knights',WPG:'Winnipeg Jets',
+ WSH:'Washington Capitals'
+};
+function expandTeams(text){
+ return text.replace(/\b(?:ANA|BOS|BUF|CAR|CBJ|CGY|CHI|COL|DAL|DET|EDM|FLA|LAK|MIN|MTL|NJD|NSH|NYI|NYR|OTT|PHI|PIT|SEA|SJS|STL|TBL|TOR|UTA|VAN|VGK|WPG|WSH)\b/g,code=>teamNames[code]||code);
+}
 function pronounce(text){
- return text
+ return expandTeams(text)
   .replace(/\bPROJECTED\b/gi,'předpokládaný start')
   .replace(/\bCONFIRMED\b/gi,'potvrzený start')
   .replace(/\bUNKNOWN\b/gi,'zatím neznámý start')
