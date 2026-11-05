@@ -1064,10 +1064,13 @@ async function analyzeGame(id){
  };
  const seasonPlayerStats=await Promise.all([ac,hc].map(async code=>{
   const label=String(code||'').trim();
-  const compact=label.toLowerCase().replace(/[^a-z]/g,'');
-  const direct={'utahmammoth':'UTA','montrealcanadiens':'MTL','montralcanadiens':'MTL','utahhockeyclub':'UTA'};
-  const teamCode=direct[compact]||NHL_TEAMS.find(t=>t[0]===label||t[1].toLowerCase().replace(/[^a-z]/g,'')===compact)?.[0]||label;
-  const base='https://api-web.nhle.com/v1/club-stats/'+encodeURIComponent(teamCode)+'/';
+  const normalized=label.toLowerCase();
+  let teamCode;
+  if(normalized.includes('utah')||normalized==='uta')teamCode='UTA';
+  else if(normalized.includes('montreal')||normalized.includes('montréal')||normalized==='mtl')teamCode='MTL';
+  else teamCode=NHL_TEAMS.find(t=>t[0].toLowerCase()===normalized||t[1].toLowerCase()===normalized)?.[0];
+  if(!teamCode||!/^[A-Z]{3}$/.test(teamCode))return {ok:false,data:null,teamCode:null,attempts:[],reason:'Neznámý NHL tým: '+label};
+  const base='https://api-web.nhle.com/v1/club-stats/'+teamCode+'/';
   const paths=[base+encodeURIComponent(season)+'/2',base+'now'];
   const attempts=[];
   for(const url of paths){
