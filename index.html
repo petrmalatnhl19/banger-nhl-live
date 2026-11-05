@@ -1276,18 +1276,29 @@ async function analyzeGame(id){
  });
  const core32Base=canonicalSnapshot?.advanced_away!=null&&canonicalSnapshot?.advanced_home!=null?
    {away:Number(canonicalSnapshot.advanced_away),home:Number(canonicalSnapshot.advanced_home)}:coreForecast;
- const core32Available=starterSamples.every(s=>s&&s.starts>=2&&s.shots>=35&&Number.isFinite(s.pct));
- const core32Forecast=core32Base&&core32Available?(()=>{
+ // Bayesian-style shrinkage: the short-term goalie sample is blended with a neutral
+ // 90% save-rate reference; weight is based on shots faced, not arbitrary game count.
+ // This is an experimental heuristic, not a calibrated or validated probability.
+ const core32Goalies=starterSamples.map((s,i)=>{
+   const projectedStarter=projected[i];
+   if(!projectedStarter||!['confirmed','projected'].includes(projectedStarter.status)||!s||!Number.isFinite(s.pct)||s.shots<=0)return null;
+   const priorShots=120;
+   const weight=s.shots/(s.shots+priorShots);
+   const adjustedPct=90+(s.pct-90)*weight;
+   const confidence=s.shots>=200?'větší vzorek':s.shots>=80?'střední vzorek':'malý vzorek';
+   return {...s,weight,adjustedPct,confidence};
+ });
+ const core32Forecast=core32Base&&[core32Base.away,core32Base.home].every(Number.isFinite)?(()=>{
    const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
-   const a=starterSamples[0],h=starterSamples[1];
-   return {away:clamp(core32Base.away*clamp(1+(90-h.pct)*.006,.96,1.04),.4,6),
-     home:clamp(core32Base.home*clamp(1+(90-a.pct)*.006,.96,1.04),.4,6)};
+   const a=core32Goalies[0],h=core32Goalies[1];
+   return {away:clamp(core32Base.away*(h?clamp(1+(90-h.adjustedPct)*.006,.96,1.04):1),.4,6),
+     home:clamp(core32Base.home*(a?clamp(1+(90-a.adjustedPct)*.006,.96,1.04):1),.4,6)};
  })():null;
- const core32Section='<details class="analyst-fold" open style="margin-top:12px"><summary>🧪 BANGER CORE 3.2 <small>Testovací model · konkrétní brankáři</small></summary><div class="analyst-fold-body">'+
- '<p class="analysis-small">Výpočet v prohlížeči, nikoliv serverová předzápasová predikce. Vychází z CORE 3.1, pokud je uložený, jinak z CORE 3.0. Brankářský faktor vyžaduje u obou projektovaných startujících alespoň 2 doložené starty a 35 střel.</p>'+
+ const core32Section='<details class="analyst-fold" open style="margin-top:12px"><summary>🧪 BANGER CORE 3.2 <small>Adaptivní brankářský model</small></summary><div class="analyst-fold-body">'+
+ '<p class="analysis-small">Testovací výpočet v prohlížeči. Základ tvoří uložený CORE 3.1, případně CORE 3.0. Krátký brankářský vzorek se opatrně kombinuje s neutrální referencí SV% 90 % (váha = střely / (střely + 120)). Nejde o kalibrovanou předpověď.</p>'+
  '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="metric"><span>'+clean(ac)+' · očekávané góly</span><b>'+intelligenceNum(core32Forecast?.away)+'</b></div><div class="metric"><span>'+clean(hc)+' · očekávané góly</span><b>'+intelligenceNum(core32Forecast?.home)+'</b></div></div>'+
- [ac,hc].map((code,i)=>'<p class="analysis-small"><b>'+clean(code)+':</b> '+clean(projected[i]?.name||'Start neověřen')+' · '+(starterSamples[i]?'SV% '+fmt(starterSamples[i].pct)+' % · '+starterSamples[i].starts+' startů · '+starterSamples[i].shots+' střel':'není dostatek spárovaných individuálních statistik')+'</p>').join('')+
- '<p class="analysis-small">'+(core32Forecast?'Korekce brankářů je omezená na ±4 %. Výsledek není zpětně otestován.':'Model 3.2 zatím nevydává číselný odhad, dokud nejsou splněny podmínky pro oba brankáře.')+'</p></div></details>';
+ [ac,hc].map((code,i)=>'<p class="analysis-small"><b>'+clean(code)+':</b> '+clean(projected[i]?.name||'Start neověřen')+' · '+(core32Goalies[i]?'SV% '+fmt(core32Goalies[i].pct)+' % · '+core32Goalies[i].starts+' startů · '+core32Goalies[i].shots+' střel · váha vzorku '+fmt(core32Goalies[i].weight*100)+' % · '+core32Goalies[i].confidence:'bez spolehlivě spárovaných statistik; neutrální brankářská korekce')+'</p>').join('')+
+ '<p class="analysis-small">'+(core32Forecast?'Korekce jednotlivých brankářů je maximálně ±4 %. Při chybějících údajích zůstává základní týmový odhad. Zlepšení přesnosti zatím nebylo prokázáno.':'Chybí základní týmové statistiky pro číselnou predikci.')+'</p></div></details>';
  const advancedSection='<details style="margin-top:12px;border-top:1px solid #54eaff44;padding-top:12px"><summary style="cursor:pointer;color:#8feeff;font-weight:700">🔬 Rozšířený model · forma, brankáři a speciální týmy</summary>'+
  '<p class="analysis-small">Experimentální výpočet přímo v aplikaci. Není součástí uložené serverové předpovědi ani hodnocení přesnosti. Využívá pouze dostupná data.</p>'+
  (advancedModel?'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="metric"><span>Hosté · rozšířený model</span><b>'+intelligenceNum(advancedModel.away)+'</b></div><div class="metric"><span>Domácí · rozšířený model</span><b>'+intelligenceNum(advancedModel.home)+'</b></div></div>':'<p class="analysis-small">Zatím nejsou dostupná dostatečná doplňková data. Zůstává základní CORE 3.0.</p>')+
