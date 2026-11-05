@@ -1,77 +1,117 @@
 (function(){
 'use strict';
-let utterance=null,paused=false,segments=[],index=0,activeRoot=null;
-let aiAudio=null,aiUrl=null;
-const aiEndpoint=window.BANGER_AZURE_SPEECH_ENDPOINT||'';
-function clearAi(){if(aiAudio){aiAudio.pause();aiAudio.src='';aiAudio=null}if(aiUrl){URL.revokeObjectURL(aiUrl);aiUrl=null}}
-async function playAi(root){
- if(!aiEndpoint){alert('AI komentátor zatím čeká na nastavení bezpečného hlasového serveru. Do té doby použij běžné hlasové čtení.');return}
- const report=root.querySelector('.analyst-expert-report .analyst-fold-body');if(!report)return;
- const children=Array.from(report.children);
- const first=children.findIndex(e=>e.tagName==='H4'&&e.textContent.trim().toLocaleLowerCase('cs-CZ').includes('celkový obraz utkání'));
- if(first<0)return;
- const paragraphs=children.slice(first).filter(e=>e.tagName==='H4'||(e.tagName==='P'&&e.previousElementSibling?.tagName==='H4')).map(e=>spoken(e.textContent||'')).filter(Boolean);
- reset();clearAi();activeRoot=root;
- const status=root.querySelector('[data-banger-voice-status]');if(status)status.textContent='Připravuji mužský AI komentář…';
- try{
- const response=await fetch(aiEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({paragraphs})});
- if(!response.ok)throw new Error('Služba není dostupná');
- aiUrl=URL.createObjectURL(await response.blob());aiAudio=new Audio(aiUrl);
- aiAudio.onended=()=>{clearAi();update()};await aiAudio.play();
- if(status)status.textContent='Přehrává AI komentátor Antonín';
- }catch(e){clearAi();if(status)status.textContent='AI komentátor nedostupný: '+e.message}
+const synth=window.speechSynthesis;
+const available=!!synth&&typeof SpeechSynthesisUtterance==='function';
+let activeRoot=null, queue=[], position=0, current=null, paused=false, session=0;
+const $=(root,selector)=>root?.querySelector(selector);
+function status(message){
+ document.querySelectorAll('[data-banger-voice-status]').forEach(el=>el.textContent=message);
+ document.querySelectorAll('[data-banger-voice-pause]').forEach(el=>{
+  el.disabled=!current;el.textContent=paused?'▶ Pokračovat':'⏸ Pauza';
+ });
 }
-
-const synth=()=>window.speechSynthesis;
-const supported=()=>typeof SpeechSynthesisUtterance!=='undefined'&&!!synth();
-function reset(){clearAi();if(supported())synth().cancel();utterance=null;paused=false;segments=[];index=0;update()}
-function update(){document.querySelectorAll('[data-banger-voice-status]').forEach(e=>{e.textContent=!utterance?'Připraveno k poslechu':paused?'Pozastaveno':'Přehrává se';});document.querySelectorAll('[data-banger-voice-pause]').forEach(b=>{b.textContent=paused?'▶ Pokračovat':'⏸ Pauza';b.disabled=!utterance});}
-function selectVoice(){
- const voices=synth().getVoices();
- const cz=voices.filter(v=>/^cs(?:-|$)/i.test(v.lang||''));
- const male=/male|muž|muz|jan|anton|adam|petr|jakub|ondrej|ondřej|michal|zdenek|zdeněk/i;
- return cz.find(v=>male.test(v.name))||cz.find(v=>v.localService&&male.test(v.name))||cz[0]||null;
+function stop(){
+ session++;
+ if(available)synth.cancel();
+ current=null;paused=false;queue=[];position=0;
+ status('Připraveno k poslechu');
 }
-function spoken(text){
- return text.replace(/\bPROJECTED\b/gi,'předpokládaný start').replace(/\bCONFIRMED\b/gi,'potvrzený start').replace(/\bUNKNOWN\b/gi,'neznámý start')
- .replace(/\bNHL\b/g,'en há el').replace(/\bRotoWire\b/gi,'Rotovajr')
- .replace(/\bvs\.?\b/gi,'proti').replace(/\bPPG\b/g,'bodů na zápas')
- .replace(/\b([0-9]+)\s*%/g,'$1 procent').replace(/\s+/g,' ').trim();
+function voice(){
+ const voices=synth.getVoices();
+ return voices.find(v=>/^cs-CZ$/i.test(v.lang)&&/female|woman|žena|zuzana|vlasta|tereza/i.test(v.name))||
+        voices.find(v=>/^cs-CZ$/i.test(v.lang))||
+        voices.find(v=>/^cs\b/i.test(v.lang))||null;
 }
-function speakNext(){
- if(!segments.length||index>=segments.length){utterance=null;paused=false;update();return}
- const s=synth(),u=new SpeechSynthesisUtterance(segments[index]);utterance=u;
- u.lang='cs-CZ';u.rate=Number(activeRoot?.querySelector('[data-banger-voice-rate]')?.value||0.92);
- u.pitch=0.88;u.voice=selectVoice();
- u.onend=()=>{if(utterance!==u)return;index++;speakNext()};
- u.onerror=()=>{if(utterance!==u)return;utterance=null;update()};
- s.speak(u);update();
+function pronounce(text){
+ return text
+  .replace(/\bPROJECTED\b/gi,'předpokládaný start')
+  .replace(/\bCONFIRMED\b/gi,'potvrzený start')
+  .replace(/\bUNKNOWN\b/gi,'zatím neznámý start')
+  .replace(/\bNHL\b/g,'en há el')
+  .replace(/\bRotoWire\b/gi,'Rotovajr')
+  .replace(/\bvs\.?\s/gi,'proti ')
+  .replace(/\bPPG\b/g,'bodů na zápas')
+  .replace(/(\d)\s*%/g,'$1 procent')
+  .replace(/(\d)\s*:\s*(\d)/g,'$1 ku $2')
+  .replace(/\s+/g,' ').trim();
 }
-function start(root){
- if(!supported())return;
- reset();activeRoot=root;
- const report=root.querySelector('.analyst-expert-report .analyst-fold-body');
- if(!report)return;
- // Only narrative h4 + p pairs. Excludes goalie status cards, badges, links and metadata.
- const elements=Array.from(report.children);
- const startAt=elements.findIndex(el=>el.tagName==='H4'&&el.textContent.trim().toLocaleLowerCase('cs-CZ').includes('celkový obraz utkání'));
- const narrative=startAt<0?[]:elements.slice(startAt).filter(el=>el.tagName==='H4'||(el.tagName==='P'&&el.previousElementSibling?.tagName==='H4'));
- segments=[];
- for(const el of narrative){
-  const raw=spoken(el.textContent||'');
-  if(!raw)continue;
-  if(el.tagName==='H4'){segments.push(raw+'.');continue}
-  const sentences=raw.match(/[^.!?]+(?:[.!?]+|$)/g)||[raw];
-  for(const sentence of sentences){
-   const words=sentence.trim().split(/\s+/);let chunk='';
-   for(const word of words){if(chunk.length+word.length>200&&chunk){segments.push(chunk.trim());chunk=''}chunk+=word+' '}
-   if(chunk.trim())segments.push(chunk.trim());
+function collect(root){
+ const body=$(root,'.analyst-expert-report .analyst-fold-body');
+ if(!body)return [];
+ const elements=Array.from(body.children);
+ const first=elements.findIndex(el=>el.tagName==='H4'&&el.textContent.toLocaleLowerCase('cs-CZ').includes('celkový obraz utkání'));
+ if(first<0)return [];
+ const result=[];
+ for(let i=first;i<elements.length;i++){
+  const el=elements[i];
+  if(el.tagName!=='H4'&&!(el.tagName==='P'&&el.previousElementSibling?.tagName==='H4'))continue;
+  const value=pronounce(el.textContent||'');
+  if(!value)continue;
+  if(el.tagName==='H4'){
+   result.push({text:value.replace(/[.:!?]+$/,'')+'.',kind:'heading'});
+  }else{
+   // Keep decimals and abbreviations intact. Split only at sentence-ending punctuation.
+   const sentences=value.match(/.*?(?:[!?]+|[.](?=\s+[A-ZÁ-Ž]|$)|$)/g)?.map(s=>s.trim()).filter(Boolean)||[value];
+   for(const sentence of sentences){
+    if(sentence.length<=280){result.push({text:sentence,kind:'sentence'});continue}
+    let chunk='';
+    for(const word of sentence.split(/\s+/)){
+     if(chunk&&chunk.length+word.length+1>260){result.push({text:chunk.trim(),kind:'sentence'});chunk=''}
+     chunk+=(chunk?' ':'')+word;
+    }
+    if(chunk)result.push({text:chunk,kind:'sentence'});
+   }
   }
  }
- index=0;if(segments.length)speakNext();else update();
+ return result;
 }
-document.addEventListener('click',e=>{const button=e.target.closest('[data-banger-voice]');if(!button)return;const root=button.closest('.analysis-panel');if(!root)return;const action=button.dataset.bangerVoice;if(action==='ai')playAi(root);else if(action==='play')start(root);else if(action==='stop')reset();else if(action==='pause'&&aiAudio){if(aiAudio.paused)aiAudio.play();else aiAudio.pause()}else if(action==='pause'&&utterance){if(paused){synth().resume();paused=false}else{synth().pause();paused=true}update()}});
-const observer=new MutationObserver(()=>{if(activeRoot&&!activeRoot.isConnected)reset();document.querySelectorAll('.analyst-expert-report:not([data-banger-voice-ready])').forEach(report=>{report.dataset.bangerVoiceReady='1';const body=report.querySelector('.analyst-fold-body');if(!body)return;const controls=document.createElement('div');controls.className='banger-voice-controls';controls.style.cssText='display:flex;flex-wrap:wrap;align-items:center;gap:9px;padding:12px;margin:10px 0 18px;border:1px solid #347a9c;border-radius:12px;background:#0b1b35';controls.innerHTML='<button type="button" class="btn" data-banger-voice="ai">🎙️ AI komentátor</button><button type="button" class="btn" data-banger-voice="play">▶ Přehrát analýzu</button><button type="button" class="btn" data-banger-voice="pause" data-banger-voice-pause disabled>⏸ Pauza</button><button type="button" class="btn" data-banger-voice="stop">⏹ Stop</button><label style="font-size:13px">Rychlost <select data-banger-voice-rate style="background:#112c49;color:white;padding:7px;border-radius:8px"><option value="0.8">0,8×</option><option value="0.92" selected>0,92× · komentátor</option><option value="1">1×</option><option value="1.2">1,2×</option><option value="1.5">1,5×</option></select></label><small data-banger-voice-status style="color:#9db2c6">Připraveno k poslechu</small>';body.prepend(controls);if(!supported()){controls.querySelector('[data-banger-voice="play"]').disabled=true;controls.querySelector('[data-banger-voice-status]').textContent='Tento prohlížeč nepodporuje hlasové čtení.'}})});
+function next(token){
+ if(token!==session)return;
+ if(position>=queue.length){current=null;paused=false;status('Analýza dočtena');return}
+ const item=queue[position++];
+ const u=new SpeechSynthesisUtterance(item.text);
+ current=u;u.lang='cs-CZ';u.voice=voice();
+ const base=Number($(activeRoot,'[data-banger-voice-rate]')?.value||1.02);
+ u.rate=Math.min(1.5,Math.max(0.75,base*(item.kind==='heading'?0.94:1)));
+ u.pitch=1.04;
+ u.onend=()=>{if(current!==u||token!==session)return;current=null;next(token)};
+ u.onerror=e=>{if(current!==u||token!==session)return;current=null;if(e.error==='canceled'||e.error==='interrupted')return;next(token)};
+ synth.speak(u);
+ status('Přehrává se česká analýza');
+}
+function play(root){
+ if(!available)return;
+ stop();activeRoot=root;queue=collect(root);position=0;
+ if(!queue.length){status('Text analýzy zatím není dostupný');return}
+ next(session);
+}
+document.addEventListener('click',event=>{
+ const button=event.target.closest('[data-banger-voice]');
+ if(!button)return;
+ const root=button.closest('.analysis-panel');
+ if(!root)return;
+ const action=button.dataset.bangerVoice;
+ if(action==='play')play(root);
+ if(action==='stop')stop();
+ if(action==='pause'&&current){
+  if(paused){synth.resume();paused=false;status('Přehrává se česká analýza')}
+  else{synth.pause();paused=true;status('Pozastaveno')}
+ }
+});
+const observer=new MutationObserver(()=>{
+ if(activeRoot&&!activeRoot.isConnected)stop();
+ document.querySelectorAll('.analyst-expert-report:not([data-banger-voice-ready])').forEach(report=>{
+  report.dataset.bangerVoiceReady='1';
+  const body=report.querySelector('.analyst-fold-body');
+  if(!body)return;
+  const bar=document.createElement('div');
+  bar.className='banger-voice-controls';
+  bar.style.cssText='display:flex;flex-wrap:wrap;align-items:center;gap:9px;padding:12px;margin:10px 0 18px;border:1px solid #347a9c;border-radius:12px;background:#0b1b35';
+  bar.innerHTML='<button type="button" class="btn" data-banger-voice="play">▶ Poslechnout analýzu</button><button type="button" class="btn" data-banger-voice="pause" data-banger-voice-pause disabled>⏸ Pauza</button><button type="button" class="btn" data-banger-voice="stop">⏹ Stop</button><label style="font-size:13px">Tempo <select data-banger-voice-rate style="background:#112c49;color:white;padding:7px;border-radius:8px"><option value="0.9">Klidné · 0,9×</option><option value="1.02" selected>Plynulé · 1,02×</option><option value="1.12">Svižné · 1,12×</option><option value="1.25">Rychlé · 1,25×</option></select></label><small data-banger-voice-status style="color:#9db2c6">Připraveno k poslechu</small>';
+  body.prepend(bar);
+  if(!available){bar.querySelector('[data-banger-voice="play"]').disabled=true;bar.querySelector('[data-banger-voice-status]').textContent='Hlasové čtení není v prohlížeči dostupné'}
+ });
+});
 observer.observe(document.documentElement,{childList:true,subtree:true});
-document.addEventListener('visibilitychange',()=>{if(document.hidden&&utterance&&!paused){synth().pause();paused=true;update()}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&current&&!paused){synth.pause();paused=true;status('Pozastaveno')}});
 })();
