@@ -650,6 +650,33 @@ if weighted_section_anchor in html and "section('Vážený predikční model'," 
     html=html.replace(weighted_section_anchor,weighted_section+weighted_section_anchor,1)
     changes+=1
 
+# Data-quality audit for the weighted forecast; never fabricate missing signals.
+audit_anchor = " section('Vzájemné zápasy',bangerH2HReport());"
+audit_code = """ section('Kontrola dat predikce',(()=>{
+  const m=bangerWeightedForecast();
+  const hasSeason=[af,aa,hf,ha].every(Number.isFinite);
+  const recentA=bangerRecentForm(ga,ac,5),recentH=bangerRecentForm(gh,hc,5);
+  const goalieA=bangerGoalieSamples[0],goalieH=bangerGoalieSamples[1];
+  const specialA=bangerSpecial[0],specialH=bangerSpecial[1];
+  const signals=[
+   ['Sezonní gólové průměry',hasSeason],
+   ['Forma obou týmů',!!(recentA&&recentH)],
+   ['Brankářské statistiky obou týmů',!!(goalieA&&goalieH)],
+   ['Přesilovky a oslabení obou týmů',!!(specialA&&specialH)],
+   ['Historie vzájemných zápasů',h2h.length>0]
+  ];
+  const available=signals.filter(x=>x[1]).length;
+  const details=signals.map(x=>x[0]+': '+(x[1]?'dostupné':'nedostupné')).join('; ');
+  const caution='Pokrytí '+available+' z '+signals.length+' oblastí. '+details+'. ';
+  if(!m)return caution+'Číselnou predikci nelze sestavit bez sezonních gólových průměrů.';
+  const baseAway=Math.max(.4,Math.min(6,(af+ha)/2)),baseHome=Math.max(.4,Math.min(6,(hf+aa)/2));
+  return caution+'Sezonní základ '+clean(ac)+' '+fmt(baseAway)+', '+clean(hc)+' '+fmt(baseHome)+'. Po korekcích '+clean(ac)+' '+fmt(m.away)+', '+clean(hc)+' '+fmt(m.home)+'. Změna oproti základu: '+clean(ac)+' '+fmt(m.away-baseAway)+', '+clean(hc)+' '+fmt(m.home-baseHome)+' gólu. Výsledek je orientační, bez zpětného ověření přesnosti. Chybějící statistiky se nenahrazují odhady.';
+ })());
+"""
+if audit_anchor in html and "section('Kontrola dat predikce'," not in html:
+    html=html.replace(audit_anchor,audit_code+audit_anchor,1)
+    changes+=1
+
 # Install the voice player once; it observes Expert Reports rendered dynamically.
 voice_tag = '<script defer src="./expert-voice.js"></script>'
 if voice_tag not in html:
