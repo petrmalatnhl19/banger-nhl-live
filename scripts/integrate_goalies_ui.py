@@ -343,7 +343,7 @@ goalie_sample_code = """ const bangerGoalieSample=async(games,code)=>{
    const goalies=side?data.playerByGameStats?.[side]?.goalies:null;
    if(!Array.isArray(goalies))continue;
    const starter=goalies.find(g=>g.starter)||goalies[0];
-   const match=String(starter?.saveShotsAgainst||'').match(/(\\d+)\\s*\\/\\s*(\\d+)/);
+   const match=String(starter?.saveShotsAgainst||'').match(/(\d+)\s*\/\s*(\d+)/);
    if(!match||Number(match[2])<=0)continue;
    saves+=Number(match[1]);shots+=Number(match[2]);starts++;
   }
