@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-05T22:20:07.444852+00:00",
-  "rostersUpdatedAt": "2026-11-05T22:19:48.357466+00:00",
+  "updatedAt": "2026-11-05T23:03:11.313261+00:00",
+  "rostersUpdatedAt": "2026-11-05T23:02:46.050408+00:00",
   "projectionDate": "2026-11-05",
   "teamCount": 32,
-  "goalieCount": 77,
+  "goalieCount": 78,
   "goalies": [
     {
       "name": "Mackenzie Blackwood",
@@ -77,17 +77,17 @@
       "team": "BOS",
       "teamKey": "bruins",
       "playerId": 8480022,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-05",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Jeremy Swayman",
       "team": "BOS",
       "teamKey": "bruins",
       "playerId": 8480280,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-05",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Jakub Dobes",
@@ -400,6 +400,14 @@
       "team": "EDM",
       "teamKey": "oilers",
       "playerId": 8475883,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Brett Epp",
+      "team": "EDM",
+      "teamKey": "oilers",
+      "playerId": 8486540,
       "starterStatus": "unknown",
       "starterGameDate": null
     },
