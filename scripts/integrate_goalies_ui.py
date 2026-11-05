@@ -151,6 +151,46 @@ if section_anchor in html and "section('Střelecká aktivita a efektivita'" not 
     html = html.replace(section_anchor, new_sections + section_anchor, 1)
     changes += 1
 
+# Compare recent form over 5/10 games and strength of faced opponents using real NHL standings.
+form_anchor = " const narrative=[];"
+form_code = """ const bangerRecentForm=(games,code,count)=>{
+  const list=games.slice(0,count);
+  if(list.length<Math.min(count,3))return null;
+  let wins=0,goalsFor=0,goalsAgainst=0;
+  const opponentStrength=[];
+  for(const game of list){
+   const own=game.homeTeam?.abbrev===code?game.homeTeam:game.awayTeam;
+   const opp=game.homeTeam?.abbrev===code?game.awayTeam:game.homeTeam;
+   if(!own||!opp||!Number.isFinite(Number(own.score))||!Number.isFinite(Number(opp.score)))continue;
+   goalsFor+=Number(own.score);goalsAgainst+=Number(opp.score);
+   if(Number(own.score)>Number(opp.score))wins++;
+   const opponent=find(opp.abbrev);
+   const played=Number(opponent?.gamesPlayed);
+   if(played>0&&Number.isFinite(Number(opponent?.points)))opponentStrength.push(Number(opponent.points)/(2*played));
+  }
+  return {n:list.length,wins,goalsFor,goalsAgainst,opponentStrength};
+ };
+ const bangerFormText=(games,code)=>{
+  const f5=bangerRecentForm(games,code,5),f10=bangerRecentForm(games,code,10);
+  if(!f5)return clean(code)+': není dostatek dokončených zápasů pro porovnání formy.';
+  const describe=f=>f.wins+' výher z '+f.n+' zápasů, '+fmt(f.goalsFor/f.n)+' vstřeleného a '+fmt(f.goalsAgainst/f.n)+' inkasovaného gólu na utkání';
+  const opponents=f10?.opponentStrength||f5.opponentStrength;
+  const difficulty=opponents.length>=3?'Průměrná bodová úspěšnost soupeřů v dostupné sezonní tabulce byla '+fmt(100*opponents.reduce((a,b)=>a+b,0)/opponents.length)+' procenta. ':'';
+  return clean(code)+': posledních '+f5.n+' utkání '+describe(f5)+'. '+
+   (f10&&f10.n>f5.n?'V posledních '+f10.n+' utkáních '+describe(f10)+'. ':'')+
+   difficulty+'Srovnání formy má omezenou vypovídací hodnotu kvůli krátkému vzorku.';
+ };
+"""
+if form_anchor in html and "const bangerRecentForm=" not in html:
+    html = html.replace(form_anchor, form_code + form_anchor, 1)
+    changes += 1
+form_section_anchor = " section('Celkový obraz utkání',"
+form_section = """ section('Forma za pět a deset zápasů a síla soupeřů',bangerFormText(ga,ac)+' '+bangerFormText(gh,hc)+' Výkonnost proti silnějším soupeřům může mít jinou váhu než stejné výsledky proti slabším týmům.');
+"""
+if form_section_anchor in html and "section('Forma za pět a deset zápasů a síla soupeřů'" not in html:
+    html = html.replace(form_section_anchor, form_section + form_section_anchor, 1)
+    changes += 1
+
 # Install the voice player once; it observes Expert Reports rendered dynamically.
 voice_tag = '<script defer src="./expert-voice.js"></script>'
 if voice_tag not in html:
