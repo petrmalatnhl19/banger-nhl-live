@@ -585,8 +585,9 @@ if history_old in html:
 old_h2h_report = "  return 'Posledních '+games.length+' dostupných vzájemných zápasů: '+clean(ac)+' '+aw+' výher, '+clean(hc)+' '+hw+' výher. Průměr '+fmt(avg)+' gólu na utkání. Výsledky (hosté : domácí): '+results+'. '+(games.length<3?'Velmi malý vzorek. ':'')+'Historické výsledky samy o sobě nedokazují rivalitu ani neurčují výsledek dalšího utkání.';"
 new_h2h_report = """  const homeWins=games.filter(g=>g.homeTeam.abbrev===hc&&Number(g.homeTeam.score)>Number(g.awayTeam.score)).length;
   const homeGames=games.filter(g=>g.homeTeam.abbrev===hc).length;
-  const seasons=[...new Set(games.map(g=>String(g.bangerSeason||g.season||((Number(g.gameDate.slice(5,7))>=9?Number(g.gameDate.slice(0,4)):Number(g.gameDate.slice(0,4))-1))+'-'+(Number(g.gameDate.slice(5,7))>=9?Number(g.gameDate.slice(0,4))+1:Number(g.gameDate.slice(0,4)))))))];
-  const bySeason=seasons.map(y=>{const list=games.filter(g=>String(g.bangerSeason||g.season||((Number(g.gameDate.slice(5,7))>=9?Number(g.gameDate.slice(0,4)):Number(g.gameDate.slice(0,4))-1))+'-'+(Number(g.gameDate.slice(5,7))>=9?Number(g.gameDate.slice(0,4))+1:Number(g.gameDate.slice(0,4)))))===y);return y+': '+list.length+' utkání'}).join('; ');
+  const seasonOf=g=>{if(g.bangerSeason)return String(g.bangerSeason);const d=String(g.gameDate||'');const y=Number(d.slice(0,4));const m=Number(d.slice(5,7));if(!Number.isFinite(y)||!Number.isFinite(m))return 'neznámá';const start=m>=9?y:y-1;return start+'/'+(start+1)};
+  const seasons=[...new Set(games.map(seasonOf))];
+  const bySeason=seasons.map(y=>y+': '+games.filter(g=>seasonOf(g)===y).length+' utkání').join('; ');
   return 'Posledních '+games.length+' dostupných vzájemných zápasů: '+clean(ac)+' '+aw+' výher, '+clean(hc)+' '+hw+' výher. Průměr '+fmt(avg)+' gólu na utkání. '+clean(hc)+' doma: '+homeWins+' výher z '+homeGames+' vzájemných utkání. Historie podle sezon: '+bySeason+'. Výsledky (hosté : domácí): '+results+'. '+(games.length<3?'Velmi malý vzorek. ':'')+'Starší sezony mají pro současnou formu omezenou vypovídací hodnotu; tato historie zatím nemění gólový model.';"""
 if old_h2h_report in html:
     html=html.replace(old_h2h_report,new_h2h_report,1)
