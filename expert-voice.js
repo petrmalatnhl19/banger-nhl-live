@@ -66,7 +66,9 @@ function collect(root){
  const body=$(root,'.analyst-expert-report .analyst-fold-body');
  if(!body)return [];
  const elements=Array.from(body.children);
- const first=elements.findIndex(el=>el.tagName==='H4'&&el.textContent.toLocaleLowerCase('cs-CZ').includes('celkový obraz utkání'));
+ // The report now has additional narrative sections before "Celkový obraz utkání".
+ // Read all narrative h4/p pairs in their visible order, excluding goalie cards and metadata.
+ const first=elements.findIndex(el=>el.tagName==='H4');
  if(first<0)return [];
  const result=[];
  for(let i=first;i<elements.length;i++){
