@@ -621,11 +621,31 @@ async function analyzeGame(id){
   return delta<3?'Bodová úspěšnost obou týmů je podobná.':
    'Podle bodové úspěšnosti má zatím navrch '+clean(a>h?ac:hc)+' o přibližně '+delta.toFixed(1).replace('.',',')+' procentního bodu.';
  };
+ const bangerShotReport=(skaters,code)=>{
+  if(!skaters)return clean(code)+': střelecká data posledního zápasu nejsou dostupná.';
+  const attempts=Number(skaters.shots),goals=Number(skaters.goals);
+  if(!Number.isFinite(attempts)||attempts<=0)return clean(code)+': počet střel v posledním utkání není ověřen.';
+  return clean(code)+' v posledním dostupném zápase vyslal '+attempts+' střel na branku a skóroval '+goals+'krát. Úspěšnost zakončení byla '+fmt(100*goals/attempts)+' procenta. Jde o jediné utkání, ne o dlouhodobou střeleckou úroveň.';
+ };
+ const bangerRestReport=(games,code)=>{
+  const played=games.filter(g=>g.gameDate&&[g.awayTeam?.abbrev,g.homeTeam?.abbrev].includes(code))
+   .map(g=>g.gameDate).sort().reverse();
+  const unique=[...new Set(played)];
+  if(!unique.length)return clean(code)+': datum posledního utkání není k dispozici.';
+  const days=Math.round((Date.parse(day+'T12:00:00Z')-Date.parse(unique[0]+'T12:00:00Z'))/86400000);
+  if(!Number.isFinite(days)||days<0)return clean(code)+': odpočinek nelze spolehlivě určit.';
+  const between=unique.length>1?Math.round((Date.parse(unique[0]+'T12:00:00Z')-Date.parse(unique[1]+'T12:00:00Z'))/86400000):null;
+  return clean(code)+' odehrál poslední dostupné utkání '+clean(unique[0])+'. Do dne zápasu uplynulo '+days+' kalendářních dní'+(days===1?', což odpovídá druhému zápasu ve dvou dnech':'.')+
+   (between===1?' Také předchozí dvojice zápasů následovala ve dvou dnech.':'')+
+   ' Bez informací o cestování a skutečném nasazení hráčů nejde únavu přesně kvantifikovat.';
+ };
  const narrative=[];
  const section=(heading,body)=>narrative.push('<h4>'+heading+'</h4><p>'+body+'</p>');
  const completeSeason=[af,aa,hf,ha].every(Number.isFinite);
  const leaderText=(s,code)=>s?.leaders?.length?'Za '+clean(code)+' v posledním dostupném zápase vynikl '+clean(s.leaders[0].name)+' s '+s.leaders[0].points+' body, '+s.leaders[0].shots+' střelami.':'U '+clean(code)+' nejsou dostupné ověřené individuální statistiky z posledního utkání.';
  section('Tabulková síla a dlouhodobá stabilita',bangerMetrics(ar,ac)+' '+bangerMetrics(hr,hc)+' '+bangerCompare()+' Jde o popis dosavadní sezony, nikoli jistotu výsledku.');
+ section('Střelecká aktivita a efektivita',bangerShotReport(skaters[0],ac)+' '+bangerShotReport(skaters[1],hc)+' Vyšší úspěšnost střelby z jediného utkání sama o sobě neznamená lepší útok.');
+ section('Odpočinek a náročnost programu',bangerRestReport(ga,ac)+' '+bangerRestReport(gh,hc));
  section('Celkový obraz utkání',completeSeason?'V zápase '+clean(ac)+' proti '+clean(hc)+' se střetnou dva odlišné sezónní gólové profily. Hosté dávají průměrně '+fmt(af)+' gólu a inkasují '+fmt(aa)+' na zápas. Domácí skórují '+fmt(hf)+'krát a inkasují '+fmt(ha)+'krát na utkání. '+(Math.abs((af+ha)-(hf+aa))<0.4?'Gólové průměry naznačují poměrně vyrovnaný souboj.':'Zjednodušené porovnání gólových průměrů mírně zvýhodňuje '+clean((af+ha)>(hf+aa)?ac:hc)+'.'):'Chybí úplné sezónní průměry obou týmů, proto nelze spolehlivě určit výhodu podle útoku a obrany.');
  section('Útočná síla a obrana',completeSeason?'Útok '+clean(ac)+' s '+fmt(af)+' góly na zápas narazí na obranu '+clean(hc)+', která inkasuje '+fmt(ha)+' gólu. Opačná dvojice má hodnoty '+fmt(hf)+' vstřelených a '+fmt(aa)+' inkasovaných gólů. Tyto průměry neříkají, kolik střel nebo vyložených šancí týmy vytvářejí. Efektivitu mohou zásadně ovlivnit brankáři, přesilovky a aktuální sestavy.':'Porovnání útoku s obranou je omezeno chybějícími sezónními údaji.');
  const formDescription=(code,f)=>f?clean(code)+' vyhrál '+f.wins+' z posledních '+f.n+' dostupných utkání a v nich vstřelil průměrně '+fmt(f.scored)+' a inkasoval '+fmt(f.allowed)+' gólu.':'Pro '+clean(code)+' nejsou k dispozici alespoň tři dokončené zápasy.';
