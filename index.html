@@ -317,6 +317,14 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid 
 .analysis-panel .analysis-close{min-height:36px!important;padding:6px 10px!important;margin-bottom:9px!important}
 }
 </style>
+<style id="banger-advanced-table-v1">
+.analysis-panel .banger-advanced-table{width:100%;border-collapse:collapse;font-size:13px;min-width:0}
+.analysis-panel .banger-advanced-table th,.analysis-panel .banger-advanced-table td{padding:9px 6px;border-bottom:1px solid #54cfff33;text-align:right;white-space:normal}
+.analysis-panel .banger-advanced-table th:first-child,.analysis-panel .banger-advanced-table td:first-child{text-align:left;width:48%}
+.analysis-panel .banger-advanced-table th{color:#74dcf8;font-size:12px}
+.analysis-panel .banger-advanced-table tbody tr:nth-child(odd){background:#ffffff08}
+@media(max-width:600px){.analysis-panel .banger-advanced-table{font-size:12px}.analysis-panel .banger-advanced-table th,.analysis-panel .banger-advanced-table td{padding:8px 4px}}
+</style>
 </head><body><div class="wrap">
 <div id="brandSplash" class="brand-splash" aria-label="Načítání BANGER NHL LIVE"><div class="brand-splash-glow"></div><picture><source media="(orientation: portrait)" srcset="splash-portrait.png"><img src="splash-landscape.png" alt="BANGER NHL LIVE" fetchpriority="high" decoding="async"></picture><div class="brand-splash-loader"><span></span></div><div class="brand-splash-caption">VSTUP DO HOKEJOVÉ ARÉNY</div></div><header class="top"><div class="brand"><div class="brand-logo" aria-label="BANGER NHL LIVE"><span class="brand-mark">BANGER</span><span class="brand-sub">NHL <b>LIVE</b></span></div></div><span class="header-status"><i></i> NHL 2026/27</span></header>
 
@@ -1000,24 +1008,23 @@ async function analyzeGame(id){
  section('Střelecká aktivita a efektivita',bangerShotReport(skaters[0],ac)+' '+bangerShotReport(skaters[1],hc)+' Vyšší úspěšnost střelby z jediného utkání sama o sobě neznamená lepší útok.');
  section('Odpočinek a náročnost programu',bangerRestReport(ga,ac)+' '+bangerRestReport(gh,hc));
  section('Forma za 5, 10 a 15 zápasů, trend a síla soupeřů',bangerFormText(ga,ac)+' '+bangerFormText(gh,hc)+' Výkonnost proti silnějším soupeřům může mít jinou váhu než stejné výsledky proti slabším týmům.');
- section('ADVANCED STATS · ověřené týmové ukazatele',(()=>{
-  const row=(sample,goalie,special,code)=>{
-   if(!sample)return clean(code)+': detailní vzorek není dostupný.';
-   const shot=Number(sample.shots),hit=Number(sample.hits),block=Number(sample.blocks);
-   const values=[
-    'Střely na branku / zápas: '+fmt(shot),
-    'Hity / zápas: '+fmt(hit),
-    'Bloky / zápas: '+fmt(block),
-    'Hity na 10 střel: '+(shot>0?fmt(10*hit/shot):'nedostupné'),
-    'Bloky na 10 střel: '+(shot>0?fmt(10*block/shot):'nedostupné'),
-    'Trestné minuty / zápas: '+fmt(sample.penaltyMinutes)
-   ];
-   if(goalie&&goalie.shots>0)values.push('Souhrnné SV% startujících brankářů ve vzorku: '+fmt(100*goalie.saves/goalie.shots)+' %');
-   if(special?.ppPct!=null)values.push('PP% ve vzorku: '+fmt(special.ppPct)+' %');
-   if(special?.pkPct!=null)values.push('PK% ve vzorku: '+fmt(special.pkPct)+' %');
-   return clean(code)+' ('+sample.n+' zápasů): '+values.join('; ')+'.';
+ section('ADVANCED STATS · srovnání týmů',(()=>{
+  const rows=[
+   ['Střely / zápas',bangerSamples[0]?.shots,bangerSamples[1]?.shots,'higher'],
+   ['Hity / zápas',bangerSamples[0]?.hits,bangerSamples[1]?.hits,'neutral'],
+   ['Bloky / zápas',bangerSamples[0]?.blocks,bangerSamples[1]?.blocks,'neutral'],
+   ['Trestné minuty / zápas',bangerSamples[0]?.penaltyMinutes,bangerSamples[1]?.penaltyMinutes,'lower'],
+   ['SV% startujících brankářů',bangerGoalieSamples[0]?.shots>0?100*bangerGoalieSamples[0].saves/bangerGoalieSamples[0].shots:null,bangerGoalieSamples[1]?.shots>0?100*bangerGoalieSamples[1].saves/bangerGoalieSamples[1].shots:null,'higher'],
+   ['PP%',bangerSpecial[0]?.ppPct,bangerSpecial[1]?.ppPct,'higher'],
+   ['PK%',bangerSpecial[0]?.pkPct,bangerSpecial[1]?.pkPct,'higher']
+  ];
+  const valid=v=>v!=null&&Number.isFinite(Number(v));
+  const cell=(v,other,mode)=>{
+   const better=valid(v)&&valid(other)&&Math.abs(v-other)>.00001&&(mode==='higher'?v>other:mode==='lower'?v<other:false);
+   return '<td'+(better?' style="color:#75edb3;font-weight:800"':'')+'>'+(valid(v)?fmt(v):'—')+'</td>';
   };
-  return row(bangerSamples[0],bangerGoalieSamples[0],bangerSpecial[0],ac)+' '+row(bangerSamples[1],bangerGoalieSamples[1],bangerSpecial[1],hc)+' Jde o ukazatele odvozené z dostupných zápasových statistik, nikoli o hodnoty přepočtené na 60 minut. Corsi%, Fenwick%, xGF%, HDCF% a individuální G/60, P/60 bez ověřených dat o pokusech, šancích a čase na ledě neuvádíme.';
+  const table='<div class="tablewrap"><table class="banger-advanced-table"><thead><tr><th>Ukazatel</th><th>'+clean(ac)+'</th><th>'+clean(hc)+'</th></tr></thead><tbody>'+rows.map(([label,away,home,mode])=>'<tr><td>'+label+'</td>'+cell(away,home,mode)+cell(home,away,mode)+'</tr>').join('')+'</tbody></table></div>';
+  return '<p class="analysis-small">Vzorek: '+(bangerSamples[0]?.n??'—')+' / '+(bangerSamples[1]?.n??'—')+' zápasů. Zeleně je zvýrazněna příznivější hodnota u jednoznačně směrových ukazatelů. Hity a bloky nejsou automaticky známkou lepší hry.</p>'+table+'<p class="analysis-small">SV% představuje souhrn startujících brankářů ve vzorku, ne potvrzeného startéra příštího zápasu. Corsi%, Fenwick%, xGF% a HDCF% vyžadují ověřené podrobné 5v5 údaje.</p>';
  })());
  section('Střely, hity a bloky z posledních utkání',bangerSampleText(bangerSamples[0],ac)+bangerSampleText(bangerSamples[1],hc)+' Jde o průměry malého vzorku, ne o potvrzenou předpověď příštího utkání.');
  section('Fyzická náročnost a trestné minuty',bangerPhysicalOutlook());
