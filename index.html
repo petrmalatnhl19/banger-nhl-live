@@ -525,7 +525,7 @@ async function analyzeGame(id){
  const fa=recent(ga,ac),fh=recent(gh,hc);
  state('form',!!(fa&&fh));
  const venue=(games,code,homeSide)=>{const list=games.filter(g=>(homeSide?g.homeTeam:g.awayTeam).abbrev===code).slice(0,12);if(!list.length)return null;const wins=list.filter(g=>Number((homeSide?g.homeTeam:g.awayTeam).score)>Number((homeSide?g.awayTeam:g.homeTeam).score)).length;return wins+'/'+list.length+' výher ('+list.length+' zápasů)'+(list.length<3?' · malý vzorek':'')};
- const h2h=ga.filter(g=>[g.awayTeam.abbrev,g.homeTeam.abbrev].includes(hc)).slice(0,5);
+ const h2h=unique([...ga,...gh]).filter(g=>[g.awayTeam?.abbrev,g.homeTeam?.abbrev].includes(ac)&&[g.awayTeam?.abbrev,g.homeTeam?.abbrev].includes(hc)).sort((a,b)=>b.gameDate.localeCompare(a.gameDate)).slice(0,10);
  let extra='<details class="analyst-fold"><summary>📈 Forma posledních zápasů</summary><div class="analyst-fold-body">'+[ [ac,fa],[hc,fh] ].map(([code,f])=>'<p><b>'+clean(code)+':</b> '+(f?f.wins+'/'+f.n+' výher · '+fmt(f.scored)+' vstřelených a '+fmt(f.allowed)+' inkasovaných gólů/zápas · naposledy '+clean(f.last):'Nedostatečná nebo nedostupná data')+'</p>').join('')+'<p class="analysis-small">Forma se zobrazuje samostatně a nemění hlavní model.</p></div></details>';
  const restDays=f=>f?.last?Math.round((Date.parse(day)-Date.parse(f.last))/86400000):null;
  const recentTiles=(games,code)=>games.slice(0,5).map(g=>{
@@ -791,8 +791,18 @@ async function analyzeGame(id){
   lines.push('Fyzická hra: '+(shots[0]&&shots[1]?fmt(shots[0].hits+shots[1].hits)+' hitů obou týmů v součtu jejich průměrů; tvrdost příštího zápasu není jistá':'nedostatek údajů o hitech')+'.');
   lines.push('Brankáři: '+(goalies[0]&&goalies[1]?clean(ac)+' '+fmt(goalies[0].pct)+' %, '+clean(hc)+' '+fmt(goalies[1].pct)+' % zákroků v nedávných startech':'chybí srovnatelná forma brankářů')+'.');
   lines.push('Speciální týmy: '+(special[0]&&special[1]?clean(ac)+' PP '+(special[0].ppPct==null?'bez dat':fmt(special[0].ppPct)+' %')+', '+clean(hc)+' PP '+(special[1].ppPct==null?'bez dat':fmt(special[1].ppPct)+' %'):'neúplná data o přesilovkách')+'.');
+  lines.push('Vzájemné zápasy: '+(h2h.length?h2h.length+' dostupných utkání, podrobné výsledky v samostatné sekci':'v dostupném vzorku nejsou')+'.');
   lines.push('Spolehlivost: '+confidence+' ('+coverage+'/7 dostupných datových oblastí). Nejde o statisticky kalibrovanou pravděpodobnost správné předpovědi; rivalitu ani výsledek nelze z těchto čísel potvrdit.');
   return lines.join(' ');
+ };
+ const bangerH2HReport=()=>{
+  const games=h2h.filter(g=>Number.isFinite(Number(g.homeTeam?.score))&&Number.isFinite(Number(g.awayTeam?.score)));
+  if(!games.length)return 'V dostupných sezonních rozpisech nejsou nalezena dokončená vzájemná utkání. Neznamená to, že týmy spolu nikdy nehrály.';
+  const aw=games.filter(g=>(g.awayTeam.abbrev===ac?Number(g.awayTeam.score)>Number(g.homeTeam.score):Number(g.homeTeam.score)>Number(g.awayTeam.score))).length;
+  const hw=games.length-aw;
+  const avg=games.reduce((sum,g)=>sum+Number(g.homeTeam.score)+Number(g.awayTeam.score),0)/games.length;
+  const results=games.slice(0,5).map(g=>clean(g.gameDate)+': '+clean(g.awayTeam.abbrev)+' '+Number(g.awayTeam.score)+' : '+Number(g.homeTeam.score)+' '+clean(g.homeTeam.abbrev)).join('; ');
+  return 'Posledních '+games.length+' dostupných vzájemných zápasů: '+clean(ac)+' '+aw+' výher, '+clean(hc)+' '+hw+' výher. Průměr '+fmt(avg)+' gólu na utkání. Výsledky (hosté : domácí): '+results+'. '+(games.length<3?'Velmi malý vzorek. ':'')+'Historické výsledky samy o sobě nedokazují rivalitu ani neurčují výsledek dalšího utkání.';
  };
  const narrative=[];
  const section=(heading,body)=>narrative.push('<h4>'+heading+'</h4><p>'+body+'</p>');
@@ -800,6 +810,7 @@ async function analyzeGame(id){
  const leaderText=(s,code)=>s?.leaders?.length?'Za '+clean(code)+' v posledním dostupném zápase vynikl '+clean(s.leaders[0].name)+' s '+s.leaders[0].points+' body, '+s.leaders[0].shots+' střelami.':'U '+clean(code)+' nejsou dostupné ověřené individuální statistiky z posledního utkání.';
  section('Závěrečný expertní verdikt',bangerVerdict());
  section('Závěrečný expertní verdikt',bangerVerdict());
+ section('Vzájemné zápasy',bangerH2HReport());
  section('Tabulková síla a dlouhodobá stabilita',bangerMetrics(ar,ac)+' '+bangerMetrics(hr,hc)+' '+bangerCompare()+' Jde o popis dosavadní sezony, nikoli jistotu výsledku.');
  section('Střelecká aktivita a efektivita',bangerShotReport(skaters[0],ac)+' '+bangerShotReport(skaters[1],hc)+' Vyšší úspěšnost střelby z jediného utkání sama o sobě neznamená lepší útok.');
  section('Odpočinek a náročnost programu',bangerRestReport(ga,ac)+' '+bangerRestReport(gh,hc));
