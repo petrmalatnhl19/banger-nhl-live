@@ -55,9 +55,9 @@ if needle in html and "const expertGoalieSection=" not in html:
     html = html.replace(needle, replacement, 1)
     changes += 1
 
-needle = """'+narrative.join('')+'<p class=\\"analysis-small\\">"""
+needle = """'+narrative.join('')+'<p class="analysis-small">"""
 if needle in html and "expertGoalieSection+narrative.join" not in html:
-    html = html.replace(needle, "'+expertGoalieSection+narrative.join('')+'<p class=\\\"analysis-small\\\">", 1)
+    html = html.replace(needle, """'+expertGoalieSection+narrative.join('')+'<p class="analysis-small">""", 1)
     changes += 1
 
 # Prevent a stale lineup projection being presented as a current starter.
