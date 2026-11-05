@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-05T04:43:17.037218+00:00",
-  "rostersUpdatedAt": "2026-11-05T04:42:49.143673+00:00",
+  "updatedAt": "2026-11-05T05:43:43.711561+00:00",
+  "rostersUpdatedAt": "2026-11-05T05:43:13.801785+00:00",
   "projectionDate": "2026-11-05",
   "teamCount": 32,
   "goalieCount": 77,
@@ -43,8 +43,9 @@
       "team": "CBJ",
       "teamKey": "blue jackets",
       "playerId": 8482982,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-05",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Cam Talbot",
@@ -504,8 +505,9 @@
       "team": "NYR",
       "teamKey": "rangers",
       "playerId": 8473503,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-05",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Igor Shesterkin",
