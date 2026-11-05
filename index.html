@@ -1227,6 +1227,22 @@ async function analyzeGame(id){
    }
   }catch(e){console.warn('Experimental prediction snapshot unavailable',e)}
  }
+ const coreVersion=canonicalSnapshot?String(canonicalSnapshot.model_version||'Archiv bez verze'):'banger-core-v3-season-home · lokální výpočet';
+ const coreSource=canonicalSnapshot?'Centrální archiv Supabase · předzápasová predikce':'Lokální výpočet · zápas bez serverového snímku';
+ const coreXgVersion=experimentalModel?(experimentalModel.server?String(canonicalSnapshot.experimental_version||'server-xg'):'banger-core-v3-xg-share · lokální'):'xG data nejsou dostupná';
+ const corePanel='<section id="banger-core-3" class="analysis-section" style="margin:14px 0;border:1px solid #54eaff;border-radius:18px;padding:17px;background:linear-gradient(145deg,#0b3655,#08152e);box-shadow:0 0 24px #21cfff2b">'+
+ '<div style="font-size:11px;letter-spacing:2px;color:#71eaff;font-weight:800">BANGER CORE 3.0 · PREDIKČNÍ CENTRUM</div>'+
+ '<h3 style="margin:7px 0 5px">🏒 '+clean(ac)+' vs '+clean(hc)+'</h3>'+
+ '<p class="analysis-small" style="margin:0 0 12px">'+clean(coreSource)+'</p>'+
+ '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'+
+ '<div class="metric"><span>Očekávané góly · hosté</span><b>'+intelligenceNum(intelligenceModel?.away)+'</b></div>'+
+ '<div class="metric"><span>Očekávané góly · domácí</span><b>'+intelligenceNum(intelligenceModel?.home)+'</b></div>'+
+ '<div class="metric"><span>xG model · hosté</span><b>'+intelligenceNum(experimentalModel?.away)+'</b></div>'+
+ '<div class="metric"><span>xG model · domácí</span><b>'+intelligenceNum(experimentalModel?.home)+'</b></div></div>'+
+ '<details style="margin-top:12px"><summary style="cursor:pointer;color:#8feeff;font-weight:700">⚙️ Verze modelu a započtené faktory</summary>'+
+ '<p class="analysis-small">Základ: '+clean(coreVersion)+'<br>Varianta xG: '+clean(coreXgVersion)+'</p>'+
+ '<p class="analysis-small">Základní CORE v3 používá sezonní góly, inkasované branky a korekci domácího prostředí ±1,5 %. xG varianta přidává podíl xG při 5v5 (korekce maximálně ±8 %). Brankáři, forma a speciální týmy jsou zatím kontextové údaje mimo společný model.</p>'+
+ '</details></section>';
  const intelligencePanel='<section class="analysis-section" style="border:1px solid rgba(89,210,249,.5);border-radius:18px;padding:16px;margin:14px 0;background:linear-gradient(145deg,rgba(8,37,69,.96),rgba(10,25,50,.97))">'+
  '<div style="font-size:12px;letter-spacing:1.5px;color:#67e4ff">BANGER ANALYST 2.0 · MATCH INTELLIGENCE</div><h3 style="margin:8px 0 4px">Přehled zápasu na jednom místě</h3>'+
  '<p class="analysis-small">'+clean(ac)+' (hosté) vs '+clean(hc)+' (domácí) · '+clean(day)+'</p>'+
@@ -1253,7 +1269,7 @@ async function analyzeGame(id){
  '<p class="analysis-small">Datová transparentnost: týmové průměry = NHL tabulka; střely/hity/bloky = dostupné boxscore; brankáři = aktuální projekce; xG/Corsi/Fenwick = MoneyPuck, pokud jsou data dostupná.</p></section>';
  const expert='<details class="analyst-fold analyst-expert-report"><summary>📝 BANGER EXPERT REPORT <small>Podrobná česká analýza</small></summary><div class="analyst-fold-body"><p class="analysis-small">Automatický datový rozbor · '+clean(ac)+' vs '+clean(hc)+' · '+clean(day)+'</p>'+expertGoalieSection+seasonPlayerSection+playerFormSection+narrative.join('')+'<p class="analysis-small">Založeno na dostupných NHL datech. Nejde o generativní AI, kalibrovanou predikci ani potvrzené informace o sestavách.</p></div></details>';
  if(extraRoot&&extraRoot.isConnected){
-  extraRoot.insertAdjacentHTML('afterbegin',intelligencePanel+expert);
+  extraRoot.insertAdjacentHTML('afterbegin',corePanel+intelligencePanel+expert);
   let saved=[];
   try{const parsed=JSON.parse(localStorage.getItem('banger-prediction-tracker-v1')||'[]');if(Array.isArray(parsed))saved=parsed.filter(x=>x&&x.id&&Number.isFinite(x.away)&&Number.isFinite(x.home)).slice(-150)}catch(e){}
   const evaluated=saved.filter(x=>x.status==='final');
