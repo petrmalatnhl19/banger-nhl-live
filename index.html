@@ -769,13 +769,15 @@ async function analyzeGame(id){
   return {n:list.length,wins,goalsFor,goalsAgainst,opponentStrength};
  };
  const bangerFormText=(games,code)=>{
-  const f5=bangerRecentForm(games,code,5),f10=bangerRecentForm(games,code,10);
+  const f5=bangerRecentForm(games,code,5),f10=bangerRecentForm(games,code,10),f15=bangerRecentForm(games,code,15);
   if(!f5)return clean(code)+': není dostatek dokončených zápasů pro porovnání formy.';
   const describe=f=>f.wins+' výher z '+f.n+' zápasů, '+fmt(f.goalsFor/f.n)+' vstřeleného a '+fmt(f.goalsAgainst/f.n)+' inkasovaného gólu na utkání';
   const opponents=f10?.opponentStrength||f5.opponentStrength;
   const difficulty=opponents.length>=3?'Průměrná bodová úspěšnost soupeřů v dostupné sezonní tabulce byla '+fmt(100*opponents.reduce((a,b)=>a+b,0)/opponents.length)+' procenta. ':'';
   return clean(code)+': posledních '+f5.n+' utkání '+describe(f5)+'. '+
    (f10&&f10.n>f5.n?'V posledních '+f10.n+' utkáních '+describe(f10)+'. ':'')+
+   (f15&&f15.n>(f10?.n||f5.n)?'Za posledních '+f15.n+' utkání '+describe(f15)+'. ':'')+
+   (f10&&f10.n>=8?'Gólový trend oproti desetizápasovému průměru: '+(f5.goalsFor/f5.n>=f10.goalsFor/f10.n?'rostoucí':'klesající')+' útočná produktivita ('+fmt(f5.goalsFor/f5.n)+' vs '+fmt(f10.goalsFor/f10.n)+' gólu na zápas). ':'')+
    difficulty+'Srovnání formy má omezenou vypovídací hodnotu kvůli krátkému vzorku.';
  };
  const bangerSnapshot=()=>{
@@ -997,7 +999,7 @@ async function analyzeGame(id){
  section('Tabulková síla a dlouhodobá stabilita',bangerMetrics(ar,ac)+' '+bangerMetrics(hr,hc)+' '+bangerCompare()+' Jde o popis dosavadní sezony, nikoli jistotu výsledku.');
  section('Střelecká aktivita a efektivita',bangerShotReport(skaters[0],ac)+' '+bangerShotReport(skaters[1],hc)+' Vyšší úspěšnost střelby z jediného utkání sama o sobě neznamená lepší útok.');
  section('Odpočinek a náročnost programu',bangerRestReport(ga,ac)+' '+bangerRestReport(gh,hc));
- section('Forma za pět a deset zápasů a síla soupeřů',bangerFormText(ga,ac)+' '+bangerFormText(gh,hc)+' Výkonnost proti silnějším soupeřům může mít jinou váhu než stejné výsledky proti slabším týmům.');
+ section('Forma za 5, 10 a 15 zápasů, trend a síla soupeřů',bangerFormText(ga,ac)+' '+bangerFormText(gh,hc)+' Výkonnost proti silnějším soupeřům může mít jinou váhu než stejné výsledky proti slabším týmům.');
  section('Střely, hity a bloky z posledních utkání',bangerSampleText(bangerSamples[0],ac)+bangerSampleText(bangerSamples[1],hc)+' Jde o průměry malého vzorku, ne o potvrzenou předpověď příštího utkání.');
  section('Fyzická náročnost a trestné minuty',bangerPhysicalOutlook());
  section('Aktuální výkonnost brankářů',bangerGoalieText(bangerGoalieSamples[0],ac)+bangerGoalieText(bangerGoalieSamples[1],hc)+' Statistiky se vztahují ke skutečně nasazeným brankářům v minulých zápasech, nikoli k potvrzenému startérovi příštího utkání.');
