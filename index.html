@@ -895,6 +895,7 @@ async function analyzeGame(id){
 
 
 
+
   records=records.slice(-150);
   try{localStorage.setItem(key,JSON.stringify(records))}catch(e){}
   const finished=records.filter(x=>x.status==='final');
@@ -940,6 +941,7 @@ async function analyzeGame(id){
   return caution+'Sezonní základ '+clean(ac)+' '+fmt(baseAway)+', '+clean(hc)+' '+fmt(baseHome)+'. Po korekcích '+clean(ac)+' '+fmt(m.away)+', '+clean(hc)+' '+fmt(m.home)+'. Změna oproti základu: '+clean(ac)+' '+fmt(m.away-baseAway)+', '+clean(hc)+' '+fmt(m.home-baseHome)+' gólu. Výsledek je orientační, bez zpětného ověření přesnosti. Chybějící statistiky se nenahrazují odhady.';
  })());
  section('Vzájemné zápasy',bangerH2HReport());
+
 
 
 
@@ -1011,14 +1013,18 @@ async function analyzeGame(id){
   const pendingCount=saved.filter(x=>x.status==='pending').length;
   const trackerRows=saved.slice().sort((a,b)=>String(b.day).localeCompare(String(a.day))).slice(0,30).map(x=>{
    const done=x.status==='final';
-   const actual=done?' · skutečně '+clean(x.actualAway)+' : '+clean(x.actualHome):'';
-   const statusText=done?'Vyhodnoceno':'Čeká na výsledek';
-   return '<tr><td>'+clean(x.day)+'</td><td>'+clean(x.ac)+' – '+clean(x.hc)+'</td><td>'+fmt(x.away)+' : '+fmt(x.home)+actual+'</td><td>'+statusText+'</td></tr>';
+   const statusText=done?'✓ Vyhodnoceno':'◷ Čeká na výsledek';
+   const actual=done?'<div style="margin-top:9px;font-size:13px;color:#bcebdc">Skutečný výsledek <b>'+clean(x.actualAway)+' : '+clean(x.actualHome)+'</b></div>':'';
+   const comparison=done?'<div style="margin-top:5px;font-size:12px;opacity:.8">Odchylka '+fmt(x.goalError)+' gólu · '+(x.correctSide===null?'Směr nelze hodnotit':x.correctSide?'Správný směr':'Nesprávný směr')+'</div>':'';
+   return '<article style="min-width:0;padding:14px;margin:10px 0;border:1px solid rgba(74,204,244,.4);border-radius:16px;background:linear-gradient(135deg,rgba(18,60,99,.85),rgba(7,23,45,.85));box-shadow:inset 0 1px 0 rgba(255,255,255,.08)">'+
+    '<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;font-size:12px;color:#a7c6df"><span>'+clean(x.day)+'</span><span>'+statusText+'</span></div>'+
+    '<div style="margin-top:12px;font-size:19px;font-weight:800;letter-spacing:.4px;color:#f2fbff">'+clean(x.ac)+' <span style="color:#54d7ff">vs</span> '+clean(x.hc)+'</div>'+
+    '<div style="margin-top:9px;font-size:14px">Predikce <strong style="color:#67e6ff;font-size:19px">'+fmt(x.away)+' : '+fmt(x.home)+'</strong></div>'+actual+comparison+'</article>';
   }).join('');
   const trackerPanel='<details class="analyst-fold analyst-tracker-panel" open><summary>📊 BANGER PREDICTION TRACKER <small>Historie předpovědí</small></summary><div class="analyst-fold-body">'+
    '<p><b>'+saved.length+'</b> uložených · <b>'+evaluated.length+'</b> vyhodnocených · <b>'+pendingCount+'</b> čekajících</p>'+
    '<p>Úspěšnost směru gólové převahy: '+(rated.length?successes+' / '+rated.length+' ('+fmt(100*successes/rated.length)+' %)':'zatím bez vyhodnocených srovnatelných zápasů')+'.'+(avgErr===null?'':' Průměrná absolutní odchylka obou skóre: '+fmt(avgErr)+' gólu.')+'</p>'+
-   (trackerRows?'<div style="overflow-x:auto"><table style="width:100%;font-size:12px;text-align:left;border-spacing:8px"><thead><tr><th>Datum</th><th>Zápas</th><th>Predikce / výsledek</th><th>Stav</th></tr></thead><tbody>'+trackerRows+'</tbody></table></div>':'<p>Historie je zatím prázdná. Otevři Analyst nadcházejícího zápasu, aby se uložila první predikce.</p>')+
+   (trackerRows?'<div class="banger-tracker-cards" style="min-width:0">'+trackerRows+'</div>':'<p>Historie je zatím prázdná. Otevři Analyst nadcházejícího zápasu, aby se uložila první predikce.</p>')+
    '<p class="analysis-small">Zobrazeno nejvýše 30 posledních záznamů. Data jsou uložena jen v tomto prohlížeči; nejsou synchronizována mezi zařízeními. Predikce se neukládají zpětně.</p></div></details>';
   extraRoot.insertAdjacentHTML('afterbegin',trackerPanel);
  }
