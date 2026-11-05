@@ -5,10 +5,17 @@ path = Path(__file__).resolve().parent.parent / "index.html"
 html = path.read_text(encoding="utf-8")
 changes = 0
 
+# Repair duplicate declarations from earlier scheduled runs before patching.
+import re
+duplicate = "let rotowireGoalies={games:[]};try{const rr=await fetch('./rotowire_goalies.json?t='+Math.floor(Date.now()/900000),{cache:'no-store'});if(rr.ok)rotowireGoalies=await rr.json()}catch(e){}"
+while duplicate + duplicate in html:
+    html = html.replace(duplicate + duplicate, duplicate, 1)
+    changes += 1
+
 # All lineup goalie panels should use the same verified, date-scoped source.
 needle = "let startingGoalies={};try{const gr=await fetch('./starting_goalies.json?t='+Math.floor(Date.now()/900000),{cache:'no-store'});"
 replacement = """let rotowireGoalies={games:[]};try{const rr=await fetch('./rotowire_goalies.json?t='+Math.floor(Date.now()/900000),{cache:'no-store'});if(rr.ok)rotowireGoalies=await rr.json()}catch(e){}let startingGoalies={};try{const gr=await fetch('./starting_goalies.json?t='+Math.floor(Date.now()/900000),{cache:'no-store'});"""
-if needle in html:
+if needle in html and duplicate not in html:
     html = html.replace(needle, replacement, 1)
     changes += 1
 
