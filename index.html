@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#030b1b"><title>BANGER NHL LIVE</title>
+<html lang="cs"><head>
+<meta name="banger-build" content="2026-11-05-1657-diagnostics-v17"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#030b1b"><title>BANGER NHL LIVE</title>
 
 <style>
 :root{color-scheme:dark;--cyan:#41eaff;--ink:#e8faff;--muted:#8ba9c5;--panel:#0b1b35}
@@ -1084,7 +1085,7 @@ async function analyzeGame(id){
  }));
  const seasonPlayerSection='<section class="analysis-section"><h3>📈 Sezonní hráči a brankáři · NHL</h3><p class="analysis-small">Oficiální sezonní souhrny. Hodnoty na 60 minut se nepočítají bez ověřeného celkového času na ledě.</p>'+seasonPlayerStats.map((result,i)=>{
   const code=i===0?ac:hc;
-  if(!result.ok||!result.data)return '<h4>'+clean(code)+'</h4><p>Sezonní statistiky NHL nejsou dostupné.</p><p class="analysis-small">Diagnostika: kód '+clean(result.teamCode||'—')+'. '+(result.attempts||[]).map(a=>clean(a.url.replace('https://api-web.nhle.com/v1',''))+' — '+(a.error?'chyba: '+clean(a.error):'hráči: '+(a.skaters??'—')+', brankáři: '+(a.goalies??'—'))).join('; ')+'</p>';
+  if(!result.ok||!result.data)return '<h4>'+clean(code)+'</h4><p>Sezonní statistiky NHL nejsou dostupné. <b>Diagnostika v17</b></p><p class="analysis-small">Diagnostika: kód '+clean(result.teamCode||'—')+'. '+(result.attempts||[]).map(a=>clean(a.url.replace('https://api-web.nhle.com/v1',''))+' — '+(a.error?'chyba: '+clean(a.error):'hráči: '+(a.skaters??'—')+', brankáři: '+(a.goalies??'—'))).join('; ')+'</p>';
   const data=result.data;
   const name=p=>p.firstName?.default&&p.lastName?.default?p.firstName.default+' '+p.lastName.default:p.name?.default||p.lastName?.default||'Hráč';
   const n=v=>Number.isFinite(Number(v))?Number(v):null;
