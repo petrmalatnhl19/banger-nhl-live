@@ -475,6 +475,16 @@ if side_start >= 0 and side_end > side_start:
         html = html[:side_start] + revised + html[side_end:]
         changes += 1
 
+# Replace accidental literal backslash-n sequences introduced in the PP/PK loop.
+special_start = html.find(" const bangerSpecialTeams=async(")
+special_end = html.find(" const bangerSpecial=await", special_start)
+if special_start >= 0 and special_end > special_start:
+    special_block = html[special_start:special_end]
+    fixed_block = special_block.replace(r"{\n   const result=", "{\n   const result=").replace(r";\n   const game=", ";\n   const game=")
+    if fixed_block != special_block:
+        html = html[:special_start] + fixed_block + html[special_end:]
+        changes += 1
+
 # Install the voice player once; it observes Expert Reports rendered dynamically.
 voice_tag = '<script defer src="./expert-voice.js"></script>'
 if voice_tag not in html:
