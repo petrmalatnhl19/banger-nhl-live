@@ -1063,13 +1063,15 @@ async function analyzeGame(id){
   });
  };
  const seasonPlayerStats=await Promise.all([ac,hc].map(async code=>{
-  const base='https://api-web.nhle.com/v1/club-stats/'+encodeURIComponent(code)+'/';
+  const normalized=String(code||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').trim().toLowerCase();
+  const teamCode=(Array.isArray(NHL_TEAMS)?NHL_TEAMS:[]).find(t=>String(t[0]).toLowerCase()===normalized||String(t[1]).normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase()===normalized)?.[0]||({'utah mammoth':'UTA','montreal canadiens':'MTL','utah hockey club':'UTA'}[normalized])||String(code||'');
+  const base='https://api-web.nhle.com/v1/club-stats/'+encodeURIComponent(teamCode)+'/';
   const paths=[base+encodeURIComponent(season)+'/2',base+'now'];
   for(const url of paths){
    const result=await safe(()=>get(url),6500);
    if(result.ok&&result.data&&(Array.isArray(result.data.skaters)||Array.isArray(result.data.goalies)))return {...result,source:url};
   }
-  return {ok:false,data:null,reason:'NHL club-stats: oba požadavky selhaly nebo neobsahují očekávané seznamy hráčů'};
+  return {ok:false,data:null,teamCode,reason:'NHL club-stats: oba požadavky selhaly nebo neobsahují očekávané seznamy hráčů'};
  }));
  const seasonPlayerSection='<section class="analysis-section"><h3>📈 Sezonní hráči a brankáři · NHL</h3><p class="analysis-small">Oficiální sezonní souhrny. Hodnoty na 60 minut se nepočítají bez ověřeného celkového času na ledě.</p>'+seasonPlayerStats.map((result,i)=>{
   const code=i===0?ac:hc;
