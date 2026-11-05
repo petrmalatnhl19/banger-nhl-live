@@ -1069,15 +1069,19 @@ async function analyzeGame(id){
   const teamCode=direct[compact]||NHL_TEAMS.find(t=>t[0]===label||t[1].toLowerCase().replace(/[^a-z]/g,'')===compact)?.[0]||label;
   const base='https://api-web.nhle.com/v1/club-stats/'+encodeURIComponent(teamCode)+'/';
   const paths=[base+encodeURIComponent(season)+'/2',base+'now'];
+  const attempts=[];
   for(const url of paths){
-   const result=await safe(()=>get(url),6500);
-   if(result.ok&&result.data&&(Array.isArray(result.data.skaters)||Array.isArray(result.data.goalies)))return {...result,source:url};
+   const result=await safe(()=>get(url),6500),data=result.data;
+   const skaters=Array.isArray(data?.skaters)?data.skaters.length:null;
+   const goalies=Array.isArray(data?.goalies)?data.goalies.length:null;
+   attempts.push({url,skaters,goalies,error:result.error||null});
+   if(result.ok&&(skaters!==null||goalies!==null))return {...result,source:url,teamCode};
   }
-  return {ok:false,data:null,teamCode,reason:'NHL club-stats: oba požadavky selhaly nebo neobsahují očekávané seznamy hráčů'};
+  return {ok:false,data:null,teamCode,attempts};
  }));
  const seasonPlayerSection='<section class="analysis-section"><h3>📈 Sezonní hráči a brankáři · NHL</h3><p class="analysis-small">Oficiální sezonní souhrny. Hodnoty na 60 minut se nepočítají bez ověřeného celkového času na ledě.</p>'+seasonPlayerStats.map((result,i)=>{
   const code=i===0?ac:hc;
-  if(!result.ok||!result.data)return '<h4>'+clean(code)+'</h4><p>Sezonní statistiky momentálně nejsou dostupné z NHL club-stats. Ostatní zápasové údaje zůstávají funkční.</p><p class="analysis-small">Diagnostika: '+clean(result.reason||'Chyba odpovědi')+'. Kontrolované cesty: /club-stats/'+clean(code)+'/'+clean(season)+'/2 a /club-stats/'+clean(code)+'/now.</p>';
+  if(!result.ok||!result.data)return '<h4>'+clean(code)+'</h4><p>Sezonní statistiky NHL nejsou dostupné.</p><p class="analysis-small">Diagnostika: kód '+clean(result.teamCode||'—')+'. '+(result.attempts||[]).map(a=>clean(a.url.replace('https://api-web.nhle.com/v1',''))+' — '+(a.error?'chyba: '+clean(a.error):'hráči: '+(a.skaters??'—')+', brankáři: '+(a.goalies??'—'))).join('; ')+'</p>';
   const data=result.data;
   const name=p=>p.firstName?.default&&p.lastName?.default?p.firstName.default+' '+p.lastName.default:p.name?.default||p.lastName?.default||'Hráč';
   const n=v=>Number.isFinite(Number(v))?Number(v):null;
