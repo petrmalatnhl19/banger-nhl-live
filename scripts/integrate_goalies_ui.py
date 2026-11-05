@@ -429,6 +429,13 @@ if snapshot_return in html:
     html=html.replace(snapshot_return,"  return expectedGoals+' '+goalChances+favorite+' '+shots+' '+physical+' '+bangerSampleText(bangerSamples[0],ac)+bangerSampleText(bangerSamples[1],hc)+' '+bangerGoalieText(bangerGoalieSamples[0],ac)+bangerGoalieText(bangerGoalieSamples[1],hc)+' '+bangerSpecialText(bangerSpecial[0],ac)+bangerSpecialText(bangerSpecial[1],hc)+' '+bangerPhysicalOutlook()+' '+meetingStats+rivalry;",1)
     changes+=1
 
+# Normalize escaped regex emitted by the earlier Python string template.
+bad_fraction = r"/(\\d+)\\s*\\/\\s*(\\d+)/"
+good_fraction = r"/(\d+)\s*\/\s*(\d+)/"
+if bad_fraction in html:
+    html = html.replace(bad_fraction, good_fraction)
+    changes += 1
+
 # Install the voice player once; it observes Expert Reports rendered dynamically.
 voice_tag = '<script defer src="./expert-voice.js"></script>'
 if voice_tag not in html:
