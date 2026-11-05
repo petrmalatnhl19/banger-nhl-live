@@ -450,6 +450,31 @@ if start >= 0 and end > start:
         html = html[:start] + revised + html[end:]
         changes += 1
 
+# Right-rail responses need not repeat home/away team identities; use the schedule game.
+side_start = html.find(" const bangerSpecialTeams=async(")
+side_end = html.find(" const bangerSpecial=await", side_start)
+if side_start >= 0 and side_end > side_start:
+    block = html[side_start:side_end]
+    revised = block.replace(
+        "const results=await Promise.all(ids.map(id=>safe(()=>get('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(id)+'/right-rail'),3500)));",
+        "const results=await Promise.all(ids.map(id=>safe(()=>get('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(id)+'/right-rail'),3500)));"
+    )
+    revised = revised.replace(
+        "  for(const result of results){",
+        "  for(let index=0;index<results.length;index++){\\n   const result=results[index];\\n   const game=games.find(g=>String(g.id)===String(ids[index]));"
+    )
+    revised = revised.replace(
+        "const side=data.awayTeam?.abbrev===code?'away':'home';",
+        "const side=game?.awayTeam?.abbrev===code?'away':game?.homeTeam?.abbrev===code?'home':null;"
+    )
+    revised = revised.replace(
+        "if(data[side+'Team']?.abbrev!==code)continue;",
+        "if(!side)continue;"
+    )
+    if revised != block:
+        html = html[:side_start] + revised + html[side_end:]
+        changes += 1
+
 # Install the voice player once; it observes Expert Reports rendered dynamically.
 voice_tag = '<script defer src="./expert-voice.js"></script>'
 if voice_tag not in html:
