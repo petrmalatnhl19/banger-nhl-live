@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#071325"><title>Brankáři | BANGER NHL LIVE</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,Arial;color:#e8f9ff;background:#061122}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#123e66,#061122 65%);min-height:100vh}.wrap{max-width:1150px;margin:auto;padding:22px 15px 70px}a{color:#73e8ff}header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid #2c6680;padding-bottom:18px}h1{margin:10px 0 4px;font-size:clamp(26px,5vw,40px);letter-spacing:1px}p{color:#a2c0d2}.sub{color:#72e8ff;letter-spacing:2px;font-size:12px;font-weight:800}.controls{display:flex;flex-wrap:wrap;gap:9px;margin:22px 0}.controls input,.controls select{border:1px solid #387f9d;background:#0a2945;color:white;padding:13px;border-radius:12px;font:inherit;min-width:120px}.controls input{flex:1;min-width:180px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:20px 0}.stat{border:1px solid #2e7392;background:#0b2844;border-radius:15px;text-align:center;padding:15px 5px}.stat strong{display:block;font-size:29px;color:#76eaff}.stat small{color:#a7c7d7}.games{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}.game{padding:16px;border:1px solid #32738e;border-radius:17px;background:linear-gradient(145deg,#103654,#091c34);box-shadow:0 12px 35px #0005}.game h3{margin:0 0 13px;font-size:16px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}.side{padding:11px 8px;background:#071a30;border-radius:12px;min-height:100px}.side b{display:block;font-size:19px}.side .name{display:block;margin:7px 0;font-size:13px;min-height:36px}.pill{display:inline-block;border:1px solid #52677b;border-radius:30px;padding:5px 9px;font-size:11px;color:#b8cbd8}.confirmed{border-color:#35c79a;color:#78f5c4;background:#0b4b3b}.projected{border-color:#dfaa51;color:#ffdc99;background:#543915}.unknown{color:#adc1d3}.muted{color:#9cb6c9;font-size:12px}.roster{margin-top:26px;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:9px}.person{border:1px solid #2c6382;background:#0a2440;border-radius:12px;padding:12px}.person b{display:block}.person small{color:#8fbed5}h2{margin-top:28px;font-size:22px}.empty{padding:22px;border:1px dashed #4d7692;border-radius:13px;color:#a9c6d7}@media(max-width:450px){.stat strong{font-size:23px}.game{padding:12px}}
+</style></head><body><main class="wrap"><header><div><div class="sub">BANGER NHL LIVE · GOALIE CENTER</div><h1>🥅 Brankářské centrum</h1><p>Oficiální soupisky NHL + datované projekce RotoWire</p></div><a href="./index.html">← Zpět na NHL LIVE</a></header>
+<div class="stats"><div class="stat"><strong id="total">—</strong><small>Brankářů</small></div><div class="stat"><strong id="teams">—</strong><small>Týmů</small></div><div class="stat"><strong id="matches">—</strong><small>Projekcí zápasů</small></div></div>
+<div class="controls"><input id="search" type="search" placeholder="Hledat brankáře nebo tým…"><select id="team"><option value="">Všechny týmy</option></select><select id="status"><option value="">Všechny stavy</option><option value="confirmed">Confirmed</option><option value="projected">Projected</option><option value="unknown">Unknown</option></select><input id="date" type="date" aria-label="Datum zápasů"></div>
+<p id="info">Načítám NHL data…</p><h2>Startující brankáři podle zápasů</h2><section id="games" class="games"></section><h2>Kompletní seznam brankářů</h2><section id="roster" class="roster"></section></main>
+<script>
+const $=id=>document.getElementById(id),esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),dateLocal=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')};
+let catalog=[],projections=[],stamp='',ready=false;
+$('date').value=dateLocal();
+const badge=s=>'<span class="pill '+esc(s)+'">'+(s==='confirmed'?'✓ Confirmed':s==='projected'?'◷ Projected':'? Unknown')+'</span>';
+function render(){
+if(!ready)return;
+const term=$('search').value.trim().toLocaleLowerCase(),team=$('team').value,status=$('status').value,date=$('date').value;
+const filtered=catalog.filter(p=>(!team||p.team===team)&&(!term||(p.name+' '+p.team).toLocaleLowerCase().includes(term)));
+const selected=projections.filter(g=>g.date===date);
+const gameMap=new Map();
+for(const g of selected){if(!gameMap.has(g.gameId))gameMap.set(g.gameId,{id:g.gameId,date:g.date,home:g.venue==='home'?g.team:g.opponent,away:g.venue==='away'?g.team:g.opponent,teams:{}});gameMap.get(g.gameId).teams[g.team]=g}
+const games=[...gameMap.values()].filter(g=>(!team||g.home===team||g.away===team)&&(!term||[g.home,g.away,...Object.values(g.teams).map(x=>x.goalie)].join(' ').toLowerCase().includes(term))&&(!status||[g.teams[g.home]?.status||'unknown',g.teams[g.away]?.status||'unknown'].includes(status)));
+$('games').innerHTML=games.length?games.map(g=>'<article class="game"><h3>'+esc(g.away)+' @ '+esc(g.home)+' <small class="muted">· '+esc(g.date)+'</small></h3><div class="pair">'+[g.away,g.home].map(t=>{const p=g.teams[t];return '<div class="side"><b>'+esc(t)+'</b><span class="name">'+esc(p?.goalie||'Start neznámý')+'</span>'+badge(p?.status||'unknown')+'</div>'}).join('')+'</div></article>').join(''):'<div class="empty">Pro vybrané datum a filtry nejsou dostupné projekce. Neznamená to, že se nehraje.</div>';
+const todayProjection=new Map(selected.map(g=>[g.team+'|'+g.goalie.toLowerCase(),g.status]));
+const people=filtered.filter(p=>!status||(todayProjection.get(p.team+'|'+p.name.toLowerCase())||'unknown')===status);
+$('roster').innerHTML=people.length?people.map(p=>'<article class="person"><b>'+esc(p.name)+'</b><small>'+esc(p.team)+' · NHL ID '+esc(p.playerId||'neuvedeno')+'</small><div style="margin-top:9px">'+badge(todayProjection.get(p.team+'|'+p.name.toLowerCase())||'unknown')+'</div></article>').join(''):'<div class="empty">Žádní brankáři neodpovídají filtrům.</div>';
+$('info').textContent='Zdroj projekcí: RotoWire · poslední aktualizace: '+(stamp?new Date(stamp).toLocaleString('cs-CZ'):'neznámá')+' · datum zápasů: '+date;
+}
+async function load(){
+try{
+const fetchJSON=async p=>{const r=await fetch('./'+p+'?v='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error(p+' HTTP '+r.status);return r.json()};
+const [c,g]=await Promise.all([fetchJSON('nhl_goalies.json'),fetchJSON('rotowire_goalies.json')]);
+if(!Array.isArray(c.goalies)||!Array.isArray(g.games))throw Error('Neplatný formát NHL dat');
+catalog=c.goalies;projections=g.games;stamp=g.updatedAt;ready=true;
+$('total').textContent=c.goalieCount||catalog.length;$('teams').textContent=c.teamCount||new Set(catalog.map(x=>x.team)).size;$('matches').textContent=projections.length;
+for(const t of [...new Set(catalog.map(x=>x.team))].sort()){const o=document.createElement('option');o.value=t;o.textContent=t;$('team').appendChild(o)}
+render();
+}catch(e){$('info').textContent='Data se nepodařilo načíst: '+e.message;$('games').innerHTML='<div class="empty">Zkuste stránku obnovit.</div>'}}
+for(const id of ['search','team','status','date'])$(id).addEventListener('input',render);
+load();
+</script></body></html>
