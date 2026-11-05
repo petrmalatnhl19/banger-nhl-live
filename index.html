@@ -1135,7 +1135,18 @@ async function analyzeGame(id){
  // ANALYST 2.0: compact comparison, verified metrics and context, no fabricated xG.
  // For scheduled games the immutable server snapshot is the canonical forecast.
  // The browser's richer exploratory model remains available as a separate calculation.
+ // Shared deterministic BANGER core v3 (also implemented in nhl-prediction-collect).
+ // Inputs: NHL season goals for/against per game; optional MoneyPuck 5v5 xG shares.
+ const bangerCoreV3=(af,aa,hf,ha,awayShare=null,homeShare=null)=>{
+  if(![af,aa,hf,ha].every(Number.isFinite))return null;
+  const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
+  const away=clamp((af+ha)/2*.985,.4,6),home=clamp((hf+aa)/2*1.015,.4,6);
+  const ready=[awayShare,homeShare].every(v=>v!==null&&Number.isFinite(v));
+  const correction=ready?clamp((awayShare-homeShare)*.4,-.08,.08):null;
+  return {away,home,xgAway:ready?clamp(away*(1+correction),.4,6):null,xgHome:ready?clamp(home*(1-correction),.4,6):null,version:'banger-core-v3-season-home'};
+ };
  const localIntelligenceModel=bangerWeightedForecast();
+ const coreForecast=bangerCoreV3(af,aa,hf,ha);
  let canonicalSnapshot=null;
  if(['FUT','PRE'].includes(String(d.gameState||''))){
   try{
@@ -1145,7 +1156,7 @@ async function analyzeGame(id){
    if(row&&Number.isFinite(Number(row.baseline_away))&&Number.isFinite(Number(row.baseline_home))&&row.baseline_away!==null&&row.baseline_home!==null)canonicalSnapshot=row;
   }catch(e){console.warn('Server forecast unavailable',e)}
  }
- const intelligenceModel=canonicalSnapshot?{away:Number(canonicalSnapshot.baseline_away),home:Number(canonicalSnapshot.baseline_home),factors:['centrální předzápasový archiv · '+String(canonicalSnapshot.model_version||'server')],form:false}:localIntelligenceModel;
+ const intelligenceModel=canonicalSnapshot?{away:Number(canonicalSnapshot.baseline_away),home:Number(canonicalSnapshot.baseline_home),factors:['centrální předzápasový archiv · '+String(canonicalSnapshot.model_version||'server')],form:false}:coreForecast||localIntelligenceModel;
  const intelligenceNum=v=>v==null||!Number.isFinite(Number(v))?'—':fmt(Number(v));
  const intelligenceRecent=[bangerRecentForm(ga,ac,5),bangerRecentForm(gh,hc,5)];
  const intelligenceRest=games=>{const date=games.find(g=>g.gameDate&&g.gameDate<day)?.gameDate;return date?Math.round((Date.parse(day+'T12:00:00Z')-Date.parse(date+'T12:00:00Z'))/86400000):null};
@@ -1186,12 +1197,12 @@ async function analyzeGame(id){
   const v=[mpField(mpTeams[0],'xGoalsFor'),mpField(mpTeams[0],'xGoalsAgainst'),mpField(mpTeams[1],'xGoalsFor'),mpField(mpTeams[1],'xGoalsAgainst')];
   if(!v.every(x=>Number.isFinite(x)&&x>=0)||v[0]+v[1]<=0||v[2]+v[3]<=0)return null;
   const shares=[v[0]/(v[0]+v[1]),v[2]/(v[2]+v[3])];
-  const correction=Math.max(-.08,Math.min(.08,(shares[0]-shares[1])*.4));
-  return {away:Math.max(.4,Math.min(6,intelligenceModel.away*(1+correction))),home:Math.max(.4,Math.min(6,intelligenceModel.home*(1-correction))),shares};
+  const core=bangerCoreV3(af,aa,hf,ha,shares[0],shares[1]);
+  return core?{away:core.xgAway,home:core.xgHome,shares,server:false}:null;
  })();
  const experimentalSection='<details class="analyst-fold" open><summary>🧠 PREDICTION ENGINE 2.0 <small>Experimentální · nevalidováno</small></summary><div class="analyst-fold-body">'+
- (experimentalModel?intelligenceMetric('Původní model · očekávané góly',intelligenceNum(intelligenceModel.away),intelligenceNum(intelligenceModel.home),(canonicalSnapshot?'Centrální předzápasový archiv · '+clean(canonicalSnapshot.model_version||'server'):'Sezonní góly a aktuální forma'))+
- intelligenceMetric('Experimentální model · očekávané góly',intelligenceNum(experimentalModel.away),intelligenceNum(experimentalModel.home),(experimentalModel.server?'Centrální předzápasový archiv · '+clean(canonicalSnapshot.experimental_version||'xG'):'Korekce podle 5v5 xG podílu, maximálně ±8 %'))+
+ (experimentalModel?intelligenceMetric('Původní model · očekávané góly',intelligenceNum(intelligenceModel.away),intelligenceNum(intelligenceModel.home),(canonicalSnapshot?'Centrální předzápasový archiv · '+clean(canonicalSnapshot.model_version||'server'):'BANGER CORE v3 · sezona a domácí prostředí'))+
+ intelligenceMetric('Experimentální model · očekávané góly',intelligenceNum(experimentalModel.away),intelligenceNum(experimentalModel.home),(experimentalModel.server?'Centrální předzápasový archiv · '+clean(canonicalSnapshot.experimental_version||'xG'):'BANGER CORE v3 · xG 5v5, korekce maximálně ±8 %'))+
  intelligenceMetric('Podíl xG při 5v5',experimentalModel.shares.length?(experimentalModel.shares[0]*100).toFixed(1)+' %':'—',experimentalModel.shares.length?(experimentalModel.shares[1]*100).toFixed(1)+' %':'—','MoneyPuck · xGF / (xGF + xGA)'):
  '<p>Chybí ověřená xG data pro oba týmy. Experimentální model není dostupný.</p>')+
  '<p class="analysis-small"><b>Experimentální model není zpětně otestovaný.</b> Nejde o kalibrovanou pravděpodobnost ani prokázané zlepšení přesnosti. Start brankáře tento výpočet zatím nemění.</p></div></details>';
@@ -1220,7 +1231,7 @@ async function analyzeGame(id){
  '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0">'+
  '<div style="padding:12px;border-radius:12px;background:rgba(58,166,208,.12)"><small>Očekávané góly hostů</small><div style="font-size:27px;font-weight:800;color:#80e5ff">'+intelligenceNum(intelligenceModel?.away)+'</div></div>'+
  '<div style="padding:12px;border-radius:12px;background:rgba(235,158,97,.12)"><small>Očekávané góly domácích</small><div style="font-size:27px;font-weight:800;color:#ffd09a">'+intelligenceNum(intelligenceModel?.home)+'</div></div></div>'+
- '<p class="analysis-small">Orientační model, nikoliv kalibrovaná pravděpodobnost výsledku. '+(intelligenceModel?(canonicalSnapshot?'Zdroj: neměnná předzápasová predikce uložená na serveru.':'Základ: sezonní góly, poslední forma a dostupné doplňkové faktory.'):'Chybí potřebné sezonní údaje.')+'</p>'+
+ '<p class="analysis-small">Orientační model, nikoliv kalibrovaná pravděpodobnost výsledku. '+(intelligenceModel?(canonicalSnapshot?'Zdroj: neměnná předzápasová predikce uložená na serveru.':'BANGER CORE v3: sezonní góly, domácí prostředí a volitelná xG korekce. Pokročilé faktory jsou zobrazeny zvlášť.'):'Chybí potřebné sezonní údaje.')+'</p>'+
  '<details class="analyst-fold" open><summary>📊 Přímé srovnání týmů <small>Sezona a forma</small></summary><div class="analyst-fold-body">'+
  intelligenceMetric('Vstřelené góly / zápas',intelligenceNum(af),intelligenceNum(hf),'Sezonní průměr')+
  intelligenceMetric('Inkasované góly / zápas',intelligenceNum(aa),intelligenceNum(ha),'Nižší je lepší')+
