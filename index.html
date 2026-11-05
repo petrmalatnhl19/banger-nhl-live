@@ -1323,7 +1323,7 @@ async function analyzeGame(id){
   const accuracyPanel=document.createElement('section');
   accuracyPanel.className='analyst-fold-body';
   accuracyPanel.innerHTML='<details class="analyst-fold" open><summary>🎯 PREDICTION ACCURACY <small>Centrální vyhodnocení · pouze dokončené zápasy</small></summary><div class="analyst-fold-body"><p id="bangerAccuracyStatus">Načítám výsledky…</p><div id="bangerAccuracyStats" class="metrics"></div><div id="bangerAccuracyComparison"></div><details style="margin-top:12px"><summary style="cursor:pointer;color:#9bbdd3">ℹ️ Jak číst statistiky</summary><p class="analysis-small">MAE = průměrná absolutní chyba očekávaných gólů na tým. Nižší je lepší. Porovnáváme pouze stejné zápasy s oběma předzápasovými predikcemi. Vyhodnocujeme konečné skóre NHL.</p></details></div></details>';
-  extraRoot.insertAdjacentElement('afterbegin',accuracyPanel);
+  predictionHubContent.insertBefore(accuracyPanel,predictionHubContent.firstChild);
   (async()=>{
     const label=accuracyPanel.querySelector('#bangerAccuracyStatus');
     const metrics=accuracyPanel.querySelector('#bangerAccuracyStats');
@@ -1359,10 +1359,26 @@ async function analyzeGame(id){
       showModel('advanced');
     }catch(e){label.textContent='Přesnost nyní nelze načíst: '+e.message}
   })();
+  // Unified prediction hub: one visible entry point for server accuracy, archive and local history.
+  // Keep local history clearly labeled; it is not synced with Supabase.
+  const predictionHub=document.createElement('section');
+  predictionHub.id='banger-prediction-hub';
+  predictionHub.className='analysis-section';
+  predictionHub.style.cssText='margin:14px 0;padding:14px;border:1px solid rgba(84,234,255,.65);border-radius:18px;background:linear-gradient(145deg,#0a2946,#08182e);box-shadow:0 0 24px #21cfff18';
+  predictionHub.innerHTML='<div style="font-size:11px;letter-spacing:1.8px;color:#71eaff;font-weight:800">BANGER · PREDIKČNÍ CENTRUM</div><h3 style="margin:7px 0 4px">🎯 Předpovědi a přesnost</h3><p class="analysis-small">Jedno místo pro centrální předpovědi CORE 3.0, xG a CORE 3.1, jejich vyhodnocení i historii v tomto zařízení.</p><div id="bangerPredictionHubContent"></div>';
+  extraRoot.insertAdjacentElement('afterbegin',predictionHub);
+  const predictionHubContent=predictionHub.querySelector('#bangerPredictionHubContent');
+  const localTracker=extraRoot.querySelector('.analyst-tracker-panel');
+  if(localTracker){
+    const summary=localTracker.querySelector('summary');
+    if(summary)summary.innerHTML='📱 Historie v tomto zařízení <small>Lokální tracker · nesynchronizuje se</small>';
+    localTracker.open=false;
+    predictionHubContent.appendChild(localTracker);
+  }
   const archiveContainer=document.createElement('div');
   archiveContainer.className='analyst-fold-body';
-  archiveContainer.innerHTML='<details class="analyst-fold"><summary>☁️ Centrální archiv <small>Supabase · sdílená historie</small></summary><div class="analyst-fold-body"><p id="bangerCentralStatus">Načítám centrální archiv…</p><div id="bangerCentralRows"></div><p class="analysis-small">Archiv je pouze pro čtení. Server automaticky ukládá předzápasové snímky; lokální tracker je samostatný.</p></div></details>';
-  extraRoot.insertAdjacentElement('afterbegin',archiveContainer);
+  archiveContainer.innerHTML='<details class="analyst-fold"><summary>☁️ Serverový archiv <small>Supabase · sdílená historie</small></summary><div class="analyst-fold-body"><p id="bangerCentralStatus">Načítám centrální archiv…</p><div id="bangerCentralRows"></div><p class="analysis-small">Serverový archiv je pouze pro čtení a synchronizuje se mezi zařízeními. Lokální historie níže zůstává pouze v tomto prohlížeči.</p></div></details>';
+  predictionHubContent.insertBefore(archiveContainer,predictionHubContent.firstChild);
   (async()=>{
    const status=archiveContainer.querySelector('#bangerCentralStatus');
    const target=archiveContainer.querySelector('#bangerCentralRows');
