@@ -1052,9 +1052,12 @@ async function analyzeGame(id){
   const team=(obj,code)=>Object.entries(obj||{}).find(([key])=>key.toLowerCase()===String(alias[code]||code).toLowerCase())?.[1]||null;
   return [ac,hc].map(code=>{
    const s=starterData?.teams?.[code],l=team(lineupData?.teams,code),roster=team(rosterData?.teams,code);
-   const rw=(rotowireData?.games||[]).find(g=>g.date===day&&g.team===code&&g.opponent===(code===ac?hc:ac));
-   const current=s?.date===day?s:null;
-   const selected=rw?{name:rw.goalie,status:rw.status,checkedAt:rotowireData.updatedAt,source:rw.source}:current;
+   const opponent=code===ac?hc:ac;
+   const matchId=String(d.id||d.gameId||'');
+   const rw=(rotowireData?.games||[]).find(g=>g.date===day&&g.team===code&&g.opponent===opponent&&(!matchId||!g.gameId||String(g.gameId)===matchId));
+   const current=s?.date===day&&(!matchId||!s.gameId||String(s.gameId)===matchId)?s:null;
+   // A mismatch in an explicitly provided game ID is never treated as a valid start.
+   const selected=rw?{name:rw.goalie,status:rw.status,checkedAt:rotowireData.updatedAt,source:rw.source,gameId:rw.gameId}:current;
    const name=selected?.name;
    const status=selected?.status;
    const checked=selected?.checkedAt;
@@ -1063,8 +1066,9 @@ async function analyzeGame(id){
    const lineupNames=l?.goalies||[];
    const listed=[...rosterNames,...lineupNames].some(x=>String(x).trim().toLowerCase()===String(name||'').trim().toLowerCase());
    const recent=checked&&Number.isFinite(Date.parse(checked))&&Date.now()-Date.parse(checked)>=0&&Date.now()-Date.parse(checked)<24*3600000;
-   const valid=(status==='confirmed'||status==='projected')&&listed&&recent&&/^https:\/\//.test(String(source||''));
-   return valid?{name,status,source,checked,code}:null;
+   const sameGame=!matchId||!selected?.gameId||String(selected.gameId)===matchId;
+   const valid=(status==='confirmed'||status==='projected')&&listed&&recent&&sameGame&&/^https:\/\//.test(String(source||''));
+   return valid?{name,status,source,checked,code,gameId:selected.gameId||null,rosterVerified:listed,gameVerified:!!(matchId&&selected.gameId&&sameGame)}:null;
   });
  };
  const seasonPlayerStats=await Promise.all([ac,hc].map(async (name,i)=>{
