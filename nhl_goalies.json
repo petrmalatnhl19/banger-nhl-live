@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-05T14:18:14.613973+00:00",
-  "rostersUpdatedAt": "2026-11-05T14:17:45.158588+00:00",
+  "updatedAt": "2026-11-05T15:14:11.341693+00:00",
+  "rostersUpdatedAt": "2026-11-05T15:13:53.707684+00:00",
   "projectionDate": "2026-11-05",
   "teamCount": 32,
-  "goalieCount": 77,
+  "goalieCount": 78,
   "goalies": [
     {
       "name": "Mackenzie Blackwood",
@@ -523,6 +523,14 @@
       "starterStatus": "projected",
       "starterGameDate": "2026-11-05",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+    },
+    {
+      "name": "Michal Postava",
+      "team": "DET",
+      "teamKey": "red wings",
+      "playerId": 8485545,
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Daniil Tarasov",
