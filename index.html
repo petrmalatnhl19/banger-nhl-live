@@ -1072,7 +1072,7 @@ async function analyzeGame(id){
   const paths=[base+encodeURIComponent(season)+'/2',base+'now'];
   const attempts=[];
   for(const url of paths){
-   const result=await safe(()=>get(url),6500),data=result.data;
+   const result=await safe(async()=>{const response=await fetch(url);if(!response.ok)throw Error('NHL HTTP '+response.status);return response.json()},6500),data=result.data;
    const skaters=Array.isArray(data?.skaters)?data.skaters.length:null;
    const goalies=Array.isArray(data?.goalies)?data.goalies.length:null;
    attempts.push({url,skaters,goalies,error:result.error||null});
@@ -1082,7 +1082,7 @@ async function analyzeGame(id){
  }));
  const seasonPlayerSection='<section class="analysis-section"><h3>📈 Sezonní hráči a brankáři · NHL</h3><p class="analysis-small">Oficiální sezonní souhrny. Hodnoty na 60 minut se nepočítají bez ověřeného celkového času na ledě.</p>'+seasonPlayerStats.map((result,i)=>{
   const code=i===0?ac:hc;
-  if(!result.ok||!result.data)return '<h4>'+clean(code)+'</h4><p>Sezonní statistiky NHL nejsou dostupné. <b>Diagnostika v18</b></p><p class="analysis-small">Diagnostika v18: kód '+clean(result.teamCode||'—')+'. '+(result.attempts||[]).map(a=>clean(a.url.replace('https://api-web.nhle.com/v1',''))+' — '+(a.error?'chyba: '+clean(a.error):'hráči: '+(a.skaters??'—')+', brankáři: '+(a.goalies??'—'))).join('; ')+'</p>';
+  if(!result.ok||!result.data)return '<h4>'+clean(code)+'</h4><p>Sezonní statistiky NHL nejsou dostupné. <b>Diagnostika v19</b></p><p class="analysis-small">Diagnostika v19: kód '+clean(result.teamCode||'—')+'. '+(result.attempts||[]).map(a=>clean(a.url.replace('https://api-web.nhle.com/v1',''))+' — '+(a.error?'chyba: '+clean(a.error):'hráči: '+(a.skaters??'—')+', brankáři: '+(a.goalies??'—'))).join('; ')+'</p>';
   const data=result.data;
   const name=p=>p.firstName?.default&&p.lastName?.default?p.firstName.default+' '+p.lastName.default:p.name?.default||p.lastName?.default||'Hráč';
   const n=v=>Number.isFinite(Number(v))?Number(v):null;
