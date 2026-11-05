@@ -855,7 +855,7 @@ async function analyzeGame(id){
   const bySeason=seasons.map(y=>y+': '+games.filter(g=>seasonOf(g)===y).length+' utkání').join('; ');
   return 'Posledních '+games.length+' dostupných vzájemných zápasů: '+clean(ac)+' '+aw+' výher, '+clean(hc)+' '+hw+' výher. Průměr '+fmt(avg)+' gólu na utkání. '+clean(hc)+' doma: '+homeWins+' výher z '+homeGames+' vzájemných utkání. Historie podle sezon: '+bySeason+'. Výsledky (hosté : domácí): '+results+'. '+(games.length<3?'Velmi malý vzorek. ':'')+'Starší sezony mají pro současnou formu omezenou vypovídací hodnotu; tato historie zatím nemění gólový model.';
  };
- const bangerTracker=(()=>{
+ const bangerTracker=await (async()=>{
   const key='banger-prediction-tracker-v1';
   let records=[];
   try{const parsed=JSON.parse(localStorage.getItem(key)||'[]');if(Array.isArray(parsed))records=parsed.filter(x=>x&&x.id&&Number.isFinite(x.away)&&Number.isFinite(x.home)).slice(-150)}catch(e){}
@@ -875,6 +875,23 @@ async function analyzeGame(id){
     row.correctSide=Math.abs(predDiff)<.001||realDiff===0?null:Math.sign(predDiff)===Math.sign(realDiff);
    }
   }
+  const pending=records.filter(x=>x.status==='pending'&&x.id!==gameId&&x.day<=new Date().toISOString().slice(0,10)).slice(0,8);
+  const refreshed=await Promise.all(pending.map(async row=>{
+   const result=await safe(()=>get('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(row.id)+'/landing'),4500);
+   return {row,data:result.ok?result.data:null};
+  }));
+  let updated=0;
+  for(const {row,data:game} of refreshed){
+   if(!game||!['OFF','FINAL'].includes(String(game.gameState||'')))continue;
+   if(!Number.isFinite(Number(game.awayTeam?.score))||!Number.isFinite(Number(game.homeTeam?.score)))continue;
+   if(String(game.awayTeam?.abbrev)!==row.ac||String(game.homeTeam?.abbrev)!==row.hc)continue;
+   row.status='final';row.actualAway=Number(game.awayTeam.score);row.actualHome=Number(game.homeTeam.score);
+   row.goalError=Math.abs(row.away-row.actualAway)+Math.abs(row.home-row.actualHome);
+   const diff=row.away-row.home,actual=row.actualAway-row.actualHome;
+   row.correctSide=Math.abs(diff)<.001||actual===0?null:Math.sign(diff)===Math.sign(actual);
+   updated++;
+  }
+  if(!root.isConnected)return 'Kontrola předpovědí přerušena.';
   records=records.slice(-150);
   try{localStorage.setItem(key,JSON.stringify(records))}catch(e){}
   const finished=records.filter(x=>x.status==='final');
@@ -886,7 +903,7 @@ async function analyzeGame(id){
    (scored.length?'Správně určený tým s vyšším očekáváním gólů: '+correct+' z '+scored.length+'. ':'')+
    (avgError!==null?'Průměrný součet absolutních odchylek gólů obou týmů: '+fmt(avgError)+'. ':'')+
    (current?'Tento zápas: '+(current.status==='final'?'vyhodnocen':'předzápasová predikce uložena')+' ('+fmt(current.away)+' : '+fmt(current.home)+'). ':'')+
-   'Záznamy jsou pouze v místním úložišti tohoto prohlížeče; neukládají se zpětně pro již odehrané zápasy. K vyhodnocení zatím dochází při opětovném otevření stejného dokončeného utkání. Nejde o ověřenou dlouhodobou přesnost.';
+   'Záznamy jsou pouze v místním úložišti tohoto prohlížeče; neukládají se zpětně pro již odehrané zápasy. Při otevření Analystu se automaticky zkontroluje až osm dříve uložených utkání a doplní se jejich výsledky. Nejde o ověřenou dlouhodobou přesnost.';
  })();
  const narrative=[];
  const section=(heading,body)=>narrative.push('<h4>'+heading+'</h4><p>'+body+'</p>');
@@ -920,6 +937,7 @@ async function analyzeGame(id){
   return caution+'Sezonní základ '+clean(ac)+' '+fmt(baseAway)+', '+clean(hc)+' '+fmt(baseHome)+'. Po korekcích '+clean(ac)+' '+fmt(m.away)+', '+clean(hc)+' '+fmt(m.home)+'. Změna oproti základu: '+clean(ac)+' '+fmt(m.away-baseAway)+', '+clean(hc)+' '+fmt(m.home-baseHome)+' gólu. Výsledek je orientační, bez zpětného ověření přesnosti. Chybějící statistiky se nenahrazují odhady.';
  })());
  section('Vzájemné zápasy',bangerH2HReport());
+
 
 
 
