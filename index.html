@@ -1063,8 +1063,8 @@ async function analyzeGame(id){
   });
  };
  const seasonPlayerStats=await Promise.all([ac,hc].map(async code=>{
-  const normalized=String(code||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').trim().toLowerCase();
-  const teamCode=(Array.isArray(NHL_TEAMS)?NHL_TEAMS:[]).find(t=>String(t[0]).toLowerCase()===normalized||String(t[1]).normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase()===normalized)?.[0]||({'utah mammoth':'UTA','montreal canadiens':'MTL','utah hockey club':'UTA'}[normalized])||String(code||'');
+  const normalized=String(code||'').normalize('NFD').replace(/[^a-zA-Z0-9 ]/g,'').trim().toLowerCase();
+  const teamCode=NHL_TEAMS.find(t=>t[0].toLowerCase()===normalized||t[1].normalize('NFD').replace(/[^a-zA-Z0-9 ]/g,'').toLowerCase()===normalized)?.[0]||({'utah mammoth':'UTA','montreal canadiens':'MTL','utah hockey club':'UTA'}[normalized])||String(code||'');
   const base='https://api-web.nhle.com/v1/club-stats/'+encodeURIComponent(teamCode)+'/';
   const paths=[base+encodeURIComponent(season)+'/2',base+'now'];
   for(const url of paths){
