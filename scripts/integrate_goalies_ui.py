@@ -761,6 +761,18 @@ if panel_anchor in html and "analyst-tracker-panel" not in html:
     html=html.replace(panel_anchor,panel_code,1)
     changes+=1
 
+# Remove duplicated tracker refresh blocks left by earlier idempotent replacements.
+tracker_start = "  const pending=records.filter(x=>x.status==='pending'&&x.id!==gameId"
+tracker_end = "  if(!root.isConnected)return 'Kontrola předpovědí přerušena.';"
+first_tracker = html.find(tracker_start)
+if first_tracker >= 0:
+    second_tracker = html.find(tracker_start, first_tracker + len(tracker_start))
+    if second_tracker >= 0:
+        second_end = html.find(tracker_end, second_tracker)
+        if second_end >= 0:
+            html = html[:second_tracker] + html[second_end + len(tracker_end):]
+            changes += 1
+
 # Install the voice player once; it observes Expert Reports rendered dynamically.
 voice_tag = '<script defer src="./expert-voice.js"></script>'
 if voice_tag not in html:
