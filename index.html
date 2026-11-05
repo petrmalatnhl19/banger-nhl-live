@@ -1698,4 +1698,5 @@ el("lhBadge").textContent="· "+a.length+" aktuálních / 32";
 el("lhTeams").textContent="Aktuální: "+(a.join(", ")||"žádné")+" | Archiv: "+(b.join(", ")||"žádné")+" | Bez projekce: "+(missing.join(", ")||"žádné");
 }catch(e){el("lhBadge").textContent="· Nedostupné";el("lhUpdated").textContent="Chyba kontroly: "+e.message;el("lhTeams").textContent="Počty nelze ověřit."}}
 refresh();document.addEventListener("visibilitychange",()=>{if(!document.hidden)refresh()});
-})();</script><script defer src="./expert-voice.js"></script></body></html>
+})();</script><script defer src="./expert-voice.js"></script><script src="report-ui.js"></script>
+</body></html>
