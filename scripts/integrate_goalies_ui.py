@@ -246,6 +246,42 @@ if return_anchor in html:
     html=html.replace(return_anchor,"  return expectedGoals+' '+goalChances+favorite+' '+shots+' '+physical+' '+meetingStats+rivalry;",1)
     changes+=1
 
+# Extend existing last-game boxscore fetch with a five-game sample for each club.
+sample_anchor = " const skaterSection='<details class="
+sample_code = """ const bangerSampleGames=async(games,code)=>{
+  const ids=games.slice(0,5).map(g=>g.id).filter(Boolean);
+  const results=await Promise.all(ids.map(id=>safe(()=>get('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(id)+'/boxscore'),3500)));
+  const records=results.map(r=>skaterSummary(r,code)).filter(Boolean);
+  if(records.length<3)return null;
+  const sum=key=>records.reduce((n,r)=>n+r[key],0);
+  return {n:records.length,shots:sum('shots')/records.length,hits:sum('hits')/records.length,blocks:sum('blocks')/records.length};
+ };
+ const bangerSamples=await Promise.all([bangerSampleGames(ga,ac),bangerSampleGames(gh,hc)]);
+ if(!root.isConnected)return;
+"""
+if sample_anchor in html and "const bangerSampleGames=" not in html:
+    html = html.replace(sample_anchor,sample_code+sample_anchor,1)
+    changes += 1
+sample_report_anchor = " const narrative=[];"
+sample_report_code = """ const bangerSampleText=(sample,code)=>sample?
+  clean(code)+': za '+sample.n+' posledních dostupných utkání průměrně '+fmt(sample.shots)+' střel na branku, '+fmt(sample.hits)+' hitů a '+fmt(sample.blocks)+' bloků na zápas. ':
+  clean(code)+': není dost dostupných boxscore pro vícezápasový vzorek. ';
+"""
+if sample_report_anchor in html and "const bangerSampleText=" not in html:
+    html = html.replace(sample_report_anchor,sample_report_code+sample_report_anchor,1)
+    changes += 1
+sample_section_anchor = " section('Celkový obraz utkání',"
+sample_section = """ section('Střely, hity a bloky z posledních utkání',bangerSampleText(bangerSamples[0],ac)+bangerSampleText(bangerSamples[1],hc)+' Jde o průměry malého vzorku, ne o potvrzenou předpověď příštího utkání.');
+"""
+if sample_section_anchor in html and "section('Střely, hity a bloky z posledních utkání'" not in html:
+    html = html.replace(sample_section_anchor,sample_section+sample_section_anchor,1)
+    changes += 1
+# Include five-game context in the short snapshot without inventing probability percentages.
+snapshot_return = "  return expectedGoals+' '+goalChances+favorite+' '+shots+' '+physical+' '+meetingStats+rivalry;"
+if snapshot_return in html:
+    html = html.replace(snapshot_return,"  return expectedGoals+' '+goalChances+favorite+' '+shots+' '+physical+' '+bangerSampleText(bangerSamples[0],ac)+bangerSampleText(bangerSamples[1],hc)+' '+meetingStats+rivalry;",1)
+    changes += 1
+
 # Install the voice player once; it observes Expert Reports rendered dynamically.
 voice_tag = '<script defer src="./expert-voice.js"></script>'
 if voice_tag not in html:
