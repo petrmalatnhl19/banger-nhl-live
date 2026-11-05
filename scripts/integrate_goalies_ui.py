@@ -436,6 +436,20 @@ if bad_fraction in html:
     html = html.replace(bad_fraction, good_fraction)
     changes += 1
 
+# NHL teamGameStats live in gamecenter/right-rail; landing is not reliable for these fields.
+right_rail_old = "'/landing'),3500)));\\n  let ppGoals=0"
+right_rail_new = "'/right-rail'),3500)));\\n  let ppGoals=0"
+# Target only the special-teams helper, never other landing calls.
+start = html.find(" const bangerSpecialTeams=async(")
+end = html.find(" const bangerSpecial=await", start)
+if start >= 0 and end > start:
+    block = html[start:end]
+    revised = block.replace("+'/landing'),3500)", "+'/right-rail'),3500)")
+    revised = revised.replace("const rows=data.summary?.teamGameStats;", "const rows=data.teamGameStats??data.summary?.teamGameStats;")
+    if revised != block:
+        html = html[:start] + revised + html[end:]
+        changes += 1
+
 # Install the voice player once; it observes Expert Reports rendered dynamically.
 voice_tag = '<script defer src="./expert-voice.js"></script>'
 if voice_tag not in html:
