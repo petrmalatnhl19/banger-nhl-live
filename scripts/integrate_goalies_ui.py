@@ -55,16 +55,20 @@ if needle in html and "const expertGoalieSection=" not in html:
     html = html.replace(needle, replacement, 1)
     changes += 1
 
-needle = "'+narrative.join('')+'<p class=\\"analysis-small\\">"
-# Replace only the report-specific expression.
-needle = "'+narrative.join('')+'<p class=\\\"analysis-small\\\">"
+needle = """'+narrative.join('')+'<p class=\\"analysis-small\\">"""
 if needle in html and "expertGoalieSection+narrative.join" not in html:
     html = html.replace(needle, "'+expertGoalieSection+narrative.join('')+'<p class=\\\"analysis-small\\\">", 1)
     changes += 1
 
-# Prevent old lineup data being used as an apparently current projected starter.
-needle = "const name=selected?.name||l?.startingGoalie;\\n   const status=selected?.status||l?.startingGoalieStatus;\\n   const checked=selected?.checkedAt||l?.startingGoalieCheckedAt;\\n   const source=selected?.source||l?.startingGoalieSource;"
-replacement = "const name=selected?.name;\\n   const status=selected?.status;\\n   const checked=selected?.checkedAt;\\n   const source=selected?.source;"
+# Prevent a stale lineup projection being presented as a current starter.
+needle = """const name=selected?.name||l?.startingGoalie;
+   const status=selected?.status||l?.startingGoalieStatus;
+   const checked=selected?.checkedAt||l?.startingGoalieCheckedAt;
+   const source=selected?.source||l?.startingGoalieSource;"""
+replacement = """const name=selected?.name;
+   const status=selected?.status;
+   const checked=selected?.checkedAt;
+   const source=selected?.source;"""
 if needle in html:
     html = html.replace(needle, replacement, 1)
     changes += 1
