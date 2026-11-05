@@ -1,19 +1,23 @@
 {
-  "generatedAt": "2026-11-05T05:43:40.472775+00:00",
+  "generatedAt": "2026-11-05T06:22:22.232859+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 15,
+  "currentProjections": 11,
   "needsFreshProjection": [
     "avalanche",
     "blue jackets",
     "blues",
     "bruins",
+    "canadiens",
     "capitals",
     "devils",
     "flyers",
     "golden knights",
     "islanders",
+    "jets",
     "lightning",
+    "mammoth",
+    "maple leafs",
     "oilers",
     "penguins",
     "rangers",
@@ -28,12 +32,16 @@
     "blue jackets",
     "blues",
     "bruins",
+    "canadiens",
     "capitals",
     "devils",
     "flyers",
     "golden knights",
     "islanders",
+    "jets",
     "lightning",
+    "mammoth",
+    "maple leafs",
     "oilers",
     "penguins",
     "rangers",
@@ -111,11 +119,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-03T18:06:18.771000+00:00",
       "source": "https://www.nhl.com/news/winnipeg-jets-montreal-canadiens-game-preview-november-3-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "canucks": {
       "hasProjectedLines": true,
@@ -232,11 +240,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-03T18:06:18.771000+00:00",
       "source": "https://www.nhl.com/news/winnipeg-jets-montreal-canadiens-game-preview-november-3-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "kings": {
       "hasProjectedLines": true,
@@ -281,11 +289,11 @@
         "archive",
         "manual"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-03T17:53:04.347000+00:00",
       "source": "https://www.nhl.com/news/utah-mammoth-toronto-maple-leafs-game-preview-november-3-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "maple leafs": {
       "hasProjectedLines": true,
@@ -294,11 +302,11 @@
         "archive",
         "manual"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-03T17:53:04.347000+00:00",
       "source": "https://www.nhl.com/news/utah-mammoth-toronto-maple-leafs-game-preview-november-3-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "oilers": {
       "hasProjectedLines": true,
