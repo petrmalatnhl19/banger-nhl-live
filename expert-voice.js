@@ -32,7 +32,9 @@ function start(root){
  const report=root.querySelector('.analyst-expert-report .analyst-fold-body');
  if(!report)return;
  // Only narrative h4 + p pairs. Excludes goalie status cards, badges, links and metadata.
- const narrative=Array.from(report.children).filter(el=>el.tagName==='H4'||(el.tagName==='P'&&el.previousElementSibling?.tagName==='H4'));
+ const elements=Array.from(report.children);
+ const startAt=elements.findIndex(el=>el.tagName==='H4'&&el.textContent.trim().toLocaleLowerCase('cs-CZ').includes('celkový obraz utkání'));
+ const narrative=startAt<0?[]:elements.slice(startAt).filter(el=>el.tagName==='H4'||(el.tagName==='P'&&el.previousElementSibling?.tagName==='H4'));
  segments=[];
  for(const el of narrative){
   const raw=spoken(el.textContent||'');
