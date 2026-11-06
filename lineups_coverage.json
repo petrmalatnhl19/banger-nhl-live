@@ -1,19 +1,23 @@
 {
-  "generatedAt": "2026-11-06T06:30:23.480222+00:00",
+  "generatedAt": "2026-11-06T07:47:33.486365+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 27,
+  "currentProjections": 25,
   "needsFreshProjection": [
+    "blackhawks",
     "capitals",
     "maple leafs",
+    "panthers",
     "sabres",
     "senators",
     "wild"
   ],
   "missing": [],
   "olderVerified": [
+    "blackhawks",
     "capitals",
     "maple leafs",
+    "panthers",
     "sabres",
     "senators",
     "wild"
@@ -39,11 +43,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-04T18:35:21.038000+00:00",
       "source": "https://www.nhl.com/news/chicago-blackhawks-florida-panthers-game-preview-november-4-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "blue jackets": {
       "hasProjectedLines": true,
@@ -294,11 +298,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-04T18:35:21.038000+00:00",
       "source": "https://www.nhl.com/news/chicago-blackhawks-florida-panthers-game-preview-november-4-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "penguins": {
       "hasProjectedLines": true,
