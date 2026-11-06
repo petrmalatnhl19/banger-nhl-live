@@ -16,7 +16,7 @@ function apply(){
    const node=[...el.childNodes].find(n=>n.nodeType===Node.TEXT_NODE&&n.textContent.trim());
    if(!node)return;
    const text=node.textContent.trim();
-   const plain=text.replace(/^[^\\p{L}\\p{N}]+/u,'').trim();
+   const plain=text.replace(/^[^\p{L}\p{N}]+/u,'').trim();
    if(!dictionary[plain])return;
    el.dataset.i18nOriginal=plain;
   }
@@ -24,7 +24,7 @@ function apply(){
   if(!node)return;
   const source=el.dataset.i18nOriginal;
   const current=node.textContent;
-  const prefix=current.match(/^[^\\p{L}\\p{N}]*/u)?.[0]||'';
+  const prefix=current.match(/^[^\p{L}\p{N}]*/u)?.[0]||'';
   const next=prefix+translateText(source);
   if(current!==next)node.textContent=next;
  });
