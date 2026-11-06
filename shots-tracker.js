@@ -9,7 +9,7 @@ function collect(){
  document.querySelectorAll('.analyst-expert-report[data-banger-projections]').forEach(el=>{
   let p;try{p=JSON.parse(decodeURIComponent(el.dataset.bangerProjections))}catch{return}
   const id=String(p.gameId||'');
-  if(!/^\\d{8,12}$/.test(id)||store[id]||num(p.shots?.away)===null||num(p.shots?.home)===null)return;
+  if(!/^\d{8,12}$/.test(id)||store[id]||num(p.shots?.away)===null||num(p.shots?.home)===null)return;
   // A pregame record is saved only when the game is still upcoming, verified by NHL boxscore.
   if(el.dataset.shotsArchiveCheck)return;
   el.dataset.shotsArchiveCheck='1';
@@ -51,7 +51,7 @@ function importArchive(file){
   if(input?.schema!=='banger-shots-tracker-v1'||!input.games||typeof input.games!=='object')throw Error('Neplatný formát');
   const existing=read();let added=0;
   for(const [id,row] of Object.entries(input.games)){
-   if(!/^\\d{8,12}$/.test(id)||existing[id]||!row||num(row.forecastAway)===null||num(row.forecastHome)===null)continue;
+   if(!/^\d{8,12}$/.test(id)||existing[id]||!row||num(row.forecastAway)===null||num(row.forecastHome)===null)continue;
    if(!['pending','final'].includes(row.status))continue;
    if(row.status==='final'&&(num(row.actualAway)===null||num(row.actualHome)===null))continue;
    existing[id]={id,away:String(row.away||''),home:String(row.home||''),forecastAway:num(row.forecastAway),forecastHome:num(row.forecastHome),createdAt:String(row.createdAt||''),status:row.status,version:String(row.version||'shots-v1')};
@@ -65,8 +65,10 @@ function render(){
  const host=document.querySelector('#bangerShotsTracker');if(!host)return;
  const rows=Object.values(read()),done=rows.filter(r=>r.status==='final'),pending=rows.length-done.length;
  const mae=done.length?done.reduce((sum,r)=>sum+Math.abs(r.forecastAway-r.actualAway)+Math.abs(r.forecastHome-r.actualHome),0)/(2*done.length):null;
+ const recent=done.slice().sort((a,b)=>String(a.finalizedAt||'').localeCompare(String(b.finalizedAt||'')));
+ const rolling=[10,25,50,100].map(n=>{const subset=recent.slice(-n);return {n,count:subset.length,mae:subset.length?subset.reduce((sum,r)=>sum+Math.abs(r.forecastAway-r.actualAway)+Math.abs(r.forecastHome-r.actualHome),0)/(2*subset.length):null}});
  const safe=s=>String(s||'').replace(/[&<>"']/g,'');
- host.innerHTML='<h4 style="margin:0 0 8px">🎯 Shots Engine · kontrola přesnosti</h4><p>Vyhodnoceno <b>'+done.length+'</b> · čeká <b>'+pending+'</b> · MAE střel na tým <b>'+(mae===null?'—':mae.toFixed(2))+'</b></p><p class="analysis-small">Lokální archiv tohoto prohlížeče. Předpověď se ukládá pouze před začátkem zápasu; po skončení se doplní oficiální střely NHL. Není synchronizován mezi zařízeními.</p><div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0"><button class="btn" type="button" data-shots-export>⬇ Export archivu</button><button class="btn" type="button" data-shots-import>⬆ Import archivu</button><input type="file" accept="application/json,.json" data-shots-file hidden></div>'+
+ host.innerHTML='<h4 style="margin:0 0 8px">🎯 Shots Engine · kontrola přesnosti</h4><p>Vyhodnoceno <b>'+done.length+'</b> · čeká <b>'+pending+'</b> · MAE střel na tým <b>'+(mae===null?'—':mae.toFixed(2))+'</b></p><p class="analysis-small">Lokální archiv tohoto prohlížeče. Předpověď se ukládá pouze před začátkem zápasu; po skončení se doplní oficiální střely NHL. Není synchronizován mezi zařízeními.</p><div class="banger-shots-trend" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin:12px 0">'+rolling.map(x=>'<div style="padding:10px;border:1px solid #3c8fb266;border-radius:10px;background:#092238"><div style="font-size:12px;color:#a4c8dc">Posledních '+x.n+'</div><strong style="font-size:20px">'+(x.count===x.n?x.mae.toFixed(2):'—')+'</strong><div style="font-size:11px;color:#92b2c7">'+x.count+'/'+x.n+' zápasů · MAE</div></div>').join('')+'</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0"><button class="btn" type="button" data-shots-export>⬇ Export archivu</button><button class="btn" type="button" data-shots-import>⬆ Import archivu</button><input type="file" accept="application/json,.json" data-shots-file hidden></div>'+
  done.slice(-6).reverse().map(r=>'<div class="analysis-small" style="padding:6px 0;border-top:1px solid #ffffff22">'+safe(r.away)+' – '+safe(r.home)+' · odhad '+r.forecastAway+' : '+r.forecastHome+' · skutečnost '+r.actualAway+' : '+r.actualHome+'</div>').join('');
 }
 function mount(){
