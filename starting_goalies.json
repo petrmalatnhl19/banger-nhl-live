@@ -1,6 +1,6 @@
 {
   "date": "2026-11-06",
-  "updatedAt": "2026-11-06T04:31:44.282086+00:00",
+  "updatedAt": "2026-11-06T05:28:55.046875+00:00",
   "teams": {
     "SJS": {
       "name": "Yaroslav Askarov",
@@ -8,17 +8,8 @@
       "date": "2026-11-06",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-06T04:31:44.282086+00:00",
+      "checkedAt": "2026-11-06T05:28:55.046875+00:00",
       "gameId": 2026020263
-    },
-    "CBJ": {
-      "name": "Cam Talbot",
-      "status": "projected",
-      "date": "2026-11-06",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-06T04:31:44.282086+00:00",
-      "gameId": 2026020262
     },
     "CGY": {
       "name": "Dustin Wolf",
@@ -26,8 +17,17 @@
       "date": "2026-11-06",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-06T04:31:44.282086+00:00",
+      "checkedAt": "2026-11-06T05:28:55.046875+00:00",
       "gameId": 2026020264
+    },
+    "CBJ": {
+      "name": "Cam Talbot",
+      "status": "projected",
+      "date": "2026-11-06",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-06T05:28:55.046875+00:00",
+      "gameId": 2026020262
     },
     "MIN": {
       "name": "Jesper Wallstedt",
@@ -35,7 +35,7 @@
       "date": "2026-11-06",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-06T04:31:44.282086+00:00",
+      "checkedAt": "2026-11-06T05:28:55.046875+00:00",
       "gameId": 2026020263
     }
   },
