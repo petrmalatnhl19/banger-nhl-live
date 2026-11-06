@@ -4,6 +4,20 @@ const MODELS=[
  ['CORE 3.0','Základní gólový model','baseline'],['xG','Experimentální očekávané góly','experimental'],['CORE 3.1','Rozšířené týmové faktory','advanced'],['CORE 3.2','Brankářské faktory','goalie32'],['CORE 3.3','Přesilovky a oslabení','special33'],['SHOTS 1.0','Střely a obrana soupeře','shots']
 ];
 const style=document.createElement('style');style.textContent=`
+
+/* Mobile reading mode: avoid dense two-column reports and clipped navigation. */
+@media(max-width:600px){
+ #bangerEngineLab{min-width:0;overflow:hidden;padding:12px 10px}
+ #bangerEngineLab .lab-grid,#bangerEngineLab .lab-overview-grid{grid-template-columns:minmax(0,1fr)}
+ #bangerEngineLab .lab-card{min-height:0;padding:13px}
+ #bangerEngineLab .lab-details{min-width:0;overflow-wrap:anywhere}
+ #bangerEngineLab .lab-controls{margin:10px 0 10px;padding-bottom:9px}
+ #bangerEngineLab .lab-controls button{min-height:42px;padding:9px 11px;font-size:13px}
+ #bangerEngineLab .lab-summary{gap:6px}
+ #bangerEngineLab .lab-summary>div{padding:8px 6px}
+ #bangerEngineLab .lab-summary small{font-size:10px}
+ #bangerEngineLab .lab-overview-link{min-height:60px}
+}
 #bangerEngineLab .lab-overview-group{margin-top:18px}#bangerEngineLab .lab-overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:9px;margin-top:10px}#bangerEngineLab .lab-overview-link{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;min-height:75px;padding:12px;border:1px solid #3c91b480;border-radius:12px;background:#102f45;color:#e8f8ff;cursor:pointer}#bangerEngineLab .lab-overview-link:hover,#bangerEngineLab .lab-overview-link:focus-visible{border-color:#76e5ff;background:#16465f}#bangerEngineLab .lab-overview-link small{font-size:11px;color:#a8cbdc}
 
 #bangerEngineLab{margin:12px 0 18px;padding:16px;border:1px solid #38c9ed80;border-radius:20px;background:radial-gradient(circle at 100% 0%,#14516d 0%,#09283e 48%,#071728 100%);color:#e6f8ff;box-shadow:0 12px 35px #0004}
