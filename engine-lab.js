@@ -30,6 +30,15 @@ const style=document.createElement('style');style.textContent=`
 #bangerEngineLab .lab-bar span{display:block;height:100%;background:linear-gradient(90deg,#21b3e8,#6cf1bd)}
 #bangerEngineLab .lab-error-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:10px;margin-top:12px}
 #bangerEngineLab .lab-error-card{min-width:0}
+#bangerEngineLab .lab-error-entry{border-top:1px solid #3c789b55}
+#bangerEngineLab .lab-error-entry .lab-error-row{border-top:0}
+#bangerEngineLab .lab-factor-details{padding:0 0 12px;font-size:12px}
+#bangerEngineLab .lab-factor-details summary{cursor:pointer;color:#80e6ff;padding:6px 0;min-height:32px;font-weight:700}
+#bangerEngineLab .lab-factor-details summary:focus-visible{outline:2px solid #7af3ff}
+#bangerEngineLab .lab-factor-details small{display:block;color:#a6c9d9;line-height:1.55;margin-top:7px}
+#bangerEngineLab .lab-factor-line{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid #2b577744;font-size:11px}
+#bangerEngineLab .lab-factor-line span:last-child{text-align:right}
+@media(max-width:520px){#bangerEngineLab .lab-factor-line{flex-direction:column;gap:2px}#bangerEngineLab .lab-factor-line span:last-child{text-align:left}}
 #bangerEngineLab .lab-error-row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid #3c789b55;font-size:12px}
 #bangerEngineLab .lab-error-row:first-of-type{margin-top:10px}
 #bangerEngineLab .lab-error-row small{display:block;color:#a6c9d9;line-height:1.5}
@@ -149,12 +158,27 @@ function errorsPanel(){
    const r=v.r,score=Number(r.actual_away)+' : '+Number(r.actual_home);
    const predicted=Number(r[key+'_away']).toFixed(1)+' : '+Number(r[key+'_home']).toFixed(1);
    const teams=esc(r.away_team)+' – '+esc(r.home_team);
-   return '<div class="lab-error-row"><div><span class="lab-pill">#'+(i+1)+'</span> <b>'+teams+'</b><small>'+esc(r.game_date)+'</small></div><div class="lab-error-numbers"><b>MAE '+v.mae.toFixed(2)+'</b><small>Odhad '+predicted+' · výsledek '+score+'</small><small>Chyba hosté '+v.away.toFixed(1)+' · domácí '+v.home.toFixed(1)+'</small></div></div>';
+   const other=specs.filter(([,k])=>ok(r[k+'_away'])&&ok(r[k+'_home'])).map(([n,k])=>{
+    const a=Number(r[k+'_away']),h=Number(r[k+'_home']);
+    const e=(Math.abs(a-Number(r.actual_away))+Math.abs(h-Number(r.actual_home)))/2;
+    return {n,k,a,h,e};
+   });
+   const base=other.find(x=>x.k==='baseline');
+   const comparisons=other.map(x=>{
+    const delta=base?(x.e-base.e):null;
+    const deltaLabel=delta===null?'':(' · vůči CORE 3.0 '+(delta>0?'+':'')+delta.toFixed(2));
+    return '<div class="lab-factor-line"><span>'+esc(x.n)+'</span><span>'+x.a.toFixed(1)+' : '+x.h.toFixed(1)+' · MAE '+x.e.toFixed(2)+deltaLabel+'</span></div>';
+   }).join('');
+   const notes=[];
+   const goalie=other.find(x=>x.k==='goalie32'),special=other.find(x=>x.k==='special33');
+   if(base&&goalie)notes.push('Brankářský model mění odhad vůči CORE 3.0 o '+(Math.abs(goalie.a-base.a)+Math.abs(goalie.h-base.h)).toFixed(2)+' gólu v součtu absolutních změn.');
+   if(base&&special)notes.push('Model speciálních týmů mění odhad vůči CORE 3.0 o '+(Math.abs(special.a-base.a)+Math.abs(special.h-base.h)).toFixed(2)+' gólu v součtu absolutních změn.');
+   return '<div class="lab-error-entry"><div class="lab-error-row"><div><span class="lab-pill">#'+(i+1)+'</span> <b>'+teams+'</b><small>'+esc(r.game_date)+'</small></div><div class="lab-error-numbers"><b>MAE '+v.mae.toFixed(2)+'</b><small>Odhad '+predicted+' · výsledek '+score+'</small><small>Chyba hosté '+v.away.toFixed(1)+' · domácí '+v.home.toFixed(1)+'</small></div></div><details class="lab-factor-details"><summary>Rozbor rozdílů modelů</summary><div class="lab-factor-list">'+comparisons+'</div><small>'+(notes.length?notes.map(esc).join('<br>'):'Pro tento zápas nejsou dostupná všechna srovnání.')+'</small><small>Rozdíly ukazují vliv variant modelů na odhad, nikoliv skutečný počet přesilovek, střel nebo kvalitu brankáře. Bez uložených zápasových faktorů nelze potvrdit příčinu chyby.</small></details></div>';
   }).join('');
   const overall=ranked.reduce((sum,v)=>sum+v.mae,0)/ranked.length;
   return '<article class="lab-card lab-error-card"><span class="lab-pill">'+ranked.length+' VYHODNOCENÝCH</span><strong>'+name+'</strong><small>Celková MAE '+overall.toFixed(2)+' · pět největších odchylek</small>'+lines+'</article>';
  }).join('');
- return '<div class="lab-details"><b>🧩 Největší chyby jednotlivých modelů</b><p class="analysis-small">Pět zápasů s nejvyšší absolutní chybou předpovězených gólů na tým. Pouze dokončené zápasy s uloženou predikcí. Tento přehled ukazuje, kde se model mýlil, nikoliv proč; příčiny musíme ověřit další analýzou.</p><div class="lab-error-grid">'+cards+'</div><p class="analysis-small">Pořadí je počítané samostatně pro každý model. Vzorky se mohou lišit a výsledky nejsou důkazem budoucí přesnosti.</p></div>';
+ return '<div class="lab-details"><b>🧩 Největší chyby jednotlivých modelů</b><p class="analysis-small">Pět zápasů s nejvyšší absolutní chybou předpovězených gólů na tým. U každého zápasu lze rozbalit srovnání všech dostupných modelů a jejich odchylek od základního CORE 3.0. Pouze dokončené zápasy s uloženou predikcí. Tento přehled ukazuje, kde se model mýlil, nikoliv proč; příčiny musíme ověřit další analýzou.</p><div class="lab-error-grid">'+cards+'</div><p class="analysis-small">Pořadí je počítané samostatně pro každý model. Vzorky se mohou lišit a výsledky nejsou důkazem budoucí přesnosti.</p></div>';
 }
 function update(){
  const lab=document.getElementById('bangerEngineLab');if(!lab)return;
