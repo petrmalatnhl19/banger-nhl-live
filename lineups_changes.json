@@ -749,20 +749,30 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "sabres": {
-      "updatedAt": "2026-11-04T17:51:24.029255+00:00",
-      "previousPublishedAt": "2026-10-30T21:02:46.495000+00:00",
-      "publishedAt": "",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-06T17:58:08.834406+00:00",
+      "previousPublishedAt": "2026-11-04T17:37:08.585000+00:00",
+      "publishedAt": "2026-11-06T17:50:25.006000+00:00",
+      "source": "https://www.nhl.com/news/columbus-blue-jackets-buffalo-sabres-game-preview-november-6-2026",
       "events": [
         {
           "type": "added",
-          "player": "Zach Metsa",
-          "to": "Obrana 3"
+          "player": "Jiri Kulich",
+          "to": "Útok 3"
         },
         {
           "type": "added",
-          "player": "Louis Crevier",
+          "player": "Conor Timmins",
           "to": "Obrana 3"
+        },
+        {
+          "type": "removed",
+          "player": "Ryan McLeod",
+          "from": "Útok 3"
+        },
+        {
+          "type": "removed",
+          "player": "Louis Crevier",
+          "from": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

@@ -1,32 +1,14 @@
 {
   "date": "2026-11-06",
-  "updatedAt": "2026-11-06T17:14:54.528557+00:00",
+  "updatedAt": "2026-11-06T17:58:11.799122+00:00",
   "teams": {
-    "BUF": {
-      "name": "Ukko-Pekka Luukkonen",
-      "status": "confirmed",
-      "date": "2026-11-06",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-06T17:14:54.528557+00:00",
-      "gameId": 2026020262
-    },
-    "CBJ": {
-      "name": "Jet Greaves",
-      "status": "confirmed",
-      "date": "2026-11-06",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-06T17:14:54.528557+00:00",
-      "gameId": 2026020262
-    },
     "CGY": {
       "name": "Dustin Wolf",
       "status": "confirmed",
       "date": "2026-11-06",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-06T17:14:54.528557+00:00",
+      "checkedAt": "2026-11-06T17:58:11.799122+00:00",
       "gameId": 2026020264
     },
     "MIN": {
@@ -35,7 +17,7 @@
       "date": "2026-11-06",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-06T17:14:54.528557+00:00",
+      "checkedAt": "2026-11-06T17:58:11.799122+00:00",
       "gameId": 2026020263
     },
     "SJS": {
@@ -44,8 +26,26 @@
       "date": "2026-11-06",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-06T17:14:54.528557+00:00",
+      "checkedAt": "2026-11-06T17:58:11.799122+00:00",
       "gameId": 2026020263
+    },
+    "BUF": {
+      "name": "Ukko-Pekka Luukkonen",
+      "status": "confirmed",
+      "date": "2026-11-06",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-06T17:58:11.799122+00:00",
+      "gameId": 2026020262
+    },
+    "CBJ": {
+      "name": "Jet Greaves",
+      "status": "confirmed",
+      "date": "2026-11-06",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-06T17:58:11.799122+00:00",
+      "gameId": 2026020262
     }
   },
   "conflicts": [
