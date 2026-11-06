@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-06T15:29:48.281328+00:00",
+  "updatedAt": "2026-11-06T16:22:24.345843+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "goalieCount": 96,
   "games": [
@@ -18,14 +18,14 @@
       "goalie": "Ukko-Pekka Luukkonen",
       "opponent": "CBJ",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-06",
       "gameId": 2026020262,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "team": "CBJ",
-      "goalie": "Cam Talbot",
+      "goalie": "Jet Greaves",
       "opponent": "BUF",
       "venue": "away",
       "status": "projected",

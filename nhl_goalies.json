@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-06T15:29:48.320543+00:00",
-  "rostersUpdatedAt": "2026-11-06T15:29:22.996415+00:00",
+  "updatedAt": "2026-11-06T16:22:24.376627+00:00",
+  "rostersUpdatedAt": "2026-11-06T16:21:58.149900+00:00",
   "projectionDate": "2026-11-06",
   "teamCount": 32,
   "goalieCount": 77,
@@ -50,9 +50,8 @@
       "team": "CBJ",
       "teamKey": "blue jackets",
       "playerId": 8475660,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-06",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Jordan Binnington",
@@ -532,8 +531,9 @@
       "team": "BUF",
       "teamKey": "sabres",
       "playerId": 8480045,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-06",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Alex Lyon",
