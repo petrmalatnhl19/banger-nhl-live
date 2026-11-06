@@ -8,7 +8,16 @@ const style=document.createElement('style');style.textContent=`
 #bangerEngineLab .lab-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 #bangerEngineLab .lab-title{font-size:clamp(19px,4vw,27px);font-weight:900;letter-spacing:.05em}
 #bangerEngineLab .lab-sub{color:#9ac6da;font-size:12px}
-#bangerEngineLab .lab-controls{display:flex;gap:7px;flex-wrap:wrap;margin:15px 0}
+#bangerEngineLab .lab-controls{display:flex;gap:8px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;margin:15px 0;padding:4px 2px 11px;scrollbar-width:thin;scrollbar-color:#357a98 transparent}
+#bangerEngineLab .lab-controls button{flex:0 0 auto;white-space:nowrap;scroll-snap-align:start;min-height:44px}
+#bangerEngineLab .lab-controls button:focus-visible{outline:2px solid #7af3ff;outline-offset:2px}
+#bangerEngineLab .lab-controls button[aria-pressed=true]{box-shadow:0 0 0 1px #6be4ff66,0 6px 18px #00c8ff22}
+#bangerEngineLab .lab-mobile-hint{font-size:11px;color:#8dbed1;margin-top:-9px;margin-bottom:9px}
+#bangerEngineLab .lab-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:12px 0}
+#bangerEngineLab .lab-summary>div{padding:12px;border:1px solid #356a86;border-radius:13px;background:#0c2c42;min-width:0}
+#bangerEngineLab .lab-summary strong{display:block;font-size:clamp(17px,3.7vw,24px);color:#b5f4ff;overflow-wrap:anywhere}
+#bangerEngineLab .lab-summary small{color:#9bc4d8;font-size:11px}
+@media(max-width:520px){#bangerEngineLab{padding:12px;border-radius:15px}#bangerEngineLab .lab-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}#bangerEngineLab .lab-card{padding:10px;min-height:110px}#bangerEngineLab .lab-card strong{font-size:15px}#bangerEngineLab .lab-details{padding:10px}#bangerEngineLab .lab-summary>div{padding:9px}#bangerEngineLab .lab-head{align-items:flex-start}}
 #bangerEngineLab button{border:1px solid #4288a8;background:#102d45;color:#dcf7ff;border-radius:12px;padding:10px 12px;font-weight:750;cursor:pointer}
 #bangerEngineLab button[aria-pressed=true]{background:linear-gradient(120deg,#1687a9,#14587a);border-color:#6be4ff}
 #bangerEngineLab .lab-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:10px}
@@ -23,7 +32,7 @@ const style=document.createElement('style');style.textContent=`
 function mount(){
  const hub=document.getElementById('bangerPredictionHubContent');if(!hub||document.getElementById('bangerEngineLab'))return;
  const lab=document.createElement('section');lab.id='bangerEngineLab';
- lab.innerHTML='<div class="lab-head"><div><div class="lab-title">⚙️ BANGER ENGINE LAB</div><div class="lab-sub">Řídicí centrum predikčních modelů · data, přesnost a vývoj</div></div><span class="lab-pill">● MODEL MONITOR</span></div><div class="lab-controls" role="group" aria-label="Přehled Engine Lab"><button type="button" data-lab-tab="models" aria-pressed="true">🧠 Modely</button><button type="button" data-lab-tab="accuracy" aria-pressed="false">🎯 Přesnost</button><button type="button" data-lab-tab="shots" aria-pressed="false">🏒 Shots</button><button type="button" data-lab-tab="diagnostics" aria-pressed="false">🔬 Diagnostika</button><button type="button" data-lab-tab="calibration" aria-pressed="false">🧪 Kalibrace</button><button type="button" data-lab-tab="stability" aria-pressed="false">📡 Stabilita</button></div><div data-lab-content aria-live="polite"></div>';
+ lab.innerHTML='<div class="lab-head"><div><div class="lab-title">⚙️ BANGER ENGINE LAB</div><div class="lab-sub">Řídicí centrum predikčních modelů · data, přesnost a vývoj</div></div><span class="lab-pill">● MODEL MONITOR</span></div><div class="lab-summary"><div><strong>5</strong><small>Gólových modelů</small></div><div><strong>1</strong><small>Shots Engine</small></div><div><strong data-lab-final>—</strong><small>Dokončených zápasů</small></div></div><div class="lab-controls" role="group" aria-label="Přehled Engine Lab"><button type="button" data-lab-tab="models" aria-pressed="true">🧠 Modely</button><button type="button" data-lab-tab="accuracy" aria-pressed="false">🎯 Přesnost</button><button type="button" data-lab-tab="shots" aria-pressed="false">🏒 Shots</button><button type="button" data-lab-tab="diagnostics" aria-pressed="false">🔬 Diagnostika</button><button type="button" data-lab-tab="calibration" aria-pressed="false">🧪 Kalibrace</button><button type="button" data-lab-tab="stability" aria-pressed="false">📡 Stabilita</button></div><div class="lab-mobile-hint">← Posunutím nabídky zobrazíš další moduly →</div><div data-lab-content aria-live="polite"></div>';
  hub.insertBefore(lab,hub.firstChild);
  lab.addEventListener('click',e=>{const b=e.target.closest('[data-lab-tab]');if(!b)return;lab.dataset.tab=b.dataset.labTab;update()});
  lab.dataset.tab='models';update();
@@ -119,6 +128,8 @@ function update(){
  const tab=lab.dataset.tab||'models';
  lab.querySelectorAll('[data-lab-tab]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.labTab===tab)));
  const body=lab.querySelector('[data-lab-content]');
+ const finalCount=Array.isArray(window.bangerEngineLabArchive)?window.bangerEngineLabArchive.filter(r=>r.status==='final').length:null;
+ const finalEl=lab.querySelector('[data-lab-final]');if(finalEl)finalEl.textContent=finalCount===null?'—':String(finalCount);
  if(tab==='stability'){
   body.innerHTML=stabilityPanel();
  }else if(tab==='calibration'){
@@ -147,7 +158,7 @@ function update(){
  }
 }
 let last='';
-function refresh(){mount();const lab=document.getElementById('bangerEngineLab');if(!lab||lab.dataset.tab==='models')return;const source=[document.getElementById('bangerAccuracyComparison')?.parentElement?.textContent||'',document.getElementById('bangerShotsTracker')?.textContent||''].join('|');if(source!==last){last=source;update()}}
+function refresh(){mount();const lab=document.getElementById('bangerEngineLab');if(!lab||lab.dataset.tab==='models')return;const source=[document.getElementById('bangerAccuracyComparison')?.parentElement?.textContent||'',document.getElementById('bangerShotsTracker')?.textContent||'',String(window.bangerEngineLabArchive?.length??'')].join('|');if(source!==last){last=source;update()}}
 function start(){refresh();window.addEventListener('banger-engine-lab-archive',()=>{if(['accuracy','diagnostics','calibration','stability'].includes(document.getElementById('bangerEngineLab')?.dataset.tab))update()});setInterval(refresh,2500)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
