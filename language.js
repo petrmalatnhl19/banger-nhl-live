@@ -87,11 +87,26 @@ const interfaceLabels={
  'Statistiky hráčů nejsou momentálně dostupné.':'Player statistics are currently unavailable.',
  'Tabulka není momentálně dostupná.':'Standings are currently unavailable.',
  'Statistiky':'Statistics','Analytika':'Analytics',
+ '✓ KONEC':'✓ FINAL','KONEC':'FINAL','ZAČÁTEK':'START','PROBÍHÁ':'IN PROGRESS','PRODLOUŽENÍ':'OVERTIME','NÁJEZDY':'SHOOTOUT','ŽIVĚ':'LIVE',
+ 'BANGER NHL LIVE · Data: NHL veřejné rozhraní · Neoficiální fanouškovská aplikace':'BANGER NHL LIVE · Data: NHL public API · Unofficial fan application',
  'Bez projekce':'No projection',
  'Aktuální znamená ověřenou projekci publikovanou v posledních 36 hodinách. Archiv není potvrzenou sestavou dalšího utkání.':'Current means a verified projection published within the last 36 hours. Archived lineups do not confirm the next game lineup.',
  '⚔️ Porovnání hráčů':'⚔️ Player comparison'
 };
 const originalNodes=new WeakMap();
+function translateGameStates(){
+ document.querySelectorAll('.dash-game-state').forEach(el=>{
+  const current=el.textContent.trim();
+  const source=el.dataset.i18nGameState||current;
+  if(!el.dataset.i18nGameState||!/^((?:● )?ŽIVĚ|✓ KONEC|\\d{2}:\\d{2} · |\\d+\\. TŘETINA)/.test(source)&&!source.includes('KONEC')){
+   if(!/KONEC|FINAL|ZAČÁTEK|START|ŽIVĚ|LIVE|PRODLOUŽENÍ|OVERTIME|NÁJEZDY|SHOOTOUT|PROBÍHÁ|IN PROGRESS|TŘETINA|PERIOD/.test(current))return;
+   if(!el.dataset.i18nGameState)el.dataset.i18nGameState=current;
+  }
+  const original=el.dataset.i18nGameState||source;
+  const value=lang==='en'?original.replace(/KONEC/g,'FINAL').replace(/ZAČÁTEK/g,'START').replace(/ŽIVĚ/g,'LIVE').replace(/PRODLOUŽENÍ/g,'OVERTIME').replace(/NÁJEZDY/g,'SHOOTOUT').replace(/PROBÍHÁ/g,'IN PROGRESS').replace(/TŘETINA/g,'PERIOD'):original;
+  if(current!==value)el.textContent=value;
+ });
+}
 function translateDashboardDate(){
  const line=document.querySelector('.dash-heading p');if(!line)return;
  const current=line.textContent.trim();
@@ -127,6 +142,7 @@ function apply(){
  document.documentElement.lang=lang;
  translateInterface();
  translateDashboardDate();
+ translateGameStates();
  const en=lang==='en';
  const picker=document.getElementById('bangerLanguageSelect');if(picker&&picker.value!==lang)picker.value=lang;
  document.querySelectorAll('#bangerEngineLab [data-lab-tab]').forEach(el=>{const pair=labLabels[el.dataset.labTab];if(pair){const label=pair[en?1:0];if(el.textContent!==label)el.textContent=label;}});
