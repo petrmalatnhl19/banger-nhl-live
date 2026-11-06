@@ -1527,7 +1527,15 @@ async function analyzeGame(id){
  '<p class="analysis-small">Absence, kompletní sestavy, vzdálenost cestování a GSAx nejsou v tomto panelu ověřeny; nejsou proto zahrnuty jako potvrzené faktory.</p>'+
  '</div></details>'+
  '<p class="analysis-small">Datová transparentnost: týmové průměry = NHL tabulka; střely/hity/bloky = dostupné boxscore; brankáři = aktuální projekce; xG/Corsi/Fenwick = MoneyPuck, pokud jsou data dostupná.</p></section>';
- const expert='<details class="analyst-fold analyst-expert-report"><summary>📝 BANGER EXPERT REPORT <small>Podrobná česká analýza</small></summary><div class="analyst-fold-body"><p class="analysis-small">Automatický datový rozbor · '+clean(ac)+' vs '+clean(hc)+' · '+clean(day)+'</p>'+expertGoalieSection+seasonPlayerSection+playerFormSection+narrative.join('')+'<p class="analysis-small">Založeno na dostupných NHL datech. Nejde o generativní AI, kalibrovanou predikci ani potvrzené informace o sestavách.</p></div></details>';
+ const projectedSnapshot=(()=>{
+  const model=bangerWeightedForecast();
+  const numeric=v=>v===null||v===undefined||v===''||!Number.isFinite(Number(v))?null:Number(v);
+  return {gameId:String(id),away:ac,home:hc,goals:model?{away:numeric(model.away),home:numeric(model.home)}:null,
+    shots:{away:numeric(bangerSamples[0]?.shots),home:numeric(bangerSamples[1]?.shots)},
+    penaltyMinutes:{away:numeric(bangerSamples[0]?.penaltyMinutes),home:numeric(bangerSamples[1]?.penaltyMinutes)},
+    sampleGames:{away:numeric(bangerSamples[0]?.n),home:numeric(bangerSamples[1]?.n)}};
+ })();
+ const expert='<details class="analyst-fold analyst-expert-report" data-banger-projections="'+encodeURIComponent(JSON.stringify(projectedSnapshot))+'"><summary>📝 BANGER EXPERT REPORT <small>Podrobná česká analýza</small></summary><div class="analyst-fold-body"><p class="analysis-small">Automatický datový rozbor · '+clean(ac)+' vs '+clean(hc)+' · '+clean(day)+'</p>'+expertGoalieSection+seasonPlayerSection+playerFormSection+narrative.join('')+'<p class="analysis-small">Založeno na dostupných NHL datech. Nejde o generativní AI, kalibrovanou predikci ani potvrzené informace o sestavách.</p></div></details>';
  if(extraRoot&&extraRoot.isConnected){
   extraRoot.insertAdjacentHTML('afterbegin',corePanel+intelligencePanel+expert);
   let saved=[];
