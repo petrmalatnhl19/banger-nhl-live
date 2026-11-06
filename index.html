@@ -820,10 +820,19 @@ async function analyzeGame(id){
  const bangerSampleGames=async(games,code)=>{
   const ids=games.slice(0,5).map(g=>g.id).filter(Boolean);
   const results=await Promise.all(ids.map(id=>safe(()=>get('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(id)+'/boxscore'),3500)));
-  const records=results.map(r=>skaterSummary(r,code)).filter(Boolean);
+  const records=results.map(r=>{
+   if(!r.ok||!r.data)return null;
+   const own=skaterSummary(r,code);
+   if(!own)return null;
+   const away=r.data.awayTeam?.abbrev,home=r.data.homeTeam?.abbrev;
+   const opponent=away===code?home:home===code?away:null;
+   const against=opponent?skaterSummary(r,opponent):null;
+   return {...own,shotsAgainst:against?.shots??null};
+  }).filter(Boolean);
   if(records.length<3)return null;
   const sum=key=>records.reduce((n,r)=>n+r[key],0);
-  return {n:records.length,shots:sum('shots')/records.length,hits:sum('hits')/records.length,blocks:sum('blocks')/records.length,penaltyMinutes:sum('penaltyMinutes')/records.length};
+  const against=records.map(r=>r.shotsAgainst).filter(Number.isFinite);
+  return {n:records.length,shots:sum('shots')/records.length,shotsAgainst:against.length>=3?against.reduce((a,b)=>a+b,0)/against.length:null,shotsAgainstN:against.length,hits:sum('hits')/records.length,blocks:sum('blocks')/records.length,penaltyMinutes:sum('penaltyMinutes')/records.length};
  };
  const bangerSamples=await Promise.all([bangerSampleGames(ga,ac),bangerSampleGames(gh,hc)]);
  if(!root.isConnected)return;
@@ -1530,8 +1539,16 @@ async function analyzeGame(id){
  const projectedSnapshot=(()=>{
   const model=bangerWeightedForecast();
   const numeric=v=>v===null||v===undefined||v===''||!Number.isFinite(Number(v))?null:Number(v);
+  const awaySample=bangerSamples[0],homeSample=bangerSamples[1];
+  const shotsForecast=(own,opponent)=>{
+   if(!own||!opponent||!Number.isFinite(own.shots)||!Number.isFinite(opponent.shotsAgainst))return null;
+   // Transparent first-version heuristic: 65% own recent shots + 35% opponent recent shots allowed.
+   return Math.round((0.65*own.shots+0.35*opponent.shotsAgainst)*10)/10;
+  };
   return {gameId:String(id),away:ac,home:hc,goals:model?{away:numeric(model.away),home:numeric(model.home)}:null,
-    shots:{away:numeric(bangerSamples[0]?.shots),home:numeric(bangerSamples[1]?.shots)},
+    shots:{away:shotsForecast(awaySample,homeSample),home:shotsForecast(homeSample,awaySample)},
+    shotInputs:{awayFor:numeric(awaySample?.shots),homeFor:numeric(homeSample?.shots),awayAgainst:numeric(awaySample?.shotsAgainst),homeAgainst:numeric(homeSample?.shotsAgainst)},
+    shotsModel:'shots-v1-65-35',shotsMethod:'65 % vlastní střely z posledních utkání + 35 % střely povolené soupeřem',
     penaltyMinutes:{away:numeric(bangerSamples[0]?.penaltyMinutes),home:numeric(bangerSamples[1]?.penaltyMinutes)},
     sampleGames:{away:numeric(bangerSamples[0]?.n),home:numeric(bangerSamples[1]?.n)}};
  })();
