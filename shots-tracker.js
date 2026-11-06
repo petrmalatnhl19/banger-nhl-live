@@ -40,19 +40,40 @@ async function evaluate(){
  }
  render();
 }
+function downloadArchive(){
+ const data=read(),blob=new Blob([JSON.stringify({schema:'banger-shots-tracker-v1',exportedAt:new Date().toISOString(),games:data},null,2)],{type:'application/json'});
+ const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='banger-shots-archive.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function importArchive(file){
+ if(!file)return;
+ file.text().then(raw=>{
+  const input=JSON.parse(raw);
+  if(input?.schema!=='banger-shots-tracker-v1'||!input.games||typeof input.games!=='object')throw Error('Neplatný formát');
+  const existing=read();let added=0;
+  for(const [id,row] of Object.entries(input.games)){
+   if(!/^\\d{8,12}$/.test(id)||existing[id]||!row||num(row.forecastAway)===null||num(row.forecastHome)===null)continue;
+   if(!['pending','final'].includes(row.status))continue;
+   if(row.status==='final'&&(num(row.actualAway)===null||num(row.actualHome)===null))continue;
+   existing[id]={id,away:String(row.away||''),home:String(row.home||''),forecastAway:num(row.forecastAway),forecastHome:num(row.forecastHome),createdAt:String(row.createdAt||''),status:row.status,version:String(row.version||'shots-v1')};
+   if(row.status==='final'){existing[id].actualAway=num(row.actualAway);existing[id].actualHome=num(row.actualHome)}
+   added++;
+  }
+  write(existing);render();alert('Importováno '+added+' nových záznamů. Existující předpovědi zůstaly beze změny.');
+ }).catch(()=>alert('Soubor archivu není platný.'));
+}
 function render(){
  const host=document.querySelector('#bangerShotsTracker');if(!host)return;
  const rows=Object.values(read()),done=rows.filter(r=>r.status==='final'),pending=rows.length-done.length;
  const mae=done.length?done.reduce((sum,r)=>sum+Math.abs(r.forecastAway-r.actualAway)+Math.abs(r.forecastHome-r.actualHome),0)/(2*done.length):null;
  const safe=s=>String(s||'').replace(/[&<>"']/g,'');
- host.innerHTML='<h4 style="margin:0 0 8px">🎯 Shots Engine · kontrola přesnosti</h4><p>Vyhodnoceno <b>'+done.length+'</b> · čeká <b>'+pending+'</b> · MAE střel na tým <b>'+(mae===null?'—':mae.toFixed(2))+'</b></p><p class="analysis-small">Lokální archiv tohoto prohlížeče. Předpověď se ukládá pouze před začátkem zápasu; po skončení se doplní oficiální střely NHL. Není synchronizován mezi zařízeními.</p>'+
+ host.innerHTML='<h4 style="margin:0 0 8px">🎯 Shots Engine · kontrola přesnosti</h4><p>Vyhodnoceno <b>'+done.length+'</b> · čeká <b>'+pending+'</b> · MAE střel na tým <b>'+(mae===null?'—':mae.toFixed(2))+'</b></p><p class="analysis-small">Lokální archiv tohoto prohlížeče. Předpověď se ukládá pouze před začátkem zápasu; po skončení se doplní oficiální střely NHL. Není synchronizován mezi zařízeními.</p><div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0"><button class="btn" type="button" data-shots-export>⬇ Export archivu</button><button class="btn" type="button" data-shots-import>⬆ Import archivu</button><input type="file" accept="application/json,.json" data-shots-file hidden></div>'+
  done.slice(-6).reverse().map(r=>'<div class="analysis-small" style="padding:6px 0;border-top:1px solid #ffffff22">'+safe(r.away)+' – '+safe(r.home)+' · odhad '+r.forecastAway+' : '+r.forecastHome+' · skutečnost '+r.actualAway+' : '+r.actualHome+'</div>').join('');
 }
 function mount(){
  const hub=document.querySelector('#bangerAccuracyComparison');if(!hub)return;
  if(document.querySelector('#bangerShotsTracker'))return;
  const el=document.createElement('section');el.id='bangerShotsTracker';el.style.cssText='margin:14px 0;padding:14px;border:1px solid #3c8fb2;border-radius:14px;background:linear-gradient(135deg,#102b43,#071a2e)';
- hub.insertAdjacentElement('afterend',el);render();
+ hub.insertAdjacentElement('afterend',el);el.addEventListener('click',e=>{if(e.target.closest('[data-shots-export]'))downloadArchive();if(e.target.closest('[data-shots-import]'))el.querySelector('[data-shots-file]').click()});el.querySelector('[data-shots-file]').addEventListener('change',e=>{importArchive(e.target.files?.[0]);e.target.value='' });render();
 }
 let scheduled=false;
 function scan(){mount();collect()}
