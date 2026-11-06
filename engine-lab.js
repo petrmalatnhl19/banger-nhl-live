@@ -59,7 +59,7 @@ const style=document.createElement('style');style.textContent=`
 function mount(){
  const hub=document.getElementById('bangerPredictionHubContent');if(!hub||document.getElementById('bangerEngineLab'))return;
  const lab=document.createElement('section');lab.id='bangerEngineLab';
- lab.innerHTML='<div class="lab-head"><div><div class="lab-title">⚙️ BANGER ENGINE LAB</div><div class="lab-sub">Řídicí centrum predikčních modelů · data, přesnost a vývoj</div></div><span class="lab-pill">● MODEL MONITOR</span></div><div class="lab-summary"><div><strong>5</strong><small>Gólových modelů</small></div><div><strong>1</strong><small>Shots Engine</small></div><div><strong data-lab-final>—</strong><small>Dokončených zápasů</small></div></div><div class="lab-controls" role="group" aria-label="Přehled Engine Lab"><button type="button" data-lab-tab="models" aria-pressed="true">🧠 Modely</button><button type="button" data-lab-tab="accuracy" aria-pressed="false">🎯 Přesnost</button><button type="button" data-lab-tab="shots" aria-pressed="false">🏒 Shots</button><button type="button" data-lab-tab="diagnostics" aria-pressed="false">🔬 Diagnostika</button><button type="button" data-lab-tab="calibration" aria-pressed="false">🧪 Kalibrace</button><button type="button" data-lab-tab="stability" aria-pressed="false">📡 Stabilita</button><button type="button" data-lab-tab="errors" aria-pressed="false">🧩 Největší chyby</button><button type="button" data-lab-tab="patterns" aria-pressed="false">📊 Vzorce faktorů</button></div><div class="lab-mobile-hint">← Posunutím nabídky zobrazíš další moduly →</div><div data-lab-content aria-live="polite"></div>';
+ lab.innerHTML='<div class="lab-head"><div><div class="lab-title">⚙️ BANGER ENGINE LAB</div><div class="lab-sub">Řídicí centrum predikčních modelů · data, přesnost a vývoj</div></div><span class="lab-pill">● MODEL MONITOR</span></div><div class="lab-summary"><div><strong>5</strong><small>Gólových modelů</small></div><div><strong>1</strong><small>Shots Engine</small></div><div><strong data-lab-final>—</strong><small>Dokončených zápasů</small></div></div><div class="lab-controls" role="group" aria-label="Přehled Engine Lab"><button type="button" data-lab-tab="models" aria-pressed="true">🧠 Modely</button><button type="button" data-lab-tab="accuracy" aria-pressed="false">🎯 Přesnost</button><button type="button" data-lab-tab="shots" aria-pressed="false">🏒 Shots</button><button type="button" data-lab-tab="diagnostics" aria-pressed="false">🔬 Diagnostika</button><button type="button" data-lab-tab="calibration" aria-pressed="false">🧪 Kalibrace</button><button type="button" data-lab-tab="stability" aria-pressed="false">📡 Stabilita</button><button type="button" data-lab-tab="errors" aria-pressed="false">🧩 Největší chyby</button><button type="button" data-lab-tab="patterns" aria-pressed="false">📊 Vzorce faktorů</button><button type="button" data-lab-tab="quality" aria-pressed="false">🛡️ Kvalita dat</button></div><div class="lab-mobile-hint">← Posunutím nabídky zobrazíš další moduly →</div><div data-lab-content aria-live="polite"></div>';
  hub.insertBefore(lab,hub.firstChild);
  lab.addEventListener('click',e=>{const b=e.target.closest('[data-lab-tab]');if(!b)return;lab.dataset.tab=b.dataset.labTab;update()});
  lab.dataset.tab='models';update();
@@ -239,6 +239,22 @@ function patternsPanel(){
  }).join('');
  return '<div class="lab-details"><b>📊 Vzorce chyb podle archivovaných faktorů</b><p class="analysis-small">Pro každý číselný faktor porovnáváme průměrnou chybu MAE u nižší a vyšší poloviny jeho hodnot. Rozdíl = MAE vyšší poloviny minus MAE nižší poloviny. Kladný rozdíl značí větší chybu při vyšších hodnotách faktoru. Každá polovina vyžaduje alespoň 10 zápasů; řadíme podle absolutní velikosti rozdílu, což může zvýraznit náhodné výkyvy.</p><div class="lab-error-grid">'+sections+'</div><p class="analysis-small">Jde o průzkumnou souvislost, nikoli prokázanou příčinu. Vnořené či textové faktory zatím nevyhodnocujeme. Žádné váhy modelů se automaticky nemění.</p></div>';
 }
+function qualityPanel(){
+ const rows=window.bangerEngineLabArchive;
+ if(!Array.isArray(rows))return '<div class="lab-details">Čekám na načtení archivu.</div>';
+ const ok=v=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v));
+ const specs=[['CORE 3.0','baseline',null],['xG','experimental',null],['CORE 3.1','advanced','advanced_factors'],['CORE 3.2','goalie32','goalie32_factors'],['CORE 3.3','special33','special33_factors']];
+ const cards=specs.map(([name,key,factor])=>{
+  const valid=rows.filter(r=>ok(r[key+'_away'])&&ok(r[key+'_home']));
+  const partial=rows.filter(r=>ok(r[key+'_away'])!==ok(r[key+'_home'])).length;
+  const stored=factor?valid.filter(r=>r[factor]!==null&&r[factor]!==undefined).length:null;
+  return '<article class="lab-card"><strong>'+name+'</strong><small>Kompletní odhady: '+valid.length+' / '+rows.length+'<br>Neúplné dvojice: '+partial+(factor?'<br>Uložené faktory: '+stored+' / '+valid.length:'')+'</small></article>';
+ }).join('');
+ const duplicates=rows.length-new Set(rows.map(r=>String(r.game_id))).size;
+ const completed=rows.filter(r=>r.status==='final');
+ const missingScores=completed.filter(r=>!ok(r.actual_away)||!ok(r.actual_home)).length;
+ return '<div class="lab-details"><b>🛡️ Kontrola kvality dat</b><p class="analysis-small">Pouze čtení archivu. Žádné predikce ani výsledky se neupravují.</p><div class="lab-grid">'+cards+'</div><p class="analysis-small">Dokončených zápasů: '+completed.length+' · Duplicitních ID ve výpisu: '+duplicates+' · Dokončené bez úplného skóre: '+missingScores+'.</p><p class="analysis-small">Tato kontrola sleduje dostupnost hodnot, nikoliv jejich správnost. Bez přesného času začátku utkání nelze ověřit, zda všechny odhady vznikly před zápasem.</p></div>';
+}
 function update(){
  const lab=document.getElementById('bangerEngineLab');if(!lab)return;
  const tab=lab.dataset.tab||'models';
@@ -246,7 +262,9 @@ function update(){
  const body=lab.querySelector('[data-lab-content]');
  const finalCount=Array.isArray(window.bangerEngineLabArchive)?window.bangerEngineLabArchive.filter(r=>r.status==='final').length:null;
  const finalEl=lab.querySelector('[data-lab-final]');if(finalEl)finalEl.textContent=finalCount===null?'—':String(finalCount);
- if(tab==='patterns'){
+ if(tab==='quality'){
+  body.innerHTML=qualityPanel();
+ }else if(tab==='patterns'){
   body.innerHTML=patternsPanel();
  }else if(tab==='errors'){
   body.innerHTML=errorsPanel();
@@ -279,6 +297,6 @@ function update(){
 }
 let last='';
 function refresh(){mount();const lab=document.getElementById('bangerEngineLab');if(!lab||lab.dataset.tab==='models')return;const source=[document.getElementById('bangerAccuracyComparison')?.parentElement?.textContent||'',document.getElementById('bangerShotsTracker')?.textContent||'',String(window.bangerEngineLabArchive?.length??'')].join('|');if(source!==last){last=source;update()}}
-function start(){refresh();window.addEventListener('banger-engine-lab-archive',()=>{if(['accuracy','diagnostics','calibration','stability','errors','patterns'].includes(document.getElementById('bangerEngineLab')?.dataset.tab))update()});setInterval(refresh,2500)}
+function start(){refresh();window.addEventListener('banger-engine-lab-archive',()=>{if(['accuracy','diagnostics','calibration','stability','errors','patterns','quality'].includes(document.getElementById('bangerEngineLab')?.dataset.tab))update()});setInterval(refresh,2500)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
