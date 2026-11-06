@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-06T20:29:50.643948+00:00",
+  "fetchedAt": "2026-11-06T21:14:35.002101+00:00",
   "teams": {
     "blue jackets": {
       "name": "Blue Jackets",
@@ -554,8 +554,7 @@
         ]
       ],
       "goalies": [
-        "Dylan Garand",
-        "James Reimer"
+        "Dylan Garand"
       ],
       "injured": "Igor Shesterkin (lower body), Joonas Korpisalo (lower body), Joseph Veleno (lower body), Sean Durzi (undisclosed)",
       "scratched": "Luke Glendening, Matthew Robertson",

@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-06T20:29:53.349180+00:00",
-  "rostersUpdatedAt": "2026-11-06T20:29:33.715871+00:00",
+  "updatedAt": "2026-11-06T21:14:38.547452+00:00",
+  "rostersUpdatedAt": "2026-11-06T21:14:10.150533+00:00",
   "projectionDate": "2026-11-06",
   "teamCount": 32,
-  "goalieCount": 77,
+  "goalieCount": 76,
   "goalies": [
     {
       "name": "Mackenzie Blackwood",
@@ -477,14 +477,6 @@
       "team": "NYR",
       "teamKey": "rangers",
       "playerId": 8476914,
-      "starterStatus": "unknown",
-      "starterGameDate": null
-    },
-    {
-      "name": "James Reimer",
-      "team": "NYR",
-      "teamKey": "rangers",
-      "playerId": 8473503,
       "starterStatus": "unknown",
       "starterGameDate": null
     },
