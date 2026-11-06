@@ -1,6 +1,6 @@
 # NHL projection diagnostics
 
-Generated (UTC): 2026-11-06T09:44:30.012562+00:00
+Generated (UTC): 2026-11-06T10:44:19.212219+00:00
 
 Available (including historical): 32/32
 Recent verified (source published within 36h): 21/32
