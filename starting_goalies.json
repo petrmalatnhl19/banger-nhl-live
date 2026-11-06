@@ -1,15 +1,15 @@
 {
   "date": "2026-11-06",
-  "updatedAt": "2026-11-06T05:28:55.046875+00:00",
+  "updatedAt": "2026-11-06T06:30:25.588891+00:00",
   "teams": {
-    "SJS": {
-      "name": "Yaroslav Askarov",
+    "CBJ": {
+      "name": "Cam Talbot",
       "status": "projected",
       "date": "2026-11-06",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-06T05:28:55.046875+00:00",
-      "gameId": 2026020263
+      "checkedAt": "2026-11-06T06:30:25.588891+00:00",
+      "gameId": 2026020262
     },
     "CGY": {
       "name": "Dustin Wolf",
@@ -17,17 +17,8 @@
       "date": "2026-11-06",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-06T05:28:55.046875+00:00",
+      "checkedAt": "2026-11-06T06:30:25.588891+00:00",
       "gameId": 2026020264
-    },
-    "CBJ": {
-      "name": "Cam Talbot",
-      "status": "projected",
-      "date": "2026-11-06",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-06T05:28:55.046875+00:00",
-      "gameId": 2026020262
     },
     "MIN": {
       "name": "Jesper Wallstedt",
@@ -35,7 +26,16 @@
       "date": "2026-11-06",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-06T05:28:55.046875+00:00",
+      "checkedAt": "2026-11-06T06:30:25.588891+00:00",
+      "gameId": 2026020263
+    },
+    "SJS": {
+      "name": "Yaroslav Askarov",
+      "status": "projected",
+      "date": "2026-11-06",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-06T06:30:25.588891+00:00",
       "gameId": 2026020263
     }
   },
@@ -44,7 +44,7 @@
       "date": "2026-11-06",
       "team": "ANA",
       "reason": "source disagreement",
-      "rotowire": "Ville Husso",
+      "rotowire": "Lukas Dostal",
       "previous": "Laurent Brossoit"
     },
     {
@@ -55,8 +55,6 @@
       "previous": "Colten Ellis"
     }
   ],
-  "sourceErrors": [
-    "specialist: ValueError: Source does not show today's date"
-  ],
+  "sourceErrors": [],
   "status": "partial"
 }

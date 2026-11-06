@@ -1,11 +1,12 @@
 {
-  "generatedAt": "2026-11-06T05:28:51.880594+00:00",
+  "generatedAt": "2026-11-06T06:30:23.480222+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 28,
+  "currentProjections": 27,
   "needsFreshProjection": [
     "capitals",
     "maple leafs",
+    "sabres",
     "senators",
     "wild"
   ],
@@ -13,6 +14,7 @@
   "olderVerified": [
     "capitals",
     "maple leafs",
+    "sabres",
     "senators",
     "wild"
   ],
@@ -352,11 +354,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-04T17:37:08.585000+00:00",
       "source": "https://www.nhl.com/news/ottawa-senators-buffalo-sabres-game-preview-november-4-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "senators": {
       "hasProjectedLines": true,
