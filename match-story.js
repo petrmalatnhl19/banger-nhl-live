@@ -1,6 +1,7 @@
-/* BANGER MATCH STORY 2.1 — concise, sourced projected summary */
+/* BANGER MATCH STORY 2.2 — concise, sourced projected summary */
 (()=>{'use strict';
 let speaking=null;
+const style=document.createElement('style');style.textContent='.banger-projection-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:9px;margin:10px 0}.banger-projection-teams{grid-column:1/-1;display:flex;justify-content:space-around;color:#9cecff;font-size:13px}.banger-projection-tile{padding:13px;border:1px solid #3d829b88;border-radius:13px;background:linear-gradient(145deg,#12334d,#091c32)}.banger-projection-label{color:#a6d8eb;font-size:12px}.banger-projection-numbers{display:flex;justify-content:space-around;align-items:center;font-size:24px;font-weight:850;margin:8px 0;color:#f2fbff}.banger-projection-divider{font-size:16px;color:#6a9eb8}.banger-projection-note{font-size:11px;color:#9bbbd0;line-height:1.4}.banger-projection-cards>.analysis-small{grid-column:1/-1}';document.head.appendChild(style);
 function text(el){return (el?.textContent||'').replace(/\s+/g,' ').trim()}
 function read(report){
  const body=report.querySelector('.analyst-fold-body');if(!body)return null;
@@ -35,6 +36,20 @@ function install(report){
  body.querySelectorAll('.banger-match-story').forEach(el=>el.remove());
  const box=document.createElement('details');box.className='banger-report-section banger-match-story';
  box.innerHTML='<summary>🎙️ BANGER PROJECTED · krátký souhrn</summary><div class="banger-report-section-body"><p data-projected-story></p><button class="btn" type="button" data-projected-play>▶ Přehrát souhrn</button> <button class="btn" type="button" data-projected-stop>⏹ Stop</button><p class="analysis-small" data-projected-status>Hodnoty bez podkladů nejsou odhadovány.</p></div>';
+ const visual=document.createElement('div');visual.className='banger-projection-cards';
+ let data=null;try{data=JSON.parse(decodeURIComponent(report.dataset.bangerProjections||''))}catch(e){}
+ const number=v=>v===null||v===undefined||!Number.isFinite(Number(v))?null:Number(v);
+ const fmt=v=>number(v)===null?'—':number(v).toLocaleString('cs-CZ',{maximumFractionDigits:1});
+ const tile=(title,left,right,note)=>'<div class="banger-projection-tile"><div class="banger-projection-label">'+title+'</div><div class="banger-projection-numbers"><span>'+fmt(left)+'</span><span class="banger-projection-divider">:</span><span>'+fmt(right)+'</span></div><div class="banger-projection-note">'+note+'</div></div>';
+ if(data){
+  const sample=Math.min(number(data.sampleGames?.away)||0,number(data.sampleGames?.home)||0);
+  visual.innerHTML='<div class="banger-projection-teams"><b>'+String(data.away||'HOSTÉ').replace(/[&<>]/g,'')+'</b><b>'+String(data.home||'DOMÁCÍ').replace(/[&<>]/g,'')+'</b></div>'+
+   tile('🥅 Očekávané góly',data.goals?.away,data.goals?.home,'Orientační týmový model')+
+   tile('🎯 Střely na branku',data.shots?.away,data.shots?.home,'Průměr posledních dostupných zápasů · předběžná projekce')+
+   tile('⚡ Trestné minuty',data.penaltyMinutes?.away,data.penaltyMinutes?.home,'Historický průměr · nikoli počet vyloučení')+
+   '<p class="analysis-small">Střely a tresty vycházejí ze vzorku nejméně '+sample+' utkání na tým, pokud jsou data dostupná. Střelci a počet vyloučení čekají na samostatný ověřitelný model.</p>';
+  box.querySelector('.banger-report-section-body').prepend(visual);
+ }
  const result=read(report);const p=box.querySelector('[data-projected-story]');p.textContent=result?.parts.join(' ')||'Zatím nejsou dostupná data.';
  body.prepend(box);
  box.addEventListener('click',event=>{
