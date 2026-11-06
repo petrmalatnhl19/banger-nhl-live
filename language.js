@@ -59,6 +59,22 @@ const interfaceLabels={
  'Výsledky třetin zatím nejsou dostupné.':'Period scores are not available yet.',
  'Pro tento den nejsou naplánované zápasy. Zkus jiné datum.':'No games scheduled for this date. Try another day.',
  '🏆 Žebříček přesnosti modelů':'🏆 Model accuracy leaderboard',
+ '🏒 BANGER | Analýza zápasu':'🏒 BANGER | Game analysis',
+ 'Nejdřív projekce, potom důvody. Každý údaj zůstává dohledatelný v příslušné sekci.':'Projections first, then the reasoning. Each figure can be traced to its respective section.',
+ '🎯 Predikce zápasu':'🎯 Game prediction',
+ '📊 Srovnání týmů':'📊 Team comparison',
+ '🥅 Brankáři a sestavy':'🥅 Goalies and lineups',
+ '⚡ Speciální týmy':'⚡ Special teams',
+ '🔊 Poslech a informace':'🔊 Audio and information',
+ '🎙️ BANGER PROJECTED · krátký souhrn':'🎙️ BANGER PROJECTED · quick summary',
+ '▶ Přehrát souhrn':'▶ Play summary',
+ 'Hodnoty bez podkladů nejsou odhadovány.':'Figures without supporting data are not estimated.',
+ '▶ Poslechnout analýzu':'▶ Listen to analysis',
+ 'Připraveno k poslechu':'Ready to play',
+ 'Klidné · 0,9×':'Relaxed · 0.9×',
+ 'Plynulé · 1,02×':'Natural · 1.02×',
+ 'Svižné · 1,12×':'Brisk · 1.12×',
+ 'Rychlé · 1,25×':'Fast · 1.25×',
  '⚔️ Porovnání hráčů':'⚔️ Player comparison'
 };
 const originalNodes=new WeakMap();
