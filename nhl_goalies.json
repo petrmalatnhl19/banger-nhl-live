@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-06T13:42:35.115808+00:00",
-  "rostersUpdatedAt": "2026-11-06T13:42:11.956677+00:00",
+  "updatedAt": "2026-11-06T14:38:13.779230+00:00",
+  "rostersUpdatedAt": "2026-11-06T14:37:44.889091+00:00",
   "projectionDate": "2026-11-06",
   "teamCount": 32,
-  "goalieCount": 78,
+  "goalieCount": 77,
   "goalies": [
     {
       "name": "Mackenzie Blackwood",
@@ -388,14 +388,6 @@
       "team": "EDM",
       "teamKey": "oilers",
       "playerId": 8475883,
-      "starterStatus": "unknown",
-      "starterGameDate": null
-    },
-    {
-      "name": "Brett Epp",
-      "team": "EDM",
-      "teamKey": "oilers",
-      "playerId": 8486540,
       "starterStatus": "unknown",
       "starterGameDate": null
     },
