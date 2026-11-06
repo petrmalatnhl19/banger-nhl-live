@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-06T16:22:24.376627+00:00",
-  "rostersUpdatedAt": "2026-11-06T16:21:58.149900+00:00",
+  "updatedAt": "2026-11-06T17:14:54.567616+00:00",
+  "rostersUpdatedAt": "2026-11-06T17:14:34.632198+00:00",
   "projectionDate": "2026-11-06",
   "teamCount": 32,
   "goalieCount": 77,
@@ -42,8 +42,9 @@
       "team": "CBJ",
       "teamKey": "blue jackets",
       "playerId": 8482982,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-06",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Cam Talbot",
@@ -210,7 +211,7 @@
       "team": "CGY",
       "teamKey": "flames",
       "playerId": 8481692,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-06",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -621,7 +622,7 @@
       "team": "MIN",
       "teamKey": "wild",
       "playerId": 8482661,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-06",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     }
