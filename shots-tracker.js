@@ -75,7 +75,7 @@ function mount(){
  const hub=document.querySelector('#bangerAccuracyComparison');if(!hub)return;
  if(document.querySelector('#bangerShotsTracker'))return;
  const el=document.createElement('section');el.id='bangerShotsTracker';el.style.cssText='margin:14px 0;padding:14px;border:1px solid #3c8fb2;border-radius:14px;background:linear-gradient(135deg,#102b43,#071a2e)';
- hub.insertAdjacentElement('afterend',el);el.addEventListener('click',e=>{if(e.target.closest('[data-shots-export]'))downloadArchive();if(e.target.closest('[data-shots-import]'))el.querySelector('[data-shots-file]').click()});el.querySelector('[data-shots-file]').addEventListener('change',e=>{importArchive(e.target.files?.[0]);e.target.value='' });render();
+ hub.insertAdjacentElement('afterend',el);render();el.addEventListener('click',e=>{if(e.target.closest('[data-shots-export]'))downloadArchive();if(e.target.closest('[data-shots-import]'))el.querySelector('[data-shots-file]').click()});el.querySelector('[data-shots-file]').addEventListener('change',e=>{importArchive(e.target.files?.[0]);e.target.value='' });
 }
 let scheduled=false;
 function scan(){mount();collect()}
