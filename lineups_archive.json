@@ -193,9 +193,9 @@
       ],
       "injured": "Aleksander Barkov (knee), Brad Marchand (knee), Jonah Gadjovich (neck)",
       "scratched": "Radko Gudas, Cole Reinhardt",
-      "source": "https://www.nhl.com/news/chicago-blackhawks-florida-panthers-game-preview-november-4-2026",
-      "publishedAt": "2026-11-04T18:35:21.038000+00:00",
-      "asOf": "2026-11-04",
+      "source": "https://www.nhl.com/news/florida-panthers-washington-capitals-game-preview-november-7-2026",
+      "publishedAt": "2026-11-06T18:37:23.054000+00:00",
+      "asOf": "2026-11-06",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -341,13 +341,14 @@
         ]
       ],
       "goalies": [
-        "Dustin Wolf"
+        "Dustin Wolf",
+        "Devin Cooley"
       ],
-      "injured": "Devin Cooley (lower body), Brennan Othmann (upper body), Jonathan Huberdeau (hip), Samuel Honzek (lower body)",
+      "injured": "Brennan Othmann (upper body), Jonathan Huberdeau (hip), Samuel Honzek (lower body)",
       "scratched": "Maksim Tsyplakov, Joel Hanley",
-      "source": "https://www.nhl.com/news/calgary-flames-seattle-kraken-game-preview-november-4-2026",
-      "publishedAt": "2026-11-04T20:03:02.892000+00:00",
-      "asOf": "2026-11-04",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-06T18:32:00+00:00",
+      "asOf": "2026-11-06",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -407,6 +408,11 @@
       "name": "Ducks",
       "forwards": [
         [
+          "Alex Killorn",
+          "Leo Carlsson",
+          "Judd Caulfield"
+        ],
+        [
           "Cutter Gauthier",
           "Mikael Granlund",
           "Beckett Sennecke"
@@ -430,17 +436,21 @@
         [
           "Pavel Mintyukov",
           "Noah Warren"
+        ],
+        [
+          "Travis Mitchell",
+          "Tristan Luneau"
         ]
       ],
       "goalies": [
-        "Laurent Brossoit",
-        "Lukas Dostal"
+        "Lukas Dostal",
+        "Laurent Brossoit"
       ],
       "injured": "A.J. Greer (upper body), Ian Moore (lower body), Ryan Poehling (MCL), Troy Terry (hip)",
       "scratched": "Tyson Hinds, Ville Husso, Frank Vatrano",
-      "source": "https://www.nhl.com/news/anaheim-ducks-at-edmonton-oilers-game-preview-november-5-2026",
-      "publishedAt": "2026-11-05T19:06:54.747000+00:00",
-      "asOf": "2026-11-05",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-06T18:32:00+00:00",
+      "asOf": "2026-11-06",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -819,23 +829,23 @@
           "Brandon Carlo"
         ],
         [
-          "Cam Fowler",
-          "Adam Jiricek"
+          "Justin Barron",
+          "Colton Parayko"
         ],
         [
-          "Colton Parayko",
-          "Justin Barron"
+          "Cam Fowler",
+          "Adam Jiricek"
         ]
       ],
       "goalies": [
-        "Jordan Binnington",
-        "Joel Hofer"
+        "Joel Hofer",
+        "Jordan Binnington"
       ],
       "injured": "Tyler Tucker (knee), Dillon Dube (neck)",
       "scratched": "Jonatan Berggren, Theo Lindstein",
-      "source": "https://www.nhl.com/news/st-louis-blues-new-jersey-devils-game-preview-november-5-2026",
-      "publishedAt": "2026-11-05T18:05:34.044000+00:00",
-      "asOf": "2026-11-05",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-06T18:32:00+00:00",
+      "asOf": "2026-11-06",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -1002,6 +1012,11 @@
           "Jordan Kyrou"
         ],
         [
+          "Aliaksei Protas",
+          "Pierre-Luc Dubois",
+          "Tom Wilson"
+        ],
+        [
           "Alex Ovechkin",
           "Justin Sourdif",
           "Anthony Beauvillier"
@@ -1018,6 +1033,10 @@
           "Matt Roy"
         ],
         [
+          "Martin Fehervary",
+          "Timothy Liljegren"
+        ],
+        [
           "Cole Hutson",
           "Jack St. Ivany"
         ]
@@ -1028,8 +1047,10 @@
       ],
       "injured": "Rasmus Sandin (knee), Vincent Desharnais (appendectomy)",
       "scratched": "Ethen Frank, Ivan Miroshnichenko, Remi Poirier",
-      "asOf": "2026-11-04",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "source": "https://www.nhl.com/news/florida-panthers-washington-capitals-game-preview-november-7-2026",
+      "publishedAt": "2026-11-06T18:37:23.054000+00:00",
+      "asOf": "2026-11-06",
+      "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
     },
@@ -1077,8 +1098,8 @@
       ],
       "injured": "Isac Lundestrom (lower body)",
       "scratched": "Erik Gudbranson, Jack Williams, Steven Lorentz",
-      "source": "https://www.nhl.com/news/columbus-blue-jackets-buffalo-sabres-game-preview-november-6-2026",
-      "publishedAt": "2026-11-06T17:50:25.006000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-06T18:32:00+00:00",
       "asOf": "2026-11-06",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1179,8 +1200,8 @@
       ],
       "injured": "Konsta Helenius (upper body), Justin Danforth (upper body), Matt Grzelcyk (lower body), Alex Lyon (upper body)",
       "scratched": "Ryan McLeod, Louis Crevier",
-      "source": "https://www.nhl.com/news/columbus-blue-jackets-buffalo-sabres-game-preview-november-6-2026",
-      "publishedAt": "2026-11-06T17:50:25.006000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-06T18:32:00+00:00",
       "asOf": "2026-11-06",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1329,7 +1350,7 @@
       "forwards": [
         [
           "Steven Stamkos",
-          "Ryan O’Reilly",
+          "Ryan O'Reilly",
           "Mavrik Bourque"
         ],
         [
@@ -1366,11 +1387,11 @@
         "Juuse Saros",
         "Justus Annunen"
       ],
-      "injured": "William Trudeau (upper body), Jonathan Marchessault (lower body)",
-      "scratched": "Nicolas Hague, Ilya Lyubushkin,",
-      "source": "https://www.nhl.com/news/nashville-predators-colorado-avalanche-game-preview-november-5-2026",
-      "publishedAt": "2026-11-05T19:28:44.408000+00:00",
-      "asOf": "2026-11-05",
+      "injured": "Jonathan Marchessault (lower body), William Trudeau (upper body)",
+      "scratched": "Nicolas Hague, Ilya Lyubushkin",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-06T18:32:00+00:00",
+      "asOf": "2026-11-06",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"

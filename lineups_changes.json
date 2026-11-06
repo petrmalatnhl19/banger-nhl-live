@@ -106,93 +106,34 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "blues": {
-      "updatedAt": "2026-11-05T18:11:17.970592+00:00",
-      "previousPublishedAt": "2026-11-03T17:14:56.036000+00:00",
-      "publishedAt": "2026-11-05T18:05:34.044000+00:00",
-      "source": "https://www.nhl.com/news/st-louis-blues-new-jersey-devils-game-preview-november-5-2026",
+      "updatedAt": "2026-11-06T18:48:26.992155+00:00",
+      "previousPublishedAt": "2026-11-05T18:05:34.044000+00:00",
+      "publishedAt": "2026-11-06T18:32:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
-          "type": "added",
-          "player": "Dylan Holloway",
-          "to": "Útok 1"
-        },
-        {
-          "type": "added",
-          "player": "Robert Thomas",
-          "to": "Útok 1"
-        },
-        {
-          "type": "added",
-          "player": "Jimmy Snuggerud",
-          "to": "Útok 1"
+          "type": "moved",
+          "player": "Justin Barron",
+          "from": "Obrana 3",
+          "to": "Obrana 2"
         },
         {
           "type": "moved",
-          "player": "Connor McMichael",
-          "from": "Útok 1",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Mason McTavish",
-          "from": "Útok 1",
-          "to": "Útok 2"
-        },
-        {
-          "type": "added",
-          "player": "Aleksanteri Kaskimaki",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Jake Neighbours",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Dalibor Dvorsky",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Pavel Buchnevich",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Alexey Toropchenko",
-          "from": "Útok 3",
-          "to": "Útok 4"
-        },
-        {
-          "type": "moved",
-          "player": "Pius Suter",
-          "from": "Útok 3",
-          "to": "Útok 4"
-        },
-        {
-          "type": "moved",
-          "player": "Ross Johnston",
-          "from": "Útok 3",
-          "to": "Útok 4"
-        },
-        {
-          "type": "added",
           "player": "Colton Parayko",
+          "from": "Obrana 3",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "moved",
+          "player": "Cam Fowler",
+          "from": "Obrana 2",
           "to": "Obrana 3"
         },
         {
-          "type": "removed",
-          "player": "Jonatan Berggren",
-          "from": "Útok 1"
-        },
-        {
-          "type": "removed",
-          "player": "Theo Lindstein",
-          "from": "Obrana 3"
+          "type": "moved",
+          "player": "Adam Jiricek",
+          "from": "Obrana 2",
+          "to": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -251,32 +192,61 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "capitals": {
-      "updatedAt": "2026-11-04T20:34:48.375148+00:00",
+      "updatedAt": "2026-11-06T18:48:26.992036+00:00",
       "previousPublishedAt": "2026-11-03T17:31:29.960000+00:00",
-      "publishedAt": "2026-11-03T17:31:29.960000+00:00",
-      "source": "https://www.nhl.com/news/dallas-stars-washington-capitals-game-preview-november-3-2026",
+      "publishedAt": "2026-11-06T18:37:23.054000+00:00",
+      "source": "https://www.nhl.com/news/florida-panthers-washington-capitals-game-preview-november-7-2026",
       "events": [
         {
           "type": "added",
-          "player": "Martin Fehervary",
-          "to": "Obrana 2"
+          "player": "Aliaksei Protas",
+          "to": "Útok 2"
         },
         {
           "type": "added",
-          "player": "Timothy Liljegren",
-          "to": "Obrana 2"
+          "player": "Pierre-Luc Dubois",
+          "to": "Útok 2"
+        },
+        {
+          "type": "added",
+          "player": "Tom Wilson",
+          "to": "Útok 2"
         },
         {
           "type": "moved",
-          "player": "Cole Hutson",
-          "from": "Obrana 2",
-          "to": "Obrana 3"
+          "player": "Alex Ovechkin",
+          "from": "Útok 2",
+          "to": "Útok 3"
         },
         {
           "type": "moved",
-          "player": "Jack St. Ivany",
-          "from": "Obrana 2",
-          "to": "Obrana 3"
+          "player": "Justin Sourdif",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Anthony Beauvillier",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Boone Jenner",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Ilya Protas",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Ryan Leonard",
+          "from": "Útok 3",
+          "to": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -607,89 +577,89 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "ducks": {
-      "updatedAt": "2026-11-05T19:12:44.546162+00:00",
-      "previousPublishedAt": "2026-11-03T19:43:35.256000+00:00",
-      "publishedAt": "2026-11-05T19:06:54.747000+00:00",
-      "source": "https://www.nhl.com/news/anaheim-ducks-at-edmonton-oilers-game-preview-november-5-2026",
+      "updatedAt": "2026-11-06T18:48:26.991703+00:00",
+      "previousPublishedAt": "2026-11-05T19:06:54.747000+00:00",
+      "publishedAt": "2026-11-06T18:32:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
+        {
+          "type": "added",
+          "player": "Alex Killorn",
+          "to": "Útok 1"
+        },
+        {
+          "type": "added",
+          "player": "Leo Carlsson",
+          "to": "Útok 1"
+        },
+        {
+          "type": "added",
+          "player": "Judd Caulfield",
+          "to": "Útok 1"
+        },
         {
           "type": "moved",
           "player": "Cutter Gauthier",
-          "from": "Útok 2",
-          "to": "Útok 1"
+          "from": "Útok 1",
+          "to": "Útok 2"
         },
         {
           "type": "moved",
           "player": "Mikael Granlund",
-          "from": "Útok 2",
-          "to": "Útok 1"
+          "from": "Útok 1",
+          "to": "Útok 2"
         },
         {
           "type": "moved",
           "player": "Beckett Sennecke",
-          "from": "Útok 2",
-          "to": "Útok 1"
+          "from": "Útok 1",
+          "to": "Útok 2"
         },
         {
           "type": "moved",
           "player": "Nico Myatovic",
-          "from": "Útok 3",
-          "to": "Útok 2"
+          "from": "Útok 2",
+          "to": "Útok 3"
         },
         {
           "type": "moved",
           "player": "Tim Washe",
-          "from": "Útok 3",
-          "to": "Útok 2"
+          "from": "Útok 2",
+          "to": "Útok 3"
         },
         {
           "type": "moved",
           "player": "Sam Colangelo",
-          "from": "Útok 3",
-          "to": "Útok 2"
+          "from": "Útok 2",
+          "to": "Útok 3"
         },
         {
           "type": "moved",
           "player": "Jeff Malott",
-          "from": "Útok 4",
-          "to": "Útok 3"
+          "from": "Útok 3",
+          "to": "Útok 4"
         },
         {
           "type": "moved",
           "player": "Roger McQueen",
-          "from": "Útok 4",
-          "to": "Útok 3"
+          "from": "Útok 3",
+          "to": "Útok 4"
         },
         {
           "type": "moved",
           "player": "Nikita Nesterenko",
-          "from": "Útok 4",
-          "to": "Útok 3"
+          "from": "Útok 3",
+          "to": "Útok 4"
         },
         {
-          "type": "removed",
-          "player": "Alex Killorn",
-          "from": "Útok 1"
-        },
-        {
-          "type": "removed",
-          "player": "Leo Carlsson",
-          "from": "Útok 1"
-        },
-        {
-          "type": "removed",
-          "player": "Judd Caulfield",
-          "from": "Útok 1"
-        },
-        {
-          "type": "removed",
+          "type": "added",
           "player": "Travis Mitchell",
-          "from": "Obrana 3"
+          "to": "Obrana 3"
         },
         {
-          "type": "removed",
+          "type": "added",
           "player": "Tristan Luneau",
-          "from": "Obrana 3"
+          "to": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

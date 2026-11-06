@@ -1,41 +1,14 @@
 {
   "date": "2026-11-06",
-  "updatedAt": "2026-11-06T17:58:11.799122+00:00",
+  "updatedAt": "2026-11-06T18:48:30.127882+00:00",
   "teams": {
-    "CGY": {
-      "name": "Dustin Wolf",
-      "status": "confirmed",
-      "date": "2026-11-06",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-06T17:58:11.799122+00:00",
-      "gameId": 2026020264
-    },
-    "MIN": {
-      "name": "Jesper Wallstedt",
-      "status": "confirmed",
-      "date": "2026-11-06",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-06T17:58:11.799122+00:00",
-      "gameId": 2026020263
-    },
-    "SJS": {
-      "name": "Yaroslav Askarov",
-      "status": "projected",
-      "date": "2026-11-06",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-06T17:58:11.799122+00:00",
-      "gameId": 2026020263
-    },
     "BUF": {
       "name": "Ukko-Pekka Luukkonen",
       "status": "confirmed",
       "date": "2026-11-06",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-06T17:58:11.799122+00:00",
+      "checkedAt": "2026-11-06T18:48:30.127882+00:00",
       "gameId": 2026020262
     },
     "CBJ": {
@@ -44,17 +17,52 @@
       "date": "2026-11-06",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-06T17:58:11.799122+00:00",
+      "checkedAt": "2026-11-06T18:48:30.127882+00:00",
       "gameId": 2026020262
+    },
+    "CGY": {
+      "name": "Dustin Wolf",
+      "status": "confirmed",
+      "date": "2026-11-06",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-06T18:48:30.127882+00:00",
+      "gameId": 2026020264
+    },
+    "MIN": {
+      "name": "Jesper Wallstedt",
+      "status": "confirmed",
+      "date": "2026-11-06",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-06T18:48:30.127882+00:00",
+      "gameId": 2026020263
+    },
+    "SJS": {
+      "name": "Yaroslav Askarov",
+      "status": "confirmed",
+      "date": "2026-11-06",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-06T18:48:30.127882+00:00",
+      "gameId": 2026020263
+    },
+    "ANA": {
+      "name": "Lukas Dostal",
+      "status": "projected",
+      "date": "2026-11-06",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-06T18:48:30.127882+00:00",
+      "gameId": 2026020264
     }
   },
   "conflicts": [
     {
-      "date": "2026-11-06",
       "team": "ANA",
-      "reason": "source disagreement",
-      "rotowire": "Lukas Dostal",
-      "previous": "Laurent Brossoit"
+      "specialist": "Laurent Brossoit",
+      "nhl": "Lukas Dostal",
+      "nhlSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season"
     }
   ],
   "sourceErrors": [],
