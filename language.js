@@ -75,9 +75,32 @@ const interfaceLabels={
  'Plynulé · 1,02×':'Natural · 1.02×',
  'Svižné · 1,12×':'Brisk · 1.12×',
  'Rychlé · 1,25×':'Fast · 1.25×',
+ 'NHL · ŽIVÝ PŘEHLED':'NHL · LIVE OVERVIEW',
+ 'Dnešní NHL':'Today’s NHL','↻ Obnovit':'↻ Refresh',
+ '🏒 Zápasy dnes':'🏒 Today’s games','📊 Statistiky':'📊 Statistics',
+ '🏆 Tabulky':'🏆 Standings','⚡ Dnešní zápasy':'⚡ Today’s games',
+ 'Všechny zápasy ↗':'All games ↗','Detail zápasu ›':'Game details ›',
+ '🏒 Lídři produktivity':'🏒 Points leaders','Statistiky ↗':'Statistics ↗',
+ '🏆 Nejlepší týmy':'🏆 Top teams','Tabulky ↗':'Standings ↗',
+ '🕘 Včerejší výsledky':'🕘 Yesterday’s results',
+ 'Na dnešek nejsou naplánované zápasy.':'No games scheduled for today.',
+ 'Statistiky hráčů nejsou momentálně dostupné.':'Player statistics are currently unavailable.',
+ 'Tabulka není momentálně dostupná.':'Standings are currently unavailable.',
+ 'Statistiky':'Statistics','Analytika':'Analytics',
+ 'Bez projekce':'No projection',
+ 'Aktuální znamená ověřenou projekci publikovanou v posledních 36 hodinách. Archiv není potvrzenou sestavou dalšího utkání.':'Current means a verified projection published within the last 36 hours. Archived lineups do not confirm the next game lineup.',
  '⚔️ Porovnání hráčů':'⚔️ Player comparison'
 };
 const originalNodes=new WeakMap();
+function translateDashboardDate(){
+ const line=document.querySelector('.dash-heading p');if(!line)return;
+ const current=line.textContent.trim();
+ const match=current.match(/ · (\\d+) zápasů · (\\d+) živě$/)||current.match(/ · (\\d+) games · (\\d+) live$/);
+ if(!match)return;
+ const date=new Date().toLocaleDateString(lang==='en'?'en-US':'cs-CZ',{weekday:'long',day:'numeric',month:'long'});
+ const label=lang==='en'?date+' · '+match[1]+' games · '+match[2]+' live':date+' · '+match[1]+' zápasů · '+match[2]+' živě';
+ if(line.textContent!==label)line.textContent=label;
+}
 function translateInterface(){
  const root=document.body;if(!root)return;
  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
@@ -103,6 +126,7 @@ function translateInterface(){
 function apply(){
  document.documentElement.lang=lang;
  translateInterface();
+ translateDashboardDate();
  const en=lang==='en';
  const picker=document.getElementById('bangerLanguageSelect');if(picker&&picker.value!==lang)picker.value=lang;
  document.querySelectorAll('#bangerEngineLab [data-lab-tab]').forEach(el=>{const pair=labLabels[el.dataset.labTab];if(pair){const label=pair[en?1:0];if(el.textContent!==label)el.textContent=label;}});
@@ -118,9 +142,9 @@ function apply(){
 function mount(){
  if(document.getElementById('bangerLanguageSelect'))return;
  const box=document.createElement('div');box.id='bangerLanguageBox';
- box.style.cssText='position:fixed;right:12px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:10020;padding:5px 7px;background:#09243bf2;border:1px solid #4abed7;border-radius:12px;box-shadow:0 5px 20px #0008';
+ box.style.cssText='display:flex;align-items:center;gap:4px;flex:0 0 auto;padding:5px 7px;background:#09243bf2;border:1px solid #4abed7;border-radius:12px;box-shadow:0 5px 20px #0008';
  box.innerHTML='<label for="bangerLanguageSelect" style="font:600 11px system-ui;color:#b8eaff;margin-right:5px">🌐</label><select id="bangerLanguageSelect" aria-label="Language / Jazyk" style="background:#102e46;color:#e8faff;border:1px solid #3b7e9a;border-radius:8px;padding:7px;font:600 12px system-ui"><option value="cs">🇨🇿 Čeština</option><option value="en">🇬🇧 English</option></select>';
- document.body.appendChild(box);
+ (document.querySelector('header.top')||document.body).appendChild(box);
  box.querySelector('select').addEventListener('change',e=>{lang=e.target.value==='en'?'en':'cs';try{localStorage.setItem(KEY,lang)}catch{}apply();window.dispatchEvent(new CustomEvent('banger-language-change',{detail:{lang}}))});
  apply();
 }
