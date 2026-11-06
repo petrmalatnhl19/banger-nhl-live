@@ -59,7 +59,7 @@ const style=document.createElement('style');style.textContent=`
 function mount(){
  const hub=document.getElementById('bangerPredictionHubContent');if(!hub||document.getElementById('bangerEngineLab'))return;
  const lab=document.createElement('section');lab.id='bangerEngineLab';
- lab.innerHTML='<div class="lab-head"><div><div class="lab-title">⚙️ BANGER ENGINE LAB</div><div class="lab-sub">Řídicí centrum predikčních modelů · data, přesnost a vývoj</div></div><span class="lab-pill">● MODEL MONITOR</span></div><div class="lab-summary"><div><strong>5</strong><small>Gólových modelů</small></div><div><strong>1</strong><small>Shots Engine</small></div><div><strong data-lab-final>—</strong><small>Dokončených zápasů</small></div></div><div class="lab-controls" role="group" aria-label="Přehled Engine Lab"><button type="button" data-lab-tab="models" aria-pressed="true">🧠 Modely</button><button type="button" data-lab-tab="accuracy" aria-pressed="false">🎯 Přesnost</button><button type="button" data-lab-tab="shots" aria-pressed="false">🏒 Shots</button><button type="button" data-lab-tab="diagnostics" aria-pressed="false">🔬 Diagnostika</button><button type="button" data-lab-tab="calibration" aria-pressed="false">🧪 Kalibrace</button><button type="button" data-lab-tab="stability" aria-pressed="false">📡 Stabilita</button><button type="button" data-lab-tab="errors" aria-pressed="false">🧩 Největší chyby</button><button type="button" data-lab-tab="patterns" aria-pressed="false">📊 Vzorce faktorů</button><button type="button" data-lab-tab="quality" aria-pressed="false">🛡️ Kvalita dat</button><button type="button" data-lab-tab="health" aria-pressed="false">🩺 Stav modelů</button></div><div class="lab-mobile-hint">← Posunutím nabídky zobrazíš další moduly →</div><div data-lab-content aria-live="polite"></div>';
+ lab.innerHTML='<div class="lab-head"><div><div class="lab-title">⚙️ BANGER ENGINE LAB</div><div class="lab-sub">Řídicí centrum predikčních modelů · data, přesnost a vývoj</div></div><span class="lab-pill">● MODEL MONITOR</span></div><div class="lab-summary"><div><strong>5</strong><small>Gólových modelů</small></div><div><strong>1</strong><small>Shots Engine</small></div><div><strong data-lab-final>—</strong><small>Dokončených zápasů</small></div></div><div class="lab-controls" role="group" aria-label="Přehled Engine Lab"><button type="button" data-lab-tab="models" aria-pressed="true">🧠 Modely</button><button type="button" data-lab-tab="accuracy" aria-pressed="false">🎯 Přesnost</button><button type="button" data-lab-tab="shots" aria-pressed="false">🏒 Shots</button><button type="button" data-lab-tab="diagnostics" aria-pressed="false">🔬 Diagnostika</button><button type="button" data-lab-tab="calibration" aria-pressed="false">🧪 Kalibrace</button><button type="button" data-lab-tab="stability" aria-pressed="false">📡 Stabilita</button><button type="button" data-lab-tab="errors" aria-pressed="false">🧩 Největší chyby</button><button type="button" data-lab-tab="patterns" aria-pressed="false">📊 Vzorce faktorů</button><button type="button" data-lab-tab="quality" aria-pressed="false">🛡️ Kvalita dat</button><button type="button" data-lab-tab="health" aria-pressed="false">🩺 Stav modelů</button><button type="button" data-lab-tab="history" aria-pressed="false">📈 Historie MAE</button></div><div class="lab-mobile-hint">← Posunutím nabídky zobrazíš další moduly →</div><div data-lab-content aria-live="polite"></div>';
  hub.insertBefore(lab,hub.firstChild);
  lab.addEventListener('click',e=>{if(e.target.closest('[data-lab-audit]')){runTimeAudit();return}const b=e.target.closest('[data-lab-tab]');if(!b)return;lab.dataset.tab=b.dataset.labTab;update()});
  lab.dataset.tab='models';update();
@@ -326,6 +326,27 @@ function healthPanel(){
  }).join('');
  return '<div class="lab-details"><b>🩺 Zdravotní stav predikčních modelů</b><p class="analysis-small">Přehled dostupnosti uložených predikcí a historické přesnosti. Pokrytí se počítá vůči všem neuzavřeným záznamům v archivu, ne vůči celému rozpisu NHL.</p><div class="lab-summary"><div><strong>'+rows.length+'</strong><small>Zápasů v archivu</small></div><div><strong>'+pending.length+'</strong><small>Neuzavřených</small></div><div><strong>'+final.length+'</strong><small>Vyhodnocených</small></div></div><div class="lab-grid">'+cards+'</div><p class="analysis-small">Nízké pokrytí může být způsobeno chybějícími vstupy nebo tím, že model pro daný zápas neměl dostatek údajů. Tento přehled zatím neověřuje běh plánovače, dostupnost externích API ani správnost vstupů. MAE mezi modely s různým počtem zápasů nelze přímo porovnávat.</p></div>';
 }
+function historyPanel(){
+ const rows=Array.isArray(window.bangerEngineLabArchive)?window.bangerEngineLabArchive:[];
+ const models=[['CORE 3.0','baseline'],['xG','experimental'],['CORE 3.1','advanced'],['CORE 3.2','goalie32'],['CORE 3.3','special33']];
+ const valid=rows.filter(r=>r.status==='final'&&r.actual_away!=null&&r.actual_home!=null&&Number.isFinite(Number(r.actual_away))&&Number.isFinite(Number(r.actual_home))).sort((a,b)=>String(a.game_date).localeCompare(String(b.game_date))||String(a.game_id).localeCompare(String(b.game_id)));
+ const common=valid.filter(r=>models.every(([,key])=>r[key+'_away']!=null&&r[key+'_home']!=null&&Number.isFinite(Number(r[key+'_away']))&&Number.isFinite(Number(r[key+'_home']))));
+ if(common.length<5)return '<div class="lab-details"><b>📈 Historie přesnosti</b><p class="analysis-small">Pro srovnatelný graf potřebujeme alespoň 5 dokončených zápasů s predikcí všech pěti modelů. Nyní: '+common.length+'.</p></div>';
+ const colors=['#65d9f6','#ffd06c','#91f6ad','#db9eff','#ff929d'];
+ const series=models.map(([name,key],i)=>({name,color:colors[i],errors:common.map(r=>(Math.abs(Number(r[key+'_away'])-Number(r.actual_away))+Math.abs(Number(r[key+'_home'])-Number(r.actual_home)))/2)}));
+ const windowSize=Math.min(10,common.length);
+ const points=series.map(item=>({...item,rolling:item.errors.map((_,i)=>{const sample=item.errors.slice(Math.max(0,i-windowSize+1),i+1);return sample.reduce((a,b)=>a+b,0)/sample.length})}));
+ const width=720,height=265,left=42,right=18,top=20,bottom=38;
+ const ymax=Math.max(1,...points.flatMap(p=>p.rolling))*1.12;
+ const x=i=>left+(common.length===1?0:i/(common.length-1))*(width-left-right);
+ const y=v=>top+(1-v/ymax)*(height-top-bottom);
+ const grid=[0,.25,.5,.75,1].map(t=>'<line x1="'+left+'" y1="'+y(ymax*t).toFixed(1)+'" x2="'+(width-right)+'" y2="'+y(ymax*t).toFixed(1)+'" stroke="#5a8aa0" opacity=".22"/><text x="'+(left-7)+'" y="'+(y(ymax*t)+4).toFixed(1)+'" fill="#aac8d7" font-size="11" text-anchor="end">'+(ymax*t).toFixed(1)+'</text>').join('');
+ const lines=points.map(p=>'<polyline fill="none" stroke="'+p.color+'" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" points="'+p.rolling.map((v,i)=>x(i).toFixed(1)+','+y(v).toFixed(1)).join(' ')+'"/>').join('');
+ const legend=points.map(p=>'<span style="display:inline-flex;align-items:center;gap:6px;margin:4px 12px 4px 0;font-size:12px"><span style="width:12px;height:3px;background:'+p.color+'"></span>'+p.name+'</span>').join('');
+ const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const stats=points.map(p=>{const last=p.rolling.at(-1);const previous=p.rolling.length>=2*windowSize?p.errors.slice(-2*windowSize,-windowSize).reduce((a,b)=>a+b,0)/windowSize:null;return '<article class="lab-card"><strong>'+p.name+'</strong><small>Posledních '+windowSize+' zápasů: MAE '+last.toFixed(2)+(previous===null?'<br>Pro předchozí samostatné období chybí data.':'<br>Předchozích '+windowSize+': '+previous.toFixed(2)+' · změna '+(last-previous>=0?'+':'')+(last-previous).toFixed(2))+'</small></article>'}).join('');
+ return '<div class="lab-details"><b>📈 Historický vývoj přesnosti modelů</b><p class="analysis-small">Klouzavý průměr MAE z posledních '+windowSize+' dokončených zápasů. Graf porovnává pouze společné zápasy všech pěti modelů (n='+common.length+'). Prvních '+(windowSize-1)+' bodů používá kratší okno.</p><div style="overflow-x:auto"><svg viewBox="0 0 '+width+' '+height+'" role="img" aria-label="Historický vývoj klouzavé chyby MAE pěti modelů" style="width:100%;min-width:420px;max-width:900px">'+grid+lines+'<text x="'+left+'" y="'+(height-9)+'" fill="#aac8d7" font-size="11">'+esc(common[0].game_date)+'</text><text x="'+(width-right)+'" y="'+(height-9)+'" text-anchor="end" fill="#aac8d7" font-size="11">'+esc(common.at(-1).game_date)+'</text></svg></div><div>'+legend+'</div><div class="lab-grid">'+stats+'</div><p class="analysis-small">Nižší MAE znamená přesnější odhad počtu gólů. Malé vzorky mohou výrazně kolísat; graf sám neprokazuje zlepšení modelu.</p></div>';
+}
 function update(){
  const lab=document.getElementById('bangerEngineLab');if(!lab)return;
  const tab=lab.dataset.tab||'models';
@@ -333,7 +354,9 @@ function update(){
  const body=lab.querySelector('[data-lab-content]');
  const finalCount=Array.isArray(window.bangerEngineLabArchive)?window.bangerEngineLabArchive.filter(r=>r.status==='final').length:null;
  const finalEl=lab.querySelector('[data-lab-final]');if(finalEl)finalEl.textContent=finalCount===null?'—':String(finalCount);
- if(tab==='health'){
+ if(tab==='history'){
+  body.innerHTML=historyPanel();
+ }else if(tab==='health'){
   body.innerHTML=healthPanel();
  }else if(tab==='quality'){
   body.innerHTML=qualityPanel();
@@ -370,6 +393,6 @@ function update(){
 }
 let last='';
 function refresh(){mount();const lab=document.getElementById('bangerEngineLab');if(!lab||lab.dataset.tab==='models')return;const source=[document.getElementById('bangerAccuracyComparison')?.parentElement?.textContent||'',document.getElementById('bangerShotsTracker')?.textContent||'',String(window.bangerEngineLabArchive?.length??'')].join('|');if(source!==last){last=source;update()}}
-function start(){refresh();window.addEventListener('banger-engine-lab-archive',()=>{if(['accuracy','diagnostics','calibration','stability','errors','patterns','quality','health'].includes(document.getElementById('bangerEngineLab')?.dataset.tab))update()});setInterval(refresh,2500)}
+function start(){refresh();window.addEventListener('banger-engine-lab-archive',()=>{if(['accuracy','diagnostics','calibration','stability','errors','patterns','quality','health','history'].includes(document.getElementById('bangerEngineLab')?.dataset.tab))update()});setInterval(refresh,2500)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
