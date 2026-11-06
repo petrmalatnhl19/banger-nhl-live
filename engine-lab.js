@@ -294,6 +294,26 @@ function healthPanel(){
  const specs=[['CORE 3.0','baseline',null],['xG','experimental',null],['CORE 3.1','advanced','advanced_factors'],['CORE 3.2','goalie32','goalie32_factors'],['CORE 3.3','special33','special33_factors']];
  const pending=rows.filter(r=>r.status!=='final');
  const final=rows.filter(r=>r.status==='final'&&ok(r.actual_away)&&ok(r.actual_home));
+ const notices=[];
+ const maeFor=(r,key)=>(Math.abs(Number(r[key+'_away'])-Number(r.actual_away))+Math.abs(Number(r[key+'_home'])-Number(r.actual_home)))/2;
+ specs.forEach(([name,key,factor])=>{
+  const has=r=>ok(r[key+'_away'])&&ok(r[key+'_home']);
+  const waiting=pending.filter(has).length;
+  if(pending.length>=5&&waiting/pending.length<.8)notices.push({level:'warning',name,message:'Predikce jsou dostupné jen pro '+waiting+' z '+pending.length+' neuzavřených zápasů.'});
+  const done=final.filter(has);
+  if(factor&&done.length>=10){
+   const missing=done.filter(r=>r[factor]==null).length;
+   if(missing/done.length>.2)notices.push({level:'warning',name,message:'V '+missing+' z '+done.length+' vyhodnocených predikcí chybějí archivované faktory.'});
+  }
+  if(done.length>=20){
+   const ordered=done.slice().sort((a,b)=>String(a.game_date).localeCompare(String(b.game_date)));
+   const previous=ordered.slice(-20,-10),latest=ordered.slice(-10);
+   const avg=items=>items.reduce((sum,r)=>sum+maeFor(r,key),0)/items.length;
+   const before=avg(previous),after=avg(latest);
+   if(after-before>=.4&&after>before*1.15)notices.push({level:'warning',name,message:'MAE posledních 10 zápasů '+after.toFixed(2)+' proti '+before.toFixed(2)+' v předchozích 10. Jde o možný výkyv, ne potvrzené zhoršení.'});
+  }
+ });
+ const alertHtml=notices.length?notices.map(n=>'<div class="lab-health-alert"><b>⚠️ '+n.name+'</b><small>'+n.message+'</small></div>').join(''):'<p class="analysis-small">Žádné upozornění podle aktuálních pravidel. U menších vzorků se některé kontroly nespouštějí; neznamená to, že je vše ověřeno.</p>';
  const cards=specs.map(([name,key,factor])=>{
   const has=r=>ok(r[key+'_away'])&&ok(r[key+'_home']);
   const ready=pending.filter(has).length;
