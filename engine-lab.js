@@ -59,7 +59,7 @@ const style=document.createElement('style');style.textContent=`
 function mount(){
  const hub=document.getElementById('bangerPredictionHubContent');if(!hub||document.getElementById('bangerEngineLab'))return;
  const lab=document.createElement('section');lab.id='bangerEngineLab';
- lab.innerHTML='<div class="lab-head"><div><div class="lab-title">⚙️ BANGER ENGINE LAB</div><div class="lab-sub">Řídicí centrum predikčních modelů · data, přesnost a vývoj</div></div><span class="lab-pill">● MODEL MONITOR</span></div><div class="lab-summary"><div><strong>5</strong><small>Gólových modelů</small></div><div><strong>1</strong><small>Shots Engine</small></div><div><strong data-lab-final>—</strong><small>Dokončených zápasů</small></div></div><div class="lab-controls" role="group" aria-label="Přehled Engine Lab"><button type="button" data-lab-tab="models" aria-pressed="true">🧠 Modely</button><button type="button" data-lab-tab="accuracy" aria-pressed="false">🎯 Přesnost</button><button type="button" data-lab-tab="shots" aria-pressed="false">🏒 Shots</button><button type="button" data-lab-tab="diagnostics" aria-pressed="false">🔬 Diagnostika</button><button type="button" data-lab-tab="calibration" aria-pressed="false">🧪 Kalibrace</button><button type="button" data-lab-tab="stability" aria-pressed="false">📡 Stabilita</button><button type="button" data-lab-tab="errors" aria-pressed="false">🧩 Největší chyby</button><button type="button" data-lab-tab="patterns" aria-pressed="false">📊 Vzorce faktorů</button><button type="button" data-lab-tab="quality" aria-pressed="false">🛡️ Kvalita dat</button></div><div class="lab-mobile-hint">← Posunutím nabídky zobrazíš další moduly →</div><div data-lab-content aria-live="polite"></div>';
+ lab.innerHTML='<div class="lab-head"><div><div class="lab-title">⚙️ BANGER ENGINE LAB</div><div class="lab-sub">Řídicí centrum predikčních modelů · data, přesnost a vývoj</div></div><span class="lab-pill">● MODEL MONITOR</span></div><div class="lab-summary"><div><strong>5</strong><small>Gólových modelů</small></div><div><strong>1</strong><small>Shots Engine</small></div><div><strong data-lab-final>—</strong><small>Dokončených zápasů</small></div></div><div class="lab-controls" role="group" aria-label="Přehled Engine Lab"><button type="button" data-lab-tab="models" aria-pressed="true">🧠 Modely</button><button type="button" data-lab-tab="accuracy" aria-pressed="false">🎯 Přesnost</button><button type="button" data-lab-tab="shots" aria-pressed="false">🏒 Shots</button><button type="button" data-lab-tab="diagnostics" aria-pressed="false">🔬 Diagnostika</button><button type="button" data-lab-tab="calibration" aria-pressed="false">🧪 Kalibrace</button><button type="button" data-lab-tab="stability" aria-pressed="false">📡 Stabilita</button><button type="button" data-lab-tab="errors" aria-pressed="false">🧩 Největší chyby</button><button type="button" data-lab-tab="patterns" aria-pressed="false">📊 Vzorce faktorů</button><button type="button" data-lab-tab="quality" aria-pressed="false">🛡️ Kvalita dat</button><button type="button" data-lab-tab="health" aria-pressed="false">🩺 Stav modelů</button></div><div class="lab-mobile-hint">← Posunutím nabídky zobrazíš další moduly →</div><div data-lab-content aria-live="polite"></div>';
  hub.insertBefore(lab,hub.firstChild);
  lab.addEventListener('click',e=>{if(e.target.closest('[data-lab-audit]')){runTimeAudit();return}const b=e.target.closest('[data-lab-tab]');if(!b)return;lab.dataset.tab=b.dataset.labTab;update()});
  lab.dataset.tab='models';update();
@@ -287,6 +287,25 @@ function qualityPanel(){
  const audit=auditRunning?'<p class="analysis-small">Probíhá ověřování časů začátků zápasů proti NHL…</p>':auditResults?'<p class="analysis-small">Ověřeno zápasů: '+auditResults.checked+' · před začátkem: '+auditResults.ok+' predikcí · čas chybí: '+auditResults.missing+' · predikce po začátku: '+auditResults.late.length+' · nedostupné NHL záznamy: '+auditResults.errors+' · mimo limit kontroly: '+auditResults.unverified+'</p>'+auditResults.late.slice(0,15).map(x=>'<p class="analysis-small">⚠️ Zápas '+x.game+' · '+x.model+' · '+x.minutes+' minut po začátku</p>').join(''):'<p class="analysis-small">Časovou kontrolu spusť ručně. Ověří maximálně 30 zápasů podle oficiálního času NHL; neprovádí žádné zápisy.</p>';
  return '<div class="lab-details"><b>🛡️ Kontrola kvality dat</b><p class="analysis-small">Pouze čtení archivu. Žádné predikce ani výsledky se neupravují.</p><div class="lab-grid">'+cards+'</div><p class="analysis-small">Dokončených zápasů: '+completed.length+' · Duplicitních ID ve výpisu: '+duplicates+' · Dokončené bez úplného skóre: '+missingScores+'.</p><p class="analysis-small">Tato kontrola sleduje dostupnost hodnot, nikoliv jejich správnost. Časové značky lze porovnat s oficiálním začátkem utkání v následující kontrole.</p><div class="lab-details"><b>⏱️ Časová integrita</b><p class="analysis-small">Předzápasová predikce musí mít čas uložení před oficiálním startem NHL. Kontrola je orientační: chybějící časové značky a nedostupná data jsou hlášeny samostatně.</p><button type="button" data-lab-audit '+(auditRunning?'disabled':'')+'>Spustit časovou kontrolu</button>'+audit+'</div></div>';
 }
+function healthPanel(){
+ const rows=window.bangerEngineLabArchive;
+ if(!Array.isArray(rows))return '<div class="lab-details"><b>🩺 Stav modelů</b><p class="analysis-small">Čekám na načtení archivu. Pokud se nenačte, zkontroluj připojení k databázi.</p></div>';
+ const ok=v=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v));
+ const specs=[['CORE 3.0','baseline',null],['xG','experimental',null],['CORE 3.1','advanced','advanced_factors'],['CORE 3.2','goalie32','goalie32_factors'],['CORE 3.3','special33','special33_factors']];
+ const pending=rows.filter(r=>r.status!=='final');
+ const final=rows.filter(r=>r.status==='final'&&ok(r.actual_away)&&ok(r.actual_home));
+ const cards=specs.map(([name,key,factor])=>{
+  const has=r=>ok(r[key+'_away'])&&ok(r[key+'_home']);
+  const ready=pending.filter(has).length;
+  const complete=final.filter(has);
+  const coverage=pending.length?ready/pending.length:null;
+  const missingFactor=factor?complete.filter(r=>r[factor]==null).length:0;
+  const mae=complete.length?complete.reduce((sum,r)=>sum+(Math.abs(Number(r[key+'_away'])-Number(r.actual_away))+Math.abs(Number(r[key+'_home'])-Number(r.actual_home)))/2,0)/complete.length:null;
+  const status=coverage===null?'Bez čekajících zápasů':coverage>=.9?'Vysoké pokrytí':coverage>=.5?'Částečné pokrytí':'Nízké pokrytí';
+  return '<article class="lab-card"><span class="lab-pill">'+status+'</span><strong>'+name+'</strong><small>Připraveno: '+ready+' / '+pending.length+' čekajících zápasů<br>Pokrytí: '+(coverage===null?'—':(coverage*100).toFixed(0)+' %')+'<br>Vyhodnoceno: '+complete.length+' zápasů<br>MAE: '+(mae===null?'—':mae.toFixed(2))+(factor?'<br>Chybějící faktory u vyhodnocených: '+missingFactor:'')+'</small></article>';
+ }).join('');
+ return '<div class="lab-details"><b>🩺 Zdravotní stav predikčních modelů</b><p class="analysis-small">Přehled dostupnosti uložených predikcí a historické přesnosti. Pokrytí se počítá vůči všem neuzavřeným záznamům v archivu, ne vůči celému rozpisu NHL.</p><div class="lab-summary"><div><strong>'+rows.length+'</strong><small>Zápasů v archivu</small></div><div><strong>'+pending.length+'</strong><small>Neuzavřených</small></div><div><strong>'+final.length+'</strong><small>Vyhodnocených</small></div></div><div class="lab-grid">'+cards+'</div><p class="analysis-small">Nízké pokrytí může být způsobeno chybějícími vstupy nebo tím, že model pro daný zápas neměl dostatek údajů. Tento přehled zatím neověřuje běh plánovače, dostupnost externích API ani správnost vstupů. MAE mezi modely s různým počtem zápasů nelze přímo porovnávat.</p></div>';
+}
 function update(){
  const lab=document.getElementById('bangerEngineLab');if(!lab)return;
  const tab=lab.dataset.tab||'models';
@@ -294,7 +313,9 @@ function update(){
  const body=lab.querySelector('[data-lab-content]');
  const finalCount=Array.isArray(window.bangerEngineLabArchive)?window.bangerEngineLabArchive.filter(r=>r.status==='final').length:null;
  const finalEl=lab.querySelector('[data-lab-final]');if(finalEl)finalEl.textContent=finalCount===null?'—':String(finalCount);
- if(tab==='quality'){
+ if(tab==='health'){
+  body.innerHTML=healthPanel();
+ }else if(tab==='quality'){
   body.innerHTML=qualityPanel();
  }else if(tab==='patterns'){
   body.innerHTML=patternsPanel();
@@ -329,6 +350,6 @@ function update(){
 }
 let last='';
 function refresh(){mount();const lab=document.getElementById('bangerEngineLab');if(!lab||lab.dataset.tab==='models')return;const source=[document.getElementById('bangerAccuracyComparison')?.parentElement?.textContent||'',document.getElementById('bangerShotsTracker')?.textContent||'',String(window.bangerEngineLabArchive?.length??'')].join('|');if(source!==last){last=source;update()}}
-function start(){refresh();window.addEventListener('banger-engine-lab-archive',()=>{if(['accuracy','diagnostics','calibration','stability','errors','patterns','quality'].includes(document.getElementById('bangerEngineLab')?.dataset.tab))update()});setInterval(refresh,2500)}
+function start(){refresh();window.addEventListener('banger-engine-lab-archive',()=>{if(['accuracy','diagnostics','calibration','stability','errors','patterns','quality','health'].includes(document.getElementById('bangerEngineLab')?.dataset.tab))update()});setInterval(refresh,2500)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
