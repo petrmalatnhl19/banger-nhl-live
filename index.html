@@ -1655,6 +1655,8 @@ async function analyzeGame(id){
       if(!response.ok)throw Error('HTTP '+response.status);
       const rows=await response.json();
       if(!Array.isArray(rows))throw Error('Neplatný archiv');
+      window.bangerEngineLabArchive=rows;
+      window.dispatchEvent(new CustomEvent('banger-engine-lab-archive',{detail:{count:rows.length}}));
       const valid=rows.filter(x=>x.status==='final'&&[x.actual_away,x.actual_home,x.baseline_away,x.baseline_home].every(v=>v!==null&&Number.isFinite(Number(v))));
       const available=(x,a,h)=>x[a]!==null&&x[h]!==null&&Number.isFinite(Number(x[a]))&&Number.isFinite(Number(x[h]));
       const paired=valid.filter(x=>available(x,'experimental_away','experimental_home'));
