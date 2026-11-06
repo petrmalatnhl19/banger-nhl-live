@@ -1,6 +1,7 @@
 /* BANGER MATCH STORY 2.3 — concise, sourced projected summary */
 (()=>{'use strict';
 let speaking=null;
+const projectionData=new WeakMap();
 const style=document.createElement('style');style.textContent='.banger-projection-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:9px;margin:10px 0}.banger-projection-teams{grid-column:1/-1;display:flex;justify-content:space-around;color:#9cecff;font-size:13px}.banger-projection-tile{padding:13px;border:1px solid #3d829b88;border-radius:13px;background:linear-gradient(145deg,#12334d,#091c32)}.banger-projection-label{color:#a6d8eb;font-size:12px}.banger-projection-numbers{display:flex;justify-content:space-around;align-items:center;font-size:24px;font-weight:850;margin:8px 0;color:#f2fbff}.banger-projection-divider{font-size:16px;color:#6a9eb8}.banger-projection-note{font-size:11px;color:#9bbbd0;line-height:1.4}.banger-projection-cards>.analysis-small{grid-column:1/-1}';document.head.appendChild(style);
 function text(el){return (el?.textContent||'').replace(/\s+/g,' ').trim()}
 function read(report){
@@ -43,7 +44,23 @@ function englishStory(data){
  parts.push('Individual goal scorers are not yet evaluated by a validated player-level model.');
  return parts.join(' ');
 }
+function renderProjectionCards(box){
+ const data=projectionData.get(box),visual=box.querySelector('.banger-projection-cards');if(!data||!visual)return;
+ const en=window.bangerI18n?.getLanguage?.()==='en';
+ const number=v=>v===null||v===undefined||!Number.isFinite(Number(v))?null:Number(v);
+ const fmt=v=>number(v)===null?'—':number(v).toLocaleString(en?'en-US':'cs-CZ',{maximumFractionDigits:1});
+ const clean=v=>String(v||'').replace(/[&<>"']/g,'');
+ const tile=(title,left,right,note)=>'<div class="banger-projection-tile"><div class="banger-projection-label">'+title+'</div><div class="banger-projection-numbers"><span>'+fmt(left)+'</span><span class="banger-projection-divider">:</span><span>'+fmt(right)+'</span></div><div class="banger-projection-note">'+note+'</div></div>';
+ const sample=Math.min(number(data.sampleGames?.away)||0,number(data.sampleGames?.home)||0);
+ const next='<div class="banger-projection-teams"><b>'+clean(data.away||(en?'AWAY':'HOSTÉ'))+'</b><b>'+clean(data.home||(en?'HOME':'DOMÁCÍ'))+'</b></div>'+
+ tile(en?'🥅 Expected goals':'🥅 Očekávané góly',data.goals?.away,data.goals?.home,en?'Indicative team model':'Orientační týmový model')+
+ tile(en?'🎯 Shots on goal':'🎯 Střely na branku',data.shots?.away,data.shots?.home,en?'Shots Engine v1 · 65% team offense / 35% opponent defense':'Shots Engine v1 · 65 % vlastní útok / 35 % obrana soupeře')+
+ tile(en?'⚡ Penalty minutes':'⚡ Trestné minuty',data.penaltyMinutes?.away,data.penaltyMinutes?.home,en?'Historical average · not projected penalties':'Historický průměr · nikoli počet vyloučení')+
+ '<p class="analysis-small">'+(en?'The shots model uses team shots and opponent shots allowed, based on at least '+sample+' games per team when data is available. Goal scorers and penalty counts require separate validated models.':'Střelecký model využívá vlastní střely a střely povolené soupeřem ze vzorku nejméně '+sample+' utkání na tým, pokud jsou data dostupná. Střelci a počet vyloučení čekají na samostatný ověřitelný model.')+'</p>';
+ if(visual.dataset.renderLanguage!==(en?'en':'cs')){visual.innerHTML=next;visual.dataset.renderLanguage=en?'en':'cs';}
+}
 function syncStoryLanguage(box){
+ renderProjectionCards(box);
  const p=box.querySelector('[data-projected-story]');if(!p)return;
  const en=window.bangerI18n?.getLanguage?.()==='en';
  const target=en?p.dataset.storyEn:p.dataset.storyCs;
@@ -68,6 +85,7 @@ function install(report){
    tile('⚡ Trestné minuty',data.penaltyMinutes?.away,data.penaltyMinutes?.home,'Historický průměr · nikoli počet vyloučení')+
    '<p class="analysis-small">Střelecký model využívá vlastní střely a střely povolené soupeřem ze vzorku nejméně '+sample+' utkání na tým, pokud jsou data dostupná. Střelci a počet vyloučení čekají na samostatný ověřitelný model.</p>';
   box.querySelector('.banger-report-section-body').prepend(visual);
+  projectionData.set(box,data);
  }
  const result=read(report);const p=box.querySelector('[data-projected-story]');p.dataset.storyCs=result?.parts.join(' ')||'Zatím nejsou dostupná data.';p.dataset.storyEn=englishStory(data);syncStoryLanguage(box);
  body.prepend(box);
@@ -79,7 +97,7 @@ function install(report){
  });
 }
 function scan(){document.querySelectorAll('.analysis-panel .analyst-expert-report').forEach(install);document.querySelectorAll('.banger-match-story').forEach(syncStoryLanguage)}
-window.addEventListener('banger-language-change',()=>document.querySelectorAll('.banger-match-story').forEach(syncStoryLanguage));
+window.addEventListener('banger-language-change',()=>{if(speaking){window.speechSynthesis?.cancel();speaking=null;}document.querySelectorAll('.banger-match-story').forEach(syncStoryLanguage)});
 function start(){scan();let scheduled=false;new MutationObserver(()=>{if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{scheduled=false;scan()})}).observe(document.body,{subtree:true,childList:true})}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
