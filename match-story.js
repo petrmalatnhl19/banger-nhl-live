@@ -1,4 +1,4 @@
-/* BANGER MATCH STORY 2.2 — concise, sourced projected summary */
+/* BANGER MATCH STORY 2.3 — concise, sourced projected summary */
 (()=>{'use strict';
 let speaking=null;
 const style=document.createElement('style');style.textContent='.banger-projection-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:9px;margin:10px 0}.banger-projection-teams{grid-column:1/-1;display:flex;justify-content:space-around;color:#9cecff;font-size:13px}.banger-projection-tile{padding:13px;border:1px solid #3d829b88;border-radius:13px;background:linear-gradient(145deg,#12334d,#091c32)}.banger-projection-label{color:#a6d8eb;font-size:12px}.banger-projection-numbers{display:flex;justify-content:space-around;align-items:center;font-size:24px;font-weight:850;margin:8px 0;color:#f2fbff}.banger-projection-divider{font-size:16px;color:#6a9eb8}.banger-projection-note{font-size:11px;color:#9bbbd0;line-height:1.4}.banger-projection-cards>.analysis-small{grid-column:1/-1}';document.head.appendChild(style);
@@ -21,7 +21,7 @@ function read(report){
  else if(model)parts.push(model.slice(0,220));
  else parts.push('Číselná projekce gólů není dostupná.');
  if(snapshot?.shots&&fmt(snapshot.shots.away)!==null&&fmt(snapshot.shots.home)!==null)
-  parts.push('Střelecký základ z posledních dostupných utkání: '+snapshot.away+' '+fmt(snapshot.shots.away)+' střel na zápas, '+snapshot.home+' '+fmt(snapshot.shots.home)+'. Nejde o samostatně kalibrovanou předpověď střel.');
+  parts.push('Shots Engine v1 odhaduje: '+snapshot.away+' '+fmt(snapshot.shots.away)+' střel, '+snapshot.home+' '+fmt(snapshot.shots.home)+'. Výpočet kombinuje vlastní střely a střely povolené soupeřem; zatím není kalibrovaný.');
  else parts.push('Střelecký průměr zatím není pro oba týmy dostupný.');
  if(snapshot?.penaltyMinutes&&fmt(snapshot.penaltyMinutes.away)!==null&&fmt(snapshot.penaltyMinutes.home)!==null)
   parts.push('Disciplína v nedávném vzorku: '+snapshot.away+' '+fmt(snapshot.penaltyMinutes.away)+' trestných minut na zápas, '+snapshot.home+' '+fmt(snapshot.penaltyMinutes.home)+'. Počet příštích vyloučení z těchto údajů nelze spolehlivě určit.');
@@ -45,9 +45,9 @@ function install(report){
   const sample=Math.min(number(data.sampleGames?.away)||0,number(data.sampleGames?.home)||0);
   visual.innerHTML='<div class="banger-projection-teams"><b>'+String(data.away||'HOSTÉ').replace(/[&<>]/g,'')+'</b><b>'+String(data.home||'DOMÁCÍ').replace(/[&<>]/g,'')+'</b></div>'+
    tile('🥅 Očekávané góly',data.goals?.away,data.goals?.home,'Orientační týmový model')+
-   tile('🎯 Střely na branku',data.shots?.away,data.shots?.home,'Průměr posledních dostupných zápasů · předběžná projekce')+
+   tile('🎯 Střely na branku',data.shots?.away,data.shots?.home,'Shots Engine v1 · 65 % vlastní útok / 35 % obrana soupeře')+
    tile('⚡ Trestné minuty',data.penaltyMinutes?.away,data.penaltyMinutes?.home,'Historický průměr · nikoli počet vyloučení')+
-   '<p class="analysis-small">Střely a tresty vycházejí ze vzorku nejméně '+sample+' utkání na tým, pokud jsou data dostupná. Střelci a počet vyloučení čekají na samostatný ověřitelný model.</p>';
+   '<p class="analysis-small">Střelecký model využívá vlastní střely a střely povolené soupeřem ze vzorku nejméně '+sample+' utkání na tým, pokud jsou data dostupná. Střelci a počet vyloučení čekají na samostatný ověřitelný model.</p>';
   box.querySelector('.banger-report-section-body').prepend(visual);
  }
  const result=read(report);const p=box.querySelector('[data-projected-story]');p.textContent=result?.parts.join(' ')||'Zatím nejsou dostupná data.';
