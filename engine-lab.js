@@ -23,7 +23,7 @@ const style=document.createElement('style');style.textContent=`
 function mount(){
  const hub=document.getElementById('bangerPredictionHubContent');if(!hub||document.getElementById('bangerEngineLab'))return;
  const lab=document.createElement('section');lab.id='bangerEngineLab';
- lab.innerHTML='<div class="lab-head"><div><div class="lab-title">⚙️ BANGER ENGINE LAB</div><div class="lab-sub">Řídicí centrum predikčních modelů · data, přesnost a vývoj</div></div><span class="lab-pill">● MODEL MONITOR</span></div><div class="lab-controls" role="group" aria-label="Přehled Engine Lab"><button type="button" data-lab-tab="models" aria-pressed="true">🧠 Modely</button><button type="button" data-lab-tab="accuracy" aria-pressed="false">🎯 Přesnost</button><button type="button" data-lab-tab="shots" aria-pressed="false">🏒 Shots</button><button type="button" data-lab-tab="diagnostics" aria-pressed="false">🔬 Diagnostika</button></div><div data-lab-content aria-live="polite"></div>';
+ lab.innerHTML='<div class="lab-head"><div><div class="lab-title">⚙️ BANGER ENGINE LAB</div><div class="lab-sub">Řídicí centrum predikčních modelů · data, přesnost a vývoj</div></div><span class="lab-pill">● MODEL MONITOR</span></div><div class="lab-controls" role="group" aria-label="Přehled Engine Lab"><button type="button" data-lab-tab="models" aria-pressed="true">🧠 Modely</button><button type="button" data-lab-tab="accuracy" aria-pressed="false">🎯 Přesnost</button><button type="button" data-lab-tab="shots" aria-pressed="false">🏒 Shots</button><button type="button" data-lab-tab="diagnostics" aria-pressed="false">🔬 Diagnostika</button><button type="button" data-lab-tab="calibration" aria-pressed="false">🧪 Kalibrace</button></div><div data-lab-content aria-live="polite"></div>';
  hub.insertBefore(lab,hub.firstChild);
  lab.addEventListener('click',e=>{const b=e.target.closest('[data-lab-tab]');if(!b)return;lab.dataset.tab=b.dataset.labTab;update()});
  lab.dataset.tab='models';update();
@@ -77,12 +77,32 @@ function diagnosticsPanel(){
  }).join('');
  return '<div class="lab-details"><b>🔬 Diagnostika chyb podle typu utkání</b><p class="analysis-small">Skupiny jsou určeny skutečným konečným skóre, tedy až po zápase. Slouží pro zpětnou analýzu, ne pro předzápasovou klasifikaci. MAE je chyba gólů na tým. V každém řádku je uveden počet dostupných predikcí.</p><div class="lab-grid">'+cards+'</div><p class="analysis-small">Malé vzorky a překrývající se skupiny mohou zkreslit výsledky. Automatické převažování modelů zatím není zapnuté.</p></div>';
 }
+function calibrationPanel(){
+ const rows=Array.isArray(window.bangerEngineLabArchive)?window.bangerEngineLabArchive:[];
+ const specs=[['CORE 3.0','baseline'],['xG','experimental'],['CORE 3.1','advanced'],['CORE 3.2','goalie32'],['CORE 3.3','special33']];
+ const ok=v=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v));
+ const valid=rows.filter(r=>r.status==='final'&&ok(r.actual_away)&&ok(r.actual_home));
+ const cards=specs.map(([name,key])=>{
+  const sample=valid.filter(r=>ok(r[key+'_away'])&&ok(r[key+'_home']));
+  if(!sample.length)return '<article class="lab-card"><strong>'+name+'</strong><small>Čeká na dokončené zápasy.</small></article>';
+  const n=sample.length;
+  const predicted=sample.reduce((sum,r)=>sum+Number(r[key+'_away'])+Number(r[key+'_home']),0)/(2*n);
+  const actual=sample.reduce((sum,r)=>sum+Number(r.actual_away)+Number(r.actual_home),0)/(2*n);
+  const bias=predicted-actual;
+  const abs=sample.reduce((sum,r)=>sum+Math.abs(Number(r[key+'_away'])-Number(r.actual_away))+Math.abs(Number(r[key+'_home'])-Number(r.actual_home)),0)/(2*n);
+  const label=Math.abs(bias)<.15?'Přibližně vyvážený':bias>0?'Nadhodnocuje góly':'Podhodnocuje góly';
+  return '<article class="lab-card"><span class="lab-pill">'+n+' ZÁPASŮ</span><strong>'+name+'</strong><small>'+label+'</small><div style="font-size:25px;font-weight:850;margin:8px 0;color:'+(Math.abs(bias)<.15?'#78edbd':'#ffd386')+'">'+(bias>0?'+':'')+bias.toFixed(2)+' <span style="font-size:12px">gólu / tým</span></div><small>Odhad '+predicted.toFixed(2)+' · skutečnost '+actual.toFixed(2)+'<br>MAE '+abs.toFixed(2)+'</small></article>';
+ }).join('');
+ return '<div class="lab-details"><b>🧪 Kalibrace gólových modelů</b><p class="analysis-small">Bias = průměrně předpovězené góly minus skutečné góly na tým. Kladné číslo znamená nadhodnocení, záporné podhodnocení. MAE navíc měří velikost chyby bez ohledu na směr.</p><div class="lab-grid">'+cards+'</div><p class="analysis-small">Výsledky jsou popisné, ne automatická oprava předpovědí. Vzorky se mezi modely mohou lišit. Pro spolehlivější kalibraci potřebujeme více zápasů.</p></div>';
+}
 function update(){
  const lab=document.getElementById('bangerEngineLab');if(!lab)return;
  const tab=lab.dataset.tab||'models';
  lab.querySelectorAll('[data-lab-tab]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.labTab===tab)));
  const body=lab.querySelector('[data-lab-content]');
- if(tab==='models'){
+ if(tab==='calibration'){
+  body.innerHTML=calibrationPanel();
+ }else if(tab==='models'){
   body.innerHTML='<div class="lab-grid">'+MODELS.map(([name,description],i)=>'<article class="lab-card"><span class="lab-pill">ENGINE '+String(i+1).padStart(2,'0')+'</span><strong>'+name+'</strong><small>'+description+'</small></article>').join('')+'</div><div class="lab-details"><b>Jak modely spolupracují?</b><p class="analysis-small">Gólové modely vytvářejí samostatné odhady, které lze zpětně porovnávat na stejných dokončených utkáních. Shots Engine sleduje střely zvlášť; jeho MAE nelze přímo srovnávat s MAE gólů.</p></div>';
  }else if(tab==='diagnostics'){
   body.innerHTML=diagnosticsPanel();
@@ -107,6 +127,6 @@ function update(){
 }
 let last='';
 function refresh(){mount();const lab=document.getElementById('bangerEngineLab');if(!lab||lab.dataset.tab==='models')return;const source=[document.getElementById('bangerAccuracyComparison')?.parentElement?.textContent||'',document.getElementById('bangerShotsTracker')?.textContent||''].join('|');if(source!==last){last=source;update()}}
-function start(){refresh();window.addEventListener('banger-engine-lab-archive',()=>{if(['accuracy','diagnostics'].includes(document.getElementById('bangerEngineLab')?.dataset.tab))update()});setInterval(refresh,2500)}
+function start(){refresh();window.addEventListener('banger-engine-lab-archive',()=>{if(['accuracy','diagnostics','calibration'].includes(document.getElementById('bangerEngineLab')?.dataset.tab))update()});setInterval(refresh,2500)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
