@@ -10,8 +10,83 @@ let lang='cs';try{lang=localStorage.getItem(KEY)==='en'?'en':'cs'}catch{}
 function translateText(original){return translations[lang][original]||original}
 const labLabels={overview:['🏠 Přehled','🏠 Overview'],models:['🧠 Modely','🧠 Models'],accuracy:['🎯 Přesnost','🎯 Accuracy'],shots:['🏒 Shots','🏒 Shots'],diagnostics:['🔬 Diagnostika','🔬 Diagnostics'],calibration:['🧪 Kalibrace','🧪 Calibration'],stability:['📡 Stabilita','📡 Stability'],errors:['🧩 Největší chyby','🧩 Largest errors'],patterns:['📊 Vzorce faktorů','📊 Factor patterns'],quality:['🛡️ Kvalita dat','🛡️ Data quality'],health:['🩺 Stav modelů','🩺 Model health'],history:['📈 Historie MAE','📈 MAE history'],uplift:['⚖️ Přínos modelů','⚖️ Model uplift'],decision:['🧭 Výběr modelu','🧭 Model selection']};
 const jumpLabels=[['🎯 Předpověď','🎯 Prediction'],['📊 Přehled zápasu','📊 Game overview'],['🥅 Brankáři','🥅 Goalies'],['📈 Přesnost','📈 Accuracy'],['📝 Podrobný report','📝 Detailed report']];
+
+// Phase 0.3: translate exact UI labels across game cards, player stats and reports.
+// Preserve numbers, team names and free-form analytical text.
+const interfaceLabels={
+ 'VSTUP DO HOKEJOVÉ ARÉNY':'ENTER THE HOCKEY ARENA',
+ '📡 STAV PROJEKCÍ SESTAV':'📡 LINEUP PROJECTION STATUS',
+ 'Aktuální projekce':'Current projections','Archivní sestavy':'Archived lineups',
+ 'Zjišťuji čas aktualizace…':'Checking update time…',
+ '🥅 Brankáři NHL':'🥅 NHL Goalies','Statistiky hráčů':'Player statistics',
+ '📅 KALENDÁŘ ZÁPASŮ':'📅 GAME CALENDAR','🏒 Hráči v poli':'🏒 Skaters',
+ '🏒 Dnešní zápasy':'🏒 Today’s games','🎯 Analýzy zápasů':'🎯 Game analysis',
+ '📈 Pokročilá data':'📈 Advanced data','Domů':'Home',
+ 'Připojuji se k NHL…':'Connecting to NHL…',
+ 'ZÁPASŮ':'GAMES','PRÁVĚ ŽIVĚ':'LIVE NOW','DOHRÁNO':'FINAL',
+ 'Zápasy':'Games','Hráči':'Players','Hráč':'Player','Týmy':'Teams',
+ 'Zápasy ↓':'Games ↓','Střely ↓':'Shots ↓','✕ Zavřít':'✕ Close',
+ 'Načítám…':'Loading…','Načítám detail NHL…':'Loading NHL game details…',
+ 'DETAIL ZÁPASU':'GAME DETAILS','POROVNÁNÍ TÝMŮ':'TEAM COMPARISON',
+ 'TŘETINY':'PERIODS','ZAČÁTEK · ČR':'START · CZECH TIME','Čas Praha':'Prague time',
+ '🏒 Předzápasový přehled':'🏒 Pregame overview',
+ '📊 Přehled':'📊 Overview','⚡ Události':'⚡ Events','📝 Komentář':'📝 Commentary',
+ '🏒 Hráči':'🏒 Players','Výsledky třetin':'Period scores',
+ '📊 Statistiky zápasu':'📊 Game statistics','Střely na branku':'Shots on goal',
+ 'Načítám další týmové statistiky…':'Loading more team statistics…',
+ '⚡ Interaktivní časová osa zápasu':'⚡ Interactive game timeline',
+ 'Góly, asistence, tresty a střely v chronologickém pořadí.':'Goals, assists, penalties and shots in chronological order.',
+ 'Načítám události NHL…':'Loading NHL events…',
+ '📝 Český online komentář':'📝 Live game commentary',
+ 'Události podle NHL API. Obnovování každých 30 sekund.':'Events from the NHL API. Refreshes every 30 seconds.',
+ '🧩 Předpokládané sestavy':'🧩 Projected lineups',
+ 'Načítám informace…':'Loading information…',
+ '🏒 Statistiky hráčů a brankářů':'🏒 Skater and goalie statistics',
+ 'Načítám sestavy a statistiky…':'Loading lineups and statistics…',
+ '⏱ Vyloučení':'⏱ Penalties','Načítám vyloučení…':'Loading penalties…',
+ 'Detail není dostupný':'Details unavailable','Nové porovnání':'New comparison',
+ 'Načítám oficiální údaje NHL…':'Loading official NHL data…',
+ '📈 Forma · body v posledních zápasech':'📈 Recent form · points per game',
+ 'Zleva nejstarší → nejnovější zápas':'Oldest → newest game',
+ 'Průměrný čas na ledě · sezóna':'Average ice time · season',
+ 'Body v přesilovce · sezóna':'Power-play points · season',
+ 'Oficiální NHL API':'Official NHL API','Aktuální sezóna':'Current season',
+ 'Posledních pět zápasů':'Last five games',
+ 'Údaje za posledních pět zápasů nejsou dostupné.':'Last five games data unavailable.',
+ 'Přesilovky':'Power plays','Obrana':'Defense','Útoky':'Forwards',
+ 'Forma za posledních 5 zápasů':'Form over last five games',
+ 'Zatím nejsou dostupné záznamy gólů.':'No goal records available yet.',
+ 'Výsledky třetin zatím nejsou dostupné.':'Period scores are not available yet.',
+ 'Pro tento den nejsou naplánované zápasy. Zkus jiné datum.':'No games scheduled for this date. Try another day.',
+ '🏆 Žebříček přesnosti modelů':'🏆 Model accuracy leaderboard',
+ '⚔️ Porovnání hráčů':'⚔️ Player comparison'
+};
+const originalNodes=new WeakMap();
+function translateInterface(){
+ const root=document.body;if(!root)return;
+ const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+ const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+ for(const node of nodes){
+  const parent=node.parentElement;
+  if(!parent||parent.closest('script,style,textarea,option,#bangerLanguageBox'))continue;
+  const current=node.nodeValue;
+  const trimmed=current.trim();
+  let original=originalNodes.get(node);
+  if(original===undefined){
+   if(!Object.prototype.hasOwnProperty.call(interfaceLabels,trimmed))continue;
+   original=trimmed;originalNodes.set(node,original);
+  }else if(trimmed!==original&&trimmed!==interfaceLabels[original]){
+   if(!Object.prototype.hasOwnProperty.call(interfaceLabels,trimmed)){originalNodes.delete(node);continue;}
+   original=trimmed;originalNodes.set(node,original);
+  }
+  const target=lang==='en'?interfaceLabels[original]:original;
+  if(trimmed!==target)node.nodeValue=current.replace(trimmed,target);
+ }
+}
+
 function apply(){
  document.documentElement.lang=lang;
+ translateInterface();
  const en=lang==='en';
  const picker=document.getElementById('bangerLanguageSelect');if(picker&&picker.value!==lang)picker.value=lang;
  document.querySelectorAll('#bangerEngineLab [data-lab-tab]').forEach(el=>{const pair=labLabels[el.dataset.labTab];if(pair){const label=pair[en?1:0];if(el.textContent!==label)el.textContent=label;}});
