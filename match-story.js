@@ -1,4 +1,4 @@
-/* BANGER MATCH STORY 2.0 — concise, sourced projected summary */
+/* BANGER MATCH STORY 2.1 — concise, sourced projected summary */
 (()=>{'use strict';
 let speaking=null;
 function text(el){return (el?.textContent||'').replace(/\s+/g,' ').trim()}
@@ -10,16 +10,23 @@ function read(report){
  const fixture=text(meta).match(/rozbor\s*·\s*(.*?)\s*·\s*\d{4}/i)?.[1]||'vybraný zápas';
  const verdict=get(/Závěrečný expertní verdikt/i);
  const model=get(/Vážený predikční model/i);
- const expected=model.match(/(?:očekávání|očekávané góly)[^\d]{0,80}(\d+[.,]\d+)[^\d]{1,80}(\d+[.,]\d+)/i);
+ let snapshot=null;
+ try{snapshot=JSON.parse(decodeURIComponent(report.dataset.bangerProjections||''))}catch(e){}
+ const fmt=v=>Number.isFinite(v)?v.toLocaleString('cs-CZ',{maximumFractionDigits:1}):null;
  const parts=[];
- parts.push('BANGER PROJECTED. '+fixture.replace(/\bvs\b/i,'proti')+'.');
- if(expected)parts.push('Model očekává přibližně '+expected[1]+' a '+expected[2]+' gólu. Nejde o jisté konečné skóre.');
- else if(model)parts.push(model.slice(0,280));
- else parts.push('Číselná projekce výsledku není dostupná.');
- if(verdict)parts.push(verdict.slice(0,300));
- parts.push('Projektovaní střelci: zatím bez ověřené individuální pravděpodobnosti gólu.');
- parts.push('Počet střel: číselná projekce zatím není vypočítaná.');
- parts.push('Počet vyloučení a přesilovek: číselná projekce zatím není vypočítaná.');
+ parts.push('BANGER PROJECTED. '+fixture.replace(/\\bvs\\b/i,'proti')+'.');
+ if(snapshot?.goals&&fmt(snapshot.goals.away)!==null&&fmt(snapshot.goals.home)!==null)
+  parts.push('Orientační očekávání gólů: '+snapshot.away+' '+fmt(snapshot.goals.away)+', '+snapshot.home+' '+fmt(snapshot.goals.home)+'. Nejde o přesné konečné skóre.');
+ else if(model)parts.push(model.slice(0,220));
+ else parts.push('Číselná projekce gólů není dostupná.');
+ if(snapshot?.shots&&fmt(snapshot.shots.away)!==null&&fmt(snapshot.shots.home)!==null)
+  parts.push('Střelecký základ z posledních dostupných utkání: '+snapshot.away+' '+fmt(snapshot.shots.away)+' střel na zápas, '+snapshot.home+' '+fmt(snapshot.shots.home)+'. Nejde o samostatně kalibrovanou předpověď střel.');
+ else parts.push('Střelecký průměr zatím není pro oba týmy dostupný.');
+ if(snapshot?.penaltyMinutes&&fmt(snapshot.penaltyMinutes.away)!==null&&fmt(snapshot.penaltyMinutes.home)!==null)
+  parts.push('Disciplína v nedávném vzorku: '+snapshot.away+' '+fmt(snapshot.penaltyMinutes.away)+' trestných minut na zápas, '+snapshot.home+' '+fmt(snapshot.penaltyMinutes.home)+'. Počet příštích vyloučení z těchto údajů nelze spolehlivě určit.');
+ else parts.push('Projekce počtu vyloučení zatím nemá dostatečné podklady.');
+ if(verdict)parts.push(verdict.slice(0,230));
+ parts.push('Projektovaní střelci zatím nejsou vyhodnoceni individuálním modelem.');
  return {fixture,parts};
 }
 function install(report){
