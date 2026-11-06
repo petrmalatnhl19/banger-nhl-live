@@ -1659,8 +1659,8 @@ async function analyzeGame(id){
       const models=[['CORE 3.0','baseline_away','baseline_home'],['xG','experimental_away','experimental_home'],['CORE 3.1','advanced_away','advanced_home'],['CORE 3.2','goalie32_away','goalie32_home'],['CORE 3.3','special33_away','special33_home']];
       if(quintuple.length){
         const ranked=models.map(([name,a,h])=>({name,score:mae(quintuple,a,h),correct:wins(quintuple,a,h)})).sort((a,b)=>a.score-b.score);
-        ranking.innerHTML='<h4 style="margin:0 0 8px">🏆 Žebříček přesnosti modelů</h4><p class="analysis-small">Všech pět modelů na stejných '+quintuple.length+' dokončených zápasech. Nižší MAE znamená přesnější odhad počtu gólů.</p>'+
-          ranked.map((m,i)=>'<p style="margin:8px 0"><b>'+(i+1)+'. '+m.name+'</b> · MAE '+fmtNum(m.score)+' · správná strana '+m.correct+'/'+quintuple.length+'</p>').join('');
+        ranking.innerHTML='<h4 style="margin:0 0 8px">🏆 Žebříček přesnosti modelů</h4><p class="analysis-small">Všech pět modelů na stejných '+quintuple.length+' dokončených zápasech. Nižší MAE znamená přesnější odhad počtu gólů. Procenta ukazují správně předpovězenou stranu výsledku, nikoli jistotu dalších predikcí.</p>'+
+          ranked.map((m,i)=>'<div style="margin:10px 0;padding:10px;border-radius:12px;background:#102b43;border:1px solid #34617b"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><b>'+(i+1)+'. '+m.name+'</b><strong>MAE '+fmtNum(m.score)+'</strong></div><div style="font-size:12px;color:#b9d7e8;margin:6px 0">Správná strana výsledku: '+m.correct+' / '+quintuple.length+' · '+Math.round(100*m.correct/quintuple.length)+' %</div><div style="height:7px;border-radius:8px;background:#284459;overflow:hidden"><div style="width:'+Math.round(100*m.correct/quintuple.length)+'%;height:100%;background:linear-gradient(90deg,#38c9ed,#6af2bf)"></div></div></div>').join('');
       }else{
         ranking.innerHTML='<h4 style="margin:0 0 8px">🏆 Žebříček přesnosti modelů</h4><p class="analysis-small">Čekáme na dokončené zápasy se všemi pěti předzápasovými predikcemi. Pořadí zatím neurčujeme.</p>';
       }
