@@ -61,7 +61,7 @@ function mount(){
  const lab=document.createElement('section');lab.id='bangerEngineLab';
  lab.innerHTML='<div class="lab-head"><div><div class="lab-title">⚙️ BANGER ENGINE LAB</div><div class="lab-sub">Řídicí centrum predikčních modelů · data, přesnost a vývoj</div></div><span class="lab-pill">● MODEL MONITOR</span></div><div class="lab-summary"><div><strong>5</strong><small>Gólových modelů</small></div><div><strong>1</strong><small>Shots Engine</small></div><div><strong data-lab-final>—</strong><small>Dokončených zápasů</small></div></div><div class="lab-controls" role="group" aria-label="Přehled Engine Lab"><button type="button" data-lab-tab="models" aria-pressed="true">🧠 Modely</button><button type="button" data-lab-tab="accuracy" aria-pressed="false">🎯 Přesnost</button><button type="button" data-lab-tab="shots" aria-pressed="false">🏒 Shots</button><button type="button" data-lab-tab="diagnostics" aria-pressed="false">🔬 Diagnostika</button><button type="button" data-lab-tab="calibration" aria-pressed="false">🧪 Kalibrace</button><button type="button" data-lab-tab="stability" aria-pressed="false">📡 Stabilita</button><button type="button" data-lab-tab="errors" aria-pressed="false">🧩 Největší chyby</button><button type="button" data-lab-tab="patterns" aria-pressed="false">📊 Vzorce faktorů</button><button type="button" data-lab-tab="quality" aria-pressed="false">🛡️ Kvalita dat</button></div><div class="lab-mobile-hint">← Posunutím nabídky zobrazíš další moduly →</div><div data-lab-content aria-live="polite"></div>';
  hub.insertBefore(lab,hub.firstChild);
- lab.addEventListener('click',e=>{const b=e.target.closest('[data-lab-tab]');if(!b)return;lab.dataset.tab=b.dataset.labTab;update()});
+ lab.addEventListener('click',e=>{if(e.target.closest('[data-lab-audit]')){runTimeAudit();return}const b=e.target.closest('[data-lab-tab]');if(!b)return;lab.dataset.tab=b.dataset.labTab;update()});
  lab.dataset.tab='models';update();
 }
 function trendPanel(){
@@ -239,6 +239,37 @@ function patternsPanel(){
  }).join('');
  return '<div class="lab-details"><b>📊 Vzorce chyb podle archivovaných faktorů</b><p class="analysis-small">Pro každý číselný faktor porovnáváme průměrnou chybu MAE u nižší a vyšší poloviny jeho hodnot. Rozdíl = MAE vyšší poloviny minus MAE nižší poloviny. Kladný rozdíl značí větší chybu při vyšších hodnotách faktoru. Každá polovina vyžaduje alespoň 10 zápasů; řadíme podle absolutní velikosti rozdílu, což může zvýraznit náhodné výkyvy.</p><div class="lab-error-grid">'+sections+'</div><p class="analysis-small">Jde o průzkumnou souvislost, nikoli prokázanou příčinu. Vnořené či textové faktory zatím nevyhodnocujeme. Žádné váhy modelů se automaticky nemění.</p></div>';
 }
+const auditModels=[['CORE 3.0','baseline','predicted_at'],['xG','experimental','experimental_predicted_at'],['CORE 3.1','advanced','advanced_predicted_at'],['CORE 3.2','goalie32','goalie32_predicted_at'],['CORE 3.3','special33','special33_predicted_at']];
+let auditResults=null,auditRunning=false;
+async function runTimeAudit(){
+ if(auditRunning)return;
+ const rows=Array.isArray(window.bangerEngineLabArchive)?window.bangerEngineLabArchive:[];
+ auditRunning=true;auditResults=null;update();
+ const unique=[...new Map(rows.filter(r=>/^\\d{8,12}$/.test(String(r.game_id))).map(r=>[String(r.game_id),r])).values()].slice(0,30);
+ const result={checked:0,missing:0,late:[],ok:0,errors:0,unverified:0};
+ for(let i=0;i<unique.length;i+=4){
+  const batch=unique.slice(i,i+4);
+  await Promise.all(batch.map(async row=>{
+   try{
+    const response=await fetch('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(String(row.game_id))+'/landing');
+    if(!response.ok)throw Error('NHL '+response.status);
+    const data=await response.json();
+    const start=Date.parse(data.startTimeUTC||data.gameDateTime||'');
+    if(!Number.isFinite(start))throw Error('Missing start');
+    result.checked++;
+    auditModels.forEach(([name,key,time])=>{
+     if(row[key+'_away']==null||row[key+'_home']==null)return;
+     const stamp=Date.parse(row[time]||'');
+     if(!Number.isFinite(stamp)){result.missing++;return}
+     if(stamp>=start)result.late.push({game:String(row.game_id),model:name,minutes:Math.round((stamp-start)/60000)});
+     else result.ok++;
+    });
+   }catch(_){result.errors++}
+  }));
+ }
+ result.unverified=rows.length-unique.length;
+ auditResults=result;auditRunning=false;update();
+}
 function qualityPanel(){
  const rows=window.bangerEngineLabArchive;
  if(!Array.isArray(rows))return '<div class="lab-details">Čekám na načtení archivu.</div>';
@@ -253,7 +284,8 @@ function qualityPanel(){
  const duplicates=rows.length-new Set(rows.map(r=>String(r.game_id))).size;
  const completed=rows.filter(r=>r.status==='final');
  const missingScores=completed.filter(r=>!ok(r.actual_away)||!ok(r.actual_home)).length;
- return '<div class="lab-details"><b>🛡️ Kontrola kvality dat</b><p class="analysis-small">Pouze čtení archivu. Žádné predikce ani výsledky se neupravují.</p><div class="lab-grid">'+cards+'</div><p class="analysis-small">Dokončených zápasů: '+completed.length+' · Duplicitních ID ve výpisu: '+duplicates+' · Dokončené bez úplného skóre: '+missingScores+'.</p><p class="analysis-small">Tato kontrola sleduje dostupnost hodnot, nikoliv jejich správnost. Bez přesného času začátku utkání nelze ověřit, zda všechny odhady vznikly před zápasem.</p></div>';
+ const audit=auditRunning?'<p class="analysis-small">Probíhá ověřování časů začátků zápasů proti NHL…</p>':auditResults?'<p class="analysis-small">Ověřeno zápasů: '+auditResults.checked+' · před začátkem: '+auditResults.ok+' predikcí · čas chybí: '+auditResults.missing+' · predikce po začátku: '+auditResults.late.length+' · nedostupné NHL záznamy: '+auditResults.errors+' · mimo limit kontroly: '+auditResults.unverified+'</p>'+auditResults.late.slice(0,15).map(x=>'<p class="analysis-small">⚠️ Zápas '+x.game+' · '+x.model+' · '+x.minutes+' minut po začátku</p>').join(''):'<p class="analysis-small">Časovou kontrolu spusť ručně. Ověří maximálně 30 zápasů podle oficiálního času NHL; neprovádí žádné zápisy.</p>';
+ return '<div class="lab-details"><b>🛡️ Kontrola kvality dat</b><p class="analysis-small">Pouze čtení archivu. Žádné predikce ani výsledky se neupravují.</p><div class="lab-grid">'+cards+'</div><p class="analysis-small">Dokončených zápasů: '+completed.length+' · Duplicitních ID ve výpisu: '+duplicates+' · Dokončené bez úplného skóre: '+missingScores+'.</p><p class="analysis-small">Tato kontrola sleduje dostupnost hodnot, nikoliv jejich správnost. Časové značky lze porovnat s oficiálním začátkem utkání v následující kontrole.</p><div class="lab-details"><b>⏱️ Časová integrita</b><p class="analysis-small">Předzápasová predikce musí mít čas uložení před oficiálním startem NHL. Kontrola je orientační: chybějící časové značky a nedostupná data jsou hlášeny samostatně.</p><button type="button" data-lab-audit '+(auditRunning?'disabled':'')+'>Spustit časovou kontrolu</button>'+audit+'</div></div>';
 }
 function update(){
  const lab=document.getElementById('bangerEngineLab');if(!lab)return;
