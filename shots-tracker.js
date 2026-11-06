@@ -5,7 +5,7 @@ const read=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch{ret
 const write=data=>{try{localStorage.setItem(KEY,JSON.stringify(data))}catch{}};
 const num=v=>v===null||v===undefined||v===''?null:Number.isFinite(Number(v))?Number(v):null;
 function collect(){
- const store=read();let changed=false;
+ const store=read();
  document.querySelectorAll('.analyst-expert-report[data-banger-projections]').forEach(el=>{
   let p;try{p=JSON.parse(decodeURIComponent(el.dataset.bangerProjections))}catch{return}
   const id=String(p.gameId||'');
@@ -14,7 +14,7 @@ function collect(){
   if(el.dataset.shotsArchiveCheck)return;
   el.dataset.shotsArchiveCheck='1';
   fetch(API+id+'/boxscore').then(r=>r.ok?r.json():null).then(g=>{
-   if(!g||String(g.gameState||'').toUpperCase()!=='FUT')return;
+   if(!g||!['FUT','PRE'].includes(String(g.gameState||'').toUpperCase()))return;
    const latest=read();if(latest[id])return;
    latest[id]={id,away:p.away,home:p.home,forecastAway:num(p.shots.away),forecastHome:num(p.shots.home),createdAt:new Date().toISOString(),status:'pending',version:p.shotsModel||'shots-v1'};
    write(latest);render();
@@ -22,7 +22,7 @@ function collect(){
  });
 }
 function actual(g,side){
- const stat=g?.[side+'Team']?.sog;
+ const stat=g?.[side+'Team']?.sog ?? g?.[side+'Team']?.shotsOnGoal;
  return num(stat);
 }
 async function evaluate(){
