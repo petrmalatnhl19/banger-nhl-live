@@ -405,13 +405,36 @@ function decisionPanel(){
  }).join('');
  return '<div class="lab-details"><b>🧭 Rozhodovací panel modelů</b><p class="analysis-small">Orientační výběr pro další testování, nikoliv automatické nasazení. Všech pět modelů je porovnáno na identickém vzorku '+complete.length+' dokončených zápasů.</p><div class="lab-details"><strong>'+verdict+'</strong></div><div class="lab-grid">'+cards+'</div><p class="analysis-small">Pravidla: alespoň 30 společných dokončených zápasů, alespoň 5 neuzavřených zápasů, pokrytí ≥ 80 % a zhoršení MAE posledních 10 oproti předchozím 10 maximálně o 0,25 gólu. Ze splňujících modelů se vybere nejnižší MAE. Pravidla jsou experimentální, nezohledňují statistickou významnost, cenu dat ani všechny typy chyb. Žádné modely ani váhy se nemění.</p></div>';
 }
+function modelScorecards(){
+ const rows=Array.isArray(window.bangerEngineLabArchive)?window.bangerEngineLabArchive:[];
+ const specs=[['CORE 3.0','baseline'],['xG','experimental'],['CORE 3.1','advanced'],['CORE 3.2','goalie32'],['CORE 3.3','special33']];
+ const ok=v=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v));
+ const finals=rows.filter(r=>r.status==='final'&&ok(r.actual_away)&&ok(r.actual_home));
+ const pending=rows.filter(r=>r.status!=='final');
+ const common=finals.filter(r=>specs.every(([,k])=>ok(r[k+'_away'])&&ok(r[k+'_home']))).sort((a,b)=>String(a.game_date).localeCompare(String(b.game_date))||String(a.game_id).localeCompare(String(b.game_id)));
+ const error=(r,k)=>(Math.abs(Number(r[k+'_away'])-Number(r.actual_away))+Math.abs(Number(r[k+'_home'])-Number(r.actual_home)))/2;
+ const mean=a=>a.reduce((x,y)=>x+y,0)/a.length;
+ const base=common.length?mean(common.map(r=>error(r,'baseline'))):null;
+ const cards=specs.map(([name,key])=>{
+  const errors=common.map(r=>error(r,key)),mae=errors.length?mean(errors):null;
+  const coverage=pending.length?pending.filter(r=>ok(r[key+'_away'])&&ok(r[key+'_home'])).length/pending.length:null;
+  const drift=errors.length>=20?mean(errors.slice(-10))-mean(errors.slice(-20,-10)):null;
+  const uplift=mae===null||base===null?null:base-mae;
+  const warnings=[];
+  if(pending.length>=5&&coverage<.8)warnings.push('Nízké pokrytí');
+  if(drift!==null&&drift>.4&&drift>mean(errors.slice(-20,-10))*.15)warnings.push('Výkyv přesnosti');
+  const status=warnings.length?'⚠️ '+warnings.join(', '):common.length<20?'Čeká na více výsledků':'Bez zjištěného varování';
+  return '<article class="lab-card"><strong>'+name+'</strong><span class="lab-pill">'+status+'</span><small>MAE (společný vzorek): '+(mae===null?'—':mae.toFixed(3))+'<br>Přínos proti CORE 3.0: '+(uplift===null?'—':(uplift>=0?'+':'')+uplift.toFixed(3))+'<br>Pokrytí neuzavřených zápasů: '+(coverage===null?'—':(coverage*100).toFixed(0)+' %')+'<br>Stabilita (změna MAE 10 vs 10): '+(drift===null?'—':(drift>=0?'+':'')+drift.toFixed(3))+'</small></article>';
+ }).join('');
+ return '<div class="lab-overview-group"><b>🧠 Karty predikčních modelů</b><p class="analysis-small">Přesnost vychází ze stejného vzorku '+common.length+' dokončených zápasů. Kladný přínos znamená nižší chybu než CORE 3.0. Při malém vzorku nelze spolehlivě určit nejlepší model.</p><div class="lab-grid">'+cards+'</div></div>';
+}
 function overviewPanel(){
  const rows=Array.isArray(window.bangerEngineLabArchive)?window.bangerEngineLabArchive:null;
  const done=rows?rows.filter(r=>r.status==='final'&&r.actual_away!=null&&r.actual_home!=null):[];
  const models=[['CORE 3.0','baseline'],['xG','experimental'],['CORE 3.1','advanced'],['CORE 3.2','goalie32'],['CORE 3.3','special33']];
  const common=done.filter(r=>models.every(([,key])=>r[key+'_away']!=null&&r[key+'_home']!=null&&Number.isFinite(Number(r[key+'_away']))&&Number.isFinite(Number(r[key+'_home']))));
  const nav=(tab,title,desc)=>'<button type="button" class="lab-overview-link" data-lab-tab="'+tab+'"><strong>'+title+'</strong><small>'+desc+'</small></button>';
- return '<div class="lab-details"><b>🏠 Přehled analytického centra</b><p class="analysis-small">Hlavní pohled odděluje užitečné výsledky od vývojových nástrojů. Engine Lab zůstává experimentálním prostředím; zatím se žádné modely automaticky nepřepínají.</p><div class="lab-summary"><div><strong>'+(rows?rows.length:'—')+'</strong><small>Zápasů v archivu</small></div><div><strong>'+done.length+'</strong><small>S konečným skóre</small></div><div><strong>'+common.length+'</strong><small>Společných pro 5 modelů</small></div></div><div class="lab-overview-group"><b>📊 Hlavní výsledky</b><div class="lab-overview-grid">'+nav('accuracy','🎯 Přesnost','Žebříček a srovnání chyb')+nav('history','📈 Historie MAE','Vývoj přesnosti v čase')+nav('uplift','⚖️ Přínos modelů','Rozdíly proti CORE 3.0')+nav('decision','🧭 Výběr modelu','Kandidáti pro další testování')+'</div></div><div class="lab-overview-group"><b>🛠️ Vývoj a kontrola</b><div class="lab-overview-grid">'+nav('models','🧠 Modely','Přehled použitých enginů')+nav('health','🩺 Stav modelů','Pokrytí a upozornění')+nav('quality','🛡️ Kvalita dat','Úplnost a časová kontrola')+nav('diagnostics','🔬 Diagnostika','Skupiny zápasů')+nav('calibration','🧪 Kalibrace','Odchylky od reality')+nav('stability','📡 Stabilita','Srovnání období')+nav('errors','🧩 Největší chyby','Rozbor konkrétních utkání')+nav('patterns','📊 Vzorce faktorů','Průzkum archivovaných vstupů')+nav('shots','🏒 Shots Engine','Samostatný tracker střel')+'</div></div><p class="analysis-small">Rozdělení je organizační, ne potvrzení kvality jednotlivých modelů. Pro rozhodování je stále potřeba dostatečný počet dokončených zápasů.</p></div>';
+ return '<div class="lab-details"><b>🏠 Přehled analytického centra</b><p class="analysis-small">Hlavní pohled odděluje užitečné výsledky od vývojových nástrojů. Engine Lab zůstává experimentálním prostředím; zatím se žádné modely automaticky nepřepínají.</p><div class="lab-summary"><div><strong>'+(rows?rows.length:'—')+'</strong><small>Zápasů v archivu</small></div><div><strong>'+done.length+'</strong><small>S konečným skóre</small></div><div><strong>'+common.length+'</strong><small>Společných pro 5 modelů</small></div></div>'+modelScorecards()+'<div class="lab-overview-group"><b>📊 Hlavní výsledky</b><div class="lab-overview-grid">'+nav('accuracy','🎯 Přesnost','Žebříček a srovnání chyb')+nav('history','📈 Historie MAE','Vývoj přesnosti v čase')+nav('uplift','⚖️ Přínos modelů','Rozdíly proti CORE 3.0')+nav('decision','🧭 Výběr modelu','Kandidáti pro další testování')+'</div></div><div class="lab-overview-group"><b>🛠️ Vývoj a kontrola</b><div class="lab-overview-grid">'+nav('models','🧠 Modely','Přehled použitých enginů')+nav('health','🩺 Stav modelů','Pokrytí a upozornění')+nav('quality','🛡️ Kvalita dat','Úplnost a časová kontrola')+nav('diagnostics','🔬 Diagnostika','Skupiny zápasů')+nav('calibration','🧪 Kalibrace','Odchylky od reality')+nav('stability','📡 Stabilita','Srovnání období')+nav('errors','🧩 Největší chyby','Rozbor konkrétních utkání')+nav('patterns','📊 Vzorce faktorů','Průzkum archivovaných vstupů')+nav('shots','🏒 Shots Engine','Samostatný tracker střel')+'</div></div><p class="analysis-small">Rozdělení je organizační, ne potvrzení kvality jednotlivých modelů. Pro rozhodování je stále potřeba dostatečný počet dokončených zápasů.</p></div>';
 }
 function update(){
  const lab=document.getElementById('bangerEngineLab');if(!lab)return;
