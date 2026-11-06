@@ -95,7 +95,7 @@ const originalNodes=new WeakMap();
 function translateDashboardDate(){
  const line=document.querySelector('.dash-heading p');if(!line)return;
  const current=line.textContent.trim();
- const match=current.match(/ · (\\d+) zápasů · (\\d+) živě$/)||current.match(/ · (\\d+) games · (\\d+) live$/);
+ const match=current.match(/ · (\d+) zápasů · (\d+) živě$/)||current.match(/ · (\d+) games · (\d+) live$/);
  if(!match)return;
  const date=new Date().toLocaleDateString(lang==='en'?'en-US':'cs-CZ',{weekday:'long',day:'numeric',month:'long'});
  const label=lang==='en'?date+' · '+match[1]+' games · '+match[2]+' live':date+' · '+match[1]+' zápasů · '+match[2]+' živě';
