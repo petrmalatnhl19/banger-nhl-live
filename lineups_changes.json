@@ -838,50 +838,61 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "kraken": {
-      "updatedAt": "2026-11-04T20:05:44.659862+00:00",
-      "previousPublishedAt": "2026-10-30T18:16:02.069000+00:00",
-      "publishedAt": "2026-11-04T20:03:02.892000+00:00",
-      "source": "https://www.nhl.com/news/calgary-flames-seattle-kraken-game-preview-november-4-2026",
+      "updatedAt": "2026-11-06T22:37:48.744514+00:00",
+      "previousPublishedAt": "2026-11-04T20:03:02.892000+00:00",
+      "publishedAt": "2026-11-06T22:34:00+00:00",
+      "source": "https://www.nhl.com/news/new-york-rangers-seattle-kraken-game-preview-november-7-2026",
       "events": [
         {
           "type": "added",
+          "player": "Matthew Wood",
+          "to": "Útok 2"
+        },
+        {
+          "type": "added",
+          "player": "Frederick Gaudreau",
+          "to": "Útok 2"
+        },
+        {
+          "type": "added",
+          "player": "Chandler Stephenson",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
           "player": "Kaapo Kakko",
-          "to": "Útok 2"
-        },
-        {
-          "type": "added",
-          "player": "Berkly Catton",
-          "to": "Útok 2"
-        },
-        {
-          "type": "added",
-          "player": "Jani Nyman",
+          "from": "Útok 2",
           "to": "Útok 3"
         },
         {
-          "type": "added",
-          "player": "Ville Ottavainen",
-          "to": "Obrana 3"
+          "type": "moved",
+          "player": "Berkly Catton",
+          "from": "Útok 2",
+          "to": "Útok 3"
         },
         {
-          "type": "removed",
-          "player": "Chandler Stephenson",
-          "from": "Útok 2"
+          "type": "moved",
+          "player": "Mackie Samoskevich",
+          "from": "Útok 2",
+          "to": "Útok 3"
         },
         {
-          "type": "removed",
-          "player": "Frederick Gaudreau",
-          "from": "Útok 2"
+          "type": "moved",
+          "player": "Jani Nyman",
+          "from": "Útok 3",
+          "to": "Útok 4"
         },
         {
-          "type": "removed",
-          "player": "Curtis Douglas",
-          "from": "Útok 3"
+          "type": "moved",
+          "player": "Ben Meyers",
+          "from": "Útok 3",
+          "to": "Útok 4"
         },
         {
-          "type": "removed",
-          "player": "Cale Fleury",
-          "from": "Obrana 3"
+          "type": "moved",
+          "player": "Ryan Winterton",
+          "from": "Útok 3",
+          "to": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
