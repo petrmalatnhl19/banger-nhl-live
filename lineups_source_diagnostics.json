@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-06T19:38:31.279521+00:00",
+  "generatedAt": "2026-11-06T20:29:50.638377+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -184,16 +184,34 @@
     "sharks": {
       "team": "SJS",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/san-jose-sharks-los-angeles-kings-game-preview-november-4-2026",
-      "candidatePublishedAt": "2026-11-04T20:17:46.883000+00:00",
+      "candidateSource": "https://www.nhl.com/news/san-jose-sharks-minnesota-wild-game-preview-november-6-2026",
+      "candidatePublishedAt": "2026-11-06T19:55:01.285000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
       "roleMismatches": [],
-      "rejectedLines": [],
-      "rejectedPlayerReasons": [],
+      "rejectedLines": [
+        {
+          "group": "defense",
+          "line": 2,
+          "players": [
+            "Jacob Troub"
+          ],
+          "sourceLine": [
+            "Sam Dickinson",
+            "Jacob Troub"
+          ]
+        }
+      ],
+      "rejectedPlayerReasons": [
+        {
+          "name": "Jacob Troub",
+          "expectedRole": "defense",
+          "reason": "not_in_current_roster"
+        }
+      ],
       "validatedForwardLines": 4,
-      "validatedDefensePairs": 3,
+      "validatedDefensePairs": 2,
       "accepted": true
     },
     "jets": {

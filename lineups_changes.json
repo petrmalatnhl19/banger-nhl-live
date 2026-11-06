@@ -923,30 +923,32 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "sharks": {
-      "updatedAt": "2026-11-04T20:19:22.535538+00:00",
-      "previousPublishedAt": "2026-11-02T19:19:05.216000+00:00",
-      "publishedAt": "2026-11-04T20:13:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-06T20:29:50.640990+00:00",
+      "previousPublishedAt": "2026-11-04T20:17:46.883000+00:00",
+      "publishedAt": "2026-11-06T19:55:01.285000+00:00",
+      "source": "https://www.nhl.com/news/san-jose-sharks-minnesota-wild-game-preview-november-6-2026",
       "events": [
         {
-          "type": "added",
-          "player": "Ty Dellandrea",
-          "to": "Útok 4"
+          "type": "moved",
+          "player": "Dmitry Orlov",
+          "from": "Obrana 3",
+          "to": "Obrana 2"
         },
         {
-          "type": "added",
+          "type": "moved",
           "player": "Eric Pohlkamp",
-          "to": "Obrana 3"
+          "from": "Obrana 3",
+          "to": "Obrana 2"
         },
         {
           "type": "removed",
-          "player": "Adam Gaudette",
-          "from": "Útok 4"
+          "player": "Sam Dickinson",
+          "from": "Obrana 2"
         },
         {
           "type": "removed",
-          "player": "Nolan Allan",
-          "from": "Obrana 3"
+          "player": "Jacob Trouba",
+          "from": "Obrana 2"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

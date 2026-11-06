@@ -1,16 +1,14 @@
 {
-  "generatedAt": "2026-11-06T19:38:31.649657+00:00",
+  "generatedAt": "2026-11-06T20:29:50.987913+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 25,
+  "currentProjections": 27,
   "needsFreshProjection": [
     "blackhawks",
     "kings",
     "kraken",
     "maple leafs",
-    "senators",
-    "sharks",
-    "wild"
+    "senators"
   ],
   "missing": [],
   "olderVerified": [
@@ -18,9 +16,7 @@
     "kings",
     "kraken",
     "maple leafs",
-    "senators",
-    "sharks",
-    "wild"
+    "senators"
   ],
   "manualSnapshots": [],
   "freshnessDefinition": "Publication within 36h; not a confirmed next-game lineup",
@@ -381,11 +377,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-04T20:17:46.883000+00:00",
-      "source": "https://www.nhl.com/news/san-jose-sharks-los-angeles-kings-game-preview-november-4-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-06T19:55:01.285000+00:00",
+      "source": "https://www.nhl.com/news/san-jose-sharks-minnesota-wild-game-preview-november-6-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "stars": {
       "hasProjectedLines": true,
@@ -406,11 +402,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-03T17:21:41.534000+00:00",
-      "source": "https://www.nhl.com/news/minnesota-wild-philadelphia-flyers-game-preview-november-3-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-06T19:55:01.285000+00:00",
+      "source": "https://www.nhl.com/news/san-jose-sharks-minnesota-wild-game-preview-november-6-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     }
   }
 }

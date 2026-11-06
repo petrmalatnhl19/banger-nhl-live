@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-06T19:38:31.286491+00:00",
+  "fetchedAt": "2026-11-06T20:29:50.643948+00:00",
   "teams": {
     "blue jackets": {
       "name": "Blue Jackets",
@@ -189,6 +189,96 @@
       "scratched": "Maksim Tsyplakov, Joel Hanley",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "publishedAt": "2026-11-06T19:08:00+00:00"
+    },
+    "sharks": {
+      "name": "Sharks",
+      "forwards": [
+        [
+          "Tyler Toffoli",
+          "Macklin Celebrini",
+          "Will Smith"
+        ],
+        [
+          "Mason Marchment",
+          "Michael Misa",
+          "Kiefer Sherwood"
+        ],
+        [
+          "Ivar Stenberg",
+          "Filip Bystedt",
+          "Collin Graf"
+        ],
+        [
+          "Barclay Goodrow",
+          "Zack Ostapchuk",
+          "Ty Dellandrea"
+        ]
+      ],
+      "defense": [
+        [
+          "Darnell Nurse",
+          "Michael Kesselring"
+        ],
+        [
+          "Dmitry Orlov",
+          "Eric Pohlkamp"
+        ]
+      ],
+      "goalies": [
+        "Yaroslav Askarov",
+        "Alex Nedeljkovic"
+      ],
+      "injured": "Alexander Wennberg (upper body), Igor Chernyshov (upper body)",
+      "scratched": "Adam Gaudette, Nolan Allan",
+      "source": "https://www.nhl.com/news/san-jose-sharks-minnesota-wild-game-preview-november-6-2026",
+      "publishedAt": "2026-11-06T19:55:01.285000+00:00"
+    },
+    "wild": {
+      "name": "Wild",
+      "forwards": [
+        [
+          "Kirill Kaprizov",
+          "Joel Eriksson Ek",
+          "Matt Boldy"
+        ],
+        [
+          "Maxim Shabanov",
+          "Danila Yurov",
+          "Yakov Trenin"
+        ],
+        [
+          "Blake Coleman",
+          "Michael McCarron",
+          "Bobby Brink"
+        ],
+        [
+          "Nico Sturm",
+          "Ryan Hartman",
+          "Tyler Pitlick"
+        ]
+      ],
+      "defense": [
+        [
+          "Quinn Hughes",
+          "Jonas Brodin"
+        ],
+        [
+          "Olli Maatta",
+          "Zach Bogosian"
+        ],
+        [
+          "Matt Kiersted",
+          "David Spacek"
+        ]
+      ],
+      "goalies": [
+        "Jesper Wallstedt",
+        "Calvin Pickard"
+      ],
+      "injured": "Brock Faber (skull fracture), Marcus Foligno (lower body), Nick Foligno (upper body), Filip",
+      "scratched": "Mason Shaw, Cameron Crotty",
+      "source": "https://www.nhl.com/news/san-jose-sharks-minnesota-wild-game-preview-november-6-2026",
+      "publishedAt": "2026-11-06T19:55:01.285000+00:00"
     },
     "panthers": {
       "name": "Panthers",
@@ -1150,53 +1240,6 @@
       "source": "https://www.nhl.com/news/carolina-hurricanes-new-york-islanders-game-preview-november-5-2026",
       "publishedAt": "2026-11-05T16:47:25.404000+00:00"
     },
-    "sharks": {
-      "name": "Sharks",
-      "forwards": [
-        [
-          "Tyler Toffoli",
-          "Macklin Celebrini",
-          "Will Smith"
-        ],
-        [
-          "Mason Marchment",
-          "Michael Misa",
-          "Kiefer Sherwood"
-        ],
-        [
-          "Ivar Stenberg",
-          "Filip Bystedt",
-          "Collin Graf"
-        ],
-        [
-          "Barclay Goodrow",
-          "Zack Ostapchuk",
-          "Ty Dellandrea"
-        ]
-      ],
-      "defense": [
-        [
-          "Darnell Nurse",
-          "Michael Kesselring"
-        ],
-        [
-          "Sam Dickinson",
-          "Jacob Trouba"
-        ],
-        [
-          "Dmitry Orlov",
-          "Eric Pohlkamp"
-        ]
-      ],
-      "goalies": [
-        "Yaroslav Askarov",
-        "Alex Nedeljkovic"
-      ],
-      "injured": "Alexander Wennberg (upper body), Igor Chernyshov (upper body)",
-      "scratched": "Adam Gaudette, Nolan Allan",
-      "source": "https://www.nhl.com/news/san-jose-sharks-los-angeles-kings-game-preview-november-4-2026",
-      "publishedAt": "2026-11-04T20:17:46.883000+00:00"
-    },
     "kings": {
       "name": "Kings",
       "forwards": [
@@ -1374,53 +1417,6 @@
       "scratched": "Dakota Mermis",
       "source": "https://www.nhl.com/news/utah-mammoth-toronto-maple-leafs-game-preview-november-3-2026",
       "publishedAt": "2026-11-03T17:53:04.347000+00:00"
-    },
-    "wild": {
-      "name": "Wild",
-      "forwards": [
-        [
-          "Kirill Kaprizov",
-          "Joel Eriksson Ek",
-          "Matt Boldy"
-        ],
-        [
-          "Maxim Shabanov",
-          "Danila Yurov",
-          "Yakov Trenin"
-        ],
-        [
-          "Blake Coleman",
-          "Michael McCarron",
-          "Bobby Brink"
-        ],
-        [
-          "Nico Sturm",
-          "Ryan Hartman",
-          "Tyler Pitlick"
-        ]
-      ],
-      "defense": [
-        [
-          "Quinn Hughes",
-          "Jonas Brodin"
-        ],
-        [
-          "Olli Maatta",
-          "Zach Bogosian"
-        ],
-        [
-          "Matt Kiersted",
-          "David Spacek"
-        ]
-      ],
-      "goalies": [
-        "Jesper Wallstedt",
-        "Calvin Pickard"
-      ],
-      "injured": "Brock Faber (skull fracture), Marcus Foligno (lower body), Nick Foligno (upper body), Filip Gustavsson (lower body), Jared Spurgeon (lower body)",
-      "scratched": "Mason Shaw, Cameron Crotty",
-      "source": "https://www.nhl.com/news/minnesota-wild-philadelphia-flyers-game-preview-november-3-2026",
-      "publishedAt": "2026-11-03T17:21:41.534000+00:00"
     }
   },
   "rosterValidated": true
