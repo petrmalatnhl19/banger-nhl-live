@@ -1652,7 +1652,7 @@ async function analyzeGame(id){
     const metrics=accuracyPanel.querySelector('#bangerAccuracyStats');
     const comparison=accuracyPanel.querySelector('#bangerAccuracyComparison');
     try{
-      const endpoint='https://xxwqeiuyislnoxsmjuul.supabase.co/rest/v1/nhl_prediction_archive?select=game_id,game_date,away_team,home_team,baseline_away,baseline_home,experimental_away,experimental_home,model_version,experimental_version,advanced_away,advanced_home,advanced_version,advanced_factors,goalie32_away,goalie32_home,goalie32_version,goalie32_factors,special33_away,special33_home,special33_version,special33_factors,predicted_at,experimental_predicted_at,advanced_predicted_at,goalie32_predicted_at,special33_predicted_at,status,actual_away,actual_home&order=game_date.desc&limit=1000';
+      const endpoint='https://xxwqeiuyislnoxsmjuul.supabase.co/rest/v1/nhl_prediction_archive?select=game_id,game_date,away_team,home_team,baseline_away,baseline_home,experimental_away,experimental_home,model_version,experimental_version,advanced_away,advanced_home,advanced_version,advanced_factors,goalie32_away,goalie32_home,goalie32_version,goalie32_factors,special33_away,special33_home,special33_version,special33_factors,predicted_at,advanced_predicted_at,goalie32_predicted_at,special33_predicted_at,status,actual_away,actual_home&order=game_date.desc&limit=1000';
       const response=await fetch(endpoint,{headers:{apikey:'sb_publishable_SfeHMIvUkYTuD3jCrWub8w_fPIY0B-G'}});
       if(!response.ok)throw Error('HTTP '+response.status);
       const rows=await response.json();
