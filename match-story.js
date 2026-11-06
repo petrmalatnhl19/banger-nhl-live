@@ -30,6 +30,25 @@ function read(report){
  parts.push('Projektovaní střelci zatím nejsou vyhodnoceni individuálním modelem.');
  return {fixture,parts};
 }
+function englishStory(data){
+ const fmt=v=>v===null||v===undefined||!Number.isFinite(Number(v))?null:Number(v).toLocaleString('en-US',{maximumFractionDigits:1});
+ const away=String(data?.away||'Away'),home=String(data?.home||'Home');
+ const parts=['BANGER PROJECTED. '+away+' vs '+home+'.'];
+ if(fmt(data?.goals?.away)!==null&&fmt(data?.goals?.home)!==null)parts.push('Estimated goals: '+away+' '+fmt(data.goals.away)+', '+home+' '+fmt(data.goals.home)+'. This is not an exact final-score prediction.');
+ else parts.push('A numeric goal projection is not available for both teams.');
+ if(fmt(data?.shots?.away)!==null&&fmt(data?.shots?.home)!==null)parts.push('Shots Engine v1 estimates '+away+' '+fmt(data.shots.away)+' shots and '+home+' '+fmt(data.shots.home)+' shots. The model combines team shooting with opponent shots allowed and has not yet been calibrated.');
+ else parts.push('Shot projections are not available for both teams.');
+ if(fmt(data?.penaltyMinutes?.away)!==null&&fmt(data?.penaltyMinutes?.home)!==null)parts.push('Recent penalty-minute averages: '+away+' '+fmt(data.penaltyMinutes.away)+', '+home+' '+fmt(data.penaltyMinutes.home)+' per game. These averages cannot reliably predict the number of penalties in the next game.');
+ else parts.push('Insufficient evidence for a penalty-count projection.');
+ parts.push('Individual goal scorers are not yet evaluated by a validated player-level model.');
+ return parts.join(' ');
+}
+function syncStoryLanguage(box){
+ const p=box.querySelector('[data-projected-story]');if(!p)return;
+ const en=window.bangerI18n?.getLanguage?.()==='en';
+ const target=en?p.dataset.storyEn:p.dataset.storyCs;
+ if(target&&p.textContent!==target)p.textContent=target;
+}
 function install(report){
  if(report.dataset.matchStoryV2)return;report.dataset.matchStoryV2='1';
  const body=report.querySelector('.analyst-fold-body');if(!body)return;
@@ -50,16 +69,17 @@ function install(report){
    '<p class="analysis-small">Střelecký model využívá vlastní střely a střely povolené soupeřem ze vzorku nejméně '+sample+' utkání na tým, pokud jsou data dostupná. Střelci a počet vyloučení čekají na samostatný ověřitelný model.</p>';
   box.querySelector('.banger-report-section-body').prepend(visual);
  }
- const result=read(report);const p=box.querySelector('[data-projected-story]');p.textContent=result?.parts.join(' ')||'Zatím nejsou dostupná data.';
+ const result=read(report);const p=box.querySelector('[data-projected-story]');p.dataset.storyCs=result?.parts.join(' ')||'Zatím nejsou dostupná data.';p.dataset.storyEn=englishStory(data);syncStoryLanguage(box);
  body.prepend(box);
  box.addEventListener('click',event=>{
  if(event.target.closest('[data-projected-stop]')){window.speechSynthesis?.cancel();speaking=null;box.querySelector('[data-projected-status]').textContent='Zastaveno';return}
  if(!event.target.closest('[data-projected-play]'))return;
  if(!window.speechSynthesis||!window.SpeechSynthesisUtterance){box.querySelector('[data-projected-status]').textContent='Hlasové čtení není dostupné.';return}
- window.speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(p.textContent);utterance.lang='cs-CZ';utterance.rate=1.04;utterance.voice=window.speechSynthesis.getVoices().find(v=>/^cs-CZ$/i.test(v.lang))||null;speaking=utterance;utterance.onend=()=>{if(speaking===utterance){speaking=null;box.querySelector('[data-projected-status]').textContent='Dočteno'}};box.querySelector('[data-projected-status]').textContent='Přehrává se';window.speechSynthesis.speak(utterance);
+ window.speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(p.textContent);utterance.lang=window.bangerI18n?.getLanguage?.()==='en'?'en-US':'cs-CZ';utterance.rate=1.04;utterance.voice=window.speechSynthesis.getVoices().find(v=>v.lang?.toLowerCase()===utterance.lang.toLowerCase())||null;speaking=utterance;utterance.onend=()=>{if(speaking===utterance){speaking=null;box.querySelector('[data-projected-status]').textContent='Dočteno'}};box.querySelector('[data-projected-status]').textContent='Přehrává se';window.speechSynthesis.speak(utterance);
  });
 }
-function scan(){document.querySelectorAll('.analysis-panel .analyst-expert-report').forEach(install)}
+function scan(){document.querySelectorAll('.analysis-panel .analyst-expert-report').forEach(install);document.querySelectorAll('.banger-match-story').forEach(syncStoryLanguage)}
+window.addEventListener('banger-language-change',()=>document.querySelectorAll('.banger-match-story').forEach(syncStoryLanguage));
 function start(){scan();let scheduled=false;new MutationObserver(()=>{if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{scheduled=false;scan()})}).observe(document.body,{subtree:true,childList:true})}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
