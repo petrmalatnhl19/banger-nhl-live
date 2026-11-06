@@ -30,6 +30,12 @@ const style=document.createElement('style');style.textContent=`
 #bangerEngineLab .lab-bar span{display:block;height:100%;background:linear-gradient(90deg,#21b3e8,#6cf1bd)}
 #bangerEngineLab .lab-error-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:10px;margin-top:12px}
 #bangerEngineLab .lab-error-card{min-width:0}
+#bangerEngineLab .lab-pattern-card{min-width:0}
+#bangerEngineLab .lab-pattern-item{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid #3c789b55;font-size:12px}
+#bangerEngineLab .lab-pattern-item>div{min-width:0;overflow-wrap:anywhere}
+#bangerEngineLab .lab-pattern-item>div:last-child{text-align:right}
+#bangerEngineLab .lab-pattern-item small{display:block;color:#a6c9d9}
+@media(max-width:520px){#bangerEngineLab .lab-pattern-item{flex-direction:column;gap:3px}#bangerEngineLab .lab-pattern-item>div:last-child{text-align:left}}
 #bangerEngineLab .lab-error-entry{border-top:1px solid #3c789b55}
 #bangerEngineLab .lab-error-entry .lab-error-row{border-top:0}
 #bangerEngineLab .lab-factor-details{padding:0 0 12px;font-size:12px}
@@ -53,7 +59,7 @@ const style=document.createElement('style');style.textContent=`
 function mount(){
  const hub=document.getElementById('bangerPredictionHubContent');if(!hub||document.getElementById('bangerEngineLab'))return;
  const lab=document.createElement('section');lab.id='bangerEngineLab';
- lab.innerHTML='<div class="lab-head"><div><div class="lab-title">⚙️ BANGER ENGINE LAB</div><div class="lab-sub">Řídicí centrum predikčních modelů · data, přesnost a vývoj</div></div><span class="lab-pill">● MODEL MONITOR</span></div><div class="lab-summary"><div><strong>5</strong><small>Gólových modelů</small></div><div><strong>1</strong><small>Shots Engine</small></div><div><strong data-lab-final>—</strong><small>Dokončených zápasů</small></div></div><div class="lab-controls" role="group" aria-label="Přehled Engine Lab"><button type="button" data-lab-tab="models" aria-pressed="true">🧠 Modely</button><button type="button" data-lab-tab="accuracy" aria-pressed="false">🎯 Přesnost</button><button type="button" data-lab-tab="shots" aria-pressed="false">🏒 Shots</button><button type="button" data-lab-tab="diagnostics" aria-pressed="false">🔬 Diagnostika</button><button type="button" data-lab-tab="calibration" aria-pressed="false">🧪 Kalibrace</button><button type="button" data-lab-tab="stability" aria-pressed="false">📡 Stabilita</button><button type="button" data-lab-tab="errors" aria-pressed="false">🧩 Největší chyby</button></div><div class="lab-mobile-hint">← Posunutím nabídky zobrazíš další moduly →</div><div data-lab-content aria-live="polite"></div>';
+ lab.innerHTML='<div class="lab-head"><div><div class="lab-title">⚙️ BANGER ENGINE LAB</div><div class="lab-sub">Řídicí centrum predikčních modelů · data, přesnost a vývoj</div></div><span class="lab-pill">● MODEL MONITOR</span></div><div class="lab-summary"><div><strong>5</strong><small>Gólových modelů</small></div><div><strong>1</strong><small>Shots Engine</small></div><div><strong data-lab-final>—</strong><small>Dokončených zápasů</small></div></div><div class="lab-controls" role="group" aria-label="Přehled Engine Lab"><button type="button" data-lab-tab="models" aria-pressed="true">🧠 Modely</button><button type="button" data-lab-tab="accuracy" aria-pressed="false">🎯 Přesnost</button><button type="button" data-lab-tab="shots" aria-pressed="false">🏒 Shots</button><button type="button" data-lab-tab="diagnostics" aria-pressed="false">🔬 Diagnostika</button><button type="button" data-lab-tab="calibration" aria-pressed="false">🧪 Kalibrace</button><button type="button" data-lab-tab="stability" aria-pressed="false">📡 Stabilita</button><button type="button" data-lab-tab="errors" aria-pressed="false">🧩 Největší chyby</button><button type="button" data-lab-tab="patterns" aria-pressed="false">📊 Vzorce faktorů</button></div><div class="lab-mobile-hint">← Posunutím nabídky zobrazíš další moduly →</div><div data-lab-content aria-live="polite"></div>';
  hub.insertBefore(lab,hub.firstChild);
  lab.addEventListener('click',e=>{const b=e.target.closest('[data-lab-tab]');if(!b)return;lab.dataset.tab=b.dataset.labTab;update()});
  lab.dataset.tab='models';update();
@@ -199,6 +205,40 @@ function errorsPanel(){
  }).join('');
  return '<div class="lab-details"><b>🧩 Největší chyby jednotlivých modelů</b><p class="analysis-small">Pět zápasů s nejvyšší absolutní chybou předpovězených gólů na tým. U každého zápasu lze rozbalit srovnání modelů a archivované vstupní faktory CORE 3.1–3.3, pokud byly uloženy. Pouze dokončené zápasy s uloženou predikcí. Tento přehled ukazuje, kde se model mýlil, nikoliv proč; příčiny musíme ověřit další analýzou.</p><div class="lab-error-grid">'+cards+'</div><p class="analysis-small">Pořadí je počítané samostatně pro každý model. Vzorky se mohou lišit a výsledky nejsou důkazem budoucí přesnosti.</p></div>';
 }
+function patternsPanel(){
+ const rows=Array.isArray(window.bangerEngineLabArchive)?window.bangerEngineLabArchive:[];
+ const models=[['CORE 3.1','advanced','advanced_factors'],['CORE 3.2','goalie32','goalie32_factors'],['CORE 3.3','special33','special33_factors']];
+ const ok=v=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v));
+ const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const final=rows.filter(r=>r.status==='final'&&ok(r.actual_away)&&ok(r.actual_home));
+ const sections=models.map(([name,key,field])=>{
+  const valid=final.filter(r=>ok(r[key+'_away'])&&ok(r[key+'_home']));
+  const records=[];
+  valid.forEach(r=>{
+   let obj=r[field];if(typeof obj==='string'){try{obj=JSON.parse(obj)}catch(_){return}}
+   if(!obj||typeof obj!=='object'||Array.isArray(obj))return;
+   const mae=(Math.abs(Number(r[key+'_away'])-Number(r.actual_away))+Math.abs(Number(r[key+'_home'])-Number(r.actual_home)))/2;
+   Object.entries(obj).forEach(([factor,value])=>{
+    if(!/^[\w .-]{1,70}$/.test(factor)||!ok(value)||typeof value==='boolean')return;
+    const num=Number(value);
+    if(!Number.isFinite(num)||Math.abs(num)>1e9)return;
+    records.push({factor,value:num,mae,game:String(r.game_id)});
+   });
+  });
+  const grouped=new Map();
+  records.forEach(x=>{if(!grouped.has(x.factor))grouped.set(x.factor,[]);grouped.get(x.factor).push(x)});
+  const eligible=[...grouped].map(([factor,points])=>{
+   const unique=[...new Map(points.map(p=>[p.game,p])).values()].sort((a,b)=>a.value-b.value);
+   if(unique.length<20||unique[0].value===unique[unique.length-1].value)return null;
+   const half=Math.floor(unique.length/2),low=unique.slice(0,half),high=unique.slice(-half);
+   const avg=arr=>arr.reduce((sum,p)=>sum+p.mae,0)/arr.length;
+   return {factor,n:unique.length,low:avg(low),high:avg(high),delta:avg(high)-avg(low),min:unique[0].value,max:unique[unique.length-1].value};
+  }).filter(Boolean).sort((a,b)=>Math.abs(b.delta)-Math.abs(a.delta)).slice(0,8);
+  const content=eligible.length?eligible.map(x=>'<div class="lab-pattern-item"><div><b>'+esc(x.factor)+'</b><small>n='+x.n+' · rozsah '+x.min.toFixed(2)+' až '+x.max.toFixed(2)+'</small></div><div><b style="color:'+(x.delta>0?'#ffd08b':'#7df0bf')+'">'+(x.delta>0?'+':'')+x.delta.toFixed(2)+'</b><small>MAE nižší polovina '+x.low.toFixed(2)+' · vyšší '+x.high.toFixed(2)+'</small></div></div>').join(''):'<small>Dosud nemáme alespoň 20 dokončených zápasů s různými číselnými hodnotami stejného faktoru. Analýza se zpřístupní automaticky.</small>';
+  return '<article class="lab-card lab-pattern-card"><span class="lab-pill">'+valid.length+' PREDIKCÍ S VÝSLEDKEM</span><strong>'+name+'</strong><small>Vyhodnocené číselné faktory: '+eligible.length+'</small>'+content+'</article>';
+ }).join('');
+ return '<div class="lab-details"><b>📊 Vzorce chyb podle archivovaných faktorů</b><p class="analysis-small">Pro každý číselný faktor porovnáváme průměrnou chybu MAE u nižší a vyšší poloviny jeho hodnot. Rozdíl = MAE vyšší poloviny minus MAE nižší poloviny. Kladný rozdíl značí větší chybu při vyšších hodnotách faktoru. Každá polovina vyžaduje alespoň 10 zápasů; řadíme podle absolutní velikosti rozdílu, což může zvýraznit náhodné výkyvy.</p><div class="lab-error-grid">'+sections+'</div><p class="analysis-small">Jde o průzkumnou souvislost, nikoli prokázanou příčinu. Vnořené či textové faktory zatím nevyhodnocujeme. Žádné váhy modelů se automaticky nemění.</p></div>';
+}
 function update(){
  const lab=document.getElementById('bangerEngineLab');if(!lab)return;
  const tab=lab.dataset.tab||'models';
@@ -206,7 +246,9 @@ function update(){
  const body=lab.querySelector('[data-lab-content]');
  const finalCount=Array.isArray(window.bangerEngineLabArchive)?window.bangerEngineLabArchive.filter(r=>r.status==='final').length:null;
  const finalEl=lab.querySelector('[data-lab-final]');if(finalEl)finalEl.textContent=finalCount===null?'—':String(finalCount);
- if(tab==='errors'){
+ if(tab==='patterns'){
+  body.innerHTML=patternsPanel();
+ }else if(tab==='errors'){
   body.innerHTML=errorsPanel();
  }else if(tab==='stability'){
   body.innerHTML=stabilityPanel();
@@ -237,6 +279,6 @@ function update(){
 }
 let last='';
 function refresh(){mount();const lab=document.getElementById('bangerEngineLab');if(!lab||lab.dataset.tab==='models')return;const source=[document.getElementById('bangerAccuracyComparison')?.parentElement?.textContent||'',document.getElementById('bangerShotsTracker')?.textContent||'',String(window.bangerEngineLabArchive?.length??'')].join('|');if(source!==last){last=source;update()}}
-function start(){refresh();window.addEventListener('banger-engine-lab-archive',()=>{if(['accuracy','diagnostics','calibration','stability','errors'].includes(document.getElementById('bangerEngineLab')?.dataset.tab))update()});setInterval(refresh,2500)}
+function start(){refresh();window.addEventListener('banger-engine-lab-archive',()=>{if(['accuracy','diagnostics','calibration','stability','errors','patterns'].includes(document.getElementById('bangerEngineLab')?.dataset.tab))update()});setInterval(refresh,2500)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
