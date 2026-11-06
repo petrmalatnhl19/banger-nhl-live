@@ -923,32 +923,81 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "sharks": {
-      "updatedAt": "2026-11-06T20:29:50.640990+00:00",
-      "previousPublishedAt": "2026-11-04T20:17:46.883000+00:00",
+      "updatedAt": "2026-11-06T21:53:56.766236+00:00",
+      "previousPublishedAt": "2026-11-06T19:55:01.285000+00:00",
       "publishedAt": "2026-11-06T19:55:01.285000+00:00",
       "source": "https://www.nhl.com/news/san-jose-sharks-minnesota-wild-game-preview-november-6-2026",
       "events": [
         {
           "type": "moved",
-          "player": "Dmitry Orlov",
-          "from": "Obrana 3",
+          "player": "Michael Misa",
+          "from": "Útok 2",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Collin Graf",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Barclay Goodrow",
+          "from": "Útok 4",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Zack Ostapchuk",
+          "from": "Útok 4",
+          "to": "Útok 3"
+        },
+        {
+          "type": "added",
+          "player": "Adam Gaudette",
+          "to": "Útok 3"
+        },
+        {
+          "type": "added",
+          "player": "Sam Dickinson",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "added",
+          "player": "Jacob Trouba",
           "to": "Obrana 2"
         },
         {
           "type": "moved",
+          "player": "Dmitry Orlov",
+          "from": "Obrana 2",
+          "to": "Obrana 3"
+        },
+        {
+          "type": "moved",
           "player": "Eric Pohlkamp",
-          "from": "Obrana 3",
-          "to": "Obrana 2"
+          "from": "Obrana 2",
+          "to": "Obrana 3"
         },
         {
           "type": "removed",
-          "player": "Sam Dickinson",
-          "from": "Obrana 2"
+          "player": "Tyler Toffoli",
+          "from": "Útok 1"
         },
         {
           "type": "removed",
-          "player": "Jacob Trouba",
-          "from": "Obrana 2"
+          "player": "Ivar Stenberg",
+          "from": "Útok 3"
+        },
+        {
+          "type": "removed",
+          "player": "Filip Bystedt",
+          "from": "Útok 3"
+        },
+        {
+          "type": "removed",
+          "player": "Ty Dellandrea",
+          "from": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

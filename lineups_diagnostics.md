@@ -1,6 +1,6 @@
 # NHL projection diagnostics
 
-Generated (UTC): 2026-11-06T21:14:35.467206+00:00
+Generated (UTC): 2026-11-06T21:53:57.423711+00:00
 
 Available (including historical): 32/32
 Recent verified (source published within 36h): 27/32
@@ -13,5 +13,5 @@ Recent verified (source published within 36h): 27/32
 - NYI: FRESH; reason=passed; candidate=True; verified lines=4F/2D; publishedAt=2026-11-05T16:47:25.404000+00:00; source=https://www.nhl.com/news/carolina-hurricanes-new-york-islanders-game-preview-november-5-2026; archive=yes
 - NYR: FRESH; reason=passed; candidate=True; verified lines=4F/3D; publishedAt=2026-11-05T19:32:00+00:00; source=https://www.nhl.com/news/philadelphia-flyers-new-york-rangers-game-preview-november-5-2026; archive=yes
 - OTT: NO VALIDATED LIVE PROJECTION; reason=insufficient_position_matched_lines; candidate=True; verified lines=2F/3D; publishedAt=unknown; source=unknown; archive=yes
-- SJS: FRESH; reason=passed; candidate=True; verified lines=4F/2D; publishedAt=2026-11-06T19:55:01.285000+00:00; source=https://www.nhl.com/news/san-jose-sharks-minnesota-wild-game-preview-november-6-2026; archive=yes
+- SJS: FRESH; reason=passed; candidate=True; verified lines=3F/3D; publishedAt=2026-11-06T19:55:01.285000+00:00; source=https://www.nhl.com/news/san-jose-sharks-minnesota-wild-game-preview-november-6-2026; archive=yes
 - WPG: FRESH; reason=passed; candidate=True; verified lines=3F/3D; publishedAt=2026-11-05T18:31:00.644000+00:00; source=https://www.nhl.com/news/vancouver-canucks-winnipeg-jets-game-preview-november-5-2026; archive=yes

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-06T21:14:34.994727+00:00",
+  "generatedAt": "2026-11-06T21:53:56.763537+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -192,26 +192,27 @@
       "roleMismatches": [],
       "rejectedLines": [
         {
-          "group": "defense",
-          "line": 2,
+          "group": "forwards",
+          "line": 3,
           "players": [
-            "Jacob Troub"
+            "Ivan Stenberg"
           ],
           "sourceLine": [
-            "Sam Dickinson",
-            "Jacob Troub"
+            "Ivan Stenberg",
+            "Ty Dellandrea",
+            "Tyler Toffoli"
           ]
         }
       ],
       "rejectedPlayerReasons": [
         {
-          "name": "Jacob Troub",
-          "expectedRole": "defense",
+          "name": "Ivan Stenberg",
+          "expectedRole": "forwards",
           "reason": "not_in_current_roster"
         }
       ],
-      "validatedForwardLines": 4,
-      "validatedDefensePairs": 2,
+      "validatedForwardLines": 3,
+      "validatedDefensePairs": 3,
       "accepted": true
     },
     "jets": {
