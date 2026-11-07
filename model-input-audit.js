@@ -11,8 +11,8 @@ function render(){
  if(!card){card=document.createElement('section');card.id='bangerInputAudit';lab.insertBefore(card,lab.firstChild)}
  const finals=rows.filter(r=>r.status==='final');
  const pending=rows.filter(r=>r.status==='pending');
- const validated=pending.filter(r=>r.goalie32_factors?.roster_validation==='nhl_current_roster_required');
- const rejected=pending.filter(r=>r.goalie32_factors?.rejected_away_goalie===true||r.goalie32_factors?.rejected_home_goalie===true);
+ const validated=pending.filter(r=>r.goalie32_factors?.roster_validation==='nhl_current_roster_advisory');
+ const mismatches=pending.filter(r=>r.goalie32_factors?.roster_validation==='nhl_current_roster_advisory'&&(r.goalie32_factors?.roster_match_away===false||r.goalie32_factors?.roster_match_home===false));
  const available=pending.filter(r=>r.goalie32_factors?.goalie_data_missing===false);
  const goalies=finals.filter(r=>r.goalie32_factors?.goalie_data_missing===true);
  const same=finals.filter(r=>['advanced_away','advanced_home','goalie32_away','goalie32_home'].every(k=>valid(r[k]))&&Number(r.advanced_away)===Number(r.goalie32_away)&&Number(r.advanced_home)===Number(r.goalie32_home));
@@ -22,9 +22,9 @@ function render(){
  const en=window.bangerI18n?.getLanguage?.()==='en';
  const tile=(name,value)=>'<div class="audit-tile"><span>'+name+'</span><strong>'+value+'</strong></div>';
  const headline=en?'🧪 Model input audit · CORE 3.2 / 3.3':'🧪 Audit vstupů modelů · CORE 3.2 / 3.3';
- const signature=[finals.length,goalies.length,same.length,changes.length,special.length,goalieUnknown,pending.length,validated.length,rejected.length,available.length,en].join(':');
+ const signature=[finals.length,goalies.length,same.length,changes.length,special.length,goalieUnknown,pending.length,validated.length,mismatches.length,available.length,en].join(':');
  if(card.dataset.signature===signature)return;card.dataset.signature=signature;
- card.innerHTML='<h3>'+headline+'</h3><p>'+(en?'Read-only checks of archived completed games. No forecasts are modified.':'Kontrola archivovaných dokončených zápasů. Žádné predikce se nemění.')+'</p><div class="audit-grid">'+tile(en?'Completed games':'Dokončené zápasy',finals.length)+tile(en?'Missing goalie data':'Chybí brankáři',goalies.length+'/'+finals.length)+tile(en?'CORE 3.2 = 3.1':'CORE 3.2 = 3.1',same.length+'/'+finals.length)+tile(en?'CORE 3.3 changed':'CORE 3.3 změnil',changes.length+'/'+special.length)+tile(en?'Pending: roster verified':'Čekající: kontrola soupisky',validated.length+'/'+pending.length)+tile(en?'Pending: goalie inputs ready':'Čekající: brankáři dostupní',available.length+'/'+pending.length)+tile(en?'Pending: rejected names':'Čekající: odmítnutá jména',rejected.length+'/'+pending.length)+'</div>'+
+ card.innerHTML='<h3>'+headline+'</h3><p>'+(en?'Read-only checks of archived completed games. No forecasts are modified.':'Kontrola archivovaných dokončených zápasů. Žádné predikce se nemění.')+'</p><div class="audit-grid">'+tile(en?'Completed games':'Dokončené zápasy',finals.length)+tile(en?'Missing goalie data':'Chybí brankáři',goalies.length+'/'+finals.length)+tile(en?'CORE 3.2 = 3.1':'CORE 3.2 = 3.1',same.length+'/'+finals.length)+tile(en?'CORE 3.3 changed':'CORE 3.3 změnil',changes.length+'/'+special.length)+tile(en?'Pending: roster checked':'Čekající: kontrola soupisky',validated.length+'/'+pending.length)+tile(en?'Pending: goalie inputs ready':'Čekající: brankáři dostupní',available.length+'/'+pending.length)+tile(en?'Pending: roster differences':'Čekající: rozdíly v soupisce',mismatches.length+'/'+pending.length)+'</div>'+
  '<p class="audit-alert">'+(goalies.length?en?'⚠ Goalie adjustments are unavailable in '+goalies.length+' completed games. CORE 3.2 may fall back to CORE 3.1.':'⚠ U '+goalies.length+' dokončených zápasů chybí brankářská data. CORE 3.2 může přebírat CORE 3.1.':en?'No explicit missing-goalie flags in completed games.':'U dokončených zápasů nejsou výslovně označena chybějící brankářská data.')+'</p>'+
  '<p>'+(en?'Special teams: '+changes.length+' of '+special.length+' comparable completed games changed their projected scores. A change does not prove an accuracy improvement.':'Speciální týmy: u '+changes.length+' z '+special.length+' porovnatelných dokončených zápasů se změnila predikce. Změna sama o sobě neznamená vyšší přesnost.')+'</p>'+
  (goalieUnknown?'<p>'+(en?'Goalie data status unknown for ':'Stav brankářských dat není znám u ')+goalieUnknown+(en?' completed games.':' dokončených zápasů.')+'</p>':'');
