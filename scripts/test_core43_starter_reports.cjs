@@ -1,0 +1,13 @@
+const assert=require("node:assert/strict");
+const {normalize}=require("../core43-starter-reports.js");
+const game={gameId:2026020267,awayTeam:"NYR",homeTeam:"SEA",kickoffUTC:"2026-11-07T22:00:00Z"};
+const report={gameId:game.gameId,teamCode:"NYR",goalieId:"12345",status:"confirmed",confirmationBasis:"explicit_pregame_report",sourceName:"Verified team report",sourceUrl:"https://example.org/report",sourcePublishedAt:"2026-11-07T20:00:00Z"};
+const t="2026-11-07T20:10:00Z";
+assert.equal(normalize(report,game,t).accepted,true);
+assert.equal(normalize({...report,status:"projected"},game,t).reason,"not_confirmed");
+assert.equal(normalize({...report,confirmationBasis:"box_score"},game,t).reason,"unsupported_confirmation_basis");
+assert.equal(normalize({...report,goalieId:null},game,t).reason,"missing_nhl_goalie_id");
+assert.equal(normalize(report,game,"2026-11-07T22:01:00Z").reason,"not_pregame");
+assert.equal(normalize({...report,sourcePublishedAt:"2026-11-07T21:00:00Z"},game,t).reason,"published_after_observation");
+assert.equal(normalize({...report,teamCode:"DAL"},game,t).reason,"team_mismatch");
+console.log("CORE 4.3 starter reports validation passed");
