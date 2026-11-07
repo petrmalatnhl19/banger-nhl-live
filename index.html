@@ -1100,10 +1100,10 @@ const beforeOwn=(isAway?away:home)-1,beforeOpp=isAway?home:away;
 const afterOwn=isAway?away:home,afterOpp=isAway?home:away;
 const oldLead=beforeOwn-beforeOpp,newLead=afterOwn-afterOpp;
 const score=away+':'+home;
-if(oldLead<0&&newLead<0)msg=variants(['🥅 GÓL! '+named+' snižuje na '+score+'.','🥅 BRANKA! '+named+' upravuje skóre na '+score+'.']);
+if(oldLead<0&&newLead<0)msg=variants(['🥅 GÓL! '+named+' snižuje na '+score+'.','🥅 BRANKA! '+named+' zmenšuje ztrátu svého týmu. Stav '+score+'.']);
 else if(oldLead<0&&newLead===0)msg=variants(['🥅 GÓL! '+named+' vyrovnává na '+score+'!','🥅 JE VYROVNÁNO! '+named+' zařizuje stav '+score+'!']);
-else if(oldLead===0&&newLead>0)msg=variants(['🥅 GÓL! '+named+' posílá tým '+team+' do vedení '+score+'!','🥅 BRANKA! Tým '+team+' vede '+score+', střelcem je '+named+'!']);
-else if(oldLead>0&&newLead>0)msg=variants(['🥅 GÓL! '+named+' zvyšuje vedení na '+score+'.','🥅 BRANKA! '+named+' přidává další gól, stav '+score+'.']);
+else if(oldLead===0&&newLead>0)msg=variants(['🥅 GÓL! '+named+' posílá svůj tým do vedení '+score+'!','🥅 BRANKA! '+named+' rozhoduje o průběžném vedení, stav '+score+'!']);
+else if(oldLead>0&&newLead>0)msg=variants(['🥅 GÓL! '+named+' navyšuje vedení svého týmu na '+score+'.','🥅 BRANKA! '+named+' zvyšuje náskok, stav '+score+'.']);
 else msg='🥅 GÓL! '+named+' mění skóre na '+score+'.';
 const strength=String(v.strength||'').toLowerCase().trim();
 const situation=String(e.situationCode||'');
@@ -1119,7 +1119,7 @@ if(goalType)msg=msg.replace(/^🥅 (?:GÓL!|BRANKA!|JE VYROVNÁNO!)/,'🥅 GÓL 
 if(period==='OT')msg+=' Prodloužení.';
 matchContext.latestScore={away,home};
 }else if(hasScore){msg+=' Stav '+away+':'+home+'.';matchContext.latestScore={away,home}}
-const goalShot=shotDescription(v);if(goalShot)msg+=' 🎯 '+named+' se prosazuje '+goalShot+'.';const assists=[actor(v.assist1PlayerId),actor(v.assist2PlayerId)].filter(Boolean);if(assists.length)msg+=' 🏒 Asistence: '+assists.join(', ')+'.';
+const goalShot=shotDescription(v);if(goalShot)msg+=' 🎯 Zakončení: '+goalShot+'.';const assists=[actor(v.assist1PlayerId),actor(v.assist2PlayerId)].filter(Boolean);if(assists.length)msg+=' 🏒 Asistence: '+assists.join(', ')+'.';
 const preceding=matchContext.recentPlays.filter(p=>p.period===e.periodDescriptor?.number&&p.time<=currentTime&&currentTime-p.time<=8&&p.team===team);const priorShot=preceding.slice().reverse().find(p=>p.type==='shot-on-goal'||p.type==='missed-shot'||p.type==='blocked-shot');if(priorShot)msg+=' 📋 Krátce před gólem '+team+' zaznamenal '+(priorShot.type==='shot-on-goal'?'střelu na branku':priorShot.type==='missed-shot'?'nepřesnou střelu':'zblokovanou střelu')+(priorShot.player?' ('+priorShot.player+')':'')+'.';
 break;}
 
