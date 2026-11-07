@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-07T16:37:17.947736+00:00",
-  "rostersUpdatedAt": "2026-11-07T16:36:54.173203+00:00",
+  "updatedAt": "2026-11-07T17:13:12.429709+00:00",
+  "rostersUpdatedAt": "2026-11-07T17:12:55.028860+00:00",
   "projectionDate": "2026-11-07",
   "teamCount": 32,
   "goalieCount": 77,
@@ -68,7 +68,7 @@
       "team": "STL",
       "teamKey": "blues",
       "playerId": 8480981,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-07",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -273,8 +273,9 @@
       "team": "NYI",
       "teamKey": "islanders",
       "playerId": 8478009,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-07",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Semyon Varlamov",

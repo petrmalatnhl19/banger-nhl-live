@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-07T16:37:15.690725+00:00",
+  "generatedAt": "2026-11-07T17:13:10.540491+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 12,
+  "currentProjections": 13,
   "needsFreshProjection": [
     "avalanche",
     "blackhawks",
@@ -12,7 +12,6 @@
     "devils",
     "flyers",
     "golden knights",
-    "hurricanes",
     "islanders",
     "jets",
     "kings",
@@ -35,7 +34,6 @@
     "devils",
     "flyers",
     "golden knights",
-    "hurricanes",
     "islanders",
     "jets",
     "kings",
@@ -94,7 +92,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-07T15:36:00+00:00",
+      "publishedAt": "2026-11-07T16:56:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -143,8 +141,8 @@
         "manual"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-07T15:37:00+00:00",
-      "source": "https://www.nhl.com/news/florida-panthers-washington-capitals-game-preview-november-7-2026",
+      "publishedAt": "2026-11-07T16:56:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -214,11 +212,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-05T16:47:25.404000+00:00",
-      "source": "https://www.nhl.com/news/carolina-hurricanes-new-york-islanders-game-preview-november-5-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-07T16:56:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "islanders": {
       "hasProjectedLines": true,
@@ -263,7 +261,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-07T15:36:00+00:00",
+      "publishedAt": "2026-11-07T16:56:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -325,8 +323,8 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-07T15:37:00+00:00",
-      "source": "https://www.nhl.com/news/florida-panthers-washington-capitals-game-preview-november-7-2026",
+      "publishedAt": "2026-11-07T16:56:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -349,7 +347,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-07T15:36:00+00:00",
+      "publishedAt": "2026-11-07T16:56:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -361,7 +359,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-07T15:36:00+00:00",
+      "publishedAt": "2026-11-07T16:56:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"

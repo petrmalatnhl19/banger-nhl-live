@@ -1169,6 +1169,41 @@
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "hurricanes": {
+      "updatedAt": "2026-11-07T17:13:10.226444+00:00",
+      "previousPublishedAt": "2026-11-05T16:47:25.404000+00:00",
+      "publishedAt": "2026-11-07T16:56:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "events": [
+        {
+          "type": "added",
+          "player": "Taylor Hall",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Jordan Martinook",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
+          "player": "Alexander Nikishin",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "removed",
+          "player": "Nicolas Deslauriers",
+          "from": "Útok 4"
+        },
+        {
+          "type": "removed",
+          "player": "Juuso Valimaki",
+          "from": "Obrana 2"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     }
   }
 }
