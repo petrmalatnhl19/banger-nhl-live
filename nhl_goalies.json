@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-07T18:17:58.662447+00:00",
-  "rostersUpdatedAt": "2026-11-07T18:17:40.707672+00:00",
+  "updatedAt": "2026-11-07T19:00:41.903127+00:00",
+  "rostersUpdatedAt": "2026-11-07T19:00:27.597454+00:00",
   "projectionDate": "2026-11-07",
   "teamCount": 32,
   "goalieCount": 77,
@@ -134,7 +134,7 @@
       "team": "VAN",
       "teamKey": "canucks",
       "playerId": 8482447,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-07",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -168,7 +168,7 @@
       "team": "NJD",
       "teamKey": "devils",
       "playerId": 8474596,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-07",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
