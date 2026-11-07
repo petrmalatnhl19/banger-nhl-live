@@ -15,6 +15,11 @@ jobs:
           python-version: '3.12'
       - name: Fetch official NHL start times
         run: python scripts/archive_core43_nhl_schedule.py
+      - name: Store official schedule in Supabase
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python scripts/ingest_core43_nhl_schedule.py
       - name: Archive schedule evidence
         uses: actions/upload-artifact@v4
         with:
