@@ -3,7 +3,9 @@ on:
   push:
     paths:
       - 'core43-inputs.js'
+      - 'core43-gsax.js'
       - 'scripts/test_core43_inputs.cjs'
+      - 'scripts/test_core43_gsax.cjs'
       - '.github/workflows/core43-inputs-test.yml'
   pull_request:
     paths:
@@ -19,3 +21,4 @@ jobs:
         with:
           node-version: '22'
       - run: node scripts/test_core43_inputs.cjs
+      - run: node scripts/test_core43_gsax.cjs
