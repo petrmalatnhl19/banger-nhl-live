@@ -1109,7 +1109,11 @@ const strength=String(v.strength||'').toLowerCase().trim();
 const situation=String(e.situationCode||'');
 // NHL play-by-play goal details: emptyNet is authoritative; do not infer from skater counts.
 const emptyNetRaw=v.emptyNet??e.emptyNet??null;
-const isEmptyNet=emptyNetRaw===true||emptyNetRaw===1||String(emptyNetRaw).toLowerCase()==='true';
+const situationGoaliePattern=/^[01][3-6][3-6][01]$/.test(situation);
+// NHL situationCode: away goalie, away skaters, home skaters, home goalie.
+// A goal into an empty net is scored against the team whose goalie is absent.
+const inferredEmptyNet=situationGoaliePattern&&(isHome?situation[0]==='0':isAway?situation[3]==='0':false);
+const isEmptyNet=emptyNetRaw===true||emptyNetRaw===1||String(emptyNetRaw).toLowerCase()==='true'||(emptyNetRaw==null&&inferredEmptyNet);
 let goalType='';
 if(['pp','powerplay','power-play'].includes(strength))goalType='V PŘESILOVCE';
 else if(['sh','shorthanded','short-handed'].includes(strength))goalType='V OSLABENÍ';
