@@ -1,0 +1,13 @@
+const assert=require("node:assert/strict");
+const {goalieSnapshot}=require("../core43-season-gsax.js");
+const rows=[{playerId:"8479999",team:"DAL",situation:"all",xGoals:"51.3",goals:"47",ongoal:"610"}];
+const options={goalieId:"8479999",team:"DAL",fetchedAt:"2026-11-07T08:00:00Z",kickoff:"2026-11-07T20:00:00Z"};
+const a=goalieSnapshot(rows,options);
+assert.equal(a.available,true);
+assert.equal(a.value.gsax,4.3);
+assert.equal(a.value.shotsAgainst,610);
+assert.equal(goalieSnapshot(rows,{...options,fetchedAt:"2026-11-08T08:00:00Z"}).available,false);
+assert.equal(goalieSnapshot(rows,{...options,goalieId:"999"}).available,false);
+assert.equal(goalieSnapshot([{...rows[0],ongoal:""}],options).available,false);
+assert.equal(goalieSnapshot([...rows,...rows],options).available,false);
+console.log("CORE 4.3 season GSAx snapshot tests passed");
