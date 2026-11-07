@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-07T15:21:04.413960+00:00",
+  "checkedAt": "2026-11-07T15:56:15.073860+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "candidateCount": 94,
   "matchedCount": 94,
@@ -276,7 +276,7 @@
     },
     {
       "team": "FLA",
-      "goalie": "Akira Schmid",
+      "goalie": "Jacob Markstrom",
       "opponent": "BOS",
       "venue": "away",
       "status": "projected",
@@ -919,7 +919,7 @@
       "goalie": "Logan Thompson",
       "opponent": "FLA",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-07",
       "gameId": 2026020265,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"

@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-07T15:21:05.148029+00:00",
-  "rostersUpdatedAt": "2026-11-07T15:20:40.692846+00:00",
+  "updatedAt": "2026-11-07T15:56:15.793623+00:00",
+  "rostersUpdatedAt": "2026-11-07T15:55:51.593844+00:00",
   "projectionDate": "2026-11-07",
   "teamCount": 32,
   "goalieCount": 77,
@@ -159,7 +159,7 @@
       "team": "WSH",
       "teamKey": "capitals",
       "playerId": 8480313,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-07",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
