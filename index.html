@@ -1107,6 +1107,8 @@ else if(oldLead>0&&newLead>0)msg=variants(['🥅 GÓL! '+named+' navyšuje veden
 else msg='🥅 GÓL! '+named+' mění skóre na '+score+'.';
 const strength=String(v.strength||'').toLowerCase().trim();
 const situation=String(e.situationCode||'');
+// NHL play-by-play goal details: emptyNet is authoritative; do not infer from skater counts.
+const isEmptyNet=v.emptyNet===true||v.emptyNet===1||v.emptyNet==='true';
 let goalType='';
 if(['pp','powerplay','power-play'].includes(strength))goalType='V PŘESILOVCE';
 else if(['sh','shorthanded','short-handed'].includes(strength))goalType='V OSLABENÍ';
@@ -1115,7 +1117,7 @@ else if(/^[01][3-5][3-5][01]$/.test(situation)&&situation[0]==='1'&&situation[3]
 const ownSkaters=Number(situation[isAway?1:2]),oppSkaters=Number(situation[isAway?2:1]);
 goalType=ownSkaters>oppSkaters?'V PŘESILOVCE':ownSkaters<oppSkaters?'V OSLABENÍ':'PŘI VYROVNANÉM POČTU HRÁČŮ';
 }
-if(goalType)msg=msg.replace(/^🥅 (?:GÓL!|BRANKA!|JE VYROVNÁNO!)/,'🥅 GÓL '+goalType+'!');
+if(isEmptyNet){msg=msg.replace(/^🥅 (?:GÓL!|BRANKA!|JE VYROVNÁNO!)/,'🥅 GÓL DO PRÁZDNÉ BRANKY!');}else if(goalType)msg=msg.replace(/^🥅 (?:GÓL!|BRANKA!|JE VYROVNÁNO!)/,'🥅 GÓL '+goalType+'!');
 if(period==='OT')msg+=' Prodloužení.';else if(e.periodDescriptor?.number===3&&currentTime>=3540&&hasScore&&Math.abs(away-home)===1&&oldLead<0&&newLead<0)msg+=' V poslední minutě základní hrací doby je rozdíl jediný gól!';
 matchContext.latestScore={away,home};
 }else if(hasScore){msg+=' Stav '+away+':'+home+'.';matchContext.latestScore={away,home}}
