@@ -1,0 +1,21 @@
+name: CORE 4.3 experimental inputs tests
+on:
+  push:
+    paths:
+      - 'core43-inputs.js'
+      - 'scripts/test_core43_inputs.cjs'
+      - '.github/workflows/core43-inputs-test.yml'
+  pull_request:
+    paths:
+      - 'core43-inputs.js'
+      - 'scripts/test_core43_inputs.cjs'
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/test_core43_inputs.cjs
