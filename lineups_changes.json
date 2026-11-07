@@ -439,36 +439,26 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "canadiens": {
-      "updatedAt": "2026-11-05T19:12:44.546074+00:00",
-      "previousPublishedAt": "2026-11-03T18:06:18.771000+00:00",
-      "publishedAt": "2026-11-05T18:46:31.658000+00:00",
-      "source": "https://www.nhl.com/news/utah-mammoth-montreal-canadiens-game-preview-november-5-2026",
+      "updatedAt": "2026-11-07T18:17:55.617722+00:00",
+      "previousPublishedAt": "2026-11-07T17:45:00+00:00",
+      "publishedAt": "2026-11-07T17:54:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
-        {
-          "type": "added",
-          "player": "Nick Suzuki",
-          "to": "Útok 1"
-        },
         {
           "type": "moved",
           "player": "Alex Newhook",
-          "from": "Útok 1",
-          "to": "Útok 4"
+          "from": "Útok 4",
+          "to": "Útok 2"
         },
         {
           "type": "added",
-          "player": "Kirby Dach",
+          "player": "Owen Beck",
           "to": "Útok 4"
         },
         {
           "type": "removed",
-          "player": "Florian Xhekaj",
-          "from": "Útok 4"
-        },
-        {
-          "type": "removed",
-          "player": "Owen Beck",
-          "from": "Útok 4"
+          "player": "Josh Anderson",
+          "from": "Útok 2"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -1077,38 +1067,20 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "jets": {
-      "updatedAt": "2026-11-05T19:12:44.545878+00:00",
-      "previousPublishedAt": "2026-11-03T18:06:18.771000+00:00",
+      "updatedAt": "2026-11-07T18:17:55.619659+00:00",
+      "previousPublishedAt": "2026-11-05T18:31:00.644000+00:00",
       "publishedAt": "2026-11-05T18:31:00.644000+00:00",
       "source": "https://www.nhl.com/news/vancouver-canucks-winnipeg-jets-game-preview-november-5-2026",
       "events": [
         {
-          "type": "added",
-          "player": "Brayden Yager",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Adam Lowry",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Haydn Fleury",
-          "from": "Obrana 3",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "moved",
+          "type": "removed",
           "player": "Mario Ferraro",
-          "from": "Obrana 2",
-          "to": "Obrana 3"
+          "from": "Obrana 3"
         },
         {
           "type": "removed",
-          "player": "Morgan Barron",
-          "from": "Útok 3"
+          "player": "Elias Salomonsson",
+          "from": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -1177,6 +1149,43 @@
           "type": "removed",
           "player": "Juuso Valimaki",
           "from": "Obrana 2"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "islanders": {
+      "updatedAt": "2026-11-07T18:17:55.618189+00:00",
+      "previousPublishedAt": "2026-11-05T16:47:25.404000+00:00",
+      "publishedAt": "2026-11-07T17:58:42.776000+00:00",
+      "source": "https://www.nhl.com/news/new-jersey-devils-new-york-islanders-game-preview-november-7-2026",
+      "events": [
+        {
+          "type": "moved",
+          "player": "Emil Heineman",
+          "from": "Útok 2",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Ondrej Palat",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Simon Holmstrom",
+          "from": "Útok 1",
+          "to": "Útok 3"
+        },
+        {
+          "type": "added",
+          "player": "Ben Hutton",
+          "to": "Obrana 3"
+        },
+        {
+          "type": "added",
+          "player": "Matthew Kessel",
+          "to": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

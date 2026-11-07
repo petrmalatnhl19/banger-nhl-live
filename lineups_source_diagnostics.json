@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T17:48:37.337308+00:00",
+  "generatedAt": "2026-11-07T18:17:55.614180+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -38,7 +38,7 @@
       "team": "CAR",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-07T17:45:00+00:00",
+      "candidatePublishedAt": "2026-11-07T17:54:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -85,41 +85,23 @@
     "islanders": {
       "team": "NYI",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/carolina-hurricanes-new-york-islanders-game-preview-november-5-2026",
-      "candidatePublishedAt": "2026-11-05T16:47:25.404000+00:00",
+      "candidateSource": "https://www.nhl.com/news/new-jersey-devils-new-york-islanders-game-preview-november-7-2026",
+      "candidatePublishedAt": "2026-11-07T17:58:42.776000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
       "roleMismatches": [],
-      "rejectedLines": [
-        {
-          "group": "defense",
-          "line": 3,
-          "players": [
-            "Matt Kessel"
-          ],
-          "sourceLine": [
-            "Matt Kessel",
-            "Scott Mayfield"
-          ]
-        }
-      ],
-      "rejectedPlayerReasons": [
-        {
-          "name": "Matt Kessel",
-          "expectedRole": "defense",
-          "reason": "not_in_current_roster"
-        }
-      ],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
       "validatedForwardLines": 4,
-      "validatedDefensePairs": 2,
+      "validatedDefensePairs": 3,
       "accepted": true
     },
     "rangers": {
       "team": "NYR",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-07T17:45:00+00:00",
+      "candidatePublishedAt": "2026-11-07T17:54:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -134,7 +116,7 @@
       "team": "OTT",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-07T17:45:00+00:00",
+      "candidatePublishedAt": "2026-11-07T17:54:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "insufficient_position_matched_lines",
@@ -185,7 +167,7 @@
       "team": "SJS",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-07T17:45:00+00:00",
+      "candidatePublishedAt": "2026-11-07T17:54:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -236,6 +218,17 @@
             "Morgan Barron",
             "Tyrel Bauer"
           ]
+        },
+        {
+          "group": "defense",
+          "line": 3,
+          "players": [
+            "Elias Salomonsson"
+          ],
+          "sourceLine": [
+            "Mario Ferraro",
+            "Elias Salomonsson"
+          ]
         }
       ],
       "rejectedPlayerReasons": [
@@ -243,10 +236,15 @@
           "name": "Tyrel Bauer",
           "expectedRole": "forwards",
           "reason": "other_position_group"
+        },
+        {
+          "name": "Elias Salomonsson",
+          "expectedRole": "defense",
+          "reason": "not_in_current_roster"
         }
       ],
       "validatedForwardLines": 3,
-      "validatedDefensePairs": 3,
+      "validatedDefensePairs": 2,
       "accepted": true
     }
   }

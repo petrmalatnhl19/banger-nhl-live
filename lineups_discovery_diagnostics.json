@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-07T17:48:32.778214+00:00",
+  "generatedAt": "2026-11-07T18:17:54.374573+00:00",
   "checked": 6,
-  "articlesFound": 0,
+  "articlesFound": 2,
   "errors": [],
   "fixtures": [
     {
@@ -23,8 +23,11 @@
   "attempts": [
     {
       "url": "https://www.nhl.com/news/new-jersey-devils-new-york-islanders-game-preview-november-7-2026",
-      "result": "no_complete_projection",
-      "teams": []
+      "result": "parsed",
+      "teams": [
+        "devils",
+        "islanders"
+      ]
     },
     {
       "url": "https://www.nhl.com/news/new-york-islanders-new-jersey-devils-game-preview-november-7-2026",
@@ -33,8 +36,11 @@
     },
     {
       "url": "https://www.nhl.com/news/utah-mammoth-ottawa-senators-game-preview-november-7-2026",
-      "result": "no_complete_projection",
-      "teams": []
+      "result": "parsed",
+      "teams": [
+        "mammoth",
+        "senators"
+      ]
     },
     {
       "url": "https://www.nhl.com/news/ottawa-senators-utah-mammoth-game-preview-november-7-2026",

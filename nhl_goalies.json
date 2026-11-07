@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-07T17:48:39.980705+00:00",
-  "rostersUpdatedAt": "2026-11-07T17:48:17.899184+00:00",
+  "updatedAt": "2026-11-07T18:17:58.662447+00:00",
+  "rostersUpdatedAt": "2026-11-07T18:17:40.707672+00:00",
   "projectionDate": "2026-11-07",
   "teamCount": 32,
   "goalieCount": 77,
@@ -10,7 +10,7 @@
       "team": "COL",
       "teamKey": "avalanche",
       "playerId": 8478406,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-07",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -168,8 +168,9 @@
       "team": "NJD",
       "teamKey": "devils",
       "playerId": 8474596,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-07",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Connor Hellebuyck",
@@ -421,8 +422,9 @@
       "team": "EDM",
       "teamKey": "oilers",
       "playerId": 8482221,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-07",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Matt Tomkins",
