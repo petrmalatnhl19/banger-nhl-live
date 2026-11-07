@@ -1,14 +1,23 @@
 {
   "date": "2026-11-07",
-  "updatedAt": "2026-11-07T04:23:20.545554+00:00",
+  "updatedAt": "2026-11-07T05:20:20.180601+00:00",
   "teams": {
+    "CAR": {
+      "name": "Pyotr Kochetkov",
+      "status": "projected",
+      "date": "2026-11-07",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-07T05:20:20.180601+00:00",
+      "gameId": 2026020271
+    },
     "CHI": {
       "name": "Spencer Knight",
       "status": "projected",
       "date": "2026-11-07",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-07T04:23:20.545554+00:00",
+      "checkedAt": "2026-11-07T05:20:20.180601+00:00",
       "gameId": 2026020271
     },
     "COL": {
@@ -17,7 +26,7 @@
       "date": "2026-11-07",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-07T04:23:20.545554+00:00",
+      "checkedAt": "2026-11-07T05:20:20.180601+00:00",
       "gameId": 2026020274
     },
     "FLA": {
@@ -26,7 +35,7 @@
       "date": "2026-11-07",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-07T04:23:20.545554+00:00",
+      "checkedAt": "2026-11-07T05:20:20.180601+00:00",
       "gameId": 2026020265
     },
     "MIN": {
@@ -35,7 +44,7 @@
       "date": "2026-11-07",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-07T04:23:20.545554+00:00",
+      "checkedAt": "2026-11-07T05:20:20.180601+00:00",
       "gameId": 2026020273
     },
     "MTL": {
@@ -44,7 +53,7 @@
       "date": "2026-11-07",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-07T04:23:20.545554+00:00",
+      "checkedAt": "2026-11-07T05:20:20.180601+00:00",
       "gameId": 2026020268
     },
     "NJD": {
@@ -53,7 +62,7 @@
       "date": "2026-11-07",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-07T04:23:20.545554+00:00",
+      "checkedAt": "2026-11-07T05:20:20.180601+00:00",
       "gameId": 2026020270
     },
     "NSH": {
@@ -62,7 +71,7 @@
       "date": "2026-11-07",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-07T04:23:20.545554+00:00",
+      "checkedAt": "2026-11-07T05:20:20.180601+00:00",
       "gameId": 2026020266
     },
     "NYR": {
@@ -71,7 +80,7 @@
       "date": "2026-11-07",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-07T04:23:20.545554+00:00",
+      "checkedAt": "2026-11-07T05:20:20.180601+00:00",
       "gameId": 2026020267
     },
     "OTT": {
@@ -80,7 +89,7 @@
       "date": "2026-11-07",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-07T04:23:20.545554+00:00",
+      "checkedAt": "2026-11-07T05:20:20.180601+00:00",
       "gameId": 2026020269
     },
     "PIT": {
@@ -89,7 +98,7 @@
       "date": "2026-11-07",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-07T04:23:20.545554+00:00",
+      "checkedAt": "2026-11-07T05:20:20.180601+00:00",
       "gameId": 2026020275
     },
     "STL": {
@@ -98,7 +107,7 @@
       "date": "2026-11-07",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-07T04:23:20.545554+00:00",
+      "checkedAt": "2026-11-07T05:20:20.180601+00:00",
       "gameId": 2026020266
     },
     "TBL": {
@@ -107,7 +116,7 @@
       "date": "2026-11-07",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-07T04:23:20.545554+00:00",
+      "checkedAt": "2026-11-07T05:20:20.180601+00:00",
       "gameId": 2026020273
     },
     "TOR": {
@@ -116,7 +125,7 @@
       "date": "2026-11-07",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-07T04:23:20.545554+00:00",
+      "checkedAt": "2026-11-07T05:20:20.180601+00:00",
       "gameId": 2026020268
     },
     "VAN": {
@@ -125,7 +134,7 @@
       "date": "2026-11-07",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-07T04:23:20.545554+00:00",
+      "checkedAt": "2026-11-07T05:20:20.180601+00:00",
       "gameId": 2026020276
     },
     "WSH": {
@@ -134,17 +143,8 @@
       "date": "2026-11-07",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-07T04:23:20.545554+00:00",
+      "checkedAt": "2026-11-07T05:20:20.180601+00:00",
       "gameId": 2026020265
-    },
-    "CAR": {
-      "name": "Pyotr Kochetkov",
-      "status": "projected",
-      "date": "2026-11-07",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-07T04:23:20.545554+00:00",
-      "gameId": 2026020271
     },
     "DAL": {
       "name": "Jake Oettinger",
@@ -152,7 +152,7 @@
       "date": "2026-11-07",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-07T04:23:20.545554+00:00",
+      "checkedAt": "2026-11-07T05:20:20.180601+00:00",
       "gameId": 2026020272
     }
   },
@@ -162,12 +162,6 @@
       "specialist": "Jake Oettinger",
       "nhl": "Casey DeSmith",
       "nhlSource": "https://www.nhl.com/news/dallas-stars-columbus-blue-jackets-game-preview-november-5-2026"
-    },
-    {
-      "team": "CAR",
-      "specialist": "Pyotr Kochetkov",
-      "nhl": "Brandon Bussi",
-      "nhlSource": "https://www.nhl.com/news/carolina-hurricanes-new-york-islanders-game-preview-november-5-2026"
     },
     {
       "date": "2026-11-07",
