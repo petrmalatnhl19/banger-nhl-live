@@ -1023,7 +1023,7 @@ if(['shot-on-goal','missed-shot','blocked-shot'].includes(type)&&v.eventOwnerTea
  const own=matchContext.periodAttempts.filter(p=>p.team===team).length;
  const other=matchContext.periodAttempts.length-own;
  if(own>=4&&own>=other+2&&currentTime-matchContext.lastTempoTime>=150){
-  addNote(5,' 📈 '+team+' zaznamenává '+own+' střelecké pokusy za poslední dvě minuty, soupeř '+other+'.');
+  addNote(5,' 📈 Hráči týmu '+team+' zaznamenali '+own+' střelecké pokusy za poslední dvě minuty, soupeř '+other+'.');
   matchContext.lastTempoTime=currentTime;
  }
  const score=matchContext.latestScore;
