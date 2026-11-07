@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-07T15:56:15.073860+00:00",
+  "checkedAt": "2026-11-07T16:37:17.286071+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "candidateCount": 94,
   "matchedCount": 94,
@@ -396,7 +396,7 @@
     },
     {
       "team": "NJD",
-      "goalie": "Connor Hellebuyck",
+      "goalie": "Jake Allen",
       "opponent": "NYI",
       "venue": "away",
       "status": "projected",
@@ -406,7 +406,7 @@
     },
     {
       "team": "NJD",
-      "goalie": "Jake Allen",
+      "goalie": "Connor Hellebuyck",
       "opponent": "TOR",
       "venue": "away",
       "status": "projected",
@@ -549,7 +549,7 @@
       "goalie": "Samuel Ersson",
       "opponent": "UTA",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-07",
       "gameId": 2026020269,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -759,7 +759,7 @@
       "goalie": "Sergei Bobrovsky",
       "opponent": "MTL",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-07",
       "gameId": 2026020268,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"

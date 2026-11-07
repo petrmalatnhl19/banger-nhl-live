@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-07T15:56:15.793623+00:00",
-  "rostersUpdatedAt": "2026-11-07T15:55:51.593844+00:00",
+  "updatedAt": "2026-11-07T16:37:17.947736+00:00",
+  "rostersUpdatedAt": "2026-11-07T16:36:54.173203+00:00",
   "projectionDate": "2026-11-07",
   "teamCount": 32,
   "goalieCount": 77,
@@ -176,9 +176,8 @@
       "team": "NJD",
       "teamKey": "devils",
       "playerId": 8476945,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-07",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Laurent Brossoit",
@@ -387,7 +386,7 @@
       "team": "TOR",
       "teamKey": "maple leafs",
       "playerId": 8475683,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-07",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -560,7 +559,7 @@
       "team": "OTT",
       "teamKey": "senators",
       "playerId": 8481035,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-07",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
