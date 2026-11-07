@@ -619,6 +619,21 @@ nav.toolbar>a[href="./goalies.html"],nav.toolbar>#tabTeams,nav.toolbar>#tabStand
 #content>.grid{gap:10px!important}
 @media(max-width:480px){#content .game[data-game-phase]{padding:10px!important}#content .game[data-game-phase] .score{margin:4px 0 7px!important}}
 </style>
+<style id="banger-typography-consistency-v1">
+/* Harmonized interface type scale and touch targets, without changing layout logic. */
+:root{--ui-text-sm:12px;--ui-text-md:14px;--ui-title:clamp(21px,4.8vw,30px)}
+.gamehead,.game-state,.game-stage,.game-league,.dash-game-state,.dash-game-hint{font-family:'Exo 2',system-ui,sans-serif}
+#content .game[data-game-phase] .game-league{font-size:11px!important;letter-spacing:.65px!important}
+#content .game[data-game-phase] .game-state{font-size:11px!important;font-weight:800!important;letter-spacing:.35px!important}
+#content .game[data-game-phase] .game-stage{font-size:11px!important;letter-spacing:.8px!important}
+#content .game[data-game-phase] button[data-game]{font-size:12px!important;font-weight:850!important;letter-spacing:.45px!important}
+#content .metrics .metric span{font-size:11px!important;letter-spacing:.45px!important}
+#content .metrics .metric b{font-variant-numeric:tabular-nums!important;line-height:1.15!important}
+.dash-game-teams strong,.game .nums{font-variant-numeric:tabular-nums}
+button:focus-visible,[role="button"]:focus-visible{outline:2px solid #86f2ff;outline-offset:2px}
+@media(max-width:480px){#content .metrics{gap:8px!important}#content .metrics .metric{padding:10px 5px!important}#content .metrics .metric span{font-size:10px!important}}
+@media(prefers-reduced-motion:reduce){button{transition:none!important}}
+</style>
 </head><body><div class="wrap">
 <div id="brandSplash" class="brand-splash" aria-label="Načítání BANGER NHL LIVE"><div class="brand-splash-glow"></div><picture><source media="(orientation: portrait)" srcset="splash-portrait.png"><img src="splash-landscape.png" alt="BANGER NHL LIVE" fetchpriority="high" decoding="async"></picture><div class="brand-splash-loader"><span></span></div><div class="brand-splash-caption">VSTUP DO HOKEJOVÉ ARÉNY</div></div><header class="top"><div class="brand"><div class="brand-logo" aria-label="BANGER NHL LIVE"><span class="brand-mark">BANGER</span><span class="brand-sub">NHL <b>LIVE</b></span></div></div><span class="header-status"><i></i> NHL 2026/27</span></header>
 
