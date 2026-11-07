@@ -63,8 +63,9 @@ function nhlScheduleFatigue(games,kickoff,team){
  },sampleGames:past.length};
 }
 
-function core43Inputs({kickoff,teamGames,goalieData,roster,missing}={}){
- return {version:"core43-inputs-v0.1",production:false,fatigue:fatigue(teamGames,kickoff),gsax:gsax(goalieData),absences:absences(roster,missing,kickoff)};
+function core43Inputs({kickoff,teamGames,nhlGames,team,goalieData,roster,missing}={}){
+ const fatigueInput=Array.isArray(teamGames)?fatigue(teamGames,kickoff):nhlScheduleFatigue(nhlGames,kickoff,team);
+ return {version:"core43-inputs-v0.2",production:false,fatigue:fatigueInput,gsax:gsax(goalieData),absences:absences(roster,missing,kickoff)};
 }
 return {fatigue,nhlScheduleFatigue,gsax,absences,core43Inputs};
 });
