@@ -1,0 +1,15 @@
+const assert=require("node:assert/strict");
+const {evaluate,parseCsv}=require("../core43-gsax-bridge.js");
+const csv='playerId,team,situation,xGoals,goals,ongoal\n10,DAL,all,52.4,49,600\n10,DAL,5on5,30,28,400\n11,NYR,all,10,9,90\n';
+const metadata={fetchedAt:"2026-11-07T14:00:28Z",rows:3,status:"archived_snapshot_not_model_integrated",sha256:"fixture"};
+const opts={csv,metadata,goalieId:10,team:"DAL",kickoff:"2026-11-07T23:00:00Z"};
+const result=evaluate(opts);
+assert.equal(result.available,true);
+assert.equal(result.value.gsax,3.4);
+assert.equal(result.value.shotsAgainst,600);
+assert.equal(evaluate({...opts,kickoff:"2026-11-07T13:00:00Z"}).available,false);
+assert.equal(evaluate({...opts,goalieId:12}).available,false);
+assert.equal(evaluate({...opts,metadata:{...metadata,rows:4}}).available,false);
+assert.equal(evaluate({...opts,csv:csv+'10,DAL,all,52.4,49,600\n',metadata:{...metadata,rows:4}}).available,false);
+assert.equal(parseCsv('playerId,team,situation,xGoals,goals,ongoal\n"10",DAL,all,52,49,600\n').length,1);
+console.log("CORE 4.3 GSAx bridge tests passed");
