@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-07T03:30:16.119321+00:00",
-  "rostersUpdatedAt": "2026-11-07T03:29:52.297037+00:00",
+  "updatedAt": "2026-11-07T04:23:20.583333+00:00",
+  "rostersUpdatedAt": "2026-11-07T04:22:53.348178+00:00",
   "projectionDate": "2026-11-07",
   "teamCount": 32,
   "goalieCount": 76,
@@ -134,8 +134,9 @@
       "team": "VAN",
       "teamKey": "canucks",
       "playerId": 8482447,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-07",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Charlie Lindgren",
@@ -264,8 +265,9 @@
       "team": "CAR",
       "teamKey": "hurricanes",
       "playerId": 8481611,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-07",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Ilya Sorokin",
@@ -312,9 +314,8 @@
       "team": "LAK",
       "teamKey": "kings",
       "playerId": 8476341,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-07",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Darcy Kuemper",
@@ -600,8 +601,9 @@
       "team": "DAL",
       "teamKey": "stars",
       "playerId": 8479979,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-07",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Filip Gustavsson",
