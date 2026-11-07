@@ -533,6 +533,18 @@ nav.toolbar>a[href="./goalies.html"],nav.toolbar>#tabTeams,nav.toolbar>#tabStand
 .dash-game-teams>strong{grid-column:2!important;grid-row:1!important;justify-self:center!important;margin:0!important;white-space:nowrap!important}
 .dash-game-teams>.dash-team-right{grid-column:3!important;grid-row:1!important;justify-self:start!important;display:inline-flex!important;align-items:center!important;gap:8px!important;white-space:nowrap!important;margin:0!important}
 @media(max-width:440px){.dash-game-teams{column-gap:10px!important}.dash-game-teams>.dash-team-left,.dash-game-teams>.dash-team-right{gap:5px!important}}
+</style><style id="banger-dashboard-cards-edge-v1">
+/* Dashboard match cards: team groups at far edges, score fixed dead-center. */
+.dash-game-teams{display:grid!important;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)!important;align-items:center!important;width:100%!important;gap:8px!important}
+.dash-game-teams>.dash-team-left{grid-column:1!important;justify-self:start!important;grid-row:1!important}
+.dash-game-teams>strong{grid-column:2!important;justify-self:center!important;grid-row:1!important}
+.dash-game-teams>.dash-team-right{grid-column:3!important;justify-self:end!important;grid-row:1!important}
+.dash-game-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))!important;gap:10px!important}
+.dash-game{min-height:120px!important;padding:13px 14px!important;gap:9px!important;border-radius:15px!important}
+.dash-game-state{line-height:1.3!important}
+.dash-game-hint{line-height:1.4!important}
+@media(max-width:620px){.dash-game-grid{grid-template-columns:minmax(0,1fr)!important}.dash-game{min-height:112px!important;padding:12px 13px!important}.dash-game-teams{gap:5px!important}.dash-game-teams img{width:28px!important;height:28px!important}.dash-game-teams b{font-size:13px!important}.dash-game-teams strong{font-size:clamp(21px,5vw,27px)!important}}
+@media(max-width:360px){.dash-game{padding:11px 9px!important}.dash-game-teams img{width:24px!important;height:24px!important}.dash-game-teams b{font-size:11px!important}}
 </style></head><body><div class="wrap">
 <div id="brandSplash" class="brand-splash" aria-label="Načítání BANGER NHL LIVE"><div class="brand-splash-glow"></div><picture><source media="(orientation: portrait)" srcset="splash-portrait.png"><img src="splash-landscape.png" alt="BANGER NHL LIVE" fetchpriority="high" decoding="async"></picture><div class="brand-splash-loader"><span></span></div><div class="brand-splash-caption">VSTUP DO HOKEJOVÉ ARÉNY</div></div><header class="top"><div class="brand"><div class="brand-logo" aria-label="BANGER NHL LIVE"><span class="brand-mark">BANGER</span><span class="brand-sub">NHL <b>LIVE</b></span></div></div><span class="header-status"><i></i> NHL 2026/27</span></header>
 
