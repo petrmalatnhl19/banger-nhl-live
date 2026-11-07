@@ -1,0 +1,24 @@
+name: CORE 4.3 official NHL schedule snapshot
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '40 8 * * *'
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch official NHL start times
+        run: python scripts/archive_core43_nhl_schedule.py
+      - name: Archive schedule evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: core43-nhl-schedule-${{ github.run_id }}
+          path: diagnostics/core43-nhl-schedule.json
+          if-no-files-found: error
+          retention-days: 90
