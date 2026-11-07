@@ -606,6 +606,19 @@ nav.toolbar>a[href="./goalies.html"],nav.toolbar>#tabTeams,nav.toolbar>#tabStand
  .game[data-game-phase] .team{font-size:16px!important}
 }
 </style>
+<style id="banger-main-game-compact-v2">
+/* Mobile-first compact NHL fixture card, deliberately scoped to match listings. */
+#content .game[data-game-phase]{padding:10px 12px!important;min-height:0!important;display:flex!important;flex-direction:column!important;gap:0!important}
+#content .game[data-game-phase] .gamehead{min-height:0!important;line-height:1.2!important}
+#content .game[data-game-phase] .game-stage{margin:4px 0 0!important;line-height:1.2!important}
+#content .game[data-game-phase] .score{margin:5px 0 8px!important;padding:0!important;min-height:0!important;align-items:center!important}
+#content .game[data-game-phase] .team{font-size:16px!important;line-height:1.15!important}
+#content .game[data-game-phase] .team img{width:42px!important;height:42px!important;margin:0 auto 3px!important}
+#content .game[data-game-phase] .nums{font-size:clamp(23px,5vw,30px)!important;line-height:1.1!important}
+#content .game[data-game-phase] button[data-game]{min-height:42px!important;padding:8px!important;margin:0!important}
+#content>.grid{gap:10px!important}
+@media(max-width:480px){#content .game[data-game-phase]{padding:10px!important}#content .game[data-game-phase] .score{margin:4px 0 7px!important}}
+</style>
 </head><body><div class="wrap">
 <div id="brandSplash" class="brand-splash" aria-label="Načítání BANGER NHL LIVE"><div class="brand-splash-glow"></div><picture><source media="(orientation: portrait)" srcset="splash-portrait.png"><img src="splash-landscape.png" alt="BANGER NHL LIVE" fetchpriority="high" decoding="async"></picture><div class="brand-splash-loader"><span></span></div><div class="brand-splash-caption">VSTUP DO HOKEJOVÉ ARÉNY</div></div><header class="top"><div class="brand"><div class="brand-logo" aria-label="BANGER NHL LIVE"><span class="brand-mark">BANGER</span><span class="brand-sub">NHL <b>LIVE</b></span></div></div><span class="header-status"><i></i> NHL 2026/27</span></header>
 
