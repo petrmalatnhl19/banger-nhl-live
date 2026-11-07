@@ -796,6 +796,40 @@ async function analyzeGame(id){
  extra+='<details class="analyst-fold"><summary>🏟️ Doma a venku</summary><div class="analyst-fold-body"><p>'+clean(ac)+' venku: '+clean(venue(ga,ac,false)||'nedostupné')+'</p><p>'+clean(hc)+' doma: '+clean(venue(gh,hc,true)||'nedostupné')+'</p></div></details>';
  extra+='<details class="analyst-fold"><summary>🤝 Vzájemné zápasy</summary><div class="analyst-fold-body">'+(h2h.length?h2h.map(g=>'<p>'+clean(g.gameDate)+' · '+clean(g.awayTeam.abbrev)+' '+Number(g.awayTeam.score)+' : '+Number(g.homeTeam.score)+' '+clean(g.homeTeam.abbrev)+'</p>').join(''):'<p>V načtené historii nebyl nalezen vzájemný zápas. Neznamená to, že týmy spolu nehrály.</p>')+'</div></details>';
  const extraRoot=card.querySelector('#analyst-extras');if(extraRoot)extraRoot.innerHTML=extra;
+ // Read-only 5v5 xG context: never alters the archived pregame forecast.
+ const xgSlot=document.createElement('section');
+ xgSlot.className='analyst-fold';
+ xgSlot.innerHTML='<details class="analyst-fold"><summary>📈 Kvalita šancí · xG 5 na 5</summary><div class="analyst-fold-body"><p class="analysis-small">Načítám MoneyPuck…</p></div></details>';
+ if(extraRoot)extraRoot.appendChild(xgSlot);
+ void (async()=>{
+  try{
+   const response=await fetch('https://xxwqeiuyislnoxsmjuul.supabase.co/functions/v1/nhl-feed?kind=moneypuck&entity=teams',{headers:{apikey:'sb_publishable_SfeHMIvUkYTuD3jCrWub8w_fPIY0B-G'}});
+   if(!response.ok)throw Error('HTTP '+response.status);
+   const csv=await response.text();
+   const rows=mpParseCSV(csv);
+   const aliases={FLA:['florida'],WSH:['washington'],LAK:['los angeles'],NJD:['new jersey'],NYI:['islanders'],NYR:['rangers'],SJS:['san jose'],STL:['st louis'],TBL:['tampa bay'],VGK:['vegas'],WPG:['winnipeg'],UTA:['utah','mammoth']};
+   const lookup=code=>rows.find(row=>{
+    if(String(row.situation||'').toLowerCase()!=='5on5')return false;
+    const label=String(row.team||row.name||row.teamName||'').toLowerCase();
+    return label===code.toLowerCase()||(aliases[code]||[]).some(a=>label.includes(a));
+   });
+   const rowA=lookup(ac),rowH=lookup(hc);
+   const stats=row=>{
+    if(!row)return null;
+    const gf=Number(row.xGoalsFor),ga=Number(row.xGoalsAgainst);
+    if(!Number.isFinite(gf)||!Number.isFinite(ga)||gf<0||ga<0||gf+ga<=0)return null;
+    return {gf,ga,share:100*gf/(gf+ga)};
+   };
+   const a=stats(rowA),h=stats(rowH);
+   if(!root.isConnected||!xgSlot.isConnected)return;
+   const fmtX=v=>Number(v).toLocaleString('cs-CZ',{maximumFractionDigits:2});
+   const line=(code,v)=>'<p><b>'+clean(code)+'</b>: xGF '+fmtX(v.gf)+' · xGA '+fmtX(v.ga)+' · podíl xG <b>'+fmtX(v.share)+' %</b></p>';
+   const body=a&&h?line(ac,a)+line(hc,h)+'<p class="analysis-small">Sezonní souhrn 5 na 5 z MoneyPuck. Nejde o předzápasový snímek ani o samostatnou pravděpodobnost výhry. Aktuální statistiky mohou obsahovat i pozdější zápasy; do archivovaných predikcí nevstupují.</p>':'<p>Pro oba týmy nejsou ověřené hodnoty xGF a xGA 5 na 5. Nic nedopočítáváme odhadem.</p>';
+   xgSlot.innerHTML='<details class="analyst-fold"><summary>📈 Kvalita šancí · xG 5 na 5</summary><div class="analyst-fold-body">'+body+'</div></details>';
+  }catch(e){
+   if(root.isConnected&&xgSlot.isConnected)xgSlot.innerHTML='<details class="analyst-fold"><summary>📈 Kvalita šancí · xG 5 na 5</summary><div class="analyst-fold-body"><p>MoneyPuck momentálně nedostupný. Výsledky xG nevymýšlíme.</p></div></details>';
+  }
+ })();
  const lastIds=[ga[0]?.id,gh[0]?.id];
  const boxes=await Promise.all(lastIds.map(gid=>gid?safe(()=>get('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(gid)+'/boxscore'),3500):Promise.resolve({ok:false})));
  if(!root.isConnected)return;
