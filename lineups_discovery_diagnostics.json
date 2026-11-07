@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-07T20:16:56.505629+00:00",
+  "generatedAt": "2026-11-07T21:22:14.816962+00:00",
   "checked": 6,
-  "articlesFound": 2,
+  "articlesFound": 3,
   "errors": [],
   "fixtures": [
     {
@@ -49,8 +49,11 @@
     },
     {
       "url": "https://www.nhl.com/news/florida-panthers-boston-bruins-game-preview-november-8-2026",
-      "result": "no_complete_projection",
-      "teams": []
+      "result": "parsed",
+      "teams": [
+        "panthers",
+        "bruins"
+      ]
     },
     {
       "url": "https://www.nhl.com/news/boston-bruins-florida-panthers-game-preview-november-8-2026",

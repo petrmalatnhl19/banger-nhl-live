@@ -830,20 +830,37 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "panthers": {
-      "updatedAt": "2026-11-07T15:56:12.980240+00:00",
-      "previousPublishedAt": "2026-11-07T05:00:00+00:00",
-      "publishedAt": "2026-11-07T15:37:00+00:00",
-      "source": "https://www.nhl.com/news/florida-panthers-washington-capitals-game-preview-november-7-2026",
+      "updatedAt": "2026-11-07T21:22:20.436678+00:00",
+      "previousPublishedAt": "2026-11-07T19:32:00+00:00",
+      "publishedAt": "2026-11-07T21:05:00.853000+00:00",
+      "source": "https://www.nhl.com/news/florida-panthers-boston-bruins-game-preview-november-8-2026",
       "events": [
         {
-          "type": "added",
-          "player": "Cole Reinhardt",
+          "type": "moved",
+          "player": "Lars Eller",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Cole Schwindt",
+          "from": "Útok 4",
           "to": "Útok 3"
         },
         {
           "type": "removed",
-          "player": "Anton Lundell",
-          "from": "Útok 3"
+          "player": "Sandis Vilmanis",
+          "from": "Útok 2"
+        },
+        {
+          "type": "removed",
+          "player": "Bokondji Imama",
+          "from": "Útok 4"
+        },
+        {
+          "type": "removed",
+          "player": "Garnet Hathaway",
+          "from": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -1067,46 +1084,55 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "bruins": {
-      "updatedAt": "2026-11-05T17:28:21.800376+00:00",
-      "previousPublishedAt": "2026-11-02T19:13:32.938000+00:00",
-      "publishedAt": "2026-11-05T16:53:27.782000+00:00",
-      "source": "https://www.nhl.com/news/boston-bruins-pittsburgh-penguins-game-preview-november-5-2026",
+      "updatedAt": "2026-11-07T21:22:20.437939+00:00",
+      "previousPublishedAt": "2026-11-05T16:53:27.782000+00:00",
+      "publishedAt": "2026-11-07T21:05:00.853000+00:00",
+      "source": "https://www.nhl.com/news/florida-panthers-boston-bruins-game-preview-november-8-2026",
       "events": [
         {
-          "type": "added",
-          "player": "Sean Kuraly",
-          "to": "Útok 4"
-        },
-        {
-          "type": "added",
-          "player": "Frederic Brunet",
-          "to": "Obrana 2"
+          "type": "moved",
+          "player": "Casey Mittelstadt",
+          "from": "Útok 3",
+          "to": "Útok 2"
         },
         {
           "type": "moved",
-          "player": "Mason Lohrei",
-          "from": "Obrana 3",
-          "to": "Obrana 2"
+          "player": "Elias Lindholm",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Tanner Jeannot",
+          "from": "Útok 4",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Sean Kuraly",
+          "from": "Útok 4",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Mark Kastelic",
+          "from": "Útok 4",
+          "to": "Útok 3"
         },
         {
           "type": "removed",
-          "player": "Matthew Poitras",
-          "from": "Útok 4"
+          "player": "Fraser Minten",
+          "from": "Útok 2"
         },
         {
           "type": "removed",
-          "player": "Nikita Zadorov",
-          "from": "Obrana 2"
+          "player": "Morgan Geekie",
+          "from": "Útok 2"
         },
         {
           "type": "removed",
-          "player": "Will Borgen",
-          "from": "Obrana 2"
-        },
-        {
-          "type": "removed",
-          "player": "Jonathan Aspirot",
-          "from": "Obrana 3"
+          "player": "James Hagens",
+          "from": "Útok 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-07T20:17:06.022373+00:00",
-  "rostersUpdatedAt": "2026-11-07T20:16:42.400156+00:00",
+  "updatedAt": "2026-11-07T21:22:23.327364+00:00",
+  "rostersUpdatedAt": "2026-11-07T21:22:01.300281+00:00",
   "projectionDate": "2026-11-07",
   "teamCount": 32,
   "goalieCount": 77,
@@ -532,8 +532,9 @@
       "team": "DET",
       "teamKey": "red wings",
       "playerId": 8480193,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-07",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Colten Ellis",
