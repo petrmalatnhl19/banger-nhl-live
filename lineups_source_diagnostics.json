@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T17:13:10.224253+00:00",
+  "generatedAt": "2026-11-07T17:48:37.337308+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -38,7 +38,7 @@
       "team": "CAR",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-07T16:56:00+00:00",
+      "candidatePublishedAt": "2026-11-07T17:45:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -119,7 +119,7 @@
       "team": "NYR",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-07T16:56:00+00:00",
+      "candidatePublishedAt": "2026-11-07T17:45:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -133,8 +133,8 @@
     "senators": {
       "team": "OTT",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/ottawa-senators-buffalo-sabres-game-preview-november-4-2026",
-      "candidatePublishedAt": "2026-11-04T17:37:08.585000+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-07T17:45:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "insufficient_position_matched_lines",
@@ -161,7 +161,7 @@
           "sourceLine": [
             "Samuel Blais",
             "Stephen Halliday",
-            "Nick Cousins"
+            "Hayden Hodgson"
           ]
         }
       ],
@@ -184,8 +184,8 @@
     "sharks": {
       "team": "SJS",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/san-jose-sharks-minnesota-wild-game-preview-november-6-2026",
-      "candidatePublishedAt": "2026-11-06T19:55:01.285000+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-07T17:45:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",

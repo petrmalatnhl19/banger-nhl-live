@@ -1,13 +1,12 @@
 {
-  "generatedAt": "2026-11-07T17:13:10.540491+00:00",
+  "generatedAt": "2026-11-07T17:48:37.678029+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 13,
+  "currentProjections": 18,
   "needsFreshProjection": [
     "avalanche",
     "blackhawks",
     "bruins",
-    "canadiens",
     "canucks",
     "devils",
     "flyers",
@@ -15,21 +14,16 @@
     "islanders",
     "jets",
     "kings",
-    "lightning",
-    "mammoth",
-    "maple leafs",
     "oilers",
     "penguins",
     "red wings",
-    "senators",
-    "stars"
+    "senators"
   ],
   "missing": [],
   "olderVerified": [
     "avalanche",
     "blackhawks",
     "bruins",
-    "canadiens",
     "canucks",
     "devils",
     "flyers",
@@ -37,14 +31,10 @@
     "islanders",
     "jets",
     "kings",
-    "lightning",
-    "mammoth",
-    "maple leafs",
     "oilers",
     "penguins",
     "red wings",
-    "senators",
-    "stars"
+    "senators"
   ],
   "manualSnapshots": [],
   "freshnessDefinition": "Publication within 36h; not a confirmed next-game lineup",
@@ -92,7 +82,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-07T16:56:00+00:00",
+      "publishedAt": "2026-11-07T17:45:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -115,11 +105,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-05T18:46:31.658000+00:00",
-      "source": "https://www.nhl.com/news/utah-mammoth-montreal-canadiens-game-preview-november-5-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-07T17:45:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "canucks": {
       "hasProjectedLines": true,
@@ -141,7 +131,7 @@
         "manual"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-07T16:56:00+00:00",
+      "publishedAt": "2026-11-07T17:45:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -213,7 +203,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-07T16:56:00+00:00",
+      "publishedAt": "2026-11-07T17:45:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -261,7 +251,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-07T16:56:00+00:00",
+      "publishedAt": "2026-11-07T17:45:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -272,11 +262,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-05T18:38:08.848000+00:00",
-      "source": "https://www.nhl.com/news/chicago-blackhawks-tampa-bay-lightning-game-preview-november-5-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-07T17:45:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "mammoth": {
       "hasProjectedLines": true,
@@ -285,11 +275,11 @@
         "archive",
         "manual"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-05T18:46:31.658000+00:00",
-      "source": "https://www.nhl.com/news/utah-mammoth-montreal-canadiens-game-preview-november-5-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-07T17:45:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "maple leafs": {
       "hasProjectedLines": true,
@@ -298,11 +288,11 @@
         "archive",
         "manual"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-03T17:53:04.347000+00:00",
-      "source": "https://www.nhl.com/news/utah-mammoth-toronto-maple-leafs-game-preview-november-3-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-07T17:45:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "oilers": {
       "hasProjectedLines": true,
@@ -323,7 +313,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-07T16:56:00+00:00",
+      "publishedAt": "2026-11-07T17:45:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -347,7 +337,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-07T16:56:00+00:00",
+      "publishedAt": "2026-11-07T17:45:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -359,7 +349,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-07T16:56:00+00:00",
+      "publishedAt": "2026-11-07T17:45:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -406,8 +396,8 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-06T19:55:01.285000+00:00",
-      "source": "https://www.nhl.com/news/san-jose-sharks-minnesota-wild-game-preview-november-6-2026",
+      "publishedAt": "2026-11-07T17:45:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -418,11 +408,11 @@
         "archive",
         "manual"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-05T18:11:13.469000+00:00",
-      "source": "https://www.nhl.com/news/dallas-stars-columbus-blue-jackets-game-preview-november-5-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-07T17:45:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "wild": {
       "hasProjectedLines": true,
@@ -431,8 +421,8 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-06T19:55:01.285000+00:00",
-      "source": "https://www.nhl.com/news/san-jose-sharks-minnesota-wild-game-preview-november-6-2026",
+      "publishedAt": "2026-11-07T17:45:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
     }

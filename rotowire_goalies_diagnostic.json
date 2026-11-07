@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-07T17:13:11.810846+00:00",
+  "checkedAt": "2026-11-07T17:48:39.286638+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "candidateCount": 94,
   "matchedCount": 94,
@@ -189,7 +189,7 @@
       "goalie": "Jake Oettinger",
       "opponent": "SJS",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-07",
       "gameId": 2026020272,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -369,7 +369,7 @@
       "goalie": "Jacob Fowler",
       "opponent": "TOR",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-07",
       "gameId": 2026020268,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -439,7 +439,7 @@
       "goalie": "Juuse Saros",
       "opponent": "STL",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-07",
       "gameId": 2026020266,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -716,17 +716,17 @@
     },
     {
       "team": "TBL",
-      "goalie": "Andrei Vasilevskiy",
+      "goalie": "Dennis Hildeby",
       "opponent": "MIN",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-07",
       "gameId": 2026020273,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "team": "TBL",
-      "goalie": "Dennis Hildeby",
+      "goalie": "Andrei Vasilevskiy",
       "opponent": "WPG",
       "venue": "away",
       "status": "projected",
