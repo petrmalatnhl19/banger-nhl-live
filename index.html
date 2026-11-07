@@ -970,7 +970,14 @@ const preceding=matchContext.recentPlays.filter(p=>p.period===e.periodDescriptor
 break;}
 
 case'shot-on-goal':{const goalie=actor(v.goalieInNetId),approach=shotDescription(v);const late=e.periodDescriptor?.number===3&&currentTime>=3480;const scores=matchContext.latestScore;const close=scores&&Math.abs(scores.away-scores.home)<=1;if(goalie)msg=approach?variants(['🧤 '+named+' zakončuje '+approach+', '+goalie+' zasahuje.','🏒 '+named+' vysílá pokus '+approach+', brankář '+goalie+' jej kryje.','🧤 '+goalie+' zastavuje střelu hráče '+named+' '+approach+'.']):variants(['🧤 '+goalie+' kryje střelu hráče '+named+'.','🏒 '+named+' střílí na branku, '+goalie+' zasahuje.','🎯 '+named+' prověřuje brankáře '+goalie+'.']);else msg=approach?'🎯 '+named+' zakončuje '+approach+' na branku.':'🏒 '+named+' střílí na branku.';if(goalie&&late&&close&&currentTime-matchContext.lastLateCallTime>=95){addNote(6,' ⏱️ Závěr třetí třetiny, rozdíl ve skóre je nejvýše jeden gól.');matchContext.lastLateCallTime=currentTime;}break;}
-case'missed-shot':{const approach=shotDescription(v);msg=approach?variants(['↗️ '+named+' zakončuje '+approach+', ale branku míjí.','🎯 '+named+' střílí '+approach+', kotouč však míří mimo.','🏒 '+named+' se pokouší zakončit '+approach+', branku ale netrefuje.']):variants(['🎯 '+named+' míří mimo branku.','🏒 '+named+' netrefuje branku.','↗️ '+named+' zakončuje mimo tyče.']);break;}
+case'missed-shot':{
+const area=shotLocation(v).trim(),kind=String(v.shotType||'').toLowerCase();
+if(['tip-in','tip','deflected'].includes(kind)){
+ msg=variants(['🏒 '+named+' tečuje kotouč'+(area?' '+area:'')+', ale branku míjí.','↗️ Teč hráče '+named+(area?' '+area:'')+' končí mimo branku.']);
+}else{
+ const approach=shotDescription(v);
+ msg=approach?variants(['↗️ '+named+' zakončuje '+approach+', ale branku míjí.','🎯 '+named+' střílí '+approach+', kotouč však míří mimo.','🏒 '+named+' se pokouší zakončit '+approach+', branku ale netrefuje.']):variants(['🎯 '+named+' míří mimo branku.','🏒 '+named+' netrefuje branku.','↗️ '+named+' zakončuje mimo tyče.']);
+}break;}
 case'blocked-shot':{const shooter=actor(v.shootingPlayerId),blocker=actor(v.blockingPlayerId);msg=blocker&&shooter?variants(['🛡️ '+blocker+' blokuje střelu hráče '+shooter+'.','🛡️ '+shooter+' vypálil, jeho pokus však zastavil '+blocker+'.','🧱 '+blocker+' se postavil do cesty střele hráče '+shooter+'.','🏒 '+shooter+' se pokusil zakončit, ale '+blocker+' jeho střelu zablokoval.','🛡️ Střelecký pokus hráče '+shooter+' končí na bloku, který zaznamenal '+blocker+'.']):blocker?'🛡️ Střelu blokuje '+blocker+'.':shooter?'🧱 Zblokovaná střela. Střílel '+shooter+'.':'🧱 Střela hráčů týmu '+team+' byla zblokována.';break;}
 case'penalty':{const penalized=actor(v.committedByPlayerId)||actor(v.playerId)||who;const minutes=Number(v.duration);const penaltyCz={'tripping':'podražení','hooking':'hákování','holding':'držení','high-sticking':'hra vysokou holí','high sticking':'hra vysokou holí','slashing':'sekání','interference':'bránění ve hře','cross-checking':'krosček','cross checking':'krosček','roughing':'hrubost','boarding':'naražení na hrazení','charging':'napadení','elbowing':'úder loktem','kneeing':'faul kolenem','delay-of-game':'zdržování hry','delay of game':'zdržování hry','too-many-men':'příliš mnoho hráčů na ledě','too many men':'příliš mnoho hráčů na ledě','unsportsmanlike-conduct':'nesportovní chování','unsportsmanlike conduct':'nesportovní chování','holding-the-stick':'držení hole','holding the stick':'držení hole','spearing':'bodnutí špičkou hole','butt-ending':'úder koncem hole','fighting':'bitka','misconduct':'osobní trest','game-misconduct':'trest do konce utkání','checking-from-behind':'vražení zezadu','checking-to-the-head':'zásah do hlavy','illegal-check-to-the-head':'nedovolený zásah do hlavy','instigator':'vyvolání bitky','diving':'filmovaný pád','embellishment':'přifilmování pádu','abuse-of-officials':'napadání rozhodčích'};const rawReason=typeof v.descKey==='string'?v.descKey.toLowerCase().replace(/_/g,'-').trim():'';const reason=penaltyCz[rawReason]||'';msg='🚨 Vyloučení týmu '+team+(penalized?' — '+penalized:'')+'.'+(Number.isFinite(minutes)&&minutes>0?' Trest '+minutes+' min.':'')+(reason?' Důvod: '+reason+'.':'');break;}
 case'faceoff':msg=variants(['⚪ Vhazování! Hra pokračuje.','🏒 Puk je znovu ve hře po vhazování.']);break;
@@ -996,14 +1003,12 @@ const previous=recent.length?recent[recent.length-1]:null;
 const gap=previous&&previous.period===periodNo?currentTime-previous.time:Infinity;
 // COMMENTATOR 3.6: relate recorded events, not inferred passes or possession.
 if(['shot-on-goal','missed-shot','blocked-shot'].includes(type)&&v.eventOwnerTeamId!=null){
- const nearby=recent.filter(p=>p.period===periodNo&&p.time<=currentTime&&currentTime-p.time<=20);
- const last=nearby[nearby.length-1];
- if(last&&last.team===team&&last.type==='takeaway'&&currentTime-last.time<=12){
-  addNote(4,' ⚡ Před zakončením zaznamenalo NHL zisk kotouče hráčem týmu '+team+'.');
- }else if(last&&last.type==='giveaway'&&last.team!==team&&currentTime-last.time<=12){
-  addNote(4,' ⚡ Střeleckému pokusu předcházela ztráta kotouče soupeře.');
- }else if(last&&last.team===team&&['shot-on-goal','missed-shot','blocked-shot'].includes(last.type)&&currentTime-last.time<=12){
-  addNote(3,' 🏒 Další střelecký pokus stejného týmu během několika sekund.');
+ const last=recent.length?recent[recent.length-1]:null;
+ const fresh=last&&last.period===periodNo&&currentTime>=last.time&&currentTime-last.time<=12;
+ // Only connect the immediate preceding recorded event; never jump over another event.
+ // Do not repeat the loss/takeaway that the previous card already narrates.
+ if(fresh&&last.team===team&&['shot-on-goal','missed-shot','blocked-shot'].includes(last.type)){
+  addNote(3,' 🏒 '+team+' zaznamenává další střelecký pokus během několika sekund.');
  }
 }
 if(type==='hit'){
@@ -1015,7 +1020,7 @@ if(type==='hit'){
 }
 if(type==='shot-on-goal'&&previous&&gap>=0&&gap<=18){
  if(previous.type==='shot-on-goal'&&previous.team===team)addNote(2,' 🏒 Hráči stejného týmu znovu střílejí v krátkém sledu.');
- else if(previous.type==='giveaway'&&previous.team!==team)addNote(3,' ⚡ Krátce před touto střelou soupeř ztratil puk.');
+ 
 }
 if(type==='takeaway'&&previous&&gap>=0&&gap<=15&&previous.type==='giveaway'&&previous.team!==team){
  addNote(2,' ⚡ Obě změny držení puku zaznamenalo NHL v krátkém sledu.');
