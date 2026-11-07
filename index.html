@@ -1116,7 +1116,7 @@ const ownSkaters=Number(situation[isAway?1:2]),oppSkaters=Number(situation[isAwa
 goalType=ownSkaters>oppSkaters?'V PŘESILOVCE':ownSkaters<oppSkaters?'V OSLABENÍ':'PŘI VYROVNANÉM POČTU HRÁČŮ';
 }
 if(goalType)msg=msg.replace(/^🥅 (?:GÓL!|BRANKA!|JE VYROVNÁNO!)/,'🥅 GÓL '+goalType+'!');
-if(period==='OT')msg+=' Prodloužení.';
+if(period==='OT')msg+=' Prodloužení.';else if(e.periodDescriptor?.number===3&&currentTime>=3540&&hasScore&&Math.abs(away-home)===1&&oldLead<0&&newLead<0)msg+=' V poslední minutě základní hrací doby je rozdíl jediný gól!';
 matchContext.latestScore={away,home};
 }else if(hasScore){msg+=' Stav '+away+':'+home+'.';matchContext.latestScore={away,home}}
 const goalShot=shotDescription(v);if(goalShot)msg+=' 🎯 Zakončení: '+goalShot+'.';const assists=[actor(v.assist1PlayerId),actor(v.assist2PlayerId)].filter(Boolean);if(assists.length)msg+=' 🏒 Asistence: '+assists.join(', ')+'.';
@@ -1135,8 +1135,8 @@ if(['tip-in','tip','deflected'].includes(kind)){
 case'blocked-shot':{const shooter=actor(v.shootingPlayerId),blocker=actor(v.blockingPlayerId);msg=blocker&&shooter?variants(['🛡️ '+blocker+' blokuje střelu hráče '+shooter+'.','🛡️ '+shooter+' vypálil, jeho pokus však zastavil '+blocker+'.','🧱 '+blocker+' se postavil do cesty střele hráče '+shooter+'.','🏒 '+shooter+' se pokusil zakončit, ale '+blocker+' jeho střelu zablokoval.','🛡️ Střelecký pokus hráče '+shooter+' končí na bloku, který zaznamenal '+blocker+'.']):blocker?'🛡️ Střelu blokuje '+blocker+'.':shooter?'🧱 Zblokovaná střela. Střílel '+shooter+'.':'🧱 Střela hráčů týmu '+team+' byla zblokována.';break;}
 case'penalty':{const penalized=actor(v.committedByPlayerId)||actor(v.playerId)||who;const minutes=Number(v.duration);const penaltyCz={'tripping':'podražení','hooking':'hákování','holding':'držení','high-sticking':'hra vysokou holí','high sticking':'hra vysokou holí','slashing':'sekání','interference':'bránění ve hře','cross-checking':'krosček','cross checking':'krosček','roughing':'hrubost','boarding':'naražení na hrazení','charging':'napadení','elbowing':'úder loktem','kneeing':'faul kolenem','delay-of-game':'zdržování hry','delay of game':'zdržování hry','too-many-men':'příliš mnoho hráčů na ledě','too many men':'příliš mnoho hráčů na ledě','unsportsmanlike-conduct':'nesportovní chování','unsportsmanlike conduct':'nesportovní chování','holding-the-stick':'držení hole','holding the stick':'držení hole','spearing':'bodnutí špičkou hole','butt-ending':'úder koncem hole','fighting':'bitka','misconduct':'osobní trest','game-misconduct':'trest do konce utkání','checking-from-behind':'vražení zezadu','checking-to-the-head':'zásah do hlavy','illegal-check-to-the-head':'nedovolený zásah do hlavy','instigator':'vyvolání bitky','diving':'filmovaný pád','embellishment':'přifilmování pádu','abuse-of-officials':'napadání rozhodčích'};const rawReason=typeof v.descKey==='string'?v.descKey.toLowerCase().replace(/_/g,'-').trim():'';const reason=penaltyCz[rawReason]||'';msg='🚨 Vyloučení týmu '+team+(penalized?' — '+penalized:'')+'.'+(Number.isFinite(minutes)&&minutes>0?' Trest '+minutes+' min.':'')+(reason?' Důvod: '+reason+'.':'');break;}
 case'faceoff':msg=variants(['⚪ Vhazování! Hra pokračuje.','🏒 Puk je znovu ve hře po vhazování.']);break;
-case'hit':{const hitter=actor(v.hittingPlayerId),hittee=actor(v.hitteePlayerId);msg=hitter&&hittee?variants(['💥 '+hitter+' dohrává osobní souboj s '+hittee+'.','💥 '+hitter+' zastavuje '+hittee+' tvrdým bodyčekem.','🏒 '+hitter+' zastavuje '+hittee+' bodyčekem.','💥 '+hitter+' zaznamenává bodyček proti hráči '+hittee+'.']):hitter?'💥 Bodyček si připisuje '+hitter+'.':'💥 Hráči týmu '+team+' si připisují bodyček.';break;}
-case'giveaway':{const p=actor(v.playerId)||actor(v.committedByPlayerId)||team;msg=variants(['⚠️ '+p+' ztrácí puk.','⚠️ Ztráta puku: '+p+'.','🏒 '+p+' přichází o kotouč.','⚠️ '+p+' si nepohlídal kotouč a připisuje si ztrátu.']);break;}
+case'hit':{const hitter=actor(v.hittingPlayerId),hittee=actor(v.hitteePlayerId);msg=hitter&&hittee?variants(['💥 '+hitter+' dohrává osobní souboj s '+hittee+'.','💥 '+hitter+' zastavuje '+hittee+' tvrdým bodyčekem.','🏒 '+hitter+' zastavuje '+hittee+' bodyčekem.','💥 '+hitter+' dohrává bodyčekem hráče '+hittee+'.']):hitter?'💥 Bodyček si připisuje '+hitter+'.':'💥 Hráči týmu '+team+' si připisují bodyček.';break;}
+case'giveaway':{const p=actor(v.playerId)||actor(v.committedByPlayerId)||team;msg=variants(['⚠️ '+p+' ztrácí puk.','⚠️ Ztráta puku: '+p+'.','🏒 '+p+' přichází o kotouč.','⚠️ Ztrátu kotouče zaznamenává '+p+'.']);break;}
 case'takeaway':{const p=actor(v.playerId)||team;msg=variants(['🏒 '+p+' získává puk.','🏒 Kotouč získává '+p+'.','🏒 '+p+' získává kotouč pro svůj tým.','⚡ Úspěšné odebrání puku, postaral se o něj '+p+'.']);break;}
 case'period-start':msg='▶️ Jdeme na to! Začíná další třetina.';break;
 case'period-end':{const p=e.periodDescriptor?.periodType,number=e.periodDescriptor?.number;msg=p==='OT'?'⏸️ Prodloužení končí.':number===3?'⏱️ Třetí třetina je u konce!':'⏸️ Siréna! '+(number||'Další')+'. třetina je za námi.';if(number&&p!=='SO')msg+=periodSummary(number);break;}
@@ -1178,9 +1178,6 @@ if(type==='shot-on-goal'&&previous&&gap>=0&&gap<=18){
  
 }
 
-if(type==='penalty'&&previous&&gap>=0&&gap<=20&&previous.type==='hit'){
- addNote(2,' 🏒 Krátce před vyloučením byl zaznamenán také bodyček.');
-}
 if(type==='penalty'&&v.eventOwnerTeamId!=null){matchContext.lastPenalty={team,time:currentTime,period:e.periodDescriptor?.number||1}}if(type==='goal'||type==='period-start'||type==='period-end'){matchContext.lastShotTeam=null;matchContext.consecutiveShots=0;matchContext.lastShotPeriod=null}
 if(['shot-on-goal','missed-shot','blocked-shot'].includes(type)&&v.eventOwnerTeamId!=null){
 const period=e.periodDescriptor?.number||1;
