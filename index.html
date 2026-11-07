@@ -685,6 +685,45 @@ button:focus-visible,[role="button"]:focus-visible{outline:2px solid #86f2ff;out
  body:has(#dashRefresh) .dash-game{border-radius:13px!important}
 }
 </style>
+
+<style id="banger-compact-mobile-panels-v1">
+/* Compact presentation only; controls and navigation remain functional. */
+@media(max-width:760px){
+ .wrap{padding-left:12px!important;padding-right:12px!important}
+ .top{padding:10px 12px!important;min-height:0!important;margin-bottom:10px!important;border-radius:17px!important}
+ .brand{gap:8px!important}.brand h1{font-size:23px!important;line-height:1!important}.brand .tag{font-size:9px!important}
+ .lineup-health{margin:8px 0!important;padding:0!important;border-radius:13px!important}
+ .lineup-health>summary{padding:10px 12px!important;font-size:12px!important;line-height:1.3!important;min-height:0!important}
+ nav.toolbar{margin:7px 0 9px!important;padding:6px!important;gap:6px!important;min-height:0!important}
+ nav.toolbar #refresh{min-height:36px!important;padding:7px 11px!important;font-size:12px!important}
+ nav.toolbar #sort,nav.toolbar #search{min-height:36px!important;padding:7px 9px!important;font-size:12px!important;min-width:0!important}
+ #calendarBar{padding:10px!important;border-radius:15px!important;margin:8px 0!important}
+ #calendarBar .calendar-title{font-size:12px!important}
+ #calendarBar .daynav{margin:7px 0!important;gap:6px!important}
+ #calendarBar .daynav #date,#calendarBar .daynav #today{min-height:39px!important;padding:7px 10px!important;font-size:13px!important}
+ #uxDayStrip{margin-top:4px!important}
+ #uxDayStrip button{min-height:51px!important;padding:6px 8px!important}
+ .ux-games-filter{margin:7px 0 0!important;gap:5px!important}
+ .ux-games-filter button{min-height:35px!important;padding:6px 3px!important;font-size:11px!important;gap:3px!important}
+ .ux-games-filter button span{min-width:19px!important;height:19px!important;font-size:10px!important}
+ .ux-stats-hub{padding:10px!important;margin:7px 0 9px!important;border-radius:14px!important}
+ .ux-stats-heading{margin-bottom:7px!important;gap:3px 8px!important}
+ .ux-stats-heading strong{font-size:15px!important}.ux-stats-heading span{font-size:11px!important}
+ .ux-stats-tabs{gap:5px!important}
+ .ux-stats-tabs button,.ux-stats-tabs a{min-height:35px!important;padding:7px 5px!important;border-radius:9px!important;font-size:11px!important}
+ #status{font-size:12px!important;line-height:1.4!important;margin:7px 0!important}
+ .analyst-list{grid-template-columns:1fr!important;gap:8px!important}
+ .analyst-list-card{padding:11px 12px!important;border-radius:14px!important;display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:6px 8px!important;align-items:center!important}
+ .analyst-list-card .analyst-teams{grid-column:1/-1!important;gap:8px!important;justify-content:space-between!important}
+ .analyst-list-card .analyst-teams img{width:32px!important;height:32px!important;flex-shrink:0!important}
+ .analyst-list-card .analyst-teams strong{font-size:16px!important;text-align:center!important}
+ .analyst-list-card p{grid-column:1/-1!important;margin:0!important;font-size:11px!important;line-height:1.35!important;color:#a9c8dc!important}
+ .analyst-list-card .btn{margin:0!important;min-height:35px!important;padding:7px 10px!important;font-size:11px!important;line-height:1.2!important;border-radius:10px!important;white-space:normal!important}
+ .analyst-list-card [data-analyze]{grid-column:1!important;width:100%!important}
+ .analyst-list-card [data-game]{grid-column:2!important;width:auto!important}
+}
+@media(max-width:380px){.analyst-list-card .btn{font-size:10px!important;padding:7px!important}.ux-games-filter button{font-size:10px!important}}
+</style>
 </head><body><div class="wrap">
 <div id="brandSplash" class="brand-splash" aria-label="Načítání BANGER NHL LIVE"><div class="brand-splash-glow"></div><picture><source media="(orientation: portrait)" srcset="splash-portrait.png"><img src="splash-landscape.png" alt="BANGER NHL LIVE" fetchpriority="high" decoding="async"></picture><div class="brand-splash-loader"><span></span></div><div class="brand-splash-caption">VSTUP DO HOKEJOVÉ ARÉNY</div></div><header class="top"><div class="brand"><div class="brand-logo" aria-label="BANGER NHL LIVE"><span class="brand-mark">BANGER</span><span class="brand-sub">NHL <b>LIVE</b></span></div></div><span class="header-status"><i></i> NHL 2026/27</span></header>
 
