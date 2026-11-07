@@ -15,6 +15,16 @@ jobs:
           python-version: '3.12'
       - name: Inspect published MoneyPuck goalie CSV
         run: python scripts/probe_moneypuck_goalies.py
+      - name: Archive pregame goalie data snapshot
+        run: python scripts/archive_core43_goalies.py
+      - name: Save immutable goalie snapshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: core43-goalie-snapshot-${{ github.run_id }}
+          path: diagnostics/core43-goalie-snapshots/
+          if-no-files-found: warn
+          retention-days: 90
       - name: Save schema diagnostic
         if: always()
         uses: actions/upload-artifact@v4
