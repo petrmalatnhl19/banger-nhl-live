@@ -1,86 +1,71 @@
 {
   "teams": {
     "kings": {
-      "updatedAt": "2026-11-04T20:19:22.535592+00:00",
-      "previousPublishedAt": "2026-10-30T21:02:46.495000+00:00",
-      "publishedAt": "2026-11-04T20:13:00+00:00",
+      "updatedAt": "2026-11-07T19:38:37.160122+00:00",
+      "previousPublishedAt": "2026-11-04T20:17:46.883000+00:00",
+      "publishedAt": "2026-11-07T19:32:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
           "type": "added",
-          "player": "Andre Lee",
+          "player": "Alex Turcotte",
           "to": "Útok 3"
         },
         {
-          "type": "added",
+          "type": "removed",
           "player": "Martin Chromiak",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Erik Haula",
-          "from": "Útok 3",
-          "to": "Útok 4"
-        },
-        {
-          "type": "added",
-          "player": "Kenny Connors",
-          "to": "Útok 4"
-        },
-        {
-          "type": "moved",
-          "player": "Joel Armia",
-          "from": "Útok 3",
-          "to": "Útok 4"
+          "from": "Útok 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "penguins": {
-      "updatedAt": "2026-11-05T17:28:21.800504+00:00",
-      "previousPublishedAt": "2026-11-03T16:32:11.100000+00:00",
-      "publishedAt": "2026-11-05T16:53:27.782000+00:00",
-      "source": "https://www.nhl.com/news/boston-bruins-pittsburgh-penguins-game-preview-november-5-2026",
+      "updatedAt": "2026-11-07T19:38:37.159995+00:00",
+      "previousPublishedAt": "2026-11-05T16:53:27.782000+00:00",
+      "publishedAt": "2026-11-07T19:32:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
-          "type": "added",
+          "type": "moved",
           "player": "Evgeni Malkin",
+          "from": "Útok 2",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Tommy Novak",
+          "from": "Útok 1",
           "to": "Útok 2"
         },
         {
           "type": "moved",
-          "player": "Samuel Girard",
+          "player": "Spencer Stastney",
           "from": "Obrana 2",
           "to": "Obrana 1"
         },
         {
           "type": "moved",
-          "player": "Spencer Stastney",
+          "player": "Samuel Girard",
           "from": "Obrana 1",
           "to": "Obrana 2"
-        },
-        {
-          "type": "removed",
-          "player": "Andrei Kuzmenko",
-          "from": "Útok 2"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "red wings": {
-      "updatedAt": "2026-11-05T19:12:44.545681+00:00",
-      "previousPublishedAt": "2026-11-03T17:02:00+00:00",
-      "publishedAt": "2026-11-05T18:27:07.738000+00:00",
-      "source": "https://www.nhl.com/news/vegas-golden-knights-detroit-red-wings-game-preview-november-5-2026",
+      "updatedAt": "2026-11-07T19:38:37.159755+00:00",
+      "previousPublishedAt": "2026-11-05T18:27:07.738000+00:00",
+      "publishedAt": "2026-11-07T19:35:08.238000+00:00",
+      "source": "https://www.nhl.com/news/detroit-red-wings-colorado-avalanche-game-preview-november-7-2026",
       "events": [
         {
           "type": "added",
-          "player": "Nate Danielson",
+          "player": "John Leonard",
           "to": "Útok 3"
         },
         {
           "type": "removed",
-          "player": "John Leonard",
+          "player": "Nate Danielson",
           "from": "Útok 3"
         }
       ],
@@ -391,29 +376,51 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "oilers": {
-      "updatedAt": "2026-11-03T17:46:39.606818+00:00",
-      "previousPublishedAt": "2026-10-31T21:29:00+00:00",
-      "publishedAt": "",
+      "updatedAt": "2026-11-07T19:38:37.160350+00:00",
+      "previousPublishedAt": "2026-11-05T19:06:54.747000+00:00",
+      "publishedAt": "2026-11-07T19:32:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
           "type": "added",
+          "player": "Zach Hyman",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
           "player": "Max Jones",
+          "from": "Útok 4",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Alex Formenton",
+          "from": "Útok 3",
           "to": "Útok 4"
         },
         {
           "type": "added",
-          "player": "Jake Walman",
+          "player": "Trent Frederic",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
+          "player": "Ty Emberson",
           "to": "Obrana 3"
         },
         {
           "type": "removed",
-          "player": "Trent Frederic",
+          "player": "Colton Dach",
+          "from": "Útok 2"
+        },
+        {
+          "type": "removed",
+          "player": "Filip Hallander",
           "from": "Útok 4"
         },
         {
           "type": "removed",
-          "player": "Ty Emberson",
+          "player": "Jake Walman",
           "from": "Obrana 3"
         }
       ],
@@ -631,55 +638,93 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "canucks": {
-      "updatedAt": "2026-11-05T19:12:44.545780+00:00",
-      "previousPublishedAt": "2026-11-03T19:43:35.256000+00:00",
-      "publishedAt": "2026-11-05T18:31:00.644000+00:00",
-      "source": "https://www.nhl.com/news/vancouver-canucks-winnipeg-jets-game-preview-november-5-2026",
+      "updatedAt": "2026-11-07T19:38:37.160235+00:00",
+      "previousPublishedAt": "2026-11-05T18:31:00.644000+00:00",
+      "publishedAt": "2026-11-07T19:32:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
-          "type": "moved",
-          "player": "Elias Pettersson",
-          "from": "Útok 1",
-          "to": "Obrana 1"
+          "type": "added",
+          "player": "Arshdeep Bains",
+          "to": "Útok 1"
         },
         {
           "type": "moved",
-          "player": "Jonathan Lekkerimaki",
+          "player": "Elias Pettersson",
+          "from": "Obrana 1",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Linus Karlsson",
           "from": "Útok 3",
           "to": "Útok 2"
         },
         {
           "type": "moved",
-          "player": "Linus Karlsson",
-          "from": "Útok 2",
+          "player": "Max Sasson",
+          "from": "Útok 4",
           "to": "Útok 3"
         },
         {
-          "type": "added",
-          "player": "Filip Hronek",
-          "to": "Obrana 1"
+          "type": "moved",
+          "player": "Brendan Gallagher",
+          "from": "Útok 4",
+          "to": "Útok 3"
         },
         {
-          "type": "added",
-          "player": "Guillaume Brisebois",
-          "to": "Obrana 2"
+          "type": "moved",
+          "player": "Jake DeBrusk",
+          "from": "Útok 1",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Jonathan Lekkerimaki",
+          "from": "Útok 2",
+          "to": "Útok 4"
         },
         {
           "type": "moved",
           "player": "Jamie Oleksiak",
-          "from": "Obrana 1",
-          "to": "Obrana 3"
+          "from": "Obrana 3",
+          "to": "Obrana 1"
         },
         {
           "type": "moved",
-          "player": "Victor Mancini",
+          "player": "Zeev Buium",
           "from": "Obrana 2",
-          "to": "Obrana 3"
+          "to": "Obrana 1"
+        },
+        {
+          "type": "added",
+          "player": "Tom Willander",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "added",
+          "player": "Luke Schenn",
+          "to": "Obrana 2"
         },
         {
           "type": "removed",
-          "player": "Tom Willander",
+          "player": "Jacob Quillan",
+          "from": "Útok 3"
+        },
+        {
+          "type": "removed",
+          "player": "Filip Hronek",
           "from": "Obrana 1"
+        },
+        {
+          "type": "removed",
+          "player": "Guillaume Brisebois",
+          "from": "Obrana 2"
+        },
+        {
+          "type": "removed",
+          "player": "Victor Mancini",
+          "from": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -1086,32 +1131,32 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "avalanche": {
-      "updatedAt": "2026-11-05T20:05:33.996928+00:00",
-      "previousPublishedAt": "2026-11-03T17:17:53.296000+00:00",
-      "publishedAt": "2026-11-05T19:30:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-07T19:38:37.159878+00:00",
+      "previousPublishedAt": "2026-11-05T19:28:44.408000+00:00",
+      "publishedAt": "2026-11-07T19:35:08.238000+00:00",
+      "source": "https://www.nhl.com/news/detroit-red-wings-colorado-avalanche-game-preview-november-7-2026",
       "events": [
         {
           "type": "moved",
-          "player": "Nazem Kadri",
-          "from": "Útok 3",
-          "to": "Útok 2"
+          "player": "Brett Kulak",
+          "from": "Obrana 2",
+          "to": "Obrana 1"
         },
         {
           "type": "moved",
-          "player": "Brock Nelson",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Noah Juulsen",
-          "from": "Obrana 3",
+          "player": "Devon Toews",
+          "from": "Obrana 1",
           "to": "Obrana 2"
         },
         {
           "type": "moved",
           "player": "Sam Malinski",
+          "from": "Obrana 3",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "moved",
+          "player": "Noah Juulsen",
           "from": "Obrana 2",
           "to": "Obrana 3"
         }
