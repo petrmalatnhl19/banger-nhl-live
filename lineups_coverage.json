@@ -1,14 +1,16 @@
 {
-  "generatedAt": "2026-11-07T06:53:06.431314+00:00",
+  "generatedAt": "2026-11-07T07:56:43.625055+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 15,
+  "currentProjections": 12,
   "needsFreshProjection": [
+    "avalanche",
     "blackhawks",
     "bruins",
     "canadiens",
     "canucks",
     "devils",
+    "flyers",
     "golden knights",
     "hurricanes",
     "islanders",
@@ -17,6 +19,7 @@
     "lightning",
     "mammoth",
     "maple leafs",
+    "oilers",
     "penguins",
     "red wings",
     "senators",
@@ -24,11 +27,13 @@
   ],
   "missing": [],
   "olderVerified": [
+    "avalanche",
     "blackhawks",
     "bruins",
     "canadiens",
     "canucks",
     "devils",
+    "flyers",
     "golden knights",
     "hurricanes",
     "islanders",
@@ -37,6 +42,7 @@
     "lightning",
     "mammoth",
     "maple leafs",
+    "oilers",
     "penguins",
     "red wings",
     "senators",
@@ -51,11 +57,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-05T19:28:44.408000+00:00",
       "source": "https://www.nhl.com/news/nashville-predators-colorado-avalanche-game-preview-november-5-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "blackhawks": {
       "hasProjectedLines": true,
@@ -184,11 +190,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-05T19:32:00+00:00",
       "source": "https://www.nhl.com/news/philadelphia-flyers-new-york-rangers-game-preview-november-5-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "golden knights": {
       "hasProjectedLines": true,
@@ -306,11 +312,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-05T19:06:54.747000+00:00",
       "source": "https://www.nhl.com/news/anaheim-ducks-at-edmonton-oilers-game-preview-november-5-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "panthers": {
       "hasProjectedLines": true,
