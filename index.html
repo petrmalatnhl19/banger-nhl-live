@@ -994,6 +994,18 @@ if(matchContext.lastPeriodSeen!==periodNo){
 const recent=matchContext.recentPlays;
 const previous=recent.length?recent[recent.length-1]:null;
 const gap=previous&&previous.period===periodNo?currentTime-previous.time:Infinity;
+// COMMENTATOR 3.6: relate recorded events, not inferred passes or possession.
+if(['shot-on-goal','missed-shot','blocked-shot'].includes(type)&&v.eventOwnerTeamId!=null){
+ const nearby=recent.filter(p=>p.period===periodNo&&p.time<=currentTime&&currentTime-p.time<=20);
+ const last=nearby[nearby.length-1];
+ if(last&&last.team===team&&last.type==='takeaway'&&currentTime-last.time<=12){
+  addNote(4,' ⚡ Před zakončením zaznamenalo NHL zisk kotouče hráčem týmu '+team+'.');
+ }else if(last&&last.type==='giveaway'&&last.team!==team&&currentTime-last.time<=12){
+  addNote(4,' ⚡ Střeleckému pokusu předcházela ztráta kotouče soupeře.');
+ }else if(last&&last.team===team&&['shot-on-goal','missed-shot','blocked-shot'].includes(last.type)&&currentTime-last.time<=12){
+  addNote(3,' 🏒 Další střelecký pokus stejného týmu během několika sekund.');
+ }
+}
 if(type==='hit'){
  const prev=matchContext.lastPhysical;
  if(prev&&prev.period===periodNo&&currentTime>=prev.time&&currentTime-prev.time<=45&&prev.team!==team){
