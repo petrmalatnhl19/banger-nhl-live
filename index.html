@@ -948,6 +948,7 @@ else msg='🥅 GÓL! '+named+' mění skóre na '+score+'.';
 if(period==='OT')msg+=' Prodloužení.';
 matchContext.latestScore={away,home};
 }else if(hasScore){msg+=' Stav '+away+':'+home+'.';matchContext.latestScore={away,home}}
+const assists=[actor(v.assist1PlayerId),actor(v.assist2PlayerId)].filter(Boolean);if(assists.length)msg+=' 🏒 Asistence: '+assists.join(', ')+'.';
 break;}
 
 case'shot-on-goal':{const goalie=actor(v.goalieInNetId);const late=e.periodDescriptor?.number===3&&currentTime>=3420;const scores=matchContext.latestScore;const close=scores&&Math.abs(scores.away-scores.home)<=1;msg=goalie?variants(['🧤 '+goalie+' čelí střele. Střílel '+named+'.','🏒 '+named+' prověřuje brankáře '+goalie+'.','🎯 '+named+' posílá střelu na branku, kde stojí '+goalie+'.']):variants(['🏒 '+named+' střílí na branku.','🧤 Střela na branku. Zakončuje '+named+'.','🎯 '+named+' posílá puk mezi tyče.']);if(goalie&&late&&close)msg+=' ⏱️ Důležitý okamžik v závěru vyrovnaného zápasu.';break;}
