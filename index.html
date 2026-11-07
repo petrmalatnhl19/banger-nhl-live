@@ -3033,4 +3033,17 @@ new MutationObserver(sync).observe(document.body,{childList:true,subtree:true});
 #arenaBody .match-tab:focus-visible{outline:2px solid #a8f6ff!important;outline-offset:2px!important}
 @media(max-width:370px){#arenaBody .match-tabs{column-gap:3px!important;row-gap:4px!important}#arenaBody .match-tab{font-size:9.5px!important}}
 </style>
+
+<style id="banger-boxscore-mobile-sticky">
+/* Kompletní statistiky zůstávají dostupné; jméno je ukotvené. */
+#boxscoreContent .boxscroll{position:relative;max-width:100%;overflow-x:auto!important;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;border:1px solid #2b6886;border-radius:12px;background:#071a30;scrollbar-width:thin;scrollbar-color:#48d9ee #09233c}
+#boxscoreContent .boxtable{border-collapse:separate!important;border-spacing:0!important;min-width:max-content!important;width:max-content!important;table-layout:auto!important}
+#boxscoreContent .boxtable th,#boxscoreContent .boxtable td{white-space:nowrap!important;min-width:52px!important;padding:10px 11px!important;text-align:center!important;font-variant-numeric:tabular-nums}
+#boxscoreContent .boxtable th:first-child,#boxscoreContent .boxtable td:first-child{position:sticky!important;left:0!important;z-index:2!important;min-width:132px!important;max-width:155px!important;text-align:left!important;background:#0b2944!important;box-shadow:3px 0 8px #0008;border-right:1px solid #34758d!important}
+#boxscoreContent .boxtable th:first-child{z-index:4!important;background:#154465!important}
+#boxscoreContent .boxtable thead th{position:sticky;top:0;z-index:3;background:#154465;color:#b6eafa}
+#boxscoreContent .boxtable tbody tr:nth-child(even) td:first-child{background:#0d304d!important}
+#boxscoreContent .boxsection{min-width:0!important;max-width:100%!important;overflow:hidden}
+@media(max-width:420px){#boxscoreContent .boxtable th,#boxscoreContent .boxtable td{padding:9px 8px!important;min-width:45px!important;font-size:12px!important}#boxscoreContent .boxtable th:first-child,#boxscoreContent .boxtable td:first-child{min-width:120px!important;max-width:135px!important}}
+</style>
 </body></html>
