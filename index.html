@@ -737,8 +737,13 @@ async function analyzeGame(id){
  // Four earlier regular seasons; season history is descriptive, not an input to the goal model.
  const firstYear=Number(season.slice(0,4));
  if(Number.isInteger(firstYear)&&firstYear>=2010&&firstYear<=2100){
-  const olderSeasons=Array.from({length:4},(_,i)=>{const y=firstYear-i-1;return String(y)+String(y+1)});
-  const historyResults=await Promise.all(olderSeasons.map(y=>safe(()=>get('https://api-web.nhle.com/v1/club-schedule-season/'+encodeURIComponent(ac)+'/'+y),4000)));
+  const olderSeasons=Array.from({length:5},(_,i)=>{const y=firstYear-i-1;return String(y)+String(y+1)});
+  const historyResults=await Promise.all(olderSeasons.map(async y=>{
+   const endpoint='https://api-web.nhle.com/v1/club-schedule-season/';
+   const primary=await safe(()=>get(endpoint+encodeURIComponent(ac)+'/'+y),8500);
+   if(primary.ok&&Array.isArray(primary.data?.games))return primary;
+   return safe(()=>get(endpoint+encodeURIComponent(hc)+'/'+y),8500);
+  }));
   const historical=[];
   for(let i=0;i<historyResults.length;i++){
    const res=historyResults[i];
