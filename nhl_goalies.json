@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-07T14:38:39.932609+00:00",
-  "rostersUpdatedAt": "2026-11-07T14:38:16.755732+00:00",
+  "updatedAt": "2026-11-07T15:21:05.148029+00:00",
+  "rostersUpdatedAt": "2026-11-07T15:20:40.692846+00:00",
   "projectionDate": "2026-11-07",
   "teamCount": 32,
-  "goalieCount": 76,
+  "goalieCount": 77,
   "goalies": [
     {
       "name": "Mackenzie Blackwood",
@@ -375,6 +375,14 @@
       "starterGameDate": null
     },
     {
+      "name": "Artur Akhtyamov",
+      "team": "TOR",
+      "teamKey": "maple leafs",
+      "playerId": 8482515,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
       "name": "Sergei Bobrovsky",
       "team": "TOR",
       "teamKey": "maple leafs",
@@ -428,17 +436,17 @@
       "team": "FLA",
       "teamKey": "panthers",
       "playerId": 8474593,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-07",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Akira Schmid",
       "team": "FLA",
       "teamKey": "panthers",
       "playerId": 8481033,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-07",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Sergei Murashov",
