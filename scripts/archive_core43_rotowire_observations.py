@@ -20,6 +20,8 @@ def main():
     now=dt.datetime.now(dt.timezone.utc)
     if observed.tzinfo is None or observed>now+dt.timedelta(minutes=2):
         raise ValueError("Invalid observation timestamp")
+    if observed < now-dt.timedelta(hours=2):
+        raise ValueError("RotoWire source JSON is stale; refusing to rearchive as fresh")
     rows=[]
     seen=set()
     for item in data.get("games",[]):
@@ -38,7 +40,7 @@ def main():
         if pair in seen:
             raise ValueError("Ambiguous duplicate game/team observation")
         seen.add(pair)
-        rows.append({"game_id":game,"team_code":team,"goalie_name":name.strip(),"observed_status":status,"observed_at":observed.isoformat(),"source_url":source})
+        rows.append({"game_id":game,"team_code":team,"goalie_name":name.strip(),"observed_status":status,"observed_at":now.isoformat(),"source_snapshot_at":observed.isoformat(),"source_url":source})
     if not rows:
         raise ValueError("No valid RotoWire observations")
     req=urllib.request.Request(url+"/rest/v1/nhl_core43_rotowire_observations?on_conflict=game_id,team_code,observed_at",
