@@ -1034,7 +1034,7 @@ const arenaClock=document.querySelector('#arenaBody .arena-clock');
 const arenaPeriod=document.querySelector('#arenaBody .arena-status>span:nth-child(2)');
 const feedClock=d.clock?.timeRemaining;
 const feedPeriod=d.periodDescriptor?.number;
-if(arenaClock&&typeof feedClock==='string'&&/^\\d{1,2}:\\d{2}$/.test(feedClock))arenaClock.textContent='⏱ '+feedClock;
+if(arenaClock&&typeof feedClock==='string'&&/^\d{1,2}:\d{2}$/.test(feedClock))arenaClock.textContent='⏱ '+feedClock;
 if(arenaPeriod&&Number.isInteger(feedPeriod)&&feedPeriod>0){
  const periodType=d.periodDescriptor?.periodType;
  arenaPeriod.textContent=periodType==='OT'?'Prodloužení':periodType==='SO'?'Nájezdy':feedPeriod+'. třetina';
