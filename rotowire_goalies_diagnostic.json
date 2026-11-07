@@ -1,8 +1,8 @@
 {
-  "checkedAt": "2026-11-07T07:56:45.440553+00:00",
+  "checkedAt": "2026-11-07T08:48:16.140214+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-  "candidateCount": 96,
-  "matchedCount": 90,
+  "candidateCount": 94,
+  "matchedCount": 94,
   "matches": [
     {
       "team": "ANA",
@@ -465,6 +465,16 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
+      "team": "NSH",
+      "goalie": "Juuse Saros",
+      "opponent": "VGK",
+      "venue": "away",
+      "status": "projected",
+      "date": "2026-11-13",
+      "gameId": 2026020311,
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+    },
+    {
       "team": "NYI",
       "goalie": "Ilya Sorokin",
       "opponent": "NJD",
@@ -522,6 +532,16 @@
       "status": "projected",
       "date": "2026-11-11",
       "gameId": 2026020294,
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+    },
+    {
+      "team": "NYR",
+      "goalie": "Dylan Garand",
+      "opponent": "VAN",
+      "venue": "away",
+      "status": "projected",
+      "date": "2026-11-13",
+      "gameId": 2026020310,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -825,6 +845,16 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
+      "team": "VAN",
+      "goalie": "Leevi Meriläinen",
+      "opponent": "NYR",
+      "venue": "home",
+      "status": "projected",
+      "date": "2026-11-13",
+      "gameId": 2026020310,
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+    },
+    {
       "team": "VGK",
       "goalie": "Carter Hart",
       "opponent": "BUF",
@@ -842,6 +872,16 @@
       "status": "projected",
       "date": "2026-11-11",
       "gameId": 2026020296,
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+    },
+    {
+      "team": "VGK",
+      "goalie": "Carter Hart",
+      "opponent": "NSH",
+      "venue": "home",
+      "status": "projected",
+      "date": "2026-11-13",
+      "gameId": 2026020311,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -905,48 +945,5 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     }
   ],
-  "unmatched": [
-    {
-      "team": "ANA",
-      "goalie": "Lukas Dostal",
-      "opponent": "CGY",
-      "venue": "away",
-      "status": "confirmed"
-    },
-    {
-      "team": "BUF",
-      "goalie": "Ukko-Pekka Luukkonen",
-      "opponent": "CBJ",
-      "venue": "home",
-      "status": "confirmed"
-    },
-    {
-      "team": "CBJ",
-      "goalie": "Jet Greaves",
-      "opponent": "BUF",
-      "venue": "away",
-      "status": "confirmed"
-    },
-    {
-      "team": "CGY",
-      "goalie": "Dustin Wolf",
-      "opponent": "ANA",
-      "venue": "home",
-      "status": "confirmed"
-    },
-    {
-      "team": "MIN",
-      "goalie": "Jesper Wallstedt",
-      "opponent": "SJS",
-      "venue": "home",
-      "status": "confirmed"
-    },
-    {
-      "team": "SJS",
-      "goalie": "Yaroslav Askarov",
-      "opponent": "MIN",
-      "venue": "away",
-      "status": "confirmed"
-    }
-  ]
+  "unmatched": []
 }

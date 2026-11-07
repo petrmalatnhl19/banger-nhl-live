@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-11-07T07:56:46.141876+00:00",
+  "updatedAt": "2026-11-07T08:48:16.848712+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-  "goalieCount": 90,
+  "goalieCount": 94,
   "games": [
     {
       "team": "CAR",
@@ -901,6 +901,46 @@
       "status": "projected",
       "date": "2026-11-12",
       "gameId": 2026020303,
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+    },
+    {
+      "team": "NSH",
+      "goalie": "Juuse Saros",
+      "opponent": "VGK",
+      "venue": "away",
+      "status": "projected",
+      "date": "2026-11-13",
+      "gameId": 2026020311,
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+    },
+    {
+      "team": "NYR",
+      "goalie": "Dylan Garand",
+      "opponent": "VAN",
+      "venue": "away",
+      "status": "projected",
+      "date": "2026-11-13",
+      "gameId": 2026020310,
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+    },
+    {
+      "team": "VAN",
+      "goalie": "Leevi Meriläinen",
+      "opponent": "NYR",
+      "venue": "home",
+      "status": "projected",
+      "date": "2026-11-13",
+      "gameId": 2026020310,
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+    },
+    {
+      "team": "VGK",
+      "goalie": "Carter Hart",
+      "opponent": "NSH",
+      "venue": "home",
+      "status": "projected",
+      "date": "2026-11-13",
+      "gameId": 2026020311,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     }
   ],
