@@ -565,6 +565,28 @@ nav.toolbar>a[href="./goalies.html"],nav.toolbar>#tabTeams,nav.toolbar>#tabStand
  .dash-game-teams>.dash-team-left,.dash-game-teams>.dash-team-right{gap:4px!important}
 }
 </style>
+<style id="banger-live-visual-polish-v1">
+/* Live Center visual hierarchy: compact, legible and touch friendly. */
+.dash-game-grid{gap:9px!important}
+.dash-game{transition:border-color .18s ease,background .18s ease,box-shadow .18s ease!important}
+.dash-game:focus-visible{outline:2px solid #6fe9ff!important;outline-offset:2px!important}
+.dash-game-live{border-color:#24e7ae!important;background:linear-gradient(115deg,#103d40,#0b2439 62%,#07182f)!important;box-shadow:inset 3px 0 #24e7ae,0 0 13px #00ffb514!important}
+.dash-game-live .dash-game-state{color:#6affca!important}
+.dash-game-live .dash-playing{display:inline-flex;align-items:center;gap:3px;text-shadow:0 0 9px #1cefa544}
+.dash-game-done{opacity:1!important;border-color:#35526a!important;background:linear-gradient(135deg,#102235,#0a192a)!important}
+.dash-game-done .dash-game-state{color:#a6bfd0!important}
+.dash-game:not(.dash-game-live):not(.dash-game-done) .dash-game-state{color:#9fd5ff!important}
+.dash-game-hint{opacity:.82}
+@media(max-width:440px){
+ .dash-game-grid{gap:7px!important}
+ .dash-game-teams>.dash-team-left,.dash-game-teams>.dash-team-right{min-width:0}
+ .dash-game-teams b{white-space:nowrap}
+ .dash-game-teams>strong{white-space:nowrap;letter-spacing:0!important}
+ .dash-game-hint{font-size:10px!important}
+}
+@media(hover:hover){.dash-game:hover{border-color:#69eaff!important;box-shadow:0 0 15px #38cfff24!important}}
+@media(prefers-reduced-motion:reduce){.dash-game{transition:none!important}}
+</style>
 </head><body><div class="wrap">
 <div id="brandSplash" class="brand-splash" aria-label="Načítání BANGER NHL LIVE"><div class="brand-splash-glow"></div><picture><source media="(orientation: portrait)" srcset="splash-portrait.png"><img src="splash-landscape.png" alt="BANGER NHL LIVE" fetchpriority="high" decoding="async"></picture><div class="brand-splash-loader"><span></span></div><div class="brand-splash-caption">VSTUP DO HOKEJOVÉ ARÉNY</div></div><header class="top"><div class="brand"><div class="brand-logo" aria-label="BANGER NHL LIVE"><span class="brand-mark">BANGER</span><span class="brand-sub">NHL <b>LIVE</b></span></div></div><span class="header-status"><i></i> NHL 2026/27</span></header>
 
