@@ -739,10 +739,17 @@ async function analyzeGame(id){
  if(Number.isInteger(firstYear)&&firstYear>=2010&&firstYear<=2100){
   const olderSeasons=Array.from({length:5},(_,i)=>{const y=firstYear-i-1;return String(y)+String(y+1)});
   const historyResults=await Promise.all(olderSeasons.map(async y=>{
-   const endpoint='https://api-web.nhle.com/v1/club-schedule-season/';
-   const primary=await safe(()=>get(endpoint+encodeURIComponent(ac)+'/'+y),8500);
-   if(primary.ok&&Array.isArray(primary.data?.games))return primary;
-   return safe(()=>get(endpoint+encodeURIComponent(hc)+'/'+y),8500);
+   const endpoint='https://xxwqeiuyislnoxsmjuul.supabase.co/functions/v1/nhl-feed';
+   const request=async code=>{
+    const url=endpoint+'?kind=clubhistory&team='+encodeURIComponent(code)+'&season='+encodeURIComponent(y);
+    const response=await fetch(url,{headers:{apikey:'sb_publishable_SfeHMIvUkYTuD3jCrWub8w_fPIY0B-G'}});
+    if(!response.ok)throw Error('Historie NHL '+response.status);
+    const data=await response.json();if(!Array.isArray(data.games))throw Error('Historie bez zápasů');
+    return data;
+   };
+   const primary=await safe(()=>request(ac),12000);
+   if(primary.ok)return primary;
+   return safe(()=>request(hc),12000);
   }));
   const historical=[];
   for(let i=0;i<historyResults.length;i++){
