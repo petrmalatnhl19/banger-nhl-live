@@ -10,15 +10,20 @@ import json
 import os
 from pathlib import Path
 import urllib.request
+from urllib.parse import urlsplit
 
 def ingest():
-    url = os.environ.get("SUPABASE_URL", "").rstrip("/")
+    url = os.environ.get("SUPABASE_URL", "").strip().rstrip("/")
     key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
     if not url or not key:
         print("Supabase ingestion skipped: server-side secrets not configured")
         return
-    if not url.startswith("https://") or not url.endswith(".supabase.co"):
-        raise ValueError("Unexpected Supabase URL")
+    parsed = urlsplit(url)
+    if (parsed.scheme != "https" or not parsed.hostname or
+            not parsed.hostname.endswith(".supabase.co") or
+            parsed.username or parsed.password or parsed.query or parsed.fragment or
+            parsed.path not in ("", "/") or parsed.port is not None):
+        raise ValueError("Unexpected Supabase URL: expected https://<project-ref>.supabase.co")
     folders = sorted(Path("diagnostics/core43-goalie-snapshots").glob("*"))
     if len(folders) != 1:
         raise ValueError("Expected exactly one snapshot from this workflow run")
