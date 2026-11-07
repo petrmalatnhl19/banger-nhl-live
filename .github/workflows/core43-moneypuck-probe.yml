@@ -1,0 +1,24 @@
+name: CORE 4.3 MoneyPuck goalie schema check
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '25 8 * * *'
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Inspect published MoneyPuck goalie CSV
+        run: python scripts/probe_moneypuck_goalies.py
+      - name: Save schema diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: core43-moneypuck-goalie-schema
+          path: diagnostics/core43-moneypuck-goalies-schema.json
+          if-no-files-found: warn
