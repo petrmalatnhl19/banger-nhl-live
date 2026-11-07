@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-07T23:10:05.442734+00:00",
-  "rostersUpdatedAt": "2026-11-07T23:09:50.097293+00:00",
+  "updatedAt": "2026-11-07T23:48:09.254870+00:00",
+  "rostersUpdatedAt": "2026-11-07T23:47:43.784647+00:00",
   "projectionDate": "2026-11-07",
   "teamCount": 32,
   "goalieCount": 77,
@@ -374,7 +374,7 @@
       "team": "UTA",
       "teamKey": "mammoth",
       "playerId": 8478872,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-07",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
