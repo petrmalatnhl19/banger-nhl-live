@@ -1,0 +1,12 @@
+const assert=require("node:assert/strict");
+const {parseCsv,normalize}=require("../core43-moneypuck-adapter.js");
+assert.deepEqual(parseCsv('a,b\n"hello, world",2\n'),[{a:"hello, world",b:"2"}]);
+const csv='id,date,xga,ga,shots,situation\n10,2026-11-01T20:00:00Z,3.5,2,35,all\n';
+const columns={goalieId:"id",gameDate:"date",xGoalsAgainst:"xga",goalsAgainst:"ga",shotsAgainst:"shots",situation:"situation"};
+const args={columns,goalieId:10,sourceUpdatedAt:"2026-11-02T03:00:00Z",cutoff:"2026-11-07T20:00:00Z"};
+const good=normalize(csv,args);
+assert.equal(good.available,true);
+assert.equal(good.rows[0].xGoalsAgainst,3.5);
+assert.equal(normalize(csv,{...args,sourceUpdatedAt:"2026-11-09T00:00:00Z"}).available,false);
+assert.equal(normalize(csv,{...args,columns:{...columns,xGoalsAgainst:"wrong"}}).available,false);
+console.log("MoneyPuck CSV adapter tests passed");
