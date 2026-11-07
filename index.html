@@ -1901,9 +1901,17 @@ async function analyzeGame(id){
   const n=v=>Number.isFinite(Number(v))?Number(v):null;
   const sk=Array.isArray(data.skaters)?data.skaters.slice().sort((a,b)=>(n(b.points)||0)-(n(a.points)||0)).slice(0,8):[];
   const gl=Array.isArray(data.goalies)?data.goalies.slice().sort((a,b)=>(n(b.gamesPlayed)||0)-(n(a.gamesPlayed)||0)).slice(0,4):[];
+  const goalieSeasonSv=p=>{
+    const fields=[p.savePctg,p.savePct,p.savePercentage,p.savePercentageValue,p.svPct,p.svPctg];
+    for(const raw of fields){if(raw==null||raw==='')continue;const value=Number(String(raw).replace('%','').replace(',','.'));if(Number.isFinite(value)&&value>=0&&value<=100){return (value<=1?value*100:value).toFixed(1)+' %';}}
+    const saved=Number(p.saves??p.saveCount??p.totalSaves);
+    const against=Number(p.shotsAgainst??p.shotsFaced??p.totalShotsAgainst);
+    if(Number.isFinite(saved)&&Number.isFinite(against)&&against>0&&saved>=0&&saved<=against)return (saved/against*100).toFixed(1)+' %';
+    return null;
+  };
   const fmtStat=v=>v==null?'—':clean(String(v));
   return '<h4>'+clean(code)+'</h4><p><b>Nejproduktivnější hráči sezony</b></p>'+(sk.length?'<div class="tablewrap"><table><thead><tr><th>Hráč</th><th>Z</th><th>G</th><th>A</th><th>B</th><th>S</th></tr></thead><tbody>'+sk.map(p=>'<tr><td>'+clean(name(p))+'</td><td>'+fmtStat(p.gamesPlayed)+'</td><td>'+fmtStat(p.goals)+'</td><td>'+fmtStat(p.assists)+'</td><td>'+fmtStat(p.points)+'</td><td>'+fmtStat(p.shots)+'</td></tr>').join('')+'</tbody></table></div>':'<p>Hráčská data nedostupná.</p>')+
-  '<p><b>Brankáři sezony</b></p>'+(gl.length?'<div class="tablewrap"><table><thead><tr><th>Brankář</th><th>Z</th><th>V</th><th>SV%</th><th>GAA</th></tr></thead><tbody>'+gl.map(p=>'<tr><td>'+clean(name(p))+'</td><td>'+fmtStat(p.gamesPlayed)+'</td><td>'+fmtStat(p.wins)+'</td><td>'+fmtStat(p.savePctg==null?null:(100*Number(p.savePctg)).toFixed(1)+' %')+'</td><td>'+fmtStat(p.goalsAgainstAverage==null?null:Number(p.goalsAgainstAverage).toFixed(2))+'</td></tr>').join('')+'</tbody></table></div>':'<p>Brankářská data nedostupná.</p>');
+  '<p><b>Brankáři sezony</b></p>'+(gl.length?'<div class="tablewrap"><table><thead><tr><th>Brankář</th><th>Z</th><th>V</th><th>SV%</th><th>GAA</th></tr></thead><tbody>'+gl.map(p=>'<tr><td>'+clean(name(p))+'</td><td>'+fmtStat(p.gamesPlayed)+'</td><td>'+fmtStat(p.wins)+'</td><td>'+fmtStat(goalieSeasonSv(p))+'</td><td>'+fmtStat(p.goalsAgainstAverage==null?null:Number(p.goalsAgainstAverage).toFixed(2))+'</td></tr>').join('')+'</tbody></table></div>':'<p>Brankářská data nedostupná.</p>');
  }).join('')+'</section>';
  const playerFormResults=await Promise.all([ga,gh].map(async(games)=>{
   const ids=games.slice(0,5).map(g=>g.id).filter(Boolean);
