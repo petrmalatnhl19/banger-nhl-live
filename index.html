@@ -954,6 +954,30 @@ button:focus-visible,[role="button"]:focus-visible{outline:2px solid #86f2ff;out
 .banger-map-fold .banger-shotmap{margin:0!important;border:0!important;border-radius:0!important}
 @media(max-width:650px){.banger-commentary-head{gap:6px;margin:5px 0 8px}.banger-commentary-head h3{font-size:16px!important}.banger-update-hint{font-size:10px}.banger-map-fold>summary{padding:10px 12px}}
 </style>
+<style id="banger-polish-v3">
+@media(max-width:650px){
+.arenacard{padding:10px!important}
+.arenatop{padding-bottom:4px!important}
+.arenascore{padding:8px 5px!important;min-height:78px!important;margin:4px 0 6px!important}
+.arenateam img{height:34px!important;max-width:39px!important;margin-bottom:2px!important}
+.arenanum{font-size:30px!important}
+.arena-status{margin:5px 0!important}
+.arena-status>span{padding:4px 8px!important}
+.arena-metrics{gap:7px!important;margin:6px 0!important}
+.arena-metrics>div{padding:7px 9px!important}
+.match-tabs{margin:5px 0 7px!important}
+}
+.banger-period-stats{margin-top:8px;border:1px solid rgba(95,194,220,.28);border-radius:9px;background:rgba(3,24,40,.48);overflow:hidden}
+.banger-period-stats>summary{padding:10px 11px;cursor:pointer;font-size:12px;font-weight:700;color:#92e6f5;line-height:1.45}
+.banger-period-stats>summary span{font-size:10px;font-weight:500;color:#9bb8c9;margin-left:5px}
+.banger-period-stats[open]>summary{border-bottom:1px solid rgba(95,194,220,.2)}
+.banger-period-stats-body{padding:9px}
+.banger-period-stats table th{padding:6px 5px;background:rgba(31,101,139,.3)}
+.bv-panel.bv-speaking{border-color:#7cefff!important;box-shadow:0 0 0 1px rgba(100,236,255,.18),0 0 24px rgba(30,196,240,.22)!important}
+.bv-panel.bv-speaking>strong:before{content:'●';color:#54edca;font-size:11px;margin-right:7px;animation:bangerVoicePulse 1.3s ease-in-out infinite}
+@keyframes bangerVoicePulse{50%{opacity:.25}}
+@media(prefers-reduced-motion:reduce){.bv-panel.bv-speaking>strong:before{animation:none}}
+</style>
 </head><body><div class="wrap">
 <div id="brandSplash" class="brand-splash" aria-label="Načítání BANGER NHL LIVE"><div class="brand-splash-glow"></div><picture><source media="(orientation: portrait)" srcset="splash-portrait.png"><img src="splash-landscape.png" alt="BANGER NHL LIVE" fetchpriority="high" decoding="async"></picture><div class="brand-splash-loader"><span></span></div><div class="brand-splash-caption">VSTUP DO HOKEJOVÉ ARÉNY</div></div><header class="top"><div class="brand"><div class="brand-logo" aria-label="BANGER NHL LIVE"><span class="brand-mark">BANGER</span><span class="brand-sub">NHL <b>LIVE</b></span></div></div><span class="header-status"><i></i> NHL 2026/27</span></header>
 
@@ -989,7 +1013,7 @@ const shotLocation=v=>{const area=shotArea(v);if(area)return ' '+area;const m=sh
 const shotDescription=v=>[shotPhrase(v),shotLocation(v).trim()].filter(Boolean).join(' ');const teamShort=t=>{const known={'Columbus Blue Jackets':'Columbusu','Buffalo Sabres':'Buffala','Dallas Stars':'Dallasu','Colorado Avalanche':'Colorada','New York Rangers':'New York Rangers','Toronto Maple Leafs':'Toronta','Boston Bruins':'Bostonu'};return known[t]||t};// Period summaries use NHL recorded events only, not inferred shots or score changes.
 const periodStats=number=>{const all=d.plays||[],plays=all.filter(p=>p.periodDescriptor?.number===number),awayId=String(d.awayTeam?.id??''),homeId=String(d.homeTeam?.id??'');const counts=(id,source)=>{const own=source.filter(p=>String(p.details?.eventOwnerTeamId??'')===id);const count=t=>own.filter(p=>p.typeDescKey===t).length;return {goals:count('goal'),shots:count('shot-on-goal'),misses:count('missed-shot'),blocks:count('blocked-shot'),penalties:count('penalty')}};const away=counts(awayId,plays),home=counts(homeId,plays),toDate=all.filter(p=>(p.periodDescriptor?.number||0)<=number);const totalAway=counts(awayId,toDate).goals,totalHome=counts(homeId,toDate).goals;return {away,home,totalAway,totalHome,awayName:teams.get(d.awayTeam?.id)||'Hosté',homeName:teams.get(d.homeTeam?.id)||'Domácí'}};
 const periodSummary=number=>{const q=periodStats(number),a=q.away,h=q.home,an=q.awayName,hn=q.homeName;const score=q.totalAway===q.totalHome?'Po '+number+'. třetině je vyrovnáno '+q.totalAway+':'+q.totalHome+'.':(q.totalAway>q.totalHome?an:hn)+' vede po '+number+'. třetině '+Math.max(q.totalAway,q.totalHome)+':'+Math.min(q.totalAway,q.totalHome)+'.';const attemptsA=a.shots+a.misses+a.blocks,attemptsH=h.shots+h.misses+h.blocks;const activity=attemptsA===attemptsH?'Oba týmy mají stejný počet střeleckých pokusů.':(attemptsA>attemptsH?an:hn)+' zaznamenali více střeleckých pokusů.';return ' 📊 Přestávkové studio. '+score+' V právě skončené třetině: '+an+' '+a.shots+' střel na branku, '+a.goals+' gólů a '+a.penalties+' vyloučení; '+hn+' '+h.shots+' střel na branku, '+h.goals+' gólů a '+h.penalties+' vyloučení. '+activity};
-const periodStatsHTML=number=>{const q=periodStats(number),a=q.away,h=q.home;const cell='padding:5px 7px;border-bottom:1px solid rgba(125,207,227,.14);text-align:center';const row=(label,x,y)=>'<tr><td style="padding:5px 7px;border-bottom:1px solid rgba(125,207,227,.14)">'+label+'</td><td style="'+cell+'">'+x+'</td><td style="'+cell+'">'+y+'</td></tr>';return '<div style="margin-top:10px;padding:10px;border-radius:10px;background:rgba(3,24,40,.48)"><div style="font-weight:700;color:#7de1f2;margin-bottom:6px">📊 '+number+'. třetina · statistiky</div><table style="width:100%;font-size:12px;border-collapse:collapse;color:#e7f8ff"><thead><tr><th style="text-align:left">Ukazatel</th><th>'+safe(String(d.awayTeam?.abbrev||'Hosté'))+'</th><th>'+safe(String(d.homeTeam?.abbrev||'Domácí'))+'</th></tr></thead><tbody>'+row('Góly',a.goals,h.goals)+row('Střely na branku',a.shots,h.shots)+row('Nepřesné střely',a.misses,h.misses)+row('Zblokované střely',a.blocks,h.blocks)+row('Vyloučení',a.penalties,h.penalties)+'</tbody></table><div style="margin-top:7px;font-size:12px;color:#a8d9e7">Stav po třetině: '+q.totalAway+':'+q.totalHome+'</div></div>'};
+const periodStatsHTML=number=>{const q=periodStats(number),a=q.away,h=q.home;const cell='padding:5px 7px;border-bottom:1px solid rgba(125,207,227,.14);text-align:center';const row=(label,x,y)=>'<tr><td style="padding:5px 7px;border-bottom:1px solid rgba(125,207,227,.14)">'+label+'</td><td style="'+cell+'">'+x+'</td><td style="'+cell+'">'+y+'</td></tr>';return '<details class="banger-period-stats"><summary>📊 '+number+'. třetina · '+a.goals+':'+h.goals+' na góly · střely '+a.shots+':'+h.shots+' <span>Podrobnosti</span></summary><div class="banger-period-stats-body"><table style="width:100%;font-size:12px;border-collapse:collapse;color:#e7f8ff"><thead><tr><th style="text-align:left">Ukazatel</th><th>'+safe(String(d.awayTeam?.abbrev||'Hosté'))+'</th><th>'+safe(String(d.homeTeam?.abbrev||'Domácí'))+'</th></tr></thead><tbody>'+row('Góly',a.goals,h.goals)+row('Střely na branku',a.shots,h.shots)+row('Nepřesné střely',a.misses,h.misses)+row('Zblokované střely',a.blocks,h.blocks)+row('Vyloučení',a.penalties,h.penalties)+'</tbody></table><div style="margin-top:7px;font-size:12px;color:#a8d9e7">Stav po třetině: '+q.totalAway+':'+q.totalHome+'</div></div></details>'};
 const items=(d.plays||[]).map(e=>{const v=e.details||{},team=teams.get(v.eventOwnerTeamId)||'NHL',who=names.get(v.scoringPlayerId||v.shootingPlayerId||v.committedByPlayerId||v.hittingPlayerId)||'',type=e.typeDescKey;const currentTime=absTime(e);const variants=(arr)=>{const key=type+':'+(arr.length);const count=matchContext.phraseCounts[key]||0;matchContext.phraseCounts[key]=count+1;return arr[(count+Math.abs(Number(e.eventId||e.sortOrder||0)))%arr.length]};const named=who||'Hráč '+team;const actor=(id)=>names.get(id)||'';const player=(id)=>actor(id)||team;let msg='';let note=null;const addNote=(priority,message)=>{if(!note||priority>note.priority)note={priority,message}};switch(type){
 case'goal':{
 const away=Number(v.awayScore),home=Number(v.homeScore);
