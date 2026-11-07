@@ -38,8 +38,33 @@ function absences(roster,missing,asOf){
   // Never treat an unknown player as absent; never invent player importance.
   return {available:true,reason:null,value:{verifiedOutCount:new Set(valid.map(p=>String(p.id))).size,verifiedPlayerIds:[...new Set(valid.map(p=>String(p.id)))]},coverage:{rosterCount:ids.size,providedStatuses:missing.length},experimental:true};
 }
+
+// NHL club-schedule-season contains game start times but not reliable end times.
+// Calculate start-to-start spacing separately; do NOT label it as exact rest hours.
+function nhlScheduleFatigue(games,kickoff,team){
+ const start=iso(kickoff),code=String(team||"").toUpperCase();
+ if(!Number.isFinite(start)||!Array.isArray(games)||!/^[A-Z]{3}$/.test(code))
+   return {available:false,reason:"invalid_schedule_or_team",value:null};
+ const past=games.filter(g=>g&&["OFF","FINAL"].includes(String(g.gameState))&&
+   Number.isFinite(iso(g.startTimeUTC))&&iso(g.startTimeUTC)<start&&
+   (String(g.homeTeam?.abbrev)===code||String(g.awayTeam?.abbrev)===code)&&
+   Number.isFinite(Number(g.homeTeam?.score))&&Number.isFinite(Number(g.awayTeam?.score)))
+   .sort((a,b)=>iso(b.startTimeUTC)-iso(a.startTimeUTC));
+ if(!past.length)return {available:false,reason:"no_completed_prior_games",value:null};
+ const spacing=(start-iso(past[0].startTimeUTC))/3600000;
+ const gamesLast7=past.filter(g=>start-iso(g.startTimeUTC)<=7*86400000).length;
+ const gamesLast14=past.filter(g=>start-iso(g.startTimeUTC)<=14*86400000).length;
+ return {available:true,reason:null,experimental:true,value:{
+   hoursBetweenStarts:Math.round(spacing*10)/10,
+   consecutiveCalendarDays:spacing<36,
+   gamesLast7,gamesLast14,
+   metric:"start_to_start_not_actual_rest",
+   exactRestHours:null
+ },sampleGames:past.length};
+}
+
 function core43Inputs({kickoff,teamGames,goalieData,roster,missing}={}){
  return {version:"core43-inputs-v0.1",production:false,fatigue:fatigue(teamGames,kickoff),gsax:gsax(goalieData),absences:absences(roster,missing,kickoff)};
 }
-return {fatigue,gsax,absences,core43Inputs};
+return {fatigue,nhlScheduleFatigue,gsax,absences,core43Inputs};
 });
