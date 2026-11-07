@@ -1857,6 +1857,44 @@ async function analyzeGame(id){
    return {away:clamp(core32Base.away*(h?clamp(1+(90-h.adjustedPct)*.006,.96,1.04):1),.4,6),
      home:clamp(core32Base.home*(a?clamp(1+(90-a.adjustedPct)*.006,.96,1.04):1),.4,6)};
  })():null;
+ // CORE 3.3 is deliberately display-only. Never feed it into the official forecast.
+ // A current-season summary is NOT valid for backtesting an already played game.
+ const core33Eligible=Date.parse(day)>Date.now();
+ let core33Season=[];
+ if(core33Eligible){
+  try{
+   const summary=await safe(()=>get('https://api.nhle.com/stats/rest/en/goalie/summary',0),5500);
+   if(summary.ok&&Array.isArray(summary.data?.data))core33Season=summary.data.data;
+  }catch(e){console.warn('CORE 3.3 goalie season unavailable',e)}
+ }
+ if(!root.isConnected)return;
+ const core33Goalies=projected.map((p,i)=>{
+  if(!core33Eligible||!p?.name||!['confirmed','projected'].includes(p.status))return null;
+  const target=normalizeGoalieName(p.name);
+  const matches=core33Season.filter(g=>normalizeGoalieName(g.goalieFullName)===target&&String(g.teamAbbrevs||'').split(',').includes(i===0?ac:hc));
+  if(matches.length!==1)return null;
+  const seasonRow=matches[0],seasonPct=normalizeGoalieSavePct(seasonRow);
+  const seasonShots=Number(seasonRow.shotsAgainst??seasonRow.shotsAgainstTotal);
+  if(seasonPct===null||!Number.isFinite(seasonShots)||seasonShots<1)return null;
+  const seasonWeight=seasonShots/(seasonShots+300);
+  const seasonBaseline=90+(seasonPct*100-90)*seasonWeight;
+  const recent=starterSamples[i];
+  const recentWeight=recent&&recent.shots>0?Math.min(.35,recent.shots/(recent.shots+240)):0;
+  const blended=seasonBaseline*(1-recentWeight)+(recent?.pct??seasonBaseline)*recentWeight;
+  const starterConfidence=p.status==='confirmed'?1:.5;
+  return {name:p.name,status:p.status,seasonPct:seasonPct*100,seasonShots,recentPct:recent?.pct??null,recentShots:recent?.shots??0,blended,starterConfidence};
+ });
+ const core33Forecast=core32Base&&[core32Base.away,core32Base.home].every(Number.isFinite)?(()=>{
+  const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
+  const factor=g=>g?clamp(1+(90-g.blended)*.006*g.starterConfidence,.96,1.04):1;
+  return {away:clamp(core32Base.away*factor(core33Goalies[1]),.4,6),home:clamp(core32Base.home*factor(core33Goalies[0]),.4,6)};
+ })():null;
+ const core33Section='<details class="analyst-fold" style="margin-top:12px"><summary>🧪 BANGER CORE 3.3 <small>Goalie Intelligence · experiment</small></summary><div class="analyst-fold-body">'+
+ '<p class="analysis-small">Oddělený testovací model. Sezónní SV% (s korekcí podle počtu střel) a poslední starty; nepotvrzený startér má poloviční váhu. Korekce maximálně ±4 %. Není zapojen do hlavních predikcí ani hodnocení přesnosti.</p>'+
+ (!core33Eligible?'<p class="analysis-small">Historický nebo právě probíhající zápas: dnešní sezónní statistiky by mohly obsahovat budoucí data. Výpočet je záměrně vypnutý, dokud nebude k dispozici archiv statistik před zápasem.</p>':
+ '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="metric"><span>'+clean(ac)+' · očekávané góly</span><b>'+intelligenceNum(core33Forecast?.away)+'</b></div><div class="metric"><span>'+clean(hc)+' · očekávané góly</span><b>'+intelligenceNum(core33Forecast?.home)+'</b></div></div>'+
+ [ac,hc].map((code,i)=>'<p class="analysis-small"><b>'+clean(code)+':</b> '+(core33Goalies[i]?clean(core33Goalies[i].name)+' · sezóna '+fmt(core33Goalies[i].seasonPct)+' % ('+core33Goalies[i].seasonShots+' střel) · poslední starty '+(core33Goalies[i].recentPct!=null?fmt(core33Goalies[i].recentPct)+' %':'bez vzorku')+' · model '+fmt(core33Goalies[i].blended)+' % · '+(core33Goalies[i].status==='confirmed'?'potvrzen':'předpokládaný'):'Sezónní data nebo spolehlivé přiřazení startéra chybí; bez korekce')+'</p>').join(''))+
+ '<p class="analysis-small">Výsledek zatím není kalibrovaný. K objektivnímu porovnání CORE 3.2 a 3.3 je nutný historický archiv předzápasových vstupů.</p></div></details>';
  const core32Section='<details class="analyst-fold" open style="margin-top:12px"><summary>🧪 BANGER CORE 3.2 <small>Adaptivní brankářský model</small></summary><div class="analyst-fold-body">'+
  '<p class="analysis-small">Testovací výpočet v prohlížeči. Základ tvoří uložený CORE 3.1, případně CORE 3.0. Krátký brankářský vzorek se opatrně kombinuje s neutrální referencí SV% 90 % (váha = střely / (střely + 120)). Nejde o kalibrovanou předpověď.</p>'+
  '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="metric"><span>'+clean(ac)+' · očekávané góly</span><b>'+intelligenceNum(core32Forecast?.away)+'</b></div><div class="metric"><span>'+clean(hc)+' · očekávané góly</span><b>'+intelligenceNum(core32Forecast?.home)+'</b></div></div>'+
@@ -1876,7 +1914,7 @@ async function analyzeGame(id){
  '<div class="metric"><span>Očekávané góly · domácí</span><b>'+intelligenceNum(intelligenceModel?.home)+'</b></div>'+
  '<div class="metric"><span>xG model · hosté</span><b>'+intelligenceNum(experimentalModel?.away)+'</b></div>'+
  '<div class="metric"><span>xG model · domácí</span><b>'+intelligenceNum(experimentalModel?.home)+'</b></div></div>'+
- core31Panel+core32Section+
+ core31Panel+core32Section+core33Section+
  '<details style="margin-top:12px"><summary style="cursor:pointer;color:#8feeff;font-weight:700">⚙️ Verze modelu a započtené faktory</summary>'+
  '<p class="analysis-small">Základ: '+clean(coreVersion)+'<br>Varianta xG: '+clean(coreXgVersion)+'</p>'+
  '<p class="analysis-small">Základní CORE v3 používá sezonní góly, inkasované branky a korekci domácího prostředí ±1,5 %. xG varianta přidává podíl xG při 5v5 (korekce maximálně ±8 %). Brankáři, forma a speciální týmy jsou zatím kontextové údaje mimo společný model.</p>'+
