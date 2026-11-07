@@ -634,6 +634,18 @@ button:focus-visible,[role="button"]:focus-visible{outline:2px solid #86f2ff;out
 @media(max-width:480px){#content .metrics{gap:8px!important}#content .metrics .metric{padding:10px 5px!important}#content .metrics .metric span{font-size:10px!important}}
 @media(prefers-reduced-motion:reduce){button{transition:none!important}}
 </style>
+<style id="banger-mobile-nav-polish-v1">
+/* Consistent four-tab mobile navigation; no change to existing routing. */
+@media(max-width:760px){
+ #uxMobileNav{gap:5px!important;padding:7px 9px max(9px,env(safe-area-inset-bottom))!important;background:linear-gradient(180deg,#081b31f7,#061122fc)!important;border-top:1px solid #3e91b077!important;box-shadow:0 -8px 25px #0005!important}
+ #uxMobileNav button{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important;min-height:58px!important;padding:7px 2px!important;border-radius:13px!important;border:1px solid transparent!important;background:transparent!important;color:#a9c5dc!important;font:700 11px 'Exo 2',system-ui,sans-serif!important;line-height:1.2!important;white-space:nowrap!important;box-shadow:none!important}
+ #uxMobileNav button .ux-nav-icon{display:grid!important;place-items:center!important;width:27px!important;height:27px!important;margin:0!important;font-size:22px!important;line-height:1!important;color:#b4d3e9!important}
+ #uxMobileNav button.active{background:linear-gradient(145deg,#1b5474,#103b5c)!important;border-color:#55cde699!important;color:#fff!important;box-shadow:inset 0 1px #ffffff19,0 0 13px #28caff19!important}
+ #uxMobileNav button.active .ux-nav-icon{color:#8bf5ff!important;text-shadow:0 0 12px #36e7ff77!important}
+ #uxMobileNav button:focus-visible{outline:2px solid #9bf4ff!important;outline-offset:2px!important}
+}
+@media(max-width:360px){#uxMobileNav{gap:3px!important;padding-left:5px!important;padding-right:5px!important}#uxMobileNav button{font-size:10px!important}}
+</style>
 </head><body><div class="wrap">
 <div id="brandSplash" class="brand-splash" aria-label="Načítání BANGER NHL LIVE"><div class="brand-splash-glow"></div><picture><source media="(orientation: portrait)" srcset="splash-portrait.png"><img src="splash-landscape.png" alt="BANGER NHL LIVE" fetchpriority="high" decoding="async"></picture><div class="brand-splash-loader"><span></span></div><div class="brand-splash-caption">VSTUP DO HOKEJOVÉ ARÉNY</div></div><header class="top"><div class="brand"><div class="brand-logo" aria-label="BANGER NHL LIVE"><span class="brand-mark">BANGER</span><span class="brand-sub">NHL <b>LIVE</b></span></div></div><span class="header-status"><i></i> NHL 2026/27</span></header>
 
