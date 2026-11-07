@@ -945,6 +945,17 @@ else if(oldLead<0&&newLead===0)msg='🥅 GÓL! '+named+' vyrovnává na '+score+
 else if(oldLead===0&&newLead>0)msg='🥅 GÓL! '+named+' posílá '+team+' do vedení '+score+'!';
 else if(oldLead>0&&newLead>0)msg='🥅 GÓL! '+named+' zvyšuje vedení na '+score+'.';
 else msg='🥅 GÓL! '+named+' mění skóre na '+score+'.';
+const strength=String(v.strength||'').toLowerCase().trim();
+const situation=String(e.situationCode||'');
+let goalType='';
+if(['pp','powerplay','power-play'].includes(strength))goalType='V PŘESILOVCE';
+else if(['sh','shorthanded','short-handed'].includes(strength))goalType='V OSLABENÍ';
+else if(['ev','even','even-strength'].includes(strength))goalType='PŘI VYROVNANÉM POČTU HRÁČŮ';
+else if(/^[01][3-5][3-5][01]$/.test(situation)&&situation[0]==='1'&&situation[3]==='1'&&(isAway||isHome)){
+const ownSkaters=Number(situation[isAway?1:2]),oppSkaters=Number(situation[isAway?2:1]);
+goalType=ownSkaters>oppSkaters?'V PŘESILOVCE':ownSkaters<oppSkaters?'V OSLABENÍ':'PŘI VYROVNANÉM POČTU HRÁČŮ';
+}
+if(goalType)msg=msg.replace('🥅 GÓL!','🥅 GÓL '+goalType+'!');
 if(period==='OT')msg+=' Prodloužení.';
 matchContext.latestScore={away,home};
 }else if(hasScore){msg+=' Stav '+away+':'+home+'.';matchContext.latestScore={away,home}}
