@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T00:58:00.561617+00:00",
+  "generatedAt": "2026-11-07T01:54:53.612004+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -118,8 +118,8 @@
     "rangers": {
       "team": "NYR",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/new-york-rangers-seattle-kraken-game-preview-november-7-2026",
-      "candidatePublishedAt": "2026-11-06T22:34:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-07T01:11:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -184,8 +184,8 @@
     "sharks": {
       "team": "SJS",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-06T22:27:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/san-jose-sharks-minnesota-wild-game-preview-november-6-2026",
+      "candidatePublishedAt": "2026-11-06T19:55:01.285000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
