@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-07T22:35:09.314543+00:00",
-  "rostersUpdatedAt": "2026-11-07T22:34:51.852150+00:00",
+  "updatedAt": "2026-11-07T23:10:05.442734+00:00",
+  "rostersUpdatedAt": "2026-11-07T23:09:50.097293+00:00",
   "projectionDate": "2026-11-07",
   "teamCount": 32,
   "goalieCount": 77,
@@ -599,7 +599,7 @@
       "team": "SJS",
       "teamKey": "sharks",
       "playerId": 8477968,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-07",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
