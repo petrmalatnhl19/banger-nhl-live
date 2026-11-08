@@ -8,46 +8,121 @@
     {
       "team": "canucks",
       "status": "incomplete_projection",
-      "reason": "incomplete_source_or_no_validated_replacement",
+      "reason": "rejected_roster_lines",
       "missingForwardLines": 0,
       "missingDefensePairs": 1,
       "source": "https://www.nhl.com/news/vancouver-canucks-edmonton-oilers-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T19:30:24.446000+00:00",
-      "rejectedLines": [],
-      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
+      "rejectedLines": [
+        {
+          "group": "defense",
+          "sourceLineNumber": 1,
+          "sourceLine": [
+            "Elias Nils Pettersson",
+            "Filip Hronek"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Elias Nils Pettersson",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ],
+      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
     },
     {
       "team": "lightning",
       "status": "incomplete_projection",
-      "reason": "incomplete_source_or_no_validated_replacement",
+      "reason": "rejected_roster_lines",
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "publishedAt": "2026-11-08T17:15:00+00:00",
-      "rejectedLines": [],
-      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
+      "rejectedLines": [
+        {
+          "group": "defense",
+          "sourceLineNumber": 1,
+          "sourceLine": [
+            "Jeffrey Viel",
+            "Zemgus Girgensons"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Jeffrey Viel",
+              "reason": "other_position_group",
+              "inLocalCurrentRoster": true,
+              "requiresIndependentGameEvidence": true
+            },
+            {
+              "name": "Zemgus Girgensons",
+              "reason": "other_position_group",
+              "inLocalCurrentRoster": true,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ],
+      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
     },
     {
       "team": "mammoth",
       "status": "incomplete_projection",
-      "reason": "incomplete_source_or_no_validated_replacement",
+      "reason": "rejected_roster_lines",
       "missingForwardLines": 0,
       "missingDefensePairs": 1,
       "source": "https://www.nhl.com/news/utah-mammoth-ottawa-senators-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:48:55.189000+00:00",
-      "rejectedLines": [],
-      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
+      "rejectedLines": [
+        {
+          "group": "defense",
+          "sourceLineNumber": 2,
+          "sourceLine": [
+            "Artem Duda",
+            "Andrew Peeke"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Artem Duda",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ],
+      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
     },
     {
       "team": "red wings",
       "status": "incomplete_projection",
-      "reason": "incomplete_source_or_no_validated_replacement",
+      "reason": "rejected_roster_lines",
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
       "source": "https://www.nhl.com/news/detroit-red-wings-colorado-avalanche-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T19:35:08.238000+00:00",
-      "rejectedLines": [],
-      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
+      "rejectedLines": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 3,
+          "sourceLine": [
+            "Michael Rasmussen",
+            "J.T. Compher",
+            "John Leonard"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "John Leonard",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ],
+      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
     },
     {
       "team": "senators",
@@ -98,13 +173,30 @@
     {
       "team": "stars",
       "status": "incomplete_projection",
-      "reason": "incomplete_source_or_no_validated_replacement",
+      "reason": "rejected_roster_lines",
       "missingForwardLines": 0,
       "missingDefensePairs": 1,
       "source": "https://www.nhl.com/news/san-jose-sharks-dallas-stars-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:44:05.810000+00:00",
-      "rejectedLines": [],
-      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
+      "rejectedLines": [
+        {
+          "group": "defense",
+          "sourceLineNumber": 3,
+          "sourceLine": [
+            "Trey Taylor",
+            "Tyler Myers"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Trey Taylor",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ],
+      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
     }
   ],
   "policy": "Diagnostics only. Never synthesize or automatically publish unverified lines."

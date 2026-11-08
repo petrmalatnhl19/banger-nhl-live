@@ -1,9 +1,124 @@
 {
-  "teamsWithRejectedLines": 1,
+  "teamsWithRejectedLines": 6,
   "teams": {
+    "canucks": {
+      "team": "VAN",
+      "rosterUpdatedAt": "2026-11-08T19:23:09.472312+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 2,
+      "rejected": [
+        {
+          "group": "defense",
+          "sourceLineNumber": 1,
+          "sourceLine": [
+            "Elias Nils Pettersson",
+            "Filip Hronek"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Elias Nils Pettersson",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    },
+    "lightning": {
+      "team": "TBL",
+      "rosterUpdatedAt": "2026-11-08T19:23:08.878876+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 3,
+      "candidateDefensePairs": 4,
+      "validatedForwardLines": 3,
+      "validatedDefensePairs": 3,
+      "rejected": [
+        {
+          "group": "defense",
+          "sourceLineNumber": 1,
+          "sourceLine": [
+            "Jeffrey Viel",
+            "Zemgus Girgensons"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Jeffrey Viel",
+              "reason": "other_position_group",
+              "inLocalCurrentRoster": true,
+              "requiresIndependentGameEvidence": true
+            },
+            {
+              "name": "Zemgus Girgensons",
+              "reason": "other_position_group",
+              "inLocalCurrentRoster": true,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    },
+    "mammoth": {
+      "team": "UTA",
+      "rosterUpdatedAt": "2026-11-08T19:23:09.268922+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 2,
+      "rejected": [
+        {
+          "group": "defense",
+          "sourceLineNumber": 2,
+          "sourceLine": [
+            "Artem Duda",
+            "Andrew Peeke"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Artem Duda",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    },
+    "red wings": {
+      "team": "DET",
+      "rosterUpdatedAt": "2026-11-08T19:23:05.682196+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "validatedForwardLines": 3,
+      "validatedDefensePairs": 3,
+      "rejected": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 3,
+          "sourceLine": [
+            "Michael Rasmussen",
+            "J.T. Compher",
+            "John Leonard"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "John Leonard",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    },
     "senators": {
       "team": "OTT",
-      "rosterUpdatedAt": "2026-11-08T19:20:36.052430+00:00",
+      "rosterUpdatedAt": "2026-11-08T19:23:07.718768+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -38,6 +153,33 @@
           "unverifiedPlayers": [
             {
               "name": "Samuel Blais",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    },
+    "stars": {
+      "team": "DAL",
+      "rosterUpdatedAt": "2026-11-08T19:23:05.491501+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 2,
+      "rejected": [
+        {
+          "group": "defense",
+          "sourceLineNumber": 3,
+          "sourceLine": [
+            "Trey Taylor",
+            "Tyler Myers"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Trey Taylor",
               "reason": "not_in_current_roster",
               "inLocalCurrentRoster": false,
               "requiresIndependentGameEvidence": true

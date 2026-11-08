@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T19:21:00.241419+00:00",
+  "generatedAt": "2026-11-08T19:23:27.786264+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -155,6 +155,187 @@
       "rejectedPlayerReasons": [],
       "validatedForwardLines": 4,
       "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "canucks": {
+      "team": "VAN",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/vancouver-canucks-edmonton-oilers-game-preview-november-7-2026",
+      "candidatePublishedAt": "2026-11-07T19:30:24.446000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [
+        {
+          "group": "defense",
+          "line": 1,
+          "players": [
+            "Elias Nils Pettersson"
+          ],
+          "sourceLine": [
+            "Elias Nils Pettersson",
+            "Filip Hronek"
+          ]
+        }
+      ],
+      "rejectedPlayerReasons": [
+        {
+          "name": "Elias Nils Pettersson",
+          "expectedRole": "defense",
+          "reason": "not_in_current_roster"
+        }
+      ],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 2,
+      "accepted": true
+    },
+    "lightning": {
+      "team": "TBL",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-08T17:15:00+00:00",
+      "candidateForwardLines": 3,
+      "candidateDefensePairs": 4,
+      "rosterValidation": "passed",
+      "roleMismatches": [
+        {
+          "sourcePair": 1,
+          "players": [
+            "Jeffrey Viel",
+            "Zemgus Girgensons"
+          ],
+          "reason": "forward_in_defense_row"
+        }
+      ],
+      "rejectedLines": [
+        {
+          "group": "defense",
+          "line": 1,
+          "players": [
+            "Jeffrey Viel",
+            "Zemgus Girgensons"
+          ],
+          "sourceLine": [
+            "Jeffrey Viel",
+            "Zemgus Girgensons"
+          ]
+        }
+      ],
+      "rejectedPlayerReasons": [
+        {
+          "name": "Jeffrey Viel",
+          "expectedRole": "defense",
+          "reason": "other_position_group"
+        },
+        {
+          "name": "Zemgus Girgensons",
+          "expectedRole": "defense",
+          "reason": "other_position_group"
+        }
+      ],
+      "validatedForwardLines": 3,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "mammoth": {
+      "team": "UTA",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/utah-mammoth-ottawa-senators-game-preview-november-7-2026",
+      "candidatePublishedAt": "2026-11-07T17:48:55.189000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [
+        {
+          "group": "defense",
+          "line": 2,
+          "players": [
+            "Artem Duda"
+          ],
+          "sourceLine": [
+            "Artem Duda",
+            "Andrew Peeke"
+          ]
+        }
+      ],
+      "rejectedPlayerReasons": [
+        {
+          "name": "Artem Duda",
+          "expectedRole": "defense",
+          "reason": "not_in_current_roster"
+        }
+      ],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 2,
+      "accepted": true
+    },
+    "red wings": {
+      "team": "DET",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/detroit-red-wings-colorado-avalanche-game-preview-november-7-2026",
+      "candidatePublishedAt": "2026-11-07T19:35:08.238000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [
+        {
+          "group": "forwards",
+          "line": 3,
+          "players": [
+            "John Leonard"
+          ],
+          "sourceLine": [
+            "Michael Rasmussen",
+            "J.T. Compher",
+            "John Leonard"
+          ]
+        }
+      ],
+      "rejectedPlayerReasons": [
+        {
+          "name": "John Leonard",
+          "expectedRole": "forwards",
+          "reason": "not_in_current_roster"
+        }
+      ],
+      "validatedForwardLines": 3,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "stars": {
+      "team": "DAL",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/san-jose-sharks-dallas-stars-game-preview-november-7-2026",
+      "candidatePublishedAt": "2026-11-07T17:44:05.810000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [
+        {
+          "group": "defense",
+          "line": 3,
+          "players": [
+            "Trey Taylor"
+          ],
+          "sourceLine": [
+            "Trey Taylor",
+            "Tyler Myers"
+          ]
+        }
+      ],
+      "rejectedPlayerReasons": [
+        {
+          "name": "Trey Taylor",
+          "expectedRole": "defense",
+          "reason": "not_in_current_roster"
+        }
+      ],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 2,
       "accepted": true
     }
   }
