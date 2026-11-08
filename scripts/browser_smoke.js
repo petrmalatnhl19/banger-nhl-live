@@ -8,7 +8,17 @@ const path = require('node:path');
   page.on('pageerror', error => errors.push(error.message));
   await page.route('https://xxwqeiuyislnoxsmjuul.supabase.co/functions/v1/nhl-feed**', async route => {
     const kind = new URL(route.request().url()).searchParams.get('kind');
-    const data = kind === 'score' ? { games: [] } : kind === 'standings' ? { standings: [] } : { data: [], total: 0 };
+    const url = new URL(route.request().url());
+    const data = kind === 'score'
+      ? { games: [{ id: 2026020999, gameState: 'FUT', startTimeUTC: '2026-11-08T22:00:00Z',
+          awayTeam: { abbrev: 'DAL', score: 0 }, homeTeam: { abbrev: 'BOS', score: 0 } }] }
+      : kind === 'game'
+        ? { id: 2026020999, gameState: 'FUT', awayTeam: { abbrev: 'DAL' }, homeTeam: { abbrev: 'BOS' }, summary: {} }
+      : kind === 'boxscore'
+        ? { id: 2026020999, playerByGameStats: { awayTeam: { forwards: [], defense: [], goalies: [] }, homeTeam: { forwards: [], defense: [], goalies: [] } } }
+      : kind === 'playbyplay'
+        ? { plays: [], rosterSpots: [], awayTeam: { id: 1, abbrev: 'DAL' }, homeTeam: { id: 2, abbrev: 'BOS' } }
+      : kind === 'standings' ? { standings: [] } : { data: [], total: 0 };
     await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(data) });
   });
   await page.goto(pathToFileURL(path.resolve('index.html')).href, { waitUntil: 'domcontentloaded' });
@@ -16,6 +26,17 @@ const path = require('node:path');
   if (errors.length) throw Error('JavaScript errors on startup: ' + errors.join(' | '));
   await page.locator('#uxMobileNav [data-ux-tab="games"]').click();
   await page.waitForFunction(() => document.querySelector('#status')?.textContent.includes('zápasů · aktualizováno'), { timeout: 10000 });
+  await page.locator('#content [data-game]').first().click();
+  await page.locator('#liveArena:not(.hidden) #closeArena').waitFor({ timeout: 10000 });
+  await page.locator('#arenaBody [data-match-tab="lineups"]').first().click();
+  await page.locator('#arenaBody [data-match-pane="lineups"]:not(.hidden)').waitFor({ timeout: 10000 });
+  await page.locator('#arenaBody [data-match-tab="players"]').first().click();
+  await page.locator('#arenaBody [data-match-pane="players"]:not(.hidden)').waitFor({ timeout: 10000 });
+  await page.locator('#arenaBody [data-match-tab="commentary"]').first().click();
+  await page.locator('#arenaBody [data-match-pane="commentary"]:not(.hidden)').waitFor({ timeout: 10000 });
+  await page.locator('#closeArena').click();
+  await page.locator('#liveArena.hidden').waitFor({ timeout: 10000 });
+  if (errors.length) throw Error('JavaScript errors in match detail: ' + errors.join(' | '));
   if (errors.length) throw Error('JavaScript errors after navigation: ' + errors.join(' | '));
   // Verify all visible mobile navigation destinations without relying on hidden desktop tabs.
   await page.locator('#uxMobileNav [data-ux-tab="analyst"]').click();
