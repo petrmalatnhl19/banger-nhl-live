@@ -69,7 +69,9 @@
           "unverifiedPlayers": [
             {
               "name": "Philip Tomasino",
-              "reason": "not_in_current_roster"
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
             }
           ]
         },
@@ -84,7 +86,9 @@
           "unverifiedPlayers": [
             {
               "name": "Samuel Blais",
-              "reason": "not_in_current_roster"
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
             }
           ]
         }

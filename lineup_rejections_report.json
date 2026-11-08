@@ -3,6 +3,8 @@
   "teams": {
     "senators": {
       "team": "OTT",
+      "rosterUpdatedAt": "2026-11-08T19:15:37.523578+00:00",
+      "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "validatedForwardLines": 2,
@@ -19,7 +21,9 @@
           "unverifiedPlayers": [
             {
               "name": "Philip Tomasino",
-              "reason": "not_in_current_roster"
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
             }
           ]
         },
@@ -34,7 +38,9 @@
           "unverifiedPlayers": [
             {
               "name": "Samuel Blais",
-              "reason": "not_in_current_roster"
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
             }
           ]
         }
