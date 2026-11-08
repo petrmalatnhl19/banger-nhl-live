@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T19:42:06.986217+00:00",
+  "generatedAt": "2026-11-08T19:44:12.844856+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -180,6 +180,7 @@
       "candidateForwardLines": 3,
       "candidateDefensePairs": 4,
       "rosterValidation": "passed",
+      "incompleteForwardFragments": [],
       "roleMismatches": [
         {
           "sourcePair": 1,
