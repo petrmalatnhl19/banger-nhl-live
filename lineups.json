@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-08T19:11:08.618053+00:00",
+  "fetchedAt": "2026-11-08T19:13:35.369726+00:00",
   "teams": {
     "panthers": {
       "name": "Panthers",
@@ -1058,6 +1058,53 @@
       "scratched": "Cameron Crotty, Tyler Pitlick",
       "source": "https://www.nhl.com/news/tampa-bay-lightning-minnesota-wild-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:41:54.999000+00:00"
+    },
+    "blackhawks": {
+      "name": "Blackhawks",
+      "forwards": [
+        [
+          "Roman Kantserov",
+          "Connor Bedard",
+          "Tyler Bertuzzi"
+        ],
+        [
+          "Oliver Moore",
+          "Anton Frondell",
+          "Frank Nazar"
+        ],
+        [
+          "Teuvo Teravainen",
+          "Ryan Greene",
+          "Ryan Donato"
+        ],
+        [
+          "Cole Smith",
+          "Jordan Greenway",
+          "Dillon Boucher"
+        ]
+      ],
+      "defense": [
+        [
+          "Alex Vlasic",
+          "Ian Cole"
+        ],
+        [
+          "Wyatt Kaiser",
+          "Artyom Levshunov"
+        ],
+        [
+          "Kevin Korchinski",
+          "Sam Rinzel"
+        ]
+      ],
+      "goalies": [
+        "Spencer Knight",
+        "Arvid Soderblom"
+      ],
+      "injured": "Bowen Byram (upper body), Patrick Kane (upper body)",
+      "scratched": "Ethan Del Mastro, Andrew Mangiapane",
+      "source": "https://www.nhl.com/news/chicago-blackhawks-carolina-hurricanes-game-preview-november-7-2026",
+      "publishedAt": "2026-11-07T17:28:41.992000+00:00"
     },
     "hurricanes": {
       "name": "Hurricanes",

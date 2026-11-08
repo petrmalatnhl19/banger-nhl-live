@@ -3,19 +3,8 @@
     "lineup_core_report.json",
     "lineup_rejections_report.json"
   ],
-  "incompleteTeams": 7,
+  "incompleteTeams": 6,
   "teams": [
-    {
-      "team": "blackhawks",
-      "status": "missing_team",
-      "reason": "no_accepted_projection",
-      "missingForwardLines": 4,
-      "missingDefensePairs": 3,
-      "source": null,
-      "publishedAt": null,
-      "rejectedLines": [],
-      "nextAction": "Find a current NHL.com projection and validate all players."
-    },
     {
       "team": "canucks",
       "status": "incomplete_projection",

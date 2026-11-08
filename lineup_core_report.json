@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T19:11:09.060492+00:00",
+  "generatedAt": "2026-11-08T19:13:36.122126+00:00",
   "sourceFile": "lineups.json",
   "teams": {
     "avalanche": {
@@ -14,6 +14,20 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/detroit-red-wings-colorado-avalanche-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T19:35:08.238000+00:00",
+      "status": "complete_projection"
+    },
+    "blackhawks": {
+      "name": "Blackhawks",
+      "complete": true,
+      "forwardLines": 4,
+      "defensePairs": 3,
+      "missingForwardLines": 0,
+      "missingDefensePairs": 0,
+      "malformedForwardLines": [],
+      "malformedDefensePairs": [],
+      "duplicatePlayers": [],
+      "source": "https://www.nhl.com/news/chicago-blackhawks-carolina-hurricanes-game-preview-november-7-2026",
+      "publishedAt": "2026-11-07T17:28:41.992000+00:00",
       "status": "complete_projection"
     },
     "blue jackets": {
@@ -422,18 +436,6 @@
       "publishedAt": "2026-11-07T17:41:54.999000+00:00",
       "status": "complete_projection"
     },
-    "blackhawks": {
-      "name": "Blackhawks",
-      "abbreviation": "CHI",
-      "complete": false,
-      "forwardLines": 0,
-      "defensePairs": 0,
-      "missingForwardLines": 4,
-      "missingDefensePairs": 3,
-      "status": "missing_team",
-      "source": null,
-      "publishedAt": null
-    },
     "senators": {
       "name": "Senators",
       "abbreviation": "OTT",
@@ -448,11 +450,11 @@
     }
   },
   "summary": {
-    "teams": 30,
+    "teams": 31,
     "expectedTeams": 32,
-    "complete": 25,
+    "complete": 26,
     "incomplete": 5,
-    "missing": 2,
-    "coveragePercent": 93.8
+    "missing": 1,
+    "coveragePercent": 96.9
   }
 }

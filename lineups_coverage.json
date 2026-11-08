@@ -1,10 +1,9 @@
 {
-  "generatedAt": "2026-11-08T19:11:09.520022+00:00",
+  "generatedAt": "2026-11-08T19:13:36.591908+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 25,
+  "currentProjections": 26,
   "needsFreshProjection": [
-    "blackhawks",
     "blue jackets",
     "blues",
     "kraken",
@@ -14,7 +13,6 @@
   ],
   "missing": [],
   "olderVerified": [
-    "blackhawks",
     "blue jackets",
     "blues",
     "kraken",
@@ -40,13 +38,14 @@
     "blackhawks": {
       "hasProjectedLines": true,
       "sources": [
+        "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": null,
-      "source": null,
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-07T17:28:41.992000+00:00",
+      "source": "https://www.nhl.com/news/chicago-blackhawks-carolina-hurricanes-game-preview-november-7-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "blue jackets": {
       "hasProjectedLines": true,
