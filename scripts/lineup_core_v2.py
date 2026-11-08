@@ -113,6 +113,17 @@ report["summary"] = {"teams": len(teams), "expectedTeams": len(EXPECTED), **coun
                      "coveragePercent": round(100 * len(teams) / len(EXPECTED), 1),
                      "possibleAlternativeFormations": alternative_count,
                      "freshness": freshness_counts}
+report["refreshPriorities"] = [
+    {"team": slug, "ageHours": entry.get("sourceAgeHours"),
+     "publishedAt": entry.get("publishedAt"), "freshness": entry.get("freshness"),
+     "status": entry.get("status"), "source": entry.get("source")}
+    for slug, entry in sorted(
+        report["teams"].items(),
+        key=lambda item: (item[1].get("sourceAgeHours") is None,
+                          -(item[1].get("sourceAgeHours") or 0))
+    )
+    if entry.get("freshness") in ("aging_24_72h", "historical_over_72h", "undated")
+]
 OUTPUT.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 print("BANGER Lineup Core 2.0:", json.dumps(report["summary"], ensure_ascii=False))
 for slug, entry in report["teams"].items():
