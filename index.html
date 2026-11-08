@@ -2950,7 +2950,7 @@ async function analyzeGame(id){
   predictionHub.id='banger-prediction-hub';
   predictionHub.className='analysis-section';
   predictionHub.style.cssText='margin:14px 0;padding:14px;border:1px solid rgba(84,234,255,.65);border-radius:18px;background:linear-gradient(145deg,#0a2946,#08182e);box-shadow:0 0 24px #21cfff18';
-  predictionHub.innerHTML='<h3 class="banger-hub-heading">📈 Přesnost předpovědí</h3><p class="analysis-small banger-hub-intro">Srovnání dokončených zápasů. Podrobnosti a historii najdeš v části Archiv a nástroje.</p><div id="bangerPredictionHubContent"></div>';
+  predictionHub.innerHTML='<h3 class="banger-hub-heading">🧪 Pokročilá analytika a historie</h3><div id="bangerPredictionHubContent"></div>';
   extraRoot.insertAdjacentElement('afterbegin',predictionHub);
   const predictionHubContent=predictionHub.querySelector('#bangerPredictionHubContent');
   const hubBuildMs=Math.round(performance.now()-hubBuildStarted);
@@ -2979,14 +2979,14 @@ async function analyzeGame(id){
     const key=button.dataset.uxJump;
     let target=null;
     if(key==='forecast')target=card.querySelector('#banger-core-3')||card.querySelector('#banger-prediction-hub');
-    if(key==='stats')target=[...extraRoot.querySelectorAll('.analyst-fold')].find(el=>/GOALIE MODULE|Brankáři a sestavy|Forma|Srovnání/i.test(el.querySelector('summary')?.textContent||''))||extraRoot.querySelector('.analysis-section');
+    if(key==='stats')target=[...extraRoot.querySelectorAll('.analyst-fold')].find(el=>/Forma|Srovnání/i.test(el.querySelector('summary')?.textContent||''))||[...extraRoot.querySelectorAll('.analyst-fold')].find(el=>/GOALIE MODULE|Brankáři a sestavy/i.test(el.querySelector('summary')?.textContent||''))||extraRoot.querySelector('.analysis-section');
     if(key==='report')target=extraRoot.querySelector('.analyst-expert-report')||[...extraRoot.querySelectorAll('.analyst-fold')].find(el=>/Scénáře zápasu/i.test(el.querySelector('summary')?.textContent||''));
     if(key==='tools')target=card.querySelector('.banger-advanced-panel');
     if(!target)return;
     const drawer=target.closest('.analyst-extras-drawer');
     if(drawer)drawer.open=true;
     let parent=target.parentElement;
-    while(parent&&parent!==extraRoot){if(parent.tagName==='DETAILS')parent.open=true;parent=parent.parentElement}
+    while(parent&&parent!==card){if(parent.tagName==='DETAILS')parent.open=true;parent=parent.parentElement}
     if(target.tagName==='DETAILS')target.open=true;
     uxAnalystNav.querySelectorAll('[data-ux-jump]').forEach(el=>el.setAttribute('aria-pressed',String(el===button)));
     target.scrollIntoView({behavior:'smooth',block:'start'});
@@ -3108,7 +3108,7 @@ async function analyzeGame(id){
   // Move existing DOM nodes rather than rebuilding them: fetches and listeners remain intact.
   const advancedPanel=document.createElement('details');
   advancedPanel.className='analyst-fold banger-advanced-panel';
-  advancedPanel.innerHTML='<summary>🧪 Pokročilá analytika <small>Přesnost modelů · archiv · diagnostika</small></summary><div class="analyst-fold-body banger-advanced-body"></div>';
+  advancedPanel.innerHTML='<summary>📊 Výsledky modelů a nástroje <small>Přesnost · archiv · diagnostika</small></summary><div class="analyst-fold-body banger-advanced-body"></div>';
   const advancedBody=advancedPanel.querySelector('.banger-advanced-body');
   advancedBody.appendChild(accuracyPanel);
   advancedBody.appendChild(hubTools);
