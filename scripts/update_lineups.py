@@ -41,7 +41,10 @@ def normalize(name):
  # NHL articles frequently omit accents (Stutzle vs Stützle, Valimaki vs Välimäki).
  # Fold accents, but never accept a different player solely by surname.
  folded=unicodedata.normalize("NFKD",str(name).casefold().replace("’","'"))
- return re.sub(r"[^a-z]","", "".join(ch for ch in folded if not unicodedata.combining(ch)))
+ key=re.sub(r"[^a-z]","", "".join(ch for ch in folded if not unicodedata.combining(ch)))
+ # NHL.com previews may use a familiar given name while the official roster
+ # uses a formal name. Only explicitly verified full-name aliases are allowed.
+ return {"mikeyeyssimont":"michaeleyssimont", "williamborgen":"willborgen"}.get(key,key)
 
 # Also collect individual NHL.com matchup previews, but only those published
 # within the last 36 hours. Never mix historical lineups into today's games.
