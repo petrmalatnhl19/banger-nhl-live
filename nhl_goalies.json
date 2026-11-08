@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-08T23:11:46.269818+00:00",
-  "rostersUpdatedAt": "2026-11-08T23:11:21.702389+00:00",
+  "updatedAt": "2026-11-08T23:49:05.913686+00:00",
+  "rostersUpdatedAt": "2026-11-08T23:48:41.046819+00:00",
   "projectionDate": "2026-11-08",
   "teamCount": 32,
   "goalieCount": 74,
@@ -451,7 +451,7 @@
       "team": "PIT",
       "teamKey": "penguins",
       "playerId": 8481668,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-08",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
