@@ -2948,7 +2948,7 @@ async function analyzeGame(id){
   predictionHub.id='banger-prediction-hub';
   predictionHub.className='analysis-section';
   predictionHub.style.cssText='margin:14px 0;padding:14px;border:1px solid rgba(84,234,255,.65);border-radius:18px;background:linear-gradient(145deg,#0a2946,#08182e);box-shadow:0 0 24px #21cfff18';
-  predictionHub.innerHTML='<div style="font-size:11px;letter-spacing:1.8px;color:#71eaff;font-weight:800">BANGER · PREDIKČNÍ CENTRUM</div><h3 style="margin:7px 0 4px">🎯 Předpovědi a přesnost</h3><p class="analysis-small">Centrální předpovědi CORE 3.0, xG, CORE 3.1 a CORE 3.2, jejich vyhodnocení i historie v tomto zařízení. Experimentální výpočty jsou odlišeny od uložených serverových predikcí.</p><div id="bangerPredictionHubContent"></div>';
+  predictionHub.innerHTML='<h3 class="banger-hub-heading">📈 Přesnost předpovědí</h3><p class="analysis-small banger-hub-intro">Srovnání dokončených zápasů. Podrobnosti a historii najdeš v části Archiv a nástroje.</p><div id="bangerPredictionHubContent"></div>';
   extraRoot.insertAdjacentElement('afterbegin',predictionHub);
   const predictionHubContent=predictionHub.querySelector('#bangerPredictionHubContent');
   const hubBuildMs=Math.round(performance.now()-hubBuildStarted);
@@ -2999,8 +2999,8 @@ async function analyzeGame(id){
     predictionHubContent.appendChild(localTracker);
   }
   const accuracyPanel=document.createElement('section');
-  accuracyPanel.className='analyst-fold-body';
-  accuracyPanel.innerHTML='<details class="analyst-fold" open><summary>🎯 PREDICTION ACCURACY <small>Centrální vyhodnocení · pouze dokončené zápasy</small></summary><div class="analyst-fold-body"><p id="bangerAccuracyStatus">Načítám výsledky…</p><div id="bangerAccuracyStats" class="metrics"></div><div id="bangerAccuracyComparison"></div><details style="margin-top:12px"><summary style="cursor:pointer;color:#9bbdd3">ℹ️ Jak číst statistiky</summary><p class="analysis-small">MAE = průměrná absolutní chyba očekávaných gólů na tým. Nižší je lepší. Porovnáváme pouze stejné zápasy s oběma předzápasovými predikcemi. Vyhodnocujeme konečné skóre NHL.</p></details></div></details>';
+  accuracyPanel.className='analyst-accuracy-panel';
+  accuracyPanel.innerHTML='<details class="analyst-fold" open><summary>📊 Výsledky modelů <small>Dokončené zápasy NHL</small></summary><div class="analyst-fold-body"><p id="bangerAccuracyStatus">Načítám výsledky…</p><div id="bangerAccuracyStats" class="metrics"></div><div id="bangerAccuracyComparison"></div><details style="margin-top:12px"><summary style="cursor:pointer;color:#9bbdd3">ℹ️ Jak číst statistiky</summary><p class="analysis-small">MAE = průměrná absolutní chyba očekávaných gólů na tým. Nižší je lepší. Porovnáváme pouze stejné zápasy s oběma předzápasovými predikcemi. Vyhodnocujeme konečné skóre NHL.</p></details></div></details>';
   predictionHubContent.insertBefore(accuracyPanel,predictionHubContent.firstChild);
   (async()=>{
     const label=accuracyPanel.querySelector('#bangerAccuracyStatus');
@@ -3327,5 +3327,16 @@ document.addEventListener('click',function(ev){const th=ev.target.closest('.bang
 .analysis-panel .ux-section-jump button{width:100%;min-width:0;min-height:42px;text-align:center;padding:9px 6px;font-size:12px;line-height:1.25}
 .analysis-panel .ux-section-jump button[aria-pressed="true"]{border-color:#6beeff;background:#195775;box-shadow:inset 0 0 0 1px #6beeff44}
 @media(min-width:800px){.analysis-panel .ux-section-jump{grid-template-columns:repeat(4,minmax(0,1fr))}}
+</style>
+
+<style id="banger-analyst-duplication-cleanup-v1">
+/* Reduce repeated headings and nested spacing; no prediction or API changes. */
+#banger-prediction-hub .banger-hub-heading{margin:0 0 5px;font-size:17px;line-height:1.3;letter-spacing:.1px}
+#banger-prediction-hub .banger-hub-intro{margin:0 0 11px;line-height:1.45;color:#a6c9d9}
+#banger-prediction-hub .analyst-accuracy-panel{margin:0;padding:0;background:transparent;border:0}
+#banger-prediction-hub .analyst-accuracy-panel>.analyst-fold{margin:0;border:1px solid #386c85;border-radius:11px}
+#banger-prediction-hub .analyst-accuracy-panel>.analyst-fold>summary{padding:11px 12px}
+#banger-prediction-hub .analyst-accuracy-panel>.analyst-fold>.analyst-fold-body{padding:8px 10px 12px}
+@media(max-width:650px){#banger-prediction-hub .banger-hub-heading{font-size:16px}#banger-prediction-hub .banger-hub-intro{font-size:11px}#banger-prediction-hub .analyst-accuracy-panel>.analyst-fold>.analyst-fold-body{padding:7px 7px 10px}}
 </style>
 </body></html>
