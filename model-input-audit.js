@@ -61,6 +61,14 @@ function render(){
  '<p>'+(core42Finals.length?(en?'Late goalie CORE 4.2 MAE '+core42Mae.toFixed(3)+' vs CORE 4.1 '+core41SameMae.toFixed(3)+' on '+core42Finals.length+' identical completed games.':'Pozdní brankáři CORE 4.2 MAE '+core42Mae.toFixed(3)+' proti CORE 4.1 '+core41SameMae.toFixed(3)+' na '+core42Finals.length+' stejných dokončených zápasech.'):(en?'CORE 4.2 is waiting for eligible pregame goalie snapshots and completed games.':'CORE 4.2 čeká na vhodné předzápasové sestavy a dokončené zápasy.'))+'</p>'+
  '<p>'+(en?'Special teams: '+changes.length+' of '+special.length+' comparable completed games changed their projected scores. A change does not prove an accuracy improvement.':'Speciální týmy: u '+changes.length+' z '+special.length+' porovnatelných dokončených zápasů se změnila predikce. Změna sama o sobě neznamená vyšší přesnost.')+'</p>'+
  (goalieUnknown?'<p>'+(en?'Goalie data status unknown for ':'Stav brankářských dat není znám u ')+goalieUnknown+(en?' completed games.':' dokončených zápasů.')+'</p>':'');
+
+ const goalieFlags={missing:finals.filter(r=>r.goalie32_factors?.goalie_data_missing===true),available:finals.filter(r=>r.goalie32_factors?.goalie_data_missing===false),unknown:finals.filter(r=>typeof r.goalie32_factors?.goalie_data_missing!=='boolean')};
+ const missingPair=pending.filter(r=>!r.goalie32_factors?.away_goalie||!r.goalie32_factors?.home_goalie);
+ const finalNoResult=finals.filter(r=>!valid(r.actual_away)||!valid(r.actual_home));
+ const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const games=arr=>arr.slice(0,8).map(r=>'<li>'+esc([r.game_date||'?',r.away_team||'?',r.home_team||'?'].join(' · '))+'</li>').join('');
+ card.insertAdjacentHTML('beforeend','<details class="audit-diagnostics" style="margin-top:16px;padding:14px;border:1px solid #367d9d;border-radius:12px"><summary style="cursor:pointer;color:#8de7ff;font-weight:800">🔎 Diagnostika brankářů a archivu</summary><p>Archiv: '+rows.length+' záznamů · '+finals.length+' dokončených · '+pending.length+' čekajících · '+finalNoResult.length+' dokončených bez výsledného skóre.</p><p>Brankářská data u dokončených: '+goalieFlags.available.length+' dostupná · '+goalieFlags.missing.length+' chybějící · '+goalieFlags.unknown.length+' neurčená.</p><p>Čekající bez úplné dvojice brankářů: '+missingPair.length+'/'+pending.length+'. Oba potvrzení: '+goalieConfirmed+'/'+core41Pending.length+'.</p><p class="audit-alert">Audit kontroluje uložené předzápasové snímky, nikoliv později zjištěné sestavy. Původní predikce se nemění.</p><b>Dokončené s chybějícími vstupy (max. 8):</b><ol>'+games(goalieFlags.missing)+'</ol><b>Čekající bez dvojice (max. 8):</b><ol>'+games(missingPair)+'</ol></details>');
+
 }
 window.addEventListener('banger-engine-lab-archive',render);
 window.addEventListener('banger-language-change',render);
