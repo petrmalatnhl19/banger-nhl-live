@@ -48,6 +48,20 @@ jobs:
         run: python scripts/lineup_rejection_report.py
       - name: Build missing lineup recovery priorities
         run: python scripts/lineup_recovery_plan.py
+      - name: Publish missing lineup recovery priorities
+        run: |
+          echo '### Missing lineup recovery priorities' >> "$GITHUB_STEP_SUMMARY"
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          from pathlib import Path
+          p = Path("lineup_recovery_plan.json")
+          if p.exists():
+              data = json.loads(p.read_text(encoding="utf-8"))
+              print("| Team | Missing forwards | Missing defense | Cause |")
+              print("|---|---:|---:|---|")
+              for item in data.get("teams", []):
+                  print(f"| {item['team']} | {item['missingForwardLines']} | {item['missingDefensePairs']} | {item['reason']} |")
+          PY
       - name: Refresh recent lineups
         run: python scripts/update_last_game_lines.py
       - name: Verify lineup coverage
