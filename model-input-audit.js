@@ -76,7 +76,7 @@ function render(){
  const rosterResp=await fetch('./nhl_rosters.json?audit='+encodeURIComponent(String(Date.now())),{cache:'no-store'});
  const rosterData=rosterResp.ok?await rosterResp.json():null;
  const teamAliases={ANA:'ducks',BOS:'bruins',BUF:'sabres',CAR:'hurricanes',CBJ:'blue jackets',CGY:'flames',CHI:'blackhawks',COL:'avalanche',DAL:'stars',DET:'red wings',EDM:'oilers',FLA:'panthers',LAK:'kings',MIN:'wild',MTL:'canadiens',NJD:'devils',NSH:'predators',NYI:'islanders',NYR:'rangers',OTT:'senators',PHI:'flyers',PIT:'penguins',SEA:'kraken',SJS:'sharks',STL:'blues',TBL:'lightning',TOR:'maple leafs',UTA:'mammoth',VAN:'canucks',VGK:'golden knights',WPG:'jets',WSH:'capitals'};
- const normalizeName=name=>String(name||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-z0-9]/gi,'').toLowerCase();
+ const normalizeName=name=>String(name||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/gi,'').toLowerCase();
  const rosterTeams=rosterData?.teams||{};
  const rosterFor=code=>Object.entries(rosterTeams).find(([key])=>normalizeName(key)===normalizeName(teamAliases[code]||code))?.[1];
  const checked=(Array.isArray(feed.games)?feed.games:[]).map(g=>{const roster=rosterFor(g.team);const goalieList=roster?.goalies;return {...g,rosterCheck:Array.isArray(goalieList)?goalieList.some(name=>normalizeName(name)===normalizeName(g.goalie))?'ok':'mismatch':'unknown'}});
