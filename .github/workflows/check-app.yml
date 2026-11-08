@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'index.html'
+      - 'scripts/audit_official_final_goalies.py'
+      - 'scripts/test_official_final_goalies.py'
       - 'scripts/check_app.js'
       - 'scripts/browser_smoke.js'
       - '.github/workflows/check-app.yml'
@@ -28,6 +30,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Otestovat ověřování skutečných brankářů NHL
+        run: python -m unittest discover -s scripts -p 'test_official_final_goalies.py'
       - name: Zkontrolovat HTML a JavaScript
         run: node scripts/check_app.js
       - name: Připravit prohlížeč

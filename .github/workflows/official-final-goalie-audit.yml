@@ -1,0 +1,27 @@
+name: Official NHL final goalie audit
+on:
+  pull_request:
+    paths:
+      - 'scripts/audit_official_final_goalies.py'
+      - 'scripts/test_official_final_goalies.py'
+      - '.github/workflows/official-final-goalie-audit.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */6 * * *'
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s scripts -p 'test_official_final_goalies.py'
+      - run: python scripts/audit_official_final_goalies.py --days 10
+      - uses: actions/upload-artifact@v4
+        with:
+          name: official-final-goalie-audit
+          path: diagnostics/official-final-goalies.json
+          retention-days: 14
