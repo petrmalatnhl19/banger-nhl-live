@@ -233,17 +233,17 @@ for key,abbr in FOCUS.items():
 # Narrow evidence-based exception: the exact DAL defenseman Trey Taylor.
 # Require a fresh official game-boxscore diagnostic AND a game on the
 # projected lineup's publication date. No general surname-based exemptions.
-def verified_dallas_taylor(team):
+def verified_recent_game_player(team, abbr, player_name, diagnostic_file):
  try:
   from pathlib import Path
-  proof=json.loads(Path("dallas_game_roster_diagnostic.json").read_text(encoding="utf-8"))
+  proof=json.loads(Path(diagnostic_file).read_text(encoding="utf-8"))
   checked=datetime.datetime.fromisoformat(proof["checkedAt"].replace("Z","+00:00"))
   if datetime.datetime.now(datetime.timezone.utc)-checked>datetime.timedelta(hours=24):return False
   published=team.get("publishedAt")
   if not published:return False
   date=datetime.datetime.fromisoformat(published.replace("Z","+00:00")).date()
-  appearances=proof.get("players",{}).get("Trey Taylor",{}).get("appearedInGames",[])
-  return (proof.get("team")=="DAL" and not proof.get("errors") and
+  appearances=proof.get("players",{}).get(player_name,{}).get("appearedInGames",[])
+  return (proof.get("team")==abbr and not proof.get("errors") and
           any(datetime.date.fromisoformat(g["gameDate"])==date for g in appearances))
  except (OSError,KeyError,ValueError,TypeError):return False
 
@@ -264,9 +264,19 @@ for name,team in teams.items():
   groups={}
   for role,group in (("forwards","forwards"),("defense","defensemen"),("goalies","goalies")):
    groups[role]={normalize(str((p.get("firstName",{}).get("default","") if isinstance(p.get("firstName"),dict) else p.get("firstName","")))+" "+str((p.get("lastName",{}).get("default","") if isinstance(p.get("lastName"),dict) else p.get("lastName","")))) for p in roster.get(group,[])}
-  if name=="stars" and verified_dallas_taylor(team):
-   groups["defense"].add(normalize("Trey Taylor"))
-   if name in source_diagnostics:source_diagnostics[name]["gameEvidenceException"]={"player":"Trey Taylor","role":"defense","basis":"official DAL game boxscore on projection publication date"}
+  # Exact player/team/position only; requires a fresh official game
+  # appearance on the source projection date. No blanket roster bypass.
+  game_evidence_cases={
+   "stars":("DAL","Trey Taylor","defense","dallas_game_roster_diagnostic.json"),
+   "mammoth":("UTA","Artem Duda","defense","utah_game_roster_diagnostic.json"),
+   "red wings":("DET","John Leonard","forwards","detroit_game_roster_diagnostic.json"),
+  }
+  if name in game_evidence_cases:
+   proof_abbr,proof_player,proof_role,proof_file=game_evidence_cases[name]
+   if verified_recent_game_player(team,proof_abbr,proof_player,proof_file):
+    groups[proof_role].add(normalize(proof_player))
+    if name in source_diagnostics:
+     source_diagnostics[name]["gameEvidenceException"]={"player":proof_player,"role":proof_role,"basis":"official game boxscore on projection publication date"}
   # Collect up to eight 2-name source rows, because some are forward fragments.
   # Only NHL-roster-verified defender pairs become published defense lines.
   # Classify each parsed row by NHL roster position, not by its order in HTML.
