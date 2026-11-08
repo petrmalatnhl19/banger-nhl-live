@@ -1708,7 +1708,7 @@ async function analyzeGame(id){
  const valid=[af,aa,hf,ha,ap,hp].every(Number.isFinite);
  const title=shell()+'<div class="analysis-match"><span>'+clean(ac)+'</span><b>VS</b><span>'+clean(hc)+'</span></div><p class="analysis-small">Zápas: '+clean(day)+' · '+(d.gameState==='FUT'||d.gameState==='PRE'?'Předzápasový rozbor':'Sezónní model – nevyhodnocuje živé skóre')+'</p>';
  function baseReport(){
-  if(!valid)return title+'<section class="analysis-section"><h3>Chybí sezónní data</h3><p>Nemáme ověřené statistiky obou týmů, proto nezobrazujeme odhady výsledku.</p></section>'+diagnostics()+'<details class="analyst-extras-drawer"><summary>📚 Podrobný rozbor <small id="analyst-extras-state">Načítám další statistiky…</small></summary><div class="analyst-extras-drawer-body"><div id="analyst-extras"><p>Načítám doplňkové údaje…</p></div></div></details>';
+  if(!valid)return title+'<section class="analysis-section"><h3>Chybí sezónní data</h3><p>Nemáme ověřené statistiky obou týmů, proto nezobrazujeme odhady výsledku.</p></section>'+diagnostics()+'<details class="analyst-extras-drawer"><summary>📚 Další statistiky a rozbory <small id="analyst-extras-state">Načítám další údaje…</small></summary><div class="analyst-extras-drawer-body"><div id="analyst-extras"><p>Načítám doplňkové údaje…</p></div></div></details>';
   const ax=Math.max(.4,Math.min(6,(af+ha)/2)),hx=Math.max(.4,Math.min(6,(hf+aa)/2));
   const pois=(n,l)=>{let fact=1;for(let k=2;k<=n;k++)fact*=k;return Math.exp(-l)*Math.pow(l,n)/fact};
   let aw=0,hw=0,tie=0,over=0;const scores=[];
@@ -1719,7 +1719,7 @@ async function analyzeGame(id){
   const scoreList=scores.slice(0,5).map(s=>'<div class="analyst-score-row"><b>'+s.i+' : '+s.j+'</b><div class="analyst-score-track"><i style="width:'+Math.min(100,s.p*1000)+'%"></i></div><span>'+pct(s.p)+'</span></div>').join('');
   const scenarioPanel='<details class="analyst-fold"><summary>🎯 Scénáře zápasu <small>Podrobný model</small></summary><div class="analyst-fold-body"><p><b>5 nejčastějších výsledků po 60 minutách</b> · hosté : domácí</p>'+scoreList+'<div class="analyst-mini-grid"><div><small>0–4 góly</small><strong>'+pct(totalProb(0,4))+'</strong></div><div><small>5–6 gólů</small><strong>'+pct(totalProb(5,6))+'</strong></div><div><small>7+ gólů</small><strong>'+pct(totalProb(7,30))+'</strong></div></div><p>Oba týmy skórují: <b>'+pct(bothScore)+'</b></p><p class="analysis-small">Nezávislý Poissonův model bez prodloužení, domácí výhody a brankářských korekcí. Nejde o kalibrovanou předpověď.</p></div></details>';
 
-  return title+'<section class="analysis-summary"><h3>Rychlý závěr</h3><p>'+(Math.abs(aw-hw)<.1?'Sezónní gólové profily ukazují na vyrovnané utkání.':'Sezónní gólový profil mírně zvýhodňuje '+clean(aw>hw?ac:hc)+'.')+' Výsledek mohou výrazně ovlivnit brankáři a speciální týmy, které model nehodnotí.</p></section><div class="analysis-prob"><div><span>'+clean(ac)+'</span><strong>'+pct(aw)+'</strong></div><div><span>REMÍZA PO 60 MIN</span><strong>'+pct(tie)+'</strong></div><div><span>'+clean(hc)+'</span><strong>'+pct(hw)+'</strong></div></div><div class="analysis-meter"><i style="width:'+Math.round(aw*100)+'%"></i><i style="width:'+Math.round(tie*100)+'%"></i><i style="width:'+Math.round(hw*100)+'%"></i></div><p class="analysis-small">Experimentální Poissonův model, nikoli kalibrovaná předpověď. Nezahrnuje prodloužení.</p><div class="analysis-grid"><div>Gólový průměr modelu<strong>'+fmt(ax)+' : '+fmt(hx)+'</strong><span class="analysis-small">Hosté : domácí; nejde o xG</span></div><div>Sezónní bodová úspěšnost<strong>'+pct(ap)+' : '+pct(hp)+'</strong><span class="analysis-small">Hosté : domácí</span></div><div>Model 6+ gólů<strong>'+pct(over)+'</strong></div><div>Nejčastější skóre<strong>'+scores[0].i+' : '+scores[0].j+'</strong><span class="analysis-small">'+pct(scores[0].p)+' modelové četnosti</span></div></div>'+scenarioPanel+'<details class="analyst-fold"><summary>📊 Srovnání útoku a obrany</summary><div class="analyst-fold-body"><p>'+clean(ac)+': '+fmt(af)+' vstřelených, '+fmt(aa)+' inkasovaných gólů na zápas.</p><p>'+clean(hc)+': '+fmt(hf)+' vstřelených, '+fmt(ha)+' inkasovaných gólů na zápas.</p></div></details>'+diagnostics()+'<details class="analyst-extras-drawer"><summary>📚 Podrobný rozbor <small id="analyst-extras-state">Načítám další statistiky…</small></summary><div class="analyst-extras-drawer-body"><div id="analyst-extras"><p class="analysis-small">Doplňuji formu a brankáře na pozadí…</p></div></div></details><p class="analysis-small">Zdroj: NHL a datové rozhraní aplikace. Model používá pouze sezónní góly, bez neověřených úprav.</p>';
+  return title+'<section class="analysis-summary"><h3>Rychlý závěr</h3><p>'+(Math.abs(aw-hw)<.1?'Sezónní gólové profily ukazují na vyrovnané utkání.':'Sezónní gólový profil mírně zvýhodňuje '+clean(aw>hw?ac:hc)+'.')+' Výsledek mohou výrazně ovlivnit brankáři a speciální týmy, které model nehodnotí.</p></section><div class="analysis-prob"><div><span>'+clean(ac)+'</span><strong>'+pct(aw)+'</strong></div><div><span>REMÍZA PO 60 MIN</span><strong>'+pct(tie)+'</strong></div><div><span>'+clean(hc)+'</span><strong>'+pct(hw)+'</strong></div></div><div class="analysis-meter"><i style="width:'+Math.round(aw*100)+'%"></i><i style="width:'+Math.round(tie*100)+'%"></i><i style="width:'+Math.round(hw*100)+'%"></i></div><p class="analysis-small">Experimentální Poissonův model, nikoli kalibrovaná předpověď. Nezahrnuje prodloužení.</p><div class="analysis-grid"><div>Gólový průměr modelu<strong>'+fmt(ax)+' : '+fmt(hx)+'</strong><span class="analysis-small">Hosté : domácí; nejde o xG</span></div><div>Sezónní bodová úspěšnost<strong>'+pct(ap)+' : '+pct(hp)+'</strong><span class="analysis-small">Hosté : domácí</span></div><div>Model 6+ gólů<strong>'+pct(over)+'</strong></div><div>Nejčastější skóre<strong>'+scores[0].i+' : '+scores[0].j+'</strong><span class="analysis-small">'+pct(scores[0].p)+' modelové četnosti</span></div></div>'+scenarioPanel+'<details class="analyst-fold"><summary>📊 Srovnání útoku a obrany</summary><div class="analyst-fold-body"><p>'+clean(ac)+': '+fmt(af)+' vstřelených, '+fmt(aa)+' inkasovaných gólů na zápas.</p><p>'+clean(hc)+': '+fmt(hf)+' vstřelených, '+fmt(ha)+' inkasovaných gólů na zápas.</p></div></details>'+diagnostics()+'<details class="analyst-extras-drawer"><summary>📚 Další statistiky a rozbory <small id="analyst-extras-state">Načítám další údaje…</small></summary><div class="analyst-extras-drawer-body"><div id="analyst-extras"><p class="analysis-small">Doplňuji formu a brankáře na pozadí…</p></div></div></details><p class="analysis-small">Zdroj: NHL a datové rozhraní aplikace. Model používá pouze sezónní góly, bez neověřených úprav.</p>';
  }
  card.innerHTML=baseReport();markAnalyst('Základní rozbor zobrazen');
  // Optional data must never delay the primary report.
@@ -2989,7 +2989,13 @@ async function analyzeGame(id){
     uxAnalystNav.querySelectorAll('[data-ux-jump]').forEach(el=>el.setAttribute('aria-pressed',String(el===button)));
     target.scrollIntoView({behavior:'smooth',block:'start'});
   });
-  extraRoot.insertAdjacentElement('afterbegin',uxAnalystNav);
+  // Navigation belongs above the collapsed secondary report, not hidden inside it.
+  const analystDrawer=extraRoot.closest('.analyst-extras-drawer');
+  if(analystDrawer&&analystDrawer.parentElement){
+    analystDrawer.parentElement.insertBefore(uxAnalystNav,analystDrawer);
+  }else{
+    extraRoot.insertAdjacentElement('afterbegin',uxAnalystNav);
+  }
 
   const localTracker=extraRoot.querySelector('.analyst-tracker-panel');
   if(localTracker){
@@ -3361,5 +3367,13 @@ document.addEventListener('click',function(ev){const th=ev.target.closest('.bang
 #banger-prediction-hub .banger-advanced-body>.analyst-accuracy-panel{margin:0}
 #banger-prediction-hub .banger-advanced-body>.banger-hub-tools{margin:8px 0 0}
 @media(max-width:650px){#banger-prediction-hub{padding:9px!important}#banger-prediction-hub .banger-advanced-body{padding:5px}}
+</style>
+
+<style id="banger-analyst-visible-nav-v5">
+/* Put the primary section navigation outside the closed secondary report. */
+.analysis-card>.ux-section-jump,.analysis-card .ux-section-jump{margin:12px 0 9px}
+.analysis-card .analyst-extras-drawer{margin-top:5px}
+.analysis-card .analyst-extras-drawer>summary{font-size:14px;line-height:1.35}
+@media(max-width:650px){.analysis-card .ux-section-jump button{min-height:45px}}
 </style>
 </body></html>
