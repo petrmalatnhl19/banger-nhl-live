@@ -1685,7 +1685,7 @@ async function analyzeGame(id){
  document.addEventListener('keydown',onKey);
  root.onclick=e=>{if(e.target===root||e.target.closest('.analysis-close'))close()};
  const shell=()=>'<button class="analysis-close" type="button">✕ Zavřít</button><div class="tag">NHL · DATOVÉ CENTRUM</div><h2>◈ BANGER ANALYST PRO</h2>';
- root.innerHTML='<div class="analysis-card">'+shell()+'<p>Načítám zápas a sezónní statistiky…</p></div>';
+ root.innerHTML='<div class="analysis-card">'+shell()+'<div class="analyst-loading-stage" role="status" aria-live="polite"><div class="analyst-loading-line"><span class="analyst-loading-dot"></span><strong>Připravuji přehled zápasu</strong></div><p>Načítám ověřené informace z NHL. Další podrobnosti doplním průběžně.</p><div class="analyst-skeleton analyst-skeleton-score" aria-hidden="true"></div><div class="analyst-skeleton analyst-skeleton-line" aria-hidden="true"></div><div class="analyst-skeleton analyst-skeleton-line short" aria-hidden="true"></div><div class="analyst-skeleton analyst-skeleton-grid" aria-hidden="true"></div></div></div>';
  const card=root.querySelector('.analysis-card');
  const timeout=(promise,ms)=>Promise.race([promise,new Promise((_,reject)=>setTimeout(()=>reject(Error('Časový limit '+ms+' ms')),ms))]);
  const safe=async(fn,ms)=>{try{return {ok:true,data:await timeout(Promise.resolve().then(fn),ms)}}catch(e){return {ok:false,error:String(e.message||e)}}};
@@ -3230,4 +3230,25 @@ document.addEventListener('click',function(e){const btn=e.target.closest('[data-
 <script>
 /* Sorting is scoped to the clicked statistical table and does not change NHL source data. */
 document.addEventListener('click',function(ev){const th=ev.target.closest('.banger-sort-head');if(!th)return;const table=th.closest('table'),body=table?.querySelector('tbody');if(!body)return;const heads=[...th.parentElement.children],index=heads.indexOf(th);const asc=th.getAttribute('aria-sort')!=='ascending';heads.forEach(h=>h.removeAttribute('aria-sort'));th.setAttribute('aria-sort',asc?'ascending':'descending');const rows=[...body.rows];rows.sort((a,b)=>{const x=a.cells[index]?.dataset.sortValue??'',y=b.cells[index]?.dataset.sortValue??'';const nx=Number(x),ny=Number(y),numeric=x.trim()!==''&&y.trim()!==''&&Number.isFinite(nx)&&Number.isFinite(ny);const cmp=numeric?nx-ny:x.localeCompare(y,'cs',{numeric:true});return asc?cmp:-cmp});rows.forEach(row=>body.appendChild(row));});
-</script><script src="core-performance.js?v=20261108-4" defer></script></body></html>
+</script><script src="core-performance.js?v=20261108-4" defer></script>
+<style id="banger-analyst-progressive-ui-v1">
+/* Stable mobile-first loading layout. Presentation only; CORE logic untouched. */
+.analysis-panel{align-items:flex-start;overscroll-behavior:contain}
+.analysis-panel .analysis-card{margin:auto;scrollbar-gutter:stable;overflow-anchor:auto}
+.analyst-loading-stage{min-height:310px;padding:14px 0 6px}
+.analyst-loading-line{display:flex;align-items:center;gap:10px;color:#d8f7ff;font-size:15px}
+.analyst-loading-stage>p{font-size:12px;line-height:1.5;color:#9ebbd0}
+.analyst-loading-dot{width:10px;height:10px;border-radius:50%;background:#41eaff;box-shadow:0 0 0 5px #41eaff22;animation:analyst-pulse 1.5s ease-in-out infinite;flex-shrink:0}
+.analyst-skeleton{border-radius:12px;background:linear-gradient(100deg,#173653 10%,#28506c 48%,#173653 90%);background-size:200% 100%;animation:analyst-shimmer 1.8s linear infinite;opacity:.65}
+.analyst-skeleton-score{height:74px;margin:22px 0 15px}
+.analyst-skeleton-line{height:15px;margin:11px 0;width:95%}
+.analyst-skeleton-line.short{width:67%}
+.analyst-skeleton-grid{height:100px;margin-top:20px}
+#analyst-extras{min-height:130px}
+#analyst-h2h-body .analysis-small{color:#8faec5}
+@keyframes analyst-shimmer{to{background-position-x:-200%}}
+@keyframes analyst-pulse{50%{opacity:.4;transform:scale(.82)}}
+@media(max-width:600px){.analysis-panel{padding:8px}.analysis-panel .analysis-card{max-height:calc(100dvh - 16px);padding:16px;border-radius:16px}.analyst-loading-stage{min-height:270px}}
+@media(prefers-reduced-motion:reduce){.analyst-skeleton,.analyst-loading-dot{animation:none}}
+</style>
+</body></html>
