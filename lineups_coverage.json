@@ -1,25 +1,29 @@
 {
-  "generatedAt": "2026-11-08T06:33:07.689705+00:00",
+  "generatedAt": "2026-11-08T07:37:27.913974+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 25,
+  "currentProjections": 23,
   "needsFreshProjection": [
     "blackhawks",
     "blue jackets",
+    "blues",
     "ducks",
     "flames",
     "flyers",
     "jets",
+    "predators",
     "senators"
   ],
   "missing": [],
   "olderVerified": [
     "blackhawks",
     "blue jackets",
+    "blues",
     "ducks",
     "flames",
     "flyers",
     "jets",
+    "predators",
     "senators"
   ],
   "manualSnapshots": [],
@@ -67,11 +71,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-06T19:07:00+00:00",
       "source": "https://www.nhl.com/news/st-louis-blues-nashville-predators-game-preview-november-7-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "bruins": {
       "hasProjectedLines": true,
@@ -322,11 +326,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-06T19:07:00+00:00",
       "source": "https://www.nhl.com/news/st-louis-blues-nashville-predators-game-preview-november-7-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "rangers": {
       "hasProjectedLines": true,
