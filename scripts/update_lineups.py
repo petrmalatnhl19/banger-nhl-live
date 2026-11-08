@@ -185,6 +185,11 @@ for day,away,home in selected_games:
    for key,value in discovered.items():
     if key not in teams or (value.get("publishedAt") and value["publishedAt"]>str(teams[key].get("publishedAt") or "")):
      teams[key]=value
+   # One official preview commonly contains both teams; avoid a redundant
+   # reverse-order request only when both projected lineups were parsed.
+   if {reverse_slugs.get(key) for key in discovered} >= {away,home}:
+    schedule_discovery["attempts"][-1]["coversBothTeams"]=True
+    break
   except Exception as err:
    schedule_discovery["attempts"].append({"url":url,"result":"fetch_or_parse_error","error":str(err)[:160]})
 with open("lineups_discovery_diagnostics.json","w",encoding="utf-8") as discovery_file:
