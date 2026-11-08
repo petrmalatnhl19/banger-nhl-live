@@ -240,7 +240,7 @@ if "lightning" in source_diagnostics:
   for block in raw.get("blocks",[]):
    for line in block.get("followingLines",[]):
     if re.search(r"projected (?:lineup|lines)$",line,re.I):break
-    parts=[x.strip() for x in re.split(r"\\s+[-–—]{1,2}\\s+",line) if x.strip()]
+    parts=[x.strip() for x in re.split(r"\s+[-–—]{1,2}\s+",line) if x.strip()]
     if len(parts)==2 and parts==["Jeffrey Viel","Zemgus Girgensons"]:
      fragments.append({"players":parts,"missingPlayers":1,"role":"forwards","sourceStatus":"incomplete"})
   source_diagnostics["lightning"]["incompleteForwardFragments"]=fragments
