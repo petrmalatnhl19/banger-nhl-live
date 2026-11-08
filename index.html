@@ -1938,7 +1938,7 @@ async function analyzeGame(id){
  const skaters=[skaterSummary(boxes[0],ac),skaterSummary(boxes[1],hc)];
  const bangerSampleGames=async(games,code)=>{
   const ids=games.slice(0,5).map(g=>g.id).filter(Boolean);
-  const results=await Promise.all(ids.map(id=>safe(()=>get('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(id)+'/boxscore'),3500)));
+  const results=await Promise.all(ids.map(fetchGoalieBox));
   const records=results.map(r=>{
    if(!r.ok||!r.data)return null;
    const own=skaterSummary(r,code);
@@ -1957,7 +1957,7 @@ async function analyzeGame(id){
  if(!root.isConnected)return;
  const bangerGoalieSample=async(games,code)=>{
   const ids=games.slice(0,5).map(g=>g.id).filter(Boolean);
-  const results=await Promise.all(ids.map(id=>safe(()=>get('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(id)+'/boxscore'),3500)));
+  const results=await Promise.all(ids.map(fetchGoalieBox));
   let saves=0,shots=0,starts=0;
   const byGoalie=new Map();
   for(let i=0;i<results.length;i++){
@@ -3462,5 +3462,18 @@ document.addEventListener('click',function(ev){const th=ev.target.closest('.bang
 .analysis-card #analyst-extras .analyst-report-group-body{padding:6px}
 .analysis-card #analyst-extras .analyst-report-group-body>.analyst-fold{margin:5px 0;border-radius:9px}
 @media(max-width:650px){.analysis-card #analyst-extras>.analyst-report-group>summary{padding:11px}.analysis-card #analyst-extras .analyst-report-group-body{padding:4px}}
+</style>
+
+<style id="banger-report-unified-details-v11">
+/* Unified detailed-report cards: compact and consistent without hiding any data. */
+.analysis-panel #analyst-extras>.analyst-fold,
+.analysis-panel #analyst-extras>.analyst-report-group{margin:7px 0;border-radius:11px;box-shadow:none}
+.analysis-panel #analyst-extras .analyst-fold>summary{font-size:13px;line-height:1.35;padding:10px 11px}
+.analysis-panel #analyst-extras .analyst-fold>summary small{font-size:10px;font-weight:400;color:#a2c6d9}
+.analysis-panel #analyst-extras .analyst-fold-body{padding:8px 10px}
+.analysis-panel #analyst-extras .analyst-fold-body p{margin:7px 0;line-height:1.45}
+.analysis-panel #analyst-extras .analyst-report-group-body>.analyst-fold{margin:4px 0;background:#0c283e}
+.analysis-panel #analyst-extras .analyst-report-group-body>.analyst-fold:last-child{margin-bottom:0}
+@media(max-width:650px){.analysis-panel #analyst-extras .analyst-fold>summary{padding:9px 10px}.analysis-panel #analyst-extras .analyst-fold-body{padding:7px 8px}.analysis-panel #analyst-extras .analyst-fold-body p{font-size:12px}}
 </style>
 </body></html>
