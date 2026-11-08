@@ -65,6 +65,9 @@ jobs:
               for item in data.get("teams", []):
                   print(f"| {item['team']} | {item['missingForwardLines']} | {item['missingDefensePairs']} | {item['reason']} |")
           PY
+      - name: Check Ottawa players in official NHL game boxscores (diagnostic only)
+        continue-on-error: true
+        run: python scripts/check_ottawa_game_roster.py
       - name: Refresh recent lineups
         run: python scripts/update_last_game_lines.py
       - name: Verify lineup coverage
@@ -108,7 +111,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for file in index.html lineups.json lineups_archive.json nhl_rosters.json lineups_coverage.json starting_goalies.json nhl_goalies.json rotowire_goalies.json rotowire_goalies_diagnostic.json lineups_changes.json lineups_diagnostics.md lineups_source_diagnostics.json lineups_discovery_diagnostics.json lineup_free_sources_probe.json lineup_core_report.json lineup_rejections_report.json lineup_recovery_plan.json; do
+          for file in index.html lineups.json lineups_archive.json nhl_rosters.json lineups_coverage.json starting_goalies.json nhl_goalies.json rotowire_goalies.json rotowire_goalies_diagnostic.json lineups_changes.json lineups_diagnostics.md lineups_source_diagnostics.json lineups_discovery_diagnostics.json lineup_free_sources_probe.json lineup_core_report.json lineup_rejections_report.json lineup_recovery_plan.json ottawa_game_roster_diagnostic.json; do
             if [ -f "$file" ]; then git add "$file"; fi
           done
           if ! git diff --cached --quiet; then
