@@ -1,0 +1,22 @@
+{
+  "checkedAt": "2026-11-08T18:52:46.639320+00:00",
+  "note": "Reachability does not grant permission to reuse or redistribute data.",
+  "sources": {
+    "between_the_lines": {
+      "url": "https://www.betweenthelineshockey.com/tonight.md",
+      "reachable": true,
+      "httpStatus": 200,
+      "contentType": "text/markdown; charset=utf-8",
+      "error": null,
+      "automaticReuseAuthorized": false
+    },
+    "fantasy_roundup": {
+      "url": "https://www.fsroundup.com/nhl/line-combinations",
+      "reachable": true,
+      "httpStatus": 200,
+      "contentType": "text/html; charset=utf-8",
+      "error": null,
+      "automaticReuseAuthorized": false
+    }
+  }
+}
