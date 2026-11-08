@@ -1805,7 +1805,7 @@ async function analyzeGame(id){
  markAnalyst('Forma a vzájemné zápasy zobrazeny');
  const extraRoot=card.querySelector('#analyst-extras');if(extraRoot)extraRoot.innerHTML=extra;
  const updateAnalystTimings=()=>{const slot=card.querySelector('#analyst-timing-detail');if(slot)slot.innerHTML=timingRows();};
- updateAnalystTimings();const extrasState=card.querySelector('#analyst-extras-state');if(extrasState)extrasState.textContent='Forma a historie připraveny · další údaje se doplňují';
+ updateAnalystTimings();const extrasState=card.querySelector('#analyst-extras-state');if(extrasState)extrasState.textContent='Připraveno';
  // Historical head-to-head data is optional: never hold up the form and other sections.
  (async()=>{
   try {
@@ -2950,7 +2950,7 @@ async function analyzeGame(id){
   predictionHub.id='banger-prediction-hub';
   predictionHub.className='analysis-section';
   predictionHub.style.cssText='margin:14px 0;padding:14px;border:1px solid rgba(84,234,255,.65);border-radius:18px;background:linear-gradient(145deg,#0a2946,#08182e);box-shadow:0 0 24px #21cfff18';
-  predictionHub.innerHTML='<h3 class="banger-hub-heading">🧪 Pokročilá analytika a historie</h3><div id="bangerPredictionHubContent"></div>';
+  predictionHub.innerHTML='<div id="bangerPredictionHubContent"></div>';
   extraRoot.insertAdjacentElement('afterbegin',predictionHub);
   const predictionHubContent=predictionHub.querySelector('#bangerPredictionHubContent');
   const hubBuildMs=Math.round(performance.now()-hubBuildStarted);
@@ -3108,7 +3108,7 @@ async function analyzeGame(id){
   // Move existing DOM nodes rather than rebuilding them: fetches and listeners remain intact.
   const advancedPanel=document.createElement('details');
   advancedPanel.className='analyst-fold banger-advanced-panel';
-  advancedPanel.innerHTML='<summary>📊 Výsledky modelů a nástroje <small>Přesnost · archiv · diagnostika</small></summary><div class="analyst-fold-body banger-advanced-body"></div>';
+  advancedPanel.innerHTML='<summary>🧪 Pokročilá analytika a historie <small>Modely · přesnost · archiv · diagnostika</small></summary><div class="analyst-fold-body banger-advanced-body"></div>';
   const advancedBody=advancedPanel.querySelector('.banger-advanced-body');
   advancedBody.appendChild(accuracyPanel);
   advancedBody.appendChild(hubTools);
@@ -3410,5 +3410,16 @@ document.addEventListener('click',function(ev){const th=ev.target.closest('.bang
  .analysis-panel .analysis-card .analysis-section p{font-size:12px;margin:7px 0}
  .analysis-panel .analysis-card .analyst-fold summary{line-height:1.4}
 }
+</style>
+
+<style id="banger-analyst-single-advanced-toggle-v9">
+/* One clear disclosure instead of a heading framing another disclosure. */
+.analysis-card #banger-prediction-hub{padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important;margin:10px 0!important}
+.analysis-card #banger-prediction-hub .banger-advanced-panel{margin:0;border:1px solid #377c9a;border-radius:13px;background:#0c243b}
+.analysis-card #banger-prediction-hub .banger-advanced-panel>summary{padding:13px 14px;font-size:15px}
+.analysis-card #banger-prediction-hub .banger-advanced-panel>summary small{display:block;margin-top:3px;font-size:10px;font-weight:500}
+.analysis-card .analyst-extras-drawer>summary{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.analysis-card .analyst-extras-drawer>summary #analyst-extras-state{font-size:10px;white-space:nowrap;opacity:.7}
+@media(max-width:650px){.analysis-card .analyst-extras-drawer>summary #analyst-extras-state{display:none}}
 </style>
 </body></html>
