@@ -46,6 +46,8 @@ jobs:
         run: python scripts/lineup_core_v2.py
       - name: Explain rejected source formations
         run: python scripts/lineup_rejection_report.py
+      - name: Build missing lineup recovery priorities
+        run: python scripts/lineup_recovery_plan.py
       - name: Refresh recent lineups
         run: python scripts/update_last_game_lines.py
       - name: Verify lineup coverage
@@ -89,7 +91,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for file in index.html lineups.json lineups_archive.json nhl_rosters.json lineups_coverage.json starting_goalies.json nhl_goalies.json rotowire_goalies.json rotowire_goalies_diagnostic.json lineups_changes.json lineups_diagnostics.md lineups_source_diagnostics.json lineups_discovery_diagnostics.json lineup_free_sources_probe.json lineup_core_report.json lineup_rejections_report.json; do
+          for file in index.html lineups.json lineups_archive.json nhl_rosters.json lineups_coverage.json starting_goalies.json nhl_goalies.json rotowire_goalies.json rotowire_goalies_diagnostic.json lineups_changes.json lineups_diagnostics.md lineups_source_diagnostics.json lineups_discovery_diagnostics.json lineup_free_sources_probe.json lineup_core_report.json lineup_rejections_report.json lineup_recovery_plan.json; do
             if [ -f "$file" ]; then git add "$file"; fi
           done
           if ! git diff --cached --quiet; then
