@@ -577,93 +577,45 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "canucks": {
-      "updatedAt": "2026-11-07T19:38:37.160235+00:00",
-      "previousPublishedAt": "2026-11-05T18:31:00.644000+00:00",
-      "publishedAt": "2026-11-07T19:32:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-08T19:26:55.285507+00:00",
+      "previousPublishedAt": "2026-11-07T19:30:24.446000+00:00",
+      "publishedAt": "2026-11-07T19:30:24.446000+00:00",
+      "source": "https://www.nhl.com/news/vancouver-canucks-edmonton-oilers-game-preview-november-7-2026",
       "events": [
         {
-          "type": "added",
-          "player": "Arshdeep Bains",
-          "to": "Útok 1"
-        },
-        {
           "type": "moved",
-          "player": "Elias Pettersson",
-          "from": "Obrana 1",
-          "to": "Útok 1"
-        },
-        {
-          "type": "moved",
-          "player": "Linus Karlsson",
-          "from": "Útok 3",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Max Sasson",
-          "from": "Útok 4",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Brendan Gallagher",
-          "from": "Útok 4",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Jake DeBrusk",
+          "player": "Elias Nils Pettersson",
           "from": "Útok 1",
-          "to": "Útok 4"
+          "to": "Obrana 1"
         },
         {
-          "type": "moved",
-          "player": "Jonathan Lekkerimaki",
-          "from": "Útok 2",
-          "to": "Útok 4"
+          "type": "added",
+          "player": "Filip Hronek",
+          "to": "Obrana 1"
         },
         {
           "type": "moved",
           "player": "Jamie Oleksiak",
-          "from": "Obrana 3",
-          "to": "Obrana 1"
+          "from": "Obrana 1",
+          "to": "Obrana 2"
         },
         {
           "type": "moved",
           "player": "Zeev Buium",
-          "from": "Obrana 2",
-          "to": "Obrana 1"
+          "from": "Obrana 1",
+          "to": "Obrana 2"
         },
         {
-          "type": "added",
+          "type": "moved",
           "player": "Tom Willander",
-          "to": "Obrana 2"
+          "from": "Obrana 2",
+          "to": "Obrana 3"
         },
         {
-          "type": "added",
+          "type": "moved",
           "player": "Luke Schenn",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "removed",
-          "player": "Jacob Quillan",
-          "from": "Útok 3"
-        },
-        {
-          "type": "removed",
-          "player": "Filip Hronek",
-          "from": "Obrana 1"
-        },
-        {
-          "type": "removed",
-          "player": "Guillaume Brisebois",
-          "from": "Obrana 2"
-        },
-        {
-          "type": "removed",
-          "player": "Victor Mancini",
-          "from": "Obrana 3"
+          "from": "Obrana 2",
+          "to": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

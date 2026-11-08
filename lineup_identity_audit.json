@@ -18,26 +18,6 @@
         }
       ]
     },
-    "canucks": {
-      "players": [
-        {
-          "sourceName": "Elias Nils Pettersson",
-          "expectedRole": "defense",
-          "sameSurnameInRoster": [
-            {
-              "name": "Elias Pettersson",
-              "role": "forwards"
-            },
-            {
-              "name": "Elias Pettersson",
-              "role": "defense"
-            }
-          ],
-          "classification": "ambiguous_same_surname",
-          "automaticApproval": false
-        }
-      ]
-    },
     "lightning": {
       "players": [
         {

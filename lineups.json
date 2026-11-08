@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-08T19:25:46.285412+00:00",
+  "fetchedAt": "2026-11-08T19:26:55.288769+00:00",
   "teams": {
     "panthers": {
       "name": "Panthers",
@@ -579,6 +579,10 @@
         ]
       ],
       "defense": [
+        [
+          "Elias Nils Pettersson",
+          "Filip Hronek"
+        ],
         [
           "Jamie Oleksiak",
           "Zeev Buium"

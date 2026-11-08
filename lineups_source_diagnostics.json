@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T19:25:46.276527+00:00",
+  "generatedAt": "2026-11-08T19:26:55.279789+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -165,29 +165,20 @@
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
-      "roleMismatches": [],
-      "rejectedLines": [
+      "roleMismatches": [
         {
-          "group": "defense",
-          "line": 1,
+          "sourcePair": 1,
           "players": [
-            "Elias Nils Pettersson"
-          ],
-          "sourceLine": [
             "Elias Nils Pettersson",
             "Filip Hronek"
-          ]
+          ],
+          "reason": "forward_in_defense_row"
         }
       ],
-      "rejectedPlayerReasons": [
-        {
-          "name": "Elias Nils Pettersson",
-          "expectedRole": "defense",
-          "reason": "not_in_current_roster"
-        }
-      ],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
       "validatedForwardLines": 4,
-      "validatedDefensePairs": 2,
+      "validatedDefensePairs": 3,
       "accepted": true
     },
     "lightning": {

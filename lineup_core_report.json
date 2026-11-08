@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T19:25:46.678238+00:00",
+  "generatedAt": "2026-11-08T19:26:56.161593+00:00",
   "sourceFile": "lineups.json",
   "teams": {
     "avalanche": {
@@ -88,17 +88,17 @@
     },
     "canucks": {
       "name": "Canucks",
-      "complete": false,
+      "complete": true,
       "forwardLines": 4,
-      "defensePairs": 2,
+      "defensePairs": 3,
       "missingForwardLines": 0,
-      "missingDefensePairs": 1,
+      "missingDefensePairs": 0,
       "malformedForwardLines": [],
       "malformedDefensePairs": [],
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/vancouver-canucks-edmonton-oilers-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T19:30:24.446000+00:00",
-      "status": "incomplete_projection"
+      "status": "complete_projection"
     },
     "capitals": {
       "name": "Capitals",
@@ -452,8 +452,8 @@
   "summary": {
     "teams": 31,
     "expectedTeams": 32,
-    "complete": 26,
-    "incomplete": 5,
+    "complete": 27,
+    "incomplete": 4,
     "missing": 1,
     "coveragePercent": 96.9
   }
