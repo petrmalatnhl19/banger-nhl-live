@@ -96,12 +96,31 @@ const style=document.createElement('style');style.textContent=`
 #bangerEngineLab .lab-error-numbers{text-align:right;min-width:140px}
 #bangerEngineLab .lab-error-numbers>b{color:#ffcf92}
 @media(max-width:520px){#bangerEngineLab .lab-error-row{flex-direction:column;gap:4px}#bangerEngineLab .lab-error-numbers{text-align:left;min-width:0}}
+
+/* Audit 2026-11-08: compact mobile Engine Lab, no empty-looking tall navigation cards. */
+@media(max-width:650px){
+ #bangerEngineLab{margin:8px 0;padding:10px;border-radius:12px;box-shadow:none}
+ #bangerEngineLab .lab-overview-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ #bangerEngineLab .lab-overview-link{min-height:0;padding:9px;gap:3px;border-radius:9px}
+ #bangerEngineLab .lab-overview-link strong{font-size:12px;line-height:1.3}
+ #bangerEngineLab .lab-overview-link small{font-size:10px;line-height:1.3}
+ #bangerEngineLab .lab-overview-group{margin-top:12px}
+ #bangerEngineLab .lab-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ #bangerEngineLab .lab-card{min-height:0;padding:10px;border-radius:10px}
+ #bangerEngineLab .lab-card strong{font-size:14px}
+ #bangerEngineLab .lab-card small{font-size:10px;line-height:1.4}
+ #bangerEngineLab .lab-details{padding:9px;margin-top:8px}
+ #bangerEngineLab .lab-summary{gap:5px}
+ #bangerEngineLab .lab-summary>div{padding:7px 5px;border-radius:9px}
+ #bangerEngineLab .lab-summary strong{font-size:17px}
+ #bangerEngineLab .lab-summary small{font-size:10px;line-height:1.3}
+}
 `;document.head.appendChild(style);
 function mount(){
- const hub=document.getElementById('bangerPredictionHubContent');if(!hub||document.getElementById('bangerEngineLab'))return;
+ const hub=document.querySelector('#banger-prediction-hub .banger-advanced-body')||document.getElementById('bangerPredictionHubContent');if(!hub||document.getElementById('bangerEngineLab'))return;
  const lab=document.createElement('section');lab.id='bangerEngineLab';
  lab.innerHTML='<div class="lab-head"><div><div class="lab-title">⚙️ BANGER ENGINE LAB</div><div class="lab-sub">Řídicí centrum predikčních modelů · data, přesnost a vývoj</div></div><span class="lab-pill">● MODEL MONITOR</span></div><details id="bangerGoalieDiagnosticEntry" style="margin:12px 0;border:1px solid #3b91ac;border-radius:13px;padding:12px;background:#0b253b"><summary style="cursor:pointer;color:#92ebff;font-weight:800">🔎 Diagnostika brankářů a archivu</summary><div id="bangerGoalieAuditMount" style="padding-top:10px;color:#c4deee">Načítám audit předzápasových dat…</div></details><details id="bangerOfficialGoaliesEntry" style="margin:10px 0;border:1px solid #3b91ac;border-radius:13px;padding:12px;background:#0b253b"><summary style="cursor:pointer;color:#92ebff;font-weight:800">🥅 Skuteční brankáři · NHL</summary><div id="bangerOfficialGoaliesMount" style="padding-top:10px;color:#c4deee">Otevři panel pro načtení oficiálního auditu.</div></details><div class="lab-summary"><div><strong>5</strong><small>Gólových modelů</small></div><div><strong>1</strong><small>Shots Engine</small></div><div><strong data-lab-final>—</strong><small>Dokončených zápasů</small></div></div><div class="lab-controls" role="group" aria-label="Přehled Engine Lab"><button type="button" data-lab-tab="overview" aria-pressed="true">🏠 Přehled</button><button type="button" data-lab-tab="models" aria-pressed="false">🧠 Modely</button><button type="button" data-lab-tab="accuracy" aria-pressed="false">🎯 Přesnost</button><button type="button" data-lab-tab="shots" aria-pressed="false">🏒 Shots</button><button type="button" data-lab-tab="diagnostics" aria-pressed="false">🔬 Diagnostika</button><button type="button" data-lab-tab="calibration" aria-pressed="false">🧪 Kalibrace</button><button type="button" data-lab-tab="stability" aria-pressed="false">📡 Stabilita</button><button type="button" data-lab-tab="errors" aria-pressed="false">🧩 Největší chyby</button><button type="button" data-lab-tab="patterns" aria-pressed="false">📊 Vzorce faktorů</button><button type="button" data-lab-tab="quality" aria-pressed="false">🛡️ Kvalita dat</button><button type="button" data-lab-tab="health" aria-pressed="false">🩺 Stav modelů</button><button type="button" data-lab-tab="history" aria-pressed="false">📈 Historie MAE</button><button type="button" data-lab-tab="uplift" aria-pressed="false">⚖️ Přínos modelů</button><button type="button" data-lab-tab="decision" aria-pressed="false">🧭 Výběr modelu</button></div><div class="lab-mobile-hint">← Posunutím nabídky zobrazíš další moduly →</div><div data-lab-content aria-live="polite"></div>';
- hub.insertBefore(lab,hub.firstChild);
+ hub.appendChild(lab);
  lab.addEventListener('click',e=>{if(e.target.closest('[data-lab-audit]')){runTimeAudit();return}const b=e.target.closest('[data-lab-tab]');if(!b)return;lab.dataset.tab=b.dataset.labTab;update()});
  lab.dataset.tab='overview';update();
 }
