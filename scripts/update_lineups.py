@@ -156,13 +156,23 @@ for offset in (0,1,2):
     if away in TEAM_SLUGS and home in TEAM_SLUGS and day and today.isoformat() <= day <= (today+datetime.timedelta(days=2)).isoformat():
      schedule_games.add((day,away,home))
  except Exception as err:schedule_discovery["errors"].append("schedule "+date.isoformat()+": "+str(err)[:120])
-# Scan the nearest upcoming games first, then games involving stale projections.
-# Bound requests to keep the scheduled GitHub workflow within its time budget.
+# Reserve eight slots for the nearest/prioritized fixtures and rotate four
+# remaining slots every 15-minute window. This eventually covers deferred
+# fixtures without doubling NHL.com requests in each scheduled run.
 ordered_games=sorted(schedule_games,key=lambda fixture:(fixture[0],0 if (fixture[1] in DISCOVERY_TARGETS or fixture[2] in DISCOVERY_TARGETS) else 1,fixture[1],fixture[2]))
+fixed=ordered_games[:8]
+remaining=ordered_games[8:]
+rotating_slots=min(4,len(remaining))
+rotation_window=int(datetime.datetime.now(datetime.timezone.utc).timestamp()//900)
+rotation_start=(rotation_window*4)%len(remaining) if remaining else 0
+rotating=[remaining[(rotation_start+i)%len(remaining)] for i in range(rotating_slots)]
+selected_games=fixed+rotating
 schedule_discovery["fixtures"]=[{"date":d,"away":a,"home":h,"priority":a in DISCOVERY_TARGETS or h in DISCOVERY_TARGETS} for d,a,h in ordered_games]
-schedule_discovery["fixturesSelected"]=min(12,len(ordered_games))
-schedule_discovery["fixturesDeferred"]=max(0,len(ordered_games)-12)
-for day,away,home in ordered_games[:12]:
+schedule_discovery["fixturesSelected"]=len(selected_games)
+schedule_discovery["fixturesDeferred"]=len(ordered_games)-len(selected_games)
+schedule_discovery["rotation"]={"window":rotation_window,"fixed":len(fixed),"rotating":len(rotating),"remainingPool":len(remaining),"rotationStart":rotation_start}
+schedule_discovery["selectedFixtures"]=[{"date":d,"away":a,"home":h} for d,a,h in selected_games]
+for day,away,home in selected_games:
  try:date_label=datetime.date.fromisoformat(day).strftime("%B-%-d-%Y").lower()
  except (ValueError,TypeError):continue
  for first,second in ((away,home),(home,away)):
