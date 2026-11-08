@@ -14,7 +14,7 @@ const path = require('node:path');
   await page.goto(pathToFileURL(path.resolve('index.html')).href, { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => document.querySelector('#status')?.textContent.includes('Dashboard · aktualizováno'), { timeout: 15000 });
   if (errors.length) throw Error('JavaScript errors on startup: ' + errors.join(' | '));
-  await page.locator('#tabGames').click();
+  await page.locator('#uxMobileNav [data-ux-tab="games"]').click();
   await page.waitForFunction(() => document.querySelector('#status')?.textContent.includes('zápasů · aktualizováno'), { timeout: 10000 });
   if (errors.length) throw Error('JavaScript errors after navigation: ' + errors.join(' | '));
   console.log('PASS: dashboard starts, mock NHL feed loads, game tab opens, no JavaScript errors.');
