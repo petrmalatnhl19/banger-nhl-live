@@ -1739,6 +1739,16 @@ async function analyzeGame(id){
  const completed=(games,code)=>games.filter(g=>g.gameDate<day&&['OFF','FINAL'].includes(g.gameState)&&g.homeTeam?.score!=null&&g.awayTeam?.score!=null&&(g.homeTeam?.abbrev===code||g.awayTeam?.abbrev===code)).sort((a,b)=>b.gameDate.localeCompare(a.gameDate));
  const unique=games=>Array.from(new Map(games.filter(g=>g.id).map(g=>[String(g.id),g])).values());
  let ga=schedules[0].ok?completed(schedules[0].data,ac):[],gh=schedules[1].ok?completed(schedules[1].data,hc):[];
+ // Start verified last-game boxscores as soon as schedules identify them.
+ // A later history fallback can change the last game, so validate IDs before reusing.
+ const goalieBoxCache=new Map();
+ const fetchGoalieBox=gid=>{
+  if(!gid)return Promise.resolve({ok:false});
+  const key=String(gid);
+  if(!goalieBoxCache.has(key))goalieBoxCache.set(key,safe(()=>get('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(key)+'/boxscore'),3500));
+  return goalieBoxCache.get(key);
+ };
+ [ga[0]?.id,gh[0]?.id].filter(Boolean).forEach(gid=>{fetchGoalieBox(gid);});
  // Expand history only when season schedules are missing or insufficient.
  // Bound network requests and keep any successfully retrieved partial results.
  const needsHistory=()=>ga.length<5||gh.length<5;
@@ -1874,7 +1884,7 @@ async function analyzeGame(id){
   }
  })();
  const lastIds=[ga[0]?.id,gh[0]?.id];
- const boxes=await Promise.all(lastIds.map(gid=>gid?safe(()=>get('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(gid)+'/boxscore'),3500):Promise.resolve({ok:false})));
+ const boxes=await Promise.all(lastIds.map(fetchGoalieBox));
  if(!root.isConnected)return;
  const goalie=(result,code)=>{
   const data=result.data;if(!result.ok||!data)return null;
