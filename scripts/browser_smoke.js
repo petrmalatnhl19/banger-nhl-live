@@ -42,7 +42,7 @@ const path = require('node:path');
   // Verify all visible mobile navigation destinations without relying on hidden desktop tabs.
   await page.locator('#uxMobileNav [data-ux-tab="analyst"]').click();
   await page.waitForFunction(() => document.querySelector('#status')?.textContent.includes('BANGER ANALYST'), { timeout: 10000 });
-  await page.locator('#content .empty').waitFor({ timeout: 10000 });
+  await page.locator('#content .analyst-list-card').first().waitFor({ timeout: 10000 });
   await page.locator('#uxMobileNav [data-ux-tab="skaters"]').click();
   await page.locator('#uxStatsHub:not(.hidden)').waitFor({ timeout: 10000 });
   await page.locator('#uxStatsHub [data-ux-tab="goalies"]').click();
