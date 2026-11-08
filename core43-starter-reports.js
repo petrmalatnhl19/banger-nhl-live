@@ -10,7 +10,7 @@ function normalize(report,game,observedAt){
  if(!Number.isInteger(game.gameId)||!Number.isFinite(Date.parse(game.kickoffUTC)))return fail("invalid_schedule");
  if(report.gameId!==game.gameId)return fail("game_mismatch");
  if(report.teamCode!==game.awayTeam&&report.teamCode!==game.homeTeam)return fail("team_mismatch");
- if(!/^\\d+$/.test(String(report.goalieId||"")))return fail("missing_nhl_goalie_id");
+ if(!/^\d+$/.test(String(report.goalieId||"")))return fail("missing_nhl_goalie_id");
  if(report.status!=="confirmed")return fail("not_confirmed");
  if(report.confirmationBasis!=="explicit_pregame_report")return fail("unsupported_confirmation_basis");
  if(typeof report.sourceName!=="string"||report.sourceName.trim().length<3)return fail("missing_source");

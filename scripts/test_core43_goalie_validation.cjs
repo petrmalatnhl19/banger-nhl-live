@@ -1,0 +1,15 @@
+const assert=require("node:assert/strict");
+const {validateEvidence}=require("../core43-starter-gate.js");
+const {normalize}=require("../core43-starter-reports.js");
+const game={gameId:2026020267,awayTeam:"NYR",homeTeam:"SEA",kickoffUTC:"2026-11-07T22:00:00Z"};
+const report={gameId:game.gameId,teamCode:"NYR",goalieId:"12345",status:"confirmed",confirmationBasis:"explicit_pregame_report",sourceName:"Verified team report",sourceUrl:"https://example.org/report",sourcePublishedAt:"2026-11-07T20:00:00Z"};
+const observed="2026-11-07T20:10:00Z";
+assert.equal(normalize(report,game,observed).accepted,true);
+assert.equal(normalize({...report,goalieId:"abc"},game,observed).reason,"missing_nhl_goalie_id");
+assert.equal(normalize({...report,sourceUrl:"http://example.org"},game,observed).reason,"missing_source_url");
+const evidence={...report,verifiedAt:observed};
+assert.equal(validateEvidence(evidence,game).accepted,true);
+assert.equal(validateEvidence({...evidence,goalieId:"abc"},game).reason,"invalid_goalie_id");
+assert.equal(validateEvidence({...evidence,status:"projected"},game).reason,"not_confirmed");
+assert.equal(validateEvidence({...evidence,sourceUrl:"http://example.org"},game).reason,"missing_source_url");
+console.log("CORE 4.3 goalie validation tests passed");

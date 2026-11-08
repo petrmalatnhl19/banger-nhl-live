@@ -10,7 +10,7 @@ function validateEvidence(e,game){
  if(!e||!game||!Number.isFinite(date(game.kickoffUTC)))return fail("invalid_game");
  if(e.gameId!==game.gameId)return fail("game_mismatch");
  if(![game.awayTeam,game.homeTeam].includes(e.teamCode))return fail("team_mismatch");
- if(!/^\\d+$/.test(String(e.goalieId||"")))return fail("invalid_goalie_id");
+ if(!/^\d+$/.test(String(e.goalieId||"")))return fail("invalid_goalie_id");
  if(e.status!=="confirmed")return fail("not_confirmed");
  if(typeof e.sourceName!=="string"||e.sourceName.trim().length<3)return fail("missing_source");
  if(typeof e.sourceUrl!=="string"||!/^https:\/\//.test(e.sourceUrl))return fail("missing_source_url");
