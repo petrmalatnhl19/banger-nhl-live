@@ -2948,6 +2948,12 @@ async function analyzeGame(id){
   predictionHub.innerHTML='<div style="font-size:11px;letter-spacing:1.8px;color:#71eaff;font-weight:800">BANGER · PREDIKČNÍ CENTRUM</div><h3 style="margin:7px 0 4px">🎯 Předpovědi a přesnost</h3><p class="analysis-small">Centrální předpovědi CORE 3.0, xG, CORE 3.1 a CORE 3.2, jejich vyhodnocení i historie v tomto zařízení. Experimentální výpočty jsou odlišeny od uložených serverových predikcí.</p><div id="bangerPredictionHubContent"></div>';
   extraRoot.insertAdjacentElement('afterbegin',predictionHub);
   const predictionHubContent=predictionHub.querySelector('#bangerPredictionHubContent');
+  const hubStarted=performance.now();
+  const hubMetrics={};
+  const hubMark=(name,ok=true)=>{hubMetrics[name]={seconds:((performance.now()-hubStarted)/1000).toFixed(2),ok};hubRenderMetrics()};
+  const hubRenderMetrics=()=>{const slot=predictionHub.querySelector('#bangerHubTimings');if(!slot)return;slot.innerHTML=Object.entries(hubMetrics).map(([name,v])=>'<p class="analysis-small">'+name+': <b>'+v.seconds+' s</b> · '+(v.ok?'načteno':'chyba')+'</p>').join('')||'<p class="analysis-small">Čekám na odpovědi…</p>'};
+  const hubDiagnostics=document.createElement('details');hubDiagnostics.className='analyst-fold';hubDiagnostics.innerHTML='<summary>⏱️ Rychlost predikčního centra <small>Samostatné měření</small></summary><div class="analyst-fold-body" id="bangerHubTimings"><p class="analysis-small">Čekám na odpovědi…</p></div>';
+  predictionHubContent.appendChild(hubDiagnostics);
   // UX 4.1: quick section navigator for the long match analysis.
   // Built from the already rendered panels, so it does not alter NHL data or predictions.
   const uxAnalystNav=document.createElement('nav');
@@ -2998,6 +3004,7 @@ async function analyzeGame(id){
       if(!response.ok)throw Error('HTTP '+response.status);
       const rows=await response.json();
       if(!Array.isArray(rows))throw Error('Neplatný archiv');
+      hubMark('Kompletní archiv modelů ('+rows.length+' zápasů)');
       window.bangerEngineLabArchive=rows;
       window.dispatchEvent(new CustomEvent('banger-engine-lab-archive',{detail:{count:rows.length}}));
       const valid=rows.filter(x=>x.status==='final'&&[x.actual_away,x.actual_home,x.baseline_away,x.baseline_home].every(v=>v!==null&&Number.isFinite(Number(v))));
@@ -3052,7 +3059,7 @@ async function analyzeGame(id){
          return '<div style="padding:10px 0;border-bottom:1px solid #ffffff20"><b>'+escapeHtml(x.game_date)+' · '+escapeHtml(x.away_team)+' – '+escapeHtml(x.home_team)+'</b><div>Skutečný výsledek: <b>'+actual+'</b></div><div class="analysis-small">'+detail+'</div></div>';
        }).join(''):'<p>Žádný zápas zatím nemá potvrzený konečný výsledek v centrálním archivu.</p>')+'</div></details>';
 
-    }catch(e){label.textContent='Přesnost nyní nelze načíst: '+e.message}
+    }catch(e){hubMark('Kompletní archiv modelů',false);label.textContent='Přesnost nyní nelze načíst: '+e.message}
   })();
   const archiveContainer=document.createElement('div');
   archiveContainer.className='analyst-fold-body';
@@ -3065,6 +3072,7 @@ async function analyzeGame(id){
     const response=await fetch('https://xxwqeiuyislnoxsmjuul.supabase.co/rest/v1/nhl_prediction_archive?select=game_id,game_date,away_team,home_team,baseline_away,baseline_home,experimental_away,experimental_home,model_version,experimental_version,status,actual_away,actual_home&order=game_date.desc&limit=20',{headers:{apikey:'sb_publishable_SfeHMIvUkYTuD3jCrWub8w_fPIY0B-G'}});
     if(!response.ok)throw Error('HTTP '+response.status);
     const rows=await response.json();
+    hubMark('Posledních 20 zápasů archivu');
     if(!Array.isArray(rows))throw Error('Neplatná odpověď archivu');
     if(!archiveContainer.isConnected)return;
     status.textContent=rows.length?'Posledních '+rows.length+' centrálně uložených zápasů':'Centrální archiv je zatím prázdný. Lokální tracker nadále funguje samostatně.';
