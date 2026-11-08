@@ -1,9 +1,9 @@
 {
-  "teamsWithRejectedLines": 2,
+  "teamsWithRejectedLines": 1,
   "teams": {
     "lightning": {
       "team": "TBL",
-      "rosterUpdatedAt": "2026-11-08T19:45:26.561599+00:00",
+      "rosterUpdatedAt": "2026-11-08T19:47:20.413443+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 3,
       "candidateDefensePairs": 4,
@@ -28,51 +28,6 @@
               "name": "Zemgus Girgensons",
               "reason": "other_position_group",
               "inLocalCurrentRoster": true,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ]
-    },
-    "senators": {
-      "team": "OTT",
-      "rosterUpdatedAt": "2026-11-08T19:45:26.150569+00:00",
-      "rosterSnapshotPresent": true,
-      "candidateForwardLines": 4,
-      "candidateDefensePairs": 3,
-      "validatedForwardLines": 2,
-      "validatedDefensePairs": 3,
-      "rejected": [
-        {
-          "group": "forwards",
-          "sourceLineNumber": 2,
-          "sourceLine": [
-            "Philip Tomasino",
-            "Shane Pinto",
-            "Drake Batherson"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Philip Tomasino",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        },
-        {
-          "group": "forwards",
-          "sourceLineNumber": 4,
-          "sourceLine": [
-            "Samuel Blais",
-            "Stephen Halliday",
-            "Hayden Hodgson"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Samuel Blais",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
               "requiresIndependentGameEvidence": true
             }
           ]

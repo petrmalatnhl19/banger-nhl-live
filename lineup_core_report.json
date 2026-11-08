@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T19:45:36.488760+00:00",
+  "generatedAt": "2026-11-08T19:47:44.747105+00:00",
   "sourceFile": "lineups.json",
   "teams": {
     "avalanche": {
@@ -394,6 +394,20 @@
       "publishedAt": "2026-11-08T17:15:00+00:00",
       "status": "complete_projection"
     },
+    "senators": {
+      "name": "Senators",
+      "complete": true,
+      "forwardLines": 4,
+      "defensePairs": 3,
+      "missingForwardLines": 0,
+      "missingDefensePairs": 0,
+      "malformedForwardLines": [],
+      "malformedDefensePairs": [],
+      "duplicatePlayers": [],
+      "source": "https://www.nhl.com/news/utah-mammoth-ottawa-senators-game-preview-november-7-2026",
+      "publishedAt": "2026-11-07T17:48:55.189000+00:00",
+      "status": "complete_projection"
+    },
     "sharks": {
       "name": "Sharks",
       "complete": true,
@@ -435,26 +449,14 @@
       "source": "https://www.nhl.com/news/tampa-bay-lightning-minnesota-wild-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:41:54.999000+00:00",
       "status": "complete_projection"
-    },
-    "senators": {
-      "name": "Senators",
-      "abbreviation": "OTT",
-      "complete": false,
-      "forwardLines": 0,
-      "defensePairs": 0,
-      "missingForwardLines": 4,
-      "missingDefensePairs": 3,
-      "status": "missing_team",
-      "source": null,
-      "publishedAt": null
     }
   },
   "summary": {
-    "teams": 31,
+    "teams": 32,
     "expectedTeams": 32,
-    "complete": 30,
+    "complete": 31,
     "incomplete": 1,
-    "missing": 1,
-    "coveragePercent": 96.9
+    "missing": 0,
+    "coveragePercent": 100.0
   }
 }

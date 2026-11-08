@@ -1,15 +1,14 @@
 {
-  "generatedAt": "2026-11-08T19:45:41.018233+00:00",
+  "generatedAt": "2026-11-08T19:47:52.362779+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 26,
+  "currentProjections": 27,
   "needsFreshProjection": [
     "blue jackets",
     "blues",
     "kraken",
     "predators",
-    "rangers",
-    "senators"
+    "rangers"
   ],
   "missing": [],
   "olderVerified": [
@@ -17,8 +16,7 @@
     "blues",
     "kraken",
     "predators",
-    "rangers",
-    "senators"
+    "rangers"
   ],
   "manualSnapshots": [],
   "freshnessDefinition": "Publication within 36h; not a confirmed next-game lineup",
@@ -365,13 +363,14 @@
     "senators": {
       "hasProjectedLines": true,
       "sources": [
+        "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": null,
-      "source": null,
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-07T17:48:55.189000+00:00",
+      "source": "https://www.nhl.com/news/utah-mammoth-ottawa-senators-game-preview-november-7-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "sharks": {
       "hasProjectedLines": true,

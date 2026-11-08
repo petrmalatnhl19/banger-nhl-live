@@ -1578,9 +1578,9 @@
       "name": "Senators",
       "forwards": [
         [
-          "Fabian Zetterlund",
-          "Tim Stützle",
-          "Dylan Cozens"
+          "Nick Cousins",
+          "Tim Stutzle",
+          "Fabian Zetterlund"
         ],
         [
           "Philip Tomasino",
@@ -1589,13 +1589,13 @@
         ],
         [
           "Michael Amadio",
-          "Ridly Greig",
+          "Dylan Cozens",
           "Claude Giroux"
         ],
         [
           "Samuel Blais",
           "Stephen Halliday",
-          "Nick Cousins"
+          "Hayden Hodgson"
         ]
       ],
       "defense": [
@@ -1608,36 +1608,21 @@
           "Jordan Spence"
         ],
         [
-          "Nikolas Matinpalo",
+          "Tyler Kleven",
           "Carter Yakemchuk"
         ]
       ],
       "goalies": [
-        "Samuel Ersson",
-        "Jonas Johansson"
+        "Samuel Ersson"
       ],
-      "powerplay": [
-        [
-          "Drake Batherson",
-          "Stephen Halliday",
-          "Dylan Cozens",
-          "Tim Stützle",
-          "Jake Sanderson"
-        ],
-        [
-          "Ridly Greig",
-          "Shane Pinto",
-          "Claude Giroux",
-          "Fabian Zetterlund",
-          "Thomas Chabot"
-        ]
-      ],
-      "injured": "Tyler Kleven (nemoc), Warren Foegele, Linus Ullmark, William Eklund, Kurtis MacDermid, Andre Burakovsky",
-      "scratched": "Hayden Hodgson",
-      "asOf": "2026-11-04",
-      "source": "https://www.nhl.com/news/ottawa-senators-buffalo-sabres-game-preview-november-4-2026",
+      "injured": "Warren Foegele (lower body), Linus Ullmark (lower body), William Eklund (ankle), Kurtis MacDermid (upper body), Andre Burakovsky (lower body), Ridly Greig (lower body)",
+      "scratched": "Nikolas Matinpalo",
+      "source": "https://www.nhl.com/news/utah-mammoth-ottawa-senators-game-preview-november-7-2026",
+      "publishedAt": "2026-11-07T17:48:55.189000+00:00",
+      "asOf": "2026-11-07",
+      "dateVerified": true,
       "sourceLabel": "NHL.com",
-      "basis": "Projekce NHL.com pro utkání Ottawa – Buffalo dne 4. 11. 2026; nejde o potvrzenou sestavu"
+      "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
     }
   }
 }

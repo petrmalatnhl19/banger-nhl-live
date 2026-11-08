@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-08T19:45:35.813870+00:00",
+  "fetchedAt": "2026-11-08T19:47:44.089593+00:00",
   "teams": {
     "panthers": {
       "name": "Panthers",
@@ -838,6 +838,52 @@
       ],
       "injured": "Kailer Yamamoto (upper body), Maveric Lamoureux (shoulder), John Marino (upper body), Nate Schmidt (upper body)",
       "scratched": "Ben McCartney, Gregor Biber",
+      "source": "https://www.nhl.com/news/utah-mammoth-ottawa-senators-game-preview-november-7-2026",
+      "publishedAt": "2026-11-07T17:48:55.189000+00:00"
+    },
+    "senators": {
+      "name": "Senators",
+      "forwards": [
+        [
+          "Nick Cousins",
+          "Tim Stutzle",
+          "Fabian Zetterlund"
+        ],
+        [
+          "Philip Tomasino",
+          "Shane Pinto",
+          "Drake Batherson"
+        ],
+        [
+          "Michael Amadio",
+          "Dylan Cozens",
+          "Claude Giroux"
+        ],
+        [
+          "Samuel Blais",
+          "Stephen Halliday",
+          "Hayden Hodgson"
+        ]
+      ],
+      "defense": [
+        [
+          "Jake Sanderson",
+          "Artem Zub"
+        ],
+        [
+          "Thomas Chabot",
+          "Jordan Spence"
+        ],
+        [
+          "Tyler Kleven",
+          "Carter Yakemchuk"
+        ]
+      ],
+      "goalies": [
+        "Samuel Ersson"
+      ],
+      "injured": "Warren Foegele (lower body), Linus Ullmark (lower body), William Eklund (ankle), Kurtis MacDermid (upper body), Andre Burakovsky (lower body), Ridly Greig (lower body)",
+      "scratched": "Nikolas Matinpalo",
       "source": "https://www.nhl.com/news/utah-mammoth-ottawa-senators-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:48:55.189000+00:00"
     },
