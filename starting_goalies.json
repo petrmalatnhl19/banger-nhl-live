@@ -1,33 +1,15 @@
 {
   "date": "2026-11-08",
-  "updatedAt": "2026-11-08T03:22:22.202766+00:00",
+  "updatedAt": "2026-11-08T05:06:12.850539+00:00",
   "teams": {
-    "BOS": {
-      "name": "Jeremy Swayman",
-      "status": "projected",
-      "date": "2026-11-08",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T03:22:22.202766+00:00",
-      "gameId": 2026020277
-    },
     "BUF": {
       "name": "Colten Ellis",
       "status": "projected",
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T03:22:22.202766+00:00",
+      "checkedAt": "2026-11-08T05:06:12.850539+00:00",
       "gameId": 2026020278
-    },
-    "CGY": {
-      "name": "Dustin Wolf",
-      "status": "projected",
-      "date": "2026-11-08",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T03:22:22.202766+00:00",
-      "gameId": 2026020281
     },
     "FLA": {
       "name": "Jacob Markstrom",
@@ -35,8 +17,26 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T03:22:22.202766+00:00",
+      "checkedAt": "2026-11-08T05:06:12.850539+00:00",
       "gameId": 2026020277
+    },
+    "BOS": {
+      "name": "Jeremy Swayman",
+      "status": "projected",
+      "date": "2026-11-08",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-08T05:06:12.850539+00:00",
+      "gameId": 2026020277
+    },
+    "CGY": {
+      "name": "Dustin Wolf",
+      "status": "projected",
+      "date": "2026-11-08",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-08T05:06:12.850539+00:00",
+      "gameId": 2026020281
     },
     "PHI": {
       "name": "Dan Vladar",
@@ -44,7 +44,7 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T03:22:22.202766+00:00",
+      "checkedAt": "2026-11-08T05:06:12.850539+00:00",
       "gameId": 2026020281
     },
     "WPG": {
@@ -53,7 +53,7 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T03:22:22.202766+00:00",
+      "checkedAt": "2026-11-08T05:06:12.850539+00:00",
       "gameId": 2026020280
     }
   },
