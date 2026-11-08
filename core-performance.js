@@ -56,8 +56,8 @@ async function load(panel){
  const controller=new AbortController();
  const timeout=setTimeout(()=>controller.abort(),9000);
  try{
-  const fetchView=async view=>{
-   const response=await fetch(ROOT+view+'?select=*&order=model.asc',{
+  const fetchView=async (view,sort=true)=>{
+   const response=await fetch(ROOT+view+'?select=*'+(sort?'&order=model.asc':''),{
     headers:{apikey:APIKEY,Authorization:'Bearer '+APIKEY},
     signal:controller.signal,
     cache:'no-store'
@@ -67,7 +67,7 @@ async function load(panel){
    if(!Array.isArray(result))throw Error('Neplatná odpověď databáze');
    return result;
   };
-  const [all,paired,trend,statusRows]=await Promise.all([fetchView('nhl_core_model_accuracy'),fetchView('nhl_core_model_head_to_head'),fetchView('nhl_core_model_trend'),fetchView('nhl_core42_status')]);
+  const [all,paired,trend,statusRows]=await Promise.all([fetchView('nhl_core_model_accuracy'),fetchView('nhl_core_model_head_to_head'),fetchView('nhl_core_model_trend'),fetchView('nhl_core42_status',false)]);
   if(!panel.isConnected)return;
   window.__core42Pending=Number(statusRows[0]?.pending_predictions??0);panel._coreData={all,paired,trend};
   lastLoad=Date.now();
