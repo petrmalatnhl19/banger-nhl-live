@@ -1692,7 +1692,8 @@ async function analyzeGame(id){
  const safe=async(fn,ms)=>{try{return {ok:true,data:await timeout(Promise.resolve().then(fn),ms)}}catch(e){return {ok:false,error:String(e.message||e)}}};
  const status={game:'čeká',stand:'čeká',form:'čeká',goalies:'čeká'};
  const state=(key,ok)=>{status[key]=ok?'načteno':'nedostupné'};
- const diagnostics=()=>'<details class="analyst-fold"><summary>🔎 Diagnostika dat <small>Stav jednotlivých zdrojů</small></summary><div class="analyst-fold-body">'+Object.entries(status).map(([k,v])=>'<p>'+({game:'Detail zápasu',stand:'Sezónní tabulka',form:'Poslední zápasy',goalies:'Brankáři'}[k])+': <b>'+clean(v)+'</b></p>').join('')+'<div id="analyst-timing-detail"><p class="analysis-small">Časy načítání se právě měří…</p></div></div></details>';
+ const timingRows=()=>'<p class="analysis-small"><b>Naměřené časy v tomto zařízení:</b></p>'+Object.entries(analystTimings).map(([name,ms])=>'<p class="analysis-small">'+clean(name)+': <b>'+((ms/1000).toFixed(2))+' s</b></p>').join('');
+ const diagnostics=()=>'<details class="analyst-fold"><summary>🔎 Diagnostika dat <small>Stav jednotlivých zdrojů</small></summary><div class="analyst-fold-body">'+Object.entries(status).map(([k,v])=>'<p>'+({game:'Detail zápasu',stand:'Sezónní tabulka',form:'Poslední zápasy',goalies:'Brankáři'}[k])+': <b>'+clean(v)+'</b></p>').join('')+'<div id="analyst-timing-detail">'+timingRows()+'</div></div></details>';
  const [dr,sr]=await Promise.all([safe(()=>get('https://api-web.nhle.com/v1/gamecenter/'+encodeURIComponent(id)+'/landing'),6500),safe(()=>teamApi('standings',''),6500)]);
  if(!root.isConnected)return;
  markAnalyst('NHL zápas + tabulka');state('game',dr.ok);state('stand',sr.ok);
@@ -1803,7 +1804,7 @@ async function analyzeGame(id){
  extra+='<details class="analyst-fold"><summary>🤝 Vzájemné zápasy</summary><div class="analyst-fold-body" id="analyst-h2h-body">'+renderH2h()+'<p class="analysis-small">Starší sezóny se doplňují na pozadí…</p></div></details>';
  markAnalyst('Forma a vzájemné zápasy zobrazeny');
  const extraRoot=card.querySelector('#analyst-extras');if(extraRoot)extraRoot.innerHTML=extra;
- const updateAnalystTimings=()=>{const slot=card.querySelector('#analyst-timing-detail');if(slot)slot.innerHTML='<p class="analysis-small"><b>Naměřené časy v tomto zařízení:</b></p>'+Object.entries(analystTimings).map(([name,ms])=>'<p class="analysis-small">'+clean(name)+': <b>'+((ms/1000).toFixed(2))+' s</b></p>').join('');};
+ const updateAnalystTimings=()=>{const slot=card.querySelector('#analyst-timing-detail');if(slot)slot.innerHTML=timingRows();};
  updateAnalystTimings();const extrasState=card.querySelector('#analyst-extras-state');if(extrasState)extrasState.textContent='Forma a historie připraveny · další údaje se doplňují';
  // Historical head-to-head data is optional: never hold up the form and other sections.
  (async()=>{
