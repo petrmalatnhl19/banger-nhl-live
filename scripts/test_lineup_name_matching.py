@@ -14,6 +14,10 @@ exec(compile(ast.fix_missing_locations(module),"<normalize>","exec"),namespace)
 normalize=namespace["normalize"]
 
 class NameNormalizationTests(unittest.TestCase):
+ def test_projected_line_heading_variants(self):
+  headings = ["Blackhawks projected lines", "Bruins projected lineup"]
+  for heading in headings:
+   self.assertIsNotNone(re.fullmatch(r"(.{2,55}?) projected (?:lineup|lines)", heading, re.I))
  def test_accents(self):
   self.assertEqual(normalize("Tim Stützle"),normalize("Tim Stutzle"))
   self.assertEqual(normalize("Juuso Välimäki"),normalize("Juuso Valimaki"))
