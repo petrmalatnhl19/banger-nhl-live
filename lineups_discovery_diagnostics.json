@@ -1,170 +1,107 @@
 {
-  "generatedAt": "2026-11-08T19:59:40.595647+00:00",
-  "checked": 22,
-  "articlesFound": 9,
+  "generatedAt": "2026-11-08T20:03:24.629592+00:00",
+  "checked": 24,
+  "articlesFound": 5,
   "errors": [],
   "fixtures": [
     {
-      "date": "2026-11-07",
-      "away": "CHI",
-      "home": "CAR"
-    },
-    {
-      "date": "2026-11-07",
+      "date": "2026-11-08",
       "away": "FLA",
-      "home": "WSH"
-    },
-    {
-      "date": "2026-11-07",
-      "away": "MTL",
-      "home": "TOR"
-    },
-    {
-      "date": "2026-11-07",
-      "away": "NJD",
-      "home": "NYI"
-    },
-    {
-      "date": "2026-11-07",
-      "away": "NYR",
-      "home": "SEA"
-    },
-    {
-      "date": "2026-11-07",
-      "away": "STL",
-      "home": "NSH"
-    },
-    {
-      "date": "2026-11-07",
-      "away": "TBL",
-      "home": "MIN"
-    },
-    {
-      "date": "2026-11-07",
-      "away": "UTA",
-      "home": "OTT"
+      "home": "BOS",
+      "priority": true
     },
     {
       "date": "2026-11-08",
-      "away": "FLA",
-      "home": "BOS"
+      "away": "NJD",
+      "home": "TOR",
+      "priority": false
+    },
+    {
+      "date": "2026-11-08",
+      "away": "PHI",
+      "home": "CGY",
+      "priority": false
+    },
+    {
+      "date": "2026-11-08",
+      "away": "PIT",
+      "home": "ANA",
+      "priority": false
+    },
+    {
+      "date": "2026-11-08",
+      "away": "TBL",
+      "home": "WPG",
+      "priority": false
+    },
+    {
+      "date": "2026-11-08",
+      "away": "VGK",
+      "home": "BUF",
+      "priority": false
     },
     {
       "date": "2026-11-09",
       "away": "NYI",
-      "home": "SJS"
+      "home": "SJS",
+      "priority": true
     },
     {
       "date": "2026-11-09",
       "away": "NYR",
-      "home": "EDM"
+      "home": "EDM",
+      "priority": true
+    },
+    {
+      "date": "2026-11-09",
+      "away": "PHI",
+      "home": "VAN",
+      "priority": false
+    },
+    {
+      "date": "2026-11-10",
+      "away": "DET",
+      "home": "STL",
+      "priority": true
+    },
+    {
+      "date": "2026-11-10",
+      "away": "FLA",
+      "home": "CBJ",
+      "priority": true
+    },
+    {
+      "date": "2026-11-10",
+      "away": "NSH",
+      "home": "LAK",
+      "priority": true
+    },
+    {
+      "date": "2026-11-10",
+      "away": "WSH",
+      "home": "OTT",
+      "priority": true
+    },
+    {
+      "date": "2026-11-10",
+      "away": "COL",
+      "home": "TOR",
+      "priority": false
+    },
+    {
+      "date": "2026-11-10",
+      "away": "MIN",
+      "home": "MTL",
+      "priority": false
+    },
+    {
+      "date": "2026-11-10",
+      "away": "NJD",
+      "home": "WPG",
+      "priority": false
     }
   ],
   "attempts": [
-    {
-      "url": "https://www.nhl.com/news/chicago-blackhawks-carolina-hurricanes-game-preview-november-7-2026",
-      "result": "parsed",
-      "teams": [
-        "blackhawks",
-        "hurricanes"
-      ]
-    },
-    {
-      "url": "https://www.nhl.com/news/carolina-hurricanes-chicago-blackhawks-game-preview-november-7-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/florida-panthers-washington-capitals-game-preview-november-7-2026",
-      "result": "parsed",
-      "teams": [
-        "panthers",
-        "capitals"
-      ]
-    },
-    {
-      "url": "https://www.nhl.com/news/washington-capitals-florida-panthers-game-preview-november-7-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/montreal-canadiens-toronto-maple-leafs-game-preview-november-7-2026",
-      "result": "parsed",
-      "teams": [
-        "canadiens",
-        "maple leafs"
-      ]
-    },
-    {
-      "url": "https://www.nhl.com/news/toronto-maple-leafs-montreal-canadiens-game-preview-november-7-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/new-jersey-devils-new-york-islanders-game-preview-november-7-2026",
-      "result": "parsed",
-      "teams": [
-        "devils",
-        "islanders"
-      ]
-    },
-    {
-      "url": "https://www.nhl.com/news/new-york-islanders-new-jersey-devils-game-preview-november-7-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/new-york-rangers-seattle-kraken-game-preview-november-7-2026",
-      "result": "parsed",
-      "teams": [
-        "rangers",
-        "kraken"
-      ]
-    },
-    {
-      "url": "https://www.nhl.com/news/seattle-kraken-new-york-rangers-game-preview-november-7-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/st-louis-blues-nashville-predators-game-preview-november-7-2026",
-      "result": "parsed",
-      "teams": [
-        "blues",
-        "predators"
-      ]
-    },
-    {
-      "url": "https://www.nhl.com/news/nashville-predators-st-louis-blues-game-preview-november-7-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/tampa-bay-lightning-minnesota-wild-game-preview-november-7-2026",
-      "result": "parsed",
-      "teams": [
-        "lightning",
-        "wild"
-      ]
-    },
-    {
-      "url": "https://www.nhl.com/news/minnesota-wild-tampa-bay-lightning-game-preview-november-7-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/utah-mammoth-ottawa-senators-game-preview-november-7-2026",
-      "result": "parsed",
-      "teams": [
-        "mammoth",
-        "senators"
-      ]
-    },
-    {
-      "url": "https://www.nhl.com/news/ottawa-senators-utah-mammoth-game-preview-november-7-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
     {
       "url": "https://www.nhl.com/news/florida-panthers-boston-bruins-game-preview-november-8-2026",
       "result": "parsed",
@@ -175,6 +112,68 @@
     },
     {
       "url": "https://www.nhl.com/news/boston-bruins-florida-panthers-game-preview-november-8-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/new-jersey-devils-toronto-maple-leafs-game-preview-november-8-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/toronto-maple-leafs-new-jersey-devils-game-preview-november-8-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/philadelphia-flyers-calgary-flames-game-preview-november-8-2026",
+      "result": "parsed",
+      "teams": [
+        "flyers",
+        "flames"
+      ]
+    },
+    {
+      "url": "https://www.nhl.com/news/calgary-flames-philadelphia-flyers-game-preview-november-8-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/pittsburgh-penguins-anaheim-ducks-game-preview-november-8-2026",
+      "result": "parsed",
+      "teams": [
+        "penguins",
+        "ducks"
+      ]
+    },
+    {
+      "url": "https://www.nhl.com/news/anaheim-ducks-pittsburgh-penguins-game-preview-november-8-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/tampa-bay-lightning-winnipeg-jets-game-preview-november-8-2026",
+      "result": "parsed",
+      "teams": [
+        "lightning",
+        "jets"
+      ]
+    },
+    {
+      "url": "https://www.nhl.com/news/winnipeg-jets-tampa-bay-lightning-game-preview-november-8-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/vegas-golden-knights-buffalo-sabres-game-preview-november-8-2026",
+      "result": "parsed",
+      "teams": [
+        "golden knights",
+        "sabres"
+      ]
+    },
+    {
+      "url": "https://www.nhl.com/news/buffalo-sabres-vegas-golden-knights-game-preview-november-8-2026",
       "result": "no_complete_projection",
       "teams": []
     },
@@ -197,7 +196,49 @@
       "url": "https://www.nhl.com/news/edmonton-oilers-new-york-rangers-game-preview-november-9-2026",
       "result": "no_complete_projection",
       "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/philadelphia-flyers-vancouver-canucks-game-preview-november-9-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/vancouver-canucks-philadelphia-flyers-game-preview-november-9-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/detroit-red-wings-st-louis-blues-game-preview-november-10-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/st-louis-blues-detroit-red-wings-game-preview-november-10-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/florida-panthers-columbus-blue-jackets-game-preview-november-10-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/columbus-blue-jackets-florida-panthers-game-preview-november-10-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/nashville-predators-los-angeles-kings-game-preview-november-10-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/los-angeles-kings-nashville-predators-game-preview-november-10-2026",
+      "result": "no_complete_projection",
+      "teams": []
     }
   ],
-  "note": "Only today and tomorrow are checked; future matchup preview URLs are not assumed published."
+  "note": "Upcoming games today through two days ahead; prioritize older sources and nearest games. A fixture is not proof a preview article exists.",
+  "fixturesSelected": 12,
+  "fixturesDeferred": 4
 }

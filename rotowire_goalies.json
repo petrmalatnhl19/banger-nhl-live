@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-08T19:59:49.255217+00:00",
+  "updatedAt": "2026-11-08T20:03:35.301260+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "goalieCount": 98,
   "games": [
@@ -28,7 +28,7 @@
       "goalie": "Colten Ellis",
       "opponent": "VGK",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-08",
       "gameId": 2026020278,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -105,10 +105,10 @@
     },
     {
       "team": "VGK",
-      "goalie": "Carter Hart",
+      "goalie": "Adin Hill",
       "opponent": "BUF",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-08",
       "gameId": 2026020278,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"

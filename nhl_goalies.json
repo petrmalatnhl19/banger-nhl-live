@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-08T19:59:49.289459+00:00",
-  "rostersUpdatedAt": "2026-11-08T19:59:23.708927+00:00",
+  "updatedAt": "2026-11-08T20:03:35.334409+00:00",
+  "rostersUpdatedAt": "2026-11-08T20:02:55.080395+00:00",
   "projectionDate": "2026-11-08",
   "teamCount": 32,
   "goalieCount": 75,
@@ -245,8 +245,9 @@
       "team": "VGK",
       "teamKey": "golden knights",
       "playerId": 8478499,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-08",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Brandon Bussi",
@@ -521,7 +522,7 @@
       "team": "BUF",
       "teamKey": "sabres",
       "playerId": 8481551,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-08",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
