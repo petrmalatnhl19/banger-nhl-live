@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-07T23:47:57.033061+00:00",
-  "checked": 6,
+  "generatedAt": "2026-11-08T00:18:17.861282+00:00",
+  "checked": 8,
   "articlesFound": 3,
   "errors": [],
   "fixtures": [
@@ -18,6 +18,11 @@
       "date": "2026-11-08",
       "away": "FLA",
       "home": "BOS"
+    },
+    {
+      "date": "2026-11-09",
+      "away": "NYI",
+      "home": "SJS"
     }
   ],
   "attempts": [
@@ -57,6 +62,16 @@
     },
     {
       "url": "https://www.nhl.com/news/boston-bruins-florida-panthers-game-preview-november-8-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/new-york-islanders-san-jose-sharks-game-preview-november-9-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/san-jose-sharks-new-york-islanders-game-preview-november-9-2026",
       "result": "no_complete_projection",
       "teams": []
     }

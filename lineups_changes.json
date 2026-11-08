@@ -1249,6 +1249,41 @@
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "wild": {
+      "updatedAt": "2026-11-08T00:18:19.998720+00:00",
+      "previousPublishedAt": "2026-11-07T21:30:00+00:00",
+      "publishedAt": "2026-11-07T21:30:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "events": [
+        {
+          "type": "moved",
+          "player": "Ryan Hartman",
+          "from": "Útok 4",
+          "to": "Útok 3"
+        },
+        {
+          "type": "added",
+          "player": "Marcus Foligno",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
+          "player": "Nick Foligno",
+          "to": "Útok 4"
+        },
+        {
+          "type": "removed",
+          "player": "Michael McCarron",
+          "from": "Útok 3"
+        },
+        {
+          "type": "removed",
+          "player": "Tyler Pitlick",
+          "from": "Útok 4"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     }
   }
 }
