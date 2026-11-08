@@ -1,10 +1,11 @@
 {
-  "generatedAt": "2026-11-08T05:06:10.148916+00:00",
+  "generatedAt": "2026-11-08T05:50:31.449593+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 28,
+  "currentProjections": 27,
   "needsFreshProjection": [
     "blackhawks",
+    "blue jackets",
     "flyers",
     "jets",
     "senators"
@@ -12,6 +13,7 @@
   "missing": [],
   "olderVerified": [
     "blackhawks",
+    "blue jackets",
     "flyers",
     "jets",
     "senators"
@@ -49,11 +51,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-06T17:50:25.006000+00:00",
       "source": "https://www.nhl.com/news/columbus-blue-jackets-buffalo-sabres-game-preview-november-6-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "blues": {
       "hasProjectedLines": true,
