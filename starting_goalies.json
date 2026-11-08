@@ -1,6 +1,6 @@
 {
   "date": "2026-11-08",
-  "updatedAt": "2026-11-08T16:53:13.338467+00:00",
+  "updatedAt": "2026-11-08T17:32:18.459911+00:00",
   "teams": {
     "BUF": {
       "name": "Colten Ellis",
@@ -8,17 +8,8 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T16:53:13.338467+00:00",
+      "checkedAt": "2026-11-08T17:32:18.459911+00:00",
       "gameId": 2026020278
-    },
-    "CGY": {
-      "name": "Devin Cooley",
-      "status": "confirmed",
-      "date": "2026-11-08",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T16:53:13.338467+00:00",
-      "gameId": 2026020281
     },
     "PHI": {
       "name": "Dan Vladar",
@@ -26,7 +17,7 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T16:53:13.338467+00:00",
+      "checkedAt": "2026-11-08T17:32:18.459911+00:00",
       "gameId": 2026020281
     },
     "TBL": {
@@ -35,7 +26,7 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T16:53:13.338467+00:00",
+      "checkedAt": "2026-11-08T17:32:18.459911+00:00",
       "gameId": 2026020280
     },
     "WPG": {
@@ -44,8 +35,17 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T16:53:13.338467+00:00",
+      "checkedAt": "2026-11-08T17:32:18.459911+00:00",
       "gameId": 2026020280
+    },
+    "ANA": {
+      "name": "Laurent Brossoit",
+      "status": "projected",
+      "date": "2026-11-08",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-08T17:32:18.459911+00:00",
+      "gameId": 2026020282
     },
     "BOS": {
       "name": "Jeremy Swayman",
@@ -53,8 +53,17 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T16:53:13.338467+00:00",
+      "checkedAt": "2026-11-08T17:32:18.459911+00:00",
       "gameId": 2026020277
+    },
+    "CGY": {
+      "name": "Devin Cooley",
+      "status": "confirmed",
+      "date": "2026-11-08",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-08T17:32:18.459911+00:00",
+      "gameId": 2026020281
     },
     "FLA": {
       "name": "Jacob Markstrom",
@@ -62,17 +71,31 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T16:53:13.338467+00:00",
+      "checkedAt": "2026-11-08T17:32:18.459911+00:00",
       "gameId": 2026020277
+    },
+    "PIT": {
+      "name": "Arturs Silovs",
+      "status": "projected",
+      "date": "2026-11-08",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-08T17:32:18.459911+00:00",
+      "gameId": 2026020282
     }
   },
   "conflicts": [
     {
-      "date": "2026-11-08",
       "team": "ANA",
-      "reason": "source disagreement",
-      "rotowire": "Laurent Brossoit",
-      "previous": "Lukas Dostal"
+      "specialist": "Lukas Dostal",
+      "nhl": "Ville Husso",
+      "nhlSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season"
+    },
+    {
+      "team": "PIT",
+      "specialist": "Sergei Murashov",
+      "nhl": "Arturs Silovs",
+      "nhlSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season"
     },
     {
       "date": "2026-11-08",
@@ -80,13 +103,6 @@
       "reason": "source disagreement",
       "rotowire": "Connor Hellebuyck",
       "previous": "Jake Allen"
-    },
-    {
-      "date": "2026-11-08",
-      "team": "PIT",
-      "reason": "source disagreement",
-      "rotowire": "Arturs Silovs",
-      "previous": "Sergei Murashov"
     },
     {
       "date": "2026-11-08",

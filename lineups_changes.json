@@ -343,34 +343,28 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "flyers": {
-      "updatedAt": "2026-11-05T17:28:21.800140+00:00",
-      "previousPublishedAt": "2026-11-03T17:21:41.534000+00:00",
-      "publishedAt": "2026-11-05T17:25:56.262000+00:00",
-      "source": "https://www.nhl.com/news/philadelphia-flyers-new-york-rangers-game-preview-november-5-2026",
+      "updatedAt": "2026-11-08T17:32:15.603562+00:00",
+      "previousPublishedAt": "2026-11-05T19:32:00+00:00",
+      "publishedAt": "2026-11-08T17:16:00+00:00",
+      "source": "https://www.nhl.com/news/philadelphia-flyers-calgary-flames-game-preview-november-8-2026",
       "events": [
         {
           "type": "moved",
           "player": "Tyson Foerster",
+          "from": "Útok 2",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Porter Martone",
           "from": "Útok 3",
           "to": "Útok 2"
         },
         {
           "type": "moved",
-          "player": "Porter Martone",
-          "from": "Útok 2",
+          "player": "Trevor Zegras",
+          "from": "Útok 1",
           "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Cole Knuble",
-          "from": "Útok 4",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Denver Barkey",
-          "from": "Útok 3",
-          "to": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -550,88 +544,33 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "ducks": {
-      "updatedAt": "2026-11-06T18:48:26.991703+00:00",
-      "previousPublishedAt": "2026-11-05T19:06:54.747000+00:00",
-      "publishedAt": "2026-11-06T18:32:00+00:00",
+      "updatedAt": "2026-11-08T17:32:15.603774+00:00",
+      "previousPublishedAt": "2026-11-06T18:21:14.068000+00:00",
+      "publishedAt": "2026-11-08T17:15:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
-          "type": "added",
-          "player": "Alex Killorn",
-          "to": "Útok 1"
-        },
-        {
-          "type": "added",
-          "player": "Leo Carlsson",
-          "to": "Útok 1"
-        },
-        {
-          "type": "added",
-          "player": "Judd Caulfield",
-          "to": "Útok 1"
-        },
-        {
           "type": "moved",
-          "player": "Cutter Gauthier",
-          "from": "Útok 1",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Mikael Granlund",
-          "from": "Útok 1",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Beckett Sennecke",
-          "from": "Útok 1",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Nico Myatovic",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Tim Washe",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Sam Colangelo",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Jeff Malott",
-          "from": "Útok 3",
-          "to": "Útok 4"
-        },
-        {
-          "type": "moved",
-          "player": "Roger McQueen",
-          "from": "Útok 3",
-          "to": "Útok 4"
-        },
-        {
-          "type": "moved",
-          "player": "Nikita Nesterenko",
-          "from": "Útok 3",
-          "to": "Útok 4"
-        },
-        {
-          "type": "added",
           "player": "Travis Mitchell",
+          "from": "Obrana 3",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "moved",
+          "player": "Tristan Luneau",
+          "from": "Obrana 3",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "moved",
+          "player": "Pavel Mintyukov",
+          "from": "Obrana 2",
           "to": "Obrana 3"
         },
         {
-          "type": "added",
-          "player": "Tristan Luneau",
+          "type": "moved",
+          "player": "Noah Warren",
+          "from": "Obrana 2",
           "to": "Obrana 3"
         }
       ],
@@ -1296,6 +1235,25 @@
           "type": "removed",
           "player": "Tyler Pitlick",
           "from": "Útok 4"
+        }
+      ],
+      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
+    },
+    "flames": {
+      "updatedAt": "2026-11-08T17:32:15.603641+00:00",
+      "previousPublishedAt": "2026-11-06T18:21:14.068000+00:00",
+      "publishedAt": "2026-11-08T17:16:00+00:00",
+      "source": "https://www.nhl.com/news/philadelphia-flyers-calgary-flames-game-preview-november-8-2026",
+      "events": [
+        {
+          "type": "added",
+          "player": "Joel Hanley",
+          "to": "Obrana 1"
+        },
+        {
+          "type": "removed",
+          "player": "Kevin Bahl",
+          "from": "Obrana 1"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

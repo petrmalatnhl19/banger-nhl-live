@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-08T16:53:13.381422+00:00",
-  "rostersUpdatedAt": "2026-11-08T16:52:48.107410+00:00",
+  "updatedAt": "2026-11-08T17:32:18.493236+00:00",
+  "rostersUpdatedAt": "2026-11-08T17:31:51.059061+00:00",
   "projectionDate": "2026-11-08",
   "teamCount": 32,
   "goalieCount": 75,
@@ -179,8 +179,9 @@
       "team": "ANA",
       "teamKey": "ducks",
       "playerId": 8476316,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-08",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Lukas Dostal",
@@ -456,8 +457,9 @@
       "team": "PIT",
       "teamKey": "penguins",
       "playerId": 8481668,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-08",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Justus Annunen",
