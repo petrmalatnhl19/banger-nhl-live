@@ -1,0 +1,50 @@
+{
+  "checkedAt": "2026-11-08T19:39:06.937466+00:00",
+  "team": "DET",
+  "scope": "Recent completed NHL games; historical evidence only",
+  "players": {
+    "John Leonard": {
+      "appearedInGames": [
+        {
+          "gameId": 2026020274,
+          "gameDate": "2026-11-07"
+        },
+        {
+          "gameId": 2026020238,
+          "gameDate": "2026-11-03"
+        },
+        {
+          "gameId": 2026020233,
+          "gameDate": "2026-11-02"
+        }
+      ],
+      "checkedGames": 8
+    }
+  },
+  "errors": [],
+  "gamesInspected": 8,
+  "nameFieldDiagnostics": {
+    "sampleNames": [
+      {
+        "default": "S. Dries"
+      },
+      {
+        "default": "A. Copp"
+      },
+      {
+        "default": "L. Raymond"
+      },
+      {
+        "default": "M. Rasmussen"
+      },
+      {
+        "default": "M. Brandsegg-Nygård"
+      },
+      {
+        "default": "V. Arvidsson"
+      }
+    ],
+    "missingNameEntries": 0
+  },
+  "note": "Never automatically approve a projected line based only on historical participation."
+}
