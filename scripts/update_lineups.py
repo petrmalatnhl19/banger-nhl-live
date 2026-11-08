@@ -129,7 +129,17 @@ for direct_url in DIRECT_PREVIEWS:
 # Never infer that an article exists: parse_preview must fetch a real NHL.com
 # article with its own publication timestamp and complete projected lines.
 TEAM_SLUGS={"ANA":"anaheim-ducks","BOS":"boston-bruins","BUF":"buffalo-sabres","CAR":"carolina-hurricanes","CBJ":"columbus-blue-jackets","CGY":"calgary-flames","CHI":"chicago-blackhawks","COL":"colorado-avalanche","DAL":"dallas-stars","DET":"detroit-red-wings","EDM":"edmonton-oilers","FLA":"florida-panthers","LAK":"los-angeles-kings","MIN":"minnesota-wild","MTL":"montreal-canadiens","NJD":"new-jersey-devils","NSH":"nashville-predators","NYI":"new-york-islanders","NYR":"new-york-rangers","OTT":"ottawa-senators","PHI":"philadelphia-flyers","PIT":"pittsburgh-penguins","SEA":"seattle-kraken","SJS":"san-jose-sharks","STL":"st-louis-blues","TBL":"tampa-bay-lightning","TOR":"toronto-maple-leafs","UTA":"utah-mammoth","VAN":"vancouver-canucks","VGK":"vegas-golden-knights","WPG":"winnipeg-jets","WSH":"washington-capitals"}
+# Prioritize the stalest published projections from the previous quality report.
+# This report is from an earlier run, so discovery remains deterministic and
+# never treats an unverified candidate as an accepted lineup.
 DISCOVERY_TARGETS={"BOS","NYI","OTT"}
+try:
+ with open("lineup_core_report.json",encoding="utf-8") as priority_file:
+  previous_quality=json.load(priority_file)
+ reverse_slugs={slug:abbr for abbr,slug in {"ANA":"ducks","BOS":"bruins","BUF":"sabres","CAR":"hurricanes","CBJ":"blue jackets","CGY":"flames","CHI":"blackhawks","COL":"avalanche","DAL":"stars","DET":"red wings","EDM":"oilers","FLA":"panthers","LAK":"kings","MIN":"wild","MTL":"canadiens","NJD":"devils","NSH":"predators","NYI":"islanders","NYR":"rangers","OTT":"senators","PHI":"flyers","PIT":"penguins","SEA":"kraken","SJS":"sharks","STL":"blues","TBL":"lightning","TOR":"maple leafs","UTA":"mammoth","VAN":"canucks","VGK":"golden knights","WPG":"jets","WSH":"capitals"}.items()}
+ DISCOVERY_TARGETS.update(reverse_slugs[item["team"]] for item in previous_quality.get("refreshPriorities",[])[:10] if item.get("team") in reverse_slugs)
+except (OSError,ValueError,TypeError,KeyError) as err:
+ print("Previous refresh priorities unavailable:",str(err)[:120])
 schedule_discovery={"checked":0,"articlesFound":0,"errors":[],"fixtures":[],"attempts":[],"note":"Only today and tomorrow are checked; future matchup preview URLs are not assumed published."}
 today=datetime.datetime.now(datetime.timezone.utc).date()
 schedule_games=set()
