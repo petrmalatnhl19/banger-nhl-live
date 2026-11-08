@@ -1761,32 +1761,7 @@ async function analyzeGame(id){
  state('form',!!(fa&&fh));
  const venue=(games,code,homeSide)=>{const list=games.filter(g=>(homeSide?g.homeTeam:g.awayTeam).abbrev===code).slice(0,12);if(!list.length)return null;const wins=list.filter(g=>Number((homeSide?g.homeTeam:g.awayTeam).score)>Number((homeSide?g.awayTeam:g.homeTeam).score)).length;return wins+'/'+list.length+' výher ('+list.length+' zápasů)'+(list.length<3?' · malý vzorek':'')};
  let h2h=unique([...ga,...gh]).filter(g=>[g.awayTeam?.abbrev,g.homeTeam?.abbrev].includes(ac)&&[g.awayTeam?.abbrev,g.homeTeam?.abbrev].includes(hc)).sort((a,b)=>b.gameDate.localeCompare(a.gameDate)).slice(0,10);
- // Four earlier regular seasons; season history is descriptive, not an input to the goal model.
- const firstYear=Number(season.slice(0,4));
- if(Number.isInteger(firstYear)&&firstYear>=2010&&firstYear<=2100){
-  const olderSeasons=Array.from({length:5},(_,i)=>{const y=firstYear-i-1;return String(y)+String(y+1)});
-  const historyResults=await Promise.all(olderSeasons.map(async y=>{
-   const endpoint='https://xxwqeiuyislnoxsmjuul.supabase.co/functions/v1/nhl-feed';
-   const request=async code=>{
-    const url=endpoint+'?kind=clubhistory&team='+encodeURIComponent(code)+'&season='+encodeURIComponent(y);
-    const response=await fetch(url,{headers:{apikey:'sb_publishable_SfeHMIvUkYTuD3jCrWub8w_fPIY0B-G'}});
-    if(!response.ok)throw Error('Historie NHL '+response.status);
-    const data=await response.json();if(!Array.isArray(data.games))throw Error('Historie bez zápasů');
-    return data;
-   };
-   const primary=await safe(()=>request(ac),12000);
-   if(primary.ok)return primary;
-   return safe(()=>request(hc),12000);
-  }));
-  const historical=[];
-  for(let i=0;i<historyResults.length;i++){
-   const res=historyResults[i];
-   if(!res.ok||!Array.isArray(res.data?.games))continue;
-   historical.push(...res.data.games.filter(g=>g.gameDate<day&&['OFF','FINAL'].includes(g.gameState)&&g.homeTeam?.score!=null&&g.awayTeam?.score!=null).map(g=>({...g,bangerSeason:olderSeasons[i]})));
-  }
-  h2h=unique([...h2h,...historical]).filter(g=>[g.awayTeam?.abbrev,g.homeTeam?.abbrev].includes(ac)&&[g.awayTeam?.abbrev,g.homeTeam?.abbrev].includes(hc)).sort((a,b)=>b.gameDate.localeCompare(a.gameDate)).slice(0,25);
- }
- if(!root.isConnected)return;
+
  let extra='<details class="analyst-fold"><summary>📈 Forma posledních zápasů</summary><div class="analyst-fold-body">'+[ [ac,fa],[hc,fh] ].map(([code,f])=>'<p><b>'+clean(code)+':</b> '+(f?f.wins+'/'+f.n+' výher · '+fmt(f.scored)+' vstřelených a '+fmt(f.allowed)+' inkasovaných gólů/zápas · naposledy '+clean(f.last):'Nedostatečná nebo nedostupná data')+'</p>').join('')+'<p class="analysis-small">Forma se zobrazuje samostatně a nemění hlavní model.</p></div></details>';
  const restDays=f=>f?.last?Math.round((Date.parse(day)-Date.parse(f.last))/86400000):null;
  const recentTiles=(games,code)=>games.slice(0,5).map(g=>{
@@ -1821,8 +1796,42 @@ async function analyzeGame(id){
  const loadRow=(code,w)=>'<div class="analyst-load-row"><b>'+clean(code)+'</b>'+(w?'<span>'+w.week+' utkání za posledních 7 dní</span><strong>'+w.daysBefore+' d.</strong><small>'+(w.daysBefore===1?'Zápas druhý den po sobě':w.compact?'3 zápasy v krátkém úseku':'Bez potvrzené výrazné krátkodobé zátěže')+'</small>':'<span>Chybí předchozí dokončené zápasy.</span>')+'</div>';
  extra+='<details class="analyst-fold"><summary>🧭 Zápasová zátěž <small>Back-to-back a 7 dní</small></summary><div class="analyst-fold-body">'+loadRow(ac,wa)+loadRow(hc,wh)+'<p class="analysis-small">Počítáno pouze z dostupných dokončených zápasů před termínem utkání. Údaj vpravo je počet kalendářních dní od posledního zápasu. Nezahrnuje cestování, časové zóny ani skutečnou regeneraci. Při neúplném rozpisu může být zátěž podhodnocena.</p></div></details>';
  extra+='<details class="analyst-fold"><summary>🏟️ Doma a venku</summary><div class="analyst-fold-body"><p>'+clean(ac)+' venku: '+clean(venue(ga,ac,false)||'nedostupné')+'</p><p>'+clean(hc)+' doma: '+clean(venue(gh,hc,true)||'nedostupné')+'</p></div></details>';
- extra+='<details class="analyst-fold"><summary>🤝 Vzájemné zápasy</summary><div class="analyst-fold-body">'+(h2h.length?h2h.map(g=>'<p>'+clean(g.gameDate)+' · '+clean(g.awayTeam.abbrev)+' '+Number(g.awayTeam.score)+' : '+Number(g.homeTeam.score)+' '+clean(g.homeTeam.abbrev)+'</p>').join(''):'<p>V načtené historii nebyl nalezen vzájemný zápas. Neznamená to, že týmy spolu nehrály.</p>')+'</div></details>';
+ const renderH2h=()=>h2h.length?h2h.map(g=>'<p>'+clean(g.gameDate)+' · '+clean(g.awayTeam.abbrev)+' '+Number(g.awayTeam.score)+' : '+Number(g.homeTeam.score)+' '+clean(g.homeTeam.abbrev)+'</p>').join(''):'<p>V načtené historii nebyl nalezen vzájemný zápas. Neznamená to, že týmy spolu nehrály.</p>';
+ extra+='<details class="analyst-fold"><summary>🤝 Vzájemné zápasy</summary><div class="analyst-fold-body" id="analyst-h2h-body">'+renderH2h()+'<p class="analysis-small">Starší sezóny se doplňují na pozadí…</p></div></details>';
  const extraRoot=card.querySelector('#analyst-extras');if(extraRoot)extraRoot.innerHTML=extra;
+ // Historical head-to-head data is optional: never hold up the form and other sections.
+ (async()=>{
+  try {
+ // Four earlier regular seasons; season history is descriptive, not an input to the goal model.
+ const firstYear=Number(season.slice(0,4));
+ if(Number.isInteger(firstYear)&&firstYear>=2010&&firstYear<=2100){
+  const olderSeasons=Array.from({length:5},(_,i)=>{const y=firstYear-i-1;return String(y)+String(y+1)});
+  const historyResults=await Promise.all(olderSeasons.map(async y=>{
+   const endpoint='https://xxwqeiuyislnoxsmjuul.supabase.co/functions/v1/nhl-feed';
+   const request=async code=>{
+    const url=endpoint+'?kind=clubhistory&team='+encodeURIComponent(code)+'&season='+encodeURIComponent(y);
+    const response=await fetch(url,{headers:{apikey:'sb_publishable_SfeHMIvUkYTuD3jCrWub8w_fPIY0B-G'}});
+    if(!response.ok)throw Error('Historie NHL '+response.status);
+    const data=await response.json();if(!Array.isArray(data.games))throw Error('Historie bez zápasů');
+    return data;
+   };
+   const primary=await safe(()=>request(ac),12000);
+   if(primary.ok)return primary;
+   return safe(()=>request(hc),12000);
+  }));
+  const historical=[];
+  for(let i=0;i<historyResults.length;i++){
+   const res=historyResults[i];
+   if(!res.ok||!Array.isArray(res.data?.games))continue;
+   historical.push(...res.data.games.filter(g=>g.gameDate<day&&['OFF','FINAL'].includes(g.gameState)&&g.homeTeam?.score!=null&&g.awayTeam?.score!=null).map(g=>({...g,bangerSeason:olderSeasons[i]})));
+  }
+  h2h=unique([...h2h,...historical]).filter(g=>[g.awayTeam?.abbrev,g.homeTeam?.abbrev].includes(ac)&&[g.awayTeam?.abbrev,g.homeTeam?.abbrev].includes(hc)).sort((a,b)=>b.gameDate.localeCompare(a.gameDate)).slice(0,25);
+ }
+
+  } catch(e) { /* Keep already displayed current-season matchups. */ }
+  const h2hBody=card.querySelector('#analyst-h2h-body');
+  if(root.isConnected&&h2hBody)h2hBody.innerHTML=renderH2h();
+ })();
  // Read-only 5v5 xG context: never alters the archived pregame forecast.
  const xgSlot=document.createElement('section');
  xgSlot.className='analyst-fold';
