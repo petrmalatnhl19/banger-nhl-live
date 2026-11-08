@@ -25,6 +25,8 @@ class NameNormalizationTests(unittest.TestCase):
   self.assertEqual(normalize("Mikey Eyssimont"),normalize("Michael Eyssimont"))
   self.assertEqual(normalize("William Borgen"),normalize("Will Borgen"))
   self.assertNotEqual(normalize("William Borgen"),normalize("William Nylander"))
+  self.assertEqual(normalize("Jacob Slavin"),normalize("Jaccob Slavin"))
+  self.assertEqual(normalize("Ivan Stenberg"),normalize("Ivar Stenberg"))
  def test_punctuation(self):
   self.assertEqual(normalize("O’Reilly"),normalize("O'Reilly"))
 
