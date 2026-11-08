@@ -5,18 +5,29 @@ let lastLoad=0;
 const fmt=(n,d=1)=>n==null?'—':Number(n).toLocaleString('cs-CZ',{minimumFractionDigits:d,maximumFractionDigits:d});
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const styles=document.createElement('style');styles.textContent=`
-#corePerformancePanel{margin:16px 0;padding:18px;border:1px solid #48d9ff66;border-radius:18px;background:linear-gradient(135deg,#123653,#081a30);color:#e5f6ff;box-shadow:0 10px 32px #0004}
-#corePerformancePanel h3{font-size:20px;margin:0 0 8px;color:#b7f5ff}
-#corePerformancePanel p{margin:7px 0 12px;color:#a8c9dc;font-size:13px}
-#corePerformancePanel .core-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
-#corePerformancePanel button{border:1px solid #4ac9e5;border-radius:11px;padding:9px 13px;background:#153d5c;color:#e8fbff;cursor:pointer;font-weight:700}
+#corePerformancePanel{margin:12px 0;padding:14px;border:1px solid #48d9ff66;border-radius:18px;background:linear-gradient(135deg,#123653,#081a30);color:#e5f6ff;box-shadow:0 10px 32px #0004}
+#corePerformancePanel h3{font-size:19px;margin:0 0 5px;color:#b7f5ff}
+#corePerformancePanel p{margin:5px 0 9px;color:#a8c9dc;font-size:13px}
+#corePerformancePanel .core-tabs{display:flex;gap:7px;flex-wrap:wrap;margin:9px 0}
+#corePerformancePanel button{border:1px solid #4ac9e5;border-radius:11px;padding:8px 10px;background:#153d5c;color:#e8fbff;cursor:pointer;font-weight:700}
 #corePerformancePanel button[aria-pressed=true]{background:#176c85}
-#corePerformancePanel .core-scroll{overflow-x:auto}
-#corePerformancePanel table{width:100%;border-collapse:collapse;font-size:13px;min-width:440px}
-#corePerformancePanel th,#corePerformancePanel td{padding:10px 8px;text-align:left;border-bottom:1px solid #7cc8e533}
-#corePerformancePanel th{color:#9adfeb}#corePerformancePanel td:first-child{font-weight:750}
+#corePerformancePanel .core-scroll{overflow-x:visible;width:100%}
+#corePerformancePanel table{width:100%;border-collapse:collapse;font-size:clamp(11px,2.8vw,13px);table-layout:fixed;min-width:0}
+#corePerformancePanel th,#corePerformancePanel td{padding:9px 3px;text-align:left;border-bottom:1px solid #7cc8e533}
+#corePerformancePanel th{color:#9adfeb}#corePerformancePanel th:nth-child(1){width:29%}#corePerformancePanel th:nth-child(2){width:19%}#corePerformancePanel th:nth-child(3){width:24%}#corePerformancePanel th:nth-child(4){width:28%}#corePerformancePanel th:nth-child(n+2),#corePerformancePanel td:nth-child(n+2){text-align:right;white-space:nowrap}#corePerformancePanel .core-best{color:#8cf1c3;font-weight:800}#corePerformancePanel .core-note{font-size:11px;color:#a9c9dc}#corePerformancePanel td:first-child{font-weight:750}
 `;document.head.appendChild(styles);
-function table(rows){if(!rows.length)return '<p>Zatím nejsou k dispozici vyhodnocené zápasy.</p>';return '<div class="core-scroll"><table><thead><tr><th>Model</th><th>Zápasy</th><th>Vítěz</th><th>Chyba gólů</th></tr></thead><tbody>'+rows.map(r=>'<tr><td>'+esc(r.model)+'</td><td>'+esc(r.games)+'</td><td>'+fmt(r.winner_accuracy_pct)+' %</td><td>'+fmt(r.goal_mae,3)+'</td></tr>').join('')+'</tbody></table></div>'}
+function table(rows){
+ if(!rows.length)return '<p>Zatím nejsou k dispozici vyhodnocené zápasy.</p>';
+ const maxAccuracy=Math.max(...rows.map(r=>Number(r.winner_accuracy_pct)).filter(Number.isFinite));
+ const minError=Math.min(...rows.map(r=>Number(r.goal_mae)).filter(Number.isFinite));
+ const html=rows.map(r=>{
+  const accuracy=Number(r.winner_accuracy_pct),error=Number(r.goal_mae);
+  const winnerBest=Number.isFinite(accuracy)&&accuracy===maxAccuracy;
+  const errorBest=Number.isFinite(error)&&error===minError;
+  return '<tr><td>'+esc(r.model)+'</td><td>'+esc(r.games)+'</td><td class="'+(winnerBest?'core-best':'')+'">'+fmt(r.winner_accuracy_pct)+' %</td><td class="'+(errorBest?'core-best':'')+'">'+fmt(r.goal_mae,3)+'</td></tr>';
+ }).join('');
+ return '<div class="core-scroll"><table><thead><tr><th>Model</th><th>Záp.</th><th>Vítěz</th><th>Chyba</th></tr></thead><tbody>'+html+'</tbody></table></div><p class="core-note">Zeleně = nejlepší hodnota v zobrazeném přehledu. Chyba = průměrná odchylka gólů na tým. Malý počet zápasů znamená nejistý výsledek.</p>';
+}
 async function load(panel){
  if(panel._loading)return;
  panel._loading=true;
