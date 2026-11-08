@@ -1,0 +1,2723 @@
+{
+  "generatedAt": "2026-11-08T13:11:52.073160+00:00",
+  "source": "official_nhl_final_boxscore",
+  "historicalPredictionMutation": false,
+  "games": [
+    {
+      "gameId": 2026020214,
+      "gameDate": "2026-10-30",
+      "away": {
+        "team": "NJD",
+        "participants": [
+          {
+            "playerId": 8474596,
+            "name": "J. Allen",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8476945,
+            "name": "C. Hellebuyck",
+            "starter": true,
+            "toi": "60:00"
+          }
+        ],
+        "startingGoalieId": 8476945,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "VGK",
+        "participants": [
+          {
+            "playerId": 8478499,
+            "name": "A. Hill",
+            "starter": true,
+            "toi": "58:12"
+          },
+          {
+            "playerId": 8479394,
+            "name": "C. Hart",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8478499,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020214/boxscore"
+    },
+    {
+      "gameId": 2026020215,
+      "gameDate": "2026-10-30",
+      "away": {
+        "team": "WPG",
+        "participants": [
+          {
+            "playerId": 8482076,
+            "name": "N. Daws",
+            "starter": true,
+            "toi": "58:06"
+          },
+          {
+            "playerId": 8479973,
+            "name": "S. Skinner",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8482076,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "FLA",
+        "participants": [
+          {
+            "playerId": 8484900,
+            "name": "C. Black",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8481033,
+            "name": "A. Schmid",
+            "starter": true,
+            "toi": "60:00"
+          }
+        ],
+        "startingGoalieId": 8481033,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020215/boxscore"
+    },
+    {
+      "gameId": 2026020216,
+      "gameDate": "2026-10-30",
+      "away": {
+        "team": "SEA",
+        "participants": [
+          {
+            "playerId": 8475831,
+            "name": "P. Grubauer",
+            "starter": true,
+            "toi": "30:40"
+          },
+          {
+            "playerId": 8478916,
+            "name": "J. Daccord",
+            "starter": false,
+            "toi": "29:20"
+          }
+        ],
+        "startingGoalieId": 8475831,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "CGY",
+        "participants": [
+          {
+            "playerId": 8481692,
+            "name": "D. Wolf",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8482949,
+            "name": "A. Sergeev",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8481692,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020216/boxscore"
+    },
+    {
+      "gameId": 2026020217,
+      "gameDate": "2026-10-31",
+      "away": {
+        "team": "CHI",
+        "participants": [
+          {
+            "playerId": 8481519,
+            "name": "S. Knight",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8482821,
+            "name": "A. Soderblom",
+            "starter": true,
+            "toi": "62:32"
+          }
+        ],
+        "startingGoalieId": 8482821,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "BOS",
+        "participants": [
+          {
+            "playerId": 8480280,
+            "name": "J. Swayman",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8480022,
+            "name": "M. DiPietro",
+            "starter": true,
+            "toi": "61:28"
+          }
+        ],
+        "startingGoalieId": 8480022,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020217/boxscore"
+    },
+    {
+      "gameId": 2026020218,
+      "gameDate": "2026-10-31",
+      "away": {
+        "team": "STL",
+        "participants": [
+          {
+            "playerId": 8480981,
+            "name": "J. Hofer",
+            "starter": true,
+            "toi": "59:28"
+          },
+          {
+            "playerId": 8476412,
+            "name": "J. Binnington",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8480981,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "DET",
+        "participants": [
+          {
+            "playerId": 8476434,
+            "name": "J. Gibson",
+            "starter": true,
+            "toi": "57:00"
+          },
+          {
+            "playerId": 8480193,
+            "name": "D. Tarasov",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8476434,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020218/boxscore"
+    },
+    {
+      "gameId": 2026020219,
+      "gameDate": "2026-10-31",
+      "away": {
+        "team": "TBL",
+        "participants": [
+          {
+            "playerId": 8483710,
+            "name": "D. Hildeby",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8476883,
+            "name": "A. Vasilevskiy",
+            "starter": true,
+            "toi": "65:00"
+          }
+        ],
+        "startingGoalieId": 8476883,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "NSH",
+        "participants": [
+          {
+            "playerId": 8481020,
+            "name": "J. Annunen",
+            "starter": true,
+            "toi": "64:52"
+          },
+          {
+            "playerId": 8477424,
+            "name": "J. Saros",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8481020,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020219/boxscore"
+    },
+    {
+      "gameId": 2026020220,
+      "gameDate": "2026-10-31",
+      "away": {
+        "team": "EDM",
+        "participants": [
+          {
+            "playerId": 8477465,
+            "name": "T. Jarry",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8477035,
+            "name": "M. Tomkins",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8477465,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "NYI",
+        "participants": [
+          {
+            "playerId": 8478009,
+            "name": "I. Sorokin",
+            "starter": true,
+            "toi": "59:26"
+          },
+          {
+            "playerId": 8473575,
+            "name": "S. Varlamov",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8478009,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020220/boxscore"
+    },
+    {
+      "gameId": 2026020221,
+      "gameDate": "2026-10-31",
+      "away": {
+        "team": "BUF",
+        "participants": [
+          {
+            "playerId": 8480045,
+            "name": "U. Luukkonen",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8481551,
+            "name": "C. Ellis",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8480045,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "LAK",
+        "participants": [
+          {
+            "playerId": 8476341,
+            "name": "A. Forsberg",
+            "starter": true,
+            "toi": "57:57"
+          },
+          {
+            "playerId": 8475311,
+            "name": "D. Kuemper",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8476341,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020221/boxscore"
+    },
+    {
+      "gameId": 2026020222,
+      "gameDate": "2026-10-31",
+      "away": {
+        "team": "OTT",
+        "participants": [
+          {
+            "playerId": 8481035,
+            "name": "S. Ersson",
+            "starter": true,
+            "toi": "59:35"
+          },
+          {
+            "playerId": 8477992,
+            "name": "J. Johansson",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8481035,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "SJS",
+        "participants": [
+          {
+            "playerId": 8482137,
+            "name": "Y. Askarov",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8477968,
+            "name": "A. Nedeljkovic",
+            "starter": true,
+            "toi": "57:31"
+          }
+        ],
+        "startingGoalieId": 8477968,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020222/boxscore"
+    },
+    {
+      "gameId": 2026020223,
+      "gameDate": "2026-10-31",
+      "away": {
+        "team": "PIT",
+        "participants": [
+          {
+            "playerId": 8483703,
+            "name": "S. Murashov",
+            "starter": true,
+            "toi": "57:40"
+          },
+          {
+            "playerId": 8481668,
+            "name": "A. Silovs",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8483703,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "MTL",
+        "participants": [
+          {
+            "playerId": 8484170,
+            "name": "J. Fowler",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8482487,
+            "name": "J. Dobes",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8484170,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020223/boxscore"
+    },
+    {
+      "gameId": 2026020224,
+      "gameDate": "2026-10-31",
+      "away": {
+        "team": "TOR",
+        "participants": [
+          {
+            "playerId": 8476932,
+            "name": "A. Stolarz",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8475683,
+            "name": "S. Bobrovsky",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8476932,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "VAN",
+        "participants": [
+          {
+            "playerId": 8482447,
+            "name": "L. Meriläinen",
+            "starter": true,
+            "toi": "58:13"
+          },
+          {
+            "playerId": 8480947,
+            "name": "K. Lankinen",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8482447,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020224/boxscore"
+    },
+    {
+      "gameId": 2026020225,
+      "gameDate": "2026-10-31",
+      "away": {
+        "team": "CBJ",
+        "participants": [
+          {
+            "playerId": 8475660,
+            "name": "C. Talbot",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8482982,
+            "name": "J. Greaves",
+            "starter": true,
+            "toi": "58:26"
+          }
+        ],
+        "startingGoalieId": 8482982,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "DAL",
+        "participants": [
+          {
+            "playerId": 8479193,
+            "name": "C. DeSmith",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8479979,
+            "name": "J. Oettinger",
+            "starter": true,
+            "toi": "60:00"
+          }
+        ],
+        "startingGoalieId": 8479979,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020225/boxscore"
+    },
+    {
+      "gameId": 2026020226,
+      "gameDate": "2026-10-31",
+      "away": {
+        "team": "CGY",
+        "participants": [
+          {
+            "playerId": 8481692,
+            "name": "D. Wolf",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8482949,
+            "name": "A. Sergeev",
+            "starter": true,
+            "toi": "60:00"
+          }
+        ],
+        "startingGoalieId": 8482949,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "COL",
+        "participants": [
+          {
+            "playerId": 8478406,
+            "name": "M. Blackwood",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8475809,
+            "name": "S. Wedgewood",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8478406,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020226/boxscore"
+    },
+    {
+      "gameId": 2026020227,
+      "gameDate": "2026-11-01",
+      "away": {
+        "team": "WPG",
+        "participants": [
+          {
+            "playerId": 8483532,
+            "name": "C. Stevenson",
+            "starter": false,
+            "toi": "30:51"
+          },
+          {
+            "playerId": 8479973,
+            "name": "S. Skinner",
+            "starter": true,
+            "toi": "29:09"
+          }
+        ],
+        "startingGoalieId": 8479973,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "CAR",
+        "participants": [
+          {
+            "playerId": 8483548,
+            "name": "B. Bussi",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8481611,
+            "name": "P. Kochetkov",
+            "starter": true,
+            "toi": "59:58"
+          }
+        ],
+        "startingGoalieId": 8481611,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020227/boxscore"
+    },
+    {
+      "gameId": 2026020228,
+      "gameDate": "2026-11-01",
+      "away": {
+        "team": "MIN",
+        "participants": [
+          {
+            "playerId": 8482661,
+            "name": "J. Wallstedt",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8475717,
+            "name": "C. Pickard",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8482661,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "WSH",
+        "participants": [
+          {
+            "playerId": 8480313,
+            "name": "L. Thompson",
+            "starter": true,
+            "toi": "58:52"
+          },
+          {
+            "playerId": 8479292,
+            "name": "C. Lindgren",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8480313,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020228/boxscore"
+    },
+    {
+      "gameId": 2026020229,
+      "gameDate": "2026-11-01",
+      "away": {
+        "team": "UTA",
+        "participants": [
+          {
+            "playerId": 8482657,
+            "name": "S. Cossa",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8478872,
+            "name": "K. Vejmelka",
+            "starter": true,
+            "toi": "58:25"
+          }
+        ],
+        "startingGoalieId": 8478872,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "PHI",
+        "participants": [
+          {
+            "playerId": 8479361,
+            "name": "J. Woll",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8478435,
+            "name": "D. Vladar",
+            "starter": true,
+            "toi": "60:00"
+          }
+        ],
+        "startingGoalieId": 8478435,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020229/boxscore"
+    },
+    {
+      "gameId": 2026020230,
+      "gameDate": "2026-11-01",
+      "away": {
+        "team": "EDM",
+        "participants": [
+          {
+            "playerId": 8477465,
+            "name": "T. Jarry",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8477035,
+            "name": "M. Tomkins",
+            "starter": true,
+            "toi": "59:13"
+          }
+        ],
+        "startingGoalieId": 8477035,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "NYR",
+        "participants": [
+          {
+            "playerId": 8482193,
+            "name": "D. Garand",
+            "starter": true,
+            "toi": "57:50"
+          },
+          {
+            "playerId": 8473503,
+            "name": "J. Reimer",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8482193,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020230/boxscore"
+    },
+    {
+      "gameId": 2026020231,
+      "gameDate": "2026-11-01",
+      "away": {
+        "team": "OTT",
+        "participants": [
+          {
+            "playerId": 8481035,
+            "name": "S. Ersson",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8477992,
+            "name": "J. Johansson",
+            "starter": true,
+            "toi": "60:00"
+          }
+        ],
+        "startingGoalieId": 8477992,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "ANA",
+        "participants": [
+          {
+            "playerId": 8480843,
+            "name": "L. Dostal",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8476316,
+            "name": "L. Brossoit",
+            "starter": true,
+            "toi": "60:00"
+          }
+        ],
+        "startingGoalieId": 8476316,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020231/boxscore"
+    },
+    {
+      "gameId": 2026020232,
+      "gameDate": "2026-11-02",
+      "away": {
+        "team": "VGK",
+        "participants": [
+          {
+            "playerId": 8478499,
+            "name": "A. Hill",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8479394,
+            "name": "C. Hart",
+            "starter": true,
+            "toi": "65:00"
+          }
+        ],
+        "startingGoalieId": 8479394,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "BOS",
+        "participants": [
+          {
+            "playerId": 8480280,
+            "name": "J. Swayman",
+            "starter": true,
+            "toi": "65:00"
+          },
+          {
+            "playerId": 8480022,
+            "name": "M. DiPietro",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8480280,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020232/boxscore"
+    },
+    {
+      "gameId": 2026020233,
+      "gameDate": "2026-11-02",
+      "away": {
+        "team": "DET",
+        "participants": [
+          {
+            "playerId": 8476434,
+            "name": "J. Gibson",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8480193,
+            "name": "D. Tarasov",
+            "starter": true,
+            "toi": "60:00"
+          }
+        ],
+        "startingGoalieId": 8480193,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "FLA",
+        "participants": [
+          {
+            "playerId": 8474593,
+            "name": "J. Markstrom",
+            "starter": true,
+            "toi": "57:33"
+          },
+          {
+            "playerId": 8481033,
+            "name": "A. Schmid",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8474593,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020233/boxscore"
+    },
+    {
+      "gameId": 2026020234,
+      "gameDate": "2026-11-02",
+      "away": {
+        "team": "COL",
+        "participants": [
+          {
+            "playerId": 8478406,
+            "name": "M. Blackwood",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8475809,
+            "name": "S. Wedgewood",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8478406,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "CHI",
+        "participants": [
+          {
+            "playerId": 8481519,
+            "name": "S. Knight",
+            "starter": true,
+            "toi": "58:54"
+          },
+          {
+            "playerId": 8482821,
+            "name": "A. Soderblom",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8481519,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020234/boxscore"
+    },
+    {
+      "gameId": 2026020235,
+      "gameDate": "2026-11-02",
+      "away": {
+        "team": "CGY",
+        "participants": [
+          {
+            "playerId": 8481692,
+            "name": "D. Wolf",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8482949,
+            "name": "A. Sergeev",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8481692,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "SJS",
+        "participants": [
+          {
+            "playerId": 8482137,
+            "name": "Y. Askarov",
+            "starter": true,
+            "toi": "58:13"
+          },
+          {
+            "playerId": 8477968,
+            "name": "A. Nedeljkovic",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8482137,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020235/boxscore"
+    },
+    {
+      "gameId": 2026020236,
+      "gameDate": "2026-11-03",
+      "away": {
+        "team": "UTA",
+        "participants": [
+          {
+            "playerId": 8482657,
+            "name": "S. Cossa",
+            "starter": true,
+            "toi": "59:58"
+          },
+          {
+            "playerId": 8478872,
+            "name": "K. Vejmelka",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8482657,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "TOR",
+        "participants": [
+          {
+            "playerId": 8476932,
+            "name": "A. Stolarz",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8475683,
+            "name": "S. Bobrovsky",
+            "starter": true,
+            "toi": "58:30"
+          }
+        ],
+        "startingGoalieId": 8475683,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020236/boxscore"
+    },
+    {
+      "gameId": 2026020237,
+      "gameDate": "2026-11-03",
+      "away": {
+        "team": "WPG",
+        "participants": [
+          {
+            "playerId": 8482076,
+            "name": "N. Daws",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8479973,
+            "name": "S. Skinner",
+            "starter": true,
+            "toi": "62:18"
+          }
+        ],
+        "startingGoalieId": 8479973,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "MTL",
+        "participants": [
+          {
+            "playerId": 8484170,
+            "name": "J. Fowler",
+            "starter": true,
+            "toi": "63:30"
+          },
+          {
+            "playerId": 8482487,
+            "name": "J. Dobes",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8484170,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020237/boxscore"
+    },
+    {
+      "gameId": 2026020238,
+      "gameDate": "2026-11-03",
+      "away": {
+        "team": "DET",
+        "participants": [
+          {
+            "playerId": 8476434,
+            "name": "J. Gibson",
+            "starter": true,
+            "toi": "20:00"
+          },
+          {
+            "playerId": 8480193,
+            "name": "D. Tarasov",
+            "starter": false,
+            "toi": "36:59"
+          }
+        ],
+        "startingGoalieId": 8476434,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "TBL",
+        "participants": [
+          {
+            "playerId": 8483710,
+            "name": "D. Hildeby",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8476883,
+            "name": "A. Vasilevskiy",
+            "starter": true,
+            "toi": "60:00"
+          }
+        ],
+        "startingGoalieId": 8476883,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020238/boxscore"
+    },
+    {
+      "gameId": 2026020239,
+      "gameDate": "2026-11-03",
+      "away": {
+        "team": "EDM",
+        "participants": [
+          {
+            "playerId": 8477465,
+            "name": "T. Jarry",
+            "starter": true,
+            "toi": "64:47"
+          },
+          {
+            "playerId": 8477035,
+            "name": "M. Tomkins",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8477465,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "NJD",
+        "participants": [
+          {
+            "playerId": 8474596,
+            "name": "J. Allen",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8476945,
+            "name": "C. Hellebuyck",
+            "starter": true,
+            "toi": "65:00"
+          }
+        ],
+        "startingGoalieId": 8476945,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020239/boxscore"
+    },
+    {
+      "gameId": 2026020240,
+      "gameDate": "2026-11-03",
+      "away": {
+        "team": "STL",
+        "participants": [
+          {
+            "playerId": 8480981,
+            "name": "J. Hofer",
+            "starter": true,
+            "toi": "58:33"
+          },
+          {
+            "playerId": 8476412,
+            "name": "J. Binnington",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8480981,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "NYR",
+        "participants": [
+          {
+            "playerId": 8482193,
+            "name": "D. Garand",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8473503,
+            "name": "J. Reimer",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8482193,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020240/boxscore"
+    },
+    {
+      "gameId": 2026020241,
+      "gameDate": "2026-11-03",
+      "away": {
+        "team": "MIN",
+        "participants": [
+          {
+            "playerId": 8482661,
+            "name": "J. Wallstedt",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8475717,
+            "name": "C. Pickard",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8482661,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "PHI",
+        "participants": [
+          {
+            "playerId": 8479361,
+            "name": "J. Woll",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8478435,
+            "name": "D. Vladar",
+            "starter": true,
+            "toi": "58:33"
+          }
+        ],
+        "startingGoalieId": 8478435,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020241/boxscore"
+    },
+    {
+      "gameId": 2026020242,
+      "gameDate": "2026-11-03",
+      "away": {
+        "team": "VGK",
+        "participants": [
+          {
+            "playerId": 8478499,
+            "name": "A. Hill",
+            "starter": true,
+            "toi": "59:58"
+          },
+          {
+            "playerId": 8479394,
+            "name": "C. Hart",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8478499,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "PIT",
+        "participants": [
+          {
+            "playerId": 8483703,
+            "name": "S. Murashov",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8481668,
+            "name": "A. Silovs",
+            "starter": true,
+            "toi": "59:36"
+          }
+        ],
+        "startingGoalieId": 8481668,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020242/boxscore"
+    },
+    {
+      "gameId": 2026020243,
+      "gameDate": "2026-11-03",
+      "away": {
+        "team": "DAL",
+        "participants": [
+          {
+            "playerId": 8479193,
+            "name": "C. DeSmith",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8479979,
+            "name": "J. Oettinger",
+            "starter": true,
+            "toi": "60:00"
+          }
+        ],
+        "startingGoalieId": 8479979,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "WSH",
+        "participants": [
+          {
+            "playerId": 8480313,
+            "name": "L. Thompson",
+            "starter": true,
+            "toi": "25:17"
+          },
+          {
+            "playerId": 8479292,
+            "name": "C. Lindgren",
+            "starter": false,
+            "toi": "31:49"
+          }
+        ],
+        "startingGoalieId": 8480313,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020243/boxscore"
+    },
+    {
+      "gameId": 2026020244,
+      "gameDate": "2026-11-03",
+      "away": {
+        "team": "COL",
+        "participants": [
+          {
+            "playerId": 8478406,
+            "name": "M. Blackwood",
+            "starter": false,
+            "toi": "32:19"
+          },
+          {
+            "playerId": 8475809,
+            "name": "S. Wedgewood",
+            "starter": true,
+            "toi": "27:20"
+          }
+        ],
+        "startingGoalieId": 8475809,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "CBJ",
+        "participants": [
+          {
+            "playerId": 8475660,
+            "name": "C. Talbot",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8482982,
+            "name": "J. Greaves",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8475660,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020244/boxscore"
+    },
+    {
+      "gameId": 2026020245,
+      "gameDate": "2026-11-03",
+      "away": {
+        "team": "CAR",
+        "participants": [
+          {
+            "playerId": 8483548,
+            "name": "B. Bussi",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8481611,
+            "name": "P. Kochetkov",
+            "starter": true,
+            "toi": "57:12"
+          }
+        ],
+        "startingGoalieId": 8481611,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "NSH",
+        "participants": [
+          {
+            "playerId": 8481020,
+            "name": "J. Annunen",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8477424,
+            "name": "J. Saros",
+            "starter": true,
+            "toi": "60:00"
+          }
+        ],
+        "startingGoalieId": 8477424,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020245/boxscore"
+    },
+    {
+      "gameId": 2026020246,
+      "gameDate": "2026-11-03",
+      "away": {
+        "team": "ANA",
+        "participants": [
+          {
+            "playerId": 8480843,
+            "name": "L. Dostal",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8476316,
+            "name": "L. Brossoit",
+            "starter": true,
+            "toi": "59:31"
+          }
+        ],
+        "startingGoalieId": 8476316,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "VAN",
+        "participants": [
+          {
+            "playerId": 8482447,
+            "name": "L. Meriläinen",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8480947,
+            "name": "K. Lankinen",
+            "starter": true,
+            "toi": "58:17"
+          }
+        ],
+        "startingGoalieId": 8480947,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020246/boxscore"
+    },
+    {
+      "gameId": 2026020247,
+      "gameDate": "2026-11-04",
+      "away": {
+        "team": "OTT",
+        "participants": [
+          {
+            "playerId": 8481035,
+            "name": "S. Ersson",
+            "starter": true,
+            "toi": "59:12"
+          },
+          {
+            "playerId": 8477992,
+            "name": "J. Johansson",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8481035,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "BUF",
+        "participants": [
+          {
+            "playerId": 8480045,
+            "name": "U. Luukkonen",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8481551,
+            "name": "C. Ellis",
+            "starter": true,
+            "toi": "58:25"
+          }
+        ],
+        "startingGoalieId": 8481551,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020247/boxscore"
+    },
+    {
+      "gameId": 2026020248,
+      "gameDate": "2026-11-04",
+      "away": {
+        "team": "CHI",
+        "participants": [
+          {
+            "playerId": 8481519,
+            "name": "S. Knight",
+            "starter": true,
+            "toi": "59:19"
+          },
+          {
+            "playerId": 8482821,
+            "name": "A. Soderblom",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8481519,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "FLA",
+        "participants": [
+          {
+            "playerId": 8474593,
+            "name": "J. Markstrom",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8481033,
+            "name": "A. Schmid",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8474593,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020248/boxscore"
+    },
+    {
+      "gameId": 2026020249,
+      "gameDate": "2026-11-04",
+      "away": {
+        "team": "SJS",
+        "participants": [
+          {
+            "playerId": 8482137,
+            "name": "Y. Askarov",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8477968,
+            "name": "A. Nedeljkovic",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8482137,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "LAK",
+        "participants": [
+          {
+            "playerId": 8476341,
+            "name": "A. Forsberg",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8475311,
+            "name": "D. Kuemper",
+            "starter": true,
+            "toi": "59:55"
+          }
+        ],
+        "startingGoalieId": 8475311,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020249/boxscore"
+    },
+    {
+      "gameId": 2026020250,
+      "gameDate": "2026-11-04",
+      "away": {
+        "team": "CGY",
+        "participants": [
+          {
+            "playerId": 8481692,
+            "name": "D. Wolf",
+            "starter": true,
+            "toi": "60:55"
+          },
+          {
+            "playerId": 8482949,
+            "name": "A. Sergeev",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8481692,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "SEA",
+        "participants": [
+          {
+            "playerId": 8475831,
+            "name": "P. Grubauer",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8478916,
+            "name": "J. Daccord",
+            "starter": true,
+            "toi": "60:55"
+          }
+        ],
+        "startingGoalieId": 8478916,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020250/boxscore"
+    },
+    {
+      "gameId": 2026020251,
+      "gameDate": "2026-11-05",
+      "away": {
+        "team": "UTA",
+        "participants": [
+          {
+            "playerId": 8482657,
+            "name": "S. Cossa",
+            "starter": true,
+            "toi": "60:30"
+          },
+          {
+            "playerId": 8478872,
+            "name": "K. Vejmelka",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8482657,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "MTL",
+        "participants": [
+          {
+            "playerId": 8484170,
+            "name": "J. Fowler",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8482487,
+            "name": "J. Dobes",
+            "starter": true,
+            "toi": "60:30"
+          }
+        ],
+        "startingGoalieId": 8482487,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020251/boxscore"
+    },
+    {
+      "gameId": 2026020252,
+      "gameDate": "2026-11-05",
+      "away": {
+        "team": "VGK",
+        "participants": [
+          {
+            "playerId": 8478499,
+            "name": "A. Hill",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8479394,
+            "name": "C. Hart",
+            "starter": true,
+            "toi": "59:11"
+          }
+        ],
+        "startingGoalieId": 8479394,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "DET",
+        "participants": [
+          {
+            "playerId": 8485545,
+            "name": "M. Postava",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8480193,
+            "name": "D. Tarasov",
+            "starter": true,
+            "toi": "57:35"
+          }
+        ],
+        "startingGoalieId": 8480193,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020252/boxscore"
+    },
+    {
+      "gameId": 2026020253,
+      "gameDate": "2026-11-05",
+      "away": {
+        "team": "CHI",
+        "participants": [
+          {
+            "playerId": 8481519,
+            "name": "S. Knight",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8482821,
+            "name": "A. Soderblom",
+            "starter": true,
+            "toi": "60:00"
+          }
+        ],
+        "startingGoalieId": 8482821,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "TBL",
+        "participants": [
+          {
+            "playerId": 8483710,
+            "name": "D. Hildeby",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8476883,
+            "name": "A. Vasilevskiy",
+            "starter": true,
+            "toi": "59:54"
+          }
+        ],
+        "startingGoalieId": 8476883,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020253/boxscore"
+    },
+    {
+      "gameId": 2026020254,
+      "gameDate": "2026-11-05",
+      "away": {
+        "team": "STL",
+        "participants": [
+          {
+            "playerId": 8480981,
+            "name": "J. Hofer",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8476412,
+            "name": "J. Binnington",
+            "starter": true,
+            "toi": "61:26"
+          }
+        ],
+        "startingGoalieId": 8476412,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "NJD",
+        "participants": [
+          {
+            "playerId": 8474596,
+            "name": "J. Allen",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8476945,
+            "name": "C. Hellebuyck",
+            "starter": true,
+            "toi": "61:00"
+          }
+        ],
+        "startingGoalieId": 8476945,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020254/boxscore"
+    },
+    {
+      "gameId": 2026020255,
+      "gameDate": "2026-11-05",
+      "away": {
+        "team": "CAR",
+        "participants": [
+          {
+            "playerId": 8483548,
+            "name": "B. Bussi",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8481611,
+            "name": "P. Kochetkov",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8483548,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "NYI",
+        "participants": [
+          {
+            "playerId": 8478009,
+            "name": "I. Sorokin",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8473575,
+            "name": "S. Varlamov",
+            "starter": true,
+            "toi": "58:29"
+          }
+        ],
+        "startingGoalieId": 8473575,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020255/boxscore"
+    },
+    {
+      "gameId": 2026020256,
+      "gameDate": "2026-11-05",
+      "away": {
+        "team": "PHI",
+        "participants": [
+          {
+            "playerId": 8479361,
+            "name": "J. Woll",
+            "starter": true,
+            "toi": "58:43"
+          },
+          {
+            "playerId": 8478435,
+            "name": "D. Vladar",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8479361,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "NYR",
+        "participants": [
+          {
+            "playerId": 8482193,
+            "name": "D. Garand",
+            "starter": true,
+            "toi": "59:45"
+          },
+          {
+            "playerId": 8473503,
+            "name": "J. Reimer",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8482193,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020256/boxscore"
+    },
+    {
+      "gameId": 2026020257,
+      "gameDate": "2026-11-05",
+      "away": {
+        "team": "BOS",
+        "participants": [
+          {
+            "playerId": 8480280,
+            "name": "J. Swayman",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8480022,
+            "name": "M. DiPietro",
+            "starter": true,
+            "toi": "60:00"
+          }
+        ],
+        "startingGoalieId": 8480022,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "PIT",
+        "participants": [
+          {
+            "playerId": 8483703,
+            "name": "S. Murashov",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8481668,
+            "name": "A. Silovs",
+            "starter": true,
+            "toi": "60:00"
+          }
+        ],
+        "startingGoalieId": 8481668,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020257/boxscore"
+    },
+    {
+      "gameId": 2026020258,
+      "gameDate": "2026-11-05",
+      "away": {
+        "team": "DAL",
+        "participants": [
+          {
+            "playerId": 8479193,
+            "name": "C. DeSmith",
+            "starter": true,
+            "toi": "65:00"
+          },
+          {
+            "playerId": 8479979,
+            "name": "J. Oettinger",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8479193,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "CBJ",
+        "participants": [
+          {
+            "playerId": 8475660,
+            "name": "C. Talbot",
+            "starter": true,
+            "toi": "65:00"
+          },
+          {
+            "playerId": 8482982,
+            "name": "J. Greaves",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8475660,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020258/boxscore"
+    },
+    {
+      "gameId": 2026020259,
+      "gameDate": "2026-11-05",
+      "away": {
+        "team": "VAN",
+        "participants": [
+          {
+            "playerId": 8482447,
+            "name": "L. Meriläinen",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8480947,
+            "name": "K. Lankinen",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8482447,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "WPG",
+        "participants": [
+          {
+            "playerId": 8482076,
+            "name": "N. Daws",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8479973,
+            "name": "S. Skinner",
+            "starter": true,
+            "toi": "60:00"
+          }
+        ],
+        "startingGoalieId": 8479973,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020259/boxscore"
+    },
+    {
+      "gameId": 2026020260,
+      "gameDate": "2026-11-05",
+      "away": {
+        "team": "ANA",
+        "participants": [
+          {
+            "playerId": 8480843,
+            "name": "L. Dostal",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8476316,
+            "name": "L. Brossoit",
+            "starter": true,
+            "toi": "60:00"
+          }
+        ],
+        "startingGoalieId": 8476316,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "EDM",
+        "participants": [
+          {
+            "playerId": 8486540,
+            "name": "B. Epp",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8477035,
+            "name": "M. Tomkins",
+            "starter": true,
+            "toi": "57:14"
+          }
+        ],
+        "startingGoalieId": 8477035,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020260/boxscore"
+    },
+    {
+      "gameId": 2026020261,
+      "gameDate": "2026-11-05",
+      "away": {
+        "team": "NSH",
+        "participants": [
+          {
+            "playerId": 8481020,
+            "name": "J. Annunen",
+            "starter": true,
+            "toi": "62:18"
+          },
+          {
+            "playerId": 8477424,
+            "name": "J. Saros",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8481020,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "COL",
+        "participants": [
+          {
+            "playerId": 8478406,
+            "name": "M. Blackwood",
+            "starter": true,
+            "toi": "62:18"
+          },
+          {
+            "playerId": 8475809,
+            "name": "S. Wedgewood",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8478406,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020261/boxscore"
+    },
+    {
+      "gameId": 2026020262,
+      "gameDate": "2026-11-06",
+      "away": {
+        "team": "CBJ",
+        "participants": [
+          {
+            "playerId": 8475660,
+            "name": "C. Talbot",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8482982,
+            "name": "J. Greaves",
+            "starter": true,
+            "toi": "59:42"
+          }
+        ],
+        "startingGoalieId": 8482982,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "BUF",
+        "participants": [
+          {
+            "playerId": 8480045,
+            "name": "U. Luukkonen",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8481551,
+            "name": "C. Ellis",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8480045,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020262/boxscore"
+    },
+    {
+      "gameId": 2026020263,
+      "gameDate": "2026-11-06",
+      "away": {
+        "team": "SJS",
+        "participants": [
+          {
+            "playerId": 8482137,
+            "name": "Y. Askarov",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8477968,
+            "name": "A. Nedeljkovic",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8482137,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "MIN",
+        "participants": [
+          {
+            "playerId": 8482661,
+            "name": "J. Wallstedt",
+            "starter": true,
+            "toi": "59:43"
+          },
+          {
+            "playerId": 8475717,
+            "name": "C. Pickard",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8482661,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020263/boxscore"
+    },
+    {
+      "gameId": 2026020264,
+      "gameDate": "2026-11-06",
+      "away": {
+        "team": "ANA",
+        "participants": [
+          {
+            "playerId": 8480843,
+            "name": "L. Dostal",
+            "starter": true,
+            "toi": "20:00"
+          },
+          {
+            "playerId": 8478024,
+            "name": "V. Husso",
+            "starter": false,
+            "toi": "39:40"
+          }
+        ],
+        "startingGoalieId": 8480843,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "CGY",
+        "participants": [
+          {
+            "playerId": 8482445,
+            "name": "D. Cooley",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8481692,
+            "name": "D. Wolf",
+            "starter": true,
+            "toi": "58:52"
+          }
+        ],
+        "startingGoalieId": 8481692,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020264/boxscore"
+    },
+    {
+      "gameId": 2026020265,
+      "gameDate": "2026-11-07",
+      "away": {
+        "team": "FLA",
+        "participants": [
+          {
+            "playerId": 8474593,
+            "name": "J. Markstrom",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8481033,
+            "name": "A. Schmid",
+            "starter": true,
+            "toi": "58:59"
+          }
+        ],
+        "startingGoalieId": 8481033,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "WSH",
+        "participants": [
+          {
+            "playerId": 8480313,
+            "name": "L. Thompson",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8479292,
+            "name": "C. Lindgren",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8480313,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020265/boxscore"
+    },
+    {
+      "gameId": 2026020266,
+      "gameDate": "2026-11-07",
+      "away": {
+        "team": "STL",
+        "participants": [
+          {
+            "playerId": 8480981,
+            "name": "J. Hofer",
+            "starter": true,
+            "toi": "58:36"
+          },
+          {
+            "playerId": 8476412,
+            "name": "J. Binnington",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8480981,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "NSH",
+        "participants": [
+          {
+            "playerId": 8481020,
+            "name": "J. Annunen",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8477424,
+            "name": "J. Saros",
+            "starter": true,
+            "toi": "60:00"
+          }
+        ],
+        "startingGoalieId": 8477424,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020266/boxscore"
+    },
+    {
+      "gameId": 2026020267,
+      "gameDate": "2026-11-07",
+      "away": {
+        "team": "NYR",
+        "participants": [
+          {
+            "playerId": 8482193,
+            "name": "D. Garand",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8476914,
+            "name": "J. Korpisalo",
+            "starter": true,
+            "toi": "59:14"
+          }
+        ],
+        "startingGoalieId": 8476914,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "SEA",
+        "participants": [
+          {
+            "playerId": 8475831,
+            "name": "P. Grubauer",
+            "starter": false,
+            "toi": "45:32"
+          },
+          {
+            "playerId": 8478916,
+            "name": "J. Daccord",
+            "starter": true,
+            "toi": "13:53"
+          }
+        ],
+        "startingGoalieId": 8478916,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020267/boxscore"
+    },
+    {
+      "gameId": 2026020268,
+      "gameDate": "2026-11-07",
+      "away": {
+        "team": "MTL",
+        "participants": [
+          {
+            "playerId": 8484170,
+            "name": "J. Fowler",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8482487,
+            "name": "J. Dobes",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8484170,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "TOR",
+        "participants": [
+          {
+            "playerId": 8482515,
+            "name": "A. Akhtyamov",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8475683,
+            "name": "S. Bobrovsky",
+            "starter": true,
+            "toi": "57:36"
+          }
+        ],
+        "startingGoalieId": 8475683,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020268/boxscore"
+    },
+    {
+      "gameId": 2026020269,
+      "gameDate": "2026-11-07",
+      "away": {
+        "team": "UTA",
+        "participants": [
+          {
+            "playerId": 8482657,
+            "name": "S. Cossa",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8478872,
+            "name": "K. Vejmelka",
+            "starter": true,
+            "toi": "58:07"
+          }
+        ],
+        "startingGoalieId": 8478872,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "OTT",
+        "participants": [
+          {
+            "playerId": 8481035,
+            "name": "S. Ersson",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8477992,
+            "name": "J. Johansson",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8481035,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020269/boxscore"
+    },
+    {
+      "gameId": 2026020270,
+      "gameDate": "2026-11-07",
+      "away": {
+        "team": "NJD",
+        "participants": [
+          {
+            "playerId": 8474596,
+            "name": "J. Allen",
+            "starter": true,
+            "toi": "61:09"
+          },
+          {
+            "playerId": 8476945,
+            "name": "C. Hellebuyck",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8474596,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "NYI",
+        "participants": [
+          {
+            "playerId": 8478009,
+            "name": "I. Sorokin",
+            "starter": true,
+            "toi": "61:18"
+          },
+          {
+            "playerId": 8473575,
+            "name": "S. Varlamov",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8478009,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020270/boxscore"
+    },
+    {
+      "gameId": 2026020271,
+      "gameDate": "2026-11-07",
+      "away": {
+        "team": "CHI",
+        "participants": [
+          {
+            "playerId": 8481519,
+            "name": "S. Knight",
+            "starter": true,
+            "toi": "30:36"
+          },
+          {
+            "playerId": 8482821,
+            "name": "A. Soderblom",
+            "starter": false,
+            "toi": "29:24"
+          }
+        ],
+        "startingGoalieId": 8481519,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "CAR",
+        "participants": [
+          {
+            "playerId": 8483548,
+            "name": "B. Bussi",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8481611,
+            "name": "P. Kochetkov",
+            "starter": true,
+            "toi": "60:00"
+          }
+        ],
+        "startingGoalieId": 8481611,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020271/boxscore"
+    },
+    {
+      "gameId": 2026020272,
+      "gameDate": "2026-11-07",
+      "away": {
+        "team": "SJS",
+        "participants": [
+          {
+            "playerId": 8482137,
+            "name": "Y. Askarov",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8477968,
+            "name": "A. Nedeljkovic",
+            "starter": true,
+            "toi": "58:29"
+          }
+        ],
+        "startingGoalieId": 8477968,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "DAL",
+        "participants": [
+          {
+            "playerId": 8479193,
+            "name": "C. DeSmith",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8479979,
+            "name": "J. Oettinger",
+            "starter": true,
+            "toi": "60:00"
+          }
+        ],
+        "startingGoalieId": 8479979,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020272/boxscore"
+    },
+    {
+      "gameId": 2026020273,
+      "gameDate": "2026-11-07",
+      "away": {
+        "team": "TBL",
+        "participants": [
+          {
+            "playerId": 8483710,
+            "name": "D. Hildeby",
+            "starter": true,
+            "toi": "63:15"
+          },
+          {
+            "playerId": 8476883,
+            "name": "A. Vasilevskiy",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8483710,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "MIN",
+        "participants": [
+          {
+            "playerId": 8482661,
+            "name": "J. Wallstedt",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8475717,
+            "name": "C. Pickard",
+            "starter": true,
+            "toi": "63:16"
+          }
+        ],
+        "startingGoalieId": 8475717,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020273/boxscore"
+    },
+    {
+      "gameId": 2026020274,
+      "gameDate": "2026-11-07",
+      "away": {
+        "team": "DET",
+        "participants": [
+          {
+            "playerId": 8485545,
+            "name": "M. Postava",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8480193,
+            "name": "D. Tarasov",
+            "starter": true,
+            "toi": "60:00"
+          }
+        ],
+        "startingGoalieId": 8480193,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "COL",
+        "participants": [
+          {
+            "playerId": 8478406,
+            "name": "M. Blackwood",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8475809,
+            "name": "S. Wedgewood",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8478406,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020274/boxscore"
+    },
+    {
+      "gameId": 2026020275,
+      "gameDate": "2026-11-07",
+      "away": {
+        "team": "PIT",
+        "participants": [
+          {
+            "playerId": 8483703,
+            "name": "S. Murashov",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8481668,
+            "name": "A. Silovs",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8483703,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "LAK",
+        "participants": [
+          {
+            "playerId": 8476341,
+            "name": "A. Forsberg",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8475311,
+            "name": "D. Kuemper",
+            "starter": true,
+            "toi": "57:59"
+          }
+        ],
+        "startingGoalieId": 8475311,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020275/boxscore"
+    },
+    {
+      "gameId": 2026020276,
+      "gameDate": "2026-11-07",
+      "away": {
+        "team": "VAN",
+        "participants": [
+          {
+            "playerId": 8482447,
+            "name": "L. Meriläinen",
+            "starter": true,
+            "toi": "58:00"
+          },
+          {
+            "playerId": 8480947,
+            "name": "K. Lankinen",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8482447,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "EDM",
+        "participants": [
+          {
+            "playerId": 8482221,
+            "name": "D. Levi",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8477465,
+            "name": "T. Jarry",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8482221,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020276/boxscore"
+    }
+  ],
+  "failures": [],
+  "summary": {
+    "finalGames": 63,
+    "withBothVerifiedStarters": 63,
+    "withBothGoalieParticipants": 63,
+    "fetchFailures": 0
+  }
+}
