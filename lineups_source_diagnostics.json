@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T19:44:12.844856+00:00",
+  "generatedAt": "2026-11-08T19:45:35.805780+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -180,7 +180,17 @@
       "candidateForwardLines": 3,
       "candidateDefensePairs": 4,
       "rosterValidation": "passed",
-      "incompleteForwardFragments": [],
+      "incompleteForwardFragments": [
+        {
+          "players": [
+            "Jeffrey Viel",
+            "Zemgus Girgensons"
+          ],
+          "missingPlayers": 1,
+          "role": "forwards",
+          "sourceStatus": "incomplete"
+        }
+      ],
       "roleMismatches": [
         {
           "sourcePair": 1,
