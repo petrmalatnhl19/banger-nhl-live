@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T20:51:48.172435+00:00",
+  "generatedAt": "2026-11-08T21:21:54.905892+00:00",
   "checked": 19,
   "articlesFound": 5,
   "errors": [],
@@ -72,6 +72,12 @@
     },
     {
       "date": "2026-11-10",
+      "away": "MIN",
+      "home": "MTL",
+      "priority": true
+    },
+    {
+      "date": "2026-11-10",
       "away": "NSH",
       "home": "LAK",
       "priority": true
@@ -86,12 +92,6 @@
       "date": "2026-11-10",
       "away": "COL",
       "home": "TOR",
-      "priority": false
-    },
-    {
-      "date": "2026-11-10",
-      "away": "MIN",
-      "home": "MTL",
       "priority": false
     },
     {
@@ -178,6 +178,16 @@
       "teams": []
     },
     {
+      "url": "https://www.nhl.com/news/nashville-predators-los-angeles-kings-game-preview-november-10-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/los-angeles-kings-nashville-predators-game-preview-november-10-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
       "url": "https://www.nhl.com/news/washington-capitals-ottawa-senators-game-preview-november-10-2026",
       "result": "no_complete_projection",
       "teams": []
@@ -198,16 +208,6 @@
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/minnesota-wild-montreal-canadiens-game-preview-november-10-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/montreal-canadiens-minnesota-wild-game-preview-november-10-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
       "url": "https://www.nhl.com/news/new-jersey-devils-winnipeg-jets-game-preview-november-10-2026",
       "result": "no_complete_projection",
       "teams": []
@@ -222,7 +222,7 @@
   "fixturesSelected": 12,
   "fixturesDeferred": 4,
   "rotation": {
-    "window": 1993523,
+    "window": 1993525,
     "fixed": 8,
     "rotating": 4,
     "remainingPool": 8,
@@ -271,6 +271,11 @@
     },
     {
       "date": "2026-11-10",
+      "away": "NSH",
+      "home": "LAK"
+    },
+    {
+      "date": "2026-11-10",
       "away": "WSH",
       "home": "OTT"
     },
@@ -278,11 +283,6 @@
       "date": "2026-11-10",
       "away": "COL",
       "home": "TOR"
-    },
-    {
-      "date": "2026-11-10",
-      "away": "MIN",
-      "home": "MTL"
     },
     {
       "date": "2026-11-10",
