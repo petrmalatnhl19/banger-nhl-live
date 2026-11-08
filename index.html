@@ -2965,25 +2965,28 @@ async function analyzeGame(id){
   uxAnalystNav.className='ux-section-jump';
   uxAnalystNav.setAttribute('aria-label','Rychlá navigace v analýze');
   const uxAnalystDestinations=[
-    ['🎯 Předpověď','#banger-core-3'],
-    ['📊 Přehled zápasu','.analysis-section:not(#banger-core-3):not(#banger-prediction-hub)'],
-    ['🥅 Brankáři','.analyst-fold'],
-    ['📈 Přesnost','#banger-prediction-hub'],
-    ['📝 Podrobný report','.analyst-expert-report']
+    ['🎯 Předpověď','forecast'],
+    ['📊 Statistiky','stats'],
+    ['📝 Podrobný rozbor','report'],
+    ['⚙️ Archiv a nástroje','tools']
   ];
-  uxAnalystNav.innerHTML=uxAnalystDestinations.map(([label],i)=>'<button type="button" data-ux-jump="'+i+'">'+label+'</button>').join('');
+  uxAnalystNav.innerHTML=uxAnalystDestinations.map(([label,key])=>'<button type="button" data-ux-jump="'+key+'">'+label+'</button>').join('');
   uxAnalystNav.addEventListener('click',event=>{
     const button=event.target.closest('[data-ux-jump]');
     if(!button)return;
-    const item=uxAnalystDestinations[Number(button.dataset.uxJump)];
-    if(!item)return;
-    let target;
-    if(Number(button.dataset.uxJump)===2){
-      target=[...extraRoot.querySelectorAll('.analyst-fold')].find(el=>/GOALIE MODULE|Brankáři a sestavy/i.test(el.querySelector('summary')?.textContent||''));
-    }else target=extraRoot.querySelector(item[1]);
+    const key=button.dataset.uxJump;
+    let target=null;
+    if(key==='forecast')target=extraRoot.querySelector('#banger-core-3')||extraRoot.querySelector('#banger-prediction-hub');
+    if(key==='stats')target=[...extraRoot.querySelectorAll('.analyst-fold')].find(el=>/GOALIE MODULE|Brankáři a sestavy|Forma|Srovnání/i.test(el.querySelector('summary')?.textContent||''))||extraRoot.querySelector('.analysis-section');
+    if(key==='report')target=extraRoot.querySelector('.analyst-expert-report')||[...extraRoot.querySelectorAll('.analyst-fold')].find(el=>/Scénáře zápasu/i.test(el.querySelector('summary')?.textContent||''));
+    if(key==='tools')target=extraRoot.querySelector('.banger-hub-tools');
     if(!target)return;
-    // Opening a collapsed report is intentional; preserve all other accordion states.
+    const drawer=target.closest('.analyst-extras-drawer');
+    if(drawer)drawer.open=true;
+    let parent=target.parentElement;
+    while(parent&&parent!==extraRoot){if(parent.tagName==='DETAILS')parent.open=true;parent=parent.parentElement}
     if(target.tagName==='DETAILS')target.open=true;
+    uxAnalystNav.querySelectorAll('[data-ux-jump]').forEach(el=>el.setAttribute('aria-pressed',String(el===button)));
     target.scrollIntoView({behavior:'smooth',block:'start'});
   });
   extraRoot.insertAdjacentElement('afterbegin',uxAnalystNav);
@@ -3316,5 +3319,13 @@ document.addEventListener('click',function(ev){const th=ev.target.closest('.bang
 #banger-prediction-hub .banger-hub-tools-content>.analyst-fold-body{padding:0}
 #banger-prediction-hub .banger-hub-tools-content .analyst-fold{margin:8px 0}
 @media(max-width:650px){#banger-prediction-hub .banger-hub-tools>summary small{display:block;font-size:10px;color:#93b7c9;font-weight:500;margin-top:3px}}
+</style>
+
+<style id="banger-analyst-nav-audit-v3">
+/* Single four-destination navigator; preserves existing analysis and model controls. */
+.analysis-panel .ux-section-jump{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:8px 0 13px}
+.analysis-panel .ux-section-jump button{width:100%;min-width:0;min-height:42px;text-align:center;padding:9px 6px;font-size:12px;line-height:1.25}
+.analysis-panel .ux-section-jump button[aria-pressed="true"]{border-color:#6beeff;background:#195775;box-shadow:inset 0 0 0 1px #6beeff44}
+@media(min-width:800px){.analysis-panel .ux-section-jump{grid-template-columns:repeat(4,minmax(0,1fr))}}
 </style>
 </body></html>
