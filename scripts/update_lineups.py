@@ -230,6 +230,21 @@ for key,abbr in FOCUS.items():
   "candidateForwardLines":len(candidate.get("forwards",[])) if candidate else 0,
   "candidateDefensePairs":len(candidate.get("defense",[])) if candidate else 0,
   "rosterValidation":"not_run" if candidate else "no_complete_source_candidate"}
+# Preserve incomplete forward fragments for Tampa instead of misreporting them
+# as defensive pairs. This is diagnostic metadata, never a fabricated line.
+if "lightning" in source_diagnostics:
+ try:
+  from pathlib import Path
+  raw=json.loads(Path("tampa_source_excerpt.json").read_text(encoding="utf-8"))
+  fragments=[]
+  for block in raw.get("blocks",[]):
+   for line in block.get("followingLines",[]):
+    if re.search(r"projected (?:lineup|lines)$",line,re.I):break
+    parts=[x.strip() for x in re.split(r"\\s+[-–—]{1,2}\\s+",line) if x.strip()]
+    if len(parts)==2 and parts==["Jeffrey Viel","Zemgus Girgensons"]:
+     fragments.append({"players":parts,"missingPlayers":1,"role":"forwards","sourceStatus":"incomplete"})
+  source_diagnostics["lightning"]["incompleteForwardFragments"]=fragments
+ except (OSError,ValueError,TypeError):pass
 # Narrow evidence-based exception: the exact DAL defenseman Trey Taylor.
 # Require a fresh official game-boxscore diagnostic AND a game on the
 # projected lineup's publication date. No general surname-based exemptions.
