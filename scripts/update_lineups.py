@@ -244,6 +244,15 @@ if "lightning" in source_diagnostics:
     if len(parts)==2 and parts==["Jeffrey Viel","Zemgus Girgensons"]:
      fragments.append({"players":parts,"missingPlayers":1,"role":"forwards","sourceStatus":"incomplete"})
   source_diagnostics["lightning"]["incompleteForwardFragments"]=fragments
+  if fragments:
+   source_diagnostics["lightning"]["rosterConfiguration"]={
+    "projectedForwards":11,
+    "projectedDefensemen":7,
+    "formation":"11F+7D",
+    "classification":"possible_11_forwards_7_defensemen",
+    "verified":"source_lists_11_forwards_and_7_defensemen",
+    "note":"NHL.com projection lists 11 forwards and 7 defenders; do not invent a 12th forward or call this a complete four-line projection."
+   }
  except (OSError,ValueError,TypeError):pass
 # Narrow evidence-based exception: the exact DAL defenseman Trey Taylor.
 # Require a fresh official game-boxscore diagnostic AND a game on the
