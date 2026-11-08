@@ -2278,6 +2278,7 @@ async function analyzeGame(id){
 
 
 
+
   records=records.slice(-150);
   try{localStorage.setItem(key,JSON.stringify(records))}catch(e){}
   const finished=records.filter(x=>x.status==='final');
@@ -2323,6 +2324,7 @@ async function analyzeGame(id){
   return caution+'Sezonní základ '+clean(ac)+' '+fmt(baseAway)+', '+clean(hc)+' '+fmt(baseHome)+'. Po korekcích '+clean(ac)+' '+fmt(m.away)+', '+clean(hc)+' '+fmt(m.home)+'. Změna oproti základu: '+clean(ac)+' '+fmt(m.away-baseAway)+', '+clean(hc)+' '+fmt(m.home-baseHome)+' gólu. Výsledek je orientační, bez zpětného ověření přesnosti. Chybějící statistiky se nenahrazují odhady.';
  })());
  section('Vzájemné zápasy',bangerH2HReport());
+
 
 
 
