@@ -270,7 +270,7 @@ for name,team in teams.items():
    # accidentally captured in the defense section).
    role_mismatches=[]
    for index,row in enumerate(original_defense,1):
-    if any(normalize(player) in groups["forwards"] for player in row):
+    if any(normalize(player) in groups["forwards"] and normalize(player) not in groups["defense"] for player in row):
      role_mismatches.append({"sourcePair":index,"players":row,"reason":"forward_in_defense_row"})
    source_diagnostics[name]["roleMismatches"]=role_mismatches
    rejected=[]
