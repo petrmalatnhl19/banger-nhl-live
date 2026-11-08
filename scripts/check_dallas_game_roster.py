@@ -62,6 +62,21 @@ for game in recent:
     except Exception as exc:
         result["errors"].append(f"game {gid}: {type(exc).__name__}")
 result["gamesInspected"] = len(seen)
+result["nameFieldDiagnostics"] = {"sampleNames": [], "missingNameEntries": 0}
+if recent:
+    try:
+        sample = fetch(f"gamecenter/{recent[0]['id']}/boxscore")
+        side = "homeTeam" if (sample.get("homeTeam") or {}).get("abbrev") == "DAL" else "awayTeam"
+        stats = (sample.get("playerByGameStats") or {}).get(side) or {}
+        for group in ("forwards", "defense", "goalies"):
+            for p in stats.get(group) or []:
+                name = p.get("name") if isinstance(p, dict) else None
+                if not name:
+                    result["nameFieldDiagnostics"]["missingNameEntries"] += 1
+                elif len(result["nameFieldDiagnostics"]["sampleNames"]) < 6:
+                    result["nameFieldDiagnostics"]["sampleNames"].append(name)
+    except Exception as exc:
+        result["errors"].append(f"sample names: {type(exc).__name__}")
 result["note"] = "Never automatically approve a projected line based only on historical participation."
 OUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 print(json.dumps(result, ensure_ascii=False, indent=2))
