@@ -13,7 +13,41 @@ data = json.loads(SOURCE.read_text(encoding="utf-8"))
 teams = data.get("teams", {})
 report = {"generatedAt": datetime.datetime.now(datetime.timezone.utc).isoformat(),
           "sourceFile": "lineups.json", "teams": {}, "summary": {}}
-counts = {"complete": 0, "incomplete": 0}
+EXPECTED = {
+    "ANA": "ducks",
+    "BOS": "bruins",
+    "BUF": "sabres",
+    "CAR": "hurricanes",
+    "CBJ": "blue jackets",
+    "CGY": "flames",
+    "CHI": "blackhawks",
+    "COL": "avalanche",
+    "DAL": "stars",
+    "DET": "red wings",
+    "EDM": "oilers",
+    "FLA": "panthers",
+    "LAK": "kings",
+    "MIN": "wild",
+    "MTL": "canadiens",
+    "NJD": "devils",
+    "NSH": "predators",
+    "NYI": "islanders",
+    "NYR": "rangers",
+    "OTT": "senators",
+    "PHI": "flyers",
+    "PIT": "penguins",
+    "SEA": "kraken",
+    "SJS": "sharks",
+    "STL": "blues",
+    "TBL": "lightning",
+    "TOR": "maple leafs",
+    "UTA": "mammoth",
+    "VAN": "canucks",
+    "VGK": "golden knights",
+    "WPG": "jets",
+    "WSH": "capitals",
+}
+counts = {"complete": 0, "incomplete": 0, "missing": 0}
 for slug, team in sorted(teams.items()):
     forwards = team.get("forwards") or []
     defense = team.get("defense") or []
@@ -34,7 +68,17 @@ for slug, team in sorted(teams.items()):
         "publishedAt": team.get("publishedAt"),
         "status": "complete_projection" if complete else "incomplete_projection",
     }
-report["summary"] = {"teams": len(teams), **counts}
+for abbreviation, slug in EXPECTED.items():
+    if slug not in teams:
+        counts["missing"] += 1
+        report["teams"][slug] = {
+            "name": slug.title(), "abbreviation": abbreviation,
+            "complete": False, "forwardLines": 0, "defensePairs": 0,
+            "missingForwardLines": 4, "missingDefensePairs": 3,
+            "status": "missing_team", "source": None, "publishedAt": None,
+        }
+report["summary"] = {"teams": len(teams), "expectedTeams": len(EXPECTED), **counts,
+                     "coveragePercent": round(100 * len(teams) / len(EXPECTED), 1)}
 OUTPUT.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 print("BANGER Lineup Core 2.0:", json.dumps(report["summary"], ensure_ascii=False))
 for slug, entry in report["teams"].items():
