@@ -21,6 +21,10 @@ class NameNormalizationTests(unittest.TestCase):
  def test_distinct_players_stay_distinct(self):
   self.assertNotEqual(normalize("Jacob Slavin"),normalize("Jalen Chatfield"))
   self.assertNotEqual(normalize("Tim Stutzle"),normalize("Shane Pinto"))
+ def test_verified_full_name_aliases(self):
+  self.assertEqual(normalize("Mikey Eyssimont"),normalize("Michael Eyssimont"))
+  self.assertEqual(normalize("William Borgen"),normalize("Will Borgen"))
+  self.assertNotEqual(normalize("William Borgen"),normalize("William Nylander"))
  def test_punctuation(self):
   self.assertEqual(normalize("O’Reilly"),normalize("O'Reilly"))
 
