@@ -1,0 +1,104 @@
+{
+  "teams": {
+    "senators": {
+      "players": [
+        {
+          "sourceName": "Philip Tomasino",
+          "expectedRole": "forwards",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
+          "automaticApproval": false
+        },
+        {
+          "sourceName": "Samuel Blais",
+          "expectedRole": "forwards",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
+          "automaticApproval": false
+        }
+      ]
+    },
+    "canucks": {
+      "players": [
+        {
+          "sourceName": "Elias Nils Pettersson",
+          "expectedRole": "defense",
+          "sameSurnameInRoster": [
+            {
+              "name": "Elias Pettersson",
+              "role": "forwards"
+            },
+            {
+              "name": "Elias Pettersson",
+              "role": "defense"
+            }
+          ],
+          "classification": "ambiguous_same_surname",
+          "automaticApproval": false
+        }
+      ]
+    },
+    "lightning": {
+      "players": [
+        {
+          "sourceName": "Jeffrey Viel",
+          "expectedRole": "defense",
+          "sameSurnameInRoster": [
+            {
+              "name": "Jeffrey Viel",
+              "role": "forwards"
+            }
+          ],
+          "classification": "possible_name_variant_needs_review",
+          "automaticApproval": false
+        },
+        {
+          "sourceName": "Zemgus Girgensons",
+          "expectedRole": "defense",
+          "sameSurnameInRoster": [
+            {
+              "name": "Zemgus Girgensons",
+              "role": "forwards"
+            }
+          ],
+          "classification": "possible_name_variant_needs_review",
+          "automaticApproval": false
+        }
+      ]
+    },
+    "mammoth": {
+      "players": [
+        {
+          "sourceName": "Artem Duda",
+          "expectedRole": "defense",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
+          "automaticApproval": false
+        }
+      ]
+    },
+    "red wings": {
+      "players": [
+        {
+          "sourceName": "John Leonard",
+          "expectedRole": "forwards",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
+          "automaticApproval": false
+        }
+      ]
+    },
+    "stars": {
+      "players": [
+        {
+          "sourceName": "Trey Taylor",
+          "expectedRole": "defense",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
+          "automaticApproval": false
+        }
+      ]
+    }
+  },
+  "policy": "Identity audit only; never auto-approve ambiguous or absent players."
+}
