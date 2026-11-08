@@ -282,16 +282,18 @@ for name,team in teams.items():
   # Exact player/team/position only; requires a fresh official game
   # appearance on the source projection date. No blanket roster bypass.
   game_evidence_cases={
-   "stars":("DAL","Trey Taylor","defense","dallas_game_roster_diagnostic.json"),
-   "mammoth":("UTA","Artem Duda","defense","utah_game_roster_diagnostic.json"),
-   "red wings":("DET","John Leonard","forwards","detroit_game_roster_diagnostic.json"),
+   "stars":[("DAL","Trey Taylor","defense","dallas_game_roster_diagnostic.json")],
+   "mammoth":[("UTA","Artem Duda","defense","utah_game_roster_diagnostic.json")],
+   "red wings":[("DET","John Leonard","forwards","detroit_game_roster_diagnostic.json")],
+   "senators":[("OTT","Philip Tomasino","forwards","ottawa_game_roster_diagnostic.json"),
+               ("OTT","Samuel Blais","forwards","ottawa_game_roster_diagnostic.json")],
   }
-  if name in game_evidence_cases:
-   proof_abbr,proof_player,proof_role,proof_file=game_evidence_cases[name]
+  for proof_abbr,proof_player,proof_role,proof_file in game_evidence_cases.get(name,[]):
    if verified_recent_game_player(team,proof_abbr,proof_player,proof_file):
     groups[proof_role].add(normalize(proof_player))
     if name in source_diagnostics:
-     source_diagnostics[name]["gameEvidenceException"]={"player":proof_player,"role":proof_role,"basis":"official game boxscore on projection publication date"}
+     source_diagnostics[name].setdefault("gameEvidenceExceptions",[]).append(
+      {"player":proof_player,"role":proof_role,"basis":"official game boxscore on projection publication date"})
   # Collect up to eight 2-name source rows, because some are forward fragments.
   # Only NHL-roster-verified defender pairs become published defense lines.
   # Classify each parsed row by NHL roster position, not by its order in HTML.
