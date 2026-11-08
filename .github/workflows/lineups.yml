@@ -21,6 +21,21 @@ jobs:
         run: python -m unittest scripts/test_lineup_name_matching.py
       - name: Refresh NHL rosters
         run: python scripts/update_rosters.py
+      - name: Inspect Tampa Bay projected line source
+        continue-on-error: true
+        run: python scripts/inspect_tampa_source.py
+      - name: Check Utah Artem Duda in official NHL game boxscores
+        continue-on-error: true
+        run: python scripts/check_utah_game_roster.py
+      - name: Check Detroit John Leonard in official NHL game boxscores
+        continue-on-error: true
+        run: python scripts/check_detroit_game_roster.py
+      - name: Check Dallas Trey Taylor in official NHL game boxscores
+        continue-on-error: true
+        run: python scripts/check_dallas_game_roster.py
+      - name: Check Ottawa players in official NHL game boxscores (diagnostic only)
+        continue-on-error: true
+        run: python scripts/check_ottawa_game_roster.py
       - name: Refresh validated lineup projections
         run: python scripts/update_lineups.py
       - name: Report missing formations (non-blocking)
@@ -65,21 +80,6 @@ jobs:
               for item in data.get("teams", []):
                   print(f"| {item['team']} | {item['missingForwardLines']} | {item['missingDefensePairs']} | {item['reason']} |")
           PY
-      - name: Inspect Tampa Bay projected line source
-        continue-on-error: true
-        run: python scripts/inspect_tampa_source.py
-      - name: Check Utah Artem Duda in official NHL game boxscores
-        continue-on-error: true
-        run: python scripts/check_utah_game_roster.py
-      - name: Check Detroit John Leonard in official NHL game boxscores
-        continue-on-error: true
-        run: python scripts/check_detroit_game_roster.py
-      - name: Check Dallas Trey Taylor in official NHL game boxscores
-        continue-on-error: true
-        run: python scripts/check_dallas_game_roster.py
-      - name: Check Ottawa players in official NHL game boxscores (diagnostic only)
-        continue-on-error: true
-        run: python scripts/check_ottawa_game_roster.py
       - name: Audit rejected player identities and ambiguous names
         run: python scripts/lineup_identity_audit.py
       - name: Refresh recent lineups
