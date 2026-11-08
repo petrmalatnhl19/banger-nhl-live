@@ -48,6 +48,11 @@ EXPECTED = {
     "WSH": "capitals",
 }
 counts = {"complete": 0, "incomplete": 0, "missing": 0}
+try:
+    source_diagnostics = json.loads((ROOT / "lineups_source_diagnostics.json").read_text(encoding="utf-8")).get("teams", {})
+except (OSError, ValueError):
+    source_diagnostics = {}
+alternative_count = 0
 for slug, team in sorted(teams.items()):
     forwards = team.get("forwards") or []
     defense = team.get("defense") or []
@@ -56,6 +61,14 @@ for slug, team in sorted(teams.items()):
     players = [p.casefold().strip() for rows in (forwards, defense) for row in rows if isinstance(row, list) for p in row if isinstance(p, str)]
     duplicate = sorted({p for p in players if players.count(p) > 1})
     complete = len(forwards) == 4 and all(f_valid) and len(defense) == 3 and all(d_valid) and not duplicate
+    source_config = source_diagnostics.get(slug, {}).get("rosterConfiguration", {})
+    alternative = (slug == "lightning" and not complete
+                   and source_config.get("formation") == "11F+7D"
+                   and source_config.get("verified") == "source_lists_11_forwards_and_7_defensemen"
+                   and len(forwards) == 3 and all(f_valid)
+                   and len(defense) == 3 and all(d_valid) and not duplicate)
+    if alternative:
+        alternative_count += 1
     counts["complete" if complete else "incomplete"] += 1
     report["teams"][slug] = {
         "name": team.get("name", slug), "complete": complete,
@@ -66,7 +79,9 @@ for slug, team in sorted(teams.items()):
         "malformedDefensePairs": [i + 1 for i, ok in enumerate(d_valid) if not ok],
         "duplicatePlayers": duplicate, "source": team.get("source"),
         "publishedAt": team.get("publishedAt"),
-        "status": "complete_projection" if complete else "incomplete_projection",
+        "status": "complete_projection" if complete else ("possible_11F_7D" if alternative else "incomplete_projection"),
+        "alternativeFormation": source_config if alternative else None,
+        "alternativeFormationVerified": False if alternative else None,
     }
 for abbreviation, slug in EXPECTED.items():
     if slug not in teams:
@@ -78,7 +93,8 @@ for abbreviation, slug in EXPECTED.items():
             "status": "missing_team", "source": None, "publishedAt": None,
         }
 report["summary"] = {"teams": len(teams), "expectedTeams": len(EXPECTED), **counts,
-                     "coveragePercent": round(100 * len(teams) / len(EXPECTED), 1)}
+                     "coveragePercent": round(100 * len(teams) / len(EXPECTED), 1),
+                     "possibleAlternativeFormations": alternative_count}
 OUTPUT.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 print("BANGER Lineup Core 2.0:", json.dumps(report["summary"], ensure_ascii=False))
 for slug, entry in report["teams"].items():
