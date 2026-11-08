@@ -3211,4 +3211,4 @@ document.addEventListener('click',function(e){const btn=e.target.closest('[data-
 <script>
 /* Sorting is scoped to the clicked statistical table and does not change NHL source data. */
 document.addEventListener('click',function(ev){const th=ev.target.closest('.banger-sort-head');if(!th)return;const table=th.closest('table'),body=table?.querySelector('tbody');if(!body)return;const heads=[...th.parentElement.children],index=heads.indexOf(th);const asc=th.getAttribute('aria-sort')!=='ascending';heads.forEach(h=>h.removeAttribute('aria-sort'));th.setAttribute('aria-sort',asc?'ascending':'descending');const rows=[...body.rows];rows.sort((a,b)=>{const x=a.cells[index]?.dataset.sortValue??'',y=b.cells[index]?.dataset.sortValue??'';const nx=Number(x),ny=Number(y),numeric=x.trim()!==''&&y.trim()!==''&&Number.isFinite(nx)&&Number.isFinite(ny);const cmp=numeric?nx-ny:x.localeCompare(y,'cs',{numeric:true});return asc?cmp:-cmp});rows.forEach(row=>body.appendChild(row));});
-</script><script src="core-performance.js?v=20261108-2" defer></script></body></html>
+</script><script src="core-performance.js?v=20261108-3" defer></script></body></html>
