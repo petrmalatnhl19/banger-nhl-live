@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-08T19:30:58.166545+00:00",
+  "checkedAt": "2026-11-08T19:32:39.244567+00:00",
   "team": "DAL",
   "scope": "Recent completed NHL games; historical evidence only",
   "players": {
@@ -10,5 +10,28 @@
   },
   "errors": [],
   "gamesInspected": 8,
+  "nameFieldDiagnostics": {
+    "sampleNames": [
+      {
+        "default": "R. Faksa"
+      },
+      {
+        "default": "J. Benn"
+      },
+      {
+        "default": "D. Perron"
+      },
+      {
+        "default": "S. Steel"
+      },
+      {
+        "default": "J. Robertson"
+      },
+      {
+        "default": "J. Kiviranta"
+      }
+    ],
+    "missingNameEntries": 0
+  },
   "note": "Never automatically approve a projected line based only on historical participation."
 }
