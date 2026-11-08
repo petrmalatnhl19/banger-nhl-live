@@ -1218,6 +1218,16 @@ button:focus-visible,[role="button"]:focus-visible{outline:2px solid #86f2ff;out
 .banger-goalie-details{margin:9px 0 15px}
 .banger-goalie-details summary{cursor:pointer;color:#84eaff;padding:10px;border:1px solid #315b76;border-radius:10px}
 @media(max-width:390px){.banger-top-player{grid-template-columns:19px minmax(0,1fr);gap:5px}.banger-top-player>span:last-child{grid-column:2}.banger-goalie-metrics b{font-size:15px}}
+</style><style id="banger-match-more-fix">
+/* Override legacy four-column rules; keep dropdown inside viewport */
+#arenaBody .match-tabs{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:4px!important;overflow:visible!important;position:relative!important}
+#arenaBody .match-tabs>.match-tab,#arenaBody .match-tabs>.match-more-wrap{grid-column:auto!important;grid-row:auto!important;min-width:0!important;width:100%!important}
+#arenaBody .match-more-wrap{position:relative!important;display:block!important;overflow:visible!important}
+#arenaBody .match-more-toggle{display:block!important;width:100%!important;min-width:0!important;white-space:nowrap!important;padding:5px 2px!important}
+#arenaBody .match-more-menu{position:absolute!important;left:auto!important;right:0!important;top:calc(100% + 6px)!important;width:150px!important;min-width:150px!important;z-index:999!important;display:grid!important;grid-template-columns:1fr!important;gap:5px!important;overflow:visible!important}
+#arenaBody .match-more-menu.hidden{display:none!important}
+#arenaBody .match-more-menu .match-tab{width:100%!important;min-width:0!important;white-space:nowrap!important;text-align:left!important;padding:10px!important}
+@media(max-width:520px){#arenaBody .match-tabs>.match-tab{padding:7px 1px!important;font-size:clamp(9px,2.45vw,12px)!important;letter-spacing:-.3px!important}#arenaBody .match-more-toggle{font-size:clamp(9px,2.45vw,12px)!important}}
 </style></head><body><div class="wrap">
 <div id="brandSplash" class="brand-splash" aria-label="Načítání BANGER NHL LIVE"><div class="brand-splash-glow"></div><picture><source media="(orientation: portrait)" srcset="splash-portrait.png"><img src="splash-landscape.png" alt="BANGER NHL LIVE" fetchpriority="high" decoding="async"></picture><div class="brand-splash-loader"><span></span></div><div class="brand-splash-caption">VSTUP DO HOKEJOVÉ ARÉNY</div></div><header class="top"><div class="brand"><div class="brand-logo" aria-label="BANGER NHL LIVE"><span class="brand-mark">BANGER</span><span class="brand-sub">NHL <b>LIVE</b></span></div></div><span class="header-status"><i></i> NHL 2026/27</span></header>
 
