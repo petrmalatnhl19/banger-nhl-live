@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T19:05:07.039297+00:00",
+  "generatedAt": "2026-11-08T19:07:06.403336+00:00",
   "sourceFile": "lineups.json",
   "teams": {
     "avalanche": {
@@ -172,17 +172,17 @@
     },
     "hurricanes": {
       "name": "Hurricanes",
-      "complete": false,
+      "complete": true,
       "forwardLines": 4,
-      "defensePairs": 2,
+      "defensePairs": 3,
       "missingForwardLines": 0,
-      "missingDefensePairs": 1,
+      "missingDefensePairs": 0,
       "malformedForwardLines": [],
       "malformedDefensePairs": [],
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/chicago-blackhawks-carolina-hurricanes-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:28:41.992000+00:00",
-      "status": "incomplete_projection"
+      "status": "complete_projection"
     },
     "islanders": {
       "name": "Islanders",
@@ -382,17 +382,17 @@
     },
     "sharks": {
       "name": "Sharks",
-      "complete": false,
-      "forwardLines": 3,
+      "complete": true,
+      "forwardLines": 4,
       "defensePairs": 3,
-      "missingForwardLines": 1,
+      "missingForwardLines": 0,
       "missingDefensePairs": 0,
       "malformedForwardLines": [],
       "malformedDefensePairs": [],
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/san-jose-sharks-dallas-stars-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:44:05.810000+00:00",
-      "status": "incomplete_projection"
+      "status": "complete_projection"
     },
     "stars": {
       "name": "Stars",
@@ -450,8 +450,8 @@
   "summary": {
     "teams": 30,
     "expectedTeams": 32,
-    "complete": 23,
-    "incomplete": 7,
+    "complete": 25,
+    "incomplete": 5,
     "missing": 2,
     "coveragePercent": 93.8
   }

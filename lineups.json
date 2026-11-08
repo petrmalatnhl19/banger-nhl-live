@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-08T19:05:06.433728+00:00",
+  "fetchedAt": "2026-11-08T19:07:05.955604+00:00",
   "teams": {
     "panthers": {
       "name": "Panthers",
@@ -936,6 +936,11 @@
           "Kiefer Sherwood"
         ],
         [
+          "Ivan Stenberg",
+          "Ty Dellandrea",
+          "Tyler Toffoli"
+        ],
+        [
           "Barclay Goodrow",
           "Zack Ostapchuk",
           "Adam Gaudette"
@@ -1079,6 +1084,10 @@
         ]
       ],
       "defense": [
+        [
+          "Jacob Slavin",
+          "Jalen Chatfield"
+        ],
         [
           "K’Andre Miller",
           "Sean Walker"

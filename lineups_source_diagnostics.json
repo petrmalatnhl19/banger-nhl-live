@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T19:05:06.427334+00:00",
+  "generatedAt": "2026-11-08T19:07:05.949724+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -25,28 +25,10 @@
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
       "roleMismatches": [],
-      "rejectedLines": [
-        {
-          "group": "defense",
-          "line": 1,
-          "players": [
-            "Jacob Slavin"
-          ],
-          "sourceLine": [
-            "Jacob Slavin",
-            "Jalen Chatfield"
-          ]
-        }
-      ],
-      "rejectedPlayerReasons": [
-        {
-          "name": "Jacob Slavin",
-          "expectedRole": "defense",
-          "reason": "not_in_current_roster"
-        }
-      ],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
       "validatedForwardLines": 4,
-      "validatedDefensePairs": 2,
+      "validatedDefensePairs": 3,
       "accepted": true
     },
     "kings": {
@@ -154,28 +136,9 @@
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
       "roleMismatches": [],
-      "rejectedLines": [
-        {
-          "group": "forwards",
-          "line": 3,
-          "players": [
-            "Ivan Stenberg"
-          ],
-          "sourceLine": [
-            "Ivan Stenberg",
-            "Ty Dellandrea",
-            "Tyler Toffoli"
-          ]
-        }
-      ],
-      "rejectedPlayerReasons": [
-        {
-          "name": "Ivan Stenberg",
-          "expectedRole": "forwards",
-          "reason": "not_in_current_roster"
-        }
-      ],
-      "validatedForwardLines": 3,
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
       "validatedDefensePairs": 3,
       "accepted": true
     },

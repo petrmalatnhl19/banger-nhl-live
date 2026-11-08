@@ -1,29 +1,6 @@
 {
-  "teamsWithRejectedLines": 3,
+  "teamsWithRejectedLines": 1,
   "teams": {
-    "hurricanes": {
-      "team": "CAR",
-      "candidateForwardLines": 4,
-      "candidateDefensePairs": 3,
-      "validatedForwardLines": 4,
-      "validatedDefensePairs": 2,
-      "rejected": [
-        {
-          "group": "defense",
-          "sourceLineNumber": 1,
-          "sourceLine": [
-            "Jacob Slavin",
-            "Jalen Chatfield"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Jacob Slavin",
-              "reason": "not_in_current_roster"
-            }
-          ]
-        }
-      ]
-    },
     "senators": {
       "team": "OTT",
       "candidateForwardLines": 4,
@@ -57,30 +34,6 @@
           "unverifiedPlayers": [
             {
               "name": "Samuel Blais",
-              "reason": "not_in_current_roster"
-            }
-          ]
-        }
-      ]
-    },
-    "sharks": {
-      "team": "SJS",
-      "candidateForwardLines": 4,
-      "candidateDefensePairs": 3,
-      "validatedForwardLines": 3,
-      "validatedDefensePairs": 3,
-      "rejected": [
-        {
-          "group": "forwards",
-          "sourceLineNumber": 3,
-          "sourceLine": [
-            "Ivan Stenberg",
-            "Ty Dellandrea",
-            "Tyler Toffoli"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Ivan Stenberg",
               "reason": "not_in_current_roster"
             }
           ]
