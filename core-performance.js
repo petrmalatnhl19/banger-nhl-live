@@ -20,11 +20,12 @@ function table(rows){
  if(!rows.length)return '<p>Zatím nejsou k dispozici vyhodnocené zápasy.</p>';
  const maxAccuracy=Math.max(...rows.map(r=>Number(r.winner_accuracy_pct)).filter(Number.isFinite));
  const minError=Math.min(...rows.map(r=>Number(r.goal_mae)).filter(Number.isFinite));
- const html=rows.map(r=>{
+ const displayRows=rows.some(r=>r.model==='CORE 4.2')?rows:[...rows,{model:'CORE 4.2',games:0,winner_accuracy_pct:null,goal_mae:null,pending:true}];
+ const html=displayRows.map(r=>{
   const accuracy=Number(r.winner_accuracy_pct),error=Number(r.goal_mae);
-  const winnerBest=Number.isFinite(accuracy)&&accuracy===maxAccuracy;
-  const errorBest=Number.isFinite(error)&&error===minError;
-  return '<tr><td>'+esc(r.model)+'</td><td>'+esc(r.games)+'</td><td class="'+(winnerBest?'core-best':'')+'">'+fmt(r.winner_accuracy_pct)+' %</td><td class="'+(errorBest?'core-best':'')+'">'+fmt(r.goal_mae,3)+'</td></tr>';
+  const winnerBest=!r.pending&&r.winner_accuracy_pct!=null&&Number.isFinite(accuracy)&&accuracy===maxAccuracy;
+  const errorBest=!r.pending&&r.goal_mae!=null&&Number.isFinite(error)&&error===minError;
+  return r.pending?'<tr><td>'+esc(r.model)+'</td><td>0</td><td colspan="2" style="text-align:right;color:#a9dced">'+esc(String(window.__core42Pending??'5'))+' predikcí · čeká</td></tr>':'<tr><td>'+esc(r.model)+'</td><td>'+esc(r.games)+'</td><td class="'+(winnerBest?'core-best':'')+'">'+fmt(r.winner_accuracy_pct)+' %</td><td class="'+(errorBest?'core-best':'')+'">'+fmt(r.goal_mae,3)+'</td></tr>';
  }).join('');
  return '<div class="core-scroll"><table><thead><tr><th>Model</th><th>Záp.</th><th>Vítěz</th><th>Chyba</th></tr></thead><tbody>'+html+'</tbody></table></div><p class="core-note">Zeleně = nejlepší hodnota v zobrazeném přehledu. Chyba = průměrná odchylka gólů na tým. Malý počet zápasů znamená nejistý výsledek.</p>';
 }
@@ -66,9 +67,9 @@ async function load(panel){
    if(!Array.isArray(result))throw Error('Neplatná odpověď databáze');
    return result;
   };
-  const [all,paired,trend]=await Promise.all([fetchView('nhl_core_model_accuracy'),fetchView('nhl_core_model_head_to_head'),fetchView('nhl_core_model_trend')]);
+  const [all,paired,trend,statusRows]=await Promise.all([fetchView('nhl_core_model_accuracy'),fetchView('nhl_core_model_head_to_head'),fetchView('nhl_core_model_trend'),fetchView('nhl_core42_status')]);
   if(!panel.isConnected)return;
-  panel._coreData={all,paired,trend};
+  window.__core42Pending=Number(statusRows[0]?.pending_predictions??0);panel._coreData={all,paired,trend};
   lastLoad=Date.now();
   render(panel);renderTrend(panel);
  }catch(e){
