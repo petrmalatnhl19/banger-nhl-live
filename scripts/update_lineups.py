@@ -20,13 +20,13 @@ lines=[re.sub(r"\s+"," ",html.unescape(x)).strip() for x in "".join(p.parts).spl
 lines=[x for x in lines if x]
 teams={}
 for i,line in enumerate(lines):
- m=re.fullmatch(r"(.{2,55}?) projected lineup",line,re.I)
+ m=re.fullmatch(r"(.{2,55}?) projected (?:lineup|lines)",line,re.I)
  if not m:continue
  name=m.group(1).strip()
  if name.lower() in ("projected","today"):continue
  forwards=[];defense=[];goalies=[];injured="";scratched=""
  for x in lines[i+1:i+30]:
-  if re.search(r"projected lineup$|^Status report|^More from|^RELATED|^\d{1,2}:\d{2} [ap]\.m\.",x,re.I):break
+  if re.search(r"projected (?:lineup|lines)$|^Status report|^More from|^RELATED|^\d{1,2}:\d{2} [ap]\.m\.",x,re.I):break
   if x.startswith("Injured:"):injured=x[8:].strip();continue
   if x.startswith("Scratched:"):scratched=x[10:].strip();continue
   names=[y.strip() for y in re.split(r"\s+[-–—]{1,2}\s+",x) if y.strip()]
@@ -72,13 +72,13 @@ def parse_preview(article_url):
  content=[x for x in content if x]
  found={}
  for idx,line in enumerate(content):
-  match=re.fullmatch(r"(.{2,55}?) projected lineup",line,re.I)
+  match=re.fullmatch(r"(.{2,55}?) projected (?:lineup|lines)",line,re.I)
   if not match:continue
   key=match.group(1).strip().lower()
   if key not in TEAM_ABBREVS:continue
   forwards=[];defense=[];goalies=[];injured="";scratched=""
   for item in content[idx+1:idx+32]:
-   if re.search(r"projected lineup$|^Status report|^RELATED",item,re.I):break
+   if re.search(r"projected (?:lineup|lines)$|^Status report|^RELATED",item,re.I):break
    if item.startswith("Injured:"):injured=item[8:].strip();continue
    if item.startswith("Scratched:"):scratched=item[10:].strip();continue
    names=[x.strip() for x in re.split(r"\s+[-–—]{1,2}\s+",item) if x.strip()]
