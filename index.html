@@ -1869,9 +1869,9 @@ async function analyzeGame(id){
   if(root.isConnected&&h2hBody)h2hBody.innerHTML=renderH2h();
  })();
  // Read-only 5v5 xG context: never alters the archived pregame forecast.
- const xgSlot=document.createElement('section');
+ const xgSlot=document.createElement('details');
  xgSlot.className='analyst-fold';
- xgSlot.innerHTML='<details class="analyst-fold"><summary>📈 Kvalita šancí · xG 5 na 5</summary><div class="analyst-fold-body"><p class="analysis-small">Načítám MoneyPuck…</p></div></details>';
+ xgSlot.innerHTML='<summary>📈 Kvalita šancí · xG 5 na 5</summary><div class="analyst-fold-body"><p class="analysis-small">Načítám MoneyPuck…</p></div>';
  if(extraRoot)extraRoot.appendChild(xgSlot);
  void (async()=>{
   try{
@@ -1897,9 +1897,9 @@ async function analyzeGame(id){
    const fmtX=v=>Number(v).toLocaleString('cs-CZ',{maximumFractionDigits:2});
    const line=(code,v)=>'<p><b>'+clean(code)+'</b>: xGF '+fmtX(v.gf)+' · xGA '+fmtX(v.ga)+' · podíl xG <b>'+fmtX(v.share)+' %</b></p>';
    const body=a&&h?line(ac,a)+line(hc,h)+'<p class="analysis-small">Sezonní souhrn 5 na 5 z MoneyPuck. Nejde o předzápasový snímek ani o samostatnou pravděpodobnost výhry. Aktuální statistiky mohou obsahovat i pozdější zápasy; do archivovaných predikcí nevstupují.</p>':'<p>Pro oba týmy nejsou ověřené hodnoty xGF a xGA 5 na 5. Nic nedopočítáváme odhadem.</p>';
-   xgSlot.innerHTML='<details class="analyst-fold"><summary>📈 Kvalita šancí · xG 5 na 5</summary><div class="analyst-fold-body">'+body+'</div></details>';
+   xgSlot.innerHTML='<summary>📈 Kvalita šancí · xG 5 na 5</summary><div class="analyst-fold-body">'+body+'</div>';
   }catch(e){
-   if(root.isConnected&&xgSlot.isConnected)xgSlot.innerHTML='<details class="analyst-fold"><summary>📈 Kvalita šancí · xG 5 na 5</summary><div class="analyst-fold-body"><p>MoneyPuck momentálně nedostupný. Výsledky xG nevymýšlíme.</p></div></details>';
+   if(root.isConnected&&xgSlot.isConnected)xgSlot.innerHTML='<summary>📈 Kvalita šancí · xG 5 na 5</summary><div class="analyst-fold-body"><p>MoneyPuck momentálně nedostupný. Výsledky xG nevymýšlíme.</p></div>';
   }
  })();
  const lastIds=[ga[0]?.id,gh[0]?.id];
