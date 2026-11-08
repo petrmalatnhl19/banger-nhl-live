@@ -53,20 +53,43 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "red wings": {
-      "updatedAt": "2026-11-07T19:38:37.159755+00:00",
-      "previousPublishedAt": "2026-11-05T18:27:07.738000+00:00",
+      "updatedAt": "2026-11-08T19:40:35.992591+00:00",
+      "previousPublishedAt": "2026-11-07T19:35:08.238000+00:00",
       "publishedAt": "2026-11-07T19:35:08.238000+00:00",
       "source": "https://www.nhl.com/news/detroit-red-wings-colorado-avalanche-game-preview-november-7-2026",
       "events": [
+        {
+          "type": "added",
+          "player": "Michael Rasmussen",
+          "to": "Útok 3"
+        },
+        {
+          "type": "added",
+          "player": "J.T. Compher",
+          "to": "Útok 3"
+        },
         {
           "type": "added",
           "player": "John Leonard",
           "to": "Útok 3"
         },
         {
-          "type": "removed",
-          "player": "Nate Danielson",
-          "from": "Útok 3"
+          "type": "moved",
+          "player": "Carter Mazur",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Sheldon Dries",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Keegan Kolesar",
+          "from": "Útok 3",
+          "to": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -401,32 +424,32 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "mammoth": {
-      "updatedAt": "2026-11-07T17:48:37.339653+00:00",
-      "previousPublishedAt": "2026-11-05T18:46:31.658000+00:00",
-      "publishedAt": "2026-11-07T17:45:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-08T19:40:35.993225+00:00",
+      "previousPublishedAt": "2026-11-07T17:48:55.189000+00:00",
+      "publishedAt": "2026-11-07T17:48:55.189000+00:00",
+      "source": "https://www.nhl.com/news/utah-mammoth-ottawa-senators-game-preview-november-7-2026",
       "events": [
+        {
+          "type": "added",
+          "player": "Artem Duda",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "added",
+          "player": "Andrew Peeke",
+          "to": "Obrana 2"
+        },
         {
           "type": "moved",
           "player": "Dmitri Simashev",
-          "from": "Obrana 3",
-          "to": "Obrana 2"
+          "from": "Obrana 2",
+          "to": "Obrana 3"
         },
         {
           "type": "moved",
           "player": "Nick DeSimone",
-          "from": "Obrana 3",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "removed",
-          "player": "Nate Schmidt",
-          "from": "Obrana 2"
-        },
-        {
-          "type": "removed",
-          "player": "Andrew Peeke",
-          "from": "Obrana 2"
+          "from": "Obrana 2",
+          "to": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

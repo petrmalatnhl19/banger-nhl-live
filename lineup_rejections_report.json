@@ -1,9 +1,9 @@
 {
-  "teamsWithRejectedLines": 4,
+  "teamsWithRejectedLines": 2,
   "teams": {
     "lightning": {
       "team": "TBL",
-      "rosterUpdatedAt": "2026-11-08T19:38:51.575929+00:00",
+      "rosterUpdatedAt": "2026-11-08T19:40:27.029920+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 3,
       "candidateDefensePairs": 4,
@@ -34,64 +34,9 @@
         }
       ]
     },
-    "mammoth": {
-      "team": "UTA",
-      "rosterUpdatedAt": "2026-11-08T19:38:51.786980+00:00",
-      "rosterSnapshotPresent": true,
-      "candidateForwardLines": 4,
-      "candidateDefensePairs": 3,
-      "validatedForwardLines": 4,
-      "validatedDefensePairs": 2,
-      "rejected": [
-        {
-          "group": "defense",
-          "sourceLineNumber": 2,
-          "sourceLine": [
-            "Artem Duda",
-            "Andrew Peeke"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Artem Duda",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ]
-    },
-    "red wings": {
-      "team": "DET",
-      "rosterUpdatedAt": "2026-11-08T19:38:50.011425+00:00",
-      "rosterSnapshotPresent": true,
-      "candidateForwardLines": 4,
-      "candidateDefensePairs": 3,
-      "validatedForwardLines": 3,
-      "validatedDefensePairs": 3,
-      "rejected": [
-        {
-          "group": "forwards",
-          "sourceLineNumber": 3,
-          "sourceLine": [
-            "Michael Rasmussen",
-            "J.T. Compher",
-            "John Leonard"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "John Leonard",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ]
-    },
     "senators": {
       "team": "OTT",
-      "rosterUpdatedAt": "2026-11-08T19:38:50.999584+00:00",
+      "rosterUpdatedAt": "2026-11-08T19:40:26.684961+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,

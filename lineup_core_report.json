@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T19:39:05.124452+00:00",
+  "generatedAt": "2026-11-08T19:40:36.413330+00:00",
   "sourceFile": "lineups.json",
   "teams": {
     "avalanche": {
@@ -270,17 +270,17 @@
     },
     "mammoth": {
       "name": "Mammoth",
-      "complete": false,
+      "complete": true,
       "forwardLines": 4,
-      "defensePairs": 2,
+      "defensePairs": 3,
       "missingForwardLines": 0,
-      "missingDefensePairs": 1,
+      "missingDefensePairs": 0,
       "malformedForwardLines": [],
       "malformedDefensePairs": [],
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/utah-mammoth-ottawa-senators-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:48:55.189000+00:00",
-      "status": "incomplete_projection"
+      "status": "complete_projection"
     },
     "maple leafs": {
       "name": "Maple Leafs",
@@ -368,17 +368,17 @@
     },
     "red wings": {
       "name": "Red Wings",
-      "complete": false,
-      "forwardLines": 3,
+      "complete": true,
+      "forwardLines": 4,
       "defensePairs": 3,
-      "missingForwardLines": 1,
+      "missingForwardLines": 0,
       "missingDefensePairs": 0,
       "malformedForwardLines": [],
       "malformedDefensePairs": [],
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/detroit-red-wings-colorado-avalanche-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T19:35:08.238000+00:00",
-      "status": "incomplete_projection"
+      "status": "complete_projection"
     },
     "sabres": {
       "name": "Sabres",
@@ -452,8 +452,8 @@
   "summary": {
     "teams": 31,
     "expectedTeams": 32,
-    "complete": 28,
-    "incomplete": 3,
+    "complete": 30,
+    "incomplete": 1,
     "missing": 1,
     "coveragePercent": 96.9
   }

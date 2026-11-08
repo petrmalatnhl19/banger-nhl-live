@@ -3,7 +3,7 @@
     "lineup_core_report.json",
     "lineup_rejections_report.json"
   ],
-  "incompleteTeams": 4,
+  "incompleteTeams": 2,
   "teams": [
     {
       "team": "lightning",
@@ -32,63 +32,6 @@
               "name": "Zemgus Girgensons",
               "reason": "other_position_group",
               "inLocalCurrentRoster": true,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ],
-      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
-    },
-    {
-      "team": "mammoth",
-      "status": "incomplete_projection",
-      "reason": "rejected_roster_lines",
-      "missingForwardLines": 0,
-      "missingDefensePairs": 1,
-      "source": "https://www.nhl.com/news/utah-mammoth-ottawa-senators-game-preview-november-7-2026",
-      "publishedAt": "2026-11-07T17:48:55.189000+00:00",
-      "rejectedLines": [
-        {
-          "group": "defense",
-          "sourceLineNumber": 2,
-          "sourceLine": [
-            "Artem Duda",
-            "Andrew Peeke"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Artem Duda",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ],
-      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
-    },
-    {
-      "team": "red wings",
-      "status": "incomplete_projection",
-      "reason": "rejected_roster_lines",
-      "missingForwardLines": 1,
-      "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/detroit-red-wings-colorado-avalanche-game-preview-november-7-2026",
-      "publishedAt": "2026-11-07T19:35:08.238000+00:00",
-      "rejectedLines": [
-        {
-          "group": "forwards",
-          "sourceLineNumber": 3,
-          "sourceLine": [
-            "Michael Rasmussen",
-            "J.T. Compher",
-            "John Leonard"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "John Leonard",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
               "requiresIndependentGameEvidence": true
             }
           ]

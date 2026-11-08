@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T19:39:04.643569+00:00",
+  "generatedAt": "2026-11-08T19:40:35.989161+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -228,29 +228,16 @@
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
+      "gameEvidenceException": {
+        "player": "Artem Duda",
+        "role": "defense",
+        "basis": "official game boxscore on projection publication date"
+      },
       "roleMismatches": [],
-      "rejectedLines": [
-        {
-          "group": "defense",
-          "line": 2,
-          "players": [
-            "Artem Duda"
-          ],
-          "sourceLine": [
-            "Artem Duda",
-            "Andrew Peeke"
-          ]
-        }
-      ],
-      "rejectedPlayerReasons": [
-        {
-          "name": "Artem Duda",
-          "expectedRole": "defense",
-          "reason": "not_in_current_roster"
-        }
-      ],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
       "validatedForwardLines": 4,
-      "validatedDefensePairs": 2,
+      "validatedDefensePairs": 3,
       "accepted": true
     },
     "red wings": {
@@ -261,29 +248,15 @@
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
+      "gameEvidenceException": {
+        "player": "John Leonard",
+        "role": "forwards",
+        "basis": "official game boxscore on projection publication date"
+      },
       "roleMismatches": [],
-      "rejectedLines": [
-        {
-          "group": "forwards",
-          "line": 3,
-          "players": [
-            "John Leonard"
-          ],
-          "sourceLine": [
-            "Michael Rasmussen",
-            "J.T. Compher",
-            "John Leonard"
-          ]
-        }
-      ],
-      "rejectedPlayerReasons": [
-        {
-          "name": "John Leonard",
-          "expectedRole": "forwards",
-          "reason": "not_in_current_roster"
-        }
-      ],
-      "validatedForwardLines": 3,
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
       "validatedDefensePairs": 3,
       "accepted": true
     },
@@ -298,7 +271,7 @@
       "gameEvidenceException": {
         "player": "Trey Taylor",
         "role": "defense",
-        "basis": "official DAL game boxscore on projection publication date"
+        "basis": "official game boxscore on projection publication date"
       },
       "roleMismatches": [],
       "rejectedLines": [],
