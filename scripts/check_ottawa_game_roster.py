@@ -19,6 +19,15 @@ def fetch(path):
 def norm(name):
     return "".join(ch for ch in str(name).casefold() if ch.isalpha())
 
+def matches_player(target, box_name):
+    parts = str(target).split()
+    if len(parts) < 2:
+        return norm(target) == norm(box_name)
+    compact = str(box_name).replace(".", "").split()
+    return (norm(target) == norm(box_name) or
+            (len(compact) >= 2 and norm(compact[0]) == norm(parts[0][0]) and
+             norm(compact[-1]) == norm(parts[-1])))
+
 def player_names(box, side):
     names = set()
     stats = (box.get("playerByGameStats") or {}).get(side) or {}
@@ -26,7 +35,7 @@ def player_names(box, side):
         for player in stats.get(group) or []:
             if not isinstance(player, dict):
                 continue
-            names.add(norm(player.get("name", {}).get("default", "") if isinstance(player.get("name"), dict) else player.get("name", "")))
+            names.add(player.get("name", {}).get("default", "") if isinstance(player.get("name"), dict) else player.get("name", ""))
     return names
 
 today = dt.datetime.now(dt.timezone.utc).date()
@@ -57,7 +66,7 @@ for game in recent:
         names = player_names(box, side)
         for player in TARGETS:
             result["players"][player]["checkedGames"] += 1
-            if norm(player) in names:
+            if any(matches_player(player, observed) for observed in names):
                 result["players"][player]["appearedInGames"].append({"gameId": gid, "gameDate": game.get("gameDate")})
     except Exception as exc:
         result["errors"].append(f"game {gid}: {type(exc).__name__}")
