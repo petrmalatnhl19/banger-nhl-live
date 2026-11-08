@@ -1,9 +1,9 @@
 # NHL projection diagnostics
 
-Generated (UTC): 2026-11-08T05:50:31.449593+00:00
+Generated (UTC): 2026-11-08T06:33:07.689705+00:00
 
 Available (including historical): 32/32
-Recent verified (source published within 36h): 27/32
+Recent verified (source published within 36h): 25/32
 
 > Recent does not mean confirmed for the next game.
 

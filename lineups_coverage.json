@@ -1,11 +1,13 @@
 {
-  "generatedAt": "2026-11-08T05:50:31.449593+00:00",
+  "generatedAt": "2026-11-08T06:33:07.689705+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 27,
+  "currentProjections": 25,
   "needsFreshProjection": [
     "blackhawks",
     "blue jackets",
+    "ducks",
+    "flames",
     "flyers",
     "jets",
     "senators"
@@ -14,6 +16,8 @@
   "olderVerified": [
     "blackhawks",
     "blue jackets",
+    "ducks",
+    "flames",
     "flyers",
     "jets",
     "senators"
@@ -136,11 +140,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-06T18:21:14.068000+00:00",
       "source": "https://www.nhl.com/news/anaheim-ducks-calgary-flames-game-preview-november-6-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "flames": {
       "hasProjectedLines": true,
@@ -148,11 +152,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-06T18:21:14.068000+00:00",
       "source": "https://www.nhl.com/news/anaheim-ducks-calgary-flames-game-preview-november-6-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "flyers": {
       "hasProjectedLines": true,

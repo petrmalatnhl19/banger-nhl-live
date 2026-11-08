@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-08T05:50:34.495125+00:00",
-  "rostersUpdatedAt": "2026-11-08T05:50:07.961467+00:00",
+  "updatedAt": "2026-11-08T06:33:09.921667+00:00",
+  "rostersUpdatedAt": "2026-11-08T06:32:49.651383+00:00",
   "projectionDate": "2026-11-08",
   "teamCount": 32,
   "goalieCount": 77,
@@ -350,8 +350,9 @@
       "team": "TBL",
       "teamKey": "lightning",
       "playerId": 8476883,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-08",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Sebastian Cossa",

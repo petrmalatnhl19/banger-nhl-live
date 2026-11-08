@@ -1,24 +1,15 @@
 {
   "date": "2026-11-08",
-  "updatedAt": "2026-11-08T05:50:34.456564+00:00",
+  "updatedAt": "2026-11-08T06:33:09.891176+00:00",
   "teams": {
-    "FLA": {
-      "name": "Jacob Markstrom",
+    "BUF": {
+      "name": "Colten Ellis",
       "status": "projected",
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T05:50:34.456564+00:00",
-      "gameId": 2026020277
-    },
-    "BOS": {
-      "name": "Jeremy Swayman",
-      "status": "projected",
-      "date": "2026-11-08",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T05:50:34.456564+00:00",
-      "gameId": 2026020277
+      "checkedAt": "2026-11-08T06:33:09.891176+00:00",
+      "gameId": 2026020278
     },
     "CGY": {
       "name": "Dustin Wolf",
@@ -26,17 +17,8 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T05:50:34.456564+00:00",
+      "checkedAt": "2026-11-08T06:33:09.891176+00:00",
       "gameId": 2026020281
-    },
-    "BUF": {
-      "name": "Colten Ellis",
-      "status": "projected",
-      "date": "2026-11-08",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T05:50:34.456564+00:00",
-      "gameId": 2026020278
     },
     "PHI": {
       "name": "Dan Vladar",
@@ -44,7 +26,7 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T05:50:34.456564+00:00",
+      "checkedAt": "2026-11-08T06:33:09.891176+00:00",
       "gameId": 2026020281
     },
     "WPG": {
@@ -53,11 +35,56 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T05:50:34.456564+00:00",
+      "checkedAt": "2026-11-08T06:33:09.891176+00:00",
+      "gameId": 2026020280
+    },
+    "BOS": {
+      "name": "Jeremy Swayman",
+      "status": "projected",
+      "date": "2026-11-08",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-08T06:33:09.891176+00:00",
+      "gameId": 2026020277
+    },
+    "FLA": {
+      "name": "Jacob Markstrom",
+      "status": "projected",
+      "date": "2026-11-08",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-08T06:33:09.891176+00:00",
+      "gameId": 2026020277
+    },
+    "TBL": {
+      "name": "Andrei Vasilevskiy",
+      "status": "projected",
+      "date": "2026-11-08",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-08T06:33:09.891176+00:00",
       "gameId": 2026020280
     }
   },
   "conflicts": [
+    {
+      "team": "FLA",
+      "specialist": "Akira Schmid",
+      "nhl": "Jacob Markstrom",
+      "nhlSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season"
+    },
+    {
+      "team": "BOS",
+      "specialist": "Michael DiPietro",
+      "nhl": "Jeremy Swayman",
+      "nhlSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season"
+    },
+    {
+      "team": "TBL",
+      "specialist": "Andrei Vasilevskiy",
+      "nhl": "Dennis Hildeby",
+      "nhlSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season"
+    },
     {
       "date": "2026-11-08",
       "team": "ANA",
@@ -81,13 +108,6 @@
     },
     {
       "date": "2026-11-08",
-      "team": "TBL",
-      "reason": "source disagreement",
-      "rotowire": "Andrei Vasilevskiy",
-      "previous": "Dennis Hildeby"
-    },
-    {
-      "date": "2026-11-08",
       "team": "TOR",
       "reason": "source disagreement",
       "rotowire": "Anthony Stolarz",
@@ -101,8 +121,6 @@
       "previous": "Adin Hill"
     }
   ],
-  "sourceErrors": [
-    "specialist: ValueError: Source does not show today's date"
-  ],
+  "sourceErrors": [],
   "status": "partial"
 }
