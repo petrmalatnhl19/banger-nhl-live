@@ -9,14 +9,21 @@ if not src.exists():
     print("No source diagnostics available")
     raise SystemExit(0)
 data = json.loads(src.read_text(encoding="utf-8"))
+roster_path = root / "nhl_rosters.json"
+roster_data = json.loads(roster_path.read_text(encoding="utf-8")) if roster_path.exists() else {}
+roster_teams = roster_data.get("teams", {})
 issues = {}
 for slug, entry in sorted(data.get("teams", {}).items()):
     rejected = entry.get("rejectedLines", [])
     if not rejected:
         continue
     reasons = {(p.get("name"), p.get("expectedRole")): p.get("reason") for p in entry.get("rejectedPlayerReasons", [])}
+    roster = roster_teams.get(slug, {})
+    roster_players = {p.casefold() for role in ("forwards", "defense", "goalies") for p in roster.get(role, []) if isinstance(p, str)}
     issues[slug] = {
         "team": entry.get("team"),
+        "rosterUpdatedAt": roster.get("updatedAt"),
+        "rosterSnapshotPresent": bool(roster),
         "candidateForwardLines": entry.get("candidateForwardLines"),
         "candidateDefensePairs": entry.get("candidateDefensePairs"),
         "validatedForwardLines": entry.get("validatedForwardLines"),
@@ -24,7 +31,9 @@ for slug, entry in sorted(data.get("teams", {}).items()):
         "rejected": [
             {"group": line.get("group"), "sourceLineNumber": line.get("line"),
              "sourceLine": line.get("sourceLine"),
-             "unverifiedPlayers": [{"name": p, "reason": reasons.get((p, line.get("group")), "unknown")}
+             "unverifiedPlayers": [{"name": p, "reason": reasons.get((p, line.get("group")), "unknown"),
+                                   "inLocalCurrentRoster": p.casefold() in roster_players,
+                                   "requiresIndependentGameEvidence": True}
                                    for p in line.get("players", [])]}
             for line in rejected
         ],
