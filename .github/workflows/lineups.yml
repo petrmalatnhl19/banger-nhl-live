@@ -5,6 +5,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+concurrency:
+  group: nhl-lineups-main
+  cancel-in-progress: false
 jobs:
   refresh:
     runs-on: ubuntu-latest
@@ -110,5 +113,16 @@ jobs:
           done
           if ! git diff --cached --quiet; then
             git commit -m "Update NHL projected lineups"
-            git push
+            for attempt in 1 2 3; do
+              if git push; then
+                echo "Lineup changes pushed successfully"
+                exit 0
+              fi
+              echo "Push attempt $attempt failed; rebasing on latest main"
+              git fetch origin main
+              git rebase origin/main || { git rebase --abort; echo "Rebase conflict: manual review required"; exit 1; }
+              sleep 2
+            done
+            echo "Unable to push after three attempts"
+            exit 1
           fi
