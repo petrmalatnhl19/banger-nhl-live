@@ -53,6 +53,19 @@ try:
 except (OSError, ValueError):
     source_diagnostics = {}
 alternative_count = 0
+freshness_counts = {"recent_24h": 0, "aging_24_72h": 0, "historical_over_72h": 0, "undated": 0}
+now = datetime.datetime.now(datetime.timezone.utc)
+def source_freshness(value):
+    if not value:
+        return "undated", None
+    try:
+        published = datetime.datetime.fromisoformat(value.replace("Z", "+00:00"))
+        if published.tzinfo is None:
+            return "undated", None
+        age = max(0, (now - published).total_seconds() / 3600)
+        return ("recent_24h" if age <= 24 else "aging_24_72h" if age <= 72 else "historical_over_72h"), round(age, 1)
+    except (ValueError, TypeError, AttributeError):
+        return "undated", None
 for slug, team in sorted(teams.items()):
     forwards = team.get("forwards") or []
     defense = team.get("defense") or []
@@ -61,6 +74,8 @@ for slug, team in sorted(teams.items()):
     players = [p.casefold().strip() for rows in (forwards, defense) for row in rows if isinstance(row, list) for p in row if isinstance(p, str)]
     duplicate = sorted({p for p in players if players.count(p) > 1})
     complete = len(forwards) == 4 and all(f_valid) and len(defense) == 3 and all(d_valid) and not duplicate
+    freshness, age_hours = source_freshness(team.get("publishedAt"))
+    freshness_counts[freshness] += 1
     source_config = source_diagnostics.get(slug, {}).get("rosterConfiguration", {})
     alternative = (slug == "lightning" and not complete
                    and source_config.get("formation") == "11F+7D"
@@ -79,6 +94,8 @@ for slug, team in sorted(teams.items()):
         "malformedDefensePairs": [i + 1 for i, ok in enumerate(d_valid) if not ok],
         "duplicatePlayers": duplicate, "source": team.get("source"),
         "publishedAt": team.get("publishedAt"),
+        "freshness": freshness, "sourceAgeHours": age_hours,
+        "freshnessNote": "Publication age only; not confirmation of next-game lineup.",
         "status": "complete_projection" if complete else ("possible_11F_7D" if alternative else "incomplete_projection"),
         "alternativeFormation": source_config if alternative else None,
         "alternativeFormationVerified": False if alternative else None,
@@ -94,7 +111,8 @@ for abbreviation, slug in EXPECTED.items():
         }
 report["summary"] = {"teams": len(teams), "expectedTeams": len(EXPECTED), **counts,
                      "coveragePercent": round(100 * len(teams) / len(EXPECTED), 1),
-                     "possibleAlternativeFormations": alternative_count}
+                     "possibleAlternativeFormations": alternative_count,
+                     "freshness": freshness_counts}
 OUTPUT.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 print("BANGER Lineup Core 2.0:", json.dumps(report["summary"], ensure_ascii=False))
 for slug, entry in report["teams"].items():
