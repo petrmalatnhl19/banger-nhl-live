@@ -63,7 +63,7 @@
         "Lukas Dostal": 8480843,
         "Ville Husso": 8478024
       },
-      "updatedAt": "2026-11-08T14:52:29.745162+00:00",
+      "updatedAt": "2026-11-08T15:31:57.010387+00:00",
       "abbrev": "ANA"
     },
     "bruins": {
@@ -123,7 +123,7 @@
         "Michael DiPietro": 8480022,
         "Jeremy Swayman": 8480280
       },
-      "updatedAt": "2026-11-08T14:52:29.833837+00:00",
+      "updatedAt": "2026-11-08T15:31:57.168076+00:00",
       "abbrev": "BOS"
     },
     "sabres": {
@@ -187,7 +187,7 @@
         "Ukko-Pekka Luukkonen": 8480045,
         "Alex Lyon": 8479312
       },
-      "updatedAt": "2026-11-08T14:52:29.895253+00:00",
+      "updatedAt": "2026-11-08T15:31:57.318407+00:00",
       "abbrev": "BUF"
     },
     "hurricanes": {
@@ -247,7 +247,7 @@
         "Brandon Bussi": 8483548,
         "Pyotr Kochetkov": 8481611
       },
-      "updatedAt": "2026-11-08T14:52:29.986578+00:00",
+      "updatedAt": "2026-11-08T15:31:57.479957+00:00",
       "abbrev": "CAR"
     },
     "blue jackets": {
@@ -305,7 +305,7 @@
         "Jet Greaves": 8482982,
         "Cam Talbot": 8475660
       },
-      "updatedAt": "2026-11-08T14:52:30.126040+00:00",
+      "updatedAt": "2026-11-08T15:31:57.647761+00:00",
       "abbrev": "CBJ"
     },
     "flames": {
@@ -369,7 +369,7 @@
         "Devin Cooley": 8482445,
         "Dustin Wolf": 8481692
       },
-      "updatedAt": "2026-11-08T14:52:30.281357+00:00",
+      "updatedAt": "2026-11-08T15:31:57.802570+00:00",
       "abbrev": "CGY"
     },
     "blackhawks": {
@@ -429,7 +429,7 @@
         "Spencer Knight": 8481519,
         "Arvid Soderblom": 8482821
       },
-      "updatedAt": "2026-11-08T14:52:30.426830+00:00",
+      "updatedAt": "2026-11-08T15:31:57.963803+00:00",
       "abbrev": "CHI"
     },
     "avalanche": {
@@ -485,7 +485,7 @@
         "Mackenzie Blackwood": 8478406,
         "Scott Wedgewood": 8475809
       },
-      "updatedAt": "2026-11-08T14:52:30.560332+00:00",
+      "updatedAt": "2026-11-08T15:31:58.125441+00:00",
       "abbrev": "COL"
     },
     "stars": {
@@ -545,7 +545,7 @@
         "Casey DeSmith": 8479193,
         "Jake Oettinger": 8479979
       },
-      "updatedAt": "2026-11-08T14:52:30.699428+00:00",
+      "updatedAt": "2026-11-08T15:31:58.281848+00:00",
       "abbrev": "DAL"
     },
     "red wings": {
@@ -609,7 +609,7 @@
         "Michal Postava": 8485545,
         "Daniil Tarasov": 8480193
       },
-      "updatedAt": "2026-11-08T14:52:30.833824+00:00",
+      "updatedAt": "2026-11-08T15:31:58.440100+00:00",
       "abbrev": "DET"
     },
     "oilers": {
@@ -679,13 +679,14 @@
         "Devon Levi": 8482221,
         "Matt Tomkins": 8477035
       },
-      "updatedAt": "2026-11-08T14:52:31.273072+00:00",
+      "updatedAt": "2026-11-08T15:31:58.591908+00:00",
       "abbrev": "EDM"
     },
     "panthers": {
       "forwards": [
         "Aleksander Barkov",
         "Sam Bennett",
+        "Jack Devine",
         "Lars Eller",
         "Jonah Gadjovich",
         "Garnet Hathaway",
@@ -717,6 +718,7 @@
       "playerIds": {
         "Aleksander Barkov": 8477493,
         "Sam Bennett": 8477935,
+        "Jack Devine": 8483433,
         "Lars Eller": 8474189,
         "Jonah Gadjovich": 8479981,
         "Garnet Hathaway": 8477903,
@@ -741,7 +743,7 @@
         "Jacob Markstrom": 8474593,
         "Akira Schmid": 8481033
       },
-      "updatedAt": "2026-11-08T14:52:31.411774+00:00",
+      "updatedAt": "2026-11-08T15:31:58.740273+00:00",
       "abbrev": "FLA"
     },
     "kings": {
@@ -803,7 +805,7 @@
         "Anton Forsberg": 8476341,
         "Darcy Kuemper": 8475311
       },
-      "updatedAt": "2026-11-08T14:52:31.496081+00:00",
+      "updatedAt": "2026-11-08T15:31:58.879750+00:00",
       "abbrev": "LAK"
     },
     "wild": {
@@ -867,7 +869,7 @@
         "Calvin Pickard": 8475717,
         "Jesper Wallstedt": 8482661
       },
-      "updatedAt": "2026-11-08T14:52:31.631630+00:00",
+      "updatedAt": "2026-11-08T15:31:58.966695+00:00",
       "abbrev": "MIN"
     },
     "canadiens": {
@@ -929,7 +931,7 @@
         "Jacob Fowler": 8484170,
         "Samuel Montembeault": 8478470
       },
-      "updatedAt": "2026-11-08T14:52:31.771828+00:00",
+      "updatedAt": "2026-11-08T15:31:59.106740+00:00",
       "abbrev": "MTL"
     },
     "devils": {
@@ -985,7 +987,7 @@
         "Jake Allen": 8474596,
         "Connor Hellebuyck": 8476945
       },
-      "updatedAt": "2026-11-08T14:52:31.811905+00:00",
+      "updatedAt": "2026-11-08T15:31:59.264429+00:00",
       "abbrev": "NJD"
     },
     "predators": {
@@ -1045,7 +1047,7 @@
         "Justus Annunen": 8481020,
         "Juuse Saros": 8477424
       },
-      "updatedAt": "2026-11-08T14:52:31.948516+00:00",
+      "updatedAt": "2026-11-08T15:31:59.431317+00:00",
       "abbrev": "NSH"
     },
     "islanders": {
@@ -1107,7 +1109,7 @@
         "Ilya Sorokin": 8478009,
         "Semyon Varlamov": 8473575
       },
-      "updatedAt": "2026-11-08T14:52:31.992436+00:00",
+      "updatedAt": "2026-11-08T15:31:59.600048+00:00",
       "abbrev": "NYI"
     },
     "rangers": {
@@ -1171,7 +1173,7 @@
         "Joonas Korpisalo": 8476914,
         "Igor Shesterkin": 8478048
       },
-      "updatedAt": "2026-11-08T14:52:32.137363+00:00",
+      "updatedAt": "2026-11-08T15:31:59.754963+00:00",
       "abbrev": "NYR"
     },
     "senators": {
@@ -1202,7 +1204,6 @@
       ],
       "goalies": [
         "Samuel Ersson",
-        "Jonas Johansson",
         "Linus Ullmark"
       ],
       "playerIds": {
@@ -1228,10 +1229,9 @@
         "Carter Yakemchuk": 8484759,
         "Artem Zub": 8482245,
         "Samuel Ersson": 8481035,
-        "Jonas Johansson": 8477992,
         "Linus Ullmark": 8476999
       },
-      "updatedAt": "2026-11-08T14:52:32.273385+00:00",
+      "updatedAt": "2026-11-08T15:31:59.904966+00:00",
       "abbrev": "OTT"
     },
     "flyers": {
@@ -1291,7 +1291,7 @@
         "Dan Vladar": 8478435,
         "Joseph Woll": 8479361
       },
-      "updatedAt": "2026-11-08T14:52:32.404043+00:00",
+      "updatedAt": "2026-11-08T15:32:00.127345+00:00",
       "abbrev": "PHI"
     },
     "penguins": {
@@ -1353,7 +1353,7 @@
         "Sergei Murashov": 8483703,
         "Arturs Silovs": 8481668
       },
-      "updatedAt": "2026-11-08T14:52:32.549813+00:00",
+      "updatedAt": "2026-11-08T15:32:00.396165+00:00",
       "abbrev": "PIT"
     },
     "kraken": {
@@ -1419,7 +1419,7 @@
         "Joey Daccord": 8478916,
         "Philipp Grubauer": 8475831
       },
-      "updatedAt": "2026-11-08T14:52:32.693474+00:00",
+      "updatedAt": "2026-11-08T15:32:00.619404+00:00",
       "abbrev": "SEA"
     },
     "sharks": {
@@ -1479,7 +1479,7 @@
         "Yaroslav Askarov": 8482137,
         "Alex Nedeljkovic": 8477968
       },
-      "updatedAt": "2026-11-08T14:52:32.782926+00:00",
+      "updatedAt": "2026-11-08T15:32:00.782290+00:00",
       "abbrev": "SJS"
     },
     "blues": {
@@ -1541,7 +1541,7 @@
         "Jordan Binnington": 8476412,
         "Joel Hofer": 8480981
       },
-      "updatedAt": "2026-11-08T14:52:32.923025+00:00",
+      "updatedAt": "2026-11-08T15:32:00.920953+00:00",
       "abbrev": "STL"
     },
     "lightning": {
@@ -1601,7 +1601,7 @@
         "Dennis Hildeby": 8483710,
         "Andrei Vasilevskiy": 8476883
       },
-      "updatedAt": "2026-11-08T14:52:32.980269+00:00",
+      "updatedAt": "2026-11-08T15:32:01.067750+00:00",
       "abbrev": "TBL"
     },
     "maple leafs": {
@@ -1671,7 +1671,7 @@
         "Sergei Bobrovsky": 8475683,
         "Anthony Stolarz": 8476932
       },
-      "updatedAt": "2026-11-08T14:52:33.079060+00:00",
+      "updatedAt": "2026-11-08T15:32:01.229762+00:00",
       "abbrev": "TOR"
     },
     "mammoth": {
@@ -1731,7 +1731,7 @@
         "Sebastian Cossa": 8482657,
         "Karel Vejmelka": 8478872
       },
-      "updatedAt": "2026-11-08T14:52:33.219124+00:00",
+      "updatedAt": "2026-11-08T15:32:01.426520+00:00",
       "abbrev": "UTA"
     },
     "canucks": {
@@ -1792,7 +1792,7 @@
         "Kevin Lankinen": 8480947,
         "Leevi Meriläinen": 8482447
       },
-      "updatedAt": "2026-11-08T14:52:33.272837+00:00",
+      "updatedAt": "2026-11-08T15:32:01.564790+00:00",
       "abbrev": "VAN"
     },
     "golden knights": {
@@ -1848,7 +1848,7 @@
         "Carter Hart": 8479394,
         "Adin Hill": 8478499
       },
-      "updatedAt": "2026-11-08T14:52:33.334153+00:00",
+      "updatedAt": "2026-11-08T15:32:01.729369+00:00",
       "abbrev": "VGK"
     },
     "jets": {
@@ -1875,7 +1875,8 @@
         "Haydn Fleury",
         "Josh Morrissey",
         "Neal Pionk",
-        "Dylan Samberg"
+        "Dylan Samberg",
+        "Henry Thrun"
       ],
       "goalies": [
         "Nico Daws",
@@ -1904,11 +1905,12 @@
         "Josh Morrissey": 8477504,
         "Neal Pionk": 8480145,
         "Dylan Samberg": 8480049,
+        "Henry Thrun": 8481567,
         "Nico Daws": 8482076,
         "Stuart Skinner": 8479973,
         "Clay Stevenson": 8483532
       },
-      "updatedAt": "2026-11-08T14:52:33.417793+00:00",
+      "updatedAt": "2026-11-08T15:32:01.871949+00:00",
       "abbrev": "WPG"
     },
     "capitals": {
@@ -1970,9 +1972,9 @@
         "Rémi Poirier": 8482465,
         "Logan Thompson": 8480313
       },
-      "updatedAt": "2026-11-08T14:52:33.468091+00:00",
+      "updatedAt": "2026-11-08T15:32:02.017641+00:00",
       "abbrev": "WSH"
     }
   },
-  "fetchedAt": "2026-11-08T14:52:33.468106+00:00"
+  "fetchedAt": "2026-11-08T15:32:02.017652+00:00"
 }

@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-08T14:52:52.021803+00:00",
-  "rostersUpdatedAt": "2026-11-08T14:52:33.468106+00:00",
+  "updatedAt": "2026-11-08T15:33:19.546834+00:00",
+  "rostersUpdatedAt": "2026-11-08T15:32:02.017652+00:00",
   "projectionDate": "2026-11-08",
   "teamCount": 32,
-  "goalieCount": 77,
+  "goalieCount": 76,
   "goalies": [
     {
       "name": "Mackenzie Blackwood",
@@ -553,14 +553,6 @@
       "team": "OTT",
       "teamKey": "senators",
       "playerId": 8481035,
-      "starterStatus": "unknown",
-      "starterGameDate": null
-    },
-    {
-      "name": "Jonas Johansson",
-      "team": "OTT",
-      "teamKey": "senators",
-      "playerId": 8477992,
       "starterStatus": "unknown",
       "starterGameDate": null
     },
