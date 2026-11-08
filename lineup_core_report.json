@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T19:34:42.216603+00:00",
+  "generatedAt": "2026-11-08T19:36:37.790229+00:00",
   "sourceFile": "lineups.json",
   "teams": {
     "avalanche": {
@@ -410,17 +410,17 @@
     },
     "stars": {
       "name": "Stars",
-      "complete": false,
+      "complete": true,
       "forwardLines": 4,
-      "defensePairs": 2,
+      "defensePairs": 3,
       "missingForwardLines": 0,
-      "missingDefensePairs": 1,
+      "missingDefensePairs": 0,
       "malformedForwardLines": [],
       "malformedDefensePairs": [],
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/san-jose-sharks-dallas-stars-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:44:05.810000+00:00",
-      "status": "incomplete_projection"
+      "status": "complete_projection"
     },
     "wild": {
       "name": "Wild",
@@ -452,8 +452,8 @@
   "summary": {
     "teams": 31,
     "expectedTeams": 32,
-    "complete": 27,
-    "incomplete": 4,
+    "complete": 28,
+    "incomplete": 3,
     "missing": 1,
     "coveragePercent": 96.9
   }

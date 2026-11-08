@@ -1,9 +1,9 @@
 {
-  "teamsWithRejectedLines": 5,
+  "teamsWithRejectedLines": 4,
   "teams": {
     "lightning": {
       "team": "TBL",
-      "rosterUpdatedAt": "2026-11-08T19:34:29.984972+00:00",
+      "rosterUpdatedAt": "2026-11-08T19:36:10.951417+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 3,
       "candidateDefensePairs": 4,
@@ -36,7 +36,7 @@
     },
     "mammoth": {
       "team": "UTA",
-      "rosterUpdatedAt": "2026-11-08T19:34:30.355524+00:00",
+      "rosterUpdatedAt": "2026-11-08T19:36:11.357686+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -63,7 +63,7 @@
     },
     "red wings": {
       "team": "DET",
-      "rosterUpdatedAt": "2026-11-08T19:34:28.405973+00:00",
+      "rosterUpdatedAt": "2026-11-08T19:36:07.609262+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -91,7 +91,7 @@
     },
     "senators": {
       "team": "OTT",
-      "rosterUpdatedAt": "2026-11-08T19:34:29.376615+00:00",
+      "rosterUpdatedAt": "2026-11-08T19:36:09.734110+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -126,33 +126,6 @@
           "unverifiedPlayers": [
             {
               "name": "Samuel Blais",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ]
-    },
-    "stars": {
-      "team": "DAL",
-      "rosterUpdatedAt": "2026-11-08T19:34:28.317100+00:00",
-      "rosterSnapshotPresent": true,
-      "candidateForwardLines": 4,
-      "candidateDefensePairs": 3,
-      "validatedForwardLines": 4,
-      "validatedDefensePairs": 2,
-      "rejected": [
-        {
-          "group": "defense",
-          "sourceLineNumber": 3,
-          "sourceLine": [
-            "Trey Taylor",
-            "Tyler Myers"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Trey Taylor",
               "reason": "not_in_current_roster",
               "inLocalCurrentRoster": false,
               "requiresIndependentGameEvidence": true

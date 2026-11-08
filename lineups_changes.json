@@ -124,84 +124,20 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "stars": {
-      "updatedAt": "2026-11-07T17:48:37.339941+00:00",
-      "previousPublishedAt": "2026-11-05T18:11:13.469000+00:00",
-      "publishedAt": "2026-11-07T17:45:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-08T19:36:37.124268+00:00",
+      "previousPublishedAt": "2026-11-07T17:44:05.810000+00:00",
+      "publishedAt": "2026-11-07T17:44:05.810000+00:00",
+      "source": "https://www.nhl.com/news/san-jose-sharks-dallas-stars-game-preview-november-7-2026",
       "events": [
         {
-          "type": "moved",
-          "player": "Jason Robertson",
-          "from": "Útok 2",
-          "to": "Útok 1"
-        },
-        {
-          "type": "moved",
-          "player": "Roope Hintz",
-          "from": "Útok 2",
-          "to": "Útok 1"
-        },
-        {
-          "type": "moved",
-          "player": "Arttu Hyry",
-          "from": "Útok 2",
-          "to": "Útok 1"
-        },
-        {
-          "type": "moved",
-          "player": "Jamie Benn",
-          "from": "Útok 1",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Wyatt Johnston",
-          "from": "Útok 1",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Mikko Rantanen",
-          "from": "Útok 1",
-          "to": "Útok 2"
+          "type": "added",
+          "player": "Trey Taylor",
+          "to": "Obrana 3"
         },
         {
           "type": "added",
-          "player": "Sam Steel",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Joel Kiviranta",
-          "from": "Útok 3",
-          "to": "Útok 4"
-        },
-        {
-          "type": "moved",
-          "player": "Thomas Harley",
-          "from": "Obrana 2",
-          "to": "Obrana 1"
-        },
-        {
-          "type": "added",
-          "player": "Lian Bichsel",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "moved",
-          "player": "Esa Lindell",
-          "from": "Obrana 1",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "removed",
-          "player": "Colin Blackwell",
-          "from": "Útok 4"
-        },
-        {
-          "type": "removed",
           "player": "Tyler Myers",
-          "from": "Obrana 2"
+          "to": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
