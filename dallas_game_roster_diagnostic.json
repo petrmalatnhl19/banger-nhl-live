@@ -1,0 +1,14 @@
+{
+  "checkedAt": "2026-11-08T19:30:58.166545+00:00",
+  "team": "DAL",
+  "scope": "Recent completed NHL games; historical evidence only",
+  "players": {
+    "Trey Taylor": {
+      "appearedInGames": [],
+      "checkedGames": 8
+    }
+  },
+  "errors": [],
+  "gamesInspected": 8,
+  "note": "Never automatically approve a projected line based only on historical participation."
+}
