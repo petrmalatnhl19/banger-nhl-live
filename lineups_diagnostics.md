@@ -1,13 +1,13 @@
 # NHL projection diagnostics
 
-Generated (UTC): 2026-11-08T19:03:03.606615+00:00
+Generated (UTC): 2026-11-08T19:05:07.509970+00:00
 
 Available (including historical): 32/32
 Recent verified (source published within 36h): 25/32
 
 > Recent does not mean confirmed for the next game.
 
-- BOS: FRESH; reason=passed; candidate=True; verified lines=3F/2D; publishedAt=2026-11-08T17:15:00+00:00; source=https://www.nhl.com/news/nhl-lineup-projections-2026-27-season; archive=yes
+- BOS: FRESH; reason=passed; candidate=True; verified lines=4F/3D; publishedAt=2026-11-08T17:15:00+00:00; source=https://www.nhl.com/news/nhl-lineup-projections-2026-27-season; archive=yes
 - CAR: FRESH; reason=passed; candidate=True; verified lines=4F/2D; publishedAt=2026-11-07T17:28:41.992000+00:00; source=https://www.nhl.com/news/chicago-blackhawks-carolina-hurricanes-game-preview-november-7-2026; archive=yes
 - LAK: FRESH; reason=passed; candidate=True; verified lines=4F/3D; publishedAt=2026-11-07T19:22:47.795000+00:00; source=https://www.nhl.com/news/pittsburgh-penguins-los-angeles-kings-game-preview-november-7-2026; archive=yes
 - NYI: FRESH; reason=passed; candidate=True; verified lines=4F/3D; publishedAt=2026-11-07T17:58:42.776000+00:00; source=https://www.nhl.com/news/new-jersey-devils-new-york-islanders-game-preview-november-7-2026; archive=yes

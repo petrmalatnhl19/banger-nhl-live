@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T19:03:02.311189+00:00",
+  "generatedAt": "2026-11-08T19:05:06.427334+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -10,45 +10,10 @@
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
       "roleMismatches": [],
-      "rejectedLines": [
-        {
-          "group": "forwards",
-          "line": 2,
-          "players": [
-            "Mikey Eyssimont"
-          ],
-          "sourceLine": [
-            "Mikey Eyssimont",
-            "Fraser Minten",
-            "Morgan Geekie"
-          ]
-        },
-        {
-          "group": "defense",
-          "line": 2,
-          "players": [
-            "William Borgen"
-          ],
-          "sourceLine": [
-            "Nikita Zadorov",
-            "William Borgen"
-          ]
-        }
-      ],
-      "rejectedPlayerReasons": [
-        {
-          "name": "Mikey Eyssimont",
-          "expectedRole": "forwards",
-          "reason": "not_in_current_roster"
-        },
-        {
-          "name": "William Borgen",
-          "expectedRole": "defense",
-          "reason": "not_in_current_roster"
-        }
-      ],
-      "validatedForwardLines": 3,
-      "validatedDefensePairs": 2,
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
       "accepted": true
     },
     "hurricanes": {

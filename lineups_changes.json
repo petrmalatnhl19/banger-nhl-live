@@ -1012,55 +1012,83 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "bruins": {
-      "updatedAt": "2026-11-07T21:22:20.437939+00:00",
-      "previousPublishedAt": "2026-11-05T16:53:27.782000+00:00",
-      "publishedAt": "2026-11-07T21:05:00.853000+00:00",
-      "source": "https://www.nhl.com/news/florida-panthers-boston-bruins-game-preview-november-8-2026",
+      "updatedAt": "2026-11-08T19:05:06.430086+00:00",
+      "previousPublishedAt": "2026-11-08T17:15:00+00:00",
+      "publishedAt": "2026-11-08T17:15:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
+        {
+          "type": "added",
+          "player": "Mikey Eyssimont",
+          "to": "Útok 2"
+        },
+        {
+          "type": "added",
+          "player": "Fraser Minten",
+          "to": "Útok 2"
+        },
+        {
+          "type": "added",
+          "player": "Morgan Geekie",
+          "to": "Útok 2"
+        },
         {
           "type": "moved",
           "player": "Casey Mittelstadt",
-          "from": "Útok 3",
-          "to": "Útok 2"
+          "from": "Útok 2",
+          "to": "Útok 3"
         },
         {
           "type": "moved",
           "player": "Elias Lindholm",
-          "from": "Útok 3",
-          "to": "Útok 2"
+          "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Marat Khusnutdinov",
+          "from": "Útok 2",
+          "to": "Útok 3"
         },
         {
           "type": "moved",
           "player": "Tanner Jeannot",
-          "from": "Útok 4",
-          "to": "Útok 3"
+          "from": "Útok 3",
+          "to": "Útok 4"
         },
         {
           "type": "moved",
           "player": "Sean Kuraly",
-          "from": "Útok 4",
-          "to": "Útok 3"
+          "from": "Útok 3",
+          "to": "Útok 4"
         },
         {
           "type": "moved",
           "player": "Mark Kastelic",
-          "from": "Útok 4",
-          "to": "Útok 3"
+          "from": "Útok 3",
+          "to": "Útok 4"
         },
         {
-          "type": "removed",
-          "player": "Fraser Minten",
-          "from": "Útok 2"
+          "type": "added",
+          "player": "Nikita Zadorov",
+          "to": "Obrana 2"
         },
         {
-          "type": "removed",
-          "player": "Morgan Geekie",
-          "from": "Útok 2"
+          "type": "added",
+          "player": "William Borgen",
+          "to": "Obrana 2"
         },
         {
-          "type": "removed",
-          "player": "James Hagens",
-          "from": "Útok 3"
+          "type": "moved",
+          "player": "Frederic Brunet",
+          "from": "Obrana 2",
+          "to": "Obrana 3"
+        },
+        {
+          "type": "moved",
+          "player": "Mason Lohrei",
+          "from": "Obrana 2",
+          "to": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

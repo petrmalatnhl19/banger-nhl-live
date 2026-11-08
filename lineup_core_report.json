@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T19:03:03.197317+00:00",
+  "generatedAt": "2026-11-08T19:05:07.039297+00:00",
   "sourceFile": "lineups.json",
   "teams": {
     "avalanche": {
@@ -46,17 +46,17 @@
     },
     "bruins": {
       "name": "Bruins",
-      "complete": false,
-      "forwardLines": 3,
-      "defensePairs": 2,
-      "missingForwardLines": 1,
-      "missingDefensePairs": 1,
+      "complete": true,
+      "forwardLines": 4,
+      "defensePairs": 3,
+      "missingForwardLines": 0,
+      "missingDefensePairs": 0,
       "malformedForwardLines": [],
       "malformedDefensePairs": [],
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "publishedAt": "2026-11-08T17:15:00+00:00",
-      "status": "incomplete_projection"
+      "status": "complete_projection"
     },
     "canadiens": {
       "name": "Canadiens",
@@ -450,8 +450,8 @@
   "summary": {
     "teams": 30,
     "expectedTeams": 32,
-    "complete": 22,
-    "incomplete": 8,
+    "complete": 23,
+    "incomplete": 7,
     "missing": 2,
     "coveragePercent": 93.8
   }

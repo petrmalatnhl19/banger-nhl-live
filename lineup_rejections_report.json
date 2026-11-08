@@ -1,44 +1,6 @@
 {
-  "teamsWithRejectedLines": 4,
+  "teamsWithRejectedLines": 3,
   "teams": {
-    "bruins": {
-      "team": "BOS",
-      "candidateForwardLines": 4,
-      "candidateDefensePairs": 3,
-      "validatedForwardLines": 3,
-      "validatedDefensePairs": 2,
-      "rejected": [
-        {
-          "group": "forwards",
-          "sourceLineNumber": 2,
-          "sourceLine": [
-            "Mikey Eyssimont",
-            "Fraser Minten",
-            "Morgan Geekie"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Mikey Eyssimont",
-              "reason": "not_in_current_roster"
-            }
-          ]
-        },
-        {
-          "group": "defense",
-          "sourceLineNumber": 2,
-          "sourceLine": [
-            "Nikita Zadorov",
-            "William Borgen"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "William Borgen",
-              "reason": "not_in_current_roster"
-            }
-          ]
-        }
-      ]
-    },
     "hurricanes": {
       "team": "CAR",
       "candidateForwardLines": 4,
