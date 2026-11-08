@@ -230,6 +230,23 @@ for key,abbr in FOCUS.items():
   "candidateForwardLines":len(candidate.get("forwards",[])) if candidate else 0,
   "candidateDefensePairs":len(candidate.get("defense",[])) if candidate else 0,
   "rosterValidation":"not_run" if candidate else "no_complete_source_candidate"}
+# Narrow evidence-based exception: the exact DAL defenseman Trey Taylor.
+# Require a fresh official game-boxscore diagnostic AND a game on the
+# projected lineup's publication date. No general surname-based exemptions.
+def verified_dallas_taylor(team):
+ try:
+  from pathlib import Path
+  proof=json.loads(Path("dallas_game_roster_diagnostic.json").read_text(encoding="utf-8"))
+  checked=datetime.datetime.fromisoformat(proof["checkedAt"].replace("Z","+00:00"))
+  if datetime.datetime.now(datetime.timezone.utc)-checked>datetime.timedelta(hours=24):return False
+  published=team.get("publishedAt")
+  if not published:return False
+  date=datetime.datetime.fromisoformat(published.replace("Z","+00:00")).date()
+  appearances=proof.get("players",{}).get("Trey Taylor",{}).get("appearedInGames",[])
+  return (proof.get("team")=="DAL" and not proof.get("errors") and
+          any(datetime.date.fromisoformat(g["gameDate"])==date for g in appearances))
+ except (OSError,KeyError,ValueError,TypeError):return False
+
 validated={}
 for name,team in teams.items():
  abbr=TEAM_ABBREVS.get(name)
@@ -247,6 +264,9 @@ for name,team in teams.items():
   groups={}
   for role,group in (("forwards","forwards"),("defense","defensemen"),("goalies","goalies")):
    groups[role]={normalize(str((p.get("firstName",{}).get("default","") if isinstance(p.get("firstName"),dict) else p.get("firstName","")))+" "+str((p.get("lastName",{}).get("default","") if isinstance(p.get("lastName"),dict) else p.get("lastName","")))) for p in roster.get(group,[])}
+  if name=="stars" and verified_dallas_taylor(team):
+   groups["defense"].add(normalize("Trey Taylor"))
+   if name in source_diagnostics:source_diagnostics[name]["gameEvidenceException"]={"player":"Trey Taylor","role":"defense","basis":"official DAL game boxscore on projection publication date"}
   # Collect up to eight 2-name source rows, because some are forward fragments.
   # Only NHL-roster-verified defender pairs become published defense lines.
   # Classify each parsed row by NHL roster position, not by its order in HTML.
