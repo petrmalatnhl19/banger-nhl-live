@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-08T21:56:19.027606+00:00",
+  "generatedAt": "2026-11-08T22:36:07.789931+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-08T17:15:00+00:00",
+      "candidatePublishedAt": "2026-11-08T22:04:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -122,7 +122,7 @@
       "team": "WPG",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-08T17:15:00+00:00",
+      "candidatePublishedAt": "2026-11-08T22:04:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -152,7 +152,7 @@
       "team": "TBL",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-08T17:15:00+00:00",
+      "candidatePublishedAt": "2026-11-08T22:04:00+00:00",
       "candidateForwardLines": 3,
       "candidateDefensePairs": 4,
       "rosterValidation": "passed",

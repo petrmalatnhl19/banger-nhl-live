@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-08T21:56:23.231142+00:00",
-  "rostersUpdatedAt": "2026-11-08T21:55:47.299805+00:00",
+  "updatedAt": "2026-11-08T22:36:11.512775+00:00",
+  "rostersUpdatedAt": "2026-11-08T22:35:40.370326+00:00",
   "projectionDate": "2026-11-08",
   "teamCount": 32,
   "goalieCount": 74,
@@ -171,8 +171,9 @@
       "team": "NJD",
       "teamKey": "devils",
       "playerId": 8476945,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-08",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Laurent Brossoit",
@@ -220,7 +221,7 @@
       "team": "PHI",
       "teamKey": "flyers",
       "playerId": 8478435,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-08",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -351,7 +352,7 @@
       "team": "TBL",
       "teamKey": "lightning",
       "playerId": 8476883,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-08",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -392,8 +393,9 @@
       "team": "TOR",
       "teamKey": "maple leafs",
       "playerId": 8476932,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-08",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Frederik Andersen",

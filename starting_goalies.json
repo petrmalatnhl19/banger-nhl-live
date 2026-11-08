@@ -1,6 +1,6 @@
 {
   "date": "2026-11-08",
-  "updatedAt": "2026-11-08T21:56:23.187110+00:00",
+  "updatedAt": "2026-11-08T22:36:11.461849+00:00",
   "teams": {
     "CGY": {
       "name": "Devin Cooley",
@@ -8,16 +8,25 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T21:56:23.187110+00:00",
+      "checkedAt": "2026-11-08T22:36:11.461849+00:00",
       "gameId": 2026020281
     },
-    "PHI": {
-      "name": "Dan Vladar",
-      "status": "projected",
+    "NJD": {
+      "name": "Connor Hellebuyck",
+      "status": "confirmed",
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T21:56:23.187110+00:00",
+      "checkedAt": "2026-11-08T22:36:11.461849+00:00",
+      "gameId": 2026020279
+    },
+    "PHI": {
+      "name": "Dan Vladar",
+      "status": "confirmed",
+      "date": "2026-11-08",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-08T22:36:11.461849+00:00",
       "gameId": 2026020281
     },
     "PIT": {
@@ -26,16 +35,16 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T21:56:23.187110+00:00",
+      "checkedAt": "2026-11-08T22:36:11.461849+00:00",
       "gameId": 2026020282
     },
     "TBL": {
       "name": "Andrei Vasilevskiy",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T21:56:23.187110+00:00",
+      "checkedAt": "2026-11-08T22:36:11.461849+00:00",
       "gameId": 2026020280
     },
     "WPG": {
@@ -44,17 +53,8 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T21:56:23.187110+00:00",
+      "checkedAt": "2026-11-08T22:36:11.461849+00:00",
       "gameId": 2026020280
-    },
-    "BUF": {
-      "name": "Colten Ellis",
-      "status": "confirmed",
-      "date": "2026-11-08",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T21:56:23.187110+00:00",
-      "gameId": 2026020278
     },
     "FLA": {
       "name": "Jacob Markstrom",
@@ -62,8 +62,17 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T21:56:23.187110+00:00",
+      "checkedAt": "2026-11-08T22:36:11.461849+00:00",
       "gameId": 2026020277
+    },
+    "BUF": {
+      "name": "Colten Ellis",
+      "status": "confirmed",
+      "date": "2026-11-08",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-08T22:36:11.461849+00:00",
+      "gameId": 2026020278
     },
     "VGK": {
       "name": "Adin Hill",
@@ -71,7 +80,7 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T21:56:23.187110+00:00",
+      "checkedAt": "2026-11-08T22:36:11.461849+00:00",
       "gameId": 2026020278
     },
     "BOS": {
@@ -80,8 +89,17 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T21:56:23.187110+00:00",
+      "checkedAt": "2026-11-08T22:36:11.461849+00:00",
       "gameId": 2026020277
+    },
+    "TOR": {
+      "name": "Anthony Stolarz",
+      "status": "confirmed",
+      "date": "2026-11-08",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-08T22:36:11.461849+00:00",
+      "gameId": 2026020279
     }
   },
   "conflicts": [
@@ -91,20 +109,6 @@
       "reason": "source disagreement",
       "rotowire": "Laurent Brossoit",
       "previous": "Ville Husso"
-    },
-    {
-      "date": "2026-11-08",
-      "team": "NJD",
-      "reason": "source disagreement",
-      "rotowire": "Connor Hellebuyck",
-      "previous": "Jake Allen"
-    },
-    {
-      "date": "2026-11-08",
-      "team": "TOR",
-      "reason": "source disagreement",
-      "rotowire": "Anthony Stolarz",
-      "previous": "Sergei Bobrovsky"
     }
   ],
   "sourceErrors": [],

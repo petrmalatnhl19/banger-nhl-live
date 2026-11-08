@@ -380,20 +380,31 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "devils": {
-      "updatedAt": "2026-11-03T17:46:39.606879+00:00",
-      "previousPublishedAt": "2026-10-29T19:45:29.810000+00:00",
-      "publishedAt": "",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-08T22:36:07.795550+00:00",
+      "previousPublishedAt": "2026-11-07T17:58:42.776000+00:00",
+      "publishedAt": "2026-11-08T22:18:00+00:00",
+      "source": "https://www.nhl.com/news/new-jersey-devils-toronto-maple-leafs-game-preview-november-8-2026",
       "events": [
         {
-          "type": "added",
-          "player": "Johnathan Kovacevic",
-          "to": "Obrana 3"
+          "type": "moved",
+          "player": "Amadeus Lombardi",
+          "from": "Útok 4",
+          "to": "Útok 3"
         },
         {
           "type": "removed",
-          "player": "Brenden Dillon",
-          "from": "Obrana 3"
+          "player": "Anthony Mantha",
+          "from": "Útok 3"
+        },
+        {
+          "type": "removed",
+          "player": "Cody Glass",
+          "from": "Útok 4"
+        },
+        {
+          "type": "removed",
+          "player": "Connor Brown",
+          "from": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -455,49 +466,54 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "maple leafs": {
-      "updatedAt": "2026-11-07T17:48:37.339585+00:00",
-      "previousPublishedAt": "2026-11-03T17:53:04.347000+00:00",
-      "publishedAt": "2026-11-07T17:45:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-08T22:36:07.795786+00:00",
+      "previousPublishedAt": "2026-11-07T17:48:00+00:00",
+      "publishedAt": "2026-11-08T22:18:00+00:00",
+      "source": "https://www.nhl.com/news/new-jersey-devils-toronto-maple-leafs-game-preview-november-8-2026",
       "events": [
         {
+          "type": "moved",
+          "player": "Jake McCabe",
+          "from": "Obrana 2",
+          "to": "Obrana 1"
+        },
+        {
+          "type": "moved",
+          "player": "Darren Raddysh",
+          "from": "Obrana 2",
+          "to": "Obrana 1"
+        },
+        {
+          "type": "moved",
+          "player": "Oliver Ekman-Larsson",
+          "from": "Obrana 3",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "moved",
+          "player": "Troy Stecher",
+          "from": "Obrana 3",
+          "to": "Obrana 2"
+        },
+        {
           "type": "added",
-          "player": "John Tavares",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Dakota Joshua",
-          "from": "Útok 2",
-          "to": "Útok 3"
+          "player": "Dakota Mermis",
+          "to": "Obrana 3"
         },
         {
           "type": "added",
-          "player": "Colton Sissons",
-          "to": "Útok 3"
+          "player": "Cole McWard",
+          "to": "Obrana 3"
         },
         {
-          "type": "added",
-          "player": "Gavin McKenna",
-          "to": "Útok 3"
+          "type": "removed",
+          "player": "Morgan Rielly",
+          "from": "Obrana 1"
         },
         {
-          "type": "moved",
-          "player": "Brandon Duhaime",
-          "from": "Útok 3",
-          "to": "Útok 4"
-        },
-        {
-          "type": "moved",
-          "player": "Teddy Blueger",
-          "from": "Útok 3",
-          "to": "Útok 4"
-        },
-        {
-          "type": "moved",
-          "player": "Zack MacEwen",
-          "from": "Útok 3",
-          "to": "Útok 4"
+          "type": "removed",
+          "player": "Chris Tanev",
+          "from": "Obrana 1"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

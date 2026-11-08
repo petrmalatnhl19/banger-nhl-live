@@ -3,8 +3,19 @@
     "lineup_core_report.json",
     "lineup_rejections_report.json"
   ],
-  "incompleteTeams": 1,
+  "incompleteTeams": 2,
   "teams": [
+    {
+      "team": "devils",
+      "status": "incomplete_projection",
+      "reason": "incomplete_source_or_no_validated_replacement",
+      "missingForwardLines": 1,
+      "missingDefensePairs": 0,
+      "source": "https://www.nhl.com/news/new-jersey-devils-toronto-maple-leafs-game-preview-november-8-2026",
+      "publishedAt": "2026-11-08T22:18:00+00:00",
+      "rejectedLines": [],
+      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
+    },
     {
       "team": "lightning",
       "status": "possible_11F_7D",
@@ -12,7 +23,7 @@
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-08T17:15:00+00:00",
+      "publishedAt": "2026-11-08T22:04:00+00:00",
       "rejectedLines": [
         {
           "group": "defense",
