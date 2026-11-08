@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T15:33:11.383209+00:00",
+  "generatedAt": "2026-11-08T16:08:06.885185+00:00",
   "checked": 8,
   "articlesFound": 3,
   "errors": [],
@@ -49,8 +49,8 @@
     },
     {
       "url": "https://www.nhl.com/news/ottawa-senators-utah-mammoth-game-preview-november-7-2026",
-      "result": "fetch_or_parse_error",
-      "error": "The read operation timed out"
+      "result": "no_complete_projection",
+      "teams": []
     },
     {
       "url": "https://www.nhl.com/news/florida-panthers-boston-bruins-game-preview-november-8-2026",

@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-08T15:33:16.832015+00:00",
+  "generatedAt": "2026-11-08T16:08:08.750145+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-07T21:30:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/florida-panthers-boston-bruins-game-preview-november-8-2026",
+      "candidatePublishedAt": "2026-11-08T15:42:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -54,8 +54,8 @@
     "hurricanes": {
       "team": "CAR",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-07T21:30:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/chicago-blackhawks-carolina-hurricanes-game-preview-november-7-2026",
+      "candidatePublishedAt": "2026-11-07T17:28:41.992000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -87,8 +87,8 @@
     "kings": {
       "team": "LAK",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-07T21:30:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/pittsburgh-penguins-los-angeles-kings-game-preview-november-7-2026",
+      "candidatePublishedAt": "2026-11-07T19:22:47.795000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -102,8 +102,8 @@
     "islanders": {
       "team": "NYI",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-07T21:30:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/new-jersey-devils-new-york-islanders-game-preview-november-7-2026",
+      "candidatePublishedAt": "2026-11-07T17:58:42.776000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -117,8 +117,8 @@
     "rangers": {
       "team": "NYR",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-07T21:30:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/new-york-rangers-seattle-kraken-game-preview-november-7-2026",
+      "candidatePublishedAt": "2026-11-06T22:34:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -132,8 +132,8 @@
     "senators": {
       "team": "OTT",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-07T21:30:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/utah-mammoth-ottawa-senators-game-preview-november-7-2026",
+      "candidatePublishedAt": "2026-11-07T17:48:55.189000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "insufficient_position_matched_lines",
@@ -183,8 +183,8 @@
     "sharks": {
       "team": "SJS",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-07T21:30:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/san-jose-sharks-dallas-stars-game-preview-november-7-2026",
+      "candidatePublishedAt": "2026-11-07T17:44:05.810000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",

@@ -830,37 +830,37 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "panthers": {
-      "updatedAt": "2026-11-07T21:22:20.436678+00:00",
-      "previousPublishedAt": "2026-11-07T19:32:00+00:00",
-      "publishedAt": "2026-11-07T21:05:00.853000+00:00",
+      "updatedAt": "2026-11-08T16:08:08.752995+00:00",
+      "previousPublishedAt": "2026-11-07T21:30:00+00:00",
+      "publishedAt": "2026-11-08T15:42:00+00:00",
       "source": "https://www.nhl.com/news/florida-panthers-boston-bruins-game-preview-november-8-2026",
       "events": [
         {
-          "type": "moved",
-          "player": "Lars Eller",
-          "from": "Útok 3",
+          "type": "added",
+          "player": "Jack Devine",
           "to": "Útok 2"
         },
         {
           "type": "moved",
-          "player": "Cole Schwindt",
-          "from": "Útok 4",
+          "player": "Lars Eller",
+          "from": "Útok 2",
           "to": "Útok 3"
         },
         {
-          "type": "removed",
-          "player": "Sandis Vilmanis",
-          "from": "Útok 2"
-        },
-        {
-          "type": "removed",
+          "type": "added",
           "player": "Bokondji Imama",
-          "from": "Útok 4"
+          "to": "Útok 4"
         },
         {
-          "type": "removed",
+          "type": "moved",
+          "player": "Cole Schwindt",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
           "player": "Garnet Hathaway",
-          "from": "Útok 4"
+          "to": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

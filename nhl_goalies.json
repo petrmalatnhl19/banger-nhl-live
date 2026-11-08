@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-08T15:33:19.546834+00:00",
-  "rostersUpdatedAt": "2026-11-08T15:32:02.017652+00:00",
+  "updatedAt": "2026-11-08T16:08:11.552258+00:00",
+  "rostersUpdatedAt": "2026-11-08T16:07:54.439293+00:00",
   "projectionDate": "2026-11-08",
   "teamCount": 32,
-  "goalieCount": 76,
+  "goalieCount": 75,
   "goalies": [
     {
       "name": "Mackenzie Blackwood",
@@ -203,17 +203,17 @@
       "team": "CGY",
       "teamKey": "flames",
       "playerId": 8482445,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-08",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Dustin Wolf",
       "team": "CGY",
       "teamKey": "flames",
       "playerId": 8481692,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-08",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Dan Vladar",
@@ -431,7 +431,7 @@
       "team": "FLA",
       "teamKey": "panthers",
       "playerId": 8474593,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-08",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -504,14 +504,6 @@
       "team": "DET",
       "teamKey": "red wings",
       "playerId": 8476434,
-      "starterStatus": "unknown",
-      "starterGameDate": null
-    },
-    {
-      "name": "Michal Postava",
-      "team": "DET",
-      "teamKey": "red wings",
-      "playerId": 8485545,
       "starterStatus": "unknown",
       "starterGameDate": null
     },

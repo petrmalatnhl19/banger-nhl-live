@@ -1,6 +1,6 @@
 {
   "date": "2026-11-08",
-  "updatedAt": "2026-11-08T15:33:19.514002+00:00",
+  "updatedAt": "2026-11-08T16:08:11.506349+00:00",
   "teams": {
     "BUF": {
       "name": "Colten Ellis",
@@ -8,16 +8,16 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T15:33:19.514002+00:00",
+      "checkedAt": "2026-11-08T16:08:11.506349+00:00",
       "gameId": 2026020278
     },
     "CGY": {
-      "name": "Dustin Wolf",
-      "status": "projected",
+      "name": "Devin Cooley",
+      "status": "confirmed",
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T15:33:19.514002+00:00",
+      "checkedAt": "2026-11-08T16:08:11.506349+00:00",
       "gameId": 2026020281
     },
     "PHI": {
@@ -26,7 +26,7 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T15:33:19.514002+00:00",
+      "checkedAt": "2026-11-08T16:08:11.506349+00:00",
       "gameId": 2026020281
     },
     "WPG": {
@@ -35,7 +35,7 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T15:33:19.514002+00:00",
+      "checkedAt": "2026-11-08T16:08:11.506349+00:00",
       "gameId": 2026020280
     },
     "BOS": {
@@ -44,16 +44,16 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T15:33:19.514002+00:00",
+      "checkedAt": "2026-11-08T16:08:11.506349+00:00",
       "gameId": 2026020277
     },
     "FLA": {
       "name": "Jacob Markstrom",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T15:33:19.514002+00:00",
+      "checkedAt": "2026-11-08T16:08:11.506349+00:00",
       "gameId": 2026020277
     },
     "TBL": {
@@ -62,28 +62,22 @@
       "date": "2026-11-08",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-08T15:33:19.514002+00:00",
+      "checkedAt": "2026-11-08T16:08:11.506349+00:00",
       "gameId": 2026020280
     }
   },
   "conflicts": [
     {
-      "team": "BOS",
-      "specialist": "Michael DiPietro",
-      "nhl": "Jeremy Swayman",
-      "nhlSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season"
-    },
-    {
       "team": "TBL",
       "specialist": "Andrei Vasilevskiy",
       "nhl": "Dennis Hildeby",
-      "nhlSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season"
+      "nhlSource": "https://www.nhl.com/news/tampa-bay-lightning-minnesota-wild-game-preview-november-7-2026"
     },
     {
-      "team": "FLA",
-      "specialist": "Akira Schmid",
-      "nhl": "Jacob Markstrom",
-      "nhlSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season"
+      "team": "BOS",
+      "specialist": "Michael DiPietro",
+      "nhl": "Jeremy Swayman",
+      "nhlSource": "https://www.nhl.com/news/florida-panthers-boston-bruins-game-preview-november-8-2026"
     },
     {
       "date": "2026-11-08",
