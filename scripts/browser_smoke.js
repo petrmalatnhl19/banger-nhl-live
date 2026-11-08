@@ -36,7 +36,7 @@ const path = require('node:path');
   await page.locator('#arenaBody [data-match-tab="commentary"]').first().click();
   await page.locator('#arenaBody [data-match-pane="commentary"]:not(.hidden)').waitFor({ timeout: 10000 });
   await page.locator('#closeArena').click();
-  await page.locator('#liveArena.hidden').waitFor({ timeout: 10000 });
+  await page.locator('#liveArena').waitFor({ state: 'hidden', timeout: 10000 });
   if (errors.length) throw Error('JavaScript errors in match detail: ' + errors.join(' | '));
   if (errors.length) throw Error('JavaScript errors after navigation: ' + errors.join(' | '));
   // Verify all visible mobile navigation destinations without relying on hidden desktop tabs.
