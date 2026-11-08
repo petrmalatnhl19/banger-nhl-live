@@ -1127,20 +1127,35 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "jets": {
-      "updatedAt": "2026-11-07T18:17:55.619659+00:00",
+      "updatedAt": "2026-11-08T16:53:10.257357+00:00",
       "previousPublishedAt": "2026-11-05T18:31:00.644000+00:00",
-      "publishedAt": "2026-11-05T18:31:00.644000+00:00",
-      "source": "https://www.nhl.com/news/vancouver-canucks-winnipeg-jets-game-preview-november-5-2026",
+      "publishedAt": "2026-11-08T16:16:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
-          "type": "removed",
-          "player": "Mario Ferraro",
-          "from": "Obrana 3"
+          "type": "added",
+          "player": "Cole Koepke",
+          "to": "Útok 4"
         },
         {
-          "type": "removed",
-          "player": "Elias Salomonsson",
-          "from": "Obrana 3"
+          "type": "added",
+          "player": "Morgan Barron",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
+          "player": "Isak Rosen",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
+          "player": "Mario Ferraro",
+          "to": "Obrana 3"
+        },
+        {
+          "type": "added",
+          "player": "Tyrel Bauer",
+          "to": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
