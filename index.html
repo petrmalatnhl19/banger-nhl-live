@@ -1813,7 +1813,7 @@ async function analyzeGame(id){
  const renderH2h=()=>h2h.length?h2h.map(g=>'<p>'+clean(g.gameDate)+' · '+clean(g.awayTeam.abbrev)+' '+Number(g.awayTeam.score)+' : '+Number(g.homeTeam.score)+' '+clean(g.homeTeam.abbrev)+'</p>').join(''):'<p>V načtené historii nebyl nalezen vzájemný zápas. Neznamená to, že týmy spolu nehrály.</p>';
  extra+='<details class="analyst-fold"><summary>🤝 Vzájemné zápasy</summary><div class="analyst-fold-body" id="analyst-h2h-body">'+renderH2h()+'<p class="analysis-small">Starší sezóny se doplňují na pozadí…</p></div></details>';
  markAnalyst('Forma a vzájemné zápasy zobrazeny');
- const extraRoot=card.querySelector('#analyst-extras');if(extraRoot)extraRoot.innerHTML=extra;
+ const extraRoot=card.querySelector('#analyst-extras');if(extraRoot)extraRoot.innerHTML=extra+'<div id="analyst-late-goalies" aria-live="polite"></div>';
  const updateAnalystTimings=()=>{const slot=card.querySelector('#analyst-timing-detail');if(slot)slot.innerHTML=timingRows();};
  updateAnalystTimings();const extrasState=card.querySelector('#analyst-extras-state');if(extrasState)extrasState.textContent='Připraveno';
  // Historical head-to-head data is optional: never hold up the form and other sections.
@@ -1897,7 +1897,7 @@ async function analyzeGame(id){
  markAnalyst('Boxscore brankářů');updateAnalystTimings();
  const goalies=[goalie(boxes[0],ac),goalie(boxes[1],hc)];
  state('goalies',goalies.some(Boolean));
- if(extraRoot&&extraRoot.isConnected)extraRoot.insertAdjacentHTML('beforeend','<details class="analyst-fold"><summary>🥅 Brankáři · poslední zápas</summary><div class="analyst-fold-body">'+goalies.map((g,i)=>'<p><b>'+clean(i===0?ac:hc)+':</b> '+(g?'<strong>'+clean(g.name)+'</strong><span class="analyst-goalie-metrics">Úspěšnost: <b>'+clean(g.save)+'</b>'+(g.saved!=null&&g.shots!=null?' · Zákroky: '+g.saved+'/'+g.shots:'')+(g.against!=null?' · Inkasované góly: '+g.against:'')+'</span><span class="analyst-goalie-date">'+(g.date?'Zápas: '+clean(g.date):'Datum zápasu neuvedeno')+'</span>':'Údaje nedostupné')+'</p>').join('')+'<p class="analysis-small">Jde pouze o poslední dostupné utkání každého týmu, nikoli sezónní úspěšnost nebo potvrzené brankáře příštího zápasu. Sezónní brankářské statistiky doplníme až po ověření jejich datového zdroje.</p></div></details>');
+ if(extraRoot&&extraRoot.isConnected){const goalieSlot=extraRoot.querySelector('#analyst-late-goalies');if(goalieSlot)goalieSlot.innerHTML='<details class="analyst-fold"><summary>🥅 Brankáři · poslední zápas</summary><div class="analyst-fold-body">'+goalies.map((g,i)=>'<p><b>'+clean(i===0?ac:hc)+':</b> '+(g?'<strong>'+clean(g.name)+'</strong><span class="analyst-goalie-metrics">Úspěšnost: <b>'+clean(g.save)+'</b>'+(g.saved!=null&&g.shots!=null?' · Zákroky: '+g.saved+'/'+g.shots:'')+(g.against!=null?' · Inkasované góly: '+g.against:'')+'</span><span class="analyst-goalie-date">'+(g.date?'Zápas: '+clean(g.date):'Datum zápasu neuvedeno')+'</span>':'Údaje nedostupné')+'</p>').join('')+'<p class="analysis-small">Jde pouze o poslední dostupné utkání každého týmu, nikoli sezónní úspěšnost nebo potvrzené brankáře příštího zápasu. Sezónní brankářské statistiky doplníme až po ověření jejich datového zdroje.</p></div></details>';}
  const skaterSummary=(result,code)=>{
   if(!result.ok||!result.data)return null;
   const data=result.data;
