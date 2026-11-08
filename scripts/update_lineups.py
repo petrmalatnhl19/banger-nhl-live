@@ -220,7 +220,7 @@ for key,slug in SLUGS.items():
    teams[key]={"name":key.title(),"forwards":fw,"defense":df,"goalies":[],"injured":"","scratched":"","powerplay":pp,"source":url,"sourceType":"secondary"}
  except Exception as err:print("Secondary unavailable",key,str(err))
 # Diagnostic: distinguish source discovery failures from roster validation failures.
-FOCUS={"bruins":"BOS","hurricanes":"CAR","kings":"LAK","islanders":"NYI","rangers":"NYR","senators":"OTT","sharks":"SJS","jets":"WPG"}
+FOCUS={"bruins":"BOS","hurricanes":"CAR","kings":"LAK","islanders":"NYI","rangers":"NYR","senators":"OTT","sharks":"SJS","jets":"WPG","canucks":"VAN","lightning":"TBL","mammoth":"UTA","red wings":"DET","stars":"DAL"}
 source_diagnostics={}
 for key,abbr in FOCUS.items():
  candidate=teams.get(key)
