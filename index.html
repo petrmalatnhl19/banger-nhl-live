@@ -1741,10 +1741,10 @@ async function analyzeGame(id){
  let ga=schedules[0].ok?completed(schedules[0].data,ac):[],gh=schedules[1].ok?completed(schedules[1].data,hc):[];
  // Expand history only when season schedules are missing or insufficient.
  // Bound network requests and keep any successfully retrieved partial results.
- const needsHistory=()=>ga.length<12||gh.length<12||ga.filter(g=>g.homeTeam?.abbrev===ac||g.awayTeam?.abbrev===ac).length<12;
+ const needsHistory=()=>ga.length<5||gh.length<5;
  if(needsHistory()){
   const fetched=[];
-  for(let batch=0;batch<10;batch++){
+  for(let batch=0;batch<4;batch++){
    if(!root.isConnected)break;
    const dates=Array.from({length:4},(_,i)=>{const dt=new Date(day+'T12:00:00Z');dt.setUTCDate(dt.getUTCDate()-1-batch*4-i);return dt.toISOString().slice(0,10)});
    const part=await Promise.all(dates.map(date=>safe(()=>get('https://api-web.nhle.com/v1/score/'+date),2200)));
@@ -1754,8 +1754,8 @@ async function analyzeGame(id){
    const awayGames=ga.filter(g=>g.awayTeam?.abbrev===ac).length;
    const homeGames=gh.filter(g=>g.homeTeam?.abbrev===hc).length;
    const headToHead=ga.some(g=>g.awayTeam?.abbrev===hc||g.homeTeam?.abbrev===hc);
-   if(ga.length>=12&&gh.length>=12&&awayGames>=5&&homeGames>=5&&headToHead)break;
-   if(schedules[0].ok&&schedules[1].ok&&ga.length>=12&&gh.length>=12)break;
+   if(ga.length>=5&&gh.length>=5)break;
+   if(schedules[0].ok&&schedules[1].ok&&ga.length>=5&&gh.length>=5)break;
   }
  }
  if(!root.isConnected)return;
