@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T19:56:09.386598+00:00",
+  "generatedAt": "2026-11-08T19:58:13.063356+00:00",
   "sourceFile": "lineups.json",
   "teams": {
     "avalanche": {
@@ -72,7 +72,7 @@
       "source": "https://www.nhl.com/news/st-louis-blues-nashville-predators-game-preview-november-7-2026",
       "publishedAt": "2026-11-06T19:07:00+00:00",
       "freshness": "aging_24_72h",
-      "sourceAgeHours": 48.8,
+      "sourceAgeHours": 48.9,
       "freshnessNote": "Publication age only; not confirmation of next-game lineup.",
       "status": "complete_projection",
       "alternativeFormation": null,
@@ -110,7 +110,7 @@
       "source": "https://www.nhl.com/news/montreal-canadiens-toronto-maple-leafs-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:48:00+00:00",
       "freshness": "aging_24_72h",
-      "sourceAgeHours": 26.1,
+      "sourceAgeHours": 26.2,
       "freshnessNote": "Publication age only; not confirmation of next-game lineup.",
       "status": "complete_projection",
       "alternativeFormation": null,
@@ -129,7 +129,7 @@
       "source": "https://www.nhl.com/news/vancouver-canucks-edmonton-oilers-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T19:30:24.446000+00:00",
       "freshness": "aging_24_72h",
-      "sourceAgeHours": 24.4,
+      "sourceAgeHours": 24.5,
       "freshnessNote": "Publication age only; not confirmation of next-game lineup.",
       "status": "complete_projection",
       "alternativeFormation": null,
@@ -148,7 +148,7 @@
       "source": "https://www.nhl.com/news/florida-panthers-washington-capitals-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T15:37:00+00:00",
       "freshness": "aging_24_72h",
-      "sourceAgeHours": 28.3,
+      "sourceAgeHours": 28.4,
       "freshnessNote": "Publication age only; not confirmation of next-game lineup.",
       "status": "complete_projection",
       "alternativeFormation": null,
@@ -383,7 +383,7 @@
       "source": "https://www.nhl.com/news/utah-mammoth-ottawa-senators-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:48:55.189000+00:00",
       "freshness": "aging_24_72h",
-      "sourceAgeHours": 26.1,
+      "sourceAgeHours": 26.2,
       "freshnessNote": "Publication age only; not confirmation of next-game lineup.",
       "status": "complete_projection",
       "alternativeFormation": null,
@@ -402,7 +402,7 @@
       "source": "https://www.nhl.com/news/montreal-canadiens-toronto-maple-leafs-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:48:00+00:00",
       "freshness": "aging_24_72h",
-      "sourceAgeHours": 26.1,
+      "sourceAgeHours": 26.2,
       "freshnessNote": "Publication age only; not confirmation of next-game lineup.",
       "status": "complete_projection",
       "alternativeFormation": null,
@@ -421,7 +421,7 @@
       "source": "https://www.nhl.com/news/vancouver-canucks-edmonton-oilers-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T19:30:24.446000+00:00",
       "freshness": "aging_24_72h",
-      "sourceAgeHours": 24.4,
+      "sourceAgeHours": 24.5,
       "freshnessNote": "Publication age only; not confirmation of next-game lineup.",
       "status": "complete_projection",
       "alternativeFormation": null,
@@ -478,7 +478,7 @@
       "source": "https://www.nhl.com/news/st-louis-blues-nashville-predators-game-preview-november-7-2026",
       "publishedAt": "2026-11-06T19:07:00+00:00",
       "freshness": "aging_24_72h",
-      "sourceAgeHours": 48.8,
+      "sourceAgeHours": 48.9,
       "freshnessNote": "Publication age only; not confirmation of next-game lineup.",
       "status": "complete_projection",
       "alternativeFormation": null,
@@ -554,7 +554,7 @@
       "source": "https://www.nhl.com/news/utah-mammoth-ottawa-senators-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:48:55.189000+00:00",
       "freshness": "aging_24_72h",
-      "sourceAgeHours": 26.1,
+      "sourceAgeHours": 26.2,
       "freshnessNote": "Publication age only; not confirmation of next-game lineup.",
       "status": "complete_projection",
       "alternativeFormation": null,
@@ -611,7 +611,7 @@
       "source": "https://www.nhl.com/news/tampa-bay-lightning-minnesota-wild-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:41:54.999000+00:00",
       "freshness": "aging_24_72h",
-      "sourceAgeHours": 26.2,
+      "sourceAgeHours": 26.3,
       "freshnessNote": "Publication age only; not confirmation of next-game lineup.",
       "status": "complete_projection",
       "alternativeFormation": null,
@@ -632,5 +632,183 @@
       "historical_over_72h": 0,
       "undated": 0
     }
-  }
+  },
+  "refreshPriorities": [
+    {
+      "team": "blue jackets",
+      "ageHours": 50.1,
+      "publishedAt": "2026-11-06T17:50:25.006000+00:00",
+      "freshness": "aging_24_72h",
+      "status": "complete_projection",
+      "source": "https://www.nhl.com/news/columbus-blue-jackets-buffalo-sabres-game-preview-november-6-2026"
+    },
+    {
+      "team": "blues",
+      "ageHours": 48.9,
+      "publishedAt": "2026-11-06T19:07:00+00:00",
+      "freshness": "aging_24_72h",
+      "status": "complete_projection",
+      "source": "https://www.nhl.com/news/st-louis-blues-nashville-predators-game-preview-november-7-2026"
+    },
+    {
+      "team": "predators",
+      "ageHours": 48.9,
+      "publishedAt": "2026-11-06T19:07:00+00:00",
+      "freshness": "aging_24_72h",
+      "status": "complete_projection",
+      "source": "https://www.nhl.com/news/st-louis-blues-nashville-predators-game-preview-november-7-2026"
+    },
+    {
+      "team": "kraken",
+      "ageHours": 45.4,
+      "publishedAt": "2026-11-06T22:34:00+00:00",
+      "freshness": "aging_24_72h",
+      "status": "complete_projection",
+      "source": "https://www.nhl.com/news/new-york-rangers-seattle-kraken-game-preview-november-7-2026"
+    },
+    {
+      "team": "rangers",
+      "ageHours": 45.4,
+      "publishedAt": "2026-11-06T22:34:00+00:00",
+      "freshness": "aging_24_72h",
+      "status": "complete_projection",
+      "source": "https://www.nhl.com/news/new-york-rangers-seattle-kraken-game-preview-november-7-2026"
+    },
+    {
+      "team": "capitals",
+      "ageHours": 28.4,
+      "publishedAt": "2026-11-07T15:37:00+00:00",
+      "freshness": "aging_24_72h",
+      "status": "complete_projection",
+      "source": "https://www.nhl.com/news/florida-panthers-washington-capitals-game-preview-november-7-2026"
+    },
+    {
+      "team": "blackhawks",
+      "ageHours": 26.5,
+      "publishedAt": "2026-11-07T17:28:41.992000+00:00",
+      "freshness": "aging_24_72h",
+      "status": "complete_projection",
+      "source": "https://www.nhl.com/news/chicago-blackhawks-carolina-hurricanes-game-preview-november-7-2026"
+    },
+    {
+      "team": "hurricanes",
+      "ageHours": 26.5,
+      "publishedAt": "2026-11-07T17:28:41.992000+00:00",
+      "freshness": "aging_24_72h",
+      "status": "complete_projection",
+      "source": "https://www.nhl.com/news/chicago-blackhawks-carolina-hurricanes-game-preview-november-7-2026"
+    },
+    {
+      "team": "wild",
+      "ageHours": 26.3,
+      "publishedAt": "2026-11-07T17:41:54.999000+00:00",
+      "freshness": "aging_24_72h",
+      "status": "complete_projection",
+      "source": "https://www.nhl.com/news/tampa-bay-lightning-minnesota-wild-game-preview-november-7-2026"
+    },
+    {
+      "team": "canadiens",
+      "ageHours": 26.2,
+      "publishedAt": "2026-11-07T17:48:00+00:00",
+      "freshness": "aging_24_72h",
+      "status": "complete_projection",
+      "source": "https://www.nhl.com/news/montreal-canadiens-toronto-maple-leafs-game-preview-november-7-2026"
+    },
+    {
+      "team": "mammoth",
+      "ageHours": 26.2,
+      "publishedAt": "2026-11-07T17:48:55.189000+00:00",
+      "freshness": "aging_24_72h",
+      "status": "complete_projection",
+      "source": "https://www.nhl.com/news/utah-mammoth-ottawa-senators-game-preview-november-7-2026"
+    },
+    {
+      "team": "maple leafs",
+      "ageHours": 26.2,
+      "publishedAt": "2026-11-07T17:48:00+00:00",
+      "freshness": "aging_24_72h",
+      "status": "complete_projection",
+      "source": "https://www.nhl.com/news/montreal-canadiens-toronto-maple-leafs-game-preview-november-7-2026"
+    },
+    {
+      "team": "senators",
+      "ageHours": 26.2,
+      "publishedAt": "2026-11-07T17:48:55.189000+00:00",
+      "freshness": "aging_24_72h",
+      "status": "complete_projection",
+      "source": "https://www.nhl.com/news/utah-mammoth-ottawa-senators-game-preview-november-7-2026"
+    },
+    {
+      "team": "sharks",
+      "ageHours": 26.2,
+      "publishedAt": "2026-11-07T17:44:05.810000+00:00",
+      "freshness": "aging_24_72h",
+      "status": "complete_projection",
+      "source": "https://www.nhl.com/news/san-jose-sharks-dallas-stars-game-preview-november-7-2026"
+    },
+    {
+      "team": "stars",
+      "ageHours": 26.2,
+      "publishedAt": "2026-11-07T17:44:05.810000+00:00",
+      "freshness": "aging_24_72h",
+      "status": "complete_projection",
+      "source": "https://www.nhl.com/news/san-jose-sharks-dallas-stars-game-preview-november-7-2026"
+    },
+    {
+      "team": "devils",
+      "ageHours": 26.0,
+      "publishedAt": "2026-11-07T17:58:42.776000+00:00",
+      "freshness": "aging_24_72h",
+      "status": "complete_projection",
+      "source": "https://www.nhl.com/news/new-jersey-devils-new-york-islanders-game-preview-november-7-2026"
+    },
+    {
+      "team": "islanders",
+      "ageHours": 26.0,
+      "publishedAt": "2026-11-07T17:58:42.776000+00:00",
+      "freshness": "aging_24_72h",
+      "status": "complete_projection",
+      "source": "https://www.nhl.com/news/new-jersey-devils-new-york-islanders-game-preview-november-7-2026"
+    },
+    {
+      "team": "kings",
+      "ageHours": 24.6,
+      "publishedAt": "2026-11-07T19:22:47.795000+00:00",
+      "freshness": "aging_24_72h",
+      "status": "complete_projection",
+      "source": "https://www.nhl.com/news/pittsburgh-penguins-los-angeles-kings-game-preview-november-7-2026"
+    },
+    {
+      "team": "canucks",
+      "ageHours": 24.5,
+      "publishedAt": "2026-11-07T19:30:24.446000+00:00",
+      "freshness": "aging_24_72h",
+      "status": "complete_projection",
+      "source": "https://www.nhl.com/news/vancouver-canucks-edmonton-oilers-game-preview-november-7-2026"
+    },
+    {
+      "team": "oilers",
+      "ageHours": 24.5,
+      "publishedAt": "2026-11-07T19:30:24.446000+00:00",
+      "freshness": "aging_24_72h",
+      "status": "complete_projection",
+      "source": "https://www.nhl.com/news/vancouver-canucks-edmonton-oilers-game-preview-november-7-2026"
+    },
+    {
+      "team": "avalanche",
+      "ageHours": 24.4,
+      "publishedAt": "2026-11-07T19:35:08.238000+00:00",
+      "freshness": "aging_24_72h",
+      "status": "complete_projection",
+      "source": "https://www.nhl.com/news/detroit-red-wings-colorado-avalanche-game-preview-november-7-2026"
+    },
+    {
+      "team": "red wings",
+      "ageHours": 24.4,
+      "publishedAt": "2026-11-07T19:35:08.238000+00:00",
+      "freshness": "aging_24_72h",
+      "status": "complete_projection",
+      "source": "https://www.nhl.com/news/detroit-red-wings-colorado-avalanche-game-preview-november-7-2026"
+    }
+  ]
 }
