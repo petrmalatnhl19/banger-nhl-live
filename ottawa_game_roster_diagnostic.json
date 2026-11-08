@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-11-08T19:21:01.252052+00:00",
+  "team": "OTT",
+  "scope": "Recent completed NHL games; historical evidence only",
+  "players": {
+    "Philip Tomasino": {
+      "appearedInGames": [],
+      "checkedGames": 8
+    },
+    "Samuel Blais": {
+      "appearedInGames": [],
+      "checkedGames": 8
+    }
+  },
+  "errors": [],
+  "gamesInspected": 8,
+  "note": "Never automatically approve a projected line based only on historical participation."
+}
