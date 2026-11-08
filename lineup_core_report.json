@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T18:56:59.645707+00:00",
+  "generatedAt": "2026-11-08T19:00:19.633576+00:00",
   "sourceFile": "lineups.json",
   "teams": {
     "avalanche": {
@@ -421,11 +421,38 @@
       "source": "https://www.nhl.com/news/tampa-bay-lightning-minnesota-wild-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:41:54.999000+00:00",
       "status": "complete_projection"
+    },
+    "blackhawks": {
+      "name": "Blackhawks",
+      "abbreviation": "CHI",
+      "complete": false,
+      "forwardLines": 0,
+      "defensePairs": 0,
+      "missingForwardLines": 4,
+      "missingDefensePairs": 3,
+      "status": "missing_team",
+      "source": null,
+      "publishedAt": null
+    },
+    "senators": {
+      "name": "Senators",
+      "abbreviation": "OTT",
+      "complete": false,
+      "forwardLines": 0,
+      "defensePairs": 0,
+      "missingForwardLines": 4,
+      "missingDefensePairs": 3,
+      "status": "missing_team",
+      "source": null,
+      "publishedAt": null
     }
   },
   "summary": {
     "teams": 30,
+    "expectedTeams": 32,
     "complete": 22,
-    "incomplete": 8
+    "incomplete": 8,
+    "missing": 2,
+    "coveragePercent": 93.8
   }
 }
