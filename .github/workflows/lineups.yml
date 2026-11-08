@@ -34,6 +34,14 @@ jobs:
             cat lineup_completeness.txt >> "$GITHUB_STEP_SUMMARY"
             echo '\`\`\`' >> "$GITHUB_STEP_SUMMARY"
           fi
+      - name: Probe free lineup sources (diagnostic only)
+        if: always()
+        run: |
+          python scripts/probe_free_lineup_sources.py
+          echo '### Free lineup source connectivity (not permission to reuse)' >> "$GITHUB_STEP_SUMMARY"
+          echo '\`\`\`json' >> "$GITHUB_STEP_SUMMARY"
+          cat lineup_free_sources_probe.json >> "$GITHUB_STEP_SUMMARY"
+          echo '\`\`\`' >> "$GITHUB_STEP_SUMMARY"
       - name: Refresh recent lineups
         run: python scripts/update_last_game_lines.py
       - name: Verify lineup coverage
@@ -77,7 +85,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for file in index.html lineups.json lineups_archive.json nhl_rosters.json lineups_coverage.json starting_goalies.json nhl_goalies.json rotowire_goalies.json rotowire_goalies_diagnostic.json lineups_changes.json lineups_diagnostics.md lineups_source_diagnostics.json lineups_discovery_diagnostics.json; do
+          for file in index.html lineups.json lineups_archive.json nhl_rosters.json lineups_coverage.json starting_goalies.json nhl_goalies.json rotowire_goalies.json rotowire_goalies_diagnostic.json lineups_changes.json lineups_diagnostics.md lineups_source_diagnostics.json lineups_discovery_diagnostics.json lineup_free_sources_probe.json; do
             if [ -f "$file" ]; then git add "$file"; fi
           done
           if ! git diff --cached --quiet; then
