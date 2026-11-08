@@ -1813,7 +1813,26 @@ async function analyzeGame(id){
  const renderH2h=()=>h2h.length?h2h.map(g=>'<p>'+clean(g.gameDate)+' · '+clean(g.awayTeam.abbrev)+' '+Number(g.awayTeam.score)+' : '+Number(g.homeTeam.score)+' '+clean(g.homeTeam.abbrev)+'</p>').join(''):'<p>V načtené historii nebyl nalezen vzájemný zápas. Neznamená to, že týmy spolu nehrály.</p>';
  extra+='<details class="analyst-fold"><summary>🤝 Vzájemné zápasy</summary><div class="analyst-fold-body" id="analyst-h2h-body">'+renderH2h()+'<p class="analysis-small">Starší sezóny se doplňují na pozadí…</p></div></details>';
  markAnalyst('Forma a vzájemné zápasy zobrazeny');
- const extraRoot=card.querySelector('#analyst-extras');if(extraRoot)extraRoot.innerHTML=extra+'<div id="analyst-late-goalies" aria-live="polite"></div>';
+ const extraRoot=card.querySelector('#analyst-extras');
+ if(extraRoot){
+  extraRoot.innerHTML=extra+'<div id="analyst-late-goalies" aria-live="polite"></div>';
+  // Organize the existing report nodes into short topic groups without changing their data.
+  const reportSections=[...extraRoot.children].filter(el=>el.matches('details.analyst-fold'));
+  const groups=[
+   {title:'📈 Forma a výkonnost týmů',hint:'Poslední zápasy · trendy · série',match:/Forma posledních zápasů|Zátěž a průběh formy|Gólový trend a série/},
+   {title:'🏟️ Podmínky a historie zápasu',hint:'Zátěž · doma a venku · vzájemné zápasy',match:/Zápasová zátěž|Doma a venku|Vzájemné zápasy/}
+  ];
+  for(const group of groups){
+   const nodes=reportSections.filter(el=>group.match.test(el.querySelector('summary')?.textContent||''));
+   if(!nodes.length)continue;
+   const folder=document.createElement('details');
+   folder.className='analyst-fold analyst-report-group';
+   folder.innerHTML='<summary>'+group.title+' <small>'+group.hint+'</small></summary><div class="analyst-fold-body analyst-report-group-body"></div>';
+   extraRoot.insertBefore(folder,nodes[0]);
+   const body=folder.querySelector('.analyst-report-group-body');
+   nodes.forEach(node=>body.appendChild(node));
+  }
+ }
  const updateAnalystTimings=()=>{const slot=card.querySelector('#analyst-timing-detail');if(slot)slot.innerHTML=timingRows();};
  updateAnalystTimings();const extrasState=card.querySelector('#analyst-extras-state');if(extrasState)extrasState.textContent='Připraveno';
  // Historical head-to-head data is optional: never hold up the form and other sections.
@@ -3433,5 +3452,15 @@ document.addEventListener('click',function(ev){const th=ev.target.closest('.bang
 .analysis-card .analyst-extras-drawer>summary{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .analysis-card .analyst-extras-drawer>summary #analyst-extras-state{font-size:10px;white-space:nowrap;opacity:.7}
 @media(max-width:650px){.analysis-card .analyst-extras-drawer>summary #analyst-extras-state{display:none}}
+</style>
+
+<style id="banger-report-topic-groups-v10">
+/* Group existing detailed report cards by topic, preserving their DOM and data. */
+.analysis-card #analyst-extras>.analyst-report-group{margin:8px 0;border:1px solid #356e87;border-radius:12px;background:#0b263e}
+.analysis-card #analyst-extras>.analyst-report-group>summary{padding:12px;font-size:14px;font-weight:750}
+.analysis-card #analyst-extras>.analyst-report-group>summary small{display:block;margin-top:3px;font-size:11px;font-weight:400;color:#9ebed0}
+.analysis-card #analyst-extras .analyst-report-group-body{padding:6px}
+.analysis-card #analyst-extras .analyst-report-group-body>.analyst-fold{margin:5px 0;border-radius:9px}
+@media(max-width:650px){.analysis-card #analyst-extras>.analyst-report-group>summary{padding:11px}.analysis-card #analyst-extras .analyst-report-group-body{padding:4px}}
 </style>
 </body></html>
