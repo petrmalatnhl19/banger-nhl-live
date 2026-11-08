@@ -2889,6 +2889,16 @@ async function analyzeGame(id){
     uxSummary.insertAdjacentElement('afterend',coreSection);
     coreSection.insertAdjacentElement('afterend',overviewSection);
   }
+  // Keep the expert narrative directly under the quick match verdict, ahead of
+  // the technical model cards and supporting statistics. Preserve every section.
+  const leadExpertReport=extraRoot.querySelector('.analyst-expert-report');
+  if(leadExpertReport){
+    uxSummary.insertAdjacentElement('afterend',leadExpertReport);
+    const expertSummary=leadExpertReport.querySelector(':scope > summary');
+    if(expertSummary){
+      expertSummary.setAttribute('aria-label','Podrobný expertní rozbor zápasu');
+    }
+  }
   uxSummary.querySelectorAll('[data-banger-focus]').forEach(button=>button.addEventListener('click',()=>{
     const target=button.dataset.bangerFocus==='core'?coreSection:extraRoot.querySelector('.analyst-expert-report');
     if(!target)return;
