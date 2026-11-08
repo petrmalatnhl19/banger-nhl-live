@@ -1,0 +1,89 @@
+name: Frontend smoke checks
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  frontend-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate local scripts and HTML entrypoint
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          import subprocess, tempfile, sys
+          from urllib.parse import urlsplit, unquote
+
+          root = Path.cwd()
+          html = (root / 'index.html').read_text(encoding='utf-8')
+          class Scripts(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.sources = []
+                  self.inline = []
+                  self.inside = False
+                  self.buffer = []
+              def handle_starttag(self, tag, attrs):
+                  if tag != 'script':
+                      return
+                  a = dict(attrs)
+                  self.inside = 'src' not in a
+                  self.buffer = []
+                  if 'src' in a:
+                      self.sources.append(a['src'])
+              def handle_data(self, data):
+                  if self.inside:
+                      self.buffer.append(data)
+              def handle_endtag(self, tag):
+                  if tag == 'script' and self.inside:
+                      self.inline.append(''.join(self.buffer))
+                      self.inside = False
+          parser = Scripts()
+          parser.feed(html)
+          errors = []
+          seen = set()
+          for src in parser.sources:
+              url = urlsplit(src)
+              if url.scheme or url.netloc or src.startswith('//'):
+                  continue
+              path = unquote(url.path).lstrip('/')
+              if not path or '..' in Path(path).parts:
+                  errors.append(f'Invalid local script path: {src}')
+                  continue
+              if path in seen:
+                  errors.append(f'Duplicate local script include: {path}')
+              seen.add(path)
+              target = root / path
+              if not target.is_file():
+                  errors.append(f'Missing local script: {path}')
+                  continue
+              result = subprocess.run(['node', '--check', str(target)], capture_output=True, text=True)
+              if result.returncode:
+                  errors.append(f'JavaScript syntax error in {path}: {result.stderr[:700]}')
+          with tempfile.TemporaryDirectory() as tmp:
+              for i, code in enumerate(parser.inline, 1):
+                  if not code.strip():
+                      continue
+                  target = Path(tmp) / f'inline-{i}.js'
+                  target.write_text(code, encoding='utf-8')
+                  result = subprocess.run(['node', '--check', str(target)], capture_output=True, text=True)
+                  if result.returncode:
+                      errors.append(f'Inline script #{i}: {result.stderr[:700]}')
+          print(f'Checked {len(parser.sources)} external script references and {len(parser.inline)} inline scripts')
+          if errors:
+              print('\n'.join(errors), file=sys.stderr)
+              sys.exit(1)
+          print('Frontend smoke checks passed')
+          PY
