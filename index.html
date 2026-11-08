@@ -2943,6 +2943,7 @@ async function analyzeGame(id){
   // Server snapshots are the canonical pre-game comparison; never rewrite them from the browser.
   // Unified prediction hub: one visible entry point for server accuracy, archive and local history.
   // Keep local history clearly labeled; it is not synced with Supabase.
+  const hubBuildStarted=performance.now();
   const predictionHub=document.createElement('section');
   predictionHub.id='banger-prediction-hub';
   predictionHub.className='analysis-section';
@@ -2950,12 +2951,14 @@ async function analyzeGame(id){
   predictionHub.innerHTML='<div style="font-size:11px;letter-spacing:1.8px;color:#71eaff;font-weight:800">BANGER · PREDIKČNÍ CENTRUM</div><h3 style="margin:7px 0 4px">🎯 Předpovědi a přesnost</h3><p class="analysis-small">Centrální předpovědi CORE 3.0, xG, CORE 3.1 a CORE 3.2, jejich vyhodnocení i historie v tomto zařízení. Experimentální výpočty jsou odlišeny od uložených serverových predikcí.</p><div id="bangerPredictionHubContent"></div>';
   extraRoot.insertAdjacentElement('afterbegin',predictionHub);
   const predictionHubContent=predictionHub.querySelector('#bangerPredictionHubContent');
+  const hubBuildMs=Math.round(performance.now()-hubBuildStarted);
   const hubStarted=performance.now();
   const hubMetrics={};
   const hubMark=(name,ok=true)=>{hubMetrics[name]={seconds:((performance.now()-hubStarted)/1000).toFixed(2),ok};hubRenderMetrics()};
   const hubRenderMetrics=()=>{const slot=predictionHub.querySelector('#bangerHubTimings');if(!slot)return;slot.innerHTML=Object.entries(hubMetrics).map(([name,v])=>'<p class="analysis-small">'+name+': <b>'+v.seconds+' s</b> · '+(v.ok?'načteno':'chyba')+'</p>').join('')||'<p class="analysis-small">Čekám na odpovědi…</p>'};
   const hubDiagnostics=document.createElement('details');hubDiagnostics.className='analyst-fold';hubDiagnostics.innerHTML='<summary>⏱️ Rychlost predikčního centra <small>Samostatné měření</small></summary><div class="analyst-fold-body" id="bangerHubTimings"><p class="analysis-small">Čekám na odpovědi…</p></div>';
   predictionHubContent.appendChild(hubDiagnostics);
+  hubMark('Sestavení panelu v prohlížeči ('+hubBuildMs+' ms)');
   // UX 4.1: quick section navigator for the long match analysis.
   // Built from the already rendered panels, so it does not alter NHL data or predictions.
   const uxAnalystNav=document.createElement('nav');
@@ -3281,5 +3284,18 @@ document.addEventListener('click',function(ev){const th=ev.target.closest('.bang
 .analysis-card .analyst-extras-drawer>summary small{font-size:10px;font-weight:500;color:#91b6ca;text-align:right;max-width:48%}
 .analysis-card .analyst-extras-drawer-body{padding:0 10px 12px}
 .analysis-card .analyst-extras-drawer .analyst-fold{margin-top:8px}
+</style>
+
+<style id="banger-analyst-hub-compact-v1">
+/* Presentation-only cleanup of deeply nested analyst hub on narrow screens. */
+@media(max-width:650px){
+ #banger-prediction-hub{padding:10px!important;margin:10px 0!important;border-radius:13px!important;box-shadow:none!important}
+ #banger-prediction-hub .analyst-fold-body{padding-left:7px;padding-right:7px}
+ #banger-prediction-hub .analysis-section{margin-left:0;margin-right:0}
+ #banger-prediction-hub .analyst-fold{margin:8px 0;border-radius:11px}
+ #banger-prediction-hub .analyst-fold summary{padding:11px 10px}
+ #banger-prediction-hub .toolbar{gap:5px!important}
+ #banger-prediction-hub .toolbar .btn{padding:7px 9px;font-size:12px}
+}
 </style>
 </body></html>
