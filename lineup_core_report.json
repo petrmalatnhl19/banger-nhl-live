@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T19:50:15.646688+00:00",
+  "generatedAt": "2026-11-08T19:52:32.385920+00:00",
   "sourceFile": "lineups.json",
   "teams": {
     "avalanche": {
@@ -14,7 +14,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/detroit-red-wings-colorado-avalanche-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T19:35:08.238000+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "blackhawks": {
       "name": "Blackhawks",
@@ -28,7 +30,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/chicago-blackhawks-carolina-hurricanes-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:28:41.992000+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "blue jackets": {
       "name": "Blue Jackets",
@@ -42,7 +46,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/columbus-blue-jackets-buffalo-sabres-game-preview-november-6-2026",
       "publishedAt": "2026-11-06T17:50:25.006000+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "blues": {
       "name": "Blues",
@@ -56,7 +62,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/st-louis-blues-nashville-predators-game-preview-november-7-2026",
       "publishedAt": "2026-11-06T19:07:00+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "bruins": {
       "name": "Bruins",
@@ -70,7 +78,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "publishedAt": "2026-11-08T17:15:00+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "canadiens": {
       "name": "Canadiens",
@@ -84,7 +94,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/montreal-canadiens-toronto-maple-leafs-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:48:00+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "canucks": {
       "name": "Canucks",
@@ -98,7 +110,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/vancouver-canucks-edmonton-oilers-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T19:30:24.446000+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "capitals": {
       "name": "Capitals",
@@ -112,7 +126,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/florida-panthers-washington-capitals-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T15:37:00+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "devils": {
       "name": "Devils",
@@ -126,7 +142,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/new-jersey-devils-new-york-islanders-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:58:42.776000+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "ducks": {
       "name": "Ducks",
@@ -140,7 +158,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "publishedAt": "2026-11-08T17:15:00+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "flames": {
       "name": "Flames",
@@ -154,7 +174,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/philadelphia-flyers-calgary-flames-game-preview-november-8-2026",
       "publishedAt": "2026-11-08T17:16:00+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "flyers": {
       "name": "Flyers",
@@ -168,7 +190,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/philadelphia-flyers-calgary-flames-game-preview-november-8-2026",
       "publishedAt": "2026-11-08T17:16:00+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "golden knights": {
       "name": "Golden Knights",
@@ -182,7 +206,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "publishedAt": "2026-11-08T17:15:00+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "hurricanes": {
       "name": "Hurricanes",
@@ -196,7 +222,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/chicago-blackhawks-carolina-hurricanes-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:28:41.992000+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "islanders": {
       "name": "Islanders",
@@ -210,7 +238,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/new-jersey-devils-new-york-islanders-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:58:42.776000+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "jets": {
       "name": "Jets",
@@ -224,7 +254,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "publishedAt": "2026-11-08T17:15:00+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "kings": {
       "name": "Kings",
@@ -238,7 +270,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/pittsburgh-penguins-los-angeles-kings-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T19:22:47.795000+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "kraken": {
       "name": "Kraken",
@@ -252,7 +286,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/new-york-rangers-seattle-kraken-game-preview-november-7-2026",
       "publishedAt": "2026-11-06T22:34:00+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "lightning": {
       "name": "Lightning",
@@ -266,7 +302,16 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "publishedAt": "2026-11-08T17:15:00+00:00",
-      "status": "incomplete_projection"
+      "status": "possible_11F_7D",
+      "alternativeFormation": {
+        "projectedForwards": 11,
+        "projectedDefensemen": 7,
+        "formation": "11F+7D",
+        "classification": "possible_11_forwards_7_defensemen",
+        "verified": "source_lists_11_forwards_and_7_defensemen",
+        "note": "NHL.com projection lists 11 forwards and 7 defenders; do not invent a 12th forward or call this a complete four-line projection."
+      },
+      "alternativeFormationVerified": false
     },
     "mammoth": {
       "name": "Mammoth",
@@ -280,7 +325,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/utah-mammoth-ottawa-senators-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:48:55.189000+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "maple leafs": {
       "name": "Maple Leafs",
@@ -294,7 +341,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/montreal-canadiens-toronto-maple-leafs-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:48:00+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "oilers": {
       "name": "Oilers",
@@ -308,7 +357,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/vancouver-canucks-edmonton-oilers-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T19:30:24.446000+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "panthers": {
       "name": "Panthers",
@@ -322,7 +373,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "publishedAt": "2026-11-08T17:15:00+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "penguins": {
       "name": "Penguins",
@@ -336,7 +389,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "publishedAt": "2026-11-08T17:15:00+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "predators": {
       "name": "Predators",
@@ -350,7 +405,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/st-louis-blues-nashville-predators-game-preview-november-7-2026",
       "publishedAt": "2026-11-06T19:07:00+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "rangers": {
       "name": "Rangers",
@@ -364,7 +421,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/new-york-rangers-seattle-kraken-game-preview-november-7-2026",
       "publishedAt": "2026-11-06T22:34:00+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "red wings": {
       "name": "Red Wings",
@@ -378,7 +437,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/detroit-red-wings-colorado-avalanche-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T19:35:08.238000+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "sabres": {
       "name": "Sabres",
@@ -392,7 +453,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "publishedAt": "2026-11-08T17:15:00+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "senators": {
       "name": "Senators",
@@ -406,7 +469,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/utah-mammoth-ottawa-senators-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:48:55.189000+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "sharks": {
       "name": "Sharks",
@@ -420,7 +485,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/san-jose-sharks-dallas-stars-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:44:05.810000+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "stars": {
       "name": "Stars",
@@ -434,7 +501,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/san-jose-sharks-dallas-stars-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:44:05.810000+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     },
     "wild": {
       "name": "Wild",
@@ -448,7 +517,9 @@
       "duplicatePlayers": [],
       "source": "https://www.nhl.com/news/tampa-bay-lightning-minnesota-wild-game-preview-november-7-2026",
       "publishedAt": "2026-11-07T17:41:54.999000+00:00",
-      "status": "complete_projection"
+      "status": "complete_projection",
+      "alternativeFormation": null,
+      "alternativeFormationVerified": null
     }
   },
   "summary": {
@@ -457,6 +528,7 @@
     "complete": 31,
     "incomplete": 1,
     "missing": 0,
-    "coveragePercent": 100.0
+    "coveragePercent": 100.0,
+    "possibleAlternativeFormations": 1
   }
 }
