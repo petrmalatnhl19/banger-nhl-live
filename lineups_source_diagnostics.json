@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T19:47:44.081134+00:00",
+  "generatedAt": "2026-11-08T19:50:15.213949+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -167,6 +167,14 @@
           "sourceStatus": "incomplete"
         }
       ],
+      "rosterConfiguration": {
+        "projectedForwards": 11,
+        "projectedDefensemen": 7,
+        "formation": "11F+7D",
+        "classification": "possible_11_forwards_7_defensemen",
+        "verified": "source_lists_11_forwards_and_7_defensemen",
+        "note": "NHL.com projection lists 11 forwards and 7 defenders; do not invent a 12th forward or call this a complete four-line projection."
+      },
       "roleMismatches": [
         {
           "sourcePair": 1,
