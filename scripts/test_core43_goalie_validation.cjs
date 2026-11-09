@@ -26,4 +26,10 @@ assert.equal(validateFrozenEvidence(evidence,game,undefined).reason,"missing_pre
 assert.equal(validateFrozenEvidence(evidence,game,"not-a-date").reason,"missing_prediction_time");
 assert.equal(validateFrozenEvidence(evidence,game,"2026-11-07T20:05:00Z").reason,"evidence_after_prediction");
 assert.equal(validateFrozenEvidence(evidence,game,"2026-11-07T20:15:00Z").accepted,true);
+// Boundary: evidence verified exactly when the prediction is made is available.
+assert.equal(validateFrozenEvidence(evidence,game,observed).accepted,true);
+assert.equal(validateFrozenEvidence({...evidence,sourcePublishedAt:observed},game,observed).accepted,true);
+// Invalid or missing kickoff must not allow archived evidence through.
+assert.equal(validateFrozenEvidence(evidence,{...game,kickoffUTC:"invalid"},"2026-11-07T20:15:00Z").accepted,false);
+assert.equal(validateFrozenEvidence(evidence,{...game,kickoffUTC:undefined},"2026-11-07T20:15:00Z").accepted,false);
 console.log("CORE 4.3 goalie validation tests passed");
