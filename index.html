@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="cs"><head>
-<meta name="banger-build" content="2026-11-09-news-sort-v22"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#030b1b"><title>BANGER NHL LIVE</title>
+<meta name="banger-build" content="2026-11-09-news-metadata-v23"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#030b1b"><title>BANGER NHL LIVE</title>
 
 <style>
 :root{color-scheme:dark;--cyan:#41eaff;--ink:#e8faff;--muted:#8ba9c5;--panel:#0b1b35}
@@ -2296,8 +2296,12 @@ function newsArticleCard(article){
   headline=clean.slice(0,cut).trim();
   remainder=clean.slice(cut).trim();
  }
+ const verifiedHeadline=String(article.headline||'').replace(/\s*[|–-]\s*NHL\.com\s*$/i,'').trim();
+ if(verifiedHeadline)headline=verifiedHeadline;
+ const verifiedDescription=String(article.description||'').trim();
+ const teaser=verifiedDescription||remainder;
  const title=newsEscape(headline);
- const description=remainder?'<p class="banger-news-description">'+newsEscape(remainder)+'</p>':'';
+ const description=teaser?'<p class="banger-news-description">'+newsEscape(teaser)+'</p>':'';
  const team=newsTeamFromHeadline(clean);
  const crest=team?'<img class="banger-news-crest" src="'+teamLogo(team)+'" alt="'+newsEscape(team)+'" loading="lazy">':'';
  const published=article.publishedAt||article.published_at||article.published;
@@ -2338,7 +2342,7 @@ async function newsPage(){
  S.tab='news';
  $('calendarBar').classList.add('hidden');$('search').classList.add('hidden');$('sort').classList.add('hidden');
  $('status').textContent='NHL novinky';
- $('content').innerHTML='<section class="dash-panel banger-news-page"><div class="dash-panel-title"><h3>📰 NHL Novinky</h3><button type="button" id="bangerNewsReload" class="dash-link">↻ Obnovit</button></div><p class="banger-news-intro">Aktuální články z oficiálního webu NHL. Kliknutím otevřete původní článek. <small class="banger-news-build">Verze novinek v22</small></p><div class="banger-news-filters"><button type="button" data-news-lang="cs" class="active">🇨🇿 Česky</button><button type="button" data-news-lang="en">🌐 English</button></div><div id="bangerNewsList" class="banger-news-list"><p>Načítám novinky…</p></div></section>';
+ $('content').innerHTML='<section class="dash-panel banger-news-page"><div class="dash-panel-title"><h3>📰 NHL Novinky</h3><button type="button" id="bangerNewsReload" class="dash-link">↻ Obnovit</button></div><p class="banger-news-intro">Aktuální články z oficiálního webu NHL. Kliknutím otevřete původní článek. <small class="banger-news-build">Verze novinek v23</small></p><div class="banger-news-filters"><button type="button" data-news-lang="cs" class="active">🇨🇿 Česky</button><button type="button" data-news-lang="en">🌐 English</button></div><div id="bangerNewsList" class="banger-news-list"><p>Načítám novinky…</p></div></section>';
  let language='cs';
  const draw=async(force=false)=>{
   const host=document.getElementById('bangerNewsList');
