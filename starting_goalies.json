@@ -1,60 +1,66 @@
 {
   "date": "2026-11-09",
-  "updatedAt": "2026-11-09T03:20:12.859912+00:00",
+  "updatedAt": "2026-11-09T04:21:09.311487+00:00",
   "teams": {
-    "NYI": {
-      "name": "Ilya Sorokin",
-      "status": "projected",
-      "date": "2026-11-09",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-09T03:20:12.859912+00:00",
-      "gameId": 2026020285
-    },
     "EDM": {
       "name": "Devon Levi",
       "status": "projected",
       "date": "2026-11-09",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-09T03:20:12.859912+00:00",
+      "checkedAt": "2026-11-09T04:21:09.311487+00:00",
       "gameId": 2026020283
     },
-    "NYR": {
-      "name": "Joonas Korpisalo",
+    "NYI": {
+      "name": "Ilya Sorokin",
       "status": "projected",
       "date": "2026-11-09",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-09T03:20:12.859912+00:00",
-      "gameId": 2026020283
+      "checkedAt": "2026-11-09T04:21:09.311487+00:00",
+      "gameId": 2026020285
+    },
+    "VAN": {
+      "name": "Leevi Meriläinen",
+      "status": "projected",
+      "date": "2026-11-09",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-09T04:21:09.311487+00:00",
+      "gameId": 2026020284
+    },
+    "SJS": {
+      "name": "Yaroslav Askarov",
+      "status": "projected",
+      "date": "2026-11-09",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-09T04:21:09.311487+00:00",
+      "gameId": 2026020285
     }
   },
   "conflicts": [
+    {
+      "team": "SJS",
+      "specialist": "Yaroslav Askarov",
+      "nhl": "Alex Nedeljkovic",
+      "nhlSource": "https://www.nhl.com/news/san-jose-sharks-dallas-stars-game-preview-november-7-2026"
+    },
+    {
+      "date": "2026-11-09",
+      "team": "NYR",
+      "reason": "source disagreement",
+      "rotowire": "Joonas Korpisalo",
+      "previous": "Dylan Garand"
+    },
     {
       "date": "2026-11-09",
       "team": "PHI",
       "reason": "source disagreement",
       "rotowire": "Joseph Woll",
       "previous": "Dan Vladar"
-    },
-    {
-      "date": "2026-11-09",
-      "team": "SJS",
-      "reason": "source disagreement",
-      "rotowire": "Yaroslav Askarov",
-      "previous": "Alex Nedeljkovic"
-    },
-    {
-      "date": "2026-11-09",
-      "team": "VAN",
-      "reason": "source disagreement",
-      "rotowire": "Leevi Meriläinen",
-      "previous": "Leevi Merilainen"
     }
   ],
-  "sourceErrors": [
-    "specialist: ValueError: Source does not show today's date"
-  ],
+  "sourceErrors": [],
   "status": "partial"
 }

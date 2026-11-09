@@ -1,11 +1,12 @@
 {
-  "generatedAt": "2026-11-09T03:20:10.082242+00:00",
+  "generatedAt": "2026-11-09T04:21:07.248205+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 27,
+  "currentProjections": 26,
   "needsFreshProjection": [
     "blue jackets",
     "blues",
+    "capitals",
     "kraken",
     "predators",
     "rangers"
@@ -14,6 +15,7 @@
   "olderVerified": [
     "blue jackets",
     "blues",
+    "capitals",
     "kraken",
     "predators",
     "rangers"
@@ -112,11 +114,11 @@
         "archive",
         "manual"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-07T15:37:00+00:00",
       "source": "https://www.nhl.com/news/florida-panthers-washington-capitals-game-preview-november-7-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "devils": {
       "hasProjectedLines": true,
