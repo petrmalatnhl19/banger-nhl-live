@@ -9,7 +9,9 @@ on:
       - 'core43-moneypuck-adapter.js'
       - 'core43-starter-reports.js'
       - 'core43-starter-gate.js'
+      - 'core43-archive-evidence.js'
       - 'scripts/test_core43_goalie_validation.cjs'
+      - 'scripts/test_core43_archive_evidence.cjs'
       - 'scripts/test_core43_inputs.cjs'
       - 'scripts/test_core43_gsax.cjs'
       - 'scripts/test_core43_season_gsax.cjs'
@@ -40,3 +42,4 @@ jobs:
       - run: node scripts/test_core43_moneypuck.cjs
       - run: node scripts/test_core43_starter_reports.cjs
       - run: node scripts/test_core43_goalie_validation.cjs
+      - run: node scripts/test_core43_archive_evidence.cjs
