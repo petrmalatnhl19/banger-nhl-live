@@ -15,4 +15,7 @@ assert.throws(()=>run({...args,computed:{...computed,production:true}}),/unverif
 assert.throws(()=>run({...args,computed:{...computed,expectedAwayGoals:null}}),/invalid_expected_goals/);
 assert.throws(()=>run({...args,computed:{...computed,inputSnapshot:{asOf:"2026-11-09T13:00:00Z"}}}),/input_snapshot_time_mismatch/);
 assert.throws(()=>run({...args,computed:{...computed,gameId:43}}),/identity_mismatch/);
+assert.throws(()=>run({...args,computed:{...computed,engineVersion:"core43_gsax_sensitivity_v0"}}),/uncalibrated_shadow_not_a_forecast/);
+assert.throws(()=>run({...args,computed:{...computed,calibrated:false}}),/nonpersistable_forecast/);
+assert.throws(()=>run({...args,computed:{...computed,inputSnapshot:{...computed.inputSnapshot,persistable:false}}}),/nonpersistable_forecast/);
 console.log("CORE 4.3 computed forecast adapter tests passed");
