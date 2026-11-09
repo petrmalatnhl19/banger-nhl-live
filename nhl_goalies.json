@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-09T15:17:24.831669+00:00",
-  "rostersUpdatedAt": "2026-11-09T15:16:44.749777+00:00",
+  "updatedAt": "2026-11-09T16:26:07.512373+00:00",
+  "rostersUpdatedAt": "2026-11-09T16:25:22.893673+00:00",
   "projectionDate": "2026-11-09",
   "teamCount": 32,
-  "goalieCount": 74,
+  "goalieCount": 75,
   "goalies": [
     {
       "name": "Mackenzie Blackwood",
@@ -18,6 +18,14 @@
       "team": "COL",
       "teamKey": "avalanche",
       "playerId": 8475809,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Drew Commesso",
+      "team": "CHI",
+      "teamKey": "blackhawks",
+      "playerId": 8482123,
       "starterStatus": "unknown",
       "starterGameDate": null
     },
