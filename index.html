@@ -1448,6 +1448,34 @@ button:focus-visible,[role="button"]:focus-visible{outline:2px solid #86f2ff;out
  #content .dash-panel:has(#dashAllStandings) .dash-panel-title h3{font-size:16px!important}
 }
 </style>
+<style id="banger-leader-inline-team-logo-v1">
+/* Leaderboard: name and club crest share one compact row. */
+#content .dash-panel:has(#dashAllPlayers) .dash-leader-row{
+ display:flex!important;align-items:center!important;
+ gap:7px!important;padding:8px 2px!important;
+}
+#content .dash-panel:has(#dashAllPlayers) .dash-leader-row .dash-position{
+ flex:0 0 24px!important;
+}
+#content .dash-panel:has(#dashAllPlayers) .dash-leader-row .dash-player{
+ flex:0 1 auto!important;min-width:0!important;
+ white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+}
+#content .dash-panel:has(#dashAllPlayers) .dash-leader-row .dash-leader-logo{
+ display:block!important;flex:0 0 22px!important;
+ width:22px!important;height:22px!important;
+ object-fit:contain!important;margin:0!important;
+}
+#content .dash-panel:has(#dashAllPlayers) .dash-leader-row>b{
+ margin-left:auto!important;flex:0 0 auto!important;
+}
+@media(max-width:390px){
+ #content .dash-panel:has(#dashAllPlayers) .dash-leader-row{gap:5px!important}
+ #content .dash-panel:has(#dashAllPlayers) .dash-leader-row .dash-leader-logo{
+  width:19px!important;height:19px!important;flex-basis:19px!important;
+ }
+}
+</style>
 </head><body><div class="wrap">
 <div id="brandSplash" class="brand-splash" aria-label="Načítání BANGER NHL LIVE"><div class="brand-splash-glow"></div><picture><source media="(orientation: portrait)" srcset="splash-portrait.png"><img src="splash-landscape.png" alt="BANGER NHL LIVE" fetchpriority="high" decoding="async"></picture><div class="brand-splash-loader"><span></span></div><div class="brand-splash-caption">VSTUP DO HOKEJOVÉ ARÉNY</div></div><header class="top"><div class="brand"><div class="brand-logo" aria-label="BANGER NHL LIVE"><span class="brand-mark">BANGER</span><span class="brand-sub">NHL <b>LIVE</b></span></div></div><span class="header-status"><i></i> NHL 2026/27</span></header>
 
@@ -1757,7 +1785,7 @@ let dashboardRequest=0;
 async function dashboard(){S.tab='dashboard';const req=++dashboardRequest;$('calendarBar').classList.add('hidden');$('search').classList.add('hidden');$('sort').classList.add('hidden');$('status').textContent='Načítám NHL LIVE Dashboard…';$('content').innerHTML='<div class="empty">Načítám aktuální výsledky, lídry a tabulky NHL…</div>';const pragueDate=x=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Prague',year:'numeric',month:'2-digit',day:'2-digit'}).format(x);const pragueHour=x=>Number(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Prague',hour:'2-digit',hourCycle:'h23'}).format(x));const now=new Date(),day=pragueDate(now);const anchor=new Date(day+'T12:00:00Z');const shift=n=>pragueDate(new Date(anchor.getTime()+n*86400000));const slateDay=pragueHour(now)<12?shift(-1):day,followingDay=pragueHour(now)<12?day:shift(1),yesterday=shift(-1),tomorrow=shift(1);const calls=[get('https://api-web.nhle.com/v1/score/'+day),get('https://api-web.nhle.com/v1/score/'+yesterday),get('https://api-web.nhle.com/v1/score/'+tomorrow),teamApi('standings',''),dashboardSkaterLeaders()];const result=await Promise.allSettled(calls);if(S.tab!=='dashboard'||req!==dashboardRequest)return;const [today,prior,nextDay,table,leaders]=result.map(r=>r.status==='fulfilled'?r.value:null);const games=[...(today?.games||[]),...(prior?.games||[]),...(nextDay?.games||[])].filter(g=>{if(!g.startTimeUTC)return false;const t=new Date(g.startTimeUTC);if(!Number.isFinite(t.getTime()))return false;const date=pragueDate(t),hour=pragueHour(t);return date===slateDay&&hour>=12||date===followingDay&&hour<12}).filter((g,i,all)=>all.findIndex(x=>String(x.id)===String(g.id))===i).sort((a,b)=>{const started=g=>['LIVE','CRIT','OFF','FINAL'].includes(g.gameState)?0:1;return started(a)-started(b)||Date.parse(a.startTimeUTC||0)-Date.parse(b.startTimeUTC||0)}),oldGames=Array.isArray(prior?.games)?prior.games:[];const live=games.filter(g=>['LIVE','CRIT'].includes(g.gameState));const completed=games.filter(g=>['OFF','FINAL'].includes(g.gameState));const standings=Array.isArray(table?.standings)?table.standings:[];const skaters=Array.isArray(leaders)?leaders:[];const topTeams=[...standings].sort((a,b)=>(b.points||0)-(a.points||0)).slice(0,5);
 const matchCard=g=>{const a=g.awayTeam||{},b=g.homeTeam||{},playing=['LIVE','CRIT'].includes(g.gameState),done=['OFF','FINAL'].includes(g.gameState);const pd=g.periodDescriptor||{};const period=playing?(pd.periodType==='OT'?'PRODLOUŽENÍ':pd.periodType==='SO'?'NÁJEZDY':pd.number?pd.number+'. TŘETINA':'PROBÍHÁ'):done?'KONEC':'ZAČÁTEK';const time=g.startTimeUTC?new Date(g.startTimeUTC).toLocaleTimeString('cs-CZ',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Prague'}):'—';return '<button class="dash-game '+(playing?'dash-game-live':done?'dash-game-done':'dash-game-next')+'" data-game="'+safe(g.id)+'" aria-label="Detail zápasu '+safe(a.abbrev||'')+' proti '+safe(b.abbrev||'')+'"><span class="dash-game-state '+(playing?'dash-playing':'')+'">'+safe(playing?'● ŽIVĚ · '+period:done?'✓ KONEC':time+' · '+period)+'</span><span class="dash-game-teams"><span class="dash-team-left"><img src="'+safe(a.logo||teamLogo(a.abbrev||''))+'" alt=""><b>'+safe(a.abbrev||'—')+'</b></span><strong>'+safe(a.score??'–')+' <span class="dash-score-colon">:</span> '+safe(b.score??'–')+'</strong><span class="dash-team-right"><b>'+safe(b.abbrev||'—')+'</b><img src="'+safe(b.logo||teamLogo(b.abbrev||''))+'" alt=""></span></span><span class="dash-game-hint" aria-hidden="true">›</span></button>'};
 const recent=oldGames.filter(g=>['OFF','FINAL'].includes(g.gameState)).slice(0,5);
-const playerRow=(p,i)=>'<div class="dash-row"><span class="dash-position">'+(i+1)+'</span><span class="dash-player">'+safe(p.skaterFullName||p.playerName||[p.firstName,p.lastName].filter(Boolean).join(' ')||'Hráč')+' <small>'+safe(p.teamAbbrevs||p.teamAbbrev||'')+'</small></span><b>'+safe(p.points??'—')+' B</b></div>';
+const playerRow=(p,i)=>{const c=String(p.teamAbbrev||p.teamAbbrevs||'').trim().split(/[ ,/]+/)[0];return '<div class="dash-row dash-leader-row"><span class="dash-position">'+(i+1)+'</span><span class="dash-player">'+safe(p.skaterFullName||p.playerName||[p.firstName,p.lastName].filter(Boolean).join(' ')||'Hráč')+'</span>'+(c?'<img class="dash-leader-logo" src="'+safe(teamLogo(c))+'" alt="'+safe(c)+'" title="'+safe(c)+'" loading="lazy">':'')+'<b>'+safe(p.points??'—')+' B</b></div>'};
 const teamRow=(r,i)=>{const c=tn(r.teamAbbrev);return '<button class="dash-row dash-row-button" data-team="'+safe(c)+'"><span class="dash-position">'+(i+1)+'</span><img src="'+safe(r.teamLogo||teamLogo(c))+'" alt=""><span class="dash-player">'+safe(tn(r.teamName)||c)+'</span><b>'+safe(r.points??'—')+' b</b></button>'};
 $('status').textContent='NHL LIVE Dashboard · aktualizováno '+new Date().toLocaleTimeString('cs-CZ');
 $('content').innerHTML='<div class="dash-quick"><button class="dash-quick-btn" id="dashQuickGames">🏒 Zápasy dnes</button><button class="dash-quick-btn" id="dashQuickStats">📊 Statistiky</button><button class="dash-quick-btn" id="dashQuickTable">🏆 Tabulky</button></div><div class="dash-layout"><section class="dash-panel dash-wide dash-games-unified"><div class="dash-panel-title"><div class="dash-games-title"><h3>⚡ Dnešní zápasy</h3><p>'+safe(new Date().toLocaleDateString('cs-CZ',{weekday:'long',day:'numeric',month:'long'}))+' · '+games.length+' zápasů · '+live.length+' živě</p></div><div class="dash-games-actions"><button class="dash-link" id="dashAllGames">Všechny zápasy ↗</button><button class="btn" id="dashRefresh" aria-label="Obnovit zápasy" title="Obnovit zápasy">↻</button></div></div><div class="dash-game-grid">'+(games.length?games.map(matchCard).join(''):'<p>Na dnešek nejsou naplánované zápasy.</p>')+'</div></section><section class="dash-panel"><div class="dash-panel-title"><h3>🏒 Lídři produktivity</h3><button class="dash-link" id="dashAllPlayers">Statistiky ↗</button></div>'+(skaters.length?skaters.map(playerRow).join(''):'<p>Statistiky hráčů nejsou momentálně dostupné.</p>')+'</section><section class="dash-panel"><div class="dash-panel-title"><h3>🏆 Nejlepší týmy</h3><button class="dash-link" id="dashAllStandings">Tabulky ↗</button></div>'+(topTeams.length?topTeams.map(teamRow).join(''):'<p>Tabulka není momentálně dostupná.</p>')+'</section><section class="dash-panel dash-wide"><div class="dash-panel-title"><h3>🕘 Včerejší výsledky</h3></div><div class="dash-game-grid">'+(recent.length?recent.map(matchCard).join(''):'<p>Včerejší výsledky nejsou dostupné.</p>')+'</div></section></div>';
