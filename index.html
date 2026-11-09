@@ -2304,6 +2304,30 @@ const NEWS_PLAYER_TEAMS=[
  ['FLA',['barkov','marchand']],['WSH',['ovečkin','ovechkin']],
  ['NYR',['panarin']],['EDM',['mcdavid','draisaitl']]
 ];
+// Prefer the regularly refreshed NHL roster snapshot over hard-coded player affiliations.
+let newsRosterPlayerTeams=new Map();
+let newsRosterLoadedAt=0;
+async function refreshNewsRosterTeams(){
+ if(newsRosterLoadedAt && Date.now()-newsRosterLoadedAt<15*60*1000)return;
+ newsRosterLoadedAt=Date.now();
+ try{
+  const response=await fetch('./nhl_rosters.json?t='+Math.floor(Date.now()/900000),{cache:'no-store'});
+  if(!response.ok)throw new Error('roster unavailable');
+  const payload=await response.json();
+  const bySurname=new Map();
+  for(const team of Object.values(payload.teams||{})){
+   const code=team.abbrev;
+   if(!code)continue;
+   for(const fullName of [...(team.forwards||[]),...(team.defense||[]),...(team.goalies||[])]){
+    const surname=String(fullName).trim().split(/\\s+/).pop().toLocaleLowerCase('cs-CZ');
+    if(!surname||surname.length<4)continue;
+    if(!bySurname.has(surname))bySurname.set(surname,new Set());
+    bySurname.get(surname).add(code);
+   }
+  }
+  newsRosterPlayerTeams=new Map([...bySurname].filter(([,teams])=>teams.size===1).map(([name,teams])=>[name,[...teams][0]]));
+ }catch(error){console.warn('News roster lookup unavailable; using headline fallback',error)}
+}
 function newsArticleTeams(article,headline){
  const title=String(headline||'').toLocaleLowerCase('cs-CZ');
  const combined=[headline,article.title,article.description].filter(Boolean).join(' ').toLocaleLowerCase('cs-CZ');
@@ -2320,7 +2344,12 @@ function newsArticleTeams(article,headline){
  // Headline references take priority over unrelated teams in the teaser.
  const scan=text=>{
   for(const [code,names] of NEWS_TEAM_MATCHES)if(names.some(n=>wordHit(text,n)))codes.add(code);
-  for(const [code,names] of NEWS_PLAYER_TEAMS)if(names.some(n=>wordHit(text,n)))codes.add(code);
+  let matchedCurrentRoster=false;
+  for(const [surname,code] of newsRosterPlayerTeams)if(wordHit(text,surname)){
+   codes.add(code);matchedCurrentRoster=true;
+  }
+  // Use historical aliases only if the current roster has no matching player.
+  if(!matchedCurrentRoster)for(const [code,names] of NEWS_PLAYER_TEAMS)if(names.some(n=>wordHit(text,n)))codes.add(code);
  };
  scan(title);
  if(!codes.size)scan(combined);
@@ -2384,6 +2413,7 @@ async function renderNewsPreview(){
  if(!host)return;
  try{
   const data=await loadNhlNews();
+  await refreshNewsRosterTeams();
   if(!host.isConnected)return;
   const items=newsChoose(data,'cs').slice(0,3);
   host.innerHTML=items.length?items.map(newsArticleCard).join(''):'<p class="banger-news-empty">Zatím nejsou dostupné žádné články.</p>';
@@ -2401,6 +2431,7 @@ async function newsPage(){
   host.innerHTML='<p>Načítám novinky…</p>';
   try{
    const data=await loadNhlNews(force);
+   await refreshNewsRosterTeams();
    if(!host.isConnected||S.tab!=='news')return;
    const items=newsChoose(data,language);
    host.innerHTML=items.length?items.map(newsArticleCard).join(''):'<p class="banger-news-empty">Pro tento jazyk nejsou zprávy dostupné.</p>';
