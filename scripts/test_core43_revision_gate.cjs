@@ -1,0 +1,14 @@
+const assert=require("node:assert/strict");
+const {proposeRevision:run}=require("../core43-revision-gate.js");
+const prediction={game_id:123,away_team:"DAL",home_team:"NJD",core41_predicted_at:"2026-11-09T10:00:00Z"};
+const schedule={game_id:123,away_team:"DAL",home_team:"NJD",kickoff_at:"2026-11-09T20:00:00Z"};
+const evidence=(team,id,verified)=>({game_id:123,team_code:team,goalie_id:id,evidence_status:"confirmed",source_name:"Verified report",source_url:"https://example.org/report",source_published_at:"2026-11-09T12:00:00Z",verified_at:verified});
+const data=[evidence("DAL","12345","2026-11-09T13:00:00Z"),evidence("NJD","67890","2026-11-09T13:00:00Z")];
+const original=JSON.stringify(prediction);
+assert.equal(run({prediction,schedule,evidence:data,asOf:"2026-11-09T14:00:00Z"}).eligible,true);
+assert.equal(JSON.stringify(prediction),original);
+assert.equal(run({prediction,schedule,evidence:data,asOf:"2026-11-09T12:30:00Z"}).eligible,false);
+assert.equal(run({prediction,schedule,evidence:data,asOf:"2026-11-09T10:00:00Z"}).reason,"revision_not_after_original");
+assert.equal(run({prediction,schedule,evidence:data,asOf:"2026-11-09T20:00:00Z"}).reason,"revision_not_pregame");
+assert.equal(run({prediction,schedule,evidence:data,asOf:"2026-11-09T14:00:00Z",model:"core42"}).reason,"missing_timestamps");
+console.log("CORE 4.3 immutable pregame revision tests passed");

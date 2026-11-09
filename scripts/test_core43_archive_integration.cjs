@@ -1,0 +1,14 @@
+const assert=require("node:assert/strict");
+const {assemblePairs}=require("./evaluate_core43_archive.cjs");
+const archive=[{game_id:42,status:"final",away_team:"DAL",home_team:"NJD",actual_away:2,actual_home:3,core41_away:2.7,core41_home:3.2,core41_predicted_at:"2026-11-09T10:00:00Z"}];
+const schedules=[{game_id:42,away_team:"DAL",home_team:"NJD",kickoff_at:"2026-11-09T20:00:00Z"}];
+const revisions=[{game_id:42,model:"core43_shadow",revision_kind:"shadow",away_team:"DAL",home_team:"NJD",predicted_at:"2026-11-09T18:00:00Z",predicted_away:2.5,predicted_home:3.1,input_snapshot:{production:false}}];
+assert.equal(assemblePairs({archive,revisions:[],schedules}).length,0);
+assert.equal(assemblePairs({archive,revisions,schedules}).length,1);
+assert.equal(assemblePairs({archive,revisions:[{...revisions[0],model:"core41"}],schedules}).length,0);
+assert.equal(assemblePairs({archive,revisions:[{...revisions[0],input_snapshot:{production:true}}],schedules}).length,0);
+assert.equal(assemblePairs({archive,revisions,schedules:[...schedules,{...schedules[0],kickoff_at:"2026-11-09T21:00:00Z"}]}).length,0);
+const late={...revisions[0],predicted_at:"2026-11-09T21:00:00Z",predicted_away:9};
+assert.equal(assemblePairs({archive,revisions:[revisions[0],late],schedules})[0].core43.away,2.5);
+assert.equal(assemblePairs({archive,revisions:[late],schedules}).length,0);
+console.log("CORE 4.3 archive integration tests passed");

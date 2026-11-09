@@ -1,0 +1,13 @@
+const assert=require("node:assert/strict");
+const {auditShadowCandidates:run}=require("./core43_shadow_candidate_audit.cjs");
+const archive=[{game_id:42,away_team:"DAL",home_team:"NJD",core41_predicted_at:"2026-11-09T10:00:00Z",core41_away:2.8,core41_home:3.2}];
+const schedules=[{game_id:42,away_team:"DAL",home_team:"NJD",kickoff_at:"2026-11-09T20:00:00Z"}];
+const inputs=["away","home"].map((side,i)=>({game_id:42,side,team_code:side==="away"?"DAL":"NJD",goalie_id:String(100+i),readiness:"ready",starter_status:"confirmed",gsax:2,shots_against:100,prediction_at:"2026-11-09T15:00:00Z",captured_at:"2026-11-09T14:00:00Z",gsax_fetched_at:"2026-11-09T13:00:00Z",starter_published_at:"2026-11-09T12:00:00Z",starter_verified_at:"2026-11-09T13:00:00Z"}));
+const check=shadowInputs=>run({archive,schedules,shadowInputs})[0];
+assert.equal(check(inputs).ready,true);
+assert.equal(check([inputs[0]]).ready,false);
+assert.equal(check([inputs[0],{...inputs[1],gsax_fetched_at:"2026-11-09T16:00:00Z"}]).reason,"late_home_evidence");
+assert.equal(check([inputs[0],{...inputs[1],goalie_id:"100"}]).reason,"duplicate_goalie_identity");
+assert.equal(check([inputs[0],{...inputs[1],readiness:"missing_pregame_starter_evidence"}]).reason,"unverified_home_starter");
+assert.equal(run({archive,schedules:[...schedules,{...schedules[0],kickoff_at:"2026-11-09T21:00:00Z"}],shadowInputs:inputs})[0].reason,"conflicting_schedule");
+console.log("CORE 4.3 shadow candidate audit tests passed");

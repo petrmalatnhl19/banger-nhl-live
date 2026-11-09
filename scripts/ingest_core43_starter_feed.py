@@ -49,14 +49,20 @@ def main():
     with urllib.request.urlopen(schedule_req,timeout=25) as response:
         schedule=json.load(response)
     games={}
+    ambiguous=set()
     for row in schedule:
-        games.setdefault(row["game_id"],row)
+        game_id=row["game_id"]
+        previous=games.get(game_id)
+        if previous and any(previous[field]!=row[field] for field in ("kickoff_at","away_team","home_team")):
+            ambiguous.add(game_id)
+        else:
+            games.setdefault(game_id,row)
     valid=[]
     for r in feed["reports"]:
         if not isinstance(r,dict):
             continue
         g=games.get(r.get("gameId"))
-        if not g or r.get("teamCode") not in (g["away_team"],g["home_team"]):
+        if not g or r.get("gameId") in ambiguous or r.get("teamCode") not in (g["away_team"],g["home_team"]):
             continue
         if r.get("status")!="confirmed" or r.get("confirmationBasis")!="explicit_pregame_report":
             continue
@@ -74,6 +80,8 @@ def main():
         if not published<=observed<kickoff:
             continue
         valid.append({"game_id":r["gameId"],"team_code":r["teamCode"],"goalie_id":str(r["goalieId"]),"evidence_status":"confirmed","source_name":name,"source_url":source,"source_published_at":published.isoformat(),"verified_at":observed.isoformat()})
+    if ambiguous:
+        print(f"Skipped {len(ambiguous)} games with conflicting schedule snapshots")
     if not valid:
         print("No valid pregame confirmed starter evidence in feed")
         return

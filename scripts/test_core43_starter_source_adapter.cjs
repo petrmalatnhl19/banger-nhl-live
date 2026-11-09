@@ -1,0 +1,12 @@
+const assert=require("node:assert/strict");
+const {normalizeStarterAnnouncement:run}=require("./core43_starter_source_adapter.cjs");
+const game={gameId:42,awayTeam:"DAL",homeTeam:"NJD",kickoffUTC:"2026-11-09T20:00:00Z"};
+const raw={gameId:42,teamCode:"DAL",goalieId:"8471234",status:"confirmed",sourceName:"Verified source",sourceUrl:"https://example.org/starter",sourcePublishedAt:"2026-11-09T12:00:00Z"};
+const args={raw,game,asOf:"2026-11-09T15:00:00Z",verifiedAt:"2026-11-09T14:00:00Z"};
+assert.equal(run(args).accepted,true);
+assert.equal(run(args).evidence.evidence_status,"confirmed");
+assert.equal(run({...args,raw:{...raw,status:"projected"}}).reason,"not_explicitly_confirmed");
+assert.equal(run({...args,raw:{...raw,sourcePublishedAt:"2026-11-09T16:00:00Z"}}).accepted,false);
+assert.equal(run({...args,verifiedAt:"2026-11-09T16:00:00Z"}).reason,"evidence_after_prediction");
+assert.equal(run({...args,raw:{...raw,goalieId:"Unknown"}}).reason,"invalid_goalie_id");
+console.log("CORE 4.3 starter source adapter tests passed");

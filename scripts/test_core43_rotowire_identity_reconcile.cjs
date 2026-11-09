@@ -1,0 +1,12 @@
+const assert=require("node:assert/strict");
+const {reconcileIdentities:run}=require("./core43_rotowire_identity_reconcile.cjs");
+const observations=[{game_id:42,team_code:"DAL",goalie_name:"Goalie A",observed_status:"confirmed",observed_at:"2026-11-09T14:00:00Z",source_snapshot_at:"2026-11-09T13:00:00Z"}];
+const identities=[{team_code:"DAL",normalized_name:"goalie a",goalie_id:"8471234"}];
+const r=run({observations,identities})[0];
+assert.equal(r.goalieId,"8471234");
+assert.equal(r.verifiedStarter,false);
+assert.equal(r.eligibleForPromotion,false);
+assert.equal(run({observations,identities:[]})[0].identityResolved,false);
+assert.equal(run({observations,identities:[...identities,{...identities[0],goalie_id:"8479999"}]})[0].reason,"identity_ambiguous");
+assert.equal(run({observations:[{...observations[0],observed_status:"projected"}],identities}).length,0);
+console.log("CORE 4.3 RotoWire identity reconciliation tests passed");

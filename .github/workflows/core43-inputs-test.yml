@@ -9,7 +9,17 @@ on:
       - 'core43-moneypuck-adapter.js'
       - 'core43-starter-reports.js'
       - 'core43-starter-gate.js'
+      - 'core43-archive-evidence.js'
+      - 'core43-revision-gate.js'
       - 'scripts/test_core43_goalie_validation.cjs'
+      - 'scripts/test_core43_archive_evidence.cjs'
+      - 'scripts/test_core43_revision_gate.cjs'
+      - 'scripts/write_core43_revision.cjs'
+      - 'scripts/test_core43_revision_writer.cjs'
+      - 'scripts/monitor_core43_revisions.cjs'
+      - 'scripts/test_core43_revision_monitor.cjs'
+      - 'scripts/core43_computed_revision_adapter.cjs'
+      - 'scripts/test_core43_computed_revision_adapter.cjs'
       - 'scripts/test_core43_inputs.cjs'
       - 'scripts/test_core43_gsax.cjs'
       - 'scripts/test_core43_season_gsax.cjs'
@@ -19,11 +29,9 @@ on:
       - '.github/workflows/core43-inputs-test.yml'
   pull_request:
     paths:
-      - 'core43-inputs.js'
-      - 'core43-starter-reports.js'
-      - 'core43-starter-gate.js'
-      - 'scripts/test_core43_inputs.cjs'
-      - 'scripts/test_core43_goalie_validation.cjs'
+      - 'core43-*.js'
+      - 'scripts/*core43*.cjs'
+      - '.github/workflows/core43-inputs-test.yml'
   workflow_dispatch:
 jobs:
   test:
@@ -40,3 +48,18 @@ jobs:
       - run: node scripts/test_core43_moneypuck.cjs
       - run: node scripts/test_core43_starter_reports.cjs
       - run: node scripts/test_core43_goalie_validation.cjs
+      - run: node scripts/test_core43_archive_evidence.cjs
+      - run: node scripts/test_core43_revision_gate.cjs
+      - run: node scripts/test_core43_revision_writer.cjs
+      - run: node scripts/test_core43_revision_monitor.cjs
+      - run: node scripts/test_core43_computed_revision_adapter.cjs
+      - run: node scripts/test_core43_gsax_sensitivity.cjs
+      - run: node scripts/test_core43_paired_evaluation.cjs
+      - run: node scripts/test_core43_archive_integration.cjs
+      - run: node scripts/test_core43_shadow_candidate_audit.cjs
+      - run: node scripts/test_core43_shadow_compute.cjs
+      - run: node scripts/test_core43_shadow_readonly.cjs
+      - run: node scripts/test_core43_goalie_coverage.cjs
+      - run: node scripts/test_core43_starter_source_adapter.cjs
+      - run: node scripts/test_core43_rotowire_coverage.cjs
+      - run: node scripts/test_core43_rotowire_identity_reconcile.cjs

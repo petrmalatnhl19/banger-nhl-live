@@ -1,0 +1,11 @@
+const assert=require("node:assert/strict");
+const {auditCoverage}=require("./core43_goalie_coverage.cjs");
+const now="2026-11-09T15:00:00Z";
+const schedules=[{game_id:42,kickoff_at:"2026-11-09T20:00:00Z",away_team:"DAL",home_team:"NJD"}];
+const evidence=["DAL","NJD"].map((team_code,i)=>({game_id:42,team_code,goalie_id:String(100+i),evidence_status:"confirmed",source_name:"Verified source",source_url:"https://example.org/starter",source_published_at:"2026-11-09T12:00:00Z",verified_at:"2026-11-09T13:00:00Z"}));
+assert.equal(auditCoverage({schedules,evidence,now}).bothConfirmed,1);
+assert.equal(auditCoverage({schedules,evidence:evidence.slice(0,1),now}).bothConfirmed,0);
+assert.equal(auditCoverage({schedules,evidence:[...evidence,{...evidence[1],goalie_id:"999"}],now}).results[0].teams.NJD,"conflicting_confirmations");
+assert.equal(auditCoverage({schedules,evidence:[evidence[0],{...evidence[1],verified_at:"2026-11-09T16:00:00Z"}],now}).bothConfirmed,0);
+assert.equal(auditCoverage({schedules:[...schedules,{...schedules[0],kickoff_at:"2026-11-09T21:00:00Z"}],evidence,now}).bothConfirmed,0);
+console.log("CORE 4.3 goalie coverage tests passed");
