@@ -1,20 +1,25 @@
 {
-  "generatedAt": "2026-11-09T06:34:31.276535+00:00",
+  "generatedAt": "2026-11-09T07:55:55.718540+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 17,
+  "currentProjections": 12,
   "needsFreshProjection": [
+    "avalanche",
     "blackhawks",
     "blue jackets",
     "blues",
     "canadiens",
+    "canucks",
     "capitals",
     "hurricanes",
     "islanders",
+    "kings",
     "kraken",
     "mammoth",
+    "oilers",
     "predators",
     "rangers",
+    "red wings",
     "senators",
     "sharks",
     "stars",
@@ -22,17 +27,22 @@
   ],
   "missing": [],
   "olderVerified": [
+    "avalanche",
     "blackhawks",
     "blue jackets",
     "blues",
     "canadiens",
+    "canucks",
     "capitals",
     "hurricanes",
     "islanders",
+    "kings",
     "kraken",
     "mammoth",
+    "oilers",
     "predators",
     "rangers",
+    "red wings",
     "senators",
     "sharks",
     "stars",
@@ -47,11 +57,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-07T19:35:08.238000+00:00",
       "source": "https://www.nhl.com/news/detroit-red-wings-colorado-avalanche-game-preview-november-7-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "blackhawks": {
       "hasProjectedLines": true,
@@ -119,11 +129,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-07T19:30:24.446000+00:00",
       "source": "https://www.nhl.com/news/vancouver-canucks-edmonton-oilers-game-preview-november-7-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "capitals": {
       "hasProjectedLines": true,
@@ -240,11 +250,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-07T19:22:47.795000+00:00",
       "source": "https://www.nhl.com/news/pittsburgh-penguins-los-angeles-kings-game-preview-november-7-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "kraken": {
       "hasProjectedLines": true,
@@ -302,11 +312,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-07T19:30:24.446000+00:00",
       "source": "https://www.nhl.com/news/vancouver-canucks-edmonton-oilers-game-preview-november-7-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "panthers": {
       "hasProjectedLines": true,
@@ -362,11 +372,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-07T19:35:08.238000+00:00",
       "source": "https://www.nhl.com/news/detroit-red-wings-colorado-avalanche-game-preview-november-7-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "sabres": {
       "hasProjectedLines": true,
