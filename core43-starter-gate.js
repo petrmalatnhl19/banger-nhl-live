@@ -15,9 +15,15 @@ function validateEvidence(e,game){
  if(typeof e.sourceName!=="string"||e.sourceName.trim().length<3)return fail("missing_source");
  if(typeof e.sourceUrl!=="string"||!/^https:\/\//.test(e.sourceUrl))return fail("missing_source_url");
  const published=date(e.sourcePublishedAt),verified=date(e.verifiedAt),kickoff=date(game.kickoffUTC);
+ // When validating a frozen prediction, evidence must exist at prediction time,
+ // not merely before puck drop. Preserve the legacy pregame-only mode when
+ // no prediction timestamp is supplied by existing callers.
+ const asOf=game.predictionAt===undefined?kickoff:date(game.predictionAt);
+ if(!Number.isFinite(asOf)||asOf>kickoff)return fail("invalid_prediction_time");
  if(!Number.isFinite(published)||!Number.isFinite(verified))return fail("missing_timestamps");
  if(published>verified)return fail("verification_before_publication");
  if(published>=kickoff||verified>=kickoff)return fail("not_pregame");
+ if(game.predictionAt!==undefined&&(published>asOf||verified>asOf))return fail("evidence_after_prediction");
  return {accepted:true,reason:null,goalieId:String(e.goalieId),teamCode:e.teamCode,gameId:e.gameId,
   sourceName:e.sourceName,sourceUrl:e.sourceUrl,sourcePublishedAt:e.sourcePublishedAt,verifiedAt:e.verifiedAt};
 }
