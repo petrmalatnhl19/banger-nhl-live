@@ -1888,6 +1888,8 @@ h1,.brand,.logo,.nums,.arenanum,.metric b,.profilegrid b,
 .banger-news-card{padding:10px 12px;gap:4px}
 .banger-news-page .banger-news-list{gap:7px}
 .banger-news-source{color:#7bd8ec;font:650 11px Inter,system-ui,sans-serif}
+.banger-news-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.banger-news-date{color:#9ab9ca;font:600 11px Inter,system-ui,sans-serif;white-space:nowrap}
 .banger-news-open{color:#8abbd2;font:600 11px Inter,system-ui,sans-serif}
 .banger-news-card:focus-within{outline:2px solid #79e8ff;outline-offset:2px}
 .banger-news-card details{min-width:0}
@@ -2265,9 +2267,11 @@ function newsTeamFromHeadline(value){
 function newsArticleCard(article){
  let url;
  try{url=new URL(article.url);if(url.protocol!=='https:'||(url.hostname!=='www.nhl.com'&&url.hostname!=='nhl.com'))return '';}catch{return ''}
- const clean=String(article.title||'').replace(/\\s+\\d{1,2}\\.\\s*(?:lis|led|úno|bře|dub|kvě|čer|čvc|srp|zář|říj|pro)\\s+20\\d{2}\\s*$/i,'').trim();
+ const original=String(article.title||'').trim();
+ const dateMatch=original.match(/\s+(\d{1,2})\.\s*(lis|led|úno|bře|dub|kvě|čer|čvc|srp|zář|říj|pro)\s+(20\d{2})\s*$/i);
+ const clean=(dateMatch?original.slice(0,dateMatch.index):original).trim();
  const separated=clean
-  .replace(/(^|[\\s,;:])((?:nulou|výhrou|porážkou|zápase|utkání|sezoně|sezóně))\\s+(?=(?:Chytá|Přiznal|Pro|Teď|Další|Přitom|Zároveň|Rozhodl|Pomohl|Čeká|Bude|Má|Je|Jsou|Věřil|Dokázal)(?=\\s|[,.!?]|$))/gu,'$1$2. ')
+  .replace(/(^|[\s,;:])((?:nulou|výhrou|porážkou|zápase|utkání|sezoně|sezóně))\s+(?=(?:Chytá|Přiznal|Pro|Teď|Další|Přitom|Zároveň|Rozhodl|Pomohl|Čeká|Bude|Má|Je|Jsou|Věřil|Dokázal)(?=\s|[,.!?]|$))/gu,'$1$2. ')
   .replace(/([.!?])(?=[A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ])/g,'$1 ');
  const rawTitle=/[.!?…]$/.test(separated)?separated:separated+'.';
  const team=newsTeamFromHeadline(clean);
@@ -2275,7 +2279,8 @@ function newsArticleCard(article){
  const title=newsEscape(rawTitle);
  const expandable=rawTitle.length>105;
  const heading=expandable?'<details><summary><strong>'+title+'</strong><span class="banger-news-expand"></span></summary></details>':'<strong>'+title+'</strong>';
- return '<article class="banger-news-card"><span class="banger-news-source">NHL.com · '+(article.language==='cs'?'Česky':'English')+'</span><div class="banger-news-title-row">'+crest+heading+'</div><a class="banger-news-open" href="'+newsEscape(url.href)+'" target="_blank" rel="noopener noreferrer">Přečíst originál ↗</a></article>';
+ const date=dateMatch?Number(dateMatch[1])+'. '+dateMatch[2].toLowerCase()+'. '+dateMatch[3]:'';
+ return '<article class="banger-news-card"><div class="banger-news-meta"><span class="banger-news-source">NHL.com · '+(article.language==='cs'?'Česky':'English')+'</span>'+(date?'<time class="banger-news-date">'+newsEscape(date)+'</time>':'')+'</div><div class="banger-news-title-row">'+crest+heading+'</div><a class="banger-news-open" href="'+newsEscape(url.href)+'" target="_blank" rel="noopener noreferrer">Přečíst originál ↗</a></article>';
 }
 function newsChoose(data,language){
  const items=data.articles.filter(a=>a.language===language&&a.title&&a.url&&!/\\b(betting|wager|odds|props)\\b/i.test(a.title));
