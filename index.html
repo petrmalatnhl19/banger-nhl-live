@@ -1239,6 +1239,47 @@ button:focus-visible,[role="button"]:focus-visible{outline:2px solid #86f2ff;out
 #arenaBody .match-more-menu.hidden{display:none!important}
 #arenaBody .match-more-menu .match-tab{grid-column:auto!important;width:100%!important;display:block!important;min-width:0!important;white-space:nowrap!important;text-align:left!important;padding:10px 12px!important;font-size:12px!important}
 </style>
+<style id="banger-shared-mobile-header-density-v1">
+/* Identical compact brand header and projection status on every main tab.
+   This intentionally supersedes the older home-only density rules. */
+@media(max-width:600px){
+  body header.top,
+  body:has(#dashRefresh) header.top{
+    min-height:60px!important;
+    padding:8px 12px!important;
+    margin-bottom:6px!important;
+    border-radius:16px!important;
+    gap:6px!important;
+    flex-wrap:nowrap!important;
+  }
+  body header.top .brand,
+  body:has(#dashRefresh) header.top .brand{
+    min-width:0!important;
+    gap:5px!important;
+  }
+  body header.top .brand-logo,
+  body:has(#dashRefresh) header.top .brand-logo{
+    width:95px!important;
+    height:48px!important;
+    min-height:0!important;
+    transform:none!important;
+    margin-right:0!important;
+    padding:0!important;
+  }
+  body .lineup-health,
+  body:has(#dashRefresh) .lineup-health{
+    margin:5px 0 7px!important;
+    border-radius:11px!important;
+  }
+  body .lineup-health>summary,
+  body:has(#dashRefresh) .lineup-health>summary{
+    padding:8px 11px!important;
+    min-height:0!important;
+    font-size:11px!important;
+    line-height:1.3!important;
+  }
+}
+</style>
 </head><body><div class="wrap">
 <div id="brandSplash" class="brand-splash" aria-label="Načítání BANGER NHL LIVE"><div class="brand-splash-glow"></div><picture><source media="(orientation: portrait)" srcset="splash-portrait.png"><img src="splash-landscape.png" alt="BANGER NHL LIVE" fetchpriority="high" decoding="async"></picture><div class="brand-splash-loader"><span></span></div><div class="brand-splash-caption">VSTUP DO HOKEJOVÉ ARÉNY</div></div><header class="top"><div class="brand"><div class="brand-logo" aria-label="BANGER NHL LIVE"><span class="brand-mark">BANGER</span><span class="brand-sub">NHL <b>LIVE</b></span></div></div><span class="header-status"><i></i> NHL 2026/27</span></header>
 
