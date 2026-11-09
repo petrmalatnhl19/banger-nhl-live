@@ -1883,13 +1883,22 @@ h1,.brand,.logo,.nums,.arenanum,.metric b,.profilegrid b,
 .banger-news-card strong{font:750 14px/1.4 Inter,system-ui,sans-serif;color:#f1fbff}
 .banger-news-card strong{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
 .banger-news-title-row{display:flex;align-items:center;gap:10px;min-width:0}
-.banger-news-title-row strong{flex:1;min-width:0}
+.banger-news-title-row strong{flex:1;min-width:0}\n.banger-news-title-row details{flex:1;min-width:0}
 .banger-news-crest{width:34px;height:34px;object-fit:contain;flex:none}
 .banger-news-card{padding:10px 12px;gap:4px}
 .banger-news-page .banger-news-list{gap:7px}
 .banger-news-source{color:#7bd8ec;font:650 11px Inter,system-ui,sans-serif}
 .banger-news-open{color:#8abbd2;font:600 11px Inter,system-ui,sans-serif}
-.banger-news-card:focus-visible{outline:2px solid #79e8ff;outline-offset:2px}
+.banger-news-card:focus-within{outline:2px solid #79e8ff;outline-offset:2px}
+.banger-news-card details{min-width:0}
+.banger-news-card summary{list-style:none;cursor:pointer;display:block}
+.banger-news-card summary::-webkit-details-marker{display:none}
+.banger-news-card details[open] strong{display:block;overflow:visible;-webkit-line-clamp:unset}
+.banger-news-card .banger-news-expand{display:block;margin-top:5px;color:#8abbd2;font:600 11px Inter,system-ui,sans-serif}
+.banger-news-card details[open] .banger-news-expand::after{content:"Sbalit nadpis"}
+.banger-news-card details:not([open]) .banger-news-expand::after{content:"Celý nadpis"}
+.banger-news-card .banger-news-open{display:inline-block;align-self:flex-start;padding:5px 0;text-decoration:none}
+.banger-news-card .banger-news-open:focus-visible{outline:2px solid #79e8ff;outline-offset:2px}
 .banger-news-empty{color:#abc8da;font-size:13px}
 </style>
 </head><body><div class="wrap">
@@ -2256,18 +2265,17 @@ function newsTeamFromHeadline(value){
 function newsArticleCard(article){
  let url;
  try{url=new URL(article.url);if(url.protocol!=='https:'||(url.hostname!=='www.nhl.com'&&url.hostname!=='nhl.com'))return '';}catch{return ''}
- const clean=String(article.title||'').replace(/\s+\d{1,2}\.\s*(?:lis|led|úno|bře|dub|kvě|čer|čvc|srp|zář|říj|pro)\s+20\d{2}\s*$/i,'').trim();
- // NHL feed sometimes joins a headline and its teaser without punctuation.
- // Fix only clear Czech sentence boundaries; do not rewrite proper names or abbreviations.
+ const clean=String(article.title||'').replace(/\\s+\\d{1,2}\\.\\s*(?:lis|led|úno|bře|dub|kvě|čer|čvc|srp|zář|říj|pro)\\s+20\\d{2}\\s*$/i,'').trim();
  const separated=clean
-  // Insert missing sentence punctuation only for recognizable Czech boundaries.
-  .replace(/(^|[\s,;:])((?:nulou|výhrou|porážkou|zápase|utkání|sezoně|sezóně))\s+(?=(?:Chytá|Přiznal|Pro|Teď|Další|Přitom|Zároveň|Rozhodl|Pomohl|Čeká|Bude|Má|Je|Jsou|Věřil|Dokázal)(?=\s|[,.!?]|$))/gu,'$1$2. ')
+  .replace(/(^|[\\s,;:])((?:nulou|výhrou|porážkou|zápase|utkání|sezoně|sezóně))\\s+(?=(?:Chytá|Přiznal|Pro|Teď|Další|Přitom|Zároveň|Rozhodl|Pomohl|Čeká|Bude|Má|Je|Jsou|Věřil|Dokázal)(?=\\s|[,.!?]|$))/gu,'$1$2. ')
   .replace(/([.!?])(?=[A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ])/g,'$1 ');
  const rawTitle=/[.!?…]$/.test(separated)?separated:separated+'.';
- const title=newsEscape(rawTitle);
  const team=newsTeamFromHeadline(clean);
  const crest=team?'<img class="banger-news-crest" src="'+teamLogo(team)+'" alt="'+newsEscape(team)+'" loading="lazy">':'';
- return '<a class="banger-news-card" href="'+newsEscape(url.href)+'" target="_blank" rel="noopener noreferrer"><span class="banger-news-source">NHL.com · '+(article.language==='cs'?'Česky':'English')+'</span><div class="banger-news-title-row">'+crest+'<strong>'+title+'</strong></div><span class="banger-news-open">Přečíst originál ↗</span></a>';
+ const title=newsEscape(rawTitle);
+ const expandable=rawTitle.length>105;
+ const heading=expandable?'<details><summary><strong>'+title+'</strong><span class="banger-news-expand"></span></summary></details>':'<strong>'+title+'</strong>';
+ return '<article class="banger-news-card"><span class="banger-news-source">NHL.com · '+(article.language==='cs'?'Česky':'English')+'</span><div class="banger-news-title-row">'+crest+heading+'</div><a class="banger-news-open" href="'+newsEscape(url.href)+'" target="_blank" rel="noopener noreferrer">Přečíst originál ↗</a></article>';
 }
 function newsChoose(data,language){
  const items=data.articles.filter(a=>a.language===language&&a.title&&a.url&&!/\\b(betting|wager|odds|props)\\b/i.test(a.title));
