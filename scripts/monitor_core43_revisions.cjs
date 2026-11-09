@@ -5,10 +5,19 @@
 const {proposeRevision}=require("../core43-revision-gate.js");
 function evaluateCandidates({predictions=[],schedules=[],evidence=[],now}={}){
  if(typeof now!=="string"||!Number.isFinite(Date.parse(now)))throw Error("invalid_asof");
- const byGame=new Map(schedules.map(s=>[String(s.game_id),s]));
+ const byGame=new Map();
+ for(const schedule of schedules){
+  const id=String(schedule.game_id),previous=byGame.get(id);
+  // If snapshots disagree, do not guess which schedule is authoritative.
+  if(previous&&(previous.kickoff_at!==schedule.kickoff_at||previous.away_team!==schedule.away_team||previous.home_team!==schedule.home_team)){
+   byGame.set(id,{conflicting:true});continue;
+  }
+  if(!previous)byGame.set(id,schedule);
+ }
  return predictions.map(prediction=>{
   const schedule=byGame.get(String(prediction.game_id));
   if(!schedule)return {gameId:prediction.game_id,eligible:false,reason:"missing_schedule"};
+  if(schedule.conflicting)return {gameId:prediction.game_id,eligible:false,reason:"conflicting_schedule_snapshots"};
   const decision=proposeRevision({prediction,schedule,evidence,asOf:now,model:"core41"});
   return {gameId:prediction.game_id,eligible:decision.eligible,reason:decision.reason,
    proposal:decision.eligible?decision.proposal:undefined};
