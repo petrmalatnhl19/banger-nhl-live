@@ -446,6 +446,7 @@ body.ux-arena-open .arena{z-index:10020}
 .banger-news-open{align-self:flex-start;margin-top:3px}
 .banger-news-description{font:400 13px/1.55 Inter,system-ui,sans-serif;color:#afc8da;margin:9px 0 0}.banger-news-details:not([open]) .banger-news-expand::after{content:"Zobrazit popis"}.banger-news-details[open] .banger-news-expand::after{content:"Skrýt popis"}
 .banger-news-build{display:inline-block;margin-left:7px;color:#76c4d6;font-size:11px;font-weight:600;white-space:nowrap}
+ .banger-news-league-logo{width:30px;height:30px;flex:none;display:flex;align-items:center;justify-content:center;border:1px solid #6a99b0;border-radius:8px;color:#d8edf7;background:linear-gradient(145deg,#28435a,#0a192b);font:800 10px/1 Inter,system-ui,sans-serif;letter-spacing:.02em;margin-top:2px}
 /* NHL NEWS V24: compact cards, aligned team marks and accessible teaser */
 .banger-news-page .banger-news-list{gap:7px}
 .banger-news-card{padding:10px 12px;gap:5px}
@@ -2288,6 +2289,28 @@ function newsTeamFromHeadline(value){
  }));
  return matches.length===1?matches[0][0]:null;
 }
+
+// Recognizable player surnames in news headlines; only unambiguous NHL associations.
+const NEWS_PLAYER_TEAMS=[
+ ['VGK',['hertl','eichel','mark stone']],
+ ['WPG',['hellebuyck','connor hellebuyck']],
+ ['CHI',['bedard','connor bedard']],
+ ['DAL',['benn','jamie benn','robertson','jason robertson']],
+ ['MTL',['carey price','price vzpomínal']],
+ ['WSH',['ovečkin','ovechkin']],
+ ['CAR',['aho','sebastian aho']]
+];
+function newsTeamFromArticle(article,headline){
+ const combined=[headline,article.title,article.description].filter(Boolean).join(' ').toLocaleLowerCase('cs-CZ');
+ const explicit=newsTeamFromHeadline(combined);
+ if(explicit)return explicit;
+ const title=String(headline||'').toLocaleLowerCase('cs-CZ');
+ const found=NEWS_PLAYER_TEAMS.filter(([,names])=>names.some(name=>{
+  const escaped=name.replace(/[.*+?^$()|[\]{}]/g,'\\function newsArticleCard(article){');
+  return new RegExp('(^|[^\\p{L}])'+escaped+'(?=$|[^\\p{L}])','iu').test(title);
+ }));
+ return found.length===1?found[0][0]:null;
+}
 function newsArticleCard(article){
  let url;
  try{url=new URL(article.url);if(url.protocol!=='https:'||(url.hostname!=='www.nhl.com'&&url.hostname!=='nhl.com'))return '';}catch{return ''}
@@ -2314,8 +2337,8 @@ function newsArticleCard(article){
  const teaser=verifiedDescription||remainder;
  const title=newsEscape(headline);
  const description=teaser?'<p class="banger-news-description">'+newsEscape(teaser)+'</p>':'';
- const team=newsTeamFromHeadline(verifiedHeadline||clean);
- const crest=team?'<img class="banger-news-crest" src="'+teamLogo(team)+'" alt="'+newsEscape(team)+'" loading="lazy">':'';
+ const team=newsTeamFromArticle(article,verifiedHeadline||headline);
+ const crest=team?'<img class="banger-news-crest" src="'+teamLogo(team)+'" alt="'+newsEscape(team)+'" loading="lazy">':'<span class="banger-news-league-logo" aria-label="NHL">NHL</span>';
  const published=article.publishedAt||article.published_at||article.published;
  const validPublished=published&&/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(String(published))&&Number.isFinite(Date.parse(published));
  const date=validPublished?new Intl.DateTimeFormat(article.language==='cs'?'cs-CZ':'en-GB',{timeZone:'Europe/Prague',day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}).format(new Date(published)):(dateMatch?Number(dateMatch[1])+'. '+dateMatch[2].toLowerCase()+'. '+dateMatch[3]:'');
