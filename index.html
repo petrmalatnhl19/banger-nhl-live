@@ -2260,7 +2260,8 @@ function newsArticleCard(article){
  // NHL feed sometimes joins a headline and its teaser without punctuation.
  // Fix only clear Czech sentence boundaries; do not rewrite proper names or abbreviations.
  const separated=clean
-  .replace(/\\b(nulou|výhrou|porážkou|zápase|utkání|sezoně|sezóně)\\s+(?=(?:Chytá|Přiznal|Pro|Teď|Další|Přitom|Zároveň|Rozhodl|Pomohl|Čeká|Bude|Má|Je|Jsou|Věřil|Dokázal)\\b)/gu,'$1. ')
+  // Insert missing sentence punctuation only for recognizable Czech boundaries.
+  .replace(/\b(nulou|výhrou|porážkou|zápase|utkání|sezoně|sezóně)\s+(?=(?:Chytá|Přiznal|Pro|Teď|Další|Přitom|Zároveň|Rozhodl|Pomohl|Čeká|Bude|Má|Je|Jsou|Věřil|Dokázal)\b)/gu,'$1. ')
   .replace(/([.!?])(?=[A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ])/g,'$1 ');
  const rawTitle=/[.!?…]$/.test(separated)?separated:separated+'.';
  const title=newsEscape(rawTitle);
