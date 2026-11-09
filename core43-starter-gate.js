@@ -27,5 +27,12 @@ function validateEvidence(e,game){
  return {accepted:true,reason:null,goalieId:String(e.goalieId),teamCode:e.teamCode,gameId:e.gameId,
   sourceName:e.sourceName,sourceUrl:e.sourceUrl,sourcePublishedAt:e.sourcePublishedAt,verifiedAt:e.verifiedAt};
 }
-return {validateEvidence};
+// Explicit entry point for archived/frozen predictions. Fail closed if the
+// prediction timestamp is missing; do not silently fall back to kickoff.
+function validateFrozenEvidence(e,game,predictionAt){
+ if(typeof predictionAt!=="string"||!Number.isFinite(date(predictionAt)))
+  return {accepted:false,reason:"missing_prediction_time"};
+ return validateEvidence(e,{...game,predictionAt});
+}
+return {validateEvidence,validateFrozenEvidence};
 });
