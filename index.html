@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="cs"><head>
-<meta name="banger-build" content="2026-11-09-news-metadata-v23"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#030b1b"><title>BANGER NHL LIVE</title>
+<meta name="banger-build" content="2026-11-09-news-polish-v24"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#030b1b"><title>BANGER NHL LIVE</title>
 
 <style>
 :root{color-scheme:dark;--cyan:#41eaff;--ink:#e8faff;--muted:#8ba9c5;--panel:#0b1b35}
@@ -446,6 +446,18 @@ body.ux-arena-open .arena{z-index:10020}
 .banger-news-open{align-self:flex-start;margin-top:3px}
 .banger-news-description{font:400 13px/1.55 Inter,system-ui,sans-serif;color:#afc8da;margin:9px 0 0}.banger-news-details:not([open]) .banger-news-expand::after{content:"Zobrazit popis"}.banger-news-details[open] .banger-news-expand::after{content:"Skrýt popis"}
 .banger-news-build{display:inline-block;margin-left:7px;color:#76c4d6;font-size:11px;font-weight:600;white-space:nowrap}
+/* NHL NEWS V24: compact cards, aligned team marks and accessible teaser */
+.banger-news-page .banger-news-list{gap:7px}
+.banger-news-card{padding:10px 12px;gap:5px}
+.banger-news-title-row{align-items:flex-start;gap:9px}
+.banger-news-crest{width:30px;height:30px;object-fit:contain;object-position:center;margin-top:2px}
+.banger-news-meta{justify-content:flex-start;column-gap:8px;row-gap:3px}
+.banger-news-date{margin-left:auto}
+.banger-news-fresh{font:750 10px/1.3 Inter,system-ui,sans-serif;letter-spacing:.05em;color:#7ce5f3;border:1px solid #347e92;border-radius:5px;padding:2px 5px}
+.banger-news-card .banger-news-expand{margin-top:4px}
+.banger-news-description{margin:8px 0 2px;font-size:12px;line-height:1.55}
+.banger-news-card .banger-news-open{padding:3px 0}
+@media(max-width:390px){.banger-news-date{font-size:10px}.banger-news-crest{width:27px;height:27px}}
 </style>
 <!-- BANGER Analyst compact tracker v3 -->
 <style id="banger-analyst-compact-v3">
@@ -2302,13 +2314,14 @@ function newsArticleCard(article){
  const teaser=verifiedDescription||remainder;
  const title=newsEscape(headline);
  const description=teaser?'<p class="banger-news-description">'+newsEscape(teaser)+'</p>':'';
- const team=newsTeamFromHeadline(clean);
+ const team=newsTeamFromHeadline(verifiedHeadline||clean);
  const crest=team?'<img class="banger-news-crest" src="'+teamLogo(team)+'" alt="'+newsEscape(team)+'" loading="lazy">':'';
  const published=article.publishedAt||article.published_at||article.published;
  const validPublished=published&&/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(String(published))&&Number.isFinite(Date.parse(published));
  const date=validPublished?new Intl.DateTimeFormat(article.language==='cs'?'cs-CZ':'en-GB',{timeZone:'Europe/Prague',day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}).format(new Date(published)):(dateMatch?Number(dateMatch[1])+'. '+dateMatch[2].toLowerCase()+'. '+dateMatch[3]:'');
+ const fresh=validPublished && Date.now()>=Date.parse(published) && Date.now()-Date.parse(published)<6*60*60*1000;
  const body=description?'<details class="banger-news-details"><summary><strong>'+title+'</strong><span class="banger-news-expand"></span></summary>'+description+'</details>':'<strong>'+title+'</strong>';
- return '<article class="banger-news-card"><div class="banger-news-meta"><span class="banger-news-source">NHL.com · '+(article.language==='cs'?'Česky':'English')+'</span>'+(date?'<time class="banger-news-date">'+newsEscape(date)+'</time>':'')+'</div><div class="banger-news-title-row">'+crest+body+'</div><a class="banger-news-open" href="'+newsEscape(url.href)+'" target="_blank" rel="noopener noreferrer">Přečíst originál ↗</a></article>';
+ return '<article class="banger-news-card"><div class="banger-news-meta"><span class="banger-news-source">NHL.com · '+(article.language==='cs'?'Česky':'English')+'</span>'+(fresh?'<span class="banger-news-fresh">NOVÉ</span>':'')+(date?'<time class="banger-news-date">'+newsEscape(date)+'</time>':'')+'</div><div class="banger-news-title-row">'+crest+body+'</div><a class="banger-news-open" href="'+newsEscape(url.href)+'" target="_blank" rel="noopener noreferrer">Přečíst originál ↗</a></article>';
 }
 function newsPublishedTime(article){
  const iso=article.publishedAt||article.published_at||article.published||'';
@@ -2342,7 +2355,7 @@ async function newsPage(){
  S.tab='news';
  $('calendarBar').classList.add('hidden');$('search').classList.add('hidden');$('sort').classList.add('hidden');
  $('status').textContent='NHL novinky';
- $('content').innerHTML='<section class="dash-panel banger-news-page"><div class="dash-panel-title"><h3>📰 NHL Novinky</h3><button type="button" id="bangerNewsReload" class="dash-link">↻ Obnovit</button></div><p class="banger-news-intro">Aktuální články z oficiálního webu NHL. Kliknutím otevřete původní článek. <small class="banger-news-build">Verze novinek v23</small></p><div class="banger-news-filters"><button type="button" data-news-lang="cs" class="active">🇨🇿 Česky</button><button type="button" data-news-lang="en">🌐 English</button></div><div id="bangerNewsList" class="banger-news-list"><p>Načítám novinky…</p></div></section>';
+ $('content').innerHTML='<section class="dash-panel banger-news-page"><div class="dash-panel-title"><h3>📰 NHL Novinky</h3><button type="button" id="bangerNewsReload" class="dash-link">↻ Obnovit</button></div><p class="banger-news-intro">Aktuální články z oficiálního webu NHL. Kliknutím otevřete původní článek.</p><div class="banger-news-filters"><button type="button" data-news-lang="cs" class="active">🇨🇿 Česky</button><button type="button" data-news-lang="en">🌐 English</button></div><div id="bangerNewsList" class="banger-news-list"><p>Načítám novinky…</p></div></section>';
  let language='cs';
  const draw=async(force=false)=>{
   const host=document.getElementById('bangerNewsList');
