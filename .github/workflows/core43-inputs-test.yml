@@ -55,3 +55,4 @@ jobs:
       - run: node scripts/test_core43_computed_revision_adapter.cjs
       - run: node scripts/test_core43_gsax_sensitivity.cjs
       - run: node scripts/test_core43_paired_evaluation.cjs
+      - run: node scripts/test_core43_archive_integration.cjs
