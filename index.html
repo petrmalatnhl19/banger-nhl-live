@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="cs"><head>
-<meta name="banger-build" content="2026-11-09-news-summary-v21"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#030b1b"><title>BANGER NHL LIVE</title>
+<meta name="banger-build" content="2026-11-09-news-sort-v22"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#030b1b"><title>BANGER NHL LIVE</title>
 
 <style>
 :root{color-scheme:dark;--cyan:#41eaff;--ink:#e8faff;--muted:#8ba9c5;--panel:#0b1b35}
@@ -2304,9 +2304,23 @@ function newsArticleCard(article){
  const body=description?'<details class="banger-news-details"><summary><strong>'+title+'</strong><span class="banger-news-expand"></span></summary>'+description+'</details>':'<strong>'+title+'</strong>';
  return '<article class="banger-news-card"><div class="banger-news-meta"><span class="banger-news-source">NHL.com · '+(article.language==='cs'?'Česky':'English')+'</span>'+(date?'<time class="banger-news-date">'+newsEscape(date)+'</time>':'')+'</div><div class="banger-news-title-row">'+crest+body+'</div><a class="banger-news-open" href="'+newsEscape(url.href)+'" target="_blank" rel="noopener noreferrer">Přečíst originál ↗</a></article>';
 }
+function newsPublishedTime(article){
+ const iso=article.publishedAt||article.published_at||article.published||'';
+ if(iso&&/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(String(iso))){
+  const timestamp=Date.parse(iso);
+  if(Number.isFinite(timestamp))return timestamp;
+ }
+ const text=String(article.title||'');
+ const match=text.match(/(\d{1,2})\.\s*(lis|led|úno|bře|dub|kvě|čer|čvc|srp|zář|říj|pro)\s+(20\d{2})\s*$/i);
+ if(!match)return 0;
+ const months={led:0,'úno':1,'bře':2,dub:3,'kvě':4,'čer':5,čvc:6,srp:7,'zář':8,'říj':9,lis:10,pro:11};
+ return Date.UTC(Number(match[3]),months[match[2].toLowerCase()],Number(match[1]));
+}
 function newsChoose(data,language){
- const items=data.articles.filter(a=>a.language===language&&a.title&&a.url&&!/\\b(betting|wager|odds|props)\\b/i.test(a.title));
- return items.length?items:data.articles.filter(a=>a.title&&a.url&&!/\\b(betting|wager|odds|props)\\b/i.test(a.title));
+ const allowed=a=>a.title&&a.url&&!/\\b(betting|wager|odds|props)\\b/i.test(a.title);
+ const items=data.articles.filter(a=>a.language===language&&allowed(a));
+ const chosen=items.length?items:data.articles.filter(allowed);
+ return chosen.map((article,index)=>({article,index})).sort((a,b)=>newsPublishedTime(b.article)-newsPublishedTime(a.article)||a.index-b.index).map(x=>x.article);
 }
 async function renderNewsPreview(){
  const host=document.getElementById('bangerNewsPreview');
@@ -2322,7 +2336,7 @@ async function newsPage(){
  S.tab='news';
  $('calendarBar').classList.add('hidden');$('search').classList.add('hidden');$('sort').classList.add('hidden');
  $('status').textContent='NHL novinky';
- $('content').innerHTML='<section class="dash-panel banger-news-page"><div class="dash-panel-title"><h3>📰 NHL Novinky</h3><button type="button" id="bangerNewsReload" class="dash-link">↻ Obnovit</button></div><p class="banger-news-intro">Aktuální články z oficiálního webu NHL. Kliknutím otevřete původní článek. <small class="banger-news-build">Verze novinek v21</small></p><div class="banger-news-filters"><button type="button" data-news-lang="cs" class="active">🇨🇿 Česky</button><button type="button" data-news-lang="en">🌐 English</button></div><div id="bangerNewsList" class="banger-news-list"><p>Načítám novinky…</p></div></section>';
+ $('content').innerHTML='<section class="dash-panel banger-news-page"><div class="dash-panel-title"><h3>📰 NHL Novinky</h3><button type="button" id="bangerNewsReload" class="dash-link">↻ Obnovit</button></div><p class="banger-news-intro">Aktuální články z oficiálního webu NHL. Kliknutím otevřete původní článek. <small class="banger-news-build">Verze novinek v22</small></p><div class="banger-news-filters"><button type="button" data-news-lang="cs" class="active">🇨🇿 Česky</button><button type="button" data-news-lang="en">🌐 English</button></div><div id="bangerNewsList" class="banger-news-list"><p>Načítám novinky…</p></div></section>';
  let language='cs';
  const draw=async(force=false)=>{
   const host=document.getElementById('bangerNewsList');
