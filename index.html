@@ -2261,23 +2261,23 @@ async function loadNhlNews(force=false){
 /* Only display a team crest when the headline clearly identifies a club.
    Player-only and league-wide articles deliberately remain without a guessed crest. */
 const NEWS_TEAM_MATCHES=[
- ['ANA',['anaheim ducks','anaheim']],['BOS',['boston bruins','boston']],
- ['BUF',['buffalo sabres','buffalo']],['CGY',['calgary flames','calgary']],
+ ['ANA',['anaheim ducks','anaheim','ducks']],['BOS',['boston bruins','boston']],
+ ['BUF',['buffalo sabres','buffalo','sabres']],['CGY',['calgary flames','calgary']],
  ['CAR',['carolina hurricanes','carolina']],['CHI',['chicago blackhawks','chicago']],
  ['COL',['colorado avalanche','colorado']],['CBJ',['columbus blue jackets','columbus']],
  ['DAL',['dallas stars','dallas']],['DET',['detroit red wings','detroit']],
- ['EDM',['edmonton oilers','edmonton']],['FLA',['florida panthers','florida']],
+ ['EDM',['edmonton oilers','edmonton','oilers']],['FLA',['florida panthers','florida']],
  ['LAK',['los angeles kings','los angeles']],['MIN',['minnesota wild','minnesota']],
  ['MTL',['montreal canadiens','montreal','montréal']],['NSH',['nashville predators','nashville']],
- ['NJD',['new jersey devils','new jersey']],['NYI',['new york islanders','islanders']],
+ ['NJD',['new jersey devils','new jersey','devils']],['NYI',['new york islanders','islanders']],
  ['NYR',['new york rangers','rangers']],['OTT',['ottawa senators','ottawa']],
- ['PHI',['philadelphia flyers','philadelphia']],['PIT',['pittsburgh penguins','pittsburgh']],
+ ['PHI',['philadelphia flyers','philadelphia']],['PIT',['pittsburgh penguins','pittsburgh','penguins']],
  ['SJS',['san jose sharks','san jose']],['SEA',['seattle kraken','seattle']],
  ['STL',['st. louis blues','st louis blues','st. louis','st louis']],
  ['TBL',['tampa bay lightning','tampa bay']],['TOR',['toronto maple leafs','toronto']],
  ['UTA',['utah mammoth','utah']],['VAN',['vancouver canucks','vancouver']],
  ['VGK',['vegas golden knights','vegas']],['WSH',['washington capitals','washington']],
- ['WPG',['winnipeg jets','winnipeg']]
+ ['WPG',['winnipeg jets','winnipeg','jets']]
 ];
 function newsTeamFromHeadline(value){
  const text=String(value||'').toLocaleLowerCase('cs-CZ');
@@ -2301,7 +2301,7 @@ const NEWS_PLAYER_TEAMS=[
  ['ANA',['dostal','dostál','gólman ducks','golman ducks']],
  ['COL',['avalanche']],['DET',['red wings','postava','postavovi']],
  ['BOS',['zacha','pastrňák','pastrnak']],['CAR',['hurricanes']],
- ['FLA',['barkov','marchand']],['WSH',['ovečkin','ovechkin']],
+ ['FLA',['barkov','marchand']],['WSH',['ovečkin','ovechkin']],['EDM',['bouchard']],
  ['NYR',['panarin']],['EDM',['mcdavid','draisaitl']]
 ];
 // Prefer the regularly refreshed NHL roster snapshot over hard-coded player affiliations.
@@ -2361,6 +2361,10 @@ function newsArticleTeams(article,headline){
  const teaser=identify(combined);
  // Explicitly named clubs in a headline are the safest logos, including two-team stories.
  if(headlineMatches.explicitTeams.size)return [...headlineMatches.explicitTeams].slice(0,2);
+ // Explicitly curated athlete associations outrank incidental surname matches in roster data.
+ const curated=new Set();
+ for(const [code,names] of NEWS_PLAYER_TEAMS)if(names.some(n=>wordHit(title,n)))curated.add(code);
+ if(curated.size)return [...curated].slice(0,2);
  // When a headline names players on two teams, preserve both instead of guessing one.
  if(headlineMatches.playerTeams.size)return [...headlineMatches.playerTeams].slice(0,2);
  // Teasers can mention opponents or former clubs; show a logo only when unambiguous.
