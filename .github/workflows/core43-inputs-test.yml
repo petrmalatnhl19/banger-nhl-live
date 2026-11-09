@@ -62,3 +62,4 @@ jobs:
       - run: node scripts/test_core43_goalie_coverage.cjs
       - run: node scripts/test_core43_starter_source_adapter.cjs
       - run: node scripts/test_core43_rotowire_coverage.cjs
+      - run: node scripts/test_core43_rotowire_identity_reconcile.cjs
