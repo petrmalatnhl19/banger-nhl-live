@@ -19,7 +19,7 @@ jobs:
           python-version: '3.12'
       - name: Test player name matching
         run: python -m unittest scripts/test_lineup_name_matching.py
-      - name: Refresh NHL rosters
+      - name: Refresh NHL news headlines (optional)\n        continue-on-error: true\n        run: python scripts/update_nhl_news.py\n      - name: Refresh NHL rosters
         run: python scripts/update_rosters.py
       - name: Inspect Tampa Bay projected line source
         continue-on-error: true
@@ -128,7 +128,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for file in index.html lineups.json lineups_archive.json nhl_rosters.json lineups_coverage.json starting_goalies.json nhl_goalies.json rotowire_goalies.json rotowire_goalies_diagnostic.json lineups_changes.json lineups_diagnostics.md lineups_source_diagnostics.json lineups_discovery_diagnostics.json lineup_free_sources_probe.json lineup_source_usage_report.json lineup_core_report.json lineup_rejections_report.json lineup_recovery_plan.json ottawa_game_roster_diagnostic.json dallas_game_roster_diagnostic.json utah_game_roster_diagnostic.json detroit_game_roster_diagnostic.json lineup_identity_audit.json tampa_source_excerpt.json; do
+          for file in index.html nhl_news.json lineups.json lineups_archive.json nhl_rosters.json lineups_coverage.json starting_goalies.json nhl_goalies.json rotowire_goalies.json rotowire_goalies_diagnostic.json lineups_changes.json lineups_diagnostics.md lineups_source_diagnostics.json lineups_discovery_diagnostics.json lineup_free_sources_probe.json lineup_source_usage_report.json lineup_core_report.json lineup_rejections_report.json lineup_recovery_plan.json ottawa_game_roster_diagnostic.json dallas_game_roster_diagnostic.json utah_game_roster_diagnostic.json detroit_game_roster_diagnostic.json lineup_identity_audit.json tampa_source_excerpt.json; do
             if [ -f "$file" ]; then git add "$file"; fi
           done
           if ! git diff --cached --quiet; then
