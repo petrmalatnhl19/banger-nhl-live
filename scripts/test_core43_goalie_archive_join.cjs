@@ -1,0 +1,15 @@
+const assert=require("node:assert/strict");
+const {joinGoalieArchive:run}=require("./core43_goalie_archive_join.cjs");
+const s={game_id:7,away_team:"DAL",home_team:"NJD",kickoff_at:"2026-11-09T20:00:00Z"};
+const p={game_id:7,team_code:"DAL",goalie_id:"10",prediction_status:"projected",predicted_at:"2026-11-09T18:00:00Z"};
+const a={game_id:7,team_code:"DAL",goalie_id:"10",status:"verified",verified_at:"2026-11-09T22:00:00Z"};
+const base={predictions:[p],schedules:[s],actualStarters:[a]};
+assert.equal(run(base).overall.correct,1);
+assert.equal(run(base).byStatus.projected.correct,1);
+assert.equal(run({...base,actualStarters:[{...a,goalie_id:"11"}]}).overall.incorrect,1);
+assert.equal(run({...base,actualStarters:[]}).overall.evaluated,0);
+assert.equal(run({...base,actualStarters:[a,{...a,goalie_id:"11"}]}).excludedAtJoin.conflicting_actual_starters,1);
+assert.equal(run({...base,schedules:[s,{...s,kickoff_at:"2026-11-09T21:00:00Z"}]}).overall.evaluated,0);
+assert.equal(run({...base,predictions:[{...p,predicted_at:"2026-11-09T21:00:00Z"}]}).overall.evaluated,0);
+assert.equal(run({...base,predictions:[p,p]}).excludedAtJoin.duplicate_prediction,1);
+console.log("CORE 4.3 goalie archive join tests passed");
