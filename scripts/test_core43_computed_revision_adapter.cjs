@@ -1,0 +1,18 @@
+const assert=require("node:assert/strict");
+const {buildComputedRevision:run}=require("./core43_computed_revision_adapter.cjs");
+const asOf="2026-11-09T14:00:00Z";
+const prediction={game_id:42,away_team:"DAL",home_team:"NJD",core41_predicted_at:"2026-11-09T10:00:00Z"};
+const schedule={game_id:42,away_team:"DAL",home_team:"NJD",kickoff_at:"2026-11-09T20:00:00Z"};
+const evidence=["DAL","NJD"].map((team,i)=>({game_id:42,team_code:team,goalie_id:String(10000+i),evidence_status:"confirmed",source_name:"Verified report",source_url:"https://example.org/report",source_published_at:"2026-11-09T12:00:00Z",verified_at:"2026-11-09T13:00:00Z"}));
+const computed={gameId:42,model:"core41",computedAt:asOf,production:false,engineVersion:"experimental-test-v1",expectedAwayGoals:2.8,expectedHomeGoals:3.1,inputSnapshot:{asOf,source:"test-fixture"}};
+const args={prediction,schedule,evidence,asOf,computed};
+const row=run(args);
+assert.equal(row.predicted_away,2.8);
+assert.equal(row.input_snapshot.production,false);
+assert.equal(prediction.core41_predicted_at,"2026-11-09T10:00:00Z");
+assert.throws(()=>run({...args,computed:{...computed,computedAt:"2026-11-09T15:00:00Z"}}),/time_mismatch/);
+assert.throws(()=>run({...args,computed:{...computed,production:true}}),/unverified_engine_version/);
+assert.throws(()=>run({...args,computed:{...computed,expectedAwayGoals:null}}),/invalid_expected_goals/);
+assert.throws(()=>run({...args,computed:{...computed,inputSnapshot:{asOf:"2026-11-09T13:00:00Z"}}}),/input_snapshot_time_mismatch/);
+assert.throws(()=>run({...args,computed:{...computed,gameId:43}}),/identity_mismatch/);
+console.log("CORE 4.3 computed forecast adapter tests passed");
