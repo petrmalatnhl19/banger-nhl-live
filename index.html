@@ -2300,7 +2300,9 @@ function newsArticleCard(article){
  const description=remainder?'<p class="banger-news-description">'+newsEscape(remainder)+'</p>':'';
  const team=newsTeamFromHeadline(clean);
  const crest=team?'<img class="banger-news-crest" src="'+teamLogo(team)+'" alt="'+newsEscape(team)+'" loading="lazy">':'';
- const date=dateMatch?Number(dateMatch[1])+'. '+dateMatch[2].toLowerCase()+'. '+dateMatch[3]:'';
+ const published=article.publishedAt||article.published_at||article.published;
+ const validPublished=published&&/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(String(published))&&Number.isFinite(Date.parse(published));
+ const date=validPublished?new Intl.DateTimeFormat(article.language==='cs'?'cs-CZ':'en-GB',{timeZone:'Europe/Prague',day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}).format(new Date(published)):(dateMatch?Number(dateMatch[1])+'. '+dateMatch[2].toLowerCase()+'. '+dateMatch[3]:'');
  const body=description?'<details class="banger-news-details"><summary><strong>'+title+'</strong><span class="banger-news-expand"></span></summary>'+description+'</details>':'<strong>'+title+'</strong>';
  return '<article class="banger-news-card"><div class="banger-news-meta"><span class="banger-news-source">NHL.com · '+(article.language==='cs'?'Česky':'English')+'</span>'+(date?'<time class="banger-news-date">'+newsEscape(date)+'</time>':'')+'</div><div class="banger-news-title-row">'+crest+body+'</div><a class="banger-news-open" href="'+newsEscape(url.href)+'" target="_blank" rel="noopener noreferrer">Přečíst originál ↗</a></article>';
 }
