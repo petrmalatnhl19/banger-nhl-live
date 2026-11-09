@@ -1719,6 +1719,49 @@ h1,.brand,.logo,.nums,.arenanum,.metric b,.profilegrid b,
  }
 }
 </style>
+<style id="banger-dashboard-match-actual-height-fix-v2">
+/* Explicit card height wins over older min-height and flex rules. */
+@media(max-width:760px){
+ #content .dash-layout>.dash-panel.dash-wide .dash-game-grid{
+  grid-auto-rows:min-content!important;
+  align-items:start!important;
+  gap:7px!important;
+ }
+ #content .dash-layout>.dash-panel.dash-wide button.dash-game{
+  box-sizing:border-box!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-template-rows:16px 31px!important;
+  align-content:center!important;
+  justify-content:stretch!important;
+  row-gap:3px!important;
+  height:76px!important;
+  min-height:76px!important;
+  max-height:76px!important;
+  padding:8px 32px 8px 11px!important;
+  margin:0!important;
+  border-radius:12px!important;
+ }
+ #content .dash-layout>.dash-panel.dash-wide button.dash-game>.dash-game-state{
+  grid-row:1!important;
+  margin:0!important;padding:0!important;
+  height:16px!important;line-height:16px!important;
+  font-size:10px!important;
+ }
+ #content .dash-layout>.dash-panel.dash-wide button.dash-game>.dash-game-teams{
+  grid-row:2!important;
+  min-height:0!important;height:31px!important;
+  margin:0!important;padding:0!important;
+  align-self:center!important;
+ }
+ #content .dash-layout>.dash-panel.dash-wide button.dash-game .dash-game-hint{
+  top:50%!important;right:9px!important;
+ }
+ #content .dash-layout>.dash-panel.dash-wide .dash-panel-title{
+  margin-bottom:8px!important;
+ }
+}
+</style>
 </head><body><div class="wrap">
 <div id="brandSplash" class="brand-splash" aria-label="Načítání BANGER NHL LIVE"><div class="brand-splash-glow"></div><picture><source media="(orientation: portrait)" srcset="splash-portrait.png"><img src="splash-landscape.png" alt="BANGER NHL LIVE" fetchpriority="high" decoding="async"></picture><div class="brand-splash-loader"><span></span></div><div class="brand-splash-caption">VSTUP DO HOKEJOVÉ ARÉNY</div></div><header class="top"><div class="brand"><div class="brand-logo" aria-label="BANGER NHL LIVE"><span class="brand-mark">BANGER</span><span class="brand-sub">NHL <b>LIVE</b></span></div></div><span class="header-status"><i></i> NHL 2026/27</span></header>
 
