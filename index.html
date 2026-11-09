@@ -1636,6 +1636,89 @@ h1,.brand,.logo,.nums,.arenanum,.metric b,.profilegrid b,
  font-family:'Barlow Condensed','Exo 2',system-ui,sans-serif;
 }
 </style>
+<style id="banger-dashboard-game-cards-final-polish-v1">
+/* A consistent, denser match card for both today's and yesterday's games. */
+#content .dash-layout>.dash-panel.dash-wide .dash-game-grid{
+ gap:8px!important;
+}
+#content .dash-layout>.dash-panel.dash-wide .dash-game{
+ position:relative;
+ min-height:0!important;
+ padding:9px 38px 10px 12px!important;
+ gap:5px!important;
+ border-radius:13px!important;
+}
+#content .dash-layout>.dash-panel.dash-wide .dash-game-state{
+ display:block!important;
+ font-family:'Inter',system-ui,sans-serif!important;
+ font-size:11px!important;
+ line-height:1.15!important;
+ font-weight:750!important;
+ letter-spacing:0!important;
+}
+#content .dash-layout>.dash-panel.dash-wide .dash-game-teams{
+ display:grid!important;
+ grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)!important;
+ gap:7px!important;
+ align-items:center!important;
+ min-height:32px!important;
+}
+#content .dash-layout>.dash-panel.dash-wide .dash-team-left,
+#content .dash-layout>.dash-panel.dash-wide .dash-team-right{
+ display:flex!important;align-items:center!important;
+ gap:7px!important;min-width:0!important;
+ font-family:'Inter',system-ui,sans-serif!important;
+ font-size:13px!important;font-weight:650!important;
+}
+#content .dash-layout>.dash-panel.dash-wide .dash-team-right{
+ justify-content:flex-end!important;
+}
+#content .dash-layout>.dash-panel.dash-wide .dash-game-teams img{
+ width:25px!important;height:25px!important;flex:0 0 25px!important;
+ object-fit:contain!important;
+}
+#content .dash-layout>.dash-panel.dash-wide .dash-game-teams strong{
+ font-size:23px!important;
+ line-height:1.1!important;
+ font-variant-numeric:tabular-nums!important;
+ text-align:center!important;
+}
+#content .dash-layout>.dash-panel.dash-wide .dash-game-hint{
+ position:absolute!important;
+ right:11px!important;top:50%!important;
+ transform:translateY(-50%)!important;
+ font-size:24px!important;
+}
+#content .dash-layout>.dash-panel.dash-wide .dash-panel-title{
+ margin-bottom:9px!important;
+}
+#content .dash-games-unified .dash-games-title p{
+ margin-top:3px!important;line-height:1.25!important;
+}
+#content .dash-games-unified #dashRefresh{
+ min-width:36px!important;width:36px!important;height:36px!important;
+ min-height:36px!important;padding:0!important;
+ font-size:19px!important;border-radius:11px!important;
+}
+@media(max-width:600px){
+ #content .dash-layout>.dash-panel.dash-wide{
+  padding:12px!important;
+ }
+ #content .dash-layout>.dash-panel.dash-wide .dash-game{
+  padding:8px 32px 9px 10px!important;
+ }
+ #content .dash-layout>.dash-panel.dash-wide .dash-game-teams strong{
+  font-size:21px!important;
+ }
+ #content .dash-layout>.dash-panel.dash-wide .dash-team-left,
+ #content .dash-layout>.dash-panel.dash-wide .dash-team-right{
+  font-size:12px!important;gap:6px!important;
+ }
+ #content .dash-layout>.dash-panel.dash-wide .dash-game-teams img{
+  width:23px!important;height:23px!important;flex-basis:23px!important;
+ }
+}
+</style>
 </head><body><div class="wrap">
 <div id="brandSplash" class="brand-splash" aria-label="Načítání BANGER NHL LIVE"><div class="brand-splash-glow"></div><picture><source media="(orientation: portrait)" srcset="splash-portrait.png"><img src="splash-landscape.png" alt="BANGER NHL LIVE" fetchpriority="high" decoding="async"></picture><div class="brand-splash-loader"><span></span></div><div class="brand-splash-caption">VSTUP DO HOKEJOVÉ ARÉNY</div></div><header class="top"><div class="brand"><div class="brand-logo" aria-label="BANGER NHL LIVE"><span class="brand-mark">BANGER</span><span class="brand-sub">NHL <b>LIVE</b></span></div></div><span class="header-status"><i></i> NHL 2026/27</span></header>
 
