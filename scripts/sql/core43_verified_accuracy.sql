@@ -34,13 +34,20 @@ WITH schedule AS (
 ), paired_games AS (
  SELECT game_id FROM metrics GROUP BY game_id HAVING count(DISTINCT model)=2
 )
-SELECT CASE WHEN p.game_id IS NULL THEN 'all_verified' ELSE 'paired_subset' END AS cohort,
- m.model,count(*) AS games,count(m.winner_correct) AS winner_calls,
- count(*) FILTER (WHERE m.winner_correct) AS correct_winners,
- round(avg(m.winner_correct::int)::numeric,4) AS winner_accuracy,
- round(avg(m.goal_mae)::numeric,4) AS goals_mae,
- round(sqrt(avg(m.goal_mse))::numeric,4) AS goals_rmse
-FROM metrics m LEFT JOIN paired_games p USING(game_id)
-GROUP BY GROUPING SETS ((m.model),(m.model,p.game_id IS NOT NULL))
-HAVING GROUPING(p.game_id IS NOT NULL)=1 OR p.game_id IS NOT NULL
-ORDER BY cohort,m.model;
+SELECT 'all_verified' AS cohort,model,count(*) AS games,
+ count(winner_correct) AS winner_calls,
+ count(*) FILTER(WHERE winner_correct) AS correct_winners,
+ round(avg(winner_correct::int)::numeric,4) AS winner_accuracy,
+ round(avg(goal_mae)::numeric,4) AS goals_mae,
+ round(sqrt(avg(goal_mse))::numeric,4) AS goals_rmse
+FROM metrics GROUP BY model
+UNION ALL
+SELECT 'paired_subset',m.model,count(*),
+ count(m.winner_correct),
+ count(*) FILTER(WHERE m.winner_correct),
+ round(avg(m.winner_correct::int)::numeric,4),
+ round(avg(m.goal_mae)::numeric,4),
+ round(sqrt(avg(m.goal_mse))::numeric,4)
+FROM metrics m JOIN paired_games p USING(game_id)
+GROUP BY m.model
+ORDER BY cohort,model;
