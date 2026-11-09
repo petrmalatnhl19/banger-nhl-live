@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="cs"><head>
-<meta name="banger-build" content="2026-11-09-news-summary-v20"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#030b1b"><title>BANGER NHL LIVE</title>
+<meta name="banger-build" content="2026-11-09-news-summary-v21"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#030b1b"><title>BANGER NHL LIVE</title>
 
 <style>
 :root{color-scheme:dark;--cyan:#41eaff;--ink:#e8faff;--muted:#8ba9c5;--panel:#0b1b35}
@@ -2282,9 +2282,20 @@ function newsArticleCard(article){
  const original=String(article.title||'').trim();
  const dateMatch=original.match(/\s+(\d{1,2})\.\s*(lis|led|úno|bře|dub|kvě|čer|čvc|srp|zář|říj|pro)\s+(20\d{2})\s*$/i);
  const clean=(dateMatch?original.slice(0,dateMatch.index):original).trim();
- const sentenceBoundary=clean.search(/[.!?]\s+(?=[A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ])/);
- const headline=sentenceBoundary>=0?clean.slice(0,sentenceBoundary+1).trim():clean;
- const remainder=sentenceBoundary>=0?clean.slice(sentenceBoundary+1).trim():'';
+ // NHL feed sometimes joins headline and teaser without punctuation.
+ // Keep short emphatic openings (e.g. "2+2!") and multi-sentence headlines intact.
+ let headline=clean, remainder='';
+ const teaserMarkers=[
+  /(?<=Hertl)\s+(?=Centr Vegas dal\b)/u,
+  /(?<=nebude)\s+(?=Devils se rozhodli\b)/u,
+  /(?<=diváky)\s+(?=Price vzpomínal\b)/u
+ ];
+ const explicitBoundary=teaserMarkers.map(pattern=>pattern.exec(clean)).find(Boolean);
+ if(explicitBoundary){
+  const cut=explicitBoundary.index;
+  headline=clean.slice(0,cut).trim();
+  remainder=clean.slice(cut).trim();
+ }
  const title=newsEscape(headline);
  const description=remainder?'<p class="banger-news-description">'+newsEscape(remainder)+'</p>':'';
  const team=newsTeamFromHeadline(clean);
@@ -2311,7 +2322,7 @@ async function newsPage(){
  S.tab='news';
  $('calendarBar').classList.add('hidden');$('search').classList.add('hidden');$('sort').classList.add('hidden');
  $('status').textContent='NHL novinky';
- $('content').innerHTML='<section class="dash-panel banger-news-page"><div class="dash-panel-title"><h3>📰 NHL Novinky</h3><button type="button" id="bangerNewsReload" class="dash-link">↻ Obnovit</button></div><p class="banger-news-intro">Aktuální články z oficiálního webu NHL. Kliknutím otevřete původní článek. <small class="banger-news-build">Verze novinek v20</small></p><div class="banger-news-filters"><button type="button" data-news-lang="cs" class="active">🇨🇿 Česky</button><button type="button" data-news-lang="en">🌐 English</button></div><div id="bangerNewsList" class="banger-news-list"><p>Načítám novinky…</p></div></section>';
+ $('content').innerHTML='<section class="dash-panel banger-news-page"><div class="dash-panel-title"><h3>📰 NHL Novinky</h3><button type="button" id="bangerNewsReload" class="dash-link">↻ Obnovit</button></div><p class="banger-news-intro">Aktuální články z oficiálního webu NHL. Kliknutím otevřete původní článek. <small class="banger-news-build">Verze novinek v21</small></p><div class="banger-news-filters"><button type="button" data-news-lang="cs" class="active">🇨🇿 Česky</button><button type="button" data-news-lang="en">🌐 English</button></div><div id="bangerNewsList" class="banger-news-list"><p>Načítám novinky…</p></div></section>';
  let language='cs';
  const draw=async(force=false)=>{
   const host=document.getElementById('bangerNewsList');
