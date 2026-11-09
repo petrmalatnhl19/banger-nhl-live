@@ -4,6 +4,7 @@ import json
 import re
 from datetime import datetime, timezone
 from html.parser import HTMLParser
+from html import unescape
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
 from urllib.request import Request, urlopen
@@ -31,6 +32,41 @@ class NewsLinks(HTMLParser):
         self.items.append((self.href, title))
         self.href = None
         self.parts = []
+
+class ArticleMeta(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.values = {}
+    def handle_starttag(self, tag, attrs):
+        if tag != "meta":
+            return
+        attrs = dict(attrs)
+        key = (attrs.get("property") or attrs.get("name") or "").lower()
+        if key in ("article:published_time", "og:title", "og:description", "description"):
+            self.values[key] = attrs.get("content", "")
+
+def fetch_metadata(url):
+    req = Request(url, headers={"User-Agent": "Mozilla/5.0", "Accept": "text/html"})
+    with urlopen(req, timeout=10) as resp:
+        content = resp.read(1_500_000).decode("utf-8", "replace")
+    parser = ArticleMeta()
+    parser.feed(content)
+    values = parser.values
+    result = {}
+    published = values.get("article:published_time", "")
+    if published:
+        try:
+            parsed = datetime.fromisoformat(published.replace("Z", "+00:00"))
+            if parsed.tzinfo:
+                result["publishedAt"] = parsed.isoformat()
+        except ValueError:
+            pass
+    if values.get("og:title"):
+        result["headline"] = unescape(values["og:title"]).strip()
+    description = values.get("description") or values.get("og:description")
+    if description:
+        result["description"] = unescape(description).strip()
+    return result
 
 def load(language, source):
     req = Request(source, headers={"User-Agent": "Mozilla/5.0 (compatible; BangerNHLNews/1.0)", "Accept": "text/html"})
@@ -65,12 +101,21 @@ def main():
         except (ValueError, OSError):
             pass
     articles = []
+    old_by_url = {a.get('url'): a for a in old.get('articles', []) if a.get('url')}
     for language, source in SOURCES:
         try:
             found = load(language, source)
             print(f"{language}: {len(found)} links")
             if found:
-                articles.extend(found)
+                for article in found:
+                    previous = old_by_url.get(article['url'], {})
+                    article.update({key: previous[key] for key in ('headline', 'description', 'publishedAt') if previous.get(key)})
+                    if not article.get('publishedAt') or not article.get('headline'):
+                        try:
+                            article.update(fetch_metadata(article['url']))
+                        except Exception as exc:
+                            print(f"Metadata unavailable: {article['url']} ({exc})")
+                    articles.append(article)
             else:
                 articles.extend(a for a in old.get("articles", []) if a.get("language") == language)
         except Exception as exc:
