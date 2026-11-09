@@ -1,0 +1,18 @@
+const assert=require("node:assert/strict");
+const {calculateShadow:run}=require("./core43_gsax_sensitivity.cjs");
+const asOf="2026-11-09T15:00:00Z";
+const baseline={away:2.8,home:3.2,predictedAt:"2026-11-09T10:00:00Z"};
+const goalie=(gsaxPer100Shots,fetchedAt="2026-11-09T14:00:00Z")=>({available:true,value:{gsaxPer100Shots,shotsAgainst:200,fetchedAt}});
+const args={baseline,awayGoalie:goalie(2),homeGoalie:goalie(-1),asOf};
+const result=run(args);
+assert.equal(result.available,true);
+assert.equal(result.production,false);
+assert.equal(result.calibrated,false);
+assert.equal(result.expectedAwayGoals,2.82);
+assert.equal(result.expectedHomeGoals,3.16);
+assert.equal(run({...args,homeGoalie:goalie(-1,"2026-11-09T16:00:00Z")}).reason,"goalie_snapshot_after_asof");
+assert.equal(run({...args,baseline:{...baseline,predictedAt:"2026-11-09T16:00:00Z"}}).reason,"baseline_after_asof");
+assert.equal(run({...args,awayGoalie:null}).reason,"missing_away_goalie_gsax");
+assert.equal(run({...args,coefficient:0.5}).reason,"invalid_experimental_coefficient");
+assert.equal(run({...args,coefficient:0}).expectedAwayGoals,2.8);
+console.log("CORE 4.3 GSAx sensitivity tests passed");
