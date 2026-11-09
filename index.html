@@ -1882,6 +1882,9 @@ h1,.brand,.logo,.nums,.arenanum,.metric b,.profilegrid b,
 .banger-news-card{display:flex;flex-direction:column;gap:6px;padding:12px 13px;border:1px solid #2b6686;border-radius:12px;background:linear-gradient(130deg,#102e4b,#081d33);color:#e6f6ff;text-decoration:none!important}
 .banger-news-card strong{font:750 14px/1.4 Inter,system-ui,sans-serif;color:#f1fbff}
 .banger-news-card strong{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+.banger-news-title-row{display:flex;align-items:center;gap:10px;min-width:0}
+.banger-news-title-row strong{flex:1;min-width:0}
+.banger-news-crest{width:34px;height:34px;object-fit:contain;flex:none}
 .banger-news-card{padding:10px 12px;gap:4px}
 .banger-news-page .banger-news-list{gap:7px}
 .banger-news-source{color:#7bd8ec;font:650 11px Inter,system-ui,sans-serif}
@@ -2219,12 +2222,46 @@ async function loadNhlNews(force=false){
  if(!Array.isArray(json.articles))throw new Error('Neplatný formát novinek');
  newsCache=json;newsLoadedAt=Date.now();return json;
 }
+/* Only display a team crest when the headline clearly identifies a club.
+   Player-only and league-wide articles deliberately remain without a guessed crest. */
+const NEWS_TEAM_MATCHES=[
+ ['ANA',['anaheim ducks','anaheim']],['BOS',['boston bruins','boston']],
+ ['BUF',['buffalo sabres','buffalo']],['CGY',['calgary flames','calgary']],
+ ['CAR',['carolina hurricanes','carolina']],['CHI',['chicago blackhawks','chicago']],
+ ['COL',['colorado avalanche','colorado']],['CBJ',['columbus blue jackets','columbus']],
+ ['DAL',['dallas stars','dallas']],['DET',['detroit red wings','detroit']],
+ ['EDM',['edmonton oilers','edmonton']],['FLA',['florida panthers','florida']],
+ ['LAK',['los angeles kings','los angeles']],['MIN',['minnesota wild','minnesota']],
+ ['MTL',['montreal canadiens','montreal','montréal']],['NSH',['nashville predators','nashville']],
+ ['NJD',['new jersey devils','new jersey']],['NYI',['new york islanders','islanders']],
+ ['NYR',['new york rangers','rangers']],['OTT',['ottawa senators','ottawa']],
+ ['PHI',['philadelphia flyers','philadelphia']],['PIT',['pittsburgh penguins','pittsburgh']],
+ ['SJS',['san jose sharks','san jose']],['SEA',['seattle kraken','seattle']],
+ ['STL',['st. louis blues','st louis blues','st. louis','st louis']],
+ ['TBL',['tampa bay lightning','tampa bay']],['TOR',['toronto maple leafs','toronto']],
+ ['UTA',['utah mammoth','utah']],['VAN',['vancouver canucks','vancouver']],
+ ['VGK',['vegas golden knights','vegas']],['WSH',['washington capitals','washington']],
+ ['WPG',['winnipeg jets','winnipeg']]
+];
+function newsTeamFromHeadline(value){
+ const text=String(value||'').toLocaleLowerCase('cs-CZ');
+ const matches=NEWS_TEAM_MATCHES.filter(([code,names])=>names.some(name=>{
+  const index=text.indexOf(name);
+  if(index<0)return false;
+  const before=text[index-1]||' ',after=text[index+name.length]||' ';
+  return !/[a-zá-ž]/i.test(before)&&!/[a-zá-ž]/i.test(after);
+ }));
+ return matches.length===1?matches[0][0]:null;
+}
 function newsArticleCard(article){
  let url;
- try{url=new URL(article.url);if(url.protocol!=='https:'||url.hostname!=='www.nhl.com'&&url.hostname!=='nhl.com')return '';}catch{return ''}
- const rawTitle=String(article.title||'').replace(/\s+\d{1,2}\.\s*(?:lis|led|úno|bře|dub|kvě|čer|čvc|srp|zář|říj|pro)\s+20\d{2}\s*$/i,'').trim();
+ try{url=new URL(article.url);if(url.protocol!=='https:'||(url.hostname!=='www.nhl.com'&&url.hostname!=='nhl.com'))return '';}catch{return ''}
+ const clean=String(article.title||'').replace(/\s+\d{1,2}\.\s*(?:lis|led|úno|bře|dub|kvě|čer|čvc|srp|zář|říj|pro)\s+20\d{2}\s*$/i,'').trim();
+ const rawTitle=/[.!?…]$/.test(clean)?clean:clean+'.';
  const title=newsEscape(rawTitle);
- return '<a class="banger-news-card" href="'+newsEscape(url.href)+'" target="_blank" rel="noopener noreferrer"><span class="banger-news-source">NHL.com · '+(article.language==='cs'?'Česky':'English')+'</span><strong>'+title+'</strong><span class="banger-news-open">Přečíst originál ↗</span></a>';
+ const team=newsTeamFromHeadline(clean);
+ const crest=team?'<img class="banger-news-crest" src="'+teamLogo(team)+'" alt="'+newsEscape(team)+'" loading="lazy">':'';
+ return '<a class="banger-news-card" href="'+newsEscape(url.href)+'" target="_blank" rel="noopener noreferrer"><span class="banger-news-source">NHL.com · '+(article.language==='cs'?'Česky':'English')+'</span><div class="banger-news-title-row">'+crest+'<strong>'+title+'</strong></div><span class="banger-news-open">Přečíst originál ↗</span></a>';
 }
 function newsChoose(data,language){
  const items=data.articles.filter(a=>a.language===language&&a.title&&a.url&&!/\\b(betting|wager|odds|props)\\b/i.test(a.title));
