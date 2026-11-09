@@ -16,6 +16,8 @@ on:
       - 'scripts/test_core43_revision_gate.cjs'
       - 'scripts/write_core43_revision.cjs'
       - 'scripts/test_core43_revision_writer.cjs'
+      - 'scripts/monitor_core43_revisions.cjs'
+      - 'scripts/test_core43_revision_monitor.cjs'
       - 'scripts/test_core43_inputs.cjs'
       - 'scripts/test_core43_gsax.cjs'
       - 'scripts/test_core43_season_gsax.cjs'
@@ -47,3 +49,4 @@ jobs:
       - run: node scripts/test_core43_archive_evidence.cjs
       - run: node scripts/test_core43_revision_gate.cjs
       - run: node scripts/test_core43_revision_writer.cjs
+      - run: node scripts/test_core43_revision_monitor.cjs
