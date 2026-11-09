@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="cs"><head>
-<meta name="banger-build" content="2026-11-09-news-layout-v18"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#030b1b"><title>BANGER NHL LIVE</title>
+<meta name="banger-build" content="2026-11-09-news-summary-v19"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#030b1b"><title>BANGER NHL LIVE</title>
 
 <style>
 :root{color-scheme:dark;--cyan:#41eaff;--ink:#e8faff;--muted:#8ba9c5;--panel:#0b1b35}
@@ -444,6 +444,7 @@ body.ux-arena-open .arena{z-index:10020}
 .banger-news-title-row details[open] strong{display:block;-webkit-line-clamp:unset;overflow:visible}
 .banger-news-title-row summary strong{font-size:14px;line-height:1.42}
 .banger-news-open{align-self:flex-start;margin-top:3px}
+.banger-news-description{font:400 13px/1.55 Inter,system-ui,sans-serif;color:#afc8da;margin:9px 0 0}.banger-news-details:not([open]) .banger-news-expand::after{content:"Zobrazit popis"}.banger-news-details[open] .banger-news-expand::after{content:"Skrýt popis"}
 </style>
 <!-- BANGER Analyst compact tracker v3 -->
 <style id="banger-analyst-compact-v3">
@@ -2280,17 +2281,16 @@ function newsArticleCard(article){
  const original=String(article.title||'').trim();
  const dateMatch=original.match(/\s+(\d{1,2})\.\s*(lis|led|úno|bře|dub|kvě|čer|čvc|srp|zář|říj|pro)\s+(20\d{2})\s*$/i);
  const clean=(dateMatch?original.slice(0,dateMatch.index):original).trim();
- const separated=clean
-  .replace(/(^|[\s,;:])((?:nulou|výhrou|porážkou|zápase|utkání|sezoně|sezóně))\s+(?=(?:Chytá|Přiznal|Pro|Teď|Další|Přitom|Zároveň|Rozhodl|Pomohl|Čeká|Bude|Má|Je|Jsou|Věřil|Dokázal)(?=\s|[,.!?]|$))/gu,'$1$2. ')
-  .replace(/([.!?])(?=[A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ])/g,'$1 ');
- const rawTitle=/[.!?…]$/.test(separated)?separated:separated+'.';
+ const sentenceBoundary=clean.search(/[.!?]\s+(?=[A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ])/);
+ const headline=sentenceBoundary>=0?clean.slice(0,sentenceBoundary+1).trim():clean;
+ const remainder=sentenceBoundary>=0?clean.slice(sentenceBoundary+1).trim():'';
+ const title=newsEscape(headline);
+ const description=remainder?'<p class="banger-news-description">'+newsEscape(remainder)+'</p>':'';
  const team=newsTeamFromHeadline(clean);
  const crest=team?'<img class="banger-news-crest" src="'+teamLogo(team)+'" alt="'+newsEscape(team)+'" loading="lazy">':'';
- const title=newsEscape(rawTitle);
- const expandable=rawTitle.length>105;
- const heading=expandable?'<details><summary><strong>'+title+'</strong><span class="banger-news-expand"></span></summary></details>':'<strong>'+title+'</strong>';
  const date=dateMatch?Number(dateMatch[1])+'. '+dateMatch[2].toLowerCase()+'. '+dateMatch[3]:'';
- return '<article class="banger-news-card"><div class="banger-news-meta"><span class="banger-news-source">NHL.com · '+(article.language==='cs'?'Česky':'English')+'</span>'+(date?'<time class="banger-news-date">'+newsEscape(date)+'</time>':'')+'</div><div class="banger-news-title-row">'+crest+heading+'</div><a class="banger-news-open" href="'+newsEscape(url.href)+'" target="_blank" rel="noopener noreferrer">Přečíst originál ↗</a></article>';
+ const body=description?'<details class="banger-news-details"><summary><strong>'+title+'</strong><span class="banger-news-expand"></span></summary>'+description+'</details>':'<strong>'+title+'</strong>';
+ return '<article class="banger-news-card"><div class="banger-news-meta"><span class="banger-news-source">NHL.com · '+(article.language==='cs'?'Česky':'English')+'</span>'+(date?'<time class="banger-news-date">'+newsEscape(date)+'</time>':'')+'</div><div class="banger-news-title-row">'+crest+body+'</div><a class="banger-news-open" href="'+newsEscape(url.href)+'" target="_blank" rel="noopener noreferrer">Přečíst originál ↗</a></article>';
 }
 function newsChoose(data,language){
  const items=data.articles.filter(a=>a.language===language&&a.title&&a.url&&!/\\b(betting|wager|odds|props)\\b/i.test(a.title));
