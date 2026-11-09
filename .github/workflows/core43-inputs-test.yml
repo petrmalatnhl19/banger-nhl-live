@@ -59,3 +59,4 @@ jobs:
       - run: node scripts/test_core43_shadow_candidate_audit.cjs
       - run: node scripts/test_core43_shadow_compute.cjs
       - run: node scripts/test_core43_shadow_readonly.cjs
+      - run: node scripts/test_core43_goalie_coverage.cjs
