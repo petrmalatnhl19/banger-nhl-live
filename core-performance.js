@@ -25,7 +25,7 @@ function table(rows){
   const accuracy=Number(r.winner_accuracy_pct),error=Number(r.goal_mae);
   const winnerBest=!r.pending&&r.winner_accuracy_pct!=null&&Number.isFinite(accuracy)&&accuracy===maxAccuracy;
   const errorBest=!r.pending&&r.goal_mae!=null&&Number.isFinite(error)&&error===minError;
-  return r.pending?'<tr><td>'+esc(r.model)+'</td><td>0</td><td colspan="2" style="text-align:right;color:#a9dced">'+esc(String(window.__core42Pending??'5'))+' predikcí · čeká</td></tr>':'<tr><td>'+esc(r.model)+'</td><td>'+esc(r.games)+'</td><td class="'+(winnerBest?'core-best':'')+'">'+fmt(r.winner_accuracy_pct)+' %</td><td class="'+(errorBest?'core-best':'')+'">'+fmt(r.goal_mae,3)+'</td></tr>';
+  return '<tr><td>'+esc(r.model)+'</td><td>'+esc(r.games)+'</td><td class="'+(winnerBest?'core-best':'')+'">'+fmt(r.winner_accuracy_pct)+' %</td><td class="'+(errorBest?'core-best':'')+'">'+fmt(r.goal_mae,3)+'</td></tr>';
  }).join('');
  return '<p class="core-note">Starší modely · historické srovnání. CORE 4.1 a 4.2 jsou vyhodnoceny samostatně podle ověřeného času před zápasem níže.</p><div class="core-scroll"><table><thead><tr><th>Model</th><th>Záp.</th><th>Vítěz</th><th>Chyba</th></tr></thead><tbody>'+html+'</tbody></table></div><p class="core-note">Zeleně = nejlepší hodnota v zobrazeném přehledu. Chyba = průměrná odchylka gólů na tým. Malý počet zápasů znamená nejistý výsledek.</p>';
 }
@@ -100,7 +100,7 @@ async function load(panel){
   };
   const [all,paired,trend,statusRows]=await Promise.all([fetchView('nhl_core_model_accuracy'),fetchView('nhl_core_model_head_to_head'),fetchView('nhl_core_model_trend'),fetchView('nhl_core42_status',false)]);
   if(!panel.isConnected)return;
-  window.__core42Pending=Number(statusRows[0]?.pending_predictions??0);panel._coreData={all,paired,trend};
+  panel._coreData={all,paired,trend};
   lastLoad=Date.now();
   render(panel);renderTrend(panel);await loadVerified(panel);
  }catch(e){
