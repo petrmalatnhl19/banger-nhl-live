@@ -1,0 +1,20 @@
+name: CORE 4.3 paired accuracy report (read only)
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '15 7 * * *'
+permissions:
+  contents: read
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Score immutable pregame forecasts only
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/evaluate_core43_archive.cjs
