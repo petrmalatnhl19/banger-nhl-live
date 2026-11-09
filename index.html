@@ -2320,11 +2320,6 @@ function newsArticleTeams(article,headline){
  if(!codes.size)scan(combined);
  return [...codes].slice(0,2);
 }
-function newsArticleCard(article){');
-  return new RegExp('(^|[^\\p{L}])'+escaped+'(?=$|[^\\p{L}])','iu').test(title);
- }));
- return found.length===1?found[0][0]:null;
-}
 function newsArticleCard(article){
  let url;
  try{url=new URL(article.url);if(url.protocol!=='https:'||(url.hostname!=='www.nhl.com'&&url.hostname!=='nhl.com'))return '';}catch{return ''}
