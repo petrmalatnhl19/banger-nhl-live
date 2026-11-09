@@ -1,0 +1,14 @@
+const assert=require("node:assert/strict");
+const {computeShadowCandidates:run}=require("./core43_shadow_compute.cjs");
+const archive=[{game_id:42,away_team:"DAL",home_team:"NJD",core41_predicted_at:"2026-11-09T10:00:00Z",core41_away:2.8,core41_home:3.2}];
+const schedules=[{game_id:42,away_team:"DAL",home_team:"NJD",kickoff_at:"2026-11-09T20:00:00Z"}];
+const shadowInputs=["away","home"].map((side,i)=>({game_id:42,side,team_code:side==="away"?"DAL":"NJD",goalie_id:String(100+i),readiness:"ready",starter_status:"confirmed",gsax:i===0?2:-1,shots_against:100,prediction_at:"2026-11-09T15:00:00Z",captured_at:"2026-11-09T14:00:00Z",gsax_fetched_at:"2026-11-09T13:00:00Z",starter_published_at:"2026-11-09T12:00:00Z",starter_verified_at:"2026-11-09T13:00:00Z"}));
+const result=run({archive,schedules,shadowInputs})[0];
+assert.equal(result.available,true);
+assert.equal(result.production,false);
+assert.equal(result.persistable,false);
+assert.equal(result.expectedAwayGoals,2.82);
+assert.equal(result.expectedHomeGoals,3.16);
+assert.equal(run({archive,schedules,shadowInputs:[shadowInputs[0]]})[0].available,false);
+assert.equal(run({archive,schedules,shadowInputs:[shadowInputs[0],{...shadowInputs[1],gsax_fetched_at:"2026-11-09T16:00:00Z"}]})[0].available,false);
+console.log("CORE 4.3 shadow computation integration tests passed");
