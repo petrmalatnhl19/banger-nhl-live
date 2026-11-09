@@ -96,3 +96,23 @@ jobs:
               sys.exit(1)
           print('Frontend smoke checks passed')
           PY
+
+  browser-smoke:
+    needs: frontend-smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser test dependencies
+        run: |
+          npm install --no-save --no-package-lock playwright@1.58.2
+          npx playwright install --with-deps chromium
+      - name: Start local web server
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/banger-server.log 2>&1 &
+          echo $! > /tmp/banger-server.pid
+      - name: Test application startup in Chromium
+        run: node .github/scripts/browser-smoke.cjs
