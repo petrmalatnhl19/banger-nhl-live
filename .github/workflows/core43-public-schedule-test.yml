@@ -1,0 +1,23 @@
+name: CORE 4.3 public schedule access contract
+on:
+  pull_request:
+    paths:
+      - 'core-performance.js'
+      - 'scripts/core43_verified_dashboard.js'
+      - 'scripts/sql/core43_public_schedule_evidence.sql'
+      - 'scripts/test_core43_public_schedule_contract.cjs'
+      - '.github/workflows/core43-public-schedule-test.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/test_core43_public_schedule_contract.cjs
+      - run: node scripts/test_core_performance_verified.cjs
+      - run: node scripts/test_core43_verified_dashboard.cjs

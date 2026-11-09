@@ -4352,7 +4352,7 @@ document.addEventListener('click',function(e){const btn=e.target.closest('[data-
 <script>
 /* Sorting is scoped to the clicked statistical table and does not change NHL source data. */
 document.addEventListener('click',function(ev){const th=ev.target.closest('.banger-sort-head');if(!th)return;const table=th.closest('table'),body=table?.querySelector('tbody');if(!body)return;const heads=[...th.parentElement.children],index=heads.indexOf(th);const asc=th.getAttribute('aria-sort')!=='ascending';heads.forEach(h=>h.removeAttribute('aria-sort'));th.setAttribute('aria-sort',asc?'ascending':'descending');const rows=[...body.rows];rows.sort((a,b)=>{const x=a.cells[index]?.dataset.sortValue??'',y=b.cells[index]?.dataset.sortValue??'';const nx=Number(x),ny=Number(y),numeric=x.trim()!==''&&y.trim()!==''&&Number.isFinite(nx)&&Number.isFinite(ny);const cmp=numeric?nx-ny:x.localeCompare(y,'cs',{numeric:true});return asc?cmp:-cmp});rows.forEach(row=>body.appendChild(row));});
-</script><script src="core-performance.js?v=20261109-verified" defer></script>
+</script><script src="core-performance.js?v=20261109-schedule-view" defer></script>
 <style id="banger-analyst-progressive-ui-v1">
 /* Stable mobile-first loading layout. Presentation only; CORE logic untouched. */
 .analysis-panel{align-items:flex-start;overscroll-behavior:contain}
@@ -4512,5 +4512,5 @@ document.addEventListener('click',function(ev){const th=ev.target.closest('.bang
 .analysis-panel #analyst-extras .analyst-report-group-body>.analyst-fold:last-child{margin-bottom:0}
 @media(max-width:650px){.analysis-panel #analyst-extras .analyst-fold>summary{padding:9px 10px}.analysis-panel #analyst-extras .analyst-fold-body{padding:7px 8px}.analysis-panel #analyst-extras .analyst-fold-body p{font-size:12px}}
 </style>
-<script defer src="scripts/core43_verified_dashboard.js?v=20261109-verified"></script>
+<script defer src="scripts/core43_verified_dashboard.js?v=20261109-schedule-view"></script>
 </body></html>
