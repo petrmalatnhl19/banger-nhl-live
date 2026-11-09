@@ -1,0 +1,21 @@
+name: CORE 4.3 verified dashboard tests
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'scripts/core43_verified_dashboard.js'
+      - 'scripts/test_core43_verified_dashboard.cjs'
+      - '.github/workflows/core43-dashboard-test.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/test_core43_verified_dashboard.cjs
+      - run: node --check scripts/core43_verified_dashboard.js
