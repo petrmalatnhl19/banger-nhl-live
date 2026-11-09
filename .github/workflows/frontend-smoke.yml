@@ -81,7 +81,16 @@ jobs:
                   result = subprocess.run(['node', '--check', str(target)], capture_output=True, text=True)
                   if result.returncode:
                       errors.append(f'Inline script #{i}: {result.stderr[:700]}')
+          # Regression guard for the malformed duplicate news function that
+          # previously prevented the entire app from loading.
+          if html.count('function newsArticleCard(article){') != 1:
+              errors.append('News renderer must be defined exactly once')
+          if "function newsArticleCard(article){');" in html:
+              errors.append('Broken news renderer fragment detected')
+          if 'function newsArticleTeams(' not in html:
+              errors.append('News team resolver missing')
           print(f'Checked {len(parser.sources)} external script references and {len(parser.inline)} inline scripts')
+
           if errors:
               print('\n'.join(errors), file=sys.stderr)
               sys.exit(1)
