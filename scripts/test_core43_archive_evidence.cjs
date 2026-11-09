@@ -1,0 +1,17 @@
+const assert=require("node:assert/strict");
+const {evaluateArchiveEvidence:run}=require("../core43-archive-evidence.js");
+const prediction={game_id:123,away_team:"DAL",home_team:"NJD",core41_predicted_at:"2026-11-09T12:00:00Z",core42_predicted_at:"2026-11-09T17:00:00Z"};
+const schedule={game_id:123,away_team:"DAL",home_team:"NJD",kickoff_at:"2026-11-09T20:00:00Z"};
+const evidence=(team,id,published,verified)=>({game_id:123,team_code:team,goalie_id:id,evidence_status:"confirmed",source_name:"Verified report",source_url:"https://example.org/report",source_published_at:published,verified_at:verified});
+const dal=evidence("DAL","12345","2026-11-09T10:00:00Z","2026-11-09T11:00:00Z");
+const njd=evidence("NJD","67890","2026-11-09T13:00:00Z","2026-11-09T14:00:00Z");
+assert.equal(run({prediction,schedule,evidence:[dal,njd]}).ready,false);
+assert.equal(run({prediction,schedule,evidence:[dal,njd]}).home.reason,"no_asof_confirmation");
+assert.equal(run({prediction,schedule,evidence:[dal,njd],model:"core42"}).ready,true);
+assert.equal(run({prediction,schedule,evidence:[dal,njd],model:"core42"}).home.goalieId,"67890");
+assert.equal(run({prediction:{...prediction,core41_predicted_at:null},schedule,evidence:[dal,njd]}).reason,"missing_prediction_time");
+assert.equal(run({prediction,schedule:{...schedule,game_id:124},evidence:[dal,njd]}).reason,"schedule_mismatch");
+assert.equal(run({prediction,schedule,evidence:[dal,evidence("DAL","22222","2026-11-09T09:00:00Z","2026-11-09T11:00:00Z"),njd]}).away.reason,"conflicting_confirmations");
+assert.equal(run({prediction,schedule,evidence:[dal,{...dal,source_url:"https://example.org/other"},njd],model:"core42"}).ready,true);
+assert.equal(run({prediction,schedule,evidence:[dal,njd],model:"unknown"}).reason,"unsupported_model");
+console.log("CORE 4.3 archive evidence as-of tests passed");
