@@ -1,0 +1,16 @@
+"use strict";
+const assert=require("node:assert/strict");
+const fs=require("node:fs");
+const vm=require("node:vm");
+const source=fs.readFileSync("core-performance.js","utf8");
+new vm.Script(source);
+assert.match(source,/loadVerified\(panel\)/);
+assert.match(source,/BangerVerifiedAccuracyCalculate/);
+assert.match(source,/data-core-verified/);
+assert.match(source,/CORE 4\.2/);
+assert.doesNotMatch(source,/__core42Pending\?\?/);
+const {calculate}=require("./core43_verified_dashboard.js");
+const schedules=[{game_id:1,kickoff_at:"2026-11-09T20:00:00Z",away_team:"DAL",home_team:"UTA"}];
+const archives=[{game_id:1,status:"final",actual_away:3,actual_home:2,away_team:"DAL",home_team:"UTA",core42_predicted_at:"2026-11-09T19:00:00Z",core42_away:3.1,core42_home:2.2}];
+assert.equal(calculate(archives,schedules).core42.games,1);
+console.log("CORE performance integration tests passed");
