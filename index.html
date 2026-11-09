@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="cs"><head>
-<meta name="banger-build" content="2026-11-05-1657-diagnostics-v17"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#030b1b"><title>BANGER NHL LIVE</title>
+<meta name="banger-build" content="2026-11-09-news-layout-v18"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#030b1b"><title>BANGER NHL LIVE</title>
 
 <style>
 :root{color-scheme:dark;--cyan:#41eaff;--ink:#e8faff;--muted:#8ba9c5;--panel:#0b1b35}
@@ -435,6 +435,15 @@ body.ux-arena-open .arena{z-index:10020}
 .match-more-menu.hidden{display:none}
 .match-more-menu .match-tab{width:100%;text-align:left;padding:11px 12px}
 @media(max-width:520px){.match-tabs{grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}.match-tab{font-size:clamp(10px,2.4vw,12px);padding:9px 2px}.match-more-menu .match-tab{font-size:12px}}
+/* BANGER NEWS CARD LAYOUT V18 */
+.banger-news-card{gap:7px;padding:12px 13px}
+.banger-news-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.banger-news-date{font-size:11px;color:#9fb9cc;white-space:nowrap}
+.banger-news-title-row{align-items:flex-start}
+.banger-news-title-row details{min-width:0;flex:1}
+.banger-news-title-row details[open] strong{display:block;-webkit-line-clamp:unset;overflow:visible}
+.banger-news-title-row summary strong{font-size:14px;line-height:1.42}
+.banger-news-open{align-self:flex-start;margin-top:3px}
 </style>
 <!-- BANGER Analyst compact tracker v3 -->
 <style id="banger-analyst-compact-v3">
@@ -1883,7 +1892,8 @@ h1,.brand,.logo,.nums,.arenanum,.metric b,.profilegrid b,
 .banger-news-card strong{font:750 14px/1.4 Inter,system-ui,sans-serif;color:#f1fbff}
 .banger-news-card strong{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
 .banger-news-title-row{display:flex;align-items:center;gap:10px;min-width:0}
-.banger-news-title-row strong{flex:1;min-width:0}\n.banger-news-title-row details{flex:1;min-width:0}
+.banger-news-title-row strong{flex:1;min-width:0}
+.banger-news-title-row details{flex:1;min-width:0}
 .banger-news-crest{width:34px;height:34px;object-fit:contain;flex:none}
 .banger-news-card{padding:10px 12px;gap:4px}
 .banger-news-page .banger-news-list{gap:7px}
