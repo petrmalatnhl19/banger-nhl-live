@@ -1,0 +1,12 @@
+const assert=require("node:assert/strict");
+const {evaluateGoalieAccuracy:run}=require("./core43_goalie_accuracy_evaluation.cjs");
+const base={gameId:1,teamCode:"DAL",kickoffAt:"2026-11-09T20:00:00Z",predictedAt:"2026-11-09T18:00:00Z",actualVerifiedAt:"2026-11-09T22:00:00Z",predictedGoalieId:"10",actualStarterGoalieId:"10",actualSourceStatus:"verified",predictionStatus:"projected"};
+assert.deepEqual([run([base]).correct,run([base]).accuracy],[1,1]);
+assert.equal(run([{...base,actualStarterGoalieId:"11"}]).incorrect,1);
+assert.equal(run([{...base,predictedAt:"2026-11-09T21:00:00Z"}]).evaluated,0);
+assert.equal(run([{...base,actualSourceStatus:"unverified"}]).evaluated,0);
+assert.equal(run([{...base,predictionStatus:"conflict"}]).evaluated,0);
+assert.equal(run([{...base,actualStarterGoalieId:null}]).evaluated,0);
+assert.equal(run([]).accuracy,null);
+assert.equal(run([base]).conclusion,"insufficient_sample_no_accuracy_claim");
+console.log("CORE 4.3 goalie accuracy evaluation tests passed");
