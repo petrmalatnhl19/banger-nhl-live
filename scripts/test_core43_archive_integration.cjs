@@ -8,4 +8,7 @@ assert.equal(assemblePairs({archive,revisions,schedules}).length,1);
 assert.equal(assemblePairs({archive,revisions:[{...revisions[0],model:"core41"}],schedules}).length,0);
 assert.equal(assemblePairs({archive,revisions:[{...revisions[0],input_snapshot:{production:true}}],schedules}).length,0);
 assert.equal(assemblePairs({archive,revisions,schedules:[...schedules,{...schedules[0],kickoff_at:"2026-11-09T21:00:00Z"}]}).length,0);
+const late={...revisions[0],predicted_at:"2026-11-09T21:00:00Z",predicted_away:9};
+assert.equal(assemblePairs({archive,revisions:[revisions[0],late],schedules})[0].core43.away,2.5);
+assert.equal(assemblePairs({archive,revisions:[late],schedules}).length,0);
 console.log("CORE 4.3 archive integration tests passed");
