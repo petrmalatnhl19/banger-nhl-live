@@ -1330,66 +1330,61 @@ button:focus-visible,[role="button"]:focus-visible{outline:2px solid #86f2ff;out
  }
 }
 </style>
-<style id="banger-games-list-row-mobile-v2">
-/* Games tab: restrained, compact scoreboard cards. Preserve existing data and buttons. */
-@media(max-width:600px){
- #content .game[data-game-phase]{
-  padding:11px 13px 10px!important;margin:0 0 9px!important;
-  border-radius:16px!important;background:linear-gradient(115deg,#10324e,#0a2037)!important;
-  box-shadow:inset 0 1px 0 #78d8ff29,0 5px 16px #0002!important;
- }
- #content .game[data-game-phase] .gamehead{
-  display:flex!important;align-items:center!important;justify-content:space-between!important;
-  min-height:0!important;margin:0!important;gap:8px!important;
- }
- #content .game[data-game-phase] .game-league{
-  font-size:10px!important;letter-spacing:.45px!important;color:#8faec2!important;
- }
- #content .game[data-game-phase] .game-state{
-  padding:3px 8px!important;font-size:10px!important;line-height:1.2!important;
- }
- #content .game[data-game-phase] .game-stage{
-  text-align:center!important;margin:0!important;
-  font-size:11px!important;line-height:1.1!important;letter-spacing:.5px!important;
-  color:#9ebed2!important;
- }
- #content .game[data-game-phase] .score{
-  display:grid!important;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)!important;
-  align-items:center!important;column-gap:10px!important;
-  margin:5px 0 6px!important;padding:0!important;min-height:35px!important;
- }
- #content .game[data-game-phase] .team{
-  display:flex!important;flex-direction:row!important;align-items:center!important;
-  gap:7px!important;min-width:0!important;
-  font-size:14px!important;line-height:1.1!important;letter-spacing:.3px!important;
-  white-space:nowrap!important;
- }
- #content .game[data-game-phase] .team:first-child{justify-content:flex-end!important}
- #content .game[data-game-phase] .team:last-child{justify-content:flex-end!important;flex-direction:row-reverse!important}
- #content .game[data-game-phase] .team img{
-  width:30px!important;height:30px!important;margin:0!important;
-  object-fit:contain!important;flex-shrink:0!important;
- }
- #content .game[data-game-phase] .nums{
-  font-size:24px!important;line-height:1.05!important;
-  letter-spacing:0!important;white-space:nowrap!important;
-  color:#e3faff!important;
- }
- #content .game[data-game-phase] .vs{font-size:16px!important;color:#6daac2!important}
- #content .game[data-game-phase] .btn[data-game]{
-  display:block!important;width:auto!important;min-height:27px!important;
-  margin:0 0 0 auto!important;padding:4px 9px!important;
-  border-radius:8px!important;font-size:10px!important;line-height:1.15!important;
-  letter-spacing:.25px!important;
-  color:#9bd8ed!important;background:#0b2c45!important;
-  border:1px solid #286581!important;box-shadow:none!important;
- }
+<style id="banger-games-analyst-card-match-v3">
+/* Games use the same card structure as the Analyst match list. */
+#content .game.analyst-list-card{
+ display:grid!important;
+ grid-template-columns:minmax(0,1fr) auto!important;
+ gap:9px 12px!important;
+ padding:13px 14px!important;
+ margin:0 0 10px!important;
+ border-radius:17px!important;
+ min-height:0!important;
+ background:linear-gradient(115deg,#102e4c,#0b233b)!important;
 }
-@media(max-width:360px){
- #content .game[data-game-phase] .score{column-gap:5px!important}
- #content .game[data-game-phase] .team{gap:4px!important;font-size:12px!important}
- #content .game[data-game-phase] .team img{width:25px!important;height:25px!important}
- #content .game[data-game-phase] .nums{font-size:21px!important}
+#content .game.analyst-list-card .analyst-teams{
+ grid-column:1/-1!important;
+ display:grid!important;
+ grid-template-columns:35px minmax(0,1fr) 35px!important;
+ align-items:center!important;
+ gap:8px!important;
+ width:100%!important;
+}
+#content .game.analyst-list-card .analyst-teams img{
+ width:32px!important;height:32px!important;
+ object-fit:contain!important;
+}
+#content .game.analyst-list-card .analyst-teams strong{
+ text-align:center!important;
+ font-size:17px!important;
+ font-weight:800!important;
+ letter-spacing:.2px!important;
+}
+#content .game.analyst-list-card p{
+ grid-column:1/-1!important;
+ margin:0!important;
+ font-size:12px!important;
+ color:#9cbdd3!important;
+}
+#content .game.analyst-list-card .btn{
+ margin:0!important;
+ padding:8px 9px!important;
+ min-height:37px!important;
+ border-radius:11px!important;
+ font-size:11px!important;
+ white-space:normal!important;
+ line-height:1.2!important;
+}
+#content .game.analyst-list-card [data-analyze]{
+ grid-column:1!important;width:100%!important;
+}
+#content .game.analyst-list-card [data-game]{
+ grid-column:2!important;width:auto!important;
+}
+#content .game.analyst-list-card .goals{grid-column:1/-1!important}
+@media(max-width:380px){
+ #content .game.analyst-list-card{gap:7px!important;padding:11px!important}
+ #content .game.analyst-list-card .btn{font-size:10px!important;padding:7px!important}
 }
 </style>
 </head><body><div class="wrap">
@@ -1406,7 +1401,7 @@ async function get(url,start=0){const base="https://xxwqeiuyislnoxsmjuul.supabas
 function state(v){return ({LIVE:'🔴 ŽIVĚ',CRIT:'🔴 ŽIVĚ',FINAL:'KONEC',OFF:'KONEC',FUT:'PLÁNOVÁNO',PRE:'PŘED ZÁPASEM'})[v]||v||'—'}
 function team(t){const code=String(t?.abbrev||'').toUpperCase();return '<div class="team"'+(/^[A-Z]{3}$/.test(code)?' data-team="'+safe(code)+'" role="button" tabindex="0" title="Otevřít profil týmu"':'')+'>'+(t?.logo?'<img src="'+safe(t.logo)+'" alt="">':'')+safe(code||'NHL')+'</div>'}
 let bangerGamesRequestId=0;
-async function games(){const requestId=++bangerGamesRequestId;S.tab='games';uxRenderDays();$('search').classList.add('hidden');$('calendarBar').classList.remove('hidden');$('sort').classList.add('hidden');$('status').textContent='Načítám zápasy '+S.date+'…';$('content').innerHTML='';try{const requestedDate=S.date;const d=await get('https://api-web.nhle.com/v1/score/'+requestedDate);if(requestId!==bangerGamesRequestId||S.tab!=='games'||S.date!==requestedDate)return;const arr=[...(d.games||[])].sort((a,b)=>{return Date.parse(a.startTimeUTC||0)-Date.parse(b.startTimeUTC||0)});$('status').textContent=arr.length+' zápasů · aktualizováno '+new Date().toLocaleTimeString('cs-CZ');const live=arr.filter(g=>['LIVE','CRIT'].includes(g.gameState)).length,finished=arr.filter(g=>['OFF','FINAL'].includes(g.gameState)).length;const upcoming=arr.length-live-finished;const filterBar=$('uxGamesFilter');if(filterBar){filterBar.querySelectorAll('[data-game-count]').forEach(el=>{const counts={all:arr.length,live,upcoming,final:finished};el.textContent=counts[el.dataset.gameCount]??0});}const metrics='<div class="metrics"><div class="metric"><b>'+arr.length+'</b><span>ZÁPASŮ</span></div><div class="metric"><b>'+live+'</b><span>PRÁVĚ ŽIVĚ</span></div><div class="metric"><b>'+finished+'</b><span>DOHRÁNO</span></div></div>';if(!arr.length){$('content').innerHTML='<div class="empty">Pro tento den nejsou naplánované zápasy. Zkus jiné datum.</div>';return}$('content').innerHTML=metrics+'<div class="grid">'+arr.map(g=>{const live=['LIVE','CRIT'].includes(g.gameState),done=['OFF','FINAL'].includes(g.gameState);const phase=live?'game-live':done?'game-final':'game-upcoming';const stage=live?(g.periodDescriptor?.periodType==='OT'?'PRODLOUŽENÍ':g.periodDescriptor?.periodType==='SO'?'NÁJEZDY':g.periodDescriptor?.number?g.periodDescriptor.number+'. TŘETINA':'PROBÍHÁ'):done?'UKONČENO':g.startTimeUTC?new Date(g.startTimeUTC).toLocaleTimeString('cs-CZ',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Prague'}):'PŘIPRAVUJE SE';return '<article class="game '+phase+'" data-game-phase="'+(live?'live':done?'final':'upcoming')+'"><div class="gamehead"><span class="game-league">'+safe(g.gameType===2?'NHL · ZÁKLADNÍ ČÁST':'NHL')+'</span><span class="game-state">'+state(g.gameState)+'</span></div><div class="game-stage">'+safe(stage)+'</div><div class="score">'+team(g.awayTeam)+'<div class="nums">'+safe(g.awayTeam?.score??'–')+' <span class="vs">:</span> '+safe(g.homeTeam?.score??'–')+'</div>'+team(g.homeTeam)+'</div><button class="btn" data-game="'+g.id+'">DETAIL ZÁPASU <span aria-hidden="true">↗</span></button><div class="goals hidden" id="g'+g.id+'"></div></article>'}).join('')+'</div>';uxApplyGameFilter();document.querySelectorAll('[data-game]').forEach(b=>b.onclick=()=>detail(b.dataset.game,b));document.querySelectorAll('[data-analyze]').forEach(b=>b.onclick=()=>analyzeGame(b.dataset.analyze))}catch(e){if(requestId!==bangerGamesRequestId||S.tab!=='games')return;$('status').textContent='Nepodařilo se načíst NHL data';$('content').innerHTML='<div class="empty">⚠️ Připojení k NHL API selhalo: '+safe(e.message)+'. Zkus tlačítko Obnovit. Pokud chyba přetrvá, bude potřeba serverové propojení přes Supabase.</div>'}}
+async function games(){const requestId=++bangerGamesRequestId;S.tab='games';uxRenderDays();$('search').classList.add('hidden');$('calendarBar').classList.remove('hidden');$('sort').classList.add('hidden');$('status').textContent='Načítám zápasy '+S.date+'…';$('content').innerHTML='';try{const requestedDate=S.date;const d=await get('https://api-web.nhle.com/v1/score/'+requestedDate);if(requestId!==bangerGamesRequestId||S.tab!=='games'||S.date!==requestedDate)return;const arr=[...(d.games||[])].sort((a,b)=>{return Date.parse(a.startTimeUTC||0)-Date.parse(b.startTimeUTC||0)});$('status').textContent=arr.length+' zápasů · aktualizováno '+new Date().toLocaleTimeString('cs-CZ');const live=arr.filter(g=>['LIVE','CRIT'].includes(g.gameState)).length,finished=arr.filter(g=>['OFF','FINAL'].includes(g.gameState)).length;const upcoming=arr.length-live-finished;const filterBar=$('uxGamesFilter');if(filterBar){filterBar.querySelectorAll('[data-game-count]').forEach(el=>{const counts={all:arr.length,live,upcoming,final:finished};el.textContent=counts[el.dataset.gameCount]??0});}const metrics='<div class="metrics"><div class="metric"><b>'+arr.length+'</b><span>ZÁPASŮ</span></div><div class="metric"><b>'+live+'</b><span>PRÁVĚ ŽIVĚ</span></div><div class="metric"><b>'+finished+'</b><span>DOHRÁNO</span></div></div>';if(!arr.length){$('content').innerHTML='<div class="empty">Pro tento den nejsou naplánované zápasy. Zkus jiné datum.</div>';return}$('content').innerHTML=metrics+'<div class="grid">'+arr.map(g=>{const live=['LIVE','CRIT'].includes(g.gameState),done=['OFF','FINAL'].includes(g.gameState);const phase=live?'game-live':done?'game-final':'game-upcoming';const stage=live?(g.periodDescriptor?.periodType==='OT'?'PRODLOUŽENÍ':g.periodDescriptor?.periodType==='SO'?'NÁJEZDY':g.periodDescriptor?.number?g.periodDescriptor.number+'. TŘETINA':'PROBÍHÁ'):done?'UKONČENO':g.startTimeUTC?new Date(g.startTimeUTC).toLocaleTimeString('cs-CZ',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Prague'}):'PŘIPRAVUJE SE';return '<article class="game analyst-list-card '+phase+'" data-game-phase="'+(live?'live':done?'final':'upcoming')+'"><div class="analyst-teams"><img src="'+safe(g.awayTeam?.logo||teamLogo(g.awayTeam?.abbrev||''))+'" alt=""><strong>'+safe(g.awayTeam?.abbrev||'—')+' vs '+safe(g.homeTeam?.abbrev||'—')+'</strong><img src="'+safe(g.homeTeam?.logo||teamLogo(g.homeTeam?.abbrev||''))+'" alt=""></div><p>'+safe(stage)+' · '+state(g.gameState)+'</p><button class="btn" data-analyze="'+safe(g.id)+'">◈ PROFESIONÁLNÍ ANALÝZA</button><button class="btn" data-game="'+safe(g.id)+'">DETAIL ZÁPASU</button><div class="goals hidden" id="g'+g.id+'"></div></article>'}).join('')+'</div>';uxApplyGameFilter();document.querySelectorAll('[data-game]').forEach(b=>b.onclick=()=>detail(b.dataset.game,b));document.querySelectorAll('[data-analyze]').forEach(b=>b.onclick=()=>analyzeGame(b.dataset.analyze))}catch(e){if(requestId!==bangerGamesRequestId||S.tab!=='games')return;$('status').textContent='Nepodařilo se načíst NHL data';$('content').innerHTML='<div class="empty">⚠️ Připojení k NHL API selhalo: '+safe(e.message)+'. Zkus tlačítko Obnovit. Pokud chyba přetrvá, bude potřeba serverové propojení přes Supabase.</div>'}}
 let bangerDetailRequestId=0;
 async function detail(id,b){const detailRequestId=++bangerDetailRequestId;/* Keep the original match-card label intact while the modal loads. */$('liveArena').classList.remove('hidden');document.body.classList.add('ux-arena-open');$('arenaBody').innerHTML='<button class="btn close" id="closeArena">✕ Zavřít</button><h2>Načítám detail NHL…</h2>';$('closeArena').onclick=closeArena;document.body.style.overflow='hidden';try{const d=await get('https://api-web.nhle.com/v1/gamecenter/'+id+'/landing');if(detailRequestId!==bangerDetailRequestId||$('liveArena').classList.contains('hidden'))return;const away=d.awayTeam||{},home=d.homeTeam||{};const ab=t=>t.abbrev||t.commonName?.default||t.name?.default||'NHL';const img=t=>t.logo?'<img src="'+safe(t.logo)+'" alt="">':'';const periods=d.summary?.scoring||[];const personName=n=>{if(typeof n==='string')return n;if(!n||typeof n!=='object')return '';return n.default||[n.firstName?.default||n.firstName,n.lastName?.default||n.lastName].filter(x=>typeof x==='string').join(' ')||''};const periodLabel=p=>p.periodDescriptor?.periodType==='OT'?'Prodloužení':p.periodDescriptor?.periodType==='SO'?'Nájezdy':(p.periodDescriptor?.number||1)+'. třetina';const events=periods.length?periods.map((p,i)=>{const goals=p.goals||[];const title=p.periodDescriptor?.periodType==='OT'?'Prodloužení':p.periodDescriptor?.periodType==='SO'?'Nájezdy':(p.periodDescriptor?.number||i+1)+'. třetina';return '<section class="periodgoals"><h4 class="periodtitle">'+safe(title)+' <span>'+goals.length+' gólů</span></h4>'+(goals.length?goals.map(g=>{const scorer=personName(g.name)||[personName(g.firstName),personName(g.lastName)].filter(Boolean).join(' ')||'Střelec';const assists=(g.assists||[]).map(x=>personName(x.name)||[personName(x.firstName),personName(x.lastName)].filter(Boolean).join(' ')).filter(Boolean);return '<div class="event goal-event"><span class="event-marker" aria-hidden="true">●</span><small>'+safe(g.timeInPeriod||'—')+' · '+safe(personName(g.teamAbbrev)||g.teamAbbrev||'')+'</small><div>🥅 <b>'+safe(scorer)+'</b> '+safe(g.awayScore??'')+' : '+safe(g.homeScore??'')+'</div><small>Asistence: '+safe(assists.join(', ')||'bez asistence')+'</small></div>'}).join(''):'<p class="nogols">Bez gólu</p>')+'</section>'}).join(''):'<p>Zatím nejsou dostupné záznamy gólů.</p>';const periodScores=(()=>{const lines=(d.summary?.scoring||[]).map((p,i)=>{const kind=p.periodDescriptor?.periodType;const number=p.periodDescriptor?.number||i+1;const title=kind==='OT'?'PROD.':kind==='SO'?'NÁJEZDY':number+'. TŘ.';const gs=p.goals||[];const count=ab=>gs.filter(g=>{const t=g.teamAbbrev;return (typeof t==='string'?t:t?.default)===ab}).length;return {title,away:count(away.abbrev),home:count(home.abbrev),kind}});if(!lines.length)return '<p class="periodnote">Výsledky třetin zatím nejsou dostupné.</p>';const cells=(label,values)=>'<div class="periodscoreline"><b>'+safe(label)+'</b>'+values.map(v=>'<span>'+safe(v)+'</span>').join('')+'</div>';return '<div class="periodscore" style="--periods:'+lines.length+'"><div class="periodscoregrid">'+cells('TŘETINY',lines.map(x=>x.title)).replace('class="periodscoreline"','class="periodscoreline periodscorehead"')+cells(away.abbrev||'HOSTÉ',lines.map(x=>x.away))+cells(home.abbrev||'DOMÁCÍ',lines.map(x=>x.home))+'</div></div>'})();const shotsAway=away.sog??away.shotsOnGoal,shotsHome=home.sog??home.shotsOnGoal;const stat=(label,x,y)=>x==null&&y==null?'':'<div class="arenastat"><b>'+safe(x??'—')+'</b><span>'+label+'</span><b>'+safe(y??'—')+'</b></div>';const pd=d.periodDescriptor||{};const clock=d.clock?.timeRemaining;const status=state(d.gameState);
 const uxLive=['LIVE','CRIT'].includes(d.gameState),uxFinal=['FINAL','OFF'].includes(d.gameState);
