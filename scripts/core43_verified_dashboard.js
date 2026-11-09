@@ -77,6 +77,7 @@ function mount(){
  return true;
 }
 if(typeof module!=="undefined"&&module.exports)module.exports={calculate};
+if(typeof window!=="undefined")window.BangerVerifiedAccuracyCalculate=calculate;
 if(typeof document!=="undefined"){
  let attempts=0;
  const timer=setInterval(()=>{if(mount()||++attempts>=45)clearInterval(timer)},1000);
