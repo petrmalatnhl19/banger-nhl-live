@@ -19,7 +19,10 @@ jobs:
           python-version: '3.12'
       - name: Test player name matching
         run: python -m unittest scripts/test_lineup_name_matching.py
-      - name: Refresh NHL news headlines (optional)\n        continue-on-error: true\n        run: python scripts/update_nhl_news.py\n      - name: Refresh NHL rosters
+      - name: Refresh NHL news headlines (optional)
+        continue-on-error: true
+        run: python scripts/update_nhl_news.py
+      - name: Refresh NHL rosters
         run: python scripts/update_rosters.py
       - name: Inspect Tampa Bay projected line source
         continue-on-error: true
