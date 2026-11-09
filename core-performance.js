@@ -18,22 +18,22 @@ const styles=document.createElement('style');styles.textContent=`
 `;document.head.appendChild(styles);
 function table(rows){
  if(!rows.length)return '<p>Zatím nejsou k dispozici vyhodnocené zápasy.</p>';
- const maxAccuracy=Math.max(...rows.map(r=>Number(r.winner_accuracy_pct)).filter(Number.isFinite));
- const minError=Math.min(...rows.map(r=>Number(r.goal_mae)).filter(Number.isFinite));
- const displayRows=rows.some(r=>r.model==='CORE 4.2')?rows:[...rows,{model:'CORE 4.2',games:0,winner_accuracy_pct:null,goal_mae:null,pending:true}];
+ const maxAccuracy=Math.max(...rows.filter(r=>r.model!=='CORE 4.1'&&r.model!=='CORE 4.2').map(r=>Number(r.winner_accuracy_pct)).filter(Number.isFinite));
+ const minError=Math.min(...rows.filter(r=>r.model!=='CORE 4.1'&&r.model!=='CORE 4.2').map(r=>Number(r.goal_mae)).filter(Number.isFinite));
+ const displayRows=rows.filter(r=>r.model!=='CORE 4.1'&&r.model!=='CORE 4.2');
  const html=displayRows.map(r=>{
   const accuracy=Number(r.winner_accuracy_pct),error=Number(r.goal_mae);
   const winnerBest=!r.pending&&r.winner_accuracy_pct!=null&&Number.isFinite(accuracy)&&accuracy===maxAccuracy;
   const errorBest=!r.pending&&r.goal_mae!=null&&Number.isFinite(error)&&error===minError;
-  return r.pending?'<tr><td>'+esc(r.model)+'</td><td>0</td><td colspan="2" style="text-align:right;color:#a9dced">'+esc(String(window.__core42Pending??'5'))+' predikcí · čeká</td></tr>':'<tr><td>'+esc(r.model)+'</td><td>'+esc(r.games)+'</td><td class="'+(winnerBest?'core-best':'')+'">'+fmt(r.winner_accuracy_pct)+' %</td><td class="'+(errorBest?'core-best':'')+'">'+fmt(r.goal_mae,3)+'</td></tr>';
+  return '<tr><td>'+esc(r.model)+'</td><td>'+esc(r.games)+'</td><td class="'+(winnerBest?'core-best':'')+'">'+fmt(r.winner_accuracy_pct)+' %</td><td class="'+(errorBest?'core-best':'')+'">'+fmt(r.goal_mae,3)+'</td></tr>';
  }).join('');
- return '<div class="core-scroll"><table><thead><tr><th>Model</th><th>Záp.</th><th>Vítěz</th><th>Chyba</th></tr></thead><tbody>'+html+'</tbody></table></div><p class="core-note">Zeleně = nejlepší hodnota v zobrazeném přehledu. Chyba = průměrná odchylka gólů na tým. Malý počet zápasů znamená nejistý výsledek.</p>';
+ return '<p class="core-note">Starší modely · historické srovnání. CORE 4.1 a 4.2 jsou vyhodnoceny samostatně podle ověřeného času před zápasem níže.</p><div class="core-scroll"><table><thead><tr><th>Model</th><th>Záp.</th><th>Vítěz</th><th>Chyba</th></tr></thead><tbody>'+html+'</tbody></table></div><p class="core-note">Zeleně = nejlepší hodnota v zobrazeném přehledu. Chyba = průměrná odchylka gólů na tým. Malý počet zápasů znamená nejistý výsledek.</p>';
 }
 function renderTrend(panel){
  const box=panel.querySelector('[data-core-trend]');
  if(!box)return;
  const data=panel._coreData?.trend||[];
- const models=[...new Set(data.map(r=>r.model))];
+ const models=[...new Set(data.filter(r=>r.model!=='CORE 4.1'&&r.model!=='CORE 4.2').map(r=>r.model))];
  if(!models.length){box.innerHTML='<p>Graf zatím nemá dokončené zápasy.</p>';return}
  const selected=models.includes(panel.dataset.trendModel)?panel.dataset.trendModel:models[0];
  panel.dataset.trendModel=selected;
@@ -48,6 +48,37 @@ function renderTrend(panel){
  box.querySelector('select').addEventListener('change',e=>{panel.dataset.trendModel=e.target.value;renderTrend(panel)});
 }
 
+async function loadVerified(panel){
+ const box=panel.querySelector('[data-core-verified]');
+ if(!box)return;
+ box.textContent='Načítám ověřené CORE 4.1 / 4.2…';
+ try{
+  const get=async path=>{
+   const response=await fetch(ROOT+path,{headers:{apikey:APIKEY},cache:'no-store'});
+   if(!response.ok)throw Error('HTTP '+response.status);
+   const data=await response.json();
+   if(!Array.isArray(data)||data.length>=1000)throw Error('data_incomplete');
+   return data;
+  };
+  const [archive,schedules]=await Promise.all([
+   get('nhl_prediction_archive?select=game_id,status,away_team,home_team,actual_away,actual_home,core41_away,core41_home,core41_predicted_at,core42_away,core42_home,core42_predicted_at&status=eq.final&limit=1000'),
+   get('nhl_core43_schedule_snapshots?select=game_id,away_team,home_team,kickoff_at&limit=1000')
+  ]);
+  if(!panel.isConnected)return;
+  const calculate=window.BangerVerifiedAccuracyCalculate;
+  if(typeof calculate!=='function')throw Error('verified_calculator_unavailable');
+  const result=calculate(archive,schedules);
+  const fmtRow=(name,r)=>'<tr><td>'+name+'</td><td>'+r.games+'</td><td>'+(r.calls?fmt(100*r.correct/r.calls)+' %':'—')+'</td><td>'+(r.mae===null?'—':fmt(r.mae,3))+'</td></tr>';
+  box.innerHTML='<h4 style="margin:12px 0 5px">✓ Ověřená přesnost CORE 4.1 a 4.2</h4><p class="core-note">Pouze dokončené zápasy s ověřenou předzápasovou predikcí a shodou týmů.</p>'+
+   '<table><thead><tr><th>Model</th><th>Záp.</th><th>Vítěz</th><th>Chyba</th></tr></thead><tbody>'+
+   fmtRow('CORE 4.1',result.core41)+fmtRow('CORE 4.2',result.core42)+'</tbody></table>'+
+   '<p class="core-note">Společný vzorek obou modelů: '+result.pairedGames+' zápasů.</p>'+
+   '<table><tbody>'+fmtRow('CORE 4.1',result.paired41)+fmtRow('CORE 4.2',result.paired42)+'</tbody></table>';
+ }catch(e){
+  box.textContent='Ověřená data CORE 4.1 / 4.2 momentálně nejsou dostupná. Nezobrazujeme neověřená čísla.';
+  console.warn('CORE performance verified data:',e.message);
+ }
+}
 async function load(panel){
  if(panel._loading)return;
  panel._loading=true;
@@ -69,16 +100,16 @@ async function load(panel){
   };
   const [all,paired,trend,statusRows]=await Promise.all([fetchView('nhl_core_model_accuracy'),fetchView('nhl_core_model_head_to_head'),fetchView('nhl_core_model_trend'),fetchView('nhl_core42_status',false)]);
   if(!panel.isConnected)return;
-  window.__core42Pending=Number(statusRows[0]?.pending_predictions??0);panel._coreData={all,paired,trend};
+  panel._coreData={all,paired,trend};
   lastLoad=Date.now();
-  render(panel);renderTrend(panel);
+  render(panel);renderTrend(panel);await loadVerified(panel);
  }catch(e){
   if(panel.isConnected){
    area.textContent=e?.name==='AbortError'?'Načítání překročilo 9 sekund. Zkus Aktualizovat.':'Přehled se nepodařilo načíst: '+String(e?.message||e);
   }
  }finally{clearTimeout(timeout);panel._loading=false}
 }
-function render(panel){const data=panel._coreData;if(!data)return;const mode=panel.dataset.mode||'paired';const rows=data[mode]||[];panel.querySelector('[data-core-body]').innerHTML=table(rows);panel.querySelector('[data-core-caption]').textContent=mode==='paired'?'Srovnání na stejných zápasech. Menší chyba gólů je lepší.':'Všechny dostupné dokončené zápasy pro každý model. Počty zápasů se mohou lišit.';panel.querySelectorAll('[data-core-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.coreMode===mode)))}
-function attach(){if(typeof S==='undefined'||S.tab!=='analyst')return;const target=document.getElementById('content');if(!target||document.getElementById('corePerformancePanel'))return;const panel=document.createElement('section');panel.id='corePerformancePanel';panel.dataset.mode='paired';panel.innerHTML='<h3>📊 Výkonnost CORE</h3><p>Skutečná přesnost předzápasových modelů podle dokončených utkání NHL.</p><div class="core-tabs"><button type="button" data-core-mode="paired" aria-pressed="true">Stejné zápasy</button><button type="button" data-core-mode="all" aria-pressed="false">Všechny zápasy</button><button type="button" data-core-refresh>↻ Aktualizovat</button></div><p data-core-caption></p><div data-core-body aria-live="polite">Načítám…</div><div class="core-chart" data-core-trend aria-label="Graf vývoje přesnosti"></div>';panel.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.coreMode){panel.dataset.mode=b.dataset.coreMode;render(panel)}else if(b.hasAttribute('data-core-refresh'))load(panel)});target.prepend(panel);load(panel)}
+function render(panel){const data=panel._coreData;if(!data)return;const mode=panel.dataset.mode||'paired';const rows=data[mode]||[];panel.querySelector('[data-core-body]').innerHTML=table(rows);panel.querySelector('[data-core-caption]').textContent=mode==='paired'?'Historické srovnání starších modelů na společných zápasech. CORE 4.1 / 4.2 níže používají vlastní ověřený vzorek.':'Starší modely: všechny dostupné dokončené zápasy. CORE 4.1 / 4.2 níže jsou ověřené samostatně.';panel.querySelectorAll('[data-core-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.coreMode===mode)))}
+function attach(){if(typeof S==='undefined'||S.tab!=='analyst')return;const target=document.getElementById('content');if(!target||document.getElementById('corePerformancePanel'))return;const panel=document.createElement('section');panel.id='corePerformancePanel';panel.dataset.mode='paired';panel.innerHTML='<h3>📊 Výkonnost CORE</h3><p>Skutečná přesnost předzápasových modelů podle dokončených utkání NHL.</p><div class="core-tabs"><button type="button" data-core-mode="paired" aria-pressed="true">Stejné zápasy</button><button type="button" data-core-mode="all" aria-pressed="false">Všechny zápasy</button><button type="button" data-core-refresh>↻ Aktualizovat</button></div><p data-core-caption></p><div data-core-body aria-live="polite">Načítám…</div><div data-core-verified aria-live="polite"></div><div class="core-chart" data-core-trend aria-label="Graf vývoje přesnosti"></div>';panel.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.coreMode){panel.dataset.mode=b.dataset.coreMode;render(panel)}else if(b.hasAttribute('data-core-refresh'))load(panel)});target.prepend(panel);load(panel)}
 const observer=new MutationObserver(()=>{if((typeof S!=='undefined'?S.tab:null)==='analyst')attach()});observer.observe(document.getElementById('content')||document.body,{childList:true});document.addEventListener('click',()=>setTimeout(attach,100));attach();
 })();
