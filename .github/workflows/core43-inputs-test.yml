@@ -56,3 +56,4 @@ jobs:
       - run: node scripts/test_core43_gsax_sensitivity.cjs
       - run: node scripts/test_core43_paired_evaluation.cjs
       - run: node scripts/test_core43_archive_integration.cjs
+      - run: node scripts/test_core43_shadow_candidate_audit.cjs
