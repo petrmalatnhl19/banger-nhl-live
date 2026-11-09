@@ -1387,6 +1387,67 @@ button:focus-visible,[role="button"]:focus-visible{outline:2px solid #86f2ff;out
  #content .game.analyst-list-card .btn{font-size:10px!important;padding:7px!important}
 }
 </style>
+<style id="banger-dashboard-leaders-inter-v2">
+/* A clean, broadly adopted UI typeface for leaderboard and standings panels.
+   Keep the sports-display font elsewhere. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+#content .dash-panel:has(#dashAllPlayers),
+#content .dash-panel:has(#dashAllStandings){
+ padding:12px 14px!important;
+ border-radius:17px!important;
+}
+#content .dash-panel:has(#dashAllPlayers) .dash-panel-title,
+#content .dash-panel:has(#dashAllStandings) .dash-panel-title{
+ margin-bottom:3px!important;
+ gap:6px!important;
+}
+#content .dash-panel:has(#dashAllPlayers) .dash-panel-title h3,
+#content .dash-panel:has(#dashAllStandings) .dash-panel-title h3{
+ font-family:'Inter',system-ui,sans-serif!important;
+ font-size:17px!important;font-weight:800!important;
+ line-height:1.2!important;letter-spacing:-.45px!important;
+}
+#content .dash-panel:has(#dashAllPlayers) .dash-row,
+#content .dash-panel:has(#dashAllStandings) .dash-row{
+ min-height:0!important;
+ padding:7px 2px!important;
+ gap:8px!important;
+}
+#content .dash-panel:has(#dashAllPlayers) .dash-player,
+#content .dash-panel:has(#dashAllStandings) .dash-player{
+ font-family:'Inter',system-ui,sans-serif!important;
+ font-size:13px!important;font-weight:700!important;
+ line-height:1.22!important;letter-spacing:-.3px!important;
+}
+#content .dash-panel:has(#dashAllPlayers) .dash-player small{
+ display:block!important;
+ font-family:'Inter',system-ui,sans-serif!important;
+ font-size:10px!important;font-weight:600!important;
+ margin-top:2px!important;line-height:1.15!important;
+}
+#content .dash-panel:has(#dashAllPlayers) .dash-row b,
+#content .dash-panel:has(#dashAllStandings) .dash-row b{
+ font-family:'Inter',system-ui,sans-serif!important;
+ font-size:13px!important;font-weight:800!important;
+ font-variant-numeric:tabular-nums!important;
+ letter-spacing:-.3px!important;
+}
+#content .dash-panel:has(#dashAllPlayers) .dash-row img,
+#content .dash-panel:has(#dashAllStandings) .dash-row img{
+ width:22px!important;height:22px!important;object-fit:contain!important;
+}
+#content .dash-panel:has(#dashAllPlayers) .dash-panel-title .dash-link,
+#content .dash-panel:has(#dashAllStandings) .dash-panel-title .dash-link{
+ font-family:'Inter',system-ui,sans-serif!important;
+ font-size:11px!important;font-weight:600!important;
+}
+@media(max-width:440px){
+ #content .dash-panel:has(#dashAllPlayers),
+ #content .dash-panel:has(#dashAllStandings){padding:10px 12px!important}
+ #content .dash-panel:has(#dashAllPlayers) .dash-panel-title h3,
+ #content .dash-panel:has(#dashAllStandings) .dash-panel-title h3{font-size:16px!important}
+}
+</style>
 </head><body><div class="wrap">
 <div id="brandSplash" class="brand-splash" aria-label="Načítání BANGER NHL LIVE"><div class="brand-splash-glow"></div><picture><source media="(orientation: portrait)" srcset="splash-portrait.png"><img src="splash-landscape.png" alt="BANGER NHL LIVE" fetchpriority="high" decoding="async"></picture><div class="brand-splash-loader"><span></span></div><div class="brand-splash-caption">VSTUP DO HOKEJOVÉ ARÉNY</div></div><header class="top"><div class="brand"><div class="brand-logo" aria-label="BANGER NHL LIVE"><span class="brand-mark">BANGER</span><span class="brand-sub">NHL <b>LIVE</b></span></div></div><span class="header-status"><i></i> NHL 2026/27</span></header>
 
