@@ -20,7 +20,7 @@ function goalieStats(data,team){
  const list=side&&data.playerByGameStats?.[side]?.goalies;
  if(!Array.isArray(list))return null;
  const g=list.find(x=>x.starter===true||x.starter==='Y'||x.starter===1);if(!g)return null;
- const match=String(g.saveShotsAgainst||'').match(/(\\d+)\\s*\\/\\s*(\\d+)/);
+ const match=String(g.saveShotsAgainst||'').match(new RegExp('([0-9]+)\\s*/\\s*([0-9]+)'));
  return match&&Number(match[2])>0&&Number(match[1])<=Number(match[2])?{saves:Number(match[1]),faced:Number(match[2])}:null;
 }
 function specialStats(data,team){
@@ -28,7 +28,7 @@ function specialStats(data,team){
  const home=data.homeTeam?.abbrev===team;if(!away&&!home)return null;
  const row=(data.teamGameStats||data.summary?.teamGameStats||[]).find(x=>/power.?play/i.test(String(x.category||x.name||'')));
  if(!row)return null;
- const parse=v=>{const m=String(v??'').match(/(\\d+)\\s*\\/\\s*(\\d+)/);return m?[Number(m[1]),Number(m[2])]:null;};
+ const parse=v=>{const m=String(v??'').match(new RegExp('([0-9]+)\\s*/\\s*([0-9]+)'));return m?[Number(m[1]),Number(m[2])]:null;};
  const own=parse(row[(away?'away':'home')+'Value']??row[(away?'away':'home')+'Team']);
  const opp=parse(row[(away?'home':'away')+'Value']??row[(away?'home':'away')+'Team']);
  return own&&opp?{ppGoals:own[0],ppChances:own[1],pkAllowed:opp[0],pkFaced:opp[1]}:null;
