@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-09T14:07:34.515042+00:00",
-  "rostersUpdatedAt": "2026-11-09T14:07:05.445295+00:00",
+  "updatedAt": "2026-11-09T15:17:24.831669+00:00",
+  "rostersUpdatedAt": "2026-11-09T15:16:44.749777+00:00",
   "projectionDate": "2026-11-09",
   "teamCount": 32,
   "goalieCount": 74,
@@ -227,8 +227,9 @@
       "team": "PHI",
       "teamKey": "flyers",
       "playerId": 8479361,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-09",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Carter Hart",

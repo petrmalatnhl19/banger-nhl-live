@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09",
-  "updatedAt": "2026-11-09T14:07:34.469454+00:00",
+  "updatedAt": "2026-11-09T15:17:24.788283+00:00",
   "teams": {
     "EDM": {
       "name": "Devon Levi",
@@ -8,7 +8,7 @@
       "date": "2026-11-09",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-09T14:07:34.469454+00:00",
+      "checkedAt": "2026-11-09T15:17:24.788283+00:00",
       "gameId": 2026020283
     },
     "NYI": {
@@ -17,8 +17,17 @@
       "date": "2026-11-09",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-09T14:07:34.469454+00:00",
+      "checkedAt": "2026-11-09T15:17:24.788283+00:00",
       "gameId": 2026020285
+    },
+    "PHI": {
+      "name": "Joseph Woll",
+      "status": "confirmed",
+      "date": "2026-11-09",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-09T15:17:24.788283+00:00",
+      "gameId": 2026020284
     },
     "SJS": {
       "name": "Yaroslav Askarov",
@@ -26,7 +35,7 @@
       "date": "2026-11-09",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-09T14:07:34.469454+00:00",
+      "checkedAt": "2026-11-09T15:17:24.788283+00:00",
       "gameId": 2026020285
     },
     "VAN": {
@@ -35,7 +44,7 @@
       "date": "2026-11-09",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-09T14:07:34.469454+00:00",
+      "checkedAt": "2026-11-09T15:17:24.788283+00:00",
       "gameId": 2026020284
     }
   },
@@ -46,13 +55,6 @@
       "reason": "source disagreement",
       "rotowire": "Joonas Korpisalo",
       "previous": "Dylan Garand"
-    },
-    {
-      "date": "2026-11-09",
-      "team": "PHI",
-      "reason": "source disagreement",
-      "rotowire": "Joseph Woll",
-      "previous": "Dan Vladar"
     }
   ],
   "sourceErrors": [],
