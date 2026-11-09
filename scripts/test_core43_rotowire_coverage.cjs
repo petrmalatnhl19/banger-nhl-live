@@ -1,0 +1,12 @@
+const assert=require("node:assert/strict");
+const {auditRotoWire}=require("./core43_rotowire_coverage.cjs");
+const asOf="2026-11-09T15:00:00Z";
+const schedules=[{game_id:42,away_team:"DAL",home_team:"NJD",kickoff_at:"2026-11-09T20:00:00Z"}];
+const observation={game_id:42,team_code:"DAL",goalie_name:"Goalie A",observed_status:"confirmed",observed_at:"2026-11-09T14:00:00Z",source_snapshot_at:"2026-11-09T13:00:00Z"};
+let r=auditRotoWire({observations:[observation],schedules,asOf});
+assert.equal(r.matchedPregamePairs,1);
+assert.equal(r.results[0].eligibleForPromotion,false);
+assert.equal(auditRotoWire({observations:[{...observation,observed_at:"2026-11-09T21:00:00Z"}],schedules,asOf}).matchedPregamePairs,0);
+assert.equal(auditRotoWire({observations:[observation,{...observation,goalie_name:"Goalie B"}],schedules,asOf}).results[0].reason,"conflicting_goalie_names");
+assert.equal(auditRotoWire({observations:[observation],schedules:[...schedules,{...schedules[0],kickoff_at:"2026-11-09T22:00:00Z"}],asOf}).matchedPregamePairs,0);
+console.log("CORE 4.3 RotoWire coverage tests passed");
