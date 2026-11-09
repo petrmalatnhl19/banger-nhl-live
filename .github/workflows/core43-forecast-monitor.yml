@@ -1,0 +1,35 @@
+name: CORE 4.3 frozen forecast monitor
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'scripts/core43_scheduled_forecast_monitor.cjs'
+      - 'scripts/test_core43_scheduled_forecast_monitor.cjs'
+      - '.github/workflows/core43-forecast-monitor.yml'
+permissions:
+  contents: read
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/test_core43_scheduled_forecast_monitor.cjs
+  monitor:
+    if: github.event_name != 'pull_request'
+    needs: unit-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Read-only Supabase monitor
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/core43_scheduled_forecast_monitor.cjs
