@@ -1522,6 +1522,39 @@ button:focus-visible,[role="button"]:focus-visible{outline:2px solid #86f2ff;out
  #uxStatsHub .ux-stats-tabs a{font-size:10px!important;padding:6px 2px!important}
 }
 </style>
+<style id="banger-playoff-contained-horizontal-scroll-v1">
+/* Keep the app header and category selector stationary horizontally;
+   only the playoff rounds themselves may pan left/right. */
+@media(max-width:850px){
+ html:has(#content .playoff-brackets),
+ body:has(#content .playoff-brackets){
+  max-width:100%!important;overflow-x:clip!important;
+ }
+ body:has(#content .playoff-brackets) .wrap,
+ body:has(#content .playoff-brackets) #content,
+ #content .playoff-brackets,
+ #content .playoff-conference{
+  box-sizing:border-box!important;
+  width:100%!important;max-width:100%!important;min-width:0!important;
+ }
+ #content .playoff-brackets{
+  display:grid!important;grid-template-columns:minmax(0,1fr)!important;
+  overflow:visible!important;
+ }
+ #content .playoff-conference{
+  overflow:hidden!important;
+ }
+ #content .playoff-rounds{
+  display:flex!important;min-width:0!important;max-width:100%!important;
+  overflow-x:auto!important;overflow-y:hidden!important;
+  overscroll-behavior-x:contain!important;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-x pan-y;
+  padding-bottom:10px!important;
+ }
+ #content .playoff-round{flex:0 0 180px!important}
+}
+</style>
 </head><body><div class="wrap">
 <div id="brandSplash" class="brand-splash" aria-label="Načítání BANGER NHL LIVE"><div class="brand-splash-glow"></div><picture><source media="(orientation: portrait)" srcset="splash-portrait.png"><img src="splash-landscape.png" alt="BANGER NHL LIVE" fetchpriority="high" decoding="async"></picture><div class="brand-splash-loader"><span></span></div><div class="brand-splash-caption">VSTUP DO HOKEJOVÉ ARÉNY</div></div><header class="top"><div class="brand"><div class="brand-logo" aria-label="BANGER NHL LIVE"><span class="brand-mark">BANGER</span><span class="brand-sub">NHL <b>LIVE</b></span></div></div><span class="header-status"><i></i> NHL 2026/27</span></header>
 
