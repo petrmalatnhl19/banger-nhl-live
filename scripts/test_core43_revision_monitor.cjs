@@ -1,0 +1,11 @@
+const assert=require("node:assert/strict");
+const {evaluateCandidates}=require("./monitor_core43_revisions.cjs");
+const predictions=[{game_id:42,away_team:"DAL",home_team:"NJD",core41_predicted_at:"2026-11-09T10:00:00Z"}];
+const schedules=[{game_id:42,away_team:"DAL",home_team:"NJD",kickoff_at:"2026-11-09T20:00:00Z"}];
+const evidence=["DAL","NJD"].map((team,i)=>({game_id:42,team_code:team,goalie_id:String(10000+i),evidence_status:"confirmed",source_name:"Confirmed report",source_url:"https://example.org/report",source_published_at:"2026-11-09T12:00:00Z",verified_at:"2026-11-09T13:00:00Z"}));
+assert.equal(evaluateCandidates({predictions,schedules,evidence,now:"2026-11-09T14:00:00Z"})[0].eligible,true);
+assert.equal(evaluateCandidates({predictions,schedules,evidence,now:"2026-11-09T12:30:00Z"})[0].eligible,false);
+assert.equal(evaluateCandidates({predictions,schedules,evidence,now:"2026-11-09T20:00:00Z"})[0].eligible,false);
+assert.equal(evaluateCandidates({predictions,schedules:[],evidence,now:"2026-11-09T14:00:00Z"})[0].reason,"missing_schedule");
+assert.throws(()=>evaluateCandidates({predictions,schedules,evidence,now:"invalid"}),/invalid_asof/);
+console.log("CORE 4.3 revision monitor tests passed");
