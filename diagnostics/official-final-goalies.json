@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-09T01:29:21.634330+00:00",
+  "generatedAt": "2026-11-09T07:46:02.741093+00:00",
   "source": "official_nhl_final_boxscore",
   "historicalPredictionMutation": false,
   "games": [
@@ -2668,13 +2668,185 @@
         "starterVerified": true
       },
       "sourceUrl": "https://www.nhl.com/gamecenter/2026020278/boxscore"
+    },
+    {
+      "gameId": 2026020279,
+      "gameDate": "2026-11-08",
+      "away": {
+        "team": "NJD",
+        "participants": [
+          {
+            "playerId": 8474596,
+            "name": "J. Allen",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8476945,
+            "name": "C. Hellebuyck",
+            "starter": true,
+            "toi": "60:00"
+          }
+        ],
+        "startingGoalieId": 8476945,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "TOR",
+        "participants": [
+          {
+            "playerId": 8476932,
+            "name": "A. Stolarz",
+            "starter": true,
+            "toi": "58:45"
+          },
+          {
+            "playerId": 8475683,
+            "name": "S. Bobrovsky",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8476932,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020279/boxscore"
+    },
+    {
+      "gameId": 2026020280,
+      "gameDate": "2026-11-08",
+      "away": {
+        "team": "TBL",
+        "participants": [
+          {
+            "playerId": 8483710,
+            "name": "D. Hildeby",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8476883,
+            "name": "A. Vasilevskiy",
+            "starter": true,
+            "toi": "60:00"
+          }
+        ],
+        "startingGoalieId": 8476883,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "WPG",
+        "participants": [
+          {
+            "playerId": 8482076,
+            "name": "N. Daws",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8479973,
+            "name": "S. Skinner",
+            "starter": true,
+            "toi": "59:52"
+          }
+        ],
+        "startingGoalieId": 8479973,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020280/boxscore"
+    },
+    {
+      "gameId": 2026020281,
+      "gameDate": "2026-11-08",
+      "away": {
+        "team": "PHI",
+        "participants": [
+          {
+            "playerId": 8479361,
+            "name": "J. Woll",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8478435,
+            "name": "D. Vladar",
+            "starter": true,
+            "toi": "64:08"
+          }
+        ],
+        "startingGoalieId": 8478435,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "CGY",
+        "participants": [
+          {
+            "playerId": 8482445,
+            "name": "D. Cooley",
+            "starter": true,
+            "toi": "64:08"
+          },
+          {
+            "playerId": 8481692,
+            "name": "D. Wolf",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8482445,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020281/boxscore"
+    },
+    {
+      "gameId": 2026020282,
+      "gameDate": "2026-11-08",
+      "away": {
+        "team": "PIT",
+        "participants": [
+          {
+            "playerId": 8483703,
+            "name": "S. Murashov",
+            "starter": false,
+            "toi": "00:00"
+          },
+          {
+            "playerId": 8481668,
+            "name": "A. Silovs",
+            "starter": true,
+            "toi": "53:45"
+          }
+        ],
+        "startingGoalieId": 8481668,
+        "starterVerified": true
+      },
+      "home": {
+        "team": "ANA",
+        "participants": [
+          {
+            "playerId": 8476316,
+            "name": "L. Brossoit",
+            "starter": true,
+            "toi": "60:00"
+          },
+          {
+            "playerId": 8478024,
+            "name": "V. Husso",
+            "starter": false,
+            "toi": "00:00"
+          }
+        ],
+        "startingGoalieId": 8476316,
+        "starterVerified": true
+      },
+      "sourceUrl": "https://www.nhl.com/gamecenter/2026020282/boxscore"
     }
   ],
   "failures": [],
   "summary": {
-    "finalGames": 62,
-    "withBothVerifiedStarters": 62,
-    "withBothGoalieParticipants": 62,
+    "finalGames": 66,
+    "withBothVerifiedStarters": 66,
+    "withBothGoalieParticipants": 66,
     "fetchFailures": 0
   }
 }
