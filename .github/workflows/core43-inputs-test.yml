@@ -12,6 +12,8 @@ on:
       - 'core43-archive-evidence.js'
       - 'core43-revision-gate.js'
       - 'scripts/test_core43_goalie_validation.cjs'
+      - 'scripts/core43_goalie_source_diagnostics.cjs'
+      - 'scripts/test_core43_goalie_source_diagnostics.cjs'
       - 'scripts/test_core43_archive_evidence.cjs'
       - 'scripts/test_core43_revision_gate.cjs'
       - 'scripts/write_core43_revision.cjs'
@@ -48,6 +50,7 @@ jobs:
       - run: node scripts/test_core43_moneypuck.cjs
       - run: node scripts/test_core43_starter_reports.cjs
       - run: node scripts/test_core43_goalie_validation.cjs
+      - run: node scripts/test_core43_goalie_source_diagnostics.cjs
       - run: node scripts/test_core43_archive_evidence.cjs
       - run: node scripts/test_core43_revision_gate.cjs
       - run: node scripts/test_core43_revision_writer.cjs
