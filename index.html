@@ -2341,29 +2341,31 @@ function newsArticleTeams(article,headline){
   }
   return false;
  };
- // Headline references take priority over unrelated teams in the teaser.
- const scan=text=>{
+ // Keep article context separate: the headline determines the primary teams.
+ const identify=text=>{
   const explicitTeams=new Set();
   const rosterTeams=new Set();
   for(const [code,names] of NEWS_TEAM_MATCHES)if(names.some(n=>wordHit(text,n)))explicitTeams.add(code);
-  // Czech sports headlines commonly inflect foreign player surnames.
-  // Keep exact matches first and only accept inflections at word boundaries.
-  const inflectedSurnameHit=(surname)=>{
+  const inflectedSurnameHit=surname=>{
    if(wordHit(text,surname))return true;
    if(surname.length<5)return false;
    const endings=/[aeiouyáéíóúůý]$/u.test(surname)?['ho','m','a','ovi']:['a','em','ovi','e','u'];
    return endings.some(ending=>wordHit(text,surname+ending));
   };
   for(const [surname,code] of newsRosterPlayerTeams)if(inflectedSurnameHit(surname))rosterTeams.add(code);
-  // A named team in the headline is stronger evidence than a player mentioned in passing.
-  if(explicitTeams.size){for(const code of explicitTeams)codes.add(code);return;}
-  if(rosterTeams.size){for(const code of rosterTeams)codes.add(code);return;}
-  // Historical player aliases are a fallback only when roster data cannot identify a player.
-  for(const [code,names] of NEWS_PLAYER_TEAMS)if(names.some(n=>wordHit(text,n)))codes.add(code);
+  const fallback=new Set();
+  if(!rosterTeams.size)for(const [code,names] of NEWS_PLAYER_TEAMS)if(names.some(n=>wordHit(text,n)))fallback.add(code);
+  return {explicitTeams,playerTeams:rosterTeams.size?rosterTeams:fallback};
  };
- scan(title);
- if(!codes.size)scan(combined);
- return [...codes].slice(0,2);
+ const headlineMatches=identify(title);
+ const teaser=identify(combined);
+ // Explicitly named clubs in a headline are the safest logos, including two-team stories.
+ if(headlineMatches.explicitTeams.size)return [...headlineMatches.explicitTeams].slice(0,2);
+ // When a headline names players on two teams, preserve both instead of guessing one.
+ if(headlineMatches.playerTeams.size)return [...headlineMatches.playerTeams].slice(0,2);
+ // Teasers can mention opponents or former clubs; show a logo only when unambiguous.
+ const teaserTeams=new Set([...teaser.explicitTeams,...teaser.playerTeams]);
+ return teaserTeams.size===1?[...teaserTeams]:[];
 }
 function newsArticleCard(article){
  let url;
