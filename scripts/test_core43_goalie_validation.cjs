@@ -16,7 +16,7 @@ assert.equal(validateEvidence({...evidence,sourceUrl:"http://example.org"},game)
 const frozenGame={...game,predictionAt:"2026-11-07T20:15:00Z"};
 assert.equal(validateEvidence(evidence,frozenGame).accepted,true);
 assert.equal(validateEvidence(evidence,{...game,predictionAt:"2026-11-07T20:05:00Z"}).reason,"evidence_after_prediction");
-assert.equal(validateEvidence({...evidence,sourcePublishedAt:"2026-11-07T20:12:00Z"},frozenGame).accepted,true);
+assert.equal(validateEvidence({...evidence,sourcePublishedAt:"2026-11-07T20:12:00Z",verifiedAt:"2026-11-07T20:13:00Z"},frozenGame).accepted,true);
 assert.equal(validateEvidence({...evidence,sourcePublishedAt:"2026-11-07T20:16:00Z",verifiedAt:"2026-11-07T20:17:00Z"},frozenGame).reason,"evidence_after_prediction");
 assert.equal(validateEvidence(evidence,{...game,predictionAt:"not-a-date"}).reason,"invalid_prediction_time");
 assert.equal(validateEvidence(evidence,{...game,predictionAt:"2026-11-07T22:01:00Z"}).reason,"invalid_prediction_time");
