@@ -2357,12 +2357,12 @@ function newsArticleTeams(article,headline){
   if(!rosterTeams.size)for(const [code,names] of NEWS_PLAYER_TEAMS)if(names.some(n=>wordHit(text,n)))fallback.add(code);
   return {explicitTeams,playerTeams:rosterTeams.size?rosterTeams:fallback};
  };
- const headline=identify(title);
+ const headlineMatches=identify(title);
  const teaser=identify(combined);
  // Explicitly named clubs in a headline are the safest logos, including two-team stories.
- if(headline.explicitTeams.size)return [...headline.explicitTeams].slice(0,2);
+ if(headlineMatches.explicitTeams.size)return [...headlineMatches.explicitTeams].slice(0,2);
  // When a headline names players on two teams, preserve both instead of guessing one.
- if(headline.playerTeams.size)return [...headline.playerTeams].slice(0,2);
+ if(headlineMatches.playerTeams.size)return [...headlineMatches.playerTeams].slice(0,2);
  // Teasers can mention opponents or former clubs; show a logo only when unambiguous.
  const teaserTeams=new Set([...teaser.explicitTeams,...teaser.playerTeams]);
  return teaserTeams.size===1?[...teaserTeams]:[];
