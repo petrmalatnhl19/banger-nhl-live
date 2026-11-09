@@ -1330,6 +1330,60 @@ button:focus-visible,[role="button"]:focus-visible{outline:2px solid #86f2ff;out
  }
 }
 </style>
+<style id="banger-games-list-row-mobile-v1">
+/* Games list only: compact match rows similar to the home scoreboard. */
+@media(max-width:600px){
+ #content .game[data-game-phase]{
+  padding:10px 12px!important;
+  margin-bottom:8px!important;
+  border-radius:15px!important;
+ }
+ #content .game[data-game-phase] .gamehead{
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  min-height:0!important;margin:0!important;gap:6px!important;
+ }
+ #content .game[data-game-phase] .game-league{
+  font-size:10px!important;letter-spacing:.4px!important;
+ }
+ #content .game[data-game-phase] .game-state{
+  font-size:10px!important;padding:3px 8px!important;
+ }
+ #content .game[data-game-phase] .game-stage{
+  text-align:left!important;margin:3px 0 0!important;
+  font-size:11px!important;line-height:1.2!important;
+ }
+ #content .game[data-game-phase] .score{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)!important;
+  align-items:center!important;gap:7px!important;
+  margin:6px 0 7px!important;min-height:34px!important;
+ }
+ #content .game[data-game-phase] .team{
+  display:flex!important;flex-direction:row!important;
+  align-items:center!important;gap:6px!important;
+  min-width:0!important;font-size:13px!important;
+  line-height:1.1!important;letter-spacing:.2px!important;
+  white-space:nowrap!important;
+ }
+ #content .game[data-game-phase] .team:first-child{justify-content:flex-start!important}
+ #content .game[data-game-phase] .team:last-child{justify-content:flex-end!important;flex-direction:row-reverse!important}
+ #content .game[data-game-phase] .team img{
+  width:29px!important;height:29px!important;
+  margin:0!important;object-fit:contain!important;flex-shrink:0!important;
+ }
+ #content .game[data-game-phase] .nums{
+  font-size:22px!important;line-height:1!important;
+  white-space:nowrap!important;letter-spacing:0!important;
+ }
+ #content .game[data-game-phase] .vs{font-size:15px!important}
+ #content .game[data-game-phase] .btn[data-game]{
+  display:block!important;width:100%!important;min-height:32px!important;
+  padding:5px 9px!important;margin:0!important;
+  border-radius:9px!important;font-size:11px!important;
+  line-height:1.25!important;
+ }
+}
+</style>
 </head><body><div class="wrap">
 <div id="brandSplash" class="brand-splash" aria-label="Načítání BANGER NHL LIVE"><div class="brand-splash-glow"></div><picture><source media="(orientation: portrait)" srcset="splash-portrait.png"><img src="splash-landscape.png" alt="BANGER NHL LIVE" fetchpriority="high" decoding="async"></picture><div class="brand-splash-loader"><span></span></div><div class="brand-splash-caption">VSTUP DO HOKEJOVÉ ARÉNY</div></div><header class="top"><div class="brand"><div class="brand-logo" aria-label="BANGER NHL LIVE"><span class="brand-mark">BANGER</span><span class="brand-sub">NHL <b>LIVE</b></span></div></div><span class="header-status"><i></i> NHL 2026/27</span></header>
 
