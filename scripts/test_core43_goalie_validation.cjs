@@ -1,5 +1,5 @@
 const assert=require("node:assert/strict");
-const {validateEvidence}=require("../core43-starter-gate.js");
+const {validateEvidence,validateFrozenEvidence}=require("../core43-starter-gate.js");
 const {normalize}=require("../core43-starter-reports.js");
 const game={gameId:2026020267,awayTeam:"NYR",homeTeam:"SEA",kickoffUTC:"2026-11-07T22:00:00Z"};
 const report={gameId:game.gameId,teamCode:"NYR",goalieId:"12345",status:"confirmed",confirmationBasis:"explicit_pregame_report",sourceName:"Verified team report",sourceUrl:"https://example.org/report",sourcePublishedAt:"2026-11-07T20:00:00Z"};
@@ -22,4 +22,8 @@ assert.equal(validateEvidence(evidence,{...game,predictionAt:"not-a-date"}).reas
 assert.equal(validateEvidence(evidence,{...game,predictionAt:"2026-11-07T22:01:00Z"}).reason,"invalid_prediction_time");
 assert.equal(validateEvidence({...evidence,verifiedAt:"2026-11-07T19:00:00Z"},frozenGame).reason,"verification_before_publication");
 assert.equal(validateEvidence({...evidence,verifiedAt:"2026-11-07T22:01:00Z"},frozenGame).reason,"not_pregame");
+assert.equal(validateFrozenEvidence(evidence,game,undefined).reason,"missing_prediction_time");
+assert.equal(validateFrozenEvidence(evidence,game,"not-a-date").reason,"missing_prediction_time");
+assert.equal(validateFrozenEvidence(evidence,game,"2026-11-07T20:05:00Z").reason,"evidence_after_prediction");
+assert.equal(validateFrozenEvidence(evidence,game,"2026-11-07T20:15:00Z").accepted,true);
 console.log("CORE 4.3 goalie validation tests passed");
