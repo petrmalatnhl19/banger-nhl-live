@@ -1,24 +1,24 @@
 {
   "date": "2026-11-09",
-  "updatedAt": "2026-11-09T01:34:27.401473+00:00",
+  "updatedAt": "2026-11-09T02:30:42.023211+00:00",
   "teams": {
-    "NYI": {
-      "name": "Ilya Sorokin",
-      "status": "projected",
-      "date": "2026-11-09",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-09T01:34:27.401473+00:00",
-      "gameId": 2026020285
-    },
     "EDM": {
       "name": "Devon Levi",
       "status": "projected",
       "date": "2026-11-09",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-09T01:34:27.401473+00:00",
+      "checkedAt": "2026-11-09T02:30:42.023211+00:00",
       "gameId": 2026020283
+    },
+    "NYI": {
+      "name": "Ilya Sorokin",
+      "status": "projected",
+      "date": "2026-11-09",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-09T02:30:42.023211+00:00",
+      "gameId": 2026020285
     },
     "NYR": {
       "name": "Joonas Korpisalo",
@@ -26,7 +26,7 @@
       "date": "2026-11-09",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-09T01:34:27.401473+00:00",
+      "checkedAt": "2026-11-09T02:30:42.023211+00:00",
       "gameId": 2026020283
     }
   },
