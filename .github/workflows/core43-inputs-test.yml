@@ -14,6 +14,8 @@ on:
       - 'scripts/test_core43_goalie_validation.cjs'
       - 'scripts/core43_goalie_accuracy_evaluation.cjs'
       - 'scripts/test_core43_goalie_accuracy_evaluation.cjs'
+      - 'scripts/core43_goalie_archive_join.cjs'
+      - 'scripts/test_core43_goalie_archive_join.cjs'
       - 'scripts/core43_goalie_source_diagnostics.cjs'
       - 'scripts/test_core43_goalie_source_diagnostics.cjs'
       - 'scripts/test_core43_archive_evidence.cjs'
@@ -53,6 +55,7 @@ jobs:
       - run: node scripts/test_core43_starter_reports.cjs
       - run: node scripts/test_core43_goalie_validation.cjs
       - run: node scripts/test_core43_goalie_accuracy_evaluation.cjs
+      - run: node scripts/test_core43_goalie_archive_join.cjs
       - run: node scripts/test_core43_goalie_source_diagnostics.cjs
       - run: node scripts/test_core43_archive_evidence.cjs
       - run: node scripts/test_core43_revision_gate.cjs
