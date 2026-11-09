@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="cs"><head>
-<meta name="banger-build" content="2026-11-09-news-summary-v19"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#030b1b"><title>BANGER NHL LIVE</title>
+<meta name="banger-build" content="2026-11-09-news-summary-v20"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#030b1b"><title>BANGER NHL LIVE</title>
 
 <style>
 :root{color-scheme:dark;--cyan:#41eaff;--ink:#e8faff;--muted:#8ba9c5;--panel:#0b1b35}
@@ -445,6 +445,7 @@ body.ux-arena-open .arena{z-index:10020}
 .banger-news-title-row summary strong{font-size:14px;line-height:1.42}
 .banger-news-open{align-self:flex-start;margin-top:3px}
 .banger-news-description{font:400 13px/1.55 Inter,system-ui,sans-serif;color:#afc8da;margin:9px 0 0}.banger-news-details:not([open]) .banger-news-expand::after{content:"Zobrazit popis"}.banger-news-details[open] .banger-news-expand::after{content:"Skrýt popis"}
+.banger-news-build{display:inline-block;margin-left:7px;color:#76c4d6;font-size:11px;font-weight:600;white-space:nowrap}
 </style>
 <!-- BANGER Analyst compact tracker v3 -->
 <style id="banger-analyst-compact-v3">
@@ -1908,8 +1909,8 @@ h1,.brand,.logo,.nums,.arenanum,.metric b,.profilegrid b,
 .banger-news-card summary::-webkit-details-marker{display:none}
 .banger-news-card details[open] strong{display:block;overflow:visible;-webkit-line-clamp:unset}
 .banger-news-card .banger-news-expand{display:block;margin-top:5px;color:#8abbd2;font:600 11px Inter,system-ui,sans-serif}
-.banger-news-card details[open] .banger-news-expand::after{content:"Sbalit nadpis"}
-.banger-news-card details:not([open]) .banger-news-expand::after{content:"Celý nadpis"}
+.banger-news-card details[open] .banger-news-expand::after{content:"Skrýt popis"}
+.banger-news-card details:not([open]) .banger-news-expand::after{content:"Zobrazit popis"}
 .banger-news-card .banger-news-open{display:inline-block;align-self:flex-start;padding:5px 0;text-decoration:none}
 .banger-news-card .banger-news-open:focus-visible{outline:2px solid #79e8ff;outline-offset:2px}
 .banger-news-empty{color:#abc8da;font-size:13px}
@@ -2310,7 +2311,7 @@ async function newsPage(){
  S.tab='news';
  $('calendarBar').classList.add('hidden');$('search').classList.add('hidden');$('sort').classList.add('hidden');
  $('status').textContent='NHL novinky';
- $('content').innerHTML='<section class="dash-panel banger-news-page"><div class="dash-panel-title"><h3>📰 NHL Novinky</h3><button type="button" id="bangerNewsReload" class="dash-link">↻ Obnovit</button></div><p class="banger-news-intro">Aktuální články z oficiálního webu NHL. Kliknutím otevřete původní článek.</p><div class="banger-news-filters"><button type="button" data-news-lang="cs" class="active">🇨🇿 Česky</button><button type="button" data-news-lang="en">🌐 English</button></div><div id="bangerNewsList" class="banger-news-list"><p>Načítám novinky…</p></div></section>';
+ $('content').innerHTML='<section class="dash-panel banger-news-page"><div class="dash-panel-title"><h3>📰 NHL Novinky</h3><button type="button" id="bangerNewsReload" class="dash-link">↻ Obnovit</button></div><p class="banger-news-intro">Aktuální články z oficiálního webu NHL. Kliknutím otevřete původní článek. <small class="banger-news-build">Verze novinek v20</small></p><div class="banger-news-filters"><button type="button" data-news-lang="cs" class="active">🇨🇿 Česky</button><button type="button" data-news-lang="en">🌐 English</button></div><div id="bangerNewsList" class="banger-news-list"><p>Načítám novinky…</p></div></section>';
  let language='cs';
  const draw=async(force=false)=>{
   const host=document.getElementById('bangerNewsList');
