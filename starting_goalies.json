@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09",
-  "updatedAt": "2026-11-09T05:26:57.134461+00:00",
+  "updatedAt": "2026-11-09T06:34:34.253479+00:00",
   "teams": {
     "EDM": {
       "name": "Devon Levi",
@@ -8,7 +8,7 @@
       "date": "2026-11-09",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-09T05:26:57.134461+00:00",
+      "checkedAt": "2026-11-09T06:34:34.253479+00:00",
       "gameId": 2026020283
     },
     "NYI": {
@@ -17,7 +17,16 @@
       "date": "2026-11-09",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-09T05:26:57.134461+00:00",
+      "checkedAt": "2026-11-09T06:34:34.253479+00:00",
+      "gameId": 2026020285
+    },
+    "SJS": {
+      "name": "Yaroslav Askarov",
+      "status": "projected",
+      "date": "2026-11-09",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-09T06:34:34.253479+00:00",
       "gameId": 2026020285
     },
     "VAN": {
@@ -26,26 +35,11 @@
       "date": "2026-11-09",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-09T05:26:57.134461+00:00",
+      "checkedAt": "2026-11-09T06:34:34.253479+00:00",
       "gameId": 2026020284
-    },
-    "SJS": {
-      "name": "Yaroslav Askarov",
-      "status": "projected",
-      "date": "2026-11-09",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-09T05:26:57.134461+00:00",
-      "gameId": 2026020285
     }
   },
   "conflicts": [
-    {
-      "team": "SJS",
-      "specialist": "Yaroslav Askarov",
-      "nhl": "Alex Nedeljkovic",
-      "nhlSource": "https://www.nhl.com/news/san-jose-sharks-dallas-stars-game-preview-november-7-2026"
-    },
     {
       "date": "2026-11-09",
       "team": "NYR",
