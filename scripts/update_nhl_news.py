@@ -48,7 +48,7 @@ def load(language, source):
         prefix = "/cs/news/" if language == "cs" else "/news/"
         if not parsed.path.startswith(prefix) or parsed.path == prefix:
             continue
-        if len(title) < 15 or len(title) > 190 or url in seen:
+        if len(title) < 15 or len(title) > 190 or url in seen or re.search(r"\\b(betting|wager|odds|props|sázk|kurzy)\\b", title, re.I):
             continue
         seen.add(url)
         out.append({"title": title, "url": url, "language": language, "source": "NHL.com"})
