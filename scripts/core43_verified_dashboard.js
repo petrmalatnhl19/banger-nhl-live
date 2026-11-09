@@ -59,7 +59,7 @@ function mount(){
    };
    const [archive,schedules]=await Promise.all([
     fetchRows("nhl_prediction_archive?select=game_id,status,away_team,home_team,actual_away,actual_home,core41_away,core41_home,core41_predicted_at,core42_away,core42_home,core42_predicted_at&status=eq.final&limit=1000"),
-    fetchRows("nhl_core43_schedule_snapshots?select=game_id,away_team,home_team,kickoff_at&limit=1000")
+    fetchRows("nhl_core43_public_schedule_evidence?select=game_id,away_team,home_team,kickoff_at&limit=1000")
    ]);
    if(archive.length===1000||schedules.length===1000)throw Error("pagination_required");
    const result=calculate(archive,schedules);
