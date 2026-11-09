@@ -3,7 +3,7 @@
  * Missing outcomes are excluded, never counted as correct or incorrect.
  */
 const time=x=>typeof x==="string"&&Number.isFinite(Date.parse(x))?Date.parse(x):NaN;
-const id=x=>/^\\d+$/.test(String(x??""))?String(x):null;
+const id=x=>/^\d+$/.test(String(x??""))?String(x):null;
 function evaluateGoalieAccuracy(rows=[]){
  const excluded={},details=[];let correct=0,incorrect=0;
  for(const row of rows){
