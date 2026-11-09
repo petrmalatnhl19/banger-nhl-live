@@ -2292,21 +2292,35 @@ function newsTeamFromHeadline(value){
 
 // Recognizable player surnames in news headlines; only unambiguous NHL associations.
 const NEWS_PLAYER_TEAMS=[
- ['VGK',['hertl','eichel','mark stone']],
- ['WPG',['hellebuyck','connor hellebuyck']],
- ['CHI',['bedard','connor bedard']],
- ['DAL',['benn','jamie benn','robertson','jason robertson']],
- ['MTL',['carey price','price vzpomínal']],
- ['WSH',['ovečkin','ovechkin']],
- ['CAR',['aho','sebastian aho']]
+ ['VGK',['hertl','eichel','mark stone']],['DAL',['benn','robertson']],
+ ['WPG',['hellebuyck']],['CHI',['bedard']],['MTL',['slafkovský','slafkovsky','carey price']],
+ ['TOR',['tavares','matthews','nylander']],['MIN',['kaprizov']],
+ ['ANA',['dostal','dostál','gólman ducks','golman ducks']],
+ ['COL',['avalanche']],['DET',['red wings','postava','postavovi']],
+ ['BOS',['zacha','pastrňák','pastrnak']],['CAR',['hurricanes']],
+ ['FLA',['barkov','marchand']],['WSH',['ovečkin','ovechkin']],
+ ['NYR',['panarin']],['EDM',['mcdavid','draisaitl']]
 ];
-function newsTeamFromArticle(article,headline){
- const combined=[headline,article.title,article.description].filter(Boolean).join(' ').toLocaleLowerCase('cs-CZ');
- const explicit=newsTeamFromHeadline(combined);
- if(explicit)return explicit;
+function newsArticleTeams(article,headline){
  const title=String(headline||'').toLocaleLowerCase('cs-CZ');
- const found=NEWS_PLAYER_TEAMS.filter(([,names])=>names.some(name=>{
-  const escaped=name.replace(/[.*+?^$()|[\]{}]/g,'\\function newsArticleCard(article){');
+ const combined=[headline,article.title,article.description].filter(Boolean).join(' ').toLocaleLowerCase('cs-CZ');
+ const codes=new Set();
+ const wordHit=(text,term)=>{
+  const pos=text.indexOf(term);
+  if(pos<0)return false;
+  const letter=/[\p{L}]/u;
+  return !letter.test(text[pos-1]||'')&&!letter.test(text[pos+term.length]||'');
+ };
+ // Headline references take priority over unrelated teams in the teaser.
+ const scan=text=>{
+  for(const [code,names] of NEWS_TEAM_MATCHES)if(names.some(n=>wordHit(text,n)))codes.add(code);
+  for(const [code,names] of NEWS_PLAYER_TEAMS)if(names.some(n=>wordHit(text,n)))codes.add(code);
+ };
+ scan(title);
+ if(!codes.size)scan(combined);
+ return [...codes].slice(0,2);
+}
+function newsArticleCard(article){');
   return new RegExp('(^|[^\\p{L}])'+escaped+'(?=$|[^\\p{L}])','iu').test(title);
  }));
  return found.length===1?found[0][0]:null;
@@ -2337,8 +2351,8 @@ function newsArticleCard(article){
  const teaser=verifiedDescription||remainder;
  const title=newsEscape(headline);
  const description=teaser?'<p class="banger-news-description">'+newsEscape(teaser)+'</p>':'';
- const team=newsTeamFromArticle(article,verifiedHeadline||headline);
- const crest=team?'<img class="banger-news-crest" src="'+teamLogo(team)+'" alt="'+newsEscape(team)+'" loading="lazy">':'<span class="banger-news-league-logo" aria-label="NHL">NHL</span>';
+ const teams=newsArticleTeams(article,verifiedHeadline||headline);
+ const crest=teams.length?teams.map(team=>'<img class="banger-news-crest" src="'+teamLogo(team)+'" alt="'+newsEscape(team)+'" loading="lazy">').join(''):'<span class="banger-news-league-logo" aria-label="NHL">NHL</span>';
  const published=article.publishedAt||article.published_at||article.published;
  const validPublished=published&&/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(String(published))&&Number.isFinite(Date.parse(published));
  const date=validPublished?new Intl.DateTimeFormat(article.language==='cs'?'cs-CZ':'en-GB',{timeZone:'Europe/Prague',day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}).format(new Date(published)):(dateMatch?Number(dateMatch[1])+'. '+dateMatch[2].toLowerCase()+'. '+dateMatch[3]:'');
