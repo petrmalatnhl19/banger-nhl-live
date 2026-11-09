@@ -38,7 +38,7 @@ async function history(team,gameDate){
  const key=team+':'+gameDate;if(historicalCache.has(key))return historicalCache.get(key);
  const task=(async()=>{
   const season=Number(gameDate.slice(5,7))>=9?Number(gameDate.slice(0,4)):Number(gameDate.slice(0,4))-1;
-  const schedule=await nhl('club-schedule-season/'+encodeURIComponent(team)+'/'+season+(season+1));
+  const schedule=await nhl('club-schedule-season/'+encodeURIComponent(team)+'/'+season+(season+1)).catch(async()=>{const r=await fetch('https://xxwqeiuyislnoxsmjuul.supabase.co/functions/v1/nhl-feed?kind=clubhistory&team='+encodeURIComponent(team)+'&season='+season+(season+1),{headers});if(!r.ok)throw Error('Rozpis nedostupný');return r.json();});
   const games=(schedule.games||[]).filter(g=>g.gameDate<gameDate&&g.gameState==='OFF').sort((a,b)=>b.gameDate.localeCompare(a.gameDate)).slice(0,5);
   const results=await Promise.all(games.map(async g=>{const [box,rail]=await Promise.allSettled([nhl('gamecenter/'+g.id+'/boxscore'),nhl('gamecenter/'+g.id+'/right-rail')]);return {box:box.status==='fulfilled'?box.value:null,rail:rail.status==='fulfilled'?rail.value:null};}));
   const records=results.map(x=>({sk:x.box&&skaterStats(x.box,team),goalie:x.box&&goalieStats(x.box,team),special:x.rail&&specialStats(x.rail,team)}));
@@ -91,14 +91,16 @@ function mount(){
    const section=document.createElement('section');section.style.cssText='margin-top:12px;border-top:1px solid #35647f;padding-top:10px';
    section.textContent='Načítám historické týmové statistiky…';target.appendChild(section);
    try{
-    const [away,home]=await Promise.all([history(g.away_team,g.game_date),history(g.home_team,g.game_date)]);
+    const [ar,hr]=await Promise.allSettled([history(g.away_team,g.game_date),history(g.home_team,g.game_date)]);
+    const empty={n:0,shots:null,hits:null,blocks:null,pim:null,goalieN:0,savePct:null,specialN:0,ppPct:null,pkPct:null};
+    const away=ar.status==='fulfilled'?ar.value:empty,home=hr.status==='fulfilled'?hr.value:empty;
     if(token!==generation||!section.isConnected)return;
     const line=(label,k,suffix='')=>'<tr><td style="text-align:center">'+(away[k]==null?'—':fmt(away[k])+suffix)+'</td><td style="text-align:center;color:#a9d4e5">'+label+'</td><td style="text-align:center">'+(home[k]==null?'—':fmt(home[k])+suffix)+'</td></tr>';
     section.innerHTML='<div style="color:#70eaff;text-align:center;font-weight:800;margin-bottom:7px">POSLEDNÍCH AŽ 5 ZÁPASŮ · PRŮMĚRY</div><table style="width:100%;table-layout:fixed;font-size:12px"><tbody>'+
      line('Střely na branku','shots')+line('Hity','hits')+line('Blokované střely','blocks')+line('Trestné minuty','pim')+
      line('Úspěšnost zákroků','savePct',' %')+line('Přesilovky','ppPct',' %')+line('Oslabení','pkPct',' %')+
-     '</tbody></table><p style="font-size:11px;color:#9dbed2">Vzorek týmových boxscore: '+away.n+' / '+home.n+' zápasů. Úspěšnost brankářů vychází ze startujících brankářů v posledních zápasech, nikoliv z potvrzené sestavy příštího utkání. U speciálních týmů je požadováno alespoň 3 utkání. Historické průměry nejsou predikce CORE.</p>';
-   }catch(e){if(token===generation&&section.isConnected)section.textContent='Historické statistiky nyní nejsou dostupné ('+e.message+').';}
+     '</tbody></table><p style="font-size:11px;color:#9dbed2">Vzorek týmových boxscore: '+away.n+' / '+home.n+' zápasů. Úspěšnost brankářů vychází ze startujících brankářů v posledních zápasech, nikoliv z potvrzené sestavy příštího utkání. U speciálních týmů je požadováno alespoň 3 utkání. Historické průměry nejsou predikce CORE. Nedostupné hodnoty zobrazujeme jako pomlčku.</p>';
+   }catch(e){if(token===generation&&section.isConnected)section.textContent='Historické statistiky se nepodařilo načíst. Predikce CORE zůstávají dostupné.';}
   }
   sel.addEventListener('change',drawHistory);drawHistory();status.textContent='Modelové predikce Supabase + historické statistiky NHL';
  }catch(e){status.textContent='Načtení TV statistik selhalo: '+e.message;}})();
