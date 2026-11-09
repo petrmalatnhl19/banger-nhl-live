@@ -2257,7 +2257,12 @@ function newsArticleCard(article){
  let url;
  try{url=new URL(article.url);if(url.protocol!=='https:'||(url.hostname!=='www.nhl.com'&&url.hostname!=='nhl.com'))return '';}catch{return ''}
  const clean=String(article.title||'').replace(/\s+\d{1,2}\.\s*(?:lis|led|úno|bře|dub|kvě|čer|čvc|srp|zář|říj|pro)\s+20\d{2}\s*$/i,'').trim();
- const rawTitle=/[.!?…]$/.test(clean)?clean:clean+'.';
+ // NHL feed sometimes joins a headline and its teaser without punctuation.
+ // Fix only clear Czech sentence boundaries; do not rewrite proper names or abbreviations.
+ const separated=clean
+  .replace(/\\b(nulou|výhrou|porážkou|zápase|utkání|sezoně|sezóně)\\s+(?=(?:Chytá|Přiznal|Pro|Teď|Další|Přitom|Zároveň|Rozhodl|Pomohl|Čeká|Bude|Má|Je|Jsou|Věřil|Dokázal)\\b)/gu,'$1. ')
+  .replace(/([.!?])(?=[A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ])/g,'$1 ');
+ const rawTitle=/[.!?…]$/.test(separated)?separated:separated+'.';
  const title=newsEscape(rawTitle);
  const team=newsTeamFromHeadline(clean);
  const crest=team?'<img class="banger-news-crest" src="'+teamLogo(team)+'" alt="'+newsEscape(team)+'" loading="lazy">':'';
