@@ -3,17 +3,37 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '15 7 * * *'
+  pull_request:
+    paths:
+      - 'scripts/core43_scheduled_accuracy.cjs'
+      - 'scripts/test_core43_scheduled_accuracy.cjs'
+      - '.github/workflows/core43-accuracy-report.yml'
 permissions:
   contents: read
 jobs:
-  evaluate:
+  unit-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Score immutable pregame forecasts only
+      - run: node scripts/test_core43_scheduled_accuracy.cjs
+  evaluate:
+    if: github.event_name != 'pull_request'
+    needs: unit-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Score immutable CORE 4.1 and CORE 4.2 forecasts
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/core43_scheduled_accuracy.cjs
+      - name: Score experimental CORE 4.3 shadow revisions
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
