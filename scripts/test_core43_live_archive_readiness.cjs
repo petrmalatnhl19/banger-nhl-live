@@ -1,0 +1,12 @@
+const assert=require("node:assert/strict");
+const {summarize}=require("./core43_live_archive_readiness.cjs");
+const now="2026-11-09T14:00:00Z";
+assert.equal(summarize({now}).readyToWrite,0);
+assert.equal(summarize({now}).checked,0);
+const predictions=[{game_id:1,away_team:"DAL",home_team:"NJD",core41_predicted_at:"2026-11-09T10:00:00Z"}];
+const schedules=[{game_id:1,away_team:"DAL",home_team:"NJD",kickoff_at:"2026-11-09T20:00:00Z"}];
+const r=summarize({now,predictions,schedules});
+assert.equal(r.checked,1);
+assert.equal(r.evidenceEligible,0);
+assert.equal(r.readyToWrite,0);
+console.log("CORE 4.3 live archive readiness tests passed");
