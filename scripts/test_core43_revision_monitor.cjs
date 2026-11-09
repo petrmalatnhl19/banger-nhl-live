@@ -8,4 +8,5 @@ assert.equal(evaluateCandidates({predictions,schedules,evidence,now:"2026-11-09T
 assert.equal(evaluateCandidates({predictions,schedules,evidence,now:"2026-11-09T20:00:00Z"})[0].eligible,false);
 assert.equal(evaluateCandidates({predictions,schedules:[],evidence,now:"2026-11-09T14:00:00Z"})[0].reason,"missing_schedule");
 assert.throws(()=>evaluateCandidates({predictions,schedules,evidence,now:"invalid"}),/invalid_asof/);
+assert.equal(evaluateCandidates({predictions,schedules:[...schedules,{...schedules[0],kickoff_at:"2026-11-09T21:00:00Z"}],evidence,now:"2026-11-09T14:00:00Z"})[0].reason,"conflicting_schedule_snapshots");
 console.log("CORE 4.3 revision monitor tests passed");
