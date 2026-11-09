@@ -2296,7 +2296,7 @@ function newsTeamFromHeadline(value){
 // Recognizable player surnames in news headlines; only unambiguous NHL associations.
 const NEWS_PLAYER_TEAMS=[
  ['VGK',['hertl','eichel','mark stone']],['DAL',['benn','robertson']],
- ['WPG',['hellebuyck']],['CHI',['bedard']],['MTL',['slafkovský','slafkovsky','carey price']],
+ ['NJD',['hellebuyck']],['CHI',['bedard']],['MTL',['slafkovský','slafkovsky','carey price']],
  ['TOR',['tavares','matthews','nylander']],['MIN',['kaprizov']],
  ['ANA',['dostal','dostál','gólman ducks','golman ducks']],
  ['COL',['avalanche']],['DET',['red wings','postava','postavovi']],
@@ -2322,10 +2322,6 @@ function newsArticleTeams(article,headline){
   for(const [code,names] of NEWS_TEAM_MATCHES)if(names.some(n=>wordHit(text,n)))codes.add(code);
   for(const [code,names] of NEWS_PLAYER_TEAMS)if(names.some(n=>wordHit(text,n)))codes.add(code);
  };
- // A headline may name a player's club while the article focuses on another team's decision.
- // In that case prefer the decision-making team, not the player's affiliation.
- const decisionText=[article.description,article.title].filter(Boolean).join(' ').toLocaleLowerCase('cs-CZ');
- if(wordHit(title,'hellebuyck') && /devils\s+se\s+rozhodli|rozhodnut[ií]\s+(?:t[ýy]mu\s+)?devils/u.test(decisionText))return ['NJD'];
  scan(title);
  if(!codes.size)scan(combined);
  return [...codes].slice(0,2);
