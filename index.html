@@ -2282,10 +2282,13 @@ const NEWS_TEAM_MATCHES=[
 function newsTeamFromHeadline(value){
  const text=String(value||'').toLocaleLowerCase('cs-CZ');
  const matches=NEWS_TEAM_MATCHES.filter(([code,names])=>names.some(name=>{
-  const index=text.indexOf(name);
-  if(index<0)return false;
-  const before=text[index-1]||' ',after=text[index+name.length]||' ';
-  return !/[a-zá-ž]/i.test(before)&&!/[a-zá-ž]/i.test(after);
+  const letter=/[\\p{L}]/u;
+  let from=0,index;
+  while((index=text.indexOf(name,from))!==-1){
+   if(!letter.test(text[index-1]||'')&&!letter.test(text[index+name.length]||''))return true;
+   from=index+1;
+  }
+  return false;
  }));
  return matches.length===1?matches[0][0]:null;
 }
@@ -2306,10 +2309,13 @@ function newsArticleTeams(article,headline){
  const combined=[headline,article.title,article.description].filter(Boolean).join(' ').toLocaleLowerCase('cs-CZ');
  const codes=new Set();
  const wordHit=(text,term)=>{
-  const pos=text.indexOf(term);
-  if(pos<0)return false;
   const letter=/[\p{L}]/u;
-  return !letter.test(text[pos-1]||'')&&!letter.test(text[pos+term.length]||'');
+  let from=0,pos;
+  while((pos=text.indexOf(term,from))!==-1){
+   if(!letter.test(text[pos-1]||'')&&!letter.test(text[pos+term.length]||''))return true;
+   from=pos+1;
+  }
+  return false;
  };
  // Headline references take priority over unrelated teams in the teaser.
  const scan=text=>{
