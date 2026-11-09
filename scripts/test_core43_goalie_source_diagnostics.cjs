@@ -1,0 +1,15 @@
+const assert=require("node:assert/strict");
+const {diagnoseGoalie:run}=require("./core43_goalie_source_diagnostics.cjs");
+const game={gameId:42,awayTeam:"DAL",homeTeam:"NJD",teamCode:"DAL",kickoffUTC:"2026-11-09T22:00:00Z"};
+const asOf="2026-11-09T20:00:00Z";
+const e=id=>({gameId:42,teamCode:"DAL",goalieId:String(id),status:"confirmed",sourceName:"Team report",sourceUrl:"https://example.org/report",sourcePublishedAt:"2026-11-09T19:00:00Z",verifiedAt:"2026-11-09T19:30:00Z"});
+const p=id=>({gameId:42,teamCode:"DAL",goalieId:String(id),observedAt:"2026-11-09T19:00:00Z",sourceName:"Projection"});
+assert.equal(run({game,asOf,evidence:[e(1)]}).status,"confirmed");
+assert.equal(run({game,asOf,evidence:[e(1),e(2)]}).status,"conflict");
+assert.equal(run({game,asOf,projections:[p(1)]}).status,"projected");
+assert.equal(run({game,asOf,projections:[p(1),p(2)]}).status,"conflict");
+assert.equal(run({game,asOf}).status,"unknown");
+assert.equal(run({game,asOf,evidence:[{...e(1),verifiedAt:"2026-11-09T20:30:00Z"}]}).status,"unknown");
+assert.equal(run({game,asOf,evidence:[e(1)],projections:[p(2)]}).goalieId,"1");
+assert.equal(run({game:{...game,teamCode:"BOS"},asOf}).reason,"invalid_team");
+console.log("CORE 4.3 goalie source diagnostics tests passed");
