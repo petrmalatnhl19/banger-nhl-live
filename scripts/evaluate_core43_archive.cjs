@@ -16,7 +16,10 @@ function assemblePairs({archive=[],revisions=[],schedules=[]}={}){
  const revisionsByGame=new Map();
  for(const r of revisions){
   if(r.model!=="core43_shadow"||r.revision_kind!=="shadow"||!date(r.predicted_at)||!r.input_snapshot||r.input_snapshot.production!==false)continue;
-  const id=String(r.game_id),old=revisionsByGame.get(id);
+  const id=String(r.game_id),schedule=scheduleByGame.get(id);
+  if(!schedule||ambiguous.has(id)||Date.parse(r.predicted_at)>=Date.parse(schedule.kickoff_at))continue;
+  if(r.away_team!==schedule.away_team||r.home_team!==schedule.home_team)continue;
+  const old=revisionsByGame.get(id);
   if(!old||Date.parse(r.predicted_at)>Date.parse(old.predicted_at))revisionsByGame.set(id,r);
  }
  const rows=[];
