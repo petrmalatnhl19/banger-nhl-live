@@ -1593,6 +1593,49 @@ body:has(#calendarBar:not(.hidden)) nav.toolbar{display:none!important}
  #content .stats-tablewrap th:nth-child(2){z-index:4!important;background:#103557!important}
 }
 </style>
+<style id="banger-unified-inter-typography-v1">
+/* Shared interface typography. Preserve the distinctive logo and scoreboard numerals. */
+body{font-family:'Inter',system-ui,'Segoe UI',sans-serif!important}
+h2,h3,
+.dash-panel-title h3,
+.dash-hero h2,
+.ux-stats-heading strong,
+.player-stats-title,
+.calendar-title,
+.calendar-title span,
+.analysis-panel h3,
+.analysis-card h3,
+.match-tabs,
+.match-tab,
+.ux-stats-tabs button,
+.ux-stats-tabs a,
+.ux-stats-tabs button span,
+.ux-stats-tabs a span,
+.btn,.sort,.date,.search,
+.dash-link,
+.dash-game-state,.dash-game-hint,
+.gamehead,.game-state,.game-stage,.game-league,
+#uxMobileNav button{
+ font-family:'Inter',system-ui,'Segoe UI',sans-serif!important;
+ letter-spacing:normal!important;
+ font-stretch:normal!important;
+}
+.dash-panel-title h3{
+ font-size:17px!important;font-weight:800!important;
+ line-height:1.25!important;letter-spacing:-.45px!important;
+}
+.ux-stats-tabs button span,.ux-stats-tabs a span{
+ font-weight:750!important;letter-spacing:0!important;
+ font-size:clamp(11px,2.9vw,14px)!important;
+}
+.gamehead,.game-state,.game-stage,.game-league{
+ font-weight:700!important;
+}
+h1,.brand,.logo,.nums,.arenanum,.metric b,.profilegrid b,
+.analysis-panel .analysis-prob strong{
+ font-family:'Barlow Condensed','Exo 2',system-ui,sans-serif;
+}
+</style>
 </head><body><div class="wrap">
 <div id="brandSplash" class="brand-splash" aria-label="Načítání BANGER NHL LIVE"><div class="brand-splash-glow"></div><picture><source media="(orientation: portrait)" srcset="splash-portrait.png"><img src="splash-landscape.png" alt="BANGER NHL LIVE" fetchpriority="high" decoding="async"></picture><div class="brand-splash-loader"><span></span></div><div class="brand-splash-caption">VSTUP DO HOKEJOVÉ ARÉNY</div></div><header class="top"><div class="brand"><div class="brand-logo" aria-label="BANGER NHL LIVE"><span class="brand-mark">BANGER</span><span class="brand-sub">NHL <b>LIVE</b></span></div></div><span class="header-status"><i></i> NHL 2026/27</span></header>
 
