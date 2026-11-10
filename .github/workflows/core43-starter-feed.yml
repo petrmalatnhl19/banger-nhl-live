@@ -24,7 +24,7 @@ jobs:
             python scripts/publish_rotowire_goalies.py
           fi
       - name: Test starter evidence provenance contract
-        run: python -m unittest scripts.test_core43_source_provenance
+        run: python -m unittest scripts.test_core43_source_provenance scripts.test_core43_legacy_evidence
       - name: Audit native RotoWire evidence coverage
         run: python scripts/audit_core43_rotowire_evidence.py
       - name: Check confirmed-starter feed configuration
@@ -40,6 +40,11 @@ jobs:
             echo '### CORE 4.3 confirmed starter feed: CONFIGURED' >> "$GITHUB_STEP_SUMMARY"
             echo 'Feed ingestion will run. Configuration does not guarantee valid confirmed reports; check ingestion output.' >> "$GITHUB_STEP_SUMMARY"
           fi
+      - name: Audit historical starter evidence provenance
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python scripts/audit_core43_legacy_evidence.py
       - name: Import pregame confirmed starter evidence
         env:
           CORE43_STARTER_FEED_URL: ${{ secrets.CORE43_STARTER_FEED_URL }}
