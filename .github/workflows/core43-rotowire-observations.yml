@@ -13,6 +13,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Refresh official NHL roster identities
+        run: python scripts/update_rosters.py
+      - name: Fetch and match current RotoWire observations
+        run: python scripts/parse_rotowire_goalies.py
+      - name: Publish current RotoWire observations
+        run: python scripts/publish_rotowire_goalies.py
+      - name: Audit CORE 4.3 evidence provenance
+        run: python scripts/audit_core43_rotowire_evidence.py
       - name: Archive existing RotoWire statuses to Supabase
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
