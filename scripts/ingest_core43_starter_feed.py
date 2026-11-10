@@ -46,13 +46,17 @@ def main():
     else:
         local=Path("rotowire_goalies.json")
         raw=json.loads(local.read_text(encoding="utf-8"))
+        snapshot=dt.datetime.fromisoformat(str(raw.get("updatedAt","")).replace("Z","+00:00"))
+        if snapshot.tzinfo is None or snapshot > observed+dt.timedelta(minutes=2) or snapshot < observed-dt.timedelta(hours=2):
+            raise ValueError("Native RotoWire snapshot is stale or invalid; refusing starter evidence ingestion")
         reports=[]
         for item in raw.get("games",[]):
             if item.get("status")!="confirmed":
                 continue
             # A source snapshot time is NOT the publication time of an individual confirmation.
             # Never substitute updatedAt or checkedAt for sourcePublishedAt.
-            if not item.get("sourcePublishedAt") or not item.get("goalieId"):
+            if (item.get("confirmationBasis")!="explicit_pregame_report"
+                    or not item.get("sourcePublishedAt") or not item.get("goalieId")):
                 continue
             reports.append({"gameId":item.get("gameId"),"teamCode":item.get("team"),
                 "goalieId":item.get("goalieId"),"status":"confirmed",
