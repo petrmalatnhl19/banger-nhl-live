@@ -8,6 +8,14 @@ def read(name):
     with (ROOT / name).open(encoding="utf-8") as file:
         return json.load(file)
 
+def preserve_explicit_confirmation(record):
+    """Never manufacture an explicit confirmation basis from a timestamp alone."""
+    record = dict(record)
+    if record.get("status") != "confirmed" or record.get("confirmationBasis") != "explicit_pregame_report":
+        record.pop("confirmationBasis", None)
+    return record
+
+
 def main():
     diagnostic = read("rotowire_goalies_diagnostic.json")
     catalog = read("nhl_rosters.json")["teams"]
@@ -41,10 +49,9 @@ def main():
         goalie_id = ids.get(record["team"], {}).get(record["goalie"].casefold())
         if goalie_id and goalie_id.isdecimal():
             record["goalieId"] = goalie_id
-        # Do not turn a page fetch timestamp into a published confirmation timestamp.
-        # Pass through only an explicit timestamp provided for this individual report.
-        if record.get("status") == "confirmed" and record.get("sourcePublishedAt"):
-            record["confirmationBasis"] = "explicit_pregame_report"
+        # Preserve only explicitly sourced confirmation metadata. A timestamp alone
+        # does not prove that the report explicitly confirmed a starter.
+        record = preserve_explicit_confirmation(record)
         valid.append(record)
     output = {"updatedAt": now.isoformat(), "source": diagnostic["source"],
               "goalieCount": len(valid), "games": valid, "conflicts": conflicts}
