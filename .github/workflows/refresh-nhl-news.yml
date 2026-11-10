@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: refresh-nhl-news
@@ -19,22 +20,33 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          persist-credentials: true
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       - name: Fetch official NHL news
         run: python scripts/update_nhl_news.py
-      - name: Commit updated news only when changed
+      # The protected main branch requires a PR and frontend-smoke.
+      # A PAT or GitHub App token is required to trigger PR checks.
+      - name: Require token that triggers PR checks
+        env:
+          NEWS_PR_TOKEN: ${{ secrets.LINEUPS_PR_TOKEN }}
         run: |
-          if git diff --quiet -- nhl_news.json; then
-            echo "No changes to NHL news"
-            exit 0
+          if [ -z "$NEWS_PR_TOKEN" ]; then
+            echo '::error title=Missing LINEUPS_PR_TOKEN::Configure a token with contents and pull-request write permissions to trigger required checks.'
+            exit 1
           fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add nhl_news.json
-          git commit -m "chore: refresh NHL news metadata"
-          git push
+      - name: Open or update news refresh pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.LINEUPS_PR_TOKEN }}
+          base: main
+          branch: automation/refresh-nhl-news
+          delete-branch: true
+          commit-message: "chore: refresh NHL news metadata"
+          title: "Automated NHL news refresh"
+          body: |
+            Automated refresh of official NHL news links.
+            Changes require frontend-smoke before merging into protected main.
+          add-paths: |
+            nhl_news.json
