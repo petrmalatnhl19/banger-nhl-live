@@ -27,6 +27,24 @@ def valid_nhl_goalie_id(value):
     return isinstance(value, (str, int)) and not isinstance(value, bool) and bool(re.fullmatch(r"\d+", str(value)))
 
 
+def fetch_schedule_snapshots(sb, key, *, page_size=500, max_rows=50000, opener=urllib.request.urlopen):
+    """Read the complete schedule snapshot history or fail closed."""
+    schedule=[]
+    for offset in range(0, max_rows, page_size):
+        endpoint=(sb+"/rest/v1/nhl_core43_schedule_snapshots"
+                  "?select=game_id,away_team,home_team,kickoff_at"
+                  "&order=fetched_at.desc&limit="+str(page_size)+"&offset="+str(offset))
+        request=urllib.request.Request(endpoint,headers={"apikey":key,"Authorization":"Bearer "+key})
+        with opener(request,timeout=25) as response:
+            page=json.load(response)
+        if not isinstance(page,list) or len(page)>page_size:
+            raise ValueError("Invalid schedule snapshot page")
+        schedule.extend(page)
+        if len(page)<page_size:
+            return schedule
+    raise RuntimeError("Schedule snapshot pagination cap reached; refusing incomplete evidence validation")
+
+
 def main():
     url=os.environ.get("CORE43_STARTER_FEED_URL","").strip()
     token=os.environ.get("CORE43_STARTER_FEED_TOKEN","").strip()
@@ -74,9 +92,7 @@ def main():
         raise ValueError("Invalid feed format")
     if len(feed["reports"])>500:
         raise ValueError("Oversized feed")
-    schedule_req=urllib.request.Request(sb+"/rest/v1/nhl_core43_schedule_snapshots?select=game_id,away_team,home_team,kickoff_at&order=fetched_at.desc&limit=1000",headers={"apikey":key,"Authorization":"Bearer "+key})
-    with urllib.request.urlopen(schedule_req,timeout=25) as response:
-        schedule=json.load(response)
+    schedule=fetch_schedule_snapshots(sb, key)
     games={}
     ambiguous=set()
     for row in schedule:
