@@ -7,7 +7,7 @@ function normalizeStarterAnnouncement({raw,game,asOf,verifiedAt}={}){
  const fail=reason=>({accepted:false,reason,evidence:null});
  if(!raw||!game||!Number.isFinite(Date.parse(asOf))||!Number.isFinite(Date.parse(verifiedAt)))return fail("missing_context");
  const status=String(raw.status||"").trim().toLowerCase();
- if(status!=="confirmed")return fail("not_explicitly_confirmed");
+ if(status!=="confirmed"||raw.confirmationBasis!=="explicit_pregame_report")return fail("not_explicitly_confirmed");
  if(raw.gameId!==game.gameId||raw.teamCode!==game.awayTeam&&raw.teamCode!==game.homeTeam)return fail("game_or_team_mismatch");
  const evidence={gameId:raw.gameId,teamCode:raw.teamCode,goalieId:raw.goalieId,status,
   sourceName:raw.sourceName,sourceUrl:raw.sourceUrl,sourcePublishedAt:raw.sourcePublishedAt,verifiedAt};
