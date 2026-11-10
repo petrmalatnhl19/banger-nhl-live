@@ -1,5 +1,5 @@
 const assert=require("node:assert/strict");
-const {loadAndCompute,readAllProvenance,readAllCoreInputs}=require("./run_core43_shadow_readonly.cjs");
+const {loadAndCompute,readAllProvenance,readAllCoreInputs,summarizeReadiness}=require("./run_core43_shadow_readonly.cjs");
 (async()=>{
  const now="2026-11-09T15:00:00Z";
  const rows={
@@ -13,6 +13,8 @@ const {loadAndCompute,readAllProvenance,readAllCoreInputs}=require("./run_core43
  const fetchImpl=async(url,opts)=>{calls.push({url,opts});const table=url.split("/rest/v1/")[1].split("?")[0];return {ok:true,json:async()=>rows[table]};};
  const result=await loadAndCompute({url:"https://example.supabase.co",key:"test",now,fetchImpl});
  assert.equal(result.available,1);
+ assert.equal(result.blocked,0);
+ assert.deepEqual(result.blockedByReason,{});
  assert.equal(result.results[0].expectedAwayGoals,2.82);
  assert.equal(result.results[0].production,false);
  assert.equal(calls.length,5);
@@ -21,6 +23,8 @@ const {loadAndCompute,readAllProvenance,readAllCoreInputs}=require("./run_core43
  rows.nhl_core43_rotowire_observations.push({game_id:42,team_code:"DAL",source_snapshot_at:"2026-11-09T12:00:00Z"});
  const blocked=await loadAndCompute({url:"https://example.supabase.co",key:"test",now,fetchImpl});
  assert.equal(blocked.available,0);
+ assert.equal(blocked.blocked,1);
+ assert.deepEqual(blocked.blockedByReason,{suspect_away_starter_provenance:1});
  assert.equal(blocked.results[0].reason,"suspect_away_starter_provenance");
  rows.nhl_core43_starter_evidence.length=0;
  rows.nhl_core43_rotowire_observations.length=0;
@@ -39,5 +43,6 @@ const {loadAndCompute,readAllProvenance,readAllCoreInputs}=require("./run_core43
  assert.deepEqual(allInputs,many);
  await assert.rejects(()=>readAllCoreInputs("https://example.supabase.co","test","nhl_prediction_archive","select=game_id","game_id.asc",pagedFetch,{pageSize:2,maxRows:4}),/core43_input_limit_exceeded/);
  await assert.rejects(()=>readAllProvenance("https://example.supabase.co","test","nhl_core43_starter_evidence","game_id",pagedFetch,{pageSize:2,maxRows:4}),/provenance_limit_exceeded/);
+ assert.deepEqual(summarizeReadiness([{available:false,reason:"missing_schedule"},{available:false,reason:"missing_schedule"},{available:false,reason:"unverified_home_starter"},{available:true}]),{missing_schedule:2,unverified_home_starter:1});
  console.log("CORE 4.3 read-only Supabase integration tests passed");
 })().catch(e=>{console.error(e);process.exitCode=1});
