@@ -45,6 +45,16 @@ def fetch_schedule_snapshots(sb, key, *, page_size=500, max_rows=50000, opener=u
     raise RuntimeError("Schedule snapshot pagination cap reached; refusing incomplete evidence validation")
 
 
+def reject_conflicting_starters(rows):
+    """Fail closed for game/team pairs with contradictory confirmed goalie IDs."""
+    identities={}
+    for row in rows:
+        pair=(row["game_id"], row["team_code"])
+        identities.setdefault(pair,set()).add(row["goalie_id"])
+    conflicts={pair for pair, ids in identities.items() if len(ids)>1}
+    return [row for row in rows if (row["game_id"],row["team_code"]) not in conflicts], conflicts
+
+
 def main():
     url=os.environ.get("CORE43_STARTER_FEED_URL","").strip()
     token=os.environ.get("CORE43_STARTER_FEED_TOKEN","").strip()
@@ -125,6 +135,9 @@ def main():
         if not published<=observed<kickoff:
             continue
         valid.append({"game_id":r["gameId"],"team_code":r["teamCode"],"goalie_id":str(r["goalieId"]),"evidence_status":"confirmed","source_name":name,"source_url":source,"source_published_at":published.isoformat(),"verified_at":observed.isoformat()})
+    valid, conflicts = reject_conflicting_starters(valid)
+    if conflicts:
+        print(f"::warning title=CORE 4.3 conflicting starters::Skipped {len(conflicts)} game/team pairs with contradictory confirmed goalie IDs")
     if ambiguous:
         print(f"Skipped {len(ambiguous)} games with conflicting schedule snapshots")
     if not valid:
