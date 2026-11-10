@@ -25,6 +25,8 @@ async function loadAndCompute({url,key,now=new Date().toISOString(),fetchImpl=fe
   readAllProvenance(base,key,"nhl_core43_starter_evidence","game_id,team_code,goalie_id,source_name,source_published_at",fetchImpl),
   readAllProvenance(base,key,"nhl_core43_rotowire_observations","game_id,team_code,source_snapshot_at",fetchImpl)
  ]);
+ if(![archive,schedules,shadowInputs].every(Array.isArray))throw Error("invalid_core43_input_response");
+ if(archive.length>=1000||schedules.length>=1000||shadowInputs.length>=1000)throw Error("core43_input_page_limit_reached");
  const future=new Set(schedules.map(s=>String(s.game_id)));
  const snapshotKeys=new Set(observations.map(o=>[String(o.game_id),o.team_code,o.source_snapshot_at].join("|")));
  const suspectStarterKeys=evidence.filter(e=>e.source_name==="RotoWire"&&snapshotKeys.has([String(e.game_id),e.team_code,e.source_published_at].join("|"))).map(e=>[String(e.game_id),e.team_code,String(e.goalie_id),e.source_published_at].join("|"));
