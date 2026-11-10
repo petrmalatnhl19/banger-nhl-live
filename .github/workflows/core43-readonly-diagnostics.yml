@@ -1,0 +1,54 @@
+name: CORE 4.3 read-only diagnostics
+
+on:
+  schedule:
+    - cron: '25 9 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: core43-readonly-diagnostics
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Regression tests
+        run: |
+          node scripts/test_core43_archive_coverage_audit.cjs
+          node scripts/test_core43_unified_diagnostic_runner.cjs
+      - name: Validate configuration
+        id: config
+        shell: bash
+        run: |
+          if [[ -n "$SUPABASE_URL" && -n "$SUPABASE_SECRET_KEY" ]]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::CORE 4.3 diagnostic skipped: configure SUPABASE_URL and SUPABASE_SECRET_KEY repository secrets."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "CORE 4.3 diagnostic skipped: missing server-side repository secrets." >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Generate read-only report
+        if: steps.config.outputs.ready == 'true'
+        shell: bash
+        run: |
+          node scripts/core43_unified_diagnostic_runner.cjs > core43-diagnostic.json
+          node scripts/core43_diagnostic_summary.cjs core43-diagnostic.json >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload report artifact
+        if: steps.config.outputs.ready == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: core43-diagnostic
+          path: core43-diagnostic.json
+          retention-days: 14
