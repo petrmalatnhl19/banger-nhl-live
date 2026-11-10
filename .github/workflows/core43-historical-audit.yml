@@ -1,8 +1,13 @@
 name: CORE 4.3 historical RotoWire audit
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '20 11 * * *'
 permissions:
   contents: read
+concurrency:
+  group: core43-historical-audit
+  cancel-in-progress: false
 jobs:
   historical-audit:
     runs-on: ubuntu-latest
