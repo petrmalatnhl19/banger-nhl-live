@@ -6,8 +6,8 @@
 const stamp=x=>typeof x==="string"&&Number.isFinite(Date.parse(x))?Date.parse(x):NaN;
 const normalize=x=>typeof x==="string"?x.normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-zA-Z]/g,"").toLowerCase():"";
 const windows=[["under_2h",0,2],["2_to_6h",2,6],["6_to_24h",6,24],["over_24h",24,Infinity]];
-function compareHistoricalProjections({observations=[],schedules=[],officialGames=[],minSample=30}={}){
- if(![observations,schedules,officialGames].every(Array.isArray)||!Number.isSafeInteger(minSample)||minSample<30)throw new TypeError("Invalid audit inputs");
+function compareHistoricalProjections({observations=[],schedules=[],officialGames=[],identityMap=[],minSample=30}={}){
+ if(![observations,schedules,officialGames,identityMap].every(Array.isArray)||!Number.isSafeInteger(minSample)||minSample<30)throw new TypeError("Invalid audit inputs");
  const excluded={};const skip=r=>{excluded[r]=(excluded[r]||0)+1;};
  const scheduleById=new Map(),badSchedule=new Set();
  for(const s of schedules){
@@ -27,6 +27,13 @@ function compareHistoricalProjections({observations=[],schedules=[],officialGame
    official.set(key,{id:String(id),name:x.participants?.find(p=>p.playerId===id)?.name||""});
   }
  }
+ const mapped=new Map(),ambiguous=new Set();
+ for(const m of identityMap){
+  if(!m||typeof m.team_code!=="string"||!normalize(m.goalie_name)||!/^\\d+$/.test(String(m.goalie_id)))continue;
+  const key=m.team_code+"|"+normalize(m.goalie_name),id=String(m.goalie_id);
+  if(mapped.has(key)&&mapped.get(key)!==id)ambiguous.add(key);
+  else mapped.set(key,id);
+ }
  const candidates=new Map(),conflicts=new Set();
  for(const o of observations){
   if(!o||o.observed_status!=="projected"){skip("not_projected");continue;}
@@ -44,24 +51,26 @@ function compareHistoricalProjections({observations=[],schedules=[],officialGame
   const identity=normalize(o.goalie_name),actualIdentity=normalize(actual.name);
   // Names can collide. Never claim identity proof solely from a normalized name.
   if(o.goalie_name.trim().split(/\s+/).length<2||actual.name.trim().split(/\s+/).length<2){skip("ambiguous_name");continue;}
+  const mapKey=o.team_code+"|"+identity;
+  const projectedId=!ambiguous.has(mapKey)?mapped.get(mapKey):null;
   const group=key+"|"+bucket,previous=candidates.get(group);
   if(previous&&stamp(previous.observedAt)===captured&&previous.projectedNameKey!==identity){conflicts.add(group);continue;}
   if(!previous||captured>stamp(previous.observedAt)){
    candidates.set(group,{gameId:o.game_id,teamCode:o.team_code,kickoffAt:schedule.kickoff_at,
     observedAt:new Date(captured).toISOString(),projectedNameKey:identity,
-    actualNameKey:actualIdentity,officialStarterId:actual.id,
-    nameMatch:identity===actualIdentity});
+    actualNameKey:actualIdentity,officialStarterId:actual.id,projectedGoalieId:projectedId||null,
+    nameMatch:identity===actualIdentity,idMatch:projectedId?projectedId===actual.id:null});
   }
  }
  const rows=[...candidates.entries()].filter(([key])=>!conflicts.has(key)).map(([,r])=>r);
- const counts={};
+ const counts={};const mismatchSamples=[];
  for(const r of rows){const lead=(stamp(r.kickoffAt)-stamp(r.observedAt))/3600000;const bucket=windows.find(([,a,b])=>lead>=a&&lead<b)?.[0];
-  const entry=counts[bucket]||(counts[bucket]={compared:0,nameMatches:0,observedMatchRate:null,usableAsProbability:false});
-  entry.compared++;if(r.nameMatch)entry.nameMatches++;
+  const entry=counts[bucket]||(counts[bucket]={compared:0,nameMatches:0,observedMatchRate:null,idCompared:0,idMatches:0,idMatchRate:null,usableAsProbability:false});
+  entry.compared++;if(r.nameMatch)entry.nameMatches++;if(r.idMatch!==null){entry.idCompared++;if(r.idMatch)entry.idMatches++;}if(!r.nameMatch&&mismatchSamples.length<8)mismatchSamples.push({gameId:r.gameId,teamCode:r.teamCode,projectedNameKey:r.projectedNameKey,officialNameKey:r.actualNameKey,projectedGoalieId:r.projectedGoalieId,officialStarterId:r.officialStarterId});
  }
- for(const entry of Object.values(counts))if(entry.compared>=minSample)entry.observedMatchRate=entry.nameMatches/entry.compared;
+ for(const entry of Object.values(counts)){if(entry.compared>=minSample)entry.observedMatchRate=entry.nameMatches/entry.compared;if(entry.idCompared>=minSample)entry.idMatchRate=entry.idMatches/entry.idCompared;}
  return {mode:"read_only",production:false,persistable:false,rowsCompared:rows.length,
-  conflicts:conflicts.size,excluded,countsByLeadTime:counts,
-  calibrated:false,warning:"Provisional full-name comparison only. No inferred goalie IDs, invented verification timestamps, or calibrated probabilities."};
+  conflicts:conflicts.size,excluded,countsByLeadTime:counts,mismatchSamples,identityMapEntries:identityMap.length,
+  calibrated:false,warning:"Identity-map matches are retrospective checks, not proof of historical roster membership. No inferred goalie IDs, invented verification timestamps, or calibrated probabilities."};
 }
 module.exports={compareHistoricalProjections};

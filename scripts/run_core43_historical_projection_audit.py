@@ -14,6 +14,7 @@ from audit_official_final_goalies import fetch_json, final_goalies
 TABLES = {
     "observations": ("nhl_core43_rotowire_observations", "game_id,team_code,goalie_name,observed_status,observed_at,source_snapshot_at"),
     "schedules": ("nhl_core43_schedule_snapshots", "game_id,kickoff_at,away_team,home_team,fetched_at"),
+    "identityMap": ("nhl_core43_goalie_identity_map", "goalie_id,goalie_name,team_code,source,observed_at"),
 }
 def read_table(base, key, table, columns, max_rows=20000):
     rows=[]
@@ -64,12 +65,13 @@ def main():
     schedules=latest_schedule(read_table(base,key,*TABLES["schedules"]))
     ids={int(r["game_id"]) for r in observations if str(r.get("game_id","")).isdigit()}
     official,errors=collect_official(ids)
-    payload={"observations":observations,"schedules":schedules,"officialGames":official}
+    identity_map=read_table(base,key,*TABLES["identityMap"])
+    payload={"observations":observations,"schedules":schedules,"officialGames":official,"identityMap":identity_map}
     js="const fs=require('fs');const {compareHistoricalProjections}=require('./scripts/core43_historical_projection_join.cjs');const input=JSON.parse(fs.readFileSync(0,'utf8'));process.stdout.write(JSON.stringify(compareHistoricalProjections(input)));"
     proc=subprocess.run(["node","-e",js],input=json.dumps(payload),text=True,capture_output=True,check=True,timeout=60)
     result=json.loads(proc.stdout)
     result["generatedAt"]=datetime.now(timezone.utc).isoformat()
-    result["sourceCounts"]={"observations":len(observations),"scheduleGames":len(schedules),"officialFinalGames":len(official),"officialFetchFailures":len(errors)}
+    result["sourceCounts"]={"observations":len(observations),"scheduleGames":len(schedules),"officialFinalGames":len(official),"identityMapEntries":len(identity_map),"officialFetchFailures":len(errors)}
     result["officialFetchErrors"]=errors
     result["historicalPredictionMutation"]=False
     output=Path(args.output)
