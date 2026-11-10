@@ -29,7 +29,7 @@ function compareHistoricalProjections({observations=[],schedules=[],officialGame
  }
  const mapped=new Map(),ambiguous=new Set();
  for(const m of identityMap){
-  if(!m||typeof m.team_code!=="string"||!normalize(m.goalie_name)||!/^\\d+$/.test(String(m.goalie_id)))continue;
+  if(!m||typeof m.team_code!=="string"||!normalize(m.goalie_name)||!/^\d+$/.test(String(m.goalie_id)))continue;
   const key=m.team_code+"|"+normalize(m.goalie_name),id=String(m.goalie_id);
   if(mapped.has(key)&&mapped.get(key)!==id)ambiguous.add(key);
   else mapped.set(key,id);
