@@ -26,6 +26,10 @@ const {loadAndCompute,readAllProvenance}=require("./run_core43_shadow_readonly.c
  rows.nhl_core43_rotowire_observations.length=0;
  rows.nhl_core43_shadow_inputs.pop();
  assert.equal((await loadAndCompute({url:"https://example.supabase.co",key:"test",now,fetchImpl})).available,0);
+ const originalArchive=rows.nhl_prediction_archive;
+ rows.nhl_prediction_archive=Array.from({length:1000},(_,i)=>({game_id:i}));
+ await assert.rejects(()=>loadAndCompute({url:"https://example.supabase.co",key:"test",now,fetchImpl}),/core43_input_page_limit_reached/);
+ rows.nhl_prediction_archive=originalArchive;
  const many=Array.from({length:5},(_,i)=>({game_id:i}));
  const pagedFetch=async(url)=>{
   const params=new URL(url).searchParams;
