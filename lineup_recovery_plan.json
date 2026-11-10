@@ -3,27 +3,60 @@
     "lineup_core_report.json",
     "lineup_rejections_report.json"
   ],
-  "incompleteTeams": 2,
+  "incompleteTeams": 7,
   "teams": [
+    {
+      "team": "canadiens",
+      "status": "incomplete_projection",
+      "reason": "incomplete_source_or_no_validated_replacement",
+      "missingForwardLines": 1,
+      "missingDefensePairs": 0,
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-10T18:10:00+00:00",
+      "rejectedLines": [],
+      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
+    },
+    {
+      "team": "canucks",
+      "status": "incomplete_projection",
+      "reason": "incomplete_source_or_no_validated_replacement",
+      "missingForwardLines": 0,
+      "missingDefensePairs": 0,
+      "source": "https://www.nhl.com/news/philadelphia-flyers-vancouver-canucks-game-preview-november-9-2026",
+      "publishedAt": "2026-11-09T19:06:00+00:00",
+      "rejectedLines": [],
+      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
+    },
     {
       "team": "devils",
       "status": "incomplete_projection",
       "reason": "incomplete_source_or_no_validated_replacement",
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/new-jersey-devils-toronto-maple-leafs-game-preview-november-8-2026",
-      "publishedAt": "2026-11-08T22:18:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-10T18:10:00+00:00",
+      "rejectedLines": [],
+      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
+    },
+    {
+      "team": "islanders",
+      "status": "incomplete_projection",
+      "reason": "incomplete_source_or_no_validated_replacement",
+      "missingForwardLines": 1,
+      "missingDefensePairs": 0,
+      "source": "https://www.nhl.com/news/new-york-islanders-san-jose-sharks-game-preview-november-9-2026",
+      "publishedAt": "2026-11-09T20:11:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
     {
       "team": "lightning",
-      "status": "possible_11F_7D",
+      "status": "incomplete_projection",
       "reason": "rejected_roster_lines",
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-08T22:04:00+00:00",
+      "source": "https://www.nhl.com/news/tampa-bay-lightning-winnipeg-jets-game-preview-november-8-2026",
+      "publishedAt": "2026-11-08T16:16:00+00:00",
       "rejectedLines": [
         {
           "group": "defense",
@@ -43,6 +76,69 @@
               "name": "Zemgus Girgensons",
               "reason": "other_position_group",
               "inLocalCurrentRoster": true,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ],
+      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
+    },
+    {
+      "team": "rangers",
+      "status": "incomplete_projection",
+      "reason": "rejected_roster_lines",
+      "missingForwardLines": 0,
+      "missingDefensePairs": 1,
+      "source": "https://www.nhl.com/news/new-york-rangers-edmonton-oilers-game-preview-november-9-2026",
+      "publishedAt": "2026-11-09T18:29:30.340000+00:00",
+      "rejectedLines": [
+        {
+          "group": "defense",
+          "sourceLineNumber": 3,
+          "sourceLine": [
+            "Matthew Roberson",
+            "Scott Morrow"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Matthew Roberson",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ],
+      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
+    },
+    {
+      "team": "senators",
+      "status": "incomplete_projection",
+      "reason": "rejected_roster_lines",
+      "missingForwardLines": 1,
+      "missingDefensePairs": 0,
+      "source": "https://www.nhl.com/news/washington-capitals-ottawa-senators-game-preview-november-10-2026",
+      "publishedAt": "2026-11-10T18:15:42.415000+00:00",
+      "rejectedLines": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 4,
+          "sourceLine": [
+            "Samuel Blais",
+            "Stephen Halliday",
+            "Philip Tomasino"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Samuel Blais",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            },
+            {
+              "name": "Philip Tomasino",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
               "requiresIndependentGameEvidence": true
             }
           ]

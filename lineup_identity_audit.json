@@ -1,5 +1,34 @@
 {
   "teams": {
+    "rangers": {
+      "players": [
+        {
+          "sourceName": "Matthew Roberson",
+          "expectedRole": "defense",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
+          "automaticApproval": false
+        }
+      ]
+    },
+    "senators": {
+      "players": [
+        {
+          "sourceName": "Samuel Blais",
+          "expectedRole": "forwards",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
+          "automaticApproval": false
+        },
+        {
+          "sourceName": "Philip Tomasino",
+          "expectedRole": "forwards",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
+          "automaticApproval": false
+        }
+      ]
+    },
     "lightning": {
       "players": [
         {

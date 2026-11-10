@@ -1,9 +1,9 @@
 {
-  "teamsWithRejectedLines": 1,
+  "teamsWithRejectedLines": 3,
   "teams": {
     "lightning": {
       "team": "TBL",
-      "rosterUpdatedAt": "2026-11-09T16:25:21.768402+00:00",
+      "rosterUpdatedAt": "2026-11-10T19:27:38.004929+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 3,
       "candidateDefensePairs": 4,
@@ -28,6 +28,67 @@
               "name": "Zemgus Girgensons",
               "reason": "other_position_group",
               "inLocalCurrentRoster": true,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    },
+    "rangers": {
+      "team": "NYR",
+      "rosterUpdatedAt": "2026-11-10T19:27:36.476250+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 2,
+      "rejected": [
+        {
+          "group": "defense",
+          "sourceLineNumber": 3,
+          "sourceLine": [
+            "Matthew Roberson",
+            "Scott Morrow"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Matthew Roberson",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    },
+    "senators": {
+      "team": "OTT",
+      "rosterUpdatedAt": "2026-11-10T19:27:36.675370+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "validatedForwardLines": 3,
+      "validatedDefensePairs": 3,
+      "rejected": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 4,
+          "sourceLine": [
+            "Samuel Blais",
+            "Stephen Halliday",
+            "Philip Tomasino"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Samuel Blais",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            },
+            {
+              "name": "Philip Tomasino",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
               "requiresIndependentGameEvidence": true
             }
           ]
