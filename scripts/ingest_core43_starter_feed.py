@@ -95,7 +95,7 @@ def main():
             continue
         if r.get("status")!="confirmed" or r.get("confirmationBasis")!="explicit_pregame_report":
             continue
-        if not re.fullmatch(r"\\d+",str(r.get("goalieId",""))):
+        if not valid_nhl_goalie_id(r.get("goalieId")):
             continue
         source=r.get("sourceUrl","")
         name=r.get("sourceName","")
