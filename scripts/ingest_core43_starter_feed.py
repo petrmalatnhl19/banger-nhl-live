@@ -27,7 +27,7 @@ def main():
     sb=os.environ.get("SUPABASE_URL","").strip().rstrip("/")
     key=os.environ.get("SUPABASE_SERVICE_ROLE_KEY","").strip()
     if not url or not token:
-        print("No configured confirmed-starter feed; no evidence inserted")
+        print("::warning title=CORE 4.3 starter feed inactive::Confirmed-starter feed URL or token missing; no verified evidence can be imported")
         return
     if not sb or not key:
         raise RuntimeError("Missing Supabase service configuration")
@@ -83,7 +83,7 @@ def main():
     if ambiguous:
         print(f"Skipped {len(ambiguous)} games with conflicting schedule snapshots")
     if not valid:
-        print("No valid pregame confirmed starter evidence in feed")
+        print("::warning title=CORE 4.3 no confirmed starters::Feed returned no valid timestamped pregame confirmations")
         return
     req=urllib.request.Request(sb+"/rest/v1/nhl_core43_starter_evidence?on_conflict=game_id,team_code,goalie_id,source_url,source_published_at",data=json.dumps(valid).encode(),method="POST",headers={"apikey":key,"Authorization":"Bearer "+key,"Content-Type":"application/json","Prefer":"resolution=ignore-duplicates,return=minimal"})
     with urllib.request.urlopen(req,timeout=30) as response:
