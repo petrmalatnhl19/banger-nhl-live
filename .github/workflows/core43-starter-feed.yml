@@ -13,6 +13,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Refresh native RotoWire data if external feed is absent
+        env:
+          CORE43_STARTER_FEED_URL: ${{ secrets.CORE43_STARTER_FEED_URL }}
+          CORE43_STARTER_FEED_TOKEN: ${{ secrets.CORE43_STARTER_FEED_TOKEN }}
+        run: |
+          if [ -z "$CORE43_STARTER_FEED_URL" ] || [ -z "$CORE43_STARTER_FEED_TOKEN" ]; then
+            python scripts/update_rosters.py
+            python scripts/parse_rotowire_goalies.py
+            python scripts/publish_rotowire_goalies.py
+          fi
       - name: Test starter evidence provenance contract
         run: python -m unittest scripts.test_core43_source_provenance
       - name: Audit native RotoWire evidence coverage
