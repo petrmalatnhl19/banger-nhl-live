@@ -16,10 +16,12 @@ TABLES = {
     "schedules": ("nhl_core43_schedule_snapshots", "game_id,kickoff_at,away_team,home_team,fetched_at"),
     "identityMap": ("nhl_core43_goalie_identity_map", "goalie_id,goalie_name,team_code,source,observed_at"),
 }
-def read_table(base, key, table, columns, max_rows=20000):
+def read_table(base, key, table, columns, max_rows=20000, order_by="game_id"):
+    if order_by not in ("game_id", "goalie_id"):
+        raise ValueError("Unsupported pagination order")
     rows=[]
     for start in range(0,max_rows,500):
-        params=urllib.parse.urlencode({"select":columns,"order":"game_id.asc","limit":"500","offset":str(start)})
+        params=urllib.parse.urlencode({"select":columns,"order":order_by+".asc","limit":"500","offset":str(start)})
         req=urllib.request.Request(f"{base}/rest/v1/{table}?{params}",headers={"apikey":key,"Authorization":"Bearer "+key,"Accept":"application/json"})
         with urllib.request.urlopen(req,timeout=30) as response:
             batch=json.load(response)
@@ -65,7 +67,7 @@ def main():
     schedules=latest_schedule(read_table(base,key,*TABLES["schedules"]))
     ids={int(r["game_id"]) for r in observations if str(r.get("game_id","")).isdigit()}
     official,errors=collect_official(ids)
-    identity_map=read_table(base,key,*TABLES["identityMap"])
+    identity_map=read_table(base,key,*TABLES["identityMap"],order_by="goalie_id")
     payload={"observations":observations,"schedules":schedules,"officialGames":official,"identityMap":identity_map}
     js="const fs=require('fs');const {compareHistoricalProjections}=require('./scripts/core43_historical_projection_join.cjs');const input=JSON.parse(fs.readFileSync(0,'utf8'));process.stdout.write(JSON.stringify(compareHistoricalProjections(input)));"
     proc=subprocess.run(["node","-e",js],input=json.dumps(payload),text=True,capture_output=True,check=True,timeout=60)
