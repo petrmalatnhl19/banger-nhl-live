@@ -1,10 +1,24 @@
 import importlib.util
 import unittest
+from unittest.mock import patch
+import io
+import json
 from pathlib import Path
 spec=importlib.util.spec_from_file_location("runner",Path(__file__).with_name("run_core43_historical_projection_audit.py"))
 runner=importlib.util.module_from_spec(spec)
 spec.loader.exec_module(runner)
 class RunnerTests(unittest.TestCase):
+ def test_identity_map_uses_valid_order_column(self):
+  class FakeResponse:
+   def __enter__(self):return self
+   def __exit__(self,*args):return False
+   def read(self,*args):return b'[]'
+  def fake_urlopen(request,timeout):
+   self.assertIn("order=goalie_id.asc",request.full_url)
+   self.assertNotIn("order=game_id.asc",request.full_url)
+   return FakeResponse()
+  with patch.object(runner.urllib.request,"urlopen",side_effect=fake_urlopen):
+   self.assertEqual(runner.read_table("https://example.supabase.co","test","nhl_core43_goalie_identity_map","goalie_id,goalie_name",order_by="goalie_id"),[])
  def test_latest_pregame_schedule(self):
   rows=[
    {"game_id":42,"kickoff_at":"2026-11-09T20:00:00Z","fetched_at":"2026-11-09T18:00:00Z","away_team":"DAL","home_team":"NJD"},
