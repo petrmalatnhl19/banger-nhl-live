@@ -5,7 +5,8 @@
 "use strict";
 const validTime=x=>typeof x==="string"&&Number.isFinite(Date.parse(x));
 const validNumber=x=>typeof x==="number"&&Number.isFinite(x);
-function auditShadowCandidates({archive=[],schedules=[],shadowInputs=[]}={}){
+function auditShadowCandidates({archive=[],schedules=[],shadowInputs=[],suspectStarterKeys=[]}={}){
+ const suspect=new Set(suspectStarterKeys);
  const schedulesById=new Map(),conflicts=new Set();
  for(const s of schedules){
   const id=String(s.game_id),old=schedulesById.get(id);
@@ -28,6 +29,7 @@ function auditShadowCandidates({archive=[],schedules=[],shadowInputs=[]}={}){
    const rows=inputs.filter(x=>x.side===side&&x.team_code===s[side+"_team"]);
    if(rows.length!==1)return fail("missing_or_ambiguous_"+side+"_input");
    const x=rows[0];
+   if(suspect.has([id,x.team_code,String(x.goalie_id),x.starter_published_at].join("|")))return fail("suspect_"+side+"_starter_provenance");
    if(x.readiness!=="ready"||!x.goalie_id||x.starter_status!=="confirmed")return fail("unverified_"+side+"_starter");
    if(![x.prediction_at,x.captured_at,x.gsax_fetched_at,x.starter_published_at,x.starter_verified_at].every(validTime))return fail("missing_"+side+"_timestamps");
    const at=Date.parse(x.prediction_at);
