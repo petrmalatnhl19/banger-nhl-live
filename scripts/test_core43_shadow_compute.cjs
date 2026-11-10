@@ -11,4 +11,8 @@ assert.equal(result.expectedAwayGoals,2.82);
 assert.equal(result.expectedHomeGoals,3.16);
 assert.equal(run({archive,schedules,shadowInputs:[shadowInputs[0]]})[0].available,false);
 assert.equal(run({archive,schedules,shadowInputs:[shadowInputs[0],{...shadowInputs[1],gsax_fetched_at:"2026-11-09T16:00:00Z"}]})[0].available,false);
+const suspectStarterKeys=["42|DAL|100|2026-11-09T12:00:00Z"];
+const blocked=run({archive,schedules,shadowInputs,suspectStarterKeys})[0];
+assert.equal(blocked.available,false);
+assert.equal(blocked.reason,"suspect_away_starter_provenance");
 console.log("CORE 4.3 shadow computation integration tests passed");
