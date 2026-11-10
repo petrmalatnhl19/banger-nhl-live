@@ -13,6 +13,19 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Check confirmed-starter feed configuration
+        env:
+          CORE43_STARTER_FEED_URL: ${{ secrets.CORE43_STARTER_FEED_URL }}
+          CORE43_STARTER_FEED_TOKEN: ${{ secrets.CORE43_STARTER_FEED_TOKEN }}
+        run: |
+          if [ -z "$CORE43_STARTER_FEED_URL" ] || [ -z "$CORE43_STARTER_FEED_TOKEN" ]; then
+            echo '::warning title=CORE 4.3 starter feed inactive::Missing CORE43_STARTER_FEED_URL or CORE43_STARTER_FEED_TOKEN. Verified starter evidence cannot be ingested.'
+            echo '### ⚠️ CORE 4.3 confirmed starter feed: NOT CONFIGURED' >> "$GITHUB_STEP_SUMMARY"
+            echo 'Configure both CORE43_STARTER_FEED_URL and CORE43_STARTER_FEED_TOKEN in repository Actions secrets. Without them, CORE 4.3 cannot receive verified starter evidence from this feed.' >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo '### CORE 4.3 confirmed starter feed: CONFIGURED' >> "$GITHUB_STEP_SUMMARY"
+            echo 'Feed ingestion will run. Configuration does not guarantee valid confirmed reports; check ingestion output.' >> "$GITHUB_STEP_SUMMARY"
+          fi
       - name: Import pregame confirmed starter evidence
         env:
           CORE43_STARTER_FEED_URL: ${{ secrets.CORE43_STARTER_FEED_URL }}
