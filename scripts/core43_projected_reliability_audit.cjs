@@ -10,6 +10,20 @@ function evaluateProjectedReliability(rows=[],{minSample=30}={}){
  if(!Array.isArray(rows)||!Number.isSafeInteger(minSample)||minSample<30)
   throw new TypeError("Invalid reliability audit inputs");
  const byBucket={};const excluded={};let eligible=0;
+ // One frozen pick per game/team/lead-time bucket. Duplicate records cannot inflate sample size.
+ const unique=new Map(),conflicted=new Set();
+ for(const row of rows){
+  if(!row||row.predictionStatus!=="projected")continue;
+  const kickoff=time(row.kickoffAt),observed=time(row.predictedAt);
+  if(!Number.isFinite(kickoff)||!Number.isFinite(observed))continue;
+  const hours=(kickoff-observed)/3600000;
+  const bucket=buckets.find(([,min,max])=>hours>=min&&hours<max)?.[0];
+  if(!bucket)continue;
+  const key=JSON.stringify([row.gameId,row.teamCode,bucket]);
+  if(row.gameId==null||typeof row.teamCode!=="string"||!row.teamCode)continue;
+  if(unique.has(key))conflicted.add(key);
+  else unique.set(key,row);
+ }
  for(const [name] of buckets)byBucket[name]={evaluated:0,correct:0,incorrect:0,observedAccuracy:null,usableAsProbability:false};
  for(const row of rows){
   const reject=reason=>{excluded[reason]=(excluded[reason]||0)+1;};
@@ -21,6 +35,9 @@ function evaluateProjectedReliability(rows=[],{minSample=30}={}){
   const hours=(kickoff-observed)/3600000;
   const name=buckets.find(([,min,max])=>hours>=min&&hours<max)?.[0];
   if(!name){reject("invalid_lead_time");continue;}
+  const key=JSON.stringify([row.gameId,row.teamCode,name]);
+  if(row.gameId==null||typeof row.teamCode!=="string"||!row.teamCode){reject("missing_identity");continue;}
+  if(conflicted.has(key)){reject("duplicate_or_conflicting_pick");continue;}
   eligible++;
   const bucket=byBucket[name];bucket.evaluated++;
   if(evaluation.correct)bucket.correct++;else bucket.incorrect++;
