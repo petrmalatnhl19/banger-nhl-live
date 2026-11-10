@@ -18,7 +18,7 @@ jobs:
     timeout-minutes: 10
     env:
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -35,7 +35,7 @@ jobs:
           if [[ -n "$SUPABASE_URL" && -n "$SUPABASE_SECRET_KEY" ]]; then
             echo "ready=true" >> "$GITHUB_OUTPUT"
           else
-            echo "::warning::CORE 4.3 diagnostic skipped: configure SUPABASE_URL and SUPABASE_SECRET_KEY repository secrets."
+            echo "::warning::CORE 4.3 diagnostic skipped: configure SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY repository secrets."
             echo "ready=false" >> "$GITHUB_OUTPUT"
             echo "CORE 4.3 diagnostic skipped: missing server-side repository secrets." >> "$GITHUB_STEP_SUMMARY"
           fi
