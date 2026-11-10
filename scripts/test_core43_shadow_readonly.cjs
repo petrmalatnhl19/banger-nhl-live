@@ -1,5 +1,5 @@
 const assert=require("node:assert/strict");
-const {loadAndCompute,readAllProvenance}=require("./run_core43_shadow_readonly.cjs");
+const {loadAndCompute,readAllProvenance,readAllCoreInputs}=require("./run_core43_shadow_readonly.cjs");
 (async()=>{
  const now="2026-11-09T15:00:00Z";
  const rows={
@@ -26,10 +26,6 @@ const {loadAndCompute,readAllProvenance}=require("./run_core43_shadow_readonly.c
  rows.nhl_core43_rotowire_observations.length=0;
  rows.nhl_core43_shadow_inputs.pop();
  assert.equal((await loadAndCompute({url:"https://example.supabase.co",key:"test",now,fetchImpl})).available,0);
- const originalArchive=rows.nhl_prediction_archive;
- rows.nhl_prediction_archive=Array.from({length:1000},(_,i)=>({game_id:i}));
- await assert.rejects(()=>loadAndCompute({url:"https://example.supabase.co",key:"test",now,fetchImpl}),/core43_input_page_limit_reached/);
- rows.nhl_prediction_archive=originalArchive;
  const many=Array.from({length:5},(_,i)=>({game_id:i}));
  const pagedFetch=async(url)=>{
   const params=new URL(url).searchParams;
@@ -39,6 +35,9 @@ const {loadAndCompute,readAllProvenance}=require("./run_core43_shadow_readonly.c
  };
  const complete=await readAllProvenance("https://example.supabase.co","test","nhl_core43_starter_evidence","game_id",pagedFetch,{pageSize:2,maxRows:10});
  assert.deepEqual(complete,many);
+ const allInputs=await readAllCoreInputs("https://example.supabase.co","test","nhl_prediction_archive","select=game_id","game_id.asc",pagedFetch,{pageSize:2,maxRows:10});
+ assert.deepEqual(allInputs,many);
+ await assert.rejects(()=>readAllCoreInputs("https://example.supabase.co","test","nhl_prediction_archive","select=game_id","game_id.asc",pagedFetch,{pageSize:2,maxRows:4}),/core43_input_limit_exceeded/);
  await assert.rejects(()=>readAllProvenance("https://example.supabase.co","test","nhl_core43_starter_evidence","game_id",pagedFetch,{pageSize:2,maxRows:4}),/provenance_limit_exceeded/);
  console.log("CORE 4.3 read-only Supabase integration tests passed");
 })().catch(e=>{console.error(e);process.exitCode=1});
