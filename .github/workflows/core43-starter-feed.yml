@@ -13,6 +13,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Audit native RotoWire evidence coverage
+        run: python scripts/audit_core43_rotowire_evidence.py
       - name: Check confirmed-starter feed configuration
         env:
           CORE43_STARTER_FEED_URL: ${{ secrets.CORE43_STARTER_FEED_URL }}
