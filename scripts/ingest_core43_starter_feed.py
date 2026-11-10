@@ -22,6 +22,11 @@ def stamp(value):
         raise ValueError("Timestamp must be UTC ISO 8601 with Z")
     return dt.datetime.fromisoformat(value.replace("Z","+00:00"))
 
+def valid_nhl_goalie_id(value):
+    """Accept only a numeric NHL player ID; never coerce missing values."""
+    return isinstance(value, (str, int)) and not isinstance(value, bool) and bool(re.fullmatch(r"\d+", str(value)))
+
+
 def main():
     url=os.environ.get("CORE43_STARTER_FEED_URL","").strip()
     token=os.environ.get("CORE43_STARTER_FEED_TOKEN","").strip()
@@ -90,7 +95,7 @@ def main():
             continue
         if r.get("status")!="confirmed" or r.get("confirmationBasis")!="explicit_pregame_report":
             continue
-        if not re.fullmatch(r"\\d+",str(r.get("goalieId",""))):
+        if not valid_nhl_goalie_id(r.get("goalieId")):
             continue
         source=r.get("sourceUrl","")
         name=r.get("sourceName","")
