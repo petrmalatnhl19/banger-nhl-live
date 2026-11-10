@@ -68,6 +68,10 @@ def main():
                 out.write(f"- {key}: {value}\n")
             if not counts["eligible_evidence_candidates"]:
                 out.write("**No eligible verified starter evidence.** A snapshot check time is not a source publication time.\n")
+            if counts["total"] and counts["projected"] == counts["total"]:
+                out.write("**Projection-only source:** all parsed rows are projected; no confirmed starters can enter CORE 4.3 from this snapshot.\n")
+    if counts["total"] and counts["projected"] == counts["total"]:
+        print("::warning title=CORE 4.3 projection-only RotoWire snapshot::All parsed rows are projected, so this run cannot supply verified pregame starter evidence")
     if counts["confirmed"] and not counts["eligible_evidence_candidates"]:
         print("::warning title=CORE 4.3 evidence gap::Confirmed goalie statuses exist, but no records have all required individual evidence metadata")
 
