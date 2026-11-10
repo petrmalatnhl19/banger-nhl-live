@@ -5,6 +5,16 @@
 "use strict";
 const stamp=x=>typeof x==="string"&&Number.isFinite(Date.parse(x))?Date.parse(x):NaN;
 const normalize=x=>typeof x==="string"?x.normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-zA-Z]/g,"").toLowerCase():"";
+
+// Official NHL boxscores may use "L. Thompson" while projected sources use
+// "Logan Thompson". This is a name-format check ONLY, never identity proof.
+const nameFormatMatches=(projected,official)=>{
+ if(normalize(projected)===normalize(official))return true;
+ if(typeof projected!=="string"||typeof official!=="string")return false;
+ const parts=x=>x.normalize("NFKD").replace(/[\u0300-\u036f]/g,"").toLowerCase().match(/[a-z]+/g)||[];
+ const p=parts(projected),o=parts(official);
+ return p.length>=2&&o.length===2&&o[0].length===1&&p[0][0]===o[0]&&p[p.length-1]===o[1];
+};
 const windows=[["under_2h",0,2],["2_to_6h",2,6],["6_to_24h",6,24],["over_24h",24,Infinity]];
 function compareHistoricalProjections({observations=[],schedules=[],officialGames=[],identityMap=[],minSample=30}={}){
  if(![observations,schedules,officialGames,identityMap].every(Array.isArray)||!Number.isSafeInteger(minSample)||minSample<30)throw new TypeError("Invalid audit inputs");
@@ -59,7 +69,7 @@ function compareHistoricalProjections({observations=[],schedules=[],officialGame
    candidates.set(group,{gameId:o.game_id,teamCode:o.team_code,kickoffAt:schedule.kickoff_at,
     observedAt:new Date(captured).toISOString(),projectedNameKey:identity,
     actualNameKey:actualIdentity,officialStarterId:actual.id,projectedGoalieId:projectedId||null,
-    nameMatch:identity===actualIdentity,idMatch:projectedId?projectedId===actual.id:null});
+    nameMatch:nameFormatMatches(o.goalie_name,actual.name),idMatch:projectedId?projectedId===actual.id:null});
   }
  }
  const rows=[...candidates.entries()].filter(([key])=>!conflicts.has(key)).map(([,r])=>r);
