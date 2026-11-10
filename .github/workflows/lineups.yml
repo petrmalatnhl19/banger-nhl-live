@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+  pull-requests: write
 concurrency:
   group: nhl-lineups-main
   cancel-in-progress: false
@@ -142,28 +143,55 @@ jobs:
         run: python scripts/build_goalie_catalog.py
       - name: Integrate verified goalie data into lineup UI
         run: python scripts/integrate_goalies_ui.py
-      - name: Commit changed lineups
+      # Protected main requires a pull request and the frontend-smoke check.
+      # This action reuses one bot branch/PR rather than opening a new PR every 15 minutes.
+      - name: Require token that triggers PR checks
+        env:
+          LINEUPS_PR_TOKEN: ${{ secrets.LINEUPS_PR_TOKEN }}
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for file in index.html nhl_news.json lineups.json lineups_archive.json nhl_rosters.json lineups_coverage.json starting_goalies.json nhl_goalies.json rotowire_goalies.json rotowire_goalies_diagnostic.json lineups_changes.json lineups_diagnostics.md lineups_source_diagnostics.json lineups_discovery_diagnostics.json lineup_free_sources_probe.json lineup_source_usage_report.json lineup_core_report.json lineup_rejections_report.json lineup_recovery_plan.json ottawa_game_roster_diagnostic.json dallas_game_roster_diagnostic.json utah_game_roster_diagnostic.json detroit_game_roster_diagnostic.json lineup_identity_audit.json tampa_source_excerpt.json; do
-            if [ -f "$file" ]; then git add "$file"; fi
-          done
-          if ! git diff --cached --quiet; then
-            git commit -m "Update NHL projected lineups"
-            for attempt in 1 2 3; do
-              if git push; then
-                echo "Lineup changes pushed successfully"
-                exit 0
-              fi
-              echo "Push attempt $attempt failed; rebasing on latest main"
-              git fetch origin main
-              git rebase origin/main || { git rebase --abort; echo "Rebase conflict: manual review required"; exit 1; }
-              sleep 2
-            done
-            echo "Unable to push after three attempts"
+          if [ -z "$LINEUPS_PR_TOKEN" ]; then
+            echo '::error title=Missing LINEUPS_PR_TOKEN::A repository secret with PR write permission is needed so frontend-smoke runs on bot-created PRs. GITHUB_TOKEN-created PRs do not trigger the required check.'
             exit 1
           fi
+      - name: Open or update lineup refresh pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.LINEUPS_PR_TOKEN }}
+          base: main
+          branch: automation/refresh-nhl-lineups
+          delete-branch: true
+          commit-message: "Update NHL projected lineups"
+          title: "Automated NHL projected lineups refresh"
+          body: |
+            Automated lineup and goalie data refresh.
+            Changes must pass required checks before merge into protected main.
+            Review generated files and source timestamps before merging.
+          add-paths: |
+            index.html
+            nhl_news.json
+            lineups.json
+            lineups_archive.json
+            nhl_rosters.json
+            lineups_coverage.json
+            starting_goalies.json
+            nhl_goalies.json
+            rotowire_goalies.json
+            rotowire_goalies_diagnostic.json
+            lineups_changes.json
+            lineups_diagnostics.md
+            lineups_source_diagnostics.json
+            lineups_discovery_diagnostics.json
+            lineup_free_sources_probe.json
+            lineup_source_usage_report.json
+            lineup_core_report.json
+            lineup_rejections_report.json
+            lineup_recovery_plan.json
+            ottawa_game_roster_diagnostic.json
+            dallas_game_roster_diagnostic.json
+            utah_game_roster_diagnostic.json
+            detroit_game_roster_diagnostic.json
+            lineup_identity_audit.json
+            tampa_source_excerpt.json
       - name: Fail if RotoWire publication was unsuccessful
         if: always()
         shell: bash
