@@ -1,0 +1,17 @@
+"use strict";
+const assert=require("node:assert/strict");
+const {buildReport}=require("./core43_unified_diagnostic_runner.cjs");
+const prediction={game_id:42,away_team:"DAL",home_team:"NJD",core41_predicted_at:"2026-11-09T14:00:00Z"};
+const schedule={game_id:42,away_team:"DAL",home_team:"NJD",kickoff_at:"2026-11-09T20:00:00Z",fetched_at:"2026-11-09T11:00:00Z"};
+const goalie=(team,name)=>({game_id:42,team_code:team,goalie_name:name,observed_status:"projected",observed_at:"2026-11-09T13:00:00Z",source_snapshot_at:"2026-11-09T12:00:00Z"});
+const identity=(team,name,id)=>({team_code:team,goalie_name:name,goalie_id:id,observed_at:"2026-11-09T11:00:00Z"});
+const data={predictions:[prediction],schedules:[schedule],goalies:[goalie("DAL","Goalie One"),goalie("NJD","Goalie Two")],identityMap:[identity("DAL","Goalie One","123"),identity("NJD","Goalie Two","456")],starterEvidence:[]};
+const report=buildReport(data);
+assert.equal(report.total,1);
+assert.equal(report.coverage.usableFrozenSchedule,1);
+assert.equal(report.starterReadiness.ready_projected,1);
+assert.equal(report.games[0].coverageStatus,"usable_frozen_schedule");
+assert.equal(report.production,false);
+assert.equal(report.persistable,false);
+assert.equal(buildReport({...data,schedules:[]}).games[0].coverageStatus,"missing_frozen_schedule");
+console.log("CORE 4.3 unified runner tests passed");
