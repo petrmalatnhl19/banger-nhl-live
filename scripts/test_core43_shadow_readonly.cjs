@@ -1,5 +1,5 @@
 const assert=require("node:assert/strict");
-const {loadAndCompute}=require("./run_core43_shadow_readonly.cjs");
+const {loadAndCompute,readAllProvenance}=require("./run_core43_shadow_readonly.cjs");
 (async()=>{
  const now="2026-11-09T15:00:00Z";
  const rows={
@@ -26,5 +26,15 @@ const {loadAndCompute}=require("./run_core43_shadow_readonly.cjs");
  rows.nhl_core43_rotowire_observations.length=0;
  rows.nhl_core43_shadow_inputs.pop();
  assert.equal((await loadAndCompute({url:"https://example.supabase.co",key:"test",now,fetchImpl})).available,0);
+ const many=Array.from({length:5},(_,i)=>({game_id:i}));
+ const pagedFetch=async(url)=>{
+  const params=new URL(url).searchParams;
+  const offset=Number(params.get("offset"));
+  const limit=Number(params.get("limit"));
+  return {ok:true,json:async()=>many.slice(offset,offset+limit)};
+ };
+ const complete=await readAllProvenance("https://example.supabase.co","test","nhl_core43_starter_evidence","game_id",pagedFetch,{pageSize:2,maxRows:10});
+ assert.deepEqual(complete,many);
+ await assert.rejects(()=>readAllProvenance("https://example.supabase.co","test","nhl_core43_starter_evidence","game_id",pagedFetch,{pageSize:2,maxRows:4}),/provenance_limit_exceeded/);
  console.log("CORE 4.3 read-only Supabase integration tests passed");
 })().catch(e=>{console.error(e);process.exitCode=1});
