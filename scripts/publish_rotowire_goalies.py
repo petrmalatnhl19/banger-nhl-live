@@ -15,6 +15,10 @@ def main():
         raise SystemExit("RotoWire coverage too low; preserving existing data")
     names = {team["abbrev"]: {name.casefold() for name in team.get("goalies", [])}
              for team in catalog.values()}
+    # NHL roster identity is independent of whether the goalie is confirmed to start.
+    ids = {team["abbrev"]: {name.casefold(): str(team.get("playerIds", {}).get(name))
+             for name in team.get("goalies", []) if team.get("playerIds", {}).get(name)}
+           for team in catalog.values()}
     now = datetime.datetime.now(datetime.timezone.utc)
     today = now.date().isoformat()
     by_game = {}
@@ -33,7 +37,15 @@ def main():
             conflicts.append({"date": key[0], "team": key[1], "gameId": key[2],
                               "reason": "conflicting RotoWire rows"})
             continue
-        valid.append(items[0])
+        record = dict(items[0])
+        goalie_id = ids.get(record["team"], {}).get(record["goalie"].casefold())
+        if goalie_id and goalie_id.isdecimal():
+            record["goalieId"] = goalie_id
+        # Do not turn a page fetch timestamp into a published confirmation timestamp.
+        # Pass through only an explicit timestamp provided for this individual report.
+        if record.get("status") == "confirmed" and record.get("sourcePublishedAt"):
+            record["confirmationBasis"] = "explicit_pregame_report"
+        valid.append(record)
     output = {"updatedAt": now.isoformat(), "source": diagnostic["source"],
               "goalieCount": len(valid), "games": valid, "conflicts": conflicts}
     with (ROOT / "rotowire_goalies.json").open("w", encoding="utf-8") as file:
