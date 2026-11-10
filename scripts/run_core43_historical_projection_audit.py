@@ -79,5 +79,5 @@ def main():
     output=Path(args.output)
     output.parent.mkdir(parents=True,exist_ok=True)
     output.write_text(json.dumps(result,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
-    print(json.dumps({"rowsCompared":result["rowsCompared"],"sourceCounts":result["sourceCounts"],"countsByLeadTime":result["countsByLeadTime"]}))
+    print(json.dumps({"rowsCompared":result["rowsCompared"],"sourceCounts":result["sourceCounts"],"countsByLeadTime":result["countsByLeadTime"],"uniqueGameTeamPairs":result["uniqueGameTeamPairs"],"uniqueGames":result["uniqueGames"],"uniqueIdComparedPairs":result["uniqueIdComparedPairs"],"uniqueIdMatchedPairs":result["uniqueIdMatchedPairs"],"nameIdDisagreements":result["nameIdDisagreements"]}))
 if __name__=="__main__":main()
