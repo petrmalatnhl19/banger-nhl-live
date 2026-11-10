@@ -1,0 +1,17 @@
+"use strict";
+const assert=require("node:assert/strict");
+const {classifyStarter}=require("./core43_starter_readiness.cjs");
+const base={gameId:42,teamCode:"DAL",goalieName:"Example Goalie",goalieId:"123",predictionAt:"2026-11-09T14:00:00Z"};
+const observation={game_id:42,team_code:"DAL",goalie_name:"Example Goalie",observed_status:"projected",observed_at:"2026-11-09T13:00:00Z",source_snapshot_at:"2026-11-09T12:00:00Z"};
+const evidence={game_id:42,team_code:"DAL",goalie_id:"123",evidence_status:"confirmed",source_published_at:"2026-11-09T12:00:00Z",verified_at:"2026-11-09T13:00:00Z",source_url:"https://example.org/source"};
+const inspect=extra=>classifyStarter({...base,...extra});
+assert.equal(inspect({observations:[observation]}).status,"ready_projected");
+assert.equal(inspect({observations:[{...observation,observed_status:"confirmed"}]}).status,"ready_projected");
+assert.equal(inspect({evidence:[evidence]}).status,"ready_confirmed");
+assert.equal(inspect({evidence:[{...evidence,verified_at:"2026-11-09T15:00:00Z"}]}).status,"unavailable");
+assert.equal(inspect({observations:[{...observation,observed_at:"2026-11-09T15:00:00Z"}]}).status,"unavailable");
+assert.equal(inspect({observations:[{...observation,source_snapshot_at:"2026-11-09T15:00:00Z"}]}).status,"unavailable");
+assert.equal(inspect({observations:[{...observation,goalie_name:"Other Goalie"}]}).reason,"goalie_identity_mismatch");
+assert.equal(inspect({observations:[observation,{...observation,goalie_name:"Other Goalie"}]}).reason,"conflicting_latest_observations");
+assert.equal(inspect({observations:[observation]}).persistable,false);
+console.log("CORE 4.3 projected/confirmed starter readiness tests passed");
