@@ -63,14 +63,15 @@ function compareHistoricalProjections({observations=[],schedules=[],officialGame
   }
  }
  const rows=[...candidates.entries()].filter(([key])=>!conflicts.has(key)).map(([,r])=>r);
- const counts={};const mismatchSamples=[];
+ const counts={};const mismatchSamples=[];const uniquePairs=new Set(),uniqueGames=new Set(),idMatchedPairs=new Set(),idComparedPairs=new Set(),nameIdDisagreements=[];
  for(const r of rows){const lead=(stamp(r.kickoffAt)-stamp(r.observedAt))/3600000;const bucket=windows.find(([,a,b])=>lead>=a&&lead<b)?.[0];
   const entry=counts[bucket]||(counts[bucket]={compared:0,nameMatches:0,observedMatchRate:null,idCompared:0,idMatches:0,idMatchRate:null,usableAsProbability:false});
-  entry.compared++;if(r.nameMatch)entry.nameMatches++;if(r.idMatch!==null){entry.idCompared++;if(r.idMatch)entry.idMatches++;}if(!r.nameMatch&&mismatchSamples.length<8)mismatchSamples.push({gameId:r.gameId,teamCode:r.teamCode,projectedNameKey:r.projectedNameKey,officialNameKey:r.actualNameKey,projectedGoalieId:r.projectedGoalieId,officialStarterId:r.officialStarterId});
+  uniquePairs.add(String(r.gameId)+"|"+r.teamCode);uniqueGames.add(String(r.gameId));
+  entry.compared++;if(r.nameMatch)entry.nameMatches++;if(r.idMatch!==null){entry.idCompared++;idComparedPairs.add(String(r.gameId)+'|'+r.teamCode);if(r.idMatch){entry.idMatches++;idMatchedPairs.add(String(r.gameId)+'|'+r.teamCode);}if(r.nameMatch!==r.idMatch&&nameIdDisagreements.length<8)nameIdDisagreements.push({gameId:r.gameId,teamCode:r.teamCode,projectedNameKey:r.projectedNameKey,officialNameKey:r.actualNameKey,projectedGoalieId:r.projectedGoalieId,officialStarterId:r.officialStarterId});}if(!r.nameMatch&&mismatchSamples.length<8)mismatchSamples.push({gameId:r.gameId,teamCode:r.teamCode,projectedNameKey:r.projectedNameKey,officialNameKey:r.actualNameKey,projectedGoalieId:r.projectedGoalieId,officialStarterId:r.officialStarterId});
  }
  for(const entry of Object.values(counts)){if(entry.compared>=minSample)entry.observedMatchRate=entry.nameMatches/entry.compared;if(entry.idCompared>=minSample)entry.idMatchRate=entry.idMatches/entry.idCompared;}
  return {mode:"read_only",production:false,persistable:false,rowsCompared:rows.length,
-  conflicts:conflicts.size,excluded,countsByLeadTime:counts,mismatchSamples,identityMapEntries:identityMap.length,
+  conflicts:conflicts.size,excluded,countsByLeadTime:counts,mismatchSamples,nameIdDisagreements,uniqueGameTeamPairs:uniquePairs.size,uniqueGames:uniqueGames.size,uniqueIdComparedPairs:idComparedPairs.size,uniqueIdMatchedPairs:idMatchedPairs.size,identityMapEntries:identityMap.length,
   calibrated:false,warning:"Identity-map matches are retrospective checks, not proof of historical roster membership. No inferred goalie IDs, invented verification timestamps, or calibrated probabilities."};
 }
 module.exports={compareHistoricalProjections};
