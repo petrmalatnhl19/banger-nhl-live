@@ -4,8 +4,8 @@
 "use strict";
 const {auditShadowCandidates}=require("./core43_shadow_candidate_audit.cjs");
 const {calculateShadow}=require("./core43_gsax_sensitivity.cjs");
-function computeShadowCandidates({archive=[],schedules=[],shadowInputs=[]}={}){
- const candidates=auditShadowCandidates({archive,schedules,shadowInputs});
+function computeShadowCandidates({archive=[],schedules=[],shadowInputs=[],suspectStarterKeys=[]}={}){
+ const candidates=auditShadowCandidates({archive,schedules,shadowInputs,suspectStarterKeys});
  return candidates.map(candidate=>{
   if(!candidate.ready)return {gameId:candidate.gameId,available:false,reason:candidate.reason,production:false};
   const rows=shadowInputs.filter(r=>String(r.game_id)===String(candidate.gameId));
