@@ -24,7 +24,7 @@ jobs:
             python scripts/publish_rotowire_goalies.py
           fi
       - name: Test starter evidence provenance contract
-        run: python -m unittest scripts.test_core43_source_provenance scripts.test_core43_legacy_evidence scripts.test_core43_rotowire_publisher_provenance scripts.test_core43_goalie_id_validation scripts.test_core43_schedule_pagination
+        run: python -m unittest scripts.test_core43_source_provenance scripts.test_core43_legacy_evidence scripts.test_core43_rotowire_publisher_provenance scripts.test_core43_goalie_id_validation scripts.test_core43_schedule_pagination scripts.test_core43_conflicting_starters
       - name: Audit native RotoWire evidence coverage
         run: python scripts/audit_core43_rotowire_evidence.py
       - name: Check confirmed-starter feed configuration
