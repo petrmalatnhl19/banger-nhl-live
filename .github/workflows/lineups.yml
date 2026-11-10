@@ -123,6 +123,8 @@ jobs:
           if [ -f rotowire_goalies_diagnostic.json ]; then
             python scripts/publish_rotowire_goalies.py || echo "Keeping previous starter feed; RotoWire publication unavailable"
           fi
+      - name: Audit CORE 4.3 starter evidence provenance
+        run: python scripts/audit_core43_rotowire_evidence.py
       - name: Build complete NHL goalie catalog
         run: python scripts/build_goalie_catalog.py
       - name: Integrate verified goalie data into lineup UI
