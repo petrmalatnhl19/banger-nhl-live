@@ -14,6 +14,7 @@ import json
 import os
 import re
 import urllib.request
+from pathlib import Path
 from urllib.parse import urlsplit
 
 def stamp(value):
@@ -26,21 +27,40 @@ def main():
     token=os.environ.get("CORE43_STARTER_FEED_TOKEN","").strip()
     sb=os.environ.get("SUPABASE_URL","").strip().rstrip("/")
     key=os.environ.get("SUPABASE_SERVICE_ROLE_KEY","").strip()
-    if not url or not token:
-        print("::warning title=CORE 4.3 starter feed inactive::Confirmed-starter feed URL or token missing; no verified evidence can be imported")
-        return
+    use_remote = bool(url and token)
+    if bool(url) != bool(token):
+        print("::warning title=CORE 4.3 partial feed config::URL and token must both be set; trying local verified reports instead")
     if not sb or not key:
         raise RuntimeError("Missing Supabase service configuration")
-    for value in (url,sb):
+    for value in ((url,sb) if use_remote else (sb,)):
         p=urlsplit(value)
         if p.scheme!="https" or not p.hostname or p.username or p.password or p.fragment:
             raise ValueError("Invalid secure endpoint")
     if not urlsplit(sb).hostname.endswith(".supabase.co"):
         raise ValueError("Unexpected Supabase host")
     observed=dt.datetime.now(dt.timezone.utc)
-    req=urllib.request.Request(url,headers={"Authorization":"Bearer "+token,"Accept":"application/json"})
-    with urllib.request.urlopen(req,timeout=25) as response:
-        feed=json.load(response)
+    if use_remote:
+        req=urllib.request.Request(url,headers={"Authorization":"Bearer "+token,"Accept":"application/json"})
+        with urllib.request.urlopen(req,timeout=25) as response:
+            feed=json.load(response)
+    else:
+        local=Path("rotowire_goalies.json")
+        raw=json.loads(local.read_text(encoding="utf-8"))
+        reports=[]
+        for item in raw.get("games",[]):
+            if item.get("status")!="confirmed":
+                continue
+            # A source snapshot time is NOT the publication time of an individual confirmation.
+            # Never substitute updatedAt or checkedAt for sourcePublishedAt.
+            if not item.get("sourcePublishedAt") or not item.get("goalieId"):
+                continue
+            reports.append({"gameId":item.get("gameId"),"teamCode":item.get("team"),
+                "goalieId":item.get("goalieId"),"status":"confirmed",
+                "confirmationBasis":"explicit_pregame_report",
+                "sourceName":"RotoWire","sourceUrl":item.get("source"),
+                "sourcePublishedAt":item.get("sourcePublishedAt")})
+        feed={"reports":reports}
+        print(f"Native RotoWire bridge: {len(reports)} explicitly timestamped confirmed reports; source snapshot timestamps alone are insufficient")
     if not isinstance(feed,dict) or not isinstance(feed.get("reports"),list):
         raise ValueError("Invalid feed format")
     if len(feed["reports"])>500:
@@ -83,7 +103,7 @@ def main():
     if ambiguous:
         print(f"Skipped {len(ambiguous)} games with conflicting schedule snapshots")
     if not valid:
-        print("::warning title=CORE 4.3 no confirmed starters::Feed returned no valid timestamped pregame confirmations")
+        print("::warning title=CORE 4.3 no confirmed starters::No valid explicitly timestamped pregame confirmations; projected or untimestamped reports are never promoted")
         return
     req=urllib.request.Request(sb+"/rest/v1/nhl_core43_starter_evidence?on_conflict=game_id,team_code,goalie_id,source_url,source_published_at",data=json.dumps(valid).encode(),method="POST",headers={"apikey":key,"Authorization":"Bearer "+key,"Content-Type":"application/json","Prefer":"resolution=ignore-duplicates,return=minimal"})
     with urllib.request.urlopen(req,timeout=30) as response:
