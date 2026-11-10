@@ -111,18 +111,31 @@ jobs:
             cat goalie_sources_probe.json
             echo '\`\`\`'
           } >> "$GITHUB_STEP_SUMMARY"
-      - name: Validate RotoWire goalie matchups (diagnostic only)
-        if: always()
+      - name: Test RotoWire publisher health checks
+        run: python -m unittest scripts.test_rotowire_publisher_health
+      - name: Validate RotoWire goalie matchups
+        shell: bash
         run: |
-          python scripts/parse_rotowire_goalies.py || echo "RotoWire diagnostic unavailable"
-          if [ -f rotowire_goalies_diagnostic.json ]; then
-            python -c 'import json; d=json.load(open("rotowire_goalies_diagnostic.json")); print("RotoWire matched:",d["matchedCount"],"of",d["candidateCount"]); print(json.dumps(d["matches"][:8],indent=2))'
+          rm -f rotowire_goalies_diagnostic.json
+          if python scripts/parse_rotowire_goalies.py; then
+            echo 'CORE43_ROTOWIRE_PARSE_OK=true' >> "$GITHUB_ENV"
+          else
+            echo 'CORE43_ROTOWIRE_PARSE_OK=false' >> "$GITHUB_ENV"
+            echo '::warning title=RotoWire parser failed::No fresh diagnostic was produced; previous goalie feed is retained.'
           fi
       - name: Publish verified RotoWire goalie starts
+        shell: bash
         run: |
-          if [ -f rotowire_goalies_diagnostic.json ]; then
-            python scripts/publish_rotowire_goalies.py || echo "Keeping previous starter feed; RotoWire publication unavailable"
+          if [ "$CORE43_ROTOWIRE_PARSE_OK" = true ] && python scripts/publish_rotowire_goalies.py; then
+            echo 'CORE43_ROTOWIRE_PUBLISH_OK=true' >> "$GITHUB_ENV"
+          else
+            echo 'CORE43_ROTOWIRE_PUBLISH_OK=false' >> "$GITHUB_ENV"
+            echo '::warning title=RotoWire publisher failed::Goalie feed was not refreshed; check source coverage and publisher output.'
           fi
+      - name: Report goalie feed publication health
+        if: always()
+        run: |
+          python scripts/check_rotowire_publisher_health.py
       - name: Audit CORE 4.3 starter evidence provenance
         run: python scripts/audit_core43_rotowire_evidence.py
       - name: Build complete NHL goalie catalog
@@ -149,5 +162,13 @@ jobs:
               sleep 2
             done
             echo "Unable to push after three attempts"
+            exit 1
+          fi
+      - name: Fail if RotoWire publication was unsuccessful
+        if: always()
+        shell: bash
+        run: |
+          if [ "$CORE43_ROTOWIRE_PUBLISH_OK" != true ]; then
+            echo '::error title=RotoWire feed stale::The goalie publisher failed in this run. See earlier logs and the job summary.'
             exit 1
           fi
