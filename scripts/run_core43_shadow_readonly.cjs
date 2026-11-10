@@ -14,6 +14,7 @@ async function loadAndCompute({url,key,now=new Date().toISOString(),fetchImpl=fe
   readTable(base,key,"nhl_core43_starter_evidence","select=game_id,team_code,goalie_id,source_name,source_published_at&limit=1000",fetchImpl),
   readTable(base,key,"nhl_core43_rotowire_observations","select=game_id,team_code,source_snapshot_at&limit=1000",fetchImpl)
  ]);
+ if(evidence.length>=1000||observations.length>=1000)throw Error("provenance_audit_incomplete_pagination");
  const future=new Set(schedules.map(s=>String(s.game_id)));
  const snapshotKeys=new Set(observations.map(o=>[String(o.game_id),o.team_code,o.source_snapshot_at].join("|")));
  const suspectStarterKeys=evidence.filter(e=>e.source_name==="RotoWire"&&snapshotKeys.has([String(e.game_id),e.team_code,e.source_published_at].join("|"))).map(e=>[String(e.game_id),e.team_code,String(e.goalie_id),e.source_published_at].join("|"));
