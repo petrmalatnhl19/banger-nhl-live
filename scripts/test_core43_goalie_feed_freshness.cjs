@@ -1,0 +1,12 @@
+"use strict";
+const assert=require("node:assert/strict");
+const {assessFeed}=require("./core43_goalie_feed_freshness.cjs");
+const now=Date.parse("2026-11-10T18:00:00Z");
+const make=updatedAt=>({updatedAt,games:[{status:"confirmed"},{status:"projected"}]});
+assert.equal(assessFeed(make("2026-11-10T17:00:00Z"),{now}).status,"fresh");
+const stale=assessFeed(make("2026-11-09T16:26:07Z"),{now});
+assert.equal(stale.status,"stale");
+assert.equal(stale.confirmedCount,1);
+assert.equal(assessFeed(make("2026-11-11T00:00:00Z"),{now}).status,"future_timestamp");
+assert.equal(assessFeed(make("invalid"),{now}).status,"invalid_timestamp");
+console.log("CORE 4.3 goalie feed freshness tests passed");
