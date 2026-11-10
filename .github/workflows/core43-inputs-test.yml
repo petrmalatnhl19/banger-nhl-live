@@ -32,6 +32,8 @@ on:
       - 'scripts/test_core43_revision_monitor.cjs'
       - 'scripts/core43_computed_revision_adapter.cjs'
       - 'scripts/test_core43_computed_revision_adapter.cjs'
+      - 'scripts/core43_projected_reliability_audit.cjs'
+      - 'scripts/test_core43_projected_reliability_audit.cjs'
       - 'scripts/core43_projected_source_observations.cjs'
       - 'scripts/test_core43_projected_source_observations.cjs'
       - 'scripts/core43_projected_shadow.cjs'
@@ -82,6 +84,7 @@ jobs:
       - run: node scripts/test_core43_shadow_compute.cjs
       - run: node scripts/test_core43_projected_shadow.cjs
       - run: node scripts/test_core43_projected_source_observations.cjs
+      - run: node scripts/test_core43_projected_reliability_audit.cjs
       - run: node scripts/test_core43_shadow_readonly.cjs
       - run: node scripts/test_core43_goalie_coverage.cjs
       - run: node scripts/test_core43_starter_source_adapter.cjs
