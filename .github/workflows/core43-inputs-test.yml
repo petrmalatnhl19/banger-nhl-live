@@ -32,6 +32,8 @@ on:
       - 'scripts/test_core43_revision_monitor.cjs'
       - 'scripts/core43_computed_revision_adapter.cjs'
       - 'scripts/test_core43_computed_revision_adapter.cjs'
+      - 'scripts/run_core43_historical_projection_audit.py'
+      - 'scripts/test_run_core43_historical_projection_audit.py'
       - 'scripts/core43_historical_projection_join.cjs'
       - 'scripts/test_core43_historical_projection_join.cjs'
       - 'scripts/core43_projected_reliability_audit.cjs'
@@ -51,6 +53,7 @@ on:
     paths:
       - 'core43-*.js'
       - 'scripts/*core43*.cjs'
+      - 'scripts/*core43*.py'
       - '.github/workflows/core43-inputs-test.yml'
   workflow_dispatch:
 jobs:
@@ -88,6 +91,7 @@ jobs:
       - run: node scripts/test_core43_projected_source_observations.cjs
       - run: node scripts/test_core43_projected_reliability_audit.cjs
       - run: node scripts/test_core43_historical_projection_join.cjs
+      - run: python -m unittest discover -s scripts -p 'test_run_core43_historical_projection_audit.py'
       - run: node scripts/test_core43_shadow_readonly.cjs
       - run: node scripts/test_core43_goalie_coverage.cjs
       - run: node scripts/test_core43_starter_source_adapter.cjs
