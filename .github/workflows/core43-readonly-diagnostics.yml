@@ -28,6 +28,7 @@ jobs:
         run: |
           node scripts/test_core43_archive_coverage_audit.cjs
           node scripts/test_core43_unified_diagnostic_runner.cjs
+          node scripts/test_core43_starter_evidence_quality.cjs
       - name: Validate configuration
         id: config
         shell: bash
@@ -45,10 +46,13 @@ jobs:
         run: |
           node scripts/core43_unified_diagnostic_runner.cjs > core43-diagnostic.json
           node scripts/core43_diagnostic_summary.cjs core43-diagnostic.json >> "$GITHUB_STEP_SUMMARY"
+          node scripts/core43_starter_evidence_quality.cjs > core43-evidence-quality.json
       - name: Upload report artifact
         if: steps.config.outputs.ready == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: core43-diagnostic
-          path: core43-diagnostic.json
+          path: |
+            core43-diagnostic.json
+            core43-evidence-quality.json
           retention-days: 14

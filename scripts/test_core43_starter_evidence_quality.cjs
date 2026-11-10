@@ -1,0 +1,13 @@
+"use strict";
+const assert=require("node:assert/strict");
+const {auditEvidence}=require("./core43_starter_evidence_quality.cjs");
+const predictions=[{game_id:1,core41_predicted_at:"2026-11-10T12:00:00Z"},{game_id:2,core41_predicted_at:"2026-11-10T12:00:00Z"},{game_id:3}];
+const base={evidence_status:"confirmed",source_name:"RotoWire",source_url:"https://example.org/goalies",source_published_at:"2026-11-10T11:00:00Z",verified_at:"2026-11-10T11:30:00Z"};
+const result=auditEvidence({predictions,evidence:[{...base,game_id:1},{...base,game_id:2,verified_at:"2026-11-10T13:00:00Z"},{...base,game_id:3,source_published_at:"2026-11-10T14:00:00Z"}]});
+assert.equal(result.archivedGames.withPregameEvidence,1);
+assert.equal(result.archivedGames.withoutPregameEvidence,1);
+assert.equal(result.archivedGames.missingPredictionTime,1);
+assert.equal(result.invalidChronology,1);
+assert.equal(result.uniqueSources,1);
+assert.equal(result.independentVerification,"not_established");
+console.log("CORE 4.3 evidence quality tests passed");
