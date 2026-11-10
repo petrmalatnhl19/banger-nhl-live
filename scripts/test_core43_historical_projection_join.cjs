@@ -1,0 +1,21 @@
+const assert=require("node:assert/strict");
+const {compareHistoricalProjections:run}=require("./core43_historical_projection_join.cjs");
+const schedules=[{game_id:42,away_team:"DAL",home_team:"NJD",kickoff_at:"2026-11-09T20:00:00Z"}];
+const officialGames=[{gameId:42,away:{team:"DAL",starterVerified:true,startingGoalieId:123,
+ participants:[{playerId:123,name:"Jake Oettinger"}]},home:{team:"NJD",starterVerified:false}}];
+const base={game_id:42,team_code:"DAL",goalie_name:"Jake Oettinger",observed_status:"projected",
+ observed_at:"2026-11-09T17:00:00Z",source_snapshot_at:"2026-11-09T16:59:00Z"};
+const args={observations:[base],schedules,officialGames};
+const ok=run(args);
+assert.equal(ok.rowsCompared,1);
+assert.equal(ok.countsByLeadTime["2_to_6h"].nameMatches,1);
+assert.equal(ok.countsByLeadTime["2_to_6h"].observedMatchRate,null);
+assert.equal(ok.countsByLeadTime["2_to_6h"].usableAsProbability,false);
+assert.equal(ok.calibrated,false);
+assert.equal(run({...args,observations:[base,{...base,goalie_name:"Another Goalie"}]}).rowsCompared,0);
+assert.equal(run({...args,observations:[{...base,observed_at:"2026-11-09T21:00:00Z"}]}).rowsCompared,0);
+assert.equal(run({...args,observations:[{...base,source_snapshot_at:"2026-11-09T18:00:00Z"}]}).rowsCompared,0);
+assert.equal(run({...args,officialGames:[{...officialGames[0],away:{...officialGames[0].away,starterVerified:false}}]}).rowsCompared,0);
+assert.equal(run({...args,observations:[{...base,goalie_name:"Other Goalie"}]}).countsByLeadTime["2_to_6h"].nameMatches,0);
+assert.throws(()=>run({...args,minSample:1}),TypeError);
+console.log("CORE 4.3 historical projection join tests passed");
