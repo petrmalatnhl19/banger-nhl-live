@@ -26,6 +26,15 @@ async function readAllCoreInputs(base,key,table,query,order,fetchImpl,{pageSize=
  }
  throw Error("core43_input_limit_exceeded_"+table);
 }
+function summarizeReadiness(results){
+ const reasons={};
+ for(const result of results){
+  if(result.available)continue;
+  const reason=typeof result.reason==="string"&&result.reason?result.reason:"unknown";
+  reasons[reason]=(reasons[reason]||0)+1;
+ }
+ return Object.fromEntries(Object.entries(reasons).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0])));
+}
 async function loadAndCompute({url,key,now=new Date().toISOString(),fetchImpl=fetch}={}){
  if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test((url||"").replace(/\/$/,""))||!key||!Number.isFinite(Date.parse(now)))throw Error("invalid_configuration");
  const base=url.replace(/\/$/,"");
@@ -42,11 +51,11 @@ async function loadAndCompute({url,key,now=new Date().toISOString(),fetchImpl=fe
  const suspectStarterKeys=evidence.filter(e=>e.source_name==="RotoWire"&&snapshotKeys.has([String(e.game_id),e.team_code,e.source_published_at].join("|"))).map(e=>[String(e.game_id),e.team_code,String(e.goalie_id),e.source_published_at].join("|"));
  const results=computeShadowCandidates({archive:archive.filter(a=>future.has(String(a.game_id))),schedules,shadowInputs,suspectStarterKeys});
  return {mode:"read_only",asOf:now,archiveRows:archive.length,scheduleRows:schedules.length,inputRows:shadowInputs.length,suspectLegacyEvidence:suspectStarterKeys.length,
-  scanned:results.length,available:results.filter(r=>r.available).length,results};
+  scanned:results.length,available:results.filter(r=>r.available).length,blocked:results.filter(r=>!r.available).length,blockedByReason:summarizeReadiness(results),results};
 }
 async function main(){
  const report=await loadAndCompute({url:process.env.SUPABASE_URL,key:process.env.SUPABASE_SERVICE_ROLE_KEY});
  console.log(JSON.stringify(report,null,2));
 }
 if(require.main===module)main().catch(e=>{console.error(e.message);process.exitCode=1;});
-module.exports={loadAndCompute,readAllProvenance,readAllCoreInputs};
+module.exports={loadAndCompute,readAllProvenance,readAllCoreInputs,summarizeReadiness};
