@@ -20,8 +20,8 @@ jobs:
         run: |
           if [ -z "$CORE43_STARTER_FEED_URL" ] || [ -z "$CORE43_STARTER_FEED_TOKEN" ]; then
             echo '::warning title=CORE 4.3 starter feed inactive::Missing CORE43_STARTER_FEED_URL or CORE43_STARTER_FEED_TOKEN. Verified starter evidence cannot be ingested.'
-            echo '### ⚠️ CORE 4.3 confirmed starter feed: NOT CONFIGURED' >> "$GITHUB_STEP_SUMMARY"
-            echo 'Configure both CORE43_STARTER_FEED_URL and CORE43_STARTER_FEED_TOKEN in repository Actions secrets. Without them, CORE 4.3 cannot receive verified starter evidence from this feed.' >> "$GITHUB_STEP_SUMMARY"
+            echo '### CORE 4.3 confirmed starter feed: NATIVE FALLBACK' >> "$GITHUB_STEP_SUMMARY"
+            echo 'External feed is not configured. The native RotoWire bridge checks local reports for explicit per-goalie publication timestamps and IDs. Untimestamped confirmations remain unverified.' >> "$GITHUB_STEP_SUMMARY"
           else
             echo '### CORE 4.3 confirmed starter feed: CONFIGURED' >> "$GITHUB_STEP_SUMMARY"
             echo 'Feed ingestion will run. Configuration does not guarantee valid confirmed reports; check ingestion output.' >> "$GITHUB_STEP_SUMMARY"
