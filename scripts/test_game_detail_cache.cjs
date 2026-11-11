@@ -1,0 +1,13 @@
+"use strict";
+const fs=require("node:fs"),vm=require("node:vm"),assert=require("node:assert/strict");
+const html=fs.readFileSync("index.html","utf8");
+const a=html.indexOf("const bangerGameDetailCache=new Map();"),b=html.indexOf("function state(v)",a);
+assert(a>=0&&b>a);
+const code=html.slice(a,b);
+new Function(code);
+assert(code.includes("kind==='game'||kind==='boxscore'"),"cache only game detail sources");
+assert(code.includes("while(bangerGameDetailCache.size>24)"),"bounded cache");
+assert(code.includes("cached.expires>Date.now()"),"TTL enforced");
+assert(code.includes("if(bangerNhlFeedInflight.has(requestUrl))"),"inflight dedup retained");
+assert(code.includes("if(cached&&Date.now()-cached.expires<15000)"),"brief stale fallback on error");
+console.log("Short-lived game detail cache regression checks passed");
