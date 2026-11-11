@@ -1,0 +1,24 @@
+"use strict";
+const assert=require("node:assert/strict");
+const crypto=require("node:crypto");
+const {prepareArchiveRow,insertOnce}=require("./core43_append_only_capture_writer.cjs");
+const predictedAt="2026-11-11T12:00:00Z",frozenAt="2026-11-11T12:00:10Z";
+const record={schema:"core43_shadow_capture_v1",gameId:123,predictedAt,frozenAt,kickoffAt:"2026-11-11T13:00:00Z",production:false,persistable:false,experimental:true,calibrated:false,frozenBeforeKickoff:true};
+const result={captured:true,record,sha256:crypto.createHash("sha256").update(JSON.stringify(record)).digest("hex"),provenance:{gsaxArchiveId:"snapshot-1",baselineModel:"core42"}};
+const now="2026-11-11T12:00:20Z";
+assert.equal(prepareArchiveRow(result,{now}).production,false);
+assert.throws(()=>prepareArchiveRow({...result,sha256:"wrong"},{now}),/hash_mismatch/);
+assert.throws(()=>prepareArchiveRow({...result,record:{...record,kickoffAt:"2026-11-11T11:00:00Z"}},{now}),/invalid_capture/);
+(async()=>{
+ await assert.rejects(()=>insertOnce({result,now}),/disabled/);
+ const requests=[];
+ const fetchImpl=async(url,opts)=>{requests.push(opts);return {status:201}};
+ const saved=await insertOnce({url:"https://example.supabase.co",key:"server-only",result,now,enabled:true,fetchImpl});
+ assert.equal(saved.inserted,true);
+ assert.equal(requests.length,1);assert.equal(requests[0].method,"POST");
+ assert.equal(JSON.parse(requests[0].body).experimental,true);
+ const duplicate=await insertOnce({url:"https://example.supabase.co",key:"server-only",result,now,enabled:true,fetchImpl:async()=>({status:409})});
+ assert.equal(duplicate.inserted,false);
+ await assert.rejects(()=>insertOnce({url:"https://example.supabase.co",key:"server-only",result,now,enabled:true,fetchImpl:async()=>({status:400})}),/insert_failed/);
+ console.log("CORE 4.3 append-only writer tests passed");
+})().catch(e=>{console.error(e);process.exitCode=1});
