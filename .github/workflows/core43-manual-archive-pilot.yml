@@ -1,0 +1,46 @@
+name: CORE 4.3 manual prospective archive pilot
+
+on:
+  workflow_dispatch:
+    inputs:
+      game_id:
+        description: "Future NHL game ID from archived schedule"
+        required: true
+        type: string
+      confirm_write:
+        description: "Write experimental archive row (false = dry run)"
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: core43-manual-archive-pilot
+  cancel-in-progress: false
+
+jobs:
+  pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: core43-archive-pilot
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      CORE43_PILOT_GAME_ID: ${{ inputs.game_id }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate server credentials
+        shell: bash
+        run: |
+          test -n "$SUPABASE_URL" && test -n "$SUPABASE_SERVICE_ROLE_KEY"
+      - name: Verify experimental archive access
+        run: node scripts/core43_verify_archive_deployment.cjs
+      - name: Run manual prospective pilot
+        env:
+          CORE43_PILOT_WRITE: ${{ inputs.confirm_write && 'I_CONFIRM_EXPERIMENTAL_INSERT' || 'DRY_RUN' }}
+        run: node scripts/core43_manual_prospective_archive_pilot.cjs
