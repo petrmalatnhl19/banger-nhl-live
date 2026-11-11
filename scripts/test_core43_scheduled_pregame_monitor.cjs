@@ -1,0 +1,20 @@
+"use strict";
+const assert=require("node:assert/strict");
+const {discoverUpcomingGames,run}=require("./core43_scheduled_pregame_monitor.cjs");
+const now="2026-11-11T12:00:00Z";
+const schedules=[{game_id:42,away_team:"DAL",home_team:"NYR",kickoff_at:"2026-11-11T13:00:00Z",fetched_at:"2026-11-11T11:00:00Z"},{game_id:43,away_team:"TOR",home_team:"BOS",kickoff_at:"2026-11-11T10:00:00Z",fetched_at:"2026-11-11T09:00:00Z"}];
+const predictions=[{game_id:42,away_team:"DAL",home_team:"NYR",core42_predicted_at:"2026-11-11T11:30:00Z",core42_away:3,core42_home:2.8}];
+const games=discoverUpcomingGames({schedules,predictions,now});
+assert.equal(games.length,1);assert.equal(games[0].baselineReady,true);
+assert.equal(discoverUpcomingGames({schedules,predictions:[],now})[0].baselineReady,false);
+assert.equal(discoverUpcomingGames({schedules:[{...schedules[0],fetched_at:"2026-11-11T12:05:00Z"}],predictions,now}).length,0);
+assert.throws(()=>discoverUpcomingGames({schedules,now:"bad"}),/invalid_window/);
+(async()=>{
+ const fetchImpl=async(url)=>({ok:true,json:async()=>url.includes("nhl_core43_schedule_snapshots")?schedules:url.includes("nhl_prediction_archive")?predictions:[]});
+ const result=await run({url:"https://example.supabase.co",key:"test-secret",now,fetchImpl});
+ assert.equal(result.mode,"read_only_pregame_monitor");
+ assert.equal(result.archived,0);
+ assert.equal(result.checked,1);
+ assert.equal(result.ready,0);
+ console.log("CORE 4.3 scheduled pregame monitor tests passed");
+})().catch(e=>{console.error(e);process.exitCode=1});
