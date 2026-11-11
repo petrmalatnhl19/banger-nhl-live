@@ -1,0 +1,14 @@
+"use strict";
+const fs=require("node:fs"),assert=require("node:assert/strict");
+const html=fs.readFileSync("index.html","utf8");
+const start=html.indexOf("async function loadLineupProjection(d)");
+const end=html.indexOf("async function loadGameTimeline(",start);
+assert(start>=0&&end>start);
+const code=html.slice(start,end);
+const files=["lineups.json","lineups_verified_snapshot.json","lineups_archive.json","nhl_rosters.json","rotowire_goalies.json","starting_goalies.json","lineups_changes.json"];
+for(const name of files)assert(code.includes(name),"missing lineup source "+name);
+assert(code.includes("const lineupSourcePromises=Object.fromEntries("),"source fetches should start together");
+for(const name of files)assert(code.includes("await lineupSourcePromises['"+name+"']"),"source should await prestarted fetch "+name);
+assert(code.includes("if(!response?.ok)"),"primary lineup fallback handles rejected fetch");
+for(const v of ["sr","ar","rr","gr","cr"])assert(code.includes("if("+v+"?.ok)"),"optional source handles rejected fetch "+v);
+console.log("Parallel lineup source regression checks passed");
