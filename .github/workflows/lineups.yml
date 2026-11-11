@@ -153,6 +153,11 @@ jobs:
             echo '::error title=Missing LINEUPS_PR_TOKEN::A repository secret with PR write permission is needed so frontend-smoke runs on bot-created PRs. GITHUB_TOKEN-created PRs do not trigger the required check.'
             exit 1
           fi
+      - name: Keep generated PR strictly data-only
+        run: |
+          # Existing bot PRs may still carry previously committed UI/markdown edits.
+          # Restore these files to main before create-pull-request recalculates its diff.
+          git restore --source=HEAD -- index.html lineups_diagnostics.md
       - name: Open or update lineup refresh pull request
         uses: peter-evans/create-pull-request@v7
         with:
