@@ -1,0 +1,18 @@
+"use strict";
+const assert=require("node:assert/strict");
+const {preparePregameGoalieIdentity:run}=require("./core43_new_pregame_goalie_identity.cjs");
+const observation={game_id:42,team_code:"DAL",goalie_name:"Goalie A",observed_status:"projected",observed_at:"2026-11-09T14:00:00Z",source_snapshot_at:"2026-11-09T13:00:00Z"};
+const identity={team_code:"DAL",normalized_name:"goalie a",goalie_id:"8471234",observed_at:"2026-11-09T12:00:00Z"};
+const base={gameId:42,teamCode:"DAL",predictionAt:"2026-11-09T15:00:00Z",kickoffAt:"2026-11-09T23:00:00Z",observations:[observation],identities:[identity]};
+const test=change=>run({...base,...change});
+assert.equal(test({}).goalieId,"8471234");
+assert.equal(test({}).starterStatus,"projected");
+assert.equal(test({}).persistable,false);
+assert.equal(test({observations:[{...observation,observed_status:"confirmed"}]}).verifiedStarter,false);
+assert.equal(test({identities:[{...identity,observed_at:"2026-11-10T12:00:00Z"}]}).reason,"unresolved_goalie_identity");
+assert.equal(test({identities:[identity,{...identity,goalie_id:"8479999"}]}).reason,"ambiguous_goalie_identity");
+assert.equal(test({observations:[observation,{...observation,goalie_name:"Goalie B"}]}).reason,"unresolved_goalie_identity");
+assert.equal(test({observations:[{...observation,observed_at:"2026-11-09T16:00:00Z"}]}).reason,"missing_pregame_observation");
+assert.equal(test({predictionAt:base.kickoffAt}).reason,"invalid_pregame_context");
+assert.equal(test({observations:[{...observation,observed_status:"unknown"}]}).reason,"invalid_latest_status");
+console.log("CORE 4.3 new pregame goalie identity gate tests passed");
