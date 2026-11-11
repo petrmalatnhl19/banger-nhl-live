@@ -1,8 +1,8 @@
 {
-  "checkedAt": "2026-11-10T19:28:14.970520+00:00",
+  "checkedAt": "2026-11-11T07:53:07.266119+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "candidateCount": 94,
-  "matchedCount": 94,
+  "matchedCount": 80,
   "matches": [
     {
       "team": "ANA",
@@ -106,16 +106,6 @@
     },
     {
       "team": "CBJ",
-      "goalie": "Cam Talbot",
-      "opponent": "FLA",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-10",
-      "gameId": 2026020289,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "CBJ",
       "goalie": "Jet Greaves",
       "opponent": "TBL",
       "venue": "home",
@@ -187,16 +177,6 @@
     {
       "team": "COL",
       "goalie": "Mackenzie Blackwood",
-      "opponent": "TOR",
-      "venue": "away",
-      "status": "confirmed",
-      "date": "2026-11-10",
-      "gameId": 2026020286,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "COL",
-      "goalie": "Mackenzie Blackwood",
       "opponent": "OTT",
       "venue": "away",
       "status": "projected",
@@ -242,16 +222,6 @@
       "status": "projected",
       "date": "2026-11-15",
       "gameId": 2026020327,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "DET",
-      "goalie": "John Gibson",
-      "opponent": "STL",
-      "venue": "away",
-      "status": "confirmed",
-      "date": "2026-11-10",
-      "gameId": 2026020290,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -307,16 +277,6 @@
     {
       "team": "FLA",
       "goalie": "Jacob Markstrom",
-      "opponent": "CBJ",
-      "venue": "away",
-      "status": "confirmed",
-      "date": "2026-11-10",
-      "gameId": 2026020289,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "FLA",
-      "goalie": "Jacob Markstrom",
       "opponent": "DET",
       "venue": "home",
       "status": "projected",
@@ -347,16 +307,6 @@
     {
       "team": "LAK",
       "goalie": "Darcy Kuemper",
-      "opponent": "NSH",
-      "venue": "home",
-      "status": "projected",
-      "date": "2026-11-10",
-      "gameId": 2026020292,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "LAK",
-      "goalie": "Darcy Kuemper",
       "opponent": "NYI",
       "venue": "home",
       "status": "projected",
@@ -377,16 +327,6 @@
     {
       "team": "MIN",
       "goalie": "Jesper Wallstedt",
-      "opponent": "MTL",
-      "venue": "away",
-      "status": "projected",
-      "date": "2026-11-10",
-      "gameId": 2026020287,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "MIN",
-      "goalie": "Jesper Wallstedt",
       "opponent": "TOR",
       "venue": "away",
       "status": "projected",
@@ -402,16 +342,6 @@
       "status": "projected",
       "date": "2026-11-14",
       "gameId": 2026020313,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "MTL",
-      "goalie": "Jacob Fowler",
-      "opponent": "MIN",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-10",
-      "gameId": 2026020287,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -446,16 +376,6 @@
     },
     {
       "team": "NJD",
-      "goalie": "Jake Allen",
-      "opponent": "WPG",
-      "venue": "away",
-      "status": "confirmed",
-      "date": "2026-11-10",
-      "gameId": 2026020291,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "NJD",
       "goalie": "Connor Hellebuyck",
       "opponent": "WSH",
       "venue": "home",
@@ -472,16 +392,6 @@
       "status": "projected",
       "date": "2026-11-14",
       "gameId": 2026020318,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "NSH",
-      "goalie": "Juuse Saros",
-      "opponent": "LAK",
-      "venue": "away",
-      "status": "projected",
-      "date": "2026-11-10",
-      "gameId": 2026020292,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -562,16 +472,6 @@
       "status": "projected",
       "date": "2026-11-16",
       "gameId": 2026020331,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "OTT",
-      "goalie": "Samuel Ersson",
-      "opponent": "WSH",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-10",
-      "gameId": 2026020288,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -697,16 +597,6 @@
     {
       "team": "STL",
       "goalie": "Joel Hofer",
-      "opponent": "DET",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-10",
-      "gameId": 2026020290,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "STL",
-      "goalie": "Joel Hofer",
       "opponent": "UTA",
       "venue": "away",
       "status": "projected",
@@ -752,16 +642,6 @@
       "status": "projected",
       "date": "2026-11-14",
       "gameId": 2026020316,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "TOR",
-      "goalie": "Sergei Bobrovsky",
-      "opponent": "COL",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-10",
-      "gameId": 2026020286,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -886,16 +766,6 @@
     },
     {
       "team": "WPG",
-      "goalie": "Nico Daws",
-      "opponent": "NJD",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-10",
-      "gameId": 2026020291,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "WPG",
       "goalie": "Stuart Skinner",
       "opponent": "DAL",
       "venue": "away",
@@ -912,16 +782,6 @@
       "status": "projected",
       "date": "2026-11-14",
       "gameId": 2026020312,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "WSH",
-      "goalie": "Logan Thompson",
-      "opponent": "OTT",
-      "venue": "away",
-      "status": "projected",
-      "date": "2026-11-10",
-      "gameId": 2026020288,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -945,5 +805,104 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     }
   ],
-  "unmatched": []
+  "unmatched": [
+    {
+      "team": "CBJ",
+      "goalie": "Cam Talbot",
+      "opponent": "FLA",
+      "venue": "home",
+      "status": "confirmed"
+    },
+    {
+      "team": "COL",
+      "goalie": "Mackenzie Blackwood",
+      "opponent": "TOR",
+      "venue": "away",
+      "status": "confirmed"
+    },
+    {
+      "team": "DET",
+      "goalie": "John Gibson",
+      "opponent": "STL",
+      "venue": "away",
+      "status": "confirmed"
+    },
+    {
+      "team": "FLA",
+      "goalie": "Jacob Markstrom",
+      "opponent": "CBJ",
+      "venue": "away",
+      "status": "confirmed"
+    },
+    {
+      "team": "LAK",
+      "goalie": "Anton Forsberg",
+      "opponent": "NSH",
+      "venue": "home",
+      "status": "confirmed"
+    },
+    {
+      "team": "MIN",
+      "goalie": "Jesper Wallstedt",
+      "opponent": "MTL",
+      "venue": "away",
+      "status": "confirmed"
+    },
+    {
+      "team": "MTL",
+      "goalie": "Jacob Fowler",
+      "opponent": "MIN",
+      "venue": "home",
+      "status": "confirmed"
+    },
+    {
+      "team": "NJD",
+      "goalie": "Jake Allen",
+      "opponent": "WPG",
+      "venue": "away",
+      "status": "confirmed"
+    },
+    {
+      "team": "NSH",
+      "goalie": "Juuse Saros",
+      "opponent": "LAK",
+      "venue": "away",
+      "status": "confirmed"
+    },
+    {
+      "team": "OTT",
+      "goalie": "Samuel Ersson",
+      "opponent": "WSH",
+      "venue": "home",
+      "status": "confirmed"
+    },
+    {
+      "team": "STL",
+      "goalie": "Joel Hofer",
+      "opponent": "DET",
+      "venue": "home",
+      "status": "confirmed"
+    },
+    {
+      "team": "TOR",
+      "goalie": "Sergei Bobrovsky",
+      "opponent": "COL",
+      "venue": "home",
+      "status": "confirmed"
+    },
+    {
+      "team": "WPG",
+      "goalie": "Nico Daws",
+      "opponent": "NJD",
+      "venue": "home",
+      "status": "confirmed"
+    },
+    {
+      "team": "WSH",
+      "goalie": "Logan Thompson",
+      "opponent": "OTT",
+      "venue": "away",
+      "status": "confirmed"
+    }
+  ]
 }

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T19:28:11.314144+00:00",
+  "generatedAt": "2026-11-11T07:53:04.523815+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -34,8 +34,8 @@
     "kings": {
       "team": "LAK",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/pittsburgh-penguins-los-angeles-kings-game-preview-november-7-2026",
-      "candidatePublishedAt": "2026-11-07T19:22:47.795000+00:00",
+      "candidateSource": "https://www.nhl.com/news/nashville-predators-los-angeles-kings-game-preview-november-10-2026",
+      "candidatePublishedAt": "2026-11-10T20:22:05.537000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -97,19 +97,25 @@
     "senators": {
       "team": "OTT",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/washington-capitals-ottawa-senators-game-preview-november-10-2026",
-      "candidatePublishedAt": "2026-11-10T18:15:42.415000+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-10T20:13:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
+      "gameEvidenceExceptions": [
+        {
+          "player": "Philip Tomasino",
+          "role": "forwards",
+          "basis": "official game boxscore on projection publication date"
+        }
+      ],
       "roleMismatches": [],
       "rejectedLines": [
         {
           "group": "forwards",
           "line": 4,
           "players": [
-            "Samuel Blais",
-            "Philip Tomasino"
+            "Samuel Blais"
           ],
           "sourceLine": [
             "Samuel Blais",
@@ -121,11 +127,6 @@
       "rejectedPlayerReasons": [
         {
           "name": "Samuel Blais",
-          "expectedRole": "forwards",
-          "reason": "not_in_current_roster"
-        },
-        {
-          "name": "Philip Tomasino",
           "expectedRole": "forwards",
           "reason": "not_in_current_roster"
         }
@@ -153,7 +154,7 @@
       "team": "WPG",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-10T18:10:00+00:00",
+      "candidatePublishedAt": "2026-11-10T20:13:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -254,7 +255,7 @@
       "team": "DET",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-10T18:10:00+00:00",
+      "candidatePublishedAt": "2026-11-10T20:13:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
