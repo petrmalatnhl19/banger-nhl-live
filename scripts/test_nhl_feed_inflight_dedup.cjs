@@ -1,0 +1,26 @@
+"use strict";
+const assert=require("node:assert/strict");
+const fs=require("node:fs");
+const vm=require("node:vm");
+const html=fs.readFileSync("index.html","utf8");
+const start=html.indexOf("const bangerNhlFeedInflight=new Map();");
+const end=html.indexOf("function state(v)",start);
+assert(start>=0&&end>start,"NHL feed wrapper must exist");
+let requests=0,release;
+const wait=new Promise(resolve=>{release=resolve});
+const sandbox={Map,encodeURIComponent,fetch:async()=>{requests++;await wait;return {ok:true,json:async()=>({games:[1]})}}};
+vm.createContext(sandbox);
+vm.runInContext(html.slice(start,end)+"\nthis.testGet=get;",sandbox);
+(async()=>{
+ const a=sandbox.testGet("https://api-web.nhle.com/v1/score/2026-11-11");
+ const b=sandbox.testGet("https://api-web.nhle.com/v1/score/2026-11-11");
+ await Promise.resolve();
+ assert.equal(requests,1,"concurrent identical requests must share one fetch");
+ release();
+ const results=await Promise.all([a,b]);
+ assert.equal(results[0].games[0],1);assert.equal(results[1].games[0],1);
+ await sandbox.testGet("https://api-web.nhle.com/v1/score/2026-11-11");
+ assert.equal(requests,2,"completed requests must not remain cached");
+ assert(html.includes("if(!document.hidden&&S.tab==='games')games()"),"hidden tab polling should be skipped");
+ console.log("NHL feed request deduplication tests passed");
+})().catch(e=>{console.error(e);process.exitCode=1});
