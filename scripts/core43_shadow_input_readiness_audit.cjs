@@ -5,7 +5,7 @@ const validDate=value=>typeof value==="string"&&Number.isFinite(Date.parse(value
 function audit(rows=[]){
  const totals={rows:rows.length,games:new Set(rows.map(r=>String(r.game_id))).size,
   missingGoalieId:0,missingGsax:0,missingPredictionAt:0,
-  futureCaptured:0,missingStarterPublishedAt:0,publishedAfterPrediction:0,
+  futureCaptured:0,capturedWithinFiveMinutes:0,capturedMoreThanFiveMinutesLate:0,missingCaptureTime:0,missingStarterPublishedAt:0,publishedAfterPrediction:0,
   missingStarterVerifiedAt:0,verifiedAfterPrediction:0,
   confirmed:0,projected:0,unavailable:0,otherReadiness:0,
   fullyTimeQualified:0};
@@ -16,8 +16,16 @@ function audit(rows=[]){
   if(r.gsax===null||r.gsax===undefined){totals.missingGsax++;reasons.push("missing_gsax");}
   const at=validDate(r.prediction_at)?Date.parse(r.prediction_at):null;
   if(at===null){totals.missingPredictionAt++;reasons.push("missing_prediction_time");}
-  if(validDate(r.captured_at)&&at!==null&&Date.parse(r.captured_at)>at){
-   totals.futureCaptured++;reasons.push("captured_after_prediction");
+  if(!validDate(r.captured_at)){totals.missingCaptureTime++;reasons.push("missing_capture_time");}
+  else if(at!==null){
+   const lag=Date.parse(r.captured_at)-at;
+   if(lag>0){
+    totals.futureCaptured++;
+    // Storage capture is not proof of source publication. Small positive lag
+    // is normal for asynchronous writes, but cannot establish pregame provenance.
+    if(lag<=300000)totals.capturedWithinFiveMinutes++;
+    else {totals.capturedMoreThanFiveMinutesLate++;reasons.push("capture_delayed_over_five_minutes");}
+   }
   }
   if(!validDate(r.starter_published_at)){totals.missingStarterPublishedAt++;reasons.push("missing_publication_time");}
   else if(at===null||Date.parse(r.starter_published_at)>at){
@@ -31,7 +39,8 @@ function audit(rows=[]){
   else if(r.readiness==="ready_projected")totals.projected++;
   else if(!r.readiness||r.readiness==="unavailable")totals.unavailable++;
   else totals.otherReadiness++;
-  if(reasons.length===0)totals.fullyTimeQualified++;
+  // Qualification requires independently timestamped source data, not capture time alone.
+  if(reasons.length===0&&validDate(r.starter_published_at)&&validDate(r.starter_verified_at))totals.fullyTimeQualified++;
   else {
    const id=String(r.game_id);
    if(!reasonsByGame[id])reasonsByGame[id]=[];
