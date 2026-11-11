@@ -1,0 +1,11 @@
+"use strict";
+const fs=require("node:fs"),assert=require("node:assert/strict");
+const html=fs.readFileSync("index.html","utf8");
+assert(html.includes("loadBoxscore(id,d);loadLineupProjection(d)"),"detail must pass landing payload to boxscore");
+const start=html.indexOf("async function loadBoxscore(id,landing=null)");
+assert(start>=0,"boxscore must accept existing landing payload");
+const end=html.indexOf("\nasync function ",start+20);
+const code=html.slice(start,end<0?start+12000:end);
+assert(code.includes("const d=await get('https://api-web.nhle.com/v1/gamecenter/'+id+'/boxscore')"),"boxscore still fetched");
+assert(!code.includes("get('https://api-web.nhle.com/v1/gamecenter/'+id+'/landing')"),"boxscore must not re-fetch landing");
+console.log("Detail landing reuse regression checks passed");
