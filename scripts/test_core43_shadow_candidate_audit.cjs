@@ -5,6 +5,10 @@ const schedules=[{game_id:42,away_team:"DAL",home_team:"NJD",kickoff_at:"2026-11
 const inputs=["away","home"].map((side,i)=>({game_id:42,side,team_code:side==="away"?"DAL":"NJD",goalie_id:String(100+i),readiness:"ready",starter_status:"confirmed",gsax:2,shots_against:100,prediction_at:"2026-11-09T15:00:00Z",captured_at:"2026-11-09T14:00:00Z",gsax_fetched_at:"2026-11-09T13:00:00Z",starter_published_at:"2026-11-09T12:00:00Z",starter_verified_at:"2026-11-09T13:00:00Z"}));
 const check=shadowInputs=>run({archive,schedules,shadowInputs})[0];
 assert.equal(check(inputs).ready,true);
+const asyncCaptured=inputs.map(x=>({...x,captured_at:"2026-11-09T15:00:01Z"}));
+assert.equal(check(asyncCaptured).ready,true);
+assert.equal(check([asyncCaptured[0],{...asyncCaptured[1],captured_at:"2026-11-09T15:06:00Z"}]).reason,"delayed_home_capture");
+assert.equal(check([asyncCaptured[0],{...asyncCaptured[1],starter_verified_at:"2026-11-09T15:00:02Z"}]).reason,"late_home_evidence");
 assert.equal(check([inputs[0]]).ready,false);
 assert.equal(check([inputs[0],{...inputs[1],gsax_fetched_at:"2026-11-09T16:00:00Z"}]).reason,"late_home_evidence");
 assert.equal(check([inputs[0],{...inputs[1],goalie_id:"100"}]).reason,"duplicate_goalie_identity");

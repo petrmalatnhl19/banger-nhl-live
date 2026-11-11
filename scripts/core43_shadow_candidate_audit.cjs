@@ -33,7 +33,12 @@ function auditShadowCandidates({archive=[],schedules=[],shadowInputs=[],suspectS
    if(x.readiness!=="ready"||!x.goalie_id||x.starter_status!=="confirmed")return fail("unverified_"+side+"_starter");
    if(![x.prediction_at,x.captured_at,x.gsax_fetched_at,x.starter_published_at,x.starter_verified_at].every(validTime))return fail("missing_"+side+"_timestamps");
    const at=Date.parse(x.prediction_at);
-   if(at<=predicted||at>=kickoff||[x.captured_at,x.gsax_fetched_at,x.starter_published_at,x.starter_verified_at].some(t=>Date.parse(t)>at))return fail("late_"+side+"_evidence");
+   if(at<=predicted||at>=kickoff)return fail("invalid_"+side+"_prediction_time");
+   // captured_at is the database write time, not when source evidence became available.
+   // Permit only short asynchronous archive latency; never allow a late source timestamp.
+   const captureLag=Date.parse(x.captured_at)-at;
+   if(captureLag>300000)return fail("delayed_"+side+"_capture");
+   if([x.gsax_fetched_at,x.starter_published_at,x.starter_verified_at].some(t=>Date.parse(t)>at))return fail("late_"+side+"_evidence");
    if(!validNumber(x.gsax)||!Number.isInteger(x.shots_against)||x.shots_against<30)return fail("missing_"+side+"_gsax");
    sides[side]={goalieId:String(x.goalie_id),gsax:x.gsax,shots:x.shots_against,asOf:x.prediction_at};
   }
