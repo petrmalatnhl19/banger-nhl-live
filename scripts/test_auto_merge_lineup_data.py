@@ -1,5 +1,5 @@
 import unittest
-from scripts.auto_merge_lineup_data import eligible, REPO, BRANCH, TITLE, REQUIRED
+from scripts.auto_merge_lineup_data import eligible, wait_for_mergeability, REPO, BRANCH, TITLE, REQUIRED
 
 def sample():
     pr = {
@@ -14,6 +14,21 @@ def sample():
     return pr, files, checks
 
 class TestAutoMerge(unittest.TestCase):
+    def test_mergeability_poll_waits_for_github(self):
+        states = iter([{"mergeable": None}, {"mergeable": None}, {"mergeable": True}])
+        calls = []
+        result = wait_for_mergeability(lambda _: next(states), 90, attempts=4,
+                                       delay=0, sleep=lambda _: calls.append(1))
+        self.assertTrue(result["mergeable"])
+        self.assertEqual(len(calls), 2)
+    def test_mergeability_poll_does_not_override_conflict(self):
+        result = wait_for_mergeability(lambda _: {"mergeable": False}, 90,
+                                       attempts=4, delay=0, sleep=lambda _: None)
+        self.assertFalse(result["mergeable"])
+    def test_mergeability_poll_timeout_fails_closed(self):
+        result = wait_for_mergeability(lambda _: {"mergeable": None}, 90,
+                                       attempts=2, delay=0, sleep=lambda _: None)
+        self.assertIsNone(result["mergeable"])
     def test_valid_data(self):
         self.assertTrue(eligible(*sample())[0])
     def test_html_blocked(self):

@@ -4,6 +4,7 @@ import datetime as dt
 import json
 import os
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -59,6 +60,17 @@ def api(path, token, method="GET", payload=None):
     with urllib.request.urlopen(request, timeout=25) as response:
         return json.load(response)
 
+def wait_for_mergeability(fetch, number, attempts=8, delay=3, sleep=time.sleep):
+    """Poll only while GitHub has not calculated mergeability; never bypass conflicts."""
+    for attempt in range(attempts):
+        pr = fetch(f"/pulls/{number}")
+        if pr.get("mergeable") is not None:
+            return pr
+        if attempt < attempts - 1:
+            sleep(delay)
+    return pr
+
+
 def main():
     read_token = os.environ["GITHUB_TOKEN"]
     write_token = os.environ["LINEUPS_PR_TOKEN"]
@@ -68,7 +80,7 @@ def main():
         print("No unique generated data PR; skipping")
         return
     number = matches[0]["number"]
-    pr = api(f"/pulls/{number}", read_token)
+    pr = wait_for_mergeability(lambda path: api(path, read_token), number)
     # GitHub can report mergeable_state=unstable for pending checks even when
     # mergeable=True. Check the required checks explicitly below instead.
     sha = pr["head"]["sha"]
