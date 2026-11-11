@@ -45,6 +45,7 @@ jobs:
           node scripts/test_core43_archived_gsax_snapshot_adapter.cjs
           node scripts/test_core43_live_shadow_source_reader.cjs
           node scripts/test_core43_append_only_capture_writer.cjs
+          node scripts/test_core43_verify_archive_deployment.cjs
       - name: Validate configuration
         id: config
         shell: bash
