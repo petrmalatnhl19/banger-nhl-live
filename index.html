@@ -1939,12 +1939,26 @@ h1,.brand,.logo,.nums,.arenanum,.metric b,.profilegrid b,
 const $=id=>document.getElementById(id),S={tab:'games',rows:[],expanded:false,date:localDate(new Date())};function localDate(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};$('date').value=S.date;
 const safe=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const bangerNhlFeedInflight=new Map();
+const bangerGameDetailCache=new Map();
+function bangerGameDetailCacheTtl(kind,data){
+ const phase=String(data?.gameState||data?.game?.gameState||'').toUpperCase();
+ return ['LIVE','CRIT'].includes(phase)?8000:['FINAL','OFF'].includes(phase)?120000:kind==='boxscore'?10000:30000;
+}
+function bangerRememberGameDetail(key,kind,data){
+ const ttl=bangerGameDetailCacheTtl(kind,data);
+ bangerGameDetailCache.delete(key);
+ bangerGameDetailCache.set(key,{data,expires:Date.now()+ttl});
+ while(bangerGameDetailCache.size>24)bangerGameDetailCache.delete(bangerGameDetailCache.keys().next().value);
+}
 async function get(url,start=0){const base="https://xxwqeiuyislnoxsmjuul.supabase.co/functions/v1/nhl-feed";let kind,extra="";if(url.includes("/gamecenter/")){kind=url.includes("/boxscore")?"boxscore":"game";extra="&id="+encodeURIComponent(url.split("/gamecenter/")[1].split("/")[0])}else if(url.includes("/score/")){kind="score";extra="&date="+encodeURIComponent(url.split("/score/")[1])}else{kind=url.includes("/goalie/")?"goalies":"skaters";extra="&start="+start}
 const requestUrl=base+"?kind="+kind+extra;
+const cacheable=kind==='game'||kind==='boxscore';
+const cached=cacheable?bangerGameDetailCache.get(requestUrl):null;
+if(cached&&cached.expires>Date.now())return cached.data;
 if(bangerNhlFeedInflight.has(requestUrl))return bangerNhlFeedInflight.get(requestUrl);
-const request=(async()=>{const r=await fetch(requestUrl,{headers:{"apikey":"sb_publishable_SfeHMIvUkYTuD3jCrWub8w_fPIY0B-G"}});if(!r.ok)throw Error("Supabase NHL feed HTTP "+r.status);return r.json()})();
+const request=(async()=>{const r=await fetch(requestUrl,{headers:{"apikey":"sb_publishable_SfeHMIvUkYTuD3jCrWub8w_fPIY0B-G"}});if(!r.ok)throw Error("Supabase NHL feed HTTP "+r.status);const data=await r.json();if(cacheable)bangerRememberGameDetail(requestUrl,kind,data);return data})();
 bangerNhlFeedInflight.set(requestUrl,request);
-try{return await request}finally{if(bangerNhlFeedInflight.get(requestUrl)===request)bangerNhlFeedInflight.delete(requestUrl)}
+try{return await request}catch(e){if(cached&&Date.now()-cached.expires<15000)return cached.data;throw e}finally{if(bangerNhlFeedInflight.get(requestUrl)===request)bangerNhlFeedInflight.delete(requestUrl)}
 }
 function state(v){return ({LIVE:'🔴 ŽIVĚ',CRIT:'🔴 ŽIVĚ',FINAL:'KONEC',OFF:'KONEC',FUT:'PLÁNOVÁNO',PRE:'PŘED ZÁPASEM'})[v]||v||'—'}
 function team(t){const code=String(t?.abbrev||'').toUpperCase();return '<div class="team"'+(/^[A-Z]{3}$/.test(code)?' data-team="'+safe(code)+'" role="button" tabindex="0" title="Otevřít profil týmu"':'')+'>'+(t?.logo?'<img src="'+safe(t.logo)+'" alt="">':'')+safe(code||'NHL')+'</div>'}
