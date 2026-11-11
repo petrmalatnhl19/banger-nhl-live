@@ -8,6 +8,7 @@ function audit(rows=[]){
   futureCaptured:0,capturedWithinFiveMinutes:0,capturedMoreThanFiveMinutesLate:0,missingCaptureTime:0,missingStarterPublishedAt:0,publishedAfterPrediction:0,
   missingStarterVerifiedAt:0,verifiedAfterPrediction:0,
   confirmed:0,projected:0,unavailable:0,otherReadiness:0,
+  frozenReady:0,missingPregameStarterEvidence:0,missingFrozenGoalieId:0,
   fullyTimeQualified:0};
  const reasonsByGame={};
  for(const r of rows){
@@ -35,10 +36,13 @@ function audit(rows=[]){
   else if(at===null||Date.parse(r.starter_verified_at)>at){
    totals.verifiedAfterPrediction++;reasons.push("verified_after_prediction");
   }
+  if(r.readiness==="ready"){totals.frozenReady++;if(r.starter_status!=="confirmed")reasons.push("ready_without_confirmed_starter");}
+  else if(r.readiness==="missing_pregame_starter_evidence")totals.missingPregameStarterEvidence++;
+  else if(r.readiness==="missing_frozen_goalie_id")totals.missingFrozenGoalieId++;
   if(r.readiness==="ready_confirmed")totals.confirmed++;
   else if(r.readiness==="ready_projected")totals.projected++;
   else if(!r.readiness||r.readiness==="unavailable")totals.unavailable++;
-  else totals.otherReadiness++;
+  else if(!["ready","missing_pregame_starter_evidence","missing_frozen_goalie_id"].includes(r.readiness))totals.otherReadiness++;
   // Qualification requires independently timestamped source data, not capture time alone.
   if(reasons.length===0&&validDate(r.starter_published_at)&&validDate(r.starter_verified_at))totals.fullyTimeQualified++;
   else {
@@ -55,7 +59,7 @@ function audit(rows=[]){
 async function run({url,key,fetchImpl=fetch}){
  if(!key)throw Error("Missing server-side SUPABASE_SECRET_KEY");
  const rows=await fetchRows({url,key,table:"nhl_core43_shadow_inputs",
-  select:"game_id,side,goalie_id,gsax,prediction_at,captured_at,starter_published_at,starter_verified_at,readiness",
+  select:"game_id,side,goalie_id,gsax,prediction_at,captured_at,starter_published_at,starter_verified_at,starter_status,readiness",
   fetchImpl});
  return audit(rows);
 }
