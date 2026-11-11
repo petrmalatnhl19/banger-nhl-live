@@ -43,6 +43,7 @@ jobs:
           node scripts/test_core43_capture_new_shadow.cjs
           node scripts/test_core43_pregame_source_assembly.cjs
           node scripts/test_core43_archived_gsax_snapshot_adapter.cjs
+          node scripts/test_core43_live_shadow_source_reader.cjs
       - name: Validate configuration
         id: config
         shell: bash
