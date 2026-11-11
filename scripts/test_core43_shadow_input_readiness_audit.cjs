@@ -29,4 +29,11 @@ result=audit([{...base,readiness:"ready_confirmed",starter_verified_at:"2026-11-
 assert.equal(result.confirmed,1);
 assert.equal(result.verifiedAfterPrediction,1);
 assert.equal(result.fullyTimeQualified,0);
+result=audit([{...base,readiness:"ready",starter_status:"confirmed"},{...base,game_id:3,readiness:"missing_pregame_starter_evidence"},{...base,game_id:4,goalie_id:null,readiness:"missing_frozen_goalie_id"}]);
+assert.equal(result.frozenReady,1);
+assert.equal(result.missingPregameStarterEvidence,1);
+assert.equal(result.missingFrozenGoalieId,1);
+assert.equal(result.otherReadiness,0);
+result=audit([{...base,readiness:"ready",starter_status:null}]);
+assert.equal(result.issueCounts.ready_without_confirmed_starter,1);
 console.log("CORE 4.3 shadow input readiness audit tests passed");
