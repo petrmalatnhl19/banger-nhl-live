@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-11T07:53:05.810965+00:00",
+  "generatedAt": "2026-11-11T08:58:11.496626+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 16,
+  "currentProjections": 14,
   "needsFreshProjection": [
     "blackhawks",
     "bruins",
@@ -12,6 +12,7 @@
     "flyers",
     "golden knights",
     "hurricanes",
+    "islanders",
     "kraken",
     "lightning",
     "mammoth",
@@ -19,6 +20,7 @@
     "penguins",
     "rangers",
     "sabres",
+    "sharks",
     "stars"
   ],
   "missing": [],
@@ -31,6 +33,7 @@
     "flyers",
     "golden knights",
     "hurricanes",
+    "islanders",
     "kraken",
     "lightning",
     "mammoth",
@@ -38,6 +41,7 @@
     "penguins",
     "rangers",
     "sabres",
+    "sharks",
     "stars"
   ],
   "manualSnapshots": [],
@@ -218,11 +222,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-09T20:11:00+00:00",
       "source": "https://www.nhl.com/news/new-york-islanders-san-jose-sharks-game-preview-november-9-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "jets": {
       "hasProjectedLines": true,
@@ -400,11 +404,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-09T20:11:00+00:00",
       "source": "https://www.nhl.com/news/new-york-islanders-san-jose-sharks-game-preview-november-9-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "stars": {
       "hasProjectedLines": true,
