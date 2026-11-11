@@ -34,9 +34,13 @@ jobs:
             echo "ready=true" >> "$GITHUB_OUTPUT"
           else
             echo "ready=false" >> "$GITHUB_OUTPUT"
-            echo "::warning::Read-only pregame monitor skipped: missing Supabase secrets"
-            echo "Pregame monitor skipped: missing secrets" >> "$GITHUB_STEP_SUMMARY"
+            echo "::error::Read-only pregame monitor cannot run: missing Supabase secrets"
+            echo "Pregame monitor failed: missing Supabase secrets" >> "$GITHUB_STEP_SUMMARY"
+            exit 1
           fi
+      - name: Verify archive REST access without writes
+        if: steps.config.outputs.ready == 'true'
+        run: node scripts/core43_verify_archive_deployment.cjs
       - name: Inspect upcoming games without writes
         if: steps.config.outputs.ready == 'true'
         run: |
