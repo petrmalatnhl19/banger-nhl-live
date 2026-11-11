@@ -1,6 +1,6 @@
 {
   "date": "2026-11-11",
-  "updatedAt": "2026-11-11T13:09:09.907372+00:00",
+  "updatedAt": "2026-11-11T17:33:58.540142+00:00",
   "teams": {
     "ANA": {
       "name": "Laurent Brossoit",
@@ -8,16 +8,16 @@
       "date": "2026-11-11",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-11T13:09:09.907372+00:00",
+      "checkedAt": "2026-11-11T17:33:58.540142+00:00",
       "gameId": 2026020297
     },
     "CGY": {
-      "name": "Dustin Wolf",
-      "status": "projected",
+      "name": "Devin Cooley",
+      "status": "confirmed",
       "date": "2026-11-11",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-11T13:09:09.907372+00:00",
+      "checkedAt": "2026-11-11T17:33:58.540142+00:00",
       "gameId": 2026020294
     },
     "EDM": {
@@ -26,16 +26,16 @@
       "date": "2026-11-11",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-11T13:09:09.907372+00:00",
+      "checkedAt": "2026-11-11T17:33:58.540142+00:00",
       "gameId": 2026020295
     },
     "NYR": {
-      "name": "Dylan Garand",
-      "status": "projected",
+      "name": "Joonas Korpisalo",
+      "status": "confirmed",
       "date": "2026-11-11",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-11T13:09:09.907372+00:00",
+      "checkedAt": "2026-11-11T17:33:58.540142+00:00",
       "gameId": 2026020294
     },
     "PIT": {
@@ -44,7 +44,7 @@
       "date": "2026-11-11",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-11T13:09:09.907372+00:00",
+      "checkedAt": "2026-11-11T17:33:58.540142+00:00",
       "gameId": 2026020298
     },
     "SJS": {
@@ -53,7 +53,7 @@
       "date": "2026-11-11",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-11T13:09:09.907372+00:00",
+      "checkedAt": "2026-11-11T17:33:58.540142+00:00",
       "gameId": 2026020298
     },
     "TBL": {
@@ -62,7 +62,7 @@
       "date": "2026-11-11",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-11T13:09:09.907372+00:00",
+      "checkedAt": "2026-11-11T17:33:58.540142+00:00",
       "gameId": 2026020293
     }
   },

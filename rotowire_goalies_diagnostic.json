@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-11T13:09:09.273652+00:00",
+  "checkedAt": "2026-11-11T17:33:57.980825+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "candidateCount": 102,
   "matchedCount": 102,
@@ -166,10 +166,10 @@
     },
     {
       "team": "CGY",
-      "goalie": "Dustin Wolf",
+      "goalie": "Devin Cooley",
       "opponent": "NYR",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-11",
       "gameId": 2026020294,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -576,10 +576,10 @@
     },
     {
       "team": "NYR",
-      "goalie": "Dylan Garand",
+      "goalie": "Joonas Korpisalo",
       "opponent": "CGY",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-11",
       "gameId": 2026020294,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"

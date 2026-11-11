@@ -6,17 +6,6 @@
   "incompleteTeams": 7,
   "teams": [
     {
-      "team": "canadiens",
-      "status": "incomplete_projection",
-      "reason": "incomplete_source_or_no_validated_replacement",
-      "missingForwardLines": 1,
-      "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T20:13:00+00:00",
-      "rejectedLines": [],
-      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
-    },
-    {
       "team": "canucks",
       "status": "incomplete_projection",
       "reason": "incomplete_source_or_no_validated_replacement",
@@ -33,8 +22,19 @@
       "reason": "incomplete_source_or_no_validated_replacement",
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T20:13:00+00:00",
+      "source": "https://www.nhl.com/news/new-jersey-devils-winnipeg-jets-game-preview-november-10-2026",
+      "publishedAt": "2026-11-10T17:56:14.254000+00:00",
+      "rejectedLines": [],
+      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
+    },
+    {
+      "team": "ducks",
+      "status": "incomplete_projection",
+      "reason": "incomplete_source_or_no_validated_replacement",
+      "missingForwardLines": 1,
+      "missingDefensePairs": 0,
+      "source": "https://www.nhl.com/news/pittsburgh-penguins-anaheim-ducks-game-preview-november-8-2026",
+      "publishedAt": "2026-11-08T17:06:43.294000+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
@@ -117,8 +117,8 @@
       "reason": "rejected_roster_lines",
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T20:13:00+00:00",
+      "source": "https://www.nhl.com/news/washington-capitals-ottawa-senators-game-preview-november-10-2026",
+      "publishedAt": "2026-11-10T18:15:42.415000+00:00",
       "rejectedLines": [
         {
           "group": "forwards",

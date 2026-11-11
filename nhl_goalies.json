@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-11T13:09:10.043131+00:00",
-  "rostersUpdatedAt": "2026-11-11T13:08:32.542906+00:00",
+  "updatedAt": "2026-11-11T17:33:58.654011+00:00",
+  "rostersUpdatedAt": "2026-11-11T17:33:28.428366+00:00",
   "projectionDate": "2026-11-11",
   "teamCount": 32,
   "goalieCount": 74,
@@ -195,17 +195,17 @@
       "team": "CGY",
       "teamKey": "flames",
       "playerId": 8482445,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-11",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Dustin Wolf",
       "team": "CGY",
       "teamKey": "flames",
       "playerId": 8481692,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-11",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Dan Vladar",
@@ -463,17 +463,17 @@
       "team": "NYR",
       "teamKey": "rangers",
       "playerId": 8482193,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-11",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Joonas Korpisalo",
       "team": "NYR",
       "teamKey": "rangers",
       "playerId": 8476914,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-11",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Igor Shesterkin",

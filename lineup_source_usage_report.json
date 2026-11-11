@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-11T13:09:06.065904+00:00",
+  "generatedAt": "2026-11-11T17:33:55.406993+00:00",
   "teams": 32,
   "activeSourceCounts": {
     "nhl.com": 32
@@ -26,8 +26,8 @@
     {
       "team": "avalanche",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T20:13:00+00:00",
+      "source": "https://www.nhl.com/news/colorado-avalanche-toronto-maple-leafs-game-preview-november-10-2026",
+      "publishedAt": "2026-11-10T17:52:49.175000+00:00",
       "sourceType": null
     },
     {
@@ -40,15 +40,15 @@
     {
       "team": "blue jackets",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T20:13:00+00:00",
+      "source": "https://www.nhl.com/news/florida-panthers-columbus-blue-jackets-game-preview-november-10-2026",
+      "publishedAt": "2026-11-10T17:59:16.582000+00:00",
       "sourceType": null
     },
     {
       "team": "blues",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T20:13:00+00:00",
+      "source": "https://www.nhl.com/news/detroit-red-wings-st-louis-blues-game-preview-november-10-2026",
+      "publishedAt": "2026-11-10T18:07:31.619000+00:00",
       "sourceType": null
     },
     {
@@ -61,8 +61,8 @@
     {
       "team": "canadiens",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T20:13:00+00:00",
+      "source": "https://www.nhl.com/news/minnesota-wild-montreal-canadiens-game-preview-november-10-2026",
+      "publishedAt": "2026-11-10T17:05:50.294000+00:00",
       "sourceType": null
     },
     {
@@ -75,15 +75,15 @@
     {
       "team": "capitals",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T20:13:00+00:00",
+      "source": "https://www.nhl.com/news/washington-capitals-ottawa-senators-game-preview-november-10-2026",
+      "publishedAt": "2026-11-10T18:15:42.415000+00:00",
       "sourceType": null
     },
     {
       "team": "devils",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T20:13:00+00:00",
+      "source": "https://www.nhl.com/news/new-jersey-devils-winnipeg-jets-game-preview-november-10-2026",
+      "publishedAt": "2026-11-10T17:56:14.254000+00:00",
       "sourceType": null
     },
     {
@@ -117,8 +117,8 @@
     {
       "team": "hurricanes",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/chicago-blackhawks-carolina-hurricanes-game-preview-november-7-2026",
-      "publishedAt": "2026-11-07T17:28:41.992000+00:00",
+      "source": "https://www.nhl.com/news/carolina-hurricanes-seattle-kraken-game-preview-november-11-2026",
+      "publishedAt": "2026-11-11T14:36:12.512000+00:00",
       "sourceType": null
     },
     {
@@ -131,8 +131,8 @@
     {
       "team": "jets",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T20:13:00+00:00",
+      "source": "https://www.nhl.com/news/new-jersey-devils-winnipeg-jets-game-preview-november-10-2026",
+      "publishedAt": "2026-11-10T17:56:14.254000+00:00",
       "sourceType": null
     },
     {
@@ -145,8 +145,8 @@
     {
       "team": "kraken",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/new-york-rangers-seattle-kraken-game-preview-november-7-2026",
-      "publishedAt": "2026-11-06T22:34:00+00:00",
+      "source": "https://www.nhl.com/news/carolina-hurricanes-seattle-kraken-game-preview-november-11-2026",
+      "publishedAt": "2026-11-11T14:36:12.512000+00:00",
       "sourceType": null
     },
     {
@@ -166,8 +166,8 @@
     {
       "team": "maple leafs",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T20:13:00+00:00",
+      "source": "https://www.nhl.com/news/colorado-avalanche-toronto-maple-leafs-game-preview-november-10-2026",
+      "publishedAt": "2026-11-10T17:52:49.175000+00:00",
       "sourceType": null
     },
     {
@@ -180,8 +180,8 @@
     {
       "team": "panthers",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T20:13:00+00:00",
+      "source": "https://www.nhl.com/news/florida-panthers-columbus-blue-jackets-game-preview-november-10-2026",
+      "publishedAt": "2026-11-10T17:59:16.582000+00:00",
       "sourceType": null
     },
     {
@@ -208,8 +208,8 @@
     {
       "team": "red wings",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T20:13:00+00:00",
+      "source": "https://www.nhl.com/news/detroit-red-wings-st-louis-blues-game-preview-november-10-2026",
+      "publishedAt": "2026-11-10T18:07:31.619000+00:00",
       "sourceType": null
     },
     {
@@ -222,8 +222,8 @@
     {
       "team": "senators",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T20:13:00+00:00",
+      "source": "https://www.nhl.com/news/washington-capitals-ottawa-senators-game-preview-november-10-2026",
+      "publishedAt": "2026-11-10T18:15:42.415000+00:00",
       "sourceType": null
     },
     {
@@ -243,8 +243,8 @@
     {
       "team": "wild",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T20:13:00+00:00",
+      "source": "https://www.nhl.com/news/minnesota-wild-montreal-canadiens-game-preview-november-10-2026",
+      "publishedAt": "2026-11-10T17:05:50.294000+00:00",
       "sourceType": null
     }
   ],
