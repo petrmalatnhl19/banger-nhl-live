@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-11T13:09:05.209784+00:00",
+  "generatedAt": "2026-11-11T17:33:54.734473+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -19,8 +19,8 @@
     "hurricanes": {
       "team": "CAR",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/chicago-blackhawks-carolina-hurricanes-game-preview-november-7-2026",
-      "candidatePublishedAt": "2026-11-07T17:28:41.992000+00:00",
+      "candidateSource": "https://www.nhl.com/news/carolina-hurricanes-seattle-kraken-game-preview-november-11-2026",
+      "candidatePublishedAt": "2026-11-11T14:36:12.512000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -97,8 +97,8 @@
     "senators": {
       "team": "OTT",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-10T20:13:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/washington-capitals-ottawa-senators-game-preview-november-10-2026",
+      "candidatePublishedAt": "2026-11-10T18:15:42.415000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -153,8 +153,8 @@
     "jets": {
       "team": "WPG",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-10T20:13:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/new-jersey-devils-winnipeg-jets-game-preview-november-10-2026",
+      "candidatePublishedAt": "2026-11-10T17:56:14.254000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -254,8 +254,8 @@
     "red wings": {
       "team": "DET",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-10T20:13:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/detroit-red-wings-st-louis-blues-game-preview-november-10-2026",
+      "candidatePublishedAt": "2026-11-10T18:07:31.619000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
