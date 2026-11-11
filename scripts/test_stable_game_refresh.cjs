@@ -1,0 +1,14 @@
+"use strict";
+const fs=require("node:fs"),assert=require("node:assert/strict");
+const html=fs.readFileSync("index.html","utf8");
+const start=html.indexOf("let bangerGamesRequestId=0;");
+const end=html.indexOf("let bangerDetailRequestId=0;",start);
+assert(start>=0&&end>start,"game refresh module must exist");
+const source=html.slice(start,end);
+assert(source.includes("bangerGamesRenderedDate===S.date"),"same-date cards must be preserved");
+assert(source.includes("bangerGamesRenderedSignature===signature"),"unchanged responses must skip redraw");
+assert(source.includes("if(!keepCurrentCards)$('content').innerHTML="),"failed background refresh must preserve old cards");
+assert(source.includes("requestId!==bangerGamesRequestId"),"stale requests must remain guarded");
+assert(source.includes("uxApplyGameFilter()"),"filters must remain applied after changed data");
+new Function(source);
+console.log("Stable NHL game-list refresh regression checks passed");

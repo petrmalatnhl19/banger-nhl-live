@@ -5,6 +5,7 @@ on:
     paths:
       - index.html
       - scripts/test_nhl_feed_inflight_dedup.cjs
+      - scripts/test_stable_game_refresh.cjs
       - .github/workflows/nhl-feed-performance.yml
   workflow_dispatch:
 
@@ -20,3 +21,4 @@ jobs:
         with:
           node-version: '22'
       - run: node scripts/test_nhl_feed_inflight_dedup.cjs
+      - run: node scripts/test_stable_game_refresh.cjs
