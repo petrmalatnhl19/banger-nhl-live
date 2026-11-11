@@ -1,6 +1,5 @@
 "use strict";
 /* Experimental CORE 4.3 postgame evaluation. Read-only: no database mutations. */
-const crypto=require("node:crypto");
 const {fetchRows}=require("./core43_supabase_readonly_report.cjs");
 function evaluate(rows,game){
  if(!Array.isArray(rows)||!rows.length)return {status:"no_archived_capture",evaluated:0};
@@ -11,16 +10,16 @@ function evaluate(rows,game){
  for(const row of rows){
   const p=row.payload;
   if(!p||p.schema!=="core43_shadow_capture_v1"||p.production!==false||p.experimental!==true||p.gameId?.toString()!==String(row.game_id))throw Error("invalid_archived_capture");
-  if(!/^[a-f0-9]{64}$/.test(row.capture_sha256||"")||crypto.createHash("sha256").update(JSON.stringify(p)).digest("hex")!==row.capture_sha256)throw Error("archive_capture_hash_mismatch");
+  if(!/^[a-f0-9]{64}$/.test(row.capture_sha256||""))throw Error("missing_capture_hash");
   if(Date.parse(row.frozen_at)>=Date.parse(row.kickoff_at)||!Number.isFinite(Date.parse(row.frozen_at)))throw Error("invalid_capture_time");
   if(String(game.id)!==String(row.game_id))throw Error("game_id_mismatch");
   const away=Number(p.away),home=Number(p.home);
   if(!Number.isFinite(away)||!Number.isFinite(home)||away<0||home<0)throw Error("invalid_projected_goals");
   const actualWinner=awayGoals>homeGoals?"away":homeGoals>awayGoals?"home":"tie";
   const projectedLeader=away>home?"away":home>away?"home":"tie";
-  evaluations.push({gameId:String(row.game_id),modelVersion:row.model_version,archivedAt:row.archived_at,projectedGoals:{away,home},actualGoals:{away:awayGoals,home:homeGoals},absoluteError:{away:Number(Math.abs(away-awayGoals).toFixed(3)),home:Number(Math.abs(home-homeGoals).toFixed(3))},totalAbsoluteError:Number((Math.abs(away-awayGoals)+Math.abs(home-homeGoals)).toFixed(3)),projectedLeader,actualWinner,leaderMatched:projectedLeader===actualWinner,experimental:true});
+  evaluations.push({gameId:String(row.game_id),modelVersion:row.model_version,archivedAt:row.archived_at,projectedGoals:{away,home},actualGoals:{away:awayGoals,home:homeGoals},absoluteError:{away:Number(Math.abs(away-awayGoals).toFixed(3)),home:Number(Math.abs(home-homeGoals).toFixed(3))},totalAbsoluteError:Number((Math.abs(away-awayGoals)+Math.abs(home-homeGoals)).toFixed(3)),projectedLeader,actualWinner,leaderMatched:projectedLeader===actualWinner,experimental:true,captureSha256:row.capture_sha256});
  }
- return {status:"evaluated_read_only",evaluated:evaluations.length,results:evaluations,notice:"Projected goal leader is not a calibrated win probability. No Brier score or accuracy rate from a single game."};
+ return {status:"evaluated_read_only",evaluated:evaluations.length,results:evaluations,notice:"Projected goal leader is not a calibrated win probability. No Brier score or accuracy rate from a single game. Stored hash is retained; JSONB reorders keys, so this reader cannot independently recompute the original serialized capture digest."};
 }
 async function run({url,key,gameId,fetchImpl=fetch}={}){
  if(!/^\d+$/.test(String(gameId||"")))throw Error("invalid_game_id");
