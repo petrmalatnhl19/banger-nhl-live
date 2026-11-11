@@ -1,0 +1,15 @@
+"use strict";
+const assert=require("node:assert/strict");
+const {audit}=require("./core43_shadow_identity_coverage.cjs");
+const input={game_id:42,team_code:"DAL",goalie_id:null,prediction_at:"2026-11-09T15:00:00Z"};
+const observation={game_id:42,team_code:"DAL",goalie_name:"Goalie A",observed_status:"projected",observed_at:"2026-11-09T14:00:00Z",source_snapshot_at:"2026-11-09T13:00:00Z"};
+const identity={team_code:"DAL",normalized_name:"goalie a",goalie_id:"8471234",observed_at:"2026-11-09T12:00:00Z"};
+const check=(inputs=[input],observations=[observation],identities=[identity])=>audit({inputs,observations,identities}).counts;
+assert.equal(check().resolvableAsOf,1);
+assert.equal(check().missingFrozenId,1);
+assert.equal(check([{...input,goalie_id:"8471234"}]).alreadyFrozen,1);
+assert.equal(check([input],[observation],[{...identity,observed_at:"2026-11-10T12:00:00Z"}]).unresolvedAsOf,1);
+assert.equal(check([input],[observation],[identity,{...identity,goalie_id:"8479999"}]).ambiguousAsOf,1);
+assert.equal(check([input],[{...observation,observed_at:"2026-11-09T16:00:00Z"}]).lateOrInvalidObservation,1);
+assert.equal(check([input],[],[identity]).unresolvedAsOf,1);
+console.log("CORE 4.3 shadow identity coverage tests passed");
