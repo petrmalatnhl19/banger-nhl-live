@@ -1,6 +1,6 @@
 {
   "date": "2026-11-11",
-  "updatedAt": "2026-11-11T18:27:56.407990+00:00",
+  "updatedAt": "2026-11-11T22:22:28.096060+00:00",
   "teams": {
     "ANA": {
       "name": "Laurent Brossoit",
@@ -8,44 +8,8 @@
       "date": "2026-11-11",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-11T18:27:56.407990+00:00",
+      "checkedAt": "2026-11-11T22:22:28.096060+00:00",
       "gameId": 2026020297
-    },
-    "EDM": {
-      "name": "Devon Levi",
-      "status": "projected",
-      "date": "2026-11-11",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-11T18:27:56.407990+00:00",
-      "gameId": 2026020295
-    },
-    "PIT": {
-      "name": "Arturs Silovs",
-      "status": "projected",
-      "date": "2026-11-11",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-11T18:27:56.407990+00:00",
-      "gameId": 2026020298
-    },
-    "SJS": {
-      "name": "Yaroslav Askarov",
-      "status": "projected",
-      "date": "2026-11-11",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-11T18:27:56.407990+00:00",
-      "gameId": 2026020298
-    },
-    "TBL": {
-      "name": "Andrei Vasilevskiy",
-      "status": "projected",
-      "date": "2026-11-11",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-11T18:27:56.407990+00:00",
-      "gameId": 2026020293
     },
     "BUF": {
       "name": "Ukko-Pekka Luukkonen",
@@ -53,7 +17,7 @@
       "date": "2026-11-11",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-11T18:27:56.407990+00:00",
+      "checkedAt": "2026-11-11T22:22:28.096060+00:00",
       "gameId": 2026020293
     },
     "CGY": {
@@ -62,8 +26,71 @@
       "date": "2026-11-11",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-11T18:27:56.407990+00:00",
+      "checkedAt": "2026-11-11T22:22:28.096060+00:00",
       "gameId": 2026020294
+    },
+    "EDM": {
+      "name": "Tristan Jarry",
+      "status": "confirmed",
+      "date": "2026-11-11",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-11T22:22:28.096060+00:00",
+      "gameId": 2026020295
+    },
+    "NSH": {
+      "name": "Justus Annunen",
+      "status": "projected",
+      "date": "2026-11-11",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-11T22:22:28.096060+00:00",
+      "gameId": 2026020297
+    },
+    "PHI": {
+      "name": "Dan Vladar",
+      "status": "confirmed",
+      "date": "2026-11-11",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-11T22:22:28.096060+00:00",
+      "gameId": 2026020295
+    },
+    "PIT": {
+      "name": "Sergei Murashov",
+      "status": "confirmed",
+      "date": "2026-11-11",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-11T22:22:28.096060+00:00",
+      "gameId": 2026020298
+    },
+    "SJS": {
+      "name": "Yaroslav Askarov",
+      "status": "confirmed",
+      "date": "2026-11-11",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-11T22:22:28.096060+00:00",
+      "gameId": 2026020298
+    },
+    "TBL": {
+      "name": "Andrei Vasilevskiy",
+      "status": "projected",
+      "date": "2026-11-11",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-11T22:22:28.096060+00:00",
+      "gameId": 2026020293
+    },
+    "UTA": {
+      "name": "Sebastian Cossa",
+      "status": "projected",
+      "date": "2026-11-11",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-11T22:22:28.096060+00:00",
+      "gameId": 2026020296
     },
     "NYR": {
       "name": "Joonas Korpisalo",
@@ -71,46 +98,20 @@
       "date": "2026-11-11",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-11T18:27:56.407990+00:00",
+      "checkedAt": "2026-11-11T22:22:28.096060+00:00",
       "gameId": 2026020294
+    },
+    "VGK": {
+      "name": "Carter Hart",
+      "status": "confirmed",
+      "date": "2026-11-11",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-11T22:22:28.096060+00:00",
+      "gameId": 2026020296
     }
   },
-  "conflicts": [
-    {
-      "team": "BUF",
-      "specialist": "Colten Ellis",
-      "nhl": "Ukko-Pekka Luukkonen",
-      "nhlSource": "https://www.nhl.com/news/tampa-bay-lightning-buffalo-sabres-game-preview-november-11-2026"
-    },
-    {
-      "date": "2026-11-11",
-      "team": "NSH",
-      "reason": "source disagreement",
-      "rotowire": "Justus Annunen",
-      "previous": "Juuse Saros"
-    },
-    {
-      "date": "2026-11-11",
-      "team": "PHI",
-      "reason": "source disagreement",
-      "rotowire": "Dan Vladar",
-      "previous": "Joseph Woll"
-    },
-    {
-      "date": "2026-11-11",
-      "team": "UTA",
-      "reason": "source disagreement",
-      "rotowire": "Karel Vejmelka",
-      "previous": "Sebastian Cossa"
-    },
-    {
-      "date": "2026-11-11",
-      "team": "VGK",
-      "reason": "source disagreement",
-      "rotowire": "Carter Hart",
-      "previous": "Adin Hill"
-    }
-  ],
+  "conflicts": [],
   "sourceErrors": [],
-  "status": "partial"
+  "status": "ok"
 }

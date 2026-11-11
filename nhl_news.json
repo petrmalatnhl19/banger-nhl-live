@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-11T18:27:06.906166+00:00",
+  "updatedAt": "2026-11-11T22:21:57.295032+00:00",
   "articles": [
     {
       "title": "Kouč o Dvorském: Musí být přesvědčivější Slovenský útočník nastoupil jen na 6 a půl minuty. Nehrál podle našich standardů, přiznal kouč Montgomery 11. lis 2026",
@@ -29,7 +29,7 @@
       "publishedAt": "2026-11-11T14:37:26.052000+00:00"
     },
     {
-      "title": "Dva góly a výhra. Mercer potopil svůj bývalý tým Očekávaný střet mezi Winnipegem a New Jersey vyzněl pro domácí barvy, vedle Mercera zářil i gólman Daws 11. lis 2026",
+      "title": "Dva góly a výhra. Mercer potopil svůj bývalý tým 11. lis 2026",
       "url": "https://www.nhl.com/cs/news/mercer-dvema-goly-srazil-byvale-partaky-na-kolena",
       "language": "cs",
       "source": "NHL.com",
@@ -63,15 +63,6 @@
       "headline": "Ve Finsku je nadšený i Dán Ehlers",
       "description": "Útočník Hurricanes sice nehraje doma, ale z Kodaně to má na duely Global Series blízko, dorazí mu rodina",
       "publishedAt": "2026-11-10T15:23:55.024000+00:00"
-    },
-    {
-      "title": "Stanley Cup, operace a boj o návrat. Fabbri to nevzdává 10. lis 2026",
-      "url": "https://www.nhl.com/cs/news/fabbri-po-mnoha-zranenich-zkousi-stesti-v-ahl",
-      "language": "cs",
-      "source": "NHL.com",
-      "headline": "Stanley Cup, operace a boj o návrat. Fabbri to nevzdává",
-      "description": "Výlet na farmu: Útočník z 1. kola draftu 2014 se po neúspěšných pokusech o comeback do NHL upsal na zkoušku Hamiltonu",
-      "publishedAt": "2026-11-10T14:30:23.821000+00:00"
     },
     {
       "title": "FORČEK: Kučerovovi nejde o peníze, ale o ocenění Slavomír Lener ve 38. dílu podcastu o dění v NHL, českých juniorech i o tom, jak s Babcockem sháněl 300 doutníků 05. lis 2026",
@@ -135,6 +126,15 @@
       "headline": "Hughes může zůstat u Wild, i pokud neprodlouží",
       "description": "Chci ho udržet tak dlouho, jak jen to půjde, říká GM Minnesoty o hvězdném obránci",
       "publishedAt": "2026-11-10T16:40:36.118000+00:00"
+    },
+    {
+      "title": "Stanley Cup, operace a boj o návrat. Fabbri to nevzdává 10. lis 2026",
+      "url": "https://www.nhl.com/cs/news/fabbri-po-mnoha-zranenich-zkousi-stesti-v-ahl",
+      "language": "cs",
+      "source": "NHL.com",
+      "headline": "Stanley Cup, operace a boj o návrat. Fabbri to nevzdává",
+      "description": "Výlet na farmu: Útočník z 1. kola draftu 2014 se po neúspěšných pokusech o comeback do NHL upsal na zkoušku Hamiltonu",
+      "publishedAt": "2026-11-10T14:30:23.821000+00:00"
     },
     {
       "title": "Kdo může vstoupit do Síně slávy v roce 2027 10. lis 2026",
@@ -299,22 +299,49 @@
       "publishedAt": "2026-11-08T10:16:00+00:00"
     },
     {
-      "title": "On Tap: Veterans Appreciation doubleheader on TNT McDavid seeks point in 20th straight game to start season; Golden Knights host Mammoth with Stone approaching milestone Nov 11, 2026",
-      "url": "https://www.nhl.com/news/nhl-on-tap-news-and-notes-november-11-2026",
+      "title": "Michkov happy with Flyers amid reports he wants out Philadelphia off to 5-10-5 start, forward can be restricted free agent after season Nov 11, 2026",
+      "url": "https://www.nhl.com/news/matvei-michkov-happy-with-philadelphia-flyers-amid-reports",
       "language": "en",
       "source": "NHL.com",
-      "headline": "NHL On Tap: Lightning, Sabres kick off Veterans Appreciation Night doubleheader on TNT",
-      "description": "Golden Knights host Mammoth with Stone approaching milestone; McDavid seeks point in 20th straight game to start season",
-      "publishedAt": "2026-11-11T15:49:56.244000+00:00"
+      "headline": "Michkov says he's happy with Flyers amid reports he wants out",
+      "publishedAt": "2026-11-11T20:48:03.347000+00:00",
+      "description": "Philadelphia off to 5-10-5 start, forward can be restricted free agent after season"
     },
     {
-      "title": "NHL, Buffalo, Vegas erase $1.5M of debt for veterans Joins Golden Knights, Sabres to provide relief through partnership with ForgiveCo, Operation Line Shift military initiative Nov 11, 2026",
+      "title": "Bedard: Blackhawks believe in coach '100 percent' Chicago has lost six straight, looking to turn things around on homestand Nov 11, 2026",
+      "url": "https://www.nhl.com/news/connor-bedard-says-blackhawks-have-100-percent-belief-in-jeff-blashill-as-coach",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Bedard says Blackhawks have ‘100 percent belief’ in Blashill as coach",
+      "publishedAt": "2026-11-11T22:05:36.971000+00:00",
+      "description": "Chicago has lost six straight, looking to turn things around on homestand"
+    },
+    {
+      "title": "NHL, Buffalo, Vegas erase $1.5M of debt for veterans Nov 11, 2026",
       "url": "https://www.nhl.com/news/nhl-helps-erase-debt-in-recognition-of-veterans-day",
       "language": "en",
       "source": "NHL.com",
       "headline": "NHL helps erase $1.5 million of debt in recognition of Veterans Day",
       "description": "Joins Golden Knights, Sabres to provide relief through partnership with ForgiveCo, Operation Line Shift military initiative",
       "publishedAt": "2026-11-11T13:00:00+00:00"
+    },
+    {
+      "title": "Aho’s NHL dream took shape in Finland at age 13 Nov 11, 2026",
+      "url": "https://www.nhl.com/news/topic/global-series/carolina-hurricanes-sebastian-aho-back-in-finland-2026-nhl-global-series",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Aho back in Finland with Hurricanes to revisit where NHL dream took shape",
+      "publishedAt": "2026-11-11T16:21:31.613000+00:00",
+      "description": "Saw Carolina play as a 13-year-old, now facing Kraken in Global Series"
+    },
+    {
+      "title": "Devils GM has burger named after him by local deli Nov 11, 2026",
+      "url": "https://www.nhl.com/news/connor-hellebuyck-sunny-mehta-honored-by-newark-deli-with-namesake-burger-dessert",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Hellebuyck, Mehta honored by Newark deli with namesake burger, dessert",
+      "publishedAt": "2026-11-11T17:00:08.251000+00:00",
+      "description": "Hobby’s rolls out Lava cake, burger with Taylor Ham for Devils GM, goalie"
     },
     {
       "title": "Kraken set for 2 ‘hard games’ vs. Canes in Finland Nov 11, 2026",
@@ -326,22 +353,13 @@
       "publishedAt": "2026-11-11T15:14:22.025000+00:00"
     },
     {
-      "title": "Connelly thriving in 1st season with Golden Knights Nov 11, 2026",
-      "url": "https://www.nhl.com/news/trevor-connelly-thriving-as-rookie-with-vegas-golden-knights",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Connelly thriving as rookie with Golden Knights, ‘focused on winning’",
-      "description": "20-year-old forward played for Vegas coach Craig in AHL last season",
-      "publishedAt": "2026-11-11T06:00:00+00:00"
-    },
-    {
-      "title": "Status Report: Point placed on IR by Lightning Nov 11, 2026",
+      "title": "Status Report: Terry to make season debut for Ducks Nov 11, 2026",
       "url": "https://www.nhl.com/news/nhl-status-report-news-and-notes-november-11-2026",
       "language": "en",
       "source": "NHL.com",
       "headline": "NHL Status Report: Point on injured reserve for Lightning",
-      "publishedAt": "2026-11-11T17:57:22.195000+00:00",
-      "description": "Cousins out 7-10 days for Senators; Fiala nearing return for Kings"
+      "description": "Cousins out 7-10 days for Senators; Fiala nearing return for Kings",
+      "publishedAt": "2026-11-11T17:57:22.195000+00:00"
     },
     {
       "title": "Cooley in spotlight for thought-provoking interviews Nov 11, 2026",
@@ -351,24 +369,6 @@
       "headline": "Cooley in spotlight for postgame interviews with Flames",
       "description": "Goalie known for thought-provoking conversations having on-ice success this season",
       "publishedAt": "2026-11-11T15:48:19.438000+00:00"
-    },
-    {
-      "title": "Hurricanes’ Hall goes Global for 1,000th NHL Game Nov 11, 2026",
-      "url": "https://www.nhl.com/news/topic/global-series/carolina-hurricanes-seattle-kraken-global-series-finland-perfect-time-for-taylor-hall-1000th-game",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Global Series Finland between Hurricanes, Kraken perfect time for Hall’s 1,000th game",
-      "description": "Forward happy in Carolina, set to make League history by reaching milestone in Helsinki",
-      "publishedAt": "2026-11-11T05:00:00+00:00"
-    },
-    {
-      "title": "Key EDGE stats for 2026 NHL Global Series Finland Nov 11, 2026",
-      "url": "https://www.nhl.com/news/topic/nhl-edge/nhl-edge-stats-global-series-finland-carolina-hurricanes-seattle-kraken-2026",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "NHL EDGE stats for 2026 NHL Global Series Finland",
-      "description": "Hurricanes’ continued possession dominance, Catton’s breakout for Kraken among highlights",
-      "publishedAt": "2026-11-11T16:38:22.507000+00:00"
     },
     {
       "title": "Projected lineups, starting goalies for tonight Nov 11, 2026",
@@ -434,6 +434,24 @@
       "publishedAt": "2026-11-11T04:27:00+00:00"
     },
     {
+      "title": "Fantasy hockey top 200 player rankings for 2026-27 Nov 11, 2026",
+      "url": "https://www.nhl.com/news/topic/fantasy/nhl-fantasy-hockey-top-250-200-rankings-drafts-players-big-board-281505474",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Fantasy hockey top 200 player rankings for 2026-27",
+      "description": "Most valuable overall options for standard leagues, impact of Hellebuyck trade on goalie landscape",
+      "publishedAt": "2026-11-09T14:00:00+00:00"
+    },
+    {
+      "title": "Fantasy hockey top 100 forward rankings for 2026-27 Nov 11, 2026",
+      "url": "https://www.nhl.com/news/topic/Fantasy/nhl-fantasy-hockey-top-100-forward-rankings-pools-282775028",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Fantasy hockey top 100 forward rankings for 2026-27",
+      "description": "Most valuable options at position in standard leagues; new podcast episodes",
+      "publishedAt": "2026-11-09T14:00:00+00:00"
+    },
+    {
       "title": "NHL picks, props, daily fantasy projections Nov 11, 2026",
       "url": "https://www.nhl.com/news/topic/fantasy/nhl-picks-props-daily-fantasy-hockey-projections-for-2026-27-season",
       "language": "en",
@@ -450,24 +468,6 @@
       "headline": "NHL EDGE stats for 'Wednesday Night Hockey'",
       "description": "Thompson’s shot speed, Stützle’s high-danger goals highlight Senators-Sabres matchup",
       "publishedAt": "2026-11-04T05:00:00+00:00"
-    },
-    {
-      "title": "Fantasy hockey top 200 player rankings for 2026-27 Nov 10, 2026",
-      "url": "https://www.nhl.com/news/topic/fantasy/nhl-fantasy-hockey-top-250-200-rankings-drafts-players-big-board-281505474",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Fantasy hockey top 200 player rankings for 2026-27",
-      "description": "Most valuable overall options for standard leagues, impact of Hellebuyck trade on goalie landscape",
-      "publishedAt": "2026-11-09T14:00:00+00:00"
-    },
-    {
-      "title": "Fantasy hockey top 100 forward rankings for 2026-27 Nov 10, 2026",
-      "url": "https://www.nhl.com/news/topic/Fantasy/nhl-fantasy-hockey-top-100-forward-rankings-pools-282775028",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Fantasy hockey top 100 forward rankings for 2026-27",
-      "description": "Most valuable options at position in standard leagues; new podcast episodes",
-      "publishedAt": "2026-11-09T14:00:00+00:00"
     },
     {
       "title": "Fantasy hockey top 50 defenseman rankings Nov 10, 2026",
@@ -560,6 +560,15 @@
       "publishedAt": "2026-11-01T23:08:00+00:00"
     },
     {
+      "title": "NHL EDGE stats for 2026 NHL Global Series Finland Nov 11, 2026",
+      "url": "https://www.nhl.com/news/topic/nhl-edge/nhl-edge-stats-global-series-finland-carolina-hurricanes-seattle-kraken-2026",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "NHL EDGE stats for 2026 NHL Global Series Finland",
+      "description": "Hurricanes’ continued possession dominance, Catton’s breakout for Kraken among highlights",
+      "publishedAt": "2026-11-11T16:38:22.507000+00:00"
+    },
+    {
       "title": "Jets’ historic comeback against Canadiens fueled by puck possession, mid-range prowess Nov 04, 2026",
       "url": "https://www.nhl.com/news/topic/nhl-edge/nhl-edge-stats-winnipeg-jets-historic-comeback-november-3-2026",
       "language": "en",
@@ -648,15 +657,6 @@
       "headline": "NHL EDGE stats impact of Marchenko-Knies trade",
       "description": "Toronto adds elite play-driver to top 6; Columbus lands high-danger standout",
       "publishedAt": "2026-09-30T04:00:00+00:00"
-    },
-    {
-      "title": "Fantasy projection for McKenna with Maple Leafs in 2026-27 Sep 29, 2026",
-      "url": "https://www.nhl.com/news/topic/fantasy/nhl-fantasy-hockey-outlook-gavin-mckenna-toronto-maple-leafs-2026-draft",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Fantasy projection for McKenna with Maple Leafs in 2026-27",
-      "publishedAt": "2026-09-29T04:00:00+00:00",
-      "description": "1st pick in 2026 NHL Draft can exceed 60 points as rookie, help Matthews bounce back"
     }
   ]
 }
