@@ -94,6 +94,18 @@ def main():
     if age < -300 or age > 3 * 3600 or not feed.get("games"):
         print("RotoWire data stale, future-dated, or empty; skipping")
         return
+    diagnostic_file = api("/contents/rotowire_goalies_diagnostic.json?ref=" + sha, read_token)
+    diagnostic = json.loads(base64.b64decode(diagnostic_file["content"]))
+    candidates = diagnostic.get("candidateCount", 0)
+    matched = diagnostic.get("matchedCount", 0)
+    games = feed["games"]
+    if (not isinstance(candidates, int) or not isinstance(matched, int)
+            or candidates < 10 or matched < 10 or matched > candidates
+            or matched / candidates < 0.75
+            or feed.get("goalieCount") != len(games)
+            or len(games) < 10 or len(games) > matched):
+        print("RotoWire coverage or published record counts invalid; skipping")
+        return
     # GitHub rechecks the exact expected head SHA; branch protection still applies.
     result = api(f"/pulls/{number}/merge", write_token, "PUT", {
         "commit_title": "Update verified NHL lineup data",
