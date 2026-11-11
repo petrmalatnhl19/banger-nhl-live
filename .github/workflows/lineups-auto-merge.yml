@@ -1,0 +1,28 @@
+name: Safely merge verified NHL lineup data
+on:
+  schedule:
+    - cron: '12,27,42,57 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  pull-requests: read
+  checks: read
+concurrency:
+  group: nhl-lineup-data-auto-merge
+  cancel-in-progress: false
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test strict merge eligibility
+        run: python -m unittest scripts.test_auto_merge_lineup_data
+      - name: Merge only fully verified generated JSON data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LINEUPS_PR_TOKEN: ${{ secrets.LINEUPS_PR_TOKEN }}
+        run: python scripts/auto_merge_lineup_data.py

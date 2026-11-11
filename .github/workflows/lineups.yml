@@ -167,7 +167,6 @@ jobs:
             Changes must pass required checks before merge into protected main.
             Review generated files and source timestamps before merging.
           add-paths: |
-            index.html
             nhl_news.json
             lineups.json
             lineups_archive.json
@@ -178,7 +177,6 @@ jobs:
             rotowire_goalies.json
             rotowire_goalies_diagnostic.json
             lineups_changes.json
-            lineups_diagnostics.md
             lineups_source_diagnostics.json
             lineups_discovery_diagnostics.json
             lineup_free_sources_probe.json
