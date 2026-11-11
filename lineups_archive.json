@@ -324,7 +324,7 @@
           "Ryan Strome"
         ],
         [
-          "William Stromgren",
+          "Brennan Othmann",
           "Jonathan Castagna",
           "Adam Klapka"
         ]
@@ -347,11 +347,11 @@
         "Devin Cooley",
         "Dustin Wolf"
       ],
-      "injured": "Brennan Othmann (upper body), Jonathan Huberdeau (hip), Samuel Honzek (lower body), Kevin Bahl (lower body)",
-      "scratched": "Maksim Tsyplakov, Brayden Pachal",
-      "source": "https://www.nhl.com/news/philadelphia-flyers-calgary-flames-game-preview-november-8-2026",
-      "publishedAt": "2026-11-08T17:16:00+00:00",
-      "asOf": "2026-11-08",
+      "injured": "Jonathan Huberdeau (hip), Samuel Honzek (lower body), Kevin Bahl (lower body)",
+      "scratched": "Maksim Tsyplakov, William Stromgren, Brayden Pachal",
+      "source": "https://www.nhl.com/news/new-york-rangers-calgary-flames-game-preview-november-11-2026",
+      "publishedAt": "2026-11-11T18:16:00.408000+00:00",
+      "asOf": "2026-11-11",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -1165,19 +1165,19 @@
       "name": "Sabres",
       "forwards": [
         [
-          "Zach Benson",
           "Peyton Krebs",
+          "Josh Norris",
           "Tage Thompson"
         ],
         [
-          "Josh Doan",
+          "Zach Benson",
           "Noah Ostlund",
           "Jack Quinn"
         ],
         [
-          "Jiri Kulich",
-          "Josh Norris",
-          "Jason Zucker"
+          "Jason Zucker",
+          "Ryan McLeod",
+          "Josh Doan"
         ],
         [
           "Beck Malenstyn",
@@ -1200,14 +1200,14 @@
         ]
       ],
       "goalies": [
-        "Colten Ellis",
-        "Ukko-Pekka Luukkonen"
+        "Ukko-Pekka Luukkonen",
+        "Colten Ellis"
       ],
       "injured": "Konsta Helenius (upper body), Justin Danforth (upper body), Matt Grzelcyk (lower body), Alex Lyon (upper body)",
-      "scratched": "Ryan McLeod, Louis Crevier",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-08T22:04:00+00:00",
-      "asOf": "2026-11-08",
+      "scratched": "Jiri Kulich, Louis Crevier",
+      "source": "https://www.nhl.com/news/tampa-bay-lightning-buffalo-sabres-game-preview-november-11-2026",
+      "publishedAt": "2026-11-11T18:07:25.884000+00:00",
+      "asOf": "2026-11-11",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -1216,19 +1216,24 @@
       "name": "Lightning",
       "forwards": [
         [
-          "Jake Guentzel",
-          "Brayden Point",
+          "Brandon Hagel",
+          "Anthony Cirelli",
           "Nikita Kucherov"
         ],
         [
-          "Brandon Hagel",
-          "Anthony Cirelli",
-          "Gage Goncalves"
+          "Jake Guentzel",
+          "Sam O'Reilly",
+          "Yanni Gourde"
         ],
         [
           "Ilya Mikheyev",
-          "Conor Geekie",
+          "Zemgus Girgensons",
           "Pontus Holmberg"
+        ],
+        [
+          "Jeffrey Viel",
+          "Conor Geekie",
+          "Scott Sabourin"
         ]
       ],
       "defense": [
@@ -1242,17 +1247,18 @@
         ],
         [
           "Victor Hedman",
-          "Emil Lilleberg"
+          "Charle-Edouard D'Astous"
         ]
       ],
       "goalies": [
-        "Andrei Vasilevskiy"
+        "Andrei Vasilevskiy",
+        "Dennis Hildeby"
       ],
-      "injured": "Yanni Gourde (hip)",
-      "scratched": "Max Crozier, Scott Sabourin",
-      "source": "https://www.nhl.com/news/tampa-bay-lightning-winnipeg-jets-game-preview-november-8-2026",
-      "publishedAt": "2026-11-08T16:16:00+00:00",
-      "asOf": "2026-11-08",
+      "injured": "Brayden Point (lower body)",
+      "scratched": "Emil Lilleberg, Max Crozier, Gage Goncalves",
+      "source": "https://www.nhl.com/news/tampa-bay-lightning-buffalo-sabres-game-preview-november-11-2026",
+      "publishedAt": "2026-11-11T18:07:25.884000+00:00",
+      "asOf": "2026-11-11",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -1467,17 +1473,17 @@
         [
           "Tye Kartye",
           "J.T. Miller",
+          "Pavel Dorofeyev"
+        ],
+        [
+          "Will Cuylle",
+          "Noah Laba",
           "Oliver Bjorkstrand"
         ],
         [
           "Eeli Tolvanen",
-          "Will Cuylle",
-          "Pavel Dorofeyev"
-        ],
-        [
-          "Jaroslav Chmelar",
-          "Noah Laba",
-          "Matt Rempe"
+          "Glenn Gawdin",
+          "Jaroslav Chmelar"
         ]
       ],
       "defense": [
@@ -1491,14 +1497,14 @@
         ]
       ],
       "goalies": [
-        "Dylan Garand",
-        "Joonas Korpisalo"
+        "Joonas Korpisalo",
+        "Dylan Garand"
       ],
       "injured": "Sean Durzi (undisclosed), Igor Shesterkin (lower body), Alberts Smits (upper body), Adam Sykora (lower body), Joseph Veleno (lower body)",
-      "scratched": "Marcel Del Gaizo, Luke Glendening",
-      "source": "https://www.nhl.com/news/new-york-rangers-edmonton-oilers-game-preview-november-9-2026",
-      "publishedAt": "2026-11-09T18:29:30.340000+00:00",
-      "asOf": "2026-11-09",
+      "scratched": "Matt Rempe, Luke Glendening, Marc Del Gaizo",
+      "source": "https://www.nhl.com/news/new-york-rangers-calgary-flames-game-preview-november-11-2026",
+      "publishedAt": "2026-11-11T18:16:00.408000+00:00",
+      "asOf": "2026-11-11",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"

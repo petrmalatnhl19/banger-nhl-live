@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-11T17:33:58.654011+00:00",
-  "rostersUpdatedAt": "2026-11-11T17:33:28.428366+00:00",
+  "updatedAt": "2026-11-11T18:27:56.520874+00:00",
+  "rostersUpdatedAt": "2026-11-11T18:27:12.602543+00:00",
   "projectionDate": "2026-11-11",
   "teamCount": 32,
   "goalieCount": 74,
@@ -170,7 +170,7 @@
       "team": "ANA",
       "teamKey": "ducks",
       "playerId": 8476316,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-11",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -512,8 +512,9 @@
       "team": "BUF",
       "teamKey": "sabres",
       "playerId": 8480045,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-11",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Alex Lyon",

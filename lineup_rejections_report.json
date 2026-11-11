@@ -1,42 +1,9 @@
 {
-  "teamsWithRejectedLines": 3,
+  "teamsWithRejectedLines": 2,
   "teams": {
-    "lightning": {
-      "team": "TBL",
-      "rosterUpdatedAt": "2026-11-11T17:33:27.951973+00:00",
-      "rosterSnapshotPresent": true,
-      "candidateForwardLines": 3,
-      "candidateDefensePairs": 4,
-      "validatedForwardLines": 3,
-      "validatedDefensePairs": 3,
-      "rejected": [
-        {
-          "group": "defense",
-          "sourceLineNumber": 1,
-          "sourceLine": [
-            "Jeffrey Viel",
-            "Zemgus Girgensons"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Jeffrey Viel",
-              "reason": "other_position_group",
-              "inLocalCurrentRoster": true,
-              "requiresIndependentGameEvidence": true
-            },
-            {
-              "name": "Zemgus Girgensons",
-              "reason": "other_position_group",
-              "inLocalCurrentRoster": true,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ]
-    },
     "rangers": {
       "team": "NYR",
-      "rosterUpdatedAt": "2026-11-11T17:33:27.404870+00:00",
+      "rosterUpdatedAt": "2026-11-11T18:27:10.410979+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -63,7 +30,7 @@
     },
     "senators": {
       "team": "OTT",
-      "rosterUpdatedAt": "2026-11-11T17:33:27.487984+00:00",
+      "rosterUpdatedAt": "2026-11-11T18:27:10.554043+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
