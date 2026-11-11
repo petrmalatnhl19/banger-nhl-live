@@ -1,0 +1,15 @@
+"use strict";
+const fs=require("node:fs"),assert=require("node:assert/strict");
+const html=fs.readFileSync("index.html","utf8");
+const start=html.indexOf("let bangerGamesRequestId=0;");
+const end=html.indexOf("let bangerDetailRequestId=0;",start);
+assert(start>=0&&end>start);
+const code=html.slice(start,end);
+new Function(code);
+assert(code.includes("existing.every((node,index)=>node.dataset.gameId===cards[index].id)"),"require stable identity and order");
+assert(code.includes("if(node.dataset.cardMarkup!==item.html)"),"skip unchanged cards");
+assert(code.includes("next.dataset.gameId=item.id"),"replacement must retain game ID");
+assert(code.includes("node.replaceWith(next)"),"only replace changed card");
+assert(code.includes("uxApplyGameFilter();return;"),"reapply filter after incremental update");
+assert(code.includes("root.innerHTML=metrics+"),"fallback for changed game list");
+console.log("Incremental NHL card update regression checks passed");
