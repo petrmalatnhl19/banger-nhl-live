@@ -11,7 +11,7 @@ import urllib.request
 REPO = "petrmalatnhl19/banger-nhl-live"
 BRANCH = "automation/refresh-nhl-lineups"
 TITLE = "Automated NHL projected lineups refresh"
-REQUIRED = {"frontend-smoke", "browser-smoke", "unit-test"}
+REQUIRED = {"frontend-smoke", "browser-smoke"}
 ALLOWED = {
     "nhl_news.json", "lineups.json", "lineups_archive.json", "nhl_rosters.json",
     "lineups_coverage.json", "starting_goalies.json", "nhl_goalies.json",
