@@ -33,6 +33,7 @@ jobs:
           node scripts/test_core43_observation_cadence_audit.cjs
           node scripts/test_core43_confirmation_pipeline_audit.cjs
           node scripts/test_core43_goalie_feed_freshness.cjs
+          node scripts/test_core43_shadow_input_readiness_audit.cjs
       - name: Validate configuration
         id: config
         shell: bash
@@ -55,6 +56,7 @@ jobs:
           node scripts/core43_observation_cadence_audit.cjs > core43-observation-cadence.json
           node scripts/core43_confirmation_pipeline_audit.cjs > core43-confirmation-pipeline.json
           node scripts/core43_goalie_feed_freshness.cjs > core43-goalie-feed-freshness.json
+          node scripts/core43_shadow_input_readiness_audit.cjs > core43-shadow-input-readiness.json
       - name: Upload report artifact
         if: steps.config.outputs.ready == 'true'
         uses: actions/upload-artifact@v4
@@ -67,4 +69,5 @@ jobs:
             core43-observation-cadence.json
             core43-confirmation-pipeline.json
             core43-goalie-feed-freshness.json
+            core43-shadow-input-readiness.json
           retention-days: 14

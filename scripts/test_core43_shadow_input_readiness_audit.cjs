@@ -1,0 +1,26 @@
+"use strict";
+const assert=require("node:assert/strict");
+const {audit}=require("./core43_shadow_input_readiness_audit.cjs");
+const base={game_id:1,side:"home",goalie_id:"1",gsax:0,
+ prediction_at:"2026-11-10T19:00:00Z",captured_at:"2026-11-10T18:00:00Z",
+ starter_published_at:"2026-11-10T17:00:00Z",
+ starter_verified_at:"2026-11-10T18:00:00Z",readiness:"ready_projected"};
+let result=audit([base]);
+assert.equal(result.fullyTimeQualified,1);
+assert.equal(result.projected,1);
+assert.equal(result.missingGsax,0);
+result=audit([{...base,game_id:2,goalie_id:null,gsax:null,
+ starter_published_at:"2026-11-10T20:00:00Z",
+ starter_verified_at:null,captured_at:"2026-11-10T20:00:00Z"}]);
+assert.equal(result.fullyTimeQualified,0);
+assert.equal(result.missingGoalieId,1);
+assert.equal(result.missingGsax,1);
+assert.equal(result.publishedAfterPrediction,1);
+assert.equal(result.missingStarterVerifiedAt,1);
+assert.equal(result.futureCaptured,1);
+assert.equal(result.affectedGames,1);
+result=audit([{...base,readiness:"ready_confirmed",starter_verified_at:"2026-11-10T20:00:00Z"}]);
+assert.equal(result.confirmed,1);
+assert.equal(result.verifiedAfterPrediction,1);
+assert.equal(result.fullyTimeQualified,0);
+console.log("CORE 4.3 shadow input readiness audit tests passed");
