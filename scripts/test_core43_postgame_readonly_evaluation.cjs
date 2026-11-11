@@ -1,0 +1,14 @@
+"use strict";
+const assert=require("node:assert/strict");
+const {evaluate}=require("./core43_postgame_readonly_evaluation.cjs");
+const row={game_id:"2026020293",model_version:"core43_gsax_sensitivity_v0",archived_at:"2026-11-11T21:14:02Z",frozen_at:"2026-11-11T21:14:00Z",kickoff_at:"2026-11-12T00:00:00Z",capture_sha256:"a".repeat(64),payload:{schema:"core43_shadow_capture_v1",production:false,experimental:true,gameId:"2026020293",away:3.55,home:3.163}};
+const game={id:2026020293,gameState:"FINAL",awayTeam:{score:4},homeTeam:{score:2}};
+assert.equal(evaluate([row],{...game,gameState:"LIVE"}).status,"game_not_final");
+assert.equal(evaluate([],game).status,"no_archived_capture");
+const result=evaluate([row],game);
+assert.equal(result.status,"evaluated_read_only");
+assert.equal(result.results[0].leaderMatched,true);
+assert.equal(result.results[0].totalAbsoluteError,1.613);
+assert.throws(()=>evaluate([{...row,capture_sha256:"bad"}],game),/missing_capture_hash/);
+assert.throws(()=>evaluate([row],{...game,id:123}),/game_id_mismatch/);
+console.log("CORE 4.3 postgame evaluator regression checks passed");
