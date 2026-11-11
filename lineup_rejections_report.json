@@ -3,7 +3,7 @@
   "teams": {
     "lightning": {
       "team": "TBL",
-      "rosterUpdatedAt": "2026-11-10T19:27:38.004929+00:00",
+      "rosterUpdatedAt": "2026-11-11T07:52:40.494177+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 3,
       "candidateDefensePairs": 4,
@@ -36,7 +36,7 @@
     },
     "rangers": {
       "team": "NYR",
-      "rosterUpdatedAt": "2026-11-10T19:27:36.476250+00:00",
+      "rosterUpdatedAt": "2026-11-11T07:52:39.973176+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -63,7 +63,7 @@
     },
     "senators": {
       "team": "OTT",
-      "rosterUpdatedAt": "2026-11-10T19:27:36.675370+00:00",
+      "rosterUpdatedAt": "2026-11-11T07:52:40.057968+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -81,12 +81,6 @@
           "unverifiedPlayers": [
             {
               "name": "Samuel Blais",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            },
-            {
-              "name": "Philip Tomasino",
               "reason": "not_in_current_roster",
               "inLocalCurrentRoster": false,
               "requiresIndependentGameEvidence": true

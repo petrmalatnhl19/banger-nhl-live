@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-10T19:28:11.321750+00:00",
+  "fetchedAt": "2026-11-11T07:53:04.530140+00:00",
   "teams": {
     "avalanche": {
       "name": "Avalanche",
@@ -47,7 +47,7 @@
       "injured": "Zachary L'Heureux (upper body), Josh Manson (lower body)",
       "scratched": "None",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T18:10:00+00:00"
+      "publishedAt": "2026-11-10T20:13:00+00:00"
     },
     "maple leafs": {
       "name": "Maple Leafs",
@@ -94,7 +94,7 @@
       "injured": "Max Domi (undisclosed), Kirill Marchenko (lower body), Marshall Rifai (lower body), Nick Blankenburg (upper body), Jack Roslovic (lower body), Morgan Rielly (lower body), Colton Sissons (lower body)",
       "scratched": "Cole McWard",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T18:10:00+00:00"
+      "publishedAt": "2026-11-10T20:13:00+00:00"
     },
     "wild": {
       "name": "Wild",
@@ -141,7 +141,7 @@
       "injured": "Brock Faber (skull fracture), Filip Gustavsson (lower body)",
       "scratched": "Nico Sturm, David Spacek",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T18:10:00+00:00"
+      "publishedAt": "2026-11-10T20:13:00+00:00"
     },
     "canadiens": {
       "name": "Canadiens",
@@ -183,7 +183,7 @@
       "injured": "Mike Matheson (lower body), Ivan Demidov (lower body), Samuel Montembeault (lower body)",
       "scratched": "Florian Xhekaj, Owen Beck",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T18:10:00+00:00"
+      "publishedAt": "2026-11-10T20:13:00+00:00"
     },
     "capitals": {
       "name": "Capitals",
@@ -229,8 +229,8 @@
       ],
       "injured": "Rasmus Sandin (knee), Vincent Desharnais (appendectomy)",
       "scratched": "Ethen Frank, Ivan Miroshnichenko, Justin Holl",
-      "source": "https://www.nhl.com/news/washington-capitals-ottawa-senators-game-preview-november-10-2026",
-      "publishedAt": "2026-11-10T18:15:42.415000+00:00"
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-10T20:13:00+00:00"
     },
     "senators": {
       "name": "Senators",
@@ -270,8 +270,8 @@
       ],
       "injured": "Linus Ullmark (lower body), Warren Foegele (lower body), William Eklund (ankle), Andre Burakovsky (lower body)",
       "scratched": "Carter Yakemchuk, Hayden Hodgson",
-      "source": "https://www.nhl.com/news/washington-capitals-ottawa-senators-game-preview-november-10-2026",
-      "publishedAt": "2026-11-10T18:15:42.415000+00:00"
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-10T20:13:00+00:00"
     },
     "devils": {
       "name": "Devils",
@@ -312,7 +312,7 @@
       "injured": "Anthony Mantha (throat)",
       "scratched": "Riley Tufte",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T18:10:00+00:00"
+      "publishedAt": "2026-11-10T20:13:00+00:00"
     },
     "jets": {
       "name": "Jets",
@@ -359,7 +359,7 @@
       "injured": "Nick Bjugstad (undisclosed)",
       "scratched": "Clay Stevenson, Nino Niederreiter, Haydn Fleury",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T18:10:00+00:00"
+      "publishedAt": "2026-11-10T20:13:00+00:00"
     },
     "panthers": {
       "name": "Panthers",
@@ -406,7 +406,7 @@
       "injured": "Sandis Vilmanis (upper body), Aleksander Barkov (knee), Brad Marchand (knee), Jonah Gadjovich (neck)",
       "scratched": "Dmitry Kulikov, Cole Reinhardt",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T18:10:00+00:00"
+      "publishedAt": "2026-11-10T20:13:00+00:00"
     },
     "blue jackets": {
       "name": "Blue Jackets",
@@ -453,7 +453,7 @@
       "injured": "Isac Lundestrom (lower body), Conor Garland (upper body)",
       "scratched": "Luca Del Bel Belluz, Jake Christiansen",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T18:10:00+00:00"
+      "publishedAt": "2026-11-10T20:13:00+00:00"
     },
     "red wings": {
       "name": "Red Wings",
@@ -500,7 +500,7 @@
       "injured": "None",
       "scratched": "Carter Mazur",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T18:10:00+00:00"
+      "publishedAt": "2026-11-10T20:13:00+00:00"
     },
     "blues": {
       "name": "Blues",
@@ -547,7 +547,101 @@
       "injured": "Tyler Tucker (knee), Dillon Dube (neck)",
       "scratched": "Aleksanteri Kaskimaki, Calle Rosen",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T18:10:00+00:00"
+      "publishedAt": "2026-11-10T20:13:00+00:00"
+    },
+    "predators": {
+      "name": "Predators",
+      "forwards": [
+        [
+          "Steven Stamkos",
+          "Ryan O'Reilly",
+          "Mavrik Bourque"
+        ],
+        [
+          "Filip Forsberg",
+          "Shane Wright",
+          "Nils Hoglander"
+        ],
+        [
+          "Reid Schaefer",
+          "Alexander Kerfoot",
+          "Vitali Pinchuk"
+        ],
+        [
+          "Ross Colton",
+          "Jack Drury",
+          "Adam Edstrom"
+        ]
+      ],
+      "defense": [
+        [
+          "Roman Josi",
+          "Adam Wilsby"
+        ],
+        [
+          "Brady Skjei",
+          "Nick Perbix"
+        ],
+        [
+          "Daemon Hunt",
+          "Jayden Struble"
+        ]
+      ],
+      "goalies": [
+        "Juuse Saros",
+        "Justus Annunen"
+      ],
+      "injured": "Jonathan Marchessault (lower body), William Trudeau (upper body)",
+      "scratched": "Nicolas Hague, Ilya Lyubushkin",
+      "source": "https://www.nhl.com/news/nashville-predators-los-angeles-kings-game-preview-november-10-2026",
+      "publishedAt": "2026-11-10T20:22:05.537000+00:00"
+    },
+    "kings": {
+      "name": "Kings",
+      "forwards": [
+        [
+          "Artemi Panarin",
+          "Alex Laferriere",
+          "Adrian Kempe"
+        ],
+        [
+          "Trevor Moore",
+          "Quinton Byfield",
+          "Corey Perry"
+        ],
+        [
+          "Erik Haula",
+          "Kenny Connors",
+          "Joel Armia"
+        ],
+        [
+          "Andre Lee",
+          "Scott Laughton",
+          "Mats Zuccarello"
+        ]
+      ],
+      "defense": [
+        [
+          "Joel Edmundson",
+          "Brandt Clarke"
+        ],
+        [
+          "Mikey Anderson",
+          "Drew Doughty"
+        ],
+        [
+          "Brian Dumoulin",
+          "Cody Ceci"
+        ]
+      ],
+      "goalies": [
+        "Anton Forsberg",
+        "Darcy Kuemper"
+      ],
+      "injured": "Erik Gustafsson (undisclosed), Kevin Fiala (leg surgery)",
+      "scratched": "Alex Turcotte, Samuel Helenius",
+      "source": "https://www.nhl.com/news/nashville-predators-los-angeles-kings-game-preview-november-10-2026",
+      "publishedAt": "2026-11-10T20:22:05.537000+00:00"
     },
     "islanders": {
       "name": "Islanders",
@@ -1145,53 +1239,6 @@
       "source": "https://www.nhl.com/news/vegas-golden-knights-buffalo-sabres-game-preview-november-8-2026",
       "publishedAt": "2026-11-07T21:33:32.377000+00:00"
     },
-    "kings": {
-      "name": "Kings",
-      "forwards": [
-        [
-          "Artemi Panarin",
-          "Alex Laferriere",
-          "Adrian Kempe"
-        ],
-        [
-          "Trevor Moore",
-          "Quinton Byfield",
-          "Corey Perry"
-        ],
-        [
-          "Andre Lee",
-          "Scott Laughton",
-          "Alex Turcotte"
-        ],
-        [
-          "Erik Haula",
-          "Kenny Connors",
-          "Joel Armia"
-        ]
-      ],
-      "defense": [
-        [
-          "Erik Gustafsson",
-          "Brandt Clarke"
-        ],
-        [
-          "Joel Edmundson",
-          "Drew Doughty"
-        ],
-        [
-          "Mikey Anderson",
-          "Brian Dumoulin"
-        ]
-      ],
-      "goalies": [
-        "Darcy Kuemper",
-        "Anton Forsberg"
-      ],
-      "injured": "Kevin Fiala (leg surgery), Mats Zuccarello (upper body)",
-      "scratched": "Cody Ceci, Samuel Helenius, Martin Chromiak",
-      "source": "https://www.nhl.com/news/pittsburgh-penguins-los-angeles-kings-game-preview-november-7-2026",
-      "publishedAt": "2026-11-07T19:22:47.795000+00:00"
-    },
     "mammoth": {
       "name": "Mammoth",
       "forwards": [
@@ -1425,53 +1472,6 @@
       "scratched": "Cale Fleury, Jagger Firkus",
       "source": "https://www.nhl.com/news/new-york-rangers-seattle-kraken-game-preview-november-7-2026",
       "publishedAt": "2026-11-06T22:34:00+00:00"
-    },
-    "predators": {
-      "name": "Predators",
-      "forwards": [
-        [
-          "Steven Stamkos",
-          "Ryan O'Reilly",
-          "Mavrik Bourque"
-        ],
-        [
-          "Filip Forsberg",
-          "Shane Wright",
-          "Nils Hoglander"
-        ],
-        [
-          "Reid Schaefer",
-          "Alexander Kerfoot",
-          "Vitali Pinchuk"
-        ],
-        [
-          "Ross Colton",
-          "Jack Drury",
-          "Adam Edstrom"
-        ]
-      ],
-      "defense": [
-        [
-          "Roman Josi",
-          "Adam Wilsby"
-        ],
-        [
-          "Brady Skjei",
-          "Nick Perbix"
-        ],
-        [
-          "Daemon Hunt",
-          "Jayden Struble"
-        ]
-      ],
-      "goalies": [
-        "Juuse Saros",
-        "Justus Annunen"
-      ],
-      "injured": "Jonathan Marchessault (lower body), William Trudeau (upper body)",
-      "scratched": "Nicolas Hague, Ilya Lyubushkin",
-      "source": "https://www.nhl.com/news/st-louis-blues-nashville-predators-game-preview-november-7-2026",
-      "publishedAt": "2026-11-06T19:07:00+00:00"
     }
   },
   "rosterValidated": true

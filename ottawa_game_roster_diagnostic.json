@@ -1,10 +1,14 @@
 {
-  "checkedAt": "2026-11-10T19:27:46.283548+00:00",
+  "checkedAt": "2026-11-11T07:52:45.597726+00:00",
   "team": "OTT",
   "scope": "Recent completed NHL games; historical evidence only",
   "players": {
     "Philip Tomasino": {
       "appearedInGames": [
+        {
+          "gameId": 2026020288,
+          "gameDate": "2026-11-10"
+        },
         {
           "gameId": 2026020269,
           "gameDate": "2026-11-07"

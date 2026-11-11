@@ -12,7 +12,7 @@
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T18:10:00+00:00",
+      "publishedAt": "2026-11-10T20:13:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
@@ -34,7 +34,7 @@
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T18:10:00+00:00",
+      "publishedAt": "2026-11-10T20:13:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
@@ -117,8 +117,8 @@
       "reason": "rejected_roster_lines",
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/washington-capitals-ottawa-senators-game-preview-november-10-2026",
-      "publishedAt": "2026-11-10T18:15:42.415000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-10T20:13:00+00:00",
       "rejectedLines": [
         {
           "group": "forwards",
@@ -131,12 +131,6 @@
           "unverifiedPlayers": [
             {
               "name": "Samuel Blais",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            },
-            {
-              "name": "Philip Tomasino",
               "reason": "not_in_current_roster",
               "inLocalCurrentRoster": false,
               "requiresIndependentGameEvidence": true

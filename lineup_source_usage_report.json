@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T19:28:11.917634+00:00",
+  "generatedAt": "2026-11-11T07:53:05.301067+00:00",
   "teams": 32,
   "activeSourceCounts": {
     "nhl.com": 32
@@ -27,7 +27,7 @@
       "team": "avalanche",
       "provider": "nhl.com",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T18:10:00+00:00",
+      "publishedAt": "2026-11-10T20:13:00+00:00",
       "sourceType": null
     },
     {
@@ -41,14 +41,14 @@
       "team": "blue jackets",
       "provider": "nhl.com",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T18:10:00+00:00",
+      "publishedAt": "2026-11-10T20:13:00+00:00",
       "sourceType": null
     },
     {
       "team": "blues",
       "provider": "nhl.com",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T18:10:00+00:00",
+      "publishedAt": "2026-11-10T20:13:00+00:00",
       "sourceType": null
     },
     {
@@ -62,7 +62,7 @@
       "team": "canadiens",
       "provider": "nhl.com",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T18:10:00+00:00",
+      "publishedAt": "2026-11-10T20:13:00+00:00",
       "sourceType": null
     },
     {
@@ -75,15 +75,15 @@
     {
       "team": "capitals",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/washington-capitals-ottawa-senators-game-preview-november-10-2026",
-      "publishedAt": "2026-11-10T18:15:42.415000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-10T20:13:00+00:00",
       "sourceType": null
     },
     {
       "team": "devils",
       "provider": "nhl.com",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T18:10:00+00:00",
+      "publishedAt": "2026-11-10T20:13:00+00:00",
       "sourceType": null
     },
     {
@@ -132,14 +132,14 @@
       "team": "jets",
       "provider": "nhl.com",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T18:10:00+00:00",
+      "publishedAt": "2026-11-10T20:13:00+00:00",
       "sourceType": null
     },
     {
       "team": "kings",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/pittsburgh-penguins-los-angeles-kings-game-preview-november-7-2026",
-      "publishedAt": "2026-11-07T19:22:47.795000+00:00",
+      "source": "https://www.nhl.com/news/nashville-predators-los-angeles-kings-game-preview-november-10-2026",
+      "publishedAt": "2026-11-10T20:22:05.537000+00:00",
       "sourceType": null
     },
     {
@@ -167,7 +167,7 @@
       "team": "maple leafs",
       "provider": "nhl.com",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T18:10:00+00:00",
+      "publishedAt": "2026-11-10T20:13:00+00:00",
       "sourceType": null
     },
     {
@@ -181,7 +181,7 @@
       "team": "panthers",
       "provider": "nhl.com",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T18:10:00+00:00",
+      "publishedAt": "2026-11-10T20:13:00+00:00",
       "sourceType": null
     },
     {
@@ -194,8 +194,8 @@
     {
       "team": "predators",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/st-louis-blues-nashville-predators-game-preview-november-7-2026",
-      "publishedAt": "2026-11-06T19:07:00+00:00",
+      "source": "https://www.nhl.com/news/nashville-predators-los-angeles-kings-game-preview-november-10-2026",
+      "publishedAt": "2026-11-10T20:22:05.537000+00:00",
       "sourceType": null
     },
     {
@@ -209,7 +209,7 @@
       "team": "red wings",
       "provider": "nhl.com",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T18:10:00+00:00",
+      "publishedAt": "2026-11-10T20:13:00+00:00",
       "sourceType": null
     },
     {
@@ -222,8 +222,8 @@
     {
       "team": "senators",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/washington-capitals-ottawa-senators-game-preview-november-10-2026",
-      "publishedAt": "2026-11-10T18:15:42.415000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-10T20:13:00+00:00",
       "sourceType": null
     },
     {
@@ -244,7 +244,7 @@
       "team": "wild",
       "provider": "nhl.com",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-10T18:10:00+00:00",
+      "publishedAt": "2026-11-10T20:13:00+00:00",
       "sourceType": null
     }
   ],
