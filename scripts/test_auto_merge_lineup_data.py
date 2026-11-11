@@ -32,6 +32,15 @@ class TestAutoMerge(unittest.TestCase):
         p, f, c = sample()
         c.pop()
         self.assertFalse(eligible(p, f, c)[0])
+    def test_transient_unstable_state_with_successful_checks(self):
+        p, f, c = sample()
+        p["mergeable_state"] = "unstable"
+        self.assertTrue(eligible(p, f, c)[0])
+    def test_real_conflict_blocked(self):
+        p, f, c = sample()
+        p["mergeable"] = False
+        p["mergeable_state"] = "dirty"
+        self.assertFalse(eligible(p, f, c)[0])
     def test_wrong_branch(self):
         p, f, c = sample()
         p["head"]["ref"] = "another"
