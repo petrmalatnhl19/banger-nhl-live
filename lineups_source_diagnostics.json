@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-11T18:27:52.041231+00:00",
+  "generatedAt": "2026-11-11T22:22:24.920959+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -19,8 +19,8 @@
     "hurricanes": {
       "team": "CAR",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/carolina-hurricanes-seattle-kraken-game-preview-november-11-2026",
-      "candidatePublishedAt": "2026-11-11T14:36:12.512000+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-11T19:19:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -64,8 +64,8 @@
     "rangers": {
       "team": "NYR",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/new-york-rangers-calgary-flames-game-preview-november-11-2026",
-      "candidatePublishedAt": "2026-11-11T18:16:00.408000+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-11T19:19:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -138,8 +138,8 @@
     "sharks": {
       "team": "SJS",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/new-york-islanders-san-jose-sharks-game-preview-november-9-2026",
-      "candidatePublishedAt": "2026-11-09T20:11:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/pittsburgh-penguins-san-jose-sharks-game-preview-november-11-2026",
+      "candidatePublishedAt": "2026-11-11T19:57:02.373000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -183,8 +183,8 @@
     "lightning": {
       "team": "TBL",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/tampa-bay-lightning-buffalo-sabres-game-preview-november-11-2026",
-      "candidatePublishedAt": "2026-11-11T18:07:25.884000+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-11T19:19:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -199,23 +199,34 @@
     "mammoth": {
       "team": "UTA",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/utah-mammoth-ottawa-senators-game-preview-november-7-2026",
-      "candidatePublishedAt": "2026-11-07T17:48:55.189000+00:00",
+      "candidateSource": "https://www.nhl.com/news/utah-mammoth-vegas-golden-knights-game-preview-november-11-2026",
+      "candidatePublishedAt": "2026-11-11T20:27:25.470000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
-      "gameEvidenceExceptions": [
+      "roleMismatches": [],
+      "rejectedLines": [
         {
-          "player": "Artem Duda",
-          "role": "defense",
-          "basis": "official game boxscore on projection publication date"
+          "group": "defense",
+          "line": 3,
+          "players": [
+            "Artem Duda"
+          ],
+          "sourceLine": [
+            "Nick DeSimone",
+            "Artem Duda"
+          ]
         }
       ],
-      "roleMismatches": [],
-      "rejectedLines": [],
-      "rejectedPlayerReasons": [],
+      "rejectedPlayerReasons": [
+        {
+          "name": "Artem Duda",
+          "expectedRole": "defense",
+          "reason": "not_in_current_roster"
+        }
+      ],
       "validatedForwardLines": 4,
-      "validatedDefensePairs": 3,
+      "validatedDefensePairs": 2,
       "accepted": true
     },
     "red wings": {

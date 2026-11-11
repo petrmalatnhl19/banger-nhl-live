@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-11T18:27:56.407990+00:00",
+  "updatedAt": "2026-11-11T22:22:28.096060+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "goalieCount": 102,
   "games": [
@@ -38,14 +38,14 @@
     },
     {
       "team": "EDM",
-      "goalie": "Devon Levi",
+      "goalie": "Tristan Jarry",
       "opponent": "PHI",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-11",
       "gameId": 2026020295,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8482221"
+      "goalieId": "8477465"
     },
     {
       "team": "NSH",
@@ -74,7 +74,7 @@
       "goalie": "Dan Vladar",
       "opponent": "EDM",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-11",
       "gameId": 2026020295,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -82,21 +82,21 @@
     },
     {
       "team": "PIT",
-      "goalie": "Arturs Silovs",
+      "goalie": "Sergei Murashov",
       "opponent": "SJS",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-11",
       "gameId": 2026020298,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8481668"
+      "goalieId": "8483703"
     },
     {
       "team": "SJS",
       "goalie": "Yaroslav Askarov",
       "opponent": "PIT",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-11",
       "gameId": 2026020298,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -115,21 +115,21 @@
     },
     {
       "team": "UTA",
-      "goalie": "Karel Vejmelka",
+      "goalie": "Sebastian Cossa",
       "opponent": "VGK",
       "venue": "away",
       "status": "projected",
       "date": "2026-11-11",
       "gameId": 2026020296,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8478872"
+      "goalieId": "8482657"
     },
     {
       "team": "VGK",
       "goalie": "Carter Hart",
       "opponent": "UTA",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-11",
       "gameId": 2026020296,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -346,14 +346,14 @@
     },
     {
       "team": "UTA",
-      "goalie": "Sebastian Cossa",
+      "goalie": "Karel Vejmelka",
       "opponent": "STL",
       "venue": "home",
       "status": "projected",
       "date": "2026-11-12",
       "gameId": 2026020307,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8482657"
+      "goalieId": "8478872"
     },
     {
       "team": "WPG",
