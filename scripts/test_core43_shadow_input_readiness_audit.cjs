@@ -7,6 +7,12 @@ const base={game_id:1,side:"home",goalie_id:"1",gsax:0,
  starter_verified_at:"2026-11-10T18:00:00Z",readiness:"ready_projected"};
 let result=audit([base]);
 assert.equal(result.fullyTimeQualified,1);
+result=audit([{...base,captured_at:"2026-11-10T19:00:01Z"}]);
+assert.equal(result.capturedWithinFiveMinutes,1);
+assert.equal(result.fullyTimeQualified,1);
+result=audit([{...base,captured_at:"2026-11-10T19:06:00Z"}]);
+assert.equal(result.capturedMoreThanFiveMinutesLate,1);
+assert.equal(result.fullyTimeQualified,0);
 assert.equal(result.projected,1);
 assert.equal(result.missingGsax,0);
 result=audit([{...base,game_id:2,goalie_id:null,gsax:null,
