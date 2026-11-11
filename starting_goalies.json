@@ -1,24 +1,15 @@
 {
   "date": "2026-11-11",
-  "updatedAt": "2026-11-11T17:33:58.540142+00:00",
+  "updatedAt": "2026-11-11T18:27:56.407990+00:00",
   "teams": {
     "ANA": {
       "name": "Laurent Brossoit",
-      "status": "projected",
-      "date": "2026-11-11",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-11T17:33:58.540142+00:00",
-      "gameId": 2026020297
-    },
-    "CGY": {
-      "name": "Devin Cooley",
       "status": "confirmed",
       "date": "2026-11-11",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-11T17:33:58.540142+00:00",
-      "gameId": 2026020294
+      "checkedAt": "2026-11-11T18:27:56.407990+00:00",
+      "gameId": 2026020297
     },
     "EDM": {
       "name": "Devon Levi",
@@ -26,17 +17,8 @@
       "date": "2026-11-11",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-11T17:33:58.540142+00:00",
+      "checkedAt": "2026-11-11T18:27:56.407990+00:00",
       "gameId": 2026020295
-    },
-    "NYR": {
-      "name": "Joonas Korpisalo",
-      "status": "confirmed",
-      "date": "2026-11-11",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-11T17:33:58.540142+00:00",
-      "gameId": 2026020294
     },
     "PIT": {
       "name": "Arturs Silovs",
@@ -44,7 +26,7 @@
       "date": "2026-11-11",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-11T17:33:58.540142+00:00",
+      "checkedAt": "2026-11-11T18:27:56.407990+00:00",
       "gameId": 2026020298
     },
     "SJS": {
@@ -53,7 +35,7 @@
       "date": "2026-11-11",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-11T17:33:58.540142+00:00",
+      "checkedAt": "2026-11-11T18:27:56.407990+00:00",
       "gameId": 2026020298
     },
     "TBL": {
@@ -62,17 +44,43 @@
       "date": "2026-11-11",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-11T17:33:58.540142+00:00",
+      "checkedAt": "2026-11-11T18:27:56.407990+00:00",
       "gameId": 2026020293
+    },
+    "BUF": {
+      "name": "Ukko-Pekka Luukkonen",
+      "status": "projected",
+      "date": "2026-11-11",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-11T18:27:56.407990+00:00",
+      "gameId": 2026020293
+    },
+    "CGY": {
+      "name": "Devin Cooley",
+      "status": "confirmed",
+      "date": "2026-11-11",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-11T18:27:56.407990+00:00",
+      "gameId": 2026020294
+    },
+    "NYR": {
+      "name": "Joonas Korpisalo",
+      "status": "confirmed",
+      "date": "2026-11-11",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-11T18:27:56.407990+00:00",
+      "gameId": 2026020294
     }
   },
   "conflicts": [
     {
-      "date": "2026-11-11",
       "team": "BUF",
-      "reason": "source disagreement",
-      "rotowire": "Ukko-Pekka Luukkonen",
-      "previous": "Colten Ellis"
+      "specialist": "Colten Ellis",
+      "nhl": "Ukko-Pekka Luukkonen",
+      "nhlSource": "https://www.nhl.com/news/tampa-bay-lightning-buffalo-sabres-game-preview-november-11-2026"
     },
     {
       "date": "2026-11-11",

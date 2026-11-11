@@ -134,20 +134,79 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "lightning": {
-      "updatedAt": "2026-11-05T19:12:44.545143+00:00",
-      "previousPublishedAt": "2026-11-03T17:02:00+00:00",
-      "publishedAt": "2026-11-05T18:38:08.848000+00:00",
-      "source": "https://www.nhl.com/news/chicago-blackhawks-tampa-bay-lightning-game-preview-november-5-2026",
+      "updatedAt": "2026-11-11T18:27:52.043889+00:00",
+      "previousPublishedAt": "2026-11-08T16:16:00+00:00",
+      "publishedAt": "2026-11-11T18:07:25.884000+00:00",
+      "source": "https://www.nhl.com/news/tampa-bay-lightning-buffalo-sabres-game-preview-november-11-2026",
       "events": [
         {
+          "type": "moved",
+          "player": "Brandon Hagel",
+          "from": "Útok 2",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Anthony Cirelli",
+          "from": "Útok 2",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Jake Guentzel",
+          "from": "Útok 1",
+          "to": "Útok 2"
+        },
+        {
           "type": "added",
-          "player": "Conor Geekie",
+          "player": "Sam O'Reilly",
+          "to": "Útok 2"
+        },
+        {
+          "type": "added",
+          "player": "Yanni Gourde",
+          "to": "Útok 2"
+        },
+        {
+          "type": "added",
+          "player": "Zemgus Girgensons",
           "to": "Útok 3"
         },
         {
+          "type": "added",
+          "player": "Jeffrey Viel",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Conor Geekie",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
+          "player": "Scott Sabourin",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
+          "player": "Charle-Edouard D'Astous",
+          "to": "Obrana 3"
+        },
+        {
           "type": "removed",
-          "player": "Dominic James",
-          "from": "Útok 3"
+          "player": "Brayden Point",
+          "from": "Útok 1"
+        },
+        {
+          "type": "removed",
+          "player": "Gage Goncalves",
+          "from": "Útok 2"
+        },
+        {
+          "type": "removed",
+          "player": "Emil Lilleberg",
+          "from": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -692,30 +751,38 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "sabres": {
-      "updatedAt": "2026-11-06T17:58:08.834406+00:00",
-      "previousPublishedAt": "2026-11-04T17:37:08.585000+00:00",
-      "publishedAt": "2026-11-06T17:50:25.006000+00:00",
-      "source": "https://www.nhl.com/news/columbus-blue-jackets-buffalo-sabres-game-preview-november-6-2026",
+      "updatedAt": "2026-11-11T18:27:52.044004+00:00",
+      "previousPublishedAt": "2026-11-07T21:33:32.377000+00:00",
+      "publishedAt": "2026-11-11T18:07:25.884000+00:00",
+      "source": "https://www.nhl.com/news/tampa-bay-lightning-buffalo-sabres-game-preview-november-11-2026",
       "events": [
         {
+          "type": "moved",
+          "player": "Josh Norris",
+          "from": "Útok 3",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Zach Benson",
+          "from": "Útok 1",
+          "to": "Útok 2"
+        },
+        {
           "type": "added",
-          "player": "Jiri Kulich",
+          "player": "Ryan McLeod",
           "to": "Útok 3"
         },
         {
-          "type": "added",
-          "player": "Conor Timmins",
-          "to": "Obrana 3"
+          "type": "moved",
+          "player": "Josh Doan",
+          "from": "Útok 2",
+          "to": "Útok 3"
         },
         {
           "type": "removed",
-          "player": "Ryan McLeod",
+          "player": "Jiri Kulich",
           "from": "Útok 3"
-        },
-        {
-          "type": "removed",
-          "player": "Louis Crevier",
-          "from": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -916,38 +983,44 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "rangers": {
-      "updatedAt": "2026-11-10T19:28:11.319448+00:00",
-      "previousPublishedAt": "2026-11-06T22:34:00+00:00",
-      "publishedAt": "2026-11-09T18:29:30.340000+00:00",
-      "source": "https://www.nhl.com/news/new-york-rangers-edmonton-oilers-game-preview-november-9-2026",
+      "updatedAt": "2026-11-11T18:27:52.044096+00:00",
+      "previousPublishedAt": "2026-11-09T18:29:30.340000+00:00",
+      "publishedAt": "2026-11-11T18:16:00.408000+00:00",
+      "source": "https://www.nhl.com/news/new-york-rangers-calgary-flames-game-preview-november-11-2026",
       "events": [
         {
           "type": "moved",
-          "player": "Gabe Perreault",
-          "from": "Útok 2",
-          "to": "Útok 1"
-        },
-        {
-          "type": "moved",
-          "player": "Oliver Bjorkstrand",
+          "player": "Pavel Dorofeyev",
           "from": "Útok 3",
           "to": "Útok 2"
         },
         {
           "type": "moved",
-          "player": "Pavel Dorofeyev",
-          "from": "Útok 1",
+          "player": "Noah Laba",
+          "from": "Útok 4",
           "to": "Útok 3"
         },
         {
-          "type": "removed",
-          "player": "Alberts Smits",
-          "from": "Obrana 3"
+          "type": "moved",
+          "player": "Oliver Bjorkstrand",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Eeli Tolvanen",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
+          "player": "Glenn Gawdin",
+          "to": "Útok 4"
         },
         {
           "type": "removed",
-          "player": "Scott Morrow",
-          "from": "Obrana 3"
+          "player": "Matt Rempe",
+          "from": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -1219,20 +1292,20 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "flames": {
-      "updatedAt": "2026-11-08T17:32:15.603641+00:00",
-      "previousPublishedAt": "2026-11-06T18:21:14.068000+00:00",
-      "publishedAt": "2026-11-08T17:16:00+00:00",
-      "source": "https://www.nhl.com/news/philadelphia-flyers-calgary-flames-game-preview-november-8-2026",
+      "updatedAt": "2026-11-11T18:27:52.044193+00:00",
+      "previousPublishedAt": "2026-11-08T17:16:00+00:00",
+      "publishedAt": "2026-11-11T18:16:00.408000+00:00",
+      "source": "https://www.nhl.com/news/new-york-rangers-calgary-flames-game-preview-november-11-2026",
       "events": [
         {
           "type": "added",
-          "player": "Joel Hanley",
-          "to": "Obrana 1"
+          "player": "Brennan Othmann",
+          "to": "Útok 4"
         },
         {
           "type": "removed",
-          "player": "Kevin Bahl",
-          "from": "Obrana 1"
+          "player": "William Stromgren",
+          "from": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

@@ -1,5 +1,40 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "blocks": [],
+  "blocks": [
+    {
+      "heading": "Lightning projected lineup",
+      "followingLines": [
+        "Brandon Hagel -- Anthony Cirelli -- Nikita Kucherov",
+        "Jake Guentzel -- Sam O'Reilly -- Yanni Gourde",
+        "Ilya Mikheyev -- Zemgus Girgensons -- Pontus Holmberg",
+        "Jeffrey Viel -- Conor Geekie -- Scott Sabourin",
+        "J.J. Moser -- John Carlson",
+        "Ryan McDonagh -- Erik Cernak",
+        "Victor Hedman -- Charle-Edouard D'Astous",
+        "Andrei Vasilevskiy",
+        "Dennis Hildeby",
+        "Scratched: Emil Lilleberg, Max Crozier, Gage Goncalves",
+        "Injured: Brayden Point (lower body)",
+        "Sabres projected lineup",
+        "Peyton Krebs -- Josh Norris -- Tage Thompson",
+        "Zach Benson -- Noah Ostlund -- Jack Quinn",
+        "Jason Zucker -- Ryan McLeod -- Josh Doan",
+        "Beck Malenstyn -- Tyson Kozak -- Sam Carrick",
+        "Rasmus Dahlin -- Mattias Samuelsson",
+        "Olen Zellweger -- Owen Power",
+        "Zach Metsa -- Conor Timmins",
+        "Ukko-Pekka Luukkonen",
+        "Colten Ellis",
+        "Scratched: Jiri Kulich, Louis Crevier",
+        "Injured: Konsta Helenius (upper body), Justin Danforth (upper body), Matt Grzelcyk (lower body), Alex Lyon (upper body)",
+        "Status report",
+        "The Lightning held an optional morning skate. … No update was available on Point after the skate. The forward was placed on injured reserve Tuesday after sustaining an injury in the first period of a 4-3 loss at the Winning Jets on Sunday. … O'Reilly could make his NHL debut. The 20-year-old, who was acquired in a trade with the Edmonton Oilers in July 2025, was recalled from Syracuse of the American Hockey League on Wednesday. … McLeod will return to the lineup after being scratched the past two games.",
+        "RANGERS (10-8-1) at FLAMES (8-9-1)",
+        "7:30 p.m. ET; Prime, MSGSN",
+        "Rangers projected lineup",
+        "Gabe Perreault -- Mika Zibanejad -- Alexis Lafreniere"
+      ]
+    }
+  ],
   "warning": "Raw source excerpts for debugging only; no roster changes."
 }
