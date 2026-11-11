@@ -1,0 +1,51 @@
+name: CORE 4.3 pregame readiness monitor
+
+on:
+  schedule:
+    - cron: '7,37 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: core43-pregame-readiness
+  cancel-in-progress: false
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate monitor
+        run: node scripts/test_core43_scheduled_pregame_monitor.cjs
+      - name: Check configuration
+        id: config
+        shell: bash
+        run: |
+          if [[ -n "$SUPABASE_URL" && -n "$SUPABASE_SERVICE_ROLE_KEY" ]]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::Read-only pregame monitor skipped: missing Supabase secrets"
+            echo "Pregame monitor skipped: missing secrets" >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Inspect upcoming games without writes
+        if: steps.config.outputs.ready == 'true'
+        run: |
+          node scripts/core43_scheduled_pregame_monitor.cjs > core43-pregame-readiness.json
+          node -e 'const r=require("./core43-pregame-readiness.json");require("fs").appendFileSync(process.env.GITHUB_STEP_SUMMARY, "CORE 4.3 pregame readiness: "+r.ready+" / "+r.checked+" games; archived: 0 (read-only)\\n")'
+      - name: Upload ephemeral diagnostic artifact
+        if: steps.config.outputs.ready == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: core43-pregame-readiness
+          path: core43-pregame-readiness.json
+          retention-days: 7
