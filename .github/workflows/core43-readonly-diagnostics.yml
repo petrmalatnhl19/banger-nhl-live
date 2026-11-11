@@ -36,6 +36,7 @@ jobs:
           node scripts/test_core43_shadow_input_readiness_audit.cjs
           node scripts/test_core43_rotowire_identity_reconcile.cjs
           node scripts/test_core43_shadow_identity_coverage.cjs
+          node scripts/test_core43_new_pregame_goalie_identity.cjs
       - name: Validate configuration
         id: config
         shell: bash
