@@ -32,8 +32,8 @@ def eligible(pr, files, checks):
         return False, "unexpected source or target branch"
     if pr.get("head", {}).get("repo", {}).get("full_name") != REPO:
         return False, "unexpected head repository"
-    if pr.get("mergeable") is not True or pr.get("mergeable_state") != "clean":
-        return False, "PR is not cleanly mergeable"
+    if pr.get("mergeable") is not True:
+        return False, "GitHub reports merge conflict or has not calculated mergeability"
     names = [f.get("filename") for f in files]
     if not names or len(names) != pr.get("changed_files") or any(n not in ALLOWED for n in names):
         return False, "changed files outside approved JSON allowlist"
@@ -69,6 +69,8 @@ def main():
         return
     number = matches[0]["number"]
     pr = api(f"/pulls/{number}", read_token)
+    # GitHub can report mergeable_state=unstable for pending checks even when
+    # mergeable=True. Check the required checks explicitly below instead.
     sha = pr["head"]["sha"]
     files = api(f"/pulls/{number}/files?per_page=100", read_token)
     checks = api(f"/commits/{sha}/check-runs?per_page=100", read_token)["check_runs"]
