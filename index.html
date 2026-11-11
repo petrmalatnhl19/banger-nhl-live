@@ -1960,7 +1960,7 @@ if(canPatch){
  if(sameOrder){
   const metricsNode=root.querySelector('.metrics');
   if(metricsNode&&metricsNode.outerHTML!==metrics){metricsNode.outerHTML=metrics}
-  cards.forEach((item,index)=>{const node=existing[index];if(node.dataset.cardMarkup!==item.html){const replacement=document.createElement('template');replacement.innerHTML=item.html.trim();const next=replacement.content.firstElementChild;next.dataset.cardMarkup=item.html;node.replaceWith(next);next.querySelectorAll('[data-game]').forEach(b=>b.onclick=()=>detail(b.dataset.game,b));next.querySelectorAll('[data-analyze]').forEach(b=>b.onclick=()=>analyzeGame(b.dataset.analyze));}});
+  cards.forEach((item,index)=>{const node=existing[index];if(node.dataset.cardMarkup!==item.html){const replacement=document.createElement('template');replacement.innerHTML=item.html.trim();const next=replacement.content.firstElementChild;next.dataset.gameId=item.id;next.dataset.cardMarkup=item.html;node.replaceWith(next);next.querySelectorAll('[data-game]').forEach(b=>b.onclick=()=>detail(b.dataset.game,b));next.querySelectorAll('[data-analyze]').forEach(b=>b.onclick=()=>analyzeGame(b.dataset.analyze));}});
   uxApplyGameFilter();return;
  }
 }
