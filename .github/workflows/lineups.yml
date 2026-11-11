@@ -167,7 +167,6 @@ jobs:
             Changes must pass required checks before merge into protected main.
             Review generated files and source timestamps before merging.
           add-paths: |
-            index.html
             nhl_news.json
             lineups.json
             lineups_archive.json
