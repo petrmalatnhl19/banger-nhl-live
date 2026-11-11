@@ -1,0 +1,16 @@
+"use strict";
+const assert=require("node:assert/strict");
+const {adaptArchivedGsaxSnapshots:adapt}=require("./core43_archived_gsax_snapshot_adapter.cjs");
+const asOf="2026-11-11T12:00:00Z",fetched_at="2026-11-11T11:00:00Z",created_at="2026-11-11T11:01:00Z",source_sha256="a".repeat(64);
+const row={goalie_id:"8471234",team_code:"DAL",situation:"all",fetched_at,created_at,source_sha256,x_goals_against:"52",goals_against:"49",shots_against:600};
+const ok=adapt([row,{...row,goalie_id:"8475678",team_code:"NYR"}],{asOf});
+assert.equal(ok.ready,true);
+assert.equal(ok.snapshots.length,1);
+assert.equal(ok.snapshots[0].rows.length,2);
+assert.equal(ok.snapshots[0].rows[0].xGoals,52);
+assert.equal(adapt([row],{asOf:"2026-11-11T10:00:00Z"}).ready,false);
+assert.equal(adapt([{...row,created_at:"2026-11-11T12:05:00Z"}],{asOf}).ready,false);
+assert.equal(adapt([{...row,source_sha256:""}],{asOf}).ready,false);
+assert.equal(adapt([row,row],{asOf}).ready,false);
+assert.equal(adapt([{...row,shots_against:-1}],{asOf}).ready,false);
+console.log("CORE 4.3 archived GSAx snapshot adapter tests passed");
