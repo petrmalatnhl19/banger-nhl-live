@@ -4,6 +4,7 @@ const {fetchRows}=require("./core43_supabase_readonly_report.cjs");
 const {discoverUpcomingGames}=require("./core43_scheduled_pregame_monitor.cjs");
 const {inspectLiveShadowGame}=require("./core43_live_shadow_source_reader.cjs");
 const {insertOnce}=require("./core43_append_only_capture_writer.cjs");
+const {explain}=require("./core43_pilot_readiness_explainer.cjs");
 async function pilot({url,key,gameId,enabled=false,now=()=>new Date().toISOString(),fetchImpl=fetch}={}){
  if(!/^\d+$/.test(String(gameId??"")))throw Error("invalid_game_id");
  if(!key)throw Error("missing_server_credentials");
@@ -13,7 +14,10 @@ async function pilot({url,key,gameId,enabled=false,now=()=>new Date().toISOStrin
   fetchRows({url,key,table:"nhl_prediction_archive",select:"game_id,away_team,home_team,core42_predicted_at,core42_away,core42_home",gameId:String(gameId),fetchImpl})
  ]);
  const matches=discoverUpcomingGames({schedules,predictions,now:timestamp,horizonMinutes:180}).filter(g=>g.gameId===String(gameId));
- if(matches.length!==1||!matches[0].baselineReady)return {inserted:false,reason:matches[0]?.reason||"no_upcoming_baseline_ready_game",mode:"manual_pilot"};
+ if(matches.length!==1||!matches[0].baselineReady){
+  const diagnostics=await explain({url,key,gameId,now:timestamp,fetchImpl});
+  return {inserted:false,reason:matches[0]?.reason||"no_upcoming_baseline_ready_game",mode:"manual_pilot",diagnostics};
+ }
  const game=matches[0];
  const result=await inspectLiveShadowGame({url,key,gameId:game.gameId,awayTeam:game.awayTeam,homeTeam:game.homeTeam,asOf:timestamp,now:timestamp,fetchImpl});
  if(!result.captured)return {inserted:false,reason:result.reason,mode:"manual_pilot"};
