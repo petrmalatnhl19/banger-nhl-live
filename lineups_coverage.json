@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-12T08:05:22.746934+00:00",
+  "generatedAt": "2026-11-12T10:06:19.453514+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 15,
+  "currentProjections": 14,
   "needsFreshProjection": [
     "avalanche",
     "blackhawks",
@@ -15,6 +15,7 @@
     "devils",
     "islanders",
     "jets",
+    "kings",
     "maple leafs",
     "panthers",
     "red wings",
@@ -35,6 +36,7 @@
     "devils",
     "islanders",
     "jets",
+    "kings",
     "maple leafs",
     "panthers",
     "red wings",
@@ -209,7 +211,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-11T19:19:00+00:00",
+      "publishedAt": "2026-11-12T09:30:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -244,11 +246,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-10T20:22:05.537000+00:00",
       "source": "https://www.nhl.com/news/nashville-predators-los-angeles-kings-game-preview-november-10-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "kraken": {
       "hasProjectedLines": true,
@@ -257,7 +259,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-11T19:19:00+00:00",
+      "publishedAt": "2026-11-12T09:30:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
