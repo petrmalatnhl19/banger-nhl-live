@@ -1,22 +1,26 @@
 {
-  "generatedAt": "2026-11-12T04:34:11.034875+00:00",
+  "generatedAt": "2026-11-12T05:38:26.497802+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 27,
+  "currentProjections": 25,
   "needsFreshProjection": [
     "blackhawks",
     "bruins",
+    "canadiens",
     "canucks",
     "islanders",
-    "stars"
+    "stars",
+    "wild"
   ],
   "missing": [],
   "olderVerified": [
     "blackhawks",
     "bruins",
+    "canadiens",
     "canucks",
     "islanders",
-    "stars"
+    "stars",
+    "wild"
   ],
   "manualSnapshots": [],
   "freshnessDefinition": "Publication within 36h; not a confirmed next-game lineup",
@@ -87,11 +91,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-10T17:05:50.294000+00:00",
       "source": "https://www.nhl.com/news/minnesota-wild-montreal-canadiens-game-preview-november-10-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "canucks": {
       "hasProjectedLines": true,
@@ -403,11 +407,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-10T17:05:50.294000+00:00",
       "source": "https://www.nhl.com/news/minnesota-wild-montreal-canadiens-game-preview-november-10-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     }
   }
 }

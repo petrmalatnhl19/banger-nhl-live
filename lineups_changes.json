@@ -588,26 +588,20 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "mammoth": {
-      "updatedAt": "2026-11-11T22:22:24.925159+00:00",
-      "previousPublishedAt": "2026-11-07T17:48:55.189000+00:00",
+      "updatedAt": "2026-11-12T05:38:24.892333+00:00",
+      "previousPublishedAt": "2026-11-11T20:27:25.470000+00:00",
       "publishedAt": "2026-11-11T20:27:25.470000+00:00",
       "source": "https://www.nhl.com/news/utah-mammoth-vegas-golden-knights-game-preview-november-11-2026",
       "events": [
         {
-          "type": "moved",
-          "player": "Dmitri Simashev",
-          "from": "Obrana 3",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "removed",
-          "player": "Artem Duda",
-          "from": "Obrana 2"
-        },
-        {
-          "type": "removed",
+          "type": "added",
           "player": "Nick DeSimone",
-          "from": "Obrana 3"
+          "to": "Obrana 3"
+        },
+        {
+          "type": "added",
+          "player": "Artem Duda",
+          "to": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

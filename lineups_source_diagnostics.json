@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-12T04:34:09.421445+00:00",
+  "generatedAt": "2026-11-12T05:38:24.888494+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -204,29 +204,18 @@
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
+      "gameEvidenceExceptions": [
+        {
+          "player": "Artem Duda",
+          "role": "defense",
+          "basis": "official game boxscore on projection publication date"
+        }
+      ],
       "roleMismatches": [],
-      "rejectedLines": [
-        {
-          "group": "defense",
-          "line": 3,
-          "players": [
-            "Artem Duda"
-          ],
-          "sourceLine": [
-            "Nick DeSimone",
-            "Artem Duda"
-          ]
-        }
-      ],
-      "rejectedPlayerReasons": [
-        {
-          "name": "Artem Duda",
-          "expectedRole": "defense",
-          "reason": "not_in_current_roster"
-        }
-      ],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
       "validatedForwardLines": 4,
-      "validatedDefensePairs": 2,
+      "validatedDefensePairs": 3,
       "accepted": true
     },
     "red wings": {
