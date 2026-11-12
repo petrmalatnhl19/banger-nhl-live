@@ -1,60 +1,24 @@
 {
   "date": "2026-11-12",
-  "updatedAt": "2026-11-12T01:15:06.496792+00:00",
+  "updatedAt": "2026-11-12T02:23:08.682621+00:00",
   "teams": {
-    "MIN": {
-      "name": "Jesper Wallstedt",
-      "status": "projected",
-      "date": "2026-11-12",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-12T01:15:06.496792+00:00",
-      "gameId": 2026020300
-    },
-    "COL": {
-      "name": "Mackenzie Blackwood",
-      "status": "projected",
-      "date": "2026-11-12",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-12T01:15:06.496792+00:00",
-      "gameId": 2026020301
-    },
-    "WSH": {
-      "name": "Logan Thompson",
-      "status": "projected",
-      "date": "2026-11-12",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-12T01:15:06.496792+00:00",
-      "gameId": 2026020303
-    },
     "DET": {
       "name": "John Gibson",
       "status": "projected",
       "date": "2026-11-12",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-12T01:15:06.496792+00:00",
+      "checkedAt": "2026-11-12T02:23:08.682621+00:00",
       "gameId": 2026020302
     },
-    "FLA": {
-      "name": "Jacob Markstrom",
+    "MIN": {
+      "name": "Jesper Wallstedt",
       "status": "projected",
       "date": "2026-11-12",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-12T01:15:06.496792+00:00",
-      "gameId": 2026020302
-    },
-    "STL": {
-      "name": "Joel Hofer",
-      "status": "projected",
-      "date": "2026-11-12",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-12T01:15:06.496792+00:00",
-      "gameId": 2026020307
+      "checkedAt": "2026-11-12T02:23:08.682621+00:00",
+      "gameId": 2026020300
     },
     "MTL": {
       "name": "Jacob Fowler",
@@ -62,8 +26,35 @@
       "date": "2026-11-12",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-12T01:15:06.496792+00:00",
+      "checkedAt": "2026-11-12T02:23:08.682621+00:00",
       "gameId": 2026020299
+    },
+    "COL": {
+      "name": "Mackenzie Blackwood",
+      "status": "projected",
+      "date": "2026-11-12",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-12T02:23:08.682621+00:00",
+      "gameId": 2026020301
+    },
+    "FLA": {
+      "name": "Jacob Markstrom",
+      "status": "projected",
+      "date": "2026-11-12",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-12T02:23:08.682621+00:00",
+      "gameId": 2026020302
+    },
+    "WSH": {
+      "name": "Logan Thompson",
+      "status": "projected",
+      "date": "2026-11-12",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-12T02:23:08.682621+00:00",
+      "gameId": 2026020303
     },
     "TOR": {
       "name": "Sergei Bobrovsky",
@@ -71,8 +62,17 @@
       "date": "2026-11-12",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-12T01:15:06.496792+00:00",
+      "checkedAt": "2026-11-12T02:23:08.682621+00:00",
       "gameId": 2026020300
+    },
+    "STL": {
+      "name": "Joel Hofer",
+      "status": "projected",
+      "date": "2026-11-12",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-12T02:23:08.682621+00:00",
+      "gameId": 2026020307
     },
     "BOS": {
       "name": "Jeremy Swayman",
@@ -80,7 +80,7 @@
       "date": "2026-11-12",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-12T01:15:06.496792+00:00",
+      "checkedAt": "2026-11-12T02:23:08.682621+00:00",
       "gameId": 2026020299
     },
     "CHI": {
@@ -89,7 +89,7 @@
       "date": "2026-11-12",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-12T01:15:06.496792+00:00",
+      "checkedAt": "2026-11-12T02:23:08.682621+00:00",
       "gameId": 2026020305
     },
     "DAL": {
@@ -98,7 +98,7 @@
       "date": "2026-11-12",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-12T01:15:06.496792+00:00",
+      "checkedAt": "2026-11-12T02:23:08.682621+00:00",
       "gameId": 2026020306
     },
     "NYI": {
@@ -107,7 +107,7 @@
       "date": "2026-11-12",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-12T01:15:06.496792+00:00",
+      "checkedAt": "2026-11-12T02:23:08.682621+00:00",
       "gameId": 2026020308
     }
   },
