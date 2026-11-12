@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-12T13:38:53.153251+00:00",
-  "rostersUpdatedAt": "2026-11-12T13:38:26.482969+00:00",
+  "updatedAt": "2026-11-12T14:41:09.961857+00:00",
+  "rostersUpdatedAt": "2026-11-12T14:40:38.227485+00:00",
   "projectionDate": "2026-11-12",
   "teamCount": 32,
   "goalieCount": 74,
@@ -248,17 +248,17 @@
       "team": "CAR",
       "teamKey": "hurricanes",
       "playerId": 8483548,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-12",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Pyotr Kochetkov",
       "team": "CAR",
       "teamKey": "hurricanes",
       "playerId": 8481611,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-12",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Ilya Sorokin",
@@ -330,7 +330,7 @@
       "team": "SEA",
       "teamKey": "kraken",
       "playerId": 8475831,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-12",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },

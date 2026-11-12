@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-12T13:38:52.497736+00:00",
+  "checkedAt": "2026-11-12T14:41:09.275914+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "candidateCount": 96,
   "matchedCount": 96,
@@ -106,7 +106,7 @@
     },
     {
       "team": "CAR",
-      "goalie": "Pyotr Kochetkov",
+      "goalie": "Brandon Bussi",
       "opponent": "SEA",
       "venue": "away",
       "status": "projected",
@@ -669,14 +669,14 @@
       "goalie": "Philipp Grubauer",
       "opponent": "CAR",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-12",
       "gameId": 2026020309,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "team": "SEA",
-      "goalie": "Philipp Grubauer",
+      "goalie": "Joey Daccord",
       "opponent": "CAR",
       "venue": "away",
       "status": "projected",
