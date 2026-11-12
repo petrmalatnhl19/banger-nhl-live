@@ -3,8 +3,19 @@
     "lineup_core_report.json",
     "lineup_rejections_report.json"
   ],
-  "incompleteTeams": 7,
+  "incompleteTeams": 9,
   "teams": [
+    {
+      "team": "blackhawks",
+      "status": "missing_team",
+      "reason": "no_accepted_projection",
+      "missingForwardLines": 4,
+      "missingDefensePairs": 3,
+      "source": null,
+      "publishedAt": null,
+      "rejectedLines": [],
+      "nextAction": "Find a current NHL.com projection and validate all players."
+    },
     {
       "team": "canucks",
       "status": "incomplete_projection",
@@ -18,14 +29,14 @@
     },
     {
       "team": "devils",
-      "status": "incomplete_projection",
-      "reason": "incomplete_source_or_no_validated_replacement",
-      "missingForwardLines": 1,
-      "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/new-jersey-devils-winnipeg-jets-game-preview-november-10-2026",
-      "publishedAt": "2026-11-10T17:56:14.254000+00:00",
+      "status": "missing_team",
+      "reason": "no_accepted_projection",
+      "missingForwardLines": 4,
+      "missingDefensePairs": 3,
+      "source": null,
+      "publishedAt": null,
       "rejectedLines": [],
-      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
+      "nextAction": "Find a current NHL.com projection and validate all players."
     },
     {
       "team": "golden knights",
@@ -134,6 +145,17 @@
         }
       ],
       "nextAction": "Verify official roster and source-player identity; do not auto-approve."
+    },
+    {
+      "team": "stars",
+      "status": "missing_team",
+      "reason": "no_accepted_projection",
+      "missingForwardLines": 4,
+      "missingDefensePairs": 3,
+      "source": null,
+      "publishedAt": null,
+      "rejectedLines": [],
+      "nextAction": "Find a current NHL.com projection and validate all players."
     }
   ],
   "policy": "Diagnostics only. Never synthesize or automatically publish unverified lines."

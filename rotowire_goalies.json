@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-12T16:46:21.449843+00:00",
+  "updatedAt": "2026-11-12T17:40:32.149341+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "goalieCount": 96,
   "games": [
@@ -60,14 +60,14 @@
     },
     {
       "team": "COL",
-      "goalie": "Mackenzie Blackwood",
+      "goalie": "Scott Wedgewood",
       "opponent": "OTT",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-12",
       "gameId": 2026020301,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8478406"
+      "goalieId": "8475809"
     },
     {
       "team": "DAL",
@@ -118,7 +118,7 @@
       "goalie": "Jesper Wallstedt",
       "opponent": "TOR",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-12",
       "gameId": 2026020300,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -228,7 +228,7 @@
       "goalie": "Stuart Skinner",
       "opponent": "DAL",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-12",
       "gameId": 2026020306,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
