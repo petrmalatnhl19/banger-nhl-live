@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-12T22:24:02.252187+00:00",
-  "checked": 17,
-  "articlesFound": 7,
+  "generatedAt": "2026-11-12T23:19:13.523520+00:00",
+  "checked": 14,
+  "articlesFound": 10,
   "errors": [],
   "fixtures": [
     {
@@ -242,6 +242,33 @@
       "coversBothTeams": true
     },
     {
+      "url": "https://www.nhl.com/news/tampa-bay-lightning-columbus-blue-jackets-game-preview-november-12-2026",
+      "result": "parsed",
+      "teams": [
+        "lightning",
+        "blue jackets"
+      ],
+      "coversBothTeams": true
+    },
+    {
+      "url": "https://www.nhl.com/news/winnipeg-jets-dallas-stars-game-preview-november-12-2026",
+      "result": "parsed",
+      "teams": [
+        "jets",
+        "stars"
+      ],
+      "coversBothTeams": true
+    },
+    {
+      "url": "https://www.nhl.com/news/washington-capitals-new-jersey-devils-game-preview-november-12-2026",
+      "result": "parsed",
+      "teams": [
+        "capitals",
+        "devils"
+      ],
+      "coversBothTeams": true
+    },
+    {
       "url": "https://www.nhl.com/news/nashville-predators-vegas-golden-knights-game-preview-november-13-2026",
       "result": "no_complete_projection",
       "teams": []
@@ -250,47 +277,17 @@
       "url": "https://www.nhl.com/news/vegas-golden-knights-nashville-predators-game-preview-november-13-2026",
       "result": "no_complete_projection",
       "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/new-york-rangers-vancouver-canucks-game-preview-november-13-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/vancouver-canucks-new-york-rangers-game-preview-november-13-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/calgary-flames-los-angeles-kings-game-preview-november-14-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/los-angeles-kings-calgary-flames-game-preview-november-14-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/edmonton-oilers-toronto-maple-leafs-game-preview-november-14-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/toronto-maple-leafs-edmonton-oilers-game-preview-november-14-2026",
-      "result": "no_complete_projection",
-      "teams": []
     }
   ],
   "note": "Upcoming games today through two days ahead; prioritize older sources and nearest games. A fixture is not proof a preview article exists.",
   "fixturesSelected": 12,
   "fixturesDeferred": 15,
   "rotation": {
-    "window": 1993913,
+    "window": 1993917,
     "fixed": 8,
     "rotating": 4,
     "remainingPool": 19,
-    "rotationStart": 3
+    "rotationStart": 0
   },
   "selectedFixtures": [
     {
@@ -334,24 +331,24 @@
       "home": "UTA"
     },
     {
+      "date": "2026-11-12",
+      "away": "TBL",
+      "home": "CBJ"
+    },
+    {
+      "date": "2026-11-12",
+      "away": "WPG",
+      "home": "DAL"
+    },
+    {
+      "date": "2026-11-12",
+      "away": "WSH",
+      "home": "NJD"
+    },
+    {
       "date": "2026-11-13",
       "away": "NSH",
       "home": "VGK"
-    },
-    {
-      "date": "2026-11-13",
-      "away": "NYR",
-      "home": "VAN"
-    },
-    {
-      "date": "2026-11-14",
-      "away": "CGY",
-      "home": "LAK"
-    },
-    {
-      "date": "2026-11-14",
-      "away": "EDM",
-      "home": "TOR"
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-12T22:24:11.490238+00:00",
+  "updatedAt": "2026-11-12T23:19:20.090867+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "goalieCount": 96,
   "games": [
@@ -16,14 +16,14 @@
     },
     {
       "team": "BUF",
-      "goalie": "Colten Ellis",
+      "goalie": "Alex Lyon",
       "opponent": "CHI",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-12",
       "gameId": 2026020305,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8481551"
+      "goalieId": "8479312"
     },
     {
       "team": "CAR",
@@ -195,7 +195,7 @@
       "goalie": "Dennis Hildeby",
       "opponent": "CBJ",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-12",
       "gameId": 2026020304,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -239,7 +239,7 @@
       "goalie": "Logan Thompson",
       "opponent": "NJD",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-12",
       "gameId": 2026020303,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",

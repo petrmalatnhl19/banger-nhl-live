@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-12T22:24:11.588268+00:00",
-  "rostersUpdatedAt": "2026-11-12T22:23:38.289621+00:00",
+  "updatedAt": "2026-11-12T23:19:20.207591+00:00",
+  "rostersUpdatedAt": "2026-11-12T23:18:58.585865+00:00",
   "projectionDate": "2026-11-12",
   "teamCount": 32,
   "goalieCount": 74,
@@ -152,7 +152,7 @@
       "team": "WSH",
       "teamKey": "capitals",
       "playerId": 8480313,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-12",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -343,7 +343,7 @@
       "team": "TBL",
       "teamKey": "lightning",
       "playerId": 8483710,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-12",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -516,9 +516,8 @@
       "team": "BUF",
       "teamKey": "sabres",
       "playerId": 8481551,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-12",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Ukko-Pekka Luukkonen",
@@ -533,8 +532,9 @@
       "team": "BUF",
       "teamKey": "sabres",
       "playerId": 8479312,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-12",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Samuel Ersson",
