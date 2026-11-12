@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-12T18:37:09.720605+00:00",
-  "rostersUpdatedAt": "2026-11-12T18:36:45.829324+00:00",
+  "updatedAt": "2026-11-12T19:37:52.759882+00:00",
+  "rostersUpdatedAt": "2026-11-12T19:37:14.745241+00:00",
   "projectionDate": "2026-11-12",
   "teamCount": 32,
   "goalieCount": 74,
@@ -69,7 +69,7 @@
       "team": "STL",
       "teamKey": "blues",
       "playerId": 8480981,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-12",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -169,8 +169,9 @@
       "team": "NJD",
       "teamKey": "devils",
       "playerId": 8476945,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-12",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Laurent Brossoit",
@@ -367,8 +368,9 @@
       "team": "UTA",
       "teamKey": "mammoth",
       "playerId": 8478872,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-12",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Artur Akhtyamov",
@@ -497,7 +499,7 @@
       "team": "DET",
       "teamKey": "red wings",
       "playerId": 8476434,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-12",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },

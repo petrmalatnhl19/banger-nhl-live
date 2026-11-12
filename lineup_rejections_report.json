@@ -1,9 +1,9 @@
 {
-  "teamsWithRejectedLines": 3,
+  "teamsWithRejectedLines": 5,
   "teams": {
     "kings": {
       "team": "LAK",
-      "rosterUpdatedAt": "2026-11-12T18:36:43.834224+00:00",
+      "rosterUpdatedAt": "2026-11-12T19:37:10.151096+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -29,9 +29,36 @@
         }
       ]
     },
+    "mammoth": {
+      "team": "UTA",
+      "rosterUpdatedAt": "2026-11-12T19:37:13.782528+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 2,
+      "rejected": [
+        {
+          "group": "defense",
+          "sourceLineNumber": 3,
+          "sourceLine": [
+            "Artem Duda",
+            "Nick DeSimone"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Artem Duda",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    },
     "rangers": {
       "team": "NYR",
-      "rosterUpdatedAt": "2026-11-12T18:36:44.242639+00:00",
+      "rosterUpdatedAt": "2026-11-12T19:37:11.594321+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -58,7 +85,7 @@
     },
     "senators": {
       "team": "OTT",
-      "rosterUpdatedAt": "2026-11-12T18:36:44.289155+00:00",
+      "rosterUpdatedAt": "2026-11-12T19:37:11.850509+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -93,6 +120,33 @@
           "unverifiedPlayers": [
             {
               "name": "Samuel Blais",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    },
+    "stars": {
+      "team": "DAL",
+      "rosterUpdatedAt": "2026-11-12T19:37:09.200359+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 2,
+      "rejected": [
+        {
+          "group": "defense",
+          "sourceLineNumber": 3,
+          "sourceLine": [
+            "Trey Taylor",
+            "Tyler Myers"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Trey Taylor",
               "reason": "not_in_current_roster",
               "inLocalCurrentRoster": false,
               "requiresIndependentGameEvidence": true
