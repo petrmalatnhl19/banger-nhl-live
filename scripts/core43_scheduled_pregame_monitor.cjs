@@ -2,6 +2,7 @@
 /* Scheduled read-only pregame readiness. Never writes or claims a frozen forecast. */
 const {fetchRows}=require("./core43_supabase_readonly_report.cjs");
 const {inspectLiveShadowGame}=require("./core43_live_shadow_source_reader.cjs");
+const {diagnoseGoalies}=require("./core43_goalie_readiness_diagnostics.cjs");
 const valid=x=>typeof x==="string"&&Number.isFinite(Date.parse(x));
 function discoverUpcomingGames({schedules=[],predictions=[],now,horizonMinutes=180}={}){
  if(!valid(now)||!Number.isInteger(horizonMinutes)||horizonMinutes<1||horizonMinutes>360)throw Error("invalid_window");
@@ -27,10 +28,17 @@ async function run({url,key,now=new Date().toISOString(),fetchImpl=fetch}={}){
  const games=discoverUpcomingGames({schedules,predictions,now});
  const results=[];
  for(const game of games){
-  if(!game.baselineReady){results.push({...game,ready:false,reason:game.reason});continue;}
+  // Diagnostic reads are independent of the CORE 4.2 baseline gate.
+  const [observations,identities,starterEvidence]=await Promise.all([
+   fetchRows({url,key,table:"nhl_core43_rotowire_observations",select:"game_id,team_code,goalie_name,observed_status,observed_at,source_snapshot_at",gameId:game.gameId,fetchImpl}),
+   fetchRows({url,key,table:"nhl_core43_goalie_identity_map",select:"goalie_id,goalie_name,team_code,observed_at",fetchImpl}),
+   fetchRows({url,key,table:"nhl_core43_starter_evidence",select:"game_id,team_code,goalie_id,evidence_status,source_published_at,verified_at",gameId:game.gameId,fetchImpl})
+  ]);
+  const goalieDiagnostics=diagnoseGoalies({gameId:game.gameId,awayTeam:game.awayTeam,homeTeam:game.homeTeam,asOf:now,observations,identities,starterEvidence});
+  if(!game.baselineReady){results.push({...game,ready:false,reason:game.reason,goalieDiagnostics});continue;}
   // asOf is NOW for a prospective experimental calculation, not a historical forecast timestamp.
   const result=await inspectLiveShadowGame({url,key,gameId:game.gameId,awayTeam:game.awayTeam,homeTeam:game.homeTeam,asOf:now,now,fetchImpl});
-  results.push({...game,ready:result.captured===true,reason:result.reason||null,experimental:true,archived:false});
+  results.push({...game,ready:result.captured===true,reason:result.reason||null,experimental:true,archived:false,goalieDiagnostics});
  }
  return {mode:"read_only_pregame_monitor",generatedAt:now,checked:results.length,ready:results.filter(r=>r.ready).length,archived:0,results};
 }
