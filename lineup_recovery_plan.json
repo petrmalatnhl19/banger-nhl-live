@@ -7,14 +7,14 @@
   "teams": [
     {
       "team": "blackhawks",
-      "status": "missing_team",
-      "reason": "no_accepted_projection",
-      "missingForwardLines": 4,
-      "missingDefensePairs": 3,
-      "source": null,
-      "publishedAt": null,
+      "status": "incomplete_projection",
+      "reason": "incomplete_source_or_no_validated_replacement",
+      "missingForwardLines": 0,
+      "missingDefensePairs": 1,
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-12T17:52:00+00:00",
       "rejectedLines": [],
-      "nextAction": "Find a current NHL.com projection and validate all players."
+      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
     {
       "team": "canucks",
@@ -119,20 +119,37 @@
     },
     {
       "team": "senators",
-      "status": "incomplete_projection",
+      "status": "missing_team",
       "reason": "rejected_roster_lines",
-      "missingForwardLines": 1,
-      "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/washington-capitals-ottawa-senators-game-preview-november-10-2026",
-      "publishedAt": "2026-11-10T18:15:42.415000+00:00",
+      "missingForwardLines": 4,
+      "missingDefensePairs": 3,
+      "source": null,
+      "publishedAt": null,
       "rejectedLines": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 2,
+          "sourceLine": [
+            "Philip Tomasino",
+            "Shane Pinto",
+            "Drake Batherson"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Philip Tomasino",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        },
         {
           "group": "forwards",
           "sourceLineNumber": 4,
           "sourceLine": [
             "Samuel Blais",
             "Stephen Halliday",
-            "Philip Tomasino"
+            "Hayden Hodgson"
           ],
           "unverifiedPlayers": [
             {
