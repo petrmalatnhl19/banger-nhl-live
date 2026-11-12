@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-12T05:38:24.888494+00:00",
+  "generatedAt": "2026-11-12T06:49:03.479641+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -64,8 +64,8 @@
     "rangers": {
       "team": "NYR",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-11T19:19:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/new-york-rangers-calgary-flames-game-preview-november-11-2026",
+      "candidatePublishedAt": "2026-11-11T18:16:00.408000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -183,8 +183,8 @@
     "lightning": {
       "team": "TBL",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-11T19:19:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/tampa-bay-lightning-buffalo-sabres-game-preview-november-11-2026",
+      "candidatePublishedAt": "2026-11-11T18:07:25.884000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",

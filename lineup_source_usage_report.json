@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-12T05:38:25.900105+00:00",
+  "generatedAt": "2026-11-12T06:49:04.109033+00:00",
   "teams": 32,
   "activeSourceCounts": {
     "nhl.com": 32
@@ -96,15 +96,15 @@
     {
       "team": "flames",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-11T19:19:00+00:00",
+      "source": "https://www.nhl.com/news/new-york-rangers-calgary-flames-game-preview-november-11-2026",
+      "publishedAt": "2026-11-11T18:16:00.408000+00:00",
       "sourceType": null
     },
     {
       "team": "flyers",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-11T19:19:00+00:00",
+      "source": "https://www.nhl.com/news/philadelphia-flyers-edmonton-oilers-game-preview-november-11-2026",
+      "publishedAt": "2026-11-11T18:50:25.155000+00:00",
       "sourceType": null
     },
     {
@@ -152,8 +152,8 @@
     {
       "team": "lightning",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-11T19:19:00+00:00",
+      "source": "https://www.nhl.com/news/tampa-bay-lightning-buffalo-sabres-game-preview-november-11-2026",
+      "publishedAt": "2026-11-11T18:07:25.884000+00:00",
       "sourceType": null
     },
     {
@@ -173,8 +173,8 @@
     {
       "team": "oilers",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-11T19:19:00+00:00",
+      "source": "https://www.nhl.com/news/philadelphia-flyers-edmonton-oilers-game-preview-november-11-2026",
+      "publishedAt": "2026-11-11T18:50:25.155000+00:00",
       "sourceType": null
     },
     {
@@ -201,8 +201,8 @@
     {
       "team": "rangers",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-11T19:19:00+00:00",
+      "source": "https://www.nhl.com/news/new-york-rangers-calgary-flames-game-preview-november-11-2026",
+      "publishedAt": "2026-11-11T18:16:00.408000+00:00",
       "sourceType": null
     },
     {
@@ -215,8 +215,8 @@
     {
       "team": "sabres",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-11T19:19:00+00:00",
+      "source": "https://www.nhl.com/news/tampa-bay-lightning-buffalo-sabres-game-preview-november-11-2026",
+      "publishedAt": "2026-11-11T18:07:25.884000+00:00",
       "sourceType": null
     },
     {
