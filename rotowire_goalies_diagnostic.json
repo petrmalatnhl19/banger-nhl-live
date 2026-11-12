@@ -1,19 +1,9 @@
 {
-  "checkedAt": "2026-11-11T23:16:15.139496+00:00",
+  "checkedAt": "2026-11-12T00:05:25.564223+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "candidateCount": 102,
-  "matchedCount": 102,
+  "matchedCount": 90,
   "matches": [
-    {
-      "team": "ANA",
-      "goalie": "Laurent Brossoit",
-      "opponent": "NSH",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-11",
-      "gameId": 2026020297,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
     {
       "team": "ANA",
       "goalie": "Laurent Brossoit",
@@ -72,16 +62,6 @@
       "status": "projected",
       "date": "2026-11-17",
       "gameId": 2026020333,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "BUF",
-      "goalie": "Ukko-Pekka Luukkonen",
-      "opponent": "TBL",
-      "venue": "home",
-      "status": "projected",
-      "date": "2026-11-11",
-      "gameId": 2026020293,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -162,16 +142,6 @@
       "status": "projected",
       "date": "2026-11-17",
       "gameId": 2026020336,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "CGY",
-      "goalie": "Devin Cooley",
-      "opponent": "NYR",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-11",
-      "gameId": 2026020294,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -312,16 +282,6 @@
       "status": "projected",
       "date": "2026-11-14",
       "gameId": 2026020316,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "EDM",
-      "goalie": "Tristan Jarry",
-      "opponent": "PHI",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-11",
-      "gameId": 2026020295,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -506,16 +466,6 @@
     },
     {
       "team": "NSH",
-      "goalie": "Justus Annunen",
-      "opponent": "ANA",
-      "venue": "away",
-      "status": "projected",
-      "date": "2026-11-11",
-      "gameId": 2026020297,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "NSH",
       "goalie": "Juuse Saros",
       "opponent": "VGK",
       "venue": "away",
@@ -576,16 +526,6 @@
     },
     {
       "team": "NYR",
-      "goalie": "Joonas Korpisalo",
-      "opponent": "CGY",
-      "venue": "away",
-      "status": "confirmed",
-      "date": "2026-11-11",
-      "gameId": 2026020294,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "NYR",
       "goalie": "Dylan Garand",
       "opponent": "VAN",
       "venue": "away",
@@ -637,16 +577,6 @@
     {
       "team": "PHI",
       "goalie": "Dan Vladar",
-      "opponent": "EDM",
-      "venue": "away",
-      "status": "confirmed",
-      "date": "2026-11-11",
-      "gameId": 2026020295,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "PHI",
-      "goalie": "Dan Vladar",
       "opponent": "CBJ",
       "venue": "away",
       "status": "projected",
@@ -672,16 +602,6 @@
       "status": "projected",
       "date": "2026-11-17",
       "gameId": 2026020337,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "PIT",
-      "goalie": "Sergei Murashov",
-      "opponent": "SJS",
-      "venue": "away",
-      "status": "confirmed",
-      "date": "2026-11-11",
-      "gameId": 2026020298,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -712,16 +632,6 @@
       "status": "projected",
       "date": "2026-11-14",
       "gameId": 2026020321,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "SJS",
-      "goalie": "Yaroslav Askarov",
-      "opponent": "PIT",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-11",
-      "gameId": 2026020298,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -786,16 +696,6 @@
     },
     {
       "team": "TBL",
-      "goalie": "Andrei Vasilevskiy",
-      "opponent": "BUF",
-      "venue": "away",
-      "status": "projected",
-      "date": "2026-11-11",
-      "gameId": 2026020293,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "TBL",
       "goalie": "Dennis Hildeby",
       "opponent": "CBJ",
       "venue": "away",
@@ -856,16 +756,6 @@
     },
     {
       "team": "UTA",
-      "goalie": "Sebastian Cossa",
-      "opponent": "VGK",
-      "venue": "away",
-      "status": "projected",
-      "date": "2026-11-11",
-      "gameId": 2026020296,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "UTA",
       "goalie": "Karel Vejmelka",
       "opponent": "STL",
       "venue": "home",
@@ -922,16 +812,6 @@
       "status": "projected",
       "date": "2026-11-16",
       "gameId": 2026020332,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "VGK",
-      "goalie": "Carter Hart",
-      "opponent": "UTA",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-11",
-      "gameId": 2026020296,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -1025,5 +905,90 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     }
   ],
-  "unmatched": []
+  "unmatched": [
+    {
+      "team": "ANA",
+      "goalie": "Laurent Brossoit",
+      "opponent": "NSH",
+      "venue": "home",
+      "status": "confirmed"
+    },
+    {
+      "team": "BUF",
+      "goalie": "Ukko-Pekka Luukkonen",
+      "opponent": "TBL",
+      "venue": "home",
+      "status": "confirmed"
+    },
+    {
+      "team": "CGY",
+      "goalie": "Devin Cooley",
+      "opponent": "NYR",
+      "venue": "home",
+      "status": "confirmed"
+    },
+    {
+      "team": "EDM",
+      "goalie": "Tristan Jarry",
+      "opponent": "PHI",
+      "venue": "home",
+      "status": "confirmed"
+    },
+    {
+      "team": "NSH",
+      "goalie": "Justus Annunen",
+      "opponent": "ANA",
+      "venue": "away",
+      "status": "projected"
+    },
+    {
+      "team": "NYR",
+      "goalie": "Joonas Korpisalo",
+      "opponent": "CGY",
+      "venue": "away",
+      "status": "confirmed"
+    },
+    {
+      "team": "PHI",
+      "goalie": "Dan Vladar",
+      "opponent": "EDM",
+      "venue": "away",
+      "status": "confirmed"
+    },
+    {
+      "team": "PIT",
+      "goalie": "Sergei Murashov",
+      "opponent": "SJS",
+      "venue": "away",
+      "status": "confirmed"
+    },
+    {
+      "team": "SJS",
+      "goalie": "Yaroslav Askarov",
+      "opponent": "PIT",
+      "venue": "home",
+      "status": "confirmed"
+    },
+    {
+      "team": "TBL",
+      "goalie": "Andrei Vasilevskiy",
+      "opponent": "BUF",
+      "venue": "away",
+      "status": "confirmed"
+    },
+    {
+      "team": "UTA",
+      "goalie": "Sebastian Cossa",
+      "opponent": "VGK",
+      "venue": "away",
+      "status": "projected"
+    },
+    {
+      "team": "VGK",
+      "goalie": "Carter Hart",
+      "opponent": "UTA",
+      "venue": "home",
+      "status": "confirmed"
+    }
+  ]
 }
