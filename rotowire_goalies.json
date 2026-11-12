@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-12T13:38:53.017031+00:00",
+  "updatedAt": "2026-11-12T14:41:09.845450+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "goalieCount": 96,
   "games": [
@@ -27,14 +27,14 @@
     },
     {
       "team": "CAR",
-      "goalie": "Pyotr Kochetkov",
+      "goalie": "Brandon Bussi",
       "opponent": "SEA",
       "venue": "away",
       "status": "projected",
       "date": "2026-11-12",
       "gameId": 2026020309,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8481611"
+      "goalieId": "8483548"
     },
     {
       "team": "CBJ",
@@ -173,7 +173,7 @@
       "goalie": "Philipp Grubauer",
       "opponent": "CAR",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-12",
       "gameId": 2026020309,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -511,14 +511,14 @@
     },
     {
       "team": "SEA",
-      "goalie": "Philipp Grubauer",
+      "goalie": "Joey Daccord",
       "opponent": "CAR",
       "venue": "away",
       "status": "projected",
       "date": "2026-11-14",
       "gameId": 2026020321,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8475831"
+      "goalieId": "8478916"
     },
     {
       "team": "SJS",
