@@ -1,0 +1,16 @@
+"use strict";
+const assert=require("node:assert/strict");
+const {classifyPregameDecision,classifyMonitor}=require("./core43_pregame_decision.cjs");
+const now="2026-11-12T20:00:00Z";
+const base={kickoffAt:"2026-11-12T20:45:00Z",baselineReady:true,ready:true,readinessSummary:{experimentalReady:true,verifiedStarters:false,missing:[]}};
+assert.equal(classifyPregameDecision(base,now).status,"experimental_ready");
+assert.equal(classifyPregameDecision(base,now).archiveAllowed,false);
+assert.equal(classifyPregameDecision({...base,kickoffAt:"2026-11-12T22:00:00Z"},now).status,"watch");
+assert.equal(classifyPregameDecision({...base,baselineReady:false},now).reason,"core42_baseline");
+assert.equal(classifyPregameDecision({...base,readinessSummary:{...base.readinessSummary,missing:["away_verified_starter_evidence"]}},now).status,"blocked");
+assert.equal(classifyPregameDecision({...base,ready:false},now).status,"blocked");
+assert.equal(classifyPregameDecision({...base,kickoffAt:now},now).status,"expired");
+const result=classifyMonitor({generatedAt:now,results:[base],archived:0});
+assert.equal(result.decisionCounts.experimental_ready,1);
+assert.equal(result.archived,0);
+console.log("CORE 4.3 pregame decision tests passed");
