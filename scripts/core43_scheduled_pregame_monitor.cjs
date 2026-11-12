@@ -3,6 +3,7 @@
 const {fetchRows}=require("./core43_supabase_readonly_report.cjs");
 const {inspectLiveShadowGame}=require("./core43_live_shadow_source_reader.cjs");
 const {diagnoseGoalies}=require("./core43_goalie_readiness_diagnostics.cjs");
+const {summarizeReadiness}=require("./core43_readiness_summary.cjs");
 const valid=x=>typeof x==="string"&&Number.isFinite(Date.parse(x));
 function discoverUpcomingGames({schedules=[],predictions=[],now,horizonMinutes=180}={}){
  if(!valid(now)||!Number.isInteger(horizonMinutes)||horizonMinutes<1||horizonMinutes>360)throw Error("invalid_window");
@@ -35,10 +36,12 @@ async function run({url,key,now=new Date().toISOString(),fetchImpl=fetch}={}){
    fetchRows({url,key,table:"nhl_core43_starter_evidence",select:"game_id,team_code,goalie_id,evidence_status,source_published_at,verified_at",gameId:game.gameId,fetchImpl})
   ]);
   const goalieDiagnostics=diagnoseGoalies({gameId:game.gameId,awayTeam:game.awayTeam,homeTeam:game.homeTeam,asOf:now,observations,identities,starterEvidence});
-  if(!game.baselineReady){results.push({...game,ready:false,reason:game.reason,goalieDiagnostics});continue;}
+  if(!game.baselineReady){const entry={...game,ready:false,reason:game.reason,goalieDiagnostics};
+   results.push({...entry,readinessSummary:summarizeReadiness(entry)});continue;}
   // asOf is NOW for a prospective experimental calculation, not a historical forecast timestamp.
   const result=await inspectLiveShadowGame({url,key,gameId:game.gameId,awayTeam:game.awayTeam,homeTeam:game.homeTeam,asOf:now,now,fetchImpl});
-  results.push({...game,ready:result.captured===true,reason:result.reason||null,experimental:true,archived:false,goalieDiagnostics});
+  const entry={...game,ready:result.captured===true,reason:result.reason||null,experimental:true,archived:false,goalieDiagnostics};
+  results.push({...entry,readinessSummary:summarizeReadiness(entry)});
  }
  return {mode:"read_only_pregame_monitor",generatedAt:now,checked:results.length,ready:results.filter(r=>r.ready).length,archived:0,results};
 }

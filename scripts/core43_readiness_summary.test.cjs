@@ -1,0 +1,14 @@
+"use strict";
+const assert=require("node:assert/strict");
+const {summarizeReadiness}=require("./core43_readiness_summary.cjs");
+const blocked=summarizeReadiness({baselineReady:false,ready:false,reason:"missing_valid_core42_baseline",goalieDiagnostics:{sides:[{side:"away",reason:"missing_pregame_observation",verifiedEvidence:false},{side:"home",reason:"missing_matching_verified_starter_evidence",verifiedEvidence:false}]}});
+assert.deepEqual(blocked.missing,["core42_baseline","away_goalie_observation","home_verified_starter_evidence"]);
+assert.equal(blocked.verifiedStarters,false);
+const gsax=summarizeReadiness({baselineReady:true,ready:false,reason:"missing_archived_pregame_gsax",goalieDiagnostics:{sides:[{side:"away",verifiedEvidence:true},{side:"home",verifiedEvidence:true}]}});
+assert.deepEqual(gsax.missing,["archived_pregame_gsax"]);
+assert.equal(gsax.verifiedStarters,true);
+const experimental=summarizeReadiness({baselineReady:true,ready:true,reason:null,goalieDiagnostics:{sides:[{side:"away",verifiedEvidence:false},{side:"home",verifiedEvidence:false}]}});
+assert.equal(experimental.experimentalReady,true);
+assert.equal(experimental.verifiedStarters,false);
+assert.equal(experimental.archived,false);
+console.log("CORE 4.3 readiness summary passed");
