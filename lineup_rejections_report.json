@@ -1,9 +1,37 @@
 {
-  "teamsWithRejectedLines": 2,
+  "teamsWithRejectedLines": 3,
   "teams": {
+    "kings": {
+      "team": "LAK",
+      "rosterUpdatedAt": "2026-11-12T15:43:09.026001+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "validatedForwardLines": 3,
+      "validatedDefensePairs": 3,
+      "rejected": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 3,
+          "sourceLine": [
+            "Erik Haula",
+            "Kenny Connors",
+            "Joel Armia"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Kenny Connors",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    },
     "rangers": {
       "team": "NYR",
-      "rosterUpdatedAt": "2026-11-12T14:40:36.992853+00:00",
+      "rosterUpdatedAt": "2026-11-12T15:43:09.630274+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -30,7 +58,7 @@
     },
     "senators": {
       "team": "OTT",
-      "rosterUpdatedAt": "2026-11-12T14:40:37.059969+00:00",
+      "rosterUpdatedAt": "2026-11-12T15:43:09.697310+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
