@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-12T05:38:18.709939+00:00",
+  "generatedAt": "2026-11-12T06:49:00.550943+00:00",
   "checked": 24,
   "articlesFound": 0,
   "errors": [],
@@ -249,16 +249,6 @@
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/st-louis-blues-utah-mammoth-game-preview-november-12-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/utah-mammoth-st-louis-blues-game-preview-november-12-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
       "url": "https://www.nhl.com/news/washington-capitals-new-jersey-devils-game-preview-november-12-2026",
       "result": "no_complete_projection",
       "teams": []
@@ -287,17 +277,27 @@
       "url": "https://www.nhl.com/news/vegas-golden-knights-nashville-predators-game-preview-november-13-2026",
       "result": "no_complete_projection",
       "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/buffalo-sabres-dallas-stars-game-preview-november-14-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/dallas-stars-buffalo-sabres-game-preview-november-14-2026",
+      "result": "no_complete_projection",
+      "teams": []
     }
   ],
   "note": "Upcoming games today through two days ahead; prioritize older sources and nearest games. A fixture is not proof a preview article exists.",
   "fixturesSelected": 12,
   "fixturesDeferred": 15,
   "rotation": {
-    "window": 1993846,
+    "window": 1993851,
     "fixed": 8,
     "rotating": 4,
     "remainingPool": 19,
-    "rotationStart": 1
+    "rotationStart": 2
   },
   "selectedFixtures": [
     {
@@ -342,11 +342,6 @@
     },
     {
       "date": "2026-11-12",
-      "away": "STL",
-      "home": "UTA"
-    },
-    {
-      "date": "2026-11-12",
       "away": "WSH",
       "home": "NJD"
     },
@@ -359,6 +354,11 @@
       "date": "2026-11-13",
       "away": "NSH",
       "home": "VGK"
+    },
+    {
+      "date": "2026-11-14",
+      "away": "BUF",
+      "home": "DAL"
     }
   ]
 }
