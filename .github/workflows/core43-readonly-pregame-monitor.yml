@@ -1,0 +1,46 @@
+name: CORE 4.3 read-only pregame monitor
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/30 * * * *'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: core43-readonly-pregame-monitor
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify credentials exist
+        shell: bash
+        run: |
+          test -n "$SUPABASE_URL" || { echo "SUPABASE_URL secret missing"; exit 1; }
+          test -n "$SUPABASE_SERVICE_ROLE_KEY" || { echo "SUPABASE_SERVICE_ROLE_KEY secret missing"; exit 1; }
+      - name: Run read-only pregame monitor
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/core43_scheduled_pregame_monitor.cjs > core43-monitor-report.json
+          node -e 'const r=require("./core43-monitor-report.json"); console.log(JSON.stringify({mode:r.mode,checked:r.checked,decisionCounts:r.decisionCounts,archived:r.archived})); if(r.archived!==0) process.exit(1)'
+      - name: Upload diagnostic report
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: core43-readonly-monitor-report
+          path: core43-monitor-report.json
+          retention-days: 3
