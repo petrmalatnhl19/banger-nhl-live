@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-12T15:43:37.605774+00:00",
+  "updatedAt": "2026-11-12T16:46:21.449843+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "goalieCount": 96,
   "games": [
@@ -8,7 +8,7 @@
       "goalie": "Jeremy Swayman",
       "opponent": "MTL",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-12",
       "gameId": 2026020299,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -41,7 +41,7 @@
       "goalie": "Jet Greaves",
       "opponent": "TBL",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-12",
       "gameId": 2026020304,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -74,7 +74,7 @@
       "goalie": "Jake Oettinger",
       "opponent": "WPG",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-12",
       "gameId": 2026020306,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -162,7 +162,7 @@
       "goalie": "Linus Ullmark",
       "opponent": "COL",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-12",
       "gameId": 2026020301,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -203,14 +203,14 @@
     },
     {
       "team": "TOR",
-      "goalie": "Sergei Bobrovsky",
+      "goalie": "Anthony Stolarz",
       "opponent": "MIN",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-12",
       "gameId": 2026020300,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8475683"
+      "goalieId": "8476932"
     },
     {
       "team": "UTA",

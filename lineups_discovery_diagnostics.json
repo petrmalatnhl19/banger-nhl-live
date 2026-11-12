@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-12T15:43:29.324783+00:00",
+  "generatedAt": "2026-11-12T16:46:11.398062+00:00",
   "checked": 24,
   "articlesFound": 0,
   "errors": [],
@@ -36,14 +36,14 @@
     },
     {
       "date": "2026-11-12",
-      "away": "TBL",
-      "home": "CBJ",
+      "away": "WPG",
+      "home": "DAL",
       "priority": true
     },
     {
       "date": "2026-11-12",
-      "away": "WPG",
-      "home": "DAL",
+      "away": "WSH",
+      "home": "NJD",
       "priority": true
     },
     {
@@ -66,8 +66,8 @@
     },
     {
       "date": "2026-11-12",
-      "away": "WSH",
-      "home": "NJD",
+      "away": "TBL",
+      "home": "CBJ",
       "priority": false
     },
     {
@@ -96,14 +96,14 @@
     },
     {
       "date": "2026-11-14",
-      "away": "EDM",
-      "home": "TOR",
+      "away": "MIN",
+      "home": "BOS",
       "priority": true
     },
     {
       "date": "2026-11-14",
-      "away": "MIN",
-      "home": "BOS",
+      "away": "NJD",
+      "home": "WSH",
       "priority": true
     },
     {
@@ -116,12 +116,6 @@
       "date": "2026-11-14",
       "away": "OTT",
       "home": "PIT",
-      "priority": true
-    },
-    {
-      "date": "2026-11-14",
-      "away": "PHI",
-      "home": "CBJ",
       "priority": true
     },
     {
@@ -144,14 +138,20 @@
     },
     {
       "date": "2026-11-14",
+      "away": "EDM",
+      "home": "TOR",
+      "priority": false
+    },
+    {
+      "date": "2026-11-14",
       "away": "FLA",
       "home": "STL",
       "priority": false
     },
     {
       "date": "2026-11-14",
-      "away": "NJD",
-      "home": "WSH",
+      "away": "PHI",
+      "home": "CBJ",
       "priority": false
     },
     {
@@ -219,22 +219,22 @@
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/tampa-bay-lightning-columbus-blue-jackets-game-preview-november-12-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/columbus-blue-jackets-tampa-bay-lightning-game-preview-november-12-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
       "url": "https://www.nhl.com/news/winnipeg-jets-dallas-stars-game-preview-november-12-2026",
       "result": "no_complete_projection",
       "teams": []
     },
     {
       "url": "https://www.nhl.com/news/dallas-stars-winnipeg-jets-game-preview-november-12-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/washington-capitals-new-jersey-devils-game-preview-november-12-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/new-jersey-devils-washington-capitals-game-preview-november-12-2026",
       "result": "no_complete_projection",
       "teams": []
     },
@@ -249,32 +249,12 @@
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/new-york-islanders-anaheim-ducks-game-preview-november-14-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/anaheim-ducks-new-york-islanders-game-preview-november-14-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
       "url": "https://www.nhl.com/news/ottawa-senators-pittsburgh-penguins-game-preview-november-14-2026",
       "result": "no_complete_projection",
       "teams": []
     },
     {
       "url": "https://www.nhl.com/news/pittsburgh-penguins-ottawa-senators-game-preview-november-14-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/philadelphia-flyers-columbus-blue-jackets-game-preview-november-14-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/columbus-blue-jackets-philadelphia-flyers-game-preview-november-14-2026",
       "result": "no_complete_projection",
       "teams": []
     },
@@ -287,17 +267,37 @@
       "url": "https://www.nhl.com/news/chicago-blackhawks-winnipeg-jets-game-preview-november-14-2026",
       "result": "no_complete_projection",
       "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/calgary-flames-los-angeles-kings-game-preview-november-14-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/los-angeles-kings-calgary-flames-game-preview-november-14-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/detroit-red-wings-tampa-bay-lightning-game-preview-november-14-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/tampa-bay-lightning-detroit-red-wings-game-preview-november-14-2026",
+      "result": "no_complete_projection",
+      "teams": []
     }
   ],
   "note": "Upcoming games today through two days ahead; prioritize older sources and nearest games. A fixture is not proof a preview article exists.",
   "fixturesSelected": 12,
   "fixturesDeferred": 15,
   "rotation": {
-    "window": 1993886,
+    "window": 1993891,
     "fixed": 8,
     "rotating": 4,
     "remainingPool": 19,
-    "rotationStart": 9
+    "rotationStart": 10
   },
   "selectedFixtures": [
     {
@@ -327,13 +327,13 @@
     },
     {
       "date": "2026-11-12",
-      "away": "TBL",
-      "home": "CBJ"
+      "away": "WPG",
+      "home": "DAL"
     },
     {
       "date": "2026-11-12",
-      "away": "WPG",
-      "home": "DAL"
+      "away": "WSH",
+      "home": "NJD"
     },
     {
       "date": "2026-11-12",
@@ -342,23 +342,23 @@
     },
     {
       "date": "2026-11-14",
-      "away": "NYI",
-      "home": "ANA"
-    },
-    {
-      "date": "2026-11-14",
       "away": "OTT",
       "home": "PIT"
     },
     {
       "date": "2026-11-14",
-      "away": "PHI",
-      "home": "CBJ"
+      "away": "WPG",
+      "home": "CHI"
     },
     {
       "date": "2026-11-14",
-      "away": "WPG",
-      "home": "CHI"
+      "away": "CGY",
+      "home": "LAK"
+    },
+    {
+      "date": "2026-11-14",
+      "away": "DET",
+      "home": "TBL"
     }
   ]
 }
