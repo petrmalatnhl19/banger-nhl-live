@@ -1,43 +1,67 @@
 {
   "teams": {
     "kings": {
-      "updatedAt": "2026-11-12T15:43:34.118300+00:00",
+      "updatedAt": "2026-11-12T20:29:26.082546+00:00",
       "previousPublishedAt": "2026-11-10T20:22:05.537000+00:00",
-      "publishedAt": "2026-11-10T20:22:05.537000+00:00",
-      "source": "https://www.nhl.com/news/nashville-predators-los-angeles-kings-game-preview-november-10-2026",
+      "publishedAt": "2026-11-12T20:03:12.475000+00:00",
+      "source": "https://www.nhl.com/news/new-york-islanders-los-angeles-kings-game-preview-november-12-2026",
       "events": [
         {
-          "type": "moved",
-          "player": "Andre Lee",
-          "from": "Útok 4",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Scott Laughton",
-          "from": "Útok 4",
-          "to": "Útok 3"
+          "type": "added",
+          "player": "Kevin Fiala",
+          "to": "Útok 2"
         },
         {
           "type": "moved",
           "player": "Mats Zuccarello",
-          "from": "Útok 4",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Trevor Moore",
+          "from": "Útok 2",
           "to": "Útok 3"
         },
         {
-          "type": "removed",
+          "type": "added",
+          "player": "Alex Turcotte",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Corey Perry",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Andre Lee",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Scott Laughton",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
           "player": "Erik Haula",
-          "from": "Útok 3"
+          "to": "Útok 4"
         },
         {
-          "type": "removed",
-          "player": "Kenny Connors",
-          "from": "Útok 3"
+          "type": "moved",
+          "player": "Brian Dumoulin",
+          "from": "Obrana 3",
+          "to": "Obrana 2"
         },
         {
-          "type": "removed",
-          "player": "Joel Armia",
-          "from": "Útok 3"
+          "type": "moved",
+          "player": "Mikey Anderson",
+          "from": "Obrana 2",
+          "to": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -1057,73 +1081,54 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "islanders": {
-      "updatedAt": "2026-11-10T19:28:11.318925+00:00",
-      "previousPublishedAt": "2026-11-07T17:58:42.776000+00:00",
-      "publishedAt": "2026-11-09T20:11:00+00:00",
-      "source": "https://www.nhl.com/news/new-york-islanders-san-jose-sharks-game-preview-november-9-2026",
+      "updatedAt": "2026-11-12T20:29:26.082449+00:00",
+      "previousPublishedAt": "2026-11-09T20:11:00+00:00",
+      "publishedAt": "2026-11-12T20:03:12.475000+00:00",
+      "source": "https://www.nhl.com/news/new-york-islanders-los-angeles-kings-game-preview-november-12-2026",
       "events": [
         {
           "type": "moved",
-          "player": "Simon Holmstrom",
-          "from": "Útok 3",
-          "to": "Útok 1"
-        },
-        {
-          "type": "moved",
-          "player": "Jean-Gabriel Pageau",
-          "from": "Útok 3",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Anthony Duclair",
-          "from": "Útok 3",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Kyle MacLean",
-          "from": "Útok 4",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
           "player": "Casey Cizikas",
-          "from": "Útok 4",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "added",
+          "player": "Matias Maccelli",
           "to": "Útok 3"
         },
         {
           "type": "moved",
-          "player": "Mitchell Chaffee",
-          "from": "Útok 4",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Adam Pelech",
+          "player": "Logan Stanley",
           "from": "Obrana 2",
           "to": "Obrana 1"
         },
         {
           "type": "moved",
-          "player": "Logan Stanley",
+          "player": "Adam Pelech",
           "from": "Obrana 1",
           "to": "Obrana 2"
         },
         {
-          "type": "removed",
-          "player": "Emil Heineman",
-          "from": "Útok 1"
+          "type": "added",
+          "player": "Ryan Pulock",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "moved",
+          "player": "Tony DeAngelo",
+          "from": "Obrana 2",
+          "to": "Obrana 3"
         },
         {
           "type": "removed",
-          "player": "Brayden Schenn",
+          "player": "Jean-Gabriel Pageau",
           "from": "Útok 2"
         },
         {
           "type": "removed",
-          "player": "Victor Eklund",
-          "from": "Útok 2"
+          "player": "Matthew Kessel",
+          "from": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

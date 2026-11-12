@@ -1,21 +1,17 @@
 {
-  "generatedAt": "2026-11-12T19:37:49.192758+00:00",
+  "generatedAt": "2026-11-12T20:29:27.504277+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 27,
+  "currentProjections": 29,
   "needsFreshProjection": [
     "canucks",
     "devils",
-    "islanders",
-    "kings",
     "senators"
   ],
   "missing": [],
   "olderVerified": [
     "canucks",
     "devils",
-    "islanders",
-    "kings",
     "senators"
   ],
   "manualSnapshots": [],
@@ -195,11 +191,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-09T20:11:00+00:00",
-      "source": "https://www.nhl.com/news/new-york-islanders-san-jose-sharks-game-preview-november-9-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-12T20:03:12.475000+00:00",
+      "source": "https://www.nhl.com/news/new-york-islanders-los-angeles-kings-game-preview-november-12-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "jets": {
       "hasProjectedLines": true,
@@ -219,11 +215,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-10T20:22:05.537000+00:00",
-      "source": "https://www.nhl.com/news/nashville-predators-los-angeles-kings-game-preview-november-10-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-12T20:03:12.475000+00:00",
+      "source": "https://www.nhl.com/news/new-york-islanders-los-angeles-kings-game-preview-november-12-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "kraken": {
       "hasProjectedLines": true,
