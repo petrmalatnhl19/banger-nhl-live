@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-11-12T06:49:06.712091+00:00",
+  "updatedAt": "2026-11-12T08:05:25.645397+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-  "goalieCount": 90,
+  "goalieCount": 96,
   "games": [
     {
       "team": "BOS",
@@ -992,6 +992,72 @@
       "gameId": 2026020334,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "goalieId": "8480313"
+    },
+    {
+      "team": "BOS",
+      "goalie": "Michael DiPietro",
+      "opponent": "DET",
+      "venue": "away",
+      "status": "projected",
+      "date": "2026-11-18",
+      "gameId": 2026020344,
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8480022"
+    },
+    {
+      "team": "COL",
+      "goalie": "Mackenzie Blackwood",
+      "opponent": "UTA",
+      "venue": "away",
+      "status": "projected",
+      "date": "2026-11-18",
+      "gameId": 2026020346,
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8478406"
+    },
+    {
+      "team": "DET",
+      "goalie": "John Gibson",
+      "opponent": "BOS",
+      "venue": "home",
+      "status": "projected",
+      "date": "2026-11-18",
+      "gameId": 2026020344,
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8476434"
+    },
+    {
+      "team": "MTL",
+      "goalie": "Jacob Fowler",
+      "opponent": "NJD",
+      "venue": "away",
+      "status": "projected",
+      "date": "2026-11-18",
+      "gameId": 2026020345,
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8484170"
+    },
+    {
+      "team": "NJD",
+      "goalie": "Connor Hellebuyck",
+      "opponent": "MTL",
+      "venue": "home",
+      "status": "projected",
+      "date": "2026-11-18",
+      "gameId": 2026020345,
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8476945"
+    },
+    {
+      "team": "UTA",
+      "goalie": "Karel Vejmelka",
+      "opponent": "COL",
+      "venue": "home",
+      "status": "projected",
+      "date": "2026-11-18",
+      "gameId": 2026020346,
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8478872"
     }
   ],
   "conflicts": []
