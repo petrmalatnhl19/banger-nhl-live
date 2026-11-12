@@ -3,7 +3,7 @@
     "lineup_core_report.json",
     "lineup_rejections_report.json"
   ],
-  "incompleteTeams": 7,
+  "incompleteTeams": 6,
   "teams": [
     {
       "team": "canucks",
@@ -48,34 +48,6 @@
       "publishedAt": "2026-11-09T20:11:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
-    },
-    {
-      "team": "mammoth",
-      "status": "incomplete_projection",
-      "reason": "rejected_roster_lines",
-      "missingForwardLines": 0,
-      "missingDefensePairs": 1,
-      "source": "https://www.nhl.com/news/utah-mammoth-vegas-golden-knights-game-preview-november-11-2026",
-      "publishedAt": "2026-11-11T20:27:25.470000+00:00",
-      "rejectedLines": [
-        {
-          "group": "defense",
-          "sourceLineNumber": 3,
-          "sourceLine": [
-            "Nick DeSimone",
-            "Artem Duda"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Artem Duda",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ],
-      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
     },
     {
       "team": "rangers",
