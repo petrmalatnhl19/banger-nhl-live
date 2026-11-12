@@ -39,6 +39,28 @@
           "automaticApproval": false
         }
       ]
+    },
+    "mammoth": {
+      "players": [
+        {
+          "sourceName": "Artem Duda",
+          "expectedRole": "defense",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
+          "automaticApproval": false
+        }
+      ]
+    },
+    "stars": {
+      "players": [
+        {
+          "sourceName": "Trey Taylor",
+          "expectedRole": "defense",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
+          "automaticApproval": false
+        }
+      ]
     }
   },
   "policy": "Identity audit only; never auto-approve ambiguous or absent players."

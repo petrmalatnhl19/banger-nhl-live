@@ -435,20 +435,64 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "mammoth": {
-      "updatedAt": "2026-11-12T05:38:24.892333+00:00",
+      "updatedAt": "2026-11-12T19:37:47.604513+00:00",
       "previousPublishedAt": "2026-11-11T20:27:25.470000+00:00",
-      "publishedAt": "2026-11-11T20:27:25.470000+00:00",
-      "source": "https://www.nhl.com/news/utah-mammoth-vegas-golden-knights-game-preview-november-11-2026",
+      "publishedAt": "2026-11-12T19:32:09.831000+00:00",
+      "source": "https://www.nhl.com/news/st-louis-blues-utah-mammoth-game-preview-november-12-2026",
       "events": [
         {
-          "type": "added",
-          "player": "Nick DeSimone",
-          "to": "Obrana 3"
+          "type": "moved",
+          "player": "Nick Schmaltz",
+          "from": "Útok 3",
+          "to": "Útok 1"
         },
         {
           "type": "added",
+          "player": "Daniil But",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Jack McBain",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Anders Lee",
+          "from": "Útok 1",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Barrett Hayton",
+          "from": "Útok 1",
+          "to": "Útok 3"
+        },
+        {
+          "type": "added",
+          "player": "Kailer Yamamoto",
+          "to": "Útok 3"
+        },
+        {
+          "type": "removed",
+          "player": "Logan Cooley",
+          "from": "Útok 2"
+        },
+        {
+          "type": "removed",
+          "player": "Dylan Guenther",
+          "from": "Útok 3"
+        },
+        {
+          "type": "removed",
+          "player": "Nick DeSimone",
+          "from": "Obrana 3"
+        },
+        {
+          "type": "removed",
           "player": "Artem Duda",
-          "to": "Obrana 3"
+          "from": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -916,20 +960,34 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "jets": {
-      "updatedAt": "2026-11-10T19:28:11.318271+00:00",
-      "previousPublishedAt": "2026-11-08T22:04:00+00:00",
-      "publishedAt": "2026-11-10T18:10:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-12T19:37:47.604283+00:00",
+      "previousPublishedAt": "2026-11-10T17:56:14.254000+00:00",
+      "publishedAt": "2026-11-12T18:41:28.341000+00:00",
+      "source": "https://www.nhl.com/news/winnipeg-jets-dallas-stars-game-preview-november-12-2026",
       "events": [
         {
-          "type": "added",
+          "type": "moved",
           "player": "Josh Morrissey",
+          "from": "Obrana 2",
+          "to": "Obrana 1"
+        },
+        {
+          "type": "moved",
+          "player": "Dylan DeMelo",
+          "from": "Obrana 2",
+          "to": "Obrana 1"
+        },
+        {
+          "type": "moved",
+          "player": "Dylan Samberg",
+          "from": "Obrana 1",
           "to": "Obrana 2"
         },
         {
-          "type": "removed",
-          "player": "Haydn Fleury",
-          "from": "Obrana 2"
+          "type": "moved",
+          "player": "Neal Pionk",
+          "from": "Obrana 1",
+          "to": "Obrana 2"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

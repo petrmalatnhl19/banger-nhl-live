@@ -1,28 +1,22 @@
 {
-  "generatedAt": "2026-11-12T18:37:07.455249+00:00",
+  "generatedAt": "2026-11-12T19:37:49.192758+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 24,
+  "currentProjections": 27,
   "needsFreshProjection": [
-    "blues",
     "canucks",
     "devils",
     "islanders",
-    "jets",
     "kings",
-    "senators",
-    "stars"
+    "senators"
   ],
   "missing": [],
   "olderVerified": [
-    "blues",
     "canucks",
     "devils",
     "islanders",
-    "jets",
     "kings",
-    "senators",
-    "stars"
+    "senators"
   ],
   "manualSnapshots": [],
   "freshnessDefinition": "Publication within 36h; not a confirmed next-game lineup",
@@ -34,8 +28,8 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-12T18:06:47.983000+00:00",
-      "source": "https://www.nhl.com/news/colorado-avalanche-ottawa-senators-game-preview-november-12-2026",
+      "publishedAt": "2026-11-12T18:38:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -46,7 +40,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-12T17:52:00+00:00",
+      "publishedAt": "2026-11-12T18:38:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -58,7 +52,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-12T17:52:00+00:00",
+      "publishedAt": "2026-11-12T18:38:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -69,11 +63,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-10T18:07:31.619000+00:00",
-      "source": "https://www.nhl.com/news/detroit-red-wings-st-louis-blues-game-preview-november-10-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-12T19:32:09.831000+00:00",
+      "source": "https://www.nhl.com/news/st-louis-blues-utah-mammoth-game-preview-november-12-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "bruins": {
       "hasProjectedLines": true,
@@ -82,8 +76,8 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-12T17:55:39.979000+00:00",
-      "source": "https://www.nhl.com/news/montreal-canadiens-boston-bruins-game-preview-november-12-2026",
+      "publishedAt": "2026-11-12T18:38:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -94,8 +88,8 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-12T17:55:39.979000+00:00",
-      "source": "https://www.nhl.com/news/montreal-canadiens-boston-bruins-game-preview-november-12-2026",
+      "publishedAt": "2026-11-12T18:38:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -119,7 +113,7 @@
         "manual"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-12T17:52:00+00:00",
+      "publishedAt": "2026-11-12T18:38:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -190,7 +184,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-12T17:52:00+00:00",
+      "publishedAt": "2026-11-12T18:38:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -213,11 +207,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-10T17:56:14.254000+00:00",
-      "source": "https://www.nhl.com/news/new-jersey-devils-winnipeg-jets-game-preview-november-10-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-12T18:41:28.341000+00:00",
+      "source": "https://www.nhl.com/news/winnipeg-jets-dallas-stars-game-preview-november-12-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "kings": {
       "hasProjectedLines": true,
@@ -238,7 +232,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-12T17:52:00+00:00",
+      "publishedAt": "2026-11-12T18:38:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -250,7 +244,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-12T17:52:00+00:00",
+      "publishedAt": "2026-11-12T18:38:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -263,8 +257,8 @@
         "manual"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-11T20:27:25.470000+00:00",
-      "source": "https://www.nhl.com/news/utah-mammoth-vegas-golden-knights-game-preview-november-11-2026",
+      "publishedAt": "2026-11-12T19:32:09.831000+00:00",
+      "source": "https://www.nhl.com/news/st-louis-blues-utah-mammoth-game-preview-november-12-2026",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -276,7 +270,7 @@
         "manual"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-12T17:52:00+00:00",
+      "publishedAt": "2026-11-12T18:38:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -300,7 +294,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-12T17:52:00+00:00",
+      "publishedAt": "2026-11-12T18:38:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -348,7 +342,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-12T17:52:00+00:00",
+      "publishedAt": "2026-11-12T18:38:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -360,7 +354,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-12T17:52:00+00:00",
+      "publishedAt": "2026-11-12T18:38:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -391,14 +385,15 @@
     "stars": {
       "hasProjectedLines": true,
       "sources": [
+        "automatic",
         "archive",
         "manual"
       ],
-      "currentProjection": false,
-      "publishedAt": null,
-      "source": null,
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-12T18:41:28.341000+00:00",
+      "source": "https://www.nhl.com/news/winnipeg-jets-dallas-stars-game-preview-november-12-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "wild": {
       "hasProjectedLines": true,
@@ -407,7 +402,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-12T17:52:00+00:00",
+      "publishedAt": "2026-11-12T18:38:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
