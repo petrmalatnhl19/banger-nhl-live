@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-12T17:40:32.295954+00:00",
-  "rostersUpdatedAt": "2026-11-12T17:39:45.346778+00:00",
+  "updatedAt": "2026-11-12T18:37:09.720605+00:00",
+  "rostersUpdatedAt": "2026-11-12T18:36:45.829324+00:00",
   "projectionDate": "2026-11-12",
   "teamCount": 32,
   "goalieCount": 74,
@@ -316,8 +316,9 @@
       "team": "LAK",
       "teamKey": "kings",
       "playerId": 8475311,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-12",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Joey Daccord",
@@ -513,8 +514,9 @@
       "team": "BUF",
       "teamKey": "sabres",
       "playerId": 8481551,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-12",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Ukko-Pekka Luukkonen",

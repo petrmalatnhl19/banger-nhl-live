@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-12T17:40:26.816690+00:00",
+  "generatedAt": "2026-11-12T18:37:06.251221+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/florida-panthers-boston-bruins-game-preview-november-8-2026",
-      "candidatePublishedAt": "2026-11-08T15:42:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/montreal-canadiens-boston-bruins-game-preview-november-12-2026",
+      "candidatePublishedAt": "2026-11-12T17:55:39.979000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -20,7 +20,7 @@
       "team": "CAR",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-12T17:03:00+00:00",
+      "candidatePublishedAt": "2026-11-12T17:52:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -116,20 +116,25 @@
     "senators": {
       "team": "OTT",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/washington-capitals-ottawa-senators-game-preview-november-10-2026",
-      "candidatePublishedAt": "2026-11-10T18:15:42.415000+00:00",
+      "candidateSource": "https://www.nhl.com/news/colorado-avalanche-ottawa-senators-game-preview-november-12-2026",
+      "candidatePublishedAt": "2026-11-12T18:06:47.983000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
-      "rosterValidation": "passed",
-      "gameEvidenceExceptions": [
-        {
-          "player": "Philip Tomasino",
-          "role": "forwards",
-          "basis": "official game boxscore on projection publication date"
-        }
-      ],
+      "rosterValidation": "insufficient_position_matched_lines",
       "roleMismatches": [],
       "rejectedLines": [
+        {
+          "group": "forwards",
+          "line": 2,
+          "players": [
+            "Philip Tomasino"
+          ],
+          "sourceLine": [
+            "Philip Tomasino",
+            "Shane Pinto",
+            "Drake Batherson"
+          ]
+        },
         {
           "group": "forwards",
           "line": 4,
@@ -139,20 +144,25 @@
           "sourceLine": [
             "Samuel Blais",
             "Stephen Halliday",
-            "Philip Tomasino"
+            "Hayden Hodgson"
           ]
         }
       ],
       "rejectedPlayerReasons": [
+        {
+          "name": "Philip Tomasino",
+          "expectedRole": "forwards",
+          "reason": "not_in_current_roster"
+        },
         {
           "name": "Samuel Blais",
           "expectedRole": "forwards",
           "reason": "not_in_current_roster"
         }
       ],
-      "validatedForwardLines": 3,
+      "validatedForwardLines": 2,
       "validatedDefensePairs": 3,
-      "accepted": true
+      "accepted": false
     },
     "sharks": {
       "team": "SJS",
@@ -202,8 +212,8 @@
     "lightning": {
       "team": "TBL",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/tampa-bay-lightning-columbus-blue-jackets-game-preview-november-12-2026",
-      "candidatePublishedAt": "2026-11-12T17:05:23.617000+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-12T17:52:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -240,8 +250,8 @@
     "red wings": {
       "team": "DET",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/detroit-red-wings-florida-panthers-game-preview-november-12-2026",
-      "candidatePublishedAt": "2026-11-12T17:20:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-12T17:52:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
