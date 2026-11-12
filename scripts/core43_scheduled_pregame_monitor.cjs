@@ -4,6 +4,7 @@ const {fetchRows}=require("./core43_supabase_readonly_report.cjs");
 const {inspectLiveShadowGame}=require("./core43_live_shadow_source_reader.cjs");
 const {diagnoseGoalies}=require("./core43_goalie_readiness_diagnostics.cjs");
 const {summarizeReadiness}=require("./core43_readiness_summary.cjs");
+const {classifyMonitor}=require("./core43_pregame_decision.cjs");
 const valid=x=>typeof x==="string"&&Number.isFinite(Date.parse(x));
 function discoverUpcomingGames({schedules=[],predictions=[],now,horizonMinutes=180}={}){
  if(!valid(now)||!Number.isInteger(horizonMinutes)||horizonMinutes<1||horizonMinutes>360)throw Error("invalid_window");
@@ -43,7 +44,7 @@ async function run({url,key,now=new Date().toISOString(),fetchImpl=fetch}={}){
   const entry={...game,ready:result.captured===true,reason:result.reason||null,experimental:true,archived:false,goalieDiagnostics};
   results.push({...entry,readinessSummary:summarizeReadiness(entry)});
  }
- return {mode:"read_only_pregame_monitor",generatedAt:now,checked:results.length,ready:results.filter(r=>r.ready).length,archived:0,results};
+ return classifyMonitor({mode:"read_only_pregame_monitor",generatedAt:now,checked:results.length,ready:results.filter(r=>r.ready).length,archived:0,results});
 }
 if(require.main===module)run({url:process.env.SUPABASE_URL,key:process.env.SUPABASE_SERVICE_ROLE_KEY})
  .then(r=>console.log(JSON.stringify(r,null,2)))
