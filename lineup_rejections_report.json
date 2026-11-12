@@ -1,37 +1,9 @@
 {
-  "teamsWithRejectedLines": 5,
+  "teamsWithRejectedLines": 4,
   "teams": {
-    "kings": {
-      "team": "LAK",
-      "rosterUpdatedAt": "2026-11-12T19:37:10.151096+00:00",
-      "rosterSnapshotPresent": true,
-      "candidateForwardLines": 4,
-      "candidateDefensePairs": 3,
-      "validatedForwardLines": 3,
-      "validatedDefensePairs": 3,
-      "rejected": [
-        {
-          "group": "forwards",
-          "sourceLineNumber": 3,
-          "sourceLine": [
-            "Erik Haula",
-            "Kenny Connors",
-            "Joel Armia"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Kenny Connors",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ]
-    },
     "mammoth": {
       "team": "UTA",
-      "rosterUpdatedAt": "2026-11-12T19:37:13.782528+00:00",
+      "rosterUpdatedAt": "2026-11-12T20:28:47.681091+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -58,7 +30,7 @@
     },
     "rangers": {
       "team": "NYR",
-      "rosterUpdatedAt": "2026-11-12T19:37:11.594321+00:00",
+      "rosterUpdatedAt": "2026-11-12T20:28:45.312890+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -85,7 +57,7 @@
     },
     "senators": {
       "team": "OTT",
-      "rosterUpdatedAt": "2026-11-12T19:37:11.850509+00:00",
+      "rosterUpdatedAt": "2026-11-12T20:28:45.604328+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -130,7 +102,7 @@
     },
     "stars": {
       "team": "DAL",
-      "rosterUpdatedAt": "2026-11-12T19:37:09.200359+00:00",
+      "rosterUpdatedAt": "2026-11-12T20:28:43.620188+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
