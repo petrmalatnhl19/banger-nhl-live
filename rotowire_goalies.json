@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-12T14:41:09.845450+00:00",
+  "updatedAt": "2026-11-12T15:43:37.605774+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "goalieCount": 96,
   "games": [
@@ -30,7 +30,7 @@
       "goalie": "Brandon Bussi",
       "opponent": "SEA",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-12",
       "gameId": 2026020309,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -93,14 +93,14 @@
     },
     {
       "team": "FLA",
-      "goalie": "Jacob Markstrom",
+      "goalie": "Akira Schmid",
       "opponent": "DET",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-12",
       "gameId": 2026020302,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8474593"
+      "goalieId": "8481033"
     },
     {
       "team": "LAK",

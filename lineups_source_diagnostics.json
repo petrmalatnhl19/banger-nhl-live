@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-12T14:41:06.643878+00:00",
+  "generatedAt": "2026-11-12T15:43:34.111739+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -40,9 +40,28 @@
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
       "roleMismatches": [],
-      "rejectedLines": [],
-      "rejectedPlayerReasons": [],
-      "validatedForwardLines": 4,
+      "rejectedLines": [
+        {
+          "group": "forwards",
+          "line": 3,
+          "players": [
+            "Kenny Connors"
+          ],
+          "sourceLine": [
+            "Erik Haula",
+            "Kenny Connors",
+            "Joel Armia"
+          ]
+        }
+      ],
+      "rejectedPlayerReasons": [
+        {
+          "name": "Kenny Connors",
+          "expectedRole": "forwards",
+          "reason": "not_in_current_roster"
+        }
+      ],
+      "validatedForwardLines": 3,
       "validatedDefensePairs": 3,
       "accepted": true
     },

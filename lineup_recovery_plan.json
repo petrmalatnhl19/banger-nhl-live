@@ -3,7 +3,7 @@
     "lineup_core_report.json",
     "lineup_rejections_report.json"
   ],
-  "incompleteTeams": 6,
+  "incompleteTeams": 7,
   "teams": [
     {
       "team": "canucks",
@@ -48,6 +48,35 @@
       "publishedAt": "2026-11-09T20:11:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
+    },
+    {
+      "team": "kings",
+      "status": "incomplete_projection",
+      "reason": "rejected_roster_lines",
+      "missingForwardLines": 1,
+      "missingDefensePairs": 0,
+      "source": "https://www.nhl.com/news/nashville-predators-los-angeles-kings-game-preview-november-10-2026",
+      "publishedAt": "2026-11-10T20:22:05.537000+00:00",
+      "rejectedLines": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 3,
+          "sourceLine": [
+            "Erik Haula",
+            "Kenny Connors",
+            "Joel Armia"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Kenny Connors",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ],
+      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
     },
     {
       "team": "rangers",

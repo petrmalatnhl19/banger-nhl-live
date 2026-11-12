@@ -1,14 +1,14 @@
 {
-  "updatedAt": "2026-11-12T14:40:34.816018+00:00",
+  "updatedAt": "2026-11-12T15:43:07.792907+00:00",
   "articles": [
     {
-      "title": "KDYŽ VŠECHNO KLAPE",
-      "url": "https://www.nhl.com/cs/news/klapka-se-golem-odmenil-za-sanci-v-presilovce",
+      "title": "Lašák: V NHL jsem dostal životní šanci, ale nezvládl jsem to Bývalý gólman vzpomíná na Vokouna i na Liberec s Pardubicemi a hodnotí budoucnost slovenských brankářů 12. lis 2026",
+      "url": "https://www.nhl.com/cs/news/jan-lasak-vzpomina-na-nhl-i-na-liberec",
       "language": "cs",
       "source": "NHL.com",
-      "headline": "Zbraň na přesilovky. Klapka znovu udeřil",
-      "description": "Český útočník Calgary si užívá stále většího prostoru v početních výhodách. Našel svou identitu, těší kouče",
-      "publishedAt": "2026-11-12T08:46:20.598000+00:00"
+      "headline": "Lašák: V NHL jsem dostal životní šanci, ale nezvládl jsem to",
+      "publishedAt": "2026-11-12T15:29:54.138000+00:00",
+      "description": "Bývalý gólman vzpomíná na Vokouna i na Liberec s Pardubicemi a hodnotí budoucnost slovenských brankářů"
     },
     {
       "title": "Jako ryba ve vodě. 'Fishy' Aho se těší na velký zápas Centr Caroliny sehnal na duel Global Series na 60 lístků. Výjimečná záležitost, řekl k Finům kouč Brind'Amour 12. lis 2026",
@@ -27,6 +27,15 @@
       "headline": "Skoro jako doma. Seattle nasadí do Global Series Grubauera",
       "description": "Bude to pro něj výjimečné, řekl o německém gólmanovi před zápasem v Helsinkách bek Larsson",
       "publishedAt": "2026-11-12T10:25:48.405000+00:00"
+    },
+    {
+      "title": "Zbraň na přesilovky. Klapka znovu udeřil 12. lis 2026",
+      "url": "https://www.nhl.com/cs/news/klapka-se-golem-odmenil-za-sanci-v-presilovce",
+      "language": "cs",
+      "source": "NHL.com",
+      "headline": "Zbraň na přesilovky. Klapka znovu udeřil",
+      "description": "Český útočník Calgary si užívá stále většího prostoru v početních výhodách. Našel svou identitu, těší kouče",
+      "publishedAt": "2026-11-12T08:46:20.598000+00:00"
     },
     {
       "title": "20! McDavid nepolevuje a boří rekordy 12. lis 2026",
@@ -65,15 +74,6 @@
       "publishedAt": "2026-11-11T14:37:26.052000+00:00"
     },
     {
-      "title": "Reakce. Panthers konečně zabrali a sní o konzistenci 11. lis 2026",
-      "url": "https://www.nhl.com/cs/news/florida-se-po-dvou-porazkach-vratila-na-viteznou-vlnu",
-      "language": "cs",
-      "source": "NHL.com",
-      "headline": "Reakce. Panthers konečně zabrali a sní o konzistenci",
-      "description": "Minisérie porážek je pryč, Floridu vrátil na ledě Columbusu do sedla Bennett",
-      "publishedAt": "2026-11-11T10:12:00+00:00"
-    },
-    {
       "title": "FORČEK: Kučerovovi nejde o peníze, ale o ocenění Slavomír Lener ve 38. dílu podcastu o dění v NHL, českých juniorech i o tom, jak s Babcockem sháněl 300 doutníků 05. lis 2026",
       "url": "https://www.nhl.com/cs/news/podcast-forcek-se-slavomirem-lenerem-o-kucerovovi-i-juniorech",
       "language": "cs",
@@ -99,6 +99,24 @@
       "headline": "FORČEK: Smysl mi dává Indianapolis, říká Kotalík o expanzi NHL",
       "description": "36. díl podcastu NHL.com/cs a Livesportu s někdejším útočníkem o útoku McDavida na rekord i rozšiřování NHL",
       "publishedAt": "2026-10-22T15:20:25.443000+00:00"
+    },
+    {
+      "title": "Zažili sešup z top 10. Velké naděje NHL ale po návratu září 12. lis 2026",
+      "url": "https://www.nhl.com/cs/news/tri-utocnici-z-desitky-draftu-zari-ve-svycarsku",
+      "language": "cs",
+      "source": "NHL.com",
+      "headline": "Zažili sešup z top 10. Velké naděje NHL ale po návratu září",
+      "publishedAt": "2026-11-12T15:15:03.579000+00:00",
+      "description": "Evropský led: Puljujärvi, Andersson a Zadina patřili na draftu do elitní společnosti. Po nezdarech v NHL ožili ve Švýcarsku"
+    },
+    {
+      "title": "Reakce. Panthers konečně zabrali a sní o konzistenci 11. lis 2026",
+      "url": "https://www.nhl.com/cs/news/florida-se-po-dvou-porazkach-vratila-na-viteznou-vlnu",
+      "language": "cs",
+      "source": "NHL.com",
+      "headline": "Reakce. Panthers konečně zabrali a sní o konzistenci",
+      "description": "Minisérie porážek je pryč, Floridu vrátil na ledě Columbusu do sedla Bennett",
+      "publishedAt": "2026-11-11T10:12:00+00:00"
     },
     {
       "title": "Dva góly a výhra. Mercer potopil svůj bývalý tým 11. lis 2026",
@@ -281,67 +299,22 @@
       "publishedAt": "2026-11-09T14:29:59.197000+00:00"
     },
     {
-      "title": "Další dva góly, Hertl je při chuti 09. lis 2026",
-      "url": "https://www.nhl.com/cs/news/hertl-pomohl-k-vyhre-dvema-goly",
-      "language": "cs",
-      "source": "NHL.com",
-      "headline": "Další dva góly, Hertl je při chuti",
-      "description": "Český útočník pomohl Vegas k vítězství 4:1 v Buffalu, po dvou třetinách ale spokojený nebyl",
-      "publishedAt": "2026-11-09T07:21:00.297000+00:00"
-    },
-    {
-      "title": "Pátý zápas, pátá výhra. Hellebuyck si ji osladil nulou 09. lis 2026",
-      "url": "https://www.nhl.com/cs/news/hellebuyck-slavi-prvni-nulu-za-devils",
-      "language": "cs",
-      "source": "NHL.com",
-      "headline": "Pátý zápas, pátá výhra. Hellebuyck si ji osladil nulou",
-      "description": "Chytá skvěle, velebí ho spoluhráči. Pro příští pikantní souboj s Winnipegem nicméně americká hvězda dostane volno",
-      "publishedAt": "2026-11-09T07:11:05.085000+00:00"
-    },
-    {
-      "title": "Zibanejad scores twice, Rangers defeat Flames Korpisalo makes 29 saves, Lafreniere has two assists for New York Nov 12, 2026",
-      "url": "https://www.nhl.com/news/new-york-rangers-calgary-flames-game-recap-november-11-2026",
+      "title": "On Tap: Hurricanes, Kraken on Global stage Schaefer looks to join all-time greats; M. Tkachuk goes for 700th point Nov 12, 2026",
+      "url": "https://www.nhl.com/news/nhl-on-tap-news-and-notes-november-12-2026",
       "language": "en",
       "source": "NHL.com",
-      "headline": "Zibanejad scores twice, Rangers defeat Flames",
-      "description": "Korpisalo makes 30 saves, Lafreniere has two assists for New York",
-      "publishedAt": "2026-11-12T03:32:22.388000+00:00"
+      "headline": "NHL On Tap: Hurricanes, Kraken open Global Series Finland",
+      "publishedAt": "2026-11-12T14:57:32.990000+00:00",
+      "description": "Schaefer looks to join all-time greats; M. Tkachuk goes for 700th point"
     },
     {
-      "title": "Predators overcome Gauthier, Ducks to win 6th in row Annunen makes 27 saves for Nashville; Anaheim forward pushes goal streak to seven Nov 12, 2026",
-      "url": "https://www.nhl.com/news/nashville-predators-anaheim-ducks-game-recap-november-11-2026",
+      "title": "Projected lineups, goalies for Global Series Latest line combinations, defense pairs, injury news from NHL.com writers Nov 12, 2026",
+      "url": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "language": "en",
       "source": "NHL.com",
-      "headline": "Predators overcome Gauthier, Ducks to win sixth in row",
-      "description": "Annunen makes 27 saves for Nashville; Anaheim forward pushes goal streak to seven",
-      "publishedAt": "2026-11-12T05:57:52.930000+00:00"
-    },
-    {
-      "title": "Barbashev scores twice, Vegas wins 4th straight Nov 12, 2026",
-      "url": "https://www.nhl.com/news/utah-mammoth-vegas-golden-knights-game-recap-november-11-2026",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Barbashev scores twice, Golden Knights top Mammoth for fourth straight win",
-      "description": "Olofsson gets goal, two assists; Utah drops third in row",
-      "publishedAt": "2026-11-12T05:47:27.070000+00:00"
-    },
-    {
-      "title": "Kindel, Penguins recover to edge Sharks in shootout Nov 12, 2026",
-      "url": "https://www.nhl.com/news/pittsburgh-penguins-san-jose-sharks-game-recap-november-11-2026",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Kindel, Penguins recover to edge Sharks in shootout",
-      "description": "Murashov makes 34 saves; Celebrini has goal, assist, reaches 200 career points for San Jose",
-      "publishedAt": "2026-11-12T06:21:16.081000+00:00"
-    },
-    {
-      "title": "Hurricanes’ Hall goes Global for 1,000th NHL game Nov 11, 2026",
-      "url": "https://www.nhl.com/news/topic/global-series/carolina-hurricanes-seattle-kraken-global-series-finland-perfect-time-for-taylor-hall-1000th-game",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Global Series Finland between Hurricanes, Kraken perfect time for Hall’s 1,000th game",
-      "description": "Forward happy in Carolina, set to make League history by reaching milestone in Helsinki",
-      "publishedAt": "2026-11-11T05:00:00+00:00"
+      "headline": "Projected lineups, starting goalies for today",
+      "description": "Latest line combinations, defense pairs, injury news from NHL.com writers",
+      "publishedAt": "2026-11-08T22:04:00+00:00"
     },
     {
       "title": "Flyers GM says report Michkov wants out ‘not correct’ Nov 12, 2026",
@@ -371,13 +344,40 @@
       "publishedAt": "2026-11-11T16:21:31.613000+00:00"
     },
     {
-      "title": "Projected lineups, goalies for Global Series Nov 12, 2026",
-      "url": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "title": "Kucherov hat trick, Carlson’s 5 points boost Bolts Nov 12, 2026",
+      "url": "https://www.nhl.com/news/tampa-bay-lightning-buffalo-sabres-game-recap-november-11-2026",
       "language": "en",
       "source": "NHL.com",
-      "headline": "Projected lineups, starting goalies for today",
-      "description": "Latest line combinations, defense pairs, injury news from NHL.com writers",
-      "publishedAt": "2026-11-08T22:04:00+00:00"
+      "headline": "Kucherov's hat trick, Carlson's five points spark Lightning against Sabres",
+      "description": "Hagel gets two goals, assist in win; Buffalo loses third in past four",
+      "publishedAt": "2026-11-12T03:03:20.310000+00:00"
+    },
+    {
+      "title": "Predators overcome Gauthier, Ducks to win 6th in row Nov 12, 2026",
+      "url": "https://www.nhl.com/news/nashville-predators-anaheim-ducks-game-recap-november-11-2026",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Predators overcome Gauthier, Ducks to win sixth in row",
+      "description": "Annunen makes 27 saves for Nashville; Anaheim forward pushes goal streak to seven",
+      "publishedAt": "2026-11-12T05:57:52.930000+00:00"
+    },
+    {
+      "title": "Barbashev scores twice, Vegas wins 4th straight Nov 12, 2026",
+      "url": "https://www.nhl.com/news/utah-mammoth-vegas-golden-knights-game-recap-november-11-2026",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Barbashev scores twice, Golden Knights top Mammoth for fourth straight win",
+      "description": "Olofsson gets goal, two assists; Utah drops third in row",
+      "publishedAt": "2026-11-12T05:47:27.070000+00:00"
+    },
+    {
+      "title": "Kindel, Penguins recover to edge Sharks in shootout Nov 12, 2026",
+      "url": "https://www.nhl.com/news/pittsburgh-penguins-san-jose-sharks-game-recap-november-11-2026",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Kindel, Penguins recover to edge Sharks in shootout",
+      "description": "Murashov makes 34 saves; Celebrini has goal, assist, reaches 200 career points for San Jose",
+      "publishedAt": "2026-11-12T06:21:16.081000+00:00"
     },
     {
       "title": "McDavid’s season-opening point streak hits 20, Oilers top Flyers in OT Nov 12, 2026",
@@ -389,13 +389,31 @@
       "publishedAt": "2026-11-12T05:09:05.133000+00:00"
     },
     {
-      "title": "Kucherov's hat trick, Carlson's five points spark Lightning against Sabres Nov 12, 2026",
-      "url": "https://www.nhl.com/news/tampa-bay-lightning-buffalo-sabres-game-recap-november-11-2026",
+      "title": "Zibanejad scores twice, Rangers defeat Flames Nov 12, 2026",
+      "url": "https://www.nhl.com/news/new-york-rangers-calgary-flames-game-recap-november-11-2026",
       "language": "en",
       "source": "NHL.com",
-      "headline": "Kucherov's hat trick, Carlson's five points spark Lightning against Sabres",
-      "description": "Hagel gets two goals, assist in win; Buffalo loses third in past four",
-      "publishedAt": "2026-11-12T03:03:20.310000+00:00"
+      "headline": "Zibanejad scores twice, Rangers defeat Flames",
+      "description": "Korpisalo makes 30 saves, Lafreniere has two assists for New York",
+      "publishedAt": "2026-11-12T03:32:22.388000+00:00"
+    },
+    {
+      "title": "NHL EDGE stats behind McDavid’s historic start for Oilers Nov 12, 2026",
+      "url": "https://www.nhl.com/news/topic/nhl-edge/nhl-edge-stats-connor-mcdavid-edmonton-oilers-2026-27",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "NHL EDGE stats behind McDavid’s historic start for Oilers",
+      "description": "Edmonton captain leads League in goals off rush, skating speed categories, on pace to exceed 200 points",
+      "publishedAt": "2026-11-07T05:00:00+00:00"
+    },
+    {
+      "title": "NHL picks, props, daily fantasy projections Nov 12, 2026",
+      "url": "https://www.nhl.com/news/topic/fantasy/nhl-picks-props-daily-fantasy-hockey-projections-for-2026-27-season",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "NHL picks, props, daily fantasy projections",
+      "description": "Players to watch with EDGE stats insights, free-to-play game advice; podcast analysis",
+      "publishedAt": "2026-11-08T15:17:00+00:00"
     },
     {
       "title": "Fantasy hockey top 200 player rankings for 2026-27 Nov 11, 2026",
@@ -414,15 +432,6 @@
       "headline": "Fantasy hockey top 100 forward rankings for 2026-27",
       "description": "Most valuable options at position in standard leagues; new podcast episodes",
       "publishedAt": "2026-11-09T14:00:00+00:00"
-    },
-    {
-      "title": "NHL picks, props, daily fantasy projections Nov 11, 2026",
-      "url": "https://www.nhl.com/news/topic/fantasy/nhl-picks-props-daily-fantasy-hockey-projections-for-2026-27-season",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "NHL picks, props, daily fantasy projections",
-      "description": "Players to watch with EDGE stats insights, free-to-play game advice; podcast analysis",
-      "publishedAt": "2026-11-08T15:17:00+00:00"
     },
     {
       "title": "NHL EDGE stats for 'Wednesday Night Hockey' Nov 11, 2026",
@@ -494,15 +503,6 @@
       "source": "NHL.com",
       "headline": "Fantasy hockey top 10 rookie rankings for 2026-27",
       "description": "Fowler, McKenna, Stenberg lead class; Hagens, Brandsegg-Nygard trending up; podcast analysis",
-      "publishedAt": "2026-11-07T05:00:00+00:00"
-    },
-    {
-      "title": "NHL EDGE stats behind McDavid’s historic start for Oilers Nov 07, 2026",
-      "url": "https://www.nhl.com/news/topic/nhl-edge/nhl-edge-stats-connor-mcdavid-edmonton-oilers-2026-27",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "NHL EDGE stats behind McDavid’s historic start for Oilers",
-      "description": "Edmonton captain leads League in goals off rush, skating speed categories, on pace to exceed 200 points",
       "publishedAt": "2026-11-07T05:00:00+00:00"
     },
     {

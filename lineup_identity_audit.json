@@ -1,5 +1,16 @@
 {
   "teams": {
+    "kings": {
+      "players": [
+        {
+          "sourceName": "Kenny Connors",
+          "expectedRole": "forwards",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
+          "automaticApproval": false
+        }
+      ]
+    },
     "rangers": {
       "players": [
         {

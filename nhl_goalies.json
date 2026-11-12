@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-12T14:41:09.961857+00:00",
-  "rostersUpdatedAt": "2026-11-12T14:40:38.227485+00:00",
+  "updatedAt": "2026-11-12T15:43:37.720260+00:00",
+  "rostersUpdatedAt": "2026-11-12T15:43:10.677229+00:00",
   "projectionDate": "2026-11-12",
   "teamCount": 32,
   "goalieCount": 74,
@@ -248,7 +248,7 @@
       "team": "CAR",
       "teamKey": "hurricanes",
       "playerId": 8483548,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-12",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -420,17 +420,17 @@
       "team": "FLA",
       "teamKey": "panthers",
       "playerId": 8474593,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-12",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Akira Schmid",
       "team": "FLA",
       "teamKey": "panthers",
       "playerId": 8481033,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-12",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Sergei Murashov",
