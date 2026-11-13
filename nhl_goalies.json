@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-13T18:25:47.136272+00:00",
-  "rostersUpdatedAt": "2026-11-13T18:25:04.841908+00:00",
+  "updatedAt": "2026-11-13T19:33:44.178071+00:00",
+  "rostersUpdatedAt": "2026-11-13T19:32:55.208989+00:00",
   "projectionDate": "2026-11-13",
   "teamCount": 32,
   "goalieCount": 74,
@@ -235,8 +235,9 @@
       "team": "VGK",
       "teamKey": "golden knights",
       "playerId": 8478499,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-13",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Brandon Bussi",
@@ -451,16 +452,18 @@
       "team": "NSH",
       "teamKey": "predators",
       "playerId": 8477424,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-13",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Dylan Garand",
       "team": "NYR",
       "teamKey": "rangers",
       "playerId": 8482193,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-13",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Joonas Korpisalo",

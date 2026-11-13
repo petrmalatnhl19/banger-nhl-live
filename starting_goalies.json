@@ -1,40 +1,45 @@
 {
   "date": "2026-11-13",
-  "updatedAt": "2026-11-13T18:25:47.014138+00:00",
+  "updatedAt": "2026-11-13T19:33:44.072666+00:00",
   "teams": {
+    "NSH": {
+      "name": "Juuse Saros",
+      "status": "confirmed",
+      "date": "2026-11-13",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-13T19:33:44.072666+00:00",
+      "gameId": 2026020311
+    },
+    "NYR": {
+      "name": "Dylan Garand",
+      "status": "confirmed",
+      "date": "2026-11-13",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-13T19:33:44.072666+00:00",
+      "gameId": 2026020310
+    },
     "VAN": {
       "name": "Leevi Meriläinen",
       "status": "projected",
       "date": "2026-11-13",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-13T18:25:47.014138+00:00",
+      "checkedAt": "2026-11-13T19:33:44.072666+00:00",
       "gameId": 2026020310
+    },
+    "VGK": {
+      "name": "Adin Hill",
+      "status": "confirmed",
+      "date": "2026-11-13",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-13T19:33:44.072666+00:00",
+      "gameId": 2026020311
     }
   },
-  "conflicts": [
-    {
-      "date": "2026-11-13",
-      "team": "NSH",
-      "reason": "source disagreement",
-      "rotowire": "Juuse Saros",
-      "previous": "Justus Annunen"
-    },
-    {
-      "date": "2026-11-13",
-      "team": "NYR",
-      "reason": "source disagreement",
-      "rotowire": "Dylan Garand",
-      "previous": "Joonas Korpisalo"
-    },
-    {
-      "date": "2026-11-13",
-      "team": "VGK",
-      "reason": "source disagreement",
-      "rotowire": "Adin Hill",
-      "previous": "Carter Hart"
-    }
-  ],
+  "conflicts": [],
   "sourceErrors": [],
-  "status": "partial"
+  "status": "ok"
 }
