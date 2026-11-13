@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T03:10:29.882338+00:00",
+  "generatedAt": "2026-11-13T04:21:12.643427+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -238,29 +238,18 @@
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
+      "gameEvidenceExceptions": [
+        {
+          "player": "Trey Taylor",
+          "role": "defense",
+          "basis": "official game boxscore on projection publication date"
+        }
+      ],
       "roleMismatches": [],
-      "rejectedLines": [
-        {
-          "group": "defense",
-          "line": 3,
-          "players": [
-            "Trey Taylor"
-          ],
-          "sourceLine": [
-            "Trey Taylor",
-            "Tyler Myers"
-          ]
-        }
-      ],
-      "rejectedPlayerReasons": [
-        {
-          "name": "Trey Taylor",
-          "expectedRole": "defense",
-          "reason": "not_in_current_roster"
-        }
-      ],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
       "validatedForwardLines": 4,
-      "validatedDefensePairs": 2,
+      "validatedDefensePairs": 3,
       "accepted": true
     }
   }

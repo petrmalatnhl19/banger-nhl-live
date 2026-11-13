@@ -3,7 +3,7 @@
     "lineup_core_report.json",
     "lineup_rejections_report.json"
   ],
-  "incompleteTeams": 8,
+  "incompleteTeams": 7,
   "teams": [
     {
       "team": "blackhawks",
@@ -107,34 +107,6 @@
           "unverifiedPlayers": [
             {
               "name": "Matthew Roberson",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ],
-      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
-    },
-    {
-      "team": "stars",
-      "status": "incomplete_projection",
-      "reason": "rejected_roster_lines",
-      "missingForwardLines": 0,
-      "missingDefensePairs": 1,
-      "source": "https://www.nhl.com/news/winnipeg-jets-dallas-stars-game-preview-november-12-2026",
-      "publishedAt": "2026-11-12T18:41:28.341000+00:00",
-      "rejectedLines": [
-        {
-          "group": "defense",
-          "sourceLineNumber": 3,
-          "sourceLine": [
-            "Trey Taylor",
-            "Tyler Myers"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Trey Taylor",
               "reason": "not_in_current_roster",
               "inLocalCurrentRoster": false,
               "requiresIndependentGameEvidence": true
