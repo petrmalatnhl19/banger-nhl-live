@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-13T14:27:56.677699+00:00",
+  "generatedAt": "2026-11-13T15:23:17.264571+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-12T18:38:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/montreal-canadiens-boston-bruins-game-preview-november-12-2026",
+      "candidatePublishedAt": "2026-11-12T17:55:39.979000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -97,8 +97,8 @@
     "senators": {
       "team": "OTT",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-12T18:38:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/colorado-avalanche-ottawa-senators-game-preview-november-12-2026",
+      "candidatePublishedAt": "2026-11-12T18:06:47.983000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -169,8 +169,8 @@
     "lightning": {
       "team": "TBL",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-12T18:38:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/tampa-bay-lightning-columbus-blue-jackets-game-preview-november-12-2026",
+      "candidatePublishedAt": "2026-11-12T17:05:23.617000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -207,8 +207,8 @@
     "red wings": {
       "team": "DET",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-12T18:38:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/detroit-red-wings-florida-panthers-game-preview-november-12-2026",
+      "candidatePublishedAt": "2026-11-12T17:20:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
