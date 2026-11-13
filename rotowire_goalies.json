@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-13T22:22:54.133630+00:00",
+  "updatedAt": "2026-11-13T23:09:15.851020+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "goalieCount": 94,
   "games": [
@@ -49,14 +49,14 @@
     },
     {
       "team": "ANA",
-      "goalie": "Laurent Brossoit",
+      "goalie": "Lukas Dostal",
       "opponent": "NYI",
       "venue": "home",
       "status": "projected",
       "date": "2026-11-14",
       "gameId": 2026020324,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8476316"
+      "goalieId": "8480843"
     },
     {
       "team": "BOS",
@@ -357,14 +357,14 @@
     },
     {
       "team": "ANA",
-      "goalie": "Lukas Dostal",
+      "goalie": "Ville Husso",
       "opponent": "CGY",
       "venue": "home",
       "status": "projected",
       "date": "2026-11-15",
       "gameId": 2026020328,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8480843"
+      "goalieId": "8478024"
     },
     {
       "team": "CGY",
