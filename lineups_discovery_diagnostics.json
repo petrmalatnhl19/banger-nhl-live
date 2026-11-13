@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-13T22:22:43.122063+00:00",
-  "checked": 21,
-  "articlesFound": 3,
+  "generatedAt": "2026-11-13T23:09:05.780828+00:00",
+  "checked": 22,
+  "articlesFound": 2,
   "errors": [],
   "fixtures": [
     {
@@ -211,6 +211,16 @@
       "teams": []
     },
     {
+      "url": "https://www.nhl.com/news/san-jose-sharks-utah-mammoth-game-preview-november-14-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/utah-mammoth-san-jose-sharks-game-preview-november-14-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
       "url": "https://www.nhl.com/news/buffalo-sabres-dallas-stars-game-preview-november-14-2026",
       "result": "no_complete_projection",
       "teams": []
@@ -239,26 +249,17 @@
       "url": "https://www.nhl.com/news/washington-capitals-new-jersey-devils-game-preview-november-14-2026",
       "result": "no_complete_projection",
       "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/seattle-kraken-carolina-hurricanes-game-preview-november-14-2026",
-      "result": "parsed",
-      "teams": [
-        "kraken",
-        "hurricanes"
-      ],
-      "coversBothTeams": true
     }
   ],
   "note": "Upcoming games today through two days ahead; prioritize older sources and nearest games. A fixture is not proof a preview article exists.",
   "fixturesSelected": 12,
   "fixturesDeferred": 9,
   "rotation": {
-    "window": 1994009,
+    "window": 1994012,
     "fixed": 8,
     "rotating": 4,
     "remainingPool": 13,
-    "rotationStart": 3
+    "rotationStart": 2
   },
   "selectedFixtures": [
     {
@@ -303,6 +304,11 @@
     },
     {
       "date": "2026-11-14",
+      "away": "SJS",
+      "home": "UTA"
+    },
+    {
+      "date": "2026-11-14",
       "away": "BUF",
       "home": "DAL"
     },
@@ -315,11 +321,6 @@
       "date": "2026-11-14",
       "away": "NJD",
       "home": "WSH"
-    },
-    {
-      "date": "2026-11-14",
-      "away": "SEA",
-      "home": "CAR"
     }
   ]
 }
