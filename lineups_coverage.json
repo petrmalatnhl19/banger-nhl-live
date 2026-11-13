@@ -1,12 +1,14 @@
 {
-  "generatedAt": "2026-11-13T06:34:57.193442+00:00",
+  "generatedAt": "2026-11-13T07:54:55.457384+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 28,
+  "currentProjections": 26,
   "needsFreshProjection": [
     "canucks",
     "devils",
     "flames",
+    "flyers",
+    "oilers",
     "rangers"
   ],
   "missing": [],
@@ -14,6 +16,8 @@
     "canucks",
     "devils",
     "flames",
+    "flyers",
+    "oilers",
     "rangers"
   ],
   "manualSnapshots": [],
@@ -157,11 +161,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-11T18:50:25.155000+00:00",
       "source": "https://www.nhl.com/news/philadelphia-flyers-edmonton-oilers-game-preview-november-11-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "golden knights": {
       "hasProjectedLines": true,
@@ -279,11 +283,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-11T18:50:25.155000+00:00",
       "source": "https://www.nhl.com/news/philadelphia-flyers-edmonton-oilers-game-preview-november-11-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "panthers": {
       "hasProjectedLines": true,
