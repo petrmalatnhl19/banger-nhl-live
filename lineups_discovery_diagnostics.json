@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T11:00:55.733840+00:00",
+  "generatedAt": "2026-11-13T11:57:22.059920+00:00",
   "checked": 24,
   "articlesFound": 0,
   "errors": [],
@@ -213,6 +213,16 @@
       "teams": []
     },
     {
+      "url": "https://www.nhl.com/news/florida-panthers-st-louis-blues-game-preview-november-14-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/st-louis-blues-florida-panthers-game-preview-november-14-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
       "url": "https://www.nhl.com/news/new-jersey-devils-washington-capitals-game-preview-november-14-2026",
       "result": "no_complete_projection",
       "teams": []
@@ -241,27 +251,17 @@
       "url": "https://www.nhl.com/news/chicago-blackhawks-winnipeg-jets-game-preview-november-14-2026",
       "result": "no_complete_projection",
       "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/calgary-flames-anaheim-ducks-game-preview-november-15-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/anaheim-ducks-calgary-flames-game-preview-november-15-2026",
-      "result": "no_complete_projection",
-      "teams": []
     }
   ],
   "note": "Upcoming games today through two days ahead; prioritize older sources and nearest games. A fixture is not proof a preview article exists.",
   "fixturesSelected": 12,
   "fixturesDeferred": 9,
   "rotation": {
-    "window": 1993964,
+    "window": 1993967,
     "fixed": 8,
     "rotating": 4,
     "remainingPool": 13,
-    "rotationStart": 5
+    "rotationStart": 4
   },
   "selectedFixtures": [
     {
@@ -306,6 +306,11 @@
     },
     {
       "date": "2026-11-14",
+      "away": "FLA",
+      "home": "STL"
+    },
+    {
+      "date": "2026-11-14",
       "away": "NJD",
       "home": "WSH"
     },
@@ -318,11 +323,6 @@
       "date": "2026-11-14",
       "away": "WPG",
       "home": "CHI"
-    },
-    {
-      "date": "2026-11-15",
-      "away": "CGY",
-      "home": "ANA"
     }
   ]
 }
