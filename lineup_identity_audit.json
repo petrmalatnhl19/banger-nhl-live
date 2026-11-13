@@ -11,24 +11,6 @@
         }
       ]
     },
-    "senators": {
-      "players": [
-        {
-          "sourceName": "Philip Tomasino",
-          "expectedRole": "forwards",
-          "sameSurnameInRoster": [],
-          "classification": "not_on_current_roster",
-          "automaticApproval": false
-        },
-        {
-          "sourceName": "Samuel Blais",
-          "expectedRole": "forwards",
-          "sameSurnameInRoster": [],
-          "classification": "not_on_current_roster",
-          "automaticApproval": false
-        }
-      ]
-    },
     "mammoth": {
       "players": [
         {
