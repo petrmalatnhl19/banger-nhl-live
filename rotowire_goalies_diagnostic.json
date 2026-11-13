@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-13T18:25:46.206609+00:00",
+  "checkedAt": "2026-11-13T19:33:43.372914+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "candidateCount": 98,
   "matchedCount": 94,
@@ -276,10 +276,10 @@
     },
     {
       "team": "DET",
-      "goalie": "John Gibson",
+      "goalie": "Daniil Tarasov",
       "opponent": "TBL",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-14",
       "gameId": 2026020316,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -489,7 +489,7 @@
       "goalie": "Juuse Saros",
       "opponent": "VGK",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-13",
       "gameId": 2026020311,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -549,7 +549,7 @@
       "goalie": "Dylan Garand",
       "opponent": "VAN",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-13",
       "gameId": 2026020310,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -869,7 +869,7 @@
       "goalie": "Adin Hill",
       "opponent": "NSH",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-13",
       "gameId": 2026020311,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
