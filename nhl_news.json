@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-13T01:09:04.470006+00:00",
+  "updatedAt": "2026-11-13T02:17:38.568012+00:00",
   "articles": [
     {
       "title": "Kruh se uzavřel. Aho byl hrdinou jako před 10 lety Finský útočník při vítězství Hurricanes napsal fantastický příběh, stejně jako při premiéře dal dva góly Grubauerovi 12. lis 2026",
@@ -371,13 +371,13 @@
       "publishedAt": "2026-11-11T22:05:36.971000+00:00"
     },
     {
-      "title": "Status Report: Ullmark returns for Senators Nov 13, 2026",
-      "url": "https://www.nhl.com/news/nhl-status-report-news-and-notes-november-12-2026",
+      "title": "Global Series Finland blog: Kraken's Berkly Catton Nov 12, 2026",
+      "url": "https://www.nhl.com/news/global-series-finland-blog-seattle-kraken-berkly-catton-november-12-2026",
       "language": "en",
       "source": "NHL.com",
-      "headline": "NHL Status Report: Ullmark to return for Senators",
-      "description": "Kane 'hopeful' for Blackhawks; Guenther, Schmidt placed on IR by Mammoth",
-      "publishedAt": "2026-11-12T17:19:55.727000+00:00"
+      "headline": "Global Series Finland blog: Kraken's Catton on atmosphere",
+      "publishedAt": "2026-11-12T21:42:44.352000+00:00",
+      "description": "Forward also discuses loss to Hurricanes, teammates playing in home country"
     },
     {
       "title": "NHL EDGE stats behind McDavid’s historic start Nov 12, 2026",
@@ -452,24 +452,6 @@
       "publishedAt": "2026-11-05T16:15:00+00:00"
     },
     {
-      "title": "Fantasy hockey top 50 defenseman rankings Nov 12, 2026",
-      "url": "https://www.nhl.com/news/topic/Fantasy/nhl-fantasy-hockey-top-50-defenseman-rankings-pools-282830728",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Fantasy hockey top 50 defenseman rankings",
-      "description": "Most valuable options at position in standard leagues; new podcast episodes",
-      "publishedAt": "2026-11-07T14:00:00+00:00"
-    },
-    {
-      "title": "Fantasy hockey top 25 goalie rankings for 2026-27 Nov 12, 2026",
-      "url": "https://www.nhl.com/news/nhl-fantasy-hockey-top-25-goaltender-rankings-pools-282860450",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Fantasy hockey top 25 goalie rankings for 2026-27",
-      "description": "Most valuable options for standard leagues, tandems for 'NHL Fantasy Stars' game",
-      "publishedAt": "2026-11-07T14:00:00+00:00"
-    },
-    {
       "title": "Fantasy hockey top 200 player rankings for 2026-27 Nov 12, 2026",
       "url": "https://www.nhl.com/news/topic/fantasy/nhl-fantasy-hockey-top-250-200-rankings-drafts-players-big-board-281505474",
       "language": "en",
@@ -486,6 +468,24 @@
       "headline": "Fantasy hockey top 100 forward rankings for 2026-27",
       "description": "Most valuable options at position in standard leagues; new podcast episodes",
       "publishedAt": "2026-11-09T14:00:00+00:00"
+    },
+    {
+      "title": "Fantasy hockey top 50 defenseman rankings Nov 12, 2026",
+      "url": "https://www.nhl.com/news/topic/Fantasy/nhl-fantasy-hockey-top-50-defenseman-rankings-pools-282830728",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Fantasy hockey top 50 defenseman rankings",
+      "description": "Most valuable options at position in standard leagues; new podcast episodes",
+      "publishedAt": "2026-11-07T14:00:00+00:00"
+    },
+    {
+      "title": "Fantasy hockey top 25 goalie rankings for 2026-27 Nov 12, 2026",
+      "url": "https://www.nhl.com/news/nhl-fantasy-hockey-top-25-goaltender-rankings-pools-282860450",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Fantasy hockey top 25 goalie rankings for 2026-27",
+      "description": "Most valuable options for standard leagues, tandems for 'NHL Fantasy Stars' game",
+      "publishedAt": "2026-11-07T14:00:00+00:00"
     },
     {
       "title": "NHL picks, props, fantasy projections for today Nov 12, 2026",
@@ -673,8 +673,8 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "Hockey Fights Cancer daily digest",
-      "publishedAt": "2026-11-13T01:04:00+00:00",
-      "description": "Latest news, images from teams, players around the NHL"
+      "description": "Latest news, images from teams, players around the NHL",
+      "publishedAt": "2026-11-13T01:04:00+00:00"
     }
   ]
 }
