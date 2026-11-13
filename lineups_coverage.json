@@ -1,18 +1,16 @@
 {
-  "generatedAt": "2026-11-13T02:18:28.487966+00:00",
+  "generatedAt": "2026-11-13T03:10:31.205822+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 29,
+  "currentProjections": 30,
   "needsFreshProjection": [
     "canucks",
-    "devils",
-    "senators"
+    "devils"
   ],
   "missing": [],
   "olderVerified": [
     "canucks",
-    "devils",
-    "senators"
+    "devils"
   ],
   "manualSnapshots": [],
   "freshnessDefinition": "Publication within 36h; not a confirmed next-game lineup",
@@ -358,13 +356,14 @@
     "senators": {
       "hasProjectedLines": true,
       "sources": [
+        "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": null,
-      "source": null,
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-12T18:38:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "sharks": {
       "hasProjectedLines": true,

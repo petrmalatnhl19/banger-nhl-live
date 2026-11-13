@@ -3,7 +3,7 @@
     "lineup_core_report.json",
     "lineup_rejections_report.json"
   ],
-  "incompleteTeams": 9,
+  "incompleteTeams": 8,
   "teams": [
     {
       "team": "blackhawks",
@@ -107,52 +107,6 @@
           "unverifiedPlayers": [
             {
               "name": "Matthew Roberson",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ],
-      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
-    },
-    {
-      "team": "senators",
-      "status": "missing_team",
-      "reason": "rejected_roster_lines",
-      "missingForwardLines": 4,
-      "missingDefensePairs": 3,
-      "source": null,
-      "publishedAt": null,
-      "rejectedLines": [
-        {
-          "group": "forwards",
-          "sourceLineNumber": 2,
-          "sourceLine": [
-            "Philip Tomasino",
-            "Shane Pinto",
-            "Drake Batherson"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Philip Tomasino",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        },
-        {
-          "group": "forwards",
-          "sourceLineNumber": 4,
-          "sourceLine": [
-            "Samuel Blais",
-            "Stephen Halliday",
-            "Hayden Hodgson"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Samuel Blais",
               "reason": "not_in_current_roster",
               "inLocalCurrentRoster": false,
               "requiresIndependentGameEvidence": true

@@ -1559,7 +1559,7 @@
           "Dylan Cozens"
         ],
         [
-          "Nick Cousins",
+          "Philip Tomasino",
           "Shane Pinto",
           "Drake Batherson"
         ],
@@ -1567,6 +1567,11 @@
           "Michael Amadio",
           "Ridly Greig",
           "Claude Giroux"
+        ],
+        [
+          "Samuel Blais",
+          "Stephen Halliday",
+          "Hayden Hodgson"
         ]
       ],
       "defense": [
@@ -1584,13 +1589,14 @@
         ]
       ],
       "goalies": [
+        "Linus Ullmark",
         "Samuel Ersson"
       ],
-      "injured": "Linus Ullmark (lower body), Warren Foegele (lower body), William Eklund (ankle), Andre Burakovsky (lower body)",
-      "scratched": "Carter Yakemchuk, Hayden Hodgson",
-      "source": "https://www.nhl.com/news/washington-capitals-ottawa-senators-game-preview-november-10-2026",
-      "publishedAt": "2026-11-10T18:15:42.415000+00:00",
-      "asOf": "2026-11-10",
+      "injured": "Warren Foegele (lower body), William Eklund (ankle), Andre Burakovsky (lower body), Nick Cousins (upper body)",
+      "scratched": "Carter Yakemchuk, Jackson Parsons",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-12T18:38:00+00:00",
+      "asOf": "2026-11-12",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
