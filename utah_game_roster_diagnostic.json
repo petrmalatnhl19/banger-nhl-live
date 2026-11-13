@@ -1,10 +1,14 @@
 {
-  "checkedAt": "2026-11-13T04:20:38.347025+00:00",
+  "checkedAt": "2026-11-13T05:24:26.486567+00:00",
   "team": "UTA",
   "scope": "Recent completed NHL games; historical evidence only",
   "players": {
     "Artem Duda": {
       "appearedInGames": [
+        {
+          "gameId": 2026020307,
+          "gameDate": "2026-11-12"
+        },
         {
           "gameId": 2026020296,
           "gameDate": "2026-11-11"
@@ -30,9 +34,6 @@
   "nameFieldDiagnostics": {
     "sampleNames": [
       {
-        "default": "N. Schmaltz"
-      },
-      {
         "default": "C. Keller"
       },
       {
@@ -46,6 +47,9 @@
       },
       {
         "default": "L. O'Brien"
+      },
+      {
+        "default": "D. But"
       }
     ],
     "missingNameEntries": 0
