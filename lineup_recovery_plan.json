@@ -11,8 +11,8 @@
       "reason": "incomplete_source_or_no_validated_replacement",
       "missingForwardLines": 0,
       "missingDefensePairs": 1,
-      "source": "https://www.nhl.com/news/winnipeg-jets-chicago-blackahwks-game-preview-november-14-2026",
-      "publishedAt": "2026-11-13T20:09:36.747000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-13T20:35:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
@@ -23,7 +23,7 @@
       "missingForwardLines": 0,
       "missingDefensePairs": 0,
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-13T20:09:00+00:00",
+      "publishedAt": "2026-11-13T20:35:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
@@ -44,8 +44,8 @@
       "reason": "incomplete_source_or_no_validated_replacement",
       "missingForwardLines": 0,
       "missingDefensePairs": 1,
-      "source": "https://www.nhl.com/news/utah-mammoth-vegas-golden-knights-game-preview-november-11-2026",
-      "publishedAt": "2026-11-11T20:27:25.470000+00:00",
+      "source": "https://www.nhl.com/news/nashville-predators-vegas-golden-knights-game-preview-november-13-2026",
+      "publishedAt": "2026-11-13T20:35:32.439000+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
@@ -67,7 +67,7 @@
       "missingForwardLines": 0,
       "missingDefensePairs": 1,
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-13T20:09:00+00:00",
+      "publishedAt": "2026-11-13T20:35:00+00:00",
       "rejectedLines": [
         {
           "group": "defense",
