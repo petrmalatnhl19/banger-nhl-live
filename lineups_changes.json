@@ -563,85 +563,53 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "canucks": {
-      "updatedAt": "2026-11-10T19:28:11.319323+00:00",
-      "previousPublishedAt": "2026-11-07T19:30:24.446000+00:00",
-      "publishedAt": "2026-11-09T19:06:00+00:00",
-      "source": "https://www.nhl.com/news/philadelphia-flyers-vancouver-canucks-game-preview-november-9-2026",
+      "updatedAt": "2026-11-13T20:30:03.929581+00:00",
+      "previousPublishedAt": "2026-11-09T19:06:00+00:00",
+      "publishedAt": "2026-11-13T20:09:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
           "type": "moved",
-          "player": "Jonathan Lekkerimaki",
-          "from": "Útok 4",
+          "player": "Jake DeBrusk",
+          "from": "Útok 2",
           "to": "Útok 1"
         },
         {
-          "type": "moved",
-          "player": "Elias Pettersson",
-          "from": "Obrana 1",
-          "to": "Obrana 3"
-        },
-        {
-          "type": "moved",
-          "player": "Jake DeBrusk",
-          "from": "Útok 4",
+          "type": "added",
+          "player": "Filip Chytil",
           "to": "Útok 2"
         },
         {
           "type": "moved",
-          "player": "Paul Cotter",
-          "from": "Útok 4",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Arshdeep Bains",
+          "player": "Jonathan Lekkerimaki",
           "from": "Útok 1",
           "to": "Útok 2"
         },
         {
           "type": "moved",
-          "player": "Liam Ohgren",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Marco Rossi",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Drew O'Connor",
-          "from": "Útok 3",
-          "to": "Útok 4"
-        },
-        {
-          "type": "moved",
-          "player": "Max Sasson",
-          "from": "Útok 3",
-          "to": "Útok 4"
-        },
-        {
-          "type": "moved",
           "player": "Linus Karlsson",
-          "from": "Útok 2",
-          "to": "Útok 4"
+          "from": "Útok 4",
+          "to": "Útok 3"
         },
         {
           "type": "moved",
-          "player": "Zeev Buium",
-          "from": "Obrana 2",
-          "to": "Obrana 1"
+          "player": "Brendan Gallagher",
+          "from": "Útok 3",
+          "to": "Útok 4"
         },
         {
           "type": "added",
-          "player": "Guillaume Brisebois",
-          "to": "Obrana 2"
+          "player": "Tom Willander",
+          "to": "Obrana 3"
         },
         {
           "type": "removed",
-          "player": "Tom Willander",
+          "player": "Arshdeep Bains",
+          "from": "Útok 2"
+        },
+        {
+          "type": "removed",
+          "player": "Luke Schenn",
           "from": "Obrana 3"
         }
       ],
@@ -667,72 +635,30 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "blackhawks": {
-      "updatedAt": "2026-11-04T18:54:37.505373+00:00",
-      "previousPublishedAt": "2026-11-02T17:49:12.147000+00:00",
-      "publishedAt": "",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-13T20:30:03.930231+00:00",
+      "previousPublishedAt": "2026-11-12T17:40:00+00:00",
+      "publishedAt": "2026-11-13T20:09:36.747000+00:00",
+      "source": "https://www.nhl.com/news/winnipeg-jets-chicago-blackahwks-game-preview-november-14-2026",
       "events": [
         {
-          "type": "moved",
-          "player": "Tyler Bertuzzi",
-          "from": "Útok 2",
-          "to": "Útok 1"
-        },
-        {
-          "type": "moved",
-          "player": "Oliver Moore",
-          "from": "Útok 3",
+          "type": "added",
+          "player": "Patrick Kane",
           "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Frank Nazar",
-          "from": "Útok 3",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Ryan Donato",
-          "from": "Útok 1",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Cole Smith",
-          "from": "Útok 4",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Anton Frondell",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Teuvo Teravainen",
-          "from": "Útok 4",
-          "to": "Útok 3"
         },
         {
           "type": "added",
-          "player": "Dillon Boucher",
-          "to": "Útok 4"
-        },
-        {
-          "type": "added",
-          "player": "Jordan Greenway",
-          "to": "Útok 4"
+          "player": "Kevin Korchinski",
+          "to": "Obrana 2"
         },
         {
           "type": "removed",
-          "player": "Andrew Mangiapane",
+          "player": "Teuvo Teravainen",
           "from": "Útok 2"
         },
         {
           "type": "removed",
-          "player": "Patrick Kane",
-          "from": "Útok 3"
+          "player": "Ethan Del Mastro",
+          "from": "Obrana 2"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -956,34 +882,36 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "jets": {
-      "updatedAt": "2026-11-12T19:37:47.604283+00:00",
-      "previousPublishedAt": "2026-11-10T17:56:14.254000+00:00",
-      "publishedAt": "2026-11-12T18:41:28.341000+00:00",
-      "source": "https://www.nhl.com/news/winnipeg-jets-dallas-stars-game-preview-november-12-2026",
+      "updatedAt": "2026-11-13T20:30:03.930001+00:00",
+      "previousPublishedAt": "2026-11-12T18:41:28.341000+00:00",
+      "publishedAt": "2026-11-13T20:09:36.747000+00:00",
+      "source": "https://www.nhl.com/news/winnipeg-jets-chicago-blackahwks-game-preview-november-14-2026",
       "events": [
         {
-          "type": "moved",
-          "player": "Josh Morrissey",
-          "from": "Obrana 2",
-          "to": "Obrana 1"
+          "type": "added",
+          "player": "Nino Niederreiter",
+          "to": "Útok 4"
         },
         {
           "type": "moved",
+          "player": "Mario Ferraro",
+          "from": "Obrana 3",
+          "to": "Obrana 1"
+        },
+        {
+          "type": "added",
+          "player": "Haydn Fleury",
+          "to": "Obrana 3"
+        },
+        {
+          "type": "removed",
+          "player": "Isak Rosen",
+          "from": "Útok 4"
+        },
+        {
+          "type": "removed",
           "player": "Dylan DeMelo",
-          "from": "Obrana 2",
-          "to": "Obrana 1"
-        },
-        {
-          "type": "moved",
-          "player": "Dylan Samberg",
-          "from": "Obrana 1",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "moved",
-          "player": "Neal Pionk",
-          "from": "Obrana 1",
-          "to": "Obrana 2"
+          "from": "Obrana 1"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
