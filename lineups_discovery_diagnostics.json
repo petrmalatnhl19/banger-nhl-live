@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-13T19:33:33.673753+00:00",
-  "checked": 24,
-  "articlesFound": 0,
+  "generatedAt": "2026-11-13T20:29:58.802027+00:00",
+  "checked": 23,
+  "articlesFound": 1,
   "errors": [],
   "fixtures": [
     {
@@ -144,13 +144,12 @@
     },
     {
       "url": "https://www.nhl.com/news/new-york-rangers-vancouver-canucks-game-preview-november-13-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/vancouver-canucks-new-york-rangers-game-preview-november-13-2026",
-      "result": "no_complete_projection",
-      "teams": []
+      "result": "parsed",
+      "teams": [
+        "rangers",
+        "canucks"
+      ],
+      "coversBothTeams": true
     },
     {
       "url": "https://www.nhl.com/news/calgary-flames-los-angeles-kings-game-preview-november-14-2026",
@@ -213,6 +212,16 @@
       "teams": []
     },
     {
+      "url": "https://www.nhl.com/news/nashville-predators-san-jose-sharks-game-preview-november-15-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/san-jose-sharks-nashville-predators-game-preview-november-15-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
       "url": "https://www.nhl.com/news/vancouver-canucks-vegas-golden-knights-game-preview-november-15-2026",
       "result": "no_complete_projection",
       "teams": []
@@ -241,27 +250,17 @@
       "url": "https://www.nhl.com/news/utah-mammoth-san-jose-sharks-game-preview-november-14-2026",
       "result": "no_complete_projection",
       "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/buffalo-sabres-dallas-stars-game-preview-november-14-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/dallas-stars-buffalo-sabres-game-preview-november-14-2026",
-      "result": "no_complete_projection",
-      "teams": []
     }
   ],
   "note": "Upcoming games today through two days ahead; prioritize older sources and nearest games. A fixture is not proof a preview article exists.",
   "fixturesSelected": 12,
   "fixturesDeferred": 9,
   "rotation": {
-    "window": 1993998,
+    "window": 1994001,
     "fixed": 8,
     "rotating": 4,
     "remainingPool": 13,
-    "rotationStart": 11
+    "rotationStart": 10
   },
   "selectedFixtures": [
     {
@@ -306,6 +305,11 @@
     },
     {
       "date": "2026-11-15",
+      "away": "NSH",
+      "home": "SJS"
+    },
+    {
+      "date": "2026-11-15",
       "away": "VAN",
       "home": "VGK"
     },
@@ -318,11 +322,6 @@
       "date": "2026-11-14",
       "away": "SJS",
       "home": "UTA"
-    },
-    {
-      "date": "2026-11-14",
-      "away": "BUF",
-      "home": "DAL"
     }
   ]
 }
