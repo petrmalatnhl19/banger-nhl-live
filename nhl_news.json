@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-13T09:59:59.039979+00:00",
+  "updatedAt": "2026-11-13T11:00:24.901001+00:00",
   "articles": [
     {
       "title": "MONTREALSKÁ DVANÁCTKA",
@@ -16,8 +16,8 @@
       "language": "cs",
       "source": "NHL.com",
       "headline": "Čisté konto nestačilo. Vejmelka po nule prohrál v nájezdech",
-      "publishedAt": "2026-11-13T09:34:00+00:00",
-      "description": "Gólman Utahu zlikvidoval všech 22 střel Blues, penalty dotáhl do osmé série. Byl fantastický, chválil ho Trocheck"
+      "description": "Gólman Utahu zlikvidoval všech 22 střel Blues, penalty dotáhl do osmé série. Byl fantastický, chválil ho Trocheck",
+      "publishedAt": "2026-11-13T09:34:00+00:00"
     },
     {
       "title": "Boldy hattrickem položil na lopatky Toronto Útočník Minnesoty předvedl druhý třígólový večer v sezoně, Wild výhrou 5:2 bodovali podesáté za sebou 13. lis 2026",
@@ -74,6 +74,15 @@
       "publishedAt": "2026-11-12T16:57:38.301000+00:00"
     },
     {
+      "title": "Zažili sešup z top 10. Velké naděje NHL ale po návratu září 12. lis 2026",
+      "url": "https://www.nhl.com/cs/news/tri-utocnici-z-desitky-draftu-zari-ve-svycarsku",
+      "language": "cs",
+      "source": "NHL.com",
+      "headline": "Zažili sešup z top 10. Velké naděje NHL ale po návratu září",
+      "description": "Evropský led: Puljujärvi, Andersson a Zadina patřili na draftu do elitní společnosti. Po nezdarech v NHL ožili ve Švýcarsku",
+      "publishedAt": "2026-11-12T15:15:03.579000+00:00"
+    },
+    {
       "title": "FORČEK: Kučerovovi nejde o peníze, ale o ocenění Slavomír Lener ve 38. dílu podcastu o dění v NHL, českých juniorech i o tom, jak s Babcockem sháněl 300 doutníků 05. lis 2026",
       "url": "https://www.nhl.com/cs/news/podcast-forcek-se-slavomirem-lenerem-o-kucerovovi-i-juniorech",
       "language": "cs",
@@ -99,15 +108,6 @@
       "headline": "FORČEK: Smysl mi dává Indianapolis, říká Kotalík o expanzi NHL",
       "description": "36. díl podcastu NHL.com/cs a Livesportu s někdejším útočníkem o útoku McDavida na rekord i rozšiřování NHL",
       "publishedAt": "2026-10-22T15:20:25.443000+00:00"
-    },
-    {
-      "title": "Zažili sešup z top 10. Velké naděje NHL ale po návratu září 12. lis 2026",
-      "url": "https://www.nhl.com/cs/news/tri-utocnici-z-desitky-draftu-zari-ve-svycarsku",
-      "language": "cs",
-      "source": "NHL.com",
-      "headline": "Zažili sešup z top 10. Velké naděje NHL ale po návratu září",
-      "description": "Evropský led: Puljujärvi, Andersson a Zadina patřili na draftu do elitní společnosti. Po nezdarech v NHL ožili ve Švýcarsku",
-      "publishedAt": "2026-11-12T15:15:03.579000+00:00"
     },
     {
       "title": "Jako ryba ve vodě. 'Fishy' Aho se těší na velký zápas 12. lis 2026",
@@ -434,24 +434,6 @@
       "publishedAt": "2026-11-05T16:15:00+00:00"
     },
     {
-      "title": "Fantasy hockey top 200 player rankings for 2026-27 Nov 12, 2026",
-      "url": "https://www.nhl.com/news/topic/fantasy/nhl-fantasy-hockey-top-250-200-rankings-drafts-players-big-board-281505474",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Fantasy hockey top 200 player rankings for 2026-27",
-      "description": "Most valuable overall options for standard leagues, impact of Hellebuyck trade on goalie landscape",
-      "publishedAt": "2026-11-09T14:00:00+00:00"
-    },
-    {
-      "title": "Fantasy hockey top 100 forward rankings for 2026-27 Nov 12, 2026",
-      "url": "https://www.nhl.com/news/topic/Fantasy/nhl-fantasy-hockey-top-100-forward-rankings-pools-282775028",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Fantasy hockey top 100 forward rankings for 2026-27",
-      "description": "Most valuable options at position in standard leagues; new podcast episodes",
-      "publishedAt": "2026-11-09T14:00:00+00:00"
-    },
-    {
       "title": "Fantasy hockey top 50 defenseman rankings Nov 12, 2026",
       "url": "https://www.nhl.com/news/topic/Fantasy/nhl-fantasy-hockey-top-50-defenseman-rankings-pools-282830728",
       "language": "en",
@@ -468,6 +450,24 @@
       "headline": "Fantasy hockey top 25 goalie rankings for 2026-27",
       "description": "Most valuable options for standard leagues, tandems for 'NHL Fantasy Stars' game",
       "publishedAt": "2026-11-07T14:00:00+00:00"
+    },
+    {
+      "title": "Fantasy hockey top 200 player rankings for 2026-27 Nov 12, 2026",
+      "url": "https://www.nhl.com/news/topic/fantasy/nhl-fantasy-hockey-top-250-200-rankings-drafts-players-big-board-281505474",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Fantasy hockey top 200 player rankings for 2026-27",
+      "description": "Most valuable overall options for standard leagues, impact of Hellebuyck trade on goalie landscape",
+      "publishedAt": "2026-11-09T14:00:00+00:00"
+    },
+    {
+      "title": "Fantasy hockey top 100 forward rankings for 2026-27 Nov 12, 2026",
+      "url": "https://www.nhl.com/news/topic/Fantasy/nhl-fantasy-hockey-top-100-forward-rankings-pools-282775028",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Fantasy hockey top 100 forward rankings for 2026-27",
+      "description": "Most valuable options at position in standard leagues; new podcast episodes",
+      "publishedAt": "2026-11-09T14:00:00+00:00"
     },
     {
       "title": "NHL picks, props, fantasy projections for today Nov 12, 2026",
