@@ -767,34 +767,50 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "kraken": {
-      "updatedAt": "2026-11-11T17:33:54.737229+00:00",
-      "previousPublishedAt": "2026-11-06T22:34:00+00:00",
-      "publishedAt": "2026-11-11T14:36:12.512000+00:00",
-      "source": "https://www.nhl.com/news/carolina-hurricanes-seattle-kraken-game-preview-november-11-2026",
+      "updatedAt": "2026-11-13T15:23:17.267935+00:00",
+      "previousPublishedAt": "2026-11-12T18:38:00+00:00",
+      "publishedAt": "2026-11-12T18:38:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
           "type": "moved",
-          "player": "Jani Nyman",
-          "from": "Útok 4",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Mackie Samoskevich",
+          "player": "Kaapo Kakko",
           "from": "Útok 3",
           "to": "Útok 2"
         },
         {
           "type": "moved",
-          "player": "Matthew Wood",
-          "from": "Útok 2",
-          "to": "Útok 3"
+          "player": "Berkly Catton",
+          "from": "Útok 3",
+          "to": "Útok 2"
         },
         {
           "type": "moved",
           "player": "Frederick Gaudreau",
+          "from": "Útok 4",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Chandler Stephenson",
           "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "added",
+          "player": "Jagger Firkus",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Matthew Wood",
+          "from": "Útok 3",
           "to": "Útok 4"
+        },
+        {
+          "type": "removed",
+          "player": "Jani Nyman",
+          "from": "Útok 2"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -1018,19 +1034,47 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "hurricanes": {
-      "updatedAt": "2026-11-11T17:33:54.737118+00:00",
-      "previousPublishedAt": "2026-11-07T17:28:41.992000+00:00",
-      "publishedAt": "2026-11-11T14:36:12.512000+00:00",
-      "source": "https://www.nhl.com/news/carolina-hurricanes-seattle-kraken-game-preview-november-11-2026",
+      "updatedAt": "2026-11-13T15:23:17.268111+00:00",
+      "previousPublishedAt": "2026-11-12T18:38:00+00:00",
+      "publishedAt": "2026-11-12T18:38:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
           "type": "added",
-          "player": "Juuso Valimaki",
+          "player": "Jordan Staal",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Jordan Martinook",
+          "from": "Útok 4",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Taylor Hall",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Mark Jankowski",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
+          "player": "Alexander Nikishin",
           "to": "Obrana 3"
         },
         {
           "type": "removed",
-          "player": "Alexander Nikishin",
+          "player": "Eric Robinson",
+          "from": "Útok 4"
+        },
+        {
+          "type": "removed",
+          "player": "Juuso Valimaki",
           "from": "Obrana 3"
         }
       ],
