@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T13:08:33.697488+00:00",
+  "generatedAt": "2026-11-13T14:27:53.554502+00:00",
   "checked": 24,
   "articlesFound": 0,
   "errors": [],
@@ -213,42 +213,42 @@
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/vancouver-canucks-vegas-golden-knights-game-preview-november-15-2026",
+      "url": "https://www.nhl.com/news/new-jersey-devils-washington-capitals-game-preview-november-14-2026",
       "result": "no_complete_projection",
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/vegas-golden-knights-vancouver-canucks-game-preview-november-15-2026",
+      "url": "https://www.nhl.com/news/washington-capitals-new-jersey-devils-game-preview-november-14-2026",
       "result": "no_complete_projection",
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/florida-panthers-dallas-stars-game-preview-november-15-2026",
+      "url": "https://www.nhl.com/news/seattle-kraken-carolina-hurricanes-game-preview-november-14-2026",
       "result": "no_complete_projection",
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/dallas-stars-florida-panthers-game-preview-november-15-2026",
+      "url": "https://www.nhl.com/news/carolina-hurricanes-seattle-kraken-game-preview-november-14-2026",
       "result": "no_complete_projection",
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/san-jose-sharks-utah-mammoth-game-preview-november-14-2026",
+      "url": "https://www.nhl.com/news/winnipeg-jets-chicago-blackhawks-game-preview-november-14-2026",
       "result": "no_complete_projection",
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/utah-mammoth-san-jose-sharks-game-preview-november-14-2026",
+      "url": "https://www.nhl.com/news/chicago-blackhawks-winnipeg-jets-game-preview-november-14-2026",
       "result": "no_complete_projection",
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/buffalo-sabres-dallas-stars-game-preview-november-14-2026",
+      "url": "https://www.nhl.com/news/calgary-flames-anaheim-ducks-game-preview-november-15-2026",
       "result": "no_complete_projection",
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/dallas-stars-buffalo-sabres-game-preview-november-14-2026",
+      "url": "https://www.nhl.com/news/anaheim-ducks-calgary-flames-game-preview-november-15-2026",
       "result": "no_complete_projection",
       "teams": []
     }
@@ -257,11 +257,11 @@
   "fixturesSelected": 12,
   "fixturesDeferred": 9,
   "rotation": {
-    "window": 1993972,
+    "window": 1993977,
     "fixed": 8,
     "rotating": 4,
     "remainingPool": 13,
-    "rotationStart": 11
+    "rotationStart": 5
   },
   "selectedFixtures": [
     {
@@ -305,24 +305,24 @@
       "home": "CBJ"
     },
     {
-      "date": "2026-11-15",
-      "away": "VAN",
-      "home": "VGK"
-    },
-    {
-      "date": "2026-11-15",
-      "away": "FLA",
-      "home": "DAL"
+      "date": "2026-11-14",
+      "away": "NJD",
+      "home": "WSH"
     },
     {
       "date": "2026-11-14",
-      "away": "SJS",
-      "home": "UTA"
+      "away": "SEA",
+      "home": "CAR"
     },
     {
       "date": "2026-11-14",
-      "away": "BUF",
-      "home": "DAL"
+      "away": "WPG",
+      "home": "CHI"
+    },
+    {
+      "date": "2026-11-15",
+      "away": "CGY",
+      "home": "ANA"
     }
   ]
 }
