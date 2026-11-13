@@ -1,24 +1,34 @@
 {
-  "generatedAt": "2026-11-13T07:54:55.457384+00:00",
+  "generatedAt": "2026-11-13T08:59:44.068171+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 26,
+  "currentProjections": 21,
   "needsFreshProjection": [
     "canucks",
     "devils",
+    "ducks",
     "flames",
     "flyers",
+    "golden knights",
     "oilers",
-    "rangers"
+    "penguins",
+    "predators",
+    "rangers",
+    "sharks"
   ],
   "missing": [],
   "olderVerified": [
     "canucks",
     "devils",
+    "ducks",
     "flames",
     "flyers",
+    "golden knights",
     "oilers",
-    "rangers"
+    "penguins",
+    "predators",
+    "rangers",
+    "sharks"
   ],
   "manualSnapshots": [],
   "freshnessDefinition": "Publication within 36h; not a confirmed next-game lineup",
@@ -137,11 +147,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-11T20:32:25.821000+00:00",
       "source": "https://www.nhl.com/news/nashville-predators-anaheim-ducks-game-preview-november-11-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "flames": {
       "hasProjectedLines": true,
@@ -173,11 +183,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-11T20:27:25.470000+00:00",
       "source": "https://www.nhl.com/news/utah-mammoth-vegas-golden-knights-game-preview-november-11-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "hurricanes": {
       "hasProjectedLines": true,
@@ -307,11 +317,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-11T19:57:02.373000+00:00",
       "source": "https://www.nhl.com/news/pittsburgh-penguins-san-jose-sharks-game-preview-november-11-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "predators": {
       "hasProjectedLines": true,
@@ -319,11 +329,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-11T20:32:25.821000+00:00",
       "source": "https://www.nhl.com/news/nashville-predators-anaheim-ducks-game-preview-november-11-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "rangers": {
       "hasProjectedLines": true,
@@ -379,11 +389,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-11T19:57:02.373000+00:00",
       "source": "https://www.nhl.com/news/pittsburgh-penguins-san-jose-sharks-game-preview-november-11-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "stars": {
       "hasProjectedLines": true,
