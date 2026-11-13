@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T20:30:03.926223+00:00",
+  "generatedAt": "2026-11-13T21:26:10.708192+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -20,7 +20,7 @@
       "team": "CAR",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-13T20:09:00+00:00",
+      "candidatePublishedAt": "2026-11-13T20:35:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -65,7 +65,7 @@
       "team": "NYR",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-13T20:09:00+00:00",
+      "candidatePublishedAt": "2026-11-13T20:35:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -139,8 +139,8 @@
     "jets": {
       "team": "WPG",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/winnipeg-jets-chicago-blackahwks-game-preview-november-14-2026",
-      "candidatePublishedAt": "2026-11-13T20:09:36.747000+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-13T20:35:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -155,7 +155,7 @@
       "team": "VAN",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-13T20:09:00+00:00",
+      "candidatePublishedAt": "2026-11-13T20:35:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
