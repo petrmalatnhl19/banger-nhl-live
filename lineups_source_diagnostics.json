@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-14T20:40:53.447273+00:00",
+  "generatedAt": "2026-11-14T21:23:48.337482+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-14T20:11:00+00:00",
+      "candidatePublishedAt": "2026-11-14T20:51:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -19,8 +19,8 @@
     "hurricanes": {
       "team": "CAR",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-14T20:11:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/seattle-kraken-carolina-hurricanes-game-preview-november-14-2026",
+      "candidatePublishedAt": "2026-11-13T15:30:49.680000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -34,8 +34,8 @@
     "kings": {
       "team": "LAK",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/calgary-flames-los-angeles-kings-game-preview-november-14-2026",
-      "candidatePublishedAt": "2026-11-14T20:12:14.173000+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-14T20:51:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -49,36 +49,17 @@
     "islanders": {
       "team": "NYI",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/new-york-islanders-los-angeles-kings-game-preview-november-12-2026",
-      "candidatePublishedAt": "2026-11-12T20:03:12.475000+00:00",
-      "candidateForwardLines": 3,
+      "candidateSource": "https://www.nhl.com/news/new-york-islanders-anaheim-ducks-game-preview-november-14-2026",
+      "candidatePublishedAt": "2026-11-14T20:51:47.249000+00:00",
+      "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
-      "rosterValidation": "insufficient_position_matched_lines",
+      "rosterValidation": "passed",
       "roleMismatches": [],
-      "rejectedLines": [
-        {
-          "group": "forwards",
-          "line": 3,
-          "players": [
-            "Kyle MacLean"
-          ],
-          "sourceLine": [
-            "Matias Maccelli",
-            "Kyle MacLean",
-            "Mitchell Chaffee"
-          ]
-        }
-      ],
-      "rejectedPlayerReasons": [
-        {
-          "name": "Kyle MacLean",
-          "expectedRole": "forwards",
-          "reason": "not_in_current_roster"
-        }
-      ],
-      "validatedForwardLines": 2,
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
       "validatedDefensePairs": 3,
-      "accepted": false
+      "accepted": true
     },
     "rangers": {
       "team": "NYR",
@@ -117,7 +98,7 @@
       "team": "OTT",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-14T20:11:00+00:00",
+      "candidatePublishedAt": "2026-11-14T20:51:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "insufficient_position_matched_lines",
@@ -168,7 +149,7 @@
       "team": "SJS",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-14T20:11:00+00:00",
+      "candidatePublishedAt": "2026-11-14T20:51:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -183,7 +164,7 @@
       "team": "WPG",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-14T20:11:00+00:00",
+      "candidatePublishedAt": "2026-11-14T20:51:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -213,7 +194,7 @@
       "team": "TBL",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-14T20:11:00+00:00",
+      "candidatePublishedAt": "2026-11-14T20:51:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -229,7 +210,7 @@
       "team": "UTA",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-14T20:11:00+00:00",
+      "candidatePublishedAt": "2026-11-14T20:51:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -285,7 +266,7 @@
       "team": "DET",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-14T20:11:00+00:00",
+      "candidatePublishedAt": "2026-11-14T20:51:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -300,7 +281,7 @@
       "team": "DAL",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-14T20:11:00+00:00",
+      "candidatePublishedAt": "2026-11-14T20:51:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",

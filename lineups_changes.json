@@ -559,61 +559,62 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "ducks": {
-      "updatedAt": "2026-11-11T22:22:24.925589+00:00",
-      "previousPublishedAt": "2026-11-08T17:06:43.294000+00:00",
-      "publishedAt": "2026-11-11T20:32:25.821000+00:00",
-      "source": "https://www.nhl.com/news/nashville-predators-anaheim-ducks-game-preview-november-11-2026",
+      "updatedAt": "2026-11-14T21:23:48.341880+00:00",
+      "previousPublishedAt": "2026-11-11T20:32:25.821000+00:00",
+      "publishedAt": "2026-11-14T20:51:47.249000+00:00",
+      "source": "https://www.nhl.com/news/new-york-islanders-anaheim-ducks-game-preview-november-14-2026",
       "events": [
         {
-          "type": "added",
-          "player": "Tim Washe",
-          "to": "Útok 3"
-        },
-        {
-          "type": "added",
+          "type": "moved",
           "player": "Troy Terry",
-          "to": "Útok 3"
+          "from": "Útok 3",
+          "to": "Útok 1"
         },
         {
           "type": "moved",
           "player": "Jeff Malott",
-          "from": "Útok 3",
-          "to": "Útok 4"
+          "from": "Útok 4",
+          "to": "Útok 3"
         },
         {
           "type": "moved",
-          "player": "Roger McQueen",
+          "player": "Alex Killorn",
+          "from": "Útok 1",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Nikita Nesterenko",
           "from": "Útok 3",
           "to": "Útok 4"
         },
         {
           "type": "added",
-          "player": "Sam Colangelo",
-          "to": "Útok 4"
-        },
-        {
-          "type": "moved",
-          "player": "Pavel Mintyukov",
-          "from": "Obrana 3",
+          "player": "Tyson Hinds",
           "to": "Obrana 2"
-        },
-        {
-          "type": "moved",
-          "player": "Noah Warren",
-          "from": "Obrana 3",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "moved",
-          "player": "Travis Mitchell",
-          "from": "Obrana 2",
-          "to": "Obrana 3"
         },
         {
           "type": "moved",
           "player": "Tristan Luneau",
+          "from": "Obrana 3",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "moved",
+          "player": "Pavel Mintyukov",
           "from": "Obrana 2",
           "to": "Obrana 3"
+        },
+        {
+          "type": "moved",
+          "player": "Noah Warren",
+          "from": "Obrana 2",
+          "to": "Obrana 3"
+        },
+        {
+          "type": "removed",
+          "player": "Travis Mitchell",
+          "from": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

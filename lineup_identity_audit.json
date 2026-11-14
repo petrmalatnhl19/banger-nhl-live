@@ -1,16 +1,5 @@
 {
   "teams": {
-    "islanders": {
-      "players": [
-        {
-          "sourceName": "Kyle MacLean",
-          "expectedRole": "forwards",
-          "sameSurnameInRoster": [],
-          "classification": "not_on_current_roster",
-          "automaticApproval": false
-        }
-      ]
-    },
     "rangers": {
       "players": [
         {
