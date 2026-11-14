@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       iterations:
-        description: 'Number of samples (1-120), five minutes apart'
+        description: 'Number of samples (1-18), five minutes apart'
         required: false
         default: '12'
 permissions:
