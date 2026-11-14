@@ -69,7 +69,8 @@ const { chromium } = require("playwright");
     assert.equal((await read("boxscore")).playerByGameStats.awayTeam.forwards[0].goals, 1);
     assert.deepEqual([counters.game, counters.boxscore], [1, 1], "cache hit must avoid duplicate API calls");
 
-    await page.clock.setFixedTime(new Date("2026-11-14T23:30:09Z")); // 9 seconds later
+    await page.clock.fastForward(9000); // advance the installed browser clock by 9 seconds
+    console.log("cache diagnostic", await page.evaluate(() => ({ now: Date.now(), entries: [...bangerGameDetailCache.entries()].map(([key, value]) => ({ kind: key.includes("kind=game&") ? "game" : "boxscore", expires: value.expires, phase: value.data.gameState })) })));
     const finalLanding = await read("game");
     const finalStats = await read("boxscore");
     assert.equal(finalLanding.gameState, "FINAL");
@@ -78,12 +79,12 @@ const { chromium } = require("playwright");
     assert.deepEqual([counters.game, counters.boxscore], [2, 2], "expired LIVE caches must refetch");
 
     // FINAL landing cache is 120s; boxscore with FINAL is also 120s by current TTL rules.
-    await page.clock.setFixedTime(new Date("2026-11-14T23:31:00Z"));
+    await page.clock.fastForward(51000); // 60 seconds after initial cache creation
     assert.equal((await read("game")).gameState, "FINAL");
     assert.equal((await read("boxscore")).gameState, "FINAL");
     assert.deepEqual([counters.game, counters.boxscore], [2, 2], "FINAL cache must remain valid before 120s");
 
-    await page.clock.setFixedTime(new Date("2026-11-14T23:32:10Z"));
+    await page.clock.fastForward(70000); // 130 seconds after initial cache creation
     await read("game");
     await read("boxscore");
     assert.deepEqual([counters.game, counters.boxscore], [3, 3], "FINAL cache must expire after 120s");
