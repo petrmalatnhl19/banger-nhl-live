@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-14T15:59:19.869508+00:00",
-  "checked": 24,
-  "articlesFound": 0,
+  "generatedAt": "2026-11-14T16:43:26.665919+00:00",
+  "checked": 23,
+  "articlesFound": 1,
   "errors": [],
   "fixtures": [
     {
@@ -194,13 +194,12 @@
     },
     {
       "url": "https://www.nhl.com/news/ottawa-senators-pittsburgh-penguins-game-preview-november-14-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/pittsburgh-penguins-ottawa-senators-game-preview-november-14-2026",
-      "result": "no_complete_projection",
-      "teams": []
+      "result": "parsed",
+      "teams": [
+        "senators",
+        "penguins"
+      ],
+      "coversBothTeams": true
     },
     {
       "url": "https://www.nhl.com/news/philadelphia-flyers-columbus-blue-jackets-game-preview-november-14-2026",
@@ -209,6 +208,16 @@
     },
     {
       "url": "https://www.nhl.com/news/columbus-blue-jackets-philadelphia-flyers-game-preview-november-14-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/nashville-predators-san-jose-sharks-game-preview-november-15-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/san-jose-sharks-nashville-predators-game-preview-november-15-2026",
       "result": "no_complete_projection",
       "teams": []
     },
@@ -241,27 +250,17 @@
       "url": "https://www.nhl.com/news/utah-mammoth-vancouver-canucks-game-preview-november-16-2026",
       "result": "no_complete_projection",
       "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/san-jose-sharks-utah-mammoth-game-preview-november-14-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/utah-mammoth-san-jose-sharks-game-preview-november-14-2026",
-      "result": "no_complete_projection",
-      "teams": []
     }
   ],
   "note": "Upcoming games today through two days ahead; prioritize older sources and nearest games. A fixture is not proof a preview article exists.",
   "fixturesSelected": 12,
   "fixturesDeferred": 9,
   "rotation": {
-    "window": 1994079,
+    "window": 1994082,
     "fixed": 8,
     "rotating": 4,
     "remainingPool": 13,
-    "rotationStart": 10
+    "rotationStart": 9
   },
   "selectedFixtures": [
     {
@@ -306,6 +305,11 @@
     },
     {
       "date": "2026-11-15",
+      "away": "NSH",
+      "home": "SJS"
+    },
+    {
+      "date": "2026-11-15",
       "away": "VAN",
       "home": "VGK"
     },
@@ -317,11 +321,6 @@
     {
       "date": "2026-11-16",
       "away": "VAN",
-      "home": "UTA"
-    },
-    {
-      "date": "2026-11-14",
-      "away": "SJS",
       "home": "UTA"
     }
   ]

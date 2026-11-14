@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-14T15:59:24.875301+00:00",
+  "fetchedAt": "2026-11-14T16:43:29.542544+00:00",
   "teams": {
     "kraken": {
       "name": "Kraken",
@@ -47,7 +47,7 @@
       "injured": "Jacob Melanson (upper body), Ryan Lindgren (upper body), Jared McCann (lower body), Curtis Douglas (upper body)",
       "scratched": "Cale Fleury, Jani Nyman, Logan Morrison, Nikke Kokko",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T15:35:00+00:00"
+      "publishedAt": "2026-11-14T16:31:00+00:00"
     },
     "hurricanes": {
       "name": "Hurricanes",
@@ -94,7 +94,7 @@
       "injured": "",
       "scratched": "Eric Robinson, Juuso Valimaki, Mike Reilly, Nicolas Deslauriers, Cayden Primeau",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T15:35:00+00:00"
+      "publishedAt": "2026-11-14T16:31:00+00:00"
     },
     "jets": {
       "name": "Jets",
@@ -141,7 +141,7 @@
       "injured": "Nick Bjugstad (undisclosed), Dylan DeMelo (lower body), Isak Rosen (undisclosed)",
       "scratched": "Clay Stevenson",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T15:35:00+00:00"
+      "publishedAt": "2026-11-14T16:31:00+00:00"
     },
     "blackhawks": {
       "name": "Blackhawks",
@@ -184,7 +184,54 @@
       "injured": "Bowen Byram (upper body)",
       "scratched": "Dillon Boucher, Ethan Del Mastro, Teuvo Teravainen",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T15:35:00+00:00"
+      "publishedAt": "2026-11-14T16:31:00+00:00"
+    },
+    "penguins": {
+      "name": "Penguins",
+      "forwards": [
+        [
+          "Rickard Rakell",
+          "Sidney Crosby",
+          "Evgeni Malkin"
+        ],
+        [
+          "Tommy Novak",
+          "Ben Kindel",
+          "Egor Chinakhov"
+        ],
+        [
+          "Nick Robertson",
+          "Hendrix Lapierre",
+          "Justin Brazeau"
+        ],
+        [
+          "Connor Dewar",
+          "Blake Lizotte",
+          "Rutger McGroarty"
+        ]
+      ],
+      "defense": [
+        [
+          "Spencer Stastney",
+          "Erik Karlsson"
+        ],
+        [
+          "Samuel Girard",
+          "Kaedan Korczak"
+        ],
+        [
+          "Declan Carlile",
+          "Kris Letang"
+        ]
+      ],
+      "goalies": [
+        "Sergei Murashov",
+        "Arturs Silovs"
+      ],
+      "injured": "Ryan Graves (knee), Trevor van Riemsdyk (lower body), Bryan Rust (lower body), Elmer Soderblom (upper body)",
+      "scratched": "Andrei Kuzmenko, Ville Koivunen",
+      "source": "https://www.nhl.com/news/ottawa-senators-pittsburgh-penguins-game-preview-november-14-2026",
+      "publishedAt": "2026-11-14T16:32:26.653000+00:00"
     },
     "predators": {
       "name": "Predators",
@@ -639,53 +686,6 @@
       ],
       "injured": "Zachary L'Heureux (upper body), Josh Manson (lower body)",
       "scratched": "Alex Gagne",
-      "source": "https://www.nhl.com/news/colorado-avalanche-ottawa-senators-game-preview-november-12-2026",
-      "publishedAt": "2026-11-12T18:06:47.983000+00:00"
-    },
-    "senators": {
-      "name": "Senators",
-      "forwards": [
-        [
-          "Fabian Zetterlund",
-          "Tim Stutzle",
-          "Dylan Cozens"
-        ],
-        [
-          "Philip Tomasino",
-          "Shane Pinto",
-          "Drake Batherson"
-        ],
-        [
-          "Michael Amadio",
-          "Ridly Greig",
-          "Claude Giroux"
-        ],
-        [
-          "Samuel Blais",
-          "Stephen Halliday",
-          "Hayden Hodgson"
-        ]
-      ],
-      "defense": [
-        [
-          "Jake Sanderson",
-          "Artem Zub"
-        ],
-        [
-          "Thomas Chabot",
-          "Jordan Spence"
-        ],
-        [
-          "Tyler Kleven",
-          "Nikolas Matinpalo"
-        ]
-      ],
-      "goalies": [
-        "Linus Ullmark",
-        "Samuel Ersson"
-      ],
-      "injured": "Warren Foegele (lower body), William Eklund (ankle), Andre Burakovsky (lower body), Nick Cousins (upper body)",
-      "scratched": "Carter Yakemchuk, Jackson Parsons",
       "source": "https://www.nhl.com/news/colorado-avalanche-ottawa-senators-game-preview-november-12-2026",
       "publishedAt": "2026-11-12T18:06:47.983000+00:00"
     },
@@ -1205,53 +1205,6 @@
       "scratched": "Tyson Hinds, Frank Vatrano, Lukas Dostal",
       "source": "https://www.nhl.com/news/nashville-predators-anaheim-ducks-game-preview-november-11-2026",
       "publishedAt": "2026-11-11T20:32:25.821000+00:00"
-    },
-    "penguins": {
-      "name": "Penguins",
-      "forwards": [
-        [
-          "Rickard Rakell",
-          "Sidney Crosby",
-          "Evgeni Malkin"
-        ],
-        [
-          "Tommy Novak",
-          "Ben Kindel",
-          "Egor Chinakhov"
-        ],
-        [
-          "Ville Koivunen",
-          "Hendrix Lapierre",
-          "Justin Brazeau"
-        ],
-        [
-          "Connor Dewar",
-          "Blake Lizotte",
-          "Nick Robertson"
-        ]
-      ],
-      "defense": [
-        [
-          "Spencer Stastney",
-          "Erik Karlsson"
-        ],
-        [
-          "Samuel Girard",
-          "Kaedan Korczak"
-        ],
-        [
-          "Declan Carlile",
-          "Kris Letang"
-        ]
-      ],
-      "goalies": [
-        "Sergei Murashov",
-        "Arturs Silovs"
-      ],
-      "injured": "Ryan Graves (knee), Trevor van Riemsdyk (lower body), Bryan Rust (lower body), Elmer Soderblom (upper body)",
-      "scratched": "Jake Livanavage, Ilya Solovyov, Andrei Kuzmenko",
-      "source": "https://www.nhl.com/news/pittsburgh-penguins-san-jose-sharks-game-preview-november-11-2026",
-      "publishedAt": "2026-11-11T19:57:02.373000+00:00"
     },
     "sharks": {
       "name": "Sharks",

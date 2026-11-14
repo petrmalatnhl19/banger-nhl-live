@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-14T15:59:28.359944+00:00",
-  "rostersUpdatedAt": "2026-11-14T15:58:50.535698+00:00",
+  "updatedAt": "2026-11-14T16:43:34.190694+00:00",
+  "rostersUpdatedAt": "2026-11-14T16:42:52.849463+00:00",
   "projectionDate": "2026-11-14",
   "teamCount": 32,
   "goalieCount": 74,
@@ -43,7 +43,7 @@
       "team": "CBJ",
       "teamKey": "blue jackets",
       "playerId": 8482982,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-14",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -143,17 +143,17 @@
       "team": "WSH",
       "teamKey": "capitals",
       "playerId": 8479292,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Logan Thompson",
       "team": "WSH",
       "teamKey": "capitals",
       "playerId": 8480313,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-14",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Jake Allen",
@@ -217,17 +217,17 @@
       "team": "PHI",
       "teamKey": "flyers",
       "playerId": 8478435,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-14",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Joseph Woll",
       "team": "PHI",
       "teamKey": "flyers",
       "playerId": 8479361,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Carter Hart",
@@ -258,7 +258,7 @@
       "team": "CAR",
       "teamKey": "hurricanes",
       "playerId": 8481611,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-14",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -392,7 +392,7 @@
       "team": "TOR",
       "teamKey": "maple leafs",
       "playerId": 8476932,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-14",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -426,7 +426,7 @@
       "team": "FLA",
       "teamKey": "panthers",
       "playerId": 8474593,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-14",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -541,17 +541,17 @@
       "team": "OTT",
       "teamKey": "senators",
       "playerId": 8481035,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-14",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Linus Ullmark",
       "team": "OTT",
       "teamKey": "senators",
       "playerId": 8476999,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Yaroslav Askarov",
