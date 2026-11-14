@@ -118,3 +118,5 @@ jobs:
         run: node .github/scripts/browser-smoke.cjs
       - name: Test mobile tab reload and browser Back in Chromium
         run: node .github/scripts/browser-navigation-reload.cjs
+      - name: Test offline mobile tab navigation and reconnect in Chromium
+        run: node .github/scripts/browser-offline-navigation.cjs
