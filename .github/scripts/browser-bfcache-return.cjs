@@ -20,6 +20,27 @@ const fixture = (score) => ({ games: [{
     viewport: { width: 390, height: 844 },
     isMobile: true, hasTouch: true, timezoneId: "Europe/Prague"
   });
+  // Control experiment: real same-origin documents, no Playwright routing or API mocks.
+  // If this fails, the CI Chromium environment itself cannot exercise BFCache.
+  const clean = await context.newPage();
+  try {
+    await clean.goto(BASE + ".github/fixtures/stab-bfcache-probe.html", { waitUntil: "load" });
+    const identity = await clean.evaluate(() => window.__bfcacheProbe.identity);
+    await clean.goto(BASE + ".github/fixtures/stab-bfcache-away.html", { waitUntil: "load" });
+    await clean.goBack({ waitUntil: "load", timeout: 15000 });
+    const probe = await clean.evaluate(() => ({
+      shows: window.__bfcacheProbe?.shows || [],
+      identity: window.__bfcacheProbe?.identity,
+      navigation: performance.getEntriesByType("navigation").map(e => ({
+        type: e.type, notRestoredReasons: e.notRestoredReasons || null
+      }))
+    }));
+    console.log("STAB-05.13 UNMOCKED BFCache control:", JSON.stringify(probe));
+    assert(probe.shows.includes(true) && probe.identity === identity,
+      "Unmocked BFCache control failed; Chromium runner cannot restore even simple static pages");
+  } finally {
+    await clean.close();
+  }
   const page = await context.newPage();
   const errors = [];
   let currentScore = 1;
