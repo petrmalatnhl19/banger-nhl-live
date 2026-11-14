@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-14T04:55:24.155590+00:00",
-  "rostersUpdatedAt": "2026-11-14T04:54:49.500536+00:00",
+  "updatedAt": "2026-11-14T05:52:49.547518+00:00",
+  "rostersUpdatedAt": "2026-11-14T05:52:20.036230+00:00",
   "projectionDate": "2026-11-14",
   "teamCount": 32,
   "goalieCount": 74,
@@ -294,9 +294,8 @@
       "team": "WPG",
       "teamKey": "jets",
       "playerId": 8479973,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-14",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Clay Stevenson",
@@ -353,8 +352,9 @@
       "team": "TBL",
       "teamKey": "lightning",
       "playerId": 8476883,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Sebastian Cossa",
@@ -386,8 +386,9 @@
       "team": "TOR",
       "teamKey": "maple leafs",
       "playerId": 8475683,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Anthony Stolarz",
@@ -427,8 +428,9 @@
       "team": "FLA",
       "teamKey": "panthers",
       "playerId": 8474593,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Akira Schmid",
@@ -525,8 +527,9 @@
       "team": "BUF",
       "teamKey": "sabres",
       "playerId": 8480045,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Alex Lyon",
