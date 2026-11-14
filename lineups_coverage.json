@@ -1,11 +1,12 @@
 {
-  "generatedAt": "2026-11-14T06:59:28.085171+00:00",
+  "generatedAt": "2026-11-14T08:03:28.638222+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 12,
+  "currentProjections": 8,
   "needsFreshProjection": [
     "avalanche",
     "blue jackets",
+    "blues",
     "bruins",
     "canadiens",
     "capitals",
@@ -13,7 +14,10 @@
     "ducks",
     "flames",
     "flyers",
+    "islanders",
+    "kings",
     "lightning",
+    "mammoth",
     "maple leafs",
     "oilers",
     "panthers",
@@ -29,6 +33,7 @@
   "olderVerified": [
     "avalanche",
     "blue jackets",
+    "blues",
     "bruins",
     "canadiens",
     "capitals",
@@ -36,7 +41,10 @@
     "ducks",
     "flames",
     "flyers",
+    "islanders",
+    "kings",
     "lightning",
+    "mammoth",
     "maple leafs",
     "oilers",
     "panthers",
@@ -93,11 +101,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-12T19:32:09.831000+00:00",
       "source": "https://www.nhl.com/news/st-louis-blues-utah-mammoth-game-preview-november-12-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "bruins": {
       "hasProjectedLines": true,
@@ -225,11 +233,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-12T20:03:12.475000+00:00",
       "source": "https://www.nhl.com/news/new-york-islanders-los-angeles-kings-game-preview-november-12-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "jets": {
       "hasProjectedLines": true,
@@ -249,11 +257,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-12T20:03:12.475000+00:00",
       "source": "https://www.nhl.com/news/new-york-islanders-los-angeles-kings-game-preview-november-12-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "kraken": {
       "hasProjectedLines": true,
@@ -286,11 +294,11 @@
         "archive",
         "manual"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-12T19:32:09.831000+00:00",
       "source": "https://www.nhl.com/news/st-louis-blues-utah-mammoth-game-preview-november-12-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "maple leafs": {
       "hasProjectedLines": true,
