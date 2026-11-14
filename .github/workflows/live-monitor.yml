@@ -1,0 +1,36 @@
+name: STAB-05.14 NHL LIVE monitor
+on:
+  schedule:
+    # Daily 01:00 UTC, 60-minute sampling window. Manual runs can extend coverage.
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+    inputs:
+      iterations:
+        description: 'Number of samples (1-18), five minutes apart'
+        required: false
+        default: '12'
+permissions:
+  contents: read
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 110
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Record NHL LIVE scores, state, statistics, outages and latency
+        env:
+          MONITOR_ITERATIONS: ${{ github.event.inputs.iterations || '12' }}
+          MONITOR_INTERVAL_MS: '300000'
+          MONITOR_TIMEOUT_MS: '12000'
+        run: node .github/scripts/live-monitor.cjs
+      - name: Publish monitoring evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stab-05-14-live-monitor-${{ github.run_id }}
+          path: artifacts/stab-05-14/
+          retention-days: 30
+          if-no-files-found: warn
