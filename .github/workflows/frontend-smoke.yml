@@ -128,3 +128,5 @@ jobs:
         run: node .github/scripts/browser-live-final-cache.cjs
       - name: Test concurrent NHL requests and stale match details in Chromium
         run: node .github/scripts/browser-concurrent-details.cjs
+      - name: Test rapid date switching and stale score responses in Chromium
+        run: node .github/scripts/browser-date-races.cjs
