@@ -1956,7 +1956,7 @@ const cacheable=kind==='game'||kind==='boxscore';
 const cached=cacheable?bangerGameDetailCache.get(requestUrl):null;
 if(cached&&cached.expires>Date.now())return cached.data;
 if(bangerNhlFeedInflight.has(requestUrl))return bangerNhlFeedInflight.get(requestUrl);
-const request=(async()=>{const r=await fetch(requestUrl,{headers:{"apikey":"sb_publishable_SfeHMIvUkYTuD3jCrWub8w_fPIY0B-G"}});if(!r.ok)throw Error("Supabase NHL feed HTTP "+r.status);const data=await r.json();if(cacheable)bangerRememberGameDetail(requestUrl,kind,data);return data})();
+const request=(async()=>{const timeoutSignal=typeof AbortSignal!=="undefined"&&typeof AbortSignal.timeout==="function"?AbortSignal.timeout(12000):undefined;try{const r=await fetch(requestUrl,{headers:{"apikey":"sb_publishable_SfeHMIvUkYTuD3jCrWub8w_fPIY0B-G"},...(timeoutSignal?{signal:timeoutSignal}:{})});if(!r.ok)throw Error("Supabase NHL feed HTTP "+r.status);const data=await r.json();if(cacheable)bangerRememberGameDetail(requestUrl,kind,data);return data}catch(e){if(timeoutSignal?.aborted)throw Error("NHL feed timeout (12 s)");throw e}})();
 bangerNhlFeedInflight.set(requestUrl,request);
 try{return await request}catch(e){if(cached&&Date.now()-cached.expires<15000)return cached.data;throw e}finally{if(bangerNhlFeedInflight.get(requestUrl)===request)bangerNhlFeedInflight.delete(requestUrl)}
 }
