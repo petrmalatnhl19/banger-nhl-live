@@ -15,7 +15,7 @@ const fixture = (score) => ({ games: [{
 }] });
 
 (async () => {
-  const browser = await chromium.launch({ headless: true });
+  const browser = await chromium.launch({ headless: true, args: ["--enable-features=BackForwardCache"] });
   const context = await browser.newContext({
     viewport: { width: 390, height: 844 },
     isMobile: true, hasTouch: true, timezoneId: "Europe/Prague"
@@ -26,7 +26,6 @@ const fixture = (score) => ({ games: [{
   const requestedDates = [];
   page.on("pageerror", e => errors.push(e.message));
   try {
-    await page.clock.install({ time: new Date("2026-11-14T12:00:00Z") });
     await page.route("**/functions/v1/nhl-feed?*", async route => {
       const url = new URL(route.request().url());
       const kind = url.searchParams.get("kind");
@@ -85,6 +84,12 @@ const fixture = (score) => ({ games: [{
     assert.equal(await page.locator("#liveArena").evaluate(el => el.classList.contains("hidden")), true);
 
     const pageShows = await page.evaluate(() => window.__stab0513PageShows || []);
+    const navigation = await page.evaluate(() => ({
+      entries: performance.getEntriesByType("navigation").map(e => ({ type: e.type, activationStart: e.activationStart })),
+      pageshow: window.__stab0513PageShows || [],
+      visibility: document.visibilityState
+    }));
+    console.log("STAB-05.13 BFCache diagnostics:", JSON.stringify(navigation));
     assert(pageShows.some(e => e.persisted === true),
       "BFCache was not exercised: expected pageshow.persisted=true; inspect Chromium eligibility before changing app logic");
 
