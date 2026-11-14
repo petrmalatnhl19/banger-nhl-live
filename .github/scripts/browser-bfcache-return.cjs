@@ -22,7 +22,7 @@ const fixture = (score) => ({ games: [{
   });
   context.setDefaultTimeout(8000);
   context.setDefaultNavigationTimeout(8000);
-  console.log("STAB-05.13: starting unmocked BFCache control");
+  console.log("STAB-05.13: starting app history regression");
   const page = await context.newPage();
   const errors = [];
   let currentScore = 1;
@@ -102,10 +102,18 @@ const fixture = (score) => ({ games: [{
 
     // A history return must show fresh scores whether it reloads or restores. App must refresh
     // its selected day's NHL data; merely retaining old cards is a regression.
-    await page.waitForFunction(() =>
-      document.querySelector("#content")?.textContent.includes("4") &&
-      !document.querySelector("#status")?.textContent.includes("Načítám"),
-      null, { timeout: 10000 });
+    try {
+      await page.waitForFunction(() =>
+        document.querySelector("#content")?.textContent.includes("4") &&
+        !document.querySelector("#status")?.textContent.includes("Načítám"),
+        null, { timeout: 10000 });
+    } catch (error) {
+      console.error("STAB-05.13 return diagnostics:", JSON.stringify({
+        requestedDates, initialRequestCount, currentScore,
+        state: await page.evaluate(() => ({tab:S.tab,date:S.date,status:document.querySelector("#status")?.textContent,content:document.querySelector("#content")?.textContent.slice(0,500)}))
+      }));
+      throw error;
+    }
     assert(requestedDates.filter(d => d === DAY).length > initialRequestCount,
       "return must trigger a new score API request for the selected date");
     assert.equal(await page.locator("#content .grid > article").count(), 1,
