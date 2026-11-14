@@ -104,7 +104,7 @@ const fixture = (score) => ({ games: [{
     // its selected day's NHL data; merely retaining old cards is a regression.
     try {
       await page.waitForFunction(() =>
-        document.querySelector("#content")?.textContent.includes("4") &&
+        document.querySelector('[data-game-score="851316"]')?.textContent.trim() === "4 : 0" &&
         !document.querySelector("#status")?.textContent.includes("Načítám"),
         null, { timeout: 10000 });
     } catch (error) {
