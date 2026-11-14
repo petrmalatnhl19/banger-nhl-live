@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-14T19:10:13.122785+00:00",
+  "checkedAt": "2026-11-14T20:40:55.209321+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "candidateCount": 94,
   "matchedCount": 90,
@@ -159,7 +159,7 @@
       "goalie": "Dustin Wolf",
       "opponent": "LAK",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-14",
       "gameId": 2026020325,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -199,7 +199,7 @@
       "goalie": "Spencer Knight",
       "opponent": "WPG",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-14",
       "gameId": 2026020312,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -506,7 +506,7 @@
     },
     {
       "team": "NYI",
-      "goalie": "Ilya Sorokin",
+      "goalie": "Semyon Varlamov",
       "opponent": "ANA",
       "venue": "away",
       "status": "projected",
@@ -589,7 +589,7 @@
       "goalie": "Dan Vladar",
       "opponent": "EDM",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-15",
       "gameId": 2026020326,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -849,7 +849,7 @@
       "goalie": "Stuart Skinner",
       "opponent": "CHI",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-14",
       "gameId": 2026020312,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
