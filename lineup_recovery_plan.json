@@ -3,7 +3,7 @@
     "lineup_core_report.json",
     "lineup_rejections_report.json"
   ],
-  "incompleteTeams": 7,
+  "incompleteTeams": 8,
   "teams": [
     {
       "team": "blackhawks",
@@ -12,7 +12,7 @@
       "missingForwardLines": 0,
       "missingDefensePairs": 1,
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T17:03:00+00:00",
+      "publishedAt": "2026-11-14T18:01:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
@@ -28,15 +28,26 @@
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
     {
-      "team": "devils",
-      "status": "missing_team",
-      "reason": "no_accepted_projection",
-      "missingForwardLines": 4,
-      "missingDefensePairs": 3,
-      "source": null,
-      "publishedAt": null,
+      "team": "capitals",
+      "status": "incomplete_projection",
+      "reason": "incomplete_source_or_no_validated_replacement",
+      "missingForwardLines": 1,
+      "missingDefensePairs": 0,
+      "source": "https://www.nhl.com/news/new-jersey-devils-washington-capitals-game-preview-november-14-2026",
+      "publishedAt": "2026-11-14T18:01:55.213000+00:00",
       "rejectedLines": [],
-      "nextAction": "Find a current NHL.com projection and validate all players."
+      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
+    },
+    {
+      "team": "devils",
+      "status": "incomplete_projection",
+      "reason": "incomplete_source_or_no_validated_replacement",
+      "missingForwardLines": 0,
+      "missingDefensePairs": 1,
+      "source": "https://www.nhl.com/news/new-jersey-devils-washington-capitals-game-preview-november-14-2026",
+      "publishedAt": "2026-11-14T18:01:55.213000+00:00",
+      "rejectedLines": [],
+      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
     {
       "team": "golden knights",

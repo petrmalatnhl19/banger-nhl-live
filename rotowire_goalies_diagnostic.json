@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-14T17:23:50.935638+00:00",
+  "checkedAt": "2026-11-14T18:11:26.614036+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "candidateCount": 94,
   "matchedCount": 90,
@@ -76,7 +76,7 @@
     },
     {
       "team": "BUF",
-      "goalie": "Ukko-Pekka Luukkonen",
+      "goalie": "Alex Lyon",
       "opponent": "DAL",
       "venue": "away",
       "status": "projected",
@@ -399,7 +399,7 @@
       "goalie": "Jesper Wallstedt",
       "opponent": "BOS",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-14",
       "gameId": 2026020313,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -639,7 +639,7 @@
       "goalie": "Joey Daccord",
       "opponent": "CAR",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-14",
       "gameId": 2026020321,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -779,7 +779,7 @@
       "goalie": "Karel Vejmelka",
       "opponent": "SJS",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-14",
       "gameId": 2026020323,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
