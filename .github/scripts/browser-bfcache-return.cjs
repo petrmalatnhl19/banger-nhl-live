@@ -15,7 +15,7 @@ const fixture = (score) => ({ games: [{
 }] });
 
 (async () => {
-  const browser = await chromium.launch({ headless: true, args: ["--enable-features=BackForwardCache"] });
+  const browser = await chromium.launch({ headless: false, args: ["--enable-features=BackForwardCache"] });
   const context = await browser.newContext({
     viewport: { width: 390, height: 844 },
     isMobile: true, hasTouch: true, timezoneId: "Europe/Prague"
