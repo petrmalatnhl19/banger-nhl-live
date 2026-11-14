@@ -13,6 +13,7 @@ on:
       - scripts/test_nhl_feed_timeout.cjs
       - scripts/test_live_detail_race_guard.cjs
       - scripts/test_shared_playbyplay.cjs
+      - scripts/test_navigation_race_guard.cjs
       - .github/workflows/nhl-feed-performance.yml
   workflow_dispatch:
 
@@ -36,3 +37,4 @@ jobs:
       - run: node scripts/test_nhl_feed_timeout.cjs
       - run: node scripts/test_live_detail_race_guard.cjs
       - run: node scripts/test_shared_playbyplay.cjs
+      - run: node scripts/test_navigation_race_guard.cjs
