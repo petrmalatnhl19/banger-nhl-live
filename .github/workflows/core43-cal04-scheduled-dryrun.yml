@@ -11,6 +11,7 @@ on:
       - '.github/workflows/core43-cal04-scheduled-dryrun.yml'
 permissions:
   contents: read
+  actions: read
 concurrency:
   group: core43-cal04-readonly
   cancel-in-progress: false
@@ -35,8 +36,22 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Restore last diagnostic ledger (GitHub artifacts only)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          artifact_id=$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts?per_page=100" --jq '[.artifacts[] | select(.name=="core43-cal04-readonly-report" and .expired==false)] | sort_by(.created_at) | last | .id // empty')
+          if [[ -n "$artifact_id" ]]; then
+            gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${artifact_id}/zip" > /tmp/core43-cal04-prior.zip
+            unzip -p /tmp/core43-cal04-prior.zip core43-cal04-report.json > /tmp/core43-cal04-prior.json || true
+            if [[ -s /tmp/core43-cal04-prior.json ]]; then
+              node -e 'const fs=require("fs");const r=JSON.parse(fs.readFileSync("/tmp/core43-cal04-prior.json","utf8"));fs.writeFileSync("/tmp/core43-cal04-ledger.json",JSON.stringify(r.ledger||{keys:[]}))'
+            fi
+          fi
       - name: Read-only diagnostic report
         env:
+          CORE43_CAL04_LEDGER_PATH: /tmp/core43-cal04-ledger.json
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         shell: bash
