@@ -120,3 +120,5 @@ jobs:
         run: node .github/scripts/browser-navigation-reload.cjs
       - name: Test offline mobile tab navigation and reconnect in Chromium
         run: node .github/scripts/browser-offline-navigation.cjs
+      - name: Test NHL API interruption, timeout and recovery in Chromium
+        run: node .github/scripts/browser-api-interruption.cjs
