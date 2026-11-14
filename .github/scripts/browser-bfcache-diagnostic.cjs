@@ -15,7 +15,6 @@ const BASE = "http://127.0.0.1:8765/";
   console.log("STAB-05.13: starting unmocked BFCache control");
   // Control experiment: real same-origin documents, no Playwright routing or API mocks.
   // If this fails, the CI Chromium environment itself cannot exercise BFCache.
-  const clean = await context.newPage();
   try {
     await clean.goto(BASE + ".github/fixtures/stab-bfcache-probe.html", { waitUntil: "load" });
     const identity = await clean.evaluate(() => window.__bfcacheProbe.identity);
