@@ -1,0 +1,68 @@
+/* UX-01 — compact Games screen only; keep all date/filter JS and CORE unchanged. */
+@media (max-width: 650px) {
+  body:has(#calendarBar:not(.hidden)) #calendarBar {
+    padding: 6px 8px !important;
+    margin: 3px 0 4px !important;
+    gap: 3px !important;
+    border-radius: 12px !important;
+  }
+  body:has(#calendarBar:not(.hidden)) #calendarBar .calendar-title {
+    margin: 0 !important;
+    min-height: 20px !important;
+  }
+  body:has(#calendarBar:not(.hidden)) #calendarBar .calendar-title span {
+    font-size: 11px !important;
+  }
+  body:has(#calendarBar:not(.hidden)) #calendarBar .calendar-title-actions small {
+    display: none !important;
+  }
+  body:has(#calendarBar:not(.hidden)) #calendarBar .daynav {
+    gap: 4px !important;
+    margin: 2px 0 !important;
+  }
+  body:has(#calendarBar:not(.hidden)) #calendarBar .daynav .btn,
+  body:has(#calendarBar:not(.hidden)) #calendarBar .daynav .date {
+    min-height: 32px !important;
+    padding: 4px 7px !important;
+    font-size: 12px !important;
+  }
+  body:has(#calendarBar:not(.hidden)) #calendarBar .daynav .date {
+    min-width: 0 !important;
+  }
+  body:has(#calendarBar:not(.hidden)) #calendarBar #uxDayStrip {
+    gap: 4px !important;
+    padding: 1px 0 2px !important;
+    margin: 0 !important;
+  }
+  body:has(#calendarBar:not(.hidden)) #calendarBar #uxDayStrip .ux-day {
+    min-width: 48px !important;
+    padding: 5px 6px !important;
+    border-radius: 9px !important;
+    font-size: 11px !important;
+  }
+  body:has(#calendarBar:not(.hidden)) #calendarBar .ux-games-filter {
+    gap: 4px !important;
+    margin: 2px 0 0 !important;
+  }
+  body:has(#calendarBar:not(.hidden)) #calendarBar .ux-games-filter button {
+    min-width: 0 !important;
+    padding: 6px 3px !important;
+    font-size: 10px !important;
+  }
+  /* Counts remain visible and accessible in the filters; remove the duplicate tiles. */
+  body:has(#calendarBar:not(.hidden)) #content > .metrics {
+    display: none !important;
+  }
+  /* Keep the update timestamp and API/error status but avoid a second oversized row. */
+  body:has(#calendarBar:not(.hidden)) #status {
+    min-height: 0 !important;
+    margin: 3px 0 5px !important;
+    padding: 0 !important;
+    font-size: 10px !important;
+    line-height: 1.25 !important;
+  }
+  body:has(#calendarBar:not(.hidden)) #content > .grid {
+    margin-top: 3px !important;
+    gap: 8px !important;
+  }
+}
