@@ -115,6 +115,8 @@ jobs:
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/banger-server.log 2>&1 &
           echo $! > /tmp/banger-server.pid
+      - name: Test STAB-05.14 LIVE monitoring with deterministic API fixture
+        run: node .github/scripts/test-live-monitor.cjs
       - name: Test application startup in Chromium
         run: node .github/scripts/browser-smoke.cjs
       - name: Test mobile tab reload and browser Back in Chromium
