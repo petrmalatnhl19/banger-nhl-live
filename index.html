@@ -1743,156 +1743,77 @@ h1,.brand,.logo,.nums,.arenanum,.metric b,.profilegrid b,
  }
 }
 </style>
-<style id="banger-dashboard-match-actual-height-fix-v2">
-/* Explicit card height wins over older min-height and flex rules. */
+<style id="banger-dashboard-mobile-scorecards">
 @media(max-width:760px){
  #content .dash-layout>.dash-panel.dash-wide .dash-game-grid{
   grid-auto-rows:min-content!important;
   align-items:start!important;
-  gap:7px!important;
- }
- #content .dash-layout>.dash-panel.dash-wide button.dash-game{
-  box-sizing:border-box!important;
-  display:grid!important;
-  grid-template-columns:minmax(0,1fr)!important;
-  grid-template-rows:16px 31px!important;
-  align-content:center!important;
-  justify-content:stretch!important;
-  row-gap:3px!important;
-  height:76px!important;
-  min-height:76px!important;
-  max-height:76px!important;
-  padding:8px 32px 8px 11px!important;
-  margin:0!important;
-  border-radius:12px!important;
- }
- #content .dash-layout>.dash-panel.dash-wide button.dash-game>.dash-game-state{
-  grid-row:1!important;
-  margin:0!important;padding:0!important;
-  height:16px!important;line-height:16px!important;
-  font-size:10px!important;
- }
- #content .dash-layout>.dash-panel.dash-wide button.dash-game>.dash-game-teams{
-  grid-row:2!important;
-  min-height:0!important;height:31px!important;
-  margin:0!important;padding:0!important;
-  align-self:center!important;
- }
- #content .dash-layout>.dash-panel.dash-wide button.dash-game .dash-game-hint{
-  top:50%!important;right:9px!important;
- }
- #content .dash-layout>.dash-panel.dash-wide .dash-panel-title{
-  margin-bottom:8px!important;
- }
-}
-</style>
-<style id="banger-dashboard-one-line-scores-v1">
-/* One-line mobile scoreboard; explicit grid overrides earlier two-row layouts. */
-@media(max-width:760px){
- #content .dash-layout>.dash-panel.dash-wide .dash-game-grid{gap:6px!important}
- #content .dash-layout>.dash-panel.dash-wide button.dash-game{
-  display:grid!important;
-  grid-template-columns:90px minmax(0,1fr) 13px!important;
-  grid-template-rows:1fr!important;
-  align-items:center!important;
-  justify-items:stretch!important;
-  column-gap:7px!important;row-gap:0!important;
-  box-sizing:border-box!important;
-  height:62px!important;min-height:62px!important;max-height:62px!important;
-  padding:7px 10px!important;
-  border-radius:11px!important;
- }
- #content .dash-layout>.dash-panel.dash-wide button.dash-game>.dash-game-state{
-  display:block!important;
-  grid-column:1!important;grid-row:1!important;
-  align-self:center!important;
-  height:auto!important;min-height:0!important;
-  margin:0!important;padding:0!important;
-  line-height:1.2!important;font-size:10px!important;
-  white-space:normal!important;
- }
- #content .dash-layout>.dash-panel.dash-wide button.dash-game>.dash-game-teams{
-  grid-column:2!important;grid-row:1!important;
-  display:grid!important;
-  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)!important;
-  align-items:center!important;
   gap:5px!important;
-  height:auto!important;min-height:0!important;
-  width:100%!important;margin:0!important;padding:0!important;
  }
- #content .dash-layout>.dash-panel.dash-wide button.dash-game .dash-team-left,
- #content .dash-layout>.dash-panel.dash-wide button.dash-game .dash-team-right{
-  min-width:0!important;gap:4px!important;
-  font-size:12px!important;white-space:nowrap!important;
- }
- #content .dash-layout>.dash-panel.dash-wide button.dash-game .dash-team-right{
-  justify-content:flex-end!important;
- }
- #content .dash-layout>.dash-panel.dash-wide button.dash-game .dash-game-teams img{
-  width:20px!important;height:20px!important;flex:0 0 20px!important;
- }
- #content .dash-layout>.dash-panel.dash-wide button.dash-game .dash-game-teams strong{
-  font-size:19px!important;line-height:1!important;
-  white-space:nowrap!important;
- }
- #content .dash-layout>.dash-panel.dash-wide button.dash-game>.dash-game-hint{
-  grid-column:3!important;grid-row:1!important;
-  position:static!important;transform:none!important;
-  align-self:center!important;justify-self:center!important;
-  font-size:22px!important;line-height:1!important;
- }
-}
-@media(max-width:390px){
  #content .dash-layout>.dash-panel.dash-wide button.dash-game{
-  grid-template-columns:72px minmax(0,1fr) 11px!important;
-  column-gap:4px!important;padding:6px 7px!important;
- }
- #content .dash-layout>.dash-panel.dash-wide button.dash-game>.dash-game-state{font-size:9px!important}
- #content .dash-layout>.dash-panel.dash-wide button.dash-game .dash-game-teams strong{font-size:17px!important}
- #content .dash-layout>.dash-panel.dash-wide button.dash-game .dash-team-left,
- #content .dash-layout>.dash-panel.dash-wide button.dash-game .dash-team-right{font-size:11px!important}
- #content .dash-layout>.dash-panel.dash-wide button.dash-game .dash-game-teams img{
-  width:18px!important;height:18px!important;flex-basis:18px!important;
- }
-}
-</style>
-<style id="banger-dashboard-extra-small-scorecards-v2">
-@media(max-width:760px){
- #content .dash-layout>.dash-panel.dash-wide .dash-game-grid{gap:5px!important}
- #content .dash-layout>.dash-panel.dash-wide button.dash-game{
-  grid-template-columns:49px minmax(0,1fr) 11px!important;
-  grid-template-rows:1fr!important;
-  height:48px!important;min-height:48px!important;max-height:48px!important;
+  box-sizing:border-box;
+  display:grid!important;
+  grid-template-columns:49px minmax(0,1fr) 11px;
+  grid-template-rows:27px;
+  align-content:center;
+  align-items:center;
+  gap:0 5px!important;
+  min-height:48px!important;
   padding:5px 9px!important;
-  column-gap:5px!important;border-radius:10px!important;
+  margin:0;
+  border-radius:10px!important;
  }
  #content .dash-layout>.dash-panel.dash-wide button.dash-game>.dash-game-state{
-  font-size:11px!important;line-height:1!important;
-  font-weight:750!important;white-space:nowrap!important;
+  grid-column:1;
+  grid-row:1;
+  margin:0;
+  font-size:11px!important;
+  line-height:1!important;
+  white-space:nowrap;
  }
  #content .dash-layout>.dash-panel.dash-wide button.dash-game>.dash-game-teams{
-  height:27px!important;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)!important;
+  grid-column:2;
+  grid-row:1;
+  min-height:0!important;
   gap:4px!important;
  }
- #content .dash-layout>.dash-panel.dash-wide button.dash-game .dash-game-teams strong{
-  font-size:18px!important;
- }
- #content .dash-layout>.dash-panel.dash-wide button.dash-game .dash-game-teams img{
-  width:19px!important;height:19px!important;flex-basis:19px!important;
- }
  #content .dash-layout>.dash-panel.dash-wide button.dash-game .dash-team-left,
- #content .dash-layout>.dash-panel.dash-wide button.dash-game .dash-team-right{
-  font-size:12px!important;gap:4px!important;
+ #content .dash-layout>.dash-panel.dash-wide button.dash-game .dash-team-right{gap:4px!important}
+ #content .dash-layout>.dash-panel.dash-wide button.dash-game .dash-game-teams img{
+  width:19px!important;height:19px!important;flex:0 0 19px!important;
  }
+ #content .dash-layout>.dash-panel.dash-wide button.dash-game .dash-game-teams strong{
+  font-size:18px!important;line-height:1!important;
+ }
+ #content .dash-layout>.dash-panel.dash-wide button.dash-game>.dash-game-hint{
+  grid-column:3;
+  grid-row:1;
+  position:static!important;
+  transform:none!important;
+  align-self:center!important;
+  justify-self:center;
+  font-size:22px!important;
+  line-height:1!important;
+ }
+ #content .dash-layout>.dash-panel.dash-wide button.dash-game-live{
+  grid-template-rows:auto 21px;
+  row-gap:3px!important;
+ }
+ #content .dash-layout>.dash-panel.dash-wide button.dash-game-live>.dash-game-state{
+  grid-column:1 / 3;
+  white-space:normal;
+ }
+ #content .dash-layout>.dash-panel.dash-wide button.dash-game-live>.dash-game-teams{grid-row:2}
+ #content .dash-layout>.dash-panel.dash-wide button.dash-game-live>.dash-game-hint{grid-row:1 / 3}
+ #content .dash-layout>.dash-panel.dash-wide .dash-panel-title{margin-bottom:8px!important}
 }
 @media(max-width:390px){
  #content .dash-layout>.dash-panel.dash-wide button.dash-game{
-  grid-template-columns:44px minmax(0,1fr) 10px!important;
-  padding:5px 7px!important;column-gap:3px!important;
+  grid-template-columns:44px minmax(0,1fr) 10px;
+  padding-inline:7px!important;
+  column-gap:3px!important;
  }
- #content .dash-layout>.dash-panel.dash-wide button.dash-game>.dash-game-state{
-  font-size:10px!important;
- }
+ #content .dash-layout>.dash-panel.dash-wide button.dash-game:not(.dash-game-live)>.dash-game-state{font-size:10px!important}
 }
 </style>
 <style id="banger-nhl-news-ui-v1">
@@ -2291,13 +2212,31 @@ async function standings(){S.tab='standings';$('calendarBar').classList.add('hid
 
 async function dashboardSkaterLeaders(){const url='https://api.nhle.com/stats/rest/en/skater/summary';const first=await get(url,0);const total=Math.min(Number(first.total||first.totalRecords||first.data?.length||0),2000);const starts=[];for(let i=100;i<total;i+=100)starts.push(i);const chunks=await Promise.all(starts.map(start=>get(url,start)));const rows=[...(first.data||[]),...chunks.flatMap(c=>c.data||[])];const seen=new Set();return rows.filter(p=>{const key=p.playerId??p.skaterFullName;if(seen.has(key))return false;seen.add(key);return true}).sort((a,b)=>(Number(b.points)||0)-(Number(a.points)||0)||(Number(b.goals)||0)-(Number(a.goals)||0)||(Number(b.assists)||0)-(Number(a.assists)||0)).slice(0,5)}
 let dashboardRequest=0;
-async function dashboard(){S.tab='dashboard';const req=++dashboardRequest;$('calendarBar').classList.add('hidden');$('search').classList.add('hidden');$('sort').classList.add('hidden');$('status').textContent='Načítám NHL LIVE Dashboard…';$('content').innerHTML='<div class="empty">Načítám aktuální výsledky, lídry a tabulky NHL…</div>';const pragueDate=x=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Prague',year:'numeric',month:'2-digit',day:'2-digit'}).format(x);const pragueHour=x=>Number(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Prague',hour:'2-digit',hourCycle:'h23'}).format(x));const now=new Date(),day=pragueDate(now);const anchor=new Date(day+'T12:00:00Z');const shift=n=>pragueDate(new Date(anchor.getTime()+n*86400000));const slateDay=pragueHour(now)<12?shift(-1):day,followingDay=pragueHour(now)<12?day:shift(1),yesterday=shift(-1),tomorrow=shift(1);const calls=[get('https://api-web.nhle.com/v1/score/'+day),get('https://api-web.nhle.com/v1/score/'+yesterday),get('https://api-web.nhle.com/v1/score/'+tomorrow),teamApi('standings',''),dashboardSkaterLeaders()];const result=await Promise.allSettled(calls);if(S.tab!=='dashboard'||req!==dashboardRequest)return;const [today,prior,nextDay,table,leaders]=result.map(r=>r.status==='fulfilled'?r.value:null);const games=[...(today?.games||[]),...(prior?.games||[]),...(nextDay?.games||[])].filter(g=>{if(!g.startTimeUTC)return false;const t=new Date(g.startTimeUTC);if(!Number.isFinite(t.getTime()))return false;const date=pragueDate(t),hour=pragueHour(t);return date===slateDay&&hour>=12||date===followingDay&&hour<12}).filter((g,i,all)=>all.findIndex(x=>String(x.id)===String(g.id))===i).sort((a,b)=>{const started=g=>['LIVE','CRIT','OFF','FINAL'].includes(g.gameState)?0:1;return started(a)-started(b)||Date.parse(a.startTimeUTC||0)-Date.parse(b.startTimeUTC||0)}),oldGames=Array.isArray(prior?.games)?prior.games:[];const live=games.filter(g=>['LIVE','CRIT'].includes(g.gameState));const completed=games.filter(g=>['OFF','FINAL'].includes(g.gameState));const standings=Array.isArray(table?.standings)?table.standings:[];const skaters=Array.isArray(leaders)?leaders:[];const topTeams=[...standings].sort((a,b)=>(b.points||0)-(a.points||0)).slice(0,5);
+async function dashboard(){S.tab='dashboard';const req=++dashboardRequest;$('calendarBar').classList.add('hidden');$('search').classList.add('hidden');$('sort').classList.add('hidden');$('status').textContent='Načítám NHL LIVE Dashboard…';$('content').innerHTML='<div class="empty">Načítám aktuální výsledky, lídry a tabulky NHL…</div>';const pragueDate=x=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Prague',year:'numeric',month:'2-digit',day:'2-digit'}).format(x);const pragueHour=x=>Number(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Prague',hour:'2-digit',hourCycle:'h23'}).format(x));const now=new Date(),day=pragueDate(now);const anchor=new Date(day+'T12:00:00Z');const shift=n=>pragueDate(new Date(anchor.getTime()+n*86400000));const slateDay=pragueHour(now)<12?shift(-1):day,followingDay=pragueHour(now)<12?day:shift(1),yesterday=shift(-1),tomorrow=shift(1);const isCurrent=()=>S.tab==='dashboard'&&req===dashboardRequest;
+const standingsRequest=teamApi('standings','').catch(()=>null);
+const leadersRequest=dashboardSkaterLeaders().catch(()=>null);
+const scores=await Promise.allSettled([day,yesterday,tomorrow].map(date=>get('https://api-web.nhle.com/v1/score/'+date)));
+if(!isCurrent())return;
+const [today,prior,nextDay]=scores.map(result=>result.status==='fulfilled'?result.value:null);
+const games=[...(today?.games||[]),...(prior?.games||[]),...(nextDay?.games||[])].filter(g=>{if(!g.startTimeUTC)return false;const t=new Date(g.startTimeUTC);if(!Number.isFinite(t.getTime()))return false;const date=pragueDate(t),hour=pragueHour(t);return date===slateDay&&hour>=12||date===followingDay&&hour<12}).filter((g,i,all)=>all.findIndex(x=>String(x.id)===String(g.id))===i).sort((a,b)=>{const started=g=>['LIVE','CRIT','OFF','FINAL'].includes(g.gameState)?0:1;return started(a)-started(b)||Date.parse(a.startTimeUTC||0)-Date.parse(b.startTimeUTC||0)}),oldGames=Array.isArray(prior?.games)?prior.games:[];const live=games.filter(g=>['LIVE','CRIT'].includes(g.gameState));
 const matchCard=g=>{const a=g.awayTeam||{},b=g.homeTeam||{},playing=['LIVE','CRIT'].includes(g.gameState),done=['OFF','FINAL'].includes(g.gameState);const pd=g.periodDescriptor||{};const period=playing?(pd.periodType==='OT'?'PRODLOUŽENÍ':pd.periodType==='SO'?'NÁJEZDY':pd.number?pd.number+'. TŘETINA':'PROBÍHÁ'):done?'KONEC':'ZAČÁTEK';const time=g.startTimeUTC?new Date(g.startTimeUTC).toLocaleTimeString('cs-CZ',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Prague'}):'—';return '<button class="dash-game '+(playing?'dash-game-live':done?'dash-game-done':'dash-game-next')+'" data-game="'+safe(g.id)+'" aria-label="Detail zápasu '+safe(a.abbrev||'')+' proti '+safe(b.abbrev||'')+'"><span class="dash-game-state '+(playing?'dash-playing':'')+'">'+safe(playing?'● ŽIVĚ · '+period:done?'✓ KONEC':time)+'</span><span class="dash-game-teams"><span class="dash-team-left"><img src="'+safe(a.logo||teamLogo(a.abbrev||''))+'" alt=""><b>'+safe(a.abbrev||'—')+'</b></span><strong>'+safe(a.score??'–')+' <span class="dash-score-colon">:</span> '+safe(b.score??'–')+'</strong><span class="dash-team-right"><b>'+safe(b.abbrev||'—')+'</b><img src="'+safe(b.logo||teamLogo(b.abbrev||''))+'" alt=""></span></span><span class="dash-game-hint" aria-hidden="true">›</span></button>'};
 const recent=oldGames.filter(g=>['OFF','FINAL'].includes(g.gameState)).slice(0,5);
 const playerRow=(p,i)=>{const c=String(p.teamAbbrev||p.teamAbbrevs||'').trim().split(/[ ,/]+/)[0];return '<div class="dash-row dash-leader-row"><span class="dash-position">'+(i+1)+'</span><span class="dash-player">'+safe(p.skaterFullName||p.playerName||[p.firstName,p.lastName].filter(Boolean).join(' ')||'Hráč')+'</span>'+(c?'<img class="dash-leader-logo" src="'+safe(teamLogo(c))+'" alt="'+safe(c)+'" title="'+safe(c)+'" loading="lazy">':'')+'<b>'+safe(p.points??'—')+' B</b></div>'};
 const teamRow=(r,i)=>{const c=tn(r.teamAbbrev);return '<button class="dash-row dash-row-button" data-team="'+safe(c)+'"><span class="dash-position">'+(i+1)+'</span><img src="'+safe(r.teamLogo||teamLogo(c))+'" alt=""><span class="dash-player">'+safe(tn(r.teamName)||c)+'</span><b>'+safe(r.points??'—')+' b</b></button>'};
 $('status').textContent='NHL LIVE Dashboard · aktualizováno '+new Date().toLocaleTimeString('cs-CZ');
-$('content').innerHTML='<div class="dash-quick"><button class="dash-quick-btn" id="dashQuickGames">🏒 Zápasy dnes</button><button class="dash-quick-btn" id="dashQuickStats">📊 Statistiky</button><button class="dash-quick-btn" id="dashQuickTable">🏆 Tabulky</button></div><div class="dash-layout"><section class="dash-panel dash-wide dash-games-unified"><div class="dash-panel-title"><div class="dash-games-title"><h3>⚡ Dnešní zápasy</h3><p>'+safe(new Date().toLocaleDateString('cs-CZ',{weekday:'long',day:'numeric',month:'long'}))+' · '+games.length+' zápasů · '+live.length+' živě</p></div><div class="dash-games-actions"><button class="dash-link" id="dashAllGames">Všechny zápasy ↗</button><button class="btn" id="dashRefresh" aria-label="Obnovit zápasy" title="Obnovit zápasy">↻</button></div></div><div class="dash-game-grid">'+(games.length?games.map(matchCard).join(''):'<p>Na dnešek nejsou naplánované zápasy.</p>')+'</div></section><section class="dash-panel"><div class="dash-panel-title"><h3>🏒 Lídři produktivity</h3><button class="dash-link" id="dashAllPlayers">Statistiky ↗</button></div>'+(skaters.length?skaters.map(playerRow).join(''):'<p>Statistiky hráčů nejsou momentálně dostupné.</p>')+'</section><section class="dash-panel"><div class="dash-panel-title"><h3>🏆 Nejlepší týmy</h3><button class="dash-link" id="dashAllStandings">Tabulky ↗</button></div>'+(topTeams.length?topTeams.map(teamRow).join(''):'<p>Tabulka není momentálně dostupná.</p>')+'</section><section class="dash-panel dash-wide"><div class="dash-panel-title"><h3>🕘 Včerejší výsledky</h3></div><div class="dash-game-grid">'+(recent.length?recent.map(matchCard).join(''):'<p>Včerejší výsledky nejsou dostupné.</p>')+'</div></section><section class="dash-panel dash-wide banger-news-preview"><div class="dash-panel-title"><h3>📰 Novinky z NHL</h3><button class="dash-link" id="dashAllNews">Všechny novinky ↗</button></div><div id="bangerNewsPreview" class="banger-news-list"><p>Načítám novinky…</p></div></section></div>';
+$('content').innerHTML='<div class="dash-quick"><button class="dash-quick-btn" id="dashQuickGames">🏒 Zápasy dnes</button><button class="dash-quick-btn" id="dashQuickStats">📊 Statistiky</button><button class="dash-quick-btn" id="dashQuickTable">🏆 Tabulky</button></div><div class="dash-layout"><section class="dash-panel dash-wide dash-games-unified"><div class="dash-panel-title"><div class="dash-games-title"><h3>⚡ Dnešní zápasy</h3><p>'+safe(new Date().toLocaleDateString('cs-CZ',{weekday:'long',day:'numeric',month:'long'}))+' · '+games.length+' zápasů · '+live.length+' živě</p></div><div class="dash-games-actions"><button class="dash-link" id="dashAllGames">Všechny zápasy ↗</button><button class="btn" id="dashRefresh" aria-label="Obnovit zápasy" title="Obnovit zápasy">↻</button></div></div><div class="dash-game-grid">'+(games.length?games.map(matchCard).join(''):'<p>Na dnešek nejsou naplánované zápasy.</p>')+'</div></section><section class="dash-panel"><div class="dash-panel-title"><h3>🏒 Lídři produktivity</h3><button class="dash-link" id="dashAllPlayers">Statistiky ↗</button></div><div id="dashPlayerRows"><p>Načítám statistiky hráčů…</p></div></section><section class="dash-panel"><div class="dash-panel-title"><h3>🏆 Nejlepší týmy</h3><button class="dash-link" id="dashAllStandings">Tabulky ↗</button></div><div id="dashTeamRows"><p>Načítám tabulku NHL…</p></div></section><section class="dash-panel dash-wide"><div class="dash-panel-title"><h3>🕘 Včerejší výsledky</h3></div><div class="dash-game-grid">'+(recent.length?recent.map(matchCard).join(''):'<p>Včerejší výsledky nejsou dostupné.</p>')+'</div></section><section class="dash-panel dash-wide banger-news-preview"><div class="dash-panel-title"><h3>📰 Novinky z NHL</h3><button class="dash-link" id="dashAllNews">Všechny novinky ↗</button></div><div id="bangerNewsPreview" class="banger-news-list"><p>Načítám novinky…</p></div></section></div>';
+// The scoreboard is ready independently of the league's tables and leaders.
+document.dispatchEvent(new Event('bangerDashboardScoresReady'));
+leadersRequest.then(leaders=>{
+ if(!isCurrent())return;
+ $('dashPlayerRows').innerHTML=leaders?.length?leaders.map(playerRow).join(''):'<p>Statistiky hráčů nejsou momentálně dostupné.</p>';
+});
+standingsRequest.then(table=>{
+ if(!isCurrent())return;
+ const teams=Array.isArray(table?.standings)?table.standings:[];
+ const top=[...teams].sort((a,b)=>(b.points||0)-(a.points||0)).slice(0,5);
+ $('dashTeamRows').innerHTML=top.length?top.map(teamRow).join(''):'<p>Tabulka není momentálně dostupná.</p>';
+});
 $('dashAllNews').onclick=()=>activate('news');
 $('content').querySelectorAll('.dash-game[data-game]').forEach(b=>b.onclick=()=>detail(b.dataset.game,b));$('content').querySelectorAll('.dash-analyze[data-analyze]').forEach(b=>b.onclick=()=>analyzeGame(b.dataset.analyze));$('dashRefresh').onclick=dashboard;$('dashQuickGames').onclick=()=>activate('games');$('dashQuickStats').onclick=()=>activate('skaters');$('dashQuickTable').onclick=()=>activate('standings');$('dashAllGames').onclick=()=>activate('games');$('dashAllPlayers').onclick=()=>activate('skaters');$('dashAllStandings').onclick=()=>activate('standings');renderNewsPreview();
 }
@@ -2654,6 +2593,12 @@ activate(bangerInitialTab);$('tabDashboard').onclick=()=>activate('dashboard');$
  var seen=false;
  try{seen=sessionStorage.getItem('bangerIntroSeen')==='1';sessionStorage.setItem('bangerIntroSeen','1')}catch(e){}
  if(seen){splash.classList.add('splash-skip');return}
+ if(bangerInitialTab==='dashboard'){
+  const showDashboard=()=>splash.classList.add('splash-done');
+  document.addEventListener('bangerDashboardScoresReady',showDashboard,{once:true});
+  setTimeout(showDashboard,650);
+  return;
+ }
  var image=splash.querySelector('picture img');
  var started=Date.now();
  function dismiss(){var delay=Math.max(0,1500-(Date.now()-started));setTimeout(function(){splash.classList.add('splash-done')},delay)}
