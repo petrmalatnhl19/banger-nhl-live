@@ -15,6 +15,7 @@ on:
       - scripts/test_shared_playbyplay.cjs
       - scripts/test_navigation_race_guard.cjs
       - scripts/test_android_back_navigation.cjs
+      - scripts/test_restore_tab_on_reload.cjs
       - .github/workflows/nhl-feed-performance.yml
   workflow_dispatch:
 
@@ -40,3 +41,4 @@ jobs:
       - run: node scripts/test_shared_playbyplay.cjs
       - run: node scripts/test_navigation_race_guard.cjs
       - run: node scripts/test_android_back_navigation.cjs
+      - run: node scripts/test_restore_tab_on_reload.cjs

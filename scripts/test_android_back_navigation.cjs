@@ -23,7 +23,7 @@ sandbox.bangerRememberTab("games");assert.equal(stack.length,2,"same tab must no
 history.pushState({bangerTab:"games",bangerModal:true});modal=true;
 history.back();assert.equal(modal,false,"Back must close open match detail");
 assert.equal(sandbox.S.tab,"games","closing detail must preserve selected tab");
-assert(html.includes("history.replaceState({bangerTab:'dashboard'}"),"initial page must seed history");
+assert(html.includes("const bangerInitialTab=bangerNavigationTabs.has(history.state?.bangerTab)?history.state.bangerTab:'dashboard'"),"initial page must restore valid tab or default to dashboard");
 assert(html.includes("history.pushState({bangerTab:S.tab||'dashboard',bangerModal:true}"),"opening detail must add Back target");
 assert(html.includes("if(!fromHistory&&history.state?.bangerModal)history.back();"),"manual close must consume modal entry");
 console.log("STAB-04.2 Android Back navigation regression tests passed");
