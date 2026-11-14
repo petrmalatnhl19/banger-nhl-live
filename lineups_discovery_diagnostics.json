@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-14T22:56:20.840236+00:00",
-  "checked": 16,
-  "articlesFound": 8,
+  "generatedAt": "2026-11-14T23:38:23.850977+00:00",
+  "checked": 15,
+  "articlesFound": 9,
   "errors": [],
   "fixtures": [
     {
@@ -205,6 +205,15 @@
       "coversBothTeams": true
     },
     {
+      "url": "https://www.nhl.com/news/san-jose-sharks-utah-mammoth-game-preview-november-14-2026",
+      "result": "parsed",
+      "teams": [
+        "sharks",
+        "mammoth"
+      ],
+      "coversBothTeams": true
+    },
+    {
       "url": "https://www.nhl.com/news/winnipeg-jets-chicago-blackhawks-game-preview-november-14-2026",
       "result": "no_complete_projection",
       "teams": []
@@ -233,27 +242,17 @@
       "url": "https://www.nhl.com/news/vegas-golden-knights-vancouver-canucks-game-preview-november-15-2026",
       "result": "no_complete_projection",
       "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/calgary-flames-anaheim-ducks-game-preview-november-15-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/anaheim-ducks-calgary-flames-game-preview-november-15-2026",
-      "result": "no_complete_projection",
-      "teams": []
     }
   ],
   "note": "Upcoming games today through two days ahead; prioritize older sources and nearest games. A fixture is not proof a preview article exists.",
   "fixturesSelected": 12,
   "fixturesDeferred": 9,
   "rotation": {
-    "window": 1994107,
+    "window": 1994110,
     "fixed": 8,
     "rotating": 4,
     "remainingPool": 13,
-    "rotationStart": 5
+    "rotationStart": 4
   },
   "selectedFixtures": [
     {
@@ -298,6 +297,11 @@
     },
     {
       "date": "2026-11-14",
+      "away": "SJS",
+      "home": "UTA"
+    },
+    {
+      "date": "2026-11-14",
       "away": "WPG",
       "home": "CHI"
     },
@@ -310,11 +314,6 @@
       "date": "2026-11-15",
       "away": "VAN",
       "home": "VGK"
-    },
-    {
-      "date": "2026-11-15",
-      "away": "CGY",
-      "home": "ANA"
     }
   ]
 }
