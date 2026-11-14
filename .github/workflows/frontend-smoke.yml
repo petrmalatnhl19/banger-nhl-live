@@ -130,3 +130,5 @@ jobs:
         run: node .github/scripts/browser-concurrent-details.cjs
       - name: Test rapid date switching and stale score responses in Chromium
         run: node .github/scripts/browser-date-races.cjs
+      - name: Test browser history, match detail cleanup and reload in Chromium
+        run: node .github/scripts/browser-history-reload.cjs
