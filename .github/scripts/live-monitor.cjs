@@ -3,7 +3,7 @@ const fs=require("node:fs"),path=require("node:path");
 const {setTimeout:sleep}=require("node:timers/promises");
 const OUT=process.env.MONITOR_OUTPUT||"artifacts/stab-05-14";
 const API=process.env.NHL_API_BASE||"https://api-web.nhle.com/v1";
-const N=Math.min(120,Math.max(1,Number(process.env.MONITOR_ITERATIONS||18)));
+const N=Math.min(18,Math.max(1,Number(process.env.MONITOR_ITERATIONS||12)));
 const INTERVAL=Math.max(0,Number(process.env.MONITOR_INTERVAL_MS??300000));
 const TIMEOUT=Math.max(1000,Number(process.env.MONITOR_TIMEOUT_MS||12000));
 fs.mkdirSync(OUT,{recursive:true});
