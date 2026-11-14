@@ -2578,6 +2578,16 @@ function bangerRestoreNavigation(event){
  }finally{bangerRestoringHistory=false}
 }
 window.addEventListener('popstate',bangerRestoreNavigation);
+// STAB-05.13: BFCache restores retain the old DOM and cached scores. Refresh only
+// after an actual persisted restore; normal page loads already initialize data.
+window.addEventListener('pageshow',event=>{
+ if(!event.persisted)return;
+ if(!$('liveArena').classList.contains('hidden'))closeArena(true);
+ if(S.tab==='games'){
+  // Do not push another history entry or reset the selected match date.
+  games();
+ }
+});
 function bangerShowOfflineTab(t){
  S.tab=t;
  $('calendarBar').classList.add('hidden');
