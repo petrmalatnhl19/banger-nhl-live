@@ -133,4 +133,4 @@ jobs:
       - name: Test browser history, match detail cleanup and reload in Chromium
         run: node .github/scripts/browser-history-reload.cjs
       - name: Test Back Forward Cache restore and fresh NHL scores in Chromium
-        run: node .github/scripts/browser-bfcache-return.cjs
+        run: timeout --signal=TERM --kill-after=5s 45s node .github/scripts/browser-bfcache-return.cjs
