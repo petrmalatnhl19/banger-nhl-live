@@ -122,3 +122,5 @@ jobs:
         run: node .github/scripts/browser-offline-navigation.cjs
       - name: Test NHL API interruption, timeout and recovery in Chromium
         run: node .github/scripts/browser-api-interruption.cjs
+      - name: Test Prague midnight rollover and date navigation in Chromium
+        run: node .github/scripts/browser-midnight-rollover.cjs
