@@ -6,6 +6,7 @@ const {loadLiveShadowSources}=require("./core43_live_shadow_source_reader.cjs");
 const {adaptArchivedGsaxSnapshots}=require("./core43_archived_gsax_snapshot_adapter.cjs");
 const {assemblePregameSourceInput}=require("./core43_pregame_source_assembly.cjs");
 const {plan}=require("./core43_cal03_capture_plan.cjs");
+const fs=require("node:fs");
 function summarize({now,games,existing=[]}={}){
  const rows=[],seen=new Set(existing);
  for(const game of games){
@@ -38,13 +39,21 @@ async function run({url,key,now=new Date().toISOString(),fetchImpl=fetch}={}){
    const sources=await loadLiveShadowSources({url,key,gameId:game.gameId,fetchImpl});
    const adapted=adaptArchivedGsaxSnapshots(sources.goalieSnapshotRows,{asOf:now});
    if(!adapted.ready){games.push({...game,baselineReady:false,reason:adapted.reason});continue;}
-   const assembly=assemblePregameSourceInput({...sources,gameId:game.gameId,awayTeam:game.awayTeam,
-    homeTeam:game.homeTeam,asOf:now,now,gsaxSnapshots:adapted.snapshots});
+   const assembly=assemblePregameSourceInput({...sources,gsaxSnapshots:adapted.snapshots,gameId:game.gameId,awayTeam:game.awayTeam,
+    homeTeam:game.homeTeam,asOf:now,now});
    if(!assembly.ready){games.push({...game,baselineReady:false,reason:assembly.reason});continue;}
    games.push({...game,payload:assembly.payload,provenance:assembly.provenance});
   }catch(e){games.push({...game,baselineReady:false,reason:"source_read_failed"});}
  }
- return summarize({now,games});
+ const ledgerPath=process.env.CORE43_CAL04_LEDGER_PATH;
+ let existing=[];
+ if(ledgerPath&&fs.existsSync(ledgerPath)){
+  const ledger=JSON.parse(fs.readFileSync(ledgerPath,"utf8"));
+  if(!ledger||!Array.isArray(ledger.keys)||ledger.keys.some(k=>typeof k!=="string"))throw Error("invalid_readonly_ledger");
+  existing=ledger.keys;
+ }
+ const report=summarize({now,games,existing});
+ return {...report,ledger:{schema:"core43_cal04_keys_v1",keys:[...new Set([...existing,...report.results.flatMap(g=>g.variants.filter(v=>!v.duplicate).map(v=>v.key))])]}};
 }
 if(require.main===module)run({url:process.env.SUPABASE_URL,key:process.env.SUPABASE_SERVICE_ROLE_KEY})
  .then(r=>console.log(JSON.stringify(r,null,2))).catch(e=>{console.error(e.message);process.exitCode=1;});
