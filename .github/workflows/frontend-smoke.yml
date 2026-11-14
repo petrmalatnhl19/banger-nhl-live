@@ -124,3 +124,5 @@ jobs:
         run: node .github/scripts/browser-api-interruption.cjs
       - name: Test Prague midnight rollover and date navigation in Chromium
         run: node .github/scripts/browser-midnight-rollover.cjs
+      - name: Test LIVE to FINAL cache expiry and refreshed statistics in Chromium
+        run: node .github/scripts/browser-live-final-cache.cjs
