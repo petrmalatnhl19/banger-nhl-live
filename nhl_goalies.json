@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-14T03:54:27.992661+00:00",
-  "rostersUpdatedAt": "2026-11-14T03:53:45.694700+00:00",
+  "updatedAt": "2026-11-14T04:55:24.155590+00:00",
+  "rostersUpdatedAt": "2026-11-14T04:54:49.500536+00:00",
   "projectionDate": "2026-11-14",
   "teamCount": 32,
   "goalieCount": 74,
@@ -294,8 +294,9 @@
       "team": "WPG",
       "teamKey": "jets",
       "playerId": 8479973,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Clay Stevenson",

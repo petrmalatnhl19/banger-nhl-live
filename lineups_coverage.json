@@ -1,23 +1,31 @@
 {
-  "generatedAt": "2026-11-14T03:54:25.304007+00:00",
+  "generatedAt": "2026-11-14T04:55:21.800162+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 25,
+  "currentProjections": 21,
   "needsFreshProjection": [
+    "blackhawks",
     "devils",
     "ducks",
     "flames",
     "flyers",
+    "hurricanes",
+    "jets",
+    "kraken",
     "oilers",
     "penguins",
     "sharks"
   ],
   "missing": [],
   "olderVerified": [
+    "blackhawks",
     "devils",
     "ducks",
     "flames",
     "flyers",
+    "hurricanes",
+    "jets",
+    "kraken",
     "oilers",
     "penguins",
     "sharks"
@@ -43,11 +51,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
-      "publishedAt": "2026-11-14T03:02:00+00:00",
+      "currentProjection": false,
+      "publishedAt": "2026-11-14T05:00:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "blue jackets": {
       "hasProjectedLines": true,
@@ -187,11 +195,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
-      "publishedAt": "2026-11-14T03:02:00+00:00",
+      "currentProjection": false,
+      "publishedAt": "2026-11-14T05:00:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "islanders": {
       "hasProjectedLines": true,
@@ -211,11 +219,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
-      "publishedAt": "2026-11-14T03:02:00+00:00",
+      "currentProjection": false,
+      "publishedAt": "2026-11-14T05:00:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "kings": {
       "hasProjectedLines": true,
@@ -235,11 +243,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
-      "publishedAt": "2026-11-14T03:02:00+00:00",
+      "currentProjection": false,
+      "publishedAt": "2026-11-14T05:00:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "lightning": {
       "hasProjectedLines": true,
