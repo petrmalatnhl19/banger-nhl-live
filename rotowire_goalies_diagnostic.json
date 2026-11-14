@@ -1,7 +1,7 @@
 {
-  "checkedAt": "2026-11-14T06:59:29.661484+00:00",
+  "checkedAt": "2026-11-14T08:03:30.753108+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-  "candidateCount": 98,
+  "candidateCount": 94,
   "matchedCount": 90,
   "matches": [
     {
@@ -919,34 +919,6 @@
       "opponent": "VGK",
       "venue": "away",
       "status": "projected"
-    },
-    {
-      "team": "NSH",
-      "goalie": "Juuse Saros",
-      "opponent": "VGK",
-      "venue": "away",
-      "status": "confirmed"
-    },
-    {
-      "team": "NYR",
-      "goalie": "Dylan Garand",
-      "opponent": "VAN",
-      "venue": "away",
-      "status": "confirmed"
-    },
-    {
-      "team": "VAN",
-      "goalie": "Leevi Meriläinen",
-      "opponent": "NYR",
-      "venue": "home",
-      "status": "confirmed"
-    },
-    {
-      "team": "VGK",
-      "goalie": "Adin Hill",
-      "opponent": "NSH",
-      "venue": "home",
-      "status": "confirmed"
     },
     {
       "team": "VGK",
