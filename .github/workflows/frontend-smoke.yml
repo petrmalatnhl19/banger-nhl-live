@@ -127,6 +127,8 @@ jobs:
         run: node .github/scripts/browser-mobile-analytics.cjs
       - name: Test UX-05 request deduplication and fresh live scores
         run: node .github/scripts/browser-app-performance.cjs
+      - name: Test UX-06 late standings response on mobile
+        run: node .github/scripts/browser-mobile-standings-race.cjs
       - name: Test mobile tab reload and browser Back in Chromium
         run: node .github/scripts/browser-navigation-reload.cjs
       - name: Test offline mobile tab navigation and reconnect in Chromium
