@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-14T15:59:28.276739+00:00",
+  "updatedAt": "2026-11-14T16:43:34.081720+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "goalieCount": 90,
   "games": [
@@ -41,7 +41,7 @@
       "goalie": "Pyotr Kochetkov",
       "opponent": "SEA",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-14",
       "gameId": 2026020321,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -52,7 +52,7 @@
       "goalie": "Jet Greaves",
       "opponent": "PHI",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-14",
       "gameId": 2026020319,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -129,7 +129,7 @@
       "goalie": "Jacob Markstrom",
       "opponent": "STL",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-14",
       "gameId": 2026020320,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -192,25 +192,25 @@
     },
     {
       "team": "OTT",
-      "goalie": "Samuel Ersson",
+      "goalie": "Linus Ullmark",
       "opponent": "PIT",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-14",
       "gameId": 2026020317,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8481035"
+      "goalieId": "8476999"
     },
     {
       "team": "PHI",
-      "goalie": "Dan Vladar",
+      "goalie": "Joseph Woll",
       "opponent": "CBJ",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-14",
       "gameId": 2026020319,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8478435"
+      "goalieId": "8479361"
     },
     {
       "team": "PIT",
@@ -272,7 +272,7 @@
       "goalie": "Anthony Stolarz",
       "opponent": "EDM",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-14",
       "gameId": 2026020314,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -302,14 +302,14 @@
     },
     {
       "team": "WSH",
-      "goalie": "Logan Thompson",
+      "goalie": "Charlie Lindgren",
       "opponent": "NJD",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-14",
       "gameId": 2026020318,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8480313"
+      "goalieId": "8479292"
     },
     {
       "team": "ANA",
@@ -379,14 +379,14 @@
     },
     {
       "team": "PHI",
-      "goalie": "Joseph Woll",
+      "goalie": "Dan Vladar",
       "opponent": "EDM",
       "venue": "home",
       "status": "projected",
       "date": "2026-11-15",
       "gameId": 2026020326,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8479361"
+      "goalieId": "8478435"
     },
     {
       "team": "SJS",

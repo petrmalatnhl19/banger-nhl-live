@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-14T15:59:26.254852+00:00",
+  "generatedAt": "2026-11-14T16:43:30.865965+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 8,
+  "currentProjections": 9,
   "needsFreshProjection": [
     "avalanche",
     "blue jackets",
@@ -21,7 +21,6 @@
     "maple leafs",
     "oilers",
     "panthers",
-    "penguins",
     "red wings",
     "sabres",
     "senators",
@@ -48,7 +47,6 @@
     "maple leafs",
     "oilers",
     "panthers",
-    "penguins",
     "red wings",
     "sabres",
     "senators",
@@ -78,7 +76,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-14T15:35:00+00:00",
+      "publishedAt": "2026-11-14T16:31:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -222,7 +220,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-14T15:35:00+00:00",
+      "publishedAt": "2026-11-14T16:31:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -246,7 +244,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-14T15:35:00+00:00",
+      "publishedAt": "2026-11-14T16:31:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -270,7 +268,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-14T15:35:00+00:00",
+      "publishedAt": "2026-11-14T16:31:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -343,11 +341,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-11T19:57:02.373000+00:00",
-      "source": "https://www.nhl.com/news/pittsburgh-penguins-san-jose-sharks-game-preview-november-11-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-14T16:32:26.653000+00:00",
+      "source": "https://www.nhl.com/news/ottawa-senators-pittsburgh-penguins-game-preview-november-14-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "predators": {
       "hasProjectedLines": true,
@@ -400,12 +398,11 @@
     "senators": {
       "hasProjectedLines": true,
       "sources": [
-        "automatic",
         "archive"
       ],
       "currentProjection": false,
-      "publishedAt": "2026-11-12T18:06:47.983000+00:00",
-      "source": "https://www.nhl.com/news/colorado-avalanche-ottawa-senators-game-preview-november-12-2026",
+      "publishedAt": null,
+      "source": null,
       "needsFreshProjection": true,
       "status": "older_verified"
     },

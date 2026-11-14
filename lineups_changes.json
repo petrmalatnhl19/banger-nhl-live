@@ -67,34 +67,26 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "penguins": {
-      "updatedAt": "2026-11-07T19:38:37.159995+00:00",
-      "previousPublishedAt": "2026-11-05T16:53:27.782000+00:00",
-      "publishedAt": "2026-11-07T19:32:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-14T16:43:29.538652+00:00",
+      "previousPublishedAt": "2026-11-11T19:57:02.373000+00:00",
+      "publishedAt": "2026-11-14T16:32:26.653000+00:00",
+      "source": "https://www.nhl.com/news/ottawa-senators-pittsburgh-penguins-game-preview-november-14-2026",
       "events": [
         {
           "type": "moved",
-          "player": "Evgeni Malkin",
-          "from": "Útok 2",
-          "to": "Útok 1"
+          "player": "Nick Robertson",
+          "from": "Útok 4",
+          "to": "Útok 3"
         },
         {
-          "type": "moved",
-          "player": "Tommy Novak",
-          "from": "Útok 1",
-          "to": "Útok 2"
+          "type": "added",
+          "player": "Rutger McGroarty",
+          "to": "Útok 4"
         },
         {
-          "type": "moved",
-          "player": "Spencer Stastney",
-          "from": "Obrana 2",
-          "to": "Obrana 1"
-        },
-        {
-          "type": "moved",
-          "player": "Samuel Girard",
-          "from": "Obrana 1",
-          "to": "Obrana 2"
+          "type": "removed",
+          "player": "Ville Koivunen",
+          "from": "Útok 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

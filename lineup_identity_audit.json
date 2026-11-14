@@ -10,6 +10,24 @@
           "automaticApproval": false
         }
       ]
+    },
+    "senators": {
+      "players": [
+        {
+          "sourceName": "Philip Tomasino",
+          "expectedRole": "forwards",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
+          "automaticApproval": false
+        },
+        {
+          "sourceName": "Samuel Blais",
+          "expectedRole": "forwards",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
+          "automaticApproval": false
+        }
+      ]
     }
   },
   "policy": "Identity audit only; never auto-approve ambiguous or absent players."

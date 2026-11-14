@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T15:59:24.869340+00:00",
+  "generatedAt": "2026-11-14T16:43:29.534517+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -20,7 +20,7 @@
       "team": "CAR",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-14T15:35:00+00:00",
+      "candidatePublishedAt": "2026-11-14T16:31:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -97,29 +97,53 @@
     "senators": {
       "team": "OTT",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/colorado-avalanche-ottawa-senators-game-preview-november-12-2026",
-      "candidatePublishedAt": "2026-11-12T18:06:47.983000+00:00",
+      "candidateSource": "https://www.nhl.com/news/ottawa-senators-pittsburgh-penguins-game-preview-november-14-2026",
+      "candidatePublishedAt": "2026-11-14T16:32:26.653000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
-      "rosterValidation": "passed",
-      "gameEvidenceExceptions": [
+      "rosterValidation": "insufficient_position_matched_lines",
+      "roleMismatches": [],
+      "rejectedLines": [
         {
-          "player": "Philip Tomasino",
-          "role": "forwards",
-          "basis": "official game boxscore on projection publication date"
+          "group": "forwards",
+          "line": 2,
+          "players": [
+            "Philip Tomasino"
+          ],
+          "sourceLine": [
+            "Philip Tomasino",
+            "Shane Pinto",
+            "Drake Batherson"
+          ]
         },
         {
-          "player": "Samuel Blais",
-          "role": "forwards",
-          "basis": "official game boxscore on projection publication date"
+          "group": "forwards",
+          "line": 4,
+          "players": [
+            "Samuel Blais"
+          ],
+          "sourceLine": [
+            "Samuel Blais",
+            "Stephen Halliday",
+            "Hayden Hodgson"
+          ]
         }
       ],
-      "roleMismatches": [],
-      "rejectedLines": [],
-      "rejectedPlayerReasons": [],
-      "validatedForwardLines": 4,
+      "rejectedPlayerReasons": [
+        {
+          "name": "Philip Tomasino",
+          "expectedRole": "forwards",
+          "reason": "not_in_current_roster"
+        },
+        {
+          "name": "Samuel Blais",
+          "expectedRole": "forwards",
+          "reason": "not_in_current_roster"
+        }
+      ],
+      "validatedForwardLines": 2,
       "validatedDefensePairs": 3,
-      "accepted": true
+      "accepted": false
     },
     "sharks": {
       "team": "SJS",
@@ -140,7 +164,7 @@
       "team": "WPG",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-14T15:35:00+00:00",
+      "candidatePublishedAt": "2026-11-14T16:31:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
