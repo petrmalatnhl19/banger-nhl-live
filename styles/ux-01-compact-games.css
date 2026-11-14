@@ -101,3 +101,28 @@
     scroll-margin-bottom: 100px;
   }
 }
+
+@media (max-width: 650px) {
+  body:has(#calendarBar:not(.hidden)) #content .grid > .game {
+    padding: 8px 10px !important;
+    border-radius: 12px !important;
+  }
+  body:has(#calendarBar:not(.hidden)) #content .grid > .game .analyst-teams {
+    margin: 0 0 3px !important;
+    gap: 6px !important;
+  }
+  body:has(#calendarBar:not(.hidden)) #content .grid > .game .game-card-score {
+    margin: 2px 0 !important;
+    line-height: 1.1 !important;
+  }
+  body:has(#calendarBar:not(.hidden)) #content .grid > .game > p {
+    margin-top: 3px !important;
+    margin-bottom: 4px !important;
+  }
+  body:has(#calendarBar:not(.hidden)) #content .grid > .game > button.btn {
+    min-height: 32px !important;
+    margin: 3px 2px 0 0 !important;
+    padding: 5px 8px !important;
+    font-size: 10px !important;
+  }
+}
