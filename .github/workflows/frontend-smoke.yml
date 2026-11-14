@@ -133,5 +133,8 @@ jobs:
         run: node .github/scripts/browser-date-races.cjs
       - name: Test browser history, match detail cleanup and reload in Chromium
         run: node .github/scripts/browser-history-reload.cjs
-      - name: Test Back Forward Cache restore and fresh NHL scores in Chromium
+      - name: Diagnose real Back Forward Cache eligibility in Chromium
+        continue-on-error: true
+        run: timeout --signal=TERM --kill-after=5s 30s xvfb-run -a node .github/scripts/browser-bfcache-diagnostic.cjs
+      - name: Test browser return, selected date and refreshed NHL scores in Chromium
         run: timeout --signal=TERM --kill-after=5s 45s xvfb-run -a node .github/scripts/browser-bfcache-return.cjs
