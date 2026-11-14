@@ -2162,7 +2162,6 @@ function closeArena(fromHistory=false){if(!fromHistory&&history.state?.bangerMod
 const season=()=>{const d=new Date(),y=d.getMonth()>=8?d.getFullYear():d.getFullYear()-1;return ''+y+(y+1)};
 let bangerStatsRequestId=0;
 const statsCache=new Map();
-const statsRequests=new Map();
 const statsCacheDuration=5*60*1000;
 
 function statsDefaultDirection(key){
@@ -2190,16 +2189,6 @@ async function fetchStatsRows(type){
  }).map(row=>type==='goalies'?{...row,savePctg:normalizeGoalieSavePct(row)}:row);
 }
 
-function loadStatsRows(type){
- if(!statsRequests.has(type)){
-  statsRequests.set(type,fetchStatsRows(type).then(rows=>{
-   statsCache.set(type,{rows,expires:Date.now()+statsCacheDuration});
-   return rows;
-  }).finally(()=>statsRequests.delete(type)));
- }
- return statsRequests.get(type);
-}
-
 async function stats(type){
  const requestId=++bangerStatsRequestId;
  const isCurrent=()=>S.tab===type&&requestId===bangerStatsRequestId;
@@ -2215,11 +2204,13 @@ async function stats(type){
  S.statsSortDirection=statsDefaultDirection($('sort').value);
  $('search').value='';
  const cached=statsCache.get(type);
+ const fresh=!!cached&&cached.expires>Date.now();
  $('content').innerHTML='';
- if(!cached||cached.expires<=Date.now())$('status').textContent='Načítám kompletní žebříček NHL…';
+ if(!fresh)$('status').textContent='Načítám kompletní žebříček NHL…';
  try{
-  const rows=cached&&cached.expires>Date.now()?cached.rows:await loadStatsRows(type);
+  const rows=fresh?cached.rows:await fetchStatsRows(type);
   if(!isCurrent())return;
+  if(!fresh)statsCache.set(type,{rows,expires:Date.now()+statsCacheDuration});
   S.rows=rows;
   renderStats();
   $('status').textContent='';
