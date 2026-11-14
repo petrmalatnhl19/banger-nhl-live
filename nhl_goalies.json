@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-11-13T23:57:08.297471+00:00",
-  "rostersUpdatedAt": "2026-11-13T23:56:24.755691+00:00",
-  "projectionDate": "2026-11-13",
+  "updatedAt": "2026-11-14T01:00:28.897782+00:00",
+  "rostersUpdatedAt": "2026-11-14T00:59:42.568303+00:00",
+  "projectionDate": "2026-11-14",
   "teamCount": 32,
   "goalieCount": 74,
   "goalies": [
@@ -34,16 +34,18 @@
       "team": "CHI",
       "teamKey": "blackhawks",
       "playerId": 8481519,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Jet Greaves",
       "team": "CBJ",
       "teamKey": "blue jackets",
       "playerId": 8482982,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Cam Talbot",
@@ -66,8 +68,9 @@
       "team": "STL",
       "teamKey": "blues",
       "playerId": 8480981,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Michael DiPietro",
@@ -82,8 +85,9 @@
       "team": "BOS",
       "teamKey": "bruins",
       "playerId": 8480280,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Jakub Dobes",
@@ -98,8 +102,9 @@
       "team": "MTL",
       "teamKey": "canadiens",
       "playerId": 8484170,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Samuel Montembeault",
@@ -130,9 +135,8 @@
       "team": "VAN",
       "teamKey": "canucks",
       "playerId": 8482447,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-13",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Charlie Lindgren",
@@ -147,8 +151,9 @@
       "team": "WSH",
       "teamKey": "capitals",
       "playerId": 8480313,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Jake Allen",
@@ -163,8 +168,9 @@
       "team": "NJD",
       "teamKey": "devils",
       "playerId": 8476945,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Laurent Brossoit",
@@ -179,8 +185,9 @@
       "team": "ANA",
       "teamKey": "ducks",
       "playerId": 8480843,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Ville Husso",
@@ -203,16 +210,18 @@
       "team": "CGY",
       "teamKey": "flames",
       "playerId": 8481692,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Dan Vladar",
       "team": "PHI",
       "teamKey": "flyers",
       "playerId": 8478435,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Joseph Woll",
@@ -235,9 +244,8 @@
       "team": "VGK",
       "teamKey": "golden knights",
       "playerId": 8478499,
-      "starterStatus": "confirmed",
-      "starterGameDate": "2026-11-13",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Brandon Bussi",
@@ -252,16 +260,18 @@
       "team": "CAR",
       "teamKey": "hurricanes",
       "playerId": 8481611,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Ilya Sorokin",
       "team": "NYI",
       "teamKey": "islanders",
       "playerId": 8478009,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Semyon Varlamov",
@@ -308,16 +318,18 @@
       "team": "LAK",
       "teamKey": "kings",
       "playerId": 8475311,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Joey Daccord",
       "team": "SEA",
       "teamKey": "kraken",
       "playerId": 8478916,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Philipp Grubauer",
@@ -356,8 +368,9 @@
       "team": "UTA",
       "teamKey": "mammoth",
       "playerId": 8478872,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Artur Akhtyamov",
@@ -404,8 +417,9 @@
       "team": "EDM",
       "teamKey": "oilers",
       "playerId": 8482221,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Jacob Markstrom",
@@ -436,8 +450,9 @@
       "team": "PIT",
       "teamKey": "penguins",
       "playerId": 8481668,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Justus Annunen",
@@ -452,18 +467,16 @@
       "team": "NSH",
       "teamKey": "predators",
       "playerId": 8477424,
-      "starterStatus": "confirmed",
-      "starterGameDate": "2026-11-13",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Dylan Garand",
       "team": "NYR",
       "teamKey": "rangers",
       "playerId": 8482193,
-      "starterStatus": "confirmed",
-      "starterGameDate": "2026-11-13",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Joonas Korpisalo",
@@ -494,8 +507,9 @@
       "team": "DET",
       "teamKey": "red wings",
       "playerId": 8480193,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Colten Ellis",
@@ -542,8 +556,9 @@
       "team": "SJS",
       "teamKey": "sharks",
       "playerId": 8482137,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Alex Nedeljkovic",
@@ -566,8 +581,9 @@
       "team": "DAL",
       "teamKey": "stars",
       "playerId": 8479979,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Rémi Poirier",
@@ -598,8 +614,9 @@
       "team": "MIN",
       "teamKey": "wild",
       "playerId": 8482661,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     }
   ]
 }
