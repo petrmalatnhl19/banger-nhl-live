@@ -470,26 +470,26 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "maple leafs": {
-      "updatedAt": "2026-11-12T18:37:06.257402+00:00",
-      "previousPublishedAt": "2026-11-10T17:52:49.175000+00:00",
-      "publishedAt": "2026-11-12T17:52:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-14T17:23:47.548091+00:00",
+      "previousPublishedAt": "2026-11-12T17:44:20.897000+00:00",
+      "publishedAt": "2026-11-14T17:05:36.386000+00:00",
+      "source": "https://www.nhl.com/news/edmonton-oilers-toronto-maple-leafs-game-preview-november-14-2026",
       "events": [
         {
-          "type": "moved",
-          "player": "Troy Stecher",
-          "from": "Obrana 3",
+          "type": "added",
+          "player": "Chris Tanev",
           "to": "Obrana 1"
         },
         {
-          "type": "added",
-          "player": "Cole McWard",
+          "type": "moved",
+          "player": "Troy Stecher",
+          "from": "Obrana 1",
           "to": "Obrana 3"
         },
         {
           "type": "removed",
-          "player": "Chris Tanev",
-          "from": "Obrana 1"
+          "player": "Cole McWard",
+          "from": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

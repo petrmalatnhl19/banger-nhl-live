@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-14T16:43:34.190694+00:00",
-  "rostersUpdatedAt": "2026-11-14T16:42:52.849463+00:00",
+  "updatedAt": "2026-11-14T17:23:51.592515+00:00",
+  "rostersUpdatedAt": "2026-11-14T17:23:14.763299+00:00",
   "projectionDate": "2026-11-14",
   "teamCount": 32,
   "goalieCount": 74,
@@ -10,8 +10,9 @@
       "team": "COL",
       "teamKey": "avalanche",
       "playerId": 8478406,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Scott Wedgewood",
@@ -68,7 +69,7 @@
       "team": "STL",
       "teamKey": "blues",
       "playerId": 8480981,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-14",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -583,7 +584,7 @@
       "team": "DAL",
       "teamKey": "stars",
       "playerId": 8479979,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-14",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },

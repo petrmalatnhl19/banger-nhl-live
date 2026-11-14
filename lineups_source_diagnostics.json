@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T16:43:29.534517+00:00",
+  "generatedAt": "2026-11-14T17:23:47.544933+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -20,7 +20,7 @@
       "team": "CAR",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-14T16:31:00+00:00",
+      "candidatePublishedAt": "2026-11-14T17:03:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -97,8 +97,8 @@
     "senators": {
       "team": "OTT",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/ottawa-senators-pittsburgh-penguins-game-preview-november-14-2026",
-      "candidatePublishedAt": "2026-11-14T16:32:26.653000+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-14T17:03:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "insufficient_position_matched_lines",
@@ -164,7 +164,7 @@
       "team": "WPG",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-14T16:31:00+00:00",
+      "candidatePublishedAt": "2026-11-14T17:03:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
