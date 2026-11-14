@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-14T15:17:48.463341+00:00",
+  "fetchedAt": "2026-11-14T15:59:24.875301+00:00",
   "teams": {
     "kraken": {
       "name": "Kraken",
@@ -47,7 +47,7 @@
       "injured": "Jacob Melanson (upper body), Ryan Lindgren (upper body), Jared McCann (lower body), Curtis Douglas (upper body)",
       "scratched": "Cale Fleury, Jani Nyman, Logan Morrison, Nikke Kokko",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T05:00:00+00:00"
+      "publishedAt": "2026-11-14T15:35:00+00:00"
     },
     "hurricanes": {
       "name": "Hurricanes",
@@ -94,7 +94,7 @@
       "injured": "",
       "scratched": "Eric Robinson, Juuso Valimaki, Mike Reilly, Nicolas Deslauriers, Cayden Primeau",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T05:00:00+00:00"
+      "publishedAt": "2026-11-14T15:35:00+00:00"
     },
     "jets": {
       "name": "Jets",
@@ -141,7 +141,7 @@
       "injured": "Nick Bjugstad (undisclosed), Dylan DeMelo (lower body), Isak Rosen (undisclosed)",
       "scratched": "Clay Stevenson",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T05:00:00+00:00"
+      "publishedAt": "2026-11-14T15:35:00+00:00"
     },
     "blackhawks": {
       "name": "Blackhawks",
@@ -184,7 +184,7 @@
       "injured": "Bowen Byram (upper body)",
       "scratched": "Dillon Boucher, Ethan Del Mastro, Teuvo Teravainen",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T05:00:00+00:00"
+      "publishedAt": "2026-11-14T15:35:00+00:00"
     },
     "predators": {
       "name": "Predators",

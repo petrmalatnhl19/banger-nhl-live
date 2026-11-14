@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-14T15:17:51.729531+00:00",
+  "checkedAt": "2026-11-14T15:59:27.754874+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "candidateCount": 94,
   "matchedCount": 90,
@@ -49,7 +49,7 @@
       "goalie": "Jeremy Swayman",
       "opponent": "MIN",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-14",
       "gameId": 2026020313,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -426,10 +426,10 @@
     },
     {
       "team": "MTL",
-      "goalie": "Jacob Fowler",
+      "goalie": "Jakub Dobes",
       "opponent": "COL",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-14",
       "gameId": 2026020315,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -616,10 +616,10 @@
     },
     {
       "team": "PIT",
-      "goalie": "Arturs Silovs",
+      "goalie": "Sergei Murashov",
       "opponent": "OTT",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-14",
       "gameId": 2026020317,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -719,7 +719,7 @@
       "goalie": "Andrei Vasilevskiy",
       "opponent": "DET",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-14",
       "gameId": 2026020316,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -746,7 +746,7 @@
     },
     {
       "team": "TOR",
-      "goalie": "Sergei Bobrovsky",
+      "goalie": "Anthony Stolarz",
       "opponent": "EDM",
       "venue": "home",
       "status": "projected",
