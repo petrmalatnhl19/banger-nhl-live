@@ -110,6 +110,7 @@ jobs:
         run: |
           npm install --no-save --no-package-lock playwright@1.58.2
           npx playwright install --with-deps chromium
+          sudo apt-get update -qq && sudo apt-get install -y xvfb
       - name: Start local web server
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/banger-server.log 2>&1 &
@@ -133,4 +134,4 @@ jobs:
       - name: Test browser history, match detail cleanup and reload in Chromium
         run: node .github/scripts/browser-history-reload.cjs
       - name: Test Back Forward Cache restore and fresh NHL scores in Chromium
-        run: timeout --signal=TERM --kill-after=5s 45s node .github/scripts/browser-bfcache-return.cjs
+        run: timeout --signal=TERM --kill-after=5s 45s xvfb-run -a node .github/scripts/browser-bfcache-return.cjs
