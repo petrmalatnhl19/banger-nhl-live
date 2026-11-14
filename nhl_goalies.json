@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-14T18:11:27.387652+00:00",
-  "rostersUpdatedAt": "2026-11-14T18:10:52.870354+00:00",
+  "updatedAt": "2026-11-14T19:10:13.935994+00:00",
+  "rostersUpdatedAt": "2026-11-14T19:09:44.030280+00:00",
   "projectionDate": "2026-11-14",
   "teamCount": 32,
   "goalieCount": 74,
@@ -169,7 +169,7 @@
       "team": "NJD",
       "teamKey": "devils",
       "playerId": 8476945,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-14",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -309,17 +309,17 @@
       "team": "LAK",
       "teamKey": "kings",
       "playerId": 8476341,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Darcy Kuemper",
       "team": "LAK",
       "teamKey": "kings",
       "playerId": 8475311,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-14",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Joey Daccord",
@@ -534,8 +534,9 @@
       "team": "BUF",
       "teamKey": "sabres",
       "playerId": 8479312,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Samuel Ersson",
@@ -559,7 +560,7 @@
       "team": "SJS",
       "teamKey": "sharks",
       "playerId": 8482137,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-14",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },

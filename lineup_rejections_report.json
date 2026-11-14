@@ -1,9 +1,37 @@
 {
-  "teamsWithRejectedLines": 2,
+  "teamsWithRejectedLines": 4,
   "teams": {
+    "islanders": {
+      "team": "NYI",
+      "rosterUpdatedAt": "2026-11-14T19:09:41.998110+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 3,
+      "candidateDefensePairs": 3,
+      "validatedForwardLines": 2,
+      "validatedDefensePairs": 3,
+      "rejected": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 3,
+          "sourceLine": [
+            "Matias Maccelli",
+            "Kyle MacLean",
+            "Mitchell Chaffee"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Kyle MacLean",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    },
     "rangers": {
       "team": "NYR",
-      "rosterUpdatedAt": "2026-11-14T18:10:50.349379+00:00",
+      "rosterUpdatedAt": "2026-11-14T19:09:42.137496+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -30,7 +58,7 @@
     },
     "senators": {
       "team": "OTT",
-      "rosterUpdatedAt": "2026-11-14T18:10:50.550901+00:00",
+      "rosterUpdatedAt": "2026-11-14T19:09:42.281703+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -65,6 +93,39 @@
           "unverifiedPlayers": [
             {
               "name": "Samuel Blais",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    },
+    "stars": {
+      "team": "DAL",
+      "rosterUpdatedAt": "2026-11-14T19:09:40.778586+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 2,
+      "rejected": [
+        {
+          "group": "defense",
+          "sourceLineNumber": 3,
+          "sourceLine": [
+            "Trey Taylor",
+            "Kyle Burroughs"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Trey Taylor",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            },
+            {
+              "name": "Kyle Burroughs",
               "reason": "not_in_current_roster",
               "inLocalCurrentRoster": false,
               "requiresIndependentGameEvidence": true
