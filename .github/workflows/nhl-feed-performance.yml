@@ -11,6 +11,7 @@ on:
       - scripts/test_parallel_lineup_sources.cjs
       - scripts/test_game_detail_cache.cjs
       - scripts/test_nhl_feed_timeout.cjs
+      - scripts/test_live_detail_race_guard.cjs
       - .github/workflows/nhl-feed-performance.yml
   workflow_dispatch:
 
@@ -32,3 +33,4 @@ jobs:
       - run: node scripts/test_parallel_lineup_sources.cjs
       - run: node scripts/test_game_detail_cache.cjs
       - run: node scripts/test_nhl_feed_timeout.cjs
+      - run: node scripts/test_live_detail_race_guard.cjs
