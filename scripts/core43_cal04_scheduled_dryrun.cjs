@@ -50,7 +50,7 @@ async function run({url,key,now=new Date().toISOString(),fetchImpl=fetch,existin
  if(!Array.isArray(existing)||existing.some(k=>typeof k!=="string"))throw Error("invalid_existing_keys");
  if(existingKeys===undefined&&ledgerPath&&fs.existsSync(ledgerPath)){
   const ledger=JSON.parse(fs.readFileSync(ledgerPath,"utf8"));
-  if(!ledger||!Array.isArray(ledger.keys)||ledger.keys.some(k=>typeof k!=="string"))throw Error("invalid_readonly_ledger");
+  if(!ledger||ledger.schema!=="core43_cal04_keys_v1"||!Array.isArray(ledger.keys)||ledger.keys.some(k=>typeof k!=="string"))throw Error("invalid_readonly_ledger");
   existing=ledger.keys;
  }
  const report=summarize({now,games,existing});
