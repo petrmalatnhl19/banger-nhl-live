@@ -126,3 +126,5 @@ jobs:
         run: node .github/scripts/browser-midnight-rollover.cjs
       - name: Test LIVE to FINAL cache expiry and refreshed statistics in Chromium
         run: node .github/scripts/browser-live-final-cache.cjs
+      - name: Test concurrent NHL requests and stale match details in Chromium
+        run: node .github/scripts/browser-concurrent-details.cjs
