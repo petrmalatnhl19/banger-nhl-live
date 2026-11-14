@@ -6,7 +6,7 @@ const { chromium } = require("playwright");
 // Score list (not cached) shows LIVE -> FINAL; landing/boxscore caches expire.
 (async () => {
   const browser = await chromium.launch({ headless: true });
-  const context = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, timezoneId: "Europe/Prague" });
   const page = await context.newPage();
   const gameId = 987654;
   const counters = { score: 0, game: 0, boxscore: 0 };
