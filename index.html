@@ -1938,7 +1938,7 @@ h1,.brand,.logo,.nums,.arenanum,.metric b,.profilegrid b,
 <script>
 const $=id=>document.getElementById(id),S={tab:'games',rows:[],expanded:false,date:localDate(new Date())};function localDate(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
 // Preserve the selected match date across reloads within this browser tab.
-try{const saved=sessionStorage.getItem('bangerSelectedGamesDate');if(/^\\d{4}-\\d{2}-\\d{2}$/.test(saved||'')&&localDate(new Date(saved+'T12:00:00'))===saved)S.date=saved;}catch(e){}
+try{const saved=sessionStorage.getItem('bangerSelectedGamesDate');if(/^\d{4}-\d{2}-\d{2}$/.test(saved||'')&&localDate(new Date(saved+'T12:00:00'))===saved)S.date=saved;}catch(e){}
 $('date').value=S.date;
 const safe=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const bangerNhlFeedInflight=new Map();
