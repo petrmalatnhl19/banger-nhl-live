@@ -1,10 +1,13 @@
 {
-  "generatedAt": "2026-11-14T05:52:47.461826+00:00",
+  "generatedAt": "2026-11-14T06:59:28.085171+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 17,
+  "currentProjections": 12,
   "needsFreshProjection": [
+    "avalanche",
     "blue jackets",
+    "bruins",
+    "canadiens",
     "capitals",
     "devils",
     "ducks",
@@ -17,12 +20,17 @@
     "penguins",
     "red wings",
     "sabres",
+    "senators",
     "sharks",
+    "stars",
     "wild"
   ],
   "missing": [],
   "olderVerified": [
+    "avalanche",
     "blue jackets",
+    "bruins",
+    "canadiens",
     "capitals",
     "devils",
     "ducks",
@@ -35,7 +43,9 @@
     "penguins",
     "red wings",
     "sabres",
+    "senators",
     "sharks",
+    "stars",
     "wild"
   ],
   "manualSnapshots": [],
@@ -47,11 +57,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-12T18:06:47.983000+00:00",
       "source": "https://www.nhl.com/news/colorado-avalanche-ottawa-senators-game-preview-november-12-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "blackhawks": {
       "hasProjectedLines": true,
@@ -95,11 +105,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-12T17:55:39.979000+00:00",
       "source": "https://www.nhl.com/news/montreal-canadiens-boston-bruins-game-preview-november-12-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "canadiens": {
       "hasProjectedLines": true,
@@ -107,11 +117,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-12T17:55:39.979000+00:00",
       "source": "https://www.nhl.com/news/montreal-canadiens-boston-bruins-game-preview-november-12-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "canucks": {
       "hasProjectedLines": true,
@@ -385,11 +395,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-12T18:06:47.983000+00:00",
       "source": "https://www.nhl.com/news/colorado-avalanche-ottawa-senators-game-preview-november-12-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "sharks": {
       "hasProjectedLines": true,
@@ -410,11 +420,11 @@
         "archive",
         "manual"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-12T18:41:28.341000+00:00",
       "source": "https://www.nhl.com/news/winnipeg-jets-dallas-stars-game-preview-november-12-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "wild": {
       "hasProjectedLines": true,

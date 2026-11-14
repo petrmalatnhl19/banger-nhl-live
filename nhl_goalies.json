@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-14T05:52:49.547518+00:00",
-  "rostersUpdatedAt": "2026-11-14T05:52:20.036230+00:00",
+  "updatedAt": "2026-11-14T06:59:30.322053+00:00",
+  "rostersUpdatedAt": "2026-11-14T06:58:55.976728+00:00",
   "projectionDate": "2026-11-14",
   "teamCount": 32,
   "goalieCount": 74,
@@ -185,9 +185,8 @@
       "team": "ANA",
       "teamKey": "ducks",
       "playerId": 8480843,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-14",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Ville Husso",
@@ -210,9 +209,8 @@
       "team": "CGY",
       "teamKey": "flames",
       "playerId": 8481692,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-14",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Dan Vladar",
@@ -352,9 +350,8 @@
       "team": "TBL",
       "teamKey": "lightning",
       "playerId": 8476883,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-14",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Sebastian Cossa",
@@ -386,9 +383,8 @@
       "team": "TOR",
       "teamKey": "maple leafs",
       "playerId": 8475683,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-14",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Anthony Stolarz",
@@ -453,9 +449,8 @@
       "team": "PIT",
       "teamKey": "penguins",
       "playerId": 8481668,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-14",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Justus Annunen",
@@ -527,9 +522,8 @@
       "team": "BUF",
       "teamKey": "sabres",
       "playerId": 8480045,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-14",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Alex Lyon",
@@ -544,8 +538,9 @@
       "team": "OTT",
       "teamKey": "senators",
       "playerId": 8481035,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Linus Ullmark",
