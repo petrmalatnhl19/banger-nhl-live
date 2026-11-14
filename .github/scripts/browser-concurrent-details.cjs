@@ -48,8 +48,8 @@ const game = (id, name) => ({
     assert.equal(counts["71001"], 1, "two identical concurrent requests must deduplicate");
 
     // While A is delayed, B must render. Late A must never overwrite B.
-    await page.evaluate(() => detail(71001, ""));
-    await page.evaluate(() => detail(71002, ""));
+    await page.evaluate(() => detail(71001, document.createElement("button")));
+    await page.evaluate(() => detail(71002, document.createElement("button")));
     await page.waitForFunction(() => String(bangerActiveDetailGameId) === "71002" && !document.getElementById("arenaBody").textContent.includes("Načítám detail"), null, { timeout: 10000 });
     assert.equal(counts["71002"], 1, "second match must be fetched once");
     releaseA();
@@ -62,7 +62,7 @@ const game = (id, name) => ({
 
     // Closing a detail while its request is pending must not leave a spinner.
     await page.evaluate(() => closeArena(true));
-    await page.evaluate(() => detail(71003, ""));
+    await page.evaluate(() => detail(71003, document.createElement("button")));
     await page.waitForFunction(() => String(bangerActiveDetailGameId) === "71003", null, { timeout: 5000 });
     await page.evaluate(() => closeArena(true));
     await wait(150);
