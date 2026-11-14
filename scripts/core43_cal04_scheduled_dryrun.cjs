@@ -24,7 +24,7 @@ function summarize({now,games,existing=[]}={}){
   skipped:rows.filter(x=>x.status==="skipped").length,
   databaseWrites:0,production:false,results:rows};
 }
-async function run({url,key,now=new Date().toISOString(),fetchImpl=fetch}={}){
+async function run({url,key,now=new Date().toISOString(),fetchImpl=fetch,existingKeys}={}){
  if(!key)throw Error("missing_server_credentials");
  const [schedules,predictions]=await Promise.all([
   fetchRows({url,key,table:"nhl_core43_schedule_snapshots",select:"game_id,away_team,home_team,kickoff_at,fetched_at",fetchImpl}),
@@ -46,8 +46,9 @@ async function run({url,key,now=new Date().toISOString(),fetchImpl=fetch}={}){
   }catch(e){games.push({...game,baselineReady:false,reason:"source_read_failed"});}
  }
  const ledgerPath=process.env.CORE43_CAL04_LEDGER_PATH;
- let existing=[];
- if(ledgerPath&&fs.existsSync(ledgerPath)){
+ let existing=existingKeys===undefined?[]:existingKeys;
+ if(!Array.isArray(existing)||existing.some(k=>typeof k!=="string"))throw Error("invalid_existing_keys");
+ if(existingKeys===undefined&&ledgerPath&&fs.existsSync(ledgerPath)){
   const ledger=JSON.parse(fs.readFileSync(ledgerPath,"utf8"));
   if(!ledger||!Array.isArray(ledger.keys)||ledger.keys.some(k=>typeof k!=="string"))throw Error("invalid_readonly_ledger");
   existing=ledger.keys;
