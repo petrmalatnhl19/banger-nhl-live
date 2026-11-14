@@ -30,7 +30,6 @@ const fixtures = {
   const page = await context.newPage();
   const pending = new Map();
   const requests = [];
-  let release = () => {};
   try {
     await page.clock.install({ time: new Date("2026-11-14T12:00:00Z") });
     await page.route("**/functions/v1/nhl-feed?kind=score*", async route => {
@@ -80,7 +79,6 @@ const fixtures = {
 
     // Complete stale requests in reverse order. Neither may replace day 16.
     for (const date of [dates[1], dates[0]]) {
-      await page.waitForFunction(d => true, date);
       assert(pending.has(date), "expected a delayed API request for " + date);
       pending.get(date)();
       pending.delete(date);
