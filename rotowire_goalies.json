@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-14T15:17:52.313786+00:00",
+  "updatedAt": "2026-11-14T15:59:28.276739+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "goalieCount": 90,
   "games": [
@@ -19,7 +19,7 @@
       "goalie": "Jeremy Swayman",
       "opponent": "MIN",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-14",
       "gameId": 2026020313,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -159,14 +159,14 @@
     },
     {
       "team": "MTL",
-      "goalie": "Jacob Fowler",
+      "goalie": "Jakub Dobes",
       "opponent": "COL",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-14",
       "gameId": 2026020315,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8484170"
+      "goalieId": "8482487"
     },
     {
       "team": "NJD",
@@ -214,14 +214,14 @@
     },
     {
       "team": "PIT",
-      "goalie": "Arturs Silovs",
+      "goalie": "Sergei Murashov",
       "opponent": "OTT",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-14",
       "gameId": 2026020317,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8481668"
+      "goalieId": "8483703"
     },
     {
       "team": "SEA",
@@ -261,7 +261,7 @@
       "goalie": "Andrei Vasilevskiy",
       "opponent": "DET",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-14",
       "gameId": 2026020316,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -269,14 +269,14 @@
     },
     {
       "team": "TOR",
-      "goalie": "Sergei Bobrovsky",
+      "goalie": "Anthony Stolarz",
       "opponent": "EDM",
       "venue": "home",
       "status": "projected",
       "date": "2026-11-14",
       "gameId": 2026020314,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8475683"
+      "goalieId": "8476932"
     },
     {
       "team": "UTA",
