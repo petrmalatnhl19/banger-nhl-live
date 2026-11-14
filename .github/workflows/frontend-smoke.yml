@@ -17,6 +17,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: UX-01 mobile Games filter regression
+        run: node .github/scripts/test-ux-01-games.cjs
       - name: Validate local scripts and HTML entrypoint
         shell: bash
         run: |
