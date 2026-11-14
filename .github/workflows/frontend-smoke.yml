@@ -116,3 +116,5 @@ jobs:
           echo $! > /tmp/banger-server.pid
       - name: Test application startup in Chromium
         run: node .github/scripts/browser-smoke.cjs
+      - name: Test mobile tab reload and browser Back in Chromium
+        run: node .github/scripts/browser-navigation-reload.cjs
