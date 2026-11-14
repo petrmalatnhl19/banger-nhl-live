@@ -121,6 +121,8 @@ jobs:
         run: node .github/scripts/test-live-monitor.cjs
       - name: Test application startup in Chromium
         run: node .github/scripts/browser-smoke.cjs
+      - name: Test UX-03 mobile Statistics search, sorting and categories
+        run: node .github/scripts/browser-mobile-statistics.cjs
       - name: Test mobile tab reload and browser Back in Chromium
         run: node .github/scripts/browser-navigation-reload.cjs
       - name: Test offline mobile tab navigation and reconnect in Chromium
