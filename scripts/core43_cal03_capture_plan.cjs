@@ -9,11 +9,11 @@ const WINDOW=Object.freeze({minMinutes:45,maxMinutes:75});
 const iso=x=>typeof x==="string"&&Number.isFinite(Date.parse(x));
 const fail=reason=>({ready:false,reason,production:false,writeEnabled:false});
 function plan({payload,provenance,now,existing=[]}={}){
- if(!payload||!iso(now)||!iso(payload.predictionAt)||!iso(payload.kickoffAt))return fail("invalid_time");
+ if(!payload||!iso(now)||!iso(payload.predictionAt)||!iso(payload.kickoffAt))return fail("invalid_time");\n if(!Array.isArray(existing)||existing.some(x=>typeof x!=="string"))return fail("invalid_existing_keys");
  const ms=Date.parse(payload.kickoffAt)-Date.parse(now);
  if(ms<WINDOW.minMinutes*60000||ms>WINDOW.maxMinutes*60000)return fail("outside_60m_window");
  if(Date.parse(payload.predictionAt)>Date.parse(now)||Date.parse(now)-Date.parse(payload.predictionAt)>300000)return fail("stale_capture");
- if(!provenance||!provenance.gsaxArchiveId||provenance.baselineModel!=="core42")return fail("missing_provenance");
+ if(!provenance||typeof provenance.gsaxArchiveId!=="string"||!provenance.gsaxArchiveId.trim()||provenance.baselineModel!=="core42")return fail("missing_provenance");
  if(!payload.baseline||!iso(payload.baseline.predictedAt)||Date.parse(payload.baseline.predictedAt)>Date.parse(payload.predictionAt))return fail("invalid_baseline");
  const outputs=[];
  for(const coefficient of COEFFICIENTS){
@@ -26,7 +26,7 @@ function plan({payload,provenance,now,existing=[]}={}){
    away:result.expectedAwayGoals,home:result.expectedHomeGoals,
    production:false,experimental:true,calibrated:false,persistable:false};
   const sha256=crypto.createHash("sha256").update(JSON.stringify(record)).digest("hex");
-  const key=[record.gameId,record.schema,record.predictedAt,String(coefficient)].join(":");
+  // Stable per game and fixed 60-minute window, even when the runner retries with a fresh predictionAt.\n  const key=[record.gameId,record.schema,record.kickoffAt,"60m",String(coefficient)].join(":");
   outputs.push({key,sha256,record,duplicate:existing.includes(key)});
  }
  return {ready:true,mode:"read_only_dry_run",production:false,writeEnabled:false,
