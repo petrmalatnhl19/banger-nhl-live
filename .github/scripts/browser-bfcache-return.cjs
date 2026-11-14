@@ -84,6 +84,10 @@ const fixture = (score) => ({ games: [{
     assert.equal(await page.locator("#liveArena").evaluate(el => el.classList.contains("hidden")), true);
 
     const pageShows = await page.evaluate(() => window.__stab0513PageShows || []);
+    const notRestoredReasons = await page.evaluate(() =>
+      performance.getEntriesByType("navigation")[0]?.notRestoredReasons || null);
+    console.log("STAB-05.13 BFCache notRestoredReasons:",
+      JSON.stringify(notRestoredReasons));
     const navigation = await page.evaluate(() => ({
       entries: performance.getEntriesByType("navigation").map(e => ({ type: e.type, activationStart: e.activationStart })),
       pageshow: window.__stab0513PageShows || [],
