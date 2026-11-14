@@ -12,7 +12,7 @@
       "missingForwardLines": 0,
       "missingDefensePairs": 1,
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-13T20:35:00+00:00",
+      "publishedAt": "2026-11-14T03:02:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
@@ -22,8 +22,8 @@
       "reason": "incomplete_source_or_no_validated_replacement",
       "missingForwardLines": 0,
       "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-13T20:35:00+00:00",
+      "source": "https://www.nhl.com/news/new-york-rangers-vancouver-canucks-game-preview-november-13-2026",
+      "publishedAt": "2026-11-13T20:00:20.196000+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
@@ -66,8 +66,8 @@
       "reason": "rejected_roster_lines",
       "missingForwardLines": 0,
       "missingDefensePairs": 1,
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-13T20:35:00+00:00",
+      "source": "https://www.nhl.com/news/new-york-rangers-vancouver-canucks-game-preview-november-13-2026",
+      "publishedAt": "2026-11-13T20:00:20.196000+00:00",
       "rejectedLines": [
         {
           "group": "defense",
