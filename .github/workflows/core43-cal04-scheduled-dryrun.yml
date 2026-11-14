@@ -43,13 +43,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
+          set -euo pipefail
           artifact_id=$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts?per_page=100" --jq '[.artifacts[] | select(.name=="core43-cal04-readonly-report" and .expired==false)] | sort_by(.created_at) | last | .id // empty')
           if [[ -n "$artifact_id" ]]; then
             gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${artifact_id}/zip" > /tmp/core43-cal04-prior.zip
-            unzip -p /tmp/core43-cal04-prior.zip core43-cal04-report.json > /tmp/core43-cal04-prior.json || true
-            if [[ -s /tmp/core43-cal04-prior.json ]]; then
-              node -e 'const fs=require("fs");const r=JSON.parse(fs.readFileSync("/tmp/core43-cal04-prior.json","utf8"));fs.writeFileSync("/tmp/core43-cal04-ledger.json",JSON.stringify(r.ledger||{keys:[]}))'
-            fi
+            unzip -p /tmp/core43-cal04-prior.zip core43-cal04-report.json > /tmp/core43-cal04-prior.json
+            node -e 'const fs=require("fs");const r=JSON.parse(fs.readFileSync("/tmp/core43-cal04-prior.json","utf8"));if(!r.ledger||r.ledger.schema!=="core43_cal04_keys_v1"||!Array.isArray(r.ledger.keys)||r.ledger.keys.some(x=>typeof x!=="string"))throw Error("invalid_prior_artifact_ledger");fs.writeFileSync("/tmp/core43-cal04-ledger.json",JSON.stringify(r.ledger))'
           fi
       - name: Read-only diagnostic report
         env:
@@ -59,8 +58,8 @@ jobs:
         shell: bash
         run: |
           if [[ -z "$SUPABASE_URL" || -z "$SUPABASE_SERVICE_ROLE_KEY" ]]; then
-            echo "Missing read credentials: skipping dry-run" >> "$GITHUB_STEP_SUMMARY"
-            exit 0
+            echo "Missing read credentials: dry-run unavailable" >> "$GITHUB_STEP_SUMMARY"
+            exit 1
           fi
           node scripts/core43_cal04_scheduled_dryrun.cjs > core43-cal04-report.json
           node -e 'const r=require("./core43-cal04-report.json"); console.log("Checked: "+r.checked+", ready: "+r.ready+", duplicates: "+r.duplicates+", skipped: "+r.skipped+", writes: "+r.databaseWrites)' >> "$GITHUB_STEP_SUMMARY"
