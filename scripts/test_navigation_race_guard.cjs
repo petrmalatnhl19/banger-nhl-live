@@ -33,7 +33,7 @@ vm.runInContext(html.slice(from,to),sandbox);
  const fourth=sandbox.stats("skaters");
  pending.shift().reject(new Error("stale"));
  await third;
- assert.equal(nodes.get("status").textContent,"","old same-tab failure must not overwrite new screen");
+ assert.equal(nodes.get("status").textContent,"Načítám kompletní žebříček NHL…","old same-tab failure must not overwrite new screen");
  pending.shift().resolve({data:[],total:0});
  await fourth;
  const news=html.slice(html.indexOf("let bangerNewsPageRequestId=0;"),html.indexOf("const ADV_REPORTS="));
