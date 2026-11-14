@@ -40,6 +40,31 @@
         }
       ]
     },
+    "mammoth": {
+      "players": [
+        {
+          "sourceName": "Ben McCartney",
+          "expectedRole": "forwards",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
+          "automaticApproval": false
+        },
+        {
+          "sourceName": "Artem Duda",
+          "expectedRole": "defense",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
+          "automaticApproval": false
+        },
+        {
+          "sourceName": "Zac Jones",
+          "expectedRole": "defense",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
+          "automaticApproval": false
+        }
+      ]
+    },
     "stars": {
       "players": [
         {

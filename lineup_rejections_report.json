@@ -1,9 +1,9 @@
 {
-  "teamsWithRejectedLines": 4,
+  "teamsWithRejectedLines": 5,
   "teams": {
     "islanders": {
       "team": "NYI",
-      "rosterUpdatedAt": "2026-11-14T19:09:41.998110+00:00",
+      "rosterUpdatedAt": "2026-11-14T20:40:35.834587+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 3,
       "candidateDefensePairs": 3,
@@ -29,9 +29,59 @@
         }
       ]
     },
+    "mammoth": {
+      "team": "UTA",
+      "rosterUpdatedAt": "2026-11-14T20:40:36.485212+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "validatedForwardLines": 3,
+      "validatedDefensePairs": 2,
+      "rejected": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 4,
+          "sourceLine": [
+            "Liam O’Brien",
+            "Kevin Stenlund",
+            "Ben McCartney"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Ben McCartney",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        },
+        {
+          "group": "defense",
+          "sourceLineNumber": 3,
+          "sourceLine": [
+            "Artem Duda",
+            "Zac Jones"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Artem Duda",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            },
+            {
+              "name": "Zac Jones",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    },
     "rangers": {
       "team": "NYR",
-      "rosterUpdatedAt": "2026-11-14T19:09:42.137496+00:00",
+      "rosterUpdatedAt": "2026-11-14T20:40:35.890854+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -58,7 +108,7 @@
     },
     "senators": {
       "team": "OTT",
-      "rosterUpdatedAt": "2026-11-14T19:09:42.281703+00:00",
+      "rosterUpdatedAt": "2026-11-14T20:40:35.950228+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -103,7 +153,7 @@
     },
     "stars": {
       "team": "DAL",
-      "rosterUpdatedAt": "2026-11-14T19:09:40.778586+00:00",
+      "rosterUpdatedAt": "2026-11-14T20:40:35.265654+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,

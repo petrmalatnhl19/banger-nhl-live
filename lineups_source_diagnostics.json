@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-14T19:10:09.670356+00:00",
+  "generatedAt": "2026-11-14T20:40:53.447273+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-14T18:59:00+00:00",
+      "candidatePublishedAt": "2026-11-14T20:11:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -20,7 +20,7 @@
       "team": "CAR",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-14T18:59:00+00:00",
+      "candidatePublishedAt": "2026-11-14T20:11:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -34,8 +34,8 @@
     "kings": {
       "team": "LAK",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/new-york-islanders-los-angeles-kings-game-preview-november-12-2026",
-      "candidatePublishedAt": "2026-11-12T20:03:12.475000+00:00",
+      "candidateSource": "https://www.nhl.com/news/calgary-flames-los-angeles-kings-game-preview-november-14-2026",
+      "candidatePublishedAt": "2026-11-14T20:12:14.173000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -117,7 +117,7 @@
       "team": "OTT",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-14T18:59:00+00:00",
+      "candidatePublishedAt": "2026-11-14T20:11:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "insufficient_position_matched_lines",
@@ -167,8 +167,8 @@
     "sharks": {
       "team": "SJS",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/pittsburgh-penguins-san-jose-sharks-game-preview-november-11-2026",
-      "candidatePublishedAt": "2026-11-11T19:57:02.373000+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-14T20:11:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -183,7 +183,7 @@
       "team": "WPG",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-14T18:59:00+00:00",
+      "candidatePublishedAt": "2026-11-14T20:11:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -213,7 +213,7 @@
       "team": "TBL",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-14T18:59:00+00:00",
+      "candidatePublishedAt": "2026-11-14T20:11:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -228,30 +228,64 @@
     "mammoth": {
       "team": "UTA",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/st-louis-blues-utah-mammoth-game-preview-november-12-2026",
-      "candidatePublishedAt": "2026-11-12T19:32:09.831000+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-14T20:11:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
-      "gameEvidenceExceptions": [
+      "roleMismatches": [],
+      "rejectedLines": [
         {
-          "player": "Artem Duda",
-          "role": "defense",
-          "basis": "official game boxscore on projection publication date"
+          "group": "forwards",
+          "line": 4,
+          "players": [
+            "Ben McCartney"
+          ],
+          "sourceLine": [
+            "Liam O’Brien",
+            "Kevin Stenlund",
+            "Ben McCartney"
+          ]
+        },
+        {
+          "group": "defense",
+          "line": 3,
+          "players": [
+            "Artem Duda",
+            "Zac Jones"
+          ],
+          "sourceLine": [
+            "Artem Duda",
+            "Zac Jones"
+          ]
         }
       ],
-      "roleMismatches": [],
-      "rejectedLines": [],
-      "rejectedPlayerReasons": [],
-      "validatedForwardLines": 4,
-      "validatedDefensePairs": 3,
+      "rejectedPlayerReasons": [
+        {
+          "name": "Ben McCartney",
+          "expectedRole": "forwards",
+          "reason": "not_in_current_roster"
+        },
+        {
+          "name": "Artem Duda",
+          "expectedRole": "defense",
+          "reason": "not_in_current_roster"
+        },
+        {
+          "name": "Zac Jones",
+          "expectedRole": "defense",
+          "reason": "not_in_current_roster"
+        }
+      ],
+      "validatedForwardLines": 3,
+      "validatedDefensePairs": 2,
       "accepted": true
     },
     "red wings": {
       "team": "DET",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-14T18:59:00+00:00",
+      "candidatePublishedAt": "2026-11-14T20:11:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -265,8 +299,8 @@
     "stars": {
       "team": "DAL",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/buffalo-sabres-dallas-stars-game-preview-november-14-2026",
-      "candidatePublishedAt": "2026-11-14T19:00:43.404000+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-14T20:11:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",

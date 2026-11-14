@@ -1,67 +1,56 @@
 {
   "teams": {
     "kings": {
-      "updatedAt": "2026-11-12T20:29:26.082546+00:00",
-      "previousPublishedAt": "2026-11-10T20:22:05.537000+00:00",
-      "publishedAt": "2026-11-12T20:03:12.475000+00:00",
-      "source": "https://www.nhl.com/news/new-york-islanders-los-angeles-kings-game-preview-november-12-2026",
+      "updatedAt": "2026-11-14T20:40:53.452375+00:00",
+      "previousPublishedAt": "2026-11-12T20:03:12.475000+00:00",
+      "publishedAt": "2026-11-14T20:12:14.173000+00:00",
+      "source": "https://www.nhl.com/news/calgary-flames-los-angeles-kings-game-preview-november-14-2026",
       "events": [
         {
-          "type": "added",
-          "player": "Kevin Fiala",
-          "to": "Útok 2"
-        },
-        {
           "type": "moved",
-          "player": "Mats Zuccarello",
+          "player": "Alex Turcotte",
           "from": "Útok 3",
-          "to": "Útok 2"
+          "to": "Útok 1"
         },
         {
           "type": "moved",
-          "player": "Trevor Moore",
-          "from": "Útok 2",
+          "player": "Erik Haula",
+          "from": "Útok 4",
           "to": "Útok 3"
         },
         {
           "type": "added",
-          "player": "Alex Turcotte",
+          "player": "Joel Armia",
           "to": "Útok 3"
         },
         {
           "type": "moved",
           "player": "Corey Perry",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Andre Lee",
           "from": "Útok 3",
-          "to": "Útok 4"
-        },
-        {
-          "type": "moved",
-          "player": "Scott Laughton",
-          "from": "Útok 3",
-          "to": "Útok 4"
-        },
-        {
-          "type": "added",
-          "player": "Erik Haula",
           "to": "Útok 4"
         },
         {
           "type": "moved",
           "player": "Brian Dumoulin",
+          "from": "Obrana 2",
+          "to": "Obrana 1"
+        },
+        {
+          "type": "moved",
+          "player": "Mikey Anderson",
           "from": "Obrana 3",
           "to": "Obrana 2"
         },
         {
           "type": "moved",
-          "player": "Mikey Anderson",
-          "from": "Obrana 2",
+          "player": "Joel Edmundson",
+          "from": "Obrana 1",
           "to": "Obrana 3"
+        },
+        {
+          "type": "removed",
+          "player": "Artemi Panarin",
+          "from": "Útok 1"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -463,20 +452,83 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "mammoth": {
-      "updatedAt": "2026-11-13T05:24:49.417608+00:00",
+      "updatedAt": "2026-11-14T20:40:53.452222+00:00",
       "previousPublishedAt": "2026-11-12T19:32:09.831000+00:00",
-      "publishedAt": "2026-11-12T19:32:09.831000+00:00",
-      "source": "https://www.nhl.com/news/st-louis-blues-utah-mammoth-game-preview-november-12-2026",
+      "publishedAt": "2026-11-14T20:11:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
-          "type": "added",
-          "player": "Artem Duda",
-          "to": "Obrana 3"
+          "type": "moved",
+          "player": "Anders Lee",
+          "from": "Útok 3",
+          "to": "Útok 1"
         },
         {
-          "type": "added",
+          "type": "moved",
+          "player": "Vincent Trocheck",
+          "from": "Útok 2",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Daniil But",
+          "from": "Útok 1",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Barrett Hayton",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Kailer Yamamoto",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Michael Carcone",
+          "from": "Útok 4",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Jack McBain",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Lawson Crouse",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "removed",
+          "player": "Nick Schmaltz",
+          "from": "Útok 1"
+        },
+        {
+          "type": "removed",
+          "player": "Liam O’Brien",
+          "from": "Útok 4"
+        },
+        {
+          "type": "removed",
+          "player": "Kevin Stenlund",
+          "from": "Útok 4"
+        },
+        {
+          "type": "removed",
+          "player": "Artem Duda",
+          "from": "Obrana 3"
+        },
+        {
+          "type": "removed",
           "player": "Nick DeSimone",
-          "to": "Obrana 3"
+          "from": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -837,26 +889,44 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "sharks": {
-      "updatedAt": "2026-11-10T19:28:11.319047+00:00",
-      "previousPublishedAt": "2026-11-07T17:44:05.810000+00:00",
-      "publishedAt": "2026-11-09T20:11:00+00:00",
-      "source": "https://www.nhl.com/news/new-york-islanders-san-jose-sharks-game-preview-november-9-2026",
+      "updatedAt": "2026-11-14T20:40:53.452140+00:00",
+      "previousPublishedAt": "2026-11-11T19:57:02.373000+00:00",
+      "publishedAt": "2026-11-14T20:11:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
-          "type": "added",
-          "player": "Alexander Wennberg",
+          "type": "moved",
+          "player": "Ivar Stenberg",
+          "from": "Útok 3",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Michael Misa",
+          "from": "Útok 1",
           "to": "Útok 2"
         },
         {
           "type": "moved",
           "player": "Collin Graf",
+          "from": "Útok 4",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Kiefer Sherwood",
           "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "added",
+          "player": "Adam Gaudette",
           "to": "Útok 4"
         },
         {
           "type": "removed",
-          "player": "Adam Gaudette",
-          "from": "Útok 4"
+          "player": "Alexander Wennberg",
+          "from": "Útok 2"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -1155,19 +1225,31 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "flames": {
-      "updatedAt": "2026-11-11T18:27:52.044193+00:00",
-      "previousPublishedAt": "2026-11-08T17:16:00+00:00",
-      "publishedAt": "2026-11-11T18:16:00.408000+00:00",
-      "source": "https://www.nhl.com/news/new-york-rangers-calgary-flames-game-preview-november-11-2026",
+      "updatedAt": "2026-11-14T20:40:53.452300+00:00",
+      "previousPublishedAt": "2026-11-11T18:16:00.408000+00:00",
+      "publishedAt": "2026-11-14T20:12:14.173000+00:00",
+      "source": "https://www.nhl.com/news/calgary-flames-los-angeles-kings-game-preview-november-14-2026",
       "events": [
         {
+          "type": "moved",
+          "player": "Adam Klapka",
+          "from": "Útok 4",
+          "to": "Útok 2"
+        },
+        {
           "type": "added",
-          "player": "Brennan Othmann",
+          "player": "William Stromgren",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Aydar Suniev",
+          "from": "Útok 2",
           "to": "Útok 4"
         },
         {
           "type": "removed",
-          "player": "William Stromgren",
+          "player": "Brennan Othmann",
           "from": "Útok 4"
         }
       ],

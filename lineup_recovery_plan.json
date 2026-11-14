@@ -3,7 +3,7 @@
     "lineup_core_report.json",
     "lineup_rejections_report.json"
   ],
-  "incompleteTeams": 10,
+  "incompleteTeams": 11,
   "teams": [
     {
       "team": "blackhawks",
@@ -12,7 +12,7 @@
       "missingForwardLines": 0,
       "missingDefensePairs": 1,
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T18:59:00+00:00",
+      "publishedAt": "2026-11-14T20:11:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
@@ -23,7 +23,7 @@
       "missingForwardLines": 0,
       "missingDefensePairs": 1,
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T18:59:00+00:00",
+      "publishedAt": "2026-11-14T20:11:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
@@ -45,7 +45,7 @@
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T18:59:00+00:00",
+      "publishedAt": "2026-11-14T20:11:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
@@ -56,7 +56,7 @@
       "missingForwardLines": 0,
       "missingDefensePairs": 1,
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T18:59:00+00:00",
+      "publishedAt": "2026-11-14T20:11:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
@@ -91,6 +91,57 @@
           "unverifiedPlayers": [
             {
               "name": "Kyle MacLean",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ],
+      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
+    },
+    {
+      "team": "mammoth",
+      "status": "incomplete_projection",
+      "reason": "rejected_roster_lines",
+      "missingForwardLines": 1,
+      "missingDefensePairs": 1,
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-14T20:11:00+00:00",
+      "rejectedLines": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 4,
+          "sourceLine": [
+            "Liam O’Brien",
+            "Kevin Stenlund",
+            "Ben McCartney"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Ben McCartney",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        },
+        {
+          "group": "defense",
+          "sourceLineNumber": 3,
+          "sourceLine": [
+            "Artem Duda",
+            "Zac Jones"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Artem Duda",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            },
+            {
+              "name": "Zac Jones",
               "reason": "not_in_current_roster",
               "inLocalCurrentRoster": false,
               "requiresIndependentGameEvidence": true
@@ -180,8 +231,8 @@
       "reason": "rejected_roster_lines",
       "missingForwardLines": 0,
       "missingDefensePairs": 1,
-      "source": "https://www.nhl.com/news/buffalo-sabres-dallas-stars-game-preview-november-14-2026",
-      "publishedAt": "2026-11-14T19:00:43.404000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-14T20:11:00+00:00",
       "rejectedLines": [
         {
           "group": "defense",
