@@ -92,20 +92,20 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "red wings": {
-      "updatedAt": "2026-11-12T17:40:26.820840+00:00",
-      "previousPublishedAt": "2026-11-10T18:07:31.619000+00:00",
-      "publishedAt": "2026-11-12T17:20:00+00:00",
-      "source": "https://www.nhl.com/news/detroit-red-wings-florida-panthers-game-preview-november-12-2026",
+      "updatedAt": "2026-11-14T19:10:09.677594+00:00",
+      "previousPublishedAt": "2026-11-12T17:20:00+00:00",
+      "publishedAt": "2026-11-14T18:59:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
           "type": "added",
-          "player": "Carter Mazur",
-          "to": "Útok 3"
+          "player": "Michael Rasmussen",
+          "to": "Útok 4"
         },
         {
           "type": "removed",
-          "player": "Michael Rasmussen",
-          "from": "Útok 3"
+          "player": "Mason Appleton",
+          "from": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -155,20 +155,26 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "stars": {
-      "updatedAt": "2026-11-13T04:21:12.648203+00:00",
+      "updatedAt": "2026-11-14T19:10:09.678341+00:00",
       "previousPublishedAt": "2026-11-12T18:41:28.341000+00:00",
-      "publishedAt": "2026-11-12T18:41:28.341000+00:00",
-      "source": "https://www.nhl.com/news/winnipeg-jets-dallas-stars-game-preview-november-12-2026",
+      "publishedAt": "2026-11-14T19:00:43.404000+00:00",
+      "source": "https://www.nhl.com/news/buffalo-sabres-dallas-stars-game-preview-november-14-2026",
       "events": [
         {
-          "type": "added",
-          "player": "Trey Taylor",
-          "to": "Obrana 3"
+          "type": "moved",
+          "player": "Tyler Myers",
+          "from": "Obrana 3",
+          "to": "Obrana 2"
         },
         {
-          "type": "added",
-          "player": "Tyler Myers",
-          "to": "Obrana 3"
+          "type": "removed",
+          "player": "Lian Bichsel",
+          "from": "Obrana 2"
+        },
+        {
+          "type": "removed",
+          "player": "Trey Taylor",
+          "from": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -392,19 +398,65 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "canadiens": {
-      "updatedAt": "2026-11-12T18:37:06.256132+00:00",
-      "previousPublishedAt": "2026-11-10T17:05:50.294000+00:00",
-      "publishedAt": "2026-11-12T17:55:39.979000+00:00",
-      "source": "https://www.nhl.com/news/montreal-canadiens-boston-bruins-game-preview-november-12-2026",
+      "updatedAt": "2026-11-14T19:10:09.678106+00:00",
+      "previousPublishedAt": "2026-11-12T17:55:39.979000+00:00",
+      "publishedAt": "2026-11-14T18:59:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
+          "type": "moved",
+          "player": "Zachary Bolduc",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Phillip Danault",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Alexandre Texier",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
           "type": "added",
+          "player": "Florian Xhekaj",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Jake Evans",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Josh Anderson",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
           "player": "Mike Matheson",
-          "to": "Obrana 3"
+          "from": "Obrana 3",
+          "to": "Obrana 2"
         },
         {
           "type": "removed",
-          "player": "Adam Engstrom",
+          "player": "Chris Kreider",
+          "from": "Útok 2"
+        },
+        {
+          "type": "removed",
+          "player": "Alexandre Carrier",
+          "from": "Obrana 2"
+        },
+        {
+          "type": "removed",
+          "player": "Arber Xhekaj",
           "from": "Obrana 3"
         }
       ],
@@ -568,19 +620,65 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "sabres": {
-      "updatedAt": "2026-11-12T18:37:06.258241+00:00",
-      "previousPublishedAt": "2026-11-11T18:07:25.884000+00:00",
-      "publishedAt": "2026-11-12T17:52:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-14T19:10:09.678227+00:00",
+      "previousPublishedAt": "2026-11-12T17:40:00+00:00",
+      "publishedAt": "2026-11-14T19:00:43.404000+00:00",
+      "source": "https://www.nhl.com/news/buffalo-sabres-dallas-stars-game-preview-november-14-2026",
       "events": [
         {
+          "type": "moved",
+          "player": "Zach Benson",
+          "from": "Útok 2",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Jason Zucker",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
           "type": "added",
-          "player": "Louis Crevier",
+          "player": "Jiri Kulich",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Josh Norris",
+          "from": "Útok 1",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Ryan McLeod",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Conor Timmins",
+          "from": "Obrana 3",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "moved",
+          "player": "Olen Zellweger",
+          "from": "Obrana 2",
+          "to": "Obrana 3"
+        },
+        {
+          "type": "added",
+          "player": "Zach Metsa",
           "to": "Obrana 3"
         },
         {
           "type": "removed",
-          "player": "Zach Metsa",
+          "player": "Sam Carrick",
+          "from": "Útok 4"
+        },
+        {
+          "type": "removed",
+          "player": "Louis Crevier",
           "from": "Obrana 3"
         }
       ],
@@ -861,46 +959,66 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "avalanche": {
-      "updatedAt": "2026-11-12T18:37:06.257631+00:00",
-      "previousPublishedAt": "2026-11-10T17:52:49.175000+00:00",
-      "publishedAt": "2026-11-12T18:06:47.983000+00:00",
-      "source": "https://www.nhl.com/news/colorado-avalanche-ottawa-senators-game-preview-november-12-2026",
+      "updatedAt": "2026-11-14T19:10:09.677985+00:00",
+      "previousPublishedAt": "2026-11-12T18:06:47.983000+00:00",
+      "publishedAt": "2026-11-14T18:59:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
           "type": "moved",
-          "player": "Jaden Schwartz",
-          "from": "Útok 3",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
           "player": "Brock Nelson",
-          "from": "Útok 3",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "T.J. Hughes",
-          "from": "Útok 3",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Gabriel Landeskog",
           "from": "Útok 2",
-          "to": "Útok 3"
+          "to": "Útok 1"
         },
         {
           "type": "moved",
           "player": "Nazem Kadri",
-          "from": "Útok 2",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "added",
+          "player": "Gavin Brindley",
           "to": "Útok 3"
         },
         {
           "type": "moved",
-          "player": "Nicolas Roy",
-          "from": "Útok 2",
-          "to": "Útok 3"
+          "player": "Devon Toews",
+          "from": "Obrana 2",
+          "to": "Obrana 1"
+        },
+        {
+          "type": "moved",
+          "player": "Sam Malinski",
+          "from": "Obrana 2",
+          "to": "Obrana 1"
+        },
+        {
+          "type": "moved",
+          "player": "Brett Kulak",
+          "from": "Obrana 1",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "moved",
+          "player": "Noah Juulsen",
+          "from": "Obrana 3",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "added",
+          "player": "Alex Gagne",
+          "to": "Obrana 3"
+        },
+        {
+          "type": "removed",
+          "player": "Nathan MacKinnon",
+          "from": "Útok 1"
+        },
+        {
+          "type": "removed",
+          "player": "Cale Makar",
+          "from": "Obrana 1"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

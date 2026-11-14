@@ -92,7 +92,7 @@
       "injured": "James Hagens (back)",
       "scratched": "Jonathan Aspirot, Sean Kuraly, Mason Lohrei",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T18:01:00+00:00",
+      "publishedAt": "2026-11-14T18:59:00+00:00",
       "asOf": "2026-11-14",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -118,7 +118,7 @@
         ],
         [
           "Sheldon Dries",
-          "Mason Appleton",
+          "Michael Rasmussen",
           "Keegan Kolesar"
         ]
       ],
@@ -137,14 +137,14 @@
         ]
       ],
       "goalies": [
-        "John Gibson",
-        "Daniil Tarasov"
+        "Daniil Tarasov",
+        "John Gibson"
       ],
       "injured": "None",
-      "scratched": "Michael Rasmussen",
-      "source": "https://www.nhl.com/news/detroit-red-wings-florida-panthers-game-preview-november-12-2026",
-      "publishedAt": "2026-11-12T17:20:00+00:00",
-      "asOf": "2026-11-12",
+      "scratched": "Mason Appleton",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-14T18:59:00+00:00",
+      "asOf": "2026-11-14",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -194,7 +194,7 @@
       "injured": "Aleksander Barkov (knee), Brad Marchand (knee), Jonah Gadjovich (neck)",
       "scratched": "Uvis Balinskis, Cole Reinhardt, Jack Devine",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T18:01:00+00:00",
+      "publishedAt": "2026-11-14T18:59:00+00:00",
       "asOf": "2026-11-14",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -205,18 +205,18 @@
       "forwards": [
         [
           "Artturi Lehkonen",
-          "Nathan MacKinnon",
+          "Brock Nelson",
           "Martin Necas"
         ],
         [
           "Jaden Schwartz",
-          "Brock Nelson",
+          "Nazem Kadri",
           "T.J. Hughes"
         ],
         [
           "Gabriel Landeskog",
-          "Nazem Kadri",
-          "Nicolas Roy"
+          "Nicolas Roy",
+          "Gavin Brindley"
         ],
         [
           "Parker Kelly",
@@ -226,27 +226,27 @@
       ],
       "defense": [
         [
-          "Brett Kulak",
-          "Cale Makar"
-        ],
-        [
           "Devon Toews",
           "Sam Malinski"
         ],
         [
-          "Noah Juulsen",
+          "Brett Kulak",
+          "Noah Juulsen"
+        ],
+        [
+          "Alex Gagne",
           "Brent Burns"
         ]
       ],
       "goalies": [
-        "Scott Wedgewood",
-        "Mackenzie Blackwood"
+        "Mackenzie Blackwood",
+        "Scott Wedgewood"
       ],
-      "injured": "Zachary L'Heureux (upper body), Josh Manson (lower body)",
-      "scratched": "Alex Gagne",
-      "source": "https://www.nhl.com/news/colorado-avalanche-ottawa-senators-game-preview-november-12-2026",
-      "publishedAt": "2026-11-12T18:06:47.983000+00:00",
-      "asOf": "2026-11-12",
+      "injured": "Nathan MacKinnon (lower body), Cale Makar (lower body), Zachary L'Heureux (upper body), Josh Manson (lower body)",
+      "scratched": "None",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-14T18:59:00+00:00",
+      "asOf": "2026-11-14",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -292,7 +292,7 @@
       "injured": "Bowen Byram (upper body)",
       "scratched": "Dillon Boucher, Ethan Del Mastro, Teuvo Teravainen",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T18:01:00+00:00",
+      "publishedAt": "2026-11-14T18:59:00+00:00",
       "asOf": "2026-11-14",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -496,7 +496,7 @@
       "injured": "Filip Gustavsson (lower body)",
       "scratched": "Nico Sturm, David Spacek, Matt Kiersted",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T18:01:00+00:00",
+      "publishedAt": "2026-11-14T18:59:00+00:00",
       "asOf": "2026-11-14",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -547,7 +547,7 @@
       "injured": "Frederik Andersen (undisclosed), Isaac Howard (lower body), Mattias Janmark (undisclosed), Alec Regula (undisclosed), Matthew Savoie (undisclosed)",
       "scratched": "Filip Hallander, Max Jones, Jake Walman",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T18:01:00+00:00",
+      "publishedAt": "2026-11-14T18:59:00+00:00",
       "asOf": "2026-11-14",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -583,11 +583,7 @@
           "Nils Lundkvist"
         ],
         [
-          "Lian Bichsel",
-          "Esa Lindell"
-        ],
-        [
-          "Trey Taylor",
+          "Esa Lindell",
           "Tyler Myers"
         ]
       ],
@@ -595,11 +591,11 @@
         "Jake Oettinger",
         "Casey DeSmith"
       ],
-      "injured": "Kyle Capobianco (lower body), Miro Heiskanen (upper body), Oskar Back (finger), Matt Duchene (lower body)",
-      "scratched": "Colin Blackwell, Remi Poirier",
-      "source": "https://www.nhl.com/news/winnipeg-jets-dallas-stars-game-preview-november-12-2026",
-      "publishedAt": "2026-11-12T18:41:28.341000+00:00",
-      "asOf": "2026-11-12",
+      "injured": "Kyle Capobianco (lower body), Miro Heiskanen (upper body), Oskar Back (finger), Matt Duchene (lower body), Lian Bichsel (lower body)",
+      "scratched": "Colin Blackwell, Rémi Poirier",
+      "source": "https://www.nhl.com/news/buffalo-sabres-dallas-stars-game-preview-november-14-2026",
+      "publishedAt": "2026-11-14T19:00:43.404000+00:00",
+      "asOf": "2026-11-14",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -649,7 +645,7 @@
       "injured": "Ryan Graves (knee), Trevor van Riemsdyk (lower body), Bryan Rust (lower body), Elmer Soderblom (upper body)",
       "scratched": "Andrei Kuzmenko, Ville Koivunen",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T18:01:00+00:00",
+      "publishedAt": "2026-11-14T18:59:00+00:00",
       "asOf": "2026-11-14",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -664,14 +660,14 @@
           "Juraj Slafkovsky"
         ],
         [
-          "Chris Kreider",
-          "Jake Evans",
-          "Josh Anderson"
-        ],
-        [
           "Zachary Bolduc",
           "Phillip Danault",
           "Alexandre Texier"
+        ],
+        [
+          "Florian Xhekaj",
+          "Jake Evans",
+          "Josh Anderson"
         ],
         [
           "Alex Newhook",
@@ -686,22 +682,17 @@
         ],
         [
           "Kaiden Guhle",
-          "Alexandre Carrier"
-        ],
-        [
-          "Mike Matheson",
-          "Arber Xhekaj"
+          "Mike Matheson"
         ]
       ],
       "goalies": [
-        "Jacob Fowler",
         "Jakub Dobes"
       ],
-      "injured": "Ivan Demidov (lower body), Samuel Montembeault (lower body)",
-      "scratched": "Florian Xhekaj, Owen Beck, Adam Engstrom",
-      "source": "https://www.nhl.com/news/montreal-canadiens-boston-bruins-game-preview-november-12-2026",
-      "publishedAt": "2026-11-12T17:55:39.979000+00:00",
-      "asOf": "2026-11-12",
+      "injured": "Ivan Demidov (lower body), Chris Kreider (lower body), Samuel Montembeault (lower body)",
+      "scratched": "Owen Beck, Adam Engstrom",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-14T18:59:00+00:00",
+      "asOf": "2026-11-14",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -751,7 +742,7 @@
       "injured": "Max Domi (undisclosed), Kirill Marchenko (lower body), Marshall Rifai (lower body), Nick Blankenburg (upper body), Morgan Rielly (lower body), Colton Sissons (lower body)",
       "scratched": "Cole McWard, Brendan Brisson",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T18:01:00+00:00",
+      "publishedAt": "2026-11-14T18:59:00+00:00",
       "asOf": "2026-11-14",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -853,7 +844,7 @@
       "injured": "Tyler Tucker (knee), Dillon Dube (neck)",
       "scratched": "Jonatan Berggren, Calle Rosen",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T18:01:00+00:00",
+      "publishedAt": "2026-11-14T18:59:00+00:00",
       "asOf": "2026-11-14",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -899,8 +890,8 @@
       ],
       "injured": "Anthony Mantha (throat), Brett Pesce (illness), Johnathan Kovacevic (lower body), Vladislav Kolyachonok (illness)",
       "scratched": "Amadeus Lombardi",
-      "source": "https://www.nhl.com/news/new-jersey-devils-washington-capitals-game-preview-november-14-2026",
-      "publishedAt": "2026-11-14T18:01:55.213000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-14T18:59:00+00:00",
       "asOf": "2026-11-14",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1002,7 +993,7 @@
       "injured": "Nikita Grebenkin (back)",
       "scratched": "Simon Benoit, David Jiricek, Cole Knuble",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T18:01:00+00:00",
+      "publishedAt": "2026-11-14T18:59:00+00:00",
       "asOf": "2026-11-14",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1047,8 +1038,8 @@
       ],
       "injured": "Rasmus Sandin (knee), Vincent Desharnais (appendectomy)",
       "scratched": "Ethen Frank, Ivan Miroshnichenko, Justin Holl",
-      "source": "https://www.nhl.com/news/new-jersey-devils-washington-capitals-game-preview-november-14-2026",
-      "publishedAt": "2026-11-14T18:01:55.213000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-14T18:59:00+00:00",
       "asOf": "2026-11-14",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1099,7 +1090,7 @@
       "injured": "Isac Lundestrom (lower body), Conor Garland (upper body), Sean Monahan (upper body)",
       "scratched": "Erik Gudbranson",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T18:01:00+00:00",
+      "publishedAt": "2026-11-14T18:59:00+00:00",
       "asOf": "2026-11-14",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1159,24 +1150,24 @@
       "name": "Sabres",
       "forwards": [
         [
+          "Zach Benson",
           "Peyton Krebs",
-          "Josh Norris",
           "Tage Thompson"
         ],
         [
-          "Zach Benson",
+          "Jason Zucker",
           "Noah Ostlund",
           "Jack Quinn"
         ],
         [
-          "Jason Zucker",
-          "Ryan McLeod",
+          "Jiri Kulich",
+          "Josh Norris",
           "Josh Doan"
         ],
         [
-          "Beck Malenstyn",
           "Tyson Kozak",
-          "Sam Carrick"
+          "Ryan McLeod",
+          "Beck Malenstyn"
         ]
       ],
       "defense": [
@@ -1185,23 +1176,23 @@
           "Mattias Samuelsson"
         ],
         [
-          "Olen Zellweger",
-          "Owen Power"
+          "Owen Power",
+          "Conor Timmins"
         ],
         [
-          "Conor Timmins",
-          "Louis Crevier"
+          "Olen Zellweger",
+          "Zach Metsa"
         ]
       ],
       "goalies": [
-        "Colten Ellis",
-        "Ukko-Pekka Luukkonen"
+        "Alex Lyon",
+        "Colten Ellis"
       ],
-      "injured": "Konsta Helenius (upper body), Justin Danforth (upper body), Matt Grzelcyk (lower body), Alex Lyon (upper body)",
-      "scratched": "Jiri Kulich, Zach Metsa",
-      "source": "https://www.nhl.com/news/buffalo-sabres-chicago-blackhawks-game-preview-november-12-2026",
-      "publishedAt": "2026-11-12T17:40:00+00:00",
-      "asOf": "2026-11-12",
+      "injured": "Konsta Helenius (upper body), Justin Danforth (upper body), Matt Grzelcyk (lower body)",
+      "scratched": "Sam Carrick, Louis Crevier, Ukko-Pekka Luukkonen",
+      "source": "https://www.nhl.com/news/buffalo-sabres-dallas-stars-game-preview-november-14-2026",
+      "publishedAt": "2026-11-14T19:00:43.404000+00:00",
+      "asOf": "2026-11-14",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -1245,14 +1236,14 @@
         ]
       ],
       "goalies": [
-        "Dennis Hildeby",
-        "Andrei Vasilevskiy"
+        "Andrei Vasilevskiy",
+        "Dennis Hildeby"
       ],
       "injured": "Brayden Point (lower body), Erik Cernak (undisclosed)",
       "scratched": "Emil Lilleberg, Gage Goncalves",
-      "source": "https://www.nhl.com/news/tampa-bay-lightning-columbus-blue-jackets-game-preview-november-12-2026",
-      "publishedAt": "2026-11-12T17:05:23.617000+00:00",
-      "asOf": "2026-11-12",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-14T18:59:00+00:00",
+      "asOf": "2026-11-14",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -1302,7 +1293,7 @@
       "injured": "Jacob Melanson (upper body), Ryan Lindgren (upper body), Jared McCann (lower body), Curtis Douglas (upper body)",
       "scratched": "Cale Fleury, Jani Nyman, Logan Morrison, Nikke Kokko",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T18:01:00+00:00",
+      "publishedAt": "2026-11-14T18:59:00+00:00",
       "asOf": "2026-11-14",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1450,7 +1441,7 @@
       "injured": "Nick Bjugstad (undisclosed), Dylan DeMelo (lower body), Isak Rosen (undisclosed)",
       "scratched": "Clay Stevenson",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T18:01:00+00:00",
+      "publishedAt": "2026-11-14T18:59:00+00:00",
       "asOf": "2026-11-14",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1548,7 +1539,7 @@
       "injured": "",
       "scratched": "Eric Robinson, Juuso Valimaki, Mike Reilly, Nicolas Deslauriers, Cayden Primeau",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T18:01:00+00:00",
+      "publishedAt": "2026-11-14T18:59:00+00:00",
       "asOf": "2026-11-14",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
