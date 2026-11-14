@@ -3,7 +3,7 @@
     "lineup_core_report.json",
     "lineup_rejections_report.json"
   ],
-  "incompleteTeams": 6,
+  "incompleteTeams": 7,
   "teams": [
     {
       "team": "blackhawks",
@@ -12,7 +12,7 @@
       "missingForwardLines": 0,
       "missingDefensePairs": 1,
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T15:35:00+00:00",
+      "publishedAt": "2026-11-14T16:31:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
@@ -79,6 +79,52 @@
           "unverifiedPlayers": [
             {
               "name": "Matthew Roberson",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ],
+      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
+    },
+    {
+      "team": "senators",
+      "status": "missing_team",
+      "reason": "rejected_roster_lines",
+      "missingForwardLines": 4,
+      "missingDefensePairs": 3,
+      "source": null,
+      "publishedAt": null,
+      "rejectedLines": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 2,
+          "sourceLine": [
+            "Philip Tomasino",
+            "Shane Pinto",
+            "Drake Batherson"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Philip Tomasino",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        },
+        {
+          "group": "forwards",
+          "sourceLineNumber": 4,
+          "sourceLine": [
+            "Samuel Blais",
+            "Stephen Halliday",
+            "Hayden Hodgson"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Samuel Blais",
               "reason": "not_in_current_roster",
               "inLocalCurrentRoster": false,
               "requiresIndependentGameEvidence": true

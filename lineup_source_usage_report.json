@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-11-14T15:59:25.595513+00:00",
-  "teams": 31,
+  "generatedAt": "2026-11-14T16:43:30.274895+00:00",
+  "teams": 30,
   "activeSourceCounts": {
-    "nhl.com": 31
+    "nhl.com": 30
   },
   "sources": {
     "nhl.com": {
       "role": "primary_projection_source",
-      "usedTeams": 31
+      "usedTeams": 30
     },
     "fantasy_roundup": {
       "role": "fallback_only",
@@ -34,7 +34,7 @@
       "team": "blackhawks",
       "provider": "nhl.com",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T15:35:00+00:00",
+      "publishedAt": "2026-11-14T16:31:00+00:00",
       "sourceType": null
     },
     {
@@ -111,7 +111,7 @@
       "team": "hurricanes",
       "provider": "nhl.com",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T15:35:00+00:00",
+      "publishedAt": "2026-11-14T16:31:00+00:00",
       "sourceType": null
     },
     {
@@ -125,7 +125,7 @@
       "team": "jets",
       "provider": "nhl.com",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T15:35:00+00:00",
+      "publishedAt": "2026-11-14T16:31:00+00:00",
       "sourceType": null
     },
     {
@@ -139,7 +139,7 @@
       "team": "kraken",
       "provider": "nhl.com",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T15:35:00+00:00",
+      "publishedAt": "2026-11-14T16:31:00+00:00",
       "sourceType": null
     },
     {
@@ -180,8 +180,8 @@
     {
       "team": "penguins",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/pittsburgh-penguins-san-jose-sharks-game-preview-november-11-2026",
-      "publishedAt": "2026-11-11T19:57:02.373000+00:00",
+      "source": "https://www.nhl.com/news/ottawa-senators-pittsburgh-penguins-game-preview-november-14-2026",
+      "publishedAt": "2026-11-14T16:32:26.653000+00:00",
       "sourceType": null
     },
     {
@@ -210,13 +210,6 @@
       "provider": "nhl.com",
       "source": "https://www.nhl.com/news/buffalo-sabres-chicago-blackhawks-game-preview-november-12-2026",
       "publishedAt": "2026-11-12T17:40:00+00:00",
-      "sourceType": null
-    },
-    {
-      "team": "senators",
-      "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/colorado-avalanche-ottawa-senators-game-preview-november-12-2026",
-      "publishedAt": "2026-11-12T18:06:47.983000+00:00",
       "sourceType": null
     },
     {
