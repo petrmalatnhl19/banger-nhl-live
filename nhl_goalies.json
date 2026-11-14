@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-14T20:40:55.770313+00:00",
-  "rostersUpdatedAt": "2026-11-14T20:40:36.646876+00:00",
+  "updatedAt": "2026-11-14T21:23:51.203948+00:00",
+  "rostersUpdatedAt": "2026-11-14T21:23:28.054258+00:00",
   "projectionDate": "2026-11-14",
   "teamCount": 32,
   "goalieCount": 74,
@@ -186,8 +186,9 @@
       "team": "ANA",
       "teamKey": "ducks",
       "playerId": 8480843,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Ville Husso",
@@ -277,8 +278,9 @@
       "team": "NYI",
       "teamKey": "islanders",
       "playerId": 8473575,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-14",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Nico Daws",
