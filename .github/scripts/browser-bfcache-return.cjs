@@ -20,6 +20,9 @@ const fixture = (score) => ({ games: [{
     viewport: { width: 390, height: 844 },
     isMobile: true, hasTouch: true, timezoneId: "Europe/Prague"
   });
+  context.setDefaultTimeout(8000);
+  context.setDefaultNavigationTimeout(8000);
+  console.log("STAB-05.13: starting unmocked BFCache control");
   // Control experiment: real same-origin documents, no Playwright routing or API mocks.
   // If this fails, the CI Chromium environment itself cannot exercise BFCache.
   const clean = await context.newPage();
@@ -27,7 +30,9 @@ const fixture = (score) => ({ games: [{
     await clean.goto(BASE + ".github/fixtures/stab-bfcache-probe.html", { waitUntil: "load" });
     const identity = await clean.evaluate(() => window.__bfcacheProbe.identity);
     await clean.goto(BASE + ".github/fixtures/stab-bfcache-away.html", { waitUntil: "load" });
-    await clean.goBack({ waitUntil: "load", timeout: 15000 });
+    console.log("STAB-05.13: control returning via history");
+    await clean.goBack({ waitUntil: "commit", timeout: 8000 });
+    await clean.waitForLoadState("domcontentloaded", { timeout: 8000 });
     const probe = await clean.evaluate(() => ({
       shows: window.__bfcacheProbe?.shows || [],
       identity: window.__bfcacheProbe?.identity,
@@ -97,7 +102,8 @@ const fixture = (score) => ({ games: [{
 
     // The upstream feed changes while the user is away.
     currentScore = 4;
-    await page.goBack({ waitUntil: "domcontentloaded", timeout: 15000 });
+    console.log("STAB-05.13: application returning via history");
+    await page.goBack({ waitUntil: "commit", timeout: 8000 });
     await page.waitForFunction(() => typeof S !== "undefined" && S.tab === "games", null, { timeout: 10000 });
     assert.equal(await page.evaluate(() => S.date), DAY, "selected date must survive return");
     assert.equal(await page.locator("#date").inputValue(), DAY);
