@@ -97,6 +97,8 @@ on:
       - 'scripts/test_core43_cal28_multiprocess_race.cjs'
       - 'scripts/fixtures/core43_cal28_concurrent_worker.cjs'
       - 'docs/core43-cal28n-multiprocess-race.md'
+      - 'scripts/test_core43_cal28_private_snapshot.cjs'
+      - 'docs/core43-cal28o-private-copy.md'
       - 'docs/core43-cal28-lock-gate.md'
       - 'scripts/test_core43_cal26_end_to_end.cjs'
       - 'docs/core43-cal26-end-to-end.md'
@@ -188,6 +190,8 @@ jobs:
         run: node --test scripts/test_core43_cal28_directory_identity.cjs
       - name: Verify CAL-28N independent process archive mutation rejection
         run: node --test scripts/test_core43_cal28_multiprocess_race.cjs
+      - name: Verify CAL-28O private archive copy before pin update
+        run: node --test scripts/test_core43_cal28_private_snapshot.cjs
       - name: Enforce CAL-17 fail-closed pilot gates
         run: node --test scripts/test_core43_cal17_safety_gates.cjs
       - name: Test PUBLIC privileges in an in-memory PostgreSQL 17 database
