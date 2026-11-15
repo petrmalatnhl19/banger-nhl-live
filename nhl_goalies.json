@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-15T15:25:24.951069+00:00",
-  "rostersUpdatedAt": "2026-11-15T15:25:00.896466+00:00",
+  "updatedAt": "2026-11-15T16:16:14.742257+00:00",
+  "rostersUpdatedAt": "2026-11-15T16:15:50.382360+00:00",
   "projectionDate": "2026-11-15",
   "teamCount": 32,
-  "goalieCount": 73,
+  "goalieCount": 74,
   "goalies": [
     {
       "name": "Mackenzie Blackwood",
@@ -133,6 +133,14 @@
       "starterStatus": "projected",
       "starterGameDate": "2026-11-15",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+    },
+    {
+      "name": "Nikita Tolopilo",
+      "team": "VAN",
+      "teamKey": "canucks",
+      "playerId": 8484268,
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Charlie Lindgren",

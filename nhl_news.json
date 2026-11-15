@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-15T15:24:58.073929+00:00",
+  "updatedAt": "2026-11-15T16:15:49.024351+00:00",
   "articles": [
     {
       "title": "Momenty Global Series: Aplaus pro Aha, sauna i legendy Zápasy Caroliny proti Seattlu ve Finsku přinesly vedle dvou výher Hurricanes i další úžasné zážitky 15. lis 2026",
@@ -317,6 +317,15 @@
       "publishedAt": "2026-11-15T04:23:00+00:00"
     },
     {
+      "title": "Status Report: Heiskanen ‘doubtful’ for Stars tonight Nov 15, 2026",
+      "url": "https://www.nhl.com/news/nhl-status-report-news-and-notes-november-15-2026",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "NHL Status Report: Heiskanen ‘doubtful’ for Stars against Panthers",
+      "publishedAt": "2026-11-15T15:52:00+00:00",
+      "description": "Panarin away from Kings for death of grandfather; Moore could make season debut for Ducks"
+    },
+    {
       "title": "Lehkonen, Avs end Canadiens' 12-game point streak Nov 15, 2026",
       "url": "https://www.nhl.com/news/topic/Blackwood%20makes%2025%20saves%20for%20Colorado%20in%20first%20game%20without%20MacKinnon,%20Makar/colorado-avalanche-montreal-canadiens-game-recap-november-14-2026",
       "language": "en",
@@ -324,15 +333,6 @@
       "headline": "Lehkonen has goal, assist, Avalanche end Canadiens' 12-game point streak",
       "description": "Blackwood makes 25 saves for Colorado in first game without MacKinnon, Makar",
       "publishedAt": "2026-11-15T05:01:00+00:00"
-    },
-    {
-      "title": "Hellebuyck makes 43 saves to help Devils stay hot Nov 15, 2026",
-      "url": "https://www.nhl.com/news/new-jersey-devils-washington-capitals-game-recap-november-14-2026",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Hellebuyck makes 43 saves, Devils push past Capitals to stay hot",
-      "description": "Goalie improves to 7-0-0 with New Jersey, which gets two goals from Rodrigues",
-      "publishedAt": "2026-11-15T04:46:00+00:00"
     },
     {
       "title": "Tkachuks spark Panthers win after Blues honor dad Nov 15, 2026",
@@ -424,24 +424,6 @@
       "publishedAt": "2026-11-07T05:00:00+00:00"
     },
     {
-      "title": "Fantasy hockey top 200 player rankings for 2026-27 Nov 14, 2026",
-      "url": "https://www.nhl.com/news/topic/fantasy/nhl-fantasy-hockey-top-250-200-rankings-drafts-players-big-board-281505474",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Fantasy hockey top 200 player rankings for 2026-27",
-      "description": "Most valuable overall options for standard leagues, impact of Hellebuyck trade on goalie landscape",
-      "publishedAt": "2026-11-09T14:00:00+00:00"
-    },
-    {
-      "title": "Fantasy hockey top 100 forward rankings for 2026-27 Nov 14, 2026",
-      "url": "https://www.nhl.com/news/topic/Fantasy/nhl-fantasy-hockey-top-100-forward-rankings-pools-282775028",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Fantasy hockey top 100 forward rankings for 2026-27",
-      "description": "Most valuable options at position in standard leagues; new podcast episodes",
-      "publishedAt": "2026-11-09T14:00:00+00:00"
-    },
-    {
       "title": "Fantasy hockey top 50 defenseman rankings Nov 14, 2026",
       "url": "https://www.nhl.com/news/topic/Fantasy/nhl-fantasy-hockey-top-50-defenseman-rankings-pools-282830728",
       "language": "en",
@@ -458,6 +440,24 @@
       "headline": "Fantasy hockey top 25 goalie rankings for 2026-27",
       "description": "Most valuable options for standard leagues, tandems for 'NHL Fantasy Stars' game",
       "publishedAt": "2026-11-07T14:00:00+00:00"
+    },
+    {
+      "title": "Fantasy hockey top 200 player rankings for 2026-27 Nov 14, 2026",
+      "url": "https://www.nhl.com/news/topic/fantasy/nhl-fantasy-hockey-top-250-200-rankings-drafts-players-big-board-281505474",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Fantasy hockey top 200 player rankings for 2026-27",
+      "description": "Most valuable overall options for standard leagues, impact of Hellebuyck trade on goalie landscape",
+      "publishedAt": "2026-11-09T14:00:00+00:00"
+    },
+    {
+      "title": "Fantasy hockey top 100 forward rankings for 2026-27 Nov 14, 2026",
+      "url": "https://www.nhl.com/news/topic/Fantasy/nhl-fantasy-hockey-top-100-forward-rankings-pools-282775028",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Fantasy hockey top 100 forward rankings for 2026-27",
+      "description": "Most valuable options at position in standard leagues; new podcast episodes",
+      "publishedAt": "2026-11-09T14:00:00+00:00"
     },
     {
       "title": "NHL EDGE stats behind Wallstedt’s breakout season for Wild Nov 13, 2026",
