@@ -1,6 +1,6 @@
 {
   "date": "2026-11-15",
-  "updatedAt": "2026-11-15T19:24:38.565971+00:00",
+  "updatedAt": "2026-11-15T20:16:02.518996+00:00",
   "teams": {
     "ANA": {
       "name": "Ville Husso",
@@ -8,7 +8,7 @@
       "date": "2026-11-15",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-15T19:24:38.565971+00:00",
+      "checkedAt": "2026-11-15T20:16:02.518996+00:00",
       "gameId": 2026020328
     },
     "CGY": {
@@ -17,7 +17,7 @@
       "date": "2026-11-15",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-15T19:24:38.565971+00:00",
+      "checkedAt": "2026-11-15T20:16:02.518996+00:00",
       "gameId": 2026020328
     },
     "DAL": {
@@ -26,7 +26,7 @@
       "date": "2026-11-15",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-15T19:24:38.565971+00:00",
+      "checkedAt": "2026-11-15T20:16:02.518996+00:00",
       "gameId": 2026020327
     },
     "EDM": {
@@ -35,7 +35,7 @@
       "date": "2026-11-15",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-15T19:24:38.565971+00:00",
+      "checkedAt": "2026-11-15T20:16:02.518996+00:00",
       "gameId": 2026020326
     },
     "FLA": {
@@ -44,7 +44,7 @@
       "date": "2026-11-15",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-15T19:24:38.565971+00:00",
+      "checkedAt": "2026-11-15T20:16:02.518996+00:00",
       "gameId": 2026020327
     },
     "NSH": {
@@ -53,7 +53,7 @@
       "date": "2026-11-15",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-15T19:24:38.565971+00:00",
+      "checkedAt": "2026-11-15T20:16:02.518996+00:00",
       "gameId": 2026020330
     },
     "PHI": {
@@ -62,7 +62,7 @@
       "date": "2026-11-15",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-15T19:24:38.565971+00:00",
+      "checkedAt": "2026-11-15T20:16:02.518996+00:00",
       "gameId": 2026020326
     },
     "SJS": {
@@ -71,26 +71,26 @@
       "date": "2026-11-15",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-15T19:24:38.565971+00:00",
+      "checkedAt": "2026-11-15T20:16:02.518996+00:00",
       "gameId": 2026020330
     },
-    "VAN": {
-      "name": "Leevi Meriläinen",
+    "VGK": {
+      "name": "Carter Hart",
       "status": "projected",
       "date": "2026-11-15",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-15T19:24:38.565971+00:00",
+      "checkedAt": "2026-11-15T20:16:02.518996+00:00",
       "gameId": 2026020329
     }
   },
   "conflicts": [
     {
       "date": "2026-11-15",
-      "team": "VGK",
+      "team": "VAN",
       "reason": "source disagreement",
-      "rotowire": "Carter Hart",
-      "previous": "Adin Hill"
+      "rotowire": "Leevi Meriläinen",
+      "previous": "Kevin Lankinen"
     }
   ],
   "sourceErrors": [],
