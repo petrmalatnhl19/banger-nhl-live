@@ -8,6 +8,15 @@ const { MAX_BYTES, planSignedExport } = require("./core43_cal07_export.cjs");
 
 const APPLICATION_ID = 0x43414c38;
 const LEDGER_VERSION = 1;
+const LEDGER_TABLES = {
+  ledger: `CREATE TABLE ledger (id INTEGER PRIMARY KEY CHECK (id = 1), source TEXT NOT NULL) STRICT`,
+  receipts: `CREATE TABLE receipts (
+        game_id TEXT NOT NULL,
+        kickoff_at TEXT NOT NULL,
+        receipt TEXT NOT NULL CHECK (json_valid(receipt)),
+        PRIMARY KEY (game_id, kickoff_at)
+      ) STRICT`,
+};
 
 function readBoundedFile(path, limit) {
   const fd = openSync(path, constants.O_RDONLY | constants.O_NOFOLLOW | constants.O_NONBLOCK);
@@ -47,6 +56,27 @@ function openLedger(path) {
   }
 }
 
+function validateLedger(db, source) {
+  if (db.prepare("PRAGMA application_id").get().application_id !== APPLICATION_ID ||
+      db.prepare("PRAGMA user_version").get().user_version !== LEDGER_VERSION ||
+      db.prepare("PRAGMA quick_check(1)").get().quick_check !== "ok") {
+    throw Error("cal08_ledger_invalid");
+  }
+  if (db.prepare("SELECT source FROM ledger WHERE id = 1").get()?.source !== source) {
+    throw Error("cal08_ledger_source");
+  }
+}
+
+function validateLedgerSchema(db) {
+  const normalize = sql => sql?.replace(/\s+/g, " ").trim();
+  const objects = db.prepare("SELECT name, sql FROM sqlite_schema WHERE sql IS NOT NULL").all();
+  if (objects.length !== Object.keys(LEDGER_TABLES).length ||
+      objects.some(({ name, sql }) => !Object.hasOwn(LEDGER_TABLES, name) ||
+        normalize(sql) !== normalize(LEDGER_TABLES[name]))) {
+    throw Error("cal08_ledger_schema");
+  }
+}
+
 function initializeLedger(ledgerPath, source) {
   if (typeof source !== "string" || !source.trim()) throw Error("cal08_ledger_source");
   const path = resolve(ledgerPath);
@@ -59,13 +89,7 @@ function initializeLedger(ledgerPath, source) {
       BEGIN IMMEDIATE;
       PRAGMA application_id = ${APPLICATION_ID};
       PRAGMA user_version = ${LEDGER_VERSION};
-      CREATE TABLE ledger (id INTEGER PRIMARY KEY CHECK (id = 1), source TEXT NOT NULL) STRICT;
-      CREATE TABLE receipts (
-        game_id TEXT NOT NULL,
-        kickoff_at TEXT NOT NULL,
-        receipt TEXT NOT NULL CHECK (json_valid(receipt)),
-        PRIMARY KEY (game_id, kickoff_at)
-      ) STRICT;
+      ${Object.values(LEDGER_TABLES).join(";\n")};
     `);
     db.prepare("INSERT INTO ledger (id, source) VALUES (1, ?)").run(source);
     db.exec("COMMIT");
@@ -86,14 +110,7 @@ function receiveExport({
   const db = openLedger(path);
   try {
     db.exec("BEGIN IMMEDIATE");
-    if (db.prepare("PRAGMA application_id").get().application_id !== APPLICATION_ID ||
-        db.prepare("PRAGMA user_version").get().user_version !== LEDGER_VERSION ||
-        db.prepare("PRAGMA quick_check(1)").get().quick_check !== "ok") {
-      throw Error("cal08_ledger_invalid");
-    }
-    if (!trust || db.prepare("SELECT source FROM ledger WHERE id = 1").get()?.source !== trust.source) {
-      throw Error("cal08_ledger_source");
-    }
+    validateLedger(db, trust?.source);
 
     const now = clock();
     const { exportSha256, result } = planSignedExport({ bytes, signature, trust, now, existing: [] });
@@ -146,4 +163,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { initializeLedger, receiveExport };
+module.exports = { LEDGER_VERSION, checkPrivate, initializeLedger, readBoundedFile, receiveExport, validateLedger, validateLedgerSchema };
