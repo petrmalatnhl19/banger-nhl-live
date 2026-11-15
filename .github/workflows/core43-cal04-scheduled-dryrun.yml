@@ -86,6 +86,7 @@ on:
       - 'scripts/test_core43_cal28_real_archive.cjs'
       - 'scripts/fixtures/core43_cal28_signed_archive.cjs'
       - 'docs/core43-cal28h-fixture-migration.md'
+      - 'docs/core43-cal28i-mandatory-archives.md'
       - 'docs/core43-cal28-lock-gate.md'
       - 'scripts/test_core43_cal26_end_to_end.cjs'
       - 'docs/core43-cal26-end-to-end.md'
