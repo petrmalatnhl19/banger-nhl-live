@@ -16,6 +16,9 @@ on:
       - 'scripts/test_core43_cal04_two_run_integration.cjs'
       - 'scripts/test_core43_cal04_failure_modes.cjs'
       - 'scripts/test_core43_cal06_workflow_guards.cjs'
+      - 'docs/sql/core43-cal06-reader-migration-draft.sql'
+      - 'scripts/core43_live_shadow_source_reader.cjs'
+      - 'scripts/core43_supabase_readonly_report.cjs'
       - 'scripts/core43_cal03_capture_plan.cjs'
       - '.github/workflows/core43-cal04-scheduled-dryrun.yml'
 permissions:
@@ -39,7 +42,9 @@ jobs:
       - run: node scripts/test_core43_cal04_failure_modes.cjs
       - run: node scripts/test_core43_cal06_workflow_guards.cjs
   dry-run:
+    # Keep disabled until the hosted role grants and JWT issuer are verified.
     if: >-
+      false &&
       (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') &&
       github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
     needs: unit-tests

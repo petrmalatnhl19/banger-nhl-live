@@ -10,8 +10,30 @@ const workflow = fs.readFileSync(".github/workflows/core43-cal04-scheduled-dryru
 assert.match(workflow, /secrets\.CORE43_SUPABASE_PUBLISHABLE_KEY/);
 assert.match(workflow, /secrets\.CORE43_SUPABASE_READONLY_TOKEN/);
 assert.doesNotMatch(workflow, /SUPABASE_SERVICE_ROLE_KEY/);
+assert.match(workflow, /dry-run:\s*(?:#.*\n\s*)?if: >-\s+false &&/);
 assert.match(workflow, /github\.ref == format\('refs\/heads\/\{0\}', github\.event\.repository\.default_branch\)/);
 assert.match(workflow, /bash scripts\/core43_cal04_restore_ledger\.sh/);
+
+const migration = fs.readFileSync("docs/sql/core43-cal06-reader-migration-draft.sql", "utf8");
+const sql = migration.replace(/^--[^\n]*\n/gm, "").trim();
+assert.match(sql, /^BEGIN;[\s\S]+COMMIT;$/);
+assert.match(sql, /CREATE ROLE core43_cal04_reader\s+NOLOGIN NOINHERIT NOSUPERUSER NOCREATEDB NOCREATEROLE\s+NOREPLICATION NOBYPASSRLS;/);
+assert.match(sql, /GRANT USAGE ON SCHEMA public TO core43_cal04_reader;/);
+assert.match(sql, /GRANT core43_cal04_reader TO authenticator WITH ADMIN FALSE, INHERIT FALSE, SET TRUE;/);
+assert.match(sql, /c\.relrowsecurity/);
+assert.match(sql, /has_function_privilege\(reader, p\.oid, 'EXECUTE'\)/);
+assert.match(sql, /has_any_column_privilege\(reader, c\.oid, 'SELECT, INSERT, UPDATE, REFERENCES'\)/);
+assert.match(sql, /has_sequence_privilege\(reader, c\.oid, 'USAGE, SELECT, UPDATE'\)/);
+assert.match(sql, /has_schema_privilege\(reader, n\.oid, 'CREATE'\)/);
+assert.deepEqual(sql.match(/\bGRANT\b[^;]+;/g), [
+  "GRANT USAGE ON SCHEMA public TO core43_cal04_reader;",
+  "GRANT SELECT (%s) ON TABLE public.%I TO %I', source.columns, source.table_name, reader);",
+  "GRANT core43_cal04_reader TO authenticator WITH ADMIN FALSE, INHERIT FALSE, SET TRUE;",
+]);
+assert.deepEqual(sql.match(/\bCREATE POLICY\b[^;]+;/g), [
+  "CREATE POLICY core43_cal04_reader_select ON public.%I FOR SELECT TO %I USING (true)',\n            source.table_name, reader);",
+]);
+assert.doesNotMatch(sql, /(?:DISABLE ROW LEVEL SECURITY|SECURITY DEFINER|ALTER DEFAULT PRIVILEGES|CREATE (?:FUNCTION|PROCEDURE)|\bREVOKE\b)/i);
 
 const apiKey = "sb_publishable_fixture";
 const exp = Math.ceil(Date.now() / 1000) + 60;
@@ -27,7 +49,7 @@ const read = scopedTransport({ apiKey, token, fetchImpl(url, options) {
 assert.equal(read(project, { method: "GET", headers: { Authorization: "old", Accept: "application/json" } }), "read");
 assert.throws(() => read(project, { method: "POST" }), /supabase_readonly_requires_get/);
 assert.throws(() => scopedTransport({ apiKey: "sb_secret_fixture", token }), /invalid_supabase_publishable_key/);
-for (const badToken of ["sb_secret_fixture", jwt({ role: "service_role", exp }), jwt({ role: "core43_cal04_reader", exp: 1 })]) {
+for (const badToken of ["sb_secret_fixture", ...["service_role", "anon", "authenticated"].map(role => jwt({ role, exp })), jwt({ role: "core43_cal04_reader", exp: 1 })]) {
   assert.throws(() => scopedTransport({ apiKey, token: badToken }), /invalid_supabase_readonly_token/);
 }
 
