@@ -24,6 +24,18 @@ test("CAL-29 rejects duplicate signer pin",()=>{
  const f=fixture();f.authorities[1].authority.signerFingerprint256=fp("AA");
  assert.throws(()=>run(f),/authorities_not_distinct/);
 });
+test("CAL-29 checks duplicates anywhere in the list before verifying tokens",()=>{
+ const f=fixture();
+ f.authorities.push(authority("tsa-three",fp("BB")));
+ assert.throws(()=>run(f),{message:"cal29_authorities_not_distinct"});
+ f.authorities[2]=authority("tsa-two",fp("CC"));
+ assert.throws(()=>run(f),{message:"cal29_authorities_not_distinct"});
+});
+test("CAL-29 rejects a non-string signer pin in a later record",()=>{
+ const f=fixture();
+ f.authorities[1].authority.signerFingerprint256=[fp("BB")];
+ assert.throws(()=>run(f),{message:"cal29_authorities_not_distinct"});
+});
 test("CAL-29 rejects test authority",()=>{
  const f=fixture();f.authorities[0].authority.kind="test";
  assert.throws(()=>run(f),/authorities_not_distinct/);
@@ -32,7 +44,7 @@ test("CAL-29 rejects unverified synthetic RFC3161 bytes",()=>{
  assert.throws(()=>run(fixture()),/cal16_/);
 });
 test("CAL-29 rejects extra untrusted authority fields",()=>{
- const f=fixture();f.authorities[0].trusted=true;
+ const f=fixture();f.authorities[1].trusted=true;
  assert.throws(()=>run(f),/invalid_authority_record/);
 });
 test("CAL-29 rejects malformed kickoff",()=>{

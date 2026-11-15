@@ -14,24 +14,33 @@ function verifyIndependentPregameTimestamps({packageBytes,officialStartAt,author
  if(typeof officialStartAt!=="string"||!Number.isFinite(start)||
     new Date(start).toISOString()!==officialStartAt)
    throw Error("cal29_invalid_official_start");
- const fingerprints=new Set(),domains=new Set(),results=[];
+ const fingerprints=new Set(),domains=new Set(),validatedAuthorities=[],results=[];
  const digest=createHash("sha256").update(packageBytes).digest("hex");
  for(const item of authorities){
    if(!item||typeof item!=="object"||Array.isArray(item)||
       Object.keys(item).sort().join(",")!=="authority,request,response,trustDomain")
      throw Error("cal29_invalid_authority_record");
    const {authority,trustDomain,request,response}=item;
+   const {kind,signerFingerprint256}=authority??{};
    if(typeof trustDomain!=="string"||!/^[A-Za-z0-9._:-]{3,128}$/.test(trustDomain)||
-      domains.has(trustDomain)||authority?.kind!=="independent"||
-      !PIN.test(authority.signerFingerprint256)||fingerprints.has(authority.signerFingerprint256))
+      domains.has(trustDomain)||kind!=="independent"||
+      typeof signerFingerprint256!=="string"||!PIN.test(signerFingerprint256)||fingerprints.has(signerFingerprint256))
      throw Error("cal29_authorities_not_distinct");
+   domains.add(trustDomain);
+   fingerprints.add(signerFingerprint256);
+   const {caPem,policyOid,maxAccuracyMs}=authority;
+   validatedAuthorities.push({
+     trustDomain,request,response,
+     authority:{kind,signerFingerprint256,caPem,policyOid,maxAccuracyMs},
+   });
+ }
+ for(const {authority,trustDomain,request,response} of validatedAuthorities){
    // Full RFC3161 verification, nonce binding, CA validation, policy and signer pin are
    // enforced by CAL16. Never accept a self-declared timestamp in lieu of a token.
    const result=verifyTimestamp({packageBytes,request,response,authority});
    if(result.digest!==digest||!HEX.test(result.digest)||
       !Number.isSafeInteger(result.latestMs)||result.latestMs>=start)
      throw Error("cal29_late_or_unbound_timestamp");
-   domains.add(trustDomain);fingerprints.add(authority.signerFingerprint256);
    results.push({trustDomain,latestMs:result.latestMs});
  }
  return {digest,authorityCount:results.length,latestVerifiedMs:Math.max(...results.map(x=>x.latestMs)),
