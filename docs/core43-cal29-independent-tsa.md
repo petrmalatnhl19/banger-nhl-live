@@ -1,0 +1,5 @@
+# CAL-29 — independent RFC 3161 timestamp authority gate (offline)
+
+This stage adds a strict dual-authority verifier that reuses CAL-16's OpenSSL RFC 3161 verification (signed response, request nonce, SHA-256 package digest, policy OID, signer certificate pin and chain, and uncertainty). Each authority must have a distinct declared trust domain and signer certificate fingerprint, and every verified latest possible timestamp must precede the supplied official start. It rejects absent, duplicated, malformed or forged evidence. Ten synthetic negative-path tests run in CAL-04 CI.
+
+**No positive real-world independent-TSA verification has been performed.** The authority CA material and pins are caller supplied and their external provenance is not established. Different declared trust domains do not prove distinct operators. The official game start is caller supplied and is not independently verified by this function. No network calls, no TSA procurement, no live collection, no Supabase writes and no production CORE 4.2 changes. The verifier returns `trusted:false` until separate operational controls and independently verified game-start evidence exist.
