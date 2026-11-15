@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T23:38:25.259280+00:00",
+  "generatedAt": "2026-11-15T08:35:53.563086+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -101,49 +101,25 @@
       "candidatePublishedAt": "2026-11-14T20:51:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
-      "rosterValidation": "insufficient_position_matched_lines",
+      "rosterValidation": "passed",
+      "gameEvidenceExceptions": [
+        {
+          "player": "Philip Tomasino",
+          "role": "forwards",
+          "basis": "official game boxscore on projection publication date"
+        },
+        {
+          "player": "Samuel Blais",
+          "role": "forwards",
+          "basis": "official game boxscore on projection publication date"
+        }
+      ],
       "roleMismatches": [],
-      "rejectedLines": [
-        {
-          "group": "forwards",
-          "line": 2,
-          "players": [
-            "Philip Tomasino"
-          ],
-          "sourceLine": [
-            "Philip Tomasino",
-            "Shane Pinto",
-            "Drake Batherson"
-          ]
-        },
-        {
-          "group": "forwards",
-          "line": 4,
-          "players": [
-            "Samuel Blais"
-          ],
-          "sourceLine": [
-            "Samuel Blais",
-            "Stephen Halliday",
-            "Hayden Hodgson"
-          ]
-        }
-      ],
-      "rejectedPlayerReasons": [
-        {
-          "name": "Philip Tomasino",
-          "expectedRole": "forwards",
-          "reason": "not_in_current_roster"
-        },
-        {
-          "name": "Samuel Blais",
-          "expectedRole": "forwards",
-          "reason": "not_in_current_roster"
-        }
-      ],
-      "validatedForwardLines": 2,
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
       "validatedDefensePairs": 3,
-      "accepted": false
+      "accepted": true
     },
     "sharks": {
       "team": "SJS",
@@ -214,6 +190,13 @@
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
+      "gameEvidenceExceptions": [
+        {
+          "player": "Artem Duda",
+          "role": "defense",
+          "basis": "official game boxscore on projection publication date"
+        }
+      ],
       "roleMismatches": [],
       "rejectedLines": [
         {
@@ -232,7 +215,6 @@
           "group": "defense",
           "line": 3,
           "players": [
-            "Artem Duda",
             "Zac Jones"
           ],
           "sourceLine": [
@@ -245,11 +227,6 @@
         {
           "name": "Ben McCartney",
           "expectedRole": "forwards",
-          "reason": "not_in_current_roster"
-        },
-        {
-          "name": "Artem Duda",
-          "expectedRole": "defense",
           "reason": "not_in_current_roster"
         },
         {
@@ -285,35 +262,18 @@
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
+      "gameEvidenceExceptions": [
+        {
+          "player": "Trey Taylor",
+          "role": "defense",
+          "basis": "official game boxscore on projection publication date"
+        }
+      ],
       "roleMismatches": [],
-      "rejectedLines": [
-        {
-          "group": "defense",
-          "line": 3,
-          "players": [
-            "Trey Taylor",
-            "Kyle Burroughs"
-          ],
-          "sourceLine": [
-            "Trey Taylor",
-            "Kyle Burroughs"
-          ]
-        }
-      ],
-      "rejectedPlayerReasons": [
-        {
-          "name": "Trey Taylor",
-          "expectedRole": "defense",
-          "reason": "not_in_current_roster"
-        },
-        {
-          "name": "Kyle Burroughs",
-          "expectedRole": "defense",
-          "reason": "not_in_current_roster"
-        }
-      ],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
       "validatedForwardLines": 4,
-      "validatedDefensePairs": 2,
+      "validatedDefensePairs": 3,
       "accepted": true
     }
   }

@@ -144,26 +144,20 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "stars": {
-      "updatedAt": "2026-11-14T19:10:09.678341+00:00",
-      "previousPublishedAt": "2026-11-12T18:41:28.341000+00:00",
-      "publishedAt": "2026-11-14T19:00:43.404000+00:00",
-      "source": "https://www.nhl.com/news/buffalo-sabres-dallas-stars-game-preview-november-14-2026",
+      "updatedAt": "2026-11-15T08:35:53.567101+00:00",
+      "previousPublishedAt": "2026-11-14T20:51:00+00:00",
+      "publishedAt": "2026-11-14T20:51:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
-          "type": "moved",
-          "player": "Tyler Myers",
-          "from": "Obrana 3",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "removed",
-          "player": "Lian Bichsel",
-          "from": "Obrana 2"
-        },
-        {
-          "type": "removed",
+          "type": "added",
           "player": "Trey Taylor",
-          "from": "Obrana 3"
+          "to": "Obrana 3"
+        },
+        {
+          "type": "added",
+          "player": "Kyle Burroughs",
+          "to": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

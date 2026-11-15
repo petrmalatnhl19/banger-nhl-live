@@ -3,7 +3,7 @@
     "lineup_core_report.json",
     "lineup_rejections_report.json"
   ],
-  "incompleteTeams": 10,
+  "incompleteTeams": 8,
   "teams": [
     {
       "team": "blackhawks",
@@ -106,12 +106,6 @@
           ],
           "unverifiedPlayers": [
             {
-              "name": "Artem Duda",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            },
-            {
               "name": "Zac Jones",
               "reason": "not_in_current_roster",
               "inLocalCurrentRoster": false,
@@ -141,86 +135,6 @@
           "unverifiedPlayers": [
             {
               "name": "Matthew Roberson",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ],
-      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
-    },
-    {
-      "team": "senators",
-      "status": "missing_team",
-      "reason": "rejected_roster_lines",
-      "missingForwardLines": 4,
-      "missingDefensePairs": 3,
-      "source": null,
-      "publishedAt": null,
-      "rejectedLines": [
-        {
-          "group": "forwards",
-          "sourceLineNumber": 2,
-          "sourceLine": [
-            "Philip Tomasino",
-            "Shane Pinto",
-            "Drake Batherson"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Philip Tomasino",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        },
-        {
-          "group": "forwards",
-          "sourceLineNumber": 4,
-          "sourceLine": [
-            "Samuel Blais",
-            "Stephen Halliday",
-            "Hayden Hodgson"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Samuel Blais",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ],
-      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
-    },
-    {
-      "team": "stars",
-      "status": "incomplete_projection",
-      "reason": "rejected_roster_lines",
-      "missingForwardLines": 0,
-      "missingDefensePairs": 1,
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T20:51:00+00:00",
-      "rejectedLines": [
-        {
-          "group": "defense",
-          "sourceLineNumber": 3,
-          "sourceLine": [
-            "Trey Taylor",
-            "Kyle Burroughs"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Trey Taylor",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            },
-            {
-              "name": "Kyle Burroughs",
               "reason": "not_in_current_roster",
               "inLocalCurrentRoster": false,
               "requiresIndependentGameEvidence": true

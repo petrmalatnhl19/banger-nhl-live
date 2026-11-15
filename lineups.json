@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-14T23:38:25.267226+00:00",
+  "fetchedAt": "2026-11-15T08:35:53.568540+00:00",
   "teams": {
     "jets": {
       "name": "Jets",
@@ -89,6 +89,53 @@
       ],
       "injured": "Bowen Byram (upper body)",
       "scratched": "Dillon Boucher, Ethan Del Mastro, Teuvo Teravainen",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-14T20:51:00+00:00"
+    },
+    "senators": {
+      "name": "Senators",
+      "forwards": [
+        [
+          "Fabian Zetterlund",
+          "Tim Stutzle",
+          "Dylan Cozens"
+        ],
+        [
+          "Philip Tomasino",
+          "Shane Pinto",
+          "Drake Batherson"
+        ],
+        [
+          "Michael Amadio",
+          "Ridly Greig",
+          "Claude Giroux"
+        ],
+        [
+          "Samuel Blais",
+          "Stephen Halliday",
+          "Hayden Hodgson"
+        ]
+      ],
+      "defense": [
+        [
+          "Jake Sanderson",
+          "Artem Zub"
+        ],
+        [
+          "Thomas Chabot",
+          "Jordan Spence"
+        ],
+        [
+          "Tyler Kleven",
+          "Carter Yakemchuk"
+        ]
+      ],
+      "goalies": [
+        "Linus Ullmark",
+        "Samuel Ersson"
+      ],
+      "injured": "Warren Foegele (lower body), William Eklund (ankle), Andre Burakovsky (lower body), Nick Cousins (upper body)",
+      "scratched": "Nikolas Matinpalo",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "publishedAt": "2026-11-14T20:51:00+00:00"
     },
@@ -862,6 +909,10 @@
         [
           "Esa Lindell",
           "Tyler Myers"
+        ],
+        [
+          "Trey Taylor",
+          "Kyle Burroughs"
         ]
       ],
       "goalies": [
