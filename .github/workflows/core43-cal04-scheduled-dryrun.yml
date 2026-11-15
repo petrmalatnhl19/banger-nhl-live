@@ -130,6 +130,9 @@ on:
       - 'scripts/core43_cal28z_consistency_proof.cjs'
       - 'scripts/test_core43_cal28z_consistency_proof.cjs'
       - 'docs/core43-cal28z-consistency-proof.md'
+      - 'scripts/core43_cal29_independent_tsa.cjs'
+      - 'scripts/test_core43_cal29_independent_tsa.cjs'
+      - 'docs/core43-cal29-independent-tsa.md'
       - 'docs/core43-cal28-lock-gate.md'
       - 'scripts/test_core43_cal26_end_to_end.cjs'
       - 'docs/core43-cal26-end-to-end.md'
@@ -245,6 +248,8 @@ jobs:
         run: node --test scripts/test_core43_cal28y_view_consistency.cjs
       - name: Verify CAL-28Z signed append-only history consistency
         run: node --test scripts/test_core43_cal28z_consistency_proof.cjs
+      - name: Verify CAL-29 independent TSA pregame gate
+        run: node --test scripts/test_core43_cal29_independent_tsa.cjs
       - name: Enforce CAL-17 fail-closed pilot gates
         run: node --test scripts/test_core43_cal17_safety_gates.cjs
       - name: Test PUBLIC privileges in an in-memory PostgreSQL 17 database
