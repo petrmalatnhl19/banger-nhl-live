@@ -1,6 +1,6 @@
 {
   "date": "2026-11-15",
-  "updatedAt": "2026-11-15T17:00:32.675104+00:00",
+  "updatedAt": "2026-11-15T17:40:31.762256+00:00",
   "teams": {
     "ANA": {
       "name": "Ville Husso",
@@ -8,7 +8,7 @@
       "date": "2026-11-15",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-15T17:00:32.675104+00:00",
+      "checkedAt": "2026-11-15T17:40:31.762256+00:00",
       "gameId": 2026020328
     },
     "CGY": {
@@ -17,8 +17,17 @@
       "date": "2026-11-15",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-15T17:00:32.675104+00:00",
+      "checkedAt": "2026-11-15T17:40:31.762256+00:00",
       "gameId": 2026020328
+    },
+    "DAL": {
+      "name": "Casey DeSmith",
+      "status": "projected",
+      "date": "2026-11-15",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-15T17:40:31.762256+00:00",
+      "gameId": 2026020327
     },
     "EDM": {
       "name": "Tristan Jarry",
@@ -26,8 +35,17 @@
       "date": "2026-11-15",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-15T17:00:32.675104+00:00",
+      "checkedAt": "2026-11-15T17:40:31.762256+00:00",
       "gameId": 2026020326
+    },
+    "FLA": {
+      "name": "Akira Schmid",
+      "status": "projected",
+      "date": "2026-11-15",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-15T17:40:31.762256+00:00",
+      "gameId": 2026020327
     },
     "NSH": {
       "name": "Juuse Saros",
@@ -35,7 +53,7 @@
       "date": "2026-11-15",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-15T17:00:32.675104+00:00",
+      "checkedAt": "2026-11-15T17:40:31.762256+00:00",
       "gameId": 2026020330
     },
     "PHI": {
@@ -44,7 +62,7 @@
       "date": "2026-11-15",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-15T17:00:32.675104+00:00",
+      "checkedAt": "2026-11-15T17:40:31.762256+00:00",
       "gameId": 2026020326
     },
     "VAN": {
@@ -53,25 +71,11 @@
       "date": "2026-11-15",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-15T17:00:32.675104+00:00",
+      "checkedAt": "2026-11-15T17:40:31.762256+00:00",
       "gameId": 2026020329
     }
   },
   "conflicts": [
-    {
-      "date": "2026-11-15",
-      "team": "DAL",
-      "reason": "source disagreement",
-      "rotowire": "Casey DeSmith",
-      "previous": "Jake Oettinger"
-    },
-    {
-      "date": "2026-11-15",
-      "team": "FLA",
-      "reason": "source disagreement",
-      "rotowire": "Akira Schmid",
-      "previous": "Jacob Markstrom"
-    },
     {
       "date": "2026-11-15",
       "team": "SJS",

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-15T17:00:29.148529+00:00",
+  "generatedAt": "2026-11-15T17:40:27.959348+00:00",
   "teams": 32,
   "activeSourceCounts": {
     "nhl.com": 32
@@ -89,22 +89,22 @@
     {
       "team": "ducks",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/calgary-flames-anaheim-ducks-game-preview-november-15-2026",
-      "publishedAt": "2026-11-15T15:20:39.964000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-15T17:06:00+00:00",
       "sourceType": null
     },
     {
       "team": "flames",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/calgary-flames-anaheim-ducks-game-preview-november-15-2026",
-      "publishedAt": "2026-11-15T15:20:39.964000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-15T17:06:00+00:00",
       "sourceType": null
     },
     {
       "team": "flyers",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/edmonton-oilers-philadelphia-flyers-game-preview-november-15-2026",
-      "publishedAt": "2026-11-15T15:17:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-15T17:06:00+00:00",
       "sourceType": null
     },
     {
@@ -173,15 +173,15 @@
     {
       "team": "oilers",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/edmonton-oilers-philadelphia-flyers-game-preview-november-15-2026",
-      "publishedAt": "2026-11-15T15:17:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-15T17:06:00+00:00",
       "sourceType": null
     },
     {
       "team": "panthers",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/florida-panthers-st-louis-blues-game-preview-november-14-2026",
-      "publishedAt": "2026-11-14T17:32:00+00:00",
+      "source": "https://www.nhl.com/news/florida-panthers-dallas-stars-game-preview-november-15-2026",
+      "publishedAt": "2026-11-15T17:09:48.982000+00:00",
       "sourceType": null
     },
     {
@@ -236,8 +236,8 @@
     {
       "team": "stars",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/buffalo-sabres-dallas-stars-game-preview-november-14-2026",
-      "publishedAt": "2026-11-14T19:00:43.404000+00:00",
+      "source": "https://www.nhl.com/news/florida-panthers-dallas-stars-game-preview-november-15-2026",
+      "publishedAt": "2026-11-15T17:09:48.982000+00:00",
       "sourceType": null
     },
     {
