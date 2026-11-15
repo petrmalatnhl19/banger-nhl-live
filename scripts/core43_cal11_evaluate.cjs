@@ -189,4 +189,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { evaluate, predictionDigest, toMarkdown };
+module.exports = { evaluate, finalOutcome, predictionDigest, toMarkdown, validatePrediction };
