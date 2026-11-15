@@ -9,6 +9,7 @@ assert.match(workflow,/actions\/workflows\/core43-cal04-scheduled-dryrun\.yml\/r
 assert.match(workflow,/branch=\$\{GITHUB_REF_NAME\}/);
 assert.match(workflow,/\.event=="schedule" or \.event=="workflow_dispatch"/);
 assert.match(workflow,/set -euo pipefail/);
+assert.match(workflow,/\(\.id \| tostring\) != env\.GITHUB_RUN_ID/);
 assert.match(workflow,/invalid_prior_artifact_ledger/);
 assert.match(workflow,/if: github\.event_name != 'pull_request'/);
 const script=fs.readFileSync("scripts/core43_cal04_scheduled_dryrun.cjs","utf8");
