@@ -47,7 +47,8 @@ if (require.main === module) {
     const [pin, transferFile, keyFile, witness, approved] = process.argv.slice(2);
     if (!pin || !transferFile || !keyFile || !witness || !approved || process.argv.length !== 7)
       throw Error("cal24_usage: RECEIVER_PIN TRANSFER_JSON TRUSTED_PUBLIC_PEM WITNESS_ID OPERATOR_APPROVED_HEAD");
-    console.log(JSON.stringify(advancePin(pin, JSON.parse(readFileSync(transferFile, "utf8")),
-      readFileSync(keyFile), witness, approved), null, 2));
+    // CAL-28D: prevent the legacy CLI from bypassing evidence verification.
+    // Use CAL-28C entrypoint with an independently supplied archive root instead.
+    throw Error("cal28d_legacy_cli_disabled_use_cal28_approved");
   } catch (e) { console.error(e.message); process.exitCode = 1; }
 }
