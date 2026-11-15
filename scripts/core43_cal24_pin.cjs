@@ -1,7 +1,9 @@
 "use strict";
 // CAL-24: operator-approved, atomic receiver pin advancement. Never trust sender-supplied anchors.
 const { readFileSync, openSync, writeFileSync, fsyncSync, closeSync, renameSync, rmSync, mkdirSync, rmdirSync } = require("node:fs");
-const { resolve, dirname } = require("node:path");
+const { resolve, dirname, join } = require("node:path");
+const { mkdtempSync, cpSync, lstatSync } = require("node:fs");
+const { tmpdir } = require("node:os");
 const { verifyTransferEvidence } = require("./core43_cal28_evidence.cjs");
 const { inspectPin } = require("./core43_cal25_audit.cjs");
 const HEX = /^[a-f0-9]{64}$/;
@@ -10,7 +12,7 @@ function advancePin(pinPath, transfer, publicKey, witnessId, approvedHead, hooks
   const path = resolve(pinPath), lock = path + ".lock";
   try { mkdirSync(lock, { mode: 0o700 }); }
   catch (e) { if (e.code === "EEXIST") throw Error("cal24_locked"); throw e; }
-  let temp, fd;
+  let temp, fd, snapshot;
   try {
     // The writer owns the lock just acquired above; all other audit findings are fatal.
     const audit = inspectPin(path);
@@ -32,6 +34,21 @@ function advancePin(pinPath, transfer, publicKey, witnessId, approvedHead, hooks
     writeFileSync(fd, JSON.stringify(next) + "\n");
     fsyncSync(fd); closeSync(fd); fd = undefined;
     hooks?.onStage?.("temp_fsynced");
+    // CAL-28O: independently verify a private copy before the final commit check.
+    // This is a verified private copy, NOT an OS-enforced immutable snapshot.
+    snapshot = mkdtempSync(join(tmpdir(), "cal28o-snapshot-"));
+    const snapshotRoot = join(snapshot, "evidence");
+    mkdirSync(snapshotRoot, { mode: 0o700 });
+    for (const entry of transfer.ledger) {
+      if (!HEX.test(entry.archiveDigest)) throw Error("cal28o_invalid_digest");
+      const source = join(resolve(hooks.archiveRoot), entry.archiveDigest);
+      const stat = lstatSync(source);
+      if (!stat.isDirectory() || stat.isSymbolicLink()) throw Error("cal28o_unsafe_source_directory");
+      cpSync(source, join(snapshotRoot, entry.archiveDigest), { recursive: true, dereference: false, errorOnExist: true, force: false });
+    }
+    const snapVerified = verifyTransferEvidence(transfer, publicKey, witnessId, anchor, snapshotRoot);
+    if (snapVerified.next.head !== next.head || snapVerified.next.sequence !== next.sequence)
+      throw Error("cal28o_snapshot_mismatch");
     // CAL-28L: catch archive mutations occurring after initial verification
     // and before the durable pin rename. This is not an atomic archive snapshot.
     const precommit = verifyTransferEvidence(transfer, publicKey, witnessId, anchor, hooks.archiveRoot);
@@ -46,6 +63,7 @@ function advancePin(pinPath, transfer, publicKey, witnessId, approvedHead, hooks
     hooks?.onStage?.("directory_fsynced");
     return { status: "advanced", ...next };
   } finally {
+    if (snapshot) rmSync(snapshot, { recursive: true, force: true });
     if (fd !== undefined) closeSync(fd);
     if (temp) rmSync(temp, { force: true });
     rmdirSync(lock);
