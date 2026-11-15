@@ -1,7 +1,7 @@
 "use strict";
 // CAL-18B offline immutable-evidence package. No network or database access.
 const { createHash } = require("node:crypto");
-const { mkdirSync, mkdtempSync, readFileSync, writeFileSync, renameSync, rmSync, lstatSync } = require("node:fs");
+const { mkdirSync, mkdtempSync, readFileSync, writeFileSync, renameSync, rmSync, lstatSync, openSync, fstatSync, closeSync, constants } = require("node:fs");
 const { join, resolve, basename } = require("node:path");
 const { verifyTimestamp } = require("./core43_cal16_timestamp.cjs");
 const { validateConfig } = require("./core43_cal18_verify.cjs");
@@ -49,14 +49,30 @@ function archiveEvidence(destination, files) {
   }
   return { directory: target, manifest };
 }
+// CAL-28K: verify each opened inode, not a pathname checked before opening.
+function readArchiveFile(directory, name) {
+  const file = join(directory, name);
+  const flags = constants.O_RDONLY | (constants.O_NOFOLLOW || 0) | (constants.O_NONBLOCK || 0);
+  const fd = openSync(file, flags);
+  try {
+    const before = fstatSync(fd);
+    if (!before.isFile() || before.nlink !== 1)
+      throw Error("cal28k_unsafe_open_file:" + name);
+    const bytes = readFileSync(fd);
+    const after = fstatSync(fd);
+    if (!after.isFile() || after.nlink !== 1 ||
+        before.dev !== after.dev || before.ino !== after.ino ||
+        before.size !== after.size || before.mtimeMs !== after.mtimeMs ||
+        before.ctimeMs !== after.ctimeMs)
+      throw Error("cal28k_file_changed_during_read:" + name);
+    return bytes;
+  } finally { closeSync(fd); }
+}
 function verifyArchive(directory) {
   const archiveDir = lstatSync(directory);
-  if (!archiveDir.isDirectory() || archiveDir.isSymbolicLink()) throw Error("cal28j_unsafe_archive_directory");
-  const manifestPath = join(directory, "manifest.json");
-  const manifestStat = lstatSync(manifestPath);
-  if (!manifestStat.isFile() || manifestStat.isSymbolicLink() || manifestStat.nlink !== 1)
-    throw Error("cal28j_unsafe_archive_file:manifest.json");
-  const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
+  if (!archiveDir.isDirectory() || archiveDir.isSymbolicLink())
+    throw Error("cal28j_unsafe_archive_directory");
+  const manifest = JSON.parse(readArchiveFile(directory, "manifest.json").toString("utf8"));
   if (manifest.schema !== "core43_cal18b_evidence_v1" ||
       manifest.verification !== "timestamp_signature_only" ||
       manifest.independentOperationProven !== false ||
@@ -64,11 +80,7 @@ function verifyArchive(directory) {
       !/^[a-f0-9]{64}$/.test(manifest.packageDigest) ||
       basename(resolve(directory)) !== manifest.packageDigest) throw Error("cal18b_manifest");
   const bytes = names.map(n => {
-    const filePath = join(directory, n);
-    const stat = lstatSync(filePath);
-    if (!stat.isFile() || stat.isSymbolicLink() || stat.nlink !== 1)
-      throw Error("cal28j_unsafe_archive_file:" + n);
-    const b = readFileSync(filePath);
+    const b = readArchiveFile(directory, n);
     if (sha(b) !== manifest.files?.[n]?.sha256 || b.length !== manifest.files[n].bytes)
       throw Error("cal18b_tampered_archive");
     return b;
@@ -79,6 +91,7 @@ function verifyArchive(directory) {
   if (JSON.stringify(verified) !== JSON.stringify(manifest)) throw Error("cal18b_manifest_mismatch");
   return verified;
 }
+
 if (require.main === module) {
   try {
     const [command, ...args] = process.argv.slice(2);
