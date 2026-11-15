@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-15T18:22:39.008704+00:00",
+  "generatedAt": "2026-11-15T19:24:36.284777+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 24,
+  "currentProjections": 25,
   "needsFreshProjection": [
     "blackhawks",
     "canucks",
@@ -10,7 +10,6 @@
     "hurricanes",
     "jets",
     "kraken",
-    "predators",
     "rangers"
   ],
   "missing": [],
@@ -21,7 +20,6 @@
     "hurricanes",
     "jets",
     "kraken",
-    "predators",
     "rangers"
   ],
   "manualSnapshots": [],
@@ -143,7 +141,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-15T17:06:00+00:00",
+      "publishedAt": "2026-11-15T18:21:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -155,7 +153,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-15T17:06:00+00:00",
+      "publishedAt": "2026-11-15T18:21:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -167,7 +165,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-15T17:06:00+00:00",
+      "publishedAt": "2026-11-15T18:21:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -289,7 +287,7 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-15T17:06:00+00:00",
+      "publishedAt": "2026-11-15T18:21:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
@@ -301,8 +299,8 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-15T17:09:48.982000+00:00",
-      "source": "https://www.nhl.com/news/florida-panthers-dallas-stars-game-preview-november-15-2026",
+      "publishedAt": "2026-11-15T18:21:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -324,11 +322,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-13T20:35:32.439000+00:00",
-      "source": "https://www.nhl.com/news/nashville-predators-vegas-golden-knights-game-preview-november-13-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-15T18:24:23.483000+00:00",
+      "source": "https://www.nhl.com/news/nashville-predators-san-jose-sharks-game-preview-november-15-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "rangers": {
       "hasProjectedLines": true,
@@ -385,8 +383,8 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-14T19:19:00+00:00",
-      "source": "https://www.nhl.com/news/san-jose-sharks-utah-mammoth-game-preview-november-14-2026",
+      "publishedAt": "2026-11-15T18:24:23.483000+00:00",
+      "source": "https://www.nhl.com/news/nashville-predators-san-jose-sharks-game-preview-november-15-2026",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -398,8 +396,8 @@
         "manual"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-15T17:09:48.982000+00:00",
-      "source": "https://www.nhl.com/news/florida-panthers-dallas-stars-game-preview-november-15-2026",
+      "publishedAt": "2026-11-15T18:21:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
