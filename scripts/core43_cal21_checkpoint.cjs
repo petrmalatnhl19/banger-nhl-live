@@ -1,6 +1,6 @@
 "use strict";
 // CAL-21: offline checkpoint verifier. Trust anchor and minimum sequence must be supplied independently.
-const { createPublicKey, verify, createHash } = require("node:crypto");
+const { createPublicKey, verify, createHash, KeyObject } = require("node:crypto");
 const { readFileSync } = require("node:fs");
 const { verifyChain, readLedger } = require("./core43_cal19_chain.cjs");
 const HEX = /^[a-f0-9]{64}$/;
@@ -20,7 +20,8 @@ function verifyCheckpoint(checkpoint, ledger, publicKeyPem, expectedWitnessId, m
       checkpoint.sequence < minimumSequence ||
       (pinnedHead !== undefined && (!HEX.test(pinnedHead) || checkpoint.head !== pinnedHead)))
     throw Error("cal21_checkpoint_invalid_or_rollback");
-  const key = createPublicKey(publicKeyPem);
+  const key = publicKeyPem instanceof KeyObject && publicKeyPem.type === "public"
+    ? publicKeyPem : createPublicKey(publicKeyPem);
   if (key.asymmetricKeyType !== "ed25519") throw Error("cal21_ed25519_required");
   if (!verify(null, canonical(checkpoint), key, Buffer.from(checkpoint.signature, "base64")))
     throw Error("cal21_bad_signature");
