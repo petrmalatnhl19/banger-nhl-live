@@ -1,0 +1,5 @@
+# CAL-28O — verified private archive copy
+
+After fsync of the temporary pin and before the final source evidence re-verification, CAL-24 copies each digest-named evidence directory into a new private temporary directory. CAL-28B verifies every signed RFC3161 archive in the private copy, rejecting symlinks and malformed evidence through the existing checks. The copy is removed on success or failure. The source evidence is then independently reverified and directory identities compared before committing the receiver pin.
+
+**Important limitation:** A temporary copy is **not** an immutable filesystem snapshot. A malicious process may race during copy, modify files in a shared temporary directory if it has sufficient OS permissions, or modify the source after final verification. No claim of complete adversarial race protection is made. A truly immutable and separately trusted archive store or OS-level snapshot/isolation remains necessary before real-data use. Synthetic tests only; no Supabase writes, production CORE 4.2 changes, merge or deployment.
