@@ -3,6 +3,7 @@
 const { readFileSync, openSync, writeFileSync, fsyncSync, closeSync, renameSync, rmSync, mkdirSync, rmdirSync } = require("node:fs");
 const { resolve, dirname } = require("node:path");
 const { verifyTransfer } = require("./core43_cal22_transfer.cjs");
+const { inspectPin } = require("./core43_cal25_audit.cjs");
 const HEX = /^[a-f0-9]{64}$/;
 function advancePin(pinPath, transfer, publicKey, witnessId, approvedHead, hooks) {
   if (!HEX.test(approvedHead)) throw Error("cal24_operator_approval_required");
@@ -11,7 +12,11 @@ function advancePin(pinPath, transfer, publicKey, witnessId, approvedHead, hooks
   catch (e) { if (e.code === "EEXIST") throw Error("cal24_locked"); throw e; }
   let temp, fd;
   try {
-    const anchor = JSON.parse(readFileSync(path, "utf8"));
+    // The writer owns the lock just acquired above; all other audit findings are fatal.
+    const audit = inspectPin(path);
+    const blockers = audit.findings.filter(code => code !== "manual_lock_review_required");
+    if (blockers.length || !audit.pin) throw Error("cal28_receiver_preflight_failed:" + blockers.join(","));
+    const anchor = audit.pin;
     if (Object.keys(anchor).sort().join(",") !== "head,sequence" ||
         !Number.isSafeInteger(anchor.sequence) || anchor.sequence < 0 || !HEX.test(anchor.head))
       throw Error("cal24_invalid_anchor");
