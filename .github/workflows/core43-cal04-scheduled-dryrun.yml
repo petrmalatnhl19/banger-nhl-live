@@ -9,6 +9,7 @@ on:
       - 'scripts/test_core43_cal04_scheduled_dryrun.cjs'
       - 'scripts/test_core43_cal04_two_run_integration.cjs'
       - 'scripts/test_core43_cal04_failure_modes.cjs'
+      - 'scripts/test_core43_cal06_workflow_guards.cjs'
       - 'scripts/core43_cal03_capture_plan.cjs'
       - '.github/workflows/core43-cal04-scheduled-dryrun.yml'
 permissions:
@@ -30,6 +31,7 @@ jobs:
       - run: node scripts/test_core43_cal04_scheduled_dryrun.cjs
       - run: node scripts/test_core43_cal04_two_run_integration.cjs
       - run: node scripts/test_core43_cal04_failure_modes.cjs
+      - run: node scripts/test_core43_cal06_workflow_guards.cjs
   dry-run:
     if: github.event_name != 'pull_request'
     needs: unit-tests
