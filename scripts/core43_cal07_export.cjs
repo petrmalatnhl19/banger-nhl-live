@@ -123,4 +123,4 @@ function planSignedExport({ bytes, signature, trust, now, existing } = {}) {
   };
 }
 
-module.exports = { planSignedExport };
+module.exports = { MAX_BYTES, planSignedExport };

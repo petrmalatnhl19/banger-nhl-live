@@ -20,6 +20,10 @@ on:
       - 'scripts/core43_cal07_export.cjs'
       - 'scripts/test_core43_cal07_export.cjs'
       - 'docs/core43-cal07-signed-pregame-export.md'
+      - 'scripts/core43_cal08_receiver.cjs'
+      - 'scripts/test_core43_cal08_receiver.cjs'
+      - 'scripts/fixtures/core43_signed_export.cjs'
+      - 'docs/core43-cal08-offline-receiver.md'
       - 'docs/sql/core43-cal06-reader-migration-draft.sql'
       - 'scripts/core43_live_shadow_source_reader.cjs'
       - 'scripts/core43_supabase_readonly_report.cjs'
@@ -47,6 +51,8 @@ jobs:
       - run: node scripts/test_core43_cal06_workflow_guards.cjs
       - name: Verify signed pregame export with synthetic data
         run: node --test scripts/test_core43_cal07_export.cjs
+      - name: Test offline export receipt and durable deduplication
+        run: node --experimental-sqlite --test scripts/test_core43_cal08_receiver.cjs
       - name: Test PUBLIC privileges in an in-memory PostgreSQL 17 database
         shell: bash
         run: |
