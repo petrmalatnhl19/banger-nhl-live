@@ -64,7 +64,7 @@ function appendArchive(ledgerPath, archiveDir, pinnedHead) {
     let fd;
     try {
       fd = openSync(temp, "wx", 0o600);
-      writeFileSync(fd, entries.concat(entry).map(e => JSON.stringify(e)).join("\\n") + "\\n");
+      writeFileSync(fd, entries.concat(entry).map(e => JSON.stringify(e)).join("\n") + "\n");
       fsyncSync(fd);
       closeSync(fd); fd = undefined;
       renameSync(temp, path);
