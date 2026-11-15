@@ -1,18 +1,16 @@
 "use strict";
 
 const assert = require("node:assert/strict");
-const { execFile } = require("node:child_process");
 const { createHash, generateKeyPairSync, sign } = require("node:crypto");
 const { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } = require("node:fs");
 const { tmpdir } = require("node:os");
 const { join } = require("node:path");
 const { DatabaseSync } = require("node:sqlite");
 const { test } = require("node:test");
-const { promisify } = require("node:util");
 const { initializeAuthority, readAuthority, receiveAcrossRuns, restoreSnapshot } = require("./core43_cal09_ledger_transfer.cjs");
 const { fixture, signed, now } = require("./fixtures/core43_signed_export.cjs");
 
-const exec = promisify(execFile);
+const { runLedgerWorker } = require("./fixtures/core43_ledger_worker.cjs");
 
 function setup(t) {
   const dir = mkdtempSync(join(tmpdir(), "cal09-test-"));
@@ -129,55 +127,14 @@ test("rejects a signed unsupported schema or a receipt missing any prediction va
   assert.equal(existsSync(target), false);
 });
 
-const childProgram = `
-  const { receiveAcrossRuns } = require(process.argv[1]);
-  const { createPrivateKey, createPublicKey } = require("node:crypto");
-  const { existsSync, writeFileSync } = require("node:fs");
-  const config = JSON.parse(process.argv[2]);
-  const shared = new Int32Array(new SharedArrayBuffer(4));
-  let firstCall = true;
-  const clock = () => {
-    if (firstCall && config.marker) {
-      firstCall = false;
-      writeFileSync(config.marker, "");
-      const until = Date.now() + 5000;
-      while (!existsSync(config.peer)) {
-        if (Date.now() > until) throw Error("fixture barrier timed out");
-        Atomics.wait(shared, 0, 0, 10);
-      }
-    }
-    if (config.stop === "before") process.exit(91);
-    return config.now;
-  };
-  const outcome = receiveAcrossRuns({ ...config, clock,
-    privateKey: createPrivateKey(config.privateKey),
-    trust: { ...config.trust, publicKey: createPublicKey(config.trust.publicKey) },
-    exportTrust: { ...config.exportTrust, publicKey: createPublicKey(config.exportTrust.publicKey) }
-  });
-  if (config.stop === "after") process.exit(92);
-  console.log(JSON.stringify(outcome));
-`;
-
-function child(options, extras = {}) {
-  const { trust, privateKey, exportTrust } = options;
-  const pem = publicKey => publicKey.export({ type: "spki", format: "pem" });
-  const config = { ...options, ...extras, now,
-    privateKey: privateKey.export({ type: "pkcs8", format: "pem" }),
-    trust: { ...trust, publicKey: pem(trust.publicKey) },
-    exportTrust: { ...exportTrust, publicKey: pem(exportTrust.publicKey) },
-  };
-  return exec(process.execPath, ["--experimental-sqlite", "-e", childProgram,
-    join(__dirname, "core43_cal09_ledger_transfer.cjs"), JSON.stringify(config)]);
-}
-
 for (const sameGame of [true, false]) {
   test(sameGame ? "two competing workers accept the same game only once" :
     "competing accepted games retry against the new head without losing variants", async t => {
     const env = setup(t);
     const markers = [join(env.dir, "first.ready"), join(env.dir, "second.ready")];
     const results = await Promise.all([
-      child(env.options(env.first), { marker: markers[0], peer: markers[1] }),
-      child(env.options(env.second, sameGame ? "42" : "43"), { marker: markers[1], peer: markers[0] }),
+      runLedgerWorker(env.options(env.first), { marker: markers[0], peer: markers[1] }),
+      runLedgerWorker(env.options(env.second, sameGame ? "42" : "43"), { marker: markers[1], peer: markers[0] }),
     ]);
     const outcomes = results.map(result => JSON.parse(result.stdout));
     assert.deepEqual(outcomes.map(outcome => outcome.status).sort(), ["accepted", sameGame ? "duplicate" : "accepted"]);
@@ -194,9 +151,9 @@ for (const sameGame of [true, false]) {
 test("recovers when a worker exits before commit or after commit but before reporting", async t => {
   const env = setup(t);
   const first = env.options(env.first);
-  await assert.rejects(child(first, { stop: "before" }), { code: 91 });
+  await assert.rejects(runLedgerWorker(first, { stop: "before" }), { code: 91 });
   assert.equal(readAuthority(env.authorityPath).head.generation, 0);
-  await assert.rejects(child(first, { stop: "after" }), { code: 92 });
+  await assert.rejects(runLedgerWorker(first, { stop: "after" }), { code: 92 });
   assert.equal(readAuthority(env.authorityPath).head.generation, 1);
   const resumed = receiveAcrossRuns(env.options(env.second));
   assert.equal(resumed.status, "duplicate");
