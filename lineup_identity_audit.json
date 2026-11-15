@@ -11,24 +11,6 @@
         }
       ]
     },
-    "senators": {
-      "players": [
-        {
-          "sourceName": "Philip Tomasino",
-          "expectedRole": "forwards",
-          "sameSurnameInRoster": [],
-          "classification": "not_on_current_roster",
-          "automaticApproval": false
-        },
-        {
-          "sourceName": "Samuel Blais",
-          "expectedRole": "forwards",
-          "sameSurnameInRoster": [],
-          "classification": "not_on_current_roster",
-          "automaticApproval": false
-        }
-      ]
-    },
     "mammoth": {
       "players": [
         {
@@ -39,32 +21,7 @@
           "automaticApproval": false
         },
         {
-          "sourceName": "Artem Duda",
-          "expectedRole": "defense",
-          "sameSurnameInRoster": [],
-          "classification": "not_on_current_roster",
-          "automaticApproval": false
-        },
-        {
           "sourceName": "Zac Jones",
-          "expectedRole": "defense",
-          "sameSurnameInRoster": [],
-          "classification": "not_on_current_roster",
-          "automaticApproval": false
-        }
-      ]
-    },
-    "stars": {
-      "players": [
-        {
-          "sourceName": "Trey Taylor",
-          "expectedRole": "defense",
-          "sameSurnameInRoster": [],
-          "classification": "not_on_current_roster",
-          "automaticApproval": false
-        },
-        {
-          "sourceName": "Kyle Burroughs",
           "expectedRole": "defense",
           "sameSurnameInRoster": [],
           "classification": "not_on_current_roster",

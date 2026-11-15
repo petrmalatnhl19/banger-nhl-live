@@ -1,10 +1,14 @@
 {
-  "checkedAt": "2026-11-14T23:38:09.314887+00:00",
+  "checkedAt": "2026-11-15T08:35:27.908891+00:00",
   "team": "UTA",
   "scope": "Recent completed NHL games; historical evidence only",
   "players": {
     "Artem Duda": {
       "appearedInGames": [
+        {
+          "gameId": 2026020323,
+          "gameDate": "2026-11-14"
+        },
         {
           "gameId": 2026020307,
           "gameDate": "2026-11-12"
