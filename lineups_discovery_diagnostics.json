@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-15T08:35:51.169481+00:00",
+  "generatedAt": "2026-11-15T09:25:42.200844+00:00",
   "checked": 24,
   "articlesFound": 0,
   "errors": [],
@@ -195,26 +195,6 @@
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/anaheim-ducks-st-louis-blues-game-preview-november-17-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/st-louis-blues-anaheim-ducks-game-preview-november-17-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/buffalo-sabres-philadelphia-flyers-game-preview-november-17-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/philadelphia-flyers-buffalo-sabres-game-preview-november-17-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
       "url": "https://www.nhl.com/news/calgary-flames-san-jose-sharks-game-preview-november-17-2026",
       "result": "no_complete_projection",
       "teams": []
@@ -233,17 +213,37 @@
       "url": "https://www.nhl.com/news/florida-panthers-edmonton-oilers-game-preview-november-17-2026",
       "result": "no_complete_projection",
       "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/toronto-maple-leafs-chicago-blackhawks-game-preview-november-17-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/chicago-blackhawks-toronto-maple-leafs-game-preview-november-17-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/washington-capitals-tampa-bay-lightning-game-preview-november-17-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/tampa-bay-lightning-washington-capitals-game-preview-november-17-2026",
+      "result": "no_complete_projection",
+      "teams": []
     }
   ],
   "note": "Upcoming games today through two days ahead; prioritize older sources and nearest games. A fixture is not proof a preview article exists.",
   "fixturesSelected": 12,
   "fixturesDeferred": 6,
   "rotation": {
-    "window": 1994146,
+    "window": 1994149,
     "fixed": 8,
     "rotating": 4,
     "remainingPool": 10,
-    "rotationStart": 4
+    "rotationStart": 6
   },
   "selectedFixtures": [
     {
@@ -288,16 +288,6 @@
     },
     {
       "date": "2026-11-17",
-      "away": "ANA",
-      "home": "STL"
-    },
-    {
-      "date": "2026-11-17",
-      "away": "BUF",
-      "home": "PHI"
-    },
-    {
-      "date": "2026-11-17",
       "away": "CGY",
       "home": "SJS"
     },
@@ -305,6 +295,16 @@
       "date": "2026-11-17",
       "away": "EDM",
       "home": "FLA"
+    },
+    {
+      "date": "2026-11-17",
+      "away": "TOR",
+      "home": "CHI"
+    },
+    {
+      "date": "2026-11-17",
+      "away": "WSH",
+      "home": "TBL"
     }
   ]
 }
