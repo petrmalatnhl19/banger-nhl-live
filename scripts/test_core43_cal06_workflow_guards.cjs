@@ -1,0 +1,17 @@
+"use strict";
+const assert=require("node:assert/strict");
+const fs=require("node:fs");
+const workflow=fs.readFileSync(".github/workflows/core43-cal04-scheduled-dryrun.yml","utf8");
+assert.match(workflow,/CORE43_SUPABASE_READONLY_KEY/);
+assert.doesNotMatch(workflow,/secrets\.SUPABASE_SERVICE_ROLE_KEY/);
+assert.match(workflow,/gh run download "\$prior_run"/);
+assert.match(workflow,/actions\/workflows\/core43-cal04-scheduled-dryrun\.yml\/runs\?/);
+assert.match(workflow,/branch=\$\{GITHUB_REF_NAME\}/);
+assert.match(workflow,/\.event=="schedule" or \.event=="workflow_dispatch"/);
+assert.match(workflow,/set -euo pipefail/);
+assert.match(workflow,/invalid_prior_artifact_ledger/);
+assert.match(workflow,/if: github\.event_name != 'pull_request'/);
+const script=fs.readFileSync("scripts/core43_cal04_scheduled_dryrun.cjs","utf8");
+assert.match(script,/invalid_readonly_ledger/);
+assert.match(script,/databaseWrites:0/);
+console.log("CORE43-CAL-06 workflow guard regression passed");
