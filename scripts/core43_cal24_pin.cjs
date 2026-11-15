@@ -2,11 +2,24 @@
 // CAL-24: operator-approved, atomic receiver pin advancement. Never trust sender-supplied anchors.
 const { readFileSync, openSync, writeFileSync, fsyncSync, closeSync, renameSync, rmSync, mkdirSync, rmdirSync } = require("node:fs");
 const { resolve, dirname, join } = require("node:path");
-const { mkdtempSync, cpSync, lstatSync } = require("node:fs");
+const { mkdtempSync, cpSync, lstatSync, readdirSync, chmodSync } = require("node:fs");
 const { tmpdir } = require("node:os");
 const { verifyTransferEvidence } = require("./core43_cal28_evidence.cjs");
 const { inspectPin } = require("./core43_cal25_audit.cjs");
 const HEX = /^[a-f0-9]{64}$/;
+// CAL-28P: refuse link-based or non-regular inputs before copying to private storage.
+function inspectCopyTree(path, depth = 0) {
+  if (depth > 4) throw Error("cal28p_archive_depth_exceeded");
+  const stat = lstatSync(path);
+  if (stat.isSymbolicLink()) throw Error("cal28p_link_rejected");
+  if (stat.isFile()) {
+    if (stat.nlink !== 1) throw Error("cal28p_hardlink_rejected");
+    return;
+  }
+  if (!stat.isDirectory()) throw Error("cal28p_nonregular_rejected");
+  for (const name of readdirSync(path)) inspectCopyTree(join(path, name), depth + 1);
+}
+
 function advancePin(pinPath, transfer, publicKey, witnessId, approvedHead, hooks) {
   if (!HEX.test(approvedHead)) throw Error("cal24_operator_approval_required");
   const path = resolve(pinPath), lock = path + ".lock";
@@ -38,14 +51,18 @@ function advancePin(pinPath, transfer, publicKey, witnessId, approvedHead, hooks
     // This is a verified private copy, NOT an OS-enforced immutable snapshot.
     snapshot = mkdtempSync(join(tmpdir(), "cal28o-snapshot-"));
     const snapshotRoot = join(snapshot, "evidence");
+    chmodSync(snapshot, 0o700);
     mkdirSync(snapshotRoot, { mode: 0o700 });
     for (const entry of transfer.ledger) {
       if (!HEX.test(entry.archiveDigest)) throw Error("cal28o_invalid_digest");
       const source = join(resolve(hooks.archiveRoot), entry.archiveDigest);
       const stat = lstatSync(source);
       if (!stat.isDirectory() || stat.isSymbolicLink()) throw Error("cal28o_unsafe_source_directory");
+      inspectCopyTree(source);
       cpSync(source, join(snapshotRoot, entry.archiveDigest), { recursive: true, dereference: false, errorOnExist: true, force: false });
+      inspectCopyTree(join(snapshotRoot, entry.archiveDigest));
     }
+    hooks?.onStage?.("snapshot_copied", snapshotRoot);
     const snapVerified = verifyTransferEvidence(transfer, publicKey, witnessId, anchor, snapshotRoot);
     if (snapVerified.next.head !== next.head || snapVerified.next.sequence !== next.sequence)
       throw Error("cal28o_snapshot_mismatch");
