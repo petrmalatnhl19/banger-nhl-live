@@ -9,13 +9,15 @@ async function emptyFetch(_url,opts){assert.equal(opts.method,"GET");return {ok:
  const previous=process.env.CORE43_CAL04_LEDGER_PATH;
  try{
   const ledger=path.join(dir,"ledger.json");
-  process.env.CORE43_CAL04_LEDGER_PATH=ledger;
   const base={url:"https://example.supabase.co",key:"test",now,fetchImpl:emptyFetch};
-  const first=await run(base);
+  const first=await run({...base,existingKeys:[]});
   assert.equal(first.checked,0);
-  assert.deepEqual(first.ledger.keys,[],"missing prior artifact is a valid first run");
+  assert.deepEqual(first.ledger.keys,[],"explicit empty history permits an isolated first run");
+  process.env.CORE43_CAL04_LEDGER_PATH=ledger;
+  const unexpectedRead=async()=>assert.fail("unusable ledger must stop before Supabase reads");
+  await assert.rejects(run({...base,fetchImpl:unexpectedRead}),{code:"ENOENT"});
   fs.writeFileSync(ledger,"{broken-json");
-  await assert.rejects(run(base),SyntaxError,"corrupt JSON must fail closed");
+  await assert.rejects(run({...base,fetchImpl:unexpectedRead}),SyntaxError,"corrupt JSON must fail closed");
   fs.writeFileSync(ledger,JSON.stringify({schema:"unexpected",keys:[]}));
   await assert.rejects(run(base),/invalid_readonly_ledger/,"unknown schema must fail closed");
   fs.writeFileSync(ledger,JSON.stringify({schema:"core43_cal04_keys_v1",keys:[42]}));

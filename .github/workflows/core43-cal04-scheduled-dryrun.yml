@@ -3,9 +3,15 @@ on:
   schedule:
     - cron: '*/10 * * * *'
   workflow_dispatch:
+    inputs:
+      bootstrap_ledger:
+        description: 'Initialize a ledger only when no previous successful run exists'
+        type: boolean
+        default: false
   pull_request:
     paths:
       - 'scripts/core43_cal04_scheduled_dryrun.cjs'
+      - 'scripts/core43_cal04_restore_ledger.sh'
       - 'scripts/test_core43_cal04_scheduled_dryrun.cjs'
       - 'scripts/test_core43_cal04_two_run_integration.cjs'
       - 'scripts/test_core43_cal04_failure_modes.cjs'
@@ -33,7 +39,9 @@ jobs:
       - run: node scripts/test_core43_cal04_failure_modes.cjs
       - run: node scripts/test_core43_cal06_workflow_guards.cjs
   dry-run:
-    if: github.event_name != 'pull_request'
+    if: >-
+      (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') &&
+      github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
     needs: unit-tests
     runs-on: ubuntu-latest
     timeout-minutes: 8
@@ -45,33 +53,28 @@ jobs:
       - name: Restore last diagnostic ledger (GitHub artifacts only)
         env:
           GH_TOKEN: ${{ github.token }}
+          CORE43_CAL04_LEDGER_PATH: ${{ runner.temp }}/core43-cal04-ledger.json
+          CORE43_CAL04_BOOTSTRAP_LEDGER: ${{ inputs.bootstrap_ledger }}
         shell: bash
-        run: |
-          set -euo pipefail
-          prior_run=$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/core43-cal04-scheduled-dryrun.yml/runs?branch=${GITHUB_REF_NAME}&status=success&per_page=30" --jq '[.workflow_runs[] | select((.id | tostring) != env.GITHUB_RUN_ID and (.event=="schedule" or .event=="workflow_dispatch"))] | sort_by(.created_at) | last | .id // empty')
-          if [[ -n "$prior_run" ]]; then
-            mkdir -p /tmp/core43-cal04-restored
-            gh run download "$prior_run" --repo "$GITHUB_REPOSITORY" --name core43-cal04-readonly-report --dir /tmp/core43-cal04-restored
-            cp /tmp/core43-cal04-restored/core43-cal04-report.json /tmp/core43-cal04-prior.json
-            node -e 'const fs=require("fs");const r=JSON.parse(fs.readFileSync("/tmp/core43-cal04-prior.json","utf8"));if(!r.ledger||r.ledger.schema!=="core43_cal04_keys_v1"||!Array.isArray(r.ledger.keys)||r.ledger.keys.some(x=>typeof x!=="string"))throw Error("invalid_prior_artifact_ledger");fs.writeFileSync("/tmp/core43-cal04-ledger.json",JSON.stringify(r.ledger))'
-          fi
+        run: bash scripts/core43_cal04_restore_ledger.sh
       - name: Read-only diagnostic report
         env:
-          CORE43_CAL04_LEDGER_PATH: /tmp/core43-cal04-ledger.json
+          CORE43_CAL04_LEDGER_PATH: ${{ runner.temp }}/core43-cal04-ledger.json
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_READONLY_KEY: ${{ secrets.CORE43_SUPABASE_READONLY_KEY }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.CORE43_SUPABASE_PUBLISHABLE_KEY }}
+          SUPABASE_READONLY_TOKEN: ${{ secrets.CORE43_SUPABASE_READONLY_TOKEN }}
         shell: bash
         run: |
-          if [[ -z "$SUPABASE_URL" || -z "$SUPABASE_READONLY_KEY" ]]; then
+          if [[ -z "$SUPABASE_URL" || -z "$SUPABASE_PUBLISHABLE_KEY" || -z "$SUPABASE_READONLY_TOKEN" ]]; then
             echo "Missing read credentials: dry-run unavailable" >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
-          SUPABASE_SERVICE_ROLE_KEY="$SUPABASE_READONLY_KEY" node scripts/core43_cal04_scheduled_dryrun.cjs > core43-cal04-report.json
+          node scripts/core43_cal04_scheduled_dryrun.cjs > core43-cal04-report.json
           node -e 'const r=require("./core43-cal04-report.json"); console.log("Checked: "+r.checked+", ready: "+r.ready+", duplicates: "+r.duplicates+", skipped: "+r.skipped+", writes: "+r.databaseWrites)' >> "$GITHUB_STEP_SUMMARY"
       - name: Upload diagnostic artifact
-        if: hashFiles('core43-cal04-report.json') != ''
         uses: actions/upload-artifact@v4
         with:
           name: core43-cal04-readonly-report
           path: core43-cal04-report.json
+          if-no-files-found: error
           retention-days: 7

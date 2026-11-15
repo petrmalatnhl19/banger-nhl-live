@@ -5,8 +5,43 @@ const {discoverUpcomingGames}=require("./core43_scheduled_pregame_monitor.cjs");
 const {loadLiveShadowSources}=require("./core43_live_shadow_source_reader.cjs");
 const {adaptArchivedGsaxSnapshots}=require("./core43_archived_gsax_snapshot_adapter.cjs");
 const {assemblePregameSourceInput}=require("./core43_pregame_source_assembly.cjs");
-const {plan}=require("./core43_cal03_capture_plan.cjs");
+const {normalizeKey,plan}=require("./core43_cal03_capture_plan.cjs");
 const fs=require("node:fs");
+const REPORT_SCHEMA="core43_cal04_dryrun_report_v1";
+const LEDGER_SCHEMA="core43_cal04_keys_v1";
+
+function readLedger(ledger){
+ if(ledger?.schema!==LEDGER_SCHEMA||!Array.isArray(ledger.keys)||ledger.keys.some(key=>typeof key!=="string")){
+  throw Error("invalid_readonly_ledger");
+ }
+ return [...new Set(ledger.keys.map(normalizeKey))];
+}
+
+function ledgerFromReport(report){
+ if(report?.schema!==REPORT_SCHEMA||report.mode!=="read_only"||report.production!==false||report.databaseWrites!==0){
+  throw Error("invalid_prior_artifact_report");
+ }
+ return {schema:LEDGER_SCHEMA,keys:readLedger(report.ledger)};
+}
+
+function scopedTransport({apiKey,token,fetchImpl=fetch}={}){
+ if(!/^sb_publishable_[A-Za-z0-9_-]+$/.test(apiKey??""))throw Error("invalid_supabase_publishable_key");
+ let claims;
+ try{
+  if(!/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(token??""))throw Error();
+  claims=JSON.parse(Buffer.from(token.split(".")[1],"base64url").toString("utf8"));
+ }catch{
+  throw Error("invalid_supabase_readonly_token");
+ }
+ // Supabase verifies the signature and enforces grants. This check catches misconfigured credentials.
+ if(claims?.role!=="core43_cal04_reader"||!Number.isFinite(claims.exp)||claims.exp<=Date.now()/1000){
+  throw Error("invalid_supabase_readonly_token");
+ }
+ return (url,options)=>{
+  if(options.method!=="GET")throw Error("supabase_readonly_requires_get");
+  return fetchImpl(url,{...options,redirect:"error",headers:{...options.headers,apikey:apiKey,Authorization:"Bearer "+token}});
+ };
+}
 function summarize({now,games,existing=[]}={}){
  const rows=[],seen=new Set(existing);
  for(const game of games){
@@ -18,7 +53,7 @@ function summarize({now,games,existing=[]}={}){
    variants:p.ready?p.variants.map(v=>({coefficient:v.record.coefficient,key:v.key,sha256:v.sha256,duplicate:v.duplicate,
     away:v.record.away,home:v.record.home})):[],production:false,archived:false});
  }
- return {schema:"core43_cal04_dryrun_report_v1",mode:"read_only",generatedAt:now,
+ return {schema:REPORT_SCHEMA,mode:"read_only",generatedAt:now,
   checked:rows.length,ready:rows.filter(x=>x.status==="ready").length,
   duplicates:rows.filter(x=>x.status==="duplicate").length,
   skipped:rows.filter(x=>x.status==="skipped").length,
@@ -26,6 +61,10 @@ function summarize({now,games,existing=[]}={}){
 }
 async function run({url,key,now=new Date().toISOString(),fetchImpl=fetch,existingKeys}={}){
  if(!key)throw Error("missing_server_credentials");
+ const ledgerPath=process.env.CORE43_CAL04_LEDGER_PATH;
+ const existing=existingKeys===undefined&&ledgerPath
+  ?readLedger(JSON.parse(fs.readFileSync(ledgerPath,"utf8")))
+  :readLedger({schema:LEDGER_SCHEMA,keys:existingKeys===undefined?[]:existingKeys});
  const [schedules,predictions]=await Promise.all([
   fetchRows({url,key,table:"nhl_core43_schedule_snapshots",select:"game_id,away_team,home_team,kickoff_at,fetched_at",fetchImpl}),
   fetchRows({url,key,table:"nhl_prediction_archive",select:"game_id,away_team,home_team,core42_predicted_at,core42_away,core42_home",fetchImpl})
@@ -45,17 +84,14 @@ async function run({url,key,now=new Date().toISOString(),fetchImpl=fetch,existin
    games.push({...game,payload:assembly.payload,provenance:assembly.provenance});
   }catch(e){games.push({...game,baselineReady:false,reason:"source_read_failed"});}
  }
- const ledgerPath=process.env.CORE43_CAL04_LEDGER_PATH;
- let existing=existingKeys===undefined?[]:existingKeys;
- if(!Array.isArray(existing)||existing.some(k=>typeof k!=="string"))throw Error("invalid_existing_keys");
- if(existingKeys===undefined&&ledgerPath&&fs.existsSync(ledgerPath)){
-  const ledger=JSON.parse(fs.readFileSync(ledgerPath,"utf8"));
-  if(!ledger||ledger.schema!=="core43_cal04_keys_v1"||!Array.isArray(ledger.keys)||ledger.keys.some(k=>typeof k!=="string"))throw Error("invalid_readonly_ledger");
-  existing=ledger.keys;
- }
  const report=summarize({now,games,existing});
- return {...report,ledger:{schema:"core43_cal04_keys_v1",keys:[...new Set([...existing,...report.results.flatMap(g=>g.variants.filter(v=>!v.duplicate).map(v=>v.key))])]}};
+ return {...report,ledger:{schema:LEDGER_SCHEMA,keys:[...new Set([...existing,...report.results.flatMap(g=>g.variants.filter(v=>!v.duplicate).map(v=>v.key))])]}};
 }
-if(require.main===module)run({url:process.env.SUPABASE_URL,key:process.env.SUPABASE_SERVICE_ROLE_KEY})
+async function main(){
+ const {SUPABASE_URL:url,SUPABASE_PUBLISHABLE_KEY:apiKey,SUPABASE_READONLY_TOKEN:token,CORE43_CAL04_LEDGER_PATH:ledgerPath}=process.env;
+ if(!ledgerPath)throw Error("missing_readonly_ledger_path");
+ return run({url,key:apiKey,fetchImpl:scopedTransport({apiKey,token})});
+}
+if(require.main===module)main()
  .then(r=>console.log(JSON.stringify(r,null,2))).catch(e=>{console.error(e.message);process.exitCode=1;});
-module.exports={summarize,run};
+module.exports={summarize,run,ledgerFromReport,scopedTransport};

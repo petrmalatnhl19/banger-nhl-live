@@ -25,6 +25,12 @@ const retry=plan({...input,payload:retryPayload,now:"2026-11-09T22:00:30Z",exist
 assert.equal(retry.ready,true,JSON.stringify(retry));
 assert.equal(retry.uniqueVariants,0,"retry must not produce duplicate variants when predictionAt changes");
 assert.deepEqual(retry.variants.map(x=>x.key),result.variants.map(x=>x.key));
+const legacyKeys=result.variants.map(x=>x.key.replace("23:00:00.000Z","23:00:00Z"));
+const equivalentKickoff={...payload,kickoffAt:"2026-11-10T00:00:00+01:00"};
+const equivalent=plan({...input,payload:equivalentKickoff,existing:legacyKeys});
+assert.equal(equivalent.uniqueVariants,0,"equivalent kickoff timestamps must match legacy keys");
+assert.deepEqual(equivalent.variants.map(x=>x.key),result.variants.map(x=>x.key));
+assert.equal(plan({...input,payload:{...payload,kickoffAt:"2026-11-09T23:05:00Z"},existing:legacyKeys}).uniqueVariants,4);
 assert.equal(plan({...input,now:"2026-11-09T21:45:00Z",payload:{...payload,predictionAt:"2026-11-09T21:44:00Z"}}).ready,true,"75m boundary included");
 assert.equal(plan({...input,now:"2026-11-09T22:15:00Z",payload:{...payload,predictionAt:"2026-11-09T22:14:00Z"}}).ready,true,"45m boundary included");
 assert.equal(plan({...input,now:"2026-11-09T22:15:01Z"}).reason,"outside_60m_window");

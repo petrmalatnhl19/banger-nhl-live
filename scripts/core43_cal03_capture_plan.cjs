@@ -8,6 +8,10 @@ const COEFFICIENTS=Object.freeze([0,0.005,0.02,0.03]);
 const WINDOW=Object.freeze({minMinutes:45,maxMinutes:75});
 const iso=x=>typeof x==="string"&&Number.isFinite(Date.parse(x));
 const fail=reason=>({ready:false,reason,production:false,writeEnabled:false});
+function normalizeKey(key){
+ const parts=key.match(/^(\d+:core43_cal03_dryrun_v1:)(.+)(:60m:(?:0|0\.005|0\.02|0\.03))$/);
+ return parts&&iso(parts[2])?parts[1]+new Date(parts[2]).toISOString()+parts[3]:key;
+}
 function plan({payload,provenance,now,existing=[]}={}){
  if(!payload||!iso(now)||!iso(payload.predictionAt)||!iso(payload.kickoffAt))return fail("invalid_time");
  if(!Array.isArray(existing)||existing.some(x=>typeof x!=="string"))return fail("invalid_existing_keys");
@@ -16,6 +20,7 @@ function plan({payload,provenance,now,existing=[]}={}){
  if(Date.parse(payload.predictionAt)>Date.parse(now)||Date.parse(now)-Date.parse(payload.predictionAt)>300000)return fail("stale_capture");
  if(!provenance||typeof provenance.gsaxArchiveId!=="string"||!provenance.gsaxArchiveId.trim()||provenance.baselineModel!=="core42")return fail("missing_provenance");
  if(!payload.baseline||!iso(payload.baseline.predictedAt)||Date.parse(payload.baseline.predictedAt)>Date.parse(payload.predictionAt))return fail("invalid_baseline");
+ const existingKeys=new Set(existing.map(normalizeKey));
  const outputs=[];
  for(const coefficient of COEFFICIENTS){
   const result=calculatePregameTwoGoalieShadow({...payload,coefficient});
@@ -28,10 +33,10 @@ function plan({payload,provenance,now,existing=[]}={}){
    production:false,experimental:true,calibrated:false,persistable:false};
   const sha256=crypto.createHash("sha256").update(JSON.stringify(record)).digest("hex");
   // Stable per game and fixed 60-minute window, even when the runner retries with a fresh predictionAt.
-  const key=[record.gameId,record.schema,record.kickoffAt,"60m",String(coefficient)].join(":");
-  outputs.push({key,sha256,record,duplicate:existing.includes(key)});
+  const key=[record.gameId,record.schema,new Date(record.kickoffAt).toISOString(),"60m",String(coefficient)].join(":");
+  outputs.push({key,sha256,record,duplicate:existingKeys.has(key)});
  }
  return {ready:true,mode:"read_only_dry_run",production:false,writeEnabled:false,
   windowMinutes:Math.round(ms/60000),variants:outputs,uniqueVariants:outputs.filter(v=>!v.duplicate).length};
 }
-module.exports={COEFFICIENTS,WINDOW,plan};
+module.exports={COEFFICIENTS,WINDOW,normalizeKey,plan};
