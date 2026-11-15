@@ -1,0 +1,5 @@
+# CORE43-CAL-28E — archive re-verification under receiver writer lock
+
+CAL-28C now passes its independently supplied archive root into CAL-24, which re-runs CAL-28B archive verification **after acquiring the exclusive receiver pin lock**. This prevents an archive being removed or corrupted between the initial CAL-28C preflight and the locked CAL-24 verification from silently passing. The legacy CAL-24 command-line entrypoint remains disabled.
+
+**Security status: still NO-GO.** The exported `advancePin` JavaScript API still permits callers to omit `hooks.archiveRoot`; that path uses legacy signature-only verification for existing synthetic tests. The archive files themselves are not locked against changes between verification and rename. This commit is partial hardening, not closure of CAL27-03. Next migrate old synthetic tests to real signed CAL-18B evidence and require archive root unconditionally at the writer boundary. Independent operator approval and TSA trust are also outstanding.
