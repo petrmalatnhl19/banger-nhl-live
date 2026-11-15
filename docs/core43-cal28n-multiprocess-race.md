@@ -1,0 +1,5 @@
+# CAL-28N — independently scheduled archive mutations
+
+Adds a second Node.js process that waits for a filesystem marker, then tampers with the synthetic signed archive bundle or renames and replaces the archive directory with an identical copy. The receiver's `temp_fsynced` hook releases the worker and waits for an acknowledgement before continuing to precommit verification. Assertions require the receiver to reject the changed archive, preserve the genesis pin, and remove temporary pin and writer lock. CI executes the independent worker tests on Node 22.
+
+**Scope:** These are real separate processes with a deterministic synchronization barrier, not exhaustive randomized races. A mutation after the final verification remains possible; archive evidence is not a trusted immutable snapshot. Directory path traversal is not dirfd-based. Production CORE 4.2 and Supabase are untouched; no merge or deployment. Independent timestamp trust and official game-start verification are still outstanding.
