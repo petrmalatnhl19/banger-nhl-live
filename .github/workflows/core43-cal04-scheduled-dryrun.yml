@@ -118,6 +118,9 @@ on:
       - 'scripts/core43_cal28v_keyring.cjs'
       - 'scripts/test_core43_cal28v_keyring.cjs'
       - 'docs/core43-cal28v-keyring.md'
+      - 'scripts/core43_cal28w_rotation_history.cjs'
+      - 'scripts/test_core43_cal28w_rotation_history.cjs'
+      - 'docs/core43-cal28w-rotation-history.md'
       - 'docs/core43-cal28-lock-gate.md'
       - 'scripts/test_core43_cal26_end_to_end.cjs'
       - 'docs/core43-cal26-end-to-end.md'
@@ -225,6 +228,8 @@ jobs:
         run: node --test scripts/test_core43_cal28u_independent_audit.cjs
       - name: Verify CAL-28V pinned auditor keyring and rotation
         run: node --test scripts/test_core43_cal28v_keyring.cjs
+      - name: Verify CAL-28W signed rotation history and rollback protection
+        run: node --test scripts/test_core43_cal28w_rotation_history.cjs
       - name: Enforce CAL-17 fail-closed pilot gates
         run: node --test scripts/test_core43_cal17_safety_gates.cjs
       - name: Test PUBLIC privileges in an in-memory PostgreSQL 17 database
