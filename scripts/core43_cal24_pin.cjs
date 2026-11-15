@@ -3,6 +3,7 @@
 const { readFileSync, openSync, writeFileSync, fsyncSync, closeSync, renameSync, rmSync, mkdirSync, rmdirSync } = require("node:fs");
 const { resolve, dirname } = require("node:path");
 const { verifyTransfer } = require("./core43_cal22_transfer.cjs");
+const { verifyTransferEvidence } = require("./core43_cal28_evidence.cjs");
 const { inspectPin } = require("./core43_cal25_audit.cjs");
 const HEX = /^[a-f0-9]{64}$/;
 function advancePin(pinPath, transfer, publicKey, witnessId, approvedHead, hooks) {
@@ -20,7 +21,11 @@ function advancePin(pinPath, transfer, publicKey, witnessId, approvedHead, hooks
     if (Object.keys(anchor).sort().join(",") !== "head,sequence" ||
         !Number.isSafeInteger(anchor.sequence) || anchor.sequence < 0 || !HEX.test(anchor.head))
       throw Error("cal24_invalid_anchor");
-    const verified = verifyTransfer(transfer, publicKey, witnessId, anchor);
+    // CAL-28E: evidence is verified while the receiver writer lock is held.
+    // Legacy callers remain ungated until their synthetic fixtures are migrated.
+    const verified = hooks?.archiveRoot
+      ? verifyTransferEvidence(transfer, publicKey, witnessId, anchor, hooks.archiveRoot)
+      : verifyTransfer(transfer, publicKey, witnessId, anchor);
     if (verified.next.head !== approvedHead) throw Error("cal24_approval_mismatch");
     if (verified.next.sequence === anchor.sequence) return { status: "unchanged", ...verified.next };
     const next = { sequence: verified.next.sequence, head: verified.next.head };
