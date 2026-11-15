@@ -11,6 +11,9 @@ function verifyTransferEvidence(transfer, trustedKey, witnessId, anchor, archive
   const root = resolve(archiveRoot);
   const rootStat = lstatSync(root);
   if (!rootStat.isDirectory() || rootStat.isSymbolicLink()) throw Error("cal28b_unsafe_archive_root");
+  const identities = [];
+  const identity = s => [s.dev, s.ino, s.ctimeMs].join(":");
+  const rootIdentity = identity(rootStat);
   for (const entry of transfer.ledger) {
     if (!HEX.test(entry.archiveDigest)) throw Error("cal28b_invalid_digest");
     const path = join(root, entry.archiveDigest);
@@ -22,7 +25,15 @@ function verifyTransferEvidence(transfer, trustedKey, witnessId, anchor, archive
     try { manifest = verifyArchive(path); }
     catch (_) { throw Error("cal28b_invalid_archive:" + entry.seq); }
     if (manifest.packageDigest !== entry.archiveDigest) throw Error("cal28b_digest_mismatch:" + entry.seq);
+    const after = lstatSync(path);
+    if (!after.isDirectory() || after.isSymbolicLink() || identity(after) !== identity(stat))
+      throw Error("cal28m_archive_directory_changed:" + entry.seq);
+    identities.push({ seq: entry.seq, identity: identity(after) });
   }
-  return { ...verified, archivesVerified: transfer.ledger.length, evidenceStatus: "verified" };
+  const rootAfter = lstatSync(root);
+  if (!rootAfter.isDirectory() || rootAfter.isSymbolicLink() || identity(rootAfter) !== rootIdentity)
+    throw Error("cal28m_archive_root_changed");
+  return { ...verified, archivesVerified: transfer.ledger.length, evidenceStatus: "verified",
+    archiveDirectoryIdentities: { root: rootIdentity, entries: identities } };
 }
 module.exports = { verifyTransferEvidence };
