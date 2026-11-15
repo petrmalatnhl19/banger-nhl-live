@@ -79,6 +79,8 @@ on:
       - 'scripts/core43_cal28_approved.cjs'
       - 'scripts/test_core43_cal28_approved.cjs'
       - 'docs/core43-cal28-approved.md'
+      - 'scripts/test_core43_cal28_legacy_cli.cjs'
+      - 'docs/core43-cal28-legacy-cli.md'
       - 'scripts/test_core43_cal26_end_to_end.cjs'
       - 'docs/core43-cal26-end-to-end.md'
       - 'docs/core43-cal19-archive-chain.md'
@@ -153,6 +155,8 @@ jobs:
         run: node --test scripts/test_core43_cal28_evidence.cjs
       - name: Verify CAL-28C evidence-gated approval
         run: node --test scripts/test_core43_cal28_approved.cjs
+      - name: Verify CAL-28D legacy CLI bypass blocked
+        run: node --test scripts/test_core43_cal28_legacy_cli.cjs
       - name: Enforce CAL-17 fail-closed pilot gates
         run: node --test scripts/test_core43_cal17_safety_gates.cjs
       - name: Test PUBLIC privileges in an in-memory PostgreSQL 17 database
