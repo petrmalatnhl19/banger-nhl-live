@@ -553,62 +553,34 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "ducks": {
-      "updatedAt": "2026-11-14T21:23:48.341880+00:00",
-      "previousPublishedAt": "2026-11-11T20:32:25.821000+00:00",
-      "publishedAt": "2026-11-14T20:51:47.249000+00:00",
-      "source": "https://www.nhl.com/news/new-york-islanders-anaheim-ducks-game-preview-november-14-2026",
+      "updatedAt": "2026-11-15T15:25:21.841671+00:00",
+      "previousPublishedAt": "2026-11-14T20:51:47.249000+00:00",
+      "publishedAt": "2026-11-15T15:20:39.964000+00:00",
+      "source": "https://www.nhl.com/news/calgary-flames-anaheim-ducks-game-preview-november-15-2026",
       "events": [
         {
           "type": "moved",
-          "player": "Troy Terry",
-          "from": "Útok 3",
+          "player": "Cutter Gauthier",
+          "from": "Útok 2",
           "to": "Útok 1"
         },
         {
           "type": "moved",
-          "player": "Jeff Malott",
+          "player": "Troy Terry",
+          "from": "Útok 1",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Sam Colangelo",
           "from": "Útok 4",
           "to": "Útok 3"
         },
         {
           "type": "moved",
           "player": "Alex Killorn",
-          "from": "Útok 1",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Nikita Nesterenko",
           "from": "Útok 3",
           "to": "Útok 4"
-        },
-        {
-          "type": "added",
-          "player": "Tyson Hinds",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "moved",
-          "player": "Tristan Luneau",
-          "from": "Obrana 3",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "moved",
-          "player": "Pavel Mintyukov",
-          "from": "Obrana 2",
-          "to": "Obrana 3"
-        },
-        {
-          "type": "moved",
-          "player": "Noah Warren",
-          "from": "Obrana 2",
-          "to": "Obrana 3"
-        },
-        {
-          "type": "removed",
-          "player": "Travis Mitchell",
-          "from": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -1220,32 +1192,82 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "flames": {
-      "updatedAt": "2026-11-14T20:40:53.452300+00:00",
-      "previousPublishedAt": "2026-11-11T18:16:00.408000+00:00",
-      "publishedAt": "2026-11-14T20:12:14.173000+00:00",
-      "source": "https://www.nhl.com/news/calgary-flames-los-angeles-kings-game-preview-november-14-2026",
+      "updatedAt": "2026-11-15T15:25:21.841571+00:00",
+      "previousPublishedAt": "2026-11-14T20:51:00+00:00",
+      "publishedAt": "2026-11-15T15:20:39.964000+00:00",
+      "source": "https://www.nhl.com/news/calgary-flames-anaheim-ducks-game-preview-november-15-2026",
       "events": [
         {
           "type": "moved",
-          "player": "Adam Klapka",
-          "from": "Útok 4",
+          "player": "Matvei Gridin",
+          "from": "Útok 3",
           "to": "Útok 2"
         },
         {
-          "type": "added",
-          "player": "William Stromgren",
-          "to": "Útok 4"
+          "type": "moved",
+          "player": "Martin Pospisil",
+          "from": "Útok 3",
+          "to": "Útok 2"
         },
         {
           "type": "moved",
-          "player": "Aydar Suniev",
-          "from": "Útok 2",
-          "to": "Útok 4"
+          "player": "Ryan Strome",
+          "from": "Útok 3",
+          "to": "Útok 2"
         },
         {
-          "type": "removed",
-          "player": "Brennan Othmann",
-          "from": "Útok 4"
+          "type": "moved",
+          "player": "Yegor Sharangovich",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Morgan Frost",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Adam Klapka",
+          "from": "Útok 2",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Yan Kuznetsov",
+          "from": "Obrana 3",
+          "to": "Obrana 1"
+        },
+        {
+          "type": "moved",
+          "player": "Zayne Parekh",
+          "from": "Obrana 3",
+          "to": "Obrana 1"
+        },
+        {
+          "type": "moved",
+          "player": "Joel Hanley",
+          "from": "Obrana 1",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "moved",
+          "player": "Simon Nemec",
+          "from": "Obrana 1",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "moved",
+          "player": "Jake Middleton",
+          "from": "Obrana 2",
+          "to": "Obrana 3"
+        },
+        {
+          "type": "moved",
+          "player": "Zach Whitecloud",
+          "from": "Obrana 2",
+          "to": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

@@ -1,6 +1,6 @@
 {
   "date": "2026-11-15",
-  "updatedAt": "2026-11-15T14:46:39.288677+00:00",
+  "updatedAt": "2026-11-15T15:25:24.833498+00:00",
   "teams": {
     "NSH": {
       "name": "Juuse Saros",
@@ -8,17 +8,8 @@
       "date": "2026-11-15",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-15T14:46:39.288677+00:00",
+      "checkedAt": "2026-11-15T15:25:24.833498+00:00",
       "gameId": 2026020330
-    },
-    "PHI": {
-      "name": "Dan Vladar",
-      "status": "confirmed",
-      "date": "2026-11-15",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-15T14:46:39.288677+00:00",
-      "gameId": 2026020326
     },
     "VAN": {
       "name": "Leevi Meriläinen",
@@ -26,24 +17,64 @@
       "date": "2026-11-15",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-15T14:46:39.288677+00:00",
+      "checkedAt": "2026-11-15T15:25:24.833498+00:00",
       "gameId": 2026020329
+    },
+    "ANA": {
+      "name": "Ville Husso",
+      "status": "projected",
+      "date": "2026-11-15",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-15T15:25:24.833498+00:00",
+      "gameId": 2026020328
+    },
+    "CGY": {
+      "name": "Devin Cooley",
+      "status": "projected",
+      "date": "2026-11-15",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-15T15:25:24.833498+00:00",
+      "gameId": 2026020328
+    },
+    "EDM": {
+      "name": "Tristan Jarry",
+      "status": "projected",
+      "date": "2026-11-15",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-15T15:25:24.833498+00:00",
+      "gameId": 2026020326
+    },
+    "PHI": {
+      "name": "Dan Vladar",
+      "status": "confirmed",
+      "date": "2026-11-15",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-15T15:25:24.833498+00:00",
+      "gameId": 2026020326
     }
   },
   "conflicts": [
     {
-      "date": "2026-11-15",
       "team": "ANA",
-      "reason": "source disagreement",
-      "rotowire": "Ville Husso",
-      "previous": "Lukas Dostal"
+      "specialist": "Lukas Dostal",
+      "nhl": "Ville Husso",
+      "nhlSource": "https://www.nhl.com/news/calgary-flames-anaheim-ducks-game-preview-november-15-2026"
     },
     {
-      "date": "2026-11-15",
+      "team": "EDM",
+      "specialist": "Devon Levi",
+      "nhl": "Tristan Jarry",
+      "nhlSource": "https://www.nhl.com/news/edmonton-oilers-philadelphia-flyers-game-preview-november-15-2026"
+    },
+    {
       "team": "CGY",
-      "reason": "source disagreement",
-      "rotowire": "Devin Cooley",
-      "previous": "Dustin Wolf"
+      "specialist": "Dustin Wolf",
+      "nhl": "Devin Cooley",
+      "nhlSource": "https://www.nhl.com/news/calgary-flames-anaheim-ducks-game-preview-november-15-2026"
     },
     {
       "date": "2026-11-15",
@@ -51,13 +82,6 @@
       "reason": "source disagreement",
       "rotowire": "Casey DeSmith",
       "previous": "Jake Oettinger"
-    },
-    {
-      "date": "2026-11-15",
-      "team": "EDM",
-      "reason": "source disagreement",
-      "rotowire": "Tristan Jarry",
-      "previous": "Devon Levi"
     },
     {
       "date": "2026-11-15",

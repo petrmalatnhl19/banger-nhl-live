@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-15T14:46:39.409217+00:00",
-  "rostersUpdatedAt": "2026-11-15T14:45:59.033443+00:00",
+  "updatedAt": "2026-11-15T15:25:24.951069+00:00",
+  "rostersUpdatedAt": "2026-11-15T15:25:00.896466+00:00",
   "projectionDate": "2026-11-15",
   "teamCount": 32,
   "goalieCount": 73,
@@ -187,16 +187,18 @@
       "team": "ANA",
       "teamKey": "ducks",
       "playerId": 8478024,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-15",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Devin Cooley",
       "team": "CGY",
       "teamKey": "flames",
       "playerId": 8482445,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-15",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Dustin Wolf",
@@ -396,8 +398,9 @@
       "team": "EDM",
       "teamKey": "oilers",
       "playerId": 8477465,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-15",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Devon Levi",
