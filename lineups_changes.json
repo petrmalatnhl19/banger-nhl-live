@@ -586,54 +586,50 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "canucks": {
-      "updatedAt": "2026-11-13T20:30:03.929581+00:00",
-      "previousPublishedAt": "2026-11-09T19:06:00+00:00",
-      "publishedAt": "2026-11-13T20:09:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-15T20:15:58.759423+00:00",
+      "previousPublishedAt": "2026-11-13T20:00:20.196000+00:00",
+      "publishedAt": "2026-11-15T19:32:08.037000+00:00",
+      "source": "https://www.nhl.com/news/vancouver-canucks-vegas-golden-knights-game-preview-november-15-2026",
       "events": [
         {
           "type": "moved",
-          "player": "Jake DeBrusk",
-          "from": "Útok 2",
-          "to": "Útok 1"
-        },
-        {
-          "type": "added",
-          "player": "Filip Chytil",
-          "to": "Útok 2"
+          "player": "Elias Pettersson",
+          "from": "Obrana 3",
+          "to": "Obrana 2"
         },
         {
           "type": "moved",
           "player": "Jonathan Lekkerimaki",
+          "from": "Útok 2",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Brock Boeser",
           "from": "Útok 1",
           "to": "Útok 2"
         },
         {
           "type": "moved",
-          "player": "Linus Karlsson",
-          "from": "Útok 4",
-          "to": "Útok 3"
+          "player": "Tom Willander",
+          "from": "Obrana 3",
+          "to": "Obrana 2"
         },
         {
           "type": "moved",
-          "player": "Brendan Gallagher",
-          "from": "Útok 3",
-          "to": "Útok 4"
+          "player": "Jamie Oleksiak",
+          "from": "Obrana 2",
+          "to": "Obrana 3"
         },
         {
           "type": "added",
-          "player": "Tom Willander",
+          "player": "Cameron Crotty",
           "to": "Obrana 3"
         },
         {
           "type": "removed",
-          "player": "Arshdeep Bains",
-          "from": "Útok 2"
-        },
-        {
-          "type": "removed",
-          "player": "Luke Schenn",
-          "from": "Obrana 3"
+          "player": "Guillaume Brisebois",
+          "from": "Obrana 2"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -803,54 +799,54 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "golden knights": {
-      "updatedAt": "2026-11-11T22:22:24.925310+00:00",
-      "previousPublishedAt": "2026-11-07T21:33:32.377000+00:00",
-      "publishedAt": "2026-11-11T20:27:25.470000+00:00",
-      "source": "https://www.nhl.com/news/utah-mammoth-vegas-golden-knights-game-preview-november-11-2026",
+      "updatedAt": "2026-11-15T20:15:58.759495+00:00",
+      "previousPublishedAt": "2026-11-13T20:35:32.439000+00:00",
+      "publishedAt": "2026-11-15T19:32:08.037000+00:00",
+      "source": "https://www.nhl.com/news/vancouver-canucks-vegas-golden-knights-game-preview-november-15-2026",
       "events": [
         {
           "type": "moved",
-          "player": "Trevor Connelly",
+          "player": "Ivan Barbashev",
           "from": "Útok 3",
           "to": "Útok 1"
         },
         {
           "type": "moved",
-          "player": "Brett Howden",
+          "player": "Trevor Connelly",
           "from": "Útok 1",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Ivan Barbashev",
-          "from": "Útok 2",
           "to": "Útok 3"
         },
         {
           "type": "added",
-          "player": "Parker Wotherspoon",
+          "player": "Raphael Lavoie",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
+          "player": "Jeremy Lauzon",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "added",
+          "player": "Rasmus Andersson",
           "to": "Obrana 2"
         },
         {
           "type": "moved",
+          "player": "Parker Wotherspoon",
+          "from": "Obrana 2",
+          "to": "Obrana 3"
+        },
+        {
+          "type": "moved",
           "player": "Dylan Coghlan",
-          "from": "Obrana 3",
-          "to": "Obrana 2"
+          "from": "Obrana 2",
+          "to": "Obrana 3"
         },
         {
           "type": "removed",
-          "player": "Jeremy Lauzon",
-          "from": "Obrana 2"
-        },
-        {
-          "type": "removed",
-          "player": "Rasmus Andersson",
-          "from": "Obrana 2"
-        },
-        {
-          "type": "removed",
-          "player": "Noah Hanifin",
-          "from": "Obrana 3"
+          "player": "Marc Gatcomb",
+          "from": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

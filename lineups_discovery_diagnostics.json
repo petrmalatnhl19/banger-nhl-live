@@ -1,15 +1,9 @@
 {
-  "generatedAt": "2026-11-15T19:24:32.893034+00:00",
-  "checked": 20,
-  "articlesFound": 4,
+  "generatedAt": "2026-11-15T20:15:53.510567+00:00",
+  "checked": 19,
+  "articlesFound": 5,
   "errors": [],
   "fixtures": [
-    {
-      "date": "2026-11-15",
-      "away": "NSH",
-      "home": "SJS",
-      "priority": true
-    },
     {
       "date": "2026-11-15",
       "away": "VAN",
@@ -32,6 +26,12 @@
       "date": "2026-11-15",
       "away": "FLA",
       "home": "DAL",
+      "priority": false
+    },
+    {
+      "date": "2026-11-15",
+      "away": "NSH",
+      "home": "SJS",
       "priority": false
     },
     {
@@ -62,12 +62,6 @@
       "date": "2026-11-17",
       "away": "LAK",
       "home": "BOS",
-      "priority": true
-    },
-    {
-      "date": "2026-11-17",
-      "away": "NSH",
-      "home": "MIN",
       "priority": true
     },
     {
@@ -108,6 +102,12 @@
     },
     {
       "date": "2026-11-17",
+      "away": "NSH",
+      "home": "MIN",
+      "priority": false
+    },
+    {
+      "date": "2026-11-17",
       "away": "WSH",
       "home": "TBL",
       "priority": false
@@ -115,23 +115,13 @@
   ],
   "attempts": [
     {
-      "url": "https://www.nhl.com/news/nashville-predators-san-jose-sharks-game-preview-november-15-2026",
+      "url": "https://www.nhl.com/news/vancouver-canucks-vegas-golden-knights-game-preview-november-15-2026",
       "result": "parsed",
       "teams": [
-        "predators",
-        "sharks"
+        "canucks",
+        "golden knights"
       ],
       "coversBothTeams": true
-    },
-    {
-      "url": "https://www.nhl.com/news/vancouver-canucks-vegas-golden-knights-game-preview-november-15-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/vegas-golden-knights-vancouver-canucks-game-preview-november-15-2026",
-      "result": "no_complete_projection",
-      "teams": []
     },
     {
       "url": "https://www.nhl.com/news/calgary-flames-anaheim-ducks-game-preview-november-15-2026",
@@ -157,6 +147,15 @@
       "teams": [
         "panthers",
         "stars"
+      ],
+      "coversBothTeams": true
+    },
+    {
+      "url": "https://www.nhl.com/news/nashville-predators-san-jose-sharks-game-preview-november-15-2026",
+      "result": "parsed",
+      "teams": [
+        "predators",
+        "sharks"
       ],
       "coversBothTeams": true
     },
@@ -191,6 +190,36 @@
       "teams": []
     },
     {
+      "url": "https://www.nhl.com/news/ottawa-senators-winnipeg-jets-game-preview-november-17-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/winnipeg-jets-ottawa-senators-game-preview-november-17-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/toronto-maple-leafs-chicago-blackhawks-game-preview-november-17-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/chicago-blackhawks-toronto-maple-leafs-game-preview-november-17-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/anaheim-ducks-st-louis-blues-game-preview-november-17-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/st-louis-blues-anaheim-ducks-game-preview-november-17-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
       "url": "https://www.nhl.com/news/buffalo-sabres-philadelphia-flyers-game-preview-november-17-2026",
       "result": "no_complete_projection",
       "teams": []
@@ -199,54 +228,19 @@
       "url": "https://www.nhl.com/news/philadelphia-flyers-buffalo-sabres-game-preview-november-17-2026",
       "result": "no_complete_projection",
       "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/calgary-flames-san-jose-sharks-game-preview-november-17-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/san-jose-sharks-calgary-flames-game-preview-november-17-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/edmonton-oilers-florida-panthers-game-preview-november-17-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/florida-panthers-edmonton-oilers-game-preview-november-17-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/washington-capitals-tampa-bay-lightning-game-preview-november-17-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/tampa-bay-lightning-washington-capitals-game-preview-november-17-2026",
-      "result": "no_complete_projection",
-      "teams": []
     }
   ],
   "note": "Upcoming games today through two days ahead; prioritize older sources and nearest games. A fixture is not proof a preview article exists.",
   "fixturesSelected": 12,
   "fixturesDeferred": 6,
   "rotation": {
-    "window": 1994189,
+    "window": 1994193,
     "fixed": 8,
     "rotating": 4,
     "remainingPool": 10,
-    "rotationStart": 6
+    "rotationStart": 2
   },
   "selectedFixtures": [
-    {
-      "date": "2026-11-15",
-      "away": "NSH",
-      "home": "SJS"
-    },
     {
       "date": "2026-11-15",
       "away": "VAN",
@@ -268,6 +262,11 @@
       "home": "DAL"
     },
     {
+      "date": "2026-11-15",
+      "away": "NSH",
+      "home": "SJS"
+    },
+    {
       "date": "2026-11-16",
       "away": "MTL",
       "home": "NYR"
@@ -284,23 +283,23 @@
     },
     {
       "date": "2026-11-17",
+      "away": "OTT",
+      "home": "WPG"
+    },
+    {
+      "date": "2026-11-17",
+      "away": "TOR",
+      "home": "CHI"
+    },
+    {
+      "date": "2026-11-17",
+      "away": "ANA",
+      "home": "STL"
+    },
+    {
+      "date": "2026-11-17",
       "away": "BUF",
       "home": "PHI"
-    },
-    {
-      "date": "2026-11-17",
-      "away": "CGY",
-      "home": "SJS"
-    },
-    {
-      "date": "2026-11-17",
-      "away": "EDM",
-      "home": "FLA"
-    },
-    {
-      "date": "2026-11-17",
-      "away": "WSH",
-      "home": "TBL"
     }
   ]
 }
