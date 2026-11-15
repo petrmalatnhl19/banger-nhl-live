@@ -13,7 +13,9 @@ const otherKey = generateKeyPairSync("ed25519").publicKey;
 function receipt() {
   const r = { schema: "core43_cal28s_receipt_v1", auditorId: "external-auditor",
     policyStoreId: policy.storeId, objectVersion: "version-001", digest };
-  r.signature = sign(null, Buffer.from(JSON.stringify(r)), privateKey).toString("base64");
+  const payload = { schema: r.schema, auditorId: r.auditorId, policyStoreId: r.policyStoreId,
+    objectVersion: r.objectVersion, digest: r.digest };
+  r.signature = sign(null, Buffer.from(JSON.stringify(payload)), privateKey).toString("base64");
   return r;
 }
 test("CAL-28S signed synthetic receipt remains untrusted without external proof", () => {
