@@ -109,6 +109,9 @@ on:
       - 'scripts/core43_cal28s_receipt.cjs'
       - 'scripts/test_core43_cal28s_receipt.cjs'
       - 'docs/core43-cal28s-independent-receipt.md'
+      - 'scripts/core43_cal28t_provider_snapshot.cjs'
+      - 'scripts/test_core43_cal28t_provider_snapshot.cjs'
+      - 'docs/core43-cal28t-provider-metadata.md'
       - 'docs/core43-cal28-lock-gate.md'
       - 'scripts/test_core43_cal26_end_to_end.cjs'
       - 'docs/core43-cal26-end-to-end.md'
@@ -210,6 +213,8 @@ jobs:
         run: node --test scripts/test_core43_cal28r_archive_policy.cjs
       - name: Verify CAL-28S independent signed archive receipt
         run: node --test scripts/test_core43_cal28s_receipt.cjs
+      - name: Verify CAL-28T offline provider retention and permissions metadata
+        run: node --test scripts/test_core43_cal28t_provider_snapshot.cjs
       - name: Enforce CAL-17 fail-closed pilot gates
         run: node --test scripts/test_core43_cal17_safety_gates.cjs
       - name: Test PUBLIC privileges in an in-memory PostgreSQL 17 database
