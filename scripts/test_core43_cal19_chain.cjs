@@ -26,7 +26,7 @@ test("CAL-19B recovery classifies a single unconfirmed append without modifying 
   const dir = mkdtempSync(join(tmpdir(), "cal19b-"));
   t.after(() => rmSync(dir, { recursive: true, force: true }));
   const ledger = join(dir, "ledger.jsonl");
-  writeFileSync(ledger, JSON.stringify(first) + "\\n");
+  writeFileSync(ledger, JSON.stringify(first) + "\n");
   assert.deepEqual(recoverLedger(ledger, first.head), { status: "consistent", count: 1, head: first.head });
   assert.deepEqual(recoverLedger(ledger, GENESIS), {
     status: "unconfirmed_append", count: 1, head: first.head, pinnedHead: GENESIS,
