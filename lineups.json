@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-15T18:22:37.737841+00:00",
+  "fetchedAt": "2026-11-15T19:24:35.280204+00:00",
   "teams": {
     "oilers": {
       "name": "Oilers",
@@ -47,7 +47,7 @@
       "injured": "Frederik Andersen (undisclosed), Isaac Howard (lower body), Mattias Janmark (undisclosed), Alec Regula (undisclosed), Matt Savoie (undisclosed)",
       "scratched": "Filip Hallander, Max Jones, Jake Walman",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-15T17:06:00+00:00"
+      "publishedAt": "2026-11-15T18:21:00+00:00"
     },
     "flyers": {
       "name": "Flyers",
@@ -94,7 +94,7 @@
       "injured": "Nikita Grebenkin (back)",
       "scratched": "David Jiricek, Simon Benoit, Cole Knuble",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-15T17:06:00+00:00"
+      "publishedAt": "2026-11-15T18:21:00+00:00"
     },
     "panthers": {
       "name": "Panthers",
@@ -140,8 +140,8 @@
       ],
       "injured": "Aleksander Barkov (knee), Brad Marchand (knee), Jonah Gadjovich (neck)",
       "scratched": "Uvis Balinskis, Cole Reinhardt, Jack Devine",
-      "source": "https://www.nhl.com/news/florida-panthers-dallas-stars-game-preview-november-15-2026",
-      "publishedAt": "2026-11-15T17:09:48.982000+00:00"
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-15T18:21:00+00:00"
     },
     "stars": {
       "name": "Stars",
@@ -187,8 +187,8 @@
       ],
       "injured": "Miro Heiskanen (upper body), Oskar Back (finger), Lian Bichsel (lower body), Kyle Capobianco (lower body), Matt Duchene (lower body)",
       "scratched": "Colin Blackwell, Rémi Poirier",
-      "source": "https://www.nhl.com/news/florida-panthers-dallas-stars-game-preview-november-15-2026",
-      "publishedAt": "2026-11-15T17:09:48.982000+00:00"
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-15T18:21:00+00:00"
     },
     "flames": {
       "name": "Flames",
@@ -235,7 +235,7 @@
       "injured": "Jonathan Huberdeau (hip), Kevin Bahl (lower body)",
       "scratched": "Maxim Tsyplakov, Brennan Othmann, Brayden Pachal",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-15T17:06:00+00:00"
+      "publishedAt": "2026-11-15T18:21:00+00:00"
     },
     "ducks": {
       "name": "Ducks",
@@ -282,7 +282,101 @@
       "injured": "A.J. Greer (upper body), Ian Moore (lower body), Ryan Poehling (MCL)",
       "scratched": "Travis Mitchell, Frank Vatrano",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-15T17:06:00+00:00"
+      "publishedAt": "2026-11-15T18:21:00+00:00"
+    },
+    "predators": {
+      "name": "Predators",
+      "forwards": [
+        [
+          "Steven Stamkos",
+          "Ryan O'Reilly",
+          "Mavrik Bourque"
+        ],
+        [
+          "Filip Forsberg",
+          "Shane Wright",
+          "Nils Hoglander"
+        ],
+        [
+          "Reid Schaefer",
+          "Alexander Kerfoot",
+          "Vitali Pinchuk"
+        ],
+        [
+          "Ross Colton",
+          "Jack Drury",
+          "Adam Edstrom"
+        ]
+      ],
+      "defense": [
+        [
+          "Roman Josi",
+          "Adam Wilsby"
+        ],
+        [
+          "Brady Skjei",
+          "Nick Perbix"
+        ],
+        [
+          "Daemon Hunt",
+          "Jayden Struble"
+        ]
+      ],
+      "goalies": [
+        "Juuse Saros",
+        "Justus Annunen"
+      ],
+      "injured": "Jonathan Marchessault (lower body), William Trudeau (upper body)",
+      "scratched": "Nicolas Hague, Ilya Lyubushkin",
+      "source": "https://www.nhl.com/news/nashville-predators-san-jose-sharks-game-preview-november-15-2026",
+      "publishedAt": "2026-11-15T18:24:23.483000+00:00"
+    },
+    "sharks": {
+      "name": "Sharks",
+      "forwards": [
+        [
+          "Ivar Stenberg",
+          "Macklin Celebrini",
+          "Will Smith"
+        ],
+        [
+          "Mason Marchment",
+          "Michael Misa",
+          "Collin Graf"
+        ],
+        [
+          "Tyler Toffoli",
+          "Ty Dellandrea",
+          "Kiefer Sherwood"
+        ],
+        [
+          "Barclay Goodrow",
+          "Zack Ostapchuk",
+          "Adam Gaudette"
+        ]
+      ],
+      "defense": [
+        [
+          "Darnell Nurse",
+          "Michael Kesselring"
+        ],
+        [
+          "Sam Dickinson",
+          "Jacob Trouba"
+        ],
+        [
+          "Dmitry Orlov",
+          "Eric Pohlkamp"
+        ]
+      ],
+      "goalies": [
+        "Alex Nedeljkovic",
+        "Yaroslav Askarov"
+      ],
+      "injured": "Igor Chernyshov (upper body), Alexander Wennberg (upper body)",
+      "scratched": "Nolan Allan",
+      "source": "https://www.nhl.com/news/nashville-predators-san-jose-sharks-game-preview-november-15-2026",
+      "publishedAt": "2026-11-15T18:24:23.483000+00:00"
     },
     "islanders": {
       "name": "Islanders",
@@ -377,53 +471,6 @@
       "scratched": "Artemi Panarin, Samuel Helenius",
       "source": "https://www.nhl.com/news/calgary-flames-los-angeles-kings-game-preview-november-14-2026",
       "publishedAt": "2026-11-14T20:12:14.173000+00:00"
-    },
-    "sharks": {
-      "name": "Sharks",
-      "forwards": [
-        [
-          "Ivar Stenberg",
-          "Macklin Celebrini",
-          "Will Smith"
-        ],
-        [
-          "Mason Marchment",
-          "Michael Misa",
-          "Collin Graf"
-        ],
-        [
-          "Tyler Toffoli",
-          "Ty Dellandrea",
-          "Kiefer Sherwood"
-        ],
-        [
-          "Barclay Goodrow",
-          "Zack Ostapchuk",
-          "Adam Gaudette"
-        ]
-      ],
-      "defense": [
-        [
-          "Darnell Nurse",
-          "Michael Kesselring"
-        ],
-        [
-          "Sam Dickinson",
-          "Jacob Trouba"
-        ],
-        [
-          "Dmitry Orlov",
-          "Eric Pohlkamp"
-        ]
-      ],
-      "goalies": [
-        "Yaroslav Askarov",
-        "Alex Nedeljkovic"
-      ],
-      "injured": "Igor Chernyshov (upper body), Alexander Wennberg (upper body)",
-      "scratched": "Nolan Allan",
-      "source": "https://www.nhl.com/news/san-jose-sharks-utah-mammoth-game-preview-november-14-2026",
-      "publishedAt": "2026-11-14T19:19:00+00:00"
     },
     "mammoth": {
       "name": "Mammoth",
@@ -1106,53 +1153,6 @@
       "scratched": "Andrei Kuzmenko, Ville Koivunen",
       "source": "https://www.nhl.com/news/ottawa-senators-pittsburgh-penguins-game-preview-november-14-2026",
       "publishedAt": "2026-11-14T16:32:26.653000+00:00"
-    },
-    "predators": {
-      "name": "Predators",
-      "forwards": [
-        [
-          "Steven Stamkos",
-          "Ryan O'Reilly",
-          "Mavrik Bourque"
-        ],
-        [
-          "Filip Forsberg",
-          "Shane Wright",
-          "Nils Hoglander"
-        ],
-        [
-          "Reid Schaefer",
-          "Alexander Kerfoot",
-          "Vitali Pinchuk"
-        ],
-        [
-          "Ross Colton",
-          "Jack Drury",
-          "Adam Edstrom"
-        ]
-      ],
-      "defense": [
-        [
-          "Roman Josi",
-          "Adam Wilsby"
-        ],
-        [
-          "Brady Skjei",
-          "Nick Perbix"
-        ],
-        [
-          "Daemon Hunt",
-          "Jayden Struble"
-        ]
-      ],
-      "goalies": [
-        "Juuse Saros",
-        "Justus Annunen"
-      ],
-      "injured": "Jonathan Marchessault (lower body), William Trudeau (upper body)",
-      "scratched": "Nicolas Hague, Ilya Lyubushkin",
-      "source": "https://www.nhl.com/news/nashville-predators-vegas-golden-knights-game-preview-november-13-2026",
-      "publishedAt": "2026-11-13T20:35:32.439000+00:00"
     },
     "golden knights": {
       "name": "Golden Knights",
