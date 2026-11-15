@@ -87,6 +87,8 @@ on:
       - 'scripts/fixtures/core43_cal28_signed_archive.cjs'
       - 'docs/core43-cal28h-fixture-migration.md'
       - 'docs/core43-cal28i-mandatory-archives.md'
+      - 'scripts/test_core43_cal28_archive_links.cjs'
+      - 'docs/core43-cal28j-archive-file-safety.md'
       - 'docs/core43-cal28-lock-gate.md'
       - 'scripts/test_core43_cal26_end_to_end.cjs'
       - 'docs/core43-cal26-end-to-end.md'
@@ -170,6 +172,8 @@ jobs:
         run: node --test scripts/test_core43_cal28_locked_evidence.cjs
       - name: Verify CAL-28G signed RFC3161 archive end-to-end pin update
         run: node --test scripts/test_core43_cal28_real_archive.cjs
+      - name: Verify CAL-28J archive link and tamper rejection
+        run: node --test scripts/test_core43_cal28_archive_links.cjs
       - name: Enforce CAL-17 fail-closed pilot gates
         run: node --test scripts/test_core43_cal17_safety_gates.cjs
       - name: Test PUBLIC privileges in an in-memory PostgreSQL 17 database
