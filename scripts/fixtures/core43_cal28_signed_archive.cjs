@@ -1,4 +1,5 @@
 "use strict";
+const assert = require("node:assert/strict");
 // CAL-28H reusable synthetic RFC3161 evidence fixture. Tests only; never use for real trust.
 const { mkdtempSync, writeFileSync, readFileSync, rmSync } = require("node:fs");
 const { tmpdir } = require("node:os");
