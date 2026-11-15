@@ -43,7 +43,7 @@ function recoverLedger(ledgerPath, pinnedHead) {
   if (previous === pinnedHead) return { status: "unconfirmed_append", ...state, pinnedHead };
   throw Error("cal19_rollback_or_fork");
 }
-function appendArchive(ledgerPath, archiveDir, pinnedHead) {
+function appendArchive(ledgerPath, archiveDir, pinnedHead, testHooks) {
   // Only use with one exclusive writer and a separately pinned prior head.
   if (!HEX.test(pinnedHead)) throw Error("cal19_pin_required");
   const path = resolve(ledgerPath);
@@ -52,10 +52,11 @@ function appendArchive(ledgerPath, archiveDir, pinnedHead) {
   try { mkdirSync(lock, { mode: 0o700 }); }
   catch (e) { if (e.code === "EEXIST") throw Error("cal19_writer_locked"); throw e; }
   try {
+    testHooks?.onStage?.("lock_acquired");
     const status = recoverLedger(path, pinnedHead);
     if (status.status !== "consistent") throw Error("cal19_recovery_required");
     const entries = readLedger(path);
-    const manifest = verifyArchive(archiveDir);
+    const manifest = testHooks?.verifyArchive ? testHooks.verifyArchive(archiveDir) : verifyArchive(archiveDir);
     const digest = manifest.packageDigest;
     if (entries.some(e => e.archiveDigest === digest)) throw Error("cal19_duplicate");
     const entry = { seq: status.count + 1, archiveDigest: digest, previous: status.head,
@@ -67,10 +68,13 @@ function appendArchive(ledgerPath, archiveDir, pinnedHead) {
       writeFileSync(fd, entries.concat(entry).map(e => JSON.stringify(e)).join("\n") + "\n");
       fsyncSync(fd);
       closeSync(fd); fd = undefined;
+      testHooks?.onStage?.("temp_fsynced");
       renameSync(temp, path);
+      testHooks?.onStage?.("ledger_renamed");
       // Persist directory metadata before returning the new head.
       const dirFd = openSync(dirname(path), "r");
       try { fsyncSync(dirFd); } finally { closeSync(dirFd); }
+      testHooks?.onStage?.("directory_fsynced");
     } finally {
       if (fd !== undefined) closeSync(fd);
       rmSync(temp, { force: true });
