@@ -65,6 +65,9 @@ on:
       - 'docs/core43-cal22-checkpoint-transfer.md'
       - 'scripts/test_core43_cal23_two_process.cjs'
       - 'docs/core43-cal23-two-process-rehearsal.md'
+      - 'scripts/core43_cal24_pin.cjs'
+      - 'scripts/test_core43_cal24_pin.cjs'
+      - 'docs/core43-cal24-receiver-pin.md'
       - 'docs/core43-cal19-archive-chain.md'
       - 'docs/core43-cal17-pilot-security-gates.md'
       - 'docs/core43-cal16-timestamp-pilot-readiness.md'
@@ -125,6 +128,8 @@ jobs:
         run: node --test scripts/test_core43_cal22_transfer.cjs
       - name: Rehearse CAL-23 two-process offline transfer
         run: node --test scripts/test_core43_cal23_two_process.cjs
+      - name: Verify CAL-24 approved atomic receiver pin advancement
+        run: node --test scripts/test_core43_cal24_pin.cjs
       - name: Enforce CAL-17 fail-closed pilot gates
         run: node --test scripts/test_core43_cal17_safety_gates.cjs
       - name: Test PUBLIC privileges in an in-memory PostgreSQL 17 database
