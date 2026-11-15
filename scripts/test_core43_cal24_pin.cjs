@@ -32,3 +32,10 @@ test("CAL-24 signed archive post-rename failure retains pin and permits replay",
   assert.equal(JSON.parse(readFileSync(pin)).head, entry.head);
   assert.equal(advancePin(pin, transfer, publicKey, witness, entry.head, { archiveRoot: archives }).status, "unchanged");
 });
+
+test("CAL-28I rejects direct JavaScript API calls without archiveRoot", t => {
+  const { pin, transfer, publicKey, witness, entry } = createSignedArchiveFixture(t);
+  assert.throws(() => advancePin(pin, transfer, publicKey, witness, entry.head), /cal28i_archive_root_required/);
+  assert.deepEqual(JSON.parse(readFileSync(pin)), { sequence: 0, head: GENESIS });
+  assert.equal(existsSync(pin + ".lock"), false);
+});
