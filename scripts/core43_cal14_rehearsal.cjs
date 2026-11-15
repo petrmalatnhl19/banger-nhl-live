@@ -13,7 +13,7 @@ const { checkPrivate, readBoundedFile } = require("./core43_cal08_receiver.cjs")
 const { prepareCapture, attestCapture } = require("./core43_cal12_archive.cjs");
 const { initializeCoordinator, acceptPackage, readAccepted, MAX_PACKAGE_BYTES } = require("./core43_cal13_coordinator.cjs");
 const { downloadPackage, makeHandler, submitPackage } = require("./core43_cal13_transport.cjs");
-const { fixture, signed, now, at } = require("./fixtures/core43_signed_export.cjs");
+const { fixture, signed, now } = require("./fixtures/core43_signed_export.cjs");
 
 const SOURCE = "banger-test-only";
 const ORIGIN = "simulation";
@@ -23,26 +23,27 @@ const hex = value => typeof value === "string" && /^[a-f0-9]{64}$/.test(value);
 const publicDer = key => key.export({ type: "spki", format: "der" });
 const json = (path, limit = 64 * 1024) => JSON.parse(readBoundedFile(path, limit));
 
-function prepare(directory) {
+function prepare(directory, captureAt = now) {
+  const relative = minutes => new Date(Date.parse(captureAt) + minutes * 60_000).toISOString();
   const root = generateKeyPairSync("ed25519");
   const publisher = generateKeyPairSync("ed25519");
   const witness = generateKeyPairSync("ed25519");
   const exportTrust = { source: SOURCE, keyId: "cal14-export", publicKey: publisher.publicKey };
   const witnessId = "cal14-witness";
-  const doc = fixture(now, { gameId: "2026029999" });
+  const doc = fixture(captureAt, { gameId: "2026029999" });
   doc.keyId = exportTrust.keyId;
   const { bytes, signature } = signed(doc, publisher.privateKey);
-  const input = { bytes, signature, exportTrust, origin: ORIGIN, now };
+  const input = { bytes, signature, exportTrust, origin: ORIGIN, now: captureAt };
   const capture = prepareCapture(input);
   const receipt = attestCapture({
-    ...input, capture, witnessId, privateKey: witness.privateKey, clock: () => at("22:01"),
+    ...input, capture, witnessId, privateKey: witness.privateKey, clock: () => relative(1),
   });
   const blob = Buffer.from(JSON.stringify({
     exportBytes: bytes.toString("base64url"), exportSignature: signature.toString("base64url"), capture, receipt,
   }));
   const keys = [[exportTrust.keyId, "export", publisher.publicKey], [witnessId, "witness", witness.publicKey]]
     .map(([id, role, publicKey]) => ({ id, role, publicKey: publicDer(publicKey).toString("base64url"),
-      notBefore: at("21:00"), notAfter: at("23:00"), revoked: false }));
+      notBefore: relative(-60), notAfter: relative(60), revoked: false }));
   const body = { schema: EPOCH, version: 1, origin: ORIGIN, source: SOURCE, keys };
   const registry = {
     body, signature: sign(null, Buffer.concat([Buffer.from(EPOCH + "\0"), Buffer.from(JSON.stringify(body))]),
