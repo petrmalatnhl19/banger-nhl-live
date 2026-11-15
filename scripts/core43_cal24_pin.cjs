@@ -59,8 +59,15 @@ function advancePin(pinPath, transfer, publicKey, witnessId, approvedHead, hooks
       const stat = lstatSync(source);
       if (!stat.isDirectory() || stat.isSymbolicLink()) throw Error("cal28o_unsafe_source_directory");
       inspectCopyTree(source);
+      const beforeCopy = lstatSync(source);
       cpSync(source, join(snapshotRoot, entry.archiveDigest), { recursive: true, dereference: false, errorOnExist: true, force: false });
+      hooks?.onStage?.("archive_copied", source);
       inspectCopyTree(join(snapshotRoot, entry.archiveDigest));
+      const afterCopy = lstatSync(source);
+      if (!afterCopy.isDirectory() || afterCopy.isSymbolicLink() ||
+          beforeCopy.dev !== afterCopy.dev || beforeCopy.ino !== afterCopy.ino ||
+          beforeCopy.ctimeMs !== afterCopy.ctimeMs)
+        throw Error("cal28q_source_changed_during_copy");
     }
     hooks?.onStage?.("snapshot_copied", snapshotRoot);
     const snapVerified = verifyTransferEvidence(transfer, publicKey, witnessId, anchor, snapshotRoot);
@@ -73,6 +80,11 @@ function advancePin(pinPath, transfer, publicKey, witnessId, approvedHead, hooks
       throw Error("cal28m_archive_directory_identity_changed");
     if (precommit.next.head !== next.head || precommit.next.sequence !== next.sequence)
       throw Error("cal28l_precommit_transfer_changed");
+    // CAL-28Q test seam: any mutation observed here must be rejected before rename.
+    hooks?.onStage?.("before_pin_rename");
+    const finalCheck = verifyTransferEvidence(transfer, publicKey, witnessId, anchor, hooks.archiveRoot);
+    if (JSON.stringify(finalCheck.archiveDirectoryIdentities) !== JSON.stringify(precommit.archiveDirectoryIdentities))
+      throw Error("cal28q_final_archive_identity_changed");
     renameSync(temp, path); temp = undefined;
     hooks?.onStage?.("pin_renamed");
     const dir = openSync(dirname(path), "r");
