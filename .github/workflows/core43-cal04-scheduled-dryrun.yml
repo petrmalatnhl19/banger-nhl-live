@@ -48,7 +48,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          prior_run=$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/core43-cal04-scheduled-dryrun.yml/runs?branch=${GITHUB_REF_NAME}&status=success&per_page=30" --jq '[.workflow_runs[] | select(.id != env.GITHUB_RUN_ID and (.event=="schedule" or .event=="workflow_dispatch"))] | sort_by(.created_at) | last | .id // empty')
+          prior_run=$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/core43-cal04-scheduled-dryrun.yml/runs?branch=${GITHUB_REF_NAME}&status=success&per_page=30" --jq '[.workflow_runs[] | select((.id | tostring) != env.GITHUB_RUN_ID and (.event=="schedule" or .event=="workflow_dispatch"))] | sort_by(.created_at) | last | .id // empty')
           if [[ -n "$prior_run" ]]; then
             mkdir -p /tmp/core43-cal04-restored
             gh run download "$prior_run" --repo "$GITHUB_REPOSITORY" --name core43-cal04-readonly-report --dir /tmp/core43-cal04-restored
