@@ -1,6 +1,6 @@
 "use strict";
 // CAL-28S: offline, separately signed receipt verification; no live provider attestation.
-const { createPublicKey, verify } = require("node:crypto");
+const { createPublicKey, verify, KeyObject } = require("node:crypto");
 const { validateArchiveTrustPolicy } = require("./core43_cal28r_archive_policy.cjs");
 const HEX = /^[a-f0-9]{64}$/;
 const B64 = /^[A-Za-z0-9+/]+={0,2}$/;
@@ -27,7 +27,8 @@ function verifyIndependentReceipt(policy, receipt, expectedDigest, trustedAudito
   });
   let ok = false;
   try {
-    const key = createPublicKey(trustedAuditorKey);
+    const key = trustedAuditorKey instanceof KeyObject && trustedAuditorKey.type === "public"
+      ? trustedAuditorKey : createPublicKey(trustedAuditorKey);
     if (key.asymmetricKeyType !== "ed25519") throw Error("cal28s_wrong_key_type");
     ok = verify(null, Buffer.from(payload), key, Buffer.from(receipt.signature, "base64"));
   } catch (_) { throw Error("cal28s_signature_verification_failed"); }
