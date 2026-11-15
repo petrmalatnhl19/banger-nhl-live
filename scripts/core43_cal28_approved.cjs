@@ -12,9 +12,9 @@ function advancePinWithEvidence(pinPath, transfer, trustedKey, witnessId, approv
   if (audit.status !== "consistent") throw Error("cal28c_receiver_preflight_failed");
   const checked = verifyTransferEvidence(transfer, trustedKey, witnessId, audit.pin, archiveRoot);
   if (checked.next.head !== approvedHead) throw Error("cal28c_approval_mismatch");
-  // CAL-24 rechecks pinned history and approval while holding its writer lock.
-  // Evidence directories must be immutable/trusted throughout verification and commit.
-  const result = advancePin(pinPath, transfer, trustedKey, witnessId, approvedHead);
+  // CAL-28E: CAL-24 re-verifies evidence, pinned history and approval while holding its writer lock.
+  // Evidence directories must still be immutable/trusted throughout verification and commit.
+  const result = advancePin(pinPath, transfer, trustedKey, witnessId, approvedHead, { archiveRoot });
   return { ...result, evidenceStatus: checked.evidenceStatus, archivesVerified: checked.archivesVerified };
 }
 module.exports = { advancePinWithEvidence };
