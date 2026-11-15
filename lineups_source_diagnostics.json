@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-15T22:25:12.278934+00:00",
+  "generatedAt": "2026-11-15T23:17:36.108925+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -125,7 +125,7 @@
       "team": "SJS",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-15T19:28:00+00:00",
+      "candidatePublishedAt": "2026-11-15T22:30:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -154,8 +154,8 @@
     "canucks": {
       "team": "VAN",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/vancouver-canucks-vegas-golden-knights-game-preview-november-15-2026",
-      "candidatePublishedAt": "2026-11-15T19:32:08.037000+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-15T22:30:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -257,8 +257,8 @@
     "stars": {
       "team": "DAL",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-15T19:28:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/florida-panthers-dallas-stars-game-preview-november-15-2026",
+      "candidatePublishedAt": "2026-11-15T22:34:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",

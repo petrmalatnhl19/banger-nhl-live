@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-15T22:24:36.573414+00:00",
+  "updatedAt": "2026-11-15T23:16:52.655147+00:00",
   "articles": [
     {
       "title": "Wild se radují: Starý dobrý Faber je zpět Hvězdný obránce má za sebou sezonní debut po zranění lebky. Bude ještě mnohem lepší, věří Quinn Hughes 15. lis 2026",
@@ -443,24 +443,6 @@
       "publishedAt": "2026-11-13T17:34:18.381000+00:00"
     },
     {
-      "title": "Fantasy hockey top 200 player rankings for 2026-27 Nov 14, 2026",
-      "url": "https://www.nhl.com/news/topic/fantasy/nhl-fantasy-hockey-top-250-200-rankings-drafts-players-big-board-281505474",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Fantasy hockey top 200 player rankings for 2026-27",
-      "description": "Most valuable overall options for standard leagues, impact of Hellebuyck trade on goalie landscape",
-      "publishedAt": "2026-11-09T14:00:00+00:00"
-    },
-    {
-      "title": "Fantasy hockey top 100 forward rankings for 2026-27 Nov 14, 2026",
-      "url": "https://www.nhl.com/news/topic/Fantasy/nhl-fantasy-hockey-top-100-forward-rankings-pools-282775028",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Fantasy hockey top 100 forward rankings for 2026-27",
-      "description": "Most valuable options at position in standard leagues; new podcast episodes",
-      "publishedAt": "2026-11-09T14:00:00+00:00"
-    },
-    {
       "title": "Fantasy hockey top 50 defenseman rankings Nov 14, 2026",
       "url": "https://www.nhl.com/news/topic/Fantasy/nhl-fantasy-hockey-top-50-defenseman-rankings-pools-282830728",
       "language": "en",
@@ -477,6 +459,24 @@
       "headline": "Fantasy hockey top 25 goalie rankings for 2026-27",
       "description": "Most valuable options for standard leagues, tandems for 'NHL Fantasy Stars' game",
       "publishedAt": "2026-11-07T14:00:00+00:00"
+    },
+    {
+      "title": "Fantasy hockey top 200 player rankings for 2026-27 Nov 14, 2026",
+      "url": "https://www.nhl.com/news/topic/fantasy/nhl-fantasy-hockey-top-250-200-rankings-drafts-players-big-board-281505474",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Fantasy hockey top 200 player rankings for 2026-27",
+      "description": "Most valuable overall options for standard leagues, impact of Hellebuyck trade on goalie landscape",
+      "publishedAt": "2026-11-09T14:00:00+00:00"
+    },
+    {
+      "title": "Fantasy hockey top 100 forward rankings for 2026-27 Nov 14, 2026",
+      "url": "https://www.nhl.com/news/topic/Fantasy/nhl-fantasy-hockey-top-100-forward-rankings-pools-282775028",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Fantasy hockey top 100 forward rankings for 2026-27",
+      "description": "Most valuable options at position in standard leagues; new podcast episodes",
+      "publishedAt": "2026-11-09T14:00:00+00:00"
     },
     {
       "title": "'NHL Fantasy on Ice' podcast available now Nov 12, 2026",
@@ -655,8 +655,8 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "Lundqvist scores goalie goal at Rangers Alumni Classic",
-      "publishedAt": "2026-11-15T21:40:00+00:00",
-      "description": "Blueshirts legend provides fun moment during exhibition to benefit pediatric cancer care"
+      "description": "Blueshirts legend provides fun moment during exhibition to benefit pediatric cancer care",
+      "publishedAt": "2026-11-15T21:40:00+00:00"
     }
   ]
 }
