@@ -50,7 +50,13 @@ function archiveEvidence(destination, files) {
   return { directory: target, manifest };
 }
 function verifyArchive(directory) {
-  const manifest = JSON.parse(readFileSync(join(directory, "manifest.json"), "utf8"));
+  const archiveDir = lstatSync(directory);
+  if (!archiveDir.isDirectory() || archiveDir.isSymbolicLink()) throw Error("cal28j_unsafe_archive_directory");
+  const manifestPath = join(directory, "manifest.json");
+  const manifestStat = lstatSync(manifestPath);
+  if (!manifestStat.isFile() || manifestStat.isSymbolicLink() || manifestStat.nlink !== 1)
+    throw Error("cal28j_unsafe_archive_file:manifest.json");
+  const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
   if (manifest.schema !== "core43_cal18b_evidence_v1" ||
       manifest.verification !== "timestamp_signature_only" ||
       manifest.independentOperationProven !== false ||
@@ -58,7 +64,11 @@ function verifyArchive(directory) {
       !/^[a-f0-9]{64}$/.test(manifest.packageDigest) ||
       basename(resolve(directory)) !== manifest.packageDigest) throw Error("cal18b_manifest");
   const bytes = names.map(n => {
-    const b = readFileSync(join(directory, n));
+    const filePath = join(directory, n);
+    const stat = lstatSync(filePath);
+    if (!stat.isFile() || stat.isSymbolicLink() || stat.nlink !== 1)
+      throw Error("cal28j_unsafe_archive_file:" + n);
+    const b = readFileSync(filePath);
     if (sha(b) !== manifest.files?.[n]?.sha256 || b.length !== manifest.files[n].bytes)
       throw Error("cal18b_tampered_archive");
     return b;
