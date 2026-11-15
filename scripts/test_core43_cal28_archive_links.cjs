@@ -2,7 +2,7 @@
 const { test } = require("node:test");
 const assert = require("node:assert/strict");
 const { join } = require("node:path");
-const { readFileSync, writeFileSync, rmSync, symlinkSync, linkSync } = require("node:fs");
+const { readFileSync, writeFileSync, rmSync, symlinkSync, linkSync, mkdirSync } = require("node:fs");
 const { createSignedArchiveFixture } = require("./fixtures/core43_cal28_signed_archive.cjs");
 const { advancePin } = require("./core43_cal24_pin.cjs");
 const { GENESIS } = require("./core43_cal19_chain.cjs");
@@ -37,6 +37,24 @@ test("CAL-28J rejects symlinked manifest without advancing pin", t => {
   writeFileSync(other, readFileSync(manifest));
   rmSync(manifest);
   symlinkSync(other, manifest);
+  assert.throws(() => advancePin(pin, transfer, publicKey, witness, entry.head,
+    { archiveRoot: archives }), /cal28b_invalid_archive:1/);
+  assert.equal(JSON.parse(readFileSync(pin)).head, GENESIS);
+});
+
+test("CAL-28K refuses hardlinked manifest and leaves pin unchanged", t => {
+  const { pin, archives, archived, transfer, publicKey, witness, entry } = createSignedArchiveFixture(t);
+  const manifest = join(archived.directory, "manifest.json");
+  linkSync(manifest, join(archived.directory, "manifest-hardlink.json"));
+  assert.throws(() => advancePin(pin, transfer, publicKey, witness, entry.head,
+    { archiveRoot: archives }), /cal28b_invalid_archive:1/);
+  assert.equal(JSON.parse(readFileSync(pin)).head, GENESIS);
+});
+test("CAL-28K refuses directory masquerading as evidence file", t => {
+  const { pin, archives, archived, transfer, publicKey, witness, entry } = createSignedArchiveFixture(t);
+  const file = join(archived.directory, "request.tsq");
+  rmSync(file);
+  mkdirSync(file);
   assert.throws(() => advancePin(pin, transfer, publicKey, witness, entry.head,
     { archiveRoot: archives }), /cal28b_invalid_archive:1/);
   assert.equal(JSON.parse(readFileSync(pin)).head, GENESIS);
