@@ -45,9 +45,11 @@ function signedTimeFields(text, maxAccuracyMs) {
   const [seconds, millis, micros] = accuracy.slice(1).map(x => x === "unspecified" ? 0 : Number(x));
   const uncertainty = seconds * 1000 + millis + micros / 1000;
   requireValid(millis <= 999 && micros <= 999 && uncertainty <= maxAccuracyMs, "accuracy");
-  // Round upward separately so sub-millisecond rounding cannot make a late token appear early.
-  const latestMs = whole + Math.ceil(Number("0." + (fraction || "0")) * 1000) + Math.ceil(uncertainty);
-  return { whole, latestMs };
+  // Round the signed interval outwards before comparing it to external deadlines.
+  const fractionalMs = Number((fraction + "000000000").slice(0, 9)) / 1_000_000;
+  const earliestMs = whole + Math.floor(fractionalMs) - Math.ceil(uncertainty);
+  const latestMs = whole + Math.ceil(fractionalMs) + Math.ceil(uncertainty);
+  return { whole, earliestMs, latestMs };
 }
 
 function verifyTimestamp({ packageBytes, request, response, authority }) {
@@ -74,7 +76,7 @@ function verifyTimestamp({ packageBytes, request, response, authority }) {
     requireValid(/^Status: Granted\.$/m.test(info) && /^Hash Algorithm: sha256$/m.test(info) &&
       /^Policy OID: (\S+)$/m.exec(info)?.[1] === authority.policyOid, "response_profile");
     // Parsing can happen before verification. No parsed field is trusted or returned until verification succeeds.
-    const { whole, latestMs } = signedTimeFields(info, authority.maxAccuracyMs);
+    const { whole, earliestMs, latestMs } = signedTimeFields(info, authority.maxAccuracyMs);
     const base = ["ts", "-verify", "-CAfile", caPath, "-in", responsePath, "-attime", String(whole / 1000)];
     openssl([...base, "-queryfile", queryPath], "signature_or_nonce");
     openssl([...base, "-digest", digest], "package_binding");
@@ -87,7 +89,7 @@ function verifyTimestamp({ packageBytes, request, response, authority }) {
     const signers = readFileSync(signerPath, "utf8").match(/-----BEGIN CERTIFICATE-----[\s\S]*?-----END CERTIFICATE-----/g) ?? [];
     requireValid(signers.length === 1 &&
       new X509Certificate(signers[0]).fingerprint256 === authority.signerFingerprint256, "signer_pin");
-    return { digest, latestMs };
+    return { digest, earliestMs, latestMs };
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }

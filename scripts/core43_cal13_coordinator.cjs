@@ -193,4 +193,5 @@ function readAccepted(path, digest, trust) {
   });
 }
 
-module.exports = { MAX_PACKAGE_BYTES, initializeCoordinator, installRegistry, acceptPackage, readAccepted };
+module.exports = { MAX_PACKAGE_BYTES, initializeCoordinator, installRegistry, acceptPackage, readAccepted,
+  readRegistry, verifyPackage };
