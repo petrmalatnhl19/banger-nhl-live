@@ -8,6 +8,7 @@ const { tmpdir } = require("node:os");
 const { GENESIS, digestEntry } = require("./core43_cal19_chain.cjs");
 const { canonical } = require("./core43_cal21_checkpoint.cjs");
 const { advancePin } = require("./core43_cal24_pin.cjs");
+const { createSignedArchiveFixture } = require("./fixtures/core43_cal28_signed_archive.cjs");
 const { privateKey, publicKey } = generateKeyPairSync("ed25519");
 const witness = "cal24-test";
 const first = { seq: 1, archiveDigest: "a".repeat(64), previous: GENESIS,
@@ -53,4 +54,11 @@ test("CAL-24 post-rename failure retains advanced pin and allows replay", t => {
     { onStage: stage => { if (stage === "pin_renamed") throw Error("synthetic_crash"); } }), /synthetic_crash/);
   assert.equal(JSON.parse(readFileSync(pin)).head, second.head);
   assert.equal(advancePin(pin, data, publicKey, witness, second.head).status, "unchanged");
+});
+
+test("CAL-28H migrated CAL-24 writer: real RFC3161 evidence advances and replay is unchanged", t => {
+  const { pin, archives, transfer, publicKey, witness, entry } = createSignedArchiveFixture(t, "cal28h-cal24");
+  assert.equal(advancePin(pin, transfer, publicKey, witness, entry.head, { archiveRoot: archives }).status, "advanced");
+  assert.deepEqual(JSON.parse(readFileSync(pin)), { sequence: 1, head: entry.head });
+  assert.equal(advancePin(pin, transfer, publicKey, witness, entry.head, { archiveRoot: archives }).status, "unchanged");
 });
