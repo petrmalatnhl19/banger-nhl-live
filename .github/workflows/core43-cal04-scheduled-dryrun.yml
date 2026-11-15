@@ -101,6 +101,8 @@ on:
       - 'docs/core43-cal28o-private-copy.md'
       - 'scripts/test_core43_cal28_private_isolation.cjs'
       - 'docs/core43-cal28p-private-isolation.md'
+      - 'scripts/test_core43_cal28_copy_commit_races.cjs'
+      - 'docs/core43-cal28q-race-audit.md'
       - 'docs/core43-cal28-lock-gate.md'
       - 'scripts/test_core43_cal26_end_to_end.cjs'
       - 'docs/core43-cal26-end-to-end.md'
@@ -196,6 +198,8 @@ jobs:
         run: node --test scripts/test_core43_cal28_private_snapshot.cjs
       - name: Verify CAL-28P private archive isolation and tamper rejection
         run: node --test scripts/test_core43_cal28_private_isolation.cjs
+      - name: Verify CAL-28Q copy and final commit boundary races
+        run: node --test scripts/test_core43_cal28_copy_commit_races.cjs
       - name: Enforce CAL-17 fail-closed pilot gates
         run: node --test scripts/test_core43_cal17_safety_gates.cjs
       - name: Test PUBLIC privileges in an in-memory PostgreSQL 17 database
