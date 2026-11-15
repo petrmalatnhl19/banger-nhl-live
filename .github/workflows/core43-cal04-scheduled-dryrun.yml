@@ -56,6 +56,7 @@ on:
       - 'docs/core43-cal18b-evidence-archive.md'
       - 'scripts/core43_cal19_chain.cjs'
       - 'scripts/test_core43_cal19_chain.cjs'
+      - 'scripts/test_core43_cal20_crash.cjs'
       - 'docs/core43-cal19-archive-chain.md'
       - 'docs/core43-cal17-pilot-security-gates.md'
       - 'docs/core43-cal16-timestamp-pilot-readiness.md'
@@ -108,6 +109,8 @@ jobs:
         run: node --test scripts/test_core43_cal18_archive.cjs
       - name: Verify CAL-19 pinned archive hash chain
         run: node --test scripts/test_core43_cal19_chain.cjs
+      - name: Simulate CAL-20 archive crash recovery
+        run: node --test scripts/test_core43_cal20_crash.cjs
       - name: Enforce CAL-17 fail-closed pilot gates
         run: node --test scripts/test_core43_cal17_safety_gates.cjs
       - name: Test PUBLIC privileges in an in-memory PostgreSQL 17 database
