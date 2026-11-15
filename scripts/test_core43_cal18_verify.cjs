@@ -37,7 +37,7 @@ test("CAL-18 never accepts missing or malformed evidence", t => {
   assert.throws(() => verifyFiles({
     packageFile: files[0], requestFile: files[1],
     responseFile: files[2], configFile: files[3],
-  }), /cal16_size|cal16_trust/);
+  }), /cal16_request/);
 });
 
 test("CAL-18 rejects unknown configuration fields", () => {
