@@ -92,6 +92,8 @@ on:
       - 'docs/core43-cal28k-fd-verification.md'
       - 'scripts/test_core43_cal28_precommit_race.cjs'
       - 'docs/core43-cal28l-precommit-race.md'
+      - 'scripts/test_core43_cal28_directory_identity.cjs'
+      - 'docs/core43-cal28m-directory-identity.md'
       - 'docs/core43-cal28-lock-gate.md'
       - 'scripts/test_core43_cal26_end_to_end.cjs'
       - 'docs/core43-cal26-end-to-end.md'
@@ -179,6 +181,8 @@ jobs:
         run: node --test scripts/test_core43_cal28_archive_links.cjs
       - name: Verify CAL-28L precommit archive mutation rejection
         run: node --test scripts/test_core43_cal28_precommit_race.cjs
+      - name: Verify CAL-28M archive directory identity continuity
+        run: node --test scripts/test_core43_cal28_directory_identity.cjs
       - name: Enforce CAL-17 fail-closed pilot gates
         run: node --test scripts/test_core43_cal17_safety_gates.cjs
       - name: Test PUBLIC privileges in an in-memory PostgreSQL 17 database
