@@ -16,7 +16,21 @@ The [SQL migration draft](sql/core43-cal06-reader-migration-draft.sql) is stored
 
 All five tables must already have RLS enabled. Each new policy applies only to SELECT by the reader. It allows all rows because the collector discovers games across the archive and loads historical identity and goalie snapshots. Column grants restrict each query to its exact projection. The existing archive SELECT policy for `anon` and `authenticated` stays in effect.
 
-Read-only catalog inspection of `app-development` confirmed all 30 columns and found effective access that a new role would receive through `PUBLIC`. The `net` schema grants `USAGE` to `PUBLIC` and exposes executable routines including `net.http_post`. The draft checks for effective routine, relation, sequence, and schema CREATE privileges before granting source access. It would abort on the current `net` grants and roll back the transaction. It changes no existing ACLs. Resolve the shared grants with a separate review of the extension's callers before considering this migration. The finding concerns database permissions. HTTP exposure of the `net` schema has not been verified.
+### pg_net blocks the migration
+
+Read-only catalog inspection of `app-development` confirmed that `supabase_admin` owns `net`, that `PUBLIC` has schema `USAGE` and `EXECUTE` on all 12 routines, and that three relations or sequences carry `PUBLIC` grants. The reader role is absent. `PUBLIC` is an implicit grant to every role, so `NOINHERIT` and revoking privileges directly from the reader cannot remove it. `NOLOGIN` limits direct connections, but permissions still apply if PostgREST assumes the role. See [PostgreSQL REVOKE](https://www.postgresql.org/docs/17/sql-revoke.html) and [Supabase's pg_net permissions guidance](https://supabase.com/kb/troubleshooting/revoking-access-to-pg_net-objects-has-no-effect-0bbc16).
+
+The migration now rejects effective `USAGE` on `net` itself, even if routine permissions change. It still checks usable application schemas for executable routines, relation and sequence privileges, and schema creation rights. A failure occurs before the source grants, policies and PostgREST membership, and rolls back the role creation. The draft changes no shared ACLs. These checks cover application privileges at migration time. They do not model every PostgreSQL system privilege or detect future ACL drift. Keep the role `NOLOGIN` and recheck effective permissions before activation and after database or extension changes. Hiding `net` from PostgREST and setting a narrow `search_path` are additional controls, but neither removes database grants.
+
+### Options for isolation
+
+| Option | Conditions and impact |
+| --- | --- |
+| Stay on fixtures or consume a curated source export | Keep this migration blocked. With a future approved export, the collector would receive only the required projected data over a private read-only interface, without a database role or service-role credential. The exporting system needs its own access review, a freshness and provenance contract, and a retention limit. |
+| Use an isolated data project or database | Verify effective ACLs and that the reader cannot use `net`, including after extension changes. An isolated project still needs a separate review of replication or export, costs, data freshness and JWT issuance. A project or branch that copies the same `PUBLIC` grants would still fail the check. |
+| Review pg_net grants with Supabase | Consider only as a separate change backed by Supabase and an inventory of the pg_net worker role, cron jobs, database webhooks, trigger functions and other callers. On a disposable copy, verify least-privilege grants for required consumers, the reader denial, extension lifecycle and rollback. The extension's grants are managed by Supabase, and removing public grants can break callers that rely on them. |
+
+The regression tests run only the ACL check from the draft against PostgreSQL 17 in memory. Fixtures cover effective grants through `PUBLIC`, attempted role-specific revokes, a private `net` schema, and unrelated routine, table, column, sequence and schema grants. The migration itself is not executed.
 
 ### REST authentication
 

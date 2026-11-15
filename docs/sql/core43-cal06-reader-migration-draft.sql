@@ -8,14 +8,22 @@ CREATE ROLE core43_cal04_reader
     NOREPLICATION NOBYPASSRLS;
 GRANT USAGE ON SCHEMA public TO core43_cal04_reader;
 
-DO $reader$
+DO $reader_acl_check$
 DECLARE
     reader CONSTANT name := 'core43_cal04_reader';
-    source record;
     unexpected text;
 BEGIN
     -- PUBLIC grants still apply to NOINHERIT roles. Check effective permissions
     -- before granting any table access or allowing PostgREST to assume the role.
+    -- A usable pg_net namespace is outside the reader's contract, even
+    -- if the extension's routine or relation ACLs change independently.
+    IF EXISTS (
+        SELECT FROM pg_namespace AS n
+        WHERE n.nspname = 'net' AND has_schema_privilege(reader, n.oid, 'USAGE')
+    ) THEN
+        RAISE EXCEPTION 'Reader has unexpected schema USAGE access: net';
+    END IF;
+
     SELECT format('%I.%I', n.nspname, p.proname) INTO unexpected
     FROM pg_proc AS p
     JOIN pg_namespace AS n ON n.oid = p.pronamespace
@@ -55,7 +63,14 @@ BEGIN
     IF FOUND THEN
         RAISE EXCEPTION 'Reader has unexpected schema CREATE access: %', unexpected;
     END IF;
+END;
+$reader_acl_check$;
 
+DO $reader$
+DECLARE
+    reader CONSTANT name := 'core43_cal04_reader';
+    source record;
+BEGIN
     FOR source IN
         SELECT * FROM (VALUES
             ('nhl_core43_schedule_snapshots', 'game_id, away_team, home_team, kickoff_at, fetched_at'),

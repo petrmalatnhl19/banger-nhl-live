@@ -16,6 +16,7 @@ on:
       - 'scripts/test_core43_cal04_two_run_integration.cjs'
       - 'scripts/test_core43_cal04_failure_modes.cjs'
       - 'scripts/test_core43_cal06_workflow_guards.cjs'
+      - 'scripts/test_core43_cal06_public_acl.cjs'
       - 'docs/sql/core43-cal06-reader-migration-draft.sql'
       - 'scripts/core43_live_shadow_source_reader.cjs'
       - 'scripts/core43_supabase_readonly_report.cjs'
@@ -41,6 +42,11 @@ jobs:
       - run: node scripts/test_core43_cal04_two_run_integration.cjs
       - run: node scripts/test_core43_cal04_failure_modes.cjs
       - run: node scripts/test_core43_cal06_workflow_guards.cjs
+      - name: Test PUBLIC privileges in an in-memory PostgreSQL 17 database
+        shell: bash
+        run: |
+          npm install --prefix "$RUNNER_TEMP/core43-acl" --no-audit --no-fund --ignore-scripts @electric-sql/pglite@0.3.15
+          NODE_PATH="$RUNNER_TEMP/core43-acl/node_modules" node --test scripts/test_core43_cal06_public_acl.cjs
   dry-run:
     # Keep disabled until the hosted role grants and JWT issuer are verified.
     if: >-
