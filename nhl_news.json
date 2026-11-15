@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-15T14:45:55.017732+00:00",
+  "updatedAt": "2026-11-15T15:24:58.073929+00:00",
   "articles": [
     {
       "title": "Momenty Global Series: Aplaus pro Aha, sauna i legendy Zápasy Caroliny proti Seattlu ve Finsku přinesly vedle dvou výher Hurricanes i další úžasné zážitky 15. lis 2026",
@@ -7,8 +7,8 @@
       "language": "cs",
       "source": "NHL.com",
       "headline": "Momenty Global Series: Aplaus pro Aha, sauna i legendy",
-      "publishedAt": "2026-11-15T14:11:11.101000+00:00",
-      "description": "Zápasy Caroliny proti Seattlu ve Finsku přinesly vedle dvou výher Hurricanes i další úžasné zážitky"
+      "description": "Zápasy Caroliny proti Seattlu ve Finsku přinesly vedle dvou výher Hurricanes i další úžasné zážitky",
+      "publishedAt": "2026-11-15T14:11:11.101000+00:00"
     },
     {
       "title": "Jde to i bez superhvězd. Colorado zazářilo v Montrealu Oslabení Nečas a spol. ukončili dlouhou sérii Canadiens. Kluci ukázali odhodlání a disciplínu, chválil kouč 15. lis 2026",
@@ -299,22 +299,13 @@
       "publishedAt": "2026-11-11T07:25:00+00:00"
     },
     {
-      "title": "Zpátky v montérkách. Avalanche sbírají výhry 11. lis 2026",
-      "url": "https://www.nhl.com/cs/news/colorado-se-vraci-na-viteznou-cestu",
-      "language": "cs",
-      "source": "NHL.com",
-      "headline": "Zpátky v montérkách. Avalanche sbírají výhry",
-      "description": "Triumf 6:3 v Torontu ukázal, že se poslední vítězové Presidents' Trophy vrátili ke správným základům",
-      "publishedAt": "2026-11-11T06:19:36.743000+00:00"
-    },
-    {
       "title": "McDavid’s season-opening point streak hits 21 in win Forward has assist, Levi stops 19 in first NHL shutout for Edmonton; Toronto drops sixth in row Nov 15, 2026",
       "url": "https://www.nhl.com/news/edmonton-oilers-toronto-maple-leafs-game-recap-november-14-2026",
       "language": "en",
       "source": "NHL.com",
       "headline": "McDavid’s season-opening point streak hits 21, Oilers blank Maple Leafs",
-      "publishedAt": "2026-11-15T04:21:00+00:00",
-      "description": "Forward has assist, Levi stops 19 in first NHL shutout for Edmonton; Toronto drops sixth in row"
+      "description": "Forward has assist, Levi stops 19 in first NHL shutout for Edmonton; Toronto drops sixth in row",
+      "publishedAt": "2026-11-15T04:21:00+00:00"
     },
     {
       "title": "Wild cruise past Bruins, run point streak to 11 games Hartman, Yurov each scores twice for Minnesota, Faber has assist in season debut Nov 15, 2026",
@@ -406,6 +397,15 @@
       "publishedAt": "2026-11-15T05:06:00+00:00"
     },
     {
+      "title": "Projected lineups, starting goalies for today Nov 15, 2026",
+      "url": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Projected lineups, starting goalies for today",
+      "description": "Latest line combinations, defense pairs, injury news from NHL.com writers",
+      "publishedAt": "2026-11-08T22:04:00+00:00"
+    },
+    {
       "title": "NHL picks, props, fantasy projections for today Nov 15, 2026",
       "url": "https://www.nhl.com/news/topic/fantasy/nhl-picks-props-daily-fantasy-hockey-projections-for-2026-27-season",
       "language": "en",
@@ -424,13 +424,22 @@
       "publishedAt": "2026-11-07T05:00:00+00:00"
     },
     {
-      "title": "Projected lineups, starting goalies for today Nov 14, 2026",
-      "url": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "title": "Fantasy hockey top 200 player rankings for 2026-27 Nov 14, 2026",
+      "url": "https://www.nhl.com/news/topic/fantasy/nhl-fantasy-hockey-top-250-200-rankings-drafts-players-big-board-281505474",
       "language": "en",
       "source": "NHL.com",
-      "headline": "Projected lineups, starting goalies for today",
-      "description": "Latest line combinations, defense pairs, injury news from NHL.com writers",
-      "publishedAt": "2026-11-08T22:04:00+00:00"
+      "headline": "Fantasy hockey top 200 player rankings for 2026-27",
+      "description": "Most valuable overall options for standard leagues, impact of Hellebuyck trade on goalie landscape",
+      "publishedAt": "2026-11-09T14:00:00+00:00"
+    },
+    {
+      "title": "Fantasy hockey top 100 forward rankings for 2026-27 Nov 14, 2026",
+      "url": "https://www.nhl.com/news/topic/Fantasy/nhl-fantasy-hockey-top-100-forward-rankings-pools-282775028",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Fantasy hockey top 100 forward rankings for 2026-27",
+      "description": "Most valuable options at position in standard leagues; new podcast episodes",
+      "publishedAt": "2026-11-09T14:00:00+00:00"
     },
     {
       "title": "Fantasy hockey top 50 defenseman rankings Nov 14, 2026",
@@ -449,24 +458,6 @@
       "headline": "Fantasy hockey top 25 goalie rankings for 2026-27",
       "description": "Most valuable options for standard leagues, tandems for 'NHL Fantasy Stars' game",
       "publishedAt": "2026-11-07T14:00:00+00:00"
-    },
-    {
-      "title": "Fantasy hockey top 200 player rankings for 2026-27 Nov 14, 2026",
-      "url": "https://www.nhl.com/news/topic/fantasy/nhl-fantasy-hockey-top-250-200-rankings-drafts-players-big-board-281505474",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Fantasy hockey top 200 player rankings for 2026-27",
-      "description": "Most valuable overall options for standard leagues, impact of Hellebuyck trade on goalie landscape",
-      "publishedAt": "2026-11-09T14:00:00+00:00"
-    },
-    {
-      "title": "Fantasy hockey top 100 forward rankings for 2026-27 Nov 14, 2026",
-      "url": "https://www.nhl.com/news/topic/Fantasy/nhl-fantasy-hockey-top-100-forward-rankings-pools-282775028",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Fantasy hockey top 100 forward rankings for 2026-27",
-      "description": "Most valuable options at position in standard leagues; new podcast episodes",
-      "publishedAt": "2026-11-09T14:00:00+00:00"
     },
     {
       "title": "NHL EDGE stats behind Wallstedt’s breakout season for Wild Nov 13, 2026",
@@ -546,8 +537,8 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "NHL EDGE stats for 2026 NHL Global Series Finland",
-      "publishedAt": "2026-11-12T05:00:00+00:00",
-      "description": "Hurricanes’ continued possession dominance, Catton’s breakout for Kraken among highlights"
+      "description": "Hurricanes’ continued possession dominance, Catton’s breakout for Kraken among highlights",
+      "publishedAt": "2026-11-12T05:00:00+00:00"
     },
     {
       "title": "Jets’ historic comeback against Canadiens fueled by puck possession, mid-range prowess Nov 04, 2026",
