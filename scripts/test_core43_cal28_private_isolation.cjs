@@ -28,9 +28,12 @@ test("CAL-28P rejects tampered private copy and removes private storage", t => {
 });
 test("CAL-28P rejects added source symlink even with otherwise valid evidence", t => {
   const { pin, archives, archived, transfer, publicKey, witness, entry } = createSignedArchiveFixture(t);
-  symlinkSync(join(archived.directory, "bundle.bin"), join(archived.directory, "extra-link"));
   assert.throws(() => advancePin(pin, transfer, publicKey, witness, entry.head, {
     archiveRoot: archives,
+    onStage(stage) {
+      if (stage === "temp_fsynced")
+        symlinkSync(join(archived.directory, "bundle.bin"), join(archived.directory, "extra-link"));
+    },
   }), /cal28p_link_rejected/);
   unchanged(pin);
 });
