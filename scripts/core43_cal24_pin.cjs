@@ -35,6 +35,8 @@ function advancePin(pinPath, transfer, publicKey, witnessId, approvedHead, hooks
     // CAL-28L: catch archive mutations occurring after initial verification
     // and before the durable pin rename. This is not an atomic archive snapshot.
     const precommit = verifyTransferEvidence(transfer, publicKey, witnessId, anchor, hooks.archiveRoot);
+    if (JSON.stringify(precommit.archiveDirectoryIdentities) !== JSON.stringify(verified.archiveDirectoryIdentities))
+      throw Error("cal28m_archive_directory_identity_changed");
     if (precommit.next.head !== next.head || precommit.next.sequence !== next.sequence)
       throw Error("cal28l_precommit_transfer_changed");
     renameSync(temp, path); temp = undefined;
