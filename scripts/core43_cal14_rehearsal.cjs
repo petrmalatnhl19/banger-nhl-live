@@ -65,14 +65,16 @@ function load(directory, digest, rootFingerprint) {
   return { blob, digest, trust: { rootKey, origin: ORIGIN, source: SOURCE }, registry: json(join(directory, "registry.json")) };
 }
 
-function authority({ statePath, init, pack, tls, readToken, submitToken, dropAfterCommit }) {
+function authority({ statePath, init, pack, tls, readToken, submitToken, dropAfterCommit, peerPins }) {
+  // Validate TLS and authorization configuration before creating state.
+  makeHandler({ readToken, submitToken, peerPins });
+  if (peerPins && !tls.ca) throw Error("cal15_client_ca");
   if (init) initializeCoordinator(statePath, pack.registry, pack.trust);
-  // Validate tokens before listening.
-  makeHandler({ readToken, submitToken });
   let pendingDrop = dropAfterCommit;
-  return createServer({ ...tls, minVersion: "TLSv1.2" }, (req, res) => {
+  return createServer({ ...tls, minVersion: "TLSv1.2",
+    ...(peerPins ? { requestCert: true, rejectUnauthorized: true } : {}) }, (req, res) => {
     const handler = makeHandler({
-      readToken, submitToken, readObject: digest => digest === pack.digest ? pack.blob : undefined,
+      readToken, submitToken, peerPins, readObject: digest => digest === pack.digest ? pack.blob : undefined,
       submit(bytes) {
         const result = acceptPackage(statePath, bytes, pack.trust);
         if (pendingDrop && result.status === "accepted") {
@@ -86,9 +88,9 @@ function authority({ statePath, init, pack, tls, readToken, submitToken, dropAft
   });
 }
 
-async function receive({ origin, ca, readToken, submitToken }, digest) {
-  const bytes = await downloadPackage({ origin, ca, token: readToken }, digest);
-  return submitPackage({ origin, ca, token: submitToken }, bytes);
+async function receive({ origin, ca, readToken, submitToken, readClient, submitClient }, digest) {
+  const bytes = await downloadPackage({ origin, ca, token: readToken, ...readClient }, digest);
+  return submitPackage({ origin, ca, token: submitToken, ...submitClient }, bytes);
 }
 
 function listen(server, port, host) {
@@ -138,6 +140,12 @@ function privateIPv4(host) {
     /^(?:127\.|10\.|192\.168\.|172\.(?:1[6-9]|2\d|3[01])\.)/.test(host);
 }
 
+function clientIdentity(config) {
+  if (!config) return undefined;
+  checkPrivate(config.keyPath, false);
+  return { cert: readBoundedFile(config.certPath, 16 * 1024), key: readBoundedFile(config.keyPath, 16 * 1024) };
+}
+
 async function main([command, ...args]) {
   if (command === "prepare" && args.length === 1) return prepare(args[0]);
   if (command === "rehearse" && args.length === 3) return rehearse(load(...args));
@@ -151,8 +159,9 @@ async function main([command, ...args]) {
   }
   if (command === "receive" && args.length === 2) {
     checkPrivate(args[0], false);
-    const { origin, certPath, readToken, submitToken } = json(args[0]);
-    return receive({ origin, ca: readBoundedFile(certPath, 16 * 1024), readToken, submitToken }, args[1]);
+    const { origin, certPath, readToken, submitToken, readClient, submitClient } = json(args[0]);
+    return receive({ origin, ca: readBoundedFile(certPath, 16 * 1024), readToken, submitToken,
+      readClient: clientIdentity(readClient), submitClient: clientIdentity(submitClient) }, args[1]);
   }
   if (command === "serve" && args.length === 4) {
     const [directory, digest, rootFingerprint, configPath] = args;
@@ -163,7 +172,8 @@ async function main([command, ...args]) {
     checkPrivate(config.keyPath, false);
     const server = authority({
       ...config, pack: load(directory, digest, rootFingerprint),
-      tls: { cert: readBoundedFile(config.certPath, 16 * 1024), key: readBoundedFile(config.keyPath, 16 * 1024) },
+      tls: { cert: readBoundedFile(config.certPath, 16 * 1024), key: readBoundedFile(config.keyPath, 16 * 1024),
+        ca: config.clientCaPath ? readBoundedFile(config.clientCaPath, 16 * 1024) : undefined },
     });
     await listen(server, config.port, config.host);
     return { status: "listening", host: config.host, port: config.port, origin: ORIGIN };
@@ -174,10 +184,10 @@ async function main([command, ...args]) {
 if (require.main === module) {
   main(process.argv.slice(2)).then(result => console.log(JSON.stringify(result))).catch(error => {
     // Output only machine-readable errors; never log tokens, certificate keys or package content.
-    const diagnostic = [error.code, error.message].find(value => /^(?:cal1[34]_[a-z0-9_]+|E[A-Z]+)$/.test(value ?? ""));
+    const diagnostic = [error.code, error.message].find(value => /^(?:cal1[345]_[a-z0-9_]+|E[A-Z]+)$/.test(value ?? ""));
     console.error(diagnostic ?? "cal14_failed");
     process.exitCode = 1;
   });
 }
 
-module.exports = { prepare, load, rehearse };
+module.exports = { authority, prepare, load, rehearse };

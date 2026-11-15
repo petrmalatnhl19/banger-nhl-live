@@ -5,6 +5,7 @@ const { request } = require("node:https");
 const { MAX_PACKAGE_BYTES } = require("./core43_cal13_coordinator.cjs");
 
 const DIGEST = /^[a-f0-9]{64}$/;
+const CERTIFICATE = /^(?:[A-F0-9]{2}:){31}[A-F0-9]{2}$/;
 const TOKEN = /^[A-Za-z0-9_-]{24,180}$/;
 const sha = bytes => createHash("sha256").update(bytes).digest("hex");
 
@@ -19,7 +20,7 @@ async function readBounded(stream, limit) {
   return Buffer.concat(chunks, total);
 }
 
-function requestBytes({ origin, ca, token, path, method, bytes, limit }) {
+function requestBytes({ origin, ca, cert, key, token, path, method, bytes, limit }) {
   const endpoint = new URL(origin);
   if (endpoint.protocol !== "https:" || endpoint.username || endpoint.password ||
       endpoint.pathname !== "/" || endpoint.search || endpoint.hash || (typeof token !== "string" || !TOKEN.test(token))) {
@@ -28,7 +29,7 @@ function requestBytes({ origin, ca, token, path, method, bytes, limit }) {
   const target = new URL(path, endpoint);
   return new Promise((resolve, reject) => {
     const req = request(target, {
-      method, ca, rejectUnauthorized: true, minVersion: "TLSv1.2",
+      method, ca, cert, key, rejectUnauthorized: true, minVersion: "TLSv1.2",
       headers: {
         Authorization: "Bearer " + token,
         ...(bytes ? { "Content-Type": "application/octet-stream", "Content-Length": bytes.length } : {}),
@@ -74,11 +75,13 @@ function sameToken(header, token) {
 
 // Local adapter for exercising the role boundary over real TLS. The deployment
 // must supply the object reader and coordinator and configure its own identity provider.
-function makeHandler({ readToken, submitToken, readObject, submit }) {
+function makeHandler({ readToken, submitToken, readObject, submit, peerPins }) {
   if (![readToken, submitToken].every(token => typeof token === "string" && TOKEN.test(token)) ||
       readToken === submitToken) {
     throw Error("cal13_transport_roles");
   }
+  if (peerPins && (!["read", "submit"].every(role => typeof peerPins[role] === "string" && CERTIFICATE.test(peerPins[role])) ||
+      peerPins.read === peerPins.submit)) throw Error("cal15_transport_peers");
   return async (req, res) => {
     res.setHeader("Cache-Control", "no-store");
     const route = /^\/(objects|submissions)\/([a-f0-9]{64})$/.exec(req.url);
@@ -86,6 +89,10 @@ function makeHandler({ readToken, submitToken, readObject, submit }) {
     const [, action, digest] = route;
     const reading = action === "objects";
     if (!sameToken(req.headers.authorization, reading ? readToken : submitToken)) {
+      res.writeHead(403).end(); return;
+    }
+    if (peerPins && (!req.socket.authorized ||
+        req.socket.getPeerCertificate()?.fingerprint256 !== peerPins[reading ? "read" : "submit"])) {
       res.writeHead(403).end(); return;
     }
     if (req.method !== (reading ? "GET" : "POST")) {
