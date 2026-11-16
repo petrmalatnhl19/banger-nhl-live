@@ -43,5 +43,8 @@ jobs:
       - name: Test persisted four-variant archive replay (offline)
         run: python3 .github/scripts/test-security-54-persisted-chain.py
 
+      - name: Test persisted signed evidence and four variants (offline)
+        run: python3 .github/scripts/test-security-55-persisted-signed-chain.py
+
       - name: Test immutable pregame refresh prototype (offline)
         run: python3 .github/scripts/test-security-35-pregame-refresh.py
