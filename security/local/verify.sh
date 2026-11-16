@@ -173,7 +173,7 @@ VALUES
 UPDATE public.nhl_prediction_archive
 SET core42_predicted_at=now()-interval '30 minutes'
 WHERE game_id=26;
-DO $
+DO $security26$
 DECLARE n integer;
 BEGIN
   SELECT count(*) INTO n FROM public.nhl_core43_shadow_inputs WHERE game_id=26;
@@ -183,7 +183,7 @@ BEGIN
   PERFORM public.capture_core43_shadow_inputs();
   SELECT count(*) INTO n FROM public.nhl_core43_shadow_inputs WHERE game_id=26;
   IF n <> 2 THEN RAISE EXCEPTION 'SECURITY-26 duplicate capture, got % rows', n; END IF;
-END $;
+END $security26$;
 ROLLBACK;
 SQL
 db -Atqc "SELECT count(*) FROM public.nhl_core43_shadow_inputs WHERE game_id=26" | grep -qx '0'
