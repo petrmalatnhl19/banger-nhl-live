@@ -221,3 +221,7 @@ echo "PASS SECURITY-27 untrusted role SQL denials, public read compatibility and
 
 
 echo "SECURITY-12 local privilege and two real-view definition tests PASS"
+
+# SECURITY-36: isolated PostgreSQL append-only refresh and role checks.
+db -f /dev/stdin < security36.sql | grep -q 'PASS SECURITY-36 PostgreSQL append-only and permissions'
+echo 'PASS SECURITY-36 isolated PostgreSQL refresh tests'
