@@ -94,4 +94,23 @@ for role in anon authenticated; do
   fi
   echo "PASS actual role SQL: $role public reads allowed, internal reads denied"
 done
+# SECURITY-23: trigger/capture must remain functional after local public-grant revocation.
+for role in anon authenticated; do
+  db -Atqc "SELECT has_function_privilege('$role','public.capture_core43_shadow_inputs()','EXECUTE')" | grep -qx 'f'
+  db -Atqc "SELECT has_function_privilege('$role','public.core43_capture_on_core42_insert()','EXECUTE')" | grep -qx 'f'
+done
+db -Atqc "SELECT has_function_privilege('service_role','public.capture_core43_shadow_inputs()','EXECUTE')" | grep -qx 't'
+db -Atqc "SELECT tgenabled FROM pg_trigger WHERE tgname='core43_shadow_on_core42' AND tgrelid='public.nhl_prediction_archive'::regclass" | grep -qx 'O'
+db -Atqc "INSERT INTO public.nhl_prediction_archive (game_id,core42_predicted_at,status,game_date,away_team,home_team,core42_factors) VALUES (23,NULL,'pending',current_date,'DAL','BOS','{\"away_goalie\":{\"nhl_player_id\":\"A\",\"name\":\"Synthetic A\"},\"home_goalie\":{\"nhl_player_id\":\"H\",\"name\":\"Synthetic H\"}}'::jsonb)"
+db -Atqc "UPDATE public.nhl_prediction_archive SET core42_predicted_at=now()-interval '30 minutes' WHERE game_id=23"
+db -Atqc "SELECT count(*) FROM public.nhl_core43_shadow_inputs WHERE game_id=23" | grep -qx '2'
+db -Atqc "SELECT count(*) FROM public.nhl_core43_shadow_inputs WHERE game_id=23 AND readiness='ready'" | grep -qx '2'
+db -Atqc "SELECT public.capture_core43_shadow_inputs()" >/dev/null
+db -Atqc "SELECT count(*) FROM public.nhl_core43_shadow_inputs WHERE game_id=23" | grep -qx '2'
+for role in anon authenticated; do
+  if db -Atqc "SET ROLE $role; SELECT public.capture_core43_shadow_inputs()" >/dev/null 2>&1; then
+    echo "FAIL SECURITY-23: $role can directly execute privileged capture"; exit 1
+  fi
+done
+echo "PASS SECURITY-23 owner-privileged capture, trigger, deduplication and role restrictions"
 echo "SECURITY-12 local privilege and two real-view definition tests PASS"
