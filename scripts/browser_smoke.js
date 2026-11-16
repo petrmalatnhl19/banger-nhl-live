@@ -2,10 +2,16 @@ const { chromium } = require('playwright');
 const { pathToFileURL } = require('node:url');
 const path = require('node:path');
 const assert = require('node:assert/strict');
+const {play, game} = require('./commentary_fixture.cjs');
 (async () => {
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   const errors = [];
+  const originalPlays = [
+    play(1, 'stoppage', '03:09', {reason: 'icing'}),
+    play(2, 'faceoff', '03:09', {eventOwnerTeamId: 1, winningPlayerId: 10, losingPlayerId: 20, zoneCode: 'O'}),
+  ];
+  let playByPlay = game(originalPlays);
   const spotRequests = [];
   page.on('request', request => {
     if (/neural-match-voice|supertonic|onnx|match-voice\.worker|huggingface/i.test(request.url())) spotRequests.push(request.url());
@@ -22,11 +28,13 @@ const assert = require('node:assert/strict');
       speak(utterance) {
         this.speaking = true;
         window.voiceTrace.push({text: utterance.text, lang: utterance.lang, voice: utterance.voice?.name});
+        this.current = utterance;
         utterance.onstart?.();
       },
       pause() { this.paused = true; window.voiceTrace.push('pause'); },
       resume() { this.paused = false; window.voiceTrace.push('resume'); },
-      cancel() { this.speaking = this.paused = false; window.voiceTrace.push('cancel'); },
+      cancel() { this.current = null; this.speaking = this.paused = false; window.voiceTrace.push('cancel'); },
+      finish() { const current = this.current; this.current = null; this.speaking = false; current?.onend?.(); },
     });
     Object.defineProperty(window, 'speechSynthesis', {value: synth});
     Object.defineProperty(window, 'SpeechSynthesisUtterance', {value: class {
@@ -45,7 +53,7 @@ const assert = require('node:assert/strict');
       : kind === 'boxscore'
         ? { id: 2026020999, playerByGameStats: { awayTeam: { forwards: [], defense: [], goalies: [] }, homeTeam: { forwards: [], defense: [], goalies: [] } } }
       : kind === 'playbyplay'
-        ? { plays: [], rosterSpots: [], awayTeam: { id: 1, abbrev: 'DAL' }, homeTeam: { id: 2, abbrev: 'BOS' } }
+        ? playByPlay
       : kind === 'standings' ? { standings: [] } : { data: [], total: 0 };
     await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(data) });
   });
@@ -70,6 +78,29 @@ const assert = require('node:assert/strict');
   assert.equal(await panel.locator('[data-bv=voice]').count(), 0);
   assert.equal(await panel.getByText(/hlas ze spotu|400 MB/i).count(), 0);
   assert.deepEqual(await page.evaluate(() => window.voiceTrace), [], 'Commentary waits for Spustit');
+
+  await commentary.getByText('Zakázané uvolnění.', {exact: true}).waitFor();
+  await commentary.getByText(/Buly vyhrává Jason Robertson.*Pavel Zacha/).waitFor();
+  playByPlay = game([play(1, 'stoppage', '03:09', {reason: 'offside'}), originalPlays[1]]);
+  await page.locator('#commentaryRefresh').click();
+  await commentary.getByText('Ofsajd.', {exact: true}).waitFor();
+  assert.equal(await commentary.getByText('Zakázané uvolnění.', {exact: true}).count(), 0);
+  await panel.locator('[data-bv=pick-live]').click();
+  await panel.locator('[data-bv=start]').click();
+  assert.match(await page.evaluate(() => window.voiceTrace.at(-1).text), /první třetina.*Dallas Stars 4, Boston Bruins 1/);
+  await page.evaluate(() => speechSynthesis.finish());
+
+  const ordinaryShot = play(3, 'shot-on-goal', '04:10', {eventOwnerTeamId: 1, shootingPlayerId: 10, goalieInNetId: 30});
+  playByPlay = game([...playByPlay.plays, ordinaryShot]);
+  await page.locator('#commentaryRefresh').click();
+  await page.waitForFunction(() => /Swayman/.test(window.voiceTrace.at(-1)?.text));
+  playByPlay = game([...playByPlay.plays, play(4, 'missed-shot', '04:12', {eventOwnerTeamId: 2, shootingPlayerId: 20}),
+    play(5, 'goal', '04:15', {eventOwnerTeamId: 1, scoringPlayerId: 10, awayScore: 1, homeScore: 0})]);
+  await page.locator('#commentaryRefresh').click();
+  await page.waitForFunction(() => /GÓL|BRANKA/.test(window.voiceTrace.at(-1)?.text));
+  assert.equal(await page.evaluate(() => window.voiceTrace.at(-2)), 'cancel', 'A goal preempts routine narration');
+  await panel.locator('[data-bv=stop]').click();
+  await panel.locator('[data-bv=pick-replay]').click();
 
   await commentary.evaluate(root => {
     root.innerHTML = '<p>Aktualizovaný komentář</p>';

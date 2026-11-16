@@ -43,7 +43,7 @@ const style=document.createElement('style');style.textContent='.bv-panel{padding
 .bv-panel>.bv-mode-switch>button{width:100%;min-width:0;padding:9px 5px;font-weight:700;border:1px solid transparent;background:transparent;color:#a8cbd9;border-radius:9px}
 .bv-panel>.bv-mode-switch>button[aria-pressed=true]{background:linear-gradient(135deg,#136e8b,#17465f);color:#fff;border-color:#5ad3e9;box-shadow:0 2px 12px #00d8ff22}
 `;document.head.appendChild(style);
-let state={id:null,mode:'replay',playing:false,paused:false,queue:[],index:0,seen:new Set(),generation:0,utterance:null,latest:[],started:false,busy:false,error:'',lastNewAt:0,lastNoticeAt:0,radioIndex:0,radioOn:true,radioStats:null};
+let state={id:null,summary:'',finished:false,mode:'replay',playing:false,paused:false,queue:[],index:0,seen:new Set(),generation:0,utterance:null,latest:[],started:false,busy:false,error:'',lastNewAt:0,lastNoticeAt:0,radioIndex:0,radioOn:true,radioStats:null};
 const clean=t=>String(t||'').replace(/[🎙️🥅🏒🧤🎯↗️🛡️💥⚡📈⏱️🚨🔥📋⚠️🧱]/gu,' ').replace(/\s+/g,' ').trim();
 const defaults={'Jack Hughes':'Džek Hjůz','Connor McDavid':'Konor Mekdejvid','Cale Makar':'Kejl Makár','Ukko-Pekka Luukkonen':'Ukko Pekka Lúkkonen','Matthew Tkachuk':'Metjú Kačak','Brady Tkachuk':'Brejdy Kačak','Jason Robertson':'Džejson Robertson','Jacob Trouba':'Džejkob Trúba','Jake Oettinger':'Džejk Otinger','Jack Eichel':'Džek Ajkl','Quinn Hughes':'Kvin Hjůz','Mikko Rantanen':'Mikko Rantanen','Nathan MacKinnon':'Nejtan Mekinon','Auston Matthews':'Óston Metjús','Kirill Kaprizov':'Kirill Kaprizov','Leon Draisaitl':'Leon Drajzajtl'};
 const storageKey='banger-voice-pronunciation-v1';let custom={};try{const saved=JSON.parse(localStorage.getItem(storageKey)||'{}');if(saved&&typeof saved==='object'&&!Array.isArray(saved))custom=saved}catch(_){};
@@ -57,7 +57,7 @@ function voices(){return synth?.getVoices?.()||[]}
 function chooseVoice(){const cs=voices().filter(v=>/^cs([-_]|$)/i.test(v.lang));return cs.find(v=>v.localService)||cs[0]||null}
 function update(){const root=document.querySelector('.bv-panel');if(!root)return;root.classList.toggle('bv-speaking',Boolean(state.playing&&!state.paused&&state.busy));const status=root.querySelector('.bv-status');if(status)status.textContent=!synth?'Tento prohlížeč nepodporuje hlasové čtení.':state.error?state.error:state.paused?'Pozastaveno.':state.playing?(state.mode==='live'?'Živý režim · čeká na nové události nebo právě čte.':'Přehrávání záznamu · '+Math.min(state.index+1,state.queue.length)+' / '+state.queue.length):'Připraveno. Hlas využívá nastavení telefonu.';root.querySelector('[data-bv=pause]').textContent=state.paused?'▶ Pokračovat':'⏸ Pauza';root.querySelector('[data-bv=pause]').disabled=!state.playing;root.querySelector('[data-bv=start]').disabled=!synth;}
 function speakNext(gen){if(!state.playing||state.paused||gen!==state.generation||!synth||state.busy)return;
-if(state.index>=state.queue.length){if(state.mode==='replay'){state.playing=false;update()}else update();return}
+if(state.index>=state.queue.length){if(state.mode==='replay'||state.finished)state.playing=false;update();return}
 const item=state.queue[state.index];let utter;
 try{utter=new SpeechSynthesisUtterance(speechText(item.text));utter.lang='cs-CZ';const baseRate=Number(document.querySelector('.bv-panel [data-bv=rate]')?.value||1);const dynamic=document.querySelector('.bv-panel [data-bv=dynamic]')?.checked!==false;const isGoal=item.type==='goal',isShot=['shot-on-goal','missed-shot','blocked-shot'].includes(item.type),isPenalty=item.type==='penalty';utter.rate=Math.max(.7,Math.min(1.5,baseRate*(dynamic?(isGoal?1.12:isShot?1.03:isPenalty?.94:1):1)));utter.pitch=dynamic?(isGoal?1.22:isShot?1.08:isPenalty?.96:1):1;utter.volume=1;const voice=chooseVoice();if(voice)utter.voice=voice;}
 catch(err){state.error='Chyba přípravy hlasu: '+err.message;state.playing=false;update();return}
@@ -68,12 +68,65 @@ utter.onerror=ev=>{if(finished||gen!==state.generation||state.utterance!==utter)
 try{synth.speak(utter);update()}catch(err){state.busy=false;state.playing=false;state.error='Nepodařilo se spustit hlas: '+err.message;update()}
 }
 function start(){if(!synth){state.error='Prohlížeč nepodporuje čtení textu.';update();return}
-if(state.playing)stop();state.error='';state.paused=false;state.playing=true;state.started=true;state.mode=document.querySelector('.bv-panel [data-bv=mode]')?.value||'replay';state.queue=state.mode==='replay'?[...state.latest]:[];state.index=0;state.seen=new Set(state.latest.map(key));state.busy=false;state.lastNewAt=Date.now();state.lastNoticeAt=0;
+if(state.playing)stop();state.error='';state.paused=false;state.playing=true;state.started=true;state.mode=document.querySelector('.bv-panel [data-bv=mode]')?.value||'replay';state.queue=state.mode==='replay'?[...state.latest]:state.summary?[{type:'summary',text:state.summary,priority:0}]:[];state.index=0;state.seen=new Set(state.latest.map(key));state.busy=false;state.lastNewAt=Date.now();state.lastNoticeAt=0;
 if(state.mode==='replay'&&!state.queue.length){state.playing=false;state.error='Zatím nejsou dostupné události k přečtení.';update();return}
 speakNext(state.generation);update()}
 function togglePause(){if(!state.playing)return;if(state.paused){state.paused=false;synth.resume();if(!state.busy)speakNext(state.generation)}else{state.paused=true;synth.pause()}update()}
 function mount(root){if(root===voiceRoot&&voicePanel){if(!voicePanel.isConnected)root.prepend(voicePanel);return}const el=document.createElement('section');el.className='bv-panel';el.innerHTML='<strong>🎙️ BANGER VOICE 2.0</strong><div class="bv-mode-switch" role="group" aria-label="Režim přehrávání"><button type="button" data-bv="pick-live" aria-pressed="false">🔴 Živě</button><button type="button" data-bv="pick-replay" aria-pressed="true">⏮ Od začátku</button></div><div class="bv-controls"><button type="button" data-bv="start">▶ Spustit</button><button type="button" data-bv="pause">⏸ Pauza</button><button type="button" data-bv="stop">⏹ Zastavit</button><details class="bv-advanced"><summary title="Nastavení hlasu" aria-label="Nastavení hlasu">⚙️</summary><div class="bv-controls"><label>Rychlost <select data-bv="rate"><option value=".85">0,85×</option><option value="1" selected>1×</option><option value="1.15">1,15×</option><option value="1.3">1,3×</option></select></label></div><label style="display:flex;align-items:center;gap:6px;margin:6px 0"><input type="checkbox" data-bv="dynamic" checked> 🎭 Dynamický hlas – výraznější góly, klidnější přerušení</label><label style="display:flex;align-items:center;gap:6px;margin:6px 0"><input type="checkbox" data-bv="radio" checked> 📻 Hokejové zajímavosti při čekání na události (živě)</label><details style="margin:9px 0"><summary style="cursor:pointer;font-size:12px;color:#cce8f5">🗣️ Upravit výslovnost hráče</summary><div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:8px"><input data-bv="name" placeholder="Jméno hráče (např. Jack Hughes)" aria-label="Jméno hráče" style="min-width:180px;flex:1;background:#0c2a40;color:white;border:1px solid #58a3bd;border-radius:8px;padding:8px"><input data-bv="pron" placeholder="Jak se má vyslovit" aria-label="Fonetický přepis" style="min-width:160px;flex:1;background:#0c2a40;color:white;border:1px solid #58a3bd;border-radius:8px;padding:8px"><button type="button" data-bv="save-pron">Uložit výslovnost</button><button type="button" data-bv="test-pron">🔊 Vyzkoušet</button></div><div data-bv="pron-status" style="font-size:11px;margin-top:5px;color:#a9d5e8">Úprava ovlivní jen hlas, nikoli psaný komentář.</div></details><div class="bv-status" role="status"></div></details></div>';const controls=el.querySelector(':scope > .bv-controls');const advanced=controls.querySelector(':scope > .bv-advanced');controls.after(advanced);voiceRoot=root;voicePanel=el;root.prepend(el);const modeInput=document.createElement('input');modeInput.type='hidden';modeInput.dataset.bv='mode';modeInput.value='replay';el.appendChild(modeInput);const setMode=mode=>{if(modeInput.value===mode)return;if(state.playing)stop();modeInput.value=mode;el.querySelector('[data-bv=pick-live]').setAttribute('aria-pressed',String(mode==='live'));el.querySelector('[data-bv=pick-replay]').setAttribute('aria-pressed',String(mode==='replay'))};el.querySelector('[data-bv=pick-live]').addEventListener('click',()=>setMode('live'));el.querySelector('[data-bv=pick-replay]').addEventListener('click',()=>setMode('replay'));el.querySelector('[data-bv=start]').addEventListener('click',start);el.querySelector('[data-bv=pause]').addEventListener('click',togglePause);el.querySelector('[data-bv=stop]').addEventListener('click',stop);el.querySelector('[data-bv=radio]').addEventListener('change',ev=>{state.radioOn=ev.target.checked});el.querySelector('[data-bv=save-pron]').addEventListener('click',savePronunciation);el.querySelector('[data-bv=test-pron]').addEventListener('click',testPronunciation);el.querySelector('[data-bv=mode]').addEventListener('change',()=>{if(state.playing)stop()});update()}
-document.addEventListener('banger:commentary',ev=>{const {id,items,radioStats}=ev.detail||{};if(!id||!Array.isArray(items))return;if(state.id!==String(id)){stop();state.id=String(id);state.started=false;state.seen=new Set()}const root=document.getElementById('commentaryFeed');if(!root)return;state.radioStats=radioStats||null;state.latest=items.filter(x=>x.text).slice().sort((a,b)=>(Number(a.period||0)-Number(b.period||0))||(parseClock(a.time)-parseClock(b.time))||(Number(a.id||0)-Number(b.id||0)));mount(root);if(state.playing&&state.mode==='live'){const additions=state.latest.filter(x=>!state.seen.has(key(x)));for(const x of additions){state.seen.add(key(x));state.queue.push(x)}if(additions.length){state.lastNewAt=Date.now();state.lastNoticeAt=0;if(state.busy&&state.currentType==='radio'){state.queue.splice(state.index,1);state.busy=false;state.currentType=null;state.utterance=null;synth.cancel()}}if(!state.busy&&!state.paused)speakNext(state.generation);update()}});
+document.addEventListener('banger:commentary', event => {
+    const {id, items, radioStats, summary, finished} = event.detail || {};
+    const root = document.getElementById('commentaryFeed');
+    if (!id || !root || (items !== null && !Array.isArray(items))) return;
+    if (state.id !== String(id)) {
+        stop();
+        state.id = String(id);
+        state.latest = [];
+        state.seen = new Set();
+    }
+    state.radioStats = radioStats || null;
+    state.summary = summary || '';
+    state.finished = finished === true;
+    if (Array.isArray(items)) state.latest = items.filter(item => item.text).slice().sort((a, b) =>
+        (Number.isInteger(a.order) && Number.isInteger(b.order) ? a.order - b.order :
+            (Number(a.period || 0) - Number(b.period || 0)) || (parseClock(a.time) - parseClock(b.time)) || (Number(a.id || 0) - Number(b.id || 0))));
+    mount(root);
+    if (!state.playing || state.mode !== 'live') return;
+
+    const additions = state.latest.filter(item => !state.seen.has(key(item)));
+    const current = state.busy || state.paused ? state.queue[state.index] : null;
+    const latest = new Map(state.latest.map(item => [key(item), item]));
+    const pending = state.queue.slice(state.index + (current ? 1 : 0))
+        .map(item => latest.get(key(item)) || (item.type === 'summary' ? item : null)).filter(Boolean);
+    if (additions.length) {
+        for (const item of additions) state.seen.add(key(item));
+        state.lastNewAt = Date.now();
+        state.lastNoticeAt = 0;
+        const urgent = additions.some(item => (item.priority || 0) >= 85);
+        if (current?.type === 'radio' || (urgent && current && current.type !== 'summary' && (current.priority || 0) < 60)) {
+            state.utterance = null;
+            state.currentType = null;
+            state.busy = false;
+            synth.cancel();
+            state.queue = [];
+        } else state.queue = current ? [current] : [];
+
+        const combined = [...pending, ...additions];
+        const important = combined.filter(item => (item.priority || 0) >= 70 || item.type === 'summary');
+        const routine = combined.filter(item => (item.priority || 0) < 70 && item.type !== 'summary');
+        const newestOrder = additions.at(-1)?.order;
+        const recent = routine.filter(item => !Number.isInteger(newestOrder) ||
+            !Number.isInteger(item.order) || item.order >= newestOrder - 8);
+        recent.sort((a, b) => (b.priority || 0) - (a.priority || 0) || (b.order || 0) - (a.order || 0));
+        state.queue.push(...[...important, ...recent.slice(0, urgent ? 0 : Math.max(0, 3 - important.length))]
+            .sort((a, b) => (a.order ?? -1) - (b.order ?? -1)));
+        state.index = 0;
+    } else if (Array.isArray(items)) {
+        state.queue = current ? [current, ...pending] : pending;
+        state.index = 0;
+    }
+    if (!state.busy && !state.paused) speakNext(state.generation);
+    update();
+});
 function parseClock(value){const m=String(value||'').match(/^(\d+):(\d{2})$/);return m?Number(m[1])*60+Number(m[2]):0}
 const radioFacts=[
 'Věděli jste, že? Při zakázaném uvolnění se zpravidla vhazuje v obranném pásmu provinivšího se týmu.',
@@ -85,10 +138,10 @@ const radioFacts=[
 'Věděli jste, že? Střela zblokovaná hráčem v poli se do oficiální statistiky střel na branku nezapočítává.',
 'Hokejová zajímavost: Vyloučení na dvě minuty se obvykle ukončí, když soupeř vstřelí gól v přesilovce.'
 ];
-function radioMessage(){const n=state.radioIndex++;const q=state.radioStats;if(q&&n%2===0&&Number.isFinite(q.awayShots)&&Number.isFinite(q.homeShots)){const a=q.awayName,h=q.homeName;const lead=q.awayGoals===q.homeGoals?'Skóre je zatím vyrovnané.':(q.awayGoals>q.homeGoals?a:h)+' je ve vedení.';return '🎙️ Krátký pohled na statistiky zápasu. '+a+' mají '+q.awayShots+' střel na branku, '+h+' '+q.homeShots+'. '+lead+' Čekáme na další události.'}const text=radioFacts[Math.floor(n/2)%radioFacts.length];return '🎙️ Než dorazí další událost, jedna hokejová zajímavost. '+text}
-function checkSilence(){if(!state.playing||state.paused||state.mode!=='live'||document.hidden)return;const now=Date.now();if(!state.lastNewAt)state.lastNewAt=now;if(now-state.lastNewAt<60000||state.lastNoticeAt&&now-state.lastNoticeAt<150000)return;if(state.queue.length-state.index>0||state.busy)return;state.lastNoticeAt=now;const text=state.radioOn?radioMessage():'Zatím nemáme žádnou novou událost. Čekáme na další informace ze zápasu.';state.queue.push({id:'radio-'+now,type:'radio',text});speakNext(state.generation)}
+function radioMessage(){const n=state.radioIndex++;const q=state.radioStats;if(q&&n%2===0&&Number.isFinite(q.awayShots)&&Number.isFinite(q.homeShots)&&Number.isFinite(q.awayGoals)&&Number.isFinite(q.homeGoals)){const a=q.awayName,h=q.homeName;const lead=q.awayGoals===q.homeGoals?'Skóre je zatím vyrovnané.':(q.awayGoals>q.homeGoals?a:h)+' je ve vedení.';return '🎙️ Krátký pohled na statistiky zápasu. '+a+' mají '+q.awayShots+' střel na branku, '+h+' '+q.homeShots+'. '+lead+' Čekáme na další události.'}const text=radioFacts[Math.floor(n/2)%radioFacts.length];return '🎙️ Než dorazí další událost, jedna hokejová zajímavost. '+text}
+function checkSilence(){if(!state.playing||state.paused||state.mode!=='live'||state.finished||document.hidden)return;const now=Date.now();if(!state.lastNewAt)state.lastNewAt=now;if(now-state.lastNewAt<60000||state.lastNoticeAt&&now-state.lastNoticeAt<150000)return;if(state.queue.length-state.index>0||state.busy)return;state.lastNoticeAt=now;const text=state.radioOn?radioMessage():'Zatím nemáme žádnou novou událost. Čekáme na další informace ze zápasu.';state.queue.push({id:'radio-'+now,type:'radio',text});speakNext(state.generation)}
 setInterval(checkSilence,10000);
 document.addEventListener('visibilitychange',()=>{if(!document.getElementById('commentaryFeed')&&state.playing)stop()});
-document.addEventListener('banger:commentary-stop',()=>stop());
+document.addEventListener('banger:commentary-stop',()=>{stop();state.id=null;state.latest=[];state.summary='';state.finished=false});
 window.addEventListener('pagehide',()=>stop());
 })();
