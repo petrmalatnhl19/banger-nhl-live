@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>BANGER NHL LIVE – Test komentátora</title>
+<style>
+:root { color-scheme: dark; font: 100%/1.55 system-ui, sans-serif; background: #081322; color: #edf6ff; }
+body { max-width: 46rem; margin: auto; padding: 1rem; }
+h1 { font-size: clamp(1.6rem, 6vw, 2.25rem); line-height: 1.15; }
+h2 { font-size: 1.1rem; margin-top: 0; }
+section { background: #11243a; border: 1px solid #3d5974; border-radius: .75rem; padding: 1rem; margin-block: 1rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: .75rem; }
+label { display: grid; gap: .25rem; }
+button, select { font: inherit; color: inherit; background: #183955; border: 1px solid #7097b9; border-radius: .4rem; min-height: 2.75rem; padding: .4rem .65rem; }
+button { cursor: pointer; }
+button:disabled { opacity: .55; cursor: default; }
+:focus-visible { outline: 2px solid #80dbff; outline-offset: 2px; }
+.actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.primary { background: #b4eaff; color: #081322; border-color: transparent; font-weight: 650; }
+audio { width: 100%; display: block; }
+#clips { list-style: none; padding: 0; margin-bottom: 0; }
+#clips li + li { margin-top: 1rem; }
+pre { font-size: .82rem; white-space: pre-wrap; overflow-wrap: anywhere; max-height: 16rem; overflow: auto; }
+</style>
+</head>
+<body>
+<main>
+<h1>Test hokejového komentátora</h1>
+<p>Porovnej pět situací v neutrálním a sportovním podání. Český hlas M2 generuje řeč na zařízení. První načtení může stáhnout stovky MB. Ukázky jsou vytvořené umělou inteligencí.</p>
+<section aria-label="Nastavení testu">
+<div class="grid">
+<label>Situace <select id="delivery"></select></label>
+<label>Podání <select id="mode"><option value="sport">Sportovní</option><option value="neutral">Neutrální A/B</option></select></label>
+<label>Model <select id="variant"><option value="fp16">FP16 (experiment)</option><option value="fp32">FP32</option></select></label>
+<label>Kroky syntézy <select id="steps"><option value="8">8 (referenční)</option><option value="4">4 (rychlostní test)</option></select></label>
+</div>
+<p id="sample"></p>
+<div class="actions">
+<button id="generate" class="primary">Vygenerovat ukázku</button>
+<button id="prepare">Načíst model</button>
+<button id="release" disabled>Uvolnit model a ukázky</button>
+</div>
+<p id="status" role="status">Připraveno</p>
+</section>
+<section>
+<h2>Ukázky k poslechu</h2>
+<p id="empty">Vygenerovanou ukázku spustíš přehrávačem. Opakovaný poslech už syntézu nespouští.</p>
+<ul id="clips"></ul>
+</section>
+<section>
+<h2>Protokol měření</h2>
+<pre id="log" tabindex="0" aria-label="Záznam měření"></pre>
+<button id="copy" disabled>Kopírovat protokol</button>
+</section>
+</main>
+<script type="module" src="./voice/commentary-lab.mjs"></script>
+</body>
+</html>
