@@ -27,7 +27,7 @@
     function onMessage({ data }) {
         if (!pending) return;
         if (data.type === 'progress') {
-            pending.onProgress(data.done, data.total);
+            pending.onProgress(data.done, data.total, data.stage);
             return;
         }
         if (data.id !== pending.id) return;
@@ -84,16 +84,16 @@
             if (!worker) {
                 worker = new Worker(workerUrl, { type: 'module' });
                 worker.addEventListener('message', onMessage);
-                worker.addEventListener('error', () => {
+                worker.addEventListener('error', (event) => {
                     discardWorker();
-                    fail(new Error('Worker unavailable'));
+                    fail(new Error('Worker unavailable: '+(event.message || 'module/runtime load failed')));
                 });
             }
             return new Promise((resolve, reject) => {
                 const requestId = ++id;
                 const timer = setTimeout(() => {
                     discardWorker();
-                    fail(new Error('Speech generation timed out'));
+                    fail(new Error('Speech generation timed out after 180 seconds'));
                 }, 180000);
                 pending = { id: requestId, timer, resolve, reject, onPlay, onProgress };
                 worker.postMessage({ type: 'speak', id: requestId, text, speed });
