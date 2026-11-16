@@ -231,3 +231,6 @@ bash security37-concurrency.sh
 
 # SECURITY-38: failed uncommitted writer and competing recovery transaction.
 bash security38-failover.sh
+
+# SECURITY-39: disconnected uncommitted transaction and ambiguous commit acknowledgement.
+bash security39-disconnect-retry.sh
