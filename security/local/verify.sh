@@ -191,6 +191,33 @@ db -Atqc "SELECT count(*) FROM public.nhl_prediction_archive WHERE game_id=26" |
 db -Atqc "SELECT count(*) FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='public' AND p.proname IN ('capture_core43_shadow_inputs','core43_capture_on_core42_insert') AND p.proconfig @> ARRAY['search_path=public']::text[]" | grep -qx '2'
 echo "PASS SECURITY-26 hardened trigger capture, readiness, deduplication and rollback"
 
+# SECURITY-27: real SQL execution under untrusted API roles, not only catalog ACL inspection.
+for role in anon authenticated; do
+  db -Atqc "SELECT has_table_privilege('$role','public.nhl_prediction_archive','UPDATE')" | grep -qx 'f'
+  db -Atqc "SELECT has_table_privilege('$role','public.nhl_core43_shadow_inputs','INSERT')" | grep -qx 'f'
+  db -Atqc "SELECT has_function_privilege('$role','public.capture_core43_shadow_inputs()','EXECUTE')" | grep -qx 'f'
+  db -Atqc "SELECT has_function_privilege('$role','public.core43_capture_on_core42_insert()','EXECUTE')" | grep -qx 'f'
+  if db -Atqc "SET ROLE $role; UPDATE public.nhl_prediction_archive SET core42_predicted_at=now() WHERE game_id=23" >/dev/null 2>&1; then
+    echo "FAIL SECURITY-27: $role can update archive and potentially fire trigger"; exit 1
+  fi
+  if db -Atqc "SET ROLE $role; INSERT INTO public.nhl_core43_shadow_inputs (game_id,side) VALUES (2701,'away')" >/dev/null 2>&1; then
+    echo "FAIL SECURITY-27: $role can insert shadow inputs"; exit 1
+  fi
+  if db -Atqc "SET ROLE $role; SELECT public.capture_core43_shadow_inputs()" >/dev/null 2>&1; then
+    echo "FAIL SECURITY-27: $role can execute capture"; exit 1
+  fi
+  if db -Atqc "SET ROLE $role; SELECT public.core43_capture_on_core42_insert()" >/dev/null 2>&1; then
+    echo "FAIL SECURITY-27: $role can execute trigger function"; exit 1
+  fi
+  db -Atqc "SET ROLE $role; SELECT count(*) FROM public.nhl_prediction_archive WHERE game_id=23" | grep -qx '1'
+done
+db -Atqc "SELECT has_function_privilege('service_role','public.capture_core43_shadow_inputs()','EXECUTE')" | grep -qx 't'
+db -Atqc "SELECT has_function_privilege('service_role','public.core43_capture_on_core42_insert()','EXECUTE')" | grep -qx 't'
+db -Atqc "SELECT count(*) FROM public.nhl_core43_shadow_inputs WHERE game_id=2701" | grep -qx '0'
+db -Atqc "SELECT count(*) FROM public.nhl_core43_shadow_inputs WHERE game_id=23" | grep -qx '2'
+echo "PASS SECURITY-27 untrusted role SQL denials, public read compatibility and capture integrity"
+
+
 
 
 echo "SECURITY-12 local privilege and two real-view definition tests PASS"
