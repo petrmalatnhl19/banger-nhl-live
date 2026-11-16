@@ -22,5 +22,8 @@ jobs:
       - name: Test actual uncalibrated CORE 4.3 engine (offline)
         run: node scripts/test_security47_core43_real_engine.cjs
 
+      - name: Test four-variant CORE 4.3 sensitivity pipeline (offline)
+        run: node scripts/test_security48_four_variant_pipeline.cjs
+
       - name: Test immutable pregame refresh prototype (offline)
         run: python3 .github/scripts/test-security-35-pregame-refresh.py
