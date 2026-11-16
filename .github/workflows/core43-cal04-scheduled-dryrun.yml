@@ -141,6 +141,9 @@ on:
       - 'docs/core43-cal31-pilot-rehearsal.md'
       - 'scripts/core43_cal32_prepare_pregame.cjs'
       - 'docs/core43-cal32-pregame-preparation.md'
+      - 'scripts/core43_cal33_nhl_observer.cjs'
+      - 'scripts/test_core43_cal33_nhl_observer.cjs'
+      - 'docs/core43-cal33-pilot-audit.md'
       - 'docs/core43-cal28-lock-gate.md'
       - 'scripts/test_core43_cal26_end_to_end.cjs'
       - 'docs/core43-cal26-end-to-end.md'
@@ -260,6 +263,8 @@ jobs:
         run: node --test scripts/test_core43_cal29_independent_tsa.cjs
       - name: Verify CAL-30 historical trust evidence and rejection paths
         run: node --test scripts/test_core43_cal30_historical_trust.cjs
+      - name: Verify CAL-33 NHL source acquisition and attestation
+        run: node --test scripts/test_core43_cal33_nhl_observer.cjs
       - name: Enforce CAL-17 fail-closed pilot gates
         run: node --test scripts/test_core43_cal17_safety_gates.cjs
       - name: Test PUBLIC privileges in an in-memory PostgreSQL 17 database

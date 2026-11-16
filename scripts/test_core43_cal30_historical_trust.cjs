@@ -188,6 +188,18 @@ test("CAL-30 offline corroboration of signed predictions", async t => {
     rejects(withBravo({ request: alpha.request }), pinned, "cal16_signature_or_nonce");
   });
 
+  await t.test("CAL-33 rejects incomplete or invalid tokens and expired signer chains", () => {
+    rejects({ ...evidence, timestamps: [alpha] }, pinned, "cal30_timestamps");
+    rejects(withBravo({ response: undefined }), pinned, "cal16_size");
+    rejects(withBravo({ response: Buffer.from("invalid DER") }), pinned, "cal16_response");
+    const expiresAfter = epoch + 5 * 24 * 60 * 60_000;
+    const crls = ["issuer", "root"].map(issuer => issuers[0].crl(issuer, start, expiresAfter));
+    const [first, second] = policy.authorities;
+    const expirationPolicy = config({ ...policy, reviewAt: iso(epoch + 4 * 24 * 60 * 60_000),
+      authorities: [{ ...first, crlSha256: crls.map(sha) }, second] });
+    rejects({ ...evidence, timestamps: [{ ...alpha, crls }, bravo] }, expirationPolicy, "cal30_certificate_status");
+  });
+
   await t.test("NHL signature, raw report and same-game UTC evidence are mandatory", () => {
     rejects({ ...evidence, nhlStart: undefined }, pinned, "cal30_nhl_statement");
     rejects({ ...evidence, nhlStart: nhlStart({}, generateKeyPairSync("ed25519").privateKey) }, pinned, "cal30_nhl_signature");
