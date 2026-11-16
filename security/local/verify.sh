@@ -16,6 +16,12 @@ for role in anon authenticated; do
   check "$role" core43_shadow_predictions_v1 t
   check "$role" core43_shadow_preview_v1 t
 done
+# Exercise production-equivalent CORE43 calculations before applying local revocations.
+db -Atqc "SELECT experiment_status FROM public.core43_shadow_predictions_v1 WHERE game_id=1" | grep -qx 'experimental_ready'
+db -Atqc "SELECT preview_status FROM public.core43_shadow_preview_v1 WHERE game_id=1" | grep -qx 'provisional_goalies_not_confirmed'
+db -Atqc "SELECT core43_away IS NOT NULL AND core43_home IS NOT NULL FROM public.core43_shadow_predictions_v1 WHERE game_id=1" | grep -qx 't'
+db -Atqc "SELECT core43_preview_away IS NOT NULL AND core43_preview_home IS NOT NULL FROM public.core43_shadow_preview_v1 WHERE game_id=1" | grep -qx 't'
+echo "PASS production-equivalent CORE43 prediction/preview synthetic calculations"
 echo "Applying SECURITY-06 candidate only to synthetic local database..."
 db <<'SQL'
 BEGIN;
