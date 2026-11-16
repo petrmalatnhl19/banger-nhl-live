@@ -461,8 +461,18 @@ export async function loadTextToSpeech(onnxDir, sessionOptions = {}, progressCal
         if (progressCallback) {
             progressCallback(modelPaths[i].name, i + 1, modelPaths.length);
         }
-        const session = await loadOnnx(modelPaths[i].path, sessionOptions);
-        sessions.push(session);
+        const startedAt = performance.now();
+        try {
+            const session = await loadOnnx(modelPaths[i].path, sessionOptions);
+            sessions.push(session);
+            if (progressCallback) progressCallback(modelPaths[i].name, i + 1, modelPaths.length, {
+                phase: 'ready',
+                elapsedMs: Math.round(performance.now() - startedAt)
+            });
+        } catch (error) {
+            throw new Error(modelPaths[i].name + ' initialization failed after ' +
+                Math.round(performance.now() - startedAt) + ' ms: ' + (error?.message || String(error)));
+        }
     }
 
     const [dpOrt, textEncOrt, vectorEstOrt, vocoderOrt] = sessions;

@@ -26,9 +26,11 @@ function getEngine() {
                 executionProviders: ['wasm'],
                 enableCpuMemArena: false,
                 enableMemPattern: false,
-            }, (name, done, total) => {
-                reportStage('model '+name+' ('+done+'/'+total+')');
-                self.postMessage({ type: 'progress', done, total, stage: name });
+            }, (name, done, total, detail) => {
+                const phase = detail?.phase === 'ready' ? 'připraven' : 'inicializace';
+                const elapsed = detail?.elapsedMs == null ? '' : ' za '+(detail.elapsedMs/1000).toFixed(1)+' s';
+                reportStage('model '+name+' ('+done+'/'+total+') · '+phase+elapsed);
+                self.postMessage({ type: 'progress', done, total, stage: name, phase, elapsedMs: detail?.elapsedMs ?? null });
             });
             reportStage('model připraven');
             return { textToSpeech, style };
