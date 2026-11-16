@@ -20,8 +20,8 @@ done
 db -Atqc "SELECT count(*) FROM public.core43_shadow_readiness_v1 WHERE game_id=1 AND readiness='ready'" | grep -qx '2'
 # Post-prediction evidence must never make a previously unready game ready.
 db -Atqc "INSERT INTO public.nhl_prediction_archive (game_id,core42_predicted_at,game_date,away_team,home_team,core42_factors) VALUES (2,now()-interval '1 hour',current_date,'DAL','BOS','{\"away_goalie\":{\"nhl_player_id\":\"LATE\"}}'::jsonb)"
-db -Atqc "INSERT INTO public.nhl_core43_starter_evidence VALUES (2,'DAL','LATE','confirmed',now(),now())"
-db -Atqc "INSERT INTO public.nhl_core43_goalie_snapshots VALUES (2,'LATE','DAL','all',now(),1.5,40)"
+db -Atqc "INSERT INTO public.nhl_core43_starter_evidence (game_id,team_code,goalie_id,evidence_status,source_published_at,verified_at) VALUES (2,'DAL','LATE','confirmed',now(),now())"
+db -Atqc "INSERT INTO public.nhl_core43_goalie_snapshots (game_id,goalie_id,team_code,situation,fetched_at,gsax,shots_against) VALUES (2,'LATE','DAL','all',now(),1.5,40)"
 db -Atqc "SELECT readiness FROM public.core43_shadow_readiness_v1 WHERE game_id=2 AND side='away'" | grep -qx 'missing_pregame_starter_evidence'
 echo "PASS readiness time cutoff: post-prediction evidence excluded"
 # SECURITY-19: exact snapshot GSAx numeric typmod and readiness output signature.
