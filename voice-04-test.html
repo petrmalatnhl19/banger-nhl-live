@@ -14,23 +14,24 @@
 <section>
 <label for="variant">Varianta modelu</label>
 <select id="variant"><option value="fp16">FP16 – experiment</option><option value="fp32">FP32 – původní</option></select>
+<p><label for="delivery">Styl komentáře</label> <select id="delivery"><option value="goal">Gól – maximální emoce</option><option value="chance">Velká šance – napětí</option><option value="analysis">Analýza – klidný profesionál</option></select></p>
 <p><button id="start">Spustit test</button><button id="stop" disabled>Zastavit</button></p>
 <p id="status" role="status">Připraveno</p>
-<small>Testovací věta: „Dallas Stars právě vstřelili gól! Skvělá akce a nádherná střela!“</small>
+<small>Každý styl používá jiný text, tempo a pauzy. Samotný model nemusí umět napodobit skutečné emoce sportovního komentátora.</small>
 </section>
 <section><strong>Diagnostický protokol</strong><pre id="log" aria-live="polite"></pre><button id="copy">Kopírovat protokol</button></section>
 <script>
 (() => {
 'use strict';
 const $=id=>document.getElementById(id);
-const start=$('start'),stop=$('stop'),status=$('status'),log=$('log'),variant=$('variant');
+const start=$('start'),stop=$('stop'),status=$('status'),log=$('log'),variant=$('variant'),delivery=$('delivery');
 let worker,context,source,timer,startedAt=0,requestId=0;
 const say=s=>{status.textContent=s;record(s)};
 const record=s=>{const t=startedAt?'+'+((performance.now()-startedAt)/1000).toFixed(1)+'s':'—';log.textContent+='['+t+'] '+s+'\n';log.scrollTop=log.scrollHeight};
-const cleanup=()=>{clearTimeout(timer);timer=null;worker?.terminate();worker=null;if(source){try{source.stop()}catch{}source.disconnect();source=null}start.disabled=false;stop.disabled=true;variant.disabled=false};
+const cleanup=()=>{clearTimeout(timer);timer=null;worker?.terminate();worker=null;if(source){try{source.stop()}catch{}source.disconnect();source=null}start.disabled=false;stop.disabled=true;variant.disabled=false;delivery.disabled=false};
 start.addEventListener('click',async()=>{
 cleanup();log.textContent='';startedAt=performance.now();const choice=variant.value;
-start.disabled=true;stop.disabled=false;variant.disabled=true;
+start.disabled=true;stop.disabled=false;variant.disabled=true;delivery.disabled=true;
 try {
 context??=new (window.AudioContext||window.webkitAudioContext)();
 await context.resume();
@@ -56,7 +57,14 @@ source.start();
 }
 };
 say('Spouštím '+choice.toUpperCase()+' – čekám na worker');
-worker.postMessage({type:'speak',id,text:'Dallas Stars právě vstřelili gól! Skvělá akce a nádherná střela!',speed:1});
+const samples={
+goal:{text:'GÓÓÓL! Dallas Stars dávají gól! To byla nádherná akce! Fantastická střela! A hala bouří!',speed:1.18},
+chance:{text:'Pozor, Dallas jde do útoku! Přihrávka před branku... střela! Neuvěřitelný zákrok brankáře!',speed:1.12},
+analysis:{text:'Dallas Stars dnes výborně kontrolují střední pásmo. Rozhoduje pohyb bez kotouče a důsledná obrana.',speed:1.0}
+};
+const sample=samples[delivery.value];
+record('Styl: '+delivery.value+'; rychlost: '+sample.speed+'; text: '+sample.text);
+worker.postMessage({type:'speak',id,text:sample.text,speed:sample.speed});
 timer=setTimeout(()=>{say('Časový limit 180 s – poslední fáze: '+status.textContent);cleanup()},180000);
 }catch(e){say('Chyba spuštění: '+e.message);cleanup()}
 });
