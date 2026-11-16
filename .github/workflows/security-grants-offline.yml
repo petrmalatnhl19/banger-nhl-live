@@ -55,5 +55,8 @@ jobs:
       - name: Test signed trust registry and rollback protection (offline)
         run: node scripts/test_security58_registry_rollback.cjs
 
+      - name: Test persisted archive and signed registry rollback gate (offline)
+        run: node scripts/test_security59_archive_registry_gate.cjs
+
       - name: Test immutable pregame refresh prototype (offline)
         run: python3 .github/scripts/test-security-35-pregame-refresh.py
