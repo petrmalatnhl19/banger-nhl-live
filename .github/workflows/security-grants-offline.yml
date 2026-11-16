@@ -49,5 +49,8 @@ jobs:
       - name: Test external synthetic trust registry (offline)
         run: node scripts/test_security56_external_trust_registry.cjs
 
+      - name: Test persisted archive with external pinned keys (offline)
+        run: node scripts/test_security57_persisted_external_trust.cjs
+
       - name: Test immutable pregame refresh prototype (offline)
         run: python3 .github/scripts/test-security-35-pregame-refresh.py
