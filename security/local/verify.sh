@@ -24,6 +24,33 @@ db -Atqc "INSERT INTO public.nhl_core43_starter_evidence VALUES (2,'DAL','LATE',
 db -Atqc "INSERT INTO public.nhl_core43_goalie_snapshots VALUES (2,'LATE','DAL','all',now(),1.5,40)"
 db -Atqc "SELECT readiness FROM public.core43_shadow_readiness_v1 WHERE game_id=2 AND side='away'" | grep -qx 'missing_pregame_starter_evidence'
 echo "PASS readiness time cutoff: post-prediction evidence excluded"
+# SECURITY-15: isolated negative cases, all synthetic and marked final so public pending count stays stable.
+db <<'SQL'
+INSERT INTO public.nhl_prediction_archive (game_id,core42_predicted_at,status,game_date,away_team,home_team,core42_factors) VALUES
+(3,now(),'final',current_date,'DAL','BOS','{}'),
+(4,now(),'final',current_date,'DAL','BOS','{"away_goalie":{"nhl_player_id":"NOEVID"}}'),
+(5,now(),'final',current_date,'DAL','BOS','{"away_goalie":{"nhl_player_id":"LOW"}}'),
+(6,now(),'final',current_date,'DAL','BOS','{"away_goalie":{"nhl_player_id":"NOGSAX"}}'),
+(7,now()-interval '1 hour','final',current_date,'DAL','BOS','{"away_goalie":{"nhl_player_id":"LATEG"}}'),
+(8,now(),'final',current_date,'DAL','BOS','{"away_goalie":{"nhl_player_id":"UNCONF"}}');
+INSERT INTO public.nhl_core43_starter_evidence (game_id,team_code,goalie_id,evidence_status,source_published_at,verified_at) VALUES
+(5,'DAL','LOW','confirmed',now()-interval '2 hours',now()-interval '2 hours'),
+(6,'DAL','NOGSAX','confirmed',now()-interval '2 hours',now()-interval '2 hours'),
+(7,'DAL','LATEG','confirmed',now()-interval '2 hours',now()-interval '2 hours'),
+(8,'DAL','UNCONF','probable',now()-interval '2 hours',now()-interval '2 hours');
+INSERT INTO public.nhl_core43_goalie_snapshots (game_id,goalie_id,team_code,situation,fetched_at,gsax,shots_against) VALUES
+(5,'LOW','DAL','all',now()-interval '2 hours',1.5,29),
+(6,'NOGSAX','DAL','all',now()-interval '2 hours',NULL,40),
+(7,'LATEG','DAL','all',now(),1.5,40),
+(8,'UNCONF','DAL','all',now()-interval '2 hours',1.5,40);
+SQL
+for case in '3:missing_frozen_goalie_id' '4:missing_pregame_starter_evidence' '5:insufficient_shots' '6:missing_gsax' '7:missing_pregame_gsax_snapshot' '8:starter_not_confirmed'; do
+  game="${case%%:*}"; expected="${case#*:}"
+  actual="$(db -Atqc "SELECT readiness FROM public.core43_shadow_readiness_v1 WHERE game_id=$game AND side='away'")"
+  if [[ "$actual" != "$expected" ]]; then echo "FAIL SECURITY-15 game=$game expected=$expected actual=$actual"; exit 1; fi
+  echo "PASS SECURITY-15 game=$game readiness=$actual"
+done
+
 # Exercise production-equivalent CORE43 calculations before applying local revocations.
 db -Atqc "SELECT experiment_status FROM public.core43_shadow_predictions_v1 WHERE game_id=1" | grep -qx 'experimental_ready'
 db -Atqc "SELECT preview_status FROM public.core43_shadow_preview_v1 WHERE game_id=1" | grep -qx 'provisional_goalies_not_confirmed'
