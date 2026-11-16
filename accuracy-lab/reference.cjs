@@ -16,10 +16,10 @@ const statisticNames = ["gamesPlayed", "goalsForPerGame", "goalsAgainstPerGame",
   "recentGoalsForPerGame", "recentGoalsAgainstPerGame"];
 const optional = ["baseline41", "goalieGsax"];
 const local = Object.freeze({
-  core40: { replay: "unavailable", reason: "missing_versioned_upstream_pipeline",
-    version: models.core40.version, blocker: "Chybí verzované xG4, forma, speciální týmy a brankářská komponenta." },
-  core41: { replay: "unavailable", reason: "missing_versioned_quality_gate_and_upstream_pipeline",
-    version: models.core41.version, blocker: "Chybí verzovaná tvorba vstupů a přesná brankářská brána." },
+  core40: { replay: "exact_ensemble", reason: "missing_frozen_upstream_pipeline_inputs",
+    version: models.core40.version, blocker: "Výpočet v26 je dostupný. Chybí společné zmrazené vstupy xG4, formy, speciálních týmů a brankářů." },
+  core41: { replay: "exact_ensemble", reason: "missing_frozen_upstream_and_quality_inputs",
+    version: models.core41.version, blocker: "Výpočet i brankářská brána v26 jsou dostupné. Chybí zmrazené vstupní vzorky a doklady." },
   core42: { replay: "unavailable", reason: "missing_versioned_late_goalie_pipeline",
     version: models.core42.version, blocker: "Chybí zdroj pozdního výpočtu a původní zmrazené podklady." },
   core43: { replay: "simulation_only", reason: "gsax_sensitivity_only",

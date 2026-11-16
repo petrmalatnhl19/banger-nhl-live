@@ -51,10 +51,10 @@ function identify(score, date, id) {
     previewUrl: SITE + identity.away.fullSlug + "-" + identity.home.fullSlug + "-game-preview-" + suffix };
 }
 
-function publisher(html, game) {
+function newsArticle(html, url) {
   if (typeof html !== "string") return null;
   const canonicalUrls = [...html.matchAll(/<link\s+rel="canonical"\s+href="([^"]+)"/gi)].map(item => item[1]);
-  if (canonicalUrls.length !== 1 || canonicalUrls[0] !== game.previewUrl) return null;
+  if (canonicalUrls.length !== 1 || canonicalUrls[0] !== url) return null;
   const articles = [];
   for (const match of html.matchAll(/<script\s+type="application\/ld(?:\+|&#x2B;|&#43;)json">([\s\S]*?)<\/script>/gi)) {
     try {
@@ -66,11 +66,18 @@ function publisher(html, game) {
   }
   if (articles.length !== 1) return null;
   const article = articles[0];
-  const matchup = game.teams.away.nickname + " at " + game.teams.home.nickname + " ";
-  if (typeof article.headline !== "string" || !["projected lineups", "confirmed lineups"].some(suffix =>
-    article.headline?.toLowerCase() === (matchup + suffix).toLowerCase()) || typeof article.articleBody !== "string"
+  if (typeof article.headline !== "string" || typeof article.articleBody !== "string"
     || !Number.isFinite(timestamp(article.datePublished)) || !Number.isFinite(timestamp(article.dateModified))
     || timestamp(article.datePublished) > timestamp(article.dateModified)) return null;
+  return article;
+}
+
+function publisher(html, game) {
+  const article = newsArticle(html, game.previewUrl);
+  if (!article) return null;
+  const matchup = game.teams.away.nickname + " at " + game.teams.home.nickname + " ";
+  if (!["projected lineups", "confirmed lineups"].some(suffix =>
+    article.headline.toLowerCase() === (matchup + suffix).toLowerCase())) return null;
   return article;
 }
 
@@ -229,4 +236,4 @@ if (require.main === module) {
   })().catch(error => { console.error(error.message); process.exitCode = 1; });
 }
 
-module.exports = { collectPlayers, inspectPlayers, status };
+module.exports = { collectPlayers, inspectPlayers, status, newsArticle, normalized };

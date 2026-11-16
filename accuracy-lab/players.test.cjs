@@ -160,3 +160,37 @@ test("test witness refuses scoped capture changes, late clocks and modified sign
   delete incomplete.homeAdvantage;
   assert.deepEqual(verifyTest(incomplete, issueTest(incomplete, now)).missing, ["homeAdvantage"]);
 });
+
+test("official supplemental absence identity cannot replace T−60 or resolve a club assignment conflict", async () => {
+  const { collect, report } = require("./absence-evidence.cjs");
+  const options = fixture();
+  options.rosters.FLA.goalies.pop();
+  const raw = await collectPlayers(gameDate, gameId, undefined, options);
+  const transaction = "https://www.nhl.com/panthers/news/panthers-loan-f19-testing";
+  const config = [{ team: "FLA", name: "F19 Testing", transaction }];
+  const evidence = await collect(raw, config, { now: () => Date.parse(starts), fetcher: async url => {
+    if (url.startsWith("https://search.d3.nhle.com/")) {
+      return new Response(JSON.stringify([{ name: "F19 Testing", playerId: "8400119" }]));
+    }
+    if (url.endsWith("/8400119/landing")) {
+      return new Response(JSON.stringify({ playerId: 8400119, firstName: { default: "F19" }, lastName: { default: "Testing" } }));
+    }
+    assert.equal(url, transaction);
+    const article = { "@type": "NewsArticle", headline: "Panthers loan F19 Testing to AHL", datePublished: published,
+      dateModified: modified, articleBody: "Official transaction." };
+    return new Response('<link rel="canonical" href="' + transaction + '"><script type="application/ld+json">'
+      + JSON.stringify(article) + "</script>");
+  } });
+  const display = report(evidence);
+  const row = display.games[0].players.supplemental[0];
+  assert.equal(row.playerId, 8400119);
+  assert.equal(row.status, "assignment_conflict");
+  assert.equal(row.beforeReference, false);
+  assert.equal(row.availableForSnapshot, false);
+  assert.equal(row.evidence.transaction.publishedAt, published);
+  assert.equal(row.evidence.profile.publishedAt, null);
+  assert.equal(display.complete, 0);
+  assert.equal(display.games[0].players.quality.away.absences, false);
+  await assert.rejects(() => collect(raw, [{ ...config[0], transaction: "https://example.com/panthers/news/test" }], options),
+    /canonical official club/);
+});

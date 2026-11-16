@@ -30,3 +30,6 @@ jobs:
           node --check accuracy-lab/pregame.cjs
           node --check accuracy-lab/players.cjs
           node --check accuracy-lab/test-witness.cjs
+          node --check accuracy-lab/v26-replay.cjs
+          node --check accuracy-lab/absence-evidence.cjs
+          node --check accuracy-lab/external-time.cjs

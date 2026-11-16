@@ -177,8 +177,7 @@ function showReference(options) {
     const mode = availability[id].replay;
     if (availability[id].version) put(item, "p", availability[id].version);
     if (availability[id].blocker) put(item, "p", availability[id].blocker);
-    put(item, "small", mode === "simulation_only" ? "Místně dostupná pouze simulace citlivosti GSAx."
-      : "Přesná místní reprodukce nedostupná. Lze ověřit podepsaný archiv.");
+    put(item, "small", replayAvailability(mode));
   }
   if (view.paired.length) {
     replaceTable(pairs, ["Pár modelů", "Zápasy", "MAE na tým", "Úspěšnost"], view.paired.map(pair => {
@@ -204,6 +203,59 @@ function showReference(options) {
 const sourceLabels = { score: "NHL rozpis", standings: "NHL statistiky", awaySchedule: "Rozpis hostů",
   homeSchedule: "Rozpis domácích", goalies: "RotoWire • archiv BANGER", lineups: "Sestavy • archiv BANGER" };
 
+function replayAvailability(mode) {
+  if (mode === "simulation_only") return "Dostupná simulace GSAx";
+  if (mode === "exact_ensemble") return "Přesný offline výpočet v26 ze zmrazených komponent";
+  return "Přesná místní reprodukce nedostupná";
+}
+
+function showReplay(candidate) {
+  const result = candidate.result;
+  const modes = { archived_intermediates: "Kontrolní přepočet archivovaných mezivýsledků",
+    exact_ensemble: "Přesný ensemble v26 z úplných vstupů", simulation: "Simulace",
+    external_request: "Připravený export pro externí ověření" };
+  if (!result || !Object.hasOwn(modes, result.mode) || result.independentlyVerified !== false
+    || result.eligibleForPairing !== false) throw Error("invalid replay report");
+  el("replay-summary").textContent = modes[result.mode] + " · 0 úplných ověřených snímků · 0 platných párových predikcí";
+  el("replay-time").textContent = "Nezávislé časové potvrzení chybí.";
+  const missing = result.missing ?? [];
+  el("replay-missing").hidden = !missing.length;
+  const short = { xg4: "xG4", goalie32: "brankářská komponenta 3.2", special33: "speciální týmy 3.3",
+    form31: "forma 3.1", goalie32Factors: "podklady brankářské brány" };
+  el("replay-missing").textContent = "Chybí nebo jsou časově neplatné " + missing.map(key => short[key] ?? inputLabels[key] ?? key).join(", ");
+  const area = el("replay-results");
+  area.replaceChildren();
+  const rows = result.rows ?? [];
+  if (result.mode === "archived_intermediates") {
+    for (const model of ["core40", "core41"]) {
+      const card = put(area, "article");
+      const subset = rows.filter(row => row.model === model);
+      put(card, "h3", models[model].label);
+      const count = label => subset.filter(row => row.status === label).length;
+      put(card, "p", count("matched") + " shod · " + count("different") + " odchylek · " + count("unavailable") + " bez vstupů");
+      const deltas = subset.flatMap(row => row.delta ? Object.values(row.delta).map(Math.abs) : []);
+      put(card, "p", "Maximální odchylka " + (deltas.length ? Math.max(...deltas).toExponential(2) : "—"));
+    }
+    replaceTable(el("replay-deltas"), ["NHL Game ID", "CORE", "Stav", "Δ hosté", "Δ domácí"], rows.map(row => [
+      row.gameId, models[row.model]?.label, { matched: "Shoda", different: "Odchylka", unavailable: "Chybí vstupy" }[row.status],
+      row.delta?.away.toExponential(2) ?? "—", row.delta?.home.toExponential(2) ?? "—"
+    ]));
+  }
+  for (const row of result.models ?? []) {
+    const card = put(area, "article");
+    put(card, "h3", models[row.model]?.label);
+    put(card, "p", row.status === "calculated" ? fmtScore(row) + " · hosté / domácí" : "Podmínky v26 nedovolují výpočet");
+    if (row.excluded?.length) put(card, "p", "Vyřazeno z výpočtu " + row.excluded.map(entry => short[entry.model]).join(", "));
+    if (row.missing?.length) put(card, "p", "Vyřazeno z výpočtu " + row.missing.map(key => short[key]).join(", "));
+  }
+  el("replay-details").hidden = !rows.length;
+  el("replay").hidden = false;
+  el("pregame").hidden = true;
+  el("report").hidden = true;
+  filters.hidden = true;
+  el("status").textContent = "Načten report offline laboratoře.";
+}
+
 function showPregame(candidate) {
   if (!Array.isArray(candidate.games) || !candidate.models) throw Error("invalid pregame report");
   el("pregame-context").textContent = candidate.complete + " úplných · " + candidate.incomplete + " neúplných · "
@@ -215,8 +267,7 @@ function showPregame(candidate) {
     put(card, "h3", model.label);
     if (candidate.models[id]?.version) put(card, "p", candidate.models[id].version);
     if (candidate.models[id]?.blocker) put(card, "p", candidate.models[id].blocker);
-    put(card, "small", candidate.models[id]?.replay === "simulation_only" ? "Dostupná simulace GSAx"
-      : "Přesná místní reprodukce nedostupná");
+    put(card, "small", replayAvailability(candidate.models[id]?.replay));
   }
   const list = el("pregame-games");
   list.replaceChildren();
@@ -244,6 +295,11 @@ function showPregame(candidate) {
         const first = entries[0];
         put(item, "p", "Článek zveřejněn " + startTime.format(new Date(first.publishedAt)) + " · verze upravena "
           + startTime.format(new Date(first.modifiedAt)) + " · staženo " + startTime.format(new Date(first.retrievedAt)));
+      }
+      for (const supplemental of game.players.supplemental ?? []) {
+        const flag = { assignment_conflict: "Rozpor v klubovém zařazení", identity_only: "Doložena identita", unavailable: "Nedoloženo" }[supplemental.status];
+        put(item, "p", supplemental.name + (supplemental.playerId ? " · NHL " + supplemental.playerId : "") + " · " + flag
+          + (supplemental.beforeReference === false ? " · staženo po T−60" : ""));
       }
       put(item, "p", game.players.timely ? "Podklady vznikly v okně T−60. Nezávislý doklad chybí."
         : "Pro tento odběr nejsou před T−60 doloženy všechny zdrojové odpovědi.");
@@ -283,6 +339,11 @@ el("load").addEventListener("change", async event => {
   try {
     if (file.size > 20_000_000) throw Error("report too large");
     const candidate = JSON.parse(await file.text());
+    el("replay").hidden = true;
+    if (candidate?.schema === "banger-core-v26-replay-report-v1") {
+      showReplay(candidate);
+      return;
+    }
     if (candidate?.schema === "banger-core-accuracy-pregame-v1") {
       showPregame(candidate);
       return;
@@ -307,6 +368,7 @@ el("load").addEventListener("change", async event => {
       + report.scope.end + " a předchozí dny.";
   } catch {
     report = null;
+    el("replay").hidden = true;
     el("pregame").hidden = true;
     filters.hidden = true;
     el("report").hidden = true;
