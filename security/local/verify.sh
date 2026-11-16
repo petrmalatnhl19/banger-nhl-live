@@ -102,6 +102,7 @@ done
 db -Atqc "SELECT has_function_privilege('service_role','public.capture_core43_shadow_inputs()','EXECUTE')" | grep -qx 't'
 db -Atqc "SELECT tgenabled FROM pg_trigger WHERE tgname='core43_shadow_on_core42' AND tgrelid='public.nhl_prediction_archive'::regclass" | grep -qx 'O'
 db -Atqc "INSERT INTO public.nhl_prediction_archive (game_id,core42_predicted_at,status,game_date,away_team,home_team,core42_factors) VALUES (23,NULL,'pending',current_date,'DAL','BOS','{\"away_goalie\":{\"nhl_player_id\":\"A\",\"name\":\"Synthetic A\"},\"home_goalie\":{\"nhl_player_id\":\"H\",\"name\":\"Synthetic H\"}}'::jsonb)"
+db -Atqc "INSERT INTO public.nhl_core43_starter_evidence (game_id,team_code,goalie_id,evidence_status,source_published_at,verified_at) VALUES (23,'DAL','A','confirmed',now()-interval '2 hours',now()-interval '2 hours'),(23,'BOS','H','confirmed',now()-interval '2 hours',now()-interval '2 hours')"
 db -Atqc "UPDATE public.nhl_prediction_archive SET core42_predicted_at=now()-interval '30 minutes' WHERE game_id=23"
 db -Atqc "SELECT count(*) FROM public.nhl_core43_shadow_inputs WHERE game_id=23" | grep -qx '2'
 db -Atqc "SELECT count(*) FROM public.nhl_core43_shadow_inputs WHERE game_id=23 AND readiness='ready'" | grep -qx '2'
