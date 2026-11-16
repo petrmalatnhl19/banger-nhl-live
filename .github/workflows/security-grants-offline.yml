@@ -52,5 +52,8 @@ jobs:
       - name: Test persisted archive with external pinned keys (offline)
         run: node scripts/test_security57_persisted_external_trust.cjs
 
+      - name: Test signed trust registry and rollback protection (offline)
+        run: node scripts/test_security58_registry_rollback.cjs
+
       - name: Test immutable pregame refresh prototype (offline)
         run: python3 .github/scripts/test-security-35-pregame-refresh.py
