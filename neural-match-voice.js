@@ -27,7 +27,7 @@
     function onMessage({ data }) {
         if (!pending) return;
         if (data.type === 'progress') {
-            pending.onProgress(data.done, data.total);
+            pending.onProgress(data.done, data.total, data.stage);
             return;
         }
         if (data.id !== pending.id) return;
