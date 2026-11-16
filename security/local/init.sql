@@ -4,94 +4,180 @@ CREATE ROLE authenticated NOLOGIN;
 CREATE ROLE service_role NOLOGIN;
 CREATE TABLE public.nhl_core43_shadow_inputs (game_id bigint, side text, gsax numeric, shots_against integer, readiness text, goalie_id text, gsax_fetched_at timestamptz, prediction_at timestamptz, starter_status text);
 CREATE TABLE public.nhl_prediction_archive (game_id bigint PRIMARY KEY, prediction numeric, core42_predicted_at timestamptz, status text, core42_goalie_review jsonb, game_date date, away_team text, home_team text, core42_away double precision, core42_home double precision, core42_factors jsonb, actual_away integer, actual_home integer, baseline_away double precision, baseline_home double precision, advanced_away double precision, advanced_home double precision, goalie32_away double precision, goalie32_home double precision, special33_away double precision, special33_home double precision, core40_away double precision, core40_home double precision, core41_away double precision, core41_home double precision);
-CREATE TABLE public.nhl_core43_goalie_snapshots (game_id bigint, goalie_id text, team_code text, situation text, fetched_at timestamptz, gsax numeric(12,4), shots_against integer);
-CREATE TABLE public.nhl_core43_starter_evidence (game_id bigint, team_code text, goalie_id text, evidence_status text, source_published_at timestamptz, verified_at timestamptz);
+CREATE TABLE public.nhl_core43_goalie_snapshots (id bigint, game_id bigint, goalie_id text, team_code text, situation text, fetched_at timestamptz, source_sha256 text, x_goals_against numeric(12,4), goals_against numeric(12,4), gsax numeric(12,4), shots_against integer, created_at timestamptz);
+CREATE TABLE public.nhl_core43_starter_evidence (id bigint, game_id bigint, team_code text, goalie_id text, evidence_status text, source_name text, source_url text, source_published_at timestamptz, verified_at timestamptz, created_at timestamptz);
 CREATE TABLE public.nhl_core43_schedule_snapshots (game_id bigint, kickoff_at timestamptz, away_team text, home_team text);
 ALTER TABLE public.nhl_core43_shadow_inputs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.nhl_prediction_archive ENABLE ROW LEVEL SECURITY;
 CREATE POLICY archive_read ON public.nhl_prediction_archive FOR SELECT TO anon,authenticated USING (true);
 INSERT INTO public.nhl_core43_shadow_inputs VALUES (1,'away',1.2,40,'ready','A',now()-interval '2 hours',now()-interval '1 hour','confirmed'),(1,'home',0.8,40,'ready','H',now()-interval '2 hours',now()-interval '1 hour','confirmed');
 INSERT INTO public.nhl_prediction_archive (game_id,prediction,core42_predicted_at,status,core42_goalie_review,game_date,away_team,home_team,core42_away,core42_home,core42_factors) VALUES (1,3.4,now(),'pending',NULL,current_date,'DAL','BOS',2.7,2.4,'{"away_goalie":{"name":"Synthetic A","nhl_player_id":"A"},"home_goalie":{"name":"Synthetic H","nhl_player_id":"H"}}'::jsonb);
-INSERT INTO public.nhl_core43_goalie_snapshots VALUES (1,'A','DAL','all',now()-interval '2 hours',1.2,40),(1,'H','BOS','all',now()-interval '2 hours',0.8,40);
-INSERT INTO public.nhl_core43_starter_evidence VALUES (1,'DAL','A','confirmed',now()-interval '2 hours',now()-interval '2 hours'),(1,'BOS','H','confirmed',now()-interval '2 hours',now()-interval '2 hours');
+INSERT INTO public.nhl_core43_goalie_snapshots (game_id,goalie_id,team_code,situation,fetched_at,gsax,shots_against) VALUES (1,'A','DAL','all',now()-interval '2 hours',1.2,40),(1,'H','BOS','all',now()-interval '2 hours',0.8,40);
+INSERT INTO public.nhl_core43_starter_evidence (game_id,team_code,goalie_id,evidence_status,source_published_at,verified_at) VALUES (1,'DAL','A','confirmed',now()-interval '2 hours',now()-interval '2 hours'),(1,'BOS','H','confirmed',now()-interval '2 hours',now()-interval '2 hours');
 INSERT INTO public.nhl_core43_schedule_snapshots VALUES (1,now(),'DAL','BOS');
 -- Production-equivalent SQL from read-only pg_get_viewdef inspection (SECURITY-11).
 CREATE VIEW public.core43_shadow_predictions_v1 AS
- WITH inputs AS (
-  SELECT game_id,
-   max(gsax * 100.0 / NULLIF(shots_against,0)::numeric) FILTER (WHERE side='away') AS away_gsax_per100,
-   max(gsax * 100.0 / NULLIF(shots_against,0)::numeric) FILTER (WHERE side='home') AS home_gsax_per100,
-   count(*) FILTER (WHERE readiness='ready') AS ready_sides,
-   count(*) AS total_sides
-  FROM nhl_core43_shadow_inputs GROUP BY game_id
- )
- SELECT a.game_id,a.game_date,a.away_team,a.home_team,a.status,a.core42_away,a.core42_home,
- i.away_gsax_per100,i.home_gsax_per100,i.ready_sides,i.total_sides,
- CASE WHEN i.ready_sides=2 AND i.total_sides=2 AND a.core42_away IS NOT NULL AND a.core42_home IS NOT NULL
- THEN round(GREATEST(0.4::double precision,LEAST(6.0::double precision,a.core42_away+GREATEST(-0.3::numeric,LEAST(0.3,(i.away_gsax_per100-i.home_gsax_per100)*0.06))::double precision))::numeric,3)
- ELSE NULL::numeric END AS core43_away,
- CASE WHEN i.ready_sides=2 AND i.total_sides=2 AND a.core42_away IS NOT NULL AND a.core42_home IS NOT NULL
- THEN round(GREATEST(0.4::double precision,LEAST(6.0::double precision,a.core42_home+GREATEST(-0.3::numeric,LEAST(0.3,(i.home_gsax_per100-i.away_gsax_per100)*0.06))::double precision))::numeric,3)
- ELSE NULL::numeric END AS core43_home,
- CASE WHEN i.ready_sides=2 AND i.total_sides=2 THEN 'experimental_ready'::text ELSE 'awaiting_verified_pregame_inputs'::text END AS experiment_status,
- 'core43-shadow-gsax-v1-heuristic-unvalidated'::text AS model_version
- FROM nhl_prediction_archive a JOIN inputs i USING(game_id) WHERE a.core42_predicted_at IS NOT NULL;
+WITH inputs AS (
+         SELECT nhl_core43_shadow_inputs.game_id,
+            max(nhl_core43_shadow_inputs.gsax * 100.0 / NULLIF(nhl_core43_shadow_inputs.shots_against, 0)::numeric) FILTER (WHERE nhl_core43_shadow_inputs.side = 'away'::text) AS away_gsax_per100,
+            max(nhl_core43_shadow_inputs.gsax * 100.0 / NULLIF(nhl_core43_shadow_inputs.shots_against, 0)::numeric) FILTER (WHERE nhl_core43_shadow_inputs.side = 'home'::text) AS home_gsax_per100,
+            count(*) FILTER (WHERE nhl_core43_shadow_inputs.readiness = 'ready'::text) AS ready_sides,
+            count(*) AS total_sides
+           FROM nhl_core43_shadow_inputs
+          GROUP BY nhl_core43_shadow_inputs.game_id
+        )
+ SELECT a.game_id,
+    a.game_date,
+    a.away_team,
+    a.home_team,
+    a.status,
+    a.core42_away,
+    a.core42_home,
+    i.away_gsax_per100,
+    i.home_gsax_per100,
+    i.ready_sides,
+    i.total_sides,
+        CASE
+            WHEN i.ready_sides = 2 AND i.total_sides = 2 AND a.core42_away IS NOT NULL AND a.core42_home IS NOT NULL THEN round(GREATEST(0.4::double precision, LEAST(6.0::double precision, a.core42_away + GREATEST('-0.3'::numeric, LEAST(0.3, (i.away_gsax_per100 - i.home_gsax_per100) * 0.06))::double precision))::numeric, 3)
+            ELSE NULL::numeric
+        END AS core43_away,
+        CASE
+            WHEN i.ready_sides = 2 AND i.total_sides = 2 AND a.core42_away IS NOT NULL AND a.core42_home IS NOT NULL THEN round(GREATEST(0.4::double precision, LEAST(6.0::double precision, a.core42_home + GREATEST('-0.3'::numeric, LEAST(0.3, (i.home_gsax_per100 - i.away_gsax_per100) * 0.06))::double precision))::numeric, 3)
+            ELSE NULL::numeric
+        END AS core43_home,
+        CASE
+            WHEN i.ready_sides = 2 AND i.total_sides = 2 THEN 'experimental_ready'::text
+            ELSE 'awaiting_verified_pregame_inputs'::text
+        END AS experiment_status,
+    'core43-shadow-gsax-v1-heuristic-unvalidated'::text AS model_version
+   FROM nhl_prediction_archive a
+     JOIN inputs i USING (game_id)
+  WHERE a.core42_predicted_at IS NOT NULL;
 CREATE VIEW public.core43_shadow_preview_v1 AS
- WITH paired AS (
-  SELECT game_id,count(*) AS sides,
-  count(*) FILTER (WHERE goalie_id IS NOT NULL AND gsax IS NOT NULL AND shots_against>=30 AND gsax_fetched_at<=prediction_at) AS valid_gsax_sides,
-  max(gsax*100.0/NULLIF(shots_against,0)::numeric) FILTER (WHERE side='away') AS away_gsax_per100,
-  max(gsax*100.0/NULLIF(shots_against,0)::numeric) FILTER (WHERE side='home') AS home_gsax_per100,
-  count(*) FILTER (WHERE starter_status='confirmed') AS confirmed_sides
-  FROM nhl_core43_shadow_inputs GROUP BY game_id
- )
- SELECT a.game_id,a.game_date,a.away_team,a.home_team,a.core42_predicted_at,
- p.away_gsax_per100,p.home_gsax_per100,p.confirmed_sides,
- CASE WHEN p.sides=2 AND p.valid_gsax_sides=2 AND a.core42_away IS NOT NULL
- THEN round(GREATEST(0.4::double precision,LEAST(6.0::double precision,a.core42_away+GREATEST(-0.3::numeric,LEAST(0.3,(p.away_gsax_per100-p.home_gsax_per100)*0.06))::double precision))::numeric,3)
- ELSE NULL::numeric END AS core43_preview_away,
- CASE WHEN p.sides=2 AND p.valid_gsax_sides=2 AND a.core42_home IS NOT NULL
- THEN round(GREATEST(0.4::double precision,LEAST(6.0::double precision,a.core42_home+GREATEST(-0.3::numeric,LEAST(0.3,(p.home_gsax_per100-p.away_gsax_per100)*0.06))::double precision))::numeric,3)
- ELSE NULL::numeric END AS core43_preview_home,
- CASE WHEN p.sides=2 AND p.valid_gsax_sides=2 THEN 'provisional_goalies_not_confirmed'::text ELSE 'missing_pregame_gsax'::text END AS preview_status,
- 'core43-gsax-preview-v1-unvalidated'::text AS version
- FROM nhl_prediction_archive a JOIN paired p USING(game_id) WHERE a.core42_predicted_at IS NOT NULL;
+WITH paired AS (
+         SELECT nhl_core43_shadow_inputs.game_id,
+            count(*) AS sides,
+            count(*) FILTER (WHERE nhl_core43_shadow_inputs.goalie_id IS NOT NULL AND nhl_core43_shadow_inputs.gsax IS NOT NULL AND nhl_core43_shadow_inputs.shots_against >= 30 AND nhl_core43_shadow_inputs.gsax_fetched_at <= nhl_core43_shadow_inputs.prediction_at) AS valid_gsax_sides,
+            max(nhl_core43_shadow_inputs.gsax * 100.0 / NULLIF(nhl_core43_shadow_inputs.shots_against, 0)::numeric) FILTER (WHERE nhl_core43_shadow_inputs.side = 'away'::text) AS away_gsax_per100,
+            max(nhl_core43_shadow_inputs.gsax * 100.0 / NULLIF(nhl_core43_shadow_inputs.shots_against, 0)::numeric) FILTER (WHERE nhl_core43_shadow_inputs.side = 'home'::text) AS home_gsax_per100,
+            count(*) FILTER (WHERE nhl_core43_shadow_inputs.starter_status = 'confirmed'::text) AS confirmed_sides
+           FROM nhl_core43_shadow_inputs
+          GROUP BY nhl_core43_shadow_inputs.game_id
+        )
+ SELECT a.game_id,
+    a.game_date,
+    a.away_team,
+    a.home_team,
+    a.core42_predicted_at,
+    p.away_gsax_per100,
+    p.home_gsax_per100,
+    p.confirmed_sides,
+        CASE
+            WHEN p.sides = 2 AND p.valid_gsax_sides = 2 AND a.core42_away IS NOT NULL THEN round(GREATEST(0.4::double precision, LEAST(6.0::double precision, a.core42_away + GREATEST('-0.3'::numeric, LEAST(0.3, (p.away_gsax_per100 - p.home_gsax_per100) * 0.06))::double precision))::numeric, 3)
+            ELSE NULL::numeric
+        END AS core43_preview_away,
+        CASE
+            WHEN p.sides = 2 AND p.valid_gsax_sides = 2 AND a.core42_home IS NOT NULL THEN round(GREATEST(0.4::double precision, LEAST(6.0::double precision, a.core42_home + GREATEST('-0.3'::numeric, LEAST(0.3, (p.home_gsax_per100 - p.away_gsax_per100) * 0.06))::double precision))::numeric, 3)
+            ELSE NULL::numeric
+        END AS core43_preview_home,
+        CASE
+            WHEN p.sides = 2 AND p.valid_gsax_sides = 2 THEN 'provisional_goalies_not_confirmed'::text
+            ELSE 'missing_pregame_gsax'::text
+        END AS preview_status,
+    'core43-gsax-preview-v1-unvalidated'::text AS version
+   FROM nhl_prediction_archive a
+     JOIN paired p USING (game_id)
+  WHERE a.core42_predicted_at IS NOT NULL;
 -- Production-equivalent readiness selection and time guards; synthetic source tables.
 CREATE VIEW public.core43_shadow_readiness_v1 AS
 WITH sides AS (
- SELECT a.game_id,a.game_date,a.core42_predicted_at AS prediction_at,'away'::text AS side,a.away_team AS team_code,
- a.core42_factors->'away_goalie'->>'name' AS goalie_name,a.core42_factors->'away_goalie'->>'nhl_player_id' AS goalie_id
- FROM nhl_prediction_archive a WHERE a.core42_predicted_at IS NOT NULL
- UNION ALL
- SELECT a.game_id,a.game_date,a.core42_predicted_at,'home'::text,a.home_team,
- a.core42_factors->'home_goalie'->>'name',a.core42_factors->'home_goalie'->>'nhl_player_id'
- FROM nhl_prediction_archive a WHERE a.core42_predicted_at IS NOT NULL
-), evidence AS (
- SELECT s.*,e.evidence_status,e.source_published_at,e.verified_at,g.gsax,g.shots_against,g.fetched_at AS gsax_fetched_at
- FROM sides s
- LEFT JOIN LATERAL (
- SELECT evidence_status,source_published_at,verified_at
- FROM nhl_core43_starter_evidence e
- WHERE e.game_id=s.game_id AND e.team_code=s.team_code AND e.goalie_id=s.goalie_id
- AND e.source_published_at<=s.prediction_at AND e.verified_at<=s.prediction_at
- ORDER BY e.verified_at DESC LIMIT 1
- ) e ON true
- LEFT JOIN LATERAL (
- SELECT gsax,shots_against,fetched_at FROM nhl_core43_goalie_snapshots g
- WHERE g.goalie_id=s.goalie_id AND g.team_code=s.team_code AND g.situation='all'
- AND g.fetched_at<=s.prediction_at ORDER BY g.fetched_at DESC LIMIT 1
- ) g ON true
-)
-SELECT game_id,game_date,side,team_code,goalie_name,goalie_id,prediction_at,
- evidence_status,source_published_at,verified_at,gsax,shots_against,gsax_fetched_at,
- CASE WHEN goalie_id IS NULL THEN 'missing_frozen_goalie_id'
- WHEN evidence_status IS NULL THEN 'missing_pregame_starter_evidence'
- WHEN lower(evidence_status) <> ALL (ARRAY['confirmed','starting','confirmed_starter']) THEN 'starter_not_confirmed'
- WHEN gsax_fetched_at IS NULL THEN 'missing_pregame_gsax_snapshot'
- WHEN shots_against IS NULL OR shots_against<30 THEN 'insufficient_shots'
- WHEN gsax IS NULL THEN 'missing_gsax'
- ELSE 'ready' END AS readiness
-FROM evidence;
+         SELECT a.game_id,
+            a.game_date,
+            a.core42_predicted_at AS prediction_at,
+            'away'::text AS side,
+            a.away_team AS team_code,
+            (a.core42_factors -> 'away_goalie'::text) ->> 'name'::text AS goalie_name,
+            (a.core42_factors -> 'away_goalie'::text) ->> 'nhl_player_id'::text AS goalie_id
+           FROM nhl_prediction_archive a
+          WHERE a.core42_predicted_at IS NOT NULL
+        UNION ALL
+         SELECT a.game_id,
+            a.game_date,
+            a.core42_predicted_at,
+            'home'::text,
+            a.home_team,
+            (a.core42_factors -> 'home_goalie'::text) ->> 'name'::text,
+            (a.core42_factors -> 'home_goalie'::text) ->> 'nhl_player_id'::text
+           FROM nhl_prediction_archive a
+          WHERE a.core42_predicted_at IS NOT NULL
+        ), evidence AS (
+         SELECT s.game_id,
+            s.game_date,
+            s.prediction_at,
+            s.side,
+            s.team_code,
+            s.goalie_name,
+            s.goalie_id,
+            e.evidence_status,
+            e.source_published_at,
+            e.verified_at,
+            g.gsax,
+            g.shots_against,
+            g.fetched_at AS gsax_fetched_at
+           FROM sides s
+             LEFT JOIN LATERAL ( SELECT e_1.id,
+                    e_1.game_id,
+                    e_1.team_code,
+                    e_1.goalie_id,
+                    e_1.evidence_status,
+                    e_1.source_name,
+                    e_1.source_url,
+                    e_1.source_published_at,
+                    e_1.verified_at,
+                    e_1.created_at
+                   FROM nhl_core43_starter_evidence e_1
+                  WHERE e_1.game_id = s.game_id AND e_1.team_code = s.team_code AND e_1.goalie_id = s.goalie_id AND e_1.source_published_at <= s.prediction_at AND e_1.verified_at <= s.prediction_at
+                  ORDER BY e_1.verified_at DESC
+                 LIMIT 1) e ON true
+             LEFT JOIN LATERAL ( SELECT g_1.id,
+                    g_1.goalie_id,
+                    g_1.team_code,
+                    g_1.situation,
+                    g_1.fetched_at,
+                    g_1.source_sha256,
+                    g_1.x_goals_against,
+                    g_1.goals_against,
+                    g_1.shots_against,
+                    g_1.gsax,
+                    g_1.created_at
+                   FROM nhl_core43_goalie_snapshots g_1
+                  WHERE g_1.goalie_id = s.goalie_id AND g_1.team_code = s.team_code AND g_1.situation = 'all'::text AND g_1.fetched_at <= s.prediction_at
+                  ORDER BY g_1.fetched_at DESC
+                 LIMIT 1) g ON true
+        )
+ SELECT game_id,
+    game_date,
+    side,
+    team_code,
+    goalie_name,
+    goalie_id,
+    prediction_at,
+    evidence_status,
+    source_published_at,
+    verified_at,
+    gsax,
+    shots_against,
+    gsax_fetched_at,
+        CASE
+            WHEN goalie_id IS NULL THEN 'missing_frozen_goalie_id'::text
+            WHEN evidence_status IS NULL THEN 'missing_pregame_starter_evidence'::text
+            WHEN lower(evidence_status) <> ALL (ARRAY['confirmed'::text, 'starting'::text, 'confirmed_starter'::text]) THEN 'starter_not_confirmed'::text
+            WHEN gsax_fetched_at IS NULL THEN 'missing_pregame_gsax_snapshot'::text
+            WHEN shots_against IS NULL OR shots_against < 30 THEN 'insufficient_shots'::text
+            WHEN gsax IS NULL THEN 'missing_gsax'::text
+            ELSE 'ready'::text
+        END AS readiness
+   FROM evidence;
 -- Exact production view definition captured read-only in SECURITY-11.
 CREATE VIEW public.nhl_core42_status AS
  SELECT count(*) FILTER (WHERE core42_predicted_at IS NOT NULL AND status = 'pending'::text)::integer AS pending_predictions,
