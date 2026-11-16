@@ -24,6 +24,10 @@ db -Atqc "INSERT INTO public.nhl_core43_starter_evidence VALUES (2,'DAL','LATE',
 db -Atqc "INSERT INTO public.nhl_core43_goalie_snapshots VALUES (2,'LATE','DAL','all',now(),1.5,40)"
 db -Atqc "SELECT readiness FROM public.core43_shadow_readiness_v1 WHERE game_id=2 AND side='away'" | grep -qx 'missing_pregame_starter_evidence'
 echo "PASS readiness time cutoff: post-prediction evidence excluded"
+# SECURITY-19: exact snapshot GSAx numeric typmod and readiness output signature.
+db -Atqc "SELECT format_type(atttypid,atttypmod) FROM pg_attribute WHERE attrelid='public.nhl_core43_goalie_snapshots'::regclass AND attname='gsax'" | grep -qx 'numeric(12,4)'
+db -Atqc "SELECT format_type(atttypid,atttypmod) FROM pg_attribute WHERE attrelid='public.core43_shadow_readiness_v1'::regclass AND attname='gsax'" | grep -qx 'numeric(12,4)'
+echo "PASS SECURITY-19 GSAx numeric(12,4) snapshot and readiness view"
 # SECURITY-15: isolated negative cases, all synthetic and marked final so public pending count stays stable.
 db <<'SQL'
 INSERT INTO public.nhl_prediction_archive (game_id,core42_predicted_at,status,game_date,away_team,home_team,core42_factors) VALUES
