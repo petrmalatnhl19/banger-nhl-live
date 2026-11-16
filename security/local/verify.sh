@@ -122,4 +122,37 @@ done
 db -Atqc "SELECT count(*) FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='public' AND p.proname IN ('capture_core43_shadow_inputs','core43_capture_on_core42_insert') AND has_function_privilege('service_role',p.oid,'EXECUTE')" | grep -qx '2'
 echo "PASS SECURITY-24 function security baseline and schema CREATE restrictions"
 
+# SECURITY-25: isolated search_path hardening test; never change production function settings.
+# An untrusted session's temp table must not replace schema-qualified application tables.
+db -Atqc "SELECT count(*) FROM public.nhl_core43_shadow_inputs WHERE game_id=23" | grep -qx '2'
+db <<'SQL'
+BEGIN;
+CREATE TEMP TABLE nhl_core43_shadow_inputs (game_id bigint, side text);
+SELECT set_config('search_path','pg_temp,public',true);
+DO $
+DECLARE captured integer;
+BEGIN
+  captured := public.capture_core43_shadow_inputs();
+  IF captured IS NULL THEN RAISE EXCEPTION 'capture returned null'; END IF;
+END $;
+ROLLBACK;
+SQL
+db -Atqc "SELECT count(*) FROM public.nhl_core43_shadow_inputs WHERE game_id=23" | grep -qx '2'
+# Test a candidate stricter search_path locally, then restore the production-equivalent baseline.
+db <<'SQL'
+BEGIN;
+ALTER FUNCTION public.capture_core43_shadow_inputs() SET search_path = pg_catalog, public, pg_temp;
+ALTER FUNCTION public.core43_capture_on_core42_insert() SET search_path = pg_catalog, public, pg_temp;
+DO $
+DECLARE captured integer;
+BEGIN
+  captured := public.capture_core43_shadow_inputs();
+  IF captured IS NULL THEN RAISE EXCEPTION 'hardened capture returned null'; END IF;
+END $;
+ROLLBACK;
+SQL
+db -Atqc "SELECT count(*) FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='public' AND p.proname IN ('capture_core43_shadow_inputs','core43_capture_on_core42_insert') AND p.proconfig @> ARRAY['search_path=public']::text[]" | grep -qx '2'
+echo "PASS SECURITY-25 temporary shadowing and transactional search_path hardening"
+
+
 echo "SECURITY-12 local privilege and two real-view definition tests PASS"
