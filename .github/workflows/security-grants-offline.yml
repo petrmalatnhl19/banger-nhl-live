@@ -16,5 +16,8 @@ jobs:
       - name: Validate proposed grants SQL without database access
         run: python3 .github/scripts/test-security-08-grants.py
 
+      - name: Verify signed prediction snapshot integrity (offline)
+        run: python3 .github/scripts/test-security-45-snapshot-signature.py
+
       - name: Test immutable pregame refresh prototype (offline)
         run: python3 .github/scripts/test-security-35-pregame-refresh.py
