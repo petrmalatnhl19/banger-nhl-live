@@ -116,6 +116,18 @@ function update(){
     root.querySelector('[data-bv=start]').disabled=!canPlay;
 }
 
+const scoreNumerals=['nula','jedna','dva','tři','čtyři','pět','šest','sedm','osm','devět','deset','jedenáct','dvanáct','třináct','čtrnáct','patnáct','šestnáct','sedmnáct','osmnáct','devatenáct','dvacet'];
+const scoreAfterKu=['nule','jedné','dvěma','třem','čtyřem','pěti','šesti','sedmi','osmi','devíti','deseti','jedenácti','dvanácti','třinácti','čtrnácti','patnácti','šestnácti','sedmnácti','osmnácti','devatenácti','dvaceti'];
+
+function spotSpeechText(text){
+    // Hockey scores and shot-count pairs use the same spoken form.
+    // Period clocks live in the event's time field, outside the narration text.
+    const spoken=text.replace(/^[\p{Lu} ]+!/u, opening=>opening[0]+opening.slice(1).toLowerCase());
+    return spoken.replace(/\b(0|[1-9]\d?)\s*:\s*(0|[1-9]\d?)\b/g,(_,left,right)=>{
+        return (scoreNumerals[Number(left)]??left)+' ku '+(scoreAfterKu[Number(right)]??right);
+    });
+}
+
 function playback(item){
     const base=Number(voicePanel?.querySelector('[data-bv=rate]')?.value||1);
     if(voicePanel?.querySelector('[data-bv=dynamic]')?.checked===false)return {rate:base,pitch:1};
@@ -146,7 +158,7 @@ function speakNext(gen){
         const current=()=>gen===state.generation&&state.utterance===request;
         Promise.resolve().then(()=>{
             if(!current())return;
-            return neural.speak(text,rate,{
+            return neural.speak(spotSpeechText(text),rate,{
                 onPlay(){if(current()){state.neuralStatus='';update()}},
                 onProgress(done,total){if(current()){state.neuralStatus='Načítám hlas ze spotu · část '+done+' z '+total;update()}},
             });

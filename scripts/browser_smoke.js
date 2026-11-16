@@ -74,14 +74,14 @@ const assert = require('node:assert/strict');
   await commentary.evaluate(root => {
     root.innerHTML = '<p>Aktualizovaný komentář</p>';
     document.dispatchEvent(new CustomEvent('banger:commentary', { detail: {
-      id: '2026020999', items: [{ id: 12, period: 1, time: '03:09', type: 'goal', text: 'Gól! Dallas Stars vedou.' }],
+      id: '2026020999', items: [{ id: 12, period: 1, time: '03:09', type: 'goal', text: 'GÓL! Dallas Stars vedou 2:1.' }],
     } }));
   });
   assert.equal(await panel.locator('[data-bv=voice]').inputValue(), 'spot');
   await panel.locator('summary[aria-label="Nastavení hlasu"]').click();
   await panel.locator('[data-bv=start]').click();
   await page.waitForFunction(() => window.voiceTrace.includes('audio:start'));
-  assert.ok((await page.evaluate(() => window.voiceTrace)).includes('Gól! Dallas Stars vedou.'));
+  assert.ok((await page.evaluate(() => window.voiceTrace)).includes('Gól! Dallas Stars vedou dva ku jedné.'));
   await panel.locator('[data-bv=pause]').click();
   await page.waitForFunction(() => window.voiceTrace.includes('pause'));
 
