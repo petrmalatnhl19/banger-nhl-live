@@ -13,7 +13,7 @@ const { verifyTimestamp } = require("./core43_cal16_timestamp.cjs");
 const { verifyHistoricalPrediction: run } = require("./core43_cal30_historical_trust.cjs");
 const { replay } = require("./core43_cal31_replay.cjs");
 const { preparePregameRequests } = require("./core43_cal32_prepare_pregame.cjs");
-const { replayPrepared } = require("./core43_cal34_replay_prepared.cjs");
+const { replayPrepared, replayTechnicalPrepared } = require("./core43_cal34_replay_prepared.cjs");
 const { replayReceipted, signArchiveReceipt } = require("./core43_cal35_archive_receipt.cjs");
 
 const { makeTsa, POLICY_OID } = require("./fixtures/core43_local_tsa.cjs");
@@ -340,4 +340,82 @@ test("CAL-30 offline corroboration of signed predictions", async t => {
         "cal35_custodian_independence");
     });
   });
+});
+
+test("CAL-36 completes a no-observer rehearsal with two real local RFC 3161 responses", async t => {
+  const { directory, policy, evidence, issuers, start, epoch } = await setup(t);
+  const { gameId, kickoffAt, awayTeam, homeTeam } = JSON.parse(evidence.packageBytes).capture.prediction;
+  const authorities = policy.authorities.map(({ id, operatorId, policyOid }) => ({ id, operatorId, policyOid }));
+  const planBytes = json({ schema: "core43_cal32_pregame_plan_v1", mode: "simulation",
+    gameId, kickoffAt, packageRegistry: policy.packageRegistry, authorities });
+  const prepared = preparePregameRequests({ packageBytes: evidence.packageBytes, registryBytes: evidence.registryBytes,
+    planBytes, expectedPlanSha256: sha(planBytes) }, () => epoch);
+  const preparedBytes = Buffer.from(JSON.stringify(prepared) + "\n");
+  const dayMs = 24 * 60 * 60_000;
+  const tomorrow = Math.floor(epoch / dayMs) * dayMs + dayMs;
+  const crlEnd = epoch + 60 * 60 * 60_000;
+  const timestamps = prepared.requests.map((entry, index) => {
+    const request = Buffer.from(entry.request, "base64url");
+    const issuer = issuers[index];
+    return { ...evidence.timestamps[index], request, response: issuer.respond(request),
+      crls: ["issuer", "root"].map(name => issuer.crl(name, start, crlEnd)) };
+  });
+  const { nhlStart: _unused, ...dossier } = dossierFor({ ...evidence, timestamps });
+  const dossierBytes = json({ ...dossier, schema: "core43_cal36_dossier_v1" });
+  const calendar = new Intl.DateTimeFormat("en-US", {
+    timeZone: "UTC", weekday: "long", month: "long", day: "numeric", year: "numeric",
+  });
+  const hourMs = 60 * 60_000;
+  const sources = (day, retrievedAt) => {
+    const report = Buffer.from(
+      '<table id="Visitor"><tr><td><img src="logoc' + awayTeam.toLowerCase() + '.gif"></td></tr></table>' +
+      '<table id="GameInfo"><tr><td>Game Summary</td><td>' + calendar.format(day) + '</td></tr>' +
+      '<tr><td>Start 5:20 EDT; End 7:54 EDT</td><td>Game ' + gameId.slice(-4) +
+      '</td><td>Final</td></tr></table><table id="Home"><tr><td><img src="logoc' +
+      homeTeam.toLowerCase() + '.gif"></td></tr></table>');
+    const boxscore = json({ id: Number(gameId), gameDate: iso(day).slice(0, 10), startTimeUTC: kickoffAt,
+      gameState: "OFF", gameOutcome: { lastPeriodType: "REG" }, awayTeam: { abbrev: awayTeam, score: 2 },
+      homeTeam: { abbrev: homeTeam, score: 3 } });
+    const season = Number(gameId.slice(0, 4));
+    const archiveSource = (url, bytes) => ({ url, retrievedAt: iso(retrievedAt), sha256: sha(bytes),
+      bytes: bytes.toString("base64url") });
+    return json({ schema: "core43_cal33_nhl_sources_v1", gameId,
+      report: archiveSource(`https://www.nhl.com/scores/htmlreports/${season}${season + 1}/GS${gameId.slice(4)}.HTM`, report),
+      boxscore: archiveSource(`https://api-web.nhle.com/v1/gamecenter/${gameId}/boxscore`, boxscore) });
+  };
+  const inputsFor = (archiveBytes, reviewAt) => {
+    const policyBytes = json({ schema: "core43_cal36_technical_review_v1", mode: "simulation", reviewAt: iso(reviewAt),
+      packageRegistry: policy.packageRegistry, nhlArchiveSha256: sha(archiveBytes),
+      authorities: policy.authorities.map((profile, index) => ({ ...profile, crlSha256: timestamps[index].crls.map(sha) })) });
+    return { preparedBytes, expectedPreparedSha256: sha(preparedBytes), dossierBytes, nhlArchiveBytes: archiveBytes,
+      policyBytes, expectedPolicySha256: sha(policyBytes) };
+  };
+
+  // The NHL dates and retrieval clocks are fixtures. OpenSSL issues both tokens at the real current time.
+  const single = inputsFor(sources(tomorrow, tomorrow + 15 * hourMs), tomorrow + 16 * hourMs);
+  const accepted = replayTechnicalPrepared(single);
+  assert.equal(accepted.status, "simulation_verified", JSON.stringify(accepted));
+  assert.equal(accepted.trusted, false);
+  assert.equal(accepted.startEvidence, "single_report_time");
+  assert.equal(accepted.cutoffAt, kickoffAt);
+  assert.equal(accepted.earliestReportStartAt, iso(tomorrow + 9 * hourMs + 20 * 60_000));
+
+  const ambiguous = replayTechnicalPrepared(inputsFor(sources(tomorrow, tomorrow + 23 * hourMs), tomorrow + 23 * hourMs));
+  assert.equal(ambiguous.status, "simulation_verified", JSON.stringify(ambiguous));
+  assert.equal(ambiguous.trusted, false);
+  assert.equal(ambiguous.startEvidence, "conservative_am_pm_bound");
+  assert.equal(ambiguous.earliestReportStartAt, accepted.earliestReportStartAt);
+
+  const yesterday = tomorrow - 2 * dayMs;
+  const tooLate = replayTechnicalPrepared(inputsFor(sources(yesterday, yesterday + 23 * hourMs), tomorrow + 16 * hourMs));
+  assert.equal(tooLate.reason, "cal30_timestamp_order");
+  assert.equal(tooLate.trusted, false);
+
+  const paths = ["technical-prepared.json", "technical-dossier.json", "technical-sources.json", "technical-policy.json"]
+    .map(name => join(directory, name));
+  [single.preparedBytes, single.dossierBytes, single.nhlArchiveBytes, single.policyBytes]
+    .forEach((bytes, index) => writeFileSync(paths[index], bytes));
+  const cli = join(__dirname, "core43_cal36_technical_review.cjs");
+  const result = execFileSync(process.execPath, [cli, ...paths, single.expectedPreparedSha256, single.expectedPolicySha256]);
+  assert.deepEqual(JSON.parse(result), accepted);
 });
