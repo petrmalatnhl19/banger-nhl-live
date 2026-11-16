@@ -1,0 +1,17 @@
+name: Security grants proposal (offline)
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-security-proposal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate proposed grants SQL without database access
+        run: python3 .github/scripts/test-security-08-grants.py
