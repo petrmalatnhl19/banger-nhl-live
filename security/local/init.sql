@@ -11,7 +11,7 @@ ALTER TABLE public.nhl_core43_shadow_inputs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.nhl_prediction_archive ENABLE ROW LEVEL SECURITY;
 CREATE POLICY archive_read ON public.nhl_prediction_archive FOR SELECT TO anon,authenticated USING (true);
 INSERT INTO public.nhl_core43_shadow_inputs VALUES (1,'away',1.2,40,'ready','A',now()-interval '2 hours',now()-interval '1 hour','confirmed'),(1,'home',0.8,40,'ready','H',now()-interval '2 hours',now()-interval '1 hour','confirmed');
-INSERT INTO public.nhl_prediction_archive (game_id,prediction,core42_predicted_at,status,core42_goalie_review) VALUES (1,3.4,now(),'pending',NULL,current_date,'DAL','BOS',2.7,2.4);
+INSERT INTO public.nhl_prediction_archive (game_id,prediction,core42_predicted_at,status,core42_goalie_review,game_date,away_team,home_team,core42_away,core42_home) VALUES (1,3.4,now(),'pending',NULL,current_date,'DAL','BOS',2.7,2.4);
 INSERT INTO public.nhl_core43_goalie_snapshots VALUES (1,'Fixture goalie');
 INSERT INTO public.nhl_core43_starter_evidence VALUES (1,'fixture');
 INSERT INTO public.nhl_core43_schedule_snapshots VALUES (1,now(),'DAL','BOS');
