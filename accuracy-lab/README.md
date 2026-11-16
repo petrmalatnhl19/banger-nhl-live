@@ -49,3 +49,5 @@ node --check accuracy-lab/evaluate.cjs
 Detaily modelů a výsledek pilotu jsou v [auditním reportu](AUDIT.md).
 
 Pro sběr, archivaci a vyhodnocení společného okamžiku T−60 pokračuj návodem [CORE-ACCURACY-02](REFERENCE.md).
+
+Ruční odběr a audit zdrojů pro živý pilot popisuje [CORE-ACCURACY-03](PREGAME.md).

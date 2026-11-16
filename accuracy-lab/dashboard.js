@@ -190,11 +190,50 @@ function showReference(options) {
     const absent = required.map(key => [key, view.coverage.filter(row => row.missing.includes(key)).length])
       .filter(([, count]) => count);
     if (absent.length) put(table, "p", absent.map(([key, count]) => inputLabels[key] + " " + count).join(" · "));
-    replaceTable(put(table, "div"), ["NHL Game ID", "Čas T−60", "Stav", "Chybějící vstupy"],
+    replaceTable(put(table, "div"), ["NHL Game ID", "Čas T−60", "Stav", "Staženo naposledy", "Chybějící vstupy"],
       view.coverage.map(row => [row.gameId, startTime.format(new Date(row.referenceAt)), [
         verificationLabels[row.status], referenceReasons[row.reason], inputLabels[row.input]].filter(Boolean).join(" · "),
+      row.acquisition?.length ? startTime.format(Math.max(...row.acquisition.map(item => Date.parse(item.retrievedAt)))) : "—",
       row.missing.map(key => inputLabels[key]).join(", ") || "—"]));
   }
+}
+
+const sourceLabels = { score: "NHL rozpis", standings: "NHL statistiky", awaySchedule: "Rozpis hostů",
+  homeSchedule: "Rozpis domácích", goalies: "RotoWire • archiv BANGER", lineups: "Sestavy • archiv BANGER" };
+
+function showPregame(candidate) {
+  if (!Array.isArray(candidate.games) || !candidate.models) throw Error("invalid pregame report");
+  el("pregame-context").textContent = candidate.complete + " úplných · " + candidate.incomplete + " neúplných · "
+    + candidate.comparablePredictions + " skutečně párových predikcí";
+  const availability = el("pregame-models");
+  availability.replaceChildren();
+  for (const [id, model] of Object.entries(models)) {
+    const card = put(availability, "article");
+    put(card, "h3", model.label);
+    put(card, "small", candidate.models[id]?.replay === "simulation_only" ? "Dostupná simulace GSAx"
+      : "Přesná místní reprodukce nedostupná");
+  }
+  const list = el("pregame-games");
+  list.replaceChildren();
+  for (const game of candidate.games) {
+    const item = put(list, "details");
+    const status = game.status === "verified" ? "Úplný" : "Neúplný";
+    const stage = { probe: "Zkouška zdrojů", capture: "Čeká na ověření", signed: "Podepsaný snímek" }[game.stage];
+    put(item, "summary", game.away + " – " + game.home + " · " + status + (stage ? " · " + stage : ""));
+    put(item, "p", "T−60 " + startTime.format(new Date(game.referenceAt)) + " · NHL " + game.gameId);
+    if (game.missing.length) put(item, "p", "Chybí " + game.missing.map(key => inputLabels[key]).join(", "));
+    if (game.candidates.length) put(item, "p", "Podklady k ověření " + game.candidates.map(key => inputLabels[key]).join(", "));
+    if (game.sources.length) replaceTable(put(item, "div"), ["Zdroj", "Staženo", "Zveřejněno"], game.sources.map(row => [
+      sourceLabels[row.key],
+      row.retrievedAt ? startTime.format(new Date(row.retrievedAt)) + (row.status === "ok" ? "" : " · neověřeno") : "Nedostupné",
+      row.dataPublishedAt ? startTime.format(new Date(row.dataPublishedAt)) : "Nedoloženo"
+    ]));
+    for (const row of game.observations) put(item, "p", inputLabels[row.key] + " · staženo " + startTime.format(new Date(row.retrievedAt)));
+  }
+  el("pregame").hidden = false;
+  filters.hidden = true;
+  el("report").hidden = true;
+  el("status").textContent = candidate.games.length + " zápasů v předzápasovém přehledu.";
 }
 
 function render() {
@@ -219,6 +258,11 @@ el("load").addEventListener("change", async event => {
   try {
     if (file.size > 20_000_000) throw Error("report too large");
     const candidate = JSON.parse(await file.text());
+    if (candidate?.schema === "banger-core-accuracy-pregame-v1") {
+      showPregame(candidate);
+      return;
+    }
+    el("pregame").hidden = true;
     if (candidate?.schema !== "banger-core-accuracy-01" || !Array.isArray(candidate.games)
       || !Array.isArray(candidate.records) || !candidate.games.every(game => /^\d{10}$/.test(game.id))
       || !candidate.records.every(row => modelIds.includes(row.model) && kinds.includes(row.kind))) {
@@ -238,6 +282,7 @@ el("load").addEventListener("change", async event => {
       + report.scope.end + " a předchozí dny.";
   } catch {
     report = null;
+    el("pregame").hidden = true;
     filters.hidden = true;
     el("report").hidden = true;
     el("status").textContent = "Soubor se nepodařilo načíst. Vyber JSON vytvořený evaluátorem CORE Accuracy Lab.";

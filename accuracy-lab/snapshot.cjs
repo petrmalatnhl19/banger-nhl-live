@@ -5,10 +5,7 @@ const { dirname, join } = require("node:path");
 const { canonical } = require("./engine.js");
 const { inspectSnapshot, sha256 } = require("./reference.cjs");
 
-function freeze(input, trust, output) {
-  const result = inspectSnapshot(input, trust.snapshot);
-  if (result.status === "rejected") throw Error(result.reason + (result.input ? ": " + result.input : ""));
-  // Preserve the witness envelope alongside the exact canonical JSON payloads.
+function writeArchive(input, output) {
   const temp = mkdtempSync(join(dirname(output), ".accuracy-snapshot-"));
   try {
     const file = join(temp, "snapshot.json");
@@ -17,6 +14,12 @@ function freeze(input, trust, output) {
   } finally {
     rmSync(temp, { recursive: true });
   }
+}
+
+function freeze(input, trust, output) {
+  const result = inspectSnapshot(input, trust.snapshot);
+  if (result.status === "rejected") throw Error(result.reason + (result.input ? ": " + result.input : ""));
+  writeArchive(input, output);
   return result;
 }
 
@@ -39,4 +42,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { freeze };
+module.exports = { freeze, writeArchive };

@@ -89,6 +89,20 @@ function validPayload(name, payload, manifest) {
   }
 }
 
+function validProvenance(provenance, row) {
+  const hex = value => typeof value === "string" && /^[0-9a-f]{64}$/.test(value);
+  const locator = value => typeof value === "string" && /^(https:\/\/[^\s]+|urn:[^\s]+)$/.test(value);
+  if (!fields(provenance, ["captureSha256", "evidence", "method", "sources"])
+    || !hex(provenance.captureSha256) || provenance.method !== "live_retrieval_witness"
+    || !locator(provenance.evidence) || !Array.isArray(provenance.sources) || !provenance.sources.length
+    || timestamp(row.availableAt) !== timestamp(row.retrievedAt)) return false;
+  return provenance.sources.every(source => fields(source, ["url", "sha256", "version", "retrievedAt", "dataPublishedAt"])
+    && typeof source.url === "string" && /^https:\/\/[^\s]+$/.test(source.url)
+    && hex(source.sha256) && source.version === "sha256:" + source.sha256 && source.dataPublishedAt === null
+    && Number.isFinite(timestamp(source.retrievedAt)))
+    && Math.max(...provenance.sources.map(source => timestamp(source.retrievedAt))) === timestamp(row.retrievedAt);
+}
+
 function inspectSnapshot(bundle, keys = {}) {
   const bad = reason => ({ status: "rejected", reason, missing: required.slice() });
   const manifest = bundle?.manifest;
@@ -106,10 +120,11 @@ function inspectSnapshot(bundle, keys = {}) {
   if (seen > ref) return bad("snapshot_after_reference");
   const missing = required.filter(name => !Object.hasOwn(manifest.observations, name));
   for (const [name, row] of Object.entries(manifest.observations)) {
-    if (![...required, ...optional].includes(name) || !fields(row, [
-      "source", "dataThrough", "availableAt", "retrievedAt", "sha256", "payload"
-    ]) || typeof row.source !== "string" || !/^(https:\/\/[^\s]+|urn:[^\s]+)$/.test(row.source)
-      || row.sha256 !== sha256(row.payload) || !validPayload(name, row.payload, manifest)) {
+    const expected = ["source", "dataThrough", "availableAt", "retrievedAt", "sha256", "payload"];
+    if (row && Object.hasOwn(row, "provenance")) expected.push("provenance");
+    if (![...required, ...optional].includes(name) || !fields(row, expected) || typeof row.source !== "string" || !/^(https:\/\/[^\s]+|urn:[^\s]+)$/.test(row.source)
+      || row.sha256 !== sha256(row.payload) || !validPayload(name, row.payload, manifest)
+      || (Object.hasOwn(row, "provenance") && !validProvenance(row.provenance, row))) {
       return { status: "rejected", reason: "invalid_observation", input: name, missing };
     }
     const times = [row.dataThrough, row.availableAt, row.retrievedAt].map(timestamp);
@@ -201,7 +216,9 @@ function buildReference(games, bundle = {}, trust = {}, now = Date.now()) {
       }
     }
     const hidden = partition === "validation" && validationOpen;
-    coverage.push({ ...entry, embargoed: hidden });
+    const acquisition = ["verified", "incomplete"].includes(entry.status)
+      ? Object.entries(snapshot.manifest.observations).map(([key, row]) => ({ key, retrievedAt: row.retrievedAt })) : [];
+    coverage.push({ ...entry, acquisition, embargoed: hidden });
     if (entry.status !== "verified" || hidden || partition === "outside") continue;
     for (const row of forecasts.get(game.id) ?? []) {
       const result = inspectForecast(row, snapshot, entry, boundary, trust.forecast ?? {});
@@ -217,4 +234,4 @@ function buildReference(games, bundle = {}, trust = {}, now = Date.now()) {
   return { policy, required, models: local, validationOpen, coverage, records, ablations, issues };
 }
 
-module.exports = { buildReference, inspectSnapshot, sha256 };
+module.exports = { buildReference, inspectSnapshot, sha256, policy, required, availability: local };
