@@ -1,12 +1,11 @@
-/* BANGER VOICE – Czech live match commentary and replay. */
-(()=>{'use strict';
-const synth=window.speechSynthesis;
-const neural=window.BangerNeuralVoice;
-const voiceKey='banger-commentary-voice';
-let preferredVoice='device';
-try{if(neural&&localStorage.getItem(voiceKey)==='spot')preferredVoice='spot'}catch(_){}
-let voicePanel=null;
-let voiceRoot=null;
+/* BANGER VOICE – Czech Android match commentary and replay. */
+(() => {
+'use strict';
+const synth = window.speechSynthesis;
+const android = /\bAndroid\b/i.test(navigator.userAgent);
+const rules = window.BangerAndroidCommentary;
+let voicePanel = null;
+let voiceRoot = null;
 const style=document.createElement('style');style.textContent='.bv-panel{padding:12px;margin:0 0 12px;border:1px solid #397f9b;border-radius:14px;background:linear-gradient(135deg,#143c55,#0b263b);color:#ecf9ff}.bv-panel strong{font-size:15px}.bv-controls{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.bv-panel button,.bv-panel select{background:#194d68;border:1px solid #58a3bd;color:#f0fcff;border-radius:9px;padding:8px 10px;font-size:13px}.bv-panel button:disabled{opacity:.45}.bv-panel button[aria-pressed=true]{background:#16809b}.bv-status{font-size:12px;color:#b6d8e8;line-height:1.5}.bv-panel label{font-size:12px;color:#cce8f5} .bv-advanced{margin:5px 0}.bv-advanced>summary{cursor:pointer;color:#cce8f5;font-size:12px;padding:5px 0}.bv-advanced .bv-controls{margin:7px 0}';style.textContent+=`
 .bv-panel{position:relative;overflow:visible;padding:14px 15px 13px!important;border-radius:18px!important;border:1px solid rgba(95,216,245,.55)!important;background:radial-gradient(ellipse at 100% 0%,rgba(21,141,187,.24),transparent 58%),linear-gradient(145deg,#103750,#071b32)!important;box-shadow:inset 0 1px rgba(193,241,255,.13),0 8px 25px rgba(0,0,0,.16)}
 .bv-panel>strong{display:block;letter-spacing:.7px;font-size:14px!important;color:#bdeefa}
@@ -46,280 +45,301 @@ const style=document.createElement('style');style.textContent='.bv-panel{padding
 
 .bv-panel>.bv-mode-switch{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px;padding:4px;border:1px solid rgba(96,190,220,.32);border-radius:12px;background:rgba(2,18,34,.55)}
 .bv-panel>.bv-mode-switch>button{width:100%;min-width:0;padding:9px 5px;font-weight:700;border:1px solid transparent;background:transparent;color:#a8cbd9;border-radius:9px}
-.bv-neural-status,.bv-download-note{font-size:12px;color:#b6d8e8;margin:8px 0 0;line-height:1.5}
-.bv-neural-status:empty{display:none}
 .bv-panel>.bv-mode-switch>button[aria-pressed=true]{background:linear-gradient(135deg,#136e8b,#17465f);color:#fff;border-color:#5ad3e9;box-shadow:0 2px 12px #00d8ff22}
 `;document.head.appendChild(style);
-let state={id:null,mode:'replay',playing:false,paused:false,queue:[],index:0,seen:new Set(),generation:0,utterance:null,latest:[],started:false,busy:false,error:'',lastNewAt:0,lastNoticeAt:0,radioIndex:0,radioOn:true,radioStats:null,voice:'device',neuralStatus:''};
-const clean=t=>String(t||'').replace(/[🎙️🥅🏒🧤🎯↗️🛡️💥⚡📈⏱️🚨🔥📋⚠️🧱]/gu,' ').replace(/\s+/g,' ').trim();
-const defaults={'Jack Hughes':'Džek Hjůz','Connor McDavid':'Konor Mekdejvid','Cale Makar':'Kejl Makár','Ukko-Pekka Luukkonen':'Ukko Pekka Lúkkonen','Matthew Tkachuk':'Metjú Kačak','Brady Tkachuk':'Brejdy Kačak','Jason Robertson':'Džejson Robertson','Jacob Trouba':'Džejkob Trúba','Jake Oettinger':'Džejk Otinger','Jack Eichel':'Džek Ajkl','Quinn Hughes':'Kvin Hjůz','Mikko Rantanen':'Mikko Rantanen','Nathan MacKinnon':'Nejtan Mekinon','Auston Matthews':'Óston Metjús','Kirill Kaprizov':'Kirill Kaprizov','Leon Draisaitl':'Leon Drajzajtl'};
+const clean = text => String(text || '').trim();
+const defaults={'Dallas Stars':'Dallas Stárz','Edmonton Oilers':'Edmonton Ojlers','Florida Panthers':'Florida Pentrz','Vegas Golden Knights':'Vegas Gouden Najts','Seattle Kraken':'Sietl Kraken','Jack Hughes':'Džek Hjůz','Connor McDavid':'Konor Mekdejvid','Cale Makar':'Kejl Makár','Ukko-Pekka Luukkonen':'Ukko Pekka Lúkkonen','Matthew Tkachuk':'Metjú Kačak','Brady Tkachuk':'Brejdy Kačak','Jason Robertson':'Džejson Robertson','Jacob Trouba':'Džejkob Trúba','Jake Oettinger':'Džejk Otinger','Jack Eichel':'Džek Ajkl','Quinn Hughes':'Kvin Hjůz','Mikko Rantanen':'Mikko Rantanen','Nathan MacKinnon':'Nejtan Mekinon','Auston Matthews':'Óston Metjús','Kirill Kaprizov':'Kirill Kaprizov','Leon Draisaitl':'Leon Drajzajtl'};
 const storageKey='banger-voice-pronunciation-v1';let custom={};try{const saved=JSON.parse(localStorage.getItem(storageKey)||'{}');if(saved&&typeof saved==='object'&&!Array.isArray(saved))custom=saved}catch(_){};
 const escapeRegExp=s=>Array.from(s).map(ch=>/[A-Za-z0-9À-ž ]/u.test(ch)?ch:'\\u'+ch.codePointAt(0).toString(16).padStart(4,'0')).join('');
 function speechText(text){let output=clean(text);const entries=Object.entries({...defaults,...custom}).filter(([name,pron])=>name.trim()&&typeof pron==='string'&&pron.trim()).sort((a,b)=>b[0].length-a[0].length);for(const [name,pron] of entries){try{const rx=new RegExp('(^|[^\\p{L}])('+escapeRegExp(name)+')(?=$|[^\\p{L}])','giu');output=output.replace(rx,(_,before)=>before+pron)}catch(err){console.warn('Přepis výslovnosti přeskočen:',name,err)}}return output}
-function savePronunciation(){const panel=document.querySelector('.bv-panel');const name=panel?.querySelector('[data-bv=name]')?.value.trim(),pron=panel?.querySelector('[data-bv=pron]')?.value.trim();if(!name||!pron){panel.querySelector('[data-bv=pron-status]').textContent='Vyplň jméno i požadovanou výslovnost.';return}if(name.length>90||pron.length>120){panel.querySelector('[data-bv=pron-status]').textContent='Zadaný text je příliš dlouhý.';return}custom[name]=pron;try{localStorage.setItem(storageKey,JSON.stringify(custom));panel.querySelector('[data-bv=pron-status]').textContent='Výslovnost uložena v tomto prohlížeči.'}catch(_){panel.querySelector('[data-bv=pron-status]').textContent='Uložení v prohlížeči není dostupné.'}}
-function testPronunciation(){
-    const name=voicePanel?.querySelector('[data-bv=name]')?.value.trim();
-    if(!name)return;
-    stop();
-    const text=speechText(name);
-    const rate=Number(voicePanel.querySelector('[data-bv=rate]').value||1);
-    if(selectedVoice()==='spot'){
-        const gen=state.generation;
-        state.neuralStatus='Připravuji ukázku výslovnosti…';
-        update();
-        neural.unlock().then(()=>{
-            if(gen!==state.generation)return;
-            return neural.speak(text,rate,{
-                onStage(stage){if(gen===state.generation){state.neuralStatus='Hlas ze spotu · '+stage;update()}},
-                onPlay(){if(gen===state.generation){state.neuralStatus='';update()}},
-                onProgress(done,total,stage,phase,elapsedMs){
-                    if(gen!==state.generation)return;
-                    state.neuralStatus='Hlas ze spotu · '+(stage||'model')+' ('+done+'/'+total+') · '+(phase||'inicializace')+(elapsedMs == null ? '' : ' · '+(elapsedMs/1000).toFixed(1)+' s');
-                    update();
-                },
-            });
-        }).catch(()=>{
-            if(gen===state.generation){state.neuralStatus='Ukázku hlasu ze spotu se nepodařilo přehrát.';update()}
-        });
-        return;
-    }
-    if(!synth)return;
-    const utter=new SpeechSynthesisUtterance(text);
-    utter.lang='cs-CZ';
-    utter.rate=rate;
-    const voice=chooseVoice();
-    if(voice)utter.voice=voice;
-    synth.speak(utter);
+function savePronunciation(){const panel=voicePanel;const name=panel?.querySelector('[data-bv=name]')?.value.trim(),pron=panel?.querySelector('[data-bv=pron]')?.value.trim();if(!name||!pron){panel.querySelector('[data-bv=pron-status]').textContent='Vyplň jméno i požadovanou výslovnost.';return}if(name.length>90||pron.length>120){panel.querySelector('[data-bv=pron-status]').textContent='Zadaný text je příliš dlouhý.';return}custom[name]=pron;try{localStorage.setItem(storageKey,JSON.stringify(custom));panel.querySelector('[data-bv=pron-status]').textContent='Výslovnost uložena v tomto prohlížeči.'}catch(_){panel.querySelector('[data-bv=pron-status]').textContent='Uložení v prohlížeči není dostupné.'}}
+
+const state = {
+    id: null, latest: [], summary: '', finished: false, stats: '', lastSpokenStats: '',
+    mode: 'replay', playing: false, paused: false, error: '',
+    queue: [], seen: new Set(), active: null, utterance: null,
+    segment: 0, parts: [], nextTimer: null, watchdog: null,
+    lastActivity: 0,
+};
+const voiceStorage = 'banger-commentary-android-voice';
+let confirmedVoice = '';
+try { confirmedVoice = localStorage.getItem(voiceStorage) || ''; } catch (_) {}
+
+const control = name => voicePanel?.querySelector('[data-bv="' + name + '"]');
+const voiceId = voice => voice.voiceURI || voice.name;
+const candidates = () => android && synth
+    ? rules.localCzechVoices(synth.getVoices()).sort((a, b) =>
+        Number(rules.femaleLabel(b)) - Number(rules.femaleLabel(a)) ||
+        Number(/^cs[-_]cz$/i.test(b.lang)) - Number(/^cs[-_]cz$/i.test(a.lang)) ||
+        Number(b.default) - Number(a.default))
+    : [];
+
+function voiceForPlayback() {
+    const list = candidates();
+    return list.find(voice => voiceId(voice) === confirmedVoice) || list.find(rules.femaleLabel);
 }
-const key=x=>String(x.id??[x.period,x.time,x.text].join('|'));
-function stop(){
-    state.generation++;state.playing=false;state.paused=false;state.queue=[];state.index=0;
-    state.utterance=null;state.currentType=null;state.busy=false;state.error='';state.neuralStatus='';
-    state.lastNewAt=0;state.lastNoticeAt=0;
-    neural?.stop();
-    if(synth?.speaking||synth?.pending||synth?.paused)synth.cancel();
+
+function refreshVoiceList() {
+    const select = control('voice');
+    if (!select) return;
+    const list = candidates();
+    const wanted = select.value || voiceId(voiceForPlayback() || {}) || '';
+    select.replaceChildren(new Option(list.length ? 'Vyber český hlas' : 'Místní český hlas nenalezen', ''));
+    for (const voice of list) select.add(new Option(voice.name, voiceId(voice)));
+    if (list.some(voice => voiceId(voice) === wanted)) select.value = wanted;
+    else if (list.length === 1) select.value = voiceId(list[0]);
     update();
 }
-function voices(){return synth?.getVoices?.()||[]}
-function chooseVoice(){const cs=voices().filter(v=>/^cs([-_]|$)/i.test(v.lang));return cs.find(v=>v.localService)||cs[0]||null}
-function selectedVoice(){return neural&&preferredVoice==='spot'?'spot':'device'}
-function available(){return (neural&&selectedVoice()==='spot')||synth}
-function update(){
-    const root=voicePanel;
-    if(!root?.isConnected)return;
-    root.classList.toggle('bv-speaking',Boolean(state.playing&&!state.paused&&state.busy));
-    const status=root.querySelector('.bv-status');
-    const canPlay=available();
-    status.textContent=state.error||(!canPlay?'Tento prohlížeč nepodporuje zvolený hlas.':state.paused?'Pozastaveno.':state.playing?(state.mode==='live'?'Živý režim · čeká na nové události nebo právě čte.':'Přehrávání záznamu · '+Math.min(state.index+1,state.queue.length)+' / '+state.queue.length):selectedVoice()==='spot'?'Připraven hlas ze spotu.':'Připraveno. Hlas využívá nastavení telefonu.');
-    root.querySelector('.bv-neural-status').textContent=state.neuralStatus;
-    root.querySelector('[data-bv=pause]').textContent=state.paused?'▶ Pokračovat':'⏸ Pauza';
-    root.querySelector('[data-bv=pause]').disabled=!state.playing;
-    root.querySelector('[data-bv=start]').disabled=!canPlay;
+
+function update() {
+    if (!voicePanel?.isConnected) return;
+    const voice = voiceForPlayback();
+    const selected = Boolean(control('voice').value);
+    const pendingVoice = selected && control('voice').value !== voiceId(voice || {});
+    const status = state.error || (
+        !android ? 'Komentář používá místní český hlas na Androidu.' :
+        !synth ? 'Tento prohlížeč nepodporuje hlas zařízení.' :
+        !candidates().length ? 'V nastavení převodu textu na řeč stáhni český hlas a znovu otevři zápas.' :
+        state.paused ? 'Pozastaveno.' :
+        state.playing ? (state.mode === 'live' ? 'Živě' : 'Přehrávání od začátku') :
+        voice ? 'Připraveno · ' + voice.name : 'V nastavení komentáře poslechni a potvrď český ženský hlas.');
+    voicePanel.classList.toggle('bv-speaking', Boolean(state.utterance));
+    voicePanel.querySelector('.bv-status').textContent = status;
+    control('pause').textContent = state.paused ? '▶ Pokračovat' : '⏸ Pauza';
+    control('pause').disabled = !state.playing;
+    control('start').disabled = !voice || pendingVoice;
+    control('test-pron').disabled = !voice;
+    control('preview').disabled = !selected;
+    control('confirm').disabled = !selected;
 }
 
-const scoreNumerals=['nula','jedna','dva','tři','čtyři','pět','šest','sedm','osm','devět','deset','jedenáct','dvanáct','třináct','čtrnáct','patnáct','šestnáct','sedmnáct','osmnáct','devatenáct','dvacet'];
-const scoreAfterKu=['nule','jedné','dvěma','třem','čtyřem','pěti','šesti','sedmi','osmi','devíti','deseti','jedenácti','dvanácti','třinácti','čtrnácti','patnácti','šestnácti','sedmnácti','osmnácti','devatenácti','dvaceti'];
+function clearTimers() {
+    clearTimeout(state.nextTimer);
+    clearTimeout(state.watchdog);
+    state.nextTimer = state.watchdog = null;
+}
 
-function spotSpeechText(text){
-    // Hockey scores and shot-count pairs use the same spoken form.
-    // Period clocks live in the event's time field, outside the narration text.
-    const spoken=text.replace(/^[\p{Lu} ]+!/u, opening=>opening[0]+opening.slice(1).toLowerCase());
-    return spoken.replace(/\b(0|[1-9]\d?)\s*:\s*(0|[1-9]\d?)\b/g,(_,left,right)=>{
-        return (scoreNumerals[Number(left)]??left)+' ku '+(scoreAfterKu[Number(right)]??right);
+function cancelAudio() {
+    clearTimers();
+    const utterance = state.utterance;
+    state.utterance = null;
+    if (utterance || synth?.speaking || synth?.pending || synth?.paused) synth?.cancel();
+}
+
+function clearActive() {
+    state.active = null;
+    state.parts = [];
+    state.segment = 0;
+}
+
+function stop() {
+    cancelAudio();
+    clearActive();
+    state.queue = [];
+    state.playing = state.paused = false;
+    state.error = '';
+    update();
+}
+
+function fail(message) {
+    stop();
+    state.error = message;
+    update();
+}
+
+function speak(part, voice, onEnd) {
+    if (!voice) {
+        fail('Zvolený český hlas není dostupný. Otevři nastavení komentáře.');
+        return;
+    }
+    try {
+        const utterance = new SpeechSynthesisUtterance(speechText(part.text));
+        utterance.voice = voice;
+        utterance.lang = voice.lang;
+        utterance.rate = Math.max(.65, Math.min(1.4, Number(control('rate').value) * part.rate));
+        utterance.pitch = part.pitch;
+        const current = () => state.utterance === utterance;
+        const timeout = () => {
+            if (current()) fail('Hlas zařízení neodpovídá. Zkus komentář spustit znovu.');
+        };
+        utterance.onstart = () => {
+            if (!current()) return;
+            clearTimeout(state.watchdog);
+            state.watchdog = setTimeout(timeout, 20000);
+        };
+        utterance.onend = () => {
+            if (!current()) return;
+            clearTimeout(state.watchdog);
+            state.watchdog = null;
+            state.utterance = null;
+            update();
+            onEnd();
+        };
+        utterance.onerror = () => {
+            if (current()) fail('Český hlas nelze přehrát. Zkontroluj stažená hlasová data v Androidu.');
+        };
+        state.utterance = utterance;
+        state.watchdog = setTimeout(timeout, 7000);
+        synth.speak(utterance);
+        update();
+    } catch (_) {
+        fail('Hlas zařízení se nepodařilo spustit.');
+    }
+}
+
+function pump() {
+    if (!state.playing || state.paused || state.utterance || state.nextTimer !== null) return;
+    if (!state.active) {
+        state.active = state.queue.shift();
+        if (!state.active) {
+            if (state.mode === 'replay' || state.finished) state.playing = false;
+            update();
+            return;
+        }
+        state.parts = rules.segments(state.active, control('dynamic').checked);
+        state.segment = 0;
+    }
+    const part = state.parts[state.segment];
+    if (!part) {
+        clearActive();
+        pump();
+        return;
+    }
+    speak(part, voiceForPlayback(), () => {
+        if (++state.segment >= state.parts.length) clearActive();
+        state.nextTimer = setTimeout(() => {
+            state.nextTimer = null;
+            pump();
+        }, part.gap);
     });
 }
 
-function playback(item){
-    const base=Number(voicePanel?.querySelector('[data-bv=rate]')?.value||1);
-    if(voicePanel?.querySelector('[data-bv=dynamic]')?.checked===false)return {rate:base,pitch:1};
-    const goal=item.type==='goal';
-    const shot=['shot-on-goal','missed-shot','blocked-shot'].includes(item.type);
-    const penalty=item.type==='penalty';
-    return {rate:Math.max(.7,Math.min(1.5,base*(goal?1.12:shot?1.03:penalty?.94:1))),
-        pitch:goal?1.22:shot?1.08:penalty?.96:1};
-}
-
-function speakNext(gen){
-    if(!state.playing||state.paused||gen!==state.generation||state.busy)return;
-    if(state.index>=state.queue.length){
-        if(state.mode==='replay')state.playing=false;
-        update();
-        return;
-    }
-    const item=state.queue[state.index];
-    const {rate,pitch}=playback(item);
-    const text=speechText(item.text);
-    if(state.voice==='spot'){
-        const request={};
-        state.utterance=request;
-        state.busy=true;
-        state.currentType=item.type;
-        state.neuralStatus='Připravuji hlas ze spotu…';
-        update();
-        const current=()=>gen===state.generation&&state.utterance===request;
-        Promise.resolve().then(()=>{
-            if(!current())return;
-            return neural.speak(spotSpeechText(text),rate,{
-                onStage(stage){if(gen===state.generation){state.neuralStatus='Hlas ze spotu · '+stage;update()}},
-                onPlay(){if(current()){state.neuralStatus='';update()}},
-                onProgress(done,total,stage,phase,elapsedMs){if(current()){state.neuralStatus='Hlas ze spotu · '+(stage||'model')+' ('+done+'/'+total+') · '+(phase||'inicializace')+(elapsedMs == null ? '' : ' · '+(elapsedMs/1000).toFixed(1)+' s');update()}},
-            });
-        }).then(()=>{
-            if(!current())return;
-            state.utterance=null;
-            state.busy=false;
-            state.index++;
-            speakNext(gen);
-        }).catch(error=>{
-            if(!current())return;
-            console.error('[BANGER VOICE] Spot voice synthesis failed:',error);
-            state.busy=false;
-            state.utterance=null;
-            if(synth){
-                state.voice='device';
-                state.neuralStatus='Hlas ze spotu selhal ('+String(error?.message||'neznámá chyba').slice(0,160)+'). Přehrávám hlas zařízení.';
-                speakNext(gen);
-            }else{
-                state.playing=false;
-                state.neuralStatus='Hlas ze spotu selhal: '+String(error?.message||'neznámá chyba').slice(0,160);
-            }
-            update();
-        });
-        return;
-    }
-
-    let utter;
-    try{
-        utter=new SpeechSynthesisUtterance(text);
-        utter.lang='cs-CZ';
-        utter.rate=rate;
-        utter.pitch=pitch;
-        utter.volume=1;
-        const voice=chooseVoice();
-        if(voice)utter.voice=voice;
-    }catch(error){state.error='Chyba přípravy hlasu: '+error.message;state.playing=false;update();return}
-    state.busy=true;
-    state.utterance=utter;
-    state.currentType=item.type;
-    const current=()=>gen===state.generation&&state.utterance===utter;
-    utter.onstart=()=>{if(current()){state.error='';update()}};
-    utter.onend=()=>{
-        if(!current())return;
-        state.utterance=null;
-        state.busy=false;
-        state.index++;
-        speakNext(gen);
-    };
-    utter.onerror=event=>{
-        if(!current())return;
-        state.utterance=null;
-        state.busy=false;
-        const reason=event.error||'neznámá chyba';
-        if(reason==='canceled'||reason==='interrupted')return;
-        state.error='Hlas nelze přehrát ('+reason+'). Zkontroluj český hlas v nastavení zařízení.';
-        state.playing=false;
-        update();
-    };
-    try{synth.speak(utter);update()}
-    catch(error){state.busy=false;state.playing=false;state.error='Nepodařilo se spustit hlas: '+error.message;update()}
-}
-
-function start(){
-    if(!available()){update();return}
+function start() {
+    refreshVoiceList();
+    if (control('start').disabled) return;
     stop();
-    state.playing=true;state.started=true;
-    state.voice=selectedVoice();
-    state.mode=voicePanel.querySelector('[data-bv=mode]').value;
-    state.queue=state.mode==='replay'?[...state.latest]:[];
-    state.index=0;state.seen=new Set(state.latest.map(key));state.busy=false;
-    state.lastNewAt=Date.now();state.lastNoticeAt=0;
-    if(state.mode==='replay'&&!state.queue.length){
-        state.playing=false;state.error='Zatím nejsou dostupné události k přečtení.';update();return;
+    state.mode = control('pick-live').getAttribute('aria-pressed') === 'true' ? 'live' : 'replay';
+    state.seen = new Set(state.latest.map(item => item.id));
+    state.lastActivity = Date.now();
+    state.lastSpokenStats = state.stats;
+    state.queue = state.mode === 'live' && state.summary
+        ? [{id: 'summary', type: 'summary', mood: 'calm', priority: 0, text: state.summary}]
+        : [...state.latest];
+    if (!state.queue.length) {
+        state.error = 'Zatím nejsou dostupné události k přečtení.';
+        update();
+        return;
     }
-    const gen=state.generation;
-    if(state.voice==='spot'){
-        try{
-            const unlocked=neural.unlock();
-            unlocked?.catch(()=>{
-                if(gen!==state.generation||!state.playing)return;
-                stop();
-                state.neuralStatus='Přehrávání zvuku zařízení nebylo povoleno. Zkus stisknout Spustit znovu.';
-                update();
-            });
-        }catch(_){
-            stop();
-            state.neuralStatus='Přehrávání zvuku zařízení nebylo povoleno.';
-            update();return;
+    state.playing = true;
+    pump();
+}
+
+function togglePause() {
+    if (!state.playing) return;
+    state.paused = !state.paused;
+    if (state.paused) cancelAudio();
+    else pump();
+    update();
+}
+
+function preview(text, voice) {
+    if (!text || !voice) return;
+    stop();
+    const item = {type: 'preview', mood: 'calm', text};
+    speak(rules.segments(item, true)[0], voice, () => {});
+}
+
+function mount(root) {
+    if (voiceRoot === root && voicePanel) {
+        if (!voicePanel.isConnected) root.prepend(voicePanel);
+        return;
+    }
+    voiceRoot = root;
+    voicePanel = document.createElement('section');
+    voicePanel.className = 'bv-panel';
+    voicePanel.innerHTML = '<strong>🎙️ Hlasový komentář</strong><div class="bv-mode-switch" role="group" aria-label="Režim přehrávání"><button type="button" data-bv="pick-live" aria-pressed="false">🔴 Živě</button><button type="button" data-bv="pick-replay" aria-pressed="true">⏮ Od začátku</button></div><div class="bv-controls"><button type="button" data-bv="start">▶ Spustit</button><button type="button" data-bv="pause">⏸ Pauza</button><button type="button" data-bv="stop">⏹ Zastavit</button><details class="bv-advanced"><summary title="Nastavení hlasu" aria-label="Nastavení hlasu">⚙️</summary><div class="bv-controls"><label>Rychlost <select data-bv="rate"><option value=".85">0,85×</option><option value="1" selected>1×</option><option value="1.15">1,15×</option><option value="1.3">1,3×</option></select></label></div><label style="display:flex;align-items:center;gap:6px;margin:6px 0"><input type="checkbox" data-bv="dynamic" checked> 🎭 Sportovní přednes</label><label style="display:flex;align-items:center;gap:6px;margin:6px 0"><input type="checkbox" data-bv="radio" checked> 📻 Aktualizované střelecké statistiky během čekání</label><details style="margin:9px 0"><summary style="cursor:pointer;font-size:12px;color:#cce8f5">🗣️ Upravit výslovnost hráče</summary><div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:8px"><input data-bv="name" placeholder="Jméno hráče (např. Jack Hughes)" aria-label="Jméno hráče" style="min-width:180px;flex:1;background:#0c2a40;color:white;border:1px solid #58a3bd;border-radius:8px;padding:8px"><input data-bv="pron" placeholder="Jak se má vyslovit" aria-label="Fonetický přepis" style="min-width:160px;flex:1;background:#0c2a40;color:white;border:1px solid #58a3bd;border-radius:8px;padding:8px"><button type="button" data-bv="save-pron">Uložit výslovnost</button><button type="button" data-bv="test-pron">🔊 Vyzkoušet</button></div><div data-bv="pron-status" style="font-size:11px;margin-top:5px;color:#a9d5e8">Přepis výslovnosti se použije při přehrávání.</div></details></details></div><div class="bv-status" role="status"></div>';
+    const controls = voicePanel.querySelector(':scope > .bv-controls');
+    const advanced = controls.querySelector(':scope > .bv-advanced');
+    controls.after(advanced);
+    const settings = document.createElement('div');
+    settings.className = 'bv-controls';
+    settings.innerHTML = '<label>Český hlas Androidu<select data-bv="voice"></select></label>' +
+        '<div><button type="button" data-bv="preview">Poslechnout ukázku</button> ' +
+        '<button type="button" data-bv="confirm">Potvrdit ženský hlas</button></div>';
+    advanced.prepend(settings);
+    root.prepend(voicePanel);
+    const setMode = mode => {
+        if (control('pick-' + mode).getAttribute('aria-pressed') === 'true') return;
+        stop();
+        for (const key of ['live', 'replay']) {
+            control('pick-' + key).setAttribute('aria-pressed', String(mode === key));
         }
-    }
-    speakNext(gen);
-    update();
+    };
+    control('pick-live').addEventListener('click', () => setMode('live'));
+    control('pick-replay').addEventListener('click', () => setMode('replay'));
+    control('start').addEventListener('click', start);
+    control('pause').addEventListener('click', togglePause);
+    control('stop').addEventListener('click', stop);
+    control('voice').addEventListener('change', stop);
+    control('preview').addEventListener('click', () =>
+        preview('Krásný hokejový večer. Connor McDavid střílí! A máme vyrovnáno.', candidates().find(v => voiceId(v) === control('voice').value)));
+    control('confirm').addEventListener('click', () => {
+        stop();
+        confirmedVoice = control('voice').value;
+        try { localStorage.setItem(voiceStorage, confirmedVoice); } catch (_) {}
+        update();
+    });
+    control('save-pron').addEventListener('click', savePronunciation);
+    control('test-pron').addEventListener('click', () => preview(control('name').value.trim(), voiceForPlayback()));
+    refreshVoiceList();
 }
 
-function togglePause(){
-    if(!state.playing)return;
-    const paused=state.paused=!state.paused;
-    if(state.voice==='spot'){
-        const gen=state.generation;
-        const change=paused?neural.pause():neural.resume();
-        change?.catch(()=>{
-            if(gen!==state.generation)return;
-            stop();
-            state.neuralStatus='Nepodařilo se obnovit zvuk. Spusť komentář znovu.';
-            update();
-        });
-    }else if(paused)synth.pause();
-    else synth.resume();
-    if(!paused&&!state.busy)speakNext(state.generation);
-    update();
-}
-function mount(root){
-if(voiceRoot===root&&voicePanel){if(!voicePanel.isConnected)root.prepend(voicePanel);return}
-voiceRoot=root;const el=document.createElement('section');el.className='bv-panel';el.innerHTML='<strong>🎙️ BANGER VOICE 2.0</strong><div class="bv-mode-switch" role="group" aria-label="Režim přehrávání"><button type="button" data-bv="pick-live" aria-pressed="false">🔴 Živě</button><button type="button" data-bv="pick-replay" aria-pressed="true">⏮ Od začátku</button></div><div class="bv-controls"><button type="button" data-bv="start">▶ Spustit</button><button type="button" data-bv="pause">⏸ Pauza</button><button type="button" data-bv="stop">⏹ Zastavit</button><details class="bv-advanced"><summary title="Nastavení hlasu" aria-label="Nastavení hlasu">⚙️</summary><div class="bv-controls"><label>Rychlost <select data-bv="rate"><option value=".85">0,85×</option><option value="1" selected>1×</option><option value="1.15">1,15×</option><option value="1.3">1,3×</option></select></label></div><label style="display:flex;align-items:center;gap:6px;margin:6px 0"><input type="checkbox" data-bv="dynamic" checked> 🎭 Dynamický hlas – výraznější góly, klidnější přerušení</label><label style="display:flex;align-items:center;gap:6px;margin:6px 0"><input type="checkbox" data-bv="radio" checked> 📻 Hokejové zajímavosti při čekání na události (živě)</label><details style="margin:9px 0"><summary style="cursor:pointer;font-size:12px;color:#cce8f5">🗣️ Upravit výslovnost hráče</summary><div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:8px"><input data-bv="name" placeholder="Jméno hráče (např. Jack Hughes)" aria-label="Jméno hráče" style="min-width:180px;flex:1;background:#0c2a40;color:white;border:1px solid #58a3bd;border-radius:8px;padding:8px"><input data-bv="pron" placeholder="Jak se má vyslovit" aria-label="Fonetický přepis" style="min-width:160px;flex:1;background:#0c2a40;color:white;border:1px solid #58a3bd;border-radius:8px;padding:8px"><button type="button" data-bv="save-pron">Uložit výslovnost</button><button type="button" data-bv="test-pron">🔊 Vyzkoušet</button></div><div data-bv="pron-status" style="font-size:11px;margin-top:5px;color:#a9d5e8">Úprava ovlivní jen hlas, nikoli psaný komentář.</div></details><div class="bv-status" role="status"></div></details></div>';const controls=el.querySelector(':scope > .bv-controls');const advanced=controls.querySelector(':scope > .bv-advanced');
-const voiceStatus=document.createElement('div');
-voiceStatus.className='bv-neural-status';
-voiceStatus.setAttribute('role','status');
-controls.after(voiceStatus,advanced);
-const voiceSettings=document.createElement('label');
-voiceSettings.textContent='Hlas komentáře';
-const voiceSelect=document.createElement('select');
-voiceSelect.dataset.bv='voice';
-voiceSelect.add(new Option('Hlas zařízení','device'));
-if(neural)voiceSelect.add(new Option('Hlas ze spotu','spot'));
-voiceSelect.value=selectedVoice();
-voiceSettings.append(voiceSelect);
-advanced.querySelector('.bv-controls').prepend(voiceSettings);
-const downloadNote=document.createElement('p');
-downloadNote.className='bv-download-note';
-downloadNote.textContent='První spuštění stáhne přibližně 400 MB. Použij Wi-Fi.';
-downloadNote.hidden=voiceSelect.value!=='spot';
-advanced.querySelector('.bv-controls').after(downloadNote);
-voiceSelect.addEventListener('change',()=>{
-    stop();
-    preferredVoice=voiceSelect.value;
-    if(preferredVoice==='device')neural?.release();
-    downloadNote.hidden=preferredVoice!=='spot';
-    try{localStorage.setItem(voiceKey,preferredVoice)}catch(_){}
+document.addEventListener('banger:commentary', event => {
+    const {id, items, summary, finished, stats} = event.detail || {};
+    const root = document.getElementById('commentaryFeed');
+    if (!id || !Array.isArray(items) || !root) return;
+    if (state.id !== id) {
+        stop();
+        state.id = id;
+    }
+    Object.assign(state, {latest: items, summary, finished, stats});
+    mount(root);
+    if (state.playing && state.mode === 'live') {
+        const additions = items.filter(item => !state.seen.has(item.id));
+        for (const item of additions) state.seen.add(item.id);
+        if (additions.length) {
+            const fresh = new Map(items.map(item => [item.id, item]));
+            const pending = state.queue.map(item => fresh.get(item.id)).filter(Boolean);
+            state.lastActivity = Date.now();
+            state.queue = rules.liveQueue(pending, additions);
+            const urgent = additions.some(item => item.priority >= 85);
+            if (state.active && ((urgent && state.active.priority < 70) || state.active.type === 'radio')) {
+                cancelAudio();
+                clearActive();
+            }
+        }
+        pump();
+    }
     update();
 });
-voicePanel=el;
-root.prepend(el);const modeInput=document.createElement('input');modeInput.type='hidden';modeInput.dataset.bv='mode';modeInput.value='replay';el.appendChild(modeInput);const setMode=mode=>{if(modeInput.value===mode)return;if(state.playing)stop();modeInput.value=mode;el.querySelector('[data-bv=pick-live]').setAttribute('aria-pressed',String(mode==='live'));el.querySelector('[data-bv=pick-replay]').setAttribute('aria-pressed',String(mode==='replay'))};el.querySelector('[data-bv=pick-live]').addEventListener('click',()=>setMode('live'));el.querySelector('[data-bv=pick-replay]').addEventListener('click',()=>setMode('replay'));el.querySelector('[data-bv=start]').addEventListener('click',start);el.querySelector('[data-bv=pause]').addEventListener('click',togglePause);el.querySelector('[data-bv=stop]').addEventListener('click',stop);el.querySelector('[data-bv=radio]').addEventListener('change',ev=>{state.radioOn=ev.target.checked});el.querySelector('[data-bv=save-pron]').addEventListener('click',savePronunciation);el.querySelector('[data-bv=test-pron]').addEventListener('click',testPronunciation);el.querySelector('[data-bv=mode]').addEventListener('change',()=>{if(state.playing)stop()});update()}
-document.addEventListener('banger:commentary',ev=>{const {id,items,radioStats}=ev.detail||{};if(!id||!Array.isArray(items))return;if(state.id!==String(id)){stop();state.id=String(id);state.started=false;state.seen=new Set()}const root=document.getElementById('commentaryFeed');if(!root)return;state.radioStats=radioStats||null;state.latest=items.filter(x=>x.text).slice().sort((a,b)=>(Number(a.period||0)-Number(b.period||0))||(parseClock(a.time)-parseClock(b.time))||(Number(a.id||0)-Number(b.id||0)));mount(root);if(state.playing&&state.mode==='live'){const additions=state.latest.filter(x=>!state.seen.has(key(x)));for(const x of additions){state.seen.add(key(x));state.queue.push(x)}if(additions.length){state.lastNewAt=Date.now();state.lastNoticeAt=0;if(state.busy&&state.currentType==='radio'){state.queue.splice(state.index,1);state.busy=false;state.currentType=null;state.utterance=null;state.neuralStatus='';if(state.voice==='spot')neural.stop();else synth?.cancel()}}if(!state.busy&&!state.paused)speakNext(state.generation);update()}});
-function parseClock(value){const m=String(value||'').match(/^(\d+):(\d{2})$/);return m?Number(m[1])*60+Number(m[2]):0}
-const radioFacts=[
-'Věděli jste, že? Při zakázaném uvolnění se zpravidla vhazuje v obranném pásmu provinivšího se týmu.',
-'Hokejová zajímavost: Gól se počítá až ve chvíli, kdy puk celým objemem překročí brankovou čáru.',
-'Věděli jste, že? V základní části NHL se při nerozhodném stavu po šedesáti minutách hraje prodloužení tři na tři.',
-'Hokejová zajímavost: Brankář si může připsat asistenci, pokud se podílí na akci vedoucí ke gólu.',
-'Věděli jste, že? Při odloženém vyloučení může neprovinivší se tým odvolat brankáře a nasadit dalšího hráče do pole.',
-'Hokejová zajímavost: Hattrick znamená tři góly jednoho hráče v jediném zápase.',
-'Věděli jste, že? Střela zblokovaná hráčem v poli se do oficiální statistiky střel na branku nezapočítává.',
-'Hokejová zajímavost: Vyloučení na dvě minuty se obvykle ukončí, když soupeř vstřelí gól v přesilovce.'
-];
-function radioMessage(){const n=state.radioIndex++;const q=state.radioStats;if(q&&n%2===0&&Number.isFinite(q.awayShots)&&Number.isFinite(q.homeShots)){const a=q.awayName,h=q.homeName;const lead=q.awayGoals===q.homeGoals?'Skóre je zatím vyrovnané.':(q.awayGoals>q.homeGoals?a:h)+' je ve vedení.';return '🎙️ Krátký pohled na statistiky zápasu. '+a+' mají '+q.awayShots+' střel na branku, '+h+' '+q.homeShots+'. '+lead+' Čekáme na další události.'}const text=radioFacts[Math.floor(n/2)%radioFacts.length];return '🎙️ Než dorazí další událost, jedna hokejová zajímavost. '+text}
-function checkSilence(){if(!state.playing||state.paused||state.mode!=='live'||document.hidden)return;const now=Date.now();if(!state.lastNewAt)state.lastNewAt=now;if(now-state.lastNewAt<60000||state.lastNoticeAt&&now-state.lastNoticeAt<150000)return;if(state.queue.length-state.index>0||state.busy)return;state.lastNoticeAt=now;const text=state.radioOn?radioMessage():'Zatím nemáme žádnou novou událost. Čekáme na další informace ze zápasu.';state.queue.push({id:'radio-'+now,type:'radio',text});speakNext(state.generation)}
-setInterval(checkSilence,10000);
-document.addEventListener('visibilitychange',()=>{if(!document.getElementById('commentaryFeed')&&state.playing)stop()});
-document.addEventListener('banger:commentary-stop',()=>stop());
-window.addEventListener('pagehide',()=>{stop();neural?.release()});
+
+setInterval(() => {
+    if (!state.playing || state.paused || state.mode !== 'live' || state.finished || !control('radio')?.checked ||
+        document.hidden || state.active || state.queue.length || !state.stats || state.stats === state.lastSpokenStats ||
+        Date.now() - state.lastActivity < 60000) return;
+    state.lastSpokenStats = state.stats;
+    state.lastActivity = Date.now();
+    state.queue.push({id: 'radio', type: 'radio', text: state.stats, mood: 'calm', priority: 0});
+    pump();
+}, 10000);
+
+synth?.addEventListener?.('voiceschanged', refreshVoiceList);
+document.addEventListener('banger:commentary-stop', () => {
+    stop();
+    Object.assign(state, {id: null, latest: [], summary: '', finished: false, stats: ''});
+});
+document.addEventListener('visibilitychange', () => {
+    if (!document.getElementById('commentaryFeed')) stop();
+});
+window.addEventListener('pagehide', stop);
 })();
