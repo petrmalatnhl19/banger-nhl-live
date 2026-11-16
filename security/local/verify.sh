@@ -236,3 +236,6 @@ bash security38-failover.sh
 bash security39-disconnect-retry.sh
 
 bash security40-kill-backend.sh
+
+# SECURITY-41: restart isolated local database during an open transaction.
+bash security41-db-restart.sh
