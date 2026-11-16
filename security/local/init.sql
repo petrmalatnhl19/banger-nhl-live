@@ -3,7 +3,7 @@ CREATE ROLE anon NOLOGIN;
 CREATE ROLE authenticated NOLOGIN;
 CREATE ROLE service_role NOLOGIN;
 CREATE TABLE public.nhl_core43_shadow_inputs (game_id bigint, side text, gsax numeric, shots_against integer, readiness text, goalie_id text, gsax_fetched_at timestamptz, prediction_at timestamptz, starter_status text);
-CREATE TABLE public.nhl_prediction_archive (game_id bigint PRIMARY KEY, prediction numeric, core42_predicted_at timestamptz, status text, core42_goalie_review jsonb, game_date date, away_team text, home_team text, core42_away double precision, core42_home double precision, core42_factors jsonb);
+CREATE TABLE public.nhl_prediction_archive (game_id bigint PRIMARY KEY, prediction numeric, core42_predicted_at timestamptz, status text, core42_goalie_review jsonb, game_date date, away_team text, home_team text, core42_away double precision, core42_home double precision, core42_factors jsonb, actual_away integer, actual_home integer, baseline_away double precision, baseline_home double precision, advanced_away double precision, advanced_home double precision, goalie32_away double precision, goalie32_home double precision, special33_away double precision, special33_home double precision, core40_away double precision, core40_home double precision, core41_away double precision, core41_home double precision);
 CREATE TABLE public.nhl_core43_goalie_snapshots (game_id bigint, goalie_id text, team_code text, situation text, fetched_at timestamptz, gsax numeric, shots_against integer);
 CREATE TABLE public.nhl_core43_starter_evidence (game_id bigint, team_code text, goalie_id text, evidence_status text, source_published_at timestamptz, verified_at timestamptz);
 CREATE TABLE public.nhl_core43_schedule_snapshots (game_id bigint, kickoff_at timestamptz, away_team text, home_team text);
@@ -106,9 +106,262 @@ CREATE VIEW public.nhl_core43_public_schedule_evidence AS
     home_team
    FROM nhl_core43_schedule_snapshots
   WHERE game_id IS NOT NULL AND kickoff_at IS NOT NULL AND away_team IS NOT NULL AND home_team IS NOT NULL;
-CREATE VIEW public.nhl_core_model_accuracy AS SELECT count(*) AS games FROM public.nhl_prediction_archive;
-CREATE VIEW public.nhl_core_model_head_to_head AS SELECT count(*) AS games FROM public.nhl_prediction_archive;
-CREATE VIEW public.nhl_core_model_trend AS SELECT game_id FROM public.nhl_prediction_archive;
+-- Exact production view definition from read-only pg_get_viewdef (SECURITY-16).
+CREATE VIEW public.nhl_core_model_accuracy AS  WITH forecasts AS (
+         SELECT nhl_prediction_archive.game_id,
+            nhl_prediction_archive.actual_away,
+            nhl_prediction_archive.actual_home,
+            'CORE 3.0'::text AS model,
+            nhl_prediction_archive.baseline_away AS pred_away,
+            nhl_prediction_archive.baseline_home AS pred_home
+           FROM nhl_prediction_archive
+          WHERE nhl_prediction_archive.status = 'final'::text
+        UNION ALL
+         SELECT nhl_prediction_archive.game_id,
+            nhl_prediction_archive.actual_away,
+            nhl_prediction_archive.actual_home,
+            'CORE 3.1'::text,
+            nhl_prediction_archive.advanced_away,
+            nhl_prediction_archive.advanced_home
+           FROM nhl_prediction_archive
+          WHERE nhl_prediction_archive.status = 'final'::text
+        UNION ALL
+         SELECT nhl_prediction_archive.game_id,
+            nhl_prediction_archive.actual_away,
+            nhl_prediction_archive.actual_home,
+            'CORE 3.2'::text,
+            nhl_prediction_archive.goalie32_away,
+            nhl_prediction_archive.goalie32_home
+           FROM nhl_prediction_archive
+          WHERE nhl_prediction_archive.status = 'final'::text
+        UNION ALL
+         SELECT nhl_prediction_archive.game_id,
+            nhl_prediction_archive.actual_away,
+            nhl_prediction_archive.actual_home,
+            'CORE 3.3'::text,
+            nhl_prediction_archive.special33_away,
+            nhl_prediction_archive.special33_home
+           FROM nhl_prediction_archive
+          WHERE nhl_prediction_archive.status = 'final'::text
+        UNION ALL
+         SELECT nhl_prediction_archive.game_id,
+            nhl_prediction_archive.actual_away,
+            nhl_prediction_archive.actual_home,
+            'CORE 4.0'::text,
+            nhl_prediction_archive.core40_away,
+            nhl_prediction_archive.core40_home
+           FROM nhl_prediction_archive
+          WHERE nhl_prediction_archive.status = 'final'::text
+        UNION ALL
+         SELECT nhl_prediction_archive.game_id,
+            nhl_prediction_archive.actual_away,
+            nhl_prediction_archive.actual_home,
+            'CORE 4.1'::text,
+            nhl_prediction_archive.core41_away,
+            nhl_prediction_archive.core41_home
+           FROM nhl_prediction_archive
+          WHERE nhl_prediction_archive.status = 'final'::text
+        UNION ALL
+         SELECT nhl_prediction_archive.game_id,
+            nhl_prediction_archive.actual_away,
+            nhl_prediction_archive.actual_home,
+            'CORE 4.2'::text,
+            nhl_prediction_archive.core42_away,
+            nhl_prediction_archive.core42_home
+           FROM nhl_prediction_archive
+          WHERE nhl_prediction_archive.status = 'final'::text
+        ), valid AS (
+         SELECT forecasts.game_id,
+            forecasts.actual_away,
+            forecasts.actual_home,
+            forecasts.model,
+            forecasts.pred_away,
+            forecasts.pred_home
+           FROM forecasts
+          WHERE forecasts.pred_away >= 0::double precision AND forecasts.pred_away <= 100::double precision AND forecasts.pred_home >= 0::double precision AND forecasts.pred_home <= 100::double precision AND forecasts.actual_away IS NOT NULL AND forecasts.actual_home IS NOT NULL
+        ), scores AS (
+         SELECT valid.game_id,
+            valid.actual_away,
+            valid.actual_home,
+            valid.model,
+            valid.pred_away,
+            valid.pred_home,
+            (abs(valid.pred_away - valid.actual_away::double precision) + abs(valid.pred_home - valid.actual_home::double precision)) / 2.0::double precision AS goal_mae,
+            valid.pred_away > valid.pred_home AND valid.actual_away > valid.actual_home OR valid.pred_away < valid.pred_home AND valid.actual_away < valid.actual_home AS winner_correct,
+            valid.pred_away = valid.pred_home AS predicted_tie
+           FROM valid
+        )
+ SELECT model,
+    count(*)::integer AS games,
+    round(avg(goal_mae)::numeric, 3) AS goal_mae,
+    count(*) FILTER (WHERE NOT predicted_tie)::integer AS winner_evaluable,
+    count(*) FILTER (WHERE winner_correct)::integer AS winner_correct,
+    round(100.0 * count(*) FILTER (WHERE winner_correct)::numeric / NULLIF(count(*) FILTER (WHERE NOT predicted_tie), 0)::numeric, 1) AS winner_accuracy_pct,
+    round(avg(abs(pred_away + pred_home - (actual_away + actual_home)::double precision))::numeric, 3) AS total_goals_mae
+   FROM scores
+  GROUP BY model;;
+-- Exact production view definition from read-only pg_get_viewdef (SECURITY-16).
+CREATE VIEW public.nhl_core_model_head_to_head AS  WITH paired AS (
+         SELECT nhl_prediction_archive.game_id,
+            nhl_prediction_archive.actual_away,
+            nhl_prediction_archive.actual_home,
+            nhl_prediction_archive.core40_away,
+            nhl_prediction_archive.core40_home,
+            nhl_prediction_archive.core41_away,
+            nhl_prediction_archive.core41_home,
+            nhl_prediction_archive.baseline_away,
+            nhl_prediction_archive.baseline_home,
+            nhl_prediction_archive.advanced_away,
+            nhl_prediction_archive.advanced_home
+           FROM nhl_prediction_archive
+          WHERE nhl_prediction_archive.status = 'final'::text AND nhl_prediction_archive.actual_away IS NOT NULL AND nhl_prediction_archive.actual_home IS NOT NULL AND nhl_prediction_archive.core40_away IS NOT NULL AND nhl_prediction_archive.core40_home IS NOT NULL AND nhl_prediction_archive.core41_away IS NOT NULL AND nhl_prediction_archive.core41_home IS NOT NULL
+        ), forecasts AS (
+         SELECT paired.game_id,
+            paired.actual_away,
+            paired.actual_home,
+            'CORE 3.0'::text AS model,
+            paired.baseline_away AS away,
+            paired.baseline_home AS home
+           FROM paired
+        UNION ALL
+         SELECT paired.game_id,
+            paired.actual_away,
+            paired.actual_home,
+            'CORE 3.1'::text,
+            paired.advanced_away,
+            paired.advanced_home
+           FROM paired
+        UNION ALL
+         SELECT paired.game_id,
+            paired.actual_away,
+            paired.actual_home,
+            'CORE 4.0'::text,
+            paired.core40_away,
+            paired.core40_home
+           FROM paired
+        UNION ALL
+         SELECT paired.game_id,
+            paired.actual_away,
+            paired.actual_home,
+            'CORE 4.1'::text,
+            paired.core41_away,
+            paired.core41_home
+           FROM paired
+        )
+ SELECT model,
+    count(*)::integer AS games,
+    round(avg((abs(away - actual_away::double precision) + abs(home - actual_home::double precision)) / 2::double precision)::numeric, 3) AS goal_mae,
+    count(*) FILTER (WHERE away > home AND actual_away > actual_home OR away < home AND actual_away < actual_home)::integer AS correct_winner,
+    round(100.0 * count(*) FILTER (WHERE away > home AND actual_away > actual_home OR away < home AND actual_away < actual_home)::numeric / NULLIF(count(*) FILTER (WHERE away <> home), 0)::numeric, 1) AS winner_accuracy_pct
+   FROM forecasts
+  GROUP BY model;;
+-- Exact production view definition from read-only pg_get_viewdef (SECURITY-16).
+CREATE VIEW public.nhl_core_model_trend AS  WITH forecasts AS (
+         SELECT nhl_prediction_archive.game_id,
+            nhl_prediction_archive.game_date,
+            nhl_prediction_archive.actual_away,
+            nhl_prediction_archive.actual_home,
+            'CORE 3.0'::text AS model,
+            nhl_prediction_archive.baseline_away AS pa,
+            nhl_prediction_archive.baseline_home AS ph
+           FROM nhl_prediction_archive
+          WHERE nhl_prediction_archive.status = 'final'::text
+        UNION ALL
+         SELECT nhl_prediction_archive.game_id,
+            nhl_prediction_archive.game_date,
+            nhl_prediction_archive.actual_away,
+            nhl_prediction_archive.actual_home,
+            'CORE 3.1'::text,
+            nhl_prediction_archive.advanced_away,
+            nhl_prediction_archive.advanced_home
+           FROM nhl_prediction_archive
+          WHERE nhl_prediction_archive.status = 'final'::text
+        UNION ALL
+         SELECT nhl_prediction_archive.game_id,
+            nhl_prediction_archive.game_date,
+            nhl_prediction_archive.actual_away,
+            nhl_prediction_archive.actual_home,
+            'CORE 3.2'::text,
+            nhl_prediction_archive.goalie32_away,
+            nhl_prediction_archive.goalie32_home
+           FROM nhl_prediction_archive
+          WHERE nhl_prediction_archive.status = 'final'::text
+        UNION ALL
+         SELECT nhl_prediction_archive.game_id,
+            nhl_prediction_archive.game_date,
+            nhl_prediction_archive.actual_away,
+            nhl_prediction_archive.actual_home,
+            'CORE 3.3'::text,
+            nhl_prediction_archive.special33_away,
+            nhl_prediction_archive.special33_home
+           FROM nhl_prediction_archive
+          WHERE nhl_prediction_archive.status = 'final'::text
+        UNION ALL
+         SELECT nhl_prediction_archive.game_id,
+            nhl_prediction_archive.game_date,
+            nhl_prediction_archive.actual_away,
+            nhl_prediction_archive.actual_home,
+            'CORE 4.0'::text,
+            nhl_prediction_archive.core40_away,
+            nhl_prediction_archive.core40_home
+           FROM nhl_prediction_archive
+          WHERE nhl_prediction_archive.status = 'final'::text
+        UNION ALL
+         SELECT nhl_prediction_archive.game_id,
+            nhl_prediction_archive.game_date,
+            nhl_prediction_archive.actual_away,
+            nhl_prediction_archive.actual_home,
+            'CORE 4.1'::text,
+            nhl_prediction_archive.core41_away,
+            nhl_prediction_archive.core41_home
+           FROM nhl_prediction_archive
+          WHERE nhl_prediction_archive.status = 'final'::text
+        UNION ALL
+         SELECT nhl_prediction_archive.game_id,
+            nhl_prediction_archive.game_date,
+            nhl_prediction_archive.actual_away,
+            nhl_prediction_archive.actual_home,
+            'CORE 4.2'::text,
+            nhl_prediction_archive.core42_away,
+            nhl_prediction_archive.core42_home
+           FROM nhl_prediction_archive
+          WHERE nhl_prediction_archive.status = 'final'::text
+        ), valid AS (
+         SELECT forecasts.game_id,
+            forecasts.game_date,
+            forecasts.actual_away,
+            forecasts.actual_home,
+            forecasts.model,
+            forecasts.pa,
+            forecasts.ph,
+                CASE
+                    WHEN forecasts.pa > forecasts.ph AND forecasts.actual_away > forecasts.actual_home OR forecasts.pa < forecasts.ph AND forecasts.actual_away < forecasts.actual_home THEN 1
+                    ELSE 0
+                END AS correct,
+            (abs(forecasts.pa - forecasts.actual_away::double precision) + abs(forecasts.ph - forecasts.actual_home::double precision)) / 2.0::double precision AS error
+           FROM forecasts
+          WHERE forecasts.pa >= 0::double precision AND forecasts.pa <= 100::double precision AND forecasts.ph >= 0::double precision AND forecasts.ph <= 100::double precision AND forecasts.actual_away IS NOT NULL AND forecasts.actual_home IS NOT NULL
+        ), trend AS (
+         SELECT valid.model,
+            valid.game_id,
+            valid.game_date,
+            row_number() OVER (PARTITION BY valid.model ORDER BY valid.game_date, valid.game_id) AS games,
+            sum(valid.correct) OVER (PARTITION BY valid.model ORDER BY valid.game_date, valid.game_id ROWS UNBOUNDED PRECEDING) AS wins,
+            sum(
+                CASE
+                    WHEN valid.pa <> valid.ph THEN 1
+                    ELSE 0
+                END) OVER (PARTITION BY valid.model ORDER BY valid.game_date, valid.game_id ROWS UNBOUNDED PRECEDING) AS evaluable,
+            avg(valid.error) OVER (PARTITION BY valid.model ORDER BY valid.game_date, valid.game_id ROWS UNBOUNDED PRECEDING) AS running_mae
+           FROM valid
+        )
+ SELECT model,
+    game_id,
+    game_date,
+    games::integer AS games,
+    round(100.0 * wins::numeric / NULLIF(evaluable, 0)::numeric, 1) AS winner_accuracy_pct,
+    round(running_mae::numeric, 3) AS goal_mae
+   FROM trend;;
 GRANT USAGE ON SCHEMA public TO anon,authenticated,service_role;
 GRANT ALL ON TABLE public.nhl_core43_shadow_inputs,public.core43_shadow_predictions_v1,public.core43_shadow_preview_v1,public.core43_shadow_readiness_v1,public.nhl_core42_status TO anon,authenticated;
 GRANT SELECT ON TABLE public.nhl_prediction_archive,public.nhl_core43_public_schedule_evidence,public.nhl_core_model_accuracy,public.nhl_core_model_head_to_head,public.nhl_core_model_trend TO anon,authenticated;
