@@ -301,38 +301,26 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "oilers": {
-      "updatedAt": "2026-11-11T22:22:24.925013+00:00",
-      "previousPublishedAt": "2026-11-09T18:29:30.340000+00:00",
-      "publishedAt": "2026-11-11T19:19:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-16T00:01:23.867347+00:00",
+      "previousPublishedAt": "2026-11-15T22:35:00+00:00",
+      "publishedAt": "2026-11-15T22:35:00+00:00",
+      "source": "https://www.nhl.com/news/edmonton-oilers-philadelphia-flyers-game-preview-november-15-2026",
       "events": [
         {
-          "type": "added",
+          "type": "moved",
           "player": "Colton Dach",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Trent Frederic",
-          "from": "Útok 4",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Alex Formenton",
           "from": "Útok 3",
-          "to": "Útok 4"
+          "to": "Útok 2"
         },
         {
-          "type": "moved",
-          "player": "Mathieu Joseph",
-          "from": "Útok 3",
-          "to": "Útok 4"
+          "type": "added",
+          "player": "Filip Hallander",
+          "to": "Útok 3"
         },
         {
           "type": "removed",
-          "player": "Max Jones",
-          "from": "Útok 4"
+          "player": "Ryan Nugent-Hopkins",
+          "from": "Útok 2"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

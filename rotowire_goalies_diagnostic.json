@@ -1,19 +1,9 @@
 {
-  "checkedAt": "2026-11-15T23:17:39.753808+00:00",
+  "checkedAt": "2026-11-16T00:01:27.234225+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "candidateCount": 94,
-  "matchedCount": 90,
+  "matchedCount": 80,
   "matches": [
-    {
-      "team": "ANA",
-      "goalie": "Ville Husso",
-      "opponent": "CGY",
-      "venue": "home",
-      "status": "projected",
-      "date": "2026-11-15",
-      "gameId": 2026020328,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
     {
       "team": "ANA",
       "goalie": "Lukas Dostal",
@@ -156,16 +146,6 @@
     },
     {
       "team": "CGY",
-      "goalie": "Devin Cooley",
-      "opponent": "ANA",
-      "venue": "away",
-      "status": "confirmed",
-      "date": "2026-11-15",
-      "gameId": 2026020328,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "CGY",
       "goalie": "Dustin Wolf",
       "opponent": "SJS",
       "venue": "away",
@@ -245,16 +225,6 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "DAL",
-      "goalie": "Casey DeSmith",
-      "opponent": "FLA",
-      "venue": "home",
-      "status": "projected",
-      "date": "2026-11-15",
-      "gameId": 2026020327,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
       "team": "DET",
       "goalie": "John Gibson",
       "opponent": "BOS",
@@ -272,16 +242,6 @@
       "status": "projected",
       "date": "2026-11-21",
       "gameId": 2026020367,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "EDM",
-      "goalie": "Tristan Jarry",
-      "opponent": "PHI",
-      "venue": "away",
-      "status": "confirmed",
-      "date": "2026-11-15",
-      "gameId": 2026020326,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -312,16 +272,6 @@
       "status": "projected",
       "date": "2026-11-21",
       "gameId": 2026020359,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "FLA",
-      "goalie": "Akira Schmid",
-      "opponent": "DAL",
-      "venue": "away",
-      "status": "confirmed",
-      "date": "2026-11-15",
-      "gameId": 2026020327,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -467,16 +417,6 @@
     {
       "team": "NSH",
       "goalie": "Juuse Saros",
-      "opponent": "SJS",
-      "venue": "away",
-      "status": "confirmed",
-      "date": "2026-11-15",
-      "gameId": 2026020330,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "NSH",
-      "goalie": "Juuse Saros",
       "opponent": "MIN",
       "venue": "away",
       "status": "projected",
@@ -567,16 +507,6 @@
     {
       "team": "PHI",
       "goalie": "Dan Vladar",
-      "opponent": "EDM",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-15",
-      "gameId": 2026020326,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "PHI",
-      "goalie": "Dan Vladar",
       "opponent": "BUF",
       "venue": "home",
       "status": "projected",
@@ -642,16 +572,6 @@
       "status": "projected",
       "date": "2026-11-21",
       "gameId": 2026020372,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "SJS",
-      "goalie": "Alex Nedeljkovic",
-      "opponent": "NSH",
-      "venue": "home",
-      "status": "projected",
-      "date": "2026-11-15",
-      "gameId": 2026020330,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -786,16 +706,6 @@
     },
     {
       "team": "VAN",
-      "goalie": "Leevi Meriläinen",
-      "opponent": "VGK",
-      "venue": "away",
-      "status": "projected",
-      "date": "2026-11-15",
-      "gameId": 2026020329,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "VAN",
       "goalie": "Kevin Lankinen",
       "opponent": "UTA",
       "venue": "away",
@@ -822,16 +732,6 @@
       "status": "projected",
       "date": "2026-11-21",
       "gameId": 2026020371,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "VGK",
-      "goalie": "Carter Hart",
-      "opponent": "VAN",
-      "venue": "home",
-      "status": "projected",
-      "date": "2026-11-15",
-      "gameId": 2026020329,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -907,6 +807,27 @@
   ],
   "unmatched": [
     {
+      "team": "ANA",
+      "goalie": "Ville Husso",
+      "opponent": "CGY",
+      "venue": "home",
+      "status": "projected"
+    },
+    {
+      "team": "CGY",
+      "goalie": "Devin Cooley",
+      "opponent": "ANA",
+      "venue": "away",
+      "status": "confirmed"
+    },
+    {
+      "team": "DAL",
+      "goalie": "Casey DeSmith",
+      "opponent": "FLA",
+      "venue": "home",
+      "status": "confirmed"
+    },
+    {
       "team": "DAL",
       "goalie": "Jake Oettinger",
       "opponent": "VGK",
@@ -918,6 +839,55 @@
       "goalie": "Jake Oettinger",
       "opponent": "VGK",
       "venue": "away",
+      "status": "projected"
+    },
+    {
+      "team": "EDM",
+      "goalie": "Tristan Jarry",
+      "opponent": "PHI",
+      "venue": "away",
+      "status": "confirmed"
+    },
+    {
+      "team": "FLA",
+      "goalie": "Akira Schmid",
+      "opponent": "DAL",
+      "venue": "away",
+      "status": "confirmed"
+    },
+    {
+      "team": "NSH",
+      "goalie": "Juuse Saros",
+      "opponent": "SJS",
+      "venue": "away",
+      "status": "confirmed"
+    },
+    {
+      "team": "PHI",
+      "goalie": "Dan Vladar",
+      "opponent": "EDM",
+      "venue": "home",
+      "status": "confirmed"
+    },
+    {
+      "team": "SJS",
+      "goalie": "Alex Nedeljkovic",
+      "opponent": "NSH",
+      "venue": "home",
+      "status": "confirmed"
+    },
+    {
+      "team": "VAN",
+      "goalie": "Leevi Meriläinen",
+      "opponent": "VGK",
+      "venue": "away",
+      "status": "projected"
+    },
+    {
+      "team": "VGK",
+      "goalie": "Carter Hart",
+      "opponent": "VAN",
+      "venue": "home",
       "status": "projected"
     },
     {
