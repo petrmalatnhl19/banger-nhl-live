@@ -114,4 +114,12 @@ for role in anon authenticated; do
   fi
 done
 echo "PASS SECURITY-23 owner-privileged capture, trigger, deduplication and role restrictions"
+# SECURITY-24: assert synthetic function hardening baseline without changing production.
+db -Atqc "SELECT count(*) FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='public' AND p.proname IN ('capture_core43_shadow_inputs','core43_capture_on_core42_insert') AND p.prosecdef AND p.proconfig @> ARRAY['search_path=public']::text[]" | grep -qx '2'
+for role in anon authenticated service_role; do
+  db -Atqc "SELECT has_schema_privilege('$role','public','CREATE')" | grep -qx 'f'
+done
+db -Atqc "SELECT count(*) FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='public' AND p.proname IN ('capture_core43_shadow_inputs','core43_capture_on_core42_insert') AND has_function_privilege('service_role',p.oid,'EXECUTE')" | grep -qx '2'
+echo "PASS SECURITY-24 function security baseline and schema CREATE restrictions"
+
 echo "SECURITY-12 local privilege and two real-view definition tests PASS"
