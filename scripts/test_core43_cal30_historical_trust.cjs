@@ -366,11 +366,11 @@ test("CAL-36 completes a no-observer rehearsal with two real local RFC 3161 resp
     timeZone: "UTC", weekday: "long", month: "long", day: "numeric", year: "numeric",
   });
   const hourMs = 60 * 60_000;
-  const sources = (day, retrievedAt) => {
+  const sources = (day, retrievedAt, clockLabel = "5:20", zone = "EDT") => {
     const report = Buffer.from(
       '<table id="Visitor"><tr><td><img src="logoc' + awayTeam.toLowerCase() + '.gif"></td></tr></table>' +
       '<table id="GameInfo"><tr><td>Game Summary</td><td>' + calendar.format(day) + '</td></tr>' +
-      '<tr><td>Start 5:20 EDT; End 7:54 EDT</td><td>Game ' + gameId.slice(-4) +
+      '<tr><td>Start ' + clockLabel + ' ' + zone + '; End 7:54 ' + zone + '</td><td>Game ' + gameId.slice(-4) +
       '</td><td>Final</td></tr></table><table id="Home"><tr><td><img src="logoc' +
       homeTeam.toLowerCase() + '.gif"></td></tr></table>');
     const boxscore = json({ id: Number(gameId), gameDate: iso(day).slice(0, 10), startTimeUTC: kickoffAt,
@@ -406,8 +406,19 @@ test("CAL-36 completes a no-observer rehearsal with two real local RFC 3161 resp
   assert.equal(ambiguous.startEvidence, "conservative_am_pm_bound");
   assert.equal(ambiguous.earliestReportStartAt, accepted.earliestReportStartAt);
 
-  const yesterday = tomorrow - 2 * dayMs;
-  const tooLate = replayTechnicalPrepared(inputsFor(sources(yesterday, yesterday + 23 * hourMs), tomorrow + 16 * hourMs));
+  // Place both actual token times between the earlier and later interpretations of the same marker.
+  const easternHour = new Date(epoch - 4 * hourMs).getUTCHours();
+  const zone = easternHour === 11 || easternHour === 23 ? "CST" : "EDT";
+  const offset = zone === "CST" ? 6 : 4;
+  const localEpoch = epoch - offset * hourMs;
+  const localDay = Math.floor(localEpoch / dayMs) * dayMs;
+  const localPm = new Date(localEpoch).getUTCHours() >= 12;
+  const earlier = localDay + (offset + (localPm ? 11 : 0)) * hourMs;
+  const later = earlier + 12 * hourMs;
+  const latestToken = Date.parse(accepted.latestTimestampAt);
+  assert.ok(earlier <= latestToken && latestToken < later && latestToken < Date.parse(kickoffAt));
+  const tooLate = replayTechnicalPrepared(inputsFor(
+    sources(localDay, tomorrow + 12 * hourMs, localPm ? "11:00" : "12:00", zone), tomorrow + 16 * hourMs));
   assert.equal(tooLate.reason, "cal30_timestamp_order");
   assert.equal(tooLate.trusted, false);
 
