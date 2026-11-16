@@ -64,5 +64,8 @@ jobs:
       - name: Test automated machine witness on persisted archive (offline)
         run: node scripts/test_security61_machine_witness_archive.cjs
 
+      - name: Test signed machine checkpoint history (offline)
+        run: node scripts/test_security62_checkpoint_history.cjs
+
       - name: Test immutable pregame refresh prototype (offline)
         run: python3 .github/scripts/test-security-35-pregame-refresh.py
