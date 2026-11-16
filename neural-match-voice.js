@@ -33,8 +33,8 @@
             return;
         }
         if (data.type === 'progress') {
-            pending.stage = 'model '+data.stage+' ('+data.done+'/'+data.total+')';
-            pending.onProgress(data.done, data.total, data.stage);
+            pending.stage = 'model '+data.stage+' ('+data.done+'/'+data.total+') · '+(data.phase||'inicializace');
+            pending.onProgress(data.done, data.total, data.stage, data.phase, data.elapsedMs);
             return;
         }
         if (data.type === 'error') {
