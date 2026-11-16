@@ -5,22 +5,28 @@ const runtime = 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/';
 let engine;
 let latestId;
 let queue = Promise.resolve();
+let loadingStage = 'initializace runtime';
 
 function getEngine() {
     if (!engine) {
         engine = (async () => {
+            loadingStage = 'načítání ONNX Runtime';
             const ort = await import(runtime + 'ort.wasm.min.mjs');
             ort.env.wasm.wasmPaths = runtime;
             ort.env.wasm.numThreads = 1;
             setRuntime(ort);
+            loadingStage = 'načítání hlasového stylu';
             const style = await loadVoiceStyle([models + '/voice_styles/M2.json']);
+            loadingStage = 'načítání ONNX modelů';
             const { textToSpeech } = await loadTextToSpeech(models + '/onnx', {
                 executionProviders: ['wasm'],
                 enableCpuMemArena: false,
                 enableMemPattern: false,
-            }, (_, done, total) => {
-                self.postMessage({ type: 'progress', done, total });
+            }, (name, done, total) => {
+                loadingStage = 'model '+name+' ('+done+'/'+total+')';
+                self.postMessage({ type: 'progress', done, total, stage: name });
             });
+            loadingStage = 'připraveno';
             return { textToSpeech, style };
         })().catch(error => {
             engine = undefined;
@@ -35,6 +41,7 @@ async function synthesize({ id, text, speed }) {
     try {
         const { textToSpeech, style } = await getEngine();
         if (id !== latestId) return;
+        loadingStage = 'syntéza řeči';
         const { wav, duration } = await textToSpeech.call(text, 'cs', style, 8, speed, .14);
         if (id !== latestId) return;
         const rate = textToSpeech.sampleRate;
@@ -42,7 +49,7 @@ async function synthesize({ id, text, speed }) {
         if (!rate || !audio.length) throw new Error('Empty audio');
         self.postMessage({ type: 'audio', id, rate, audio }, [audio.buffer]);
     } catch (error) {
-        if (id === latestId) self.postMessage({ type: 'error', id, message: error.message });
+        if (id === latestId) self.postMessage({ type: 'error', id, message: loadingStage+': '+(error?.message || String(error)) });
     }
 }
 
