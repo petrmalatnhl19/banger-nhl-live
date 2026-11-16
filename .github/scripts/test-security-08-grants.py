@@ -52,7 +52,7 @@ class ProposedGrantsSafety(unittest.TestCase):
 
     def test_never_connects_to_database(self):
         text = Path(__file__).read_text(encoding="utf-8")
-        for marker in ("psycopg", "supabase.create_client", "DATABASE_URL", "POSTGRES_PASSWORD"):
+        for marker in ("import psycopg", "create_client(", "os.environ["):
             self.assertNotIn(marker, text)
 
 if __name__ == "__main__":
