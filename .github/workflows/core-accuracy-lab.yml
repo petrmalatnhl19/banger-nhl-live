@@ -1,0 +1,28 @@
+name: CORE Accuracy Lab tests
+on:
+  pull_request:
+    paths:
+      - 'accuracy-lab/**'
+      - '.github/workflows/core-accuracy-lab.yml'
+permissions:
+  contents: read
+jobs:
+  offline-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify NHL normalization and source identity
+        run: python3 -B -m unittest discover -s accuracy-lab -p test_collect.py
+      - name: Verify historical timing, cohort isolation and metrics
+        run: node --test accuracy-lab/engine.test.cjs
+      - name: Check dashboard and evaluator syntax
+        run: |
+          node --check accuracy-lab/dashboard.js
+          node --check accuracy-lab/evaluate.cjs

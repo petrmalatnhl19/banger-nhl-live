@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CORE Accuracy Lab · BANGER NHL LIVE</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <script defer src="engine.js"></script>
+  <script defer src="dashboard.js"></script>
+</head>
+<body>
+<main>
+  <header>
+    <p class="brand">BANGER NHL LIVE</p>
+    <h1>CORE Accuracy Lab</h1>
+    <p id="status" role="status">Načti lokální JSON vytvořený evaluátorem.</p>
+    <label for="load" class="file">Načíst report <input id="load" type="file" accept=".json,application/json"></label>
+  </header>
+  <form id="filters" hidden>
+    <label>Původ predikce <select name="kind">
+      <option value="archived">Archivované</option>
+      <option value="reproduced">Reprodukované</option>
+      <option value="simulation">Simulované</option>
+    </select></label>
+    <label>Model <select name="model"><option value="">Všechny modely</option></select></label>
+    <label>Tým <select name="team"><option value="">Všechny týmy</option></select></label>
+    <label>Od <input name="from" type="date"></label>
+    <label>Do <input name="through" type="date"></label>
+    <label>Výsledek <select name="target">
+      <option value="final">Včetně prodloužení a nájezdů</option>
+      <option value="regulation">Základní hrací doba</option>
+    </select></label>
+  </form>
+  <div id="report" hidden>
+    <section aria-labelledby="overview-title">
+      <h2 id="overview-title">Výsledky podle modelu</h2>
+      <p id="context"></p>
+      <div id="models" class="cards"></div>
+    </section>
+    <section aria-labelledby="pairs-title">
+      <h2 id="pairs-title">Párové porovnání</h2>
+      <p>Každá metrika používá stejné zápasy pro oba modely. Shodný čas a shodu doložených vstupů uvádíme samostatně.</p>
+      <div id="pairs" class="scroll" tabindex="0"></div>
+    </section>
+    <section aria-labelledby="history-title">
+      <h2 id="history-title">Historie zápasů a predikcí</h2>
+      <div id="history"></div>
+    </section>
+  </div>
+</main>
+</body>
+</html>

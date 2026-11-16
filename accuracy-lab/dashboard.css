@@ -1,0 +1,50 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, system-ui, sans-serif;
+  color: #e6f8ff;
+  background: #071728;
+  --muted: #acd0e3;
+  --border: #356a86;
+  --accent: #9cecf9;
+}
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; }
+main { max-width: 1180px; margin: auto; padding: clamp(12px, 3vw, 32px); }
+header, section, form {
+  margin-bottom: 14px;
+  padding: clamp(13px, 3vw, 24px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #092033;
+}
+header { background: radial-gradient(ellipse at top right, #14516d, #09283e 56%, #091e33); }
+.brand { color: var(--accent); font-size: .75rem; font-weight: 800; letter-spacing: .08em; margin: 0; }
+h1 { margin: 4px 0; font-size: clamp(1.7rem, 5vw, 2.7rem); }
+h2, h3 { margin: 0 0 8px; }
+h2 { font-size: 1.23rem; }
+h3 { font-size: 1rem; }
+p { margin: 0 0 10px; color: var(--muted); line-height: 1.48; }
+form, .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 10px; }
+label { min-width: 0; color: var(--muted); font-size: .85rem; }
+input, select {
+  display: block; width: 100%; min-width: 0; min-height: 42px; margin-top: 4px; padding: 7px;
+  border: 1px solid var(--border); border-radius: 8px; background: #102d45; color: #e6f8ff;
+  font: inherit;
+}
+input[type=file] { max-width: 330px; }
+input::file-selector-button { background: #17627c; color: #fff; border: 0; border-radius: 5px; padding: 6px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+article, details { min-width: 0; padding: 12px; border: 1px solid var(--border); border-radius: 10px; background: #0c2c42; }
+article p, details p { font-size: .85rem; }
+details { margin: 0 0 7px; }
+details p:first-of-type { margin-top: 10px; }
+summary { cursor: pointer; color: var(--accent); min-height: 26px; font-weight: 700; }
+p:last-child { margin-bottom: 0; }
+strong { color: var(--accent); }
+.scroll { overflow: auto; }
+table { width: 100%; text-align: left; border-collapse: collapse; font-size: .85rem; font-variant-numeric: tabular-nums; }
+td, th { padding: 8px; border-bottom: 1px solid #356a8688; }
+th { color: var(--accent); }
+small { color: var(--muted); }
+a { color: var(--accent); }
