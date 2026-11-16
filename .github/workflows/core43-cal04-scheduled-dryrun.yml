@@ -139,6 +139,8 @@ on:
       - 'docs/core43-cal30-tsa-candidates.json'
       - 'scripts/core43_cal31_replay.cjs'
       - 'docs/core43-cal31-pilot-rehearsal.md'
+      - 'scripts/core43_cal32_prepare_pregame.cjs'
+      - 'docs/core43-cal32-pregame-preparation.md'
       - 'docs/core43-cal28-lock-gate.md'
       - 'scripts/test_core43_cal26_end_to_end.cjs'
       - 'docs/core43-cal26-end-to-end.md'

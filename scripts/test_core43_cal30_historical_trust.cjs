@@ -12,6 +12,7 @@ const { prepare, load } = require("./core43_cal14_rehearsal.cjs");
 const { verifyTimestamp } = require("./core43_cal16_timestamp.cjs");
 const { verifyHistoricalPrediction: run } = require("./core43_cal30_historical_trust.cjs");
 const { replay } = require("./core43_cal31_replay.cjs");
+const { preparePregameRequests } = require("./core43_cal32_prepare_pregame.cjs");
 
 const POLICY_OID = "1.3.6.1.4.1.55555.30";
 const json = object => Buffer.from(JSON.stringify(object));
@@ -76,16 +77,22 @@ tsa_name = yes
 ess_cert_id_chain = no
 ess_cert_id_alg = sha256
 `);
+  function respond(request) {
+    write("request.tsq", request);
+    openssl(["ts", "-reply", "-config", "tsa.cnf", "-queryfile", "request.tsq", "-out", "response.tsr"]);
+    return read("response.tsr");
+  }
+
   function evidence(packageBytes, start, end) {
     write("package", packageBytes);
     openssl(["ts", "-query", "-data", "package", "-sha256", "-cert", "-out", "request.tsq"]);
-    openssl(["ts", "-reply", "-config", "tsa.cnf", "-queryfile", "request.tsq", "-out", "response.tsr"]);
+    const request = read("request.tsq");
     return { id, chain: ["leaf.pem", "issuer.pem", "root.pem"].map(read),
       crls: [crl("issuer", start, end), crl("root", start, end)],
       approval: Buffer.from("synthetic review record for " + id),
-      request: read("request.tsq"), response: read("response.tsr") };
+      request, response: respond(request) };
   }
-  return { evidence, crl };
+  return { evidence, crl, respond };
 }
 
 async function setup(t) {
@@ -260,5 +267,60 @@ test("CAL-30 offline corroboration of signed predictions", async t => {
     }
     truncateSync(dossierPath, 16 * 1024 * 1024 + 1);
     assert.equal(replay(options).reason, "cal31_input_file");
+  });
+
+  await t.test("CAL-32 prepares two requests before kickoff for the exact verified package", () => {
+    const { gameId, kickoffAt } = JSON.parse(evidence.packageBytes).capture.prediction;
+    const plan = {
+      schema: "core43_cal32_pregame_plan_v1", mode: "simulation", gameId, kickoffAt,
+      packageRegistry: policy.packageRegistry,
+      authorities: policy.authorities.map(({ id, operatorId, policyOid }) => ({ id, operatorId, policyOid })),
+    };
+    const withPlan = value => {
+      const planBytes = json(value);
+      return { packageBytes: evidence.packageBytes, registryBytes: evidence.registryBytes,
+        planBytes, expectedPlanSha256: sha(planBytes) };
+    };
+    const options = withPlan(plan);
+    const clock = () => epoch;
+    const prepared = preparePregameRequests(options, clock);
+    assert.equal(prepared.trusted, false);
+    assert.equal(prepared.status, "requests_prepared");
+    assert.equal(prepared.preparedAt, iso(epoch));
+    assert.equal(prepared.packageSha256, sha(evidence.packageBytes));
+    assert.equal(prepared.planSha256, options.expectedPlanSha256);
+    assert.deepEqual(Buffer.from(prepared.packageBytes, "base64url"), evidence.packageBytes);
+    assert.deepEqual(Buffer.from(prepared.registryBytes, "base64url"), evidence.registryBytes);
+    assert.notEqual(prepared.requests[0].requestSha256, prepared.requests[1].requestSha256);
+    assert.deepEqual(prepared.requests.map(request => request.id), plan.authorities.map(authority => authority.id));
+    assert.throws(() => preparePregameRequests({ ...options, expectedPlanSha256: undefined }, clock), /cal32_plan_pin/);
+    assert.throws(() => preparePregameRequests({ ...options, registryBytes: Buffer.from("{}") }, clock), /cal32_registry_pin/);
+    const altered = Buffer.concat([evidence.packageBytes, Buffer.from(" ")]);
+    assert.throws(() => preparePregameRequests({ ...options, packageBytes: altered }, clock), /cal13_package_shape/);
+    assert.throws(() => preparePregameRequests(withPlan({ ...plan, gameId: "2026020001" }), clock), /cal32_game_binding/);
+    const [first, second] = plan.authorities;
+    const sharedOperator = { ...second, operatorId: first.operatorId };
+    assert.throws(() => preparePregameRequests(withPlan({ ...plan, authorities: [first, sharedOperator] }), clock),
+      /cal32_authorities/);
+    assert.throws(() => preparePregameRequests(options, () => Date.parse(kickoffAt)), /cal32_pregame_window/);
+    assert.throws(() => preparePregameRequests(options, () => epoch - 90_000), /cal32_pregame_window/);
+    const ticks = [epoch, Date.parse(kickoffAt)];
+    assert.throws(() => preparePregameRequests(options, () => ticks.shift()), /cal32_pregame_window/);
+
+    const files = ["prep-bundle.json", "prep-registry.json", "prep-plan.json"].map(name => join(directory, name));
+    [options.packageBytes, options.registryBytes, options.planBytes].forEach((bytes, index) => writeFileSync(files[index], bytes));
+    const cli = join(__dirname, "core43_cal32_prepare_pregame.cjs");
+    const cliResult = JSON.parse(execFileSync(process.execPath, [cli, ...files, options.expectedPlanSha256]));
+    assert.equal(cliResult.status, "requests_prepared");
+    assert.equal(cliResult.packageSha256, prepared.packageSha256);
+
+    const timestamps = prepared.requests.map((entry, index) => {
+      const request = Buffer.from(entry.request, "base64url");
+      assert.equal(sha(request), entry.requestSha256);
+      return { ...evidence.timestamps[index], request, response: issuers[index].respond(request) };
+    });
+    const verified = run({ ...evidence, timestamps }, pinned);
+    assert.equal(verified.status, "simulation_verified", JSON.stringify(verified));
+    assert.equal(verified.trusted, false);
   });
 });
