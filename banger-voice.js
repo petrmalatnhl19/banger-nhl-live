@@ -70,6 +70,7 @@ function testPronunciation(){
         neural.unlock().then(()=>{
             if(gen!==state.generation)return;
             return neural.speak(text,rate,{
+                onStage(stage){if(gen===state.generation){state.neuralStatus='Hlas ze spotu · '+stage;update()}},
                 onPlay(){if(gen===state.generation){state.neuralStatus='';update()}},
                 onProgress(done,total,stage){
                     if(gen!==state.generation)return;
@@ -159,6 +160,7 @@ function speakNext(gen){
         Promise.resolve().then(()=>{
             if(!current())return;
             return neural.speak(spotSpeechText(text),rate,{
+                onStage(stage){if(gen===state.generation){state.neuralStatus='Hlas ze spotu · '+stage;update()}},
                 onPlay(){if(current()){state.neuralStatus='';update()}},
                 onProgress(done,total,stage){if(current()){state.neuralStatus='Načítám hlas ze spotu · '+(stage ? stage+' · ' : '')+'část '+done+' z '+total;update()}},
             });

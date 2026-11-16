@@ -6,27 +6,31 @@ let engine;
 let latestId;
 let queue = Promise.resolve();
 let loadingStage = 'initializace runtime';
+function reportStage(stage) {
+    loadingStage = stage;
+    self.postMessage({ type: 'stage', stage });
+}
 
 function getEngine() {
     if (!engine) {
         engine = (async () => {
-            loadingStage = 'načítání ONNX Runtime';
+            reportStage('načítání ONNX Runtime');
             const ort = await import(runtime + 'ort.wasm.min.mjs');
             ort.env.wasm.wasmPaths = runtime;
             ort.env.wasm.numThreads = 1;
             setRuntime(ort);
-            loadingStage = 'načítání hlasového stylu';
+            reportStage('načítání hlasového stylu');
             const style = await loadVoiceStyle([models + '/voice_styles/M2.json']);
-            loadingStage = 'načítání ONNX modelů';
+            reportStage('načítání ONNX modelů');
             const { textToSpeech } = await loadTextToSpeech(models + '/onnx', {
                 executionProviders: ['wasm'],
                 enableCpuMemArena: false,
                 enableMemPattern: false,
             }, (name, done, total) => {
-                loadingStage = 'model '+name+' ('+done+'/'+total+')';
+                reportStage('model '+name+' ('+done+'/'+total+')');
                 self.postMessage({ type: 'progress', done, total, stage: name });
             });
-            loadingStage = 'připraveno';
+            reportStage('model připraven');
             return { textToSpeech, style };
         })().catch(error => {
             engine = undefined;
@@ -41,7 +45,7 @@ async function synthesize({ id, text, speed }) {
     try {
         const { textToSpeech, style } = await getEngine();
         if (id !== latestId) return;
-        loadingStage = 'syntéza řeči';
+        reportStage('syntéza řeči');
         const { wav, duration } = await textToSpeech.call(text, 'cs', style, 8, speed, .14);
         if (id !== latestId) return;
         const rate = textToSpeech.sampleRate;

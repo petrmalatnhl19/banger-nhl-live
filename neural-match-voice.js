@@ -26,11 +26,17 @@
 
     function onMessage({ data }) {
         if (!pending) return;
+        if (data.id != null && data.id !== pending.id) return;
+        if (data.type === 'stage') {
+            pending.stage = data.stage;
+            pending.onStage?.(data.stage);
+            return;
+        }
         if (data.type === 'progress') {
+            pending.stage = 'model '+data.stage+' ('+data.done+'/'+data.total+')';
             pending.onProgress(data.done, data.total, data.stage);
             return;
         }
-        if (data.id !== pending.id) return;
         if (data.type === 'error') {
             discardWorker();
             fail(new Error(data.message));
@@ -79,7 +85,7 @@
             context ??= new Context();
             return context.resume();
         },
-        speak(text, speed, { onPlay, onProgress }) {
+        speak(text, speed, { onPlay, onProgress, onStage }) {
             stop();
             if (!worker) {
                 worker = new Worker(workerUrl, { type: 'module' });
@@ -93,9 +99,9 @@
                 const requestId = ++id;
                 const timer = setTimeout(() => {
                     discardWorker();
-                    fail(new Error('Speech generation timed out after 180 seconds'));
+                    fail(new Error('Časový limit 180 s překročen ve fázi: '+(pending?.stage || 'příprava hlasu')));
                 }, 180000);
-                pending = { id: requestId, timer, resolve, reject, onPlay, onProgress };
+                pending = { id: requestId, timer, resolve, reject, onPlay, onProgress, onStage, stage: 'čekání na spuštění modelu' };
                 worker.postMessage({ type: 'speak', id: requestId, text, speed });
             });
         },
