@@ -72,9 +72,9 @@ function testPronunciation(){
             return neural.speak(text,rate,{
                 onStage(stage){if(gen===state.generation){state.neuralStatus='Hlas ze spotu · '+stage;update()}},
                 onPlay(){if(gen===state.generation){state.neuralStatus='';update()}},
-                onProgress(done,total,stage){
+                onProgress(done,total,stage,phase,elapsedMs){
                     if(gen!==state.generation)return;
-                    state.neuralStatus='Načítám hlas ze spotu · '+(stage ? stage+' · ' : '')+'část '+done+' z '+total;
+                    state.neuralStatus='Hlas ze spotu · '+(stage||'model')+' ('+done+'/'+total+') · '+(phase||'inicializace')+(elapsedMs == null ? '' : ' · '+(elapsedMs/1000).toFixed(1)+' s');
                     update();
                 },
             });
@@ -162,7 +162,7 @@ function speakNext(gen){
             return neural.speak(spotSpeechText(text),rate,{
                 onStage(stage){if(gen===state.generation){state.neuralStatus='Hlas ze spotu · '+stage;update()}},
                 onPlay(){if(current()){state.neuralStatus='';update()}},
-                onProgress(done,total,stage){if(current()){state.neuralStatus='Načítám hlas ze spotu · '+(stage ? stage+' · ' : '')+'část '+done+' z '+total;update()}},
+                onProgress(done,total,stage,phase,elapsedMs){if(current()){state.neuralStatus='Hlas ze spotu · '+(stage||'model')+' ('+done+'/'+total+') · '+(phase||'inicializace')+(elapsedMs == null ? '' : ' · '+(elapsedMs/1000).toFixed(1)+' s');update()}},
             });
         }).then(()=>{
             if(!current())return;
