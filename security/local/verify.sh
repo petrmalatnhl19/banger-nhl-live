@@ -243,3 +243,6 @@ bash security41-db-restart.sh
 # SECURITY-43: adversarial timestamp and evidence provenance scenarios.
 db -f /dev/stdin < security43.sql | grep -q 'PASS SECURITY-43 adversarial provenance and time cutoff'
 echo 'PASS SECURITY-43 PostgreSQL provenance checks'
+
+# SECURITY-44: conflicting same-key payloads and bounded lock timeout retries.
+bash security44-conflict-timeout.sh
