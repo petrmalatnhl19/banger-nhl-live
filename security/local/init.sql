@@ -2,7 +2,7 @@
 CREATE ROLE anon NOLOGIN;
 CREATE ROLE authenticated NOLOGIN;
 CREATE ROLE service_role NOLOGIN;
-CREATE TABLE public.nhl_core43_shadow_inputs (game_id bigint, side text, gsax numeric, shots_against integer, readiness text, goalie_id text, gsax_fetched_at timestamptz, prediction_at timestamptz, starter_status text);
+CREATE TABLE public.nhl_core43_shadow_inputs (game_id bigint, side text, team_code text, goalie_name text, goalie_id text, prediction_at timestamptz, captured_at timestamptz DEFAULT now(), gsax numeric, shots_against integer, gsax_fetched_at timestamptz, starter_status text, starter_published_at timestamptz, starter_verified_at timestamptz, readiness text, UNIQUE(game_id,side));
 CREATE TABLE public.nhl_prediction_archive (game_id bigint PRIMARY KEY, prediction numeric, core42_predicted_at timestamptz, status text, core42_goalie_review jsonb, game_date date, away_team text, home_team text, core42_away double precision, core42_home double precision, core42_factors jsonb, actual_away integer, actual_home integer, baseline_away double precision, baseline_home double precision, advanced_away double precision, advanced_home double precision, goalie32_away double precision, goalie32_home double precision, special33_away double precision, special33_home double precision, core40_away double precision, core40_home double precision, core41_away double precision, core41_home double precision);
 CREATE TABLE public.nhl_core43_goalie_snapshots (id bigint, game_id bigint, goalie_id text, team_code text, situation text, fetched_at timestamptz, source_sha256 text, x_goals_against numeric(12,4), goals_against numeric(12,4), gsax numeric(12,4), shots_against integer, created_at timestamptz);
 CREATE TABLE public.nhl_core43_starter_evidence (id bigint, game_id bigint, team_code text, goalie_id text, evidence_status text, source_name text, source_url text, source_published_at timestamptz, verified_at timestamptz, created_at timestamptz);
@@ -10,7 +10,7 @@ CREATE TABLE public.nhl_core43_schedule_snapshots (game_id bigint, kickoff_at ti
 ALTER TABLE public.nhl_core43_shadow_inputs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.nhl_prediction_archive ENABLE ROW LEVEL SECURITY;
 CREATE POLICY archive_read ON public.nhl_prediction_archive FOR SELECT TO anon,authenticated USING (true);
-INSERT INTO public.nhl_core43_shadow_inputs VALUES (1,'away',1.2,40,'ready','A',now()-interval '2 hours',now()-interval '1 hour','confirmed'),(1,'home',0.8,40,'ready','H',now()-interval '2 hours',now()-interval '1 hour','confirmed');
+INSERT INTO public.nhl_core43_shadow_inputs (game_id,side,gsax,shots_against,readiness,goalie_id,gsax_fetched_at,prediction_at,starter_status) VALUES (1,'away',1.2,40,'ready','A',now()-interval '2 hours',now()-interval '1 hour','confirmed'),(1,'home',0.8,40,'ready','H',now()-interval '2 hours',now()-interval '1 hour','confirmed');
 INSERT INTO public.nhl_prediction_archive (game_id,prediction,core42_predicted_at,status,core42_goalie_review,game_date,away_team,home_team,core42_away,core42_home,core42_factors) VALUES (1,3.4,now(),'pending',NULL,current_date,'DAL','BOS',2.7,2.4,'{"away_goalie":{"name":"Synthetic A","nhl_player_id":"A"},"home_goalie":{"name":"Synthetic H","nhl_player_id":"H"}}'::jsonb);
 INSERT INTO public.nhl_core43_goalie_snapshots (game_id,goalie_id,team_code,situation,fetched_at,gsax,shots_against) VALUES (1,'A','DAL','all',now()-interval '2 hours',1.2,40),(1,'H','BOS','all',now()-interval '2 hours',0.8,40);
 INSERT INTO public.nhl_core43_starter_evidence (game_id,team_code,goalie_id,evidence_status,source_published_at,verified_at) VALUES (1,'DAL','A','confirmed',now()-interval '2 hours',now()-interval '2 hours'),(1,'BOS','H','confirmed',now()-interval '2 hours',now()-interval '2 hours');
@@ -448,6 +448,74 @@ CREATE VIEW public.nhl_core_model_trend AS  WITH forecasts AS (
     round(100.0 * wins::numeric / NULLIF(evaluable, 0)::numeric, 1) AS winner_accuracy_pct,
     round(running_mae::numeric, 3) AS goal_mae
    FROM trend;;
+-- SECURITY-23: synthetic, owner-privileged capture path, modeled on read-only production function inspection.
+-- Trigger created after fixture seeds to avoid changing earlier synthetic test cases.
+CREATE FUNCTION public.capture_core43_shadow_inputs() RETURNS integer
+LANGUAGE plpgsql SECURITY DEFINER SET search_path TO 'public'
+AS $function$
+DECLARE inserted integer;
+BEGIN
+  WITH sides AS (
+    SELECT a.game_id,a.core42_predicted_at AS prediction_at,'away'::text AS side,a.away_team AS team_code,
+      a.core42_factors->'away_goalie'->>'name' AS goalie_name,
+      a.core42_factors->'away_goalie'->>'nhl_player_id' AS goalie_id
+    FROM public.nhl_prediction_archive a
+    WHERE a.core42_predicted_at >= '2026-11-08 00:00:00+00'::timestamptz
+      AND a.core42_predicted_at <= now()
+    UNION ALL
+    SELECT a.game_id,a.core42_predicted_at,'home',a.home_team,
+      a.core42_factors->'home_goalie'->>'name',
+      a.core42_factors->'home_goalie'->>'nhl_player_id'
+    FROM public.nhl_prediction_archive a
+    WHERE a.core42_predicted_at >= '2026-11-08 00:00:00+00'::timestamptz
+      AND a.core42_predicted_at <= now()
+  ), sources AS (
+    SELECT s.*,g.gsax,g.shots_against,g.fetched_at AS gsax_fetched_at,
+      e.evidence_status,e.source_published_at,e.verified_at
+    FROM sides s
+    LEFT JOIN LATERAL (
+      SELECT g.* FROM public.nhl_core43_goalie_snapshots g
+      WHERE g.goalie_id=s.goalie_id AND g.team_code=s.team_code AND g.situation='all'
+        AND g.fetched_at<=s.prediction_at ORDER BY g.fetched_at DESC LIMIT 1
+    ) g ON true
+    LEFT JOIN LATERAL (
+      SELECT e.* FROM public.nhl_core43_starter_evidence e
+      WHERE e.game_id=s.game_id AND e.team_code=s.team_code AND e.goalie_id=s.goalie_id
+        AND e.source_published_at<=s.prediction_at AND e.verified_at<=s.prediction_at
+      ORDER BY e.verified_at DESC LIMIT 1
+    ) e ON true
+  ), saved AS (
+    INSERT INTO public.nhl_core43_shadow_inputs
+      (game_id,side,team_code,goalie_name,goalie_id,prediction_at,gsax,shots_against,
+       gsax_fetched_at,starter_status,starter_published_at,starter_verified_at,readiness)
+    SELECT game_id,side,team_code,goalie_name,goalie_id,prediction_at,gsax,shots_against,
+      gsax_fetched_at,evidence_status,source_published_at,verified_at,
+      CASE WHEN goalie_id IS NULL THEN 'missing_frozen_goalie_id'
+           WHEN evidence_status IS NULL THEN 'missing_pregame_starter_evidence'
+           WHEN lower(evidence_status) NOT IN ('confirmed','starting','confirmed_starter') THEN 'starter_not_confirmed'
+           WHEN gsax_fetched_at IS NULL THEN 'missing_pregame_gsax_snapshot'
+           WHEN shots_against IS NULL OR shots_against<30 THEN 'insufficient_shots'
+           WHEN gsax IS NULL THEN 'missing_gsax'
+           ELSE 'ready' END
+    FROM sources ON CONFLICT (game_id,side) DO NOTHING RETURNING 1
+  )
+  SELECT count(*) INTO inserted FROM saved;
+  RETURN inserted;
+END $function$;
+CREATE FUNCTION public.core43_capture_on_core42_insert() RETURNS trigger
+LANGUAGE plpgsql SECURITY DEFINER SET search_path TO 'public'
+AS $function$
+BEGIN
+  IF old.core42_predicted_at IS NULL AND new.core42_predicted_at IS NOT NULL THEN
+    PERFORM public.capture_core43_shadow_inputs();
+  END IF;
+  RETURN new;
+END $function$;
+CREATE TRIGGER core43_shadow_on_core42 AFTER UPDATE OF core42_predicted_at
+ON public.nhl_prediction_archive FOR EACH ROW
+EXECUTE FUNCTION public.core43_capture_on_core42_insert();
+REVOKE ALL ON FUNCTION public.capture_core43_shadow_inputs(),public.core43_capture_on_core42_insert() FROM PUBLIC,anon,authenticated;
+GRANT EXECUTE ON FUNCTION public.capture_core43_shadow_inputs(),public.core43_capture_on_core42_insert() TO service_role;
 GRANT USAGE ON SCHEMA public TO anon,authenticated,service_role;
 GRANT ALL ON TABLE public.nhl_core43_shadow_inputs,public.core43_shadow_predictions_v1,public.core43_shadow_preview_v1,public.core43_shadow_readiness_v1,public.nhl_core42_status TO anon,authenticated;
 GRANT SELECT ON TABLE public.nhl_prediction_archive,public.nhl_core43_public_schedule_evidence,public.nhl_core_model_accuracy,public.nhl_core_model_head_to_head,public.nhl_core_model_trend TO anon,authenticated;
