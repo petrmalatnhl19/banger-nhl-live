@@ -154,5 +154,43 @@ SQL
 db -Atqc "SELECT count(*) FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='public' AND p.proname IN ('capture_core43_shadow_inputs','core43_capture_on_core42_insert') AND p.proconfig @> ARRAY['search_path=public']::text[]" | grep -qx '2'
 echo "PASS SECURITY-25 temporary shadowing and transactional search_path hardening"
 
+# SECURITY-26: exercise the actual archive UPDATE trigger under hardened function paths.
+# The entire fixture is transactional: no permanent function setting or new capture row survives.
+db <<'SQL'
+BEGIN;
+ALTER FUNCTION public.capture_core43_shadow_inputs() SET search_path = pg_catalog, public, pg_temp;
+ALTER FUNCTION public.core43_capture_on_core42_insert() SET search_path = pg_catalog, public, pg_temp;
+INSERT INTO public.nhl_prediction_archive
+  (game_id,core42_predicted_at,status,game_date,away_team,home_team,core42_factors)
+VALUES
+  (26,NULL,'pending',current_date,'DAL','BOS',
+   '{"away_goalie":{"nhl_player_id":"A","name":"Synthetic A"},"home_goalie":{"nhl_player_id":"H","name":"Synthetic H"}}'::jsonb);
+INSERT INTO public.nhl_core43_starter_evidence
+  (game_id,team_code,goalie_id,evidence_status,source_published_at,verified_at)
+VALUES
+  (26,'DAL','A','confirmed',now()-interval '2 hours',now()-interval '2 hours'),
+  (26,'BOS','H','confirmed',now()-interval '2 hours',now()-interval '2 hours');
+UPDATE public.nhl_prediction_archive
+SET core42_predicted_at=now()-interval '30 minutes'
+WHERE game_id=26;
+DO $
+DECLARE n integer;
+BEGIN
+  SELECT count(*) INTO n FROM public.nhl_core43_shadow_inputs WHERE game_id=26;
+  IF n <> 2 THEN RAISE EXCEPTION 'SECURITY-26 expected 2 trigger rows, got %', n; END IF;
+  SELECT count(*) INTO n FROM public.nhl_core43_shadow_inputs WHERE game_id=26 AND readiness='ready';
+  IF n <> 2 THEN RAISE EXCEPTION 'SECURITY-26 expected 2 ready sides, got %', n; END IF;
+  PERFORM public.capture_core43_shadow_inputs();
+  SELECT count(*) INTO n FROM public.nhl_core43_shadow_inputs WHERE game_id=26;
+  IF n <> 2 THEN RAISE EXCEPTION 'SECURITY-26 duplicate capture, got % rows', n; END IF;
+END $;
+ROLLBACK;
+SQL
+db -Atqc "SELECT count(*) FROM public.nhl_core43_shadow_inputs WHERE game_id=26" | grep -qx '0'
+db -Atqc "SELECT count(*) FROM public.nhl_prediction_archive WHERE game_id=26" | grep -qx '0'
+db -Atqc "SELECT count(*) FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='public' AND p.proname IN ('capture_core43_shadow_inputs','core43_capture_on_core42_insert') AND p.proconfig @> ARRAY['search_path=public']::text[]" | grep -qx '2'
+echo "PASS SECURITY-26 hardened trigger capture, readiness, deduplication and rollback"
+
+
 
 echo "SECURITY-12 local privilege and two real-view definition tests PASS"
