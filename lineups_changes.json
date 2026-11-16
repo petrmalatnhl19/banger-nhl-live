@@ -1062,82 +1062,25 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "flames": {
-      "updatedAt": "2026-11-15T15:25:21.841571+00:00",
-      "previousPublishedAt": "2026-11-14T20:51:00+00:00",
+      "updatedAt": "2026-11-16T21:51:37.250496+00:00",
+      "previousPublishedAt": "2026-11-15T15:20:39.964000+00:00",
       "publishedAt": "2026-11-15T15:20:39.964000+00:00",
       "source": "https://www.nhl.com/news/calgary-flames-anaheim-ducks-game-preview-november-15-2026",
       "events": [
         {
-          "type": "moved",
-          "player": "Matvei Gridin",
-          "from": "Útok 3",
-          "to": "Útok 2"
+          "type": "removed",
+          "player": "William Stromgren",
+          "from": "Útok 4"
         },
         {
-          "type": "moved",
-          "player": "Martin Pospisil",
-          "from": "Útok 3",
-          "to": "Útok 2"
+          "type": "removed",
+          "player": "Jonathan Castagna",
+          "from": "Útok 4"
         },
         {
-          "type": "moved",
-          "player": "Ryan Strome",
-          "from": "Útok 3",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Yegor Sharangovich",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Morgan Frost",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Adam Klapka",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Yan Kuznetsov",
-          "from": "Obrana 3",
-          "to": "Obrana 1"
-        },
-        {
-          "type": "moved",
-          "player": "Zayne Parekh",
-          "from": "Obrana 3",
-          "to": "Obrana 1"
-        },
-        {
-          "type": "moved",
-          "player": "Joel Hanley",
-          "from": "Obrana 1",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "moved",
-          "player": "Simon Nemec",
-          "from": "Obrana 1",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "moved",
-          "player": "Jake Middleton",
-          "from": "Obrana 2",
-          "to": "Obrana 3"
-        },
-        {
-          "type": "moved",
-          "player": "Zach Whitecloud",
-          "from": "Obrana 2",
-          "to": "Obrana 3"
+          "type": "removed",
+          "player": "Aydar Suniev",
+          "from": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
