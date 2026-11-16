@@ -203,6 +203,63 @@ function showReference(options) {
 const sourceLabels = { score: "NHL rozpis", standings: "NHL statistiky", awaySchedule: "Rozpis hostů",
   homeSchedule: "Rozpis domácích", goalies: "RotoWire • archiv BANGER", lineups: "Sestavy • archiv BANGER" };
 
+const componentLabels = { xg4: "xG4", goalie32: "brankářská komponenta 3.2", special33: "speciální týmy 3.3",
+  form31: "forma 3.1", goalie32Factors: "podklady brankářské brány" };
+let pilotReference = NaN;
+
+function updatePilotClock() {
+  if (el("pilot").hidden || !Number.isFinite(pilotReference)) return;
+  const seconds = Math.ceil((pilotReference - Date.now()) / 1000);
+  el("pilot-countdown").textContent = seconds <= 0 ? "Okno T−60 skončilo."
+    : "Do T−60 " + Math.floor(seconds / 3600) + " h " + Math.floor(seconds % 3600 / 60) + " min " + seconds % 60 + " s";
+}
+setInterval(updatePilotClock, 1000);
+
+function showPilot(candidate) {
+  const { game } = candidate;
+  if (!game || !/^\d{10}$/.test(game.gameId) || !Number.isFinite(Date.parse(game.referenceAt))
+    || !Array.isArray(candidate.missing) || !Array.isArray(candidate.internallyCalculated)
+    || !["unverified", "external_confirmation_pending"].includes(candidate.timeStatus)) throw Error("invalid pilot report");
+  const states = { diagnostic: "Diagnostika", diagnostic_archived: "Interně archivovaná diagnostika",
+    captured: "Sběr dokončen · čeká na podpis", internally_archived: "Interně archivováno" };
+  const reasons = { diagnostic_outside_window: "Odběr před referenčním oknem", capture_outside_window: "Odběr mimo referenční okno",
+    required_inputs_missing: "Chybí povinné vstupy", archive_schedule_unlinked: "Nesouhlasí archivní rozpis",
+    archive_game_unavailable: "Chybí archivní záznam zápasu", model_gate_declined: "Brána v26 odmítla výpočet" };
+  el("pilot-game").textContent = game.away + " – " + game.home + " · NHL " + game.gameId
+    + " · začátek " + startTime.format(new Date(game.scheduledAt)) + " · T−60 " + startTime.format(new Date(game.referenceAt));
+  el("pilot-status").textContent = states[candidate.status] + (candidate.reason ? " · " + (reasons[candidate.reason] ?? candidate.reason) : "")
+    + " · 0 ověřených snímků · 0 platných párů";
+  el("pilot-time").textContent = candidate.timeStatus === "external_confirmation_pending"
+    ? "Místní podpis a žádost RFC 3161 připraveny. Externí potvrzení chybí."
+    : "Externí časové potvrzení chybí.";
+  const name = key => componentLabels[key] ?? inputLabels[key] ?? key;
+  el("pilot-missing").hidden = !candidate.missing.length;
+  el("pilot-missing").textContent = "Chybí " + candidate.missing.map(name).join(", ");
+  const modelsBox = el("pilot-models");
+  modelsBox.replaceChildren();
+  for (const key of ["core40", "core41"]) {
+    const card = put(modelsBox, "article");
+    const model = candidate.internallyCalculated.find(row => row.model === key && row.status === "calculated"
+      && [row.away, row.home].every(Number.isFinite));
+    put(card, "h3", models[key].label);
+    put(card, "p", model ? fmtScore(model) + " · hosté / domácí" : "Výpočet neproběhl");
+  }
+  const extra = { components: "Archiv mezivýsledků", archivedSchedule: "Archivní rozpis",
+    preview: "NHL preview", awayRoster: "Soupiska hostů", homeRoster: "Soupiska domácích" };
+  const date = value => Number.isFinite(Date.parse(value)) ? startTime.format(new Date(value)) : "—";
+  replaceTable(el("pilot-source-rows"), ["Zdroj", "Staženo", "Zveřejněno", "Verze"], [
+    ...candidate.sources, ...(candidate.componentEvidence ?? [])
+  ].map(row => [extra[row.key] ?? sourceLabels[row.key] ?? name(row.key), date(row.retrievedAt),
+    date(row.publishedAt), row.modelVersion ?? row.version?.slice(0, 19) ?? "—"]));
+  pilotReference = Date.parse(game.referenceAt);
+  el("pilot").hidden = false;
+  updatePilotClock();
+  el("status").textContent = "Načten stav předzápasového pilotu.";
+  filters.hidden = true;
+  el("report").hidden = true;
+  el("pregame").hidden = true;
+}
+
 function replayAvailability(mode) {
   if (mode === "simulation_only") return "Dostupná simulace GSAx";
   if (mode === "exact_ensemble") return "Přesný offline výpočet v26 ze zmrazených komponent";
@@ -340,6 +397,11 @@ el("load").addEventListener("change", async event => {
     if (file.size > 20_000_000) throw Error("report too large");
     const candidate = JSON.parse(await file.text());
     el("replay").hidden = true;
+    el("pilot").hidden = true;
+    if (candidate?.schema === "banger-accuracy-live-report-v1") {
+      showPilot(candidate);
+      return;
+    }
     if (candidate?.schema === "banger-core-v26-replay-report-v1") {
       showReplay(candidate);
       return;
@@ -368,6 +430,7 @@ el("load").addEventListener("change", async event => {
       + report.scope.end + " a předchozí dny.";
   } catch {
     report = null;
+    el("pilot").hidden = true;
     el("replay").hidden = true;
     el("pregame").hidden = true;
     filters.hidden = true;

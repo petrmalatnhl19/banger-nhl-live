@@ -55,3 +55,5 @@ Ruční odběr a audit zdrojů pro živý pilot popisuje [CORE-ACCURACY-03](PREG
 Přímý export hráčů, test časových dokladů a reprodukovatelnost popisuje [CORE-ACCURACY-04](REPLAY-AUDIT.md).
 
 Přesný ensemble v26, kontrolní přepočty, doplňkové absence a export pro externí časový doklad popisuje [CORE-ACCURACY-05](V26-OFFLINE.md).
+
+Ruční živý pilot, výběr utkání a společný podepsaný archiv popisuje [CORE-ACCURACY-06](LIVE-PILOT.md).

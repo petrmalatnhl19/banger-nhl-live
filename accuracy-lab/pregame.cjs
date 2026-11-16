@@ -31,12 +31,12 @@ function permittedSource(requested, resolved) {
     && day(resolved.slice(prefix.length));
 }
 
-async function fetchSource(url, fetcher, now, format = "json") {
+async function fetchSource(url, fetcher, now, format = "json", headers = {}) {
   const requestedAt = iso(now());
   try {
     const options = {
       method: "GET", redirect: "error", cache: "no-store", signal: AbortSignal.timeout(12_000),
-      headers: { Accept: format === "html" ? "text/html" : "application/json", "User-Agent": "BangerNHLResearch/0.4" }
+      headers: { Accept: format === "html" ? "text/html" : "application/json", "User-Agent": "BangerNHLResearch/0.4", ...headers }
     };
     let resolvedUrl = url;
     let response = await fetcher(url, url === STANDINGS ? { ...options, redirect: "manual" } : options);

@@ -33,3 +33,4 @@ jobs:
           node --check accuracy-lab/v26-replay.cjs
           node --check accuracy-lab/absence-evidence.cjs
           node --check accuracy-lab/external-time.cjs
+          node --check accuracy-lab/pilot.cjs

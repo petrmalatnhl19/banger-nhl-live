@@ -65,12 +65,14 @@ function checkRequest(request, expected) {
   if (read(0x01, end) !== at + 1 || request[at++] !== 255 || at !== end) throw Error("Unexpected timestamp request fields");
 }
 
-function prepareExport(manifest, privatePem, now = Date.now()) {
+function prepareExport(manifest, privatePem, now = Date.now(), bindingSha256) {
+  if (bindingSha256 !== undefined && !id(bindingSha256)) throw Error("Invalid linked archive digest");
   const inspection = inspectManifest(manifest, now);
   if (inspection.status === "rejected") throw Error("Snapshot export refused: " + inspection.reason);
   const privateKey = createPrivateKey(privatePem);
   if (privateKey.asymmetricKeyType !== "ed25519") throw Error("An Ed25519 signing key is required");
   const statement = { schema, purpose: "external_time_request", manifestSha256: sha256(manifest),
+    ...(bindingSha256 !== undefined && { bindingSha256 }),
     localCreatedAt: new Date(now).toISOString(), nonce: randomBytes(32).toString("hex"),
     snapshotStatus: inspection.status === "verified" ? "structurally_complete" : "incomplete" };
   const envelope = { statement, manifest, publicKey: createPublicKey(privateKey).export({ type: "spki", format: "pem" }),
@@ -87,6 +89,7 @@ function verifyExport(submission) {
   const statement = envelope?.statement;
   if (submission?.schema !== schema || statement?.schema !== schema
     || statement.purpose !== "external_time_request" || !id(statement.nonce)
+    || (Object.hasOwn(statement, "bindingSha256") && !id(statement.bindingSha256))
     || submission.timeStatus !== "unverified" || submission.independentlyVerified !== false
     || submission.eligibleForPairing !== false || statement.manifestSha256 !== sha256(envelope.manifest)
     || typeof envelope.signature !== "string" || !/^[A-Za-z0-9+/]{86}==$/.test(envelope.signature)
