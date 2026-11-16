@@ -1,14 +1,17 @@
 {
-  "generatedAt": "2026-11-16T03:52:07.336383+00:00",
+  "generatedAt": "2026-11-16T05:20:52.654405+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 27,
+  "currentProjections": 24,
   "needsFreshProjection": [
     "blackhawks",
     "hurricanes",
     "jets",
     "kraken",
-    "rangers"
+    "maple leafs",
+    "penguins",
+    "rangers",
+    "senators"
   ],
   "missing": [],
   "olderVerified": [
@@ -16,7 +19,10 @@
     "hurricanes",
     "jets",
     "kraken",
-    "rangers"
+    "maple leafs",
+    "penguins",
+    "rangers",
+    "senators"
   ],
   "manualSnapshots": [],
   "freshnessDefinition": "Publication within 36h; not a confirmed next-game lineup",
@@ -270,11 +276,11 @@
         "archive",
         "manual"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-14T17:05:36.386000+00:00",
       "source": "https://www.nhl.com/news/edmonton-oilers-toronto-maple-leafs-game-preview-november-14-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "oilers": {
       "hasProjectedLines": true,
@@ -306,11 +312,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-14T16:32:26.653000+00:00",
       "source": "https://www.nhl.com/news/ottawa-senators-pittsburgh-penguins-game-preview-november-14-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "predators": {
       "hasProjectedLines": true,
@@ -366,11 +372,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-14T16:32:26.653000+00:00",
       "source": "https://www.nhl.com/news/ottawa-senators-pittsburgh-penguins-game-preview-november-14-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "sharks": {
       "hasProjectedLines": true,
