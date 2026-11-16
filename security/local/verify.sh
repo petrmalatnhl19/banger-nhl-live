@@ -234,3 +234,5 @@ bash security38-failover.sh
 
 # SECURITY-39: disconnected uncommitted transaction and ambiguous commit acknowledgement.
 bash security39-disconnect-retry.sh
+
+bash security40-kill-backend.sh
