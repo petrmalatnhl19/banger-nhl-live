@@ -168,17 +168,18 @@ function speakNext(gen){
             state.busy=false;
             state.index++;
             speakNext(gen);
-        }).catch(()=>{
+        }).catch(error=>{
             if(!current())return;
+            console.error('[BANGER VOICE] Spot voice synthesis failed:',error);
             state.busy=false;
             state.utterance=null;
             if(synth){
                 state.voice='device';
-                state.neuralStatus='Hlas ze spotu se nepodařilo spustit. Přehrávám hlas zařízení.';
+                state.neuralStatus='Hlas ze spotu selhal ('+String(error?.message||'neznámá chyba').slice(0,160)+'). Přehrávám hlas zařízení.';
                 speakNext(gen);
             }else{
                 state.playing=false;
-                state.neuralStatus='Hlas ze spotu se nepodařilo spustit.';
+                state.neuralStatus='Hlas ze spotu selhal: '+String(error?.message||'neznámá chyba').slice(0,160);
             }
             update();
         });
