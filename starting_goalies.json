@@ -1,23 +1,23 @@
 {
   "date": "2026-11-16",
-  "updatedAt": "2026-11-16T01:25:17.670430+00:00",
+  "updatedAt": "2026-11-16T02:40:02.319475+00:00",
   "teams": {
-    "UTA": {
-      "name": "Karel Vejmelka",
-      "status": "projected",
-      "date": "2026-11-16",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-16T01:25:17.670430+00:00",
-      "gameId": 2026020332
-    },
     "VAN": {
       "name": "Kevin Lankinen",
       "status": "projected",
       "date": "2026-11-16",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-16T01:25:17.670430+00:00",
+      "checkedAt": "2026-11-16T02:40:02.319475+00:00",
+      "gameId": 2026020332
+    },
+    "UTA": {
+      "name": "Karel Vejmelka",
+      "status": "projected",
+      "date": "2026-11-16",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-16T02:40:02.319475+00:00",
       "gameId": 2026020332
     },
     "NYR": {
@@ -26,7 +26,7 @@
       "date": "2026-11-16",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-16T01:25:17.670430+00:00",
+      "checkedAt": "2026-11-16T02:40:02.319475+00:00",
       "gameId": 2026020331
     }
   },
