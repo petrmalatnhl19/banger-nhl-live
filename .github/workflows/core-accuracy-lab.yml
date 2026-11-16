@@ -37,6 +37,9 @@ jobs:
           node --check accuracy-lab/pilot.cjs
 
   pilot-configuration:
+    permissions:
+      contents: read
+      actions: read
     uses: ./.github/workflows/core-accuracy-pilot.yml
     with:
       mode: configuration
