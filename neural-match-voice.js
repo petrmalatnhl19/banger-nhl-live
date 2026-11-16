@@ -5,6 +5,8 @@
     if (!Context || !window.Worker || !window.WebAssembly) return;
 
     const workerUrl = new URL('./voice/match-voice.worker.mjs', document.currentScript.src);
+    // Experimental opt-in only: production users continue using the original FP32 model.
+    if (new URLSearchParams(location.search).get('voiceFp16') === '1') workerUrl.searchParams.set('model', 'fp16');
     let worker;
     let context;
     let source;
