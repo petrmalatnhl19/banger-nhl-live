@@ -63,6 +63,8 @@ db -Atqc "SELECT count(*) FROM public.nhl_core_model_accuracy WHERE model='CORE 
 db -Atqc "SELECT count(*) FROM public.nhl_core_model_head_to_head WHERE model='CORE 4.1' AND games=1" | grep -qx '1'
 db -Atqc "SELECT count(*) FROM public.nhl_core_model_trend WHERE model='CORE 4.2' AND game_id=9 AND games=1" | grep -qx '1'
 echo "PASS SECURITY-16 three production analytics views against synthetic final score"
+db -Atqc "SELECT 'security_barrier=true'=ANY(reloptions) FROM pg_class WHERE oid='public.nhl_core43_public_schedule_evidence'::regclass" | grep -qx 't'
+echo "PASS SECURITY-18 schedule security_barrier matches production"
 echo "Applying SECURITY-06 candidate only to synthetic local database..."
 db <<'SQL'
 BEGIN;
