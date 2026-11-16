@@ -16,6 +16,14 @@ for role in anon authenticated; do
   check "$role" core43_shadow_predictions_v1 t
   check "$role" core43_shadow_preview_v1 t
 done
+# Check both synthetic goalies have evidence strictly before the prediction.
+db -Atqc "SELECT count(*) FROM public.core43_shadow_readiness_v1 WHERE game_id=1 AND readiness='ready'" | grep -qx '2'
+# Post-prediction evidence must never make a previously unready game ready.
+db -Atqc "INSERT INTO public.nhl_prediction_archive (game_id,core42_predicted_at,game_date,away_team,home_team,core42_factors) VALUES (2,now()-interval '1 hour',current_date,'DAL','BOS','{\"away_goalie\":{\"nhl_player_id\":\"LATE\"}}'::jsonb)"
+db -Atqc "INSERT INTO public.nhl_core43_starter_evidence VALUES (2,'DAL','LATE','confirmed',now(),now())"
+db -Atqc "INSERT INTO public.nhl_core43_goalie_snapshots VALUES (2,'LATE','DAL','all',now(),1.5,40)"
+db -Atqc "SELECT readiness FROM public.core43_shadow_readiness_v1 WHERE game_id=2 AND side='away'" | grep -qx 'missing_pregame_starter_evidence'
+echo "PASS readiness time cutoff: post-prediction evidence excluded"
 # Exercise production-equivalent CORE43 calculations before applying local revocations.
 db -Atqc "SELECT experiment_status FROM public.core43_shadow_predictions_v1 WHERE game_id=1" | grep -qx 'experimental_ready'
 db -Atqc "SELECT preview_status FROM public.core43_shadow_preview_v1 WHERE game_id=1" | grep -qx 'provisional_goalies_not_confirmed'
