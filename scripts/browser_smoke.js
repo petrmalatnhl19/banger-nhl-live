@@ -1,10 +1,37 @@
 const { chromium } = require('playwright');
 const { pathToFileURL } = require('node:url');
 const path = require('node:path');
+const assert = require('node:assert/strict');
 (async () => {
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   const errors = [];
+  await page.addInitScript(() => {
+    window.voiceTrace = [];
+    window.AudioContext = class {
+      resume() { window.voiceTrace.push('resume'); return Promise.resolve(); }
+      suspend() { window.voiceTrace.push('pause'); return Promise.resolve(); }
+      close() { return Promise.resolve(); }
+      createBuffer() { return { copyToChannel() {} }; }
+      createBufferSource() {
+        return { connect() {}, disconnect() {},
+          start() { window.voiceTrace.push('audio:start'); },
+          stop() { window.voiceTrace.push('audio:stop'); } };
+      }
+    };
+    window.Worker = class {
+      constructor() { window.voiceTrace.push('worker'); }
+      addEventListener(type, callback) { if (type === 'message') this.message = callback; }
+      postMessage(data) {
+        if (data.type !== 'speak') return;
+        window.voiceTrace.push(data.text);
+        queueMicrotask(() => this.message({ data: {
+          type: 'audio', id: data.id, rate: 44100, audio: new Float32Array([.1,.2,.1]),
+        } }));
+      }
+      terminate() {}
+    };
+  });
   page.on('pageerror', error => errors.push(error.message));
   await page.route('https://xxwqeiuyislnoxsmjuul.supabase.co/functions/v1/nhl-feed**', async route => {
     const kind = new URL(route.request().url()).searchParams.get('kind');
@@ -35,8 +62,32 @@ const path = require('node:path');
   await page.locator('#arenaBody [data-match-pane="players"]:not(.hidden)').waitFor({ timeout: 10000 });
   await page.locator('#arenaBody [data-match-tab="commentary"]').first().click();
   await page.locator('#arenaBody [data-match-pane="commentary"]:not(.hidden)').waitFor({ timeout: 10000 });
+  const commentary = page.locator('#commentaryFeed');
+  const panel = commentary.locator('.bv-panel');
+  await panel.waitFor({ timeout: 10000 });
+  assert.equal(await panel.locator('[data-bv=voice]').inputValue(), 'device');
+  await panel.locator('summary[aria-label="Nastavení hlasu"]').click();
+  await panel.locator('[data-bv=voice]').selectOption('spot');
+  await panel.getByText(/400 MB/).waitFor();
+  assert.deepEqual(await page.evaluate(() => window.voiceTrace), [], 'Voice assets must wait for Spustit');
+
+  await commentary.evaluate(root => {
+    root.innerHTML = '<p>Aktualizovaný komentář</p>';
+    document.dispatchEvent(new CustomEvent('banger:commentary', { detail: {
+      id: '2026020999', items: [{ id: 12, period: 1, time: '03:09', type: 'goal', text: 'Gól! Dallas Stars vedou.' }],
+    } }));
+  });
+  assert.equal(await panel.locator('[data-bv=voice]').inputValue(), 'spot');
+  await panel.locator('summary[aria-label="Nastavení hlasu"]').click();
+  await panel.locator('[data-bv=start]').click();
+  await page.waitForFunction(() => window.voiceTrace.includes('audio:start'));
+  assert.ok((await page.evaluate(() => window.voiceTrace)).includes('Gól! Dallas Stars vedou.'));
+  await panel.locator('[data-bv=pause]').click();
+  await page.waitForFunction(() => window.voiceTrace.includes('pause'));
+
   await page.locator('#closeArena').click();
   await page.locator('#liveArena').waitFor({ state: 'hidden', timeout: 10000 });
+  assert.ok((await page.evaluate(() => window.voiceTrace)).includes('audio:stop'), 'Closing the match must stop the voice');
   if (errors.length) throw Error('JavaScript errors in match detail: ' + errors.join(' | '));
   if (errors.length) throw Error('JavaScript errors after navigation: ' + errors.join(' | '));
   // Verify all visible mobile navigation destinations without relying on hidden desktop tabs.
