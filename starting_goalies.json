@@ -1,6 +1,6 @@
 {
   "date": "2026-11-16",
-  "updatedAt": "2026-11-16T18:05:05.621732+00:00",
+  "updatedAt": "2026-11-16T18:59:01.560996+00:00",
   "teams": {
     "MTL": {
       "name": "Jacob Fowler",
@@ -8,7 +8,7 @@
       "date": "2026-11-16",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-16T18:05:05.621732+00:00",
+      "checkedAt": "2026-11-16T18:59:01.560996+00:00",
       "gameId": 2026020331
     },
     "NYR": {
@@ -17,29 +17,28 @@
       "date": "2026-11-16",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-16T18:05:05.621732+00:00",
+      "checkedAt": "2026-11-16T18:59:01.560996+00:00",
       "gameId": 2026020331
     },
     "UTA": {
       "name": "Karel Vejmelka",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-16",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-16T18:05:05.621732+00:00",
-      "gameId": 2026020332
-    },
-    "VAN": {
-      "name": "Kevin Lankinen",
-      "status": "projected",
-      "date": "2026-11-16",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-16T18:05:05.621732+00:00",
+      "checkedAt": "2026-11-16T18:59:01.560996+00:00",
       "gameId": 2026020332
     }
   },
-  "conflicts": [],
+  "conflicts": [
+    {
+      "date": "2026-11-16",
+      "team": "VAN",
+      "reason": "source disagreement",
+      "rotowire": "Nikita Tolopilo",
+      "previous": "Kevin Lankinen"
+    }
+  ],
   "sourceErrors": [],
-  "status": "ok"
+  "status": "partial"
 }

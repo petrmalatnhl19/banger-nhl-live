@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T18:05:00.856540+00:00",
+  "generatedAt": "2026-11-16T18:58:56.780928+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -180,45 +180,10 @@
         }
       ],
       "roleMismatches": [],
-      "rejectedLines": [
-        {
-          "group": "forwards",
-          "line": 4,
-          "players": [
-            "Ben McCartney"
-          ],
-          "sourceLine": [
-            "Liam O’Brien",
-            "Kevin Stenlund",
-            "Ben McCartney"
-          ]
-        },
-        {
-          "group": "defense",
-          "line": 3,
-          "players": [
-            "Zac Jones"
-          ],
-          "sourceLine": [
-            "Artem Duda",
-            "Zac Jones"
-          ]
-        }
-      ],
-      "rejectedPlayerReasons": [
-        {
-          "name": "Ben McCartney",
-          "expectedRole": "forwards",
-          "reason": "not_in_current_roster"
-        },
-        {
-          "name": "Zac Jones",
-          "expectedRole": "defense",
-          "reason": "not_in_current_roster"
-        }
-      ],
-      "validatedForwardLines": 3,
-      "validatedDefensePairs": 2,
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
       "accepted": true
     },
     "red wings": {

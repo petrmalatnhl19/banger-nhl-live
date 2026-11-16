@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-16T18:05:05.621732+00:00",
+  "updatedAt": "2026-11-16T18:59:01.560996+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "goalieCount": 90,
   "games": [
@@ -30,7 +30,7 @@
       "goalie": "Karel Vejmelka",
       "opponent": "VAN",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-16",
       "gameId": 2026020332,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -38,14 +38,14 @@
     },
     {
       "team": "VAN",
-      "goalie": "Kevin Lankinen",
+      "goalie": "Nikita Tolopilo",
       "opponent": "UTA",
       "venue": "away",
       "status": "projected",
       "date": "2026-11-16",
       "gameId": 2026020332,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8480947"
+      "goalieId": "8484268"
     },
     {
       "team": "ANA",
