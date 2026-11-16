@@ -25,5 +25,8 @@ jobs:
       - name: Test four-variant CORE 4.3 sensitivity pipeline (offline)
         run: node scripts/test_security48_four_variant_pipeline.cjs
 
+      - name: Test frozen CORE 4.3 input binding (offline)
+        run: node scripts/test_security49_frozen_bundle.cjs
+
       - name: Test immutable pregame refresh prototype (offline)
         run: python3 .github/scripts/test-security-35-pregame-refresh.py
