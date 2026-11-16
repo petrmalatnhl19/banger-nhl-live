@@ -2,8 +2,12 @@
 
 const assert = require("node:assert/strict");
 const { createHash, generateKeyPairSync } = require("node:crypto");
+const { mkdtempSync, readFileSync, readdirSync, rmSync } = require("node:fs");
+const { tmpdir } = require("node:os");
+const { join } = require("node:path");
 const { test } = require("node:test");
 const { attestNhlStart, collectNhlSources, verifyProvenance } = require("./core43_cal33_nhl_observer.cjs");
+const { rehearse } = require("./core43_cal34_dallas_rehearsal.cjs");
 
 const json = value => Buffer.from(JSON.stringify(value));
 const hash = bytes => createHash("sha256").update(bytes).digest("hex");
@@ -93,4 +97,25 @@ test("CAL-33 collection uses only the fixed sources and blocks redirected respon
     headers: { "content-type": "text/html" },
   }));
   await assert.rejects(collectNhlSources(gameId), /cal33_source_http/);
+});
+
+test("CAL-34 retrospective rehearsal archives public material and rejects newly issued timestamps", async t => {
+  const dir = mkdtempSync(join(tmpdir(), "cal34-rehearsal-test-"));
+  t.after(() => rmSync(dir, { recursive: true, force: true }));
+  const synthetic = fixture(html.replace("logocfla.gif", "logocdal.gif"),
+    { ...boxscore, homeTeam: { ...boxscore.homeTeam, abbrev: "DAL" } });
+  const out = join(dir, "output");
+  const result = await rehearse(json(synthetic), review, out);
+  assert.equal(result.result.trusted, false);
+  assert.equal(result.result.reason, "cal30_timestamp_order");
+  assert.equal(result.intervals.length, 2);
+  assert.equal(result.tests.relabel.trusted, false);
+  assert.ok(result.intervals.every(interval => interval.earliestAt > review.actualStartAt));
+  const prediction = JSON.parse(readFileSync(join(out, "test-prediction.json")));
+  assert.equal(prediction.generatedAfterGame, true);
+  assert.equal(prediction.prediction.homeTeam, "DAL");
+  assert.equal(prediction.prediction.variants.length, 4);
+  for (const name of readdirSync(out)) {
+    assert.doesNotMatch(readFileSync(join(out, name)).toString("latin1"), /BEGIN (?:\w+ )?PRIVATE KEY/);
+  }
 });

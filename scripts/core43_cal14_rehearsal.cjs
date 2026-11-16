@@ -23,14 +23,15 @@ const hex = value => typeof value === "string" && /^[a-f0-9]{64}$/.test(value);
 const publicDer = key => key.export({ type: "spki", format: "der" });
 const json = (path, limit = 64 * 1024) => JSON.parse(readBoundedFile(path, limit));
 
-function prepare(directory, captureAt = now) {
+function prepare(directory, captureAt = now, matchup = { gameId: "2026029999" }) {
   const relative = minutes => new Date(Date.parse(captureAt) + minutes * 60_000).toISOString();
   const root = generateKeyPairSync("ed25519");
   const publisher = generateKeyPairSync("ed25519");
   const witness = generateKeyPairSync("ed25519");
   const exportTrust = { source: SOURCE, keyId: "cal14-export", publicKey: publisher.publicKey };
   const witnessId = "cal14-witness";
-  const doc = fixture(captureAt, { gameId: "2026029999" });
+  const { gameId, away, home } = matchup;
+  const doc = fixture(captureAt, { gameId, away, home });
   doc.keyId = exportTrust.keyId;
   const { bytes, signature } = signed(doc, publisher.privateKey);
   const input = { bytes, signature, exportTrust, origin: ORIGIN, now: captureAt };
