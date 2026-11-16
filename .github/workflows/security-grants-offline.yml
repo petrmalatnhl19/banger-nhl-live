@@ -28,5 +28,8 @@ jobs:
       - name: Test frozen CORE 4.3 input binding (offline)
         run: node scripts/test_security49_frozen_bundle.cjs
 
+      - name: Test signed pregame source provenance (offline)
+        run: node scripts/test_security50_signed_source_provenance.cjs
+
       - name: Test immutable pregame refresh prototype (offline)
         run: python3 .github/scripts/test-security-35-pregame-refresh.py
