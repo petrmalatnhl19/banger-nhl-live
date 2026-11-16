@@ -78,12 +78,16 @@ test('a goal relabel keeps its identity while shootout goals stay out of regulat
     assert.equal(goalKey(first, -1), null);
 });
 test('an overturned goal requires a consistent score and can be confirmed alongside a new goal', () => {
-    const goal = {key: '1:254:0', side: 0};
+    const goal = {key: '1:254:0', side: 0, eventId: 5};
     const next = {key: '1:332:1', side: 1};
     const before = {score: [1, 0], goals: [goal]};
     assert.equal(goalChanges(before, {score: [1, 0], goals: []}), null);
     assert.equal(goalChanges(before, {score: [0, 0], goals: [goal]}), null);
-    assert.deepEqual(goalChanges(before, {score: [1, 0], goals: [goal]}), []);
-    assert.deepEqual(goalChanges(before, {score: [0, 0], goals: []}), [goal.key]);
-    assert.deepEqual(goalChanges(before, {score: [0, 1], goals: [next]}), [goal.key]);
+    assert.deepEqual(goalChanges(before, {score: [1, 0], goals: [goal]}).removed, []);
+    assert.deepEqual(goalChanges(before, {score: [0, 0], goals: []}).removed, [goal.key]);
+    assert.deepEqual(goalChanges(before, {score: [0, 1], goals: [next]}).removed, [goal.key]);
+    const retimed = {...goal, key: '1:255:0'};
+    const correction = goalChanges(before, {score: [1, 0], goals: [retimed]});
+    assert.deepEqual(correction.removed, []);
+    assert.equal(correction.moved.get(goal.key), retimed.key);
 });

@@ -97,26 +97,36 @@ document.addEventListener('banger:commentary', event => {
     mount(root);
     if (!state.playing || state.mode !== 'live') return;
 
-    const additions = state.latest.filter(item => !state.seen.has(key(item)));
     const before = state.lastConsistentGoals;
     if (!before?.score.every(Number.isInteger)) state.lastConsistentGoals = state.goals;
-    const removed = before && window.BangerCommentaryFacts?.goalChanges(before, state.goals);
-    if (removed) {
+    const changes = before && window.BangerCommentaryFacts?.goalChanges(before, state.goals);
+    if (changes) {
         state.lastConsistentGoals = state.goals;
-        for (const goal of removed) state.seen.delete('goal:' + goal);
-        const spoken = removed.filter(goal => state.spokenGoals.delete(goal));
-        if (spoken.length) {
-            const order = (state.latest.at(-1)?.order ?? 0) + 1;
-            const text = (spoken.length === 1 ? 'Branka neplatí. ' : 'Ohlášené branky neplatí. ') + state.goals.text;
-            additions.push({id: 'goal-correction-' + ++state.correctionCount, type: 'goal-correction',
-                priority: 100, order, text});
+        for (const [oldKey, newKey] of changes.moved) {
+            if (state.seen.delete('goal:' + oldKey)) state.seen.add('goal:' + newKey);
+            if (state.spokenGoals.delete(oldKey)) state.spokenGoals.add(newKey);
+            for (const item of state.queue.slice(state.index)) {
+                if (item.goalKey === oldKey) {
+                    item.goalKey = newKey;
+                    item.id = 'goal:' + newKey;
+                }
+            }
         }
+        for (const goal of changes.removed) state.seen.delete('goal:' + goal);
+    }
+    const additions = state.latest.filter(item => !state.seen.has(key(item)));
+    const spoken = changes?.removed.filter(goal => state.spokenGoals.delete(goal)) || [];
+    if (spoken.length) {
+        const order = (state.latest.at(-1)?.order ?? 0) + 1;
+        const text = (spoken.length === 1 ? 'Branka neplatí. ' : 'Ohlášené branky neplatí. ') + state.goals.text;
+        additions.push({id: 'goal-correction-' + ++state.correctionCount, type: 'goal-correction',
+            priority: 100, order, text});
     }
     const current = state.busy || state.paused ? state.queue[state.index] : null;
     const latest = new Map(state.latest.map(item => [key(item), item]));
     const pending = state.queue.slice(state.index + (current ? 1 : 0))
         .map(item => latest.get(key(item)) || (['summary', 'goal-correction'].includes(item.type) ? item : null)).filter(Boolean);
-    const invalidCurrent = current?.goalKey && removed?.includes(current.goalKey);
+    const invalidCurrent = current?.goalKey && changes?.removed.includes(current.goalKey);
     if (additions.length || invalidCurrent) {
         for (const item of additions) state.seen.add(key(item));
         state.lastNewAt = Date.now();

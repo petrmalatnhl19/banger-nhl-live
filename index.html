@@ -1996,7 +1996,7 @@ const facts=rules.gameFacts(d,[teamFull(d.awayTeam),teamFull(d.homeTeam)]);
 const playerName=facts.player;
 const goalSnapshot={score:facts.scoreboard,text:facts.scoreText,goals:facts.regulation
  .filter(play=>play.typeDescKey==='goal')
- .map(play=>{const side=facts.shotSide(play);return {side,key:rules.goalKey(play,side)}})
+ .map(play=>{const side=facts.shotSide(play);return {side,key:rules.goalKey(play,side),eventId:play.eventId}})
  .filter(goal=>goal.key)};
 const publish=items=>document.dispatchEvent(new CustomEvent('banger:commentary',{detail:{id:String(id),items,goalSnapshot,summary:facts.summary,finished:facts.final,
  radioStats:{awayName:facts.teams[0],homeName:facts.teams[1],awayShots:facts.shots[0],homeShots:facts.shots[1],awayGoals:facts.scoreboard[0],homeGoals:facts.scoreboard[1]}}}));

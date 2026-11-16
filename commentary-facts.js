@@ -200,15 +200,21 @@ function goalKey(play, side) {
 function goalChanges(previous, current) {
     const valid = snapshot => snapshot && snapshot.score?.length === 2 && snapshot.score.every(int);
     if (!valid(previous) || !valid(current)) return null;
-    const before = new Map(previous.goals.map(goal => [goal.key, goal.side]));
-    const after = new Map(current.goals.map(goal => [goal.key, goal.side]));
-    const removed = [...before.keys()].filter(key => !after.has(key));
-    const added = [...after.keys()].filter(key => !before.has(key));
+    const before = new Map(previous.goals.map(goal => [goal.key, goal]));
+    const after = new Map(current.goals.map(goal => [goal.key, goal]));
+    const removed = [...before.values()].filter(goal => !after.has(goal.key));
+    const added = [...after.values()].filter(goal => !before.has(goal.key));
     const delta = [0, 0];
-    for (const key of added) delta[after.get(key)]++;
-    for (const key of removed) delta[before.get(key)]--;
-    // Wait for the scoreboard and event list to agree. A temporarily missing play is not an overturned goal.
-    return previous.score.every((score, side) => score + delta[side] === current.score[side]) ? removed : null;
+    for (const goal of added) delta[goal.side]++;
+    for (const goal of removed) delta[goal.side]--;
+    // Wait for the scoreboard and the event list to agree.
+    if (!previous.score.every((score, side) => score + delta[side] === current.score[side])) return null;
+    const moved = new Map();
+    for (const old of removed) {
+        const match = added.find(goal => goal.side === old.side && old.eventId != null && goal.eventId === old.eventId);
+        if (match) moved.set(old.key, match.key);
+    }
+    return {moved, removed: removed.filter(goal => !moved.has(goal.key) && delta[goal.side] < 0).map(goal => goal.key)};
 }
 
 function officialReports(game) {
