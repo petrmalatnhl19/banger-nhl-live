@@ -31,5 +31,8 @@ jobs:
       - name: Test signed pregame source provenance (offline)
         run: node scripts/test_security50_signed_source_provenance.cjs
 
+      - name: Test independent source provenance chain (offline)
+        run: node scripts/test_security51_independent_provenance.cjs
+
       - name: Test immutable pregame refresh prototype (offline)
         run: python3 .github/scripts/test-security-35-pregame-refresh.py
