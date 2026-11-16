@@ -19,5 +19,8 @@ jobs:
       - name: Verify signed prediction snapshot integrity (offline)
         run: python3 .github/scripts/test-security-45-snapshot-signature.py
 
+      - name: Test actual uncalibrated CORE 4.3 engine (offline)
+        run: node scripts/test_security47_core43_real_engine.cjs
+
       - name: Test immutable pregame refresh prototype (offline)
         run: python3 .github/scripts/test-security-35-pregame-refresh.py
