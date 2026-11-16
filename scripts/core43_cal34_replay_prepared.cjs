@@ -88,4 +88,4 @@ if (require.main === module) {
   process.exitCode = result.trusted ? 0 : 1;
 }
 
-module.exports = { replayPrepared };
+module.exports = { replayPrepared, readPrepared, MAX_PREPARED_BYTES };

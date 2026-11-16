@@ -14,6 +14,7 @@ const { verifyHistoricalPrediction: run } = require("./core43_cal30_historical_t
 const { replay } = require("./core43_cal31_replay.cjs");
 const { preparePregameRequests } = require("./core43_cal32_prepare_pregame.cjs");
 const { replayPrepared } = require("./core43_cal34_replay_prepared.cjs");
+const { replayReceipted, signArchiveReceipt } = require("./core43_cal35_archive_receipt.cjs");
 
 const POLICY_OID = "1.3.6.1.4.1.55555.30";
 const json = object => Buffer.from(JSON.stringify(object));
@@ -377,6 +378,41 @@ test("CAL-30 offline corroboration of signed predictions", async t => {
       assert.throws(() => execFileSync(process.execPath, [cal34, preparedPath, dossierPath, reviewPolicyPath,
         expectedPreparedSha256, pinned.policySha256]), error =>
         error.status === 1 && JSON.parse(error.stdout).status === "simulation_verified");
+    });
+
+    await t.test("CAL-35 verifies a separately signed pregame archive receipt", () => {
+      const custodian = generateKeyPairSync("ed25519");
+      const preparedBytes = Buffer.from(JSON.stringify(prepared) + "\n");
+      const receipt = signArchiveReceipt(preparedBytes, "archive:pilot:version-1", custodian.privateKey, clock);
+      const pinOf = key => sha(key.export({ type: "spki", format: "der" }));
+      const inputs = { preparedBytes, dossierBytes: json(dossierFor({ ...evidence, timestamps })),
+        policyBytes: pinned.policyBytes, expectedPolicySha256: pinned.policySha256,
+        receiptBytes: json(receipt), custodianKey: custodian.publicKey,
+        expectedCustodianSha256: pinOf(custodian.publicKey) };
+      const result = replayReceipted(inputs);
+      assert.equal(result.trusted, false);
+      assert.equal(result.status, "simulation_verified");
+      assert.equal(result.preparedSha256, sha(preparedBytes));
+      assert.equal(result.archiveReceiptSha256, sha(json(receipt)));
+      assert.equal(result.custodyRef, "archive:pilot:version-1");
+
+      const reject = (patch, reason) => {
+        const rejected = replayReceipted({ ...inputs, ...patch });
+        assert.equal(rejected.trusted, false);
+        assert.equal(rejected.status, "rejected");
+        assert.equal(rejected.reason, reason);
+      };
+      reject({ expectedCustodianSha256: "0".repeat(64) }, "cal35_custodian_pin");
+      reject({ receiptBytes: json({ ...receipt, statement: { ...receipt.statement, custodyRef: "archive:other" } }) },
+        "cal35_receipt_signature");
+      reject({ preparedBytes: json(prepared) }, "cal34_prepared_pin");
+      assert.throws(() => signArchiveReceipt(preparedBytes, "archive:late", custodian.privateKey, () => Date.parse(kickoffAt)),
+        /cal35_receipt_format/);
+      const late = signArchiveReceipt(preparedBytes, "archive:late", custodian.privateKey, () => epoch + 60_000);
+      reject({ receiptBytes: json(late) }, "cal35_late_archive_receipt");
+      const changed = config({ ...policy, nhlObserver: { ...policy.nhlObserver, publicKey: publicDer(custodian.publicKey) } });
+      reject({ policyBytes: changed.policyBytes, expectedPolicySha256: changed.policySha256 },
+        "cal35_custodian_independence");
     });
   });
 });

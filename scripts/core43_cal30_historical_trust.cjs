@@ -208,4 +208,4 @@ function verifyHistoricalPrediction(evidence, { policyBytes, policySha256 } = {}
   }
 }
 
-module.exports = { verifyHistoricalPrediction };
+module.exports = { verifyHistoricalPrediction, readPolicy };

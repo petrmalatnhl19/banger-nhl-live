@@ -146,6 +146,8 @@ on:
       - 'docs/core43-cal33-pilot-audit.md'
       - 'scripts/core43_cal34_replay_prepared.cjs'
       - 'docs/core43-cal34-replay-binding.md'
+      - 'scripts/core43_cal35_archive_receipt.cjs'
+      - 'docs/core43-cal35-pilot-custody.md'
       - 'docs/core43-cal28-lock-gate.md'
       - 'scripts/test_core43_cal26_end_to_end.cjs'
       - 'docs/core43-cal26-end-to-end.md'
