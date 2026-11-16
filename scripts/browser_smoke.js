@@ -6,31 +6,32 @@ const assert = require('node:assert/strict');
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   const errors = [];
+  const spotRequests = [];
+  page.on('request', request => {
+    if (/neural-match-voice|supertonic|onnx|match-voice\.worker|huggingface/i.test(request.url())) spotRequests.push(request.url());
+  });
   await page.addInitScript(() => {
+    try { localStorage.setItem('banger-commentary-voice', 'spot'); } catch (_) {}
     window.voiceTrace = [];
-    window.AudioContext = class {
-      resume() { window.voiceTrace.push('resume'); return Promise.resolve(); }
-      suspend() { window.voiceTrace.push('pause'); return Promise.resolve(); }
-      close() { return Promise.resolve(); }
-      createBuffer() { return { copyToChannel() {} }; }
-      createBufferSource() {
-        return { connect() {}, disconnect() {},
-          start() { window.voiceTrace.push('audio:start'); },
-          stop() { window.voiceTrace.push('audio:stop'); } };
-      }
-    };
-    window.Worker = class {
-      constructor() { window.voiceTrace.push('worker'); }
-      addEventListener(type, callback) { if (type === 'message') this.message = callback; }
-      postMessage(data) {
-        if (data.type !== 'speak') return;
-        window.voiceTrace.push(data.text);
-        queueMicrotask(() => this.message({ data: {
-          type: 'audio', id: data.id, rate: 44100, audio: new Float32Array([.1,.2,.1]),
-        } }));
-      }
-      terminate() {}
-    };
+    const voice = {name: 'Čeština', lang: 'cs-CZ', localService: true};
+    const synth = new EventTarget();
+    Object.assign(synth, {
+      speaking: false,
+      paused: false,
+      getVoices: () => [voice],
+      speak(utterance) {
+        this.speaking = true;
+        window.voiceTrace.push({text: utterance.text, lang: utterance.lang, voice: utterance.voice?.name});
+        utterance.onstart?.();
+      },
+      pause() { this.paused = true; window.voiceTrace.push('pause'); },
+      resume() { this.paused = false; window.voiceTrace.push('resume'); },
+      cancel() { this.speaking = this.paused = false; window.voiceTrace.push('cancel'); },
+    });
+    Object.defineProperty(window, 'speechSynthesis', {value: synth});
+    Object.defineProperty(window, 'SpeechSynthesisUtterance', {value: class {
+      constructor(text) { this.text = text; }
+    }});
   });
   page.on('pageerror', error => errors.push(error.message));
   await page.route('https://xxwqeiuyislnoxsmjuul.supabase.co/functions/v1/nhl-feed**', async route => {
@@ -65,29 +66,34 @@ const assert = require('node:assert/strict');
   const commentary = page.locator('#commentaryFeed');
   const panel = commentary.locator('.bv-panel');
   await panel.waitFor({ timeout: 10000 });
-  assert.equal(await panel.locator('[data-bv=voice]').inputValue(), 'device');
   await panel.locator('summary[aria-label="Nastavení hlasu"]').click();
-  await panel.locator('[data-bv=voice]').selectOption('spot');
-  await panel.getByText(/400 MB/).waitFor();
-  assert.deepEqual(await page.evaluate(() => window.voiceTrace), [], 'Voice assets must wait for Spustit');
+  assert.equal(await panel.locator('[data-bv=voice]').count(), 0);
+  assert.equal(await panel.getByText(/hlas ze spotu|400 MB/i).count(), 0);
+  assert.deepEqual(await page.evaluate(() => window.voiceTrace), [], 'Commentary waits for Spustit');
 
   await commentary.evaluate(root => {
     root.innerHTML = '<p>Aktualizovaný komentář</p>';
-    document.dispatchEvent(new CustomEvent('banger:commentary', { detail: {
-      id: '2026020999', items: [{ id: 12, period: 1, time: '03:09', type: 'goal', text: 'GÓL! Dallas Stars vedou 2:1.' }],
-    } }));
+    document.dispatchEvent(new CustomEvent('banger:commentary', {detail: {
+      id: '2026020999',
+      items: [{id: 12, period: 1, time: '03:09', type: 'goal', text: 'GÓL! Jason Robertson skóruje.'}],
+    }}));
   });
-  assert.equal(await panel.locator('[data-bv=voice]').inputValue(), 'spot');
+  assert.equal(await panel.locator('.bv-advanced').getAttribute('open'), '', 'Feed refresh preserves the settings panel');
   await panel.locator('summary[aria-label="Nastavení hlasu"]').click();
+  await panel.locator('[data-bv=pick-live]').click();
+  assert.equal(await panel.locator('[data-bv=pick-live]').getAttribute('aria-pressed'), 'true');
+  await panel.locator('[data-bv=pick-replay]').click();
   await panel.locator('[data-bv=start]').click();
-  await page.waitForFunction(() => window.voiceTrace.includes('audio:start'));
-  assert.ok((await page.evaluate(() => window.voiceTrace)).includes('Gól! Dallas Stars vedou dva ku jedné.'));
+  assert.deepEqual(await page.evaluate(() => window.voiceTrace.at(-1)),
+    {text: 'GÓL! Džejson Robertson skóruje.', lang: 'cs-CZ', voice: 'Čeština'});
   await panel.locator('[data-bv=pause]').click();
-  await page.waitForFunction(() => window.voiceTrace.includes('pause'));
+  await panel.locator('[data-bv=pause]').click();
+  assert.deepEqual(await page.evaluate(() => window.voiceTrace.slice(-2)), ['pause', 'resume']);
 
   await page.locator('#closeArena').click();
-  await page.locator('#liveArena').waitFor({ state: 'hidden', timeout: 10000 });
-  assert.ok((await page.evaluate(() => window.voiceTrace)).includes('audio:stop'), 'Closing the match must stop the voice');
+  await page.locator('#liveArena').waitFor({state: 'hidden', timeout: 10000});
+  assert.equal(await page.evaluate(() => window.voiceTrace.at(-1)), 'cancel');
+  assert.deepEqual(spotRequests, []);
   if (errors.length) throw Error('JavaScript errors in match detail: ' + errors.join(' | '));
   if (errors.length) throw Error('JavaScript errors after navigation: ' + errors.join(' | '));
   // Verify all visible mobile navigation destinations without relying on hidden desktop tabs.
