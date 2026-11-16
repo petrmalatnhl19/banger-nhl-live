@@ -8,6 +8,7 @@ const { plan, WINDOW } = require("./core43_cal03_capture_plan.cjs");
 
 const SCHEMA = "core43_cal07_pregame_export_v1";
 const DOMAIN = Buffer.from(SCHEMA + "\0");
+const signatureMessage = bytes => Buffer.concat([DOMAIN, bytes]);
 const MAX_BYTES = 64 * 1024;
 const MAX_AGE_MS = 5 * 60_000;
 const TEAM = /^[A-Z]{3}$/;
@@ -93,7 +94,7 @@ function planSignedExport({ bytes, signature, trust, now, existing } = {}) {
   requireValid(trust?.publicKey?.type === "public" && trust.publicKey.asymmetricKeyType === "ed25519" &&
     typeof trust.source === "string" && trust.source.length > 0 &&
     typeof trust.keyId === "string" && trust.keyId.length > 0, "trust");
-  requireValid(verify(null, Buffer.concat([DOMAIN, bytes]), trust.publicKey, signature), "signature");
+  requireValid(verify(null, signatureMessage(bytes), trust.publicKey, signature), "signature");
 
   let text, doc;
   try {
@@ -123,4 +124,4 @@ function planSignedExport({ bytes, signature, trust, now, existing } = {}) {
   };
 }
 
-module.exports = { MAX_BYTES, planSignedExport };
+module.exports = { MAX_BYTES, SCHEMA, planSignedExport, signatureMessage };
