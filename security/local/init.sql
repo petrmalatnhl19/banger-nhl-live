@@ -99,7 +99,7 @@ CREATE VIEW public.nhl_core42_status AS
     count(*) FILTER (WHERE core42_goalie_review IS NOT NULL)::integer AS reviewed_goalies
    FROM nhl_prediction_archive;
 -- Exact production view definition captured read-only in SECURITY-11.
-CREATE VIEW public.nhl_core43_public_schedule_evidence AS
+CREATE VIEW public.nhl_core43_public_schedule_evidence WITH (security_barrier=true) AS
  SELECT DISTINCT game_id,
     kickoff_at,
     away_team,
