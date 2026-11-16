@@ -2,7 +2,7 @@
 const assert = require('node:assert/strict');
 const {test} = require('node:test');
 require('../commentary-facts.js');
-const {gameFacts, stoppage, faceoff, miss, shootoutText, situation, strengthChange, officialReports} = globalThis.BangerCommentaryFacts;
+const {gameFacts, stoppage, faceoff, miss, shootoutText, situation, strengthChange, officialReports, goalKey, goalChanges} = globalThis.BangerCommentaryFacts;
 const {play, names, game} = require('./commentary_fixture.cjs');
 
 test('checks both stoppage reasons and suppresses unknown detail', () => {
@@ -43,6 +43,8 @@ test('goals count as shots, blocks are attributed to the shooter and shootout at
 test('strength changes require recorded skater and goalie counts', () => {
     const change = (a, b, full = 5) => strengthChange(situation(a), situation(b), names, full);
     assert.match(change('1551', '1541'), /Dallas Stars.*5 na 4/);
+    assert.match(change('1541', '1431'), /Dallas Stars.*4 na 3/);
+    assert.match(change('1541', '1531'), /Dallas Stars.*5 na 3/);
     assert.match(change('1541', '1551'), /Boston Bruins.*plném počtu/);
     assert.match(change('1541', '1441'), /vyrovnal.*4 na 4/);
     assert.match(change('1551', '1560'), /Boston Bruins.*bez brankáře/);
@@ -65,4 +67,23 @@ test('finished-game links use NHL report paths tied to game and season', () => {
     assert.match(officialReports(final)[0].href, /20252026\/PL020251\.HTM$/);
     assert.match(officialReports(final)[2].href, /20252026\/TH020251\.HTM$/);
     assert.deepEqual(officialReports({...final, id: 'bad'}), []);
+});
+
+test('a goal relabel keeps its identity while shootout goals stay out of regulation corrections', () => {
+    const d = {eventOwnerTeamId: 1, scoringPlayerId: 10};
+    const first = play(4, 'goal', '04:14', d);
+    const relabeled = play(66, 'goal', '04:14', {...d, scoringPlayerId: 20});
+    assert.equal(goalKey(first, 0), goalKey(relabeled, 0));
+    assert.equal(goalKey(play(4, 'goal', '00:00', d, {number: 5, part: 'SO'}), 0), null);
+    assert.equal(goalKey(first, -1), null);
+});
+test('an overturned goal requires a consistent score and can be confirmed alongside a new goal', () => {
+    const goal = {key: '1:254:0', side: 0};
+    const next = {key: '1:332:1', side: 1};
+    const before = {score: [1, 0], goals: [goal]};
+    assert.equal(goalChanges(before, {score: [1, 0], goals: []}), null);
+    assert.equal(goalChanges(before, {score: [0, 0], goals: [goal]}), null);
+    assert.deepEqual(goalChanges(before, {score: [1, 0], goals: [goal]}), []);
+    assert.deepEqual(goalChanges(before, {score: [0, 0], goals: []}), [goal.key]);
+    assert.deepEqual(goalChanges(before, {score: [0, 1], goals: [next]}), [goal.key]);
 });

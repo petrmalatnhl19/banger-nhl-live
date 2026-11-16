@@ -118,7 +118,7 @@ function strengthChange(previous, current, teams, fullStrength) {
     if (!previous.goalies.every(Boolean) || !current.goalies.every(Boolean)) return '';
     const diff = current.skaters[0] - current.skaters[1];
     const before = previous.skaters[0] - previous.skaters[1];
-    if (diff && before !== diff) {
+    if (diff && current.skaters.some((count, i) => count !== previous.skaters[i])) {
         const leading = diff > 0 ? 0 : 1;
         return 'Přesilovku má tým ' + teams[leading] + '. Hraje se ' + current.skaters[leading] +
             ' na ' + current.skaters[1 - leading] + '.';
@@ -189,6 +189,28 @@ function gameFacts(game, names) {
         scoreboard, scoreText, summary, shots, shootout};
 }
 
+// A scoring play can receive a different event id after an official feed correction.
+function goalKey(play, side) {
+    const period = play.periodDescriptor?.number;
+    const time = seconds(play.timeInPeriod);
+    return play.typeDescKey === 'goal' && !shootout(play) && int(period) && period > 0 &&
+        time !== null && (side === 0 || side === 1) ? [period, time, side].join(':') : null;
+}
+
+function goalChanges(previous, current) {
+    const valid = snapshot => snapshot && snapshot.score?.length === 2 && snapshot.score.every(int);
+    if (!valid(previous) || !valid(current)) return null;
+    const before = new Map(previous.goals.map(goal => [goal.key, goal.side]));
+    const after = new Map(current.goals.map(goal => [goal.key, goal.side]));
+    const removed = [...before.keys()].filter(key => !after.has(key));
+    const added = [...after.keys()].filter(key => !before.has(key));
+    const delta = [0, 0];
+    for (const key of added) delta[after.get(key)]++;
+    for (const key of removed) delta[before.get(key)]--;
+    // Wait for the scoreboard and event list to agree. A temporarily missing play is not an overturned goal.
+    return previous.score.every((score, side) => score + delta[side] === current.score[side]) ? removed : null;
+}
+
 function officialReports(game) {
     const id = String(game.id || '');
     const season = String(game.season || '');
@@ -201,5 +223,5 @@ function officialReports(game) {
     ].map(([label, code]) => ({label, href: root + code + id.slice(4) + '.HTM'}));
 }
 
-globalThis.BangerCommentaryFacts = {gameFacts, stoppage, faceoff, miss, shootoutText, situation, strengthChange, officialReports, amount};
+globalThis.BangerCommentaryFacts = {gameFacts, stoppage, faceoff, miss, shootoutText, situation, strengthChange, officialReports, amount, goalKey, goalChanges};
 })();

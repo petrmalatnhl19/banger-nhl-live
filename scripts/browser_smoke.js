@@ -95,10 +95,26 @@ const {play, game} = require('./commentary_fixture.cjs');
   await page.locator('#commentaryRefresh').click();
   await page.waitForFunction(() => /Swayman/.test(window.voiceTrace.at(-1)?.text));
   playByPlay = game([...playByPlay.plays, play(4, 'missed-shot', '04:12', {eventOwnerTeamId: 2, shootingPlayerId: 20}),
-    play(5, 'goal', '04:15', {eventOwnerTeamId: 1, scoringPlayerId: 10, awayScore: 1, homeScore: 0})]);
+    play(5, 'goal', '04:15', {eventOwnerTeamId: 1, scoringPlayerId: 10, awayScore: 1, homeScore: 0})],
+    {awayTeam: {...playByPlay.awayTeam, score: 1}});
   await page.locator('#commentaryRefresh').click();
   await page.waitForFunction(() => /GÓL|BRANKA/.test(window.voiceTrace.at(-1)?.text));
   assert.equal(await page.evaluate(() => window.voiceTrace.at(-2)), 'cancel', 'A goal preempts routine narration');
+
+  // NHL may edit the play list before publishing the revised scoreboard.
+  playByPlay = {...playByPlay, plays: [...playByPlay.plays.filter(p => p.eventId !== 5),
+    play(6, 'stoppage', '04:15', {reason: 'video-review'})]};
+  await page.locator('#commentaryRefresh').click();
+  await commentary.getByText('Situace se přezkoumává na videu.', {exact: true}).waitFor();
+  assert.equal(await page.evaluate(() => window.voiceTrace.filter(item => item.text?.startsWith('Branka neplatí.')).length), 0);
+  playByPlay = {...playByPlay, awayTeam: {...playByPlay.awayTeam, score: 0}};
+  await page.locator('#commentaryRefresh').click();
+  await page.waitForFunction(() => /Branka neplatí.*Dallas Stars 0, Boston Bruins 0/.test(window.voiceTrace.at(-1)?.text));
+  await page.evaluate(() => speechSynthesis.finish());
+  await page.locator('#commentaryRefresh').click();
+  await page.waitForTimeout(150);
+  assert.equal(await page.evaluate(() => window.voiceTrace.filter(item => item.text?.startsWith('Branka neplatí.')).length), 1);
+
   await panel.locator('[data-bv=stop]').click();
   await panel.locator('[data-bv=pick-replay]').click();
 
