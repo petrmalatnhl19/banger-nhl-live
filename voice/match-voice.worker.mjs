@@ -2,6 +2,11 @@ import { loadTextToSpeech, loadVoiceStyle, setRuntime } from './supertonic.mjs';
 
 const models = 'https://huggingface.co/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323';
 const runtime = 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/';
+// Third-party FP16 model is used only for the opt-in experiment, not production.
+const fp16 = new URL(self.location.href).searchParams.get('model') === 'fp16';
+const modelDirectory = fp16
+    ? 'https://huggingface.co/Kyumdroid/supertonic-3-quant/resolve/d9bfd0a9384b42a76f9256eafdd3d8a5cc4706ba/fp16/onnx'
+    : models + '/onnx';
 let engine;
 let latestId;
 let queue = Promise.resolve();
@@ -21,8 +26,8 @@ function getEngine() {
             setRuntime(ort);
             reportStage('načítání hlasového stylu');
             const style = await loadVoiceStyle([models + '/voice_styles/M2.json']);
-            reportStage('načítání ONNX modelů');
-            const { textToSpeech } = await loadTextToSpeech(models + '/onnx', {
+            reportStage(fp16 ? 'experimentální FP16 model (neověřeno na Androidu)' : 'načítání ONNX modelů');
+            const { textToSpeech } = await loadTextToSpeech(modelDirectory, {
                 executionProviders: ['wasm'],
                 enableCpuMemArena: false,
                 enableMemPattern: false,
