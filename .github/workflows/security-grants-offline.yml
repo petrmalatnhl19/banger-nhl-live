@@ -40,5 +40,8 @@ jobs:
       - name: Test durable synthetic archive recovery (offline)
         run: python3 .github/scripts/test-security-53-archive-recovery.py
 
+      - name: Test persisted four-variant archive replay (offline)
+        run: python3 .github/scripts/test-security-54-persisted-chain.py
+
       - name: Test immutable pregame refresh prototype (offline)
         run: python3 .github/scripts/test-security-35-pregame-refresh.py
