@@ -13,6 +13,7 @@ const { verifyTimestamp } = require("./core43_cal16_timestamp.cjs");
 const { verifyHistoricalPrediction: run } = require("./core43_cal30_historical_trust.cjs");
 const { replay } = require("./core43_cal31_replay.cjs");
 const { preparePregameRequests } = require("./core43_cal32_prepare_pregame.cjs");
+const { replayPrepared } = require("./core43_cal34_replay_prepared.cjs");
 
 const POLICY_OID = "1.3.6.1.4.1.55555.30";
 const json = object => Buffer.from(JSON.stringify(object));
@@ -142,6 +143,19 @@ function rejects(evidence, verifierConfig, reason) {
   assert.deepEqual(run(evidence, verifierConfig), { trusted: false, status: "rejected", reason });
 }
 
+function dossierFor(evidence) {
+  const encode = bytes => bytes.toString("base64url");
+  return {
+    schema: "core43_cal31_dossier_v1",
+    packageBytes: encode(evidence.packageBytes),
+    registryBytes: encode(evidence.registryBytes),
+    nhlStart: Object.fromEntries(Object.entries(evidence.nhlStart).map(([key, bytes]) => [key, encode(bytes)])),
+    timestamps: evidence.timestamps.map(({ id, request, response, chain, crls, approval }) =>
+      ({ id, request: encode(request), response: encode(response), chain: chain.map(encode),
+        crls: crls.map(encode), approval: encode(approval) })),
+  };
+}
+
 test("CAL-30 offline corroboration of signed predictions", async t => {
   const { directory, policy, evidence, nhlStart, issuers, start, end, epoch } = await setup(t);
   const pinned = config(policy);
@@ -246,16 +260,7 @@ test("CAL-30 offline corroboration of signed predictions", async t => {
   await t.test("CAL-31 replays the dossier offline and keeps admission closed on simulation or malformed input", () => {
     const dossierPath = join(directory, "dossier.json");
     const policyPath = join(directory, "policy.json");
-    const encode = bytes => bytes.toString("base64url");
-    const dossier = {
-      schema: "core43_cal31_dossier_v1",
-      packageBytes: encode(evidence.packageBytes),
-      registryBytes: encode(evidence.registryBytes),
-      nhlStart: Object.fromEntries(Object.entries(evidence.nhlStart).map(([key, bytes]) => [key, encode(bytes)])),
-      timestamps: evidence.timestamps.map(({ id, request, response, chain, crls, approval }) =>
-        ({ id, request: encode(request), response: encode(response), chain: chain.map(encode),
-          crls: crls.map(encode), approval: encode(approval) })),
-    };
+    const dossier = dossierFor(evidence);
     const options = { dossierPath, policyPath, expectedPolicySha256: pinned.policySha256 };
     writeFileSync(dossierPath, json(dossier));
     writeFileSync(policyPath, pinned.policyBytes);
@@ -281,7 +286,7 @@ test("CAL-30 offline corroboration of signed predictions", async t => {
     assert.equal(replay(options).reason, "cal31_input_file");
   });
 
-  await t.test("CAL-32 prepares two requests before kickoff for the exact verified package", () => {
+  await t.test("CAL-32 prepares two requests before kickoff for the exact verified package", async t => {
     const { gameId, kickoffAt } = JSON.parse(evidence.packageBytes).capture.prediction;
     const plan = {
       schema: "core43_cal32_pregame_plan_v1", mode: "simulation", gameId, kickoffAt,
@@ -334,5 +339,44 @@ test("CAL-30 offline corroboration of signed predictions", async t => {
     const verified = run({ ...evidence, timestamps }, pinned);
     assert.equal(verified.status, "simulation_verified", JSON.stringify(verified));
     assert.equal(verified.trusted, false);
+
+    await t.test("CAL-34 compares the pinned CAL-32 archive before checking both tokens", () => {
+      const preparedBytes = Buffer.from(JSON.stringify(prepared) + "\n");
+      const expectedPreparedSha256 = sha(preparedBytes);
+      const dossier = dossierFor({ ...evidence, timestamps });
+      const inputs = { preparedBytes, expectedPreparedSha256, dossierBytes: json(dossier),
+        policyBytes: pinned.policyBytes, expectedPolicySha256: pinned.policySha256 };
+      const good = { ...verified, preparedSha256: expectedPreparedSha256, planSha256: options.expectedPlanSha256 };
+      assert.deepEqual(replayPrepared(inputs), good);
+      const [a, b] = dossier.timestamps;
+      const compare = patch => replayPrepared({ ...inputs, dossierBytes: json({ ...dossier, ...patch }) });
+      assert.deepEqual(compare({ timestamps: [b, a] }), good);
+      const reject = (result, reason) => {
+        assert.equal(result.trusted, false);
+        assert.equal(result.status, "rejected");
+        assert.equal(result.reason, reason);
+      };
+      reject(replayPrepared({ ...inputs, preparedBytes: json(prepared) }), "cal34_prepared_pin");
+      reject(replayPrepared({ ...inputs, expectedPolicySha256: "0".repeat(64) }), "cal34_policy_pin");
+      reject(compare({ packageBytes: altered.toString("base64url") }), "cal34_package_mismatch");
+      reject(compare({ registryBytes: Buffer.from("{}").toString("base64url") }), "cal34_registry_mismatch");
+      reject(compare({ timestamps: [a, a] }), "cal34_authority_mismatch");
+      reject(compare({ timestamps: [{ ...a, request: b.request }, b] }), "cal34_request_mismatch");
+      reject(compare({ timestamps: dossierFor(evidence).timestamps }), "cal34_request_mismatch");
+      reject(compare({ timestamps: [{ ...a, response: b.response }, b] }), "cal16_signature_or_nonce");
+      const changedPolicy = config({ ...policy, authorities: [
+        { ...policy.authorities[0], policyOid: "1.2.3" }, policy.authorities[1],
+      ] });
+      reject(replayPrepared({ ...inputs, policyBytes: changedPolicy.policyBytes,
+        expectedPolicySha256: changedPolicy.policySha256 }), "cal34_authority_policy_mismatch");
+      const [preparedPath, dossierPath, reviewPolicyPath] = ["prepared.json", "cal34-dossier.json", "cal34-policy.json"]
+        .map(name => join(directory, name));
+      [preparedBytes, inputs.dossierBytes, inputs.policyBytes].forEach((bytes, index) =>
+        writeFileSync([preparedPath, dossierPath, reviewPolicyPath][index], bytes));
+      const cal34 = join(__dirname, "core43_cal34_replay_prepared.cjs");
+      assert.throws(() => execFileSync(process.execPath, [cal34, preparedPath, dossierPath, reviewPolicyPath,
+        expectedPreparedSha256, pinned.policySha256]), error =>
+        error.status === 1 && JSON.parse(error.stdout).status === "simulation_verified");
+    });
   });
 });

@@ -26,6 +26,7 @@ function decode(value, limit) {
 }
 
 function decodeDossier(bytes) {
+  check(Buffer.isBuffer(bytes) && bytes.length > 0 && bytes.length <= MAX_DOSSIER_BYTES);
   const text = new TextDecoder("utf-8", { fatal: true, ignoreBOM: true }).decode(bytes);
   const dossier = JSON.parse(text);
   check(JSON.stringify(dossier) === text);
@@ -86,4 +87,4 @@ if (require.main === module) {
   process.exitCode = result.trusted ? 0 : 1;
 }
 
-module.exports = { replay };
+module.exports = { replay, decodeDossier, MAX_DOSSIER_BYTES };
