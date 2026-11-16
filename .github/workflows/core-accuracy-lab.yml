@@ -4,6 +4,7 @@ on:
     paths:
       - 'accuracy-lab/**'
       - '.github/workflows/core-accuracy-lab.yml'
+      - '.github/workflows/core-accuracy-pilot.yml'
 permissions:
   contents: read
 jobs:
@@ -34,3 +35,8 @@ jobs:
           node --check accuracy-lab/absence-evidence.cjs
           node --check accuracy-lab/external-time.cjs
           node --check accuracy-lab/pilot.cjs
+
+  pilot-configuration:
+    uses: ./.github/workflows/core-accuracy-pilot.yml
+    with:
+      mode: configuration

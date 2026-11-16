@@ -1,0 +1,122 @@
+name: CORE Accuracy pilot
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Configuration only or live T−60 capture"
+        type: choice
+        options:
+          - configuration
+          - live
+        default: configuration
+  workflow_call:
+    inputs:
+      mode:
+        type: string
+        default: configuration
+    secrets:
+      ACCURACY_PILOT_SIGNING_KEY:
+        required: false
+      ACCURACY_PILOT_ARCHIVE_KEY:
+        required: false
+
+# A schedule is deliberately absent. Candidate UTC cron is recorded in the pilot configuration.
+permissions:
+  contents: read
+
+jobs:
+  configuration:
+    if: inputs.mode == 'configuration'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate dormant calendar and exercise pilot locally
+        run: |
+          node accuracy-lab/pilot-automation.cjs configuration
+          node --test accuracy-lab/pilot-automation.test.cjs
+
+  live:
+    if: >-
+      inputs.mode == 'live' && github.event_name == 'workflow_dispatch' &&
+      github.repository == 'petrmalatnhl19/banger-nhl-live' &&
+      github.ref == 'refs/heads/core-accuracy-lab-01'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+    concurrency:
+      group: accuracy-pilot-2026020342-20261118T0200Z
+      cancel-in-progress: false
+    env:
+      ARTIFACT_PREFIX: accuracy-pilot-2026020342-20261118T0200Z
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check source authorization
+        env:
+          SOURCE_APPROVAL: ${{ vars.ACCURACY_PILOT_SOURCES_ALLOWED }}
+        run: |
+          if [[ "$SOURCE_APPROVAL" != true ]]; then
+            echo "::error::Live source automation requires approval for the selected providers."
+            exit 1
+          fi
+      - name: Check completed pilot artifact
+        shell: bash
+        id: duplicate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --paginate "repos/$GITHUB_REPOSITORY/actions/artifacts?name=$ARTIFACT_PREFIX-sealed&per_page=100"             --jq '.artifacts[]' | jq -s . > "$RUNNER_TEMP/prior-pilot-artifacts.json"
+          run_ids=$(node accuracy-lab/pilot-automation.cjs artifact-ids "$RUNNER_TEMP/prior-pilot-artifacts.json")
+          while IFS= read -r run_id; do
+            [[ -n "$run_id" ]] || continue
+            workflow=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run_id" --jq '.path')
+            case "$workflow" in
+              .github/workflows/core-accuracy-pilot.yml|.github/workflows/frontend-smoke.yml)
+                echo "found=true" >> "$GITHUB_OUTPUT"
+                exit 0
+                ;;
+            esac
+          done <<< "$run_ids"
+          echo "found=false" >> "$GITHUB_OUTPUT"
+      - name: Collect and seal within T−60
+        id: capture
+        if: steps.duplicate.outputs.found == 'false'
+        env:
+          ACCURACY_PILOT_SIGNING_KEY: ${{ secrets.ACCURACY_PILOT_SIGNING_KEY }}
+          ACCURACY_PILOT_ARCHIVE_KEY: ${{ secrets.ACCURACY_PILOT_ARCHIVE_KEY }}
+        run: |
+          node accuracy-lab/pilot-automation.cjs live "$RUNNER_TEMP/pilot-output"
+          if [[ -f "$RUNNER_TEMP/pilot-output/sealed-marker.json" ]]; then
+            echo "sealed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "sealed=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Retain internally sealed pilot
+        if: steps.capture.outputs.sealed == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: accuracy-pilot-2026020342-20261118T0200Z-sealed
+          path: ${{ runner.temp }}/pilot-output/
+          if-no-files-found: error
+          retention-days: 30
+      - name: Retain incomplete collection without blocking another attempt
+        if: steps.capture.outputs.sealed == 'false'
+        uses: actions/upload-artifact@v4
+        with:
+          name: accuracy-pilot-2026020342-20261118T0200Z-diagnostic-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/pilot-output/
+          if-no-files-found: error
+          retention-days: 7

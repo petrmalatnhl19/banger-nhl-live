@@ -105,6 +105,13 @@ function analyze(bundle) {
   const accepts = item => item?.status === "ok"
     && Number.isFinite(timestamp(item.retrievedAt)) && timestamp(item.retrievedAt) <= Math.min(end, cutoff)
     && (base.mode === "probe" || timelySource(item));
+  const crossCheckUrl = "https://api-web.nhle.com/v1/gamecenter/" + game.gameId + "/landing";
+  const independent = bundle.officialCrossCheck;
+  const league = independent ? readSource(independent, crossCheckUrl) : null;
+  const independentOk = !Object.hasOwn(bundle, "officialCrossCheck") || (timelySource(independent)
+    && String(league?.id) === game.gameId && league.gameDate === game.gameDate
+    && league.awayTeam?.abbrev === game.away && league.homeTeam?.abbrev === game.home
+    && ["FUT", "PRE"].includes(league.gameState) && timestamp(league.startTimeUTC) === timestamp(game.scheduledAt));
   const eligibleWindow = timely && end <= cutoff && end >= timestamp(base.finishedAt) && timelySource(base.sources.score);
   const observation = (payload, locator, acquired, dataThrough = acquired) => ({ source: locator,
     retrievedAt: acquired, availableAt: acquired, dataThrough, sha256: sha256(payload), payload });
@@ -120,23 +127,27 @@ function analyze(bundle) {
     publishedAt: null, status: "pinned_configuration" };
 
   const sources = Object.entries(base.sources).map(([key, value]) => describeSource(key, value));
+  if (independent) sources.push(describeSource("gamecenter", independent));
   if (bundle.bundle) {
     const playerBundle = bundle.bundle;
     const playerData = inspectPlayers(playerBundle);
     const linked = playerBundle.captureSha256 === sha256(base) && same(playerBundle.sources.score, base.sources.score)
       && playerData.game.id === game.gameId && playerData.game.scheduledAt === game.scheduledAt
       && playerData.game.teams.away.team === game.away && playerData.game.teams.home.team === game.home;
-    const names = ["preview", "awayRoster", "homeRoster"];
-    sources.push(...names.map(name => describeSource(name, playerBundle.sources[name],
-      name === "preview" ? playerData.article?.publishedAt ?? null : null)));
+    const names = [playerData.previewKey, "awayRoster", "homeRoster"];
+    sources.push(...Object.keys(playerBundle.sources).filter(name => name !== "score").map(name =>
+      describeSource(name, playerBundle.sources[name], name === playerData.previewKey ? playerData.article?.publishedAt ?? null : null)));
     if (linked && playerData.timely && timestamp(playerBundle.finishedAt) <= end
       && names.every(name => accepts(playerBundle.sources[name]))) {
       const acquired = iso(Math.max(...names.map(name => timestamp(playerBundle.sources[name].retrievedAt))));
+      if (!observations.goalies && playerData.goalies) {
+        observations.goalies = observation(playerData.goalies, playerData.previewUrl, acquired, playerData.article.modifiedAt);
+      }
       for (const key of ["lineups", "absences"]) {
         if (playerData.missing.includes(key)) continue;
         const rows = Object.fromEntries(sides.map(side => [side, playerData.records
           .filter(row => row.team === game[side] && row.group === key).map(row => row.playerId)]));
-        observations[key] = observation(rows, playerData.game.previewUrl, acquired, playerData.article.modifiedAt);
+        observations[key] = observation(rows, playerData.previewUrl, acquired, playerData.article.modifiedAt);
       }
     }
   }
@@ -155,7 +166,8 @@ function analyze(bundle) {
     ...(!goalie32Factors ? [goalieKey] : [])];
   const reason = base.mode === "probe" ? "diagnostic_outside_window"
     : !eligibleWindow ? "capture_outside_window"
-      : missing.length ? archiveIssue ?? "required_inputs_missing" : null;
+      : !independentOk ? "official_schedule_not_confirmed"
+        : missing.length ? archiveIssue ?? "required_inputs_missing" : null;
   const manifest = { schema: policy.id, gameId: game.gameId, away: game.away, home: game.home,
     scheduledAt: game.scheduledAt, referenceAt: game.referenceAt, observations };
   const componentSource = bundle.archive?.components;
@@ -179,7 +191,12 @@ function archivePayload(bundle, now) {
   if (checked.status === "rejected") throw Error("Invalid manifest: " + checked.reason);
   const result = view.input ? replay(view.input) : null;
   const pair = result?.models.length === 2 && result.models.every(model => model.status === "calculated") ? result : null;
-  return { schema: archiveFormat, capture: bundle, manifest: view.manifest, input: view.input, pair,
+  const pairAudit = pair ? {
+    computedAt: iso(now), inputSha256: pair.snapshotSha256, sourceVersion: pair.source.version,
+    outputSha256: Object.fromEntries(pair.models.map(model => [model.model, sha256(model)])),
+    delta: Object.fromEntries(sides.map(side => [side, pair.models[1][side] - pair.models[0][side]]))
+  } : null;
+  return { schema: archiveFormat, capture: bundle, manifest: view.manifest, input: view.input, pair, pairAudit,
     missing: view.missing, reason: view.reason ?? (pair ? null : "model_gate_declined"), archivedAt: iso(now) };
 }
 
@@ -196,9 +213,11 @@ function verifyArchive(archive) {
   if (payload.schema !== archiveFormat) throw Error("Invalid live archive format");
   verifyExport(external);
   const statement = external.envelope.statement;
+  const reproduced = archivePayload(payload.capture, timestamp(payload.archivedAt));
+  if (!Object.hasOwn(payload, "pairAudit")) delete reproduced.pairAudit;
   if (statement.bindingSha256 !== sha256(payload) || statement.localCreatedAt !== payload.archivedAt
     || !same(external.envelope.manifest, payload.manifest)
-    || !same(archivePayload(payload.capture, timestamp(payload.archivedAt)), payload)) {
+    || !same(reproduced, payload)) {
     throw Error("Signed pilot archive does not match inputs and predictions");
   }
   return payload;
@@ -212,7 +231,7 @@ function dashboard(data) {
   return { schema: "banger-accuracy-live-report-v1", game: view.game, status, missing: view.missing,
     reason: archived?.reason ?? view.reason, archiveIssue: view.archiveIssue, finishedAt: view.finishedAt, sources: view.sources, componentEvidence: view.componentEvidence,
     timeStatus: archived ? "external_confirmation_pending" : "unverified", completeSnapshots: 0, validPairs: 0,
-    internallyCalculated: archived?.pair?.models ?? [], modelInputSha256: archived?.pair?.snapshotSha256 ?? null };
+    internallyCalculated: archived?.pair?.models ?? [], pairAudit: archived?.pairAudit ?? null, modelInputSha256: archived?.pair?.snapshotSha256 ?? null };
 }
 
 function read(file) {

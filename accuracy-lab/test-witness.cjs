@@ -30,7 +30,8 @@ function inspectRequest(request, observedAt) {
     if (!players.timely || players.missing.includes(group)) continue;
     const payload = Object.fromEntries(["away", "home"].map(side => [side, players.records
       .filter(row => row.group === group && row.team === players.game.teams[side].team).map(row => row.playerId)]));
-    const { preview, awayRoster, homeRoster } = request.players.sources;
+    const { awayRoster, homeRoster } = request.players.sources;
+    const preview = request.players.sources[players.previewKey];
     const retrievedAt = new Date(Math.max(...[preview, awayRoster, homeRoster].map(source => timestamp(source.retrievedAt)))).toISOString();
     manifest.observations[group] = { source: preview.url, dataThrough: players.article.modifiedAt,
       availableAt: retrievedAt, retrievedAt, payload, sha256: sha256(payload) };

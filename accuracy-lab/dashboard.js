@@ -224,11 +224,15 @@ function showPilot(candidate) {
     captured: "Sběr dokončen · čeká na podpis", internally_archived: "Interně archivováno" };
   const reasons = { diagnostic_outside_window: "Odběr před referenčním oknem", capture_outside_window: "Odběr mimo referenční okno",
     required_inputs_missing: "Chybí povinné vstupy", archive_schedule_unlinked: "Nesouhlasí archivní rozpis",
-    archive_game_unavailable: "Chybí archivní záznam zápasu", model_gate_declined: "Brána v26 odmítla výpočet" };
+    archive_game_unavailable: "Chybí archivní záznam zápasu",
+    official_schedule_not_confirmed: "Gamecenter nepotvrdil vybraný rozpis",
+    collection_unavailable: "Sběr zdrojů nebylo možné dokončit", seal_refused: "Podpis nevznikl v ověřitelném okně",
+    model_gate_declined: "Brána v26 odmítla výpočet" };
   el("pilot-game").textContent = game.away + " – " + game.home + " · NHL " + game.gameId
     + " · začátek " + startTime.format(new Date(game.scheduledAt)) + " · T−60 " + startTime.format(new Date(game.referenceAt));
   el("pilot-status").textContent = states[candidate.status] + (candidate.reason ? " · " + (reasons[candidate.reason] ?? candidate.reason) : "")
-    + " · 0 ověřených snímků · 0 platných párů";
+    + " · 0 ověřených snímků · 0 platných párů"
+    + (candidate.workflow?.retryCount ? " · opakování zdrojů " + candidate.workflow.retryCount : "");
   el("pilot-time").textContent = candidate.timeStatus === "external_confirmation_pending"
     ? "Místní podpis a žádost RFC 3161 připraveny. Externí potvrzení chybí."
     : "Externí časové potvrzení chybí.";
@@ -244,12 +248,19 @@ function showPilot(candidate) {
     put(card, "h3", models[key].label);
     put(card, "p", model ? fmtScore(model) + " · hosté / domácí" : "Výpočet neproběhl");
   }
-  const extra = { components: "Archiv mezivýsledků", archivedSchedule: "Archivní rozpis",
-    preview: "NHL preview", awayRoster: "Soupiska hostů", homeRoster: "Soupiska domácích" };
+  if (candidate.pairAudit && ["away", "home"].every(side => Number.isFinite(candidate.pairAudit.delta?.[side]))) {
+    put(modelsBox, "p", "Rozdíl CORE 4.1 − 4.0 · " + fmtScore(candidate.pairAudit.delta)
+      + " · vypočteno " + startTime.format(new Date(candidate.pairAudit.computedAt)));
+  }
+  const extra = { components: "Archiv mezivýsledků", archivedSchedule: "Archivní rozpis", gamecenter: "NHL Gamecenter",
+    preview: "NHL preview", awayPreview: "Preview klubu hostů", homePreview: "Preview domácího klubu",
+    awayRoster: "Soupiska hostů", homeRoster: "Soupiska domácích" };
   const date = value => Number.isFinite(Date.parse(value)) ? startTime.format(new Date(value)) : "—";
-  replaceTable(el("pilot-source-rows"), ["Zdroj", "Staženo", "Zveřejněno", "Verze"], [
+  replaceTable(el("pilot-source-rows"), ["Zdroj", "Stav", "Staženo", "Zveřejněno", "Verze"], [
     ...candidate.sources, ...(candidate.componentEvidence ?? [])
-  ].map(row => [extra[row.key] ?? sourceLabels[row.key] ?? name(row.key), date(row.retrievedAt),
+  ].map(row => [extra[row.key] ?? sourceLabels[row.key] ?? name(row.key),
+    row.status === "ok" ? "Staženo" : row.status === "pinned_configuration" ? "Připnuto" : "Nedostupné",
+    date(row.retrievedAt),
     date(row.publishedAt), row.modelVersion ?? row.version?.slice(0, 19) ?? "—"]));
   pilotReference = Date.parse(game.referenceAt);
   el("pilot").hidden = false;

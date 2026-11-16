@@ -57,3 +57,5 @@ Přímý export hráčů, test časových dokladů a reprodukovatelnost popisuje
 Přesný ensemble v26, kontrolní přepočty, doplňkové absence a export pro externí časový doklad popisuje [CORE-ACCURACY-05](V26-OFFLINE.md).
 
 Ruční živý pilot, výběr utkání a společný podepsaný archiv popisuje [CORE-ACCURACY-06](LIVE-PILOT.md).
+
+Přípravu samostatného testovacího workflow, zdroje a postup aktivace popisuje [CORE-ACCURACY-07](PILOT-AUTOMATION.md).

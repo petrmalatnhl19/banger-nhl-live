@@ -72,8 +72,17 @@ function newsArticle(html, url) {
   return article;
 }
 
-function publisher(html, game) {
-  const article = newsArticle(html, game.previewUrl);
+function previewUrls(game) {
+  const path = game.previewUrl.slice(SITE.length);
+  return {
+    preview: game.previewUrl,
+    awayPreview: "https://www.nhl.com/" + normalized(game.teams.away.nickname) + "/news/" + path,
+    homePreview: "https://www.nhl.com/" + normalized(game.teams.home.nickname) + "/news/" + path
+  };
+}
+
+function publisher(html, game, url = game.previewUrl) {
+  const article = newsArticle(html, url);
   if (!article) return null;
   const matchup = game.teams.away.nickname + " at " + game.teams.home.nickname + " ";
   if (!["projected lineups", "confirmed lineups"].some(suffix =>
@@ -133,22 +142,29 @@ function inspectPlayers(bundle) {
   const scoreUrl = NHL + "score/" + bundle.game.date;
   const game = identify(readSource(bundle.sources.score, scoreUrl), bundle.game.date, bundle.game.id);
   if (canonical(game) !== canonical(bundle.game)) throw Error("Player capture conflicts with NHL Score");
-  const preview = bundle.sources.preview;
-  const article = publisher(readSource(preview, game.previewUrl, "html"), game);
   const cutoff = timestamp(game.referenceAt);
   const finished = timestamp(bundle.finishedAt);
+  const options = Object.entries(previewUrls(game)).map(([key, url]) => {
+    const row = bundle.sources[key];
+    const article = publisher(readSource(row, url, "html"), game, url);
+    return { key, url, row, article };
+  });
+  const selected = options.find(({ row, article }) => article
+    && timestamp(article.dateModified) <= timestamp(row.retrievedAt) && timestamp(row.retrievedAt) <= finished);
+  const { key: previewKey, url: previewUrl, row: preview, article } = selected ?? options[0];
   const published = timestamp(article?.datePublished);
   const modified = timestamp(article?.dateModified);
   const observed = timestamp(preview?.retrievedAt);
   const publisherValid = article && modified <= observed && observed <= finished;
   const open = cutoff - 15 * 60_000;
-  const allTime = ["score", "preview", "awayRoster", "homeRoster"].every(key => {
+  const allTime = ["score", previewKey, "awayRoster", "homeRoster"].every(key => {
     const row = bundle.sources[key];
     return row?.status === "ok" && timestamp(row.retrievedAt) >= open && timestamp(row.retrievedAt) <= finished;
   });
   const timely = Boolean(publisherValid && bundle.mode === "capture" && ["FUT", "PRE"].includes(game.state)
     && finished <= cutoff && published <= cutoff && modified <= cutoff && allTime);
   const records = [];
+  const projectedGoalies = {};
   const unavailable = [];
   const quality = {};
   for (const side of sides) {
@@ -156,7 +172,23 @@ function inspectPlayers(bundle) {
     const section = publisherValid ? parseSection(article, nickname) : null;
     const roster = bundle.sources[side + "Roster"];
     const rosterTime = timestamp(roster?.retrievedAt);
-    const names = rosterTime <= finished ? rosterMatches(readSource(roster, NHL + "roster/" + team + "/" + game.season)) : new Map();
+    const rosterData = rosterTime <= finished ? readSource(roster, NHL + "roster/" + team + "/" + game.season) : null;
+    const names = rosterMatches(rosterData);
+    const goalieNames = rosterMatches({ goalies: rosterData?.goalies });
+    const mentions = publisherValid ? array(rosterData?.goalies).flatMap(entry => {
+      const first = entry?.firstName?.default, last = entry?.lastName?.default;
+      if (typeof first !== "string" || typeof last !== "string") return [];
+      const name = first + " " + last;
+      const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const lines = article.articleBody.split(/\r?\n/);
+      const explicit = lines.flatMap(line => {
+        const m = new RegExp("^" + escaped + " (is confirmed to start|is expected to start|is projected to start|will start) in (?:goal|net)\\.?$", "i").exec(line.trim());
+        return m ? [m[1].toLowerCase() === "is confirmed to start" ? "confirmed" : "projected"] : [];
+      });
+      return explicit.map(status => ({ name, status }));
+    }) : [];
+    const ids = mentions.length === 1 ? goalieNames.get(normalized(mentions[0].name)) : null;
+    if (ids?.size === 1) projectedGoalies[side] = { playerId: [...ids][0], status: mentions[0].status };
     const start = records.length;
     for (const group of groups) {
       const slots = group === "lineups" ? section?.lineups.map(name => ({ name })) : section?.absences;
@@ -167,7 +199,7 @@ function inspectPlayers(bundle) {
           continue;
         }
         records.push({ gameId: game.id, playerId: [...ids][0], team, group, status: section.state,
-          ...(slot.reason && { reason: slot.reason }), source: game.previewUrl, retrievedAt: preview.retrievedAt,
+          ...(slot.reason && { reason: slot.reason }), source: previewUrl, retrievedAt: preview.retrievedAt,
           publishedAt: article.datePublished, modifiedAt: article.dateModified, sha256: preview.sha256,
           rosterRetrievedAt: roster.retrievedAt, rosterSha256: roster.sha256 });
       }
@@ -189,7 +221,9 @@ function inspectPlayers(bundle) {
     }
   }
   const missing = groups.filter(group => !sides.every(side => quality[side][group]));
-  return { game, timely, quality, records, unavailable, missing,
+  const goalies = projectedGoalies.away && projectedGoalies.home
+    && projectedGoalies.away.playerId !== projectedGoalies.home.playerId ? projectedGoalies : null;
+  return { game, timely, quality, records, unavailable, missing, previewKey, previewUrl, goalies,
     article: publisherValid ? { publishedAt: article.datePublished, modifiedAt: article.dateModified } : null };
 }
 
@@ -207,6 +241,12 @@ async function collectPlayers(date, id, capture, { fetcher = fetch, now = Date.n
   const tasks = [["preview", game.previewUrl, "html"], ...sides.map(side =>
     [side + "Roster", NHL + "roster/" + game.teams[side].team + "/" + game.season, "json"])];
   const rows = await Promise.all(tasks.map(async ([key, source, format]) => [key, await fetchSource(source, fetcher, now, format)]));
+  const primary = rows.find(([key]) => key === "preview")[1];
+  if (!publisher(readSource(primary, game.previewUrl, "html"), game)
+    && (!capture || now() < timestamp(game.referenceAt))) {
+    const fallback = Object.entries(previewUrls(game)).filter(([key]) => key !== "preview");
+    rows.push(...await Promise.all(fallback.map(async ([key, url]) => [key, await fetchSource(url, fetcher, now, "html")])));
+  }
   return { schema, mode: capture ? "capture" : "probe", game, finishedAt: iso(now()),
     ...(capture && { captureSha256: sha256(capture) }), sources: { score, ...Object.fromEntries(rows) } };
 }
