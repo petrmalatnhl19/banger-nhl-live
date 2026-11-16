@@ -5,7 +5,7 @@ const runtime = 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/';
 // Third-party FP16 model is used only for the opt-in experiment, not production.
 const fp16 = new URL(self.location.href).searchParams.get('model') === 'fp16';
 const modelDirectory = fp16
-    ? 'https://huggingface.co/Kyumdroid/supertonic-3-quant/resolve/main/fp16/onnx'
+    ? 'https://huggingface.co/Kyumdroid/supertonic-3-quant/resolve/d9bfd0a9384b42a76f9256eafdd3d8a5cc4706ba/fp16/onnx'
     : models + '/onnx';
 let engine;
 let latestId;
