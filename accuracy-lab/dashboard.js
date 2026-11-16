@@ -135,9 +135,10 @@ function showHistory(data, kind, model) {
 const inputLabels = { schedule: "Rozpis", teamStats: "Statistiky týmů", lineups: "Sestavy",
   goalies: "Brankáři", homeAdvantage: "Domácí výhoda", rest: "Odpočinek a únava", absences: "Absence" };
 const verificationLabels = { verified: "Čas ověřen", incomplete: "Čas ověřen · chybí vstupy",
-  missing: "Bez snímku", rejected: "Odmítnut" };
+  legacy: "Starší protokol bez důkazů ACCURACY-04", missing: "Bez snímku", rejected: "Odmítnut" };
 const referenceReasons = { conflicting_snapshot: "Rozporné snímky", invalid_snapshot: "Neplatný formát snímku",
   wrong_reference_time: "Neshoda T−60", untrusted_snapshot_receipt: "Nedůvěryhodný podpis",
+  external_player_evidence_required: "Chybí externí ověření nového protokolu",
   snapshot_after_reference: "Potvrzení po T−60", invalid_observation: "Neplatný vstup nebo otisk",
   invalid_observation_time: "Vstup nelze doložit před T−60",
   official_schedule_or_start_mismatch: "Neshoda s plánem nebo skutečným začátkem NHL" };
@@ -174,6 +175,8 @@ function showReference(options) {
     const count = view.records.filter(row => row.model === id).length;
     put(item, "p", count + " predikcí v této kategorii");
     const mode = availability[id].replay;
+    if (availability[id].version) put(item, "p", availability[id].version);
+    if (availability[id].blocker) put(item, "p", availability[id].blocker);
     put(item, "small", mode === "simulation_only" ? "Místně dostupná pouze simulace citlivosti GSAx."
       : "Přesná místní reprodukce nedostupná. Lze ověřit podepsaný archiv.");
   }
@@ -210,6 +213,8 @@ function showPregame(candidate) {
   for (const [id, model] of Object.entries(models)) {
     const card = put(availability, "article");
     put(card, "h3", model.label);
+    if (candidate.models[id]?.version) put(card, "p", candidate.models[id].version);
+    if (candidate.models[id]?.blocker) put(card, "p", candidate.models[id].blocker);
     put(card, "small", candidate.models[id]?.replay === "simulation_only" ? "Dostupná simulace GSAx"
       : "Přesná místní reprodukce nedostupná");
   }
@@ -218,11 +223,31 @@ function showPregame(candidate) {
   for (const game of candidate.games) {
     const item = put(list, "details");
     const status = game.status === "verified" ? "Úplný" : "Neúplný";
-    const stage = { probe: "Zkouška zdrojů", capture: "Čeká na ověření", signed: "Podepsaný snímek" }[game.stage];
+    const stage = { probe: "Zkouška zdrojů", capture: "Čeká na ověření", signed: "Starší podpisový protokol",
+      internal_test: "Interní test · bez nezávislého ověření" }[game.stage];
     put(item, "summary", game.away + " – " + game.home + " · " + status + (stage ? " · " + stage : ""));
     put(item, "p", "T−60 " + startTime.format(new Date(game.referenceAt)) + " · NHL " + game.gameId);
     if (game.missing.length) put(item, "p", "Chybí " + game.missing.map(key => inputLabels[key]).join(", "));
     if (game.candidates.length) put(item, "p", "Podklady k ověření " + game.candidates.map(key => inputLabels[key]).join(", "));
+    if (game.players) {
+      const stateLabels = { projected: "Očekávané", confirmed: "Potvrzené", unavailable: "Nedostupné" };
+      const playerTable = put(item, "div");
+      playerTable.className = "scroll";
+      replaceTable(playerTable, ["Tým", "Stav zdroje", "Sestava", "Absence"], ["away", "home"].map(side => {
+        const row = game.players.quality[side];
+        return [game[side], stateLabels[row.status], row.lineups ? "Úplný seznam" : "Neúplná",
+          row.absences ? "Úplný seznam ze zdroje" : "Neúplné"];
+      }));
+      const entries = game.players.records;
+      put(item, "p", entries.length + " záznamů s NHL ID · " + game.players.unavailable.length + " bez jednoznačné identity");
+      if (entries.length) {
+        const first = entries[0];
+        put(item, "p", "Článek zveřejněn " + startTime.format(new Date(first.publishedAt)) + " · verze upravena "
+          + startTime.format(new Date(first.modifiedAt)) + " · staženo " + startTime.format(new Date(first.retrievedAt)));
+      }
+      put(item, "p", game.players.timely ? "Podklady vznikly v okně T−60. Nezávislý doklad chybí."
+        : "Pro tento odběr nejsou před T−60 doloženy všechny zdrojové odpovědi.");
+    }
     if (game.sources.length) replaceTable(put(item, "div"), ["Zdroj", "Staženo", "Zveřejněno"], game.sources.map(row => [
       sourceLabels[row.key],
       row.retrievedAt ? startTime.format(new Date(row.retrievedAt)) + (row.status === "ok" ? "" : " · neověřeno") : "Nedostupné",

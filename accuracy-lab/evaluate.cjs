@@ -1,11 +1,11 @@
 "use strict";
 const fs = require("node:fs");
 const { buildReport, summarize, summarizeReference, kinds } = require("./engine.js");
-const { buildReference } = require("./reference.cjs");
+const { reviewReference } = require("./reference.cjs");
 
 function run(input, output, reference = {}, trust = {}) {
   const report = buildReport(JSON.parse(fs.readFileSync(input, "utf8")));
-  report.reference = buildReference(report.games, reference, trust);
+  report.reference = reviewReference(report.games, reference, trust);
   const pilotIds = new Set(report.reference.coverage.filter(row => row.partition === "pilot").map(row => row.gameId));
   report.records = report.records.filter(row => pilotIds.has(row.gameId));
   const pilot = { games: report.games.filter(game => pilotIds.has(game.id)), records: report.records };

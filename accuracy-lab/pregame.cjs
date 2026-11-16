@@ -31,12 +31,12 @@ function permittedSource(requested, resolved) {
     && day(resolved.slice(prefix.length));
 }
 
-async function fetchSource(url, fetcher, now) {
+async function fetchSource(url, fetcher, now, format = "json") {
   const requestedAt = iso(now());
   try {
     const options = {
       method: "GET", redirect: "error", cache: "no-store", signal: AbortSignal.timeout(12_000),
-      headers: { Accept: "application/json", "User-Agent": "BangerNHLResearch/0.4" }
+      headers: { Accept: format === "html" ? "text/html" : "application/json", "User-Agent": "BangerNHLResearch/0.4" }
     };
     let resolvedUrl = url;
     let response = await fetcher(url, url === STANDINGS ? { ...options, redirect: "manual" } : options);
@@ -57,7 +57,7 @@ async function fetchSource(url, fetcher, now) {
     }
     const retrievedAt = iso(now());
     const bytes = Buffer.concat(chunks);
-    JSON.parse(bytes.toString("utf8"));
+    if (format === "json") JSON.parse(bytes.toString("utf8"));
     const hash = digest(bytes);
     return { url, resolvedUrl, requestedAt, status: "ok", retrievedAt, sha256: hash, version: "sha256:" + hash,
       dataPublishedAt: null, etag: response.headers.get("etag"), lastModified: response.headers.get("last-modified"),
@@ -67,7 +67,7 @@ async function fetchSource(url, fetcher, now) {
   }
 }
 
-function readSource(row, url) {
+function readSource(row, url, format = "json") {
   if (row?.url !== url || !permittedSource(url, row.resolvedUrl) || row.status !== "ok" || row.dataPublishedAt !== null
     || !Number.isFinite(timestamp(row.requestedAt)) || !Number.isFinite(timestamp(row.retrievedAt))
     || timestamp(row.requestedAt) > timestamp(row.retrievedAt)
@@ -76,7 +76,7 @@ function readSource(row, url) {
   if (bytes.length > SOURCE_LIMIT || bytes.toString("base64") !== row.bytes
     || digest(bytes) !== row.sha256 || row.version !== "sha256:" + row.sha256) return null;
   try {
-    return JSON.parse(bytes.toString("utf8"));
+    return format === "html" ? bytes.toString("utf8") : JSON.parse(bytes.toString("utf8"));
   } catch {
     return null;
   }
@@ -285,11 +285,12 @@ function pregameStatus(inputs, trust = {}) {
     }) : [];
     return { gameId: game.gameId, away: game.away, home: game.home, scheduledAt: game.scheduledAt,
       referenceAt: game.referenceAt, stage: accepted ? "signed" : capture?.input.mode ?? "rejected",
-      status: accepted ? checked.status : "incomplete", missing: accepted ? checked.missing : required.slice(),
+      status: "incomplete", legacyComplete: accepted && checked.status === "verified",
+      missing: accepted ? checked.missing : required.slice(),
       observations, sources, candidates: Object.keys(diagnostic?.candidates ?? {}) };
   });
   return { schema: "banger-core-accuracy-pregame-v1", games: rows, models: availability,
-    complete: rows.filter(row => row.status === "verified").length,
+    complete: 0,
     incomplete: rows.filter(row => row.status === "incomplete").length, comparablePredictions: 0 };
 }
 
@@ -326,4 +327,4 @@ if (require.main === module) main(process.argv.slice(2)).catch(error => {
   process.exitCode = 1;
 });
 
-module.exports = { discover, capture, inspectCapture, prepare, pregameStatus };
+module.exports = { discover, capture, inspectCapture, prepare, pregameStatus, fetchSource, readSource };

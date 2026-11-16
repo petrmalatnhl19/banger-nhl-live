@@ -16,10 +16,14 @@ const statisticNames = ["gamesPlayed", "goalsForPerGame", "goalsAgainstPerGame",
   "recentGoalsForPerGame", "recentGoalsAgainstPerGame"];
 const optional = ["baseline41", "goalieGsax"];
 const local = Object.freeze({
-  core40: { replay: "unavailable", reason: "missing_versioned_upstream_pipeline" },
-  core41: { replay: "unavailable", reason: "missing_versioned_quality_gate_and_upstream_pipeline" },
-  core42: { replay: "unavailable", reason: "missing_versioned_late_goalie_pipeline" },
-  core43: { replay: "simulation_only", reason: "gsax_sensitivity_only" }
+  core40: { replay: "unavailable", reason: "missing_versioned_upstream_pipeline",
+    version: models.core40.version, blocker: "Chybí verzované xG4, forma, speciální týmy a brankářská komponenta." },
+  core41: { replay: "unavailable", reason: "missing_versioned_quality_gate_and_upstream_pipeline",
+    version: models.core41.version, blocker: "Chybí verzovaná tvorba vstupů a přesná brankářská brána." },
+  core42: { replay: "unavailable", reason: "missing_versioned_late_goalie_pipeline",
+    version: models.core42.version, blocker: "Chybí zdroj pozdního výpočtu a původní zmrazené podklady." },
+  core43: { replay: "simulation_only", reason: "gsax_sensitivity_only",
+    version: "core43_gsax_sensitivity_v0", blocker: "Simulace vyžaduje zmrazenou CORE 4.1 a GSAx obou brankářů." }
 });
 
 const object = value => value != null && typeof value === "object" && !Array.isArray(value);
@@ -103,10 +107,9 @@ function validProvenance(provenance, row) {
     && Math.max(...provenance.sources.map(source => timestamp(source.retrievedAt))) === timestamp(row.retrievedAt);
 }
 
-function inspectSnapshot(bundle, keys = {}) {
+function inspectManifest(manifest, seen) {
   const bad = reason => ({ status: "rejected", reason, missing: required.slice() });
-  const manifest = bundle?.manifest;
-  if (!fields(bundle, ["manifest", "receipt"]) || !fields(manifest, [
+  if (!fields(manifest, [
     "schema", "gameId", "away", "home", "scheduledAt", "referenceAt", "observations"
   ]) || manifest.schema !== policy.id || !id(manifest.gameId) || !team(manifest.away)
     || !team(manifest.home) || manifest.away === manifest.home || !object(manifest.observations)) {
@@ -115,7 +118,6 @@ function inspectSnapshot(bundle, keys = {}) {
   const ref = referenceAt(manifest.scheduledAt);
   if (!Number.isSafeInteger(ref) || timestamp(manifest.referenceAt) !== ref) return bad("wrong_reference_time");
   const digest = sha256(manifest);
-  const seen = signedReceipt(bundle.receipt, "snapshot", digest, keys);
   if (!Number.isFinite(seen)) return bad("untrusted_snapshot_receipt");
   if (seen > ref) return bad("snapshot_after_reference");
   const missing = required.filter(name => !Object.hasOwn(manifest.observations, name));
@@ -133,7 +135,15 @@ function inspectSnapshot(bundle, keys = {}) {
     }
   }
   return { status: missing.length ? "incomplete" : "verified", digest, referenceAt: manifest.referenceAt, missing,
-    witness: bundle.receipt.statement.keyId, witnessedAt: bundle.receipt.statement.observedAt };
+  };
+}
+
+function inspectSnapshot(bundle, keys = {}) {
+  if (!fields(bundle, ["manifest", "receipt"])) return { status: "rejected", reason: "invalid_snapshot", missing: required.slice() };
+  const seen = signedReceipt(bundle.receipt, "snapshot", sha256(bundle.manifest), keys);
+  const result = inspectManifest(bundle.manifest, seen);
+  return result.status === "rejected" ? result
+    : { ...result, witness: bundle.receipt.statement.keyId, witnessedAt: bundle.receipt.statement.observedAt };
 }
 
 function inspectForecast(bundle, snapshot, verified, boundary, keys) {
@@ -234,4 +244,12 @@ function buildReference(games, bundle = {}, trust = {}, now = Date.now()) {
   return { policy, required, models: local, validationOpen, coverage, records, ablations, issues };
 }
 
-module.exports = { buildReference, inspectSnapshot, sha256, policy, required, availability: local };
+function reviewReference(games, bundle, trust) {
+  const report = buildReference(games, bundle, trust);
+  // Imported v1 signatures remain readable as diagnostics. The new protocol has no external attestation yet.
+  const coverage = report.coverage.map(row => row.status === "verified"
+    ? { ...row, status: "legacy", reason: "external_player_evidence_required" } : row);
+  return { ...report, coverage, records: report.records.filter(row => row.kind !== "archived") };
+}
+
+module.exports = { buildReference, reviewReference, inspectSnapshot, inspectManifest, sha256, policy, required, availability: local };

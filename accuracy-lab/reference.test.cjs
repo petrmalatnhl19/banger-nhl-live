@@ -7,7 +7,7 @@ const os = require("node:os");
 const path = require("node:path");
 const { test } = require("node:test");
 const { canonical, models, summarizeReference } = require("./engine.js");
-const { buildReference, inspectSnapshot, sha256 } = require("./reference.cjs");
+const { buildReference, reviewReference, inspectSnapshot, sha256 } = require("./reference.cjs");
 const { freeze } = require("./snapshot.cjs");
 
 const observer = generateKeyPairSync("ed25519");
@@ -211,4 +211,15 @@ test("identical frozen inputs reproduce the simulation byte for byte without out
   const second = report(f, []).reference;
   assert.equal(canonical(first.records), canonical(second.records));
   assert.equal(canonical(first.ablations), canonical(second.ablations));
+});
+
+
+test("current evaluation quarantines prior-format signed pairs while retaining the legacy verifier", () => {
+  const f = fixture();
+  const games = [f.game];
+  const inputs = { snapshots: [f.wrap()], forecasts: [f.prediction("core40"), f.prediction("core41")] };
+  assert.equal(summarizeReference({ games, reference: buildReference(games, inputs, trust) }).comparablePredictions, 2);
+  const report = { games, reference: reviewReference(games, inputs, trust) };
+  assert.equal(summarizeReference(report).comparablePredictions, 0);
+  assert.equal(report.reference.coverage[0].status, "legacy");
 });

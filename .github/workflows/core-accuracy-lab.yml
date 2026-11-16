@@ -28,3 +28,5 @@ jobs:
           node --check accuracy-lab/evaluate.cjs
           node --check accuracy-lab/snapshot.cjs
           node --check accuracy-lab/pregame.cjs
+          node --check accuracy-lab/players.cjs
+          node --check accuracy-lab/test-witness.cjs

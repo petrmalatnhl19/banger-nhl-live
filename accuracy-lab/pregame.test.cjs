@@ -138,7 +138,7 @@ test("round trips a witnessed capture as incomplete and independently replays it
   assert.equal(inspectSnapshot(envelope(wrong), trust.snapshot).reason, "invalid_observation");
 });
 
-test("shows a complete independently supplemented snapshot without counting any predictions", async () => {
+test("recognizes a supplemented legacy snapshot without promoting it to a complete current snapshot", async () => {
   const bundle = await collect();
   const manifest = prepare(bundle, review(bundle, ["schedule", "teamStats", "rest", "goalies"]), now);
   for (const [name, payload] of Object.entries({
@@ -149,7 +149,9 @@ test("shows a complete independently supplemented snapshot without counting any 
     manifest.observations[name] = { source: "urn:test:supplement:" + name, dataThrough, availableAt: dataThrough,
       retrievedAt: dataThrough, sha256: sha256(payload), payload };
   }
-  assert.equal(pregameStatus([bundle, envelope(manifest)], trust).complete, 1);
+  const legacy = pregameStatus([bundle, envelope(manifest)], trust);
+  assert.equal(legacy.complete, 0);
+  assert.equal(legacy.games[0].legacyComplete, true);
   assert.equal(pregameStatus([bundle, envelope(manifest, scheduledAt)], trust).complete, 0);
 });
 
