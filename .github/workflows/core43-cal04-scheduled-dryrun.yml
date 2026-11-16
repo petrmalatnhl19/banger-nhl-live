@@ -137,6 +137,8 @@ on:
       - 'scripts/test_core43_cal30_historical_trust.cjs'
       - 'docs/core43-cal30-historical-trust-audit.md'
       - 'docs/core43-cal30-tsa-candidates.json'
+      - 'scripts/core43_cal31_replay.cjs'
+      - 'docs/core43-cal31-pilot-rehearsal.md'
       - 'docs/core43-cal28-lock-gate.md'
       - 'scripts/test_core43_cal26_end_to_end.cjs'
       - 'docs/core43-cal26-end-to-end.md'

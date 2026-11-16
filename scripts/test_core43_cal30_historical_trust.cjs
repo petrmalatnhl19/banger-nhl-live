@@ -3,7 +3,7 @@
 const assert = require("node:assert/strict");
 const { execFileSync } = require("node:child_process");
 const { createHash, generateKeyPairSync, sign, X509Certificate } = require("node:crypto");
-const { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } = require("node:fs");
+const { mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, truncateSync, writeFileSync } = require("node:fs");
 const { tmpdir } = require("node:os");
 const { join } = require("node:path");
 const { setTimeout } = require("node:timers/promises");
@@ -11,6 +11,7 @@ const { test } = require("node:test");
 const { prepare, load } = require("./core43_cal14_rehearsal.cjs");
 const { verifyTimestamp } = require("./core43_cal16_timestamp.cjs");
 const { verifyHistoricalPrediction: run } = require("./core43_cal30_historical_trust.cjs");
+const { replay } = require("./core43_cal31_replay.cjs");
 
 const POLICY_OID = "1.3.6.1.4.1.55555.30";
 const json = object => Buffer.from(JSON.stringify(object));
@@ -121,7 +122,7 @@ async function setup(t) {
       actualStartAt: iso(epoch + 60_000), precision: "second", observedAt: iso(epoch + 120_000), ...overrides });
     return { report, statement, signature: sign(null, Buffer.concat([Buffer.from(schema + "\0"), statement]), key) };
   };
-  return { issuers, start, end, epoch, policy, nhlStart,
+  return { directory, issuers, start, end, epoch, policy, nhlStart,
     evidence: { packageBytes: pack.blob, registryBytes, timestamps, nhlStart: nhlStart() } };
 }
 
@@ -135,7 +136,7 @@ function rejects(evidence, verifierConfig, reason) {
 }
 
 test("CAL-30 offline corroboration of signed predictions", async t => {
-  const { policy, evidence, nhlStart, issuers, start, end, epoch } = await setup(t);
+  const { directory, policy, evidence, nhlStart, issuers, start, end, epoch } = await setup(t);
   const pinned = config(policy);
   const [alpha, bravo] = evidence.timestamps;
   const withBravo = replacement => ({ ...evidence, timestamps: [alpha, { ...bravo, ...replacement }] });
@@ -221,5 +222,43 @@ test("CAL-30 offline corroboration of signed predictions", async t => {
     useCrls(issuers[1].crl("issuer", epoch + 180_000, end));
     useCrls(issuers[1].crl("issuer", start, end, "leaf"));
     useCrls(bravo.crls[0], issuers[1].crl("root", start, end, "issuer"));
+  });
+
+  await t.test("CAL-31 replays the dossier offline and keeps admission closed on simulation or malformed input", () => {
+    const dossierPath = join(directory, "dossier.json");
+    const policyPath = join(directory, "policy.json");
+    const encode = bytes => bytes.toString("base64url");
+    const dossier = {
+      schema: "core43_cal31_dossier_v1",
+      packageBytes: encode(evidence.packageBytes),
+      registryBytes: encode(evidence.registryBytes),
+      nhlStart: Object.fromEntries(Object.entries(evidence.nhlStart).map(([key, bytes]) => [key, encode(bytes)])),
+      timestamps: evidence.timestamps.map(({ id, request, response, chain, crls, approval }) =>
+        ({ id, request: encode(request), response: encode(response), chain: chain.map(encode),
+          crls: crls.map(encode), approval: encode(approval) })),
+    };
+    const options = { dossierPath, policyPath, expectedPolicySha256: pinned.policySha256 };
+    writeFileSync(dossierPath, json(dossier));
+    writeFileSync(policyPath, pinned.policyBytes);
+    assert.deepEqual(replay(options), run(evidence, pinned));
+    assert.equal(replay({ ...options, expectedPolicySha256: undefined }).reason, "cal31_policy_pin_required");
+    assert.equal(replay({ ...options, expectedPolicySha256: "0".repeat(64) }).reason, "cal30_policy_pin");
+
+    const cli = join(__dirname, "core43_cal31_replay.cjs");
+    assert.throws(() => execFileSync(process.execPath, [cli, dossierPath, policyPath, pinned.policySha256]), error =>
+      error.status === 1 && JSON.parse(error.stdout).status === "simulation_verified");
+    const symlink = join(directory, "dossier-link.json");
+    symlinkSync(dossierPath, symlink);
+    assert.equal(replay({ ...options, dossierPath: symlink }).reason, "cal31_input_file");
+    for (const bytes of [
+      json({ ...dossier, policySha256: pinned.policySha256, trusted: true }),
+      json({ ...dossier, packageBytes: dossier.packageBytes + "=" }),
+      Buffer.from(json(dossier).toString().replace('{"schema":', '{"schema":"shadow","schema":')),
+    ]) {
+      writeFileSync(dossierPath, bytes);
+      assert.deepEqual(replay(options), { trusted: false, status: "rejected", reason: "cal31_dossier_format" });
+    }
+    truncateSync(dossierPath, 16 * 1024 * 1024 + 1);
+    assert.equal(replay(options).reason, "cal31_input_file");
   });
 });
