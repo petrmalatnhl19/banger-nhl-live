@@ -201,8 +201,8 @@ def main():
     cli.add_argument("--count", type=int, default=100)
     cli.add_argument("--output", type=Path, required=True)
     args = cli.parse_args()
-    if not 1 <= args.days <= 31 or not 1 <= args.count <= 1000:
-        cli.error("use 1–31 days and 1–1000 games")
+    if not 1 <= args.days <= 33 or not 1 <= args.count <= 1000:
+        cli.error("use 1–33 days and 1–1000 games")
     chosen = selection(args.end, args.days, args.count, args.cutoff, lambda path: retry(fetch_json, path))
     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
         results = list(executor.map(collect_game, chosen))

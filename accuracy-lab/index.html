@@ -32,6 +32,22 @@
     </select></label>
   </form>
   <div id="report" hidden>
+    <section aria-labelledby="reference-title">
+      <h2 id="reference-title">Společný snímek T−60</h2>
+      <label id="reference-filter" hidden>Období
+        <select id="reference-partition">
+          <option value="pilot">Pilotní období</option>
+          <option value="validation">Validační období</option>
+        </select>
+      </label>
+      <p id="reference-context" role="status"></p>
+      <div id="reference-models" class="cards"></div>
+      <div id="reference-pairs" class="scroll"></div>
+      <details id="reference-detail" hidden>
+        <summary>Časové ověření a chybějící vstupy po zápasech</summary>
+        <div id="reference-coverage" class="scroll"></div>
+      </details>
+    </section>
     <section aria-labelledby="overview-title">
       <h2 id="overview-title">Výsledky podle modelu</h2>
       <p id="context"></p>

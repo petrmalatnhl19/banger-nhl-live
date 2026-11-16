@@ -251,7 +251,7 @@
     const ranking = values ? Object.keys(values).sort((a, b) => values[b] - values[a]) : [];
     const winner = values
       ? (values[ranking[0]] > values[ranking[1]] ? ranking[0] : null)
-      : (target === "final" ? side(record.goals.away, record.goals.home) : null);
+      : (target === "final" && record.goalTarget === "playedGoals" ? side(record.goals.away, record.goals.home) : null);
     const call = winner != null && (winner !== "draw" || target === "regulation");
     return { record, actual, winner: call ? winner : null, correct: call ? Number(winner === actual) : null,
       awayError, homeError, mae: (awayError + homeError) / 2,
@@ -307,9 +307,16 @@
     const coincident = shared.filter(([a, b]) => timestamp(a.record.asOf) === timestamp(b.record.asOf));
     const documentedInputs = record => canonical(record.inputs.map(({ weight, ...input }) => input)
       .sort((a, b) => a.name.localeCompare(b.name)));
+    const sameSnapshot = ([{ record: a }, { record: b }]) => {
+      if (a.evidence === "reference_witness" && b.evidence === "reference_witness") {
+        return typeof a.snapshotSha256 === "string" && a.snapshotSha256 === b.snapshotSha256
+          && a.goalTarget === b.goalTarget;
+      }
+      return a.evidence === "component_timestamps" && b.evidence === "component_timestamps"
+        && documentedInputs(a) === documentedInputs(b);
+    };
     return { sameGames: describe(shared), sameInstant: describe(coincident),
-      sameSnapshot: describe(coincident.filter(([a, b]) => a.record.evidence === "component_timestamps"
-        && b.record.evidence === "component_timestamps" && documentedInputs(a.record) === documentedInputs(b.record))) };
+      sameSnapshot: describe(coincident.filter(sameSnapshot)) };
   }
 
   function summarize(report, filters = {}) {
@@ -334,7 +341,22 @@
       comparisons };
   }
 
-  const api = { models, kinds, buildReport, summarize };
+  function summarizeReference(report, options = {}) {
+    if (!report.reference) return null;
+    const { partition = "pilot", ...filters } = options;
+    if (!["pilot", "validation"].includes(partition)) throw Error("Unsupported reference partition");
+    const coverage = new Map(report.reference.coverage.filter(row => row.partition === partition).map(row => [row.gameId, row]));
+    const view = summarize({ games: report.games.filter(game => coverage.has(game.id)),
+      records: report.reference.records }, filters);
+    const paired = view.comparisons.filter(pair => pair.sameSnapshot.n > 0);
+    const gameIds = new Set(paired.flatMap(pair => pair.sameSnapshot.gameIds));
+    const predictionKeys = new Set(paired.flatMap(pair =>
+      pair.models.flatMap(model => pair.sameSnapshot.gameIds.map(id => id + "/" + model))));
+    return { ...view, paired, comparableGames: gameIds.size, comparablePredictions: predictionKeys.size,
+      coverage: view.games.map(game => coverage.get(game.id)) };
+  }
+
+  const api = { models, kinds, buildReport, summarize, summarizeReference, timestamp, kickoff, canonical, unique };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.BangerAccuracyLab = api;
 })(globalThis);

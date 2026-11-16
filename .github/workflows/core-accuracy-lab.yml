@@ -21,8 +21,9 @@ jobs:
       - name: Verify NHL normalization and source identity
         run: python3 -B -m unittest discover -s accuracy-lab -p test_collect.py
       - name: Verify historical timing, cohort isolation and metrics
-        run: node --test accuracy-lab/engine.test.cjs
+        run: node --test accuracy-lab/*.test.cjs
       - name: Check dashboard and evaluator syntax
         run: |
           node --check accuracy-lab/dashboard.js
           node --check accuracy-lab/evaluate.cjs
+          node --check accuracy-lab/snapshot.cjs

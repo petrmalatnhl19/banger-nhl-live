@@ -48,3 +48,6 @@ td, th { padding: 8px; border-bottom: 1px solid #356a8688; }
 th { color: var(--accent); }
 small { color: var(--muted); }
 a { color: var(--accent); }
+
+#reference-filter { display: block; max-width: 250px; margin-bottom: 10px; }
+#reference-pairs, #reference-detail { margin-top: 10px; }

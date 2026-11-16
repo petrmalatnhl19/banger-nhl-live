@@ -1,5 +1,5 @@
 "use strict";
-const { models, kinds, summarize } = window.BangerAccuracyLab;
+const { models, kinds, summarize, summarizeReference } = window.BangerAccuracyLab;
 const modelIds = Object.keys(models);
 const labels = { archived: "Archivovaná předzápasová predikce", reproduced: "Historicky reprodukovaná predikce",
   simulation: "Simulace" };
@@ -132,9 +132,77 @@ function showHistory(data, kind, model) {
   }
 }
 
+const inputLabels = { schedule: "Rozpis", teamStats: "Statistiky týmů", lineups: "Sestavy",
+  goalies: "Brankáři", homeAdvantage: "Domácí výhoda", rest: "Odpočinek a únava", absences: "Absence" };
+const verificationLabels = { verified: "Čas ověřen", incomplete: "Čas ověřen · chybí vstupy",
+  missing: "Bez snímku", rejected: "Odmítnut" };
+const referenceReasons = { conflicting_snapshot: "Rozporné snímky", invalid_snapshot: "Neplatný formát snímku",
+  wrong_reference_time: "Neshoda T−60", untrusted_snapshot_receipt: "Nedůvěryhodný podpis",
+  snapshot_after_reference: "Potvrzení po T−60", invalid_observation: "Neplatný vstup nebo otisk",
+  invalid_observation_time: "Vstup nelze doložit před T−60",
+  official_schedule_or_start_mismatch: "Neshoda s plánem nebo skutečným začátkem NHL" };
+
+function showReference(options) {
+  const context = el("reference-context");
+  const modelsBox = el("reference-models");
+  const pairs = el("reference-pairs");
+  const detail = el("reference-detail");
+  const table = el("reference-coverage");
+  modelsBox.replaceChildren();
+  pairs.replaceChildren();
+  table.replaceChildren();
+  const partition = el("reference-partition").value;
+  const view = summarizeReference(report, { ...options, partition });
+  el("reference-filter").hidden = !view;
+  detail.hidden = !view?.coverage.length;
+  if (!view) {
+    context.textContent = "Tento report vznikl před zavedením T−60. Pro časové ověření vytvoř nový report.";
+    return;
+  }
+  const { policy, validationOpen, models: availability, required } = report.reference;
+  if (partition === "validation" && validationOpen) {
+    context.textContent = "Výsledky validačního období jsou uzamčené do " + startTime.format(new Date(policy.validationEndExclusive)) + ".";
+  } else {
+    context.textContent = labels[options.kind] + " · " + view.comparablePredictions + " srovnatelných predikcí na "
+      + view.comparableGames + " zápasech · " + view.coverage.filter(row => row.status === "verified").length + "/"
+      + view.coverage.length + " úplných časově ověřených snímků.";
+  }
+  for (const group of view.groups) {
+    const id = group.model;
+    const item = put(modelsBox, "article");
+    put(item, "h3", models[id].label);
+    const count = view.records.filter(row => row.model === id).length;
+    put(item, "p", count + " predikcí v této kategorii");
+    const mode = availability[id].replay;
+    put(item, "small", mode === "simulation_only" ? "Místně dostupná pouze simulace citlivosti GSAx."
+      : "Přesná místní reprodukce nedostupná. Lze ověřit podepsaný archiv.");
+  }
+  if (view.paired.length) {
+    replaceTable(pairs, ["Pár modelů", "Zápasy", "MAE na tým", "Úspěšnost"], view.paired.map(pair => {
+      const stats = pair.sameSnapshot;
+      return [pair.models.map(id => models[id].label).join(" / "), String(stats.n),
+        stats.mae.map(x => fmt(x)).join(" / "), stats.accuracy.map(x => fmt(x, percent)).join(" / ")];
+    }));
+  } else {
+    put(pairs, "p", "V tomto výběru není platný pár se stejným snímkem T−60.");
+  }
+  if (view.coverage.length) {
+    const absent = required.map(key => [key, view.coverage.filter(row => row.missing.includes(key)).length])
+      .filter(([, count]) => count);
+    if (absent.length) put(table, "p", absent.map(([key, count]) => inputLabels[key] + " " + count).join(" · "));
+    replaceTable(put(table, "div"), ["NHL Game ID", "Čas T−60", "Stav", "Chybějící vstupy"],
+      view.coverage.map(row => [row.gameId, startTime.format(new Date(row.referenceAt)), [
+        verificationLabels[row.status], referenceReasons[row.reason], inputLabels[row.input]].filter(Boolean).join(" · "),
+      row.missing.map(key => inputLabels[key]).join(", ") || "—"]));
+  }
+}
+
 function render() {
   const options = Object.fromEntries(new FormData(filters));
-  const data = summarize(report, options);
+  const pilotIds = report.reference && new Set(report.reference.coverage.filter(row => row.partition === "pilot").map(row => row.gameId));
+  const history = pilotIds ? { ...report, games: report.games.filter(game => pilotIds.has(game.id)) } : report;
+  const data = summarize(history, options);
+  showReference(options);
   el("context").textContent = labels[options.kind] + " · " + new Set(data.records.map(row => row.gameId)).size
     + " zápasů s predikcí ve výběru. "
     + (options.target === "final" ? "U archivovaných výstupů je tip odvozen z vyššího odhadu gólů."
@@ -144,6 +212,7 @@ function render() {
   showHistory(data, options.kind, options.model);
 }
 filters.addEventListener("change", render);
+el("reference-partition").addEventListener("change", render);
 el("load").addEventListener("change", async event => {
   const file = event.target.files?.[0];
   if (!file) return;
@@ -157,6 +226,7 @@ el("load").addEventListener("change", async event => {
     }
     report = candidate;
     filters.reset();
+    el("reference-partition").value = "pilot";
     const team = filters.elements.team;
     team.replaceChildren(new Option("Všechny týmy", ""));
     const teams = [...new Set(report.games.flatMap(game => [game.away, game.home]))].sort();
@@ -164,7 +234,7 @@ el("load").addEventListener("change", async event => {
     render();
     filters.hidden = false;
     el("report").hidden = false;
-    el("status").textContent = report.games.length + " výsledků NHL v pilotním vzorku · "
+    el("status").textContent = report.games.length + " výsledků NHL v reportu · "
       + report.scope.end + " a předchozí dny.";
   } catch {
     report = null;
