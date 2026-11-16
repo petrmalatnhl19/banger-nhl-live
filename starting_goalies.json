@@ -1,6 +1,6 @@
 {
   "date": "2026-11-16",
-  "updatedAt": "2026-11-16T18:59:01.560996+00:00",
+  "updatedAt": "2026-11-16T19:58:56.756473+00:00",
   "teams": {
     "MTL": {
       "name": "Jacob Fowler",
@@ -8,7 +8,7 @@
       "date": "2026-11-16",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-16T18:59:01.560996+00:00",
+      "checkedAt": "2026-11-16T19:58:56.756473+00:00",
       "gameId": 2026020331
     },
     "NYR": {
@@ -17,7 +17,7 @@
       "date": "2026-11-16",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-16T18:59:01.560996+00:00",
+      "checkedAt": "2026-11-16T19:58:56.756473+00:00",
       "gameId": 2026020331
     },
     "UTA": {
@@ -26,17 +26,25 @@
       "date": "2026-11-16",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-16T18:59:01.560996+00:00",
+      "checkedAt": "2026-11-16T19:58:56.756473+00:00",
+      "gameId": 2026020332
+    },
+    "VAN": {
+      "name": "Nikita Tolopilo",
+      "status": "projected",
+      "date": "2026-11-16",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-16T19:58:56.756473+00:00",
       "gameId": 2026020332
     }
   },
   "conflicts": [
     {
-      "date": "2026-11-16",
       "team": "VAN",
-      "reason": "source disagreement",
-      "rotowire": "Nikita Tolopilo",
-      "previous": "Kevin Lankinen"
+      "specialist": "Kevin Lankinen",
+      "nhl": "Nikita Tolopilo",
+      "nhlSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season"
     }
   ],
   "sourceErrors": [],

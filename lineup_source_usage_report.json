@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T18:58:57.761773+00:00",
+  "generatedAt": "2026-11-16T19:58:51.897766+00:00",
   "teams": 32,
   "activeSourceCounts": {
     "nhl.com": 32
@@ -61,15 +61,15 @@
     {
       "team": "canadiens",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/montreal-canadiens-new-york-rangers-game-preview-november-16-2026",
-      "publishedAt": "2026-11-16T17:29:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-16T19:54:00+00:00",
       "sourceType": null
     },
     {
       "team": "canucks",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/vancouver-canucks-vegas-golden-knights-game-preview-november-15-2026",
-      "publishedAt": "2026-11-15T19:32:08.037000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-16T19:54:00+00:00",
       "sourceType": null
     },
     {
@@ -159,8 +159,8 @@
     {
       "team": "mammoth",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/san-jose-sharks-utah-mammoth-game-preview-november-14-2026",
-      "publishedAt": "2026-11-14T19:19:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-16T19:54:00+00:00",
       "sourceType": null
     },
     {
@@ -201,8 +201,8 @@
     {
       "team": "rangers",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/montreal-canadiens-new-york-rangers-game-preview-november-16-2026",
-      "publishedAt": "2026-11-16T17:29:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-16T19:54:00+00:00",
       "sourceType": null
     },
     {

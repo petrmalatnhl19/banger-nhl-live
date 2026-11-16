@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-16T18:58:48.168360+00:00",
-  "checked": 23,
-  "articlesFound": 1,
+  "generatedAt": "2026-11-16T19:58:46.363165+00:00",
+  "checked": 22,
+  "articlesFound": 2,
   "errors": [],
   "fixtures": [
     {
@@ -113,13 +113,12 @@
     },
     {
       "url": "https://www.nhl.com/news/vancouver-canucks-utah-mammoth-game-preview-november-16-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/utah-mammoth-vancouver-canucks-game-preview-november-16-2026",
-      "result": "no_complete_projection",
-      "teams": []
+      "result": "parsed",
+      "teams": [
+        "canucks",
+        "mammoth"
+      ],
+      "coversBothTeams": true
     },
     {
       "url": "https://www.nhl.com/news/anaheim-ducks-st-louis-blues-game-preview-november-17-2026",
@@ -226,7 +225,7 @@
   "fixturesSelected": 12,
   "fixturesDeferred": 4,
   "rotation": {
-    "window": 1994283,
+    "window": 1994287,
     "fixed": 8,
     "rotating": 4,
     "remainingPool": 8,

@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-16T18:58:56.787250+00:00",
+  "fetchedAt": "2026-11-16T19:58:51.137729+00:00",
   "teams": {
     "canadiens": {
       "name": "Canadiens",
@@ -46,8 +46,8 @@
       ],
       "injured": "Chris Kreider (lower body), Josh Anderson (lower body), Mike Matheson (lower body), Samuel Montembeault (lower body), Ivan Demidov (lower body)",
       "scratched": "David Reinbacher, Brett Berard",
-      "source": "https://www.nhl.com/news/montreal-canadiens-new-york-rangers-game-preview-november-16-2026",
-      "publishedAt": "2026-11-16T17:29:00+00:00"
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-16T19:54:00+00:00"
     },
     "rangers": {
       "name": "Rangers",
@@ -93,8 +93,102 @@
       ],
       "injured": "Igor Shesterkin (lower body), Joseph Veleno (lower body), Alberts Smits (upper body), Sean Durzi (undisclosed)",
       "scratched": "Matt Rempe, Marc Del Gaizo, Luke Glendening",
-      "source": "https://www.nhl.com/news/montreal-canadiens-new-york-rangers-game-preview-november-16-2026",
-      "publishedAt": "2026-11-16T17:29:00+00:00"
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-16T19:54:00+00:00"
+    },
+    "canucks": {
+      "name": "Canucks",
+      "forwards": [
+        [
+          "Jake DeBrusk",
+          "Elias Pettersson",
+          "Jonathan Lekkerimaki"
+        ],
+        [
+          "Paul Cotter",
+          "Filip Chytil",
+          "Brock Boeser"
+        ],
+        [
+          "Liam Ohgren",
+          "Marco Rossi",
+          "Linus Karlsson"
+        ],
+        [
+          "Drew O'Connor",
+          "Max Sasson",
+          "Brendan Gallagher"
+        ]
+      ],
+      "defense": [
+        [
+          "Zeev Buium",
+          "Filip Hronek"
+        ],
+        [
+          "Elias Pettersson",
+          "Tom Willander"
+        ],
+        [
+          "Jamie Oleksiak",
+          "Cameron Crotty"
+        ]
+      ],
+      "goalies": [
+        "Nikita Tolopilo",
+        "Kevin Lankinen"
+      ],
+      "injured": "Thatcher Demko (hip), Guillaume Brisebois (undisclosed)",
+      "scratched": "Arshdeep Bains, Luke Schenn, Leevi Merilainen",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-16T19:54:00+00:00"
+    },
+    "mammoth": {
+      "name": "Mammoth",
+      "forwards": [
+        [
+          "Anders Lee",
+          "Vincent Trocheck",
+          "Clayton Keller"
+        ],
+        [
+          "Daniil But",
+          "Barrett Hayton",
+          "Kailer Yamamoto"
+        ],
+        [
+          "Michael Carcone",
+          "Jack McBain",
+          "Lawson Crouse"
+        ],
+        [
+          "Liam O'Brien",
+          "Kevin Stenlund",
+          "Ben McCartney"
+        ]
+      ],
+      "defense": [
+        [
+          "Mikhail Sergachev",
+          "MacKenzie Weegar"
+        ],
+        [
+          "Dmitri Simashev",
+          "Andrew Peeke"
+        ],
+        [
+          "Artem Duda",
+          "Zac Jones"
+        ]
+      ],
+      "goalies": [
+        "Karel Vejmelka",
+        "Sebastian Cossa"
+      ],
+      "injured": "Dylan Guenther (upper body), Logan Cooley (upper body), Nick Schmaltz (lower body), Nate Schmidt (upper body), John Marino (upper body), Maveric Lamoureux (shoulder)",
+      "scratched": "Nick DeSimone",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-16T19:54:00+00:00"
     },
     "oilers": {
       "name": "Oilers",
@@ -283,53 +377,6 @@
       "scratched": "Colin Blackwell, Rémi Poirier",
       "source": "https://www.nhl.com/news/florida-panthers-dallas-stars-game-preview-november-15-2026",
       "publishedAt": "2026-11-15T22:34:00+00:00"
-    },
-    "canucks": {
-      "name": "Canucks",
-      "forwards": [
-        [
-          "Jake DeBrusk",
-          "Elias Pettersson",
-          "Jonathan Lekkerimaki"
-        ],
-        [
-          "Paul Cotter",
-          "Filip Chytil",
-          "Brock Boeser"
-        ],
-        [
-          "Liam Ohgren",
-          "Marco Rossi",
-          "Linus Karlsson"
-        ],
-        [
-          "Drew O'Connor",
-          "Max Sasson",
-          "Brendan Gallagher"
-        ]
-      ],
-      "defense": [
-        [
-          "Zeev Buium",
-          "Filip Hronek"
-        ],
-        [
-          "Elias Pettersson",
-          "Tom Willander"
-        ],
-        [
-          "Jamie Oleksiak",
-          "Cameron Crotty"
-        ]
-      ],
-      "goalies": [
-        "Kevin Lankinen",
-        "Leevi Merilainen"
-      ],
-      "injured": "Thatcher Demko (hip), Guillaume Brisebois (undisclosed)",
-      "scratched": "Arshdeep Bains, Luke Schenn, Nikita Tolopilo",
-      "source": "https://www.nhl.com/news/vancouver-canucks-vegas-golden-knights-game-preview-november-15-2026",
-      "publishedAt": "2026-11-15T19:32:08.037000+00:00"
     },
     "golden knights": {
       "name": "Golden Knights",
@@ -659,53 +706,6 @@
       "scratched": "Artemi Panarin, Samuel Helenius",
       "source": "https://www.nhl.com/news/calgary-flames-los-angeles-kings-game-preview-november-14-2026",
       "publishedAt": "2026-11-14T20:12:14.173000+00:00"
-    },
-    "mammoth": {
-      "name": "Mammoth",
-      "forwards": [
-        [
-          "Anders Lee",
-          "Vincent Trocheck",
-          "Clayton Keller"
-        ],
-        [
-          "Daniil But",
-          "Barrett Hayton",
-          "Kailer Yamamoto"
-        ],
-        [
-          "Michael Carcone",
-          "Jack McBain",
-          "Lawson Crouse"
-        ],
-        [
-          "Liam O’Brien",
-          "Kevin Stenlund",
-          "Ben McCartney"
-        ]
-      ],
-      "defense": [
-        [
-          "Mikhail Sergachev",
-          "Mackenzie Weegar"
-        ],
-        [
-          "Dmitri Simashev",
-          "Andrew Peeke"
-        ],
-        [
-          "Artem Duda",
-          "Zac Jones"
-        ]
-      ],
-      "goalies": [
-        "Karel Vejmelka",
-        "Sebastian Cossa"
-      ],
-      "injured": "Dylan Guenther (upper body), Logan Cooley (upper body), Nick Schmaltz (lower body), Nate Schmidt (upper body), John Marino (upper body), Maveric Lamoureux (shoulder)",
-      "scratched": "Nick DeSimone",
-      "source": "https://www.nhl.com/news/san-jose-sharks-utah-mammoth-game-preview-november-14-2026",
-      "publishedAt": "2026-11-14T19:19:00+00:00"
     },
     "sabres": {
       "name": "Sabres",
