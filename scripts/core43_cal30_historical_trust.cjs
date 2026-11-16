@@ -7,6 +7,7 @@ const { tmpdir } = require("node:os");
 const { join } = require("node:path");
 const { readRegistry, verifyPackage } = require("./core43_cal13_coordinator.cjs");
 const { verifyTimestamp } = require("./core43_cal16_timestamp.cjs");
+const { verifyTechnicalNhlStart } = require("./core43_cal33_nhl_observer.cjs");
 
 const POLICY = "core43_cal30_policy_v1";
 const NHL_START = "core43_cal30_nhl_start_v1";
@@ -54,18 +55,20 @@ function ed25519(encoded, reason) {
   }
 }
 
-function readPolicy(bytes, pin) {
+function readPolicy(bytes, pin, technical = false) {
   // pin comes from verifier-owned configuration, never from the submitted evidence.
   check(bounded(bytes, 64 * 1024) && matches(SHA, pin) && hash(bytes) === pin, "policy_pin");
   const policy = document(bytes, 64 * 1024, "policy");
-  check(fields(policy, ["schema", "mode", "reviewAt", "packageRegistry", "nhlObserver", "authorities"]) &&
-    policy.schema === POLICY && ["simulation", "historical"].includes(policy.mode) && instant(policy.reviewAt) &&
+  const sourceField = technical ? "nhlArchiveSha256" : "nhlObserver";
+  check(fields(policy, ["schema", "mode", "reviewAt", "packageRegistry", sourceField, "authorities"]) &&
+    policy.schema === (technical ? "core43_cal36_technical_review_v1" : POLICY) && ["simulation", "historical"].includes(policy.mode) && instant(policy.reviewAt) &&
     Date.parse(policy.reviewAt) % 1000 === 0 &&
     Array.isArray(policy.authorities) && policy.authorities.length === 2, "policy");
   const { packageRegistry, nhlObserver, authorities } = policy;
   check(fields(packageRegistry, ["source", "rootKey", "registrySha256"]) &&
     matches(SHA, packageRegistry.registrySha256) &&
-    fields(nhlObserver, ["operatorId", "publicKey"]) && matches(ID, nhlObserver.operatorId), "policy");
+    (technical ? matches(SHA, policy.nhlArchiveSha256) :
+      fields(nhlObserver, ["operatorId", "publicKey"]) && matches(ID, nhlObserver.operatorId)), "policy");
   for (const profile of authorities) {
     check(fields(profile, ["id", "operatorId", "policyOid", "maxAccuracyMs", "approvalSha256",
       "chainSha256", "crlSha256"]) &&
@@ -78,7 +81,8 @@ function readPolicy(bytes, pin) {
       profile.crlSha256.every(pin => matches(SHA, pin)), "tsa_profile");
   }
   check(new Set(authorities.map(profile => profile.id)).size === 2 &&
-    new Set([nhlObserver.operatorId, ...authorities.map(profile => profile.operatorId)]).size === 3 &&
+    new Set(authorities.map(profile => profile.operatorId)).size === 2 &&
+    (technical || authorities.every(profile => profile.operatorId !== nhlObserver.operatorId)) &&
     new Set(authorities.map(profile => profile.approvalSha256)).size === 2, "operator_independence");
   return policy;
 }
@@ -162,21 +166,33 @@ function verifyRevocation(crls, profile, chain, interval, reviewAt) {
   }
 }
 
-function verifyHistoricalPrediction(evidence, { policyBytes, policySha256 } = {}) {
+function verifyPrediction(evidence, { policyBytes, policySha256 } = {}, technical) {
   try {
-    const policy = readPolicy(policyBytes, policySha256);
-    const { packageBytes, registryBytes, nhlStart, timestamps } = evidence ?? {};
+    const policy = readPolicy(policyBytes, policySha256, technical);
+    const { packageBytes, registryBytes, nhlStart, nhlArchiveBytes, timestamps } = evidence ?? {};
     const rootKey = ed25519(policy.packageRegistry.rootKey, "registry_key");
-    const observerKey = ed25519(policy.nhlObserver.publicKey, "observer_key");
     check(bounded(registryBytes, 64 * 1024) && hash(registryBytes) === policy.packageRegistry.registrySha256,
       "registry_pin");
     const trust = { origin: policy.mode, source: policy.packageRegistry.source, rootKey };
     const registry = readRegistry(document(registryBytes, 64 * 1024, "registry"), trust);
     const keys = new Set([spki(rootKey), ...Array.from(registry.keys.values(), entry => entry.fingerprint)]);
-    check(!keys.has(spki(observerKey)), "observer_independence");
-    keys.add(spki(observerKey));
+    let observerKey;
+    if (!technical) {
+      observerKey = ed25519(policy.nhlObserver.publicKey, "observer_key");
+      check(!keys.has(spki(observerKey)), "observer_independence");
+      keys.add(spki(observerKey));
+    }
     const { payload } = verifyPackage(packageBytes, registry, trust);
-    const cutoffMs = verifyStart(nhlStart, observerKey, payload.capture.prediction, policy.reviewAt);
+    let cutoffMs;
+    let sourceEvidence;
+    if (technical) {
+      check(bounded(nhlArchiveBytes, 4 * 1024 * 1024) && hash(nhlArchiveBytes) === policy.nhlArchiveSha256,
+        "nhl_archive_pin");
+      sourceEvidence = verifyTechnicalNhlStart(nhlArchiveBytes, payload.capture.prediction, policy.reviewAt);
+      cutoffMs = sourceEvidence.cutoffMs;
+    } else {
+      cutoffMs = verifyStart(nhlStart, observerKey, payload.capture.prediction, policy.reviewAt);
+    }
 
     check(Array.isArray(timestamps) && timestamps.length === 2, "timestamps");
     const digest = hash(packageBytes);
@@ -198,14 +214,19 @@ function verifyHistoricalPrediction(evidence, { policyBytes, policySha256 } = {}
       verifyRevocation(proof.crls, profile, chain, interval, policy.reviewAt);
       latestMs = Math.max(latestMs, interval.latestMs);
     }
-    const trusted = policy.mode === "historical";
-    return { trusted, status: trusted ? "historical_verified" : "simulation_verified", digest,
+    const trusted = !technical && policy.mode === "historical";
+    const status = trusted ? "historical_verified" : policy.mode === "simulation" ? "simulation_verified" : "technical_verified";
+    return { trusted, status, digest,
+      ...(technical && { startEvidence: sourceEvidence.startEvidence, earliestReportStartAt: sourceEvidence.earliestReportStartAt }),
       cutoffAt: new Date(cutoffMs).toISOString(), latestTimestampAt: new Date(latestMs).toISOString(),
       reviewedAt: policy.reviewAt, policySha256 };
   } catch (error) {
-    const reason = matches(/^cal(?:07|12|13|16|30)_[a-z0-9_]+$/, error?.message) ? error.message : "cal30_invalid_evidence";
+    const reason = matches(/^cal(?:07|12|13|16|30|33)_[a-z0-9_]+$/, error?.message) ? error.message : "cal30_invalid_evidence";
     return { trusted: false, status: "rejected", reason };
   }
 }
 
-module.exports = { verifyHistoricalPrediction, readPolicy };
+const verifyHistoricalPrediction = (evidence, configuration) => verifyPrediction(evidence, configuration, false);
+const verifyTechnicalPrediction = (evidence, configuration) => verifyPrediction(evidence, configuration, true);
+
+module.exports = { verifyHistoricalPrediction, verifyTechnicalPrediction, readPolicy };

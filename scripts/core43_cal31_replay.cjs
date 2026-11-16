@@ -25,23 +25,25 @@ function decode(value, limit) {
   return bytes;
 }
 
-function decodeDossier(bytes) {
+function decodeDossier(bytes, technical = false) {
   check(Buffer.isBuffer(bytes) && bytes.length > 0 && bytes.length <= MAX_DOSSIER_BYTES);
   const text = new TextDecoder("utf-8", { fatal: true, ignoreBOM: true }).decode(bytes);
   const dossier = JSON.parse(text);
   check(JSON.stringify(dossier) === text);
-  check(fields(dossier, ["schema", "packageBytes", "registryBytes", "nhlStart", "timestamps"]) &&
-    dossier.schema === SCHEMA && fields(dossier.nhlStart, ["report", "statement", "signature"]) &&
+  const coreFields = ["schema", "packageBytes", "registryBytes", "timestamps"];
+  check(fields(dossier, technical ? coreFields : [...coreFields, "nhlStart"]) &&
+    dossier.schema === (technical ? "core43_cal36_dossier_v1" : SCHEMA) &&
+    (technical || fields(dossier.nhlStart, ["report", "statement", "signature"])) &&
     Array.isArray(dossier.timestamps) && dossier.timestamps.length === 2);
   const { nhlStart } = dossier;
   return {
     packageBytes: decode(dossier.packageBytes, MAX_PACKAGE_BYTES),
     registryBytes: decode(dossier.registryBytes, 64 * 1024),
-    nhlStart: {
+    ...(!technical && { nhlStart: {
       report: decode(nhlStart.report, 2 * 1024 * 1024),
       statement: decode(nhlStart.statement, 4096),
       signature: decode(nhlStart.signature, 64),
-    },
+    } }),
     timestamps: dossier.timestamps.map(entry => {
       check(fields(entry, ["id", "request", "response", "chain", "crls", "approval"]) &&
         typeof entry.id === "string" && /^[a-z0-9][a-z0-9-]{2,63}$/.test(entry.id) &&

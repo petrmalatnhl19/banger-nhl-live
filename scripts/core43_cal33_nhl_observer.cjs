@@ -83,7 +83,7 @@ function source(record, url, limit) {
   return bytes;
 }
 
-function startMarker(report, boxscore, gameId, actualStartAt) {
+function readStartMarker(report, boxscore, gameId) {
   const text = new TextDecoder("utf-8", { fatal: true }).decode(report)
     .replace(/<!--[\s\S]*?-->|<(script|style|template)\b[^>]*>[\s\S]*?<\/\1>/gi, "");
   // Recognize the official final Game Summary header. Unknown layouts require a parser update.
@@ -106,10 +106,43 @@ function startMarker(report, boxscore, gameId, actualStartAt) {
   const stamp = markers.length === 1 &&
     /^Start\s+(1[0-2]|[1-9]):([0-5]\d)\s+([A-Z]{3});\s+End\s+(?:1[0-2]|[1-9]):[0-5]\d\s+\3$/.exec(markers[0]);
   check(stamp && zones.has(stamp[3]), "actual_start_unavailable");
+  return { cells, stamp, marker: markers[0] };
+}
+
+function startMarker(report, boxscore, gameId, actualStartAt) {
+  const { cells, stamp, marker } = readStartMarker(report, boxscore, gameId);
   const local = new Date(Date.parse(actualStartAt) + zones.get(stamp[3]) * 60000);
   check(cells.includes(calendar.format(local)) && (local.getUTCHours() % 12 || 12) === Number(stamp[1]) &&
     local.getUTCMinutes() === Number(stamp[2]), "actual_start_mismatch");
-  return markers[0];
+  return marker;
+}
+
+function verifyTechnicalNhlStart(archiveBytes, prediction, reviewAt) {
+  const archive = readArchive(archiveBytes);
+  const sources = urls(archive.gameId);
+  const report = source(archive.report, sources.report, REPORT_LIMIT);
+  const boxscore = JSON.parse(source(archive.boxscore, sources.boxscore, BOXSCORE_LIMIT).toString("utf8"));
+  const { cells, stamp } = readStartMarker(report, boxscore, archive.gameId);
+  check(typeof boxscore.gameDate === "string" && /^\d{4}-\d{2}-\d{2}$/.test(boxscore.gameDate), "game_date");
+  const day = Date.parse(boxscore.gameDate + "T00:00:00.000Z");
+  check(Number.isFinite(day) && new Date(day).toISOString().slice(0, 10) === boxscore.gameDate &&
+    cells.includes(calendar.format(day)), "game_date");
+  const retrieved = [archive.report, archive.boxscore].map(record => Date.parse(record.retrievedAt));
+  check(retrieved.every(at => at <= Date.parse(reviewAt)), "acquisition_time");
+  const hour = Number(stamp[1]) % 12;
+  const candidates = [hour, hour + 12]
+    .map(value => day + (value * 60 + Number(stamp[2]) - zones.get(stamp[3])) * 60000)
+    .filter(at => retrieved.every(retrievedAt => at < retrievedAt));
+  check(candidates.length > 0, "acquisition_time");
+  const earliest = new Date(candidates[0]).toISOString();
+  const outcome = finalOutcome({ origin: "historical", sourceUrl: sources.boxscore, boxscore,
+    officialStart: { url: sources.report, at: earliest } }, "historical");
+  check(outcome && archive.gameId === prediction.gameId && String(boxscore.id) === archive.gameId &&
+    outcome.kickoff === prediction.kickoffAt && outcome.awayTeam === prediction.awayTeam &&
+    outcome.homeTeam === prediction.homeTeam, "boxscore_binding");
+  return { cutoffMs: Math.min(Date.parse(outcome.kickoff), candidates[0]),
+    startEvidence: candidates.length === 1 ? "single_report_time" : "conservative_am_pm_bound",
+    earliestReportStartAt: earliest };
 }
 
 function attestNhlStart(archiveBytes, review, privateKey, clock = Date.now) {
@@ -191,4 +224,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { attestNhlStart, collectNhlSources, verifyProvenance };
+module.exports = { attestNhlStart, collectNhlSources, verifyProvenance, verifyTechnicalNhlStart };

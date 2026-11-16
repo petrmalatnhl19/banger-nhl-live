@@ -151,6 +151,8 @@ on:
       - 'scripts/core43_cal34_dallas_rehearsal.cjs'
       - 'scripts/fixtures/core43_local_tsa.cjs'
       - 'docs/core43-cal34-dallas-rehearsal.md'
+      - 'scripts/core43_cal36_technical_review.cjs'
+      - 'docs/core43-cal36-technical-review.md'
       - 'docs/core43-cal28-lock-gate.md'
       - 'scripts/test_core43_cal26_end_to_end.cjs'
       - 'docs/core43-cal26-end-to-end.md'

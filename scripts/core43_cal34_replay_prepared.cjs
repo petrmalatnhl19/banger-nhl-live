@@ -3,7 +3,7 @@
 const { createHash } = require("node:crypto");
 const { readBoundedFile } = require("./core43_cal08_receiver.cjs");
 const { decodeDossier, MAX_DOSSIER_BYTES } = require("./core43_cal31_replay.cjs");
-const { verifyHistoricalPrediction } = require("./core43_cal30_historical_trust.cjs");
+const { verifyHistoricalPrediction, verifyTechnicalPrediction } = require("./core43_cal30_historical_trust.cjs");
 
 const MAX_PREPARED_BYTES = 300 * 1024;
 const MAX_POLICY_BYTES = 64 * 1024;
@@ -54,20 +54,27 @@ function compareEvidence(prepared, evidence, policy) {
   }
 }
 
-function replayPrepared({ preparedBytes, expectedPreparedSha256, dossierBytes, policyBytes, expectedPolicySha256 } = {}) {
+function replayWithMode({ preparedBytes, expectedPreparedSha256, dossierBytes, policyBytes, expectedPolicySha256,
+  nhlArchiveBytes } = {}, technical) {
   try {
     const prepared = readPrepared(preparedBytes, expectedPreparedSha256);
     check(Buffer.isBuffer(policyBytes) && policyBytes.length > 0 && policyBytes.length <= MAX_POLICY_BYTES &&
       validPin(expectedPolicySha256) && hash(policyBytes) === expectedPolicySha256, "policy_pin");
-    const evidence = decodeDossier(dossierBytes);
+    const evidence = decodeDossier(dossierBytes, technical);
     compareEvidence(prepared, evidence, JSON.parse(policyBytes));
-    const result = verifyHistoricalPrediction(evidence, { policyBytes, policySha256: expectedPolicySha256 });
+    const configuration = { policyBytes, policySha256: expectedPolicySha256 };
+    const result = technical
+      ? verifyTechnicalPrediction({ ...evidence, nhlArchiveBytes }, configuration)
+      : verifyHistoricalPrediction(evidence, configuration);
     return { ...result, preparedSha256: expectedPreparedSha256, planSha256: prepared.planSha256 };
   } catch (error) {
     const reason = /^cal(?:31|34)_[a-z_]+$/.test(error?.message) ? error.message : "cal34_input_format";
     return { trusted: false, status: "rejected", reason };
   }
 }
+
+const replayPrepared = inputs => replayWithMode(inputs, false);
+const replayTechnicalPrepared = inputs => replayWithMode(inputs, true);
 
 if (require.main === module) {
   let result;
@@ -88,4 +95,4 @@ if (require.main === module) {
   process.exitCode = result.trusted ? 0 : 1;
 }
 
-module.exports = { replayPrepared, readPrepared, MAX_PREPARED_BYTES };
+module.exports = { replayPrepared, replayTechnicalPrepared, readPrepared, MAX_PREPARED_BYTES };
