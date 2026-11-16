@@ -57,6 +57,12 @@ db -Atqc "SELECT preview_status FROM public.core43_shadow_preview_v1 WHERE game_
 db -Atqc "SELECT core43_away IS NOT NULL AND core43_home IS NOT NULL FROM public.core43_shadow_predictions_v1 WHERE game_id=1" | grep -qx 't'
 db -Atqc "SELECT core43_preview_away IS NOT NULL AND core43_preview_home IS NOT NULL FROM public.core43_shadow_preview_v1 WHERE game_id=1" | grep -qx 't'
 echo "PASS production-equivalent CORE43 prediction/preview synthetic calculations"
+# SECURITY-16: actual production analytics views, synthetic final result only.
+db -Atqc "INSERT INTO public.nhl_prediction_archive (game_id,status,game_date,actual_away,actual_home,baseline_away,baseline_home,advanced_away,advanced_home,goalie32_away,goalie32_home,special33_away,special33_home,core40_away,core40_home,core41_away,core41_home,core42_away,core42_home) VALUES (9,'final',current_date,3,2,3.1,2.1,3.0,2.0,3.2,2.2,3.3,2.3,3.0,2.0,3.0,2.0,3.0,2.0)"
+db -Atqc "SELECT count(*) FROM public.nhl_core_model_accuracy WHERE model='CORE 4.2' AND games=1" | grep -qx '1'
+db -Atqc "SELECT count(*) FROM public.nhl_core_model_head_to_head WHERE model='CORE 4.1' AND games=1" | grep -qx '1'
+db -Atqc "SELECT count(*) FROM public.nhl_core_model_trend WHERE model='CORE 4.2' AND game_id=9 AND games=1" | grep -qx '1'
+echo "PASS SECURITY-16 three production analytics views against synthetic final score"
 echo "Applying SECURITY-06 candidate only to synthetic local database..."
 db <<'SQL'
 BEGIN;
