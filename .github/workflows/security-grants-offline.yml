@@ -37,5 +37,8 @@ jobs:
       - name: Test signed evidence to four predictions and archive (offline)
         run: node scripts/test_security52_evidence_chain.cjs
 
+      - name: Test durable synthetic archive recovery (offline)
+        run: python3 .github/scripts/test-security-53-archive-recovery.py
+
       - name: Test immutable pregame refresh prototype (offline)
         run: python3 .github/scripts/test-security-35-pregame-refresh.py
