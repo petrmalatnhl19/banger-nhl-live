@@ -23,9 +23,6 @@ jobs:
     uses: ./.github/workflows/core-accuracy-pilot.yml
     with:
       mode: live
-    secrets:
-      ACCURACY_PILOT_SIGNING_KEY: ${{ secrets.ACCURACY_PILOT_SIGNING_KEY }}
-      ACCURACY_PILOT_ARCHIVE_KEY: ${{ secrets.ACCURACY_PILOT_ARCHIVE_KEY }}
 
   frontend-smoke:
     runs-on: ubuntu-latest

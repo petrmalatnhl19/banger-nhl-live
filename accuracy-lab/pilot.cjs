@@ -9,6 +9,7 @@ const { policy, required, inspectManifest, sha256 } = require("./reference.cjs")
 const { replay } = require("./v26-replay.cjs");
 const { prepareExport, verifyExport } = require("./external-time.cjs");
 const { writeArchive } = require("./snapshot.cjs");
+const { publicPin } = require("./pilot-keys.cjs");
 
 const format = "banger-accuracy-live-capture-v1";
 const archiveFormat = "banger-accuracy-live-archive-v1";
@@ -208,10 +209,13 @@ function seal(bundle, key, clock = Date.now) {
   return { ...payload, external };
 }
 
-function verifyArchive(archive) {
+function verifyArchive(archive, expectedSignerSha256) {
   const { external, ...payload } = archive;
   if (payload.schema !== archiveFormat) throw Error("Invalid live archive format");
   verifyExport(external);
+  if (expectedSignerSha256 !== undefined && publicPin(external.envelope.publicKey) !== expectedSignerSha256) {
+    throw Error("Pilot signer is not pinned");
+  }
   const statement = external.envelope.statement;
   const reproduced = archivePayload(payload.capture, timestamp(payload.archivedAt));
   if (!Object.hasOwn(payload, "pairAudit")) delete reproduced.pairAudit;

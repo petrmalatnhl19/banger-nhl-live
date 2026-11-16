@@ -271,6 +271,45 @@ function showPilot(candidate) {
   el("pregame").hidden = true;
 }
 
+const pilotSecurityChecks = {
+  calendar: "Harmonogram NHL a čas T−60 ověřeny.",
+  "source-terms": "Chybí doložené oprávnění k automatizaci a archivaci zdrojů.",
+  "nhl-api": "Oficiální rozpis NHL technicky dostupný při kontrole.",
+  "nhl-preview": "Pro pilot chybí ověřené sestavy a absence.",
+  rotowire: "Chybí odpovídající dvojice brankářů a souhlas s automatizací.",
+  "lineups-mirror": "Záložní zrcadlo sestav je vypnuté.",
+  "archive-v26": "Dostupnost úplných mezivýsledků v T−60 vyžaduje ověření.",
+  secrets: "Stav klíčů v chráněném prostředí zatím neověřen.",
+  workflow: "Ruční testovací konfigurace funguje bez živých klíčů.",
+  settings: "Ochrana prostředí a výchozí oprávnění repozitáře vyžadují kontrolu.",
+  signature: "Podpis a kontrola očekávaného veřejného klíče ověřeny s testovacími klíči.",
+  tsa: "Test FreeTSA prošel technickou kontrolou. Chybí deklarovaná přesnost a schválení autority.",
+  "archive-simulation": "Test přerušení a ochrana před dvojím archivem ověřeny.",
+  schedule: "Plánovaný start je vypnutý.",
+  simulation: "Regresní generálka se syntetickými vstupy."
+};
+
+function showPilotSecurity(candidate) {
+  const states = ["PASS", "BLOCKED", "WARNING"];
+  const rows = candidate.checks;
+  if (candidate.mode !== "simulation" || candidate.status !== "BLOCKED" || !Array.isArray(rows)
+    || rows.length !== Object.keys(pilotSecurityChecks).length
+    || new Set(rows.map(row => row?.id)).size !== rows.length
+    || !rows.every(row => Object.hasOwn(pilotSecurityChecks, row.id) && states.includes(row.status))
+    || typeof candidate.lastTest !== "string" || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(candidate.lastTest)
+    || !Number.isFinite(Date.parse(candidate.lastTest))) throw Error("invalid security report");
+  el("report").hidden = true;
+  filters.hidden = true;
+  el("pregame").hidden = true;
+  el("status").textContent = "Načten report bezpečnostní generálky.";
+  el("pilot-security-summary").textContent = "BLOCKED · syntetická generálka · 0 platných párových predikcí";
+  el("pilot-security-last-test").textContent = "Poslední test " + candidate.lastTest;
+  const list = el("pilot-security-checks");
+  list.replaceChildren();
+  for (const row of rows) put(list, "li", row.status + " · " + pilotSecurityChecks[row.id]);
+  el("pilot-security").hidden = false;
+}
+
 function replayAvailability(mode) {
   if (mode === "simulation_only") return "Dostupná simulace GSAx";
   if (mode === "exact_ensemble") return "Přesný offline výpočet v26 ze zmrazených komponent";
@@ -409,6 +448,11 @@ el("load").addEventListener("change", async event => {
     const candidate = JSON.parse(await file.text());
     el("replay").hidden = true;
     el("pilot").hidden = true;
+    el("pilot-security").hidden = true;
+    if (candidate?.schema === "banger-accuracy-security-report-v1") {
+      showPilotSecurity(candidate);
+      return;
+    }
     if (candidate?.schema === "banger-accuracy-live-report-v1") {
       showPilot(candidate);
       return;
@@ -441,6 +485,7 @@ el("load").addEventListener("change", async event => {
       + report.scope.end + " a předchozí dny.";
   } catch {
     report = null;
+    el("pilot-security").hidden = true;
     el("pilot").hidden = true;
     el("replay").hidden = true;
     el("pregame").hidden = true;

@@ -17,7 +17,7 @@ const official = (scheduled = start) => new Response(JSON.stringify({ id: +id, g
 
 function workflowFixture(overrides = {}) {
   const live = fixture();
-  return { now: () => at, signingKey, archiveKey: key.toString("hex"), wait: async () => {},
+  return { now: () => at, sourcePolicy: { rotowire: true, lineups: true }, signingKey, archiveKey: key.toString("hex"), wait: async () => {},
     fetcher: (url, options) => url === gamecenter ? official() : live.fetcher(url, options), ...overrides };
 }
 
@@ -142,4 +142,73 @@ test("club preview fallback requires exact matchup and explicit starters with di
   assert.deepEqual(missing.report.missing, ["goalies"]);
   assert.equal(missing.sealed, false);
   assert.equal(missing.report.internallyCalculated.length, 0);
+});
+
+test("an unavailable lineup and a persistent API outage stay diagnostic", async () => {
+  const base = fixture();
+  const noPreview = await runLive(workflowFixture({ fetcher: async (url, options) => {
+    if (url === gamecenter) return official();
+    if (url.startsWith("https://www.nhl.com/")) return new Response("absent", { status: 404 });
+    return base.fetcher(url, options);
+  } }));
+  assert.ok(noPreview.report.missing.includes("lineups"));
+  assert.ok(noPreview.report.missing.includes("absences"));
+  assert.equal(noPreview.sealed, false);
+  let calls = 0;
+  const outage = await runLive(workflowFixture({ fetcher: async () => {
+    calls++;
+    return new Response("outage", { status: 503 });
+  } }));
+  assert.equal(calls, 2);
+  assert.equal(outage.report.reason, "official_schedule_not_confirmed");
+  assert.equal(outage.report.validPairs, 0);
+});
+
+test("wrong Game ID stops collection and restricted mirrors are never contacted", async () => {
+  const failed = await runLive(workflowFixture({ fetcher: async url => {
+    assert.equal(url, gamecenter);
+    const body = await official().json();
+    return new Response(JSON.stringify({ ...body, id: 2026020343 }));
+  } }));
+  assert.equal(failed.report.reason, "official_schedule_not_confirmed");
+  const base = fixture();
+  const blocked = await runLive(workflowFixture({ sourcePolicy: {}, fetcher: async (url, options) => {
+    assert.doesNotMatch(url, /(?:rotowire_goalies|lineups)\.json/);
+    return url === gamecenter ? official() : base.fetcher(url, options);
+  } }));
+  assert.ok(blocked.report.missing.includes("goalies"));
+  assert.equal(blocked.sealed, false);
+});
+
+test("late NHL response and a post-cutoff archive component refuse both models", async () => {
+  let clock = at;
+  const late = await runLive(workflowFixture({ now: () => clock, fetcher: async () => {
+    clock = cutoff + 1;
+    return official();
+  } }));
+  assert.equal(late.report.reason, "official_schedule_not_confirmed");
+  assert.equal(late.report.internallyCalculated.length, 0);
+
+  const base = fixture();
+  const future = await runLive(workflowFixture({ fetcher: async (url, options) => {
+    if (url === gamecenter) return official();
+    const response = await base.fetcher(url, options);
+    if (!url.includes("nhl_prediction_archive")) return response;
+    const [row] = await response.json();
+    row.xg4_predicted_at = new Date(cutoff + 1).toISOString();
+    return new Response(JSON.stringify([row]));
+  } }));
+  assert.equal(future.sealed, false);
+  assert.equal(future.report.internallyCalculated.length, 0);
+});
+
+test("a valid archive matches only the pinned signer and rejects a corrupt signature", async () => {
+  const { publicPin } = require("./pilot-keys.cjs");
+  const result = await runLive(workflowFixture());
+  const archive = decrypt(result.encrypted, key).archived;
+  verifyArchive(archive, publicPin(signingKey));
+  assert.throws(() => verifyArchive(archive, "00".repeat(32)), /not pinned/);
+  const original = archive.external.envelope.signature;
+  archive.external.envelope.signature = (original[0] === "A" ? "B" : "A") + original.slice(1);
+  assert.throws(() => verifyArchive(archive, publicPin(signingKey)), /signature/);
 });

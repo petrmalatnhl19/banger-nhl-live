@@ -15,11 +15,6 @@ on:
       mode:
         type: string
         default: configuration
-    secrets:
-      ACCURACY_PILOT_SIGNING_KEY:
-        required: false
-      ACCURACY_PILOT_ARCHIVE_KEY:
-        required: false
 
 # A schedule is deliberately absent. Candidate UTC cron is recorded in the pilot configuration.
 permissions:
@@ -31,16 +26,16 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
       - name: Validate dormant calendar and exercise pilot locally
         run: |
           node accuracy-lab/pilot-automation.cjs configuration
-          node --test accuracy-lab/pilot-automation.test.cjs
+          node --test accuracy-lab/pilot-automation.test.cjs accuracy-lab/pilot-security.test.cjs
 
   live:
     if: >-
@@ -49,6 +44,7 @@ jobs:
       github.ref == 'refs/heads/core-accuracy-lab-01'
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    environment: accuracy-pilot
     permissions:
       contents: read
       actions: read
@@ -58,45 +54,85 @@ jobs:
     env:
       ARTIFACT_PREFIX: accuracy-pilot-2026020342-20261118T0200Z
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
-      - name: Check source authorization
+      - name: Check pilot activation and source authorization
         env:
+          ACTIVATION: ${{ vars.ACCURACY_PILOT_ACTIVATION }}
           SOURCE_APPROVAL: ${{ vars.ACCURACY_PILOT_SOURCES_ALLOWED }}
         run: |
+          if [[ "$ACTIVATION" != "$ARTIFACT_PREFIX" ]]; then
+            echo "::error::The pilot is disabled pending activation approval."
+            exit 1
+          fi
           if [[ "$SOURCE_APPROVAL" != true ]]; then
             echo "::error::Live source automation requires approval for the selected providers."
             exit 1
           fi
-      - name: Check completed pilot artifact
+      - name: Check current pilot reservations and archives
         shell: bash
         id: duplicate
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh api --paginate "repos/$GITHUB_REPOSITORY/actions/artifacts?name=$ARTIFACT_PREFIX-sealed&per_page=100"             --jq '.artifacts[]' | jq -s . > "$RUNNER_TEMP/prior-pilot-artifacts.json"
-          run_ids=$(node accuracy-lab/pilot-automation.cjs artifact-ids "$RUNNER_TEMP/prior-pilot-artifacts.json")
-          while IFS= read -r run_id; do
-            [[ -n "$run_id" ]] || continue
-            workflow=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run_id" --jq '.path')
-            case "$workflow" in
-              .github/workflows/core-accuracy-pilot.yml|.github/workflows/frontend-smoke.yml)
-                echo "found=true" >> "$GITHUB_OUTPUT"
-                exit 0
-                ;;
-            esac
-          done <<< "$run_ids"
-          echo "found=false" >> "$GITHUB_OUTPUT"
-      - name: Collect and seal within T−60
-        id: capture
-        if: steps.duplicate.outputs.found == 'false'
+          gh api --paginate "repos/$GITHUB_REPOSITORY/actions/artifacts?per_page=100" \
+            --jq '.artifacts[]' | jq -s --arg prefix "$ARTIFACT_PREFIX" \
+            '[.[] | select(.name | startswith($prefix + "-"))]' > "$RUNNER_TEMP/prior-pilot-artifacts.json"
+          jq -c '.[] | select(.workflow_run.head_branch == "core-accuracy-lab-01" and .expired == false)' \
+            "$RUNNER_TEMP/prior-pilot-artifacts.json" > "$RUNNER_TEMP/candidate-pilot-artifacts.jsonl"
+          : > "$RUNNER_TEMP/trusted-pilot-artifacts.jsonl"
+          while IFS= read -r artifact; do
+            run_id=$(jq -er '.workflow_run.id | select(type == "number")' <<< "$artifact")
+            gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run_id" | jq -e --arg repository "$GITHUB_REPOSITORY" '
+              .head_branch == "core-accuracy-lab-01" and .head_repository.full_name == $repository and
+              .event == "workflow_dispatch" and (.path == ".github/workflows/core-accuracy-pilot.yml" or
+              .path == ".github/workflows/frontend-smoke.yml")
+            ' > /dev/null || { echo "::error::Unrecognized pilot artifact origin. Reconciliation required."; exit 1; }
+            printf '%s\n' "$artifact" >> "$RUNNER_TEMP/trusted-pilot-artifacts.jsonl"
+          done < "$RUNNER_TEMP/candidate-pilot-artifacts.jsonl"
+          jq -s . "$RUNNER_TEMP/trusted-pilot-artifacts.jsonl" > "$RUNNER_TEMP/trusted-pilot-artifacts.json"
+          decision=$(node accuracy-lab/pilot-automation.cjs artifact-decision "$RUNNER_TEMP/trusted-pilot-artifacts.json")
+          if [[ "$decision" == reconcile ]]; then
+            echo "::error::An interrupted pilot requires operator reconciliation."
+            exit 1
+          fi
+          echo "decision=$decision" >> "$GITHUB_OUTPUT"
+      - name: Validate pinned keys and fixed UTC window
+        if: steps.duplicate.outputs.decision == 'clear'
         env:
           ACCURACY_PILOT_SIGNING_KEY: ${{ secrets.ACCURACY_PILOT_SIGNING_KEY }}
           ACCURACY_PILOT_ARCHIVE_KEY: ${{ secrets.ACCURACY_PILOT_ARCHIVE_KEY }}
+          ACCURACY_PILOT_SIGNER_SHA256: ${{ vars.ACCURACY_PILOT_SIGNER_SHA256 }}
+          ACCURACY_PILOT_ARCHIVE_SHA256: ${{ vars.ACCURACY_PILOT_ARCHIVE_SHA256 }}
+        run: |
+          node accuracy-lab/pilot-automation.cjs check-keys
+          node -e 'const {plan}=require("./accuracy-lab/pilot-automation.cjs"); const t=Date.now(); if(t<Date.parse(plan.opensAt) || t>=Date.parse(plan.referenceAt)) process.exit(1)'
+      - name: Create non-secret attempt reservation
+        if: steps.duplicate.outputs.decision == 'clear'
+        run: node accuracy-lab/pilot-automation.cjs configuration > "$RUNNER_TEMP/pilot-reservation.json"
+      - name: Retain reservation before collection
+        if: steps.duplicate.outputs.decision == 'clear'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: accuracy-pilot-2026020342-20261118T0200Z-reservation-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/pilot-reservation.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Collect and seal within T−60
+        id: capture
+        if: steps.duplicate.outputs.decision == 'clear'
+        env:
+          ACCURACY_PILOT_SIGNING_KEY: ${{ secrets.ACCURACY_PILOT_SIGNING_KEY }}
+          ACCURACY_PILOT_ARCHIVE_KEY: ${{ secrets.ACCURACY_PILOT_ARCHIVE_KEY }}
+          ACCURACY_PILOT_SIGNER_SHA256: ${{ vars.ACCURACY_PILOT_SIGNER_SHA256 }}
+          ACCURACY_PILOT_ARCHIVE_SHA256: ${{ vars.ACCURACY_PILOT_ARCHIVE_SHA256 }}
+          ACCURACY_PILOT_ACTIVATION: ${{ vars.ACCURACY_PILOT_ACTIVATION }}
+          ACCURACY_PILOT_SOURCES_ALLOWED: ${{ vars.ACCURACY_PILOT_SOURCES_ALLOWED }}
+          ACCURACY_PILOT_ROTOWIRE_ALLOWED: ${{ vars.ACCURACY_PILOT_ROTOWIRE_ALLOWED }}
         run: |
           node accuracy-lab/pilot-automation.cjs live "$RUNNER_TEMP/pilot-output"
           if [[ -f "$RUNNER_TEMP/pilot-output/sealed-marker.json" ]]; then
@@ -106,7 +142,7 @@ jobs:
           fi
       - name: Retain internally sealed pilot
         if: steps.capture.outputs.sealed == 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: accuracy-pilot-2026020342-20261118T0200Z-sealed
           path: ${{ runner.temp }}/pilot-output/
@@ -114,7 +150,7 @@ jobs:
           retention-days: 30
       - name: Retain incomplete collection without blocking another attempt
         if: steps.capture.outputs.sealed == 'false'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: accuracy-pilot-2026020342-20261118T0200Z-diagnostic-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/pilot-output/

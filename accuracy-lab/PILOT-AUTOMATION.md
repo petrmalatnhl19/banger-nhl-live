@@ -39,3 +39,5 @@ Nová záloha sestav a absencí vyzkouší přesně svázané varianty kanonick�
 4. Samostatně dohodnout externí důvěru, politiku, podpisový certifikát, časovou nejistotu a ověřit skutečnou odpověď nad jednou svázanou žádostí. Stav „interně archivováno“ zůstává odlišný od externího časového razítka a platného páru.
 
 **Výsledek etapy 07.** Okno ještě nenastalo. Pro Vegas zůstávají chybějící preview a přesně svázaná dvojice brankářů. Úplný živý snímek, skutečné predikce obou modelů ani nezávislý doklad pro zápas nevznikly. Počty jsou **0 úplných ověřených snímků T−60 a 0 platných párů**. Syntetické testy ověřují postup a tyto počty nemění.
+
+Aktuální podmínky pro živý režim, nastavení klíčů v chráněném prostředí a postup syntetické generálky jsou v [bezpečnostním auditu ACCURACY-08](PILOT-SECURITY.md).

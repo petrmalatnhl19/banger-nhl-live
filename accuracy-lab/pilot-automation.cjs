@@ -1,13 +1,14 @@
 "use strict";
 
 const { createCipheriv, createDecipheriv, randomBytes } = require("node:crypto");
-const { mkdirSync, readFileSync, statSync } = require("node:fs");
-const { join } = require("node:path");
+const { mkdirSync, mkdtempSync, readFileSync, statSync, linkSync, rmSync, existsSync } = require("node:fs");
+const { dirname, join, resolve } = require("node:path");
 const { canonical, timestamp } = require("./engine.js");
 const { fetchSource, readSource } = require("./pregame.cjs");
 const { collectPilot, analyze, seal, dashboard } = require("./pilot.cjs");
 const { sha256 } = require("./reference.cjs");
 const { writeArchive } = require("./snapshot.cjs");
+const { validatedSecrets } = require("./pilot-keys.cjs");
 
 const plan = Object.freeze({
   gameDate: "2026-11-17", gameId: "2026020342", away: "DAL", home: "VGK",
@@ -101,12 +102,18 @@ function failureReport(reason, now, base) {
     timeStatus: "unverified", completeSnapshots: 0, validPairs: 0, internallyCalculated: [] };
 }
 
-async function runLive({ fetcher = fetch, now = Date.now, wait, signingKey, archiveKey }) {
-  const key = keyFrom(archiveKey);
-  if (typeof signingKey !== "string" || !signingKey.trim()) throw Error("A signing key from outside the repository is required");
+async function runLive({ fetcher = fetch, now = Date.now, wait, signingKey, archiveKey, pins, sourcePolicy = {} }) {
+  const { symmetric: key } = validatedSecrets(signingKey, archiveKey, pins);
   if (now() < timestamp(plan.opensAt) || now() >= deadline) throw Error("Scheduled run is outside T−75 to T−60");
   const events = [];
-  const limited = limitedFetch(fetcher, { now, wait, events });
+  const bounded = limitedFetch(fetcher, { now, wait, events });
+  const limited = (url, options) => {
+    if ((url.endsWith("/rotowire_goalies.json") && sourcePolicy.rotowire !== true)
+      || (url.endsWith("/lineups.json") && sourcePolicy.lineups !== true)) {
+      return new Response(null, { status: 403 });
+    }
+    return bounded(url, options);
+  };
   const official = await fetchSource(landing, limited, now);
   let capture = null, archived = null, report;
   if (!checkLanding(official, now())) {
@@ -144,29 +151,72 @@ function selectedArtifact(rows) {
     && row.workflow_run?.head_branch === "core-accuracy-lab-01");
 }
 
+function artifactDecision(rows) {
+  const names = rows.filter(row => row.expired === false
+    && row.workflow_run?.head_branch === "core-accuracy-lab-01").map(row => row.name);
+  if (names.includes(plan.artifact + "-sealed")) return "sealed";
+  for (const name of names) {
+    if (!name.startsWith(plan.artifact + "-reservation-")) continue;
+    const attempt = name.slice((plan.artifact + "-reservation-").length);
+    if (!/^\d+-\d+$/.test(attempt) || !names.includes(plan.artifact + "-diagnostic-" + attempt)) return "reconcile";
+  }
+  return "clear";
+}
+
+function publishResult(result, destination, save = writeArchive) {
+  const target = resolve(destination);
+  if (existsSync(target)) throw Error("Pilot output already exists");
+  const stage = mkdtempSync(join(dirname(target), ".pilot-staging-"));
+  const files = ["evidence.encrypted.json", "status.json"];
+  let created = false;
+  try {
+    save(result.encrypted, join(stage, files[0]));
+    save(result.report, join(stage, files[1]));
+    if (result.sealed) {
+      files.push("sealed-marker.json");
+      save({ gameId: plan.gameId, referenceAt: plan.referenceAt,
+        encryptedSha256: sha256(result.encrypted) }, join(stage, files[2]));
+    }
+    mkdirSync(target, { mode: 0o700 });
+    created = true;
+    for (const name of files) linkSync(join(stage, name), join(target, name));
+  } catch (error) {
+    if (created) rmSync(target, { recursive: true, force: true });
+    throw error;
+  } finally {
+    rmSync(stage, { recursive: true, force: true });
+  }
+}
+
 if (require.main === module) {
   const [command, first, second] = process.argv.slice(2);
   (async () => {
     if (command === "configuration") {
       console.log(JSON.stringify({ ...plan, scheduleEnabled: false }, null, 2));
-    } else if (command === "live" && first) {
-      // Exclusive staging path, never overwrite an earlier local run.
-      mkdirSync(first, { mode: 0o700 });
-      const result = await runLive({ signingKey: process.env.ACCURACY_PILOT_SIGNING_KEY,
-        archiveKey: process.env.ACCURACY_PILOT_ARCHIVE_KEY });
-      writeArchive(result.encrypted, join(first, "evidence.encrypted.json"));
-      writeArchive(result.report, join(first, "status.json"));
-      if (result.sealed) writeArchive({ gameId: plan.gameId, referenceAt: plan.referenceAt,
-        encryptedSha256: sha256(result.encrypted) }, join(first, "sealed-marker.json"));
+    } else if (command === "check-keys" || (command === "live" && first)) {
+      const signingKey = process.env.ACCURACY_PILOT_SIGNING_KEY;
+      const archiveKey = process.env.ACCURACY_PILOT_ARCHIVE_KEY;
+      const pins = { signer: process.env.ACCURACY_PILOT_SIGNER_SHA256, archive: process.env.ACCURACY_PILOT_ARCHIVE_SHA256 };
+      validatedSecrets(signingKey, archiveKey, pins);
+      if (command === "live") {
+        if (process.env.ACCURACY_PILOT_ACTIVATION !== plan.artifact || process.env.ACCURACY_PILOT_SOURCES_ALLOWED !== "true") {
+          throw Error("Pilot is disabled");
+        }
+        if (existsSync(first)) throw Error("Pilot output already exists");
+        const result = await runLive({ signingKey, archiveKey, pins, sourcePolicy: {
+          rotowire: process.env.ACCURACY_PILOT_ROTOWIRE_ALLOWED === "true", lineups: false
+        } });
+        publishResult(result, first);
+      }
     } else if (command === "decrypt" && first && second) {
       if (statSync(first).size > 48_100_000) throw Error("Archive exceeds size limit");
       writeArchive(decrypt(JSON.parse(readFileSync(first, "utf8")), keyFrom(process.env.ACCURACY_PILOT_ARCHIVE_KEY)), second);
-    } else if (command === "artifact-ids" && first) {
+    } else if (command === "artifact-decision" && first) {
       const list = JSON.parse(readFileSync(first, "utf8"));
       if (!Array.isArray(list) || list.some(row => !Number.isSafeInteger(row?.id))) throw Error("Invalid artifact listing");
-      console.log(selectedArtifact(list).map(row => row.workflow_run.id).filter(Number.isSafeInteger).join("\n"));
-    } else throw Error("Usage: pilot-automation.cjs configuration | live DIR | decrypt ARCHIVE OUTPUT | artifact-ids LIST");
-  })().catch(error => { console.error(error.message); process.exitCode = 1; });
+      console.log(artifactDecision(list));
+    } else throw Error("Usage: pilot-automation.cjs configuration | live DIR | decrypt ARCHIVE OUTPUT | check-keys | artifact-decision LIST");
+  })().catch(error => { console.error("Pilot command failed. Check configuration, time window, keys or archive integrity."); process.exitCode = 1; });
 }
 
-module.exports = { plan, limitedFetch, checkLanding, scheduleMatches, encrypt, decrypt, runLive, selectedArtifact };
+module.exports = { plan, limitedFetch, checkLanding, scheduleMatches, encrypt, decrypt, runLive, selectedArtifact, artifactDecision, publishResult };

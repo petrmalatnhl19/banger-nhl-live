@@ -59,3 +59,7 @@ Přesný ensemble v26, kontrolní přepočty, doplňkové absence a export pro e
 Ruční živý pilot, výběr utkání a společný podepsaný archiv popisuje [CORE-ACCURACY-06](LIVE-PILOT.md).
 
 Přípravu samostatného testovacího workflow, zdroje a postup aktivace popisuje [CORE-ACCURACY-07](PILOT-AUTOMATION.md).
+
+### CORE-ACCURACY-08
+
+[Bezpečnostní audit pilotu a obsluha klíčů](PILOT-SECURITY.md) popisuje stav zdrojů, offline kontrolu RFC 3161 a postup syntetické generálky s přehledem v dashboardu.
