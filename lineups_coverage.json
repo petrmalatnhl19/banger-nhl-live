@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-16T06:59:00.719717+00:00",
+  "generatedAt": "2026-11-16T09:43:05.035693+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 14,
+  "currentProjections": 10,
   "needsFreshProjection": [
     "avalanche",
     "blackhawks",
@@ -13,13 +13,17 @@
     "capitals",
     "devils",
     "hurricanes",
+    "islanders",
     "jets",
+    "kings",
     "kraken",
     "lightning",
+    "mammoth",
     "maple leafs",
     "penguins",
     "rangers",
     "red wings",
+    "sabres",
     "senators",
     "wild"
   ],
@@ -34,13 +38,17 @@
     "capitals",
     "devils",
     "hurricanes",
+    "islanders",
     "jets",
+    "kings",
     "kraken",
     "lightning",
+    "mammoth",
     "maple leafs",
     "penguins",
     "rangers",
     "red wings",
+    "sabres",
     "senators",
     "wild"
   ],
@@ -222,11 +230,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-14T20:51:47.249000+00:00",
       "source": "https://www.nhl.com/news/new-york-islanders-anaheim-ducks-game-preview-november-14-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "jets": {
       "hasProjectedLines": true,
@@ -246,11 +254,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-14T20:12:14.173000+00:00",
       "source": "https://www.nhl.com/news/calgary-flames-los-angeles-kings-game-preview-november-14-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "kraken": {
       "hasProjectedLines": true,
@@ -283,11 +291,11 @@
         "archive",
         "manual"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-14T19:19:00+00:00",
       "source": "https://www.nhl.com/news/san-jose-sharks-utah-mammoth-game-preview-november-14-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "maple leafs": {
       "hasProjectedLines": true,
@@ -380,11 +388,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-14T19:00:43.404000+00:00",
       "source": "https://www.nhl.com/news/buffalo-sabres-dallas-stars-game-preview-november-14-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "senators": {
       "hasProjectedLines": true,
