@@ -4,7 +4,7 @@ CREATE ROLE authenticated NOLOGIN;
 CREATE ROLE service_role NOLOGIN;
 CREATE TABLE public.nhl_core43_shadow_inputs (game_id bigint, side text, gsax numeric, shots_against integer, readiness text, goalie_id text, gsax_fetched_at timestamptz, prediction_at timestamptz, starter_status text);
 CREATE TABLE public.nhl_prediction_archive (game_id bigint PRIMARY KEY, prediction numeric, core42_predicted_at timestamptz, status text, core42_goalie_review jsonb, game_date date, away_team text, home_team text, core42_away double precision, core42_home double precision, core42_factors jsonb, actual_away integer, actual_home integer, baseline_away double precision, baseline_home double precision, advanced_away double precision, advanced_home double precision, goalie32_away double precision, goalie32_home double precision, special33_away double precision, special33_home double precision, core40_away double precision, core40_home double precision, core41_away double precision, core41_home double precision);
-CREATE TABLE public.nhl_core43_goalie_snapshots (game_id bigint, goalie_id text, team_code text, situation text, fetched_at timestamptz, gsax numeric, shots_against integer);
+CREATE TABLE public.nhl_core43_goalie_snapshots (game_id bigint, goalie_id text, team_code text, situation text, fetched_at timestamptz, gsax numeric(12,4), shots_against integer);
 CREATE TABLE public.nhl_core43_starter_evidence (game_id bigint, team_code text, goalie_id text, evidence_status text, source_published_at timestamptz, verified_at timestamptz);
 CREATE TABLE public.nhl_core43_schedule_snapshots (game_id bigint, kickoff_at timestamptz, away_team text, home_team text);
 ALTER TABLE public.nhl_core43_shadow_inputs ENABLE ROW LEVEL SECURITY;
