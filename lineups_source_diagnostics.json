@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T16:55:40.166623+00:00",
+  "generatedAt": "2026-11-16T18:05:00.856540+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -64,34 +64,16 @@
     "rangers": {
       "team": "NYR",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/new-york-rangers-vancouver-canucks-game-preview-november-13-2026",
-      "candidatePublishedAt": "2026-11-13T20:00:20.196000+00:00",
+      "candidateSource": "https://www.nhl.com/news/montreal-canadiens-new-york-rangers-game-preview-november-16-2026",
+      "candidatePublishedAt": "2026-11-16T17:29:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
       "roleMismatches": [],
-      "rejectedLines": [
-        {
-          "group": "defense",
-          "line": 3,
-          "players": [
-            "Matthew Roberson"
-          ],
-          "sourceLine": [
-            "Matthew Roberson",
-            "Scott Morrow"
-          ]
-        }
-      ],
-      "rejectedPlayerReasons": [
-        {
-          "name": "Matthew Roberson",
-          "expectedRole": "defense",
-          "reason": "not_in_current_roster"
-        }
-      ],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
       "validatedForwardLines": 4,
-      "validatedDefensePairs": 2,
+      "validatedDefensePairs": 3,
       "accepted": true
     },
     "senators": {
@@ -124,8 +106,8 @@
     "sharks": {
       "team": "SJS",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-15T22:30:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/nashville-predators-san-jose-sharks-game-preview-november-15-2026",
+      "candidatePublishedAt": "2026-11-15T18:24:23.483000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -154,8 +136,8 @@
     "canucks": {
       "team": "VAN",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-15T22:30:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/vancouver-canucks-vegas-golden-knights-game-preview-november-15-2026",
+      "candidatePublishedAt": "2026-11-15T19:32:08.037000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",

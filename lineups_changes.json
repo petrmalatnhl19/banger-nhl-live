@@ -355,66 +355,40 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "canadiens": {
-      "updatedAt": "2026-11-14T19:10:09.678106+00:00",
-      "previousPublishedAt": "2026-11-12T17:55:39.979000+00:00",
-      "publishedAt": "2026-11-14T18:59:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-16T18:05:00.859766+00:00",
+      "previousPublishedAt": "2026-11-14T18:36:00+00:00",
+      "publishedAt": "2026-11-16T17:29:00+00:00",
+      "source": "https://www.nhl.com/news/montreal-canadiens-new-york-rangers-game-preview-november-16-2026",
       "events": [
         {
-          "type": "moved",
-          "player": "Zachary Bolduc",
-          "from": "Útok 3",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Phillip Danault",
-          "from": "Útok 3",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Alexandre Texier",
-          "from": "Útok 3",
-          "to": "Útok 2"
+          "type": "added",
+          "player": "Owen Beck",
+          "to": "Útok 3"
         },
         {
           "type": "added",
-          "player": "Florian Xhekaj",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Jake Evans",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Josh Anderson",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Mike Matheson",
-          "from": "Obrana 3",
+          "player": "Alexandre Carrier",
           "to": "Obrana 2"
         },
         {
-          "type": "removed",
-          "player": "Chris Kreider",
-          "from": "Útok 2"
-        },
-        {
-          "type": "removed",
-          "player": "Alexandre Carrier",
-          "from": "Obrana 2"
-        },
-        {
-          "type": "removed",
+          "type": "added",
           "player": "Arber Xhekaj",
-          "from": "Obrana 3"
+          "to": "Obrana 3"
+        },
+        {
+          "type": "added",
+          "player": "Adam Engstrom",
+          "to": "Obrana 3"
+        },
+        {
+          "type": "removed",
+          "player": "Josh Anderson",
+          "from": "Útok 3"
+        },
+        {
+          "type": "removed",
+          "player": "Mike Matheson",
+          "from": "Obrana 2"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -867,44 +841,20 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "rangers": {
-      "updatedAt": "2026-11-11T18:27:52.044096+00:00",
-      "previousPublishedAt": "2026-11-09T18:29:30.340000+00:00",
-      "publishedAt": "2026-11-11T18:16:00.408000+00:00",
-      "source": "https://www.nhl.com/news/new-york-rangers-calgary-flames-game-preview-november-11-2026",
+      "updatedAt": "2026-11-16T18:05:00.859907+00:00",
+      "previousPublishedAt": "2026-11-13T20:00:20.196000+00:00",
+      "publishedAt": "2026-11-16T17:29:00+00:00",
+      "source": "https://www.nhl.com/news/montreal-canadiens-new-york-rangers-game-preview-november-16-2026",
       "events": [
         {
-          "type": "moved",
-          "player": "Pavel Dorofeyev",
-          "from": "Útok 3",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Noah Laba",
-          "from": "Útok 4",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Oliver Bjorkstrand",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Eeli Tolvanen",
-          "from": "Útok 3",
-          "to": "Útok 4"
+          "type": "added",
+          "player": "Matthew Robertson",
+          "to": "Obrana 3"
         },
         {
           "type": "added",
-          "player": "Glenn Gawdin",
-          "to": "Útok 4"
-        },
-        {
-          "type": "removed",
-          "player": "Matt Rempe",
-          "from": "Útok 4"
+          "player": "Scott Morrow",
+          "to": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
