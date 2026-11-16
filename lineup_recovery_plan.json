@@ -3,7 +3,7 @@
     "lineup_core_report.json",
     "lineup_rejections_report.json"
   ],
-  "incompleteTeams": 4,
+  "incompleteTeams": 5,
   "teams": [
     {
       "team": "blackhawks",
@@ -46,6 +46,17 @@
       "missingDefensePairs": 1,
       "source": "https://www.nhl.com/news/new-jersey-devils-washington-capitals-game-preview-november-14-2026",
       "publishedAt": "2026-11-14T18:01:55.213000+00:00",
+      "rejectedLines": [],
+      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
+    },
+    {
+      "team": "flames",
+      "status": "incomplete_projection",
+      "reason": "incomplete_source_or_no_validated_replacement",
+      "missingForwardLines": 1,
+      "missingDefensePairs": 0,
+      "source": "https://www.nhl.com/news/calgary-flames-anaheim-ducks-game-preview-november-15-2026",
+      "publishedAt": "2026-11-15T15:20:39.964000+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     }
