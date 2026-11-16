@@ -1,0 +1,27 @@
+name: Security local PostgreSQL permissions
+
+on:
+  pull_request:
+    paths:
+      - 'security/local/**'
+      - '.github/workflows/security-local-postgres.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic-postgres-permissions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify Docker Compose availability
+        run: |
+          docker --version
+          docker compose version
+      - name: Run isolated PostgreSQL privilege checks
+        run: bash security/local/verify.sh
+      - name: Stop local test database
+        if: always()
+        run: docker compose -f security/local/compose.yaml down -v --remove-orphans
