@@ -7,4 +7,4 @@
 5. Poslechni dohraný zápas s nájezdy a jeden s gólem v prodloužení. Zkontroluj, že nájezdy mají vlastní hlášky a nezvyšují počet střel na branku. U přesilovky s ověřitelnou změnou počtu bruslařů porovnej ohlášený začátek a návrat v pěti s událostmi NHL.
 6. Vyzkoušej **Pauza**, **Pokračovat**, **Zastavit**, změnu režimu a zavření detailu uprostřed hlášky. Po pauze může znovu začít rozečtená fráze. Po zavření detailu musí hlas utichnout. Pro kontrolu místního hlasu jde po načtení událostí vypnout připojení a spustit **Od začátku**.
 
-Přehrávání v automatickém Chromium testu používá řízenou náhradu Web Speech API. Kvalitu hlasu, reakci Android TTS a výslovnost ověří poslech na telefonu. Původní experimenty se Spotem popisují historické dokumenty VOICE-04 a VOICE-07.
+Přehrávání v automatickém Chromium testu používá řízenou náhradu Web Speech API. Kvalitu hlasu, reakci Android TTS a výslovnost ověří poslech na telefonu. Původní experiment se Spotem je v [Draft PR VOICE-07](https://github.com/petrmalatnhl19/banger-nhl-live/pull/270).
