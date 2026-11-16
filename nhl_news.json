@@ -1,6 +1,15 @@
 {
-  "updatedAt": "2026-11-16T18:04:12.767959+00:00",
+  "updatedAt": "2026-11-16T18:58:03.889911+00:00",
   "articles": [
+    {
+      "title": "Jágr by chtěl uspořádat dva rozlučkové zápasy Podle Deníku Sport je legendární útočník nakloněn konci kariéry. Rozloučit by se chtěl v létě před Světovým pohárem 16. lis 2026",
+      "url": "https://www.nhl.com/cs/news/jaromir-jagr-chce-usporadat-rozlucku",
+      "language": "cs",
+      "source": "NHL.com",
+      "headline": "Jágr by chtěl uspořádat dva rozlučkové zápasy",
+      "publishedAt": "2026-11-16T18:33:52.810000+00:00",
+      "description": "Podle Deníku Sport je legendární útočník nakloněn konci kariéry. Rozloučit by se chtěl v létě před Světovým pohárem"
+    },
     {
       "title": "Českou hvězdou týdne je Chytil Útočník Canucks vstřelil ve dvou zápasech dva góly. Druhou hvězdou je Hertl, třetí Chmelař 16. lis 2026",
       "url": "https://www.nhl.com/cs/news/ceskou-hvezdou-sedmeho-tydne-je-chytil",
@@ -11,15 +20,6 @@
       "publishedAt": "2026-11-16T14:57:04.620000+00:00"
     },
     {
-      "title": "McDavid dál řádí, tentokrát to poznal Vladař Nezastavitelný kapitán Oilers bodoval už ve 22. utkání, jeho tým porazil Philadelphii 5:2 16. lis 2026",
-      "url": "https://www.nhl.com/cs/news/mcdavid-opet-bodoval",
-      "language": "cs",
-      "source": "NHL.com",
-      "headline": "McDavid dál řádí, tentokrát to poznal Vladař",
-      "description": "Nezastavitelný kapitán Oilers bodoval už ve 22. utkání, jeho tým porazil Philadelphii 5:2",
-      "publishedAt": "2026-11-16T06:34:02.947000+00:00"
-    },
-    {
       "title": "Konečně odměna. Chytil slaví dvojitý zásah Canucks ukončili černou šňůru sedmi proher, český útočník se trefil poprvé od loňského října 16. lis 2026",
       "url": "https://www.nhl.com/cs/news/chytil-dvema-goly-rozjasal-canucks",
       "language": "cs",
@@ -27,6 +27,15 @@
       "headline": "Konečně odměna. Chytil slaví dvojitý zásah",
       "description": "Canucks ukončili černou šňůru sedmi proher, český útočník se trefil poprvé od loňského října",
       "publishedAt": "2026-11-16T07:12:13.660000+00:00"
+    },
+    {
+      "title": "McDavid dál řádí, tentokrát to poznal Vladař 16. lis 2026",
+      "url": "https://www.nhl.com/cs/news/mcdavid-opet-bodoval",
+      "language": "cs",
+      "source": "NHL.com",
+      "headline": "McDavid dál řádí, tentokrát to poznal Vladař",
+      "description": "Nezastavitelný kapitán Oilers bodoval už ve 22. utkání, jeho tým porazil Philadelphii 5:2",
+      "publishedAt": "2026-11-16T06:34:02.947000+00:00"
     },
     {
       "title": "Jde to i bez superhvězd. Colorado zazářilo v Montrealu 15. lis 2026",
@@ -65,15 +74,6 @@
       "publishedAt": "2026-11-15T14:11:11.101000+00:00"
     },
     {
-      "title": "Wild se radují: Starý dobrý Faber je zpět 15. lis 2026",
-      "url": "https://www.nhl.com/cs/news/faber-v-sezonnim-debutu-presvedcil",
-      "language": "cs",
-      "source": "NHL.com",
-      "headline": "Wild se radují: Starý dobrý Faber je zpět",
-      "description": "Hvězdný obránce má za sebou sezonní debut po zranění lebky. Bude ještě mnohem lepší, věří Quinn Hughes",
-      "publishedAt": "2026-11-15T19:10:29.211000+00:00"
-    },
-    {
       "title": "FORČEK: Kučerovovi nejde o peníze, ale o ocenění Slavomír Lener ve 38. dílu podcastu o dění v NHL, českých juniorech i o tom, jak s Babcockem sháněl 300 doutníků 05. lis 2026",
       "url": "https://www.nhl.com/cs/news/podcast-forcek-se-slavomirem-lenerem-o-kucerovovi-i-juniorech",
       "language": "cs",
@@ -99,6 +99,15 @@
       "headline": "FORČEK: Smysl mi dává Indianapolis, říká Kotalík o expanzi NHL",
       "description": "36. díl podcastu NHL.com/cs a Livesportu s někdejším útočníkem o útoku McDavida na rekord i rozšiřování NHL",
       "publishedAt": "2026-10-22T15:20:25.443000+00:00"
+    },
+    {
+      "title": "Wild se radují: Starý dobrý Faber je zpět 15. lis 2026",
+      "url": "https://www.nhl.com/cs/news/faber-v-sezonnim-debutu-presvedcil",
+      "language": "cs",
+      "source": "NHL.com",
+      "headline": "Wild se radují: Starý dobrý Faber je zpět",
+      "description": "Hvězdný obránce má za sebou sezonní debut po zranění lebky. Bude ještě mnohem lepší, věří Quinn Hughes",
+      "publishedAt": "2026-11-15T19:10:29.211000+00:00"
     },
     {
       "title": "Už 21! McDavid natáhl šňůru, ale hrdinou byl gólman 15. lis 2026",
@@ -290,13 +299,13 @@
       "publishedAt": "2026-11-12T09:01:08.500000+00:00"
     },
     {
-      "title": "Zbraň na přesilovky. Klapka znovu udeřil 12. lis 2026",
-      "url": "https://www.nhl.com/cs/news/klapka-se-golem-odmenil-za-sanci-v-presilovce",
-      "language": "cs",
+      "title": "Scheifele, Wallstedt, Ehlers named 3 Stars of Week Jets center, Wild goalie Wallstedt, Hurricanes forward Ehlers earn honors Nov 16, 2026",
+      "url": "https://www.nhl.com/news/topic/3-stars/scheifele-wallstedt-ehlers-named-nhl-3-stars-of-week-november-16-2026",
+      "language": "en",
       "source": "NHL.com",
-      "headline": "Zbraň na přesilovky. Klapka znovu udeřil",
-      "description": "Český útočník Calgary si užívá stále většího prostoru v početních výhodách. Našel svou identitu, těší kouče",
-      "publishedAt": "2026-11-12T08:46:20.598000+00:00"
+      "headline": "Scheifele leads 3 Stars of the Week, had eight points in three games",
+      "publishedAt": "2026-11-16T18:00:00+00:00",
+      "description": "Jets center, Wild goalie Wallstedt, Hurricanes forward Ehlers earn honors"
     },
     {
       "title": "On Tap: Original Six Series begins with Habs-Rangers New York home on anniversary of first game; Mammoth host Canucks led by defensemen Nov 16, 2026",
@@ -304,11 +313,11 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "NHL On Tap: Original Six Series begins with Canadiens-Rangers showdown",
-      "publishedAt": "2026-11-16T15:17:00+00:00",
-      "description": "New York home on anniversary of first game; Mammoth host Canucks led by defensemen"
+      "description": "New York home on anniversary of first game; Mammoth host Canucks led by defensemen",
+      "publishedAt": "2026-11-16T15:17:00+00:00"
     },
     {
-      "title": "Status Report: Cooley, Schmaltz questionable for Utah Rielly back at Maple Leafs practice; Boucher could make debut for Senators on Tuesday Nov 16, 2026",
+      "title": "Status Report: Cooley, Schmaltz questionable for Utah Nov 16, 2026",
       "url": "https://www.nhl.com/news/nhl-status-report-news-and-notes-november-16-2026",
       "language": "en",
       "source": "NHL.com",
@@ -349,8 +358,8 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "Stewart discusses new role as NHL Central Scouting director",
-      "publishedAt": "2026-11-16T05:00:00+00:00",
-      "description": "Former NHL forward talks going undrafted, finding identity, transitioning to current job"
+      "description": "Former NHL forward talks going undrafted, finding identity, transitioning to current job",
+      "publishedAt": "2026-11-16T05:00:00+00:00"
     },
     {
       "title": "Lundqvist scores goalie goal in alumni game Nov 15, 2026",
@@ -369,15 +378,6 @@
       "headline": "Fantasy hockey top 10 waiver wire pickups",
       "description": "Olofsson, Nikishin key returns; Samoskevich, Colton sneaky adds; podcast analysis",
       "publishedAt": "2026-11-09T14:00:00+00:00"
-    },
-    {
-      "title": "Levi’s ‘Gladiator’ pregame ritual endorsed by Crowe Nov 15, 2026",
-      "url": "https://www.nhl.com/news/topic/short-shifts/russell-crowe-gladiator-edmonton-oilers-devon-levi",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Levi channels 'Gladiator' with pregame ritual, gets Crowe's blessing",
-      "description": "Oilers goalie goes full Maximus before games to delight of Oscar-winning actor",
-      "publishedAt": "2026-11-15T20:33:00+00:00"
     },
     {
       "title": "Canucks defeat Golden Knights to end seven-game skid Nov 16, 2026",

@@ -394,83 +394,35 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "mammoth": {
-      "updatedAt": "2026-11-14T20:40:53.452222+00:00",
-      "previousPublishedAt": "2026-11-12T19:32:09.831000+00:00",
-      "publishedAt": "2026-11-14T20:11:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-16T18:58:56.784758+00:00",
+      "previousPublishedAt": "2026-11-14T19:19:00+00:00",
+      "publishedAt": "2026-11-14T19:19:00+00:00",
+      "source": "https://www.nhl.com/news/san-jose-sharks-utah-mammoth-game-preview-november-14-2026",
       "events": [
         {
-          "type": "moved",
-          "player": "Anders Lee",
-          "from": "Útok 3",
-          "to": "Útok 1"
-        },
-        {
-          "type": "moved",
-          "player": "Vincent Trocheck",
-          "from": "Útok 2",
-          "to": "Útok 1"
-        },
-        {
-          "type": "moved",
-          "player": "Daniil But",
-          "from": "Útok 1",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Barrett Hayton",
-          "from": "Útok 3",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Kailer Yamamoto",
-          "from": "Útok 3",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Michael Carcone",
-          "from": "Útok 4",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Jack McBain",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Lawson Crouse",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "removed",
-          "player": "Nick Schmaltz",
-          "from": "Útok 1"
-        },
-        {
-          "type": "removed",
+          "type": "added",
           "player": "Liam O’Brien",
-          "from": "Útok 4"
+          "to": "Útok 4"
         },
         {
-          "type": "removed",
+          "type": "added",
           "player": "Kevin Stenlund",
-          "from": "Útok 4"
+          "to": "Útok 4"
         },
         {
-          "type": "removed",
+          "type": "added",
+          "player": "Ben McCartney",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
           "player": "Artem Duda",
-          "from": "Obrana 3"
+          "to": "Obrana 3"
         },
         {
-          "type": "removed",
-          "player": "Nick DeSimone",
-          "from": "Obrana 3"
+          "type": "added",
+          "player": "Zac Jones",
+          "to": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

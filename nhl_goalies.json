@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-16T18:05:05.767101+00:00",
-  "rostersUpdatedAt": "2026-11-16T18:04:20.453364+00:00",
+  "updatedAt": "2026-11-16T18:59:01.655328+00:00",
+  "rostersUpdatedAt": "2026-11-16T18:58:11.850918+00:00",
   "projectionDate": "2026-11-16",
   "teamCount": 32,
   "goalieCount": 74,
@@ -123,9 +123,8 @@
       "team": "VAN",
       "teamKey": "canucks",
       "playerId": 8480947,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-16",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Leevi Meriläinen",
@@ -364,7 +363,7 @@
       "team": "UTA",
       "teamKey": "mammoth",
       "playerId": 8478872,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-16",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
