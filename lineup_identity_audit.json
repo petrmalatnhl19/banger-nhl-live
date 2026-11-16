@@ -1,16 +1,5 @@
 {
   "teams": {
-    "rangers": {
-      "players": [
-        {
-          "sourceName": "Matthew Roberson",
-          "expectedRole": "defense",
-          "sameSurnameInRoster": [],
-          "classification": "not_on_current_roster",
-          "automaticApproval": false
-        }
-      ]
-    },
     "mammoth": {
       "players": [
         {
