@@ -70,5 +70,8 @@ jobs:
       - name: Test signed archive checkpoint history (offline)
         run: node scripts/test_security63_archive_history.cjs
 
+      - name: Test durable archive history recovery (offline)
+        run: python3 .github/scripts/test-security-64-archive-recovery.py
+
       - name: Test immutable pregame refresh prototype (offline)
         run: python3 .github/scripts/test-security-35-pregame-refresh.py
