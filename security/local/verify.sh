@@ -129,12 +129,12 @@ db <<'SQL'
 BEGIN;
 CREATE TEMP TABLE nhl_core43_shadow_inputs (game_id bigint, side text);
 SELECT set_config('search_path','pg_temp,public',true);
-DO $
+DO $$
 DECLARE captured integer;
 BEGIN
   captured := public.capture_core43_shadow_inputs();
   IF captured IS NULL THEN RAISE EXCEPTION 'capture returned null'; END IF;
-END $;
+END $$;
 ROLLBACK;
 SQL
 db -Atqc "SELECT count(*) FROM public.nhl_core43_shadow_inputs WHERE game_id=23" | grep -qx '2'
@@ -143,12 +143,12 @@ db <<'SQL'
 BEGIN;
 ALTER FUNCTION public.capture_core43_shadow_inputs() SET search_path = pg_catalog, public, pg_temp;
 ALTER FUNCTION public.core43_capture_on_core42_insert() SET search_path = pg_catalog, public, pg_temp;
-DO $
+DO $$
 DECLARE captured integer;
 BEGIN
   captured := public.capture_core43_shadow_inputs();
   IF captured IS NULL THEN RAISE EXCEPTION 'hardened capture returned null'; END IF;
-END $;
+END $$;
 ROLLBACK;
 SQL
 db -Atqc "SELECT count(*) FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='public' AND p.proname IN ('capture_core43_shadow_inputs','core43_capture_on_core42_insert') AND p.proconfig @> ARRAY['search_path=public']::text[]" | grep -qx '2'
