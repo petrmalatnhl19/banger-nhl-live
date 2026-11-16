@@ -225,3 +225,6 @@ echo "SECURITY-12 local privilege and two real-view definition tests PASS"
 # SECURITY-36: isolated PostgreSQL append-only refresh and role checks.
 db -f /dev/stdin < security36.sql | grep -q 'PASS SECURITY-36 PostgreSQL append-only and permissions'
 echo 'PASS SECURITY-36 isolated PostgreSQL refresh tests'
+
+# SECURITY-37: concurrent connections against synthetic PostgreSQL only.
+bash security37-concurrency.sh
