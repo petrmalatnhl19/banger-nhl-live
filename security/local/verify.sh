@@ -228,3 +228,6 @@ echo 'PASS SECURITY-36 isolated PostgreSQL refresh tests'
 
 # SECURITY-37: concurrent connections against synthetic PostgreSQL only.
 bash security37-concurrency.sh
+
+# SECURITY-38: failed uncommitted writer and competing recovery transaction.
+bash security38-failover.sh
