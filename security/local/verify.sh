@@ -28,4 +28,17 @@ for role in anon authenticated; do
   for obj in nhl_core43_shadow_inputs core43_shadow_readiness_v1 core43_shadow_predictions_v1 core43_shadow_preview_v1; do check "$role" "$obj" f; done
   for obj in nhl_core42_status nhl_core43_public_schedule_evidence nhl_core_model_accuracy nhl_core_model_head_to_head nhl_core_model_trend nhl_prediction_archive; do check "$role" "$obj" t; done
 done
-echo "SECURITY-09 synthetic privilege tests PASS"
+# Execute SQL as the actual database role, not just catalog privilege inspection.
+for role in anon authenticated; do
+  db -Atqc "SET ROLE $role; SELECT pending_predictions FROM public.nhl_core42_status" | grep -qx '1'
+  db -Atqc "SET ROLE $role; SELECT away_team || '-' || home_team FROM public.nhl_core43_public_schedule_evidence" | grep -qx 'DAL-BOS'
+  # An internal view must reject actual role SELECT after remediation.
+  if db -Atqc "SET ROLE $role; SELECT * FROM public.core43_shadow_readiness_v1 LIMIT 1" >/dev/null 2>&1; then
+    echo "FAIL: $role can read internal readiness view"; exit 1
+  fi
+  if db -Atqc "SET ROLE $role; SELECT * FROM public.nhl_core43_shadow_inputs LIMIT 1" >/dev/null 2>&1; then
+    echo "FAIL: $role can read internal shadow table"; exit 1
+  fi
+  echo "PASS actual role SQL: $role public reads allowed, internal reads denied"
+done
+echo "SECURITY-12 local privilege and two real-view definition tests PASS"
