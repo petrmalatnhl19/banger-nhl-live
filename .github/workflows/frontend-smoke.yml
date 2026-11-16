@@ -19,8 +19,8 @@ jobs:
           node-version: '22'
       - name: UX-01 mobile Games filter regression
         run: node .github/scripts/test-ux-01-games.cjs
-      - name: Test VOICE-07 delivery profiles and audio assembly
-        run: node --test .github/scripts/test-voice-07.mjs
+      - name: Test VOICE-08 play-by-play and prioritization
+        run: node --test .github/scripts/test-voice-08.cjs
       - name: Validate local scripts and HTML entrypoint
         shell: bash
         run: |
@@ -121,8 +121,8 @@ jobs:
           echo $! > /tmp/banger-server.pid
       - name: Test STAB-05.14 LIVE monitoring with deterministic API fixture
         run: node .github/scripts/test-live-monitor.cjs
-      - name: Test VOICE-07 worker reuse, recovery and playback in Chromium
-        run: node .github/scripts/browser-voice-07.cjs
+      - name: Test VOICE-08 Android controls in Chromium
+        run: node .github/scripts/browser-voice-08.cjs
       - name: Test application startup in Chromium
         run: node .github/scripts/browser-smoke.cjs
       - name: Test UX-03 mobile Statistics search, sorting and categories
