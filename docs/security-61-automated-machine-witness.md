@@ -1,0 +1,5 @@
+# SECURITY-61 — Automated machine witness archive gate
+
+This standalone offline synthetic test binds a four-variant archived prediction from the real experimental `calculateShadow` function to a root-signed registry and a separately signed machine checkpoint containing both registry and archive hashes. The archive, registry and machine checkpoint are stored in separate local paths and reloaded. Negative cases reject a valid older registry, a tampered archive with recomputed digest, and a forged machine checkpoint. No human witnesses or approvals are involved.
+
+**Limits:** The machine is a local CI simulation, not a separate trusted service or public transparency log. Keys are ephemeral. The checkpoint has no independently protected monotonic history; rollback of all files remains possible if an attacker controls the machine-witness store. This is not an operational production integration, real publisher identity, or real-world time attestation. No Supabase or production CORE 4.2 writes, schedules, deployment or merge. Draft PR #274, **NO-GO**.
