@@ -21,6 +21,8 @@ jobs:
         run: node .github/scripts/test-ux-01-games.cjs
       - name: SECURITY-105 TV frontend migration regression (static)
         run: node .github/scripts/test-security-105-tv-frontend-regression.cjs
+      - name: SECURITY-126 signed snapshot integrity (offline)
+        run: node .github/scripts/test-security-126-signed-snapshot.cjs
       - name: SECURITY-125 timestamp provenance policy (offline)
         run: node .github/scripts/test-security-125-timestamp-provenance.cjs
       - name: SECURITY-124 integration isolation and NO-GO regression
