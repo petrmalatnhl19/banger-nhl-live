@@ -23,7 +23,7 @@ def verify(request,trust):
     if type(scope) is not str or not re.fullmatch(r"game:[0-9]{1,12}",scope) or type(epoch) is not int or not 0<epoch<2**53:return None
     cp=owner.checkpoint_bytes(request["checkpoint"])
     anchor=owner.anchor_bytes(request["anchor"])
-    if scope not in request["checkpoint"]["heads"] or request["anchor"]["epoch"]!=epoch or request["anchor"]["checkpoint_digest"]!=hashlib.sha256(cp).hexdigest():return None
+    if request["checkpoint"]["heads"].get(scope)!=epoch or request["anchor"]["epoch"]!=epoch or request["anchor"]["checkpoint_digest"]!=hashlib.sha256(cp).hexdigest():return None
     if not owner.signature_valid(cp,request["checkpoint_evidence"],trust["checkpoint_keys"],trust["checkpoint_active"],trust.get("checkpoint_revoked",[])):return None
     if not owner.signature_valid(anchor,request["anchor_evidence"],trust["anchor_keys"],trust["anchor_active"],trust.get("anchor_revoked",[])):return None
     # Receipt is bound to the entire signed envelope, not just client-selected request_id.
