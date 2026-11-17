@@ -92,5 +92,5 @@ def tests():
 
 if __name__=="__main__":
     if len(sys.argv)==6 and sys.argv[1]=="worker":
-        sys.exit(0 if worker(*sys.argv[2:]) else 1)
+        sys.exit(0 if worker(sys.argv[2],sys.argv[3],int(sys.argv[4]),sys.argv[5]) else 1)
     tests()
