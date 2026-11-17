@@ -149,3 +149,6 @@ jobs:
 
       - name: Verify SECURITY-139 signed anchor register gate (offline)
         run: node .github/scripts/test-security-139-verified-anchor-register.cjs
+
+      - name: Verify SECURITY-140 signed transaction owner (offline)
+        run: python3 .github/scripts/test-security-140-transaction-owner.py
