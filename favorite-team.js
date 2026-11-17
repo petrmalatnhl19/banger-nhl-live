@@ -882,8 +882,7 @@
       accent-color:var(--fan-accent);
     }
     @media(max-width:600px) {
-      header.top .fan-arena-toggle {position:absolute;top:100%;right:0;margin:3px 0;font-size:10px;padding:4px 7px}
-      header.top .fan-team-picker[open] .fan-arena-toggle {display:none}
+      header.top .fan-team-picker[open] .fan-arena-toggle {position:relative;top:auto;right:auto;margin:6px 0 0;font-size:11px;padding:7px 10px}
     }
     @media(prefers-reduced-motion:reduce) {
       body[data-fan-arena="on"] *,body[data-fan-arena="on"] *::before,
