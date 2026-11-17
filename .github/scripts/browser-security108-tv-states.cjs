@@ -55,7 +55,7 @@ async function scenario(mode){
    assert.deepEqual(await cells("CORE 4.3 · ověřený"),visible?["1,25","2,50"]:["—","—"]);
    assert.deepEqual(await cells("CORE 4.3 · náhled"),visible?["2,75","3,50"]:["—","—"]);
    assert.deepEqual(await cells("GSAx / 100 · vstup"),visible?["1,50","2,25"]:["—","—"]);
-   assert.equal(await table.locator("select option").count(),1);
+   assert.equal(await table.getByText("CORE 4.2 · góly",{exact:true}).count(),1);
   }
   assert.deepEqual(errors,[]);
   assert.ok(paths.includes("nhl_prediction_archive"));
