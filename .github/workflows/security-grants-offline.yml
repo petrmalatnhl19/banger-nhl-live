@@ -128,3 +128,6 @@ jobs:
 
       - name: Verify SECURITY-132 bound signed snapshot and replay chain (offline)
         run: node .github/scripts/test-security-132-bound-chain.cjs
+
+      - name: Verify SECURITY-133 adversarial bound replay chain (offline)
+        run: node .github/scripts/test-security-133-adversarial-chain.cjs
