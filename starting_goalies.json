@@ -1,14 +1,23 @@
 {
   "date": "2026-11-17",
-  "updatedAt": "2026-11-17T00:20:26.943602+00:00",
+  "updatedAt": "2026-11-17T01:42:35.333079+00:00",
   "teams": {
+    "PHI": {
+      "name": "Dan Vladar",
+      "status": "projected",
+      "date": "2026-11-17",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-17T01:42:35.333079+00:00",
+      "gameId": 2026020337
+    },
     "NSH": {
       "name": "Juuse Saros",
       "status": "projected",
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T00:20:26.943602+00:00",
+      "checkedAt": "2026-11-17T01:42:35.333079+00:00",
       "gameId": 2026020340
     },
     "DAL": {
@@ -17,7 +26,7 @@
       "date": "2026-11-17",
       "source": "https://www.nhl.com/news/florida-panthers-dallas-stars-game-preview-november-15-2026",
       "sourceLabel": "NHL.com projected lineup",
-      "checkedAt": "2026-11-17T00:20:24.371429+00:00",
+      "checkedAt": "2026-11-17T01:42:33.123546+00:00",
       "evidence": "first_listed_goalie",
       "sourcePublishedAt": "2026-11-15T22:34:00+00:00"
     },
@@ -27,18 +36,9 @@
       "date": "2026-11-17",
       "source": "https://www.nhl.com/news/vancouver-canucks-vegas-golden-knights-game-preview-november-15-2026",
       "sourceLabel": "NHL.com projected lineup",
-      "checkedAt": "2026-11-17T00:20:24.371439+00:00",
+      "checkedAt": "2026-11-17T01:42:33.123574+00:00",
       "evidence": "first_listed_goalie",
       "sourcePublishedAt": "2026-11-15T19:32:08.037000+00:00"
-    },
-    "PHI": {
-      "name": "Dan Vladar",
-      "status": "projected",
-      "date": "2026-11-17",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T00:20:26.943602+00:00",
-      "gameId": 2026020337
     },
     "BOS": {
       "name": "Jeremy Swayman",
@@ -46,7 +46,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T00:20:26.943602+00:00",
+      "checkedAt": "2026-11-17T01:42:35.333079+00:00",
       "gameId": 2026020333
     },
     "BUF": {
@@ -55,7 +55,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T00:20:26.943602+00:00",
+      "checkedAt": "2026-11-17T01:42:35.333079+00:00",
       "gameId": 2026020337
     },
     "CBJ": {
@@ -64,7 +64,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T00:20:26.943602+00:00",
+      "checkedAt": "2026-11-17T01:42:35.333079+00:00",
       "gameId": 2026020336
     },
     "CHI": {
@@ -73,7 +73,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T00:20:26.943602+00:00",
+      "checkedAt": "2026-11-17T01:42:35.333079+00:00",
       "gameId": 2026020338
     },
     "LAK": {
@@ -82,7 +82,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T00:20:26.943602+00:00",
+      "checkedAt": "2026-11-17T01:42:35.333079+00:00",
       "gameId": 2026020333
     },
     "MIN": {
@@ -91,7 +91,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T00:20:26.943602+00:00",
+      "checkedAt": "2026-11-17T01:42:35.333079+00:00",
       "gameId": 2026020340
     },
     "NYI": {
@@ -100,7 +100,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T00:20:26.943602+00:00",
+      "checkedAt": "2026-11-17T01:42:35.333079+00:00",
       "gameId": 2026020336
     },
     "OTT": {
@@ -109,7 +109,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T00:20:26.943602+00:00",
+      "checkedAt": "2026-11-17T01:42:35.333079+00:00",
       "gameId": 2026020341
     },
     "STL": {
@@ -118,7 +118,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T00:20:26.943602+00:00",
+      "checkedAt": "2026-11-17T01:42:35.333079+00:00",
       "gameId": 2026020339
     },
     "TBL": {
@@ -127,7 +127,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T00:20:26.943602+00:00",
+      "checkedAt": "2026-11-17T01:42:35.333079+00:00",
       "gameId": 2026020334
     },
     "TOR": {
@@ -136,7 +136,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T00:20:26.943602+00:00",
+      "checkedAt": "2026-11-17T01:42:35.333079+00:00",
       "gameId": 2026020338
     },
     "WPG": {
@@ -145,7 +145,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T00:20:26.943602+00:00",
+      "checkedAt": "2026-11-17T01:42:35.333079+00:00",
       "gameId": 2026020341
     },
     "WSH": {
@@ -154,7 +154,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T00:20:26.943602+00:00",
+      "checkedAt": "2026-11-17T01:42:35.333079+00:00",
       "gameId": 2026020334
     }
   },
