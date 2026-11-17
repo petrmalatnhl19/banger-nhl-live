@@ -23,7 +23,11 @@ def client(path,payload):
         conn.connect(path)
         conn.sendall(payload)
         conn.shutdown(socket.SHUT_WR)
-        try:\n            return conn.recv(1024)\n        except ConnectionResetError:\n            # A rejected oversized request can reset the connection on Linux.\n            return b""
+        try:
+            return conn.recv(1024)
+        except ConnectionResetError:
+            # A rejected oversized request can reset the connection on Linux.
+            return b""
 
 def run():
     now=[0.0]
