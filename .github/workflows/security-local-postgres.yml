@@ -22,6 +22,8 @@ jobs:
           docker compose version
       - name: Run isolated PostgreSQL privilege checks
         run: bash security/local/verify.sh
+      - name: Verify transactional grants rollback (SECURITY-69)
+        run: bash security/local/security69-transaction-rollback.sh
       - name: Diagnose PostgreSQL initialization failure
         if: failure()
         run: docker compose -f security/local/compose.yaml logs --no-color postgres
