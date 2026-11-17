@@ -93,3 +93,6 @@ jobs:
 
       - name: Test simulated public API responses (SECURITY-98, loopback only)
         run: node .github/scripts/test-security-98-api-fixture.cjs
+
+      - name: Enforce SECURITY-100 migration NO-GO gate (offline)
+        run: node .github/scripts/test-security-100-rollout-gate.cjs
