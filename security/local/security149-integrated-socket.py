@@ -50,7 +50,7 @@ def bounded(db,trust,operation,request,remaining,delay=0):
             try:proc.communicate(timeout=0.5)
             except subprocess.TimeoutExpired:pass
 
-def handle(conn,db,trust,allowed_uids,gate,lifetime=MAX_LIFETIME,delay=0,clock=time.monotonic):
+def handle(conn,db,trust,allowed_uids,gate,lifetime=MAX_LIFETIME,delay=0,clock=time.monotonic,accepted_at=None):
     """Bound receive, signed child operation and response by one deadline."""
     with conn:
         admitted=False
@@ -58,7 +58,8 @@ def handle(conn,db,trust,allowed_uids,gate,lifetime=MAX_LIFETIME,delay=0,clock=t
             _,uid,_=pool.base.peer.peer_identity(conn)
             if uid not in allowed_uids or not gate.acquire(uid):return "rejected"
             admitted=True
-            deadline=clock()+lifetime
+            deadline=(clock() if accepted_at is None else accepted_at)+lifetime
+            if clock()>=deadline:return "unknown"
             data=bytearray()
             while True:
                 remaining=deadline-clock()
