@@ -16,7 +16,15 @@ const { chromium } = require("playwright");
         const picker = page.locator("header.top .fan-team-picker");
         await picker.waitFor({ state: "attached" });
         const summary = picker.locator("summary");
-        assert.match(await summary.innerText(), /Můj tým/);
+        assert.equal(await summary.getAttribute("aria-label"), "Změnit oblíbený tým NHL");
+        const headerLayout = await page.locator("header.top").evaluate(el => ({
+          height:el.getBoundingClientRect().height,
+          logoTop:el.querySelector(".brand").getBoundingClientRect().top,
+          pickerTop:el.querySelector(".fan-team-picker").getBoundingClientRect().top,
+          languageTop:el.querySelector("#bangerLanguageBox")?.getBoundingClientRect().top
+        }));
+        assert(Math.abs(headerLayout.logoTop - headerLayout.pickerTop) < 25, "Logo and team picker share a row");
+        if (headerLayout.languageTop != null) assert(Math.abs(headerLayout.logoTop - headerLayout.languageTop) < 25, "Language selector shares row");
         await summary.click();
         // FAN-12: the new searchable gallery replaces the visible native select.
         const gallery = picker.locator(".fan-team-gallery");
@@ -34,7 +42,7 @@ const { chromium } = require("playwright");
         assert.equal(await gallery.locator(".fan-team-choice").count(), 1, "Team search filters choices");
         await gallery.locator(".fan-team-choice").click();
         assert.equal(await page.locator("body").getAttribute("data-fan-team"), "DAL");
-        assert.match(await summary.innerText(), /Dallas Stars/);
+        assert.equal(await summary.locator("img.fan-header-club-logo").getAttribute("alt"), "Dallas Stars");
         assert.equal(await page.evaluate(() => localStorage.getItem("banger-favorite-team-v1")), "DAL");
         assert.equal(await page.evaluate(() => getComputedStyle(document.body).getPropertyValue("--fan-accent").trim().toUpperCase()), "#8FCEAE");
         const themed = await page.evaluate(() => {

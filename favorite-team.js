@@ -83,7 +83,7 @@
     select.addEventListener('change', () => {
       try { if (select.value) localStorage.setItem(KEY, select.value); else localStorage.removeItem(KEY); } catch (_) {}
       apply(select.value);
-      summary.textContent = selected ? '⭐ ' + byCode.get(selected)[1] : '⭐ Můj tým';
+      if (!section.dataset.fanLogoHeader) summary.textContent = selected ? '⭐ ' + byCode.get(selected)[1] : '⭐ Můj tým';
       section.open = false;
     });
     section.append(label, select);
@@ -573,4 +573,95 @@
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',installShortScreenStatsReveal,{once:true});
   else installShortScreenStatsReveal();
+  /* FAN-15: one-row mobile header: brand | selected club logo | language flag. */
+  function mountCompactHeader() {
+    const header = document.querySelector('header.top');
+    if (!header) return;
+    const picker = header.querySelector('.fan-team-picker');
+    if (picker && !picker.dataset.fanLogoHeader) {
+      picker.dataset.fanLogoHeader = '1';
+      const summary = picker.querySelector('summary');
+      if (summary) {
+        summary.setAttribute('aria-label','Změnit oblíbený tým NHL');
+        function renderHeaderLogo() {
+          summary.replaceChildren();
+          const img = document.createElement('img');
+          img.className = 'fan-header-club-logo';
+          img.alt = selected ? byCode.get(selected)[1] : '';
+          img.src = selected
+            ? 'https://assets.nhle.com/logos/nhl/svg/' + selected + '_light.svg'
+            : '';
+          img.hidden = !selected;
+          const fallback = document.createElement('span');
+          fallback.className = 'fan-header-club-fallback';
+          fallback.textContent = selected ? byCode.get(selected)[0] : '★';
+          fallback.hidden = !!selected;
+          img.addEventListener('error', () => {img.hidden = true; fallback.hidden = false;});
+          const sr = document.createElement('span');
+          sr.className = 'fan-header-sr';
+          sr.textContent = selected ? byCode.get(selected)[1] : 'Vybrat tým';
+          summary.append(img,fallback,sr);
+        }
+        document.addEventListener('banger:favorite-team-change',renderHeaderLogo);
+        renderHeaderLogo();
+      }
+    }
+    const language = document.getElementById('bangerLanguageBox');
+    if (language && !language.dataset.fanFlagHeader) {
+      language.dataset.fanFlagHeader = '1';
+      const flag = document.createElement('span');
+      flag.className = 'fan-header-language-flag';
+      flag.setAttribute('aria-hidden','true');
+      const select = language.querySelector('select');
+      function updateFlag() { flag.textContent = select && select.value === 'en' ? '🇬🇧' : '🇨🇿'; }
+      updateFlag();
+      if (select) select.addEventListener('change',updateFlag);
+      language.appendChild(flag);
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',mountCompactHeader,{once:true});
+  else mountCompactHeader();
+  document.addEventListener('banger:favorite-team-change',mountCompactHeader);
+  if (typeof MutationObserver !== 'undefined') {
+    const observer = new MutationObserver(() => {
+      mountCompactHeader();
+      if (document.querySelector('header.top #bangerLanguageBox')?.dataset.fanFlagHeader) observer.disconnect();
+    });
+    observer.observe(document.documentElement,{childList:true,subtree:true});
+  }
+  style.textContent += `
+    .fan-header-sr{position:absolute!important;width:1px;height:1px;padding:0;
+      margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .fan-header-club-logo{display:block;width:55px;height:48px;object-fit:contain}
+    .fan-header-club-logo[hidden],.fan-header-club-fallback[hidden]{display:none!important}
+    .fan-header-club-fallback{font-size:22px;font-weight:900;color:#fff}
+    @media(max-width:600px) {
+      header.top{
+        display:grid!important;grid-template-columns:minmax(0,1fr) 72px minmax(0,1fr)!important;
+        grid-template-rows:auto!important;gap:6px!important;
+        align-items:center!important;min-height:74px!important;padding:8px 12px!important;
+      }
+      header.top .brand{grid-column:1!important;grid-row:1!important;max-width:100%!important;
+        min-width:0!important;justify-self:start!important}
+      header.top .fan-team-picker{grid-column:2!important;grid-row:1!important;
+        width:72px!important;max-width:72px!important;margin:0!important;justify-self:center!important}
+      header.top .fan-team-picker summary{display:flex!important;align-items:center!important;
+        justify-content:center!important;width:72px!important;max-width:72px!important;
+        height:60px!important;min-height:60px!important;padding:4px!important;
+        box-sizing:border-box!important;overflow:hidden!important;border-radius:13px!important;
+        background:color-mix(in srgb,var(--fan-accent,#79e8ff) 12%,#10283f)!important}
+      header.top #bangerLanguageBox{grid-column:3!important;grid-row:1!important;
+        justify-self:end!important;position:relative!important;
+        width:52px!important;height:48px!important;padding:0!important;
+        box-sizing:border-box!important;display:flex!important;align-items:center!important;
+        justify-content:center!important}
+      header.top #bangerLanguageBox label{display:none!important}
+      header.top #bangerLanguageBox select{position:absolute!important;inset:0!important;
+        width:100%!important;height:100%!important;opacity:0!important;cursor:pointer!important;
+        z-index:2!important}
+      .fan-header-language-flag{font-size:26px;line-height:1}
+      header.top .header-status{display:none!important}
+      body[data-fan-team] header.top{border-bottom:2px solid var(--fan-accent)!important}
+    }
+  `;
 })();
