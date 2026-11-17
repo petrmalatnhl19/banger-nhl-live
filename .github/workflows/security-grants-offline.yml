@@ -87,3 +87,6 @@ jobs:
 
       - name: Test minimal CORE 4.3 TV publication contract (SECURITY-95, offline)
         run: node .github/scripts/test-security-95-public-contract.cjs
+
+      - name: Test adversarial CORE 4.3 publication contract (SECURITY-96, offline)
+        run: node .github/scripts/test-security-96-adversarial-contract.cjs
