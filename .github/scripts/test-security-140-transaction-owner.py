@@ -47,6 +47,9 @@ def rows(db):
 
 def worker(arg):return s.submit(**arg)
 
+def crash_worker(arg):
+    return s.submit(**{**arg,"crash":True})
+
 def run():
     with tempfile.TemporaryDirectory(prefix="security140-") as d:
         db=str(Path(d)/"register.sqlite3");keys=setup(d)
@@ -71,7 +74,7 @@ def run():
         assert sum(results)==1,"only one concurrent signed update can commit"
         assert rows(db)[0][1]==2
         three=args(d,db,keys,3)
-        crash=mp.Process(target=s.submit,kwargs={**three,"crash":True})
+        crash=mp.Process(target=crash_worker,args=(three,))
         crash.start();crash.join(20)
         assert crash.exitcode==19
         assert rows(db)[0][1]==2,"crashed transaction must roll back"
