@@ -140,3 +140,6 @@ jobs:
 
       - name: Verify SECURITY-136 signed backup checkpoint (offline)
         run: node .github/scripts/test-security-136-signed-checkpoint.cjs
+
+      - name: Verify SECURITY-137 independent latest checkpoint anchor (offline)
+        run: node .github/scripts/test-security-137-independent-anchor.cjs
