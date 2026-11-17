@@ -2,6 +2,7 @@
 """SECURITY-149 offline socket-to-receipt integration; no production use."""
 import importlib.util
 import json
+import signal
 import os
 from pathlib import Path
 import socket
@@ -37,12 +38,17 @@ def bounded(db,trust,operation,request,remaining,delay=0):
         value=json.loads(output)
         return value if value in ("committed","replayed","rejected","unknown") else "unknown"
     except (subprocess.TimeoutExpired,OSError,ValueError):
-        proc.kill()
-        proc.communicate()
+        try:os.killpg(proc.pid,signal.SIGKILL)
+        except ProcessLookupError:pass
+        try:proc.communicate(timeout=0.5)
+        except subprocess.TimeoutExpired:pass
         return "unknown"
     finally:
         if proc.poll() is None:
-            proc.kill();proc.communicate()
+            try:os.killpg(proc.pid,signal.SIGKILL)
+            except ProcessLookupError:pass
+            try:proc.communicate(timeout=0.5)
+            except subprocess.TimeoutExpired:pass
 
 def handle(conn,db,trust,allowed_uids,gate,lifetime=MAX_LIFETIME,delay=0,clock=time.monotonic):
     """Bound receive, signed child operation and response by one deadline."""
