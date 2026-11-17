@@ -143,3 +143,6 @@ jobs:
 
       - name: Verify SECURITY-137 independent latest checkpoint anchor (offline)
         run: node .github/scripts/test-security-137-independent-anchor.cjs
+
+      - name: Verify SECURITY-138 anchor register contention and recovery (offline)
+        run: python3 .github/scripts/test-security-138-anchor-register.py
