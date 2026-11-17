@@ -31,7 +31,7 @@ REVOKE ALL ON TABLE public.nhl_core43_shadow_inputs,
 REVOKE INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER
  ON TABLE public.nhl_core42_status FROM PUBLIC,anon,authenticated;
 -- Restore every missing ACL entry, retaining grantor, grantee and grant-option semantics.
--- In this fixture all grants originate from postgres, the database owner.
+-- In this fixture all grants originate from the local database owner.
 DO $$
 DECLARE x record;
 BEGIN
@@ -44,7 +44,7 @@ BEGIN
      AND a.is_grantable=b.is_grantable)
   ORDER BY object_name,grantee,privilege_type
  LOOP
-  IF x.grantor <> (SELECT oid FROM pg_roles WHERE rolname='postgres') THEN
+  IF x.grantor <> (SELECT oid FROM pg_roles WHERE rolname=current_user) THEN
    RAISE EXCEPTION 'unsupported grantor in synthetic fixture';
   END IF;
   EXECUTE format('GRANT %s ON TABLE public.%I TO %s%s',
