@@ -129,7 +129,6 @@
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',watchStats,{once:true});
   else watchStats();
-}
   /* FAN-04: decorate existing game and news cards without altering NHL feeds. */
   style.textContent += `
     body[data-fan-team] .game.fan-favorite-card,
