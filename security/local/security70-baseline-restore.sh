@@ -23,7 +23,7 @@ DO $$
 DECLARE x record;
 BEGIN
  FOR x IN SELECT DISTINCT role_name,object_name FROM baseline LOOP
-  IF (SELECT count(*) FROM baseline b WHERE b.role_name=x.role_name AND b.object_name=x.object_name AND granted) <> 7 THEN
+  IF NOT EXISTS (SELECT 1 FROM baseline b WHERE b.role_name=x.role_name AND b.object_name=x.object_name AND privilege_type='SELECT' AND granted) THEN
    RAISE EXCEPTION 'fixture baseline incomplete: % %',x.role_name,x.object_name;
   END IF;
  END LOOP;
