@@ -6,13 +6,17 @@ import multiprocessing as mp
 import os
 from pathlib import Path
 import socket
+import sys
 import sqlite3
 import tempfile
 import time
 
 def load(name,path):
     spec=importlib.util.spec_from_file_location(name,path)
-    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);return module
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[name]=module
+    spec.loader.exec_module(module)
+    return module
 
 s=load("s147","security/local/security147-lifetime-owner.py")
 fixtures=load("fixtures140",".github/scripts/test-security-140-transaction-owner.py")
