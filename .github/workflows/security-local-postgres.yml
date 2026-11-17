@@ -1,6 +1,8 @@
 name: Security local PostgreSQL permissions
 
 on:
+  push:
+    branches: [security-01-public-grants-review]
   pull_request:
     paths:
       - 'security/local/**'
