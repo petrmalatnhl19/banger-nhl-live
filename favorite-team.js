@@ -546,4 +546,31 @@
       }
     }
   `;
+  /* FAN-14: on short screens, reveal the first statistics row above fixed nav.
+     Only runs after the user explicitly opens the Statistics tab. */
+  function installShortScreenStatsReveal() {
+    const nav = document.getElementById('uxMobileNav');
+    if (!nav || nav.dataset.fanStatsReveal) return;
+    nav.dataset.fanStatsReveal = '1';
+    nav.addEventListener('click', event => {
+      if (!event.target.closest('[data-ux-tab="skaters"]') || window.innerHeight > 600) return;
+      let attempts = 0;
+      function reveal() {
+        const row = document.querySelector('#content .stats-tablewrap tbody tr');
+        const bar = document.getElementById('uxMobileNav');
+        if (!row || !bar) {
+          if (++attempts < 40) requestAnimationFrame(reveal);
+          return;
+        }
+        const bottom = row.getBoundingClientRect().bottom;
+        const top = bar.getBoundingClientRect().top;
+        if (bottom > top - 10) {
+          window.scrollBy({top:Math.ceil(bottom - top + 18),behavior:'instant'});
+        }
+      }
+      requestAnimationFrame(reveal);
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',installShortScreenStatsReveal,{once:true});
+  else installShortScreenStatsReveal();
 })();
