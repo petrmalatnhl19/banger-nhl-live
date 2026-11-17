@@ -93,4 +93,41 @@
   window.BangerFavoriteTeam = Object.freeze({get:() => selected, teams:TEAMS.map(([code,name])=>({code,name}))});
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount, {once:true});
   else mount();
+}
+  /* FAN-03: highlight matching players in the existing skater/goalie tables.
+     Keep the original ranking and sorting untouched. */
+  style.textContent += `
+    body[data-fan-team] .stats-tablewrap tbody tr.fan-favorite-row {
+      background:color-mix(in srgb,var(--fan-accent) 17%,transparent);
+      box-shadow:inset 3px 0 var(--fan-accent);
+    }
+    body[data-fan-team] .stats-tablewrap tbody tr.fan-favorite-row td:nth-child(2) .playerlink {
+      color:var(--fan-accent);font-weight:750;
+    }
+    @media(forced-colors:active) {
+      body[data-fan-team] .stats-tablewrap tbody tr.fan-favorite-row {outline:2px solid Highlight}
+    }
+  `;
+  function markFavoriteStats() {
+    const root=document.getElementById('content');
+    if(!root)return;
+    const team=selected;
+    root.querySelectorAll('.stats-tablewrap tbody tr').forEach(row=>{
+      const teamCell=row.cells?.[2];
+      const codes=(teamCell?.textContent||'').toUpperCase().split(/[^A-Z]+/).filter(Boolean);
+      const match=Boolean(team&&codes.includes(team));
+      row.classList.toggle('fan-favorite-row',match);
+      if(match)row.setAttribute('aria-label','Hráč oblíbeného týmu '+byCode.get(team)[1]);
+      else row.removeAttribute('aria-label');
+    });
+  }
+  document.addEventListener('banger:favorite-team-change',markFavoriteStats);
+  function watchStats() {
+    const root=document.getElementById('content');
+    if(!root)return;
+    new MutationObserver(markFavoriteStats).observe(root,{childList:true,subtree:true});
+    markFavoriteStats();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',watchStats,{once:true});
+  else watchStats();
 })();
