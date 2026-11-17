@@ -9,7 +9,11 @@ function fixture(saved='') {
   const make = tag => ({
     tagName:tag,children:[],classList:classes(),style:{setProperty(){},removeProperty(){}},
     dataset:{},attributes:{},appendChild(child){this.children.push(child);},
+    prepend(child){this.children.unshift(child);},
+    querySelector(){return null;},
+    insertAdjacentElement(position,child){if(position==='afterend')this.children.push(child);},
     append(...children){this.children.push(...children);},
+    prepend(...children){this.children.unshift(...children);},
     addEventListener(name,fn){this['on'+name]=fn;},
     setAttribute(name,value){this.attributes[name]=value;},
     removeAttribute(name){delete this.attributes[name];},
@@ -27,7 +31,7 @@ function fixture(saved='') {
     readyState:'loading',body,head,
     createElement:make,
     querySelector(selector){return selector==='header.top'?header:null;},
-    getElementById(id){return id==='content'?content:null;},
+    getElementById(id){if(id==='content')return content; if(id==='fanTeamIdentity')return header.children.find(x=>x.id==='fanTeamIdentity')||null;return null;},
     addEventListener(name,fn){listeners.set(name,fn);},
     dispatchEvent(event){if(listeners.has(event.type))listeners.get(event.type)(event);},
   };
