@@ -87,6 +87,67 @@
       section.open = false;
     });
     section.append(label, select);
+    /* FAN-12: accessible searchable team gallery; native select remains as fallback. */
+    const gallery = document.createElement('div');
+    gallery.className = 'fan-team-gallery';
+    gallery.setAttribute('role', 'group');
+    gallery.setAttribute('aria-label', 'Vybrat oblíbený tým NHL');
+    const search = document.createElement('input');
+    search.type = 'search';
+    search.placeholder = 'Hledat tým NHL…';
+    search.setAttribute('aria-label', 'Hledat tým NHL');
+    const grid = document.createElement('div');
+    grid.className = 'fan-team-grid';
+    function renderTeams(query = '') {
+      grid.replaceChildren();
+      const filtered = TEAMS.filter(([code,name]) => (code + ' ' + name).toLocaleLowerCase().includes(query.toLocaleLowerCase().trim()));
+      for (const [code,name,color] of filtered) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'fan-team-choice';
+        button.style.setProperty('--choice-accent',color);
+        button.setAttribute('aria-pressed', String(selected === code));
+        const logo = document.createElement('img');
+        logo.src = 'https://assets.nhle.com/logos/nhl/svg/' + code + '_light.svg';
+        logo.alt = '';
+        logo.loading = 'lazy';
+        logo.addEventListener('error', () => { logo.hidden = true; });
+        const nameSpan = document.createElement('span');
+        nameSpan.textContent = name;
+        button.append(logo,nameSpan);
+        button.addEventListener('click', () => {
+          select.value = code;
+          select.dispatchEvent(new Event('change', {bubbles:true}));
+        });
+        grid.appendChild(button);
+      }
+      if (!filtered.length) {
+        const empty = document.createElement('p');
+        empty.textContent = 'Žádný tým nenalezen.';
+        grid.appendChild(empty);
+      }
+    }
+    search.addEventListener('input', () => renderTeams(search.value));
+    const reset = document.createElement('button');
+    reset.type = 'button';
+    reset.className = 'fan-team-reset';
+    reset.textContent = 'Bez oblíbeného týmu';
+    reset.addEventListener('click', () => {
+      select.value = '';
+      select.dispatchEvent(new Event('change', {bubbles:true}));
+    });
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.className = 'fan-team-close';
+    close.textContent = 'Zavřít ✕';
+    close.setAttribute('aria-label', 'Zavřít výběr týmu');
+    close.addEventListener('click', () => { section.open = false; });
+    gallery.append(close,search,grid,reset);
+    section.appendChild(gallery);
+    section.addEventListener('toggle', () => {
+      if (section.open) { search.value = ''; renderTeams(); }
+    });
+    renderTeams();
     header.appendChild(section);
     apply(selected);
   }
@@ -260,6 +321,43 @@
         outline:2px solid Highlight;
       }
     }
+  `;
+  /* FAN-12: full-height searchable picker and team-colored identity. */
+  style.textContent += `
+    header.top .fan-team-picker[open] label,
+    header.top .fan-team-picker[open] select {display:none!important}
+    header.top .fan-team-picker .fan-team-gallery{display:none}
+    header.top .fan-team-picker[open] .fan-team-gallery{
+      display:flex;flex-direction:column;gap:12px;
+      position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);
+      box-sizing:border-box;width:min(94vw,560px);max-height:min(80dvh,720px);
+      padding:18px;border:2px solid var(--fan-accent,#79e8ff);
+      border-radius:20px;background:#081b31;color:#fff;z-index:105;
+      box-shadow:0 18px 65px #000b;
+    }
+    .fan-team-gallery input{flex:0 0 auto;width:100%;min-height:48px;
+      padding:12px 15px;border-radius:12px;border:1px solid #62819a;
+      background:#102b48;color:#fff;font-size:16px}
+    .fan-team-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:9px;overflow-y:auto;min-height:0;padding:2px;overscroll-behavior:contain}
+    .fan-team-choice{display:flex;align-items:center;gap:10px;text-align:left;
+      min-height:64px;padding:9px;border:1px solid #345570;border-left:4px solid var(--choice-accent);
+      border-radius:12px;background:#112b47;color:#fff;font:700 12px system-ui;cursor:pointer}
+    .fan-team-choice img{width:36px;height:36px;object-fit:contain;flex:0 0 36px}
+    .fan-team-choice[aria-pressed="true"]{background:color-mix(in srgb,var(--choice-accent) 30%,#112b47);
+      border-color:var(--choice-accent)}
+    .fan-team-close,.fan-team-reset{min-height:40px;border:1px solid #53738c;
+      border-radius:10px;background:#173752;color:#fff;font:700 13px system-ui}
+    .fan-team-close{align-self:flex-end;padding:8px 14px}
+    .fan-team-reset{flex:0 0 auto}
+    body[data-fan-team] .dash-game.fan-favorite-card,
+    body[data-fan-team] .game.fan-favorite-card{
+      border-left:5px solid var(--fan-accent)!important;
+      background:linear-gradient(105deg,color-mix(in srgb,var(--fan-accent) 19%,#0b2037),#0b2037 75%)!important
+    }
+    @media(max-width:390px){.fan-team-choice{min-height:60px;font-size:11px;gap:6px}
+      .fan-team-choice img{width:29px;height:29px;flex-basis:29px}}
+    @media(forced-colors:active){.fan-team-choice[aria-pressed="true"]{outline:2px solid Highlight}}
   `;
   /* FAN-10: more visible team identity and spacious mobile team selection. */
   style.textContent += `
