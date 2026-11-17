@@ -30,11 +30,11 @@ async function request(path, method = "GET", role) {
     assert.equal(Number(rows[0].core43_away), 2.2);
     for (const method of ["POST", "PATCH", "DELETE"]) {
       const denied = await request("security99_tv_public_v1?game_id=eq.1", method, role);
-      assert.equal(denied.status, 403, role + " " + method);
+      assert.equal(denied.status, role === "anon" ? 401 : 403, role + " " + method);
     }
     for (const object of ["nhl_core43_shadow_inputs","core43_shadow_predictions_v1","core43_shadow_preview_v1"]) {
       const denied = await request(object + "?select=*", "GET", role);
-      assert.equal(denied.status, 403, role + " internal " + object);
+      assert.equal(denied.status, role === "anon" ? 401 : 403, role + " internal " + object);
     }
   }
   assert.equal((await request("security99_tv_public_v1?select=*")).status, 200);
