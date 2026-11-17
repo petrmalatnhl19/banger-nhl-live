@@ -173,3 +173,6 @@ jobs:
 
       - name: Verify SECURITY-147 subprocess lifetime and SQLite lock bounds (offline)
         run: python3 .github/scripts/test-security-147-lifetime-owner.py
+
+      - name: Verify SECURITY-148 signed idempotency and reconciliation (offline)
+        run: python3 .github/scripts/test-security-148-idempotent-owner.py
