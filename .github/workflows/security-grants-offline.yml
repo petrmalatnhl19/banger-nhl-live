@@ -167,3 +167,6 @@ jobs:
 
       - name: Verify SECURITY-145 bounded signed socket writer (offline)
         run: python3 .github/scripts/test-security-145-bounded-writer.py
+
+      - name: Verify SECURITY-146 absolute deadline and bounded worker pool (offline)
+        run: python3 .github/scripts/test-security-146-deadline-workers.py
