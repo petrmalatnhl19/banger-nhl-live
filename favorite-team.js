@@ -32,6 +32,17 @@
     body[data-fan-team] .fan-team-picker strong{color:var(--fan-accent)}
     @media(max-width:390px){.fan-team-picker{font-size:11px}.fan-team-picker select{min-width:135px;max-width:185px}}
   `;
+  style.textContent += `
+    header.top{position:relative}
+    header.top .fan-team-picker{display:block;position:relative;margin:0;padding:0;border:0;flex:0 0 auto}
+    header.top .fan-team-picker summary{cursor:pointer;list-style:none;padding:7px 10px;border:1px solid #49748d;border-radius:10px;background:#0d2848;color:#e6fbff;max-width:165px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    header.top .fan-team-picker summary::-webkit-details-marker{display:none}
+    header.top .fan-team-picker[open]{z-index:25}
+    header.top .fan-team-picker label,header.top .fan-team-picker select{position:absolute;right:0;z-index:26;background:#0d2848}
+    header.top .fan-team-picker label{top:100%;width:200px;padding:8px 10px 0;border:1px solid #49748d;border-bottom:0;border-radius:10px 10px 0 0}
+    header.top .fan-team-picker select{top:calc(100% + 29px);width:200px;max-width:200px;border-radius:0 0 10px 10px}
+    @media(max-width:600px){header.top .fan-team-picker summary{max-width:120px;font-size:11px;padding:6px 8px}}
+  `;
   document.head.appendChild(style);
   function apply(code) {
     selected = byCode.has(code) ? code : '';
@@ -47,8 +58,11 @@
   function mount() {
     const header = document.querySelector('header.top');
     if (!header || document.getElementById('fanTeamSelect')) return;
-    const section = document.createElement('div');
+    const section = document.createElement('details');
     section.className = 'fan-team-picker';
+    const summary = document.createElement('summary');
+    summary.textContent = selected ? '⭐ ' + byCode.get(selected)[1] : '⭐ Můj tým';
+    section.appendChild(summary);
     const label = document.createElement('label');
     label.htmlFor = 'fanTeamSelect';
     label.textContent = '⭐ Můj tým';
@@ -69,9 +83,11 @@
     select.addEventListener('change', () => {
       try { if (select.value) localStorage.setItem(KEY, select.value); else localStorage.removeItem(KEY); } catch (_) {}
       apply(select.value);
+      summary.textContent = selected ? '⭐ ' + byCode.get(selected)[1] : '⭐ Můj tým';
+      section.open = false;
     });
     section.append(label, select);
-    header.insertAdjacentElement('afterend', section);
+    header.appendChild(section);
     apply(selected);
   }
   window.BangerFavoriteTeam = Object.freeze({get:() => selected, teams:TEAMS.map(([code,name])=>({code,name}))});
