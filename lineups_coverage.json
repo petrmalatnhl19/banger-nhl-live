@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-17T09:25:03.063041+00:00",
+  "generatedAt": "2026-11-17T10:36:48.769818+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 8,
+  "currentProjections": 4,
   "needsFreshProjection": [
     "avalanche",
     "blackhawks",
@@ -13,6 +13,7 @@
     "devils",
     "ducks",
     "flames",
+    "flyers",
     "golden knights",
     "hurricanes",
     "islanders",
@@ -21,12 +22,15 @@
     "kraken",
     "lightning",
     "maple leafs",
+    "oilers",
+    "panthers",
     "penguins",
     "predators",
     "red wings",
     "sabres",
     "senators",
     "sharks",
+    "stars",
     "wild"
   ],
   "missing": [],
@@ -40,6 +44,7 @@
     "devils",
     "ducks",
     "flames",
+    "flyers",
     "golden knights",
     "hurricanes",
     "islanders",
@@ -48,12 +53,15 @@
     "kraken",
     "lightning",
     "maple leafs",
+    "oilers",
+    "panthers",
     "penguins",
     "predators",
     "red wings",
     "sabres",
     "senators",
     "sharks",
+    "stars",
     "wild"
   ],
   "manualSnapshots": [],
@@ -198,11 +206,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-15T22:35:00+00:00",
       "source": "https://www.nhl.com/news/edmonton-oilers-philadelphia-flyers-game-preview-november-15-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "golden knights": {
       "hasProjectedLines": true,
@@ -320,11 +328,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-15T22:35:00+00:00",
       "source": "https://www.nhl.com/news/edmonton-oilers-philadelphia-flyers-game-preview-november-15-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "panthers": {
       "hasProjectedLines": true,
@@ -332,11 +340,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-15T22:34:00+00:00",
       "source": "https://www.nhl.com/news/florida-panthers-dallas-stars-game-preview-november-15-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "penguins": {
       "hasProjectedLines": true,
@@ -429,11 +437,11 @@
         "archive",
         "manual"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-15T22:34:00+00:00",
       "source": "https://www.nhl.com/news/florida-panthers-dallas-stars-game-preview-november-15-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "wild": {
       "hasProjectedLines": true,

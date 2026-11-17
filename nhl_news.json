@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-17T09:24:36.275076+00:00",
+  "updatedAt": "2026-11-17T10:35:56.093044+00:00",
   "articles": [
     {
       "title": "Českou hvězdou týdne je Chytil Útočník Canucks vstřelil ve dvou zápasech dva góly. Druhou hvězdou je Hertl, třetí Chmelař 16. lis 2026",
@@ -20,15 +20,6 @@
       "publishedAt": "2026-11-16T18:33:52.810000+00:00"
     },
     {
-      "title": "Konečně odměna. Chytil slaví dvojitý zásah 16. lis 2026",
-      "url": "https://www.nhl.com/cs/news/chytil-dvema-goly-rozjasal-canucks",
-      "language": "cs",
-      "source": "NHL.com",
-      "headline": "Konečně odměna. Chytil slaví dvojitý zásah",
-      "description": "Canucks ukončili černou šňůru sedmi proher, český útočník se trefil poprvé od loňského října",
-      "publishedAt": "2026-11-16T07:12:13.660000+00:00"
-    },
-    {
       "title": "McDavid dál řádí, tentokrát to poznal Vladař 16. lis 2026",
       "url": "https://www.nhl.com/cs/news/mcdavid-opet-bodoval",
       "language": "cs",
@@ -45,6 +36,15 @@
       "headline": "Jde to i bez superhvězd. Colorado zazářilo v Montrealu",
       "description": "Oslabení Nečas a spol. ukončili dlouhou sérii Canadiens. Kluci ukázali odhodlání a disciplínu, chválil kouč",
       "publishedAt": "2026-11-15T13:34:16.407000+00:00"
+    },
+    {
+      "title": "Konečně odměna. Chytil slaví dvojitý zásah 16. lis 2026",
+      "url": "https://www.nhl.com/cs/news/chytil-dvema-goly-rozjasal-canucks",
+      "language": "cs",
+      "source": "NHL.com",
+      "headline": "Konečně odměna. Chytil slaví dvojitý zásah",
+      "description": "Canucks ukončili černou šňůru sedmi proher, český útočník se trefil poprvé od loňského října",
+      "publishedAt": "2026-11-16T07:12:13.660000+00:00"
     },
     {
       "title": "FORČEK: Kučerovovi nejde o peníze, ale o ocenění Slavomír Lener ve 38. dílu podcastu o dění v NHL, českých juniorech i o tom, jak s Babcockem sháněl 300 doutníků 05. lis 2026",
@@ -461,24 +461,6 @@
       "publishedAt": "2026-11-13T17:34:18.381000+00:00"
     },
     {
-      "title": "Fantasy hockey top 200 player rankings for 2026-27 Nov 16, 2026",
-      "url": "https://www.nhl.com/news/topic/fantasy/nhl-fantasy-hockey-top-250-200-rankings-drafts-players-big-board-281505474",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Fantasy hockey top 200 player rankings for 2026-27",
-      "description": "Most valuable overall options for standard leagues, impact of Hellebuyck trade on goalie landscape",
-      "publishedAt": "2026-11-09T14:00:00+00:00"
-    },
-    {
-      "title": "Fantasy hockey top 100 forward rankings for 2026-27 Nov 16, 2026",
-      "url": "https://www.nhl.com/news/topic/Fantasy/nhl-fantasy-hockey-top-100-forward-rankings-pools-282775028",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Fantasy hockey top 100 forward rankings for 2026-27",
-      "description": "Most valuable options at position in standard leagues; new podcast episodes",
-      "publishedAt": "2026-11-09T14:00:00+00:00"
-    },
-    {
       "title": "Fantasy hockey top 50 defenseman rankings Nov 16, 2026",
       "url": "https://www.nhl.com/news/topic/Fantasy/nhl-fantasy-hockey-top-50-defenseman-rankings-pools-282830728",
       "language": "en",
@@ -495,6 +477,24 @@
       "headline": "Fantasy hockey top 25 goalie rankings for 2026-27",
       "description": "Most valuable options for standard leagues, tandems for 'NHL Fantasy Stars' game",
       "publishedAt": "2026-11-07T14:00:00+00:00"
+    },
+    {
+      "title": "Fantasy hockey top 200 player rankings for 2026-27 Nov 16, 2026",
+      "url": "https://www.nhl.com/news/topic/fantasy/nhl-fantasy-hockey-top-250-200-rankings-drafts-players-big-board-281505474",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Fantasy hockey top 200 player rankings for 2026-27",
+      "description": "Most valuable overall options for standard leagues, impact of Hellebuyck trade on goalie landscape",
+      "publishedAt": "2026-11-09T14:00:00+00:00"
+    },
+    {
+      "title": "Fantasy hockey top 100 forward rankings for 2026-27 Nov 16, 2026",
+      "url": "https://www.nhl.com/news/topic/Fantasy/nhl-fantasy-hockey-top-100-forward-rankings-pools-282775028",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Fantasy hockey top 100 forward rankings for 2026-27",
+      "description": "Most valuable options at position in standard leagues; new podcast episodes",
+      "publishedAt": "2026-11-09T14:00:00+00:00"
     },
     {
       "title": "Fantasy hockey top 10 waiver wire pickups Nov 16, 2026",
