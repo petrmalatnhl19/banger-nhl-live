@@ -21,6 +21,8 @@ jobs:
         run: node .github/scripts/test-ux-01-games.cjs
       - name: SECURITY-105 TV frontend migration regression (static)
         run: node .github/scripts/test-security-105-tv-frontend-regression.cjs
+      - name: SECURITY-128 persistent replay ledger (offline)
+        run: node .github/scripts/test-security-128-durable-ledger.cjs
       - name: SECURITY-127 replay and key policy (offline)
         run: node .github/scripts/test-security-127-replay-key-policy.cjs
       - name: SECURITY-126 signed snapshot integrity (offline)
