@@ -153,6 +153,8 @@ jobs:
         run: node .github/scripts/browser-history-reload.cjs
       - name: Verify TV Match Stats fallback when CORE 4.3 projections become private
         run: node .github/scripts/browser-security88-tv-grants.cjs
+      - name: SECURITY-108 isolated Chromium TV rendering states
+        run: node .github/scripts/browser-security108-tv-states.cjs
       - name: Diagnose real Back Forward Cache eligibility in Chromium
         continue-on-error: true
         run: timeout --signal=TERM --kill-after=5s 30s xvfb-run -a node .github/scripts/browser-bfcache-diagnostic.cjs
