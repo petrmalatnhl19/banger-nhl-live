@@ -18,22 +18,21 @@ const { chromium } = require("playwright");
         const summary = picker.locator("summary");
         assert.match(await summary.innerText(), /Můj tým/);
         await summary.click();
-        // FAN-10: verify the expanded picker is comfortably sized and stays on screen.
-        const select = picker.locator("select");
-        const modalLayout = await page.evaluate(() => {
-          const el = document.querySelector("header.top .fan-team-picker select");
-          const label = document.querySelector("header.top .fan-team-picker label");
-          const r = el.getBoundingClientRect(), l = label.getBoundingClientRect();
-          return { x:r.x, right:r.right, width:r.width, height:r.height,
-            labelWidth:l.width, labelVisible:l.height > 0,
-            position:getComputedStyle(el).position };
+        // FAN-12: the new searchable gallery replaces the visible native select.
+        const gallery = picker.locator(".fan-team-gallery");
+        await gallery.waitFor({ state: "visible" });
+        const modalLayout = await gallery.evaluate(el => {
+          const r = el.getBoundingClientRect();
+          return {x:r.x,right:r.right,width:r.width,height:r.height,position:getComputedStyle(el).position};
         });
-        assert.equal(modalLayout.position, "fixed", "Expanded picker must be a modal-like overlay");
-        assert(modalLayout.width >= width * 0.85, "Picker width at " + width);
-        assert(modalLayout.height >= 48, "Picker touch height at " + width);
-        assert(modalLayout.x >= -1 && modalLayout.right <= width + 1, "Expanded picker fits viewport at " + width);
-        assert(modalLayout.labelVisible && modalLayout.labelWidth >= width * 0.85, "Picker heading visible at " + width);
-        await select.selectOption("DAL");
+        assert.equal(modalLayout.position, "fixed", "Team gallery must be a modal overlay");
+        assert(modalLayout.width >= width * 0.85, "Gallery width at " + width);
+        assert(modalLayout.height >= 150, "Gallery height at " + width);
+        assert(modalLayout.x >= -1 && modalLayout.right <= width + 1, "Gallery fits viewport at " + width);
+        assert.equal(await gallery.locator(".fan-team-choice").count(), 32, "All NHL teams available");
+        await gallery.locator('input[type="search"]').fill("Dallas");
+        assert.equal(await gallery.locator(".fan-team-choice").count(), 1, "Team search filters choices");
+        await gallery.locator(".fan-team-choice").click();
         assert.equal(await page.locator("body").getAttribute("data-fan-team"), "DAL");
         assert.match(await summary.innerText(), /Dallas Stars/);
         assert.equal(await page.evaluate(() => localStorage.getItem("banger-favorite-team-v1")), "DAL");
@@ -48,10 +47,10 @@ const { chromium } = require("playwright");
         await page.reload({ waitUntil: "domcontentloaded" });
         assert.equal(await page.locator("body").getAttribute("data-fan-team"), "DAL");
         await picker.locator("summary").click();
-        await picker.locator("select").selectOption("NYR");
+        await picker.locator(".fan-team-choice").filter({hasText:"New York Rangers"}).click();
         assert.equal(await page.locator("body").getAttribute("data-fan-team"), "NYR");
         await picker.locator("summary").click();
-        await picker.locator("select").selectOption("");
+        await picker.locator(".fan-team-reset").click();
         assert.equal(await page.locator("body").getAttribute("data-fan-team"), null);
         assert.equal(await page.evaluate(() => localStorage.getItem("banger-favorite-team-v1")), null);
         const pickerBounds = await picker.boundingBox();
