@@ -450,4 +450,56 @@
       body[data-fan-team] header.top {transition:background .2s ease,border-color .2s ease}
     }
   `;
+  /* FAN-13: keep brand and controls separate; distinguish teams with a second color. */
+  const secondaryColors = {
+    ANA:'#B9975B',BOS:'#111111',BUF:'#003087',CGY:'#F1BE48',
+    CAR:'#111111',CHI:'#000000',COL:'#236192',CBJ:'#CE1126',
+    DAL:'#006847',DET:'#FFFFFF',EDM:'#041E42',FLA:'#041E42',
+    LAK:'#111111',MIN:'#154734',MTL:'#001E62',NSH:'#041E42',
+    NJD:'#111111',NYI:'#00539B',NYR:'#CE1126',OTT:'#000000',
+    PHI:'#000000',PIT:'#000000',SEA:'#001628',SJS:'#006D75',
+    STL:'#002F87',TBL:'#002868',TOR:'#00205B',UTA:'#6CACE4',
+    VAN:'#00205B',VGK:'#333F42',WSH:'#041E42',WPG:'#041E42'
+  };
+  function updateSecondaryColor() {
+    const secondary = secondaryColors[selected];
+    if (secondary) document.body.style.setProperty('--fan-secondary',secondary);
+    else document.body.style.removeProperty('--fan-secondary');
+  }
+  document.addEventListener('banger:favorite-team-change',updateSecondaryColor);
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',updateSecondaryColor,{once:true});
+  else updateSecondaryColor();
+  style.textContent += `
+    /* Remove the duplicate team name introduced by FAN-11. */
+    #fanTeamIdentity {display:none!important}
+    header.top {box-sizing:border-box}
+    header.top .brand {flex:0 0 auto;min-width:0;position:relative;z-index:1}
+    header.top .fan-team-picker {min-width:0;flex:0 1 auto;z-index:2}
+    header.top .fan-team-picker summary {box-sizing:border-box}
+    body[data-fan-team] header.top {
+      background:linear-gradient(110deg,#0a1c30 15%,color-mix(in srgb,var(--fan-secondary) 25%,#071729) 100%)!important;
+      border-bottom:2px solid var(--fan-accent)!important;
+      box-shadow:none!important;
+    }
+    body[data-fan-team] .fan-team-choice {
+      border-left-color:var(--choice-accent);
+    }
+    body[data-fan-team] #uxMobileNav .active,
+    body[data-fan-team] #uxMobileNav [aria-current="page"],
+    body[data-fan-team] .toolbar .btn.active {
+      color:#fff!important;
+      background:linear-gradient(135deg,color-mix(in srgb,var(--fan-secondary) 78%,#112a40),#10243a)!important;
+      border:2px solid var(--fan-accent)!important;
+      box-shadow:inset 0 3px var(--fan-accent)!important;
+    }
+    body[data-fan-team] #uxMobileNav .active .nav-label,
+    body[data-fan-team] .toolbar .btn.active .nav-label {color:#fff!important}
+    @media(max-width:600px){
+      header.top {display:flex!important;flex-wrap:wrap!important;gap:7px!important;padding:10px 12px!important;align-items:center!important}
+      header.top .brand {flex:1 1 120px;max-width:160px}
+      header.top .header-status {display:none!important}
+      header.top .fan-team-picker {margin-left:auto!important;max-width:calc(100% - 130px)}
+      header.top .fan-team-picker summary {max-width:100%!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    }
+  `;
 })();
