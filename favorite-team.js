@@ -199,4 +199,93 @@
       }
     }
   `;
+  /* FAN-10: more visible team identity and spacious mobile team selection. */
+  style.textContent += `
+    body[data-fan-team] header.top {
+      border-bottom:2px solid var(--fan-accent);
+      background:linear-gradient(115deg,color-mix(in srgb,var(--fan-accent) 23%,#071729),#071729 65%);
+    }
+    body[data-fan-team] .toolbar>.btn.active,
+    body[data-fan-team] #uxMobileNav [aria-current="page"],
+    body[data-fan-team] #uxMobileNav .active,
+    body[data-fan-team] .dash-quick-btn.active {
+      background:linear-gradient(145deg,color-mix(in srgb,var(--fan-accent) 27%,#10263e),#10263e)!important;
+      border-color:var(--fan-accent)!important;
+      box-shadow:inset 0 -3px var(--fan-accent);
+    }
+    body[data-fan-team] .toolbar>.btn:focus-visible,
+    body[data-fan-team] button:focus-visible,
+    body[data-fan-team] select:focus-visible {
+      outline:2px solid var(--fan-accent);
+      outline-offset:2px;
+    }
+    body[data-fan-team] .dash-quick-btn:hover,
+    body[data-fan-team] .toolbar>.btn:hover {
+      border-color:var(--fan-accent);
+    }
+    header.top .fan-team-picker summary {
+      max-width:210px;
+      min-height:38px;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      font-weight:750;
+    }
+    header.top .fan-team-picker[open]::before {
+      content:"";
+      position:fixed;
+      inset:0;
+      background:rgba(1,9,20,.78);
+      z-index:99;
+    }
+    header.top .fan-team-picker[open] {z-index:100}
+    header.top .fan-team-picker[open] summary {
+      position:relative;
+      z-index:101;
+    }
+    header.top .fan-team-picker[open] label {
+      position:fixed;
+      top:calc(50% - 160px);
+      left:50%;
+      right:auto;
+      transform:translateX(-50%);
+      box-sizing:border-box;
+      width:min(90vw,420px);
+      padding:20px 18px 14px;
+      border:2px solid var(--fan-accent,#79e8ff);
+      border-bottom:0;
+      border-radius:18px 18px 0 0;
+      color:#fff;
+      font-size:18px;
+      text-align:center;
+      z-index:102;
+    }
+    header.top .fan-team-picker[open] select {
+      position:fixed;
+      top:calc(50% - 105px);
+      left:50%;
+      right:auto;
+      transform:translateX(-50%);
+      box-sizing:border-box;
+      width:min(90vw,420px);
+      max-width:420px;
+      min-height:56px;
+      padding:12px 18px;
+      border:2px solid var(--fan-accent,#79e8ff);
+      border-radius:0 0 18px 18px;
+      font-size:16px;
+      z-index:102;
+    }
+    @media(max-width:600px) {
+      header.top .fan-team-picker summary {
+        max-width:150px;
+        min-height:38px;
+        font-size:12px;
+        padding:7px 10px;
+      }
+    }
+    @media(prefers-reduced-motion:no-preference) {
+      body[data-fan-team] header.top {transition:background .2s ease,border-color .2s ease}
+    }
+  `;
 })();
