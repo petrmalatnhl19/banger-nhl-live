@@ -1,0 +1,5 @@
+# SECURITY-85 — Isolated PostgreSQL role tests
+
+`security/local/security87-revocation.sql` runs in the existing disposable PostgreSQL permissions workflow. It passed locally on native PostgreSQL 17.11 with `security/local/init.sql` and the restricted baseline established by `verify.sh` reproduced before the test.
+
+For both `anon` and `authenticated`, the baseline must expose zero direct shadow rows via RLS despite a SELECT grant, deny INSERT through RLS and show a nonempty owner-rights prediction. After the candidate, real SELECT on the four internal objects, INSERT and TRUNCATE on shadow inputs, UPDATE and DELETE on the archive, and capture RPC invocation must raise SQLSTATE 42501. Any successful statement or unrelated error fails the test. The same roles must still read seeded archive, schedule and CORE 4.2 status outputs and query all three aggregate views. The service role must still read and capture the supplied internal data. Varying authorization by user ID through Supabase Auth and exercising REST or JWT mapping requires a separate isolated API environment.

@@ -38,6 +38,11 @@ jobs:
         run: bash security/local/security76-multipath-grants.sh
       - name: Verify synthetic capture function privilege guard (SECURITY-81)
         run: bash security/local/security81-capture-function-privileges.sh
+      - name: Rehearse scoped revocation, role isolation and capture (SECURITY-85/86/87)
+        run: |
+          docker compose -f security/local/compose.yaml exec -T postgres \
+            psql -X -v ON_ERROR_STOP=1 -U security_local -d security09 \
+            < security/local/security87-revocation.sql
       - name: Diagnose PostgreSQL initialization failure
         if: failure()
         run: docker compose -f security/local/compose.yaml logs --no-color postgres
