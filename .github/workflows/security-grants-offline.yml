@@ -164,3 +164,6 @@ jobs:
 
       - name: Verify SECURITY-144 Linux SO_PEERCRED UID allowlist (offline)
         run: python3 .github/scripts/test-security-144-peercred.py
+
+      - name: Verify SECURITY-145 bounded signed socket writer (offline)
+        run: python3 .github/scripts/test-security-145-bounded-writer.py
