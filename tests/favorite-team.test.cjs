@@ -13,6 +13,7 @@ function fixture(saved='') {
     querySelector(){return null;},
     insertAdjacentElement(position,child){if(position==='afterend')this.children.push(child);},
     append(...children){this.children.push(...children);},
+    prepend(...children){this.children.unshift(...children);},
     addEventListener(name,fn){this['on'+name]=fn;},
     setAttribute(name,value){this.attributes[name]=value;},
     removeAttribute(name){delete this.attributes[name];},
