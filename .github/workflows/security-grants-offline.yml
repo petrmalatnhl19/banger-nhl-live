@@ -119,3 +119,6 @@ jobs:
 
       - name: Verify SECURITY-128 disposable ledger (offline)
         run: node .github/scripts/test-security-128-durable-ledger.cjs
+
+      - name: Verify SECURITY-130 disposable SQLite transactional replay (offline)
+        run: python3 .github/scripts/test-security-130-sqlite-replay.py
