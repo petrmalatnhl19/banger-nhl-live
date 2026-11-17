@@ -9,6 +9,7 @@ function fixture(saved='') {
   const make = tag => ({
     tagName:tag,children:[],classList:classes(),style:{setProperty(){},removeProperty(){}},
     dataset:{},attributes:{},appendChild(child){this.children.push(child);},
+    prepend(child){this.children.unshift(child);},
     querySelector(){return null;},
     insertAdjacentElement(position,child){if(position==='afterend')this.children.push(child);},
     append(...children){this.children.push(...children);},
