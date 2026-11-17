@@ -86,3 +86,18 @@ assert.ok(!article.classList.contains('fan-favorite-card'),'remove news highligh
 assert.equal(fixture('NYR').ctx.window.BangerFavoriteTeam.get(),'NYR','restore saved preference');
 assert.equal(fixture('INVALID').ctx.window.BangerFavoriteTeam.get(),'','reject invalid saved preference');
 console.log('FAN-06 offline preference and highlighting checks passed');
+
+// FAN-17: verify advanced statistics use the actual data team code, not only table column 3.
+const html=fs.readFileSync(require('node:path').join(__dirname,'../index.html'),'utf8');
+const advStart=html.indexOf('function renderAdvanced(){');
+const advEnd=html.indexOf('const bangerNavigationTabs=',advStart);
+assert(advStart>0&&advEnd>advStart,'advanced renderer exists');
+const advanced=html.slice(advStart,advEnd);
+assert(advanced.includes('x.teamAbbrevs'),'advanced player/team code sourced from NHL row');
+assert(advanced.includes("codes.includes(fanCode)"),'favorite club exact code matching');
+assert(advanced.includes("adv-podium-card'+fanClass(x)"),'favorite podium highlight');
+assert(advanced.includes("adv-rank-row'+fanClass(x)"),'favorite top ten highlight');
+assert(advanced.includes("fanMatch(x)?'fan-favorite-advanced-row'"),'favorite full table highlight');
+assert(source.includes('--fan-control-bg'),'secondary color control palette');
+assert(source.includes('.adv-rank-row.fan-favorite-advanced-row'),'advanced ranking visual style');
+console.log('FAN-17 advanced player identity and dual-tone regression checks passed');
