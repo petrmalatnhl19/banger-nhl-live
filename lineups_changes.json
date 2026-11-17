@@ -793,20 +793,32 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "rangers": {
-      "updatedAt": "2026-11-16T18:05:00.859907+00:00",
-      "previousPublishedAt": "2026-11-13T20:00:20.196000+00:00",
-      "publishedAt": "2026-11-16T17:29:00+00:00",
-      "source": "https://www.nhl.com/news/montreal-canadiens-new-york-rangers-game-preview-november-16-2026",
+      "updatedAt": "2026-11-17T01:42:31.306833+00:00",
+      "previousPublishedAt": "2026-11-16T19:54:00+00:00",
+      "publishedAt": "2026-11-16T19:54:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
-          "type": "added",
-          "player": "Matthew Robertson",
-          "to": "Obrana 3"
+          "type": "moved",
+          "player": "Will Cuylle",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Eeli Tolvanen",
+          "from": "Útok 4",
+          "to": "Útok 3"
         },
         {
           "type": "added",
-          "player": "Scott Morrow",
-          "to": "Obrana 3"
+          "player": "Matt Rempe",
+          "to": "Útok 4"
+        },
+        {
+          "type": "removed",
+          "player": "Pavel Dorofeyev",
+          "from": "Útok 2"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
