@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-17T14:45:30.811288+00:00",
-  "rostersUpdatedAt": "2026-11-17T14:44:42.319905+00:00",
+  "updatedAt": "2026-11-17T15:39:38.574063+00:00",
+  "rostersUpdatedAt": "2026-11-17T15:39:04.307121+00:00",
   "projectionDate": "2026-11-17",
   "teamCount": 32,
-  "goalieCount": 74,
+  "goalieCount": 73,
   "goalies": [
     {
       "name": "Mackenzie Blackwood",
@@ -134,14 +134,6 @@
       "team": "VAN",
       "teamKey": "canucks",
       "playerId": 8482447,
-      "starterStatus": "unknown",
-      "starterGameDate": null
-    },
-    {
-      "name": "Nikita Tolopilo",
-      "team": "VAN",
-      "teamKey": "canucks",
-      "playerId": 8484268,
       "starterStatus": "unknown",
       "starterGameDate": null
     },
@@ -298,7 +290,7 @@
       "team": "WPG",
       "teamKey": "jets",
       "playerId": 8479973,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-17",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -428,8 +420,9 @@
       "team": "FLA",
       "teamKey": "panthers",
       "playerId": 8474593,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-17",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Akira Schmid",
