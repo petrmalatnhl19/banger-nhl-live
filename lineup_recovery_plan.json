@@ -3,7 +3,7 @@
     "lineup_core_report.json",
     "lineup_rejections_report.json"
   ],
-  "incompleteTeams": 5,
+  "incompleteTeams": 11,
   "teams": [
     {
       "team": "blackhawks",
@@ -11,10 +11,56 @@
       "reason": "incomplete_source_or_no_validated_replacement",
       "missingForwardLines": 0,
       "missingDefensePairs": 1,
-      "source": "https://www.nhl.com/news/winnipeg-jets-chicago-blackahwks-game-preview-november-14-2026",
-      "publishedAt": "2026-11-13T20:09:36.747000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-17T20:36:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
+    },
+    {
+      "team": "bruins",
+      "status": "missing_team",
+      "reason": "rejected_roster_lines",
+      "missingForwardLines": 4,
+      "missingDefensePairs": 3,
+      "source": null,
+      "publishedAt": null,
+      "rejectedLines": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 1,
+          "sourceLine": [
+            "JJ Peterka",
+            "Pavel Zacha",
+            "David Pastrnl"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "David Pastrnl",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        },
+        {
+          "group": "forwards",
+          "sourceLineNumber": 2,
+          "sourceLine": [
+            "Michael Eyssiont",
+            "Fraser Minten",
+            "Morgan Geekie"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Michael Eyssiont",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ],
+      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
     },
     {
       "team": "canucks",
@@ -22,19 +68,8 @@
       "reason": "incomplete_source_or_no_validated_replacement",
       "missingForwardLines": 0,
       "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-16T19:54:00+00:00",
-      "rejectedLines": [],
-      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
-    },
-    {
-      "team": "capitals",
-      "status": "incomplete_projection",
-      "reason": "incomplete_source_or_no_validated_replacement",
-      "missingForwardLines": 1,
-      "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/new-jersey-devils-washington-capitals-game-preview-november-14-2026",
-      "publishedAt": "2026-11-14T18:01:55.213000+00:00",
+      "source": "https://www.nhl.com/news/vancouver-canucks-utah-mammoth-game-preview-november-16-2026",
+      "publishedAt": "2026-11-16T19:49:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
@@ -50,15 +85,122 @@
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
     {
-      "team": "flames",
+      "team": "ducks",
       "status": "incomplete_projection",
       "reason": "incomplete_source_or_no_validated_replacement",
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/calgary-flames-anaheim-ducks-game-preview-november-15-2026",
-      "publishedAt": "2026-11-15T15:20:39.964000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-17T20:36:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
+    },
+    {
+      "team": "hurricanes",
+      "status": "missing_team",
+      "reason": "no_accepted_projection",
+      "missingForwardLines": 4,
+      "missingDefensePairs": 3,
+      "source": null,
+      "publishedAt": null,
+      "rejectedLines": [],
+      "nextAction": "Find a current NHL.com projection and validate all players."
+    },
+    {
+      "team": "islanders",
+      "status": "incomplete_projection",
+      "reason": "incomplete_source_or_no_validated_replacement",
+      "missingForwardLines": 1,
+      "missingDefensePairs": 0,
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-17T20:36:00+00:00",
+      "rejectedLines": [],
+      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
+    },
+    {
+      "team": "kraken",
+      "status": "missing_team",
+      "reason": "no_accepted_projection",
+      "missingForwardLines": 4,
+      "missingDefensePairs": 3,
+      "source": null,
+      "publishedAt": null,
+      "rejectedLines": [],
+      "nextAction": "Find a current NHL.com projection and validate all players."
+    },
+    {
+      "team": "lightning",
+      "status": "incomplete_projection",
+      "reason": "incomplete_source_or_no_validated_replacement",
+      "missingForwardLines": 1,
+      "missingDefensePairs": 0,
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-17T20:36:00+00:00",
+      "rejectedLines": [],
+      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
+    },
+    {
+      "team": "predators",
+      "status": "incomplete_projection",
+      "reason": "incomplete_source_or_no_validated_replacement",
+      "missingForwardLines": 0,
+      "missingDefensePairs": 1,
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-17T20:36:00+00:00",
+      "rejectedLines": [],
+      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
+    },
+    {
+      "team": "senators",
+      "status": "missing_team",
+      "reason": "rejected_roster_lines",
+      "missingForwardLines": 4,
+      "missingDefensePairs": 3,
+      "source": null,
+      "publishedAt": null,
+      "rejectedLines": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 2,
+          "sourceLine": [
+            "Philip Tomasino",
+            "Shane Pinto",
+            "Drake Batherson"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Philip Tomasino",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        },
+        {
+          "group": "forwards",
+          "sourceLineNumber": 4,
+          "sourceLine": [
+            "Samuel Blais",
+            "Stephen Halliday",
+            "Tyler Boucher"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Samuel Blais",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            },
+            {
+              "name": "Tyler Boucher",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ],
+      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
     }
   ],
   "policy": "Diagnostics only. Never synthesize or automatically publish unverified lines."

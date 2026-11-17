@@ -1,5 +1,102 @@
 {
-  "teamsWithRejectedLines": 0,
-  "teams": {},
+  "teamsWithRejectedLines": 2,
+  "teams": {
+    "bruins": {
+      "team": "BOS",
+      "rosterUpdatedAt": "2026-11-17T20:41:01.398612+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "validatedForwardLines": 2,
+      "validatedDefensePairs": 3,
+      "rejected": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 1,
+          "sourceLine": [
+            "JJ Peterka",
+            "Pavel Zacha",
+            "David Pastrnl"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "David Pastrnl",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        },
+        {
+          "group": "forwards",
+          "sourceLineNumber": 2,
+          "sourceLine": [
+            "Michael Eyssiont",
+            "Fraser Minten",
+            "Morgan Geekie"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Michael Eyssiont",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    },
+    "senators": {
+      "team": "OTT",
+      "rosterUpdatedAt": "2026-11-17T20:41:03.259176+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "validatedForwardLines": 2,
+      "validatedDefensePairs": 3,
+      "rejected": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 2,
+          "sourceLine": [
+            "Philip Tomasino",
+            "Shane Pinto",
+            "Drake Batherson"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Philip Tomasino",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        },
+        {
+          "group": "forwards",
+          "sourceLineNumber": 4,
+          "sourceLine": [
+            "Samuel Blais",
+            "Stephen Halliday",
+            "Tyler Boucher"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Samuel Blais",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            },
+            {
+              "name": "Tyler Boucher",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    }
+  },
   "note": "Unverified players must not be automatically inserted into a projected lineup."
 }

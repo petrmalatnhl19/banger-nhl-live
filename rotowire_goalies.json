@@ -1,18 +1,18 @@
 {
-  "updatedAt": "2026-11-17T16:48:52.238768+00:00",
+  "updatedAt": "2026-11-17T20:41:26.729877+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "goalieCount": 100,
   "games": [
     {
       "team": "ANA",
-      "goalie": "Lukas Dostal",
+      "goalie": "Ville Husso",
       "opponent": "STL",
       "venue": "away",
       "status": "projected",
       "date": "2026-11-17",
       "gameId": 2026020339,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8480843"
+      "goalieId": "8478024"
     },
     {
       "team": "BOS",
@@ -30,7 +30,7 @@
       "goalie": "Alex Lyon",
       "opponent": "PHI",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-17",
       "gameId": 2026020337,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -52,7 +52,7 @@
       "goalie": "Dustin Wolf",
       "opponent": "SJS",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-17",
       "gameId": 2026020343,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -96,7 +96,7 @@
       "goalie": "Darcy Kuemper",
       "opponent": "BOS",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-17",
       "gameId": 2026020333,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -162,7 +162,7 @@
       "goalie": "Yaroslav Askarov",
       "opponent": "CGY",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-17",
       "gameId": 2026020343,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -195,7 +195,7 @@
       "goalie": "Sergei Bobrovsky",
       "opponent": "CHI",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-17",
       "gameId": 2026020338,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -225,14 +225,14 @@
     },
     {
       "team": "BOS",
-      "goalie": "Michael DiPietro",
+      "goalie": "Jeremy Swayman",
       "opponent": "DET",
       "venue": "away",
       "status": "projected",
       "date": "2026-11-18",
       "gameId": 2026020344,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8480022"
+      "goalieId": "8480280"
     },
     {
       "team": "COL",
@@ -247,14 +247,14 @@
     },
     {
       "team": "DET",
-      "goalie": "John Gibson",
+      "goalie": "Daniil Tarasov",
       "opponent": "BOS",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-18",
       "gameId": 2026020344,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8476434"
+      "goalieId": "8480193"
     },
     {
       "team": "MTL",
