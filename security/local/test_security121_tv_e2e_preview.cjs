@@ -1,0 +1,32 @@
+"use strict";
+const assert=require("node:assert/strict");
+const {preview}=require("./security121-tv-e2e-preview.cjs");
+const endpoint="https://xxwqeiuyislnoxsmjuul.supabase.co/rest/v1/public_tv_stats";
+const apikey="sb_publishable_offline_test_only";
+const now=Date.parse("2026-11-17T10:00:00Z");
+const metadata=[{game_id:2026020335,game_date:"2026-11-17",away_team:"EDM",home_team:"FLA",status:"pending"}];
+const prediction={game_id:2026020335,core42_away:2,core42_home:3,core43_away:2.5,core43_home:3.5,core43_preview_away:2.6,core43_preview_home:3.4,away_gsax_per100:null,home_gsax_per100:1.2};
+const args={enabled:true,endpoint,apikey,metadata,metadataAsOf:"2026-11-17T09:59:00Z",predictionsAsOf:"2026-11-17T09:59:00Z",now};
+(async()=>{
+ let calls=0;
+ const fetchImpl=async(url,options)=>{calls++;const u=new URL(url);assert.equal(u.hostname,"xxwqeiuyislnoxsmjuul.supabase.co");assert.equal(u.searchParams.get("limit"),"40");assert.equal(options.method,"GET");assert.equal(options.headers.apikey,apikey);assert.equal(options.headers.Authorization,undefined);return {ok:true,json:async()=>[prediction]};};
+ assert.equal((await preview({...args,enabled:false,fetchImpl})).mode,"legacy");assert.equal(calls,0);
+ const ready=await preview({...args,fetchImpl});
+ assert.equal(ready.state,"ready");assert.equal(ready.rows.length,1);
+ assert.equal(ready.rows[0].core42_home,3);assert.equal(ready.rows[0].core43_home,3.5);
+ assert.equal(ready.rows[0].core43_preview_home,3.4);assert.equal(ready.rows[0].home_gsax_per100,1.2);
+ assert.equal(calls,1);
+ async function fail(fetch,changes={}){const result=await preview({...args,fetchImpl:fetch,...changes});assert.equal(result.rows.length,0);assert.notEqual(result.state,"ready");assert.equal(JSON.stringify(result).includes("secret"),false);return result;}
+ assert.equal((await fail(async()=>{throw Error("secret: private service role");})).state,"unavailable");
+ assert.equal((await fail(async()=>({ok:false,status:503}))).state,"unavailable");
+ assert.equal((await fail(async()=>({ok:true,json:async()=>{throw Error("bad json");}}))).state,"unavailable");
+ assert.equal((await fail(async()=>({ok:true,json:async()=>[prediction,prediction]}))).state,"unavailable");
+ assert.equal((await fail(async()=>({ok:true,json:async()=>[{...prediction,core43_home:Infinity}]}))).state,"unavailable");
+ assert.equal((await fail(async()=>({ok:true,json:async()=>[]}))).state,"incomplete");
+ assert.equal((await fail(fetchImpl,{now:now+3600000})).state,"stale");
+ assert.equal((await fail(fetchImpl,{metadataVersion:"wrong"})).state,"invalid");
+ assert.equal((await fail(fetchImpl,{metadata:[...metadata,{...metadata[0],game_id:2026020336}]})).state,"incomplete");
+ assert.equal((await fail(fetchImpl,{endpoint:"https://evil.example/rest/v1/public_tv_stats"})).state,"unavailable");
+ assert.equal((await fail(fetchImpl,{apikey:"service_role_secret"})).state,"unavailable");
+ console.log("SECURITY-121 offline public API to TV preview regression passed");
+})().catch(error=>{console.error(error);process.exitCode=1;});
