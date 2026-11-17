@@ -93,7 +93,6 @@
   window.BangerFavoriteTeam = Object.freeze({get:() => selected, teams:TEAMS.map(([code,name])=>({code,name}))});
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount, {once:true});
   else mount();
-}
   /* FAN-03: highlight matching players in the existing skater/goalie tables.
      Keep the original ranking and sorting untouched. */
   style.textContent += `
