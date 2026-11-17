@@ -129,4 +129,41 @@
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',watchStats,{once:true});
   else watchStats();
+}
+  /* FAN-04: decorate existing game and news cards without altering NHL feeds. */
+  style.textContent += `
+    body[data-fan-team] .game.fan-favorite-card,
+    body[data-fan-team] .dash-game.fan-favorite-card,
+    body[data-fan-team] .banger-news-card.fan-favorite-card {
+      border-color:var(--fan-accent)!important;
+      box-shadow:inset 3px 0 var(--fan-accent),0 0 14px color-mix(in srgb,var(--fan-accent) 15%,transparent);
+    }
+    body[data-fan-team] .banger-news-card.fan-favorite-card .banger-news-source {
+      color:var(--fan-accent);
+    }
+  `;
+  function markFavoriteCards() {
+    const root=document.getElementById('content');
+    if(!root)return;
+    const team=selected;
+    root.querySelectorAll('.game,.dash-game').forEach(card=>{
+      const names=Array.from(card.querySelectorAll('.analyst-teams strong,.dash-game-teams,.dash-game-team,.dash-team,.team')).map(el=>el.textContent||'').join(' ');
+      const codes=names.toUpperCase().split(/[^A-Z]+/).filter(Boolean);
+      const match=Boolean(team&&codes.includes(team));
+      card.classList.toggle('fan-favorite-card',match);
+    });
+    root.querySelectorAll('.banger-news-card').forEach(card=>{
+      const codes=Array.from(card.querySelectorAll('.banger-news-crest[alt]')).map(img=>img.getAttribute('alt')?.toUpperCase());
+      card.classList.toggle('fan-favorite-card',Boolean(team&&codes.includes(team)));
+    });
+  }
+  document.addEventListener('banger:favorite-team-change',markFavoriteCards);
+  function watchFavoriteCards() {
+    const root=document.getElementById('content');
+    if(!root)return;
+    new MutationObserver(markFavoriteCards).observe(root,{childList:true,subtree:true});
+    markFavoriteCards();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',watchFavoriteCards,{once:true});
+  else watchFavoriteCards();
 })();
