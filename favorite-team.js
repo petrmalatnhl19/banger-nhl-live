@@ -83,7 +83,7 @@
     select.addEventListener('change', () => {
       try { if (select.value) localStorage.setItem(KEY, select.value); else localStorage.removeItem(KEY); } catch (_) {}
       apply(select.value);
-      summary.textContent = selected ? '⭐ ' + byCode.get(selected)[1] : '⭐ Můj tým';
+      if (!section.dataset.fanLogoHeader) summary.textContent = selected ? '⭐ ' + byCode.get(selected)[1] : '⭐ Můj tým';
       section.open = false;
     });
     section.append(label, select);
@@ -622,6 +622,13 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',mountCompactHeader,{once:true});
   else mountCompactHeader();
   document.addEventListener('banger:favorite-team-change',mountCompactHeader);
+  if (typeof MutationObserver !== 'undefined') {
+    const observer = new MutationObserver(() => {
+      mountCompactHeader();
+      if (document.querySelector('header.top #bangerLanguageBox')?.dataset.fanFlagHeader) observer.disconnect();
+    });
+    observer.observe(document.documentElement,{childList:true,subtree:true});
+  }
   style.textContent += `
     .fan-header-sr{position:absolute!important;width:1px;height:1px;padding:0;
       margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
