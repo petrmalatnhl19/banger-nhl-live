@@ -502,4 +502,75 @@
       header.top .fan-team-picker summary {max-width:100%!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     }
   `;
+  /* FAN-14: two-row mobile header; team name never clipped by language control. */
+  style.textContent += `
+    @media(max-width:600px) {
+      header.top {
+        display:grid!important;
+        grid-template-columns:minmax(0,1fr) auto!important;
+        grid-template-rows:auto auto!important;
+        align-items:center!important;
+        column-gap:10px!important;
+        row-gap:10px!important;
+        padding:12px!important;
+      }
+      header.top .brand {
+        grid-column:1!important;grid-row:1!important;
+        width:auto!important;max-width:100%!important;
+        min-width:0!important;justify-self:start!important;
+      }
+      header.top .fan-team-picker {
+        grid-column:1 / -1!important;grid-row:2!important;
+        margin:0!important;max-width:100%!important;width:100%!important;
+      }
+      header.top .fan-team-picker summary {
+        display:flex!important;align-items:center!important;
+        box-sizing:border-box!important;max-width:100%!important;
+        width:100%!important;min-height:43px!important;
+        padding:10px 14px!important;font-size:14px!important;
+        text-overflow:clip!important;white-space:normal!important;
+        overflow-wrap:anywhere!important;
+        border-radius:12px!important;
+      }
+      header.top .header-status{display:none!important}
+      header.top #bangerLanguageBox,header.top .lang-picker,header.top .language-picker,
+      header.top .lang-switch,header.top .language-switch,
+      header.top #languageSelector {
+        grid-column:2!important;grid-row:1!important;justify-self:end!important;
+      }
+      body[data-fan-team] #uxMobileNav .active,
+      body[data-fan-team] #uxMobileNav [aria-current="page"] {
+        border:1px solid color-mix(in srgb,var(--fan-accent) 65%,#30445c)!important;
+        box-shadow:inset 0 2px var(--fan-accent)!important;
+        background:linear-gradient(180deg,color-mix(in srgb,var(--fan-secondary) 38%,#10243a),#10243a)!important;
+      }
+    }
+  `;
+  /* FAN-14: on short screens, reveal the first statistics row above fixed nav.
+     Only runs after the user explicitly opens the Statistics tab. */
+  function installShortScreenStatsReveal() {
+    const nav = document.getElementById('uxMobileNav');
+    if (!nav || nav.dataset.fanStatsReveal) return;
+    nav.dataset.fanStatsReveal = '1';
+    nav.addEventListener('click', event => {
+      if (!event.target.closest('[data-ux-tab="skaters"]') || window.innerHeight > 600) return;
+      let attempts = 0;
+      function reveal() {
+        const row = document.querySelector('#content .stats-tablewrap tbody tr');
+        const bar = document.getElementById('uxMobileNav');
+        if (!row || !bar) {
+          if (++attempts < 40) requestAnimationFrame(reveal);
+          return;
+        }
+        const bottom = row.getBoundingClientRect().bottom;
+        const top = bar.getBoundingClientRect().top;
+        if (bottom > top - 10) {
+          window.scrollBy({top:Math.ceil(bottom - top + 18),behavior:'instant'});
+        }
+      }
+      requestAnimationFrame(reveal);
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',installShortScreenStatsReveal,{once:true});
+  else installShortScreenStatsReveal();
 })();
