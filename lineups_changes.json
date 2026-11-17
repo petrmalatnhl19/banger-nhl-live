@@ -394,35 +394,20 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "mammoth": {
-      "updatedAt": "2026-11-16T18:58:56.784758+00:00",
-      "previousPublishedAt": "2026-11-14T19:19:00+00:00",
-      "publishedAt": "2026-11-14T19:19:00+00:00",
-      "source": "https://www.nhl.com/news/san-jose-sharks-utah-mammoth-game-preview-november-14-2026",
+      "updatedAt": "2026-11-17T02:41:06.485999+00:00",
+      "previousPublishedAt": "2026-11-16T19:54:00+00:00",
+      "publishedAt": "2026-11-16T19:54:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
           "type": "added",
-          "player": "Liam O’Brien",
-          "to": "Útok 4"
+          "player": "Nick DeSimone",
+          "to": "Obrana 3"
         },
         {
-          "type": "added",
-          "player": "Kevin Stenlund",
-          "to": "Útok 4"
-        },
-        {
-          "type": "added",
-          "player": "Ben McCartney",
-          "to": "Útok 4"
-        },
-        {
-          "type": "added",
+          "type": "removed",
           "player": "Artem Duda",
-          "to": "Obrana 3"
-        },
-        {
-          "type": "added",
-          "player": "Zac Jones",
-          "to": "Obrana 3"
+          "from": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
