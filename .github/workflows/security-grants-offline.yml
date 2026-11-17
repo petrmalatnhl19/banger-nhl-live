@@ -122,3 +122,6 @@ jobs:
 
       - name: Verify SECURITY-130 disposable SQLite transactional replay (offline)
         run: python3 .github/scripts/test-security-130-sqlite-replay.py
+
+      - name: Verify SECURITY-131 signed issuance envelope (offline)
+        run: node .github/scripts/test-security-131-signed-issuance.cjs
