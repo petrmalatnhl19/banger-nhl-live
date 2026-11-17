@@ -22,6 +22,11 @@ jobs:
           docker compose version
       - name: Run isolated PostgreSQL privilege checks
         run: bash security/local/verify.sh
+      - name: Verify synthetic SQL role matrix (SECURITY-97)
+        run: |
+          docker compose -f security/local/compose.yaml exec -T postgres \
+            psql -X -v ON_ERROR_STOP=1 -U security_local -d security09 \
+            < security/local/security97-role-matrix.sql
       - name: Verify transactional grants rollback (SECURITY-69)
         run: bash security/local/security69-transaction-rollback.sh
       - name: Verify baseline-derived privilege restoration (SECURITY-70)
