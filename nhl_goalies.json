@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-17T22:39:55.766513+00:00",
-  "rostersUpdatedAt": "2026-11-17T22:39:18.197788+00:00",
+  "updatedAt": "2026-11-17T23:36:43.050046+00:00",
+  "rostersUpdatedAt": "2026-11-17T23:36:21.528565+00:00",
   "projectionDate": "2026-11-17",
   "teamCount": 32,
   "goalieCount": 73,
@@ -150,7 +150,7 @@
       "team": "WSH",
       "teamKey": "capitals",
       "playerId": 8480313,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-17",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -350,7 +350,7 @@
       "team": "TBL",
       "teamKey": "lightning",
       "playerId": 8476883,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-17",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
