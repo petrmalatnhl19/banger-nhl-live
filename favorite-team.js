@@ -701,6 +701,29 @@
       background:linear-gradient(90deg,color-mix(in srgb,var(--fan-accent) 19%,#10283f),color-mix(in srgb,var(--fan-secondary,#10283f) 22%,#10283f))!important;
       box-shadow:inset 4px 0 var(--fan-accent)!important;
     }
+    /* FAN-18: paint cells, not only the row: sticky first columns have opaque backgrounds. */
+    body[data-fan-team] .adv-table tbody tr.fan-favorite-advanced-row > td,
+    body[data-fan-team] .stats-tablewrap tbody tr.fan-favorite-row > td {
+      background-color:color-mix(in srgb,var(--fan-accent) 14%,#0b2036)!important;
+      background-image:linear-gradient(90deg,color-mix(in srgb,var(--fan-accent) 7%,transparent),transparent)!important;
+    }
+    body[data-fan-team] .adv-table tbody tr.fan-favorite-advanced-row > td:first-child,
+    body[data-fan-team] .stats-tablewrap tbody tr.fan-favorite-row > td:first-child {
+      box-shadow:inset 4px 0 var(--fan-accent)!important;
+    }
+    body[data-fan-team] .adv-table tbody tr.fan-favorite-advanced-row > td:is(:first-child,:nth-child(2)),
+    body[data-fan-team] .stats-tablewrap tbody tr.fan-favorite-row > td:nth-child(2) .playerlink {
+      color:var(--fan-accent)!important;
+      font-weight:800!important;
+    }
+    body[data-fan-team] .adv-table tbody tr.fan-favorite-advanced-row > td:first-child {
+      position:sticky;
+      left:0;
+      z-index:2;
+    }
+    @media(forced-colors:active) {
+      body[data-fan-team] .adv-table tbody tr.fan-favorite-advanced-row > td:first-child {outline:2px solid Highlight}
+    }
     body[data-fan-team] .adv-podium-card.fan-favorite-advanced-row,
     body[data-fan-team] .adv-rank-row.fan-favorite-advanced-row {
       border:1px solid var(--fan-accent)!important;
