@@ -11,7 +11,7 @@
     if(url.protocol!=="https:"||url.username||url.password||url.search||url.hash||url.pathname.indexOf("/rest/v1/")<0)
       throw new TypeError("invalid public endpoint");
     if(url.hostname!=="xxwqeiuyislnoxsmjuul.supabase.co")throw new TypeError("unapproved API host");
-    if(!/^\\/rest\\/v1\\/[a-z][a-z0-9_]*$/.test(url.pathname))throw new TypeError("invalid API path");
+    if(!new RegExp("^/rest/v1/[a-z][a-z0-9_]*$").test(url.pathname))throw new TypeError("invalid API path");
     if(/(?:archive|shadow|preview|security99|internal|private)/i.test(url.pathname))throw new TypeError("internal endpoint forbidden");
     return url;
   }
