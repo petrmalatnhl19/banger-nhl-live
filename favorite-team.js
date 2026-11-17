@@ -533,7 +533,7 @@
         border-radius:12px!important;
       }
       header.top .header-status{display:none!important}
-      header.top .lang-picker,header.top .language-picker,
+      header.top #bangerLanguageBox,header.top .lang-picker,header.top .language-picker,
       header.top .lang-switch,header.top .language-switch,
       header.top #languageSelector {
         grid-column:2!important;grid-row:1!important;justify-self:end!important;
