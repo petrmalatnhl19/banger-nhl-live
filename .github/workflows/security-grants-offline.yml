@@ -13,6 +13,9 @@ jobs:
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
+      - name: Inventory tracked CORE43 consumers (SECURITY-78, offline)
+        run: python3 .github/scripts/security78-consumer-inventory.py
+
       - name: Validate proposed grants SQL without database access
         run: python3 .github/scripts/test-security-08-grants.py
 
