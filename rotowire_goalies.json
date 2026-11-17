@@ -1,52 +1,8 @@
 {
-  "updatedAt": "2026-11-16T23:25:31.392387+00:00",
+  "updatedAt": "2026-11-17T00:20:26.943602+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-  "goalieCount": 90,
+  "goalieCount": 86,
   "games": [
-    {
-      "team": "MTL",
-      "goalie": "Jacob Fowler",
-      "opponent": "NYR",
-      "venue": "away",
-      "status": "confirmed",
-      "date": "2026-11-16",
-      "gameId": 2026020331,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8484170"
-    },
-    {
-      "team": "NYR",
-      "goalie": "Joonas Korpisalo",
-      "opponent": "MTL",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-16",
-      "gameId": 2026020331,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8476914"
-    },
-    {
-      "team": "UTA",
-      "goalie": "Karel Vejmelka",
-      "opponent": "VAN",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-16",
-      "gameId": 2026020332,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8478872"
-    },
-    {
-      "team": "VAN",
-      "goalie": "Nikita Tolopilo",
-      "opponent": "UTA",
-      "venue": "away",
-      "status": "projected",
-      "date": "2026-11-16",
-      "gameId": 2026020332,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8484268"
-    },
     {
       "team": "ANA",
       "goalie": "Lukas Dostal",
