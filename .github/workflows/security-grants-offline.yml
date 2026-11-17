@@ -158,3 +158,6 @@ jobs:
 
       - name: Verify SECURITY-142 isolated signed SQLite writer (offline)
         run: python3 .github/scripts/test-security-142-isolated-writer.py
+
+      - name: Verify SECURITY-143 cross-UID SQLite isolation and signed IPC (offline)
+        run: python3 .github/scripts/test-security-143-distinct-uid.py
