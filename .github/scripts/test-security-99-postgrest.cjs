@@ -11,7 +11,11 @@ function token(role) {
 }
 async function request(path, method = "GET", role) {
   const headers = role ? { authorization: "Bearer " + token(role) } : {};
-  return fetch(base + "/"+path, { method, headers, signal: AbortSignal.timeout(10000) });
+  const hasBody = method === "POST" || method === "PATCH";
+  if (hasBody) headers["content-type"] = "application/json";
+  return fetch(base + "/" + path, { method, headers,
+    ...(hasBody ? { body: JSON.stringify({ game_id: 1, core43_away: 99 }) } : {}),
+    signal: AbortSignal.timeout(10000) });
 }
 (async () => {
   for (const role of ["anon", "authenticated"]) {
