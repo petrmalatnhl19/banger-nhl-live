@@ -21,6 +21,8 @@ jobs:
         run: node .github/scripts/test-ux-01-games.cjs
       - name: SECURITY-105 TV frontend migration regression (static)
         run: node .github/scripts/test-security-105-tv-frontend-regression.cjs
+      - name: SECURITY-121 public API to TV preview end-to-end (offline)
+        run: node security/local/test_security121_tv_e2e_preview.cjs
       - name: SECURITY-120 TV UI integration gate (offline)
         run: node security/local/test_security120_tv_ui_gate.cjs
       - name: SECURITY-119 TV fail-closed presentation states (offline)
