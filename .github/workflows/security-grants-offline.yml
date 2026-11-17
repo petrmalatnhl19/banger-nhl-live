@@ -152,3 +152,6 @@ jobs:
 
       - name: Verify SECURITY-140 signed transaction owner (offline)
         run: python3 .github/scripts/test-security-140-transaction-owner.py
+
+      - name: Verify SECURITY-141 SQLite bypass inventory and adversarial controls (offline)
+        run: python3 .github/scripts/test-security-141-bypass-audit.py
