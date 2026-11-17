@@ -19,6 +19,8 @@ jobs:
           node-version: '22'
       - name: UX-01 mobile Games filter regression
         run: node .github/scripts/test-ux-01-games.cjs
+      - name: SECURITY-105 TV frontend migration regression (static)
+        run: node .github/scripts/test-security-105-tv-frontend-regression.cjs
       - name: Validate local scripts and HTML entrypoint
         shell: bash
         run: |
