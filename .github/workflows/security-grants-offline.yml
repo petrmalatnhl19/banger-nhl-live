@@ -107,3 +107,15 @@ jobs:
 
       - name: Enforce SECURITY-107 integration NO-GO gate (offline)
         run: node .github/scripts/test-security-107-integration-gate.cjs
+
+      - name: Verify SECURITY-125 timestamp provenance (offline)
+        run: node .github/scripts/test-security-125-timestamp-provenance.cjs
+
+      - name: Verify SECURITY-126 signed snapshot (offline)
+        run: node .github/scripts/test-security-126-signed-snapshot.cjs
+
+      - name: Verify SECURITY-127 replay and key policy (offline)
+        run: node .github/scripts/test-security-127-replay-key-policy.cjs
+
+      - name: Verify SECURITY-128 disposable ledger (offline)
+        run: node .github/scripts/test-security-128-durable-ledger.cjs
