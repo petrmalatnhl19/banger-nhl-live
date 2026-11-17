@@ -1,45 +1,192 @@
 {
-  "date": "2026-11-16",
-  "updatedAt": "2026-11-16T18:05:05.621732+00:00",
+  "date": "2026-11-17",
+  "updatedAt": "2026-11-17T08:09:36.503299+00:00",
   "teams": {
-    "MTL": {
-      "name": "Jacob Fowler",
-      "status": "confirmed",
-      "date": "2026-11-16",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-16T18:05:05.621732+00:00",
-      "gameId": 2026020331
-    },
-    "NYR": {
-      "name": "Joonas Korpisalo",
-      "status": "confirmed",
-      "date": "2026-11-16",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-16T18:05:05.621732+00:00",
-      "gameId": 2026020331
-    },
-    "UTA": {
-      "name": "Karel Vejmelka",
+    "BOS": {
+      "name": "Jeremy Swayman",
       "status": "projected",
-      "date": "2026-11-16",
+      "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-16T18:05:05.621732+00:00",
-      "gameId": 2026020332
+      "checkedAt": "2026-11-17T08:09:36.503299+00:00",
+      "gameId": 2026020333
     },
-    "VAN": {
-      "name": "Kevin Lankinen",
+    "BUF": {
+      "name": "Alex Lyon",
       "status": "projected",
-      "date": "2026-11-16",
+      "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-16T18:05:05.621732+00:00",
-      "gameId": 2026020332
+      "checkedAt": "2026-11-17T08:09:36.503299+00:00",
+      "gameId": 2026020337
+    },
+    "CBJ": {
+      "name": "Jet Greaves",
+      "status": "projected",
+      "date": "2026-11-17",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-17T08:09:36.503299+00:00",
+      "gameId": 2026020336
+    },
+    "CHI": {
+      "name": "Spencer Knight",
+      "status": "projected",
+      "date": "2026-11-17",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-17T08:09:36.503299+00:00",
+      "gameId": 2026020338
+    },
+    "DAL": {
+      "name": "Casey DeSmith",
+      "status": "projected",
+      "date": "2026-11-17",
+      "source": "https://themorningpuck.com/starting-goalies",
+      "sourceLabel": "The Morning Puck",
+      "checkedAt": "2026-11-17T08:09:34.813689+00:00"
+    },
+    "MIN": {
+      "name": "Jesper Wallstedt",
+      "status": "confirmed",
+      "date": "2026-11-17",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-17T08:09:36.503299+00:00",
+      "gameId": 2026020340
+    },
+    "NSH": {
+      "name": "Juuse Saros",
+      "status": "projected",
+      "date": "2026-11-17",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-17T08:09:36.503299+00:00",
+      "gameId": 2026020340
+    },
+    "NYI": {
+      "name": "Ilya Sorokin",
+      "status": "projected",
+      "date": "2026-11-17",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-17T08:09:36.503299+00:00",
+      "gameId": 2026020336
+    },
+    "OTT": {
+      "name": "Linus Ullmark",
+      "status": "projected",
+      "date": "2026-11-17",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-17T08:09:36.503299+00:00",
+      "gameId": 2026020341
+    },
+    "PHI": {
+      "name": "Dan Vladar",
+      "status": "projected",
+      "date": "2026-11-17",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-17T08:09:36.503299+00:00",
+      "gameId": 2026020337
+    },
+    "STL": {
+      "name": "Joel Hofer",
+      "status": "projected",
+      "date": "2026-11-17",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-17T08:09:36.503299+00:00",
+      "gameId": 2026020339
+    },
+    "TBL": {
+      "name": "Andrei Vasilevskiy",
+      "status": "projected",
+      "date": "2026-11-17",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-17T08:09:36.503299+00:00",
+      "gameId": 2026020334
+    },
+    "VGK": {
+      "name": "Carter Hart",
+      "status": "projected",
+      "date": "2026-11-17",
+      "source": "https://themorningpuck.com/starting-goalies",
+      "sourceLabel": "The Morning Puck",
+      "checkedAt": "2026-11-17T08:09:34.831918+00:00"
+    },
+    "WPG": {
+      "name": "Stuart Skinner",
+      "status": "projected",
+      "date": "2026-11-17",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-17T08:09:36.503299+00:00",
+      "gameId": 2026020341
+    },
+    "WSH": {
+      "name": "Logan Thompson",
+      "status": "projected",
+      "date": "2026-11-17",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-17T08:09:36.503299+00:00",
+      "gameId": 2026020334
     }
   },
-  "conflicts": [],
+  "conflicts": [
+    {
+      "date": "2026-11-17",
+      "team": "ANA",
+      "reason": "source disagreement",
+      "rotowire": "Lukas Dostal",
+      "previous": "Ville Husso"
+    },
+    {
+      "date": "2026-11-17",
+      "team": "CGY",
+      "reason": "source disagreement",
+      "rotowire": "Dustin Wolf",
+      "previous": "Devin Cooley"
+    },
+    {
+      "date": "2026-11-17",
+      "team": "EDM",
+      "reason": "source disagreement",
+      "rotowire": "Devon Levi",
+      "previous": "Tristan Jarry"
+    },
+    {
+      "date": "2026-11-17",
+      "team": "FLA",
+      "reason": "source disagreement",
+      "rotowire": "Jacob Markstrom",
+      "previous": "Akira Schmid"
+    },
+    {
+      "date": "2026-11-17",
+      "team": "LAK",
+      "reason": "source disagreement",
+      "rotowire": "Darcy Kuemper",
+      "previous": "Anton Forsberg"
+    },
+    {
+      "date": "2026-11-17",
+      "team": "SJS",
+      "reason": "source disagreement",
+      "rotowire": "Yaroslav Askarov",
+      "previous": "Alex Nedeljkovic"
+    },
+    {
+      "date": "2026-11-17",
+      "team": "TOR",
+      "reason": "source disagreement",
+      "rotowire": "Sergei Bobrovsky",
+      "previous": "Anthony Stolarz"
+    }
+  ],
   "sourceErrors": [],
-  "status": "ok"
+  "status": "partial"
 }

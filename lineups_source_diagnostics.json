@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T18:05:00.856540+00:00",
+  "generatedAt": "2026-11-17T08:09:33.557136+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -64,8 +64,8 @@
     "rangers": {
       "team": "NYR",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/montreal-canadiens-new-york-rangers-game-preview-november-16-2026",
-      "candidatePublishedAt": "2026-11-16T17:29:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-16T19:54:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -136,8 +136,8 @@
     "canucks": {
       "team": "VAN",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/vancouver-canucks-vegas-golden-knights-game-preview-november-15-2026",
-      "candidatePublishedAt": "2026-11-15T19:32:08.037000+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-16T19:54:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -167,58 +167,16 @@
     "mammoth": {
       "team": "UTA",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/san-jose-sharks-utah-mammoth-game-preview-november-14-2026",
-      "candidatePublishedAt": "2026-11-14T19:19:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-16T19:54:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
-      "gameEvidenceExceptions": [
-        {
-          "player": "Artem Duda",
-          "role": "defense",
-          "basis": "official game boxscore on projection publication date"
-        }
-      ],
       "roleMismatches": [],
-      "rejectedLines": [
-        {
-          "group": "forwards",
-          "line": 4,
-          "players": [
-            "Ben McCartney"
-          ],
-          "sourceLine": [
-            "Liam O’Brien",
-            "Kevin Stenlund",
-            "Ben McCartney"
-          ]
-        },
-        {
-          "group": "defense",
-          "line": 3,
-          "players": [
-            "Zac Jones"
-          ],
-          "sourceLine": [
-            "Artem Duda",
-            "Zac Jones"
-          ]
-        }
-      ],
-      "rejectedPlayerReasons": [
-        {
-          "name": "Ben McCartney",
-          "expectedRole": "forwards",
-          "reason": "not_in_current_roster"
-        },
-        {
-          "name": "Zac Jones",
-          "expectedRole": "defense",
-          "reason": "not_in_current_roster"
-        }
-      ],
-      "validatedForwardLines": 3,
-      "validatedDefensePairs": 2,
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
       "accepted": true
     },
     "red wings": {

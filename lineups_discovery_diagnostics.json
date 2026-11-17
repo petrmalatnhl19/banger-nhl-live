@@ -1,21 +1,9 @@
 {
-  "generatedAt": "2026-11-16T18:04:54.324685+00:00",
-  "checked": 23,
-  "articlesFound": 1,
+  "generatedAt": "2026-11-17T08:09:30.010254+00:00",
+  "checked": 24,
+  "articlesFound": 0,
   "errors": [],
   "fixtures": [
-    {
-      "date": "2026-11-16",
-      "away": "MTL",
-      "home": "NYR",
-      "priority": true
-    },
-    {
-      "date": "2026-11-16",
-      "away": "VAN",
-      "home": "UTA",
-      "priority": false
-    },
     {
       "date": "2026-11-17",
       "away": "ANA",
@@ -99,28 +87,81 @@
       "away": "MTL",
       "home": "NJD",
       "priority": false
+    },
+    {
+      "date": "2026-11-19",
+      "away": "CBJ",
+      "home": "CHI",
+      "priority": true
+    },
+    {
+      "date": "2026-11-19",
+      "away": "LAK",
+      "home": "TOR",
+      "priority": true
+    },
+    {
+      "date": "2026-11-19",
+      "away": "MTL",
+      "home": "CAR",
+      "priority": true
+    },
+    {
+      "date": "2026-11-19",
+      "away": "NYI",
+      "home": "WPG",
+      "priority": true
+    },
+    {
+      "date": "2026-11-19",
+      "away": "PHI",
+      "home": "OTT",
+      "priority": true
+    },
+    {
+      "date": "2026-11-19",
+      "away": "STL",
+      "home": "PIT",
+      "priority": true
+    },
+    {
+      "date": "2026-11-19",
+      "away": "VAN",
+      "home": "SEA",
+      "priority": true
+    },
+    {
+      "date": "2026-11-19",
+      "away": "ANA",
+      "home": "COL",
+      "priority": false
+    },
+    {
+      "date": "2026-11-19",
+      "away": "BUF",
+      "home": "WSH",
+      "priority": false
+    },
+    {
+      "date": "2026-11-19",
+      "away": "DAL",
+      "home": "VGK",
+      "priority": false
+    },
+    {
+      "date": "2026-11-19",
+      "away": "EDM",
+      "home": "TBL",
+      "priority": false
+    },
+    {
+      "date": "2026-11-19",
+      "away": "MIN",
+      "home": "CGY",
+      "priority": false
     }
   ],
   "attempts": [
-    {
-      "url": "https://www.nhl.com/news/montreal-canadiens-new-york-rangers-game-preview-november-16-2026",
-      "result": "parsed",
-      "teams": [
-        "canadiens",
-        "rangers"
-      ],
-      "coversBothTeams": true
-    },
-    {
-      "url": "https://www.nhl.com/news/vancouver-canucks-utah-mammoth-game-preview-november-16-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/utah-mammoth-vancouver-canucks-game-preview-november-16-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
     {
       "url": "https://www.nhl.com/news/anaheim-ducks-st-louis-blues-game-preview-november-17-2026",
       "result": "no_complete_projection",
@@ -202,47 +243,57 @@
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/edmonton-oilers-florida-panthers-game-preview-november-17-2026",
+      "url": "https://www.nhl.com/news/buffalo-sabres-washington-capitals-game-preview-november-19-2026",
       "result": "no_complete_projection",
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/florida-panthers-edmonton-oilers-game-preview-november-17-2026",
+      "url": "https://www.nhl.com/news/washington-capitals-buffalo-sabres-game-preview-november-19-2026",
       "result": "no_complete_projection",
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/nashville-predators-minnesota-wild-game-preview-november-17-2026",
+      "url": "https://www.nhl.com/news/dallas-stars-vegas-golden-knights-game-preview-november-19-2026",
       "result": "no_complete_projection",
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/minnesota-wild-nashville-predators-game-preview-november-17-2026",
+      "url": "https://www.nhl.com/news/vegas-golden-knights-dallas-stars-game-preview-november-19-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/edmonton-oilers-tampa-bay-lightning-game-preview-november-19-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/tampa-bay-lightning-edmonton-oilers-game-preview-november-19-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/minnesota-wild-calgary-flames-game-preview-november-19-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/calgary-flames-minnesota-wild-game-preview-november-19-2026",
       "result": "no_complete_projection",
       "teams": []
     }
   ],
   "note": "Upcoming games today through two days ahead; prioritize older sources and nearest games. A fixture is not proof a preview article exists.",
   "fixturesSelected": 12,
-  "fixturesDeferred": 4,
+  "fixturesDeferred": 14,
   "rotation": {
-    "window": 1994280,
+    "window": 1994336,
     "fixed": 8,
     "rotating": 4,
-    "remainingPool": 8,
-    "rotationStart": 0
+    "remainingPool": 18,
+    "rotationStart": 14
   },
   "selectedFixtures": [
-    {
-      "date": "2026-11-16",
-      "away": "MTL",
-      "home": "NYR"
-    },
-    {
-      "date": "2026-11-16",
-      "away": "VAN",
-      "home": "UTA"
-    },
     {
       "date": "2026-11-17",
       "away": "ANA",
@@ -284,14 +335,24 @@
       "home": "VGK"
     },
     {
-      "date": "2026-11-17",
-      "away": "EDM",
-      "home": "FLA"
+      "date": "2026-11-19",
+      "away": "BUF",
+      "home": "WSH"
     },
     {
-      "date": "2026-11-17",
-      "away": "NSH",
-      "home": "MIN"
+      "date": "2026-11-19",
+      "away": "DAL",
+      "home": "VGK"
+    },
+    {
+      "date": "2026-11-19",
+      "away": "EDM",
+      "home": "TBL"
+    },
+    {
+      "date": "2026-11-19",
+      "away": "MIN",
+      "home": "CGY"
     }
   ]
 }

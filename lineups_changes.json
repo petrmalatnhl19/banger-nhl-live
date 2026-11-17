@@ -394,82 +394,19 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "mammoth": {
-      "updatedAt": "2026-11-14T20:40:53.452222+00:00",
-      "previousPublishedAt": "2026-11-12T19:32:09.831000+00:00",
-      "publishedAt": "2026-11-14T20:11:00+00:00",
+      "updatedAt": "2026-11-17T02:41:06.485999+00:00",
+      "previousPublishedAt": "2026-11-16T19:54:00+00:00",
+      "publishedAt": "2026-11-16T19:54:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
-          "type": "moved",
-          "player": "Anders Lee",
-          "from": "Útok 3",
-          "to": "Útok 1"
-        },
-        {
-          "type": "moved",
-          "player": "Vincent Trocheck",
-          "from": "Útok 2",
-          "to": "Útok 1"
-        },
-        {
-          "type": "moved",
-          "player": "Daniil But",
-          "from": "Útok 1",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Barrett Hayton",
-          "from": "Útok 3",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Kailer Yamamoto",
-          "from": "Útok 3",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Michael Carcone",
-          "from": "Útok 4",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Jack McBain",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Lawson Crouse",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "removed",
-          "player": "Nick Schmaltz",
-          "from": "Útok 1"
-        },
-        {
-          "type": "removed",
-          "player": "Liam O’Brien",
-          "from": "Útok 4"
-        },
-        {
-          "type": "removed",
-          "player": "Kevin Stenlund",
-          "from": "Útok 4"
+          "type": "added",
+          "player": "Nick DeSimone",
+          "to": "Obrana 3"
         },
         {
           "type": "removed",
           "player": "Artem Duda",
-          "from": "Obrana 3"
-        },
-        {
-          "type": "removed",
-          "player": "Nick DeSimone",
           "from": "Obrana 3"
         }
       ],
@@ -841,20 +778,32 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "rangers": {
-      "updatedAt": "2026-11-16T18:05:00.859907+00:00",
-      "previousPublishedAt": "2026-11-13T20:00:20.196000+00:00",
-      "publishedAt": "2026-11-16T17:29:00+00:00",
-      "source": "https://www.nhl.com/news/montreal-canadiens-new-york-rangers-game-preview-november-16-2026",
+      "updatedAt": "2026-11-17T01:42:31.306833+00:00",
+      "previousPublishedAt": "2026-11-16T19:54:00+00:00",
+      "publishedAt": "2026-11-16T19:54:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
-          "type": "added",
-          "player": "Matthew Robertson",
-          "to": "Obrana 3"
+          "type": "moved",
+          "player": "Will Cuylle",
+          "from": "Útok 3",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Eeli Tolvanen",
+          "from": "Útok 4",
+          "to": "Útok 3"
         },
         {
           "type": "added",
-          "player": "Scott Morrow",
-          "to": "Obrana 3"
+          "player": "Matt Rempe",
+          "to": "Útok 4"
+        },
+        {
+          "type": "removed",
+          "player": "Pavel Dorofeyev",
+          "from": "Útok 2"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -1110,82 +1059,25 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "flames": {
-      "updatedAt": "2026-11-15T15:25:21.841571+00:00",
-      "previousPublishedAt": "2026-11-14T20:51:00+00:00",
+      "updatedAt": "2026-11-16T21:51:37.250496+00:00",
+      "previousPublishedAt": "2026-11-15T15:20:39.964000+00:00",
       "publishedAt": "2026-11-15T15:20:39.964000+00:00",
       "source": "https://www.nhl.com/news/calgary-flames-anaheim-ducks-game-preview-november-15-2026",
       "events": [
         {
-          "type": "moved",
-          "player": "Matvei Gridin",
-          "from": "Útok 3",
-          "to": "Útok 2"
+          "type": "removed",
+          "player": "William Stromgren",
+          "from": "Útok 4"
         },
         {
-          "type": "moved",
-          "player": "Martin Pospisil",
-          "from": "Útok 3",
-          "to": "Útok 2"
+          "type": "removed",
+          "player": "Jonathan Castagna",
+          "from": "Útok 4"
         },
         {
-          "type": "moved",
-          "player": "Ryan Strome",
-          "from": "Útok 3",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Yegor Sharangovich",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Morgan Frost",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Adam Klapka",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Yan Kuznetsov",
-          "from": "Obrana 3",
-          "to": "Obrana 1"
-        },
-        {
-          "type": "moved",
-          "player": "Zayne Parekh",
-          "from": "Obrana 3",
-          "to": "Obrana 1"
-        },
-        {
-          "type": "moved",
-          "player": "Joel Hanley",
-          "from": "Obrana 1",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "moved",
-          "player": "Simon Nemec",
-          "from": "Obrana 1",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "moved",
-          "player": "Jake Middleton",
-          "from": "Obrana 2",
-          "to": "Obrana 3"
-        },
-        {
-          "type": "moved",
-          "player": "Zach Whitecloud",
-          "from": "Obrana 2",
-          "to": "Obrana 3"
+          "type": "removed",
+          "player": "Aydar Suniev",
+          "from": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
