@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-17T06:50:55.327044+00:00",
+  "generatedAt": "2026-11-17T08:09:34.560230+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 9,
+  "currentProjections": 8,
   "needsFreshProjection": [
     "avalanche",
     "blackhawks",
@@ -13,6 +13,7 @@
     "devils",
     "ducks",
     "flames",
+    "golden knights",
     "hurricanes",
     "islanders",
     "jets",
@@ -39,6 +40,7 @@
     "devils",
     "ducks",
     "flames",
+    "golden knights",
     "hurricanes",
     "islanders",
     "jets",
@@ -208,11 +210,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-15T19:32:08.037000+00:00",
       "source": "https://www.nhl.com/news/vancouver-canucks-vegas-golden-knights-game-preview-november-15-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "hurricanes": {
       "hasProjectedLines": true,
