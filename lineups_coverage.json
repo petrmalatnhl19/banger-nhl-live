@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-17T05:45:38.428351+00:00",
+  "generatedAt": "2026-11-17T06:50:55.327044+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 11,
+  "currentProjections": 9,
   "needsFreshProjection": [
     "avalanche",
     "blackhawks",
@@ -21,9 +21,11 @@
     "lightning",
     "maple leafs",
     "penguins",
+    "predators",
     "red wings",
     "sabres",
     "senators",
+    "sharks",
     "wild"
   ],
   "missing": [],
@@ -45,9 +47,11 @@
     "lightning",
     "maple leafs",
     "penguins",
+    "predators",
     "red wings",
     "sabres",
     "senators",
+    "sharks",
     "wild"
   ],
   "manualSnapshots": [],
@@ -350,11 +354,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-15T18:24:23.483000+00:00",
       "source": "https://www.nhl.com/news/nashville-predators-san-jose-sharks-game-preview-november-15-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "rangers": {
       "hasProjectedLines": true,
@@ -410,11 +414,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-15T18:24:23.483000+00:00",
       "source": "https://www.nhl.com/news/nashville-predators-san-jose-sharks-game-preview-november-15-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "stars": {
       "hasProjectedLines": true,
