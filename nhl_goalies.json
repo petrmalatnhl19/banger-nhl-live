@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-17T05:45:41.363981+00:00",
-  "rostersUpdatedAt": "2026-11-17T05:44:59.177654+00:00",
+  "updatedAt": "2026-11-17T06:50:57.509642+00:00",
+  "rostersUpdatedAt": "2026-11-17T06:50:27.023706+00:00",
   "projectionDate": "2026-11-17",
   "teamCount": 32,
   "goalieCount": 74,
@@ -191,9 +191,8 @@
       "team": "ANA",
       "teamKey": "ducks",
       "playerId": 8480843,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-17",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Ville Husso",
@@ -216,9 +215,8 @@
       "team": "CGY",
       "teamKey": "flames",
       "playerId": 8481692,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-17",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Dan Vladar",
@@ -244,7 +242,7 @@
       "playerId": 8479394,
       "starterStatus": "projected",
       "starterGameDate": "2026-11-17",
-      "starterSource": "https://www.nhl.com/news/vancouver-canucks-vegas-golden-knights-game-preview-november-15-2026"
+      "starterSource": "https://themorningpuck.com/starting-goalies"
     },
     {
       "name": "Adin Hill",
@@ -325,9 +323,8 @@
       "team": "LAK",
       "teamKey": "kings",
       "playerId": 8475311,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-17",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Joey Daccord",
@@ -391,9 +388,8 @@
       "team": "TOR",
       "teamKey": "maple leafs",
       "playerId": 8475683,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-17",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Anthony Stolarz",
@@ -581,7 +577,7 @@
       "playerId": 8479193,
       "starterStatus": "projected",
       "starterGameDate": "2026-11-17",
-      "starterSource": "https://www.nhl.com/news/florida-panthers-dallas-stars-game-preview-november-15-2026"
+      "starterSource": "https://themorningpuck.com/starting-goalies"
     },
     {
       "name": "Jake Oettinger",
