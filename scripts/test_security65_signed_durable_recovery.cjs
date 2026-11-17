@@ -77,7 +77,7 @@ try{
  const bridge=path.join(__dirname,'../.github/scripts/security65_sqlite_bridge.py');
  const call=(op,extra={})=>{
   const result=spawnSync('python3',[bridge,op,db,payload,JSON.stringify(extra)],{encoding:'utf8'});
-  if(result.status!==0)throw Error(op+': '+result.stderr);
+  if(result.status!==(op==='crash'?77:0))throw Error(op+': '+result.status+' '+result.stderr);
   return result.stdout.trim()?JSON.parse(result.stdout):null;
  };
  const initial={archive,signedRegistry,history,anchor};
