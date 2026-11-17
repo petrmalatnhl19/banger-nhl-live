@@ -64,6 +64,8 @@ jobs:
             < security/local/security101-public-view.sql
       - name: Verify private-schema PostgREST contract (SECURITY-101)
         run: node .github/scripts/test-security-101-public-view.cjs
+      - name: Verify PostgREST to TV integration (SECURITY-104)
+        run: node .github/scripts/test-security-104-postgrest-tv-e2e.cjs
       - name: Diagnose PostgreSQL initialization failure
         if: failure()
         run: docker compose -f security/local/compose.yaml logs --no-color postgres
