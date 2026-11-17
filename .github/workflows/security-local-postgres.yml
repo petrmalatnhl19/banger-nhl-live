@@ -26,6 +26,8 @@ jobs:
         run: bash security/local/security69-transaction-rollback.sh
       - name: Verify baseline-derived privilege restoration (SECURITY-70)
         run: bash security/local/security70-baseline-restore.sh
+      - name: Verify exact synthetic ACL restoration (SECURITY-72)
+        run: bash security/local/security72-exact-acl-restore.sh
       - name: Diagnose PostgreSQL initialization failure
         if: failure()
         run: docker compose -f security/local/compose.yaml logs --no-color postgres
