@@ -32,8 +32,11 @@ async function request(role,path,method="GET",body) {
     for (const method of ["POST","PATCH","DELETE"]) {
       const path="/security101_tv_public_v1"+(method==="POST"?"":"?game_id=eq.101");
       const result=await request(role,path,method,method==="DELETE"?undefined:{game_id:102,core43_away:99});
-      assert.equal(result.status,role==="anon"?401:403,role+" "+method+" "+result.body);
+      assert.ok([401,403,404,405].includes(result.status),role+" "+method+" unexpectedly allowed: "+result.status+" "+result.body);
     }
+    const unchanged=await request(role,"/security101_tv_public_v1?game_id=eq.101");
+    assert.equal(unchanged.status,200,role+" post-write read");
+    assert.deepEqual(JSON.parse(unchanged.body),rows,role+" write attempts changed public data");
     const privateResult=await request(role,"/tv_source");
     assert.equal(privateResult.status,404,role+" private source not exposed "+privateResult.body);
     const privateSchema=await fetch(endpoint+"/tv_source",{headers:{
