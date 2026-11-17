@@ -90,3 +90,6 @@ jobs:
 
       - name: Test adversarial CORE 4.3 publication contract (SECURITY-96, offline)
         run: node .github/scripts/test-security-96-adversarial-contract.cjs
+
+      - name: Test simulated public API responses (SECURITY-98, loopback only)
+        run: node .github/scripts/test-security-98-api-fixture.cjs
