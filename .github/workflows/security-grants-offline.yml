@@ -125,3 +125,6 @@ jobs:
 
       - name: Verify SECURITY-131 signed issuance envelope (offline)
         run: node .github/scripts/test-security-131-signed-issuance.cjs
+
+      - name: Verify SECURITY-132 bound signed snapshot and replay chain (offline)
+        run: node .github/scripts/test-security-132-bound-chain.cjs
