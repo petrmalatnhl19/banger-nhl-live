@@ -502,6 +502,47 @@
       header.top .fan-team-picker summary {max-width:100%!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     }
   `;
+  /* FAN-19: restrained two-tone club identity; keep neutral content readable. */
+  style.textContent += `
+    body[data-fan-team] {
+      --fan-soft:color-mix(in srgb,var(--fan-accent) 12%,#0c2840);
+      --fan-edge:color-mix(in srgb,var(--fan-accent) 48%,#31536c);
+    }
+    body[data-fan-team] .game.fan-favorite-card,
+    body[data-fan-team] .dash-game.fan-favorite-card,
+    body[data-fan-team] .analyst-list-card.fan-favorite-card {
+      background:linear-gradient(115deg,color-mix(in srgb,var(--fan-accent) 13%,#10283f) 0%,color-mix(in srgb,var(--fan-secondary) 12%,#0b2138) 70%,#0b2138 100%)!important;
+      border-color:var(--fan-edge)!important;
+      box-shadow:inset 4px 0 var(--fan-accent),0 0 12px color-mix(in srgb,var(--fan-accent) 10%,transparent)!important;
+    }
+    body[data-fan-team] .game.fan-favorite-card .btn,
+    body[data-fan-team] .analyst-list-card.fan-favorite-card .btn {
+      border-color:var(--fan-edge)!important;
+      background:linear-gradient(130deg,color-mix(in srgb,var(--fan-secondary) 18%,#143452),#102b46)!important;
+      color:#f2fbff!important;
+    }
+    body[data-fan-team] #uxStatsHub [data-ux-tab].active,
+    body[data-fan-team] #uxStatsHub [data-ux-tab][aria-pressed="true"],
+    body[data-fan-team] .ux-stats-tabs button.active {
+      border-color:var(--fan-accent)!important;
+      background:linear-gradient(135deg,color-mix(in srgb,var(--fan-secondary) 32%,#102d45),#10273e)!important;
+      box-shadow:inset 3px 0 var(--fan-accent)!important;
+      color:#fff!important;
+    }
+    body[data-fan-team] .fan-team-picker select:focus-visible,
+    body[data-fan-team] #uxStatsHub [data-ux-tab]:focus-visible {
+      outline:2px solid var(--fan-accent)!important;
+      outline-offset:2px;
+    }
+    @media(prefers-reduced-motion:reduce) {
+      body[data-fan-team] .game.fan-favorite-card,
+      body[data-fan-team] .dash-game.fan-favorite-card {transition:none!important}
+    }
+    @media(forced-colors:active) {
+      body[data-fan-team] .game.fan-favorite-card,
+      body[data-fan-team] .dash-game.fan-favorite-card {outline:2px solid Highlight}
+    }
+  `;
   /* FAN-14: two-row mobile header; team name never clipped by language control. */
   style.textContent += `
     @media(max-width:600px) {

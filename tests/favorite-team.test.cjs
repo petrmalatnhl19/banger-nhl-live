@@ -108,3 +108,11 @@ assert(source.includes('.adv-table tbody tr.fan-favorite-advanced-row > td,'),'a
 assert(source.includes('position:sticky;'),'sticky column remains fixed');
 assert(source.includes('box-shadow:inset 4px 0 var(--fan-accent)'),'club color leading stripe');
 console.log('FAN-18 sticky-name and full-row style checks passed');
+
+// FAN-19: club identity styling must be limited to favorite matches and selected controls.
+assert(source.includes('body[data-fan-team] .game.fan-favorite-card'),'favorite game styling scoped');
+assert(source.includes('body[data-fan-team] .dash-game.fan-favorite-card'),'favorite dashboard styling scoped');
+assert(source.includes('body[data-fan-team] #uxStatsHub [data-ux-tab].active'),'active stats control styling');
+assert(source.includes('var(--fan-secondary) 12%'),'secondary club tone on favorite cards');
+assert(source.includes('@media(forced-colors:active)'),'high contrast fallback');
+console.log('FAN-19 favorite-only club identity checks passed');
