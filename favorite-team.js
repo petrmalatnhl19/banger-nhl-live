@@ -669,4 +669,86 @@
       body[data-fan-team] header.top{border-bottom:2px solid var(--fan-accent)!important}
     }
   `;
+  /* FAN-17: consistent two-color team identity across interactive controls.
+     Preserve neutral inactive controls and distinct live/error states. */
+  style.textContent += `
+    body[data-fan-team] {
+      --fan-control-bg:color-mix(in srgb,var(--fan-secondary,#10283f) 38%,#0b2036);
+      --fan-control-border:color-mix(in srgb,var(--fan-accent) 75%,#34526c);
+    }
+    body[data-fan-team] .ux-stats-tabs button.active,
+    body[data-fan-team] .ux-stats-tabs button[aria-selected="true"],
+    body[data-fan-team] .ux-stats-tabs button[aria-pressed="true"],
+    body[data-fan-team] .dash-quick-btn.active,
+    body[data-fan-team] .toolbar>.btn.active,
+    body[data-fan-team] #uxMobileNav .active,
+    body[data-fan-team] #uxMobileNav [aria-current="page"] {
+      background:linear-gradient(145deg,var(--fan-control-bg),#0b2036)!important;
+      border-color:var(--fan-control-border)!important;
+      box-shadow:inset 0 3px var(--fan-accent)!important;
+      color:#fff!important;
+    }
+    body[data-fan-team] .ux-stats-tabs button.active *,
+    body[data-fan-team] .toolbar>.btn.active *,
+    body[data-fan-team] #uxMobileNav .active * {color:#fff!important}
+    body[data-fan-team] .ux-action,
+    body[data-fan-team] .dash-quick-btn,
+    body[data-fan-team] .stats-controls button:not(.active) {
+      border-color:color-mix(in srgb,var(--fan-accent) 35%,#34526c)!important;
+      background:linear-gradient(125deg,color-mix(in srgb,var(--fan-secondary,#10283f) 22%,#0d2941),#0d2941)!important;
+    }
+    body[data-fan-team] .fan-favorite-advanced-row {
+      background:linear-gradient(90deg,color-mix(in srgb,var(--fan-accent) 19%,#10283f),color-mix(in srgb,var(--fan-secondary,#10283f) 22%,#10283f))!important;
+      box-shadow:inset 4px 0 var(--fan-accent)!important;
+    }
+    body[data-fan-team] .adv-podium-card.fan-favorite-advanced-row,
+    body[data-fan-team] .adv-rank-row.fan-favorite-advanced-row {
+      border:1px solid var(--fan-accent)!important;
+      border-left:4px solid var(--fan-accent)!important;
+      border-radius:10px;
+      background:linear-gradient(110deg,color-mix(in srgb,var(--fan-accent) 18%,#10283f),color-mix(in srgb,var(--fan-secondary,#10283f) 24%,#10283f))!important;
+      box-shadow:inset 0 1px color-mix(in srgb,var(--fan-accent) 25%,transparent)!important;
+    }
+    body[data-fan-team] .fan-favorite-advanced-row td:first-child {
+      color:#fff!important;font-weight:800!important;
+    }
+    body[data-fan-team] .fan-favorite-advanced-row td:nth-child(2) {
+      color:var(--fan-accent)!important;font-weight:750!important;
+    }
+    @media(forced-colors:active) {
+      body[data-fan-team] .fan-favorite-advanced-row {outline:2px solid Highlight}
+    }
+  `;
+  /* Advanced statistics use different table markup than .stats-tablewrap.
+     Resolve the team column from headings, never assume fixed column 3. */
+  function markAdvancedFavoritePlayers() {
+    const root=document.getElementById('content');
+    if(!root)return;
+    const team=selected;
+    root.querySelectorAll('table').forEach(table=>{
+      if(table.closest('.stats-tablewrap'))return;
+      const heads=Array.from(table.querySelectorAll('thead th'));
+      const teamColumn=heads.findIndex(h=>/^(tým|team|tm|klub)$/i.test((h.textContent||'').trim()));
+      if(teamColumn<0)return;
+      table.querySelectorAll('tbody tr').forEach(row=>{
+        const cell=row.cells?.[teamColumn];
+        const codes=(cell?.textContent||'').toUpperCase().split(/[^A-Z]+/).filter(Boolean);
+        const match=Boolean(team&&codes.includes(team));
+        row.classList.toggle('fan-favorite-advanced-row',match);
+        if(match)row.setAttribute('data-fan-highlight','favorite-team');
+        else row.removeAttribute('data-fan-highlight');
+      });
+    });
+  }
+  document.addEventListener('banger:favorite-team-change',markAdvancedFavoritePlayers);
+  function watchAdvancedFavoritePlayers(){
+    const root=document.getElementById('content');
+    if(!root)return;
+    if(typeof MutationObserver!=='undefined')
+      new MutationObserver(markAdvancedFavoritePlayers).observe(root,{childList:true,subtree:true});
+    markAdvancedFavoritePlayers();
+  }
+  if(document.readyState==='loading')
+    document.addEventListener('DOMContentLoaded',watchAdvancedFavoritePlayers,{once:true});
+  else watchAdvancedFavoritePlayers();
 })();
