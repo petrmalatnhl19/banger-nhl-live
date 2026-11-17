@@ -82,111 +82,20 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "lightning": {
-      "updatedAt": "2026-11-17T20:41:23.249283+00:00",
-      "previousPublishedAt": "2026-11-14T18:22:33.515000+00:00",
+      "updatedAt": "2026-11-17T21:38:02.707413+00:00",
+      "previousPublishedAt": "2026-11-17T20:36:00+00:00",
       "publishedAt": "2026-11-17T20:36:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
-          "type": "moved",
-          "player": "Jake Guentzel",
-          "from": "Útok 2",
-          "to": "Útok 1"
-        },
-        {
           "type": "added",
-          "player": "Brayden Point",
-          "to": "Útok 1"
-        },
-        {
-          "type": "moved",
-          "player": "Ilya Mikheyev",
-          "from": "Útok 3",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Zemgus Girgensons",
-          "from": "Útok 3",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Pontus Holmberg",
-          "from": "Útok 3",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Yanni Gourde",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Sam O'Reilly",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Conor Geekie",
-          "from": "Útok 4",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Charle-Edouard D'Astous",
-          "from": "Obrana 3",
-          "to": "Obrana 1"
-        },
-        {
-          "type": "moved",
-          "player": "Victor Hedman",
-          "from": "Obrana 3",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "moved",
-          "player": "J.J. Moser",
-          "from": "Obrana 1",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "moved",
-          "player": "Ryan McDonagh",
-          "from": "Obrana 2",
-          "to": "Obrana 3"
-        },
-        {
-          "type": "added",
-          "player": "Erik Cernak",
-          "to": "Obrana 3"
-        },
-        {
-          "type": "removed",
-          "player": "Brandon Hagel",
-          "from": "Útok 1"
-        },
-        {
-          "type": "removed",
-          "player": "Anthony Cirelli",
-          "from": "Útok 1"
-        },
-        {
-          "type": "removed",
-          "player": "Jeffrey Viel",
-          "from": "Útok 4"
-        },
-        {
-          "type": "removed",
           "player": "Scott Sabourin",
-          "from": "Útok 4"
+          "to": "Útok 3"
         },
         {
           "type": "removed",
-          "player": "Max Crozier",
-          "from": "Obrana 2"
+          "player": "Conor Geekie",
+          "from": "Útok 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

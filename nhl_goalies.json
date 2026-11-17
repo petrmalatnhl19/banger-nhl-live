@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-17T20:41:26.824827+00:00",
-  "rostersUpdatedAt": "2026-11-17T20:41:04.329108+00:00",
+  "updatedAt": "2026-11-17T21:38:08.470882+00:00",
+  "rostersUpdatedAt": "2026-11-17T21:37:24.338607+00:00",
   "projectionDate": "2026-11-17",
   "teamCount": 32,
   "goalieCount": 73,
@@ -242,8 +242,9 @@
       "team": "VGK",
       "teamKey": "golden knights",
       "playerId": 8478499,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-17",
+      "starterSource": "https://themorningpuck.com/starting-goalies"
     },
     {
       "name": "Brandon Bussi",
@@ -581,8 +582,9 @@
       "team": "DAL",
       "teamKey": "stars",
       "playerId": 8479979,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-17",
+      "starterSource": "https://themorningpuck.com/starting-goalies"
     },
     {
       "name": "Filip Gustavsson",

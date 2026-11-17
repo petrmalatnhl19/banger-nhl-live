@@ -1,6 +1,6 @@
 {
   "date": "2026-11-17",
-  "updatedAt": "2026-11-17T20:41:26.729877+00:00",
+  "updatedAt": "2026-11-17T21:38:08.315828+00:00",
   "teams": {
     "ANA": {
       "name": "Ville Husso",
@@ -8,7 +8,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T20:41:26.729877+00:00",
+      "checkedAt": "2026-11-17T21:38:08.315828+00:00",
       "gameId": 2026020339
     },
     "BOS": {
@@ -17,7 +17,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T20:41:26.729877+00:00",
+      "checkedAt": "2026-11-17T21:38:08.315828+00:00",
       "gameId": 2026020333
     },
     "BUF": {
@@ -26,7 +26,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T20:41:26.729877+00:00",
+      "checkedAt": "2026-11-17T21:38:08.315828+00:00",
       "gameId": 2026020337
     },
     "CBJ": {
@@ -35,7 +35,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T20:41:26.729877+00:00",
+      "checkedAt": "2026-11-17T21:38:08.315828+00:00",
       "gameId": 2026020336
     },
     "CGY": {
@@ -44,7 +44,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T20:41:26.729877+00:00",
+      "checkedAt": "2026-11-17T21:38:08.315828+00:00",
       "gameId": 2026020343
     },
     "CHI": {
@@ -53,8 +53,16 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T20:41:26.729877+00:00",
+      "checkedAt": "2026-11-17T21:38:08.315828+00:00",
       "gameId": 2026020338
+    },
+    "DAL": {
+      "name": "Jake Oettinger",
+      "status": "projected",
+      "date": "2026-11-17",
+      "source": "https://themorningpuck.com/starting-goalies",
+      "sourceLabel": "The Morning Puck",
+      "checkedAt": "2026-11-17T21:38:04.834236+00:00"
     },
     "EDM": {
       "name": "Devon Levi",
@@ -62,7 +70,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T20:41:26.729877+00:00",
+      "checkedAt": "2026-11-17T21:38:08.315828+00:00",
       "gameId": 2026020335
     },
     "FLA": {
@@ -71,7 +79,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T20:41:26.729877+00:00",
+      "checkedAt": "2026-11-17T21:38:08.315828+00:00",
       "gameId": 2026020335
     },
     "LAK": {
@@ -80,7 +88,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T20:41:26.729877+00:00",
+      "checkedAt": "2026-11-17T21:38:08.315828+00:00",
       "gameId": 2026020333
     },
     "MIN": {
@@ -89,7 +97,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T20:41:26.729877+00:00",
+      "checkedAt": "2026-11-17T21:38:08.315828+00:00",
       "gameId": 2026020340
     },
     "NSH": {
@@ -98,7 +106,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T20:41:26.729877+00:00",
+      "checkedAt": "2026-11-17T21:38:08.315828+00:00",
       "gameId": 2026020340
     },
     "NYI": {
@@ -107,7 +115,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T20:41:26.729877+00:00",
+      "checkedAt": "2026-11-17T21:38:08.315828+00:00",
       "gameId": 2026020336
     },
     "OTT": {
@@ -116,7 +124,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T20:41:26.729877+00:00",
+      "checkedAt": "2026-11-17T21:38:08.315828+00:00",
       "gameId": 2026020341
     },
     "PHI": {
@@ -125,7 +133,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T20:41:26.729877+00:00",
+      "checkedAt": "2026-11-17T21:38:08.315828+00:00",
       "gameId": 2026020337
     },
     "SJS": {
@@ -134,7 +142,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T20:41:26.729877+00:00",
+      "checkedAt": "2026-11-17T21:38:08.315828+00:00",
       "gameId": 2026020343
     },
     "STL": {
@@ -143,7 +151,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T20:41:26.729877+00:00",
+      "checkedAt": "2026-11-17T21:38:08.315828+00:00",
       "gameId": 2026020339
     },
     "TBL": {
@@ -152,7 +160,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T20:41:26.729877+00:00",
+      "checkedAt": "2026-11-17T21:38:08.315828+00:00",
       "gameId": 2026020334
     },
     "TOR": {
@@ -161,8 +169,16 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T20:41:26.729877+00:00",
+      "checkedAt": "2026-11-17T21:38:08.315828+00:00",
       "gameId": 2026020338
+    },
+    "VGK": {
+      "name": "Adin Hill",
+      "status": "projected",
+      "date": "2026-11-17",
+      "source": "https://themorningpuck.com/starting-goalies",
+      "sourceLabel": "The Morning Puck",
+      "checkedAt": "2026-11-17T21:38:04.852126+00:00"
     },
     "WPG": {
       "name": "Stuart Skinner",
@@ -170,7 +186,7 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T20:41:26.729877+00:00",
+      "checkedAt": "2026-11-17T21:38:08.315828+00:00",
       "gameId": 2026020341
     },
     "WSH": {
@@ -179,24 +195,11 @@
       "date": "2026-11-17",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-17T20:41:26.729877+00:00",
+      "checkedAt": "2026-11-17T21:38:08.315828+00:00",
       "gameId": 2026020334
     }
   },
-  "conflicts": [
-    {
-      "team": "DAL",
-      "specialist": "Casey DeSmith",
-      "nhl": "Jake Oettinger",
-      "nhlSource": "https://www.nhl.com/news/dallas-stars-vegas-golden-knights-game-preview-november-17-2026"
-    },
-    {
-      "team": "VGK",
-      "specialist": "Carter Hart",
-      "nhl": "Adin Hill",
-      "nhlSource": "https://www.nhl.com/news/dallas-stars-vegas-golden-knights-game-preview-november-17-2026"
-    }
-  ],
+  "conflicts": [],
   "sourceErrors": [],
-  "status": "partial"
+  "status": "ok"
 }

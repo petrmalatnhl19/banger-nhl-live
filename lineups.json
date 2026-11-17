@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-17T20:41:23.250998+00:00",
+  "fetchedAt": "2026-11-17T21:38:02.711639+00:00",
   "teams": {
     "kings": {
       "name": "Kings",
@@ -436,7 +436,7 @@
         [
           "Yanni Gourde",
           "Sam O'Reilly",
-          "Conor Geekie"
+          "Scott Sabourin"
         ]
       ],
       "defense": [
@@ -457,8 +457,8 @@
         "Andrei Vasilevskiy",
         "Dennis Hildeby"
       ],
-      "injured": "None",
-      "scratched": "Emil Lilleberg, Max Crozier, Jeffrey Viel, Scott Sabourin",
+      "injured": "Conor Geekie (undisclosed)",
+      "scratched": "Emil Lilleberg, Max Crozier, Jeffrey Viel",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "publishedAt": "2026-11-17T20:36:00+00:00"
     },
