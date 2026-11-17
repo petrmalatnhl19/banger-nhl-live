@@ -36,6 +36,8 @@ jobs:
         run: bash security/local/security75-multilevel-grants.sh
       - name: Verify independent grant paths (SECURITY-76)
         run: bash security/local/security76-multipath-grants.sh
+      - name: Verify synthetic capture function privilege guard (SECURITY-81)
+        run: bash security/local/security81-capture-function-privileges.sh
       - name: Diagnose PostgreSQL initialization failure
         if: failure()
         run: docker compose -f security/local/compose.yaml logs --no-color postgres
