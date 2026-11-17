@@ -96,3 +96,6 @@ jobs:
 
       - name: Enforce SECURITY-100 migration NO-GO gate (offline)
         run: node .github/scripts/test-security-100-rollout-gate.cjs
+
+      - name: Verify SECURITY-102 TV adapter (offline)
+        run: node .github/scripts/test-security-102-tv-adapter.cjs
