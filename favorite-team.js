@@ -165,7 +165,6 @@
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',watchFavoriteCards,{once:true});
   else watchFavoriteCards();
-}
   /* FAN-05: restrained team accent across navigation and controls.
      Preserve dark surfaces, readable text, live-state colors and mobile sizes. */
   style.textContent += `
