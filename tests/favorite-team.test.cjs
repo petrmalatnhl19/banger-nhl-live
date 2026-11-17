@@ -116,3 +116,10 @@ assert(source.includes('body[data-fan-team] #uxStatsHub [data-ux-tab].active'),'
 assert(source.includes('var(--fan-secondary) 12%'),'secondary club tone on favorite cards');
 assert(source.includes('@media(forced-colors:active)'),'high contrast fallback');
 console.log('FAN-19 favorite-only club identity checks passed');
+
+// FAN-20: language flag is frameless but its native selector stays usable.
+assert(source.includes('header.top #bangerLanguageBox .fan-header-language-flag'),'language flag selector remains present');
+assert(source.includes('header.top #bangerLanguageBox:focus-within'),'keyboard focus remains visible');
+assert(source.includes('background:transparent!important;'),'frameless flag background');
+assert(source.includes('pointer-events:none!important;'),'flag cannot block language selection');
+console.log('FAN-20 borderless flag checks passed');
