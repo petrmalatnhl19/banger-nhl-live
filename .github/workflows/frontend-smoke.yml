@@ -21,6 +21,8 @@ jobs:
         run: node .github/scripts/test-ux-01-games.cjs
       - name: SECURITY-105 TV frontend migration regression (static)
         run: node .github/scripts/test-security-105-tv-frontend-regression.cjs
+      - name: SECURITY-117 public TV metadata and CORE join (offline)
+        run: node .github/scripts/test-security-117-tv-public-join.cjs
       - name: SECURITY-116 public game metadata projection (offline)
         run: node .github/scripts/test-security-116-tv-metadata.cjs
       - name: SECURITY-115 TV public completeness and freshness contract (offline)
