@@ -12,17 +12,19 @@ GRANT ALL ON TABLE public.nhl_core43_shadow_inputs,
  public.core43_shadow_preview_v1, public.nhl_core42_status
  TO anon, authenticated;
 DO $$
-DECLARE role_name text; obj text;
+DECLARE role_name text; obj text; privilege_name text;
 BEGIN
  FOREACH role_name IN ARRAY ARRAY['anon','authenticated'] LOOP
   FOREACH obj IN ARRAY ARRAY['nhl_core43_shadow_inputs','core43_shadow_readiness_v1',
    'core43_shadow_predictions_v1','core43_shadow_preview_v1','nhl_core42_status'] LOOP
-   IF NOT has_table_privilege(role_name,'public.'||obj,'SELECT,INSERT,UPDATE,DELETE') THEN
-    RAISE EXCEPTION 'synthetic pre-revocation grants missing: %, %',role_name,obj;
-   END IF;
+   FOREACH privilege_name IN ARRAY ARRAY['SELECT','INSERT','UPDATE','DELETE'] LOOP
+    IF NOT has_table_privilege(role_name,'public.'||obj,privilege_name) THEN
+     RAISE EXCEPTION 'synthetic pre-revocation grant missing: %, %, %',role_name,obj,privilege_name;
+    END IF;
+   END LOOP;
   END LOOP;
  END LOOP;
-END $$;
+END $;
 -- Exercise the actual proposed revocations in the SAME transaction.
 REVOKE ALL ON TABLE public.nhl_core43_shadow_inputs FROM PUBLIC,anon,authenticated;
 REVOKE ALL ON TABLE public.core43_shadow_readiness_v1,
