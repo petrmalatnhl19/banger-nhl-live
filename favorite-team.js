@@ -90,6 +90,68 @@
     header.appendChild(section);
     apply(selected);
   }
+  /* FAN-11: prominent, persistent team identity in the actual app header. */
+  function updateTeamIdentity() {
+    const header = document.querySelector('header.top');
+    if (!header) return;
+    let identity = document.getElementById('fanTeamIdentity');
+    if (!identity) {
+      identity = document.createElement('div');
+      identity.id = 'fanTeamIdentity';
+      identity.setAttribute('aria-live', 'polite');
+      const brand = header.querySelector('.brand');
+      if (brand) brand.insertAdjacentElement('afterend', identity);
+      else header.prepend(identity);
+    }
+    identity.textContent = selected ? '★ ' + byCode.get(selected)[1] : '';
+    identity.hidden = !selected;
+  }
+  document.addEventListener('banger:favorite-team-change', updateTeamIdentity);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', updateTeamIdentity, {once:true});
+  else updateTeamIdentity();
+  style.textContent += `
+    body[data-fan-team] {
+      --fan-surface:color-mix(in srgb,var(--fan-accent) 21%,#071729);
+    }
+    body[data-fan-team] header.top {
+      background:linear-gradient(105deg,var(--fan-surface),#061322 88%)!important;
+      border-bottom:3px solid var(--fan-accent)!important;
+      box-shadow:0 7px 24px color-mix(in srgb,var(--fan-accent) 18%,transparent)!important;
+    }
+    #fanTeamIdentity[hidden]{display:none!important}
+    #fanTeamIdentity {
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:8px 12px;border:1px solid var(--fan-accent,#79e8ff);
+      border-radius:999px;background:color-mix(in srgb,var(--fan-accent) 22%,#071729);
+      color:#fff;font:800 12px Inter,system-ui,sans-serif;
+      letter-spacing:.02em;text-align:center;
+      box-shadow:0 0 16px color-mix(in srgb,var(--fan-accent) 23%,transparent);
+    }
+    body[data-fan-team] .toolbar .btn.active,
+    body[data-fan-team] .toolbar .btn[id^="tab"].active,
+    body[data-fan-team] #uxMobileNav .active,
+    body[data-fan-team] #uxMobileNav [aria-current="page"] {
+      background:linear-gradient(135deg,var(--fan-accent),color-mix(in srgb,var(--fan-accent) 55%,#092037))!important;
+      border:2px solid var(--fan-accent)!important;
+      color:#061322!important;
+      box-shadow:0 3px 16px color-mix(in srgb,var(--fan-accent) 35%,transparent)!important;
+    }
+    body[data-fan-team] .toolbar .btn.active .nav-label,
+    body[data-fan-team] #uxMobileNav .active .nav-label {color:#061322!important}
+    body[data-fan-team] .dash-quick-btn {
+      border-color:color-mix(in srgb,var(--fan-accent) 75%,#10263e)!important;
+      background:linear-gradient(135deg,color-mix(in srgb,var(--fan-accent) 30%,#10263e),#09192d)!important;
+      box-shadow:inset 0 2px color-mix(in srgb,var(--fan-accent) 45%,transparent)!important;
+    }
+    @media(max-width:600px) {
+      #fanTeamIdentity {font-size:11px;padding:6px 9px;max-width:calc(100vw - 30px)}
+      body[data-fan-team] header.top {gap:6px}
+    }
+    @media(forced-colors:active) {
+      #fanTeamIdentity {border:2px solid Highlight}
+      body[data-fan-team] .toolbar .btn.active {outline:2px solid Highlight}
+    }
+  `;
   window.BangerFavoriteTeam = Object.freeze({get:() => selected, teams:TEAMS.map(([code,name])=>({code,name}))});
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount, {once:true});
   else mount();
