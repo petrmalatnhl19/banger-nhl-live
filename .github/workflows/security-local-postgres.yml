@@ -28,6 +28,8 @@ jobs:
         run: bash security/local/security70-baseline-restore.sh
       - name: Verify exact synthetic ACL restoration (SECURITY-72)
         run: bash security/local/security72-exact-acl-restore.sh
+      - name: Verify role inheritance and grant delegation (SECURITY-73)
+        run: bash security/local/security73-inheritance-delegation.sh
       - name: Diagnose PostgreSQL initialization failure
         if: failure()
         run: docker compose -f security/local/compose.yaml logs --no-color postgres
