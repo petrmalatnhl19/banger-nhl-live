@@ -48,9 +48,18 @@ jobs:
           docker compose -f security/local/compose.yaml exec -T postgres \
             psql -X -v ON_ERROR_STOP=1 -U security_local -d security09 \
             < security/local/security87-revocation.sql
+      - name: Create disposable public API fixture (SECURITY-99)
+        run: |
+          docker compose -f security/local/compose.yaml exec -T postgres \
+            psql -X -v ON_ERROR_STOP=1 -U security_local -d security09 \
+            < security/local/security99-public-api.sql
+      - name: Start isolated PostgREST (SECURITY-99)
+        run: docker compose -f security/local/compose.yaml -f security/local/compose.postgrest.yaml up -d --wait postgrest
+      - name: Verify real PostgREST role access (SECURITY-99)
+        run: node .github/scripts/test-security-99-postgrest.cjs
       - name: Diagnose PostgreSQL initialization failure
         if: failure()
         run: docker compose -f security/local/compose.yaml logs --no-color postgres
       - name: Stop local test database
         if: always()
-        run: docker compose -f security/local/compose.yaml down -v --remove-orphans
+        run: docker compose -f security/local/compose.yaml -f security/local/compose.postgrest.yaml down -v --remove-orphans
