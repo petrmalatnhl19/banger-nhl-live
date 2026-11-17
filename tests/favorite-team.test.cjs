@@ -60,7 +60,7 @@ assert.equal(f.storage.get('banger-favorite-team-v1'),'DAL');
 assert.equal(f.document.body.dataset.fanTeam,'DAL');
 const row=f.make('tr');row.cells=[{textContent:'1'},{textContent:'Player'},{textContent:'DAL'}];
 f.rows.push(row);
-const game=f.make('article'),teams=f.make('div');teams.textContent='DAL vs NYR';
+const game=f.make('article'),teams=f.make('strong');teams.textContent='DAL vs NYR';
 game.querySelectorAll=()=>[teams];f.games.push(game);
 const dash=f.make('button'),left=f.make('b'),right=f.make('b');
 left.textContent='DAL';right.textContent='NYR';
