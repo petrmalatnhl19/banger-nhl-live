@@ -104,3 +104,6 @@ jobs:
 
       - name: Verify SECURITY-103 fail-closed TV API rollout (offline)
         run: node .github/scripts/test-security-103-tv-rollout.cjs
+
+      - name: Enforce SECURITY-107 integration NO-GO gate (offline)
+        run: node .github/scripts/test-security-107-integration-gate.cjs
