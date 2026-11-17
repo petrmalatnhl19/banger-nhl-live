@@ -132,6 +132,7 @@
   /* FAN-04: decorate existing game and news cards without altering NHL feeds. */
   style.textContent += `
     body[data-fan-team] .game.fan-favorite-card,
+    body[data-fan-team] .analyst-list-card.fan-favorite-card,
     body[data-fan-team] .dash-game.fan-favorite-card,
     body[data-fan-team] .banger-news-card.fan-favorite-card {
       border-color:var(--fan-accent)!important;
@@ -145,8 +146,8 @@
     const root=document.getElementById('content');
     if(!root)return;
     const team=selected;
-    root.querySelectorAll('.game,.dash-game').forEach(card=>{
-      const names=Array.from(card.querySelectorAll('.analyst-teams strong,.dash-game-teams,.dash-game-team,.dash-team,.team')).map(el=>el.textContent||'').join(' ');
+    root.querySelectorAll('.game,.dash-game,.analyst-list-card').forEach(card=>{
+      const names=Array.from(card.querySelectorAll('.analyst-teams strong,.dash-team-left b,.dash-team-right b,.dash-game-team,.dash-team,.team')).map(el=>el.textContent||'').join(' ');
       const codes=names.toUpperCase().split(/[^A-Z]+/).filter(Boolean);
       const match=Boolean(team&&codes.includes(team));
       card.classList.toggle('fan-favorite-card',match);
