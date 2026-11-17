@@ -34,6 +34,8 @@ jobs:
         run: bash security/local/security74-multigrantor-restore.sh
       - name: Verify multi-level delegated grants (SECURITY-75)
         run: bash security/local/security75-multilevel-grants.sh
+      - name: Verify independent grant paths (SECURITY-76)
+        run: bash security/local/security76-multipath-grants.sh
       - name: Diagnose PostgreSQL initialization failure
         if: failure()
         run: docker compose -f security/local/compose.yaml logs --no-color postgres
