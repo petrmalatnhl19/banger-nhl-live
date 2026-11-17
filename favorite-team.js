@@ -88,6 +88,7 @@
     });
     section.append(label, select);
     /* FAN-12: accessible searchable team gallery; native select remains as fallback. */
+    if (typeof Event !== 'undefined' && typeof document.createElement('div').replaceChildren === 'function') {
     const gallery = document.createElement('div');
     gallery.className = 'fan-team-gallery';
     gallery.setAttribute('role', 'group');
@@ -148,6 +149,7 @@
       if (section.open) { search.value = ''; renderTeams(); }
     });
     renderTeams();
+    }
     header.appendChild(section);
     apply(selected);
   }
