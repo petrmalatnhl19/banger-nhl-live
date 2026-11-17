@@ -701,6 +701,14 @@
       background:linear-gradient(90deg,color-mix(in srgb,var(--fan-accent) 19%,#10283f),color-mix(in srgb,var(--fan-secondary,#10283f) 22%,#10283f))!important;
       box-shadow:inset 4px 0 var(--fan-accent)!important;
     }
+    body[data-fan-team] .adv-podium-card.fan-favorite-advanced-row,
+    body[data-fan-team] .adv-rank-row.fan-favorite-advanced-row {
+      border:1px solid var(--fan-accent)!important;
+      border-left:4px solid var(--fan-accent)!important;
+      border-radius:10px;
+      background:linear-gradient(110deg,color-mix(in srgb,var(--fan-accent) 18%,#10283f),color-mix(in srgb,var(--fan-secondary,#10283f) 24%,#10283f))!important;
+      box-shadow:inset 0 1px color-mix(in srgb,var(--fan-accent) 25%,transparent)!important;
+    }
     body[data-fan-team] .fan-favorite-advanced-row td:first-child {
       color:#fff!important;font-weight:800!important;
     }
