@@ -27,7 +27,7 @@ def run():
             a=fixtures.args(d,db,keys,epoch)
             return {k:a[k] for k in ("scope","checkpoint","checkpoint_evidence","anchor","anchor_evidence","expected_epoch")}|{"request_id":rid}
         first=req(1,"a"*32)
-        assert s.reconcile(db,trust,first)=="unknown" if False else True
+        assert s.reconcile(db,trust,first)=="unknown"
         # Fault injected after COMMIT but before acknowledgement; recovery must find receipt.
         try:
             s.submit(db,trust,first,after_commit=lambda:(_ for _ in ()).throw(RuntimeError("lost response")))
