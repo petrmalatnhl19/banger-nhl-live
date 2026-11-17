@@ -649,7 +649,12 @@
         justify-content:center!important;width:72px!important;max-width:72px!important;
         height:60px!important;min-height:60px!important;padding:4px!important;
         box-sizing:border-box!important;overflow:hidden!important;border-radius:13px!important;
-        background:color-mix(in srgb,var(--fan-accent,#79e8ff) 12%,#10283f)!important}
+        background:transparent!important;border:0!important;box-shadow:none!important;
+        outline:0!important}
+      header.top .fan-team-picker summary:focus-visible{
+        outline:2px solid #79e8ff!important;outline-offset:3px!important;
+        border-radius:12px!important;
+      }
       header.top #bangerLanguageBox{grid-column:3!important;grid-row:1!important;
         justify-self:end!important;position:relative!important;
         width:52px!important;height:48px!important;padding:0!important;
