@@ -11,7 +11,7 @@ GRANT ALL ON TABLE public.nhl_core43_shadow_inputs,
  public.core43_shadow_readiness_v1, public.core43_shadow_predictions_v1,
  public.core43_shadow_preview_v1, public.nhl_core42_status
  TO anon, authenticated;
-DO $$
+DO $security77$
 DECLARE role_name text; obj text; privilege_name text;
 BEGIN
  FOREACH role_name IN ARRAY ARRAY['anon','authenticated'] LOOP
@@ -24,7 +24,7 @@ BEGIN
    END LOOP;
   END LOOP;
  END LOOP;
-END $;
+END $security77$;
 -- Exercise the actual proposed revocations in the SAME transaction.
 REVOKE ALL ON TABLE public.nhl_core43_shadow_inputs FROM PUBLIC,anon,authenticated;
 REVOKE ALL ON TABLE public.core43_shadow_readiness_v1,
