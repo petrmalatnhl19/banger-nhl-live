@@ -155,6 +155,8 @@ jobs:
         run: node .github/scripts/browser-security88-tv-grants.cjs
       - name: SECURITY-108 isolated Chromium TV rendering states
         run: node .github/scripts/browser-security108-tv-states.cjs
+      - name: SECURITY-109 adversarial TV rendering and safe errors
+        run: node .github/scripts/browser-security109-tv-adversarial.cjs
       - name: Diagnose real Back Forward Cache eligibility in Chromium
         continue-on-error: true
         run: timeout --signal=TERM --kill-after=5s 30s xvfb-run -a node .github/scripts/browser-bfcache-diagnostic.cjs
