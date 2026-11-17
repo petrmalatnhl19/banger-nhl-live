@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-17T14:45:27.389438+00:00",
+  "fetchedAt": "2026-11-17T15:39:34.470246+00:00",
   "teams": {
     "canadiens": {
       "name": "Canadiens",
@@ -135,7 +135,6 @@
         ]
       ],
       "goalies": [
-        "Nikita Tolopilo",
         "Kevin Lankinen"
       ],
       "injured": "Thatcher Demko (hip), Guillaume Brisebois (undisclosed)",
