@@ -1,6 +1,8 @@
 name: Security grants proposal (offline)
 
 on:
+  push:
+    branches: [security-01-public-grants-review]
   pull_request:
   workflow_dispatch:
 
