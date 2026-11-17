@@ -21,6 +21,8 @@ jobs:
         run: node .github/scripts/test-ux-01-games.cjs
       - name: SECURITY-105 TV frontend migration regression (static)
         run: node .github/scripts/test-security-105-tv-frontend-regression.cjs
+      - name: SECURITY-106 post-merge workflow regression
+        run: node .github/scripts/test-security-106-merge-regression.cjs
       - name: Test Czech commentary facts
         run: node --test scripts/test_commentary_facts.cjs
       - name: Validate local scripts and HTML entrypoint
