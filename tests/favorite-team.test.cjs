@@ -49,13 +49,13 @@ function fixture(saved='') {
   return {ctx,document,storage,select,picker,rows,games,news,make};
 }
 const f=fixture();
-assert.equal(f.ctx.BangerFavoriteTeam.teams.length,32,'32 NHL clubs');
-assert.equal(new Set(f.ctx.BangerFavoriteTeam.teams.map(t=>t.code)).size,32,'unique codes');
-assert.equal(f.ctx.BangerFavoriteTeam.get(),'','no implicit favorite');
+assert.equal(f.ctx.window.BangerFavoriteTeam.teams.length,32,'32 NHL clubs');
+assert.equal(new Set(f.ctx.window.BangerFavoriteTeam.teams.map(t=>t.code)).size,32,'unique codes');
+assert.equal(f.ctx.window.BangerFavoriteTeam.get(),'','no implicit favorite');
 assert.equal(f.select.children.length,33,'none option + 32 clubs');
 assert.equal(f.document.body.dataset.fanTeam,undefined);
 f.select.value='DAL';f.select.onchange();
-assert.equal(f.ctx.BangerFavoriteTeam.get(),'DAL');
+assert.equal(f.ctx.window.BangerFavoriteTeam.get(),'DAL');
 assert.equal(f.storage.get('banger-favorite-team-v1'),'DAL');
 assert.equal(f.document.body.dataset.fanTeam,'DAL');
 const row=f.make('tr');row.cells=[{textContent:'1'},{textContent:'Player'},{textContent:'DAL'}];
@@ -74,6 +74,6 @@ assert.equal(f.document.body.dataset.fanTeam,undefined);
 assert.ok(!row.classList.contains('fan-favorite-row'),'remove stats highlight');
 assert.ok(!game.classList.contains('fan-favorite-card'),'remove game highlight');
 assert.ok(!article.classList.contains('fan-favorite-card'),'remove news highlight');
-assert.equal(fixture('NYR').ctx.BangerFavoriteTeam.get(),'NYR','restore saved preference');
-assert.equal(fixture('INVALID').ctx.BangerFavoriteTeam.get(),'','reject invalid saved preference');
+assert.equal(fixture('NYR').ctx.window.BangerFavoriteTeam.get(),'NYR','restore saved preference');
+assert.equal(fixture('INVALID').ctx.window.BangerFavoriteTeam.get(),'','reject invalid saved preference');
 console.log('FAN-06 offline preference and highlighting checks passed');
