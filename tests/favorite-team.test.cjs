@@ -19,7 +19,7 @@ function fixture(saved='') {
   const rows=[],games=[],news=[];
   const content={querySelectorAll(selector){
     if(selector==='.stats-tablewrap tbody tr')return rows;
-    if(selector==='.game,.dash-game')return games;
+    if(selector==='.game,.dash-game,.analyst-list-card')return games;
     if(selector==='.banger-news-card')return news;
     return [];
   }};
