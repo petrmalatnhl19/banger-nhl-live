@@ -199,7 +199,6 @@
       }
     }
   `;
-}
   /* FAN-10: more visible team identity and spacious mobile team selection. */
   style.textContent += `
     body[data-fan-team] header.top {
