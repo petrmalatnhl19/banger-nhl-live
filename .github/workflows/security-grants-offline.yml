@@ -137,3 +137,6 @@ jobs:
 
       - name: Verify SECURITY-135 backup rollback checkpoint guard (offline)
         run: python3 .github/scripts/test-security-135-backup-rollback.py
+
+      - name: Verify SECURITY-136 signed backup checkpoint (offline)
+        run: node .github/scripts/test-security-136-signed-checkpoint.cjs
