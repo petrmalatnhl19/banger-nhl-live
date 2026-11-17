@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-17T15:39:38.574063+00:00",
-  "rostersUpdatedAt": "2026-11-17T15:39:04.307121+00:00",
+  "updatedAt": "2026-11-17T16:48:52.326382+00:00",
+  "rostersUpdatedAt": "2026-11-17T16:48:10.214984+00:00",
   "projectionDate": "2026-11-17",
   "teamCount": 32,
   "goalieCount": 73,
@@ -34,7 +34,7 @@
       "team": "CHI",
       "teamKey": "blackhawks",
       "playerId": 8481519,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-17",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -43,51 +43,51 @@
       "team": "CBJ",
       "teamKey": "blue jackets",
       "playerId": 8482982,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-17",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Cam Talbot",
       "team": "CBJ",
       "teamKey": "blue jackets",
       "playerId": 8475660,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-17",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Jordan Binnington",
       "team": "STL",
       "teamKey": "blues",
       "playerId": 8476412,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-17",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Joel Hofer",
       "team": "STL",
       "teamKey": "blues",
       "playerId": 8480981,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-17",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Michael DiPietro",
       "team": "BOS",
       "teamKey": "bruins",
       "playerId": 8480022,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-17",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Jeremy Swayman",
       "team": "BOS",
       "teamKey": "bruins",
       "playerId": 8480280,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-17",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Jakub Dobes",
@@ -215,17 +215,17 @@
       "team": "PHI",
       "teamKey": "flyers",
       "playerId": 8478435,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-17",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Joseph Woll",
       "team": "PHI",
       "teamKey": "flyers",
       "playerId": 8479361,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-17",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Carter Hart",
@@ -265,7 +265,7 @@
       "team": "NYI",
       "teamKey": "islanders",
       "playerId": 8478009,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-17",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -412,8 +412,9 @@
       "team": "EDM",
       "teamKey": "oilers",
       "playerId": 8482221,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-17",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Jacob Markstrom",
@@ -543,7 +544,7 @@
       "team": "OTT",
       "teamKey": "senators",
       "playerId": 8476999,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-17",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
