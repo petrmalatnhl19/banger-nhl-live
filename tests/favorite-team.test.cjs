@@ -40,7 +40,7 @@ function fixture(saved='') {
     setItem:(key,value)=>storage.set(key,value),
     removeItem:key=>storage.delete(key)
   };
-  const ctx={document,localStorage,MutationObserver:class{observe(){}},
+  const ctx={document,localStorage,window:{},MutationObserver:class{observe(){}},
     CustomEvent:class{constructor(type,opts){this.type=type;this.detail=opts.detail;}}};
   vm.runInNewContext(source,ctx,{filename:'favorite-team.js'});
   document.dispatchEvent({type:'DOMContentLoaded'});
