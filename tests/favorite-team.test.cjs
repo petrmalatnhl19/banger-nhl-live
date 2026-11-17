@@ -101,3 +101,10 @@ assert(advanced.includes("fanMatch(x)?'fan-favorite-advanced-row'"),'favorite fu
 assert(source.includes('--fan-control-bg'),'secondary color control palette');
 assert(source.includes('.adv-rank-row.fan-favorite-advanced-row'),'advanced ranking visual style');
 console.log('FAN-17 advanced player identity and dual-tone regression checks passed');
+
+// FAN-18: sticky player-name cells must share the favorite club background.
+assert(source.includes('.adv-table tbody tr.fan-favorite-advanced-row > td:first-child'),'advanced sticky player name highlighted');
+assert(source.includes('.adv-table tbody tr.fan-favorite-advanced-row > td,'),'all advanced row cells highlighted');
+assert(source.includes('position:sticky;'),'sticky column remains fixed');
+assert(source.includes('box-shadow:inset 4px 0 var(--fan-accent)'),'club color leading stripe');
+console.log('FAN-18 sticky-name and full-row style checks passed');
