@@ -182,3 +182,6 @@ jobs:
 
       - name: Verify SECURITY-150 integrated adversarial audit (offline)
         run: python3 .github/scripts/test-security-150-adversarial.py
+
+      - name: Verify SECURITY-151 accept deadline and queue saturation (offline)
+        run: python3 .github/scripts/test-security-151-accept-deadline.py
