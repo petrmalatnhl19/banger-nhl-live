@@ -123,3 +123,12 @@ assert(source.includes('header.top #bangerLanguageBox:focus-within'),'keyboard f
 assert(source.includes('background:transparent!important;'),'frameless flag background');
 assert(source.includes('pointer-events:none!important;'),'flag cannot block language selection');
 console.log('FAN-20 borderless flag checks passed');
+
+// FAN-21: optional Arena mode is team-scoped, reversible and motion-safe.
+assert(source.includes("const ARENA_KEY = 'banger-fan-arena-v1'"));
+assert(source.includes("document.body.dataset.fanArena = 'on'"));
+assert(source.includes("delete document.body.dataset.fanArena"));
+assert(source.includes("aria-pressed"));
+assert(source.includes('prefers-reduced-motion:reduce'));
+assert(source.includes('body[data-fan-team][data-fan-arena="on"]'));
+console.log('FAN-21 Arena mode checks passed');
