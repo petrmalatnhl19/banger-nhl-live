@@ -2,7 +2,7 @@ name: Frontend smoke checks
 
 on:
   push:
-    branches: [main, master]
+    branches: [main, master, security-01-public-grants-review]
   pull_request:
   workflow_dispatch:
 
