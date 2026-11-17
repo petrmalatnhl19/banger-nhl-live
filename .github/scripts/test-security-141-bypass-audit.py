@@ -14,6 +14,7 @@ import tempfile
 ROOT=Path(__file__).resolve().parents[2]
 EXPECTED_WRITERS={
  "security/local/security140-transaction-owner.py",
+ "security/local/security148-idempotent-owner.py",
  ".github/scripts/test-security-130-sqlite-replay.py",
  ".github/scripts/test-security-134-sqlite-recovery.py",
  ".github/scripts/test-security-135-backup-rollback.py",
