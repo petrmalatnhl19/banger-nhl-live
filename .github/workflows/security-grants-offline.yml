@@ -99,3 +99,6 @@ jobs:
 
       - name: Verify SECURITY-102 TV adapter (offline)
         run: node .github/scripts/test-security-102-tv-adapter.cjs
+
+      - name: Verify SECURITY-103 fail-closed TV API rollout (offline)
+        run: node .github/scripts/test-security-103-tv-rollout.cjs
