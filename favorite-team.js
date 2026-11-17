@@ -165,4 +165,38 @@
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',watchFavoriteCards,{once:true});
   else watchFavoriteCards();
+}
+  /* FAN-05: restrained team accent across navigation and controls.
+     Preserve dark surfaces, readable text, live-state colors and mobile sizes. */
+  style.textContent += `
+    body[data-fan-team] header.top .fan-team-picker summary {
+      border-color:var(--fan-accent);
+      box-shadow:inset 3px 0 var(--fan-accent);
+    }
+    body[data-fan-team] .toolbar>.btn[id^="tab"].active {
+      border-color:var(--fan-accent);
+      box-shadow:inset 0 1px #ffffff40,0 0 0 1px var(--fan-accent);
+    }
+    body[data-fan-team] .toolbar>.btn[id^="tab"].active:after {
+      background:var(--fan-accent);
+      box-shadow:0 0 10px var(--fan-accent);
+    }
+    body[data-fan-team] .toolbar>.btn[id^="tab"].active .nav-icon-3d {
+      border-color:var(--fan-accent);
+    }
+    body[data-fan-team] .dash-quick-btn:focus-visible,
+    body[data-fan-team] .toolbar>.btn:focus-visible,
+    body[data-fan-team] .fan-team-picker summary:focus-visible {
+      outline:2px solid var(--fan-accent);
+      outline-offset:3px;
+    }
+    body[data-fan-team] .dash-quick-btn:hover {
+      border-color:var(--fan-accent);
+    }
+    @media(forced-colors:active) {
+      body[data-fan-team] .toolbar>.btn[id^="tab"].active {
+        outline:2px solid Highlight;
+      }
+    }
+  `;
 })();
