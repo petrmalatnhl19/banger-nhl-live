@@ -134,3 +134,6 @@ jobs:
 
       - name: Verify SECURITY-134 SQLite contention and crash recovery (offline)
         run: python3 .github/scripts/test-security-134-sqlite-recovery.py
+
+      - name: Verify SECURITY-135 backup rollback checkpoint guard (offline)
+        run: python3 .github/scripts/test-security-135-backup-rollback.py
