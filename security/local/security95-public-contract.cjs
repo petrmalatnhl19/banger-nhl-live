@@ -16,11 +16,18 @@ function finiteOrNull(value) {
 
 function publishTvRows({ archive, predictions, previews }) {
   if (![archive, predictions, previews].every(Array.isArray)) throw new TypeError("arrays required");
-  const pending = archive.filter(row => row && row.status === "pending").slice(0, MAX_ROWS);
+  const seen = new Set();
+  const pending = [];
+  for (const row of archive) {
+    if (!row || row.status !== "pending" || !Number.isSafeInteger(row.game_id) || row.game_id <= 0 || seen.has(row.game_id)) continue;
+    seen.add(row.game_id);
+    pending.push(row);
+    if (pending.length === MAX_ROWS) break;
+  }
   const unique = (rows) => {
     const map = new Map();
     for (const row of rows) {
-      if (!row || !Number.isSafeInteger(row.game_id) || map.has(row.game_id)) continue;
+      if (!row || !Number.isSafeInteger(row.game_id) || row.game_id <= 0 || map.has(row.game_id)) continue;
       map.set(row.game_id, row);
     }
     return map;
