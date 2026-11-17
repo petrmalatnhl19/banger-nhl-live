@@ -22,4 +22,4 @@
 - Před úpravou `index.html` zkontrolovat aktuální `main` a minimalizovat konflikty.
 
 ## Stav
-Audit struktury dokončen. Implementace a regresní testy zatím neprovedeny.
+FAN-02 až FAN-08 implementovány v Draft PR #296. Volba 32 týmů, uložení v localStorage, týmové akcenty, zvýraznění statistik, zápasů a novinek, offline regresní test a mobilní Chromium test pro 360/390/430 px. Na commitu 99151d7 úspěšně dokončeno všech 6 GitHub checks. FAN-09: GitHub uvádí mergeable=true a 7 změněných souborů (382 přidaných řádků, bez mazání). PR zůstává Draft, bez merge a nasazení. Automatizované testy nenahrazují ruční vizuální kontrolu na skutečných telefonech.
