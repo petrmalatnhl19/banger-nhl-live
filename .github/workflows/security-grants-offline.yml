@@ -84,3 +84,6 @@ jobs:
 
       - name: Test immutable pregame refresh prototype (offline)
         run: python3 .github/scripts/test-security-35-pregame-refresh.py
+
+      - name: Test minimal CORE 4.3 TV publication contract (SECURITY-95, offline)
+        run: node .github/scripts/test-security-95-public-contract.cjs
