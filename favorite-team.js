@@ -808,6 +808,92 @@
       body[data-fan-team] .fan-favorite-advanced-row {outline:2px solid Highlight}
     }
   `;
+  /* FAN-21 / Arena Experience 2.0: CSS-only arena atmosphere; no network assets.
+     Keep tables readable and all decorations outside interactive hit targets. */
+  const ARENA_KEY = 'banger-fan-arena-v1';
+  let arenaEnabled = true;
+  try { arenaEnabled = localStorage.getItem(ARENA_KEY) !== 'off'; } catch (_) {}
+  function syncArena() {
+    if (arenaEnabled && selected) document.body.dataset.fanArena = 'on';
+    else delete document.body.dataset.fanArena;
+    const control = document.getElementById('fanArenaToggle');
+    if (control) {
+      control.setAttribute('aria-pressed', String(arenaEnabled));
+      control.textContent = arenaEnabled ? '✦ Arena: zapnuto' : '✦ Arena: vypnuto';
+    }
+  }
+  function mountArenaToggle() {
+    const picker = document.querySelector('header.top .fan-team-picker');
+    if (!picker || document.getElementById('fanArenaToggle')) return;
+    const control = document.createElement('button');
+    control.id = 'fanArenaToggle';
+    control.type = 'button';
+    control.className = 'fan-arena-toggle';
+    control.setAttribute('aria-label', 'Zapnout nebo vypnout atmosféru arény');
+    control.addEventListener('click', () => {
+      arenaEnabled = !arenaEnabled;
+      try { localStorage.setItem(ARENA_KEY, arenaEnabled ? 'on' : 'off'); } catch (_) {}
+      syncArena();
+    });
+    picker.appendChild(control);
+    syncArena();
+  }
+  document.addEventListener('banger:favorite-team-change',syncArena);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => { mountArenaToggle(); syncArena(); }, {once:true});
+  else { mountArenaToggle(); syncArena(); }
+  style.textContent += `
+    .fan-arena-toggle {
+      display:block;position:relative;z-index:3;margin:8px 0 2px;
+      padding:7px 10px;max-width:100%;border:1px solid var(--fan-accent,#49748d);
+      border-radius:9px;background:#0a2236;color:#fff;font:600 11px Inter,system-ui,sans-serif;
+      cursor:pointer;
+    }
+    .fan-arena-toggle:focus-visible {outline:2px solid #79e8ff;outline-offset:3px}
+    body[data-fan-team][data-fan-arena="on"] {
+      --arena-glow:color-mix(in srgb,var(--fan-accent) 24%,transparent);
+      background-color:#061320!important;
+      background-image:
+        radial-gradient(ellipse 100% 260px at 50% 0%,color-mix(in srgb,var(--fan-accent) 17%,transparent),transparent 75%),
+        linear-gradient(165deg,color-mix(in srgb,var(--fan-secondary) 18%,#061320),#061320 55%)!important;
+      background-attachment:scroll!important;
+    }
+    body[data-fan-team][data-fan-arena="on"] header.top {
+      isolation:isolate;
+      background:linear-gradient(115deg,color-mix(in srgb,var(--fan-secondary) 60%,#061320),color-mix(in srgb,var(--fan-accent) 18%,#061320))!important;
+      border-bottom:2px solid var(--fan-accent)!important;
+    }
+    body[data-fan-team][data-fan-arena="on"] header.top::before {
+      content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+      background:repeating-linear-gradient(112deg,transparent 0 28px,color-mix(in srgb,var(--fan-accent) 8%,transparent) 29px 31px,transparent 32px 68px);
+      opacity:.65;
+    }
+    body[data-fan-team][data-fan-arena="on"] :is(.game,.dash-game,.analyst-list-card) {
+      border-color:color-mix(in srgb,var(--fan-accent) 24%,#284057)!important;
+    }
+    body[data-fan-team][data-fan-arena="on"] :is(.game,.dash-game,.analyst-list-card).fan-favorite-card {
+      border-color:var(--fan-accent)!important;
+      box-shadow:inset 4px 0 var(--fan-accent),0 0 20px var(--arena-glow)!important;
+    }
+    body[data-fan-team][data-fan-arena="on"] #uxMobileNav {
+      border-top:2px solid color-mix(in srgb,var(--fan-accent) 55%,#0d263c)!important;
+      background:linear-gradient(100deg,color-mix(in srgb,var(--fan-secondary) 30%,#071a2a),#071a2a)!important;
+    }
+    body[data-fan-team][data-fan-arena="on"] :is(.toolbar,.stats-tablewrap,.adv-table) {
+      accent-color:var(--fan-accent);
+    }
+    @media(max-width:600px) {
+      header.top .fan-arena-toggle {position:absolute;top:100%;right:0;margin:3px 0;font-size:10px;padding:4px 7px}
+      header.top .fan-team-picker[open] .fan-arena-toggle {display:none}
+    }
+    @media(prefers-reduced-motion:reduce) {
+      body[data-fan-arena="on"] *,body[data-fan-arena="on"] *::before,
+      body[data-fan-arena="on"] *::after {animation:none!important;transition-duration:0s!important}
+    }
+    @media(forced-colors:active) {
+      body[data-fan-arena="on"] .fan-arena-toggle {border:1px solid ButtonText}
+      body[data-fan-arena="on"] header.top::before {display:none}
+    }
+  `;
   /* Advanced statistics use different table markup than .stats-tablewrap.
      Resolve the team column from headings, never assume fixed column 3. */
   function markAdvancedFavoritePlayers() {
