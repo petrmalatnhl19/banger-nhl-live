@@ -710,6 +710,31 @@
       body[data-fan-team] header.top{border-bottom:2px solid var(--fan-accent)!important}
     }
   `;
+  /* FAN-20: borderless language flag in the mobile header; retain select hit area. */
+  style.textContent += `
+    @media(max-width:600px) {
+      header.top #bangerLanguageBox,
+      body[data-fan-team] header.top #bangerLanguageBox {
+        border:0!important;
+        border-radius:0!important;
+        background:transparent!important;
+        background-image:none!important;
+        box-shadow:none!important;
+        outline:0!important;
+      }
+      header.top #bangerLanguageBox .fan-header-language-flag {
+        border:0!important;
+        background:transparent!important;
+        box-shadow:none!important;
+        pointer-events:none!important;
+      }
+      header.top #bangerLanguageBox:focus-within {
+        outline:2px solid #79e8ff!important;
+        outline-offset:2px!important;
+        border-radius:8px!important;
+      }
+    }
+  `;
   /* FAN-17: consistent two-color team identity across interactive controls.
      Preserve neutral inactive controls and distinct live/error states. */
   style.textContent += `
