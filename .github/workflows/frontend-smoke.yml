@@ -21,6 +21,8 @@ jobs:
         run: node .github/scripts/test-ux-01-games.cjs
       - name: SECURITY-105 TV frontend migration regression (static)
         run: node .github/scripts/test-security-105-tv-frontend-regression.cjs
+      - name: SECURITY-113 browser public API reader boundary (offline)
+        run: node .github/scripts/test-security-113-tv-public-browser.cjs
       - name: SECURITY-112 offline TV public API adapter boundary
         run: node .github/scripts/test-security-112-tv-public-adapter.cjs
       - name: SECURITY-106 post-merge workflow regression
