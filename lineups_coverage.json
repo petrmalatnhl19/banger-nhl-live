@@ -1,25 +1,29 @@
 {
-  "generatedAt": "2026-11-18T05:02:59.802215+00:00",
+  "generatedAt": "2026-11-18T06:07:23.322374+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 25,
+  "currentProjections": 23,
   "needsFreshProjection": [
     "avalanche",
     "bruins",
+    "canadiens",
     "devils",
     "hurricanes",
     "kraken",
     "penguins",
+    "rangers",
     "red wings"
   ],
   "missing": [],
   "olderVerified": [
     "avalanche",
     "bruins",
+    "canadiens",
     "devils",
     "hurricanes",
     "kraken",
     "penguins",
+    "rangers",
     "red wings"
   ],
   "manualSnapshots": [],
@@ -90,11 +94,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-16T17:29:00+00:00",
       "source": "https://www.nhl.com/news/montreal-canadiens-new-york-rangers-game-preview-november-16-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "canucks": {
       "hasProjectedLines": true,
@@ -331,11 +335,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-16T17:29:00+00:00",
       "source": "https://www.nhl.com/news/montreal-canadiens-new-york-rangers-game-preview-november-16-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "red wings": {
       "hasProjectedLines": true,
