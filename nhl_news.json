@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-18T07:24:49.046388+00:00",
+  "updatedAt": "2026-11-18T08:41:22.306089+00:00",
   "articles": [
     {
       "title": "McDavid řádí dál. Je úplně jinde, uznal soupeř Edmontonský kapitán bral proti Floridě bilanci 1+1, bodoval i ve 23. utkání v nové sezoně 18. lis 2026",
@@ -7,11 +7,38 @@
       "language": "cs",
       "source": "NHL.com",
       "headline": "McDavid řádí dál. Je úplně jinde, uznal soupeř",
-      "publishedAt": "2026-11-18T06:50:17.280000+00:00",
-      "description": "Edmontonský kapitán bral proti Floridě bilanci 1+1, bodoval i ve 23. utkání v nové sezoně"
+      "description": "Edmontonský kapitán bral proti Floridě bilanci 1+1, bodoval i ve 23. utkání v nové sezoně",
+      "publishedAt": "2026-11-18T06:50:17.280000+00:00"
     },
     {
-      "title": "McDavid má dál nakročeno k bájné dvoustovce Základní část je v první čtvrtině. Přinášíme přehled statistických zajímavostí od esa Oilers po hattricky 17. lis 2026",
+      "title": "Bedard nedohrál kvůli zranění v horní části těla 18. lis 2026",
+      "url": "https://www.nhl.com/cs/news/bedard-kvuli-zraneni-nedohral",
+      "language": "cs",
+      "source": "NHL.com",
+      "headline": "Bedard nedohrál kvůli zranění v horní části těla",
+      "publishedAt": "2026-11-18T08:20:10.748000+00:00",
+      "description": "Kapitán Chicaga odstoupil z duelu proti Torontu po 54 sekundách třetí třetiny a souboji na buly"
+    },
+    {
+      "title": "Veselý zabiják, zhodnotil jubilanta Gudase kouč Maurice 17. lis 2026",
+      "url": "https://www.nhl.com/cs/news/paul-maurice-o-radko-gudasovi",
+      "language": "cs",
+      "source": "NHL.com",
+      "headline": "Veselý zabiják, zhodnotil jubilanta Gudase kouč Maurice",
+      "description": "Český obránce odehrál v sobotu 900. zápas v kariéře. Trenér Floridy chválí jeho styl i osobnost",
+      "publishedAt": "2026-11-17T19:21:53.241000+00:00"
+    },
+    {
+      "title": "Američan s českou krví. Na Kladně jsem doma, říká Kelly Klíma 17. lis 2026",
+      "url": "https://www.nhl.com/cs/news/kelly-klima-se-v-kladne-uci-od-jagra-s-plekancem",
+      "language": "cs",
+      "source": "NHL.com",
+      "headline": "Američan s českou krví. Na Kladně jsem doma, říká Kelly Klíma",
+      "description": "Syn zesnulého útočníka NHL se učí od Jágra s Plekancem. Extraliga je každý rok kvalitnější, myslí si",
+      "publishedAt": "2026-11-17T15:31:07.008000+00:00"
+    },
+    {
+      "title": "McDavid má dál nakročeno k bájné dvoustovce 17. lis 2026",
       "url": "https://www.nhl.com/cs/news/mcdavid-bude-atakovat-dvoustovku",
       "language": "cs",
       "source": "NHL.com",
@@ -20,13 +47,40 @@
       "publishedAt": "2026-11-17T18:07:44.022000+00:00"
     },
     {
-      "title": "Američan s českou krví. Na Kladně jsem doma, říká Kelly Klíma Syn zesnulého útočníka NHL se učí od Jágra s Plekancem. Extraliga je každý rok kvalitnější, myslí si 17. lis 2026",
-      "url": "https://www.nhl.com/cs/news/kelly-klima-se-v-kladne-uci-od-jagra-s-plekancem",
+      "title": "FORČEK: Kučerovovi nejde o peníze, ale o ocenění Slavomír Lener ve 38. dílu podcastu o dění v NHL, českých juniorech i o tom, jak s Babcockem sháněl 300 doutníků 05. lis 2026",
+      "url": "https://www.nhl.com/cs/news/podcast-forcek-se-slavomirem-lenerem-o-kucerovovi-i-juniorech",
       "language": "cs",
       "source": "NHL.com",
-      "headline": "Američan s českou krví. Na Kladně jsem doma, říká Kelly Klíma",
-      "description": "Syn zesnulého útočníka NHL se učí od Jágra s Plekancem. Extraliga je každý rok kvalitnější, myslí si",
-      "publishedAt": "2026-11-17T15:31:07.008000+00:00"
+      "headline": "FORČEK: Kučerovovi nejde o peníze, ale o ocenění",
+      "description": "Slavomír Lener ve 38. dílu podcastu o dění v NHL, českých juniorech i o tom, jak s Babcockem sháněl 300 doutníků",
+      "publishedAt": "2026-11-05T15:46:15.480000+00:00"
+    },
+    {
+      "title": "FORČEK: Detroit nemá srdce, říká Nedomanský díl podcastu NHL.com/cs a Livesportu s československou legendou o situaci Red Wings i Hellebuyckově výměně 29. říj 2026",
+      "url": "https://www.nhl.com/cs/news/podcast-forcek-s-nedomanskym-nejen-o-detroitu",
+      "language": "cs",
+      "source": "NHL.com",
+      "headline": "FORČEK: Detroit nemá srdce, říká Nedomanský",
+      "description": "37. díl podcastu NHL.com/cs a Livesportu s československou legendou o situaci Red Wings i Hellebuyckově výměně",
+      "publishedAt": "2026-10-29T16:26:08.740000+00:00"
+    },
+    {
+      "title": "FORČEK: Smysl mi dává Indianapolis, říká Kotalík o expanzi NHL díl podcastu NHL.com/cs a Livesportu s někdejším útočníkem o útoku McDavida na rekord i rozšiřování NHL 22. říj 2026",
+      "url": "https://www.nhl.com/cs/news/podcast-forcek-s-kotalikem-o-mcdavidovi",
+      "language": "cs",
+      "source": "NHL.com",
+      "headline": "FORČEK: Smysl mi dává Indianapolis, říká Kotalík o expanzi NHL",
+      "description": "36. díl podcastu NHL.com/cs a Livesportu s někdejším útočníkem o útoku McDavida na rekord i rozšiřování NHL",
+      "publishedAt": "2026-10-22T15:20:25.443000+00:00"
+    },
+    {
+      "title": "Nezastavitelný. Gauthier ohromil dalším hattrickem 18. lis 2026",
+      "url": "https://www.nhl.com/cs/news/gauthier-se-ctvrtym-hattrickem-zapsal-do-historie",
+      "language": "cs",
+      "source": "NHL.com",
+      "headline": "Nezastavitelný. Gauthier ohromil dalším hattrickem",
+      "publishedAt": "2026-11-18T08:00:01.424000+00:00",
+      "description": "Elitní útočník Anaheimu protáhl gólovou šňůru už na deset zápasů, prohře s Blues ale nezabránil"
     },
     {
       "title": "Draft není dogma. Cestu na výsluní může otevřít i AHL 17. lis 2026",
@@ -63,42 +117,6 @@
       "headline": "Českou hvězdou týdne je Chytil",
       "description": "Útočník Canucks vstřelil ve dvou zápasech dva góly. Druhou hvězdou je Hertl, třetí Chmelař",
       "publishedAt": "2026-11-16T14:57:04.620000+00:00"
-    },
-    {
-      "title": "FORČEK: Kučerovovi nejde o peníze, ale o ocenění Slavomír Lener ve 38. dílu podcastu o dění v NHL, českých juniorech i o tom, jak s Babcockem sháněl 300 doutníků 05. lis 2026",
-      "url": "https://www.nhl.com/cs/news/podcast-forcek-se-slavomirem-lenerem-o-kucerovovi-i-juniorech",
-      "language": "cs",
-      "source": "NHL.com",
-      "headline": "FORČEK: Kučerovovi nejde o peníze, ale o ocenění",
-      "description": "Slavomír Lener ve 38. dílu podcastu o dění v NHL, českých juniorech i o tom, jak s Babcockem sháněl 300 doutníků",
-      "publishedAt": "2026-11-05T15:46:15.480000+00:00"
-    },
-    {
-      "title": "FORČEK: Detroit nemá srdce, říká Nedomanský díl podcastu NHL.com/cs a Livesportu s československou legendou o situaci Red Wings i Hellebuyckově výměně 29. říj 2026",
-      "url": "https://www.nhl.com/cs/news/podcast-forcek-s-nedomanskym-nejen-o-detroitu",
-      "language": "cs",
-      "source": "NHL.com",
-      "headline": "FORČEK: Detroit nemá srdce, říká Nedomanský",
-      "description": "37. díl podcastu NHL.com/cs a Livesportu s československou legendou o situaci Red Wings i Hellebuyckově výměně",
-      "publishedAt": "2026-10-29T16:26:08.740000+00:00"
-    },
-    {
-      "title": "FORČEK: Smysl mi dává Indianapolis, říká Kotalík o expanzi NHL díl podcastu NHL.com/cs a Livesportu s někdejším útočníkem o útoku McDavida na rekord i rozšiřování NHL 22. říj 2026",
-      "url": "https://www.nhl.com/cs/news/podcast-forcek-s-kotalikem-o-mcdavidovi",
-      "language": "cs",
-      "source": "NHL.com",
-      "headline": "FORČEK: Smysl mi dává Indianapolis, říká Kotalík o expanzi NHL",
-      "description": "36. díl podcastu NHL.com/cs a Livesportu s někdejším útočníkem o útoku McDavida na rekord i rozšiřování NHL",
-      "publishedAt": "2026-10-22T15:20:25.443000+00:00"
-    },
-    {
-      "title": "Veselý zabiják, zhodnotil jubilanta Gudase kouč Maurice 17. lis 2026",
-      "url": "https://www.nhl.com/cs/news/paul-maurice-o-radko-gudasovi",
-      "language": "cs",
-      "source": "NHL.com",
-      "headline": "Veselý zabiják, zhodnotil jubilanta Gudase kouč Maurice",
-      "description": "Český obránce odehrál v sobotu 900. zápas v kariéře. Trenér Floridy chválí jeho styl i osobnost",
-      "publishedAt": "2026-11-17T19:21:53.241000+00:00"
     },
     {
       "title": "Konečně odměna. Chytil slaví dvojitý zásah 16. lis 2026",
@@ -281,24 +299,6 @@
       "publishedAt": "2026-11-13T07:48:00+00:00"
     },
     {
-      "title": "Boldy hattrickem položil na lopatky Toronto 13. lis 2026",
-      "url": "https://www.nhl.com/cs/news/boldy-prodlouzil-hattrickem-bodovou-serii-wild",
-      "language": "cs",
-      "source": "NHL.com",
-      "headline": "Boldy hattrickem položil na lopatky Toronto",
-      "description": "Útočník Minnesoty předvedl druhý třígólový večer v sezoně, Wild výhrou 5:2 bodovali podesáté za sebou",
-      "publishedAt": "2026-11-13T07:45:52.460000+00:00"
-    },
-    {
-      "title": "Kruh se uzavřel. Aho byl hrdinou jako před 10 lety 12. lis 2026",
-      "url": "https://www.nhl.com/cs/news/aho-dal-dva-goly",
-      "language": "cs",
-      "source": "NHL.com",
-      "headline": "Kruh se uzavřel. Aho byl hrdinou jako před 10 lety",
-      "description": "Finský útočník při vítězství Hurricanes napsal fantastický příběh, stejně jako při premiéře dal dva góly Grubauerovi",
-      "publishedAt": "2026-11-12T21:59:27.783000+00:00"
-    },
-    {
       "title": "Bedard leaves Blackhawks win with upper-body injury Forward exits 54 seconds into third period after being struck during face-off setup Nov 18, 2026",
       "url": "https://www.nhl.com/news/connor-bedard-leaves-chicago-blackhawks-game-with-upper-body-injury",
       "language": "en",
@@ -358,8 +358,8 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "Castagna scores first two NHL goals, helps Flames defeat Sharks",
-      "publishedAt": "2026-11-18T06:41:00+00:00",
-      "description": "Pospisil has goal, assist for Calgary; Marchment gets two points for San Jose"
+      "description": "Pospisil has goal, assist for Calgary; Marchment gets two points for San Jose",
+      "publishedAt": "2026-11-18T06:41:00+00:00"
     },
     {
       "title": "Dvorak, Flyers hand Sabres 5th straight loss Nov 18, 2026",
@@ -385,8 +385,8 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "Heiskanen scores OT winner in return, Stars rally late past Golden Knights",
-      "publishedAt": "2026-11-18T07:18:00+00:00",
-      "description": "Defenseman ends it at 3:36 after Rantanen ties game with five seconds left for Dallas"
+      "description": "Defenseman ends it at 3:36 after Rantanen ties game with five seconds left for Dallas",
+      "publishedAt": "2026-11-18T07:18:00+00:00"
     },
     {
       "title": "Bedard scores, leaves with injury in Blackhawks win against Maple Leafs Nov 18, 2026",
