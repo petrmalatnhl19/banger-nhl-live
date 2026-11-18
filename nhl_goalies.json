@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-18T16:02:55.568079+00:00",
-  "rostersUpdatedAt": "2026-11-18T16:02:04.812938+00:00",
+  "updatedAt": "2026-11-18T17:09:08.894667+00:00",
+  "rostersUpdatedAt": "2026-11-18T17:08:38.237958+00:00",
   "projectionDate": "2026-11-18",
   "teamCount": 32,
   "goalieCount": 73,
@@ -100,7 +100,7 @@
       "team": "MTL",
       "teamKey": "canadiens",
       "playerId": 8484170,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-18",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
