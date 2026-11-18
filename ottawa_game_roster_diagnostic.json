@@ -1,10 +1,14 @@
 {
-  "checkedAt": "2026-11-18T01:55:35.956596+00:00",
+  "checkedAt": "2026-11-18T02:54:58.042630+00:00",
   "team": "OTT",
   "scope": "Recent completed NHL games; historical evidence only",
   "players": {
     "Philip Tomasino": {
       "appearedInGames": [
+        {
+          "gameId": 2026020341,
+          "gameDate": "2026-11-17"
+        },
         {
           "gameId": 2026020317,
           "gameDate": "2026-11-14"
@@ -38,6 +42,10 @@
     },
     "Samuel Blais": {
       "appearedInGames": [
+        {
+          "gameId": 2026020341,
+          "gameDate": "2026-11-17"
+        },
         {
           "gameId": 2026020317,
           "gameDate": "2026-11-14"

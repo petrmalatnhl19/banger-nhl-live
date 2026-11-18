@@ -3,7 +3,7 @@
   "teams": {
     "bruins": {
       "team": "BOS",
-      "rosterUpdatedAt": "2026-11-18T01:55:23.871153+00:00",
+      "rosterUpdatedAt": "2026-11-18T02:54:48.696161+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -48,30 +48,13 @@
     },
     "senators": {
       "team": "OTT",
-      "rosterUpdatedAt": "2026-11-18T01:55:27.437634+00:00",
+      "rosterUpdatedAt": "2026-11-18T02:54:52.413297+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
-      "validatedForwardLines": 2,
+      "validatedForwardLines": 3,
       "validatedDefensePairs": 3,
       "rejected": [
-        {
-          "group": "forwards",
-          "sourceLineNumber": 2,
-          "sourceLine": [
-            "Philip Tomasino",
-            "Shane Pinto",
-            "Drake Batherson"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Philip Tomasino",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        },
         {
           "group": "forwards",
           "sourceLineNumber": 4,
@@ -81,12 +64,6 @@
             "Tyler Boucher"
           ],
           "unverifiedPlayers": [
-            {
-              "name": "Samuel Blais",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            },
             {
               "name": "Tyler Boucher",
               "reason": "not_in_current_roster",
