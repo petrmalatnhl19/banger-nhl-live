@@ -842,6 +842,11 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => { mountArenaToggle(); syncArena(); }, {once:true});
   else { mountArenaToggle(); syncArena(); }
   style.textContent += `
+    /* Keep the expanded team picker above the main content in Arena mode. */
+    body[data-fan-arena="on"] header.top:has(.fan-team-picker[open]) {
+      position:relative;
+      z-index:200!important;
+    }
     .fan-arena-toggle {
       display:block;position:relative;z-index:3;margin:8px 0 2px;
       padding:7px 10px;max-width:100%;border:1px solid var(--fan-accent,#49748d);
