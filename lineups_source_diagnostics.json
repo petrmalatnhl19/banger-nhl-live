@@ -1,28 +1,16 @@
 {
-  "generatedAt": "2026-11-18T17:09:05.339634+00:00",
+  "generatedAt": "2026-11-18T18:10:31.003935+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-17T20:36:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/los-angeles-kings-boston-bruins-game-preview-november-17-2026",
+      "candidatePublishedAt": "2026-11-17T18:05:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
-      "rosterValidation": "insufficient_position_matched_lines",
+      "rosterValidation": "passed",
       "roleMismatches": [],
       "rejectedLines": [
-        {
-          "group": "forwards",
-          "line": 1,
-          "players": [
-            "David Pastrnl"
-          ],
-          "sourceLine": [
-            "JJ Peterka",
-            "Pavel Zacha",
-            "David Pastrnl"
-          ]
-        },
         {
           "group": "forwards",
           "line": 2,
@@ -38,19 +26,14 @@
       ],
       "rejectedPlayerReasons": [
         {
-          "name": "David Pastrnl",
-          "expectedRole": "forwards",
-          "reason": "not_in_current_roster"
-        },
-        {
           "name": "Michael Eyssiont",
           "expectedRole": "forwards",
           "reason": "not_in_current_roster"
         }
       ],
-      "validatedForwardLines": 2,
+      "validatedForwardLines": 3,
       "validatedDefensePairs": 3,
-      "accepted": false
+      "accepted": true
     },
     "hurricanes": {
       "team": "CAR",
@@ -65,8 +48,8 @@
     "kings": {
       "team": "LAK",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-17T20:36:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/los-angeles-kings-boston-bruins-game-preview-november-17-2026",
+      "candidatePublishedAt": "2026-11-17T18:05:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -80,8 +63,8 @@
     "islanders": {
       "team": "NYI",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-17T20:36:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/columbus-blue-jackets-new-york-islanders-game-preview-november-17-2026",
+      "candidatePublishedAt": "2026-11-17T17:25:00+00:00",
       "candidateForwardLines": 3,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -110,8 +93,8 @@
     "senators": {
       "team": "OTT",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-17T20:36:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/ottawa-senators-winnipeg-jets-game-preview-november-17-2026",
+      "candidatePublishedAt": "2026-11-17T18:03:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -156,8 +139,8 @@
     "sharks": {
       "team": "SJS",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-17T20:36:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/calgary-flames-san-jose-sharks-game-preview-november-17-2026",
+      "candidatePublishedAt": "2026-11-17T19:59:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -171,8 +154,8 @@
     "jets": {
       "team": "WPG",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-17T20:36:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/ottawa-senators-winnipeg-jets-game-preview-november-17-2026",
+      "candidatePublishedAt": "2026-11-17T18:03:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -201,8 +184,8 @@
     "lightning": {
       "team": "TBL",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-17T20:36:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/washington-capitals-tampa-bay-lightning-game-preview-november-17-2026",
+      "candidatePublishedAt": "2026-11-17T18:36:00+00:00",
       "candidateForwardLines": 3,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",

@@ -3,13 +3,6 @@
     "bruins": {
       "players": [
         {
-          "sourceName": "David Pastrnl",
-          "expectedRole": "forwards",
-          "sameSurnameInRoster": [],
-          "classification": "not_on_current_roster",
-          "automaticApproval": false
-        },
-        {
           "sourceName": "Michael Eyssiont",
           "expectedRole": "forwards",
           "sameSurnameInRoster": [],
