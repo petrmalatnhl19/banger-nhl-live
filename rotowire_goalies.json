@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-11-18T07:25:32.581203+00:00",
+  "updatedAt": "2026-11-18T08:41:57.002273+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-  "goalieCount": 80,
+  "goalieCount": 84,
   "games": [
     {
       "team": "BOS",
@@ -147,6 +147,17 @@
       "goalieId": "8475809"
     },
     {
+      "team": "DAL",
+      "goalie": "Jake Oettinger",
+      "opponent": "VGK",
+      "venue": "away",
+      "status": "projected",
+      "date": "2026-11-19",
+      "gameId": 2026020358,
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8479979"
+    },
+    {
       "team": "EDM",
       "goalie": "Devon Levi",
       "opponent": "TBL",
@@ -288,6 +299,17 @@
       "gameId": 2026020357,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "goalieId": "8482447"
+    },
+    {
+      "team": "VGK",
+      "goalie": "Carter Hart",
+      "opponent": "DAL",
+      "venue": "home",
+      "status": "projected",
+      "date": "2026-11-19",
+      "gameId": 2026020358,
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8479394"
     },
     {
       "team": "WPG",
@@ -588,14 +610,14 @@
     },
     {
       "team": "VGK",
-      "goalie": "Carter Hart",
+      "goalie": "Adin Hill",
       "opponent": "WPG",
       "venue": "away",
       "status": "projected",
       "date": "2026-11-21",
       "gameId": 2026020369,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8479394"
+      "goalieId": "8478499"
     },
     {
       "team": "WPG",
@@ -882,20 +904,29 @@
       "gameId": 2026020382,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "goalieId": "8479973"
-    }
-  ],
-  "conflicts": [
-    {
-      "date": "2026-11-19",
-      "team": "DAL",
-      "gameId": 2026020358,
-      "reason": "conflicting RotoWire rows"
     },
     {
-      "date": "2026-11-19",
+      "team": "EDM",
+      "goalie": "Devon Levi",
+      "opponent": "VGK",
+      "venue": "home",
+      "status": "projected",
+      "date": "2026-11-24",
+      "gameId": 2026020385,
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8482221"
+    },
+    {
       "team": "VGK",
-      "gameId": 2026020358,
-      "reason": "conflicting RotoWire rows"
+      "goalie": "Carter Hart",
+      "opponent": "EDM",
+      "venue": "away",
+      "status": "projected",
+      "date": "2026-11-24",
+      "gameId": 2026020385,
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8479394"
     }
-  ]
+  ],
+  "conflicts": []
 }

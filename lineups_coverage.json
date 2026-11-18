@@ -1,15 +1,17 @@
 {
-  "generatedAt": "2026-11-18T07:25:30.196602+00:00",
+  "generatedAt": "2026-11-18T08:41:54.934641+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 23,
+  "currentProjections": 21,
   "needsFreshProjection": [
     "avalanche",
     "bruins",
     "canadiens",
+    "canucks",
     "devils",
     "hurricanes",
     "kraken",
+    "mammoth",
     "penguins",
     "rangers",
     "red wings"
@@ -19,9 +21,11 @@
     "avalanche",
     "bruins",
     "canadiens",
+    "canucks",
     "devils",
     "hurricanes",
     "kraken",
+    "mammoth",
     "penguins",
     "rangers",
     "red wings"
@@ -106,11 +110,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-16T19:49:00+00:00",
       "source": "https://www.nhl.com/news/vancouver-canucks-utah-mammoth-game-preview-november-16-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "capitals": {
       "hasProjectedLines": true,
@@ -262,11 +266,11 @@
         "archive",
         "manual"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-16T19:49:00+00:00",
       "source": "https://www.nhl.com/news/vancouver-canucks-utah-mammoth-game-preview-november-16-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "maple leafs": {
       "hasProjectedLines": true,
