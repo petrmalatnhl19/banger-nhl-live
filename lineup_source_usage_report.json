@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-11-18T19:22:39.138913+00:00",
-  "teams": 30,
+  "generatedAt": "2026-11-18T20:23:18.403464+00:00",
+  "teams": 29,
   "activeSourceCounts": {
-    "nhl.com": 30
+    "nhl.com": 29
   },
   "sources": {
     "nhl.com": {
       "role": "primary_projection_source",
-      "usedTeams": 30
+      "usedTeams": 29
     },
     "fantasy_roundup": {
       "role": "fallback_only",
@@ -26,8 +26,8 @@
     {
       "team": "avalanche",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/colorado-avalanche-montreal-canadiens-game-preview-november-14-2026",
-      "publishedAt": "2026-11-14T18:36:00+00:00",
+      "source": "https://www.nhl.com/news/colorado-avalanche-utah-mammoth-game-preview-november-18-2026",
+      "publishedAt": "2026-11-18T20:05:17.814000+00:00",
       "sourceType": null
     },
     {
@@ -54,15 +54,15 @@
     {
       "team": "bruins",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/los-angeles-kings-boston-bruins-game-preview-november-17-2026",
-      "publishedAt": "2026-11-17T18:05:00+00:00",
+      "source": "https://www.nhl.com/news/boston-bruins-detroit-red-wings-game-preview-november-18-2026",
+      "publishedAt": "2026-11-18T20:07:00.572000+00:00",
       "sourceType": null
     },
     {
       "team": "canadiens",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/montreal-canadiens-new-jersey-devils-game-preview-november-18-2026",
-      "publishedAt": "2026-11-18T17:39:47.792000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-18T19:57:00+00:00",
       "sourceType": null
     },
     {
@@ -82,8 +82,8 @@
     {
       "team": "devils",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/montreal-canadiens-new-jersey-devils-game-preview-november-18-2026",
-      "publishedAt": "2026-11-18T17:39:47.792000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-18T19:57:00+00:00",
       "sourceType": null
     },
     {
@@ -145,8 +145,8 @@
     {
       "team": "mammoth",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/vancouver-canucks-utah-mammoth-game-preview-november-16-2026",
-      "publishedAt": "2026-11-16T19:49:00+00:00",
+      "source": "https://www.nhl.com/news/colorado-avalanche-utah-mammoth-game-preview-november-18-2026",
+      "publishedAt": "2026-11-18T20:05:17.814000+00:00",
       "sourceType": null
     },
     {
@@ -171,13 +171,6 @@
       "sourceType": null
     },
     {
-      "team": "penguins",
-      "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/ottawa-senators-pittsburgh-penguins-game-preview-november-14-2026",
-      "publishedAt": "2026-11-14T16:32:26.653000+00:00",
-      "sourceType": null
-    },
-    {
       "team": "predators",
       "provider": "nhl.com",
       "source": "https://www.nhl.com/news/nashville-predators-minnesota-wild-game-preview-november-17-2026",
@@ -194,8 +187,8 @@
     {
       "team": "red wings",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/detroit-red-wings-tampa-bay-lightning-game-preview-november-14-2026",
-      "publishedAt": "2026-11-14T18:22:33.515000+00:00",
+      "source": "https://www.nhl.com/news/boston-bruins-detroit-red-wings-game-preview-november-18-2026",
+      "publishedAt": "2026-11-18T20:07:00.572000+00:00",
       "sourceType": null
     },
     {
