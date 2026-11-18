@@ -1,6 +1,24 @@
 {
-  "updatedAt": "2026-11-18T20:22:41.763009+00:00",
+  "updatedAt": "2026-11-18T21:28:29.630456+00:00",
   "articles": [
+    {
+      "title": "Penguins potřebují zabrat. Jinak se jádro může rozpadnout Pittsburghu se nedaří a slavní veteráni jsou v ohrožení. Čím víc prohráváte, tím realističtější jsou trejdy, ví Crosby 18. lis 2026",
+      "url": "https://www.nhl.com/cs/news/penguins-hrozi-vyprodej-veteranu",
+      "language": "cs",
+      "source": "NHL.com",
+      "headline": "Penguins potřebují zabrat. Jinak se jádro může rozpadnout",
+      "publishedAt": "2026-11-18T21:15:07.337000+00:00",
+      "description": "Pittsburghu se nedaří a slavní veteráni jsou v ohrožení. Čím víc prohráváte, tím realističtější jsou trejdy, ví Crosby"
+    },
+    {
+      "title": "Bonk se těší na výjimečný zápas v Ottawě Mladý obránce Flyers si zahraje ve městě, v němž zářil jeho slavný otec Radek 18. lis 2026",
+      "url": "https://www.nhl.com/cs/news/bonk-o-zapasu-v-ottawe",
+      "language": "cs",
+      "source": "NHL.com",
+      "headline": "Bonk se těší na výjimečný zápas v Ottawě",
+      "publishedAt": "2026-11-18T21:13:02.116000+00:00",
+      "description": "Mladý obránce Flyers si zahraje ve městě, v němž zářil jeho slavný otec Radek"
+    },
     {
       "title": "Hokejová pošta: Bude Gudas rekordmanem v hitech? Michael Langr z NHL.com/cs odpovídá na dotazy čtenářů od floridského brouska až po oblíbené dresy 18. lis 2026",
       "url": "https://www.nhl.com/cs/news/hokejova-posta-o-gudasovi-i-juniorech",
@@ -11,7 +29,7 @@
       "publishedAt": "2026-11-18T17:07:00.947000+00:00"
     },
     {
-      "title": "NHL ukázala dresy Colorada a Utahu pro Winter Classic Design Avalanche i Mammoth je inspirován hokejem pod širým nebem i alpskou nostalgií 18. lis 2026",
+      "title": "NHL ukázala dresy Colorada a Utahu pro Winter Classic 18. lis 2026",
       "url": "https://www.nhl.com/cs/news/dresy-colorada-a-utahu-pro-nhl-winter-classic",
       "language": "cs",
       "source": "NHL.com",
@@ -20,7 +38,7 @@
       "publishedAt": "2026-11-18T16:12:23.510000+00:00"
     },
     {
-      "title": "Ostrovní zázrak. Schaefer zase měnil historii Devatenáctiletý zadák Islanders nasázel Columbusu premiérový hattrick, spoluhráči v něm vidí favorita na Norris Trophy 18. lis 2026",
+      "title": "Ostrovní zázrak. Schaefer zase měnil historii 18. lis 2026",
       "url": "https://www.nhl.com/cs/news/schaeferuv-historicky-hattrick",
       "language": "cs",
       "source": "NHL.com",
@@ -56,24 +74,6 @@
       "publishedAt": "2026-11-18T08:20:10.748000+00:00"
     },
     {
-      "title": "Veselý zabiják, zhodnotil jubilanta Gudase kouč Maurice 17. lis 2026",
-      "url": "https://www.nhl.com/cs/news/paul-maurice-o-radko-gudasovi",
-      "language": "cs",
-      "source": "NHL.com",
-      "headline": "Veselý zabiják, zhodnotil jubilanta Gudase kouč Maurice",
-      "description": "Český obránce odehrál v sobotu 900. zápas v kariéře. Trenér Floridy chválí jeho styl i osobnost",
-      "publishedAt": "2026-11-17T19:21:53.241000+00:00"
-    },
-    {
-      "title": "Američan s českou krví. Na Kladně jsem doma, říká Klíma 17. lis 2026",
-      "url": "https://www.nhl.com/cs/news/kelly-klima-se-v-kladne-uci-od-jagra-s-plekancem",
-      "language": "cs",
-      "source": "NHL.com",
-      "headline": "Američan s českou krví. Na Kladně jsem doma, říká Kelly Klíma",
-      "description": "Syn zesnulého útočníka NHL se učí od Jágra s Plekancem. Extraliga je každý rok kvalitnější, myslí si",
-      "publishedAt": "2026-11-17T15:31:07.008000+00:00"
-    },
-    {
       "title": "FORČEK: Kučerovovi nejde o peníze, ale o ocenění Slavomír Lener ve 38. dílu podcastu o dění v NHL, českých juniorech i o tom, jak s Babcockem sháněl 300 doutníků 05. lis 2026",
       "url": "https://www.nhl.com/cs/news/podcast-forcek-se-slavomirem-lenerem-o-kucerovovi-i-juniorech",
       "language": "cs",
@@ -101,6 +101,15 @@
       "publishedAt": "2026-10-22T15:20:25.443000+00:00"
     },
     {
+      "title": "Veselý zabiják, zhodnotil jubilanta Gudase kouč Maurice 17. lis 2026",
+      "url": "https://www.nhl.com/cs/news/paul-maurice-o-radko-gudasovi",
+      "language": "cs",
+      "source": "NHL.com",
+      "headline": "Veselý zabiják, zhodnotil jubilanta Gudase kouč Maurice",
+      "description": "Český obránce odehrál v sobotu 900. zápas v kariéře. Trenér Floridy chválí jeho styl i osobnost",
+      "publishedAt": "2026-11-17T19:21:53.241000+00:00"
+    },
+    {
       "title": "McDavid má dál nakročeno k bájné dvoustovce 17. lis 2026",
       "url": "https://www.nhl.com/cs/news/mcdavid-bude-atakovat-dvoustovku",
       "language": "cs",
@@ -108,6 +117,15 @@
       "headline": "McDavid má dál nakročeno k bájné dvoustovce",
       "description": "Základní část je v první čtvrtině. Přinášíme přehled statistických zajímavostí od esa Oilers po hattricky",
       "publishedAt": "2026-11-17T18:07:44.022000+00:00"
+    },
+    {
+      "title": "Američan s českou krví. Na Kladně jsem doma, říká Klíma 17. lis 2026",
+      "url": "https://www.nhl.com/cs/news/kelly-klima-se-v-kladne-uci-od-jagra-s-plekancem",
+      "language": "cs",
+      "source": "NHL.com",
+      "headline": "Američan s českou krví. Na Kladně jsem doma, říká Kelly Klíma",
+      "description": "Syn zesnulého útočníka NHL se učí od Jágra s Plekancem. Extraliga je každý rok kvalitnější, myslí si",
+      "publishedAt": "2026-11-17T15:31:07.008000+00:00"
     },
     {
       "title": "Draft není dogma. Cestu na výsluní může otevřít i AHL 17. lis 2026",
@@ -281,24 +299,6 @@
       "publishedAt": "2026-11-13T20:12:32.877000+00:00"
     },
     {
-      "title": "Téma týdne: Helsinská show i jízdy Gauthiera a McDavida 13. lis 2026",
-      "url": "https://www.nhl.com/cs/news/aho-v-helsinkach-a-gauthierova-strelecka-jizda",
-      "language": "cs",
-      "source": "NHL.com",
-      "headline": "Téma týdne: Helsinská show i jízdy Gauthiera a McDavida",
-      "description": "Finsko oslavovalo hrdinu Aha, Anaheim táhne střelecký fenomén a Edmonton kapitán s historickou fazonou",
-      "publishedAt": "2026-11-13T16:29:34.012000+00:00"
-    },
-    {
-      "title": "Jak ujet hurikánu. Parta ze Seattlu se učila u videa 13. lis 2026",
-      "url": "https://www.nhl.com/cs/news/seattle-kraken-hledaji-zbrane-na-carolinu",
-      "language": "cs",
-      "source": "NHL.com",
-      "headline": "Jak ujet hurikánu. Parta ze Seattlu se učila u videa",
-      "description": "První duel ve Finsku proti Carolině Kraken nezvládli. Musíme kontrolovat modrou, nabádá Beniers",
-      "publishedAt": "2026-11-13T15:53:18.807000+00:00"
-    },
-    {
       "title": "Projected lineups, starting goalies for tonight Latest line combinations, defense pairs, injury news from NHL.com writers Nov 18, 2026",
       "url": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "language": "en",
@@ -308,7 +308,7 @@
       "publishedAt": "2026-11-08T22:04:00+00:00"
     },
     {
-      "title": "Bedard leaves Blackhawks win with upper-body injury Forward exits 54 seconds into third period after being struck during face-off setup Nov 18, 2026",
+      "title": "Bedard leaves Blackhawks win with shoulder injury Forward exits 54 seconds into third period after being struck during face-off setup Nov 18, 2026",
       "url": "https://www.nhl.com/news/connor-bedard-leaves-chicago-blackhawks-game-with-upper-body-injury",
       "language": "en",
       "source": "NHL.com",
@@ -317,49 +317,13 @@
       "publishedAt": "2026-11-18T03:20:14.195000+00:00"
     },
     {
-      "title": "On Tap: Original Six Series closes with Bruins-Wings Nov 18, 2026",
-      "url": "https://www.nhl.com/news/nhl-on-tap-news-and-notes-november-18-2026",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "NHL On Tap: Original Six Series closes with Bruins visiting Red Wings",
-      "description": "Hellebuyck goes for eighth straight win with Devils; Mammoth host Avalanche in Winter Classic preview",
-      "publishedAt": "2026-11-18T15:17:39.673000+00:00"
-    },
-    {
       "title": "Crosby knows Pens need turnaround to keep core intact Nov 18, 2026",
       "url": "https://www.nhl.com/news/sidney-crosby-knows-pittsburgh-penguins-need-turnaround-to-keep-core-intact",
       "language": "en",
       "source": "NHL.com",
       "headline": "Crosby knows Penguins need turnaround to keep veteran core intact",
-      "publishedAt": "2026-11-18T19:47:10.889000+00:00",
-      "description": "Captain has played 21 seasons with Malkin, Letang in Pittsburgh, which has lost six of past eight"
-    },
-    {
-      "title": "Trophy Tracker: Sturm is Adams pick at 1st quarter Nov 18, 2026",
-      "url": "https://www.nhl.com/news/jack-adams-trophy-tracker-bruins-marco-sturm-early-favorite-after-strong-start",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Trophy Tracker: Sturm is Adams pick as top coach after strong start with Bruins",
-      "description": "Brind’Amour, Babcock also among favorites at first quarter of season by NHL.com panel",
-      "publishedAt": "2026-11-18T05:00:00+00:00"
-    },
-    {
-      "title": "Gauthier 'playing with a lot of confidence' for Ducks Nov 18, 2026",
-      "url": "https://www.nhl.com/news/cutter-gauthier-playing-with-confidence-for-anaheim-ducks",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Gauthier ‘just flowing’ during 10-game goal streak for Ducks",
-      "description": "Forward closing in on Selanne after fourth hat trick of season in loss to Blues",
-      "publishedAt": "2026-11-18T06:33:22.994000+00:00"
-    },
-    {
-      "title": "Status Report: Barkov, Marchand ‘both close’ for Florida Nov 18, 2026",
-      "url": "https://www.nhl.com/news/nhl-status-report-news-and-notes-november-18-2026",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "NHL Status Report: Barkov, Marchand ‘both close’ to returning for Panthers",
-      "description": "Geekie placed on injured reserve by Lightning; Sherwood week to week for Sharks",
-      "publishedAt": "2026-11-18T15:58:20.098000+00:00"
+      "description": "Captain has played 21 seasons with Malkin, Letang in Pittsburgh, which has lost six of past eight",
+      "publishedAt": "2026-11-18T19:47:10.889000+00:00"
     },
     {
       "title": "Boucher has priceless reaction to son’s 1st NHL goal Nov 18, 2026",
@@ -371,6 +335,33 @@
       "publishedAt": "2026-11-18T02:03:00+00:00"
     },
     {
+      "title": "Gauthier 'playing with a lot of confidence' for Ducks Nov 18, 2026",
+      "url": "https://www.nhl.com/news/cutter-gauthier-playing-with-confidence-for-anaheim-ducks",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Gauthier ‘just flowing’ during 10-game goal streak for Ducks",
+      "description": "Forward closing in on Selanne after fourth hat trick of season in loss to Blues",
+      "publishedAt": "2026-11-18T06:33:22.994000+00:00"
+    },
+    {
+      "title": "Trophy Tracker: Sturm is Adams pick at 1st quarter Nov 18, 2026",
+      "url": "https://www.nhl.com/news/jack-adams-trophy-tracker-bruins-marco-sturm-early-favorite-after-strong-start",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Trophy Tracker: Sturm is Adams pick as top coach after strong start with Bruins",
+      "description": "Brind’Amour, Babcock also among favorites at first quarter of season by NHL.com panel",
+      "publishedAt": "2026-11-18T05:00:00+00:00"
+    },
+    {
+      "title": "Schaefer dazzles Islanders with 1st NHL hat trick Nov 18, 2026",
+      "url": "https://www.nhl.com/news/new-york-islanders-matthew-schaefer-first-career-hat-trick-adds-to-record-book",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Schaefer gets first hat trick with Islanders, continues to rewrite record book",
+      "publishedAt": "2026-11-18T16:35:00+00:00",
+      "description": "Teammates 'watching greatness kind of evolve' in 19-year-old defenseman"
+    },
+    {
       "title": "Fantasy picks: Toews near point per game for Avs Nov 18, 2026",
       "url": "https://www.nhl.com/news/topic/fantasy/nhl-picks-props-daily-fantasy-hockey-projections-for-2026-27-season",
       "language": "en",
@@ -378,6 +369,15 @@
       "headline": "NHL picks, props, daily fantasy projections",
       "description": "Players to watch with EDGE stats insights, free-to-play game advice; podcast analysis",
       "publishedAt": "2026-11-08T15:17:00+00:00"
+    },
+    {
+      "title": "Status Report: Barkov, Marchand ‘both close’ for Florida Nov 18, 2026",
+      "url": "https://www.nhl.com/news/nhl-status-report-news-and-notes-november-18-2026",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "NHL Status Report: Barkov, Marchand ‘both close’ to returning for Panthers",
+      "description": "Geekie placed on injured reserve by Lightning; Sherwood week to week for Sharks",
+      "publishedAt": "2026-11-18T15:58:20.098000+00:00"
     },
     {
       "title": "Heiskanen scores OT winner in return, Stars rally late past Golden Knights Nov 18, 2026",
@@ -646,8 +646,8 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "NHL EDGE stats: Rangers’ outlook with Shesterkin injured",
-      "publishedAt": "2026-10-15T04:00:00+00:00",
-      "description": "Advanced metrics of Garand, young forwards, Fox can help New York stay afloat"
+      "description": "Advanced metrics of Garand, young forwards, Fox can help New York stay afloat",
+      "publishedAt": "2026-10-15T04:00:00+00:00"
     },
     {
       "title": "NHL EDGE stats: 32 insights for Frozen Frenzy Oct 13, 2026",
@@ -655,8 +655,8 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "NHL EDGE stats: 32 insights for Frozen Frenzy",
-      "publishedAt": "2026-10-13T04:00:00+00:00",
-      "description": "Schmaltz’s high-danger goals, Garand's save metrics among highlights with entire League in action"
+      "description": "Schmaltz’s high-danger goals, Garand's save metrics among highlights with entire League in action",
+      "publishedAt": "2026-10-13T04:00:00+00:00"
     }
   ]
 }
