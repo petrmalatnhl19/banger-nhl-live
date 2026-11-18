@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-18T01:56:08.885583+00:00",
+  "generatedAt": "2026-11-18T02:55:32.758341+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 24,
+  "currentProjections": 25,
   "needsFreshProjection": [
     "avalanche",
     "bruins",
@@ -10,8 +10,7 @@
     "hurricanes",
     "kraken",
     "penguins",
-    "red wings",
-    "senators"
+    "red wings"
   ],
   "missing": [],
   "olderVerified": [
@@ -21,8 +20,7 @@
     "hurricanes",
     "kraken",
     "penguins",
-    "red wings",
-    "senators"
+    "red wings"
   ],
   "manualSnapshots": [],
   "freshnessDefinition": "Publication within 36h; not a confirmed next-game lineup",
@@ -366,13 +364,14 @@
     "senators": {
       "hasProjectedLines": true,
       "sources": [
+        "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": null,
-      "source": null,
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-17T20:36:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "sharks": {
       "hasProjectedLines": true,
