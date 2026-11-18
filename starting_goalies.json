@@ -1,23 +1,14 @@
 {
   "date": "2026-11-18",
-  "updatedAt": "2026-11-18T17:09:08.751666+00:00",
+  "updatedAt": "2026-11-18T18:10:34.802534+00:00",
   "teams": {
-    "BOS": {
-      "name": "Jeremy Swayman",
-      "status": "projected",
-      "date": "2026-11-18",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-18T17:09:08.751666+00:00",
-      "gameId": 2026020344
-    },
     "COL": {
       "name": "Mackenzie Blackwood",
       "status": "projected",
       "date": "2026-11-18",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-18T17:09:08.751666+00:00",
+      "checkedAt": "2026-11-18T18:10:34.802534+00:00",
       "gameId": 2026020346
     },
     "DET": {
@@ -26,7 +17,7 @@
       "date": "2026-11-18",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-18T17:09:08.751666+00:00",
+      "checkedAt": "2026-11-18T18:10:34.802534+00:00",
       "gameId": 2026020344
     },
     "MTL": {
@@ -35,7 +26,7 @@
       "date": "2026-11-18",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-18T17:09:08.751666+00:00",
+      "checkedAt": "2026-11-18T18:10:34.802534+00:00",
       "gameId": 2026020345
     },
     "NJD": {
@@ -44,7 +35,7 @@
       "date": "2026-11-18",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-18T17:09:08.751666+00:00",
+      "checkedAt": "2026-11-18T18:10:34.802534+00:00",
       "gameId": 2026020345
     },
     "UTA": {
@@ -53,11 +44,27 @@
       "date": "2026-11-18",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-18T17:09:08.751666+00:00",
+      "checkedAt": "2026-11-18T18:10:34.802534+00:00",
       "gameId": 2026020346
+    },
+    "BOS": {
+      "name": "Jeremy Swayman",
+      "status": "projected",
+      "date": "2026-11-18",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-18T18:10:34.802534+00:00",
+      "gameId": 2026020344
     }
   },
-  "conflicts": [],
+  "conflicts": [
+    {
+      "team": "BOS",
+      "specialist": "Jeremy Swayman",
+      "nhl": "Michael DiPietro",
+      "nhlSource": "https://www.nhl.com/news/los-angeles-kings-boston-bruins-game-preview-november-17-2026"
+    }
+  ],
   "sourceErrors": [],
-  "status": "ok"
+  "status": "partial"
 }

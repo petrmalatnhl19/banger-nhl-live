@@ -3,30 +3,13 @@
   "teams": {
     "bruins": {
       "team": "BOS",
-      "rosterUpdatedAt": "2026-11-18T17:08:35.374216+00:00",
+      "rosterUpdatedAt": "2026-11-18T18:10:02.517419+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
-      "validatedForwardLines": 2,
+      "validatedForwardLines": 3,
       "validatedDefensePairs": 3,
       "rejected": [
-        {
-          "group": "forwards",
-          "sourceLineNumber": 1,
-          "sourceLine": [
-            "JJ Peterka",
-            "Pavel Zacha",
-            "David Pastrnl"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "David Pastrnl",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        },
         {
           "group": "forwards",
           "sourceLineNumber": 2,
@@ -48,7 +31,7 @@
     },
     "senators": {
       "team": "OTT",
-      "rosterUpdatedAt": "2026-11-18T17:08:37.153659+00:00",
+      "rosterUpdatedAt": "2026-11-18T18:10:03.553075+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
