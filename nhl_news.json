@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-18T19:21:50.827274+00:00",
+  "updatedAt": "2026-11-18T20:22:41.763009+00:00",
   "articles": [
     {
       "title": "Hokejová pošta: Bude Gudas rekordmanem v hitech? Michael Langr z NHL.com/cs odpovídá na dotazy čtenářů od floridského brouska až po oblíbené dresy 18. lis 2026",
@@ -29,7 +29,7 @@
       "publishedAt": "2026-11-18T09:46:04.353000+00:00"
     },
     {
-      "title": "Nezastavitelný. Gauthier ohromil dalším hattrickem Elitní útočník Anaheimu protáhl gólovou šňůru už na deset zápasů, prohře s Blues ale nezabránil 18. lis 2026",
+      "title": "Nezastavitelný. Gauthier ohromil dalším hattrickem 18. lis 2026",
       "url": "https://www.nhl.com/cs/news/gauthier-se-ctvrtym-hattrickem-zapsal-do-historie",
       "language": "cs",
       "source": "NHL.com",
@@ -74,15 +74,6 @@
       "publishedAt": "2026-11-17T15:31:07.008000+00:00"
     },
     {
-      "title": "McDavid má dál nakročeno k bájné dvoustovce 17. lis 2026",
-      "url": "https://www.nhl.com/cs/news/mcdavid-bude-atakovat-dvoustovku",
-      "language": "cs",
-      "source": "NHL.com",
-      "headline": "McDavid má dál nakročeno k bájné dvoustovce",
-      "description": "Základní část je v první čtvrtině. Přinášíme přehled statistických zajímavostí od esa Oilers po hattricky",
-      "publishedAt": "2026-11-17T18:07:44.022000+00:00"
-    },
-    {
       "title": "FORČEK: Kučerovovi nejde o peníze, ale o ocenění Slavomír Lener ve 38. dílu podcastu o dění v NHL, českých juniorech i o tom, jak s Babcockem sháněl 300 doutníků 05. lis 2026",
       "url": "https://www.nhl.com/cs/news/podcast-forcek-se-slavomirem-lenerem-o-kucerovovi-i-juniorech",
       "language": "cs",
@@ -108,6 +99,15 @@
       "headline": "FORČEK: Smysl mi dává Indianapolis, říká Kotalík o expanzi NHL",
       "description": "36. díl podcastu NHL.com/cs a Livesportu s někdejším útočníkem o útoku McDavida na rekord i rozšiřování NHL",
       "publishedAt": "2026-10-22T15:20:25.443000+00:00"
+    },
+    {
+      "title": "McDavid má dál nakročeno k bájné dvoustovce 17. lis 2026",
+      "url": "https://www.nhl.com/cs/news/mcdavid-bude-atakovat-dvoustovku",
+      "language": "cs",
+      "source": "NHL.com",
+      "headline": "McDavid má dál nakročeno k bájné dvoustovce",
+      "description": "Základní část je v první čtvrtině. Přinášíme přehled statistických zajímavostí od esa Oilers po hattricky",
+      "publishedAt": "2026-11-17T18:07:44.022000+00:00"
     },
     {
       "title": "Draft není dogma. Cestu na výsluní může otevřít i AHL 17. lis 2026",
@@ -299,6 +299,15 @@
       "publishedAt": "2026-11-13T15:53:18.807000+00:00"
     },
     {
+      "title": "Projected lineups, starting goalies for tonight Latest line combinations, defense pairs, injury news from NHL.com writers Nov 18, 2026",
+      "url": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Projected lineups, starting goalies for today",
+      "description": "Latest line combinations, defense pairs, injury news from NHL.com writers",
+      "publishedAt": "2026-11-08T22:04:00+00:00"
+    },
+    {
       "title": "Bedard leaves Blackhawks win with upper-body injury Forward exits 54 seconds into third period after being struck during face-off setup Nov 18, 2026",
       "url": "https://www.nhl.com/news/connor-bedard-leaves-chicago-blackhawks-game-with-upper-body-injury",
       "language": "en",
@@ -308,13 +317,22 @@
       "publishedAt": "2026-11-18T03:20:14.195000+00:00"
     },
     {
-      "title": "On Tap: Original Six Series closes with Bruins-Wings Hellebuyck goes for eighth straight win with Devils; Mammoth host Avalanche in Winter Classic preview Nov 18, 2026",
+      "title": "On Tap: Original Six Series closes with Bruins-Wings Nov 18, 2026",
       "url": "https://www.nhl.com/news/nhl-on-tap-news-and-notes-november-18-2026",
       "language": "en",
       "source": "NHL.com",
       "headline": "NHL On Tap: Original Six Series closes with Bruins visiting Red Wings",
       "description": "Hellebuyck goes for eighth straight win with Devils; Mammoth host Avalanche in Winter Classic preview",
       "publishedAt": "2026-11-18T15:17:39.673000+00:00"
+    },
+    {
+      "title": "Crosby knows Pens need turnaround to keep core intact Nov 18, 2026",
+      "url": "https://www.nhl.com/news/sidney-crosby-knows-pittsburgh-penguins-need-turnaround-to-keep-core-intact",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Crosby knows Penguins need turnaround to keep veteran core intact",
+      "publishedAt": "2026-11-18T19:47:10.889000+00:00",
+      "description": "Captain has played 21 seasons with Malkin, Letang in Pittsburgh, which has lost six of past eight"
     },
     {
       "title": "Trophy Tracker: Sturm is Adams pick at 1st quarter Nov 18, 2026",
@@ -353,31 +371,13 @@
       "publishedAt": "2026-11-18T02:03:00+00:00"
     },
     {
-      "title": "EDGE stats: Schaefer’s historic start to career Nov 18, 2026",
-      "url": "https://www.nhl.com/news/new-york-islanders-matthew-schaefer-first-career-hat-trick-adds-to-record-book",
+      "title": "Fantasy picks: Toews near point per game for Avs Nov 18, 2026",
+      "url": "https://www.nhl.com/news/topic/fantasy/nhl-picks-props-daily-fantasy-hockey-projections-for-2026-27-season",
       "language": "en",
       "source": "NHL.com",
-      "headline": "Schaefer gets first hat trick with Islanders, continues to rewrite record book",
-      "description": "Teammates 'watching greatness kind of evolve' in 19-year-old defenseman",
-      "publishedAt": "2026-11-18T16:35:00+00:00"
-    },
-    {
-      "title": "Mammoth look to end skid among Winter Classic prep Nov 17, 2026",
-      "url": "https://www.nhl.com/news/utah-mammoth-look-to-end-skid-vs-avalanche-ahead-of-winter-classic",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Mammoth look to end skid while hype for Winter Classic vs. Avalanche begins",
-      "description": "Utah has lost six straight entering outdoor preview against Colorado",
-      "publishedAt": "2026-11-17T20:04:00+00:00"
-    },
-    {
-      "title": "Hockey Fights Cancer daily digest Nov 16, 2026",
-      "url": "https://www.nhl.com/news/topic/short-shifts/hockey-fights-cancer-nhl-daily-digest-2026-27",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Hockey Fights Cancer daily digest",
-      "description": "Latest news, images from teams, players around the NHL",
-      "publishedAt": "2026-11-16T02:22:00+00:00"
+      "headline": "NHL picks, props, daily fantasy projections",
+      "description": "Players to watch with EDGE stats insights, free-to-play game advice; podcast analysis",
+      "publishedAt": "2026-11-08T15:17:00+00:00"
     },
     {
       "title": "Heiskanen scores OT winner in return, Stars rally late past Golden Knights Nov 18, 2026",
@@ -434,15 +434,6 @@
       "publishedAt": "2026-11-18T03:25:12.231000+00:00"
     },
     {
-      "title": "Projected lineups, starting goalies for today Nov 18, 2026",
-      "url": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Projected lineups, starting goalies for today",
-      "description": "Latest line combinations, defense pairs, injury news from NHL.com writers",
-      "publishedAt": "2026-11-08T22:04:00+00:00"
-    },
-    {
       "title": "NHL EDGE stats: Gauthier joins ‘Rocket’ Richard Trophy race during goal surge Nov 18, 2026",
       "url": "https://www.nhl.com/news/topic/nhl-edge/nhl-edge-stats-cutter-gauthier-anaheim-ducks-goal-scoring-2026-27",
       "language": "en",
@@ -450,15 +441,6 @@
       "headline": "NHL EDGE stats: Gauthier joins ‘Rocket’ Richard Trophy race during goal surge",
       "description": "Ducks wing leads League in mid-range goals; three hat tricks this month powered by shot speed",
       "publishedAt": "2026-11-10T05:00:00+00:00"
-    },
-    {
-      "title": "NHL picks, props, fantasy projections for today Nov 18, 2026",
-      "url": "https://www.nhl.com/news/topic/fantasy/nhl-picks-props-daily-fantasy-hockey-projections-for-2026-27-season",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "NHL picks, props, daily fantasy projections",
-      "description": "Players to watch with EDGE stats insights, free-to-play game advice; podcast analysis",
-      "publishedAt": "2026-11-08T15:17:00+00:00"
     },
     {
       "title": "NHL EDGE stats for 'Wednesday Night Hockey' Nov 18, 2026",
@@ -657,6 +639,24 @@
       "headline": "NHL EDGE stats: Brady Tkachuk’s back-to-back hat tricks for Panthers",
       "description": "Offseason acquisition scoring from middle of ice, excels in shot speed, offensive zone time",
       "publishedAt": "2026-10-16T14:26:18.607000+00:00"
+    },
+    {
+      "title": "NHL EDGE stats: Rangers’ outlook with Shesterkin injured Oct 15, 2026",
+      "url": "https://www.nhl.com/news/topic/nhl-edge/nhl-edge-stats-new-york-rangers-outlook-igor-shesterkin-injury-2026-27",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "NHL EDGE stats: Rangers’ outlook with Shesterkin injured",
+      "publishedAt": "2026-10-15T04:00:00+00:00",
+      "description": "Advanced metrics of Garand, young forwards, Fox can help New York stay afloat"
+    },
+    {
+      "title": "NHL EDGE stats: 32 insights for Frozen Frenzy Oct 13, 2026",
+      "url": "https://www.nhl.com/news/topic/nhl-edge/nhl-edge-stats-frozen-frenzy-advanced-stats-preview-2026-27",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "NHL EDGE stats: 32 insights for Frozen Frenzy",
+      "publishedAt": "2026-10-13T04:00:00+00:00",
+      "description": "Schmaltz’s high-danger goals, Garand's save metrics among highlights with entire League in action"
     }
   ]
 }

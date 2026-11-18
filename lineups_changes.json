@@ -63,20 +63,65 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "red wings": {
-      "updatedAt": "2026-11-14T19:10:09.677594+00:00",
-      "previousPublishedAt": "2026-11-12T17:20:00+00:00",
-      "publishedAt": "2026-11-14T18:59:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-18T20:23:17.851450+00:00",
+      "previousPublishedAt": "2026-11-14T18:22:33.515000+00:00",
+      "publishedAt": "2026-11-18T20:07:00.572000+00:00",
+      "source": "https://www.nhl.com/news/boston-bruins-detroit-red-wings-game-preview-november-18-2026",
       "events": [
         {
-          "type": "added",
+          "type": "moved",
           "player": "Michael Rasmussen",
-          "to": "Útok 4"
+          "from": "Útok 4",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Sheldon Dries",
+          "from": "Útok 4",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Keegan Kolesar",
+          "from": "Útok 4",
+          "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Anton Johansson",
+          "from": "Obrana 3",
+          "to": "Obrana 1"
+        },
+        {
+          "type": "moved",
+          "player": "Ben Chiarot",
+          "from": "Obrana 1",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "added",
+          "player": "Jacob Bernard-Docker",
+          "to": "Obrana 3"
         },
         {
           "type": "removed",
-          "player": "Mason Appleton",
-          "from": "Útok 4"
+          "player": "Carter Mazur",
+          "from": "Útok 3"
+        },
+        {
+          "type": "removed",
+          "player": "J.T. Compher",
+          "from": "Útok 3"
+        },
+        {
+          "type": "removed",
+          "player": "Marco Kasper",
+          "from": "Útok 3"
+        },
+        {
+          "type": "removed",
+          "player": "William Wallinder",
+          "from": "Obrana 2"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -420,20 +465,44 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "mammoth": {
-      "updatedAt": "2026-11-17T02:41:06.485999+00:00",
-      "previousPublishedAt": "2026-11-16T19:54:00+00:00",
-      "publishedAt": "2026-11-16T19:54:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-18T20:23:17.851939+00:00",
+      "previousPublishedAt": "2026-11-16T19:49:00+00:00",
+      "publishedAt": "2026-11-18T20:05:17.814000+00:00",
+      "source": "https://www.nhl.com/news/colorado-avalanche-utah-mammoth-game-preview-november-18-2026",
       "events": [
         {
           "type": "added",
-          "player": "Nick DeSimone",
-          "to": "Obrana 3"
+          "player": "Logan Cooley",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Anders Lee",
+          "from": "Útok 1",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Daniil But",
+          "from": "Útok 2",
+          "to": "Útok 4"
+        },
+        {
+          "type": "moved",
+          "player": "Andrew Peeke",
+          "from": "Obrana 2",
+          "to": "Obrana 1"
+        },
+        {
+          "type": "moved",
+          "player": "MacKenzie Weegar",
+          "from": "Obrana 1",
+          "to": "Obrana 2"
         },
         {
           "type": "removed",
-          "player": "Artem Duda",
-          "from": "Obrana 3"
+          "player": "Ben McCartney",
+          "from": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

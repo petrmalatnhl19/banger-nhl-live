@@ -85,14 +85,14 @@
         ]
       ],
       "goalies": [
-        "Michael DiPietro",
-        "Jeremy Swayman"
+        "Jeremy Swayman",
+        "Michael DiPietro"
       ],
       "injured": "James Hagens (back)",
       "scratched": "Matthew Poitras, Frederic Brunet, Jonathan Aspirot",
-      "source": "https://www.nhl.com/news/los-angeles-kings-boston-bruins-game-preview-november-17-2026",
-      "publishedAt": "2026-11-17T18:05:00+00:00",
-      "asOf": "2026-11-17",
+      "source": "https://www.nhl.com/news/boston-bruins-detroit-red-wings-game-preview-november-18-2026",
+      "publishedAt": "2026-11-18T20:07:00.572000+00:00",
+      "asOf": "2026-11-18",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -111,39 +111,34 @@
           "Lucas Raymond"
         ],
         [
-          "Carter Mazur",
-          "J.T. Compher",
-          "Marco Kasper"
-        ],
-        [
-          "Sheldon Dries",
           "Michael Rasmussen",
+          "Sheldon Dries",
           "Keegan Kolesar"
         ]
       ],
       "defense": [
         [
-          "Ben Chiarot",
+          "Anton Johansson",
           "Moritz Seider"
         ],
         [
-          "William Wallinder",
+          "Ben Chiarot",
           "Justin Faulk"
         ],
         [
           "Andreas Englund",
-          "Anton Johansson"
+          "Jacob Bernard-Docker"
         ]
       ],
       "goalies": [
         "Daniil Tarasov",
         "John Gibson"
       ],
-      "injured": "None",
-      "scratched": "Mason Appleton",
-      "source": "https://www.nhl.com/news/detroit-red-wings-tampa-bay-lightning-game-preview-november-14-2026",
-      "publishedAt": "2026-11-14T18:22:33.515000+00:00",
-      "asOf": "2026-11-14",
+      "injured": "William Wallinder (upper body), Albert Johansson (undisclosed)",
+      "scratched": "Axel Sandin-Pellikka, John Leonard",
+      "source": "https://www.nhl.com/news/boston-bruins-detroit-red-wings-game-preview-november-18-2026",
+      "publishedAt": "2026-11-18T20:07:00.572000+00:00",
+      "asOf": "2026-11-18",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -242,10 +237,10 @@
         "Scott Wedgewood"
       ],
       "injured": "Nathan MacKinnon (lower body), Cale Makar (lower body), Zachary L'Heureux (upper body), Josh Manson (lower body)",
-      "scratched": "None",
-      "source": "https://www.nhl.com/news/colorado-avalanche-montreal-canadiens-game-preview-november-14-2026",
-      "publishedAt": "2026-11-14T18:36:00+00:00",
-      "asOf": "2026-11-14",
+      "scratched": "Mike Reilly",
+      "source": "https://www.nhl.com/news/colorado-avalanche-utah-mammoth-game-preview-november-18-2026",
+      "publishedAt": "2026-11-18T20:05:17.814000+00:00",
+      "asOf": "2026-11-18",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -693,8 +688,8 @@
       ],
       "injured": "Chris Kreider (lower body), Josh Anderson (lower body), Mike Matheson (lower body), Samuel Montembeault (lower body), Ivan Demidov (lower body)",
       "scratched": "David Reinbacher, Florian Xhekaj",
-      "source": "https://www.nhl.com/news/montreal-canadiens-new-jersey-devils-game-preview-november-18-2026",
-      "publishedAt": "2026-11-18T17:39:47.792000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-18T19:57:00+00:00",
       "asOf": "2026-11-18",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -897,8 +892,8 @@
       ],
       "injured": "Anthony Mantha (throat), Johnathan Kovacevic (ankle sprain)",
       "scratched": "Amadeus Lombardi, Anton Silaev, Vladislav Kolyachonok",
-      "source": "https://www.nhl.com/news/montreal-canadiens-new-jersey-devils-game-preview-november-18-2026",
-      "publishedAt": "2026-11-18T17:39:47.792000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-18T19:57:00+00:00",
       "asOf": "2026-11-18",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -908,12 +903,12 @@
       "name": "Mammoth",
       "forwards": [
         [
-          "Anders Lee",
+          "Logan Cooley",
           "Vincent Trocheck",
           "Clayton Keller"
         ],
         [
-          "Daniil But",
+          "Anders Lee",
           "Barrett Hayton",
           "Kailer Yamamoto"
         ],
@@ -923,34 +918,34 @@
           "Lawson Crouse"
         ],
         [
-          "Liam O'Brien",
+          "Liam O’Brien",
           "Kevin Stenlund",
-          "Ben McCartney"
+          "Daniil But"
         ]
       ],
       "defense": [
         [
           "Mikhail Sergachev",
-          "MacKenzie Weegar"
-        ],
-        [
-          "Dmitri Simashev",
           "Andrew Peeke"
         ],
         [
-          "Nick DeSimone",
-          "Zac Jones"
+          "Dmitri Simashev",
+          "MacKenzie Weegar"
+        ],
+        [
+          "Zac Jones",
+          "Nick DeSimone"
         ]
       ],
       "goalies": [
-        "Karel Vejmelka",
-        "Sebastian Cossa"
+        "Sebastian Cossa",
+        "Karel Vejmelka"
       ],
-      "injured": "Dylan Guenther (upper body), Logan Cooley (upper body), Nick Schmaltz (lower body), Nate Schmidt (upper body), John Marino (upper body), Maveric Lamoureux (shoulder), Artem Duda (lower body)",
-      "scratched": "",
-      "source": "https://www.nhl.com/news/vancouver-canucks-utah-mammoth-game-preview-november-16-2026",
-      "publishedAt": "2026-11-16T19:49:00+00:00",
-      "asOf": "2026-11-16",
+      "injured": "Dylan Guenther (upper body), Nick Schmaltz (lower body), Nate Schmidt (upper body), John Marino (upper body), Maveric Lamoureux (shoulder)",
+      "scratched": "Ben McCartney, Gregor Biber",
+      "source": "https://www.nhl.com/news/colorado-avalanche-utah-mammoth-game-preview-november-18-2026",
+      "publishedAt": "2026-11-18T20:05:17.814000+00:00",
+      "asOf": "2026-11-18",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"

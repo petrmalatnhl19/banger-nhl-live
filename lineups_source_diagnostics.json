@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-18T19:22:38.605307+00:00",
+  "generatedAt": "2026-11-18T20:23:17.847954+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/los-angeles-kings-boston-bruins-game-preview-november-17-2026",
-      "candidatePublishedAt": "2026-11-17T18:05:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/boston-bruins-detroit-red-wings-game-preview-november-18-2026",
+      "candidatePublishedAt": "2026-11-18T20:07:00.572000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -200,8 +200,8 @@
     "mammoth": {
       "team": "UTA",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/vancouver-canucks-utah-mammoth-game-preview-november-16-2026",
-      "candidatePublishedAt": "2026-11-16T19:49:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/colorado-avalanche-utah-mammoth-game-preview-november-18-2026",
+      "candidatePublishedAt": "2026-11-18T20:05:17.814000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -215,15 +215,34 @@
     "red wings": {
       "team": "DET",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/detroit-red-wings-tampa-bay-lightning-game-preview-november-14-2026",
-      "candidatePublishedAt": "2026-11-14T18:22:33.515000+00:00",
+      "candidateSource": "https://www.nhl.com/news/boston-bruins-detroit-red-wings-game-preview-november-18-2026",
+      "candidatePublishedAt": "2026-11-18T20:07:00.572000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
       "roleMismatches": [],
-      "rejectedLines": [],
-      "rejectedPlayerReasons": [],
-      "validatedForwardLines": 4,
+      "rejectedLines": [
+        {
+          "group": "forwards",
+          "line": 3,
+          "players": [
+            "Nate Danielson"
+          ],
+          "sourceLine": [
+            "Carter Mazur",
+            "Nate Danielson",
+            "J.T. Compher"
+          ]
+        }
+      ],
+      "rejectedPlayerReasons": [
+        {
+          "name": "Nate Danielson",
+          "expectedRole": "forwards",
+          "reason": "not_in_current_roster"
+        }
+      ],
+      "validatedForwardLines": 3,
       "validatedDefensePairs": 3,
       "accepted": true
     },
