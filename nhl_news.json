@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-18T14:57:30.218895+00:00",
+  "updatedAt": "2026-11-18T16:01:57.118326+00:00",
   "articles": [
     {
       "title": "Ostrovní zázrak. Schaefer zase měnil historii Devatenáctiletý zadák Islanders nasázel Columbusu premiérový hattrick, spoluhráči v něm vidí favorita na Norris Trophy 18. lis 2026",
@@ -299,6 +299,15 @@
       "publishedAt": "2026-11-13T15:12:18.467000+00:00"
     },
     {
+      "title": "McDavid streak hits 23, Oilers hold off Panthers Has goal, assist; Podkolzin, Draisaitl, Kapanen each gets three points in Edmonton’s sixth straight win Nov 18, 2026",
+      "url": "https://www.nhl.com/news/edmonton-oilers-florida-panthers-game-recap-november-17-2026",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "McDavid runs season-opening point streak to 23, Oilers hold off Panthers",
+      "publishedAt": "2026-11-18T04:20:00+00:00",
+      "description": "Has goal, assist; Podkolzin, Draisaitl, Kapanen each gets three points in Edmonton’s sixth straight win"
+    },
+    {
       "title": "Bedard leaves Blackhawks win with upper-body injury Forward exits 54 seconds into third period after being struck during face-off setup Nov 18, 2026",
       "url": "https://www.nhl.com/news/connor-bedard-leaves-chicago-blackhawks-game-with-upper-body-injury",
       "language": "en",
@@ -308,7 +317,7 @@
       "publishedAt": "2026-11-18T03:20:14.195000+00:00"
     },
     {
-      "title": "Gauthier scores another hat trick, but Blues hold on late Forward gets hat trick, assist for Anaheim; Thomas, Mailloux each has three points for St. Louis Nov 18, 2026",
+      "title": "Gauthier scores another hat trick, but Blues hold on late Nov 18, 2026",
       "url": "https://www.nhl.com/news/anaheim-ducks-st-louis-blues-game-recap-november-17-2026",
       "language": "en",
       "source": "NHL.com",
@@ -317,13 +326,13 @@
       "publishedAt": "2026-11-18T04:29:55.739000+00:00"
     },
     {
-      "title": "Schaefer gets 1st career hat trick in Islanders win Nov 18, 2026",
-      "url": "https://www.nhl.com/news/columbus-blue-jackets-new-york-islanders-game-recap-november-17-2026",
+      "title": "Heiskanen caps Stars' late rally with OT goal in return Nov 18, 2026",
+      "url": "https://www.nhl.com/news/dallas-stars-vegas-golden-knights-game-recap-november-17-2026",
       "language": "en",
       "source": "NHL.com",
-      "headline": "Schaefer gets first career hat trick, Islanders defeat Blue Jackets",
-      "description": "Sorokin makes 28 saves for New York, which has won three straight; Columbus has lost five in row",
-      "publishedAt": "2026-11-18T02:54:26.224000+00:00"
+      "headline": "Heiskanen scores OT winner in return, Stars rally late past Golden Knights",
+      "description": "Defenseman ends it at 3:36 after Rantanen ties game with five seconds left for Dallas",
+      "publishedAt": "2026-11-18T07:18:00+00:00"
     },
     {
       "title": "Boldy has 3 points, Wild cruise past Predators Nov 18, 2026",
@@ -369,15 +378,6 @@
       "headline": "Dvorak breaks tie in third, Flyers hand Sabres fifth straight loss",
       "description": "Michkov extends point streak with two assists for Philadelphia",
       "publishedAt": "2026-11-18T02:46:59.524000+00:00"
-    },
-    {
-      "title": "Heiskanen caps Stars' late rally with OT goal in return Nov 18, 2026",
-      "url": "https://www.nhl.com/news/dallas-stars-vegas-golden-knights-game-recap-november-17-2026",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Heiskanen scores OT winner in return, Stars rally late past Golden Knights",
-      "description": "Defenseman ends it at 3:36 after Rantanen ties game with five seconds left for Dallas",
-      "publishedAt": "2026-11-18T07:18:00+00:00"
     },
     {
       "title": "Bedard scores, leaves with injury in Blackhawks win against Maple Leafs Nov 18, 2026",
@@ -655,8 +655,8 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "Blackhawks ambassadors talk Centennial matchup at pregame panel",
-      "publishedAt": "2026-11-18T00:56:00+00:00",
-      "description": "Olczyk, Savard, Roenick, Chelios and Foley discuss historic 100-year anniversary for franchise"
+      "description": "Olczyk, Savard, Roenick, Chelios and Foley discuss historic 100-year anniversary for franchise",
+      "publishedAt": "2026-11-18T00:56:00+00:00"
     }
   ]
 }
