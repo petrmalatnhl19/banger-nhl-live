@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-18T18:10:28.059021+00:00",
+  "generatedAt": "2026-11-18T19:22:31.677019+00:00",
   "checked": 23,
   "articlesFound": 1,
   "errors": [],
@@ -20,7 +20,7 @@
       "date": "2026-11-18",
       "away": "MTL",
       "home": "NJD",
-      "priority": true
+      "priority": false
     },
     {
       "date": "2026-11-19",
@@ -30,8 +30,14 @@
     },
     {
       "date": "2026-11-19",
-      "away": "MTL",
-      "home": "CAR",
+      "away": "BUF",
+      "home": "WSH",
+      "priority": true
+    },
+    {
+      "date": "2026-11-19",
+      "away": "EDM",
+      "home": "TBL",
       "priority": true
     },
     {
@@ -60,12 +66,6 @@
     },
     {
       "date": "2026-11-19",
-      "away": "BUF",
-      "home": "WSH",
-      "priority": false
-    },
-    {
-      "date": "2026-11-19",
       "away": "CBJ",
       "home": "CHI",
       "priority": false
@@ -78,12 +78,6 @@
     },
     {
       "date": "2026-11-19",
-      "away": "EDM",
-      "home": "TBL",
-      "priority": false
-    },
-    {
-      "date": "2026-11-19",
       "away": "LAK",
       "home": "TOR",
       "priority": false
@@ -92,6 +86,12 @@
       "date": "2026-11-19",
       "away": "MIN",
       "home": "CGY",
+      "priority": false
+    },
+    {
+      "date": "2026-11-19",
+      "away": "MTL",
+      "home": "CAR",
       "priority": false
     }
   ],
@@ -136,12 +136,22 @@
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/montreal-canadiens-carolina-hurricanes-game-preview-november-19-2026",
+      "url": "https://www.nhl.com/news/buffalo-sabres-washington-capitals-game-preview-november-19-2026",
       "result": "no_complete_projection",
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/carolina-hurricanes-montreal-canadiens-game-preview-november-19-2026",
+      "url": "https://www.nhl.com/news/washington-capitals-buffalo-sabres-game-preview-november-19-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/edmonton-oilers-tampa-bay-lightning-game-preview-november-19-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/tampa-bay-lightning-edmonton-oilers-game-preview-november-19-2026",
       "result": "no_complete_projection",
       "teams": []
     },
@@ -166,12 +176,12 @@
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/st-louis-blues-pittsburgh-penguins-game-preview-november-19-2026",
+      "url": "https://www.nhl.com/news/vancouver-canucks-seattle-kraken-game-preview-november-19-2026",
       "result": "no_complete_projection",
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/pittsburgh-penguins-st-louis-blues-game-preview-november-19-2026",
+      "url": "https://www.nhl.com/news/seattle-kraken-vancouver-canucks-game-preview-november-19-2026",
       "result": "no_complete_projection",
       "teams": []
     },
@@ -196,16 +206,6 @@
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/edmonton-oilers-tampa-bay-lightning-game-preview-november-19-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/tampa-bay-lightning-edmonton-oilers-game-preview-november-19-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
       "url": "https://www.nhl.com/news/los-angeles-kings-toronto-maple-leafs-game-preview-november-19-2026",
       "result": "no_complete_projection",
       "teams": []
@@ -220,11 +220,11 @@
   "fixturesSelected": 12,
   "fixturesDeferred": 3,
   "rotation": {
-    "window": 1994472,
+    "window": 1994477,
     "fixed": 8,
     "rotating": 4,
     "remainingPool": 7,
-    "rotationStart": 2
+    "rotationStart": 1
   },
   "selectedFixtures": [
     {
@@ -249,8 +249,13 @@
     },
     {
       "date": "2026-11-19",
-      "away": "MTL",
-      "home": "CAR"
+      "away": "BUF",
+      "home": "WSH"
+    },
+    {
+      "date": "2026-11-19",
+      "away": "EDM",
+      "home": "TBL"
     },
     {
       "date": "2026-11-19",
@@ -264,8 +269,8 @@
     },
     {
       "date": "2026-11-19",
-      "away": "STL",
-      "home": "PIT"
+      "away": "VAN",
+      "home": "SEA"
     },
     {
       "date": "2026-11-19",
@@ -276,11 +281,6 @@
       "date": "2026-11-19",
       "away": "DAL",
       "home": "VGK"
-    },
-    {
-      "date": "2026-11-19",
-      "away": "EDM",
-      "home": "TBL"
     },
     {
       "date": "2026-11-19",

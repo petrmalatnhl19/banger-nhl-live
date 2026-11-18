@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-18T18:10:34.226516+00:00",
+  "checkedAt": "2026-11-18T19:22:41.656593+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "candidateCount": 84,
   "matchedCount": 84,
@@ -56,7 +56,7 @@
     },
     {
       "team": "BUF",
-      "goalie": "Alex Lyon",
+      "goalie": "Ukko-Pekka Luukkonen",
       "opponent": "WSH",
       "venue": "away",
       "status": "projected",
@@ -209,7 +209,7 @@
       "goalie": "Mackenzie Blackwood",
       "opponent": "UTA",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-18",
       "gameId": 2026020346,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -706,10 +706,10 @@
     },
     {
       "team": "UTA",
-      "goalie": "Karel Vejmelka",
+      "goalie": "Sebastian Cossa",
       "opponent": "COL",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-18",
       "gameId": 2026020346,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"

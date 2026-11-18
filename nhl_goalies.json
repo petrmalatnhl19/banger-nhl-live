@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-18T18:10:34.931798+00:00",
-  "rostersUpdatedAt": "2026-11-18T18:10:04.197907+00:00",
+  "updatedAt": "2026-11-18T19:22:42.377799+00:00",
+  "rostersUpdatedAt": "2026-11-18T19:21:58.121077+00:00",
   "projectionDate": "2026-11-18",
   "teamCount": 32,
   "goalieCount": 73,
@@ -10,7 +10,7 @@
       "team": "COL",
       "teamKey": "avalanche",
       "playerId": 8478406,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-18",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -350,17 +350,17 @@
       "team": "UTA",
       "teamKey": "mammoth",
       "playerId": 8482657,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-18",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Karel Vejmelka",
       "team": "UTA",
       "teamKey": "mammoth",
       "playerId": 8478872,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-18",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Artur Akhtyamov",
