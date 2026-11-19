@@ -1,12 +1,14 @@
 {
-  "generatedAt": "2026-11-19T03:59:39.129069+00:00",
+  "generatedAt": "2026-11-19T05:09:08.531473+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 27,
+  "currentProjections": 25,
   "needsFreshProjection": [
     "canucks",
     "hurricanes",
     "kraken",
+    "oilers",
+    "panthers",
     "penguins",
     "rangers"
   ],
@@ -15,6 +17,8 @@
     "canucks",
     "hurricanes",
     "kraken",
+    "oilers",
+    "panthers",
     "penguins",
     "rangers"
   ],
@@ -280,11 +284,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-17T17:08:00+00:00",
       "source": "https://www.nhl.com/news/edmonton-oilers-florida-panthers-game-preview-november-17-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "panthers": {
       "hasProjectedLines": true,
@@ -292,11 +296,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-17T17:08:00+00:00",
       "source": "https://www.nhl.com/news/edmonton-oilers-florida-panthers-game-preview-november-17-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "penguins": {
       "hasProjectedLines": true,
