@@ -1,74 +1,8 @@
 {
-  "updatedAt": "2026-11-18T21:29:14.304017+00:00",
+  "updatedAt": "2026-11-19T00:28:56.247556+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-  "goalieCount": 84,
+  "goalieCount": 78,
   "games": [
-    {
-      "team": "BOS",
-      "goalie": "Jeremy Swayman",
-      "opponent": "DET",
-      "venue": "away",
-      "status": "projected",
-      "date": "2026-11-18",
-      "gameId": 2026020344,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8480280"
-    },
-    {
-      "team": "COL",
-      "goalie": "Mackenzie Blackwood",
-      "opponent": "UTA",
-      "venue": "away",
-      "status": "confirmed",
-      "date": "2026-11-18",
-      "gameId": 2026020346,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8478406"
-    },
-    {
-      "team": "DET",
-      "goalie": "Daniil Tarasov",
-      "opponent": "BOS",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-18",
-      "gameId": 2026020344,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8480193"
-    },
-    {
-      "team": "MTL",
-      "goalie": "Jacob Fowler",
-      "opponent": "NJD",
-      "venue": "away",
-      "status": "confirmed",
-      "date": "2026-11-18",
-      "gameId": 2026020345,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8484170"
-    },
-    {
-      "team": "NJD",
-      "goalie": "Connor Hellebuyck",
-      "opponent": "MTL",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-18",
-      "gameId": 2026020345,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8476945"
-    },
-    {
-      "team": "UTA",
-      "goalie": "Sebastian Cossa",
-      "opponent": "COL",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-18",
-      "gameId": 2026020346,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8482657"
-    },
     {
       "team": "ANA",
       "goalie": "Lukas Dostal",
