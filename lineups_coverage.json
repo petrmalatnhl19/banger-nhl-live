@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-19T07:48:09.714412+00:00",
+  "generatedAt": "2026-11-19T10:44:55.410489+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 10,
+  "currentProjections": 6,
   "needsFreshProjection": [
     "blackhawks",
     "blue jackets",
@@ -10,7 +10,9 @@
     "canucks",
     "capitals",
     "ducks",
+    "flames",
     "flyers",
+    "golden knights",
     "hurricanes",
     "islanders",
     "jets",
@@ -25,6 +27,8 @@
     "rangers",
     "sabres",
     "senators",
+    "sharks",
+    "stars",
     "wild"
   ],
   "missing": [],
@@ -35,7 +39,9 @@
     "canucks",
     "capitals",
     "ducks",
+    "flames",
     "flyers",
+    "golden knights",
     "hurricanes",
     "islanders",
     "jets",
@@ -50,6 +56,8 @@
     "rangers",
     "sabres",
     "senators",
+    "sharks",
+    "stars",
     "wild"
   ],
   "manualSnapshots": [],
@@ -182,11 +190,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-17T19:59:00+00:00",
       "source": "https://www.nhl.com/news/calgary-flames-san-jose-sharks-game-preview-november-17-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "flyers": {
       "hasProjectedLines": true,
@@ -206,11 +214,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-17T20:39:00+00:00",
       "source": "https://www.nhl.com/news/dallas-stars-vegas-golden-knights-game-preview-november-17-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "hurricanes": {
       "hasProjectedLines": true,
@@ -409,11 +417,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-17T19:59:00+00:00",
       "source": "https://www.nhl.com/news/calgary-flames-san-jose-sharks-game-preview-november-17-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "stars": {
       "hasProjectedLines": true,
@@ -422,11 +430,11 @@
         "archive",
         "manual"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-17T20:39:00+00:00",
       "source": "https://www.nhl.com/news/dallas-stars-vegas-golden-knights-game-preview-november-17-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "wild": {
       "hasProjectedLines": true,
