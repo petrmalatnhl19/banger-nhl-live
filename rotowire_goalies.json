@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-19T15:01:10.559862+00:00",
+  "updatedAt": "2026-11-19T16:02:20.870059+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "goalieCount": 106,
   "games": [
@@ -148,14 +148,14 @@
     },
     {
       "team": "OTT",
-      "goalie": "Linus Ullmark",
+      "goalie": "Samuel Ersson",
       "opponent": "PHI",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-19",
       "gameId": 2026020348,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8476999"
+      "goalieId": "8481035"
     },
     {
       "team": "PHI",
@@ -173,7 +173,7 @@
       "goalie": "Arturs Silovs",
       "opponent": "STL",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-19",
       "gameId": 2026020350,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
@@ -214,14 +214,14 @@
     },
     {
       "team": "TOR",
-      "goalie": "Sergei Bobrovsky",
+      "goalie": "Anthony Stolarz",
       "opponent": "LAK",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-19",
       "gameId": 2026020347,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8475683"
+      "goalieId": "8476932"
     },
     {
       "team": "VAN",
@@ -247,21 +247,21 @@
     },
     {
       "team": "WPG",
-      "goalie": "Stuart Skinner",
+      "goalie": "Nico Daws",
       "opponent": "NYI",
       "venue": "home",
       "status": "projected",
       "date": "2026-11-19",
       "gameId": 2026020354,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8479973"
+      "goalieId": "8482076"
     },
     {
       "team": "WSH",
       "goalie": "Logan Thompson",
       "opponent": "BUF",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-19",
       "gameId": 2026020351,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",

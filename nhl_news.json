@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-19T15:00:40.536899+00:00",
+  "updatedAt": "2026-11-19T16:01:49.088358+00:00",
   "articles": [
     {
       "title": "Hellebuyck zůstal krok od rekordu Gólmanova snaha o osmou výhru v dresu Devils skončila neúspěchem, po výsledku 3:2 slavili Canadiens 19. lis 2026",
@@ -90,6 +90,15 @@
       "headline": "FORČEK: Smysl mi dává Indianapolis, říká Kotalík o expanzi NHL",
       "description": "36. díl podcastu NHL.com/cs a Livesportu s někdejším útočníkem o útoku McDavida na rekord i rozšiřování NHL",
       "publishedAt": "2026-10-22T15:20:25.443000+00:00"
+    },
+    {
+      "title": "Německý průlom v CHL. Trojlístek klubů píše historii 19. lis 2026",
+      "url": "https://www.nhl.com/cs/news/nemecky-trojboj-v-champions-league",
+      "language": "cs",
+      "source": "NHL.com",
+      "headline": "Německý průlom v CHL. Trojlístek klubů píše historii",
+      "publishedAt": "2026-11-19T14:58:43.920000+00:00",
+      "description": "Evrospký led: Kolín, Mannheim a Eisbären jsou poprvé společně ve čtvrtfinále Champions League, českým praporem mávají Pardubice"
     },
     {
       "title": "Bedard nedohrál kvůli zranění v horní části těla 18. lis 2026",
@@ -290,15 +299,6 @@
       "publishedAt": "2026-11-14T17:54:37.750000+00:00"
     },
     {
-      "title": "Anaheim nepolevuje, do NHL posílá novou vlnu nadějí 14. lis 2026",
-      "url": "https://www.nhl.com/cs/news/anaheim-sazi-na-novacky",
-      "language": "cs",
-      "source": "NHL.com",
-      "headline": "Anaheim nepolevuje, do NHL posílá novou vlnu nadějí",
-      "description": "Zelenáči: Ducks mají silné mladé jádro, ale prostor dostávají i další talenty jako Warren, Caulfield a McQueen",
-      "publishedAt": "2026-11-14T15:40:16.338000+00:00"
-    },
-    {
       "title": "Habs hand Hellebuyck 1st loss in 8 games with Devils Evans breaks tie in third, Hutson has three assists for Montreal Nov 19, 2026",
       "url": "https://www.nhl.com/news/montreal-canadiens-new-jersey-devils-game-recap-november-18-2026",
       "language": "en",
@@ -416,6 +416,15 @@
       "publishedAt": "2026-11-18T03:28:57.400000+00:00"
     },
     {
+      "title": "Fantasy hockey top 200 player rankings for 2026-27 Nov 19, 2026",
+      "url": "https://www.nhl.com/news/topic/fantasy/nhl-fantasy-hockey-top-250-200-rankings-drafts-players-big-board-281505474",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Fantasy hockey top 200 player rankings for 2026-27",
+      "description": "Most valuable overall options for standard leagues, impact of Hellebuyck trade on goalie landscape",
+      "publishedAt": "2026-11-09T14:00:00+00:00"
+    },
+    {
       "title": "Projected lineups, starting goalies for today Nov 18, 2026",
       "url": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "language": "en",
@@ -441,15 +450,6 @@
       "headline": "Fantasy hockey top 50 defenseman rankings",
       "description": "Most valuable options at position in standard leagues; new podcast episodes",
       "publishedAt": "2026-11-07T14:00:00+00:00"
-    },
-    {
-      "title": "Fantasy hockey top 200 player rankings for 2026-27 Nov 18, 2026",
-      "url": "https://www.nhl.com/news/topic/fantasy/nhl-fantasy-hockey-top-250-200-rankings-drafts-players-big-board-281505474",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Fantasy hockey top 200 player rankings for 2026-27",
-      "description": "Most valuable overall options for standard leagues, impact of Hellebuyck trade on goalie landscape",
-      "publishedAt": "2026-11-09T14:00:00+00:00"
     },
     {
       "title": "NHL picks, props, fantasy projections for today Nov 18, 2026",
@@ -655,8 +655,8 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "NHL EDGE stats: 32 insights for Frozen Frenzy",
-      "publishedAt": "2026-10-13T04:00:00+00:00",
-      "description": "Schmaltz’s high-danger goals, Garand's save metrics among highlights with entire League in action"
+      "description": "Schmaltz’s high-danger goals, Garand's save metrics among highlights with entire League in action",
+      "publishedAt": "2026-10-13T04:00:00+00:00"
     }
   ]
 }
