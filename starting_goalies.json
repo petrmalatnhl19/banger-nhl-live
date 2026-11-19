@@ -1,6 +1,6 @@
 {
   "date": "2026-11-19",
-  "updatedAt": "2026-11-19T16:02:20.870059+00:00",
+  "updatedAt": "2026-11-19T17:10:13.994108+00:00",
   "teams": {
     "CAR": {
       "name": "Pyotr Kochetkov",
@@ -8,16 +8,16 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T16:02:20.870059+00:00",
+      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
       "gameId": 2026020352
     },
     "CGY": {
       "name": "Dustin Wolf",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T16:02:20.870059+00:00",
+      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
       "gameId": 2026020355
     },
     "CHI": {
@@ -26,7 +26,7 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T16:02:20.870059+00:00",
+      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
       "gameId": 2026020353
     },
     "DAL": {
@@ -35,16 +35,16 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T16:02:20.870059+00:00",
+      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
       "gameId": 2026020358
     },
     "EDM": {
       "name": "Devon Levi",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T16:02:20.870059+00:00",
+      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
       "gameId": 2026020349
     },
     "LAK": {
@@ -53,7 +53,7 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T16:02:20.870059+00:00",
+      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
       "gameId": 2026020347
     },
     "MIN": {
@@ -62,7 +62,7 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T16:02:20.870059+00:00",
+      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
       "gameId": 2026020355
     },
     "MTL": {
@@ -71,17 +71,8 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T16:02:20.870059+00:00",
+      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
       "gameId": 2026020352
-    },
-    "NYI": {
-      "name": "Ilya Sorokin",
-      "status": "projected",
-      "date": "2026-11-19",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T16:02:20.870059+00:00",
-      "gameId": 2026020354
     },
     "OTT": {
       "name": "Samuel Ersson",
@@ -89,7 +80,16 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T16:02:20.870059+00:00",
+      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
+      "gameId": 2026020348
+    },
+    "PHI": {
+      "name": "Joseph Woll",
+      "status": "confirmed",
+      "date": "2026-11-19",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
       "gameId": 2026020348
     },
     "PIT": {
@@ -98,7 +98,16 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T16:02:20.870059+00:00",
+      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
+      "gameId": 2026020350
+    },
+    "STL": {
+      "name": "Joel Hofer",
+      "status": "confirmed",
+      "date": "2026-11-19",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
       "gameId": 2026020350
     },
     "TBL": {
@@ -107,7 +116,7 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T16:02:20.870059+00:00",
+      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
       "gameId": 2026020349
     },
     "TOR": {
@@ -116,7 +125,7 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T16:02:20.870059+00:00",
+      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
       "gameId": 2026020347
     },
     "WSH": {
@@ -125,7 +134,7 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T16:02:20.870059+00:00",
+      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
       "gameId": 2026020351
     }
   },
@@ -160,10 +169,10 @@
     },
     {
       "date": "2026-11-19",
-      "team": "PHI",
+      "team": "NYI",
       "reason": "source disagreement",
-      "rotowire": "Dan Vladar",
-      "previous": "Joseph Woll"
+      "rotowire": "Semyon Varlamov",
+      "previous": "Ilya Sorokin"
     },
     {
       "date": "2026-11-19",
@@ -171,13 +180,6 @@
       "reason": "source disagreement",
       "rotowire": "Philipp Grubauer",
       "previous": "Joey Daccord"
-    },
-    {
-      "date": "2026-11-19",
-      "team": "STL",
-      "reason": "source disagreement",
-      "rotowire": "Joel Hofer",
-      "previous": "Jordan Binnington"
     },
     {
       "date": "2026-11-19",

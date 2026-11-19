@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-19T16:02:20.320470+00:00",
+  "checkedAt": "2026-11-19T17:10:12.197769+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "candidateCount": 106,
   "matchedCount": 106,
@@ -189,7 +189,7 @@
       "goalie": "Dustin Wolf",
       "opponent": "MIN",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-19",
       "gameId": 2026020355,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -339,7 +339,7 @@
       "goalie": "Devon Levi",
       "opponent": "TBL",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-19",
       "gameId": 2026020349,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -556,7 +556,7 @@
     },
     {
       "team": "NYI",
-      "goalie": "Ilya Sorokin",
+      "goalie": "Semyon Varlamov",
       "opponent": "WPG",
       "venue": "away",
       "status": "projected",
@@ -656,10 +656,10 @@
     },
     {
       "team": "PHI",
-      "goalie": "Dan Vladar",
+      "goalie": "Joseph Woll",
       "opponent": "OTT",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-19",
       "gameId": 2026020348,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -799,7 +799,7 @@
       "goalie": "Joel Hofer",
       "opponent": "PIT",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-19",
       "gameId": 2026020350,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
