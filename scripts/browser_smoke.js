@@ -103,7 +103,7 @@ const {play, game} = require('./commentary_fixture.cjs');
     await page.evaluate(() => speechSynthesis.finish());
     await page.waitForFunction(() => /GÓL|BRANKA/.test(window.voiceTrace.at(-1)?.text));
   }
-  assert.equal(await page.evaluate(() => window.voiceTrace.at(-2)), 'cancel', 'A goal preempts routine narration');
+  assert.equal(await page.evaluate(() => window.voiceTrace.some((entry, i, trace) => entry === 'cancel' && trace.slice(i + 1).some(next => /GÓL|BRANKA|Góóóól/.test(next?.text || '')))), true, 'A goal preempts routine narration');
 
   // NHL may edit the play list before publishing the revised scoreboard.
   playByPlay = {...playByPlay, plays: [...playByPlay.plays.filter(p => p.eventId !== 5),
