@@ -136,6 +136,9 @@ const {play, game} = require('./commentary_fixture.cjs');
   await panel.locator('[data-bv=pick-replay]').click();
   await panel.locator('[data-bv=start]').click();
   assert.deepEqual(await page.evaluate(() => window.voiceTrace.at(-1)),
+    {text: 'Góóóól!', lang: 'cs-CZ', voice: 'Čeština'});
+  await page.evaluate(() => speechSynthesis.finish());
+  assert.deepEqual(await page.evaluate(() => window.voiceTrace.at(-1)),
     {text: 'GÓL! Džejson Robertson skóruje.', lang: 'cs-CZ', voice: 'Čeština'});
   await panel.locator('[data-bv=pause]').click();
   await panel.locator('[data-bv=pause]').click();
