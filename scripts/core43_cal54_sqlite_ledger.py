@@ -54,7 +54,8 @@ def seen_digests(db_path: str) -> frozenset[str]:
     if not isinstance(db_path, str) or not db_path:
         raise LedgerError("invalid_path")
     try:
-        with sqlite3.connect(db_path, timeout=5) as con:
+        with sqlite3.connect(Path(db_path).resolve().as_uri() + "?mode=ro",
+                             timeout=5, uri=True) as con:
             rows=con.execute("SELECT digest FROM verified_manifests").fetchall()
             return frozenset(row[0] for row in rows)
     except sqlite3.Error as exc:
