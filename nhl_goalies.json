@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-19T06:22:34.253282+00:00",
-  "rostersUpdatedAt": "2026-11-19T06:21:51.991535+00:00",
+  "updatedAt": "2026-11-19T07:48:12.456522+00:00",
+  "rostersUpdatedAt": "2026-11-19T07:47:36.432246+00:00",
   "projectionDate": "2026-11-19",
   "teamCount": 32,
   "goalieCount": 73,
@@ -43,9 +43,8 @@
       "team": "CBJ",
       "teamKey": "blue jackets",
       "playerId": 8482982,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-19",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Cam Talbot",
@@ -133,9 +132,8 @@
       "team": "VAN",
       "teamKey": "canucks",
       "playerId": 8482447,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-19",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Charlie Lindgren",
@@ -216,9 +214,8 @@
       "team": "PHI",
       "teamKey": "flyers",
       "playerId": 8478435,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-19",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Joseph Woll",
@@ -333,9 +330,8 @@
       "team": "SEA",
       "teamKey": "kraken",
       "playerId": 8475831,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-19",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Dennis Hildeby",
@@ -449,9 +445,8 @@
       "team": "PIT",
       "teamKey": "penguins",
       "playerId": 8481668,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-19",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Justus Annunen",
@@ -522,9 +517,8 @@
       "team": "BUF",
       "teamKey": "sabres",
       "playerId": 8480045,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-19",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Alex Lyon",
