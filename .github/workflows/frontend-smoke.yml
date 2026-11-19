@@ -23,6 +23,8 @@ jobs:
         run: node --test scripts/test_commentary_facts.cjs
       - name: Test VOICE-08 Android commentary rules
         run: node --test .github/scripts/test-voice-08.cjs
+      - name: DATA-01/02 lineup and goalie integrity
+        run: node --test .github/scripts/test-data-01-02.cjs
       - name: Validate local scripts and HTML entrypoint
         shell: bash
         run: |
