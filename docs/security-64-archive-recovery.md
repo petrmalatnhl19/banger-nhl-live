@@ -1,0 +1,5 @@
+# SECURITY-64 — Offline crash-safe archive history recovery
+
+The Python standard-library SQLite test creates a temporary WAL database with FULL synchronous durability, a synthetic checkpoint chain, and a same-transaction latest-head anchor. It writes the first entry, starts a second transaction in a child process, and terminates the process before COMMIT. On reopening, the committed first entry must remain valid, the uncommitted second entry must not appear, and an explicit retry must append the second entry exactly once. The test also checks duplicate rejection, reopening, and archive tampering.
+
+**Limits:** The latest-head anchor is stored in the **same SQLite database**, so this test covers atomicity and crash recovery, not independent rollback/fork protection. It does not use the signed chain or real experimental outputs from SECURITY-63; those remain separate offline fixtures. It does not simulate disk loss, fsync lies, corruption recovery, or external checkpoint retention. No real publisher authentication, Supabase access, production CORE 4.2 modifications, merge, deployment or schedule. Draft PR #274, **NO-GO**.

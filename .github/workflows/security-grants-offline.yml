@@ -1,0 +1,187 @@
+name: Security grants proposal (offline)
+
+on:
+  push:
+    branches: [security-01-public-grants-review]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-security-proposal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inventory tracked CORE43 consumers (SECURITY-78, offline)
+        run: python3 .github/scripts/security78-consumer-inventory.py
+
+      - name: Validate proposed grants SQL without database access
+        run: python3 .github/scripts/test-security-08-grants.py
+
+      - name: Verify signed prediction snapshot integrity (offline)
+        run: python3 .github/scripts/test-security-45-snapshot-signature.py
+
+      - name: Test actual uncalibrated CORE 4.3 engine (offline)
+        run: node scripts/test_security47_core43_real_engine.cjs
+
+      - name: Test four-variant CORE 4.3 sensitivity pipeline (offline)
+        run: node scripts/test_security48_four_variant_pipeline.cjs
+
+      - name: Test frozen CORE 4.3 input binding (offline)
+        run: node scripts/test_security49_frozen_bundle.cjs
+
+      - name: Test signed pregame source provenance (offline)
+        run: node scripts/test_security50_signed_source_provenance.cjs
+
+      - name: Test independent source provenance chain (offline)
+        run: node scripts/test_security51_independent_provenance.cjs
+
+      - name: Test signed evidence to four predictions and archive (offline)
+        run: node scripts/test_security52_evidence_chain.cjs
+
+      - name: Test durable synthetic archive recovery (offline)
+        run: python3 .github/scripts/test-security-53-archive-recovery.py
+
+      - name: Test persisted four-variant archive replay (offline)
+        run: python3 .github/scripts/test-security-54-persisted-chain.py
+
+      - name: Test persisted signed evidence and four variants (offline)
+        run: python3 .github/scripts/test-security-55-persisted-signed-chain.py
+
+      - name: Test external synthetic trust registry (offline)
+        run: node scripts/test_security56_external_trust_registry.cjs
+
+      - name: Test persisted archive with external pinned keys (offline)
+        run: node scripts/test_security57_persisted_external_trust.cjs
+
+      - name: Test signed trust registry and rollback protection (offline)
+        run: node scripts/test_security58_registry_rollback.cjs
+
+      - name: Test persisted archive and signed registry rollback gate (offline)
+        run: node scripts/test_security59_archive_registry_gate.cjs
+
+      - name: Test independent signed registry checkpoint (offline)
+        run: node scripts/test_security60_independent_checkpoint.cjs
+
+      - name: Test automated machine witness on persisted archive (offline)
+        run: node scripts/test_security61_machine_witness_archive.cjs
+
+      - name: Test signed machine checkpoint history (offline)
+        run: node scripts/test_security62_checkpoint_history.cjs
+
+      - name: Test signed archive checkpoint history (offline)
+        run: node scripts/test_security63_archive_history.cjs
+
+      - name: Test durable archive history recovery (offline)
+        run: python3 .github/scripts/test-security-64-archive-recovery.py
+
+      - name: Audit scoped public grants proposal (offline)
+        run: python3 .github/scripts/test-security-68-grants-plan.py
+
+      - name: Test signed durable archive recovery (offline)
+        run: node scripts/test_security65_signed_durable_recovery.cjs
+
+      - name: Test immutable pregame refresh prototype (offline)
+        run: python3 .github/scripts/test-security-35-pregame-refresh.py
+
+      - name: Test minimal CORE 4.3 TV publication contract (SECURITY-95, offline)
+        run: node .github/scripts/test-security-95-public-contract.cjs
+
+      - name: Test adversarial CORE 4.3 publication contract (SECURITY-96, offline)
+        run: node .github/scripts/test-security-96-adversarial-contract.cjs
+
+      - name: Test simulated public API responses (SECURITY-98, loopback only)
+        run: node .github/scripts/test-security-98-api-fixture.cjs
+
+      - name: Enforce SECURITY-100 migration NO-GO gate (offline)
+        run: node .github/scripts/test-security-100-rollout-gate.cjs
+
+      - name: Verify SECURITY-102 TV adapter (offline)
+        run: node .github/scripts/test-security-102-tv-adapter.cjs
+
+      - name: Verify SECURITY-103 fail-closed TV API rollout (offline)
+        run: node .github/scripts/test-security-103-tv-rollout.cjs
+
+      - name: Enforce SECURITY-107 integration NO-GO gate (offline)
+        run: node .github/scripts/test-security-107-integration-gate.cjs
+
+      - name: Verify SECURITY-125 timestamp provenance (offline)
+        run: node .github/scripts/test-security-125-timestamp-provenance.cjs
+
+      - name: Verify SECURITY-126 signed snapshot (offline)
+        run: node .github/scripts/test-security-126-signed-snapshot.cjs
+
+      - name: Verify SECURITY-127 replay and key policy (offline)
+        run: node .github/scripts/test-security-127-replay-key-policy.cjs
+
+      - name: Verify SECURITY-128 disposable ledger (offline)
+        run: node .github/scripts/test-security-128-durable-ledger.cjs
+
+      - name: Verify SECURITY-130 disposable SQLite transactional replay (offline)
+        run: python3 .github/scripts/test-security-130-sqlite-replay.py
+
+      - name: Verify SECURITY-131 signed issuance envelope (offline)
+        run: node .github/scripts/test-security-131-signed-issuance.cjs
+
+      - name: Verify SECURITY-132 bound signed snapshot and replay chain (offline)
+        run: node .github/scripts/test-security-132-bound-chain.cjs
+
+      - name: Verify SECURITY-133 adversarial bound replay chain (offline)
+        run: node .github/scripts/test-security-133-adversarial-chain.cjs
+
+      - name: Verify SECURITY-134 SQLite contention and crash recovery (offline)
+        run: python3 .github/scripts/test-security-134-sqlite-recovery.py
+
+      - name: Verify SECURITY-135 backup rollback checkpoint guard (offline)
+        run: python3 .github/scripts/test-security-135-backup-rollback.py
+
+      - name: Verify SECURITY-136 signed backup checkpoint (offline)
+        run: node .github/scripts/test-security-136-signed-checkpoint.cjs
+
+      - name: Verify SECURITY-137 independent latest checkpoint anchor (offline)
+        run: node .github/scripts/test-security-137-independent-anchor.cjs
+
+      - name: Verify SECURITY-138 anchor register contention and recovery (offline)
+        run: python3 .github/scripts/test-security-138-anchor-register.py
+
+      - name: Verify SECURITY-139 signed anchor register gate (offline)
+        run: node .github/scripts/test-security-139-verified-anchor-register.cjs
+
+      - name: Verify SECURITY-140 signed transaction owner (offline)
+        run: python3 .github/scripts/test-security-140-transaction-owner.py
+
+      - name: Verify SECURITY-141 SQLite bypass inventory and adversarial controls (offline)
+        run: python3 .github/scripts/test-security-141-bypass-audit.py
+
+      - name: Verify SECURITY-142 isolated signed SQLite writer (offline)
+        run: python3 .github/scripts/test-security-142-isolated-writer.py
+
+      - name: Verify SECURITY-143 cross-UID SQLite isolation and signed IPC (offline)
+        run: python3 .github/scripts/test-security-143-distinct-uid.py
+
+      - name: Verify SECURITY-144 Linux SO_PEERCRED UID allowlist (offline)
+        run: python3 .github/scripts/test-security-144-peercred.py
+
+      - name: Verify SECURITY-145 bounded signed socket writer (offline)
+        run: python3 .github/scripts/test-security-145-bounded-writer.py
+
+      - name: Verify SECURITY-146 absolute deadline and bounded worker pool (offline)
+        run: python3 .github/scripts/test-security-146-deadline-workers.py
+
+      - name: Verify SECURITY-147 subprocess lifetime and SQLite lock bounds (offline)
+        run: python3 .github/scripts/test-security-147-lifetime-owner.py
+
+      - name: Verify SECURITY-148 signed idempotency and reconciliation (offline)
+        run: python3 .github/scripts/test-security-148-idempotent-owner.py
+
+      - name: Verify SECURITY-149 integrated socket signed receipts (offline)
+        run: python3 .github/scripts/test-security-149-integrated-socket.py
+
+      - name: Verify SECURITY-150 integrated adversarial audit (offline)
+        run: python3 .github/scripts/test-security-150-adversarial.py
+
+      - name: Verify SECURITY-151 accept deadline and queue saturation (offline)
+        run: python3 .github/scripts/test-security-151-accept-deadline.py

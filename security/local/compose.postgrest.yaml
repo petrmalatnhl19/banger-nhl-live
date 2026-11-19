@@ -1,0 +1,13 @@
+services:
+  postgrest:
+    image: postgrest/postgrest:v12.2.8
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PGRST_DB_URI: postgres://security_local:local_only_not_for_production@postgres:5432/security09
+      PGRST_DB_SCHEMAS: public
+      PGRST_DB_ANON_ROLE: anon
+      PGRST_JWT_SECRET: security99_disposable_test_secret_32chars_only
+    ports:
+      - "127.0.0.1:55433:3000"

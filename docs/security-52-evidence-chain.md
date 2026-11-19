@@ -1,0 +1,5 @@
+# SECURITY-52 — Synthetic end-to-end evidence chain
+
+Offline test `scripts/test_security52_evidence_chain.cjs` links a synthetic signed source record to a separately signed witness observation, validates cutoff and goalie inputs, runs four coefficients through the existing experimental `calculateShadow` engine, and creates a deterministic in-memory archive with per-record SHA-256 and overall archive hash. Tests replay, shared input/evidence hashes, result tampering, late witness, forged signature, live game, missing witness and altered source input.
+
+**Limitations:** Both signing keys are generated locally by the same test; there is no independent real-world publisher or witness, no trustworthy external clock, no external source fetch, no persistent write-once archive, and no integration with the full CORE43-CAL-03 planner in separate PR #230. This validates an isolated *contract*, not real NHL prediction provenance or model accuracy. SHA-256 is an integrity checksum, not independent authenticity proof. Production release **NO-GO**. No changes to production CORE 4.2, Supabase, schedules or deployment.
