@@ -40,3 +40,8 @@ test('DATA-03: selected goalie matches same-day RotoWire game evidence',()=>{
   assert.ok(matching.some(g=>String(g.gameId)===String(selected.gameId)),team+' selected goalie game mismatch');
  }
 });
+
+test('DATA-04: goalie evidence from the future is rejected by the game panel',()=>{
+ const html=fs.readFileSync(path.join(__dirname,'..','..','index.html'),'utf8');
+ assert.ok(html.includes('Date.now()-Date.parse(checkedAt)>=0&&Date.now()-Date.parse(checkedAt)<24*3600000'));
+});
