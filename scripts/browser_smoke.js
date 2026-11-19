@@ -98,8 +98,12 @@ const {play, game} = require('./commentary_fixture.cjs');
     play(5, 'goal', '04:15', {eventOwnerTeamId: 1, scoringPlayerId: 10, awayScore: 1, homeScore: 0})],
     {awayTeam: {...playByPlay.awayTeam, score: 1}});
   await page.locator('#commentaryRefresh').click();
-  await page.waitForFunction(() => /GÓL|BRANKA/.test(window.voiceTrace.at(-1)?.text));
-  assert.equal(await page.evaluate(() => window.voiceTrace.at(-2)), 'cancel', 'A goal preempts routine narration');
+  await page.waitForFunction(() => /GÓL|BRANKA|Góóóól/.test(window.voiceTrace.at(-1)?.text));
+  if (/Góóóól/.test((await page.evaluate(() => window.voiceTrace.at(-1)?.text)) || '')) {
+    await page.evaluate(() => speechSynthesis.finish());
+    await page.waitForFunction(() => /GÓL|BRANKA/.test(window.voiceTrace.at(-1)?.text));
+  }
+  assert.equal(await page.evaluate(() => window.voiceTrace.some((entry, i, trace) => entry === 'cancel' && trace.slice(i + 1).some(next => /GÓL|BRANKA|Góóóól/.test(next?.text || '')))), true, 'A goal preempts routine narration');
 
   // NHL may edit the play list before publishing the revised scoreboard.
   playByPlay = {...playByPlay, plays: [...playByPlay.plays.filter(p => p.eventId !== 5),
@@ -131,6 +135,9 @@ const {play, game} = require('./commentary_fixture.cjs');
   assert.equal(await panel.locator('[data-bv=pick-live]').getAttribute('aria-pressed'), 'true');
   await panel.locator('[data-bv=pick-replay]').click();
   await panel.locator('[data-bv=start]').click();
+  assert.deepEqual(await page.evaluate(() => window.voiceTrace.at(-1)),
+    {text: 'Góóóól!', lang: 'cs-CZ', voice: 'Čeština'});
+  await page.evaluate(() => speechSynthesis.finish());
   assert.deepEqual(await page.evaluate(() => window.voiceTrace.at(-1)),
     {text: 'GÓL! Džejson Robertson skóruje.', lang: 'cs-CZ', voice: 'Čeština'});
   await panel.locator('[data-bv=pause]').click();
