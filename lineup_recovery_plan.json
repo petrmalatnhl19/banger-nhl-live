@@ -3,7 +3,7 @@
     "lineup_core_report.json",
     "lineup_rejections_report.json"
   ],
-  "incompleteTeams": 12,
+  "incompleteTeams": 11,
   "teams": [
     {
       "team": "blackhawks",
@@ -66,17 +66,6 @@
       "publishedAt": "2026-11-17T18:29:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
-    },
-    {
-      "team": "hurricanes",
-      "status": "missing_team",
-      "reason": "no_accepted_projection",
-      "missingForwardLines": 4,
-      "missingDefensePairs": 3,
-      "source": null,
-      "publishedAt": null,
-      "rejectedLines": [],
-      "nextAction": "Find a current NHL.com projection and validate all players."
     },
     {
       "team": "islanders",
