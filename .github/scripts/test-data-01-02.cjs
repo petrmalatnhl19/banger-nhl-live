@@ -19,13 +19,13 @@ test('DATA-01: coverage and core report agree on all 32 team identities', () => 
 });
 test('DATA-02: every published starter has explicit status and same-date evidence', () => {
  const data=read('starting_goalies.json');
- assert.match(data.date,/^\\d{4}-\\d{2}-\\d{2}$/);
+ assert.match(data.date,/^\d{4}-\d{2}-\d{2}$/);
  for(const [team,entry] of Object.entries(data.teams)){
   assert.match(team,/^[A-Z]{2,3}$/);
   assert.ok(['projected','confirmed'].includes(entry.status),team+' invalid status');
   assert.equal(entry.date,data.date,team+' mismatched date');
   assert.ok(entry.name&&typeof entry.name==='string',team+' missing name');
-  assert.ok(/^https:\\/\\//.test(entry.source||''),team+' missing evidence URL');
+  assert.ok(/^https:\/\//.test(entry.source||''),team+' missing evidence URL');
   assert.ok(!Number.isNaN(Date.parse(entry.checkedAt)),team+' missing check timestamp');
  }
  for(const conflict of data.conflicts||[]) {
@@ -35,6 +35,6 @@ test('DATA-02: every published starter has explicit status and same-date evidenc
 });
 test('DATA-02: frontend preserves projected vs confirmed wording',()=>{
  const html=fs.readFileSync(path.join(__dirname,'..','..','index.html'),'utf8');
- assert.match(html,/status==='confirmed'\\?'Potvrzený start':'Předpokládaný start'/);
- assert.match(html,/status==='confirmed'\\|\\|status==='projected'/);
+ assert.match(html,/status==='confirmed'\?'Potvrzený start':'Předpokládaný start'/);
+ assert.match(html,/status==='confirmed'\|\|status==='projected'/);
 });
