@@ -1,9 +1,9 @@
 {
-  "teamsWithRejectedLines": 3,
+  "teamsWithRejectedLines": 5,
   "teams": {
     "bruins": {
       "team": "BOS",
-      "rosterUpdatedAt": "2026-11-19T17:09:20.461909+00:00",
+      "rosterUpdatedAt": "2026-11-19T18:11:20.650334+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -29,9 +29,70 @@
         }
       ]
     },
+    "jets": {
+      "team": "WPG",
+      "rosterUpdatedAt": "2026-11-19T18:11:22.758846+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "validatedForwardLines": 3,
+      "validatedDefensePairs": 3,
+      "rejected": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 4,
+          "sourceLine": [
+            "Cole Koepke",
+            "Morgan Barron",
+            "Danny Zhilkin"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Danny Zhilkin",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    },
+    "lightning": {
+      "team": "TBL",
+      "rosterUpdatedAt": "2026-11-19T18:11:22.438931+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 3,
+      "candidateDefensePairs": 4,
+      "validatedForwardLines": 3,
+      "validatedDefensePairs": 3,
+      "rejected": [
+        {
+          "group": "defense",
+          "sourceLineNumber": 1,
+          "sourceLine": [
+            "Jeffrey Viel",
+            "Scott Sabourin"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Jeffrey Viel",
+              "reason": "other_position_group",
+              "inLocalCurrentRoster": true,
+              "requiresIndependentGameEvidence": true
+            },
+            {
+              "name": "Scott Sabourin",
+              "reason": "other_position_group",
+              "inLocalCurrentRoster": true,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    },
     "red wings": {
       "team": "DET",
-      "rosterUpdatedAt": "2026-11-19T17:09:22.532615+00:00",
+      "rosterUpdatedAt": "2026-11-19T18:11:21.186638+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -59,13 +120,30 @@
     },
     "senators": {
       "team": "OTT",
-      "rosterUpdatedAt": "2026-11-19T17:09:24.081603+00:00",
+      "rosterUpdatedAt": "2026-11-19T18:11:22.028051+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
-      "validatedForwardLines": 3,
+      "validatedForwardLines": 2,
       "validatedDefensePairs": 3,
       "rejected": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 2,
+          "sourceLine": [
+            "Philip Tomasino",
+            "Shane Pinto",
+            "Drake Batherson"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Philip Tomasino",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        },
         {
           "group": "forwards",
           "sourceLineNumber": 4,
@@ -75,6 +153,12 @@
             "Tyler Boucher"
           ],
           "unverifiedPlayers": [
+            {
+              "name": "Samuel Blais",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            },
             {
               "name": "Tyler Boucher",
               "reason": "not_in_current_roster",

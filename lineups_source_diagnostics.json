@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-19T17:10:07.525425+00:00",
+  "generatedAt": "2026-11-19T18:11:45.753470+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -38,8 +38,8 @@
     "hurricanes": {
       "team": "CAR",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/montreal-canadiens-carolina-hurricanes-game-preview-november-19-2026",
-      "candidatePublishedAt": "2026-11-19T14:32:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-19T17:09:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -53,8 +53,8 @@
     "kings": {
       "team": "LAK",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/los-angeles-kings-boston-bruins-game-preview-november-17-2026",
-      "candidatePublishedAt": "2026-11-17T18:05:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/los-angeles-kings-toronto-maple-leafs-game-preview-november-19-2026",
+      "candidatePublishedAt": "2026-11-19T17:48:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -68,8 +68,8 @@
     "islanders": {
       "team": "NYI",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/columbus-blue-jackets-new-york-islanders-game-preview-november-17-2026",
-      "candidatePublishedAt": "2026-11-17T17:25:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/new-york-islanders-winnipeg-jets-game-preview-november-19-2026",
+      "candidatePublishedAt": "2026-11-19T17:56:00+00:00",
       "candidateForwardLines": 3,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -98,29 +98,30 @@
     "senators": {
       "team": "OTT",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/ottawa-senators-winnipeg-jets-game-preview-november-17-2026",
-      "candidatePublishedAt": "2026-11-17T18:03:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/philadelphia-flyers-ottawa-senators-game-preview-november-19-2026",
+      "candidatePublishedAt": "2026-11-19T17:15:20.099000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
-      "rosterValidation": "passed",
-      "gameEvidenceExceptions": [
-        {
-          "player": "Philip Tomasino",
-          "role": "forwards",
-          "basis": "official game boxscore on projection publication date"
-        },
-        {
-          "player": "Samuel Blais",
-          "role": "forwards",
-          "basis": "official game boxscore on projection publication date"
-        }
-      ],
+      "rosterValidation": "insufficient_position_matched_lines",
       "roleMismatches": [],
       "rejectedLines": [
         {
           "group": "forwards",
+          "line": 2,
+          "players": [
+            "Philip Tomasino"
+          ],
+          "sourceLine": [
+            "Philip Tomasino",
+            "Shane Pinto",
+            "Drake Batherson"
+          ]
+        },
+        {
+          "group": "forwards",
           "line": 4,
           "players": [
+            "Samuel Blais",
             "Tyler Boucher"
           ],
           "sourceLine": [
@@ -132,14 +133,24 @@
       ],
       "rejectedPlayerReasons": [
         {
+          "name": "Philip Tomasino",
+          "expectedRole": "forwards",
+          "reason": "not_in_current_roster"
+        },
+        {
+          "name": "Samuel Blais",
+          "expectedRole": "forwards",
+          "reason": "not_in_current_roster"
+        },
+        {
           "name": "Tyler Boucher",
           "expectedRole": "forwards",
           "reason": "not_in_current_roster"
         }
       ],
-      "validatedForwardLines": 3,
+      "validatedForwardLines": 2,
       "validatedDefensePairs": 3,
-      "accepted": true
+      "accepted": false
     },
     "sharks": {
       "team": "SJS",
@@ -159,15 +170,34 @@
     "jets": {
       "team": "WPG",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/ottawa-senators-winnipeg-jets-game-preview-november-17-2026",
-      "candidatePublishedAt": "2026-11-17T18:03:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/new-york-islanders-winnipeg-jets-game-preview-november-19-2026",
+      "candidatePublishedAt": "2026-11-19T17:56:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
       "roleMismatches": [],
-      "rejectedLines": [],
-      "rejectedPlayerReasons": [],
-      "validatedForwardLines": 4,
+      "rejectedLines": [
+        {
+          "group": "forwards",
+          "line": 4,
+          "players": [
+            "Danny Zhilkin"
+          ],
+          "sourceLine": [
+            "Cole Koepke",
+            "Morgan Barron",
+            "Danny Zhilkin"
+          ]
+        }
+      ],
+      "rejectedPlayerReasons": [
+        {
+          "name": "Danny Zhilkin",
+          "expectedRole": "forwards",
+          "reason": "not_in_current_roster"
+        }
+      ],
+      "validatedForwardLines": 3,
       "validatedDefensePairs": 3,
       "accepted": true
     },
@@ -189,15 +219,48 @@
     "lightning": {
       "team": "TBL",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/washington-capitals-tampa-bay-lightning-game-preview-november-17-2026",
-      "candidatePublishedAt": "2026-11-17T18:36:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/edmonton-oilers-tampa-bay-lightning-game-preview-november-19-2026",
+      "candidatePublishedAt": "2026-11-19T17:53:00+00:00",
       "candidateForwardLines": 3,
-      "candidateDefensePairs": 3,
+      "candidateDefensePairs": 4,
       "rosterValidation": "passed",
       "incompleteForwardFragments": [],
-      "roleMismatches": [],
-      "rejectedLines": [],
-      "rejectedPlayerReasons": [],
+      "roleMismatches": [
+        {
+          "sourcePair": 1,
+          "players": [
+            "Jeffrey Viel",
+            "Scott Sabourin"
+          ],
+          "reason": "forward_in_defense_row"
+        }
+      ],
+      "rejectedLines": [
+        {
+          "group": "defense",
+          "line": 1,
+          "players": [
+            "Jeffrey Viel",
+            "Scott Sabourin"
+          ],
+          "sourceLine": [
+            "Jeffrey Viel",
+            "Scott Sabourin"
+          ]
+        }
+      ],
+      "rejectedPlayerReasons": [
+        {
+          "name": "Jeffrey Viel",
+          "expectedRole": "defense",
+          "reason": "other_position_group"
+        },
+        {
+          "name": "Scott Sabourin",
+          "expectedRole": "defense",
+          "reason": "other_position_group"
+        }
+      ],
       "validatedForwardLines": 3,
       "validatedDefensePairs": 3,
       "accepted": true

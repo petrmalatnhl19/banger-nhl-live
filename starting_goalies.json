@@ -1,14 +1,23 @@
 {
   "date": "2026-11-19",
-  "updatedAt": "2026-11-19T17:10:13.994108+00:00",
+  "updatedAt": "2026-11-19T18:11:49.512675+00:00",
   "teams": {
+    "BUF": {
+      "name": "Ukko-Pekka Luukkonen",
+      "status": "projected",
+      "date": "2026-11-19",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-19T18:11:49.512675+00:00",
+      "gameId": 2026020351
+    },
     "CAR": {
       "name": "Pyotr Kochetkov",
       "status": "projected",
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
+      "checkedAt": "2026-11-19T18:11:49.512675+00:00",
       "gameId": 2026020352
     },
     "CGY": {
@@ -17,7 +26,7 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
+      "checkedAt": "2026-11-19T18:11:49.512675+00:00",
       "gameId": 2026020355
     },
     "CHI": {
@@ -26,7 +35,7 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
+      "checkedAt": "2026-11-19T18:11:49.512675+00:00",
       "gameId": 2026020353
     },
     "DAL": {
@@ -35,7 +44,7 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
+      "checkedAt": "2026-11-19T18:11:49.512675+00:00",
       "gameId": 2026020358
     },
     "EDM": {
@@ -44,7 +53,7 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
+      "checkedAt": "2026-11-19T18:11:49.512675+00:00",
       "gameId": 2026020349
     },
     "LAK": {
@@ -53,16 +62,16 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
+      "checkedAt": "2026-11-19T18:11:49.512675+00:00",
       "gameId": 2026020347
     },
     "MIN": {
       "name": "Jesper Wallstedt",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
+      "checkedAt": "2026-11-19T18:11:49.512675+00:00",
       "gameId": 2026020355
     },
     "MTL": {
@@ -71,7 +80,7 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
+      "checkedAt": "2026-11-19T18:11:49.512675+00:00",
       "gameId": 2026020352
     },
     "OTT": {
@@ -80,7 +89,7 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
+      "checkedAt": "2026-11-19T18:11:49.512675+00:00",
       "gameId": 2026020348
     },
     "PHI": {
@@ -89,7 +98,7 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
+      "checkedAt": "2026-11-19T18:11:49.512675+00:00",
       "gameId": 2026020348
     },
     "PIT": {
@@ -98,7 +107,7 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
+      "checkedAt": "2026-11-19T18:11:49.512675+00:00",
       "gameId": 2026020350
     },
     "STL": {
@@ -107,7 +116,7 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
+      "checkedAt": "2026-11-19T18:11:49.512675+00:00",
       "gameId": 2026020350
     },
     "TBL": {
@@ -116,7 +125,7 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
+      "checkedAt": "2026-11-19T18:11:49.512675+00:00",
       "gameId": 2026020349
     },
     "TOR": {
@@ -125,7 +134,7 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
+      "checkedAt": "2026-11-19T18:11:49.512675+00:00",
       "gameId": 2026020347
     },
     "WSH": {
@@ -134,24 +143,32 @@
       "date": "2026-11-19",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-19T17:10:13.994108+00:00",
+      "checkedAt": "2026-11-19T18:11:49.512675+00:00",
       "gameId": 2026020351
+    },
+    "NYI": {
+      "name": "Semyon Varlamov",
+      "status": "projected",
+      "date": "2026-11-19",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-19T18:11:49.512675+00:00",
+      "gameId": 2026020354
     }
   },
   "conflicts": [
+    {
+      "team": "NYI",
+      "specialist": "Ilya Sorokin",
+      "nhl": "Semyon Varlamov",
+      "nhlSource": "https://www.nhl.com/news/new-york-islanders-winnipeg-jets-game-preview-november-19-2026"
+    },
     {
       "date": "2026-11-19",
       "team": "ANA",
       "reason": "source disagreement",
       "rotowire": "Lukas Dostal",
       "previous": "Ville Husso"
-    },
-    {
-      "date": "2026-11-19",
-      "team": "BUF",
-      "reason": "source disagreement",
-      "rotowire": "Ukko-Pekka Luukkonen",
-      "previous": "Alex Lyon"
     },
     {
       "date": "2026-11-19",
@@ -166,13 +183,6 @@
       "reason": "source disagreement",
       "rotowire": "Scott Wedgewood",
       "previous": "Mackenzie Blackwood"
-    },
-    {
-      "date": "2026-11-19",
-      "team": "NYI",
-      "reason": "source disagreement",
-      "rotowire": "Semyon Varlamov",
-      "previous": "Ilya Sorokin"
     },
     {
       "date": "2026-11-19",
