@@ -14,3 +14,7 @@ test('DATA-06: goalie projections require valid non-future export timestamp',()=
  assert.ok(html.includes('Date.now()-Date.parse(gd.updatedAt)>=0'));
  assert.ok(html.includes('Date.now()-Date.parse(gd.updatedAt)<24*3600000'));
 });
+
+test('DATA-06: stale goalie status is clearly labelled as unverified',()=>{
+ assert.ok(html.includes('Neaktuální údaj o brankáři – start neověřen'));
+});
