@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-19T05:08:24.861421+00:00",
+  "updatedAt": "2026-11-19T06:21:43.271119+00:00",
   "articles": [
     {
       "title": "Bonk se těší na výjimečný zápas v Ottawě Mladý obránce Flyers si zahraje ve městě, v němž zářil jeho slavný otec Radek 18. lis 2026",
@@ -308,7 +308,7 @@
       "publishedAt": "2026-11-19T03:27:00+00:00"
     },
     {
-      "title": "Bedard leaves Blackhawks win with shoulder injury Forward exits 54 seconds into third period after being struck during face-off setup Nov 18, 2026",
+      "title": "Bedard leaves Blackhawks win with upper-body injury Forward exits 54 seconds into third period after being struck during face-off setup Nov 18, 2026",
       "url": "https://www.nhl.com/news/connor-bedard-leaves-chicago-blackhawks-game-with-upper-body-injury",
       "language": "en",
       "source": "NHL.com",
@@ -326,7 +326,16 @@
       "publishedAt": "2026-11-18T19:47:10.889000+00:00"
     },
     {
-      "title": "Bowness back with Blue Jackets, will coach tomorrow Nov 18, 2026",
+      "title": "Schaefer dazzles Isles with 1st NHL hat trick Nov 18, 2026",
+      "url": "https://www.nhl.com/news/new-york-islanders-matthew-schaefer-first-career-hat-trick-adds-to-record-book",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Schaefer gets first hat trick with Islanders, continues to rewrite record book",
+      "publishedAt": "2026-11-18T16:35:00+00:00",
+      "description": "Teammates 'watching greatness kind of evolve' in 19-year-old defenseman"
+    },
+    {
+      "title": "Bowness back with Blue Jackets, will coach tonight Nov 18, 2026",
       "url": "https://www.nhl.com/news/coach-rick-bowness-returns-to-columbus-blue-jackets-after-missing-three-games",
       "language": "en",
       "source": "NHL.com",
@@ -344,15 +353,6 @@
       "publishedAt": "2026-11-18T20:52:53.174000+00:00"
     },
     {
-      "title": "Trophy Tracker: Sturm is Adams pick at 1st quarter Nov 18, 2026",
-      "url": "https://www.nhl.com/news/jack-adams-trophy-tracker-bruins-marco-sturm-early-favorite-after-strong-start",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Trophy Tracker: Sturm is Adams pick as top coach after strong start with Bruins",
-      "description": "Brind’Amour, Babcock also among favorites at first quarter of season by NHL.com panel",
-      "publishedAt": "2026-11-18T05:00:00+00:00"
-    },
-    {
       "title": "Gauthier ‘just flowing’ during 10-game goal run Nov 18, 2026",
       "url": "https://www.nhl.com/news/cutter-gauthier-playing-with-confidence-for-anaheim-ducks",
       "language": "en",
@@ -362,22 +362,31 @@
       "publishedAt": "2026-11-18T06:33:22.994000+00:00"
     },
     {
-      "title": "EDGE stats behind Schaefer’s historic start to career Nov 18, 2026",
-      "url": "https://www.nhl.com/news/nhl-edge-stats-matthew-schaefer-new-york-islanders-2026-27",
+      "title": "Mammoth players, fans love Winter Classic jerseys Nov 18, 2026",
+      "url": "https://www.nhl.com/news/winter-classic-jerseys-for-colorado-avalanche-utah-mammoth-reach-new-heights",
       "language": "en",
       "source": "NHL.com",
-      "headline": "NHL EDGE stats behind Schaefer’s historic start to career",
-      "description": "Islanders star leads defensemen in speed burst categories since entering League, elite scorer from all locations",
-      "publishedAt": "2026-11-18T16:47:25.012000+00:00"
+      "headline": "Winter Classic jerseys get rave reviews from Mammoth players, fans",
+      "publishedAt": "2026-11-18T21:22:00+00:00",
+      "description": "Utah to host Avalanche outdoors on Dec. 31 in ski-themed uniforms"
     },
     {
-      "title": "Status Report: Barkov, Marchand ‘both close’ for Florida Nov 19, 2026",
-      "url": "https://www.nhl.com/news/nhl-status-report-news-and-notes-november-18-2026",
+      "title": "Prime watch party a hit with Montreal fans Nov 19, 2026",
+      "url": "https://www.nhl.com/news/prime-watch-party-a-hit-with-montreal-canadien-fans",
       "language": "en",
       "source": "NHL.com",
-      "headline": "NHL Status Report: Barkov, Marchand ‘both close’ to returning for Panthers",
-      "description": "Geekie placed on injured reserve by Lightning; Sherwood week to week for Sharks",
-      "publishedAt": "2026-11-18T15:58:20.098000+00:00"
+      "headline": "Prime watch party a hit with Montreal fans",
+      "publishedAt": "2026-11-19T05:42:34.765000+00:00",
+      "description": "Cheer on Canadiens victory against Devils at Cirque Éloize"
+    },
+    {
+      "title": "Trocheck, Stenlund help Mammoth defeat Avalanche to end six-game skid Nov 19, 2026",
+      "url": "https://www.nhl.com/news/colorado-avalanche-utah-mammoth-game-recap-november-18-2026",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Trocheck, Stenlund help Mammoth defeat Avalanche to end six-game skid",
+      "publishedAt": "2026-11-19T06:18:05.470000+00:00",
+      "description": "Each has goal, assist, Cossa makes 30 saves for Utah in Winter Classic preview"
     },
     {
       "title": "Canadiens hand Hellebuyck first loss in eight games with Devils Nov 19, 2026",
@@ -414,15 +423,6 @@
       "headline": "Guentzel scores twice, Lightning hand Capitals third straight loss",
       "description": "Carlson gets three assists, Kucherov adds two for Tampa Bay",
       "publishedAt": "2026-11-18T03:28:57.400000+00:00"
-    },
-    {
-      "title": "Boldy has two goals, assist, Wild cruise past Predators for fourth straight win Nov 18, 2026",
-      "url": "https://www.nhl.com/news/nashville-predators-minnesota-wild-game-recap-november-17-2026",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Boldy has two goals, assist, Wild cruise past Predators to fourth straight win",
-      "description": "Eriksson Ek gets four points for Minnesota, which has points in 12 consecutive games",
-      "publishedAt": "2026-11-18T04:11:03.038000+00:00"
     },
     {
       "title": "Projected lineups, starting goalies for today Nov 18, 2026",
@@ -560,6 +560,15 @@
       "publishedAt": "2026-11-06T15:54:18.003000+00:00"
     },
     {
+      "title": "NHL EDGE stats behind Schaefer’s historic start to career Nov 18, 2026",
+      "url": "https://www.nhl.com/news/nhl-edge-stats-matthew-schaefer-new-york-islanders-2026-27",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "NHL EDGE stats behind Schaefer’s historic start to career",
+      "description": "Islanders star leads defensemen in speed burst categories since entering League, elite scorer from all locations",
+      "publishedAt": "2026-11-18T16:47:25.012000+00:00"
+    },
+    {
       "title": "NHL EDGE stats for 2026 NHL Global Series Finland Nov 12, 2026",
       "url": "https://www.nhl.com/news/topic/nhl-edge/nhl-edge-stats-global-series-finland-carolina-hurricanes-seattle-kraken-2026",
       "language": "en",
@@ -648,15 +657,6 @@
       "headline": "NHL EDGE stats: Rangers’ outlook with Shesterkin injured",
       "description": "Advanced metrics of Garand, young forwards, Fox can help New York stay afloat",
       "publishedAt": "2026-10-15T04:00:00+00:00"
-    },
-    {
-      "title": "NHL EDGE stats: 32 insights for Frozen Frenzy Oct 13, 2026",
-      "url": "https://www.nhl.com/news/topic/nhl-edge/nhl-edge-stats-frozen-frenzy-advanced-stats-preview-2026-27",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "NHL EDGE stats: 32 insights for Frozen Frenzy",
-      "description": "Schmaltz’s high-danger goals, Garand's save metrics among highlights with entire League in action",
-      "publishedAt": "2026-10-13T04:00:00+00:00"
     }
   ]
 }

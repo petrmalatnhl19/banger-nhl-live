@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-19T05:09:11.402189+00:00",
-  "rostersUpdatedAt": "2026-11-19T05:08:30.127288+00:00",
+  "updatedAt": "2026-11-19T06:22:34.253282+00:00",
+  "rostersUpdatedAt": "2026-11-19T06:21:51.991535+00:00",
   "projectionDate": "2026-11-19",
   "teamCount": 32,
   "goalieCount": 73,
@@ -43,8 +43,9 @@
       "team": "CBJ",
       "teamKey": "blue jackets",
       "playerId": 8482982,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-19",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Cam Talbot",
@@ -215,8 +216,9 @@
       "team": "PHI",
       "teamKey": "flyers",
       "playerId": 8478435,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-19",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Joseph Woll",
@@ -520,8 +522,9 @@
       "team": "BUF",
       "teamKey": "sabres",
       "playerId": 8480045,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-19",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Alex Lyon",

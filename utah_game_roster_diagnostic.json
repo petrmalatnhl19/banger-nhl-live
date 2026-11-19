@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-19T05:08:30.450717+00:00",
+  "checkedAt": "2026-11-19T06:21:52.373012+00:00",
   "team": "UTA",
   "scope": "Recent completed NHL games; historical evidence only",
   "players": {
@@ -20,10 +20,6 @@
         {
           "gameId": 2026020269,
           "gameDate": "2026-11-07"
-        },
-        {
-          "gameId": 2026020229,
-          "gameDate": "2026-11-01"
         }
       ],
       "checkedGames": 8
