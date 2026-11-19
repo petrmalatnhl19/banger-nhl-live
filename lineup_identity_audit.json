@@ -14,10 +14,68 @@
     "senators": {
       "players": [
         {
+          "sourceName": "Philip Tomasino",
+          "expectedRole": "forwards",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
+          "automaticApproval": false
+        },
+        {
+          "sourceName": "Samuel Blais",
+          "expectedRole": "forwards",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
+          "automaticApproval": false
+        },
+        {
           "sourceName": "Tyler Boucher",
           "expectedRole": "forwards",
           "sameSurnameInRoster": [],
           "classification": "not_on_current_roster",
+          "automaticApproval": false
+        }
+      ]
+    },
+    "jets": {
+      "players": [
+        {
+          "sourceName": "Danny Zhilkin",
+          "expectedRole": "forwards",
+          "sameSurnameInRoster": [
+            {
+              "name": "Danil Zhilkin",
+              "role": "forwards"
+            }
+          ],
+          "classification": "possible_name_variant_needs_review",
+          "automaticApproval": false
+        }
+      ]
+    },
+    "lightning": {
+      "players": [
+        {
+          "sourceName": "Jeffrey Viel",
+          "expectedRole": "defense",
+          "sameSurnameInRoster": [
+            {
+              "name": "Jeffrey Viel",
+              "role": "forwards"
+            }
+          ],
+          "classification": "possible_name_variant_needs_review",
+          "automaticApproval": false
+        },
+        {
+          "sourceName": "Scott Sabourin",
+          "expectedRole": "defense",
+          "sameSurnameInRoster": [
+            {
+              "name": "Scott Sabourin",
+              "role": "forwards"
+            }
+          ],
+          "classification": "possible_name_variant_needs_review",
           "automaticApproval": false
         }
       ]
