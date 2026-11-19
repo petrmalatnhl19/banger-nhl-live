@@ -1,0 +1,20 @@
+name: CORE 4.3 research engine v0
+on:
+  pull_request:
+    paths:
+      - 'scripts/core43_research_engine_v0.cjs'
+      - 'scripts/test_core43_research_engine_v0.cjs'
+      - '.github/workflows/core43-research-engine-test.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/test_core43_research_engine_v0.cjs
+      - run: node --check scripts/core43_research_engine_v0.cjs
