@@ -5,11 +5,25 @@ on:
     branches: [main, master]
   pull_request:
   workflow_dispatch:
+    inputs:
+      run_accuracy_pilot:
+        description: "Manually run the separate Accuracy pilot on core-accuracy-lab-01"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
 
 jobs:
+  accuracy-pilot-manual:
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/core-accuracy-lab-01' && inputs.run_accuracy_pilot == true
+    permissions:
+      contents: read
+      actions: read
+    uses: ./.github/workflows/core-accuracy-pilot.yml
+    with:
+      mode: live
+
   frontend-smoke:
     runs-on: ubuntu-latest
     steps:
