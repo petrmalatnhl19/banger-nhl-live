@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-19T16:02:21.012811+00:00",
-  "rostersUpdatedAt": "2026-11-19T16:01:51.371698+00:00",
+  "updatedAt": "2026-11-19T17:10:14.076866+00:00",
+  "rostersUpdatedAt": "2026-11-19T17:09:25.602824+00:00",
   "projectionDate": "2026-11-19",
   "teamCount": 32,
   "goalieCount": 73,
@@ -67,8 +67,9 @@
       "team": "STL",
       "teamKey": "blues",
       "playerId": 8480981,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-19",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Michael DiPietro",
@@ -205,7 +206,7 @@
       "team": "CGY",
       "teamKey": "flames",
       "playerId": 8481692,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-19",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
@@ -222,8 +223,9 @@
       "team": "PHI",
       "teamKey": "flyers",
       "playerId": 8479361,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "confirmed",
+      "starterGameDate": "2026-11-19",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Carter Hart",
@@ -263,9 +265,8 @@
       "team": "NYI",
       "teamKey": "islanders",
       "playerId": 8478009,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-19",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Semyon Varlamov",
@@ -411,7 +412,7 @@
       "team": "EDM",
       "teamKey": "oilers",
       "playerId": 8482221,
-      "starterStatus": "projected",
+      "starterStatus": "confirmed",
       "starterGameDate": "2026-11-19",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
