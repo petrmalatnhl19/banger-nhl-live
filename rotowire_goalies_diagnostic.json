@@ -1,8 +1,8 @@
 {
-  "checkedAt": "2026-11-18T21:29:13.548016+00:00",
+  "checkedAt": "2026-11-19T00:28:55.745297+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "candidateCount": 84,
-  "matchedCount": 84,
+  "matchedCount": 78,
   "matches": [
     {
       "team": "ANA",
@@ -32,16 +32,6 @@
       "status": "projected",
       "date": "2026-11-23",
       "gameId": 2026020383,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "BOS",
-      "goalie": "Jeremy Swayman",
-      "opponent": "DET",
-      "venue": "away",
-      "status": "projected",
-      "date": "2026-11-18",
-      "gameId": 2026020344,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -206,16 +196,6 @@
     },
     {
       "team": "COL",
-      "goalie": "Mackenzie Blackwood",
-      "opponent": "UTA",
-      "venue": "away",
-      "status": "confirmed",
-      "date": "2026-11-18",
-      "gameId": 2026020346,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "COL",
       "goalie": "Scott Wedgewood",
       "opponent": "ANA",
       "venue": "home",
@@ -242,16 +222,6 @@
       "status": "projected",
       "date": "2026-11-22",
       "gameId": 2026020376,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "DET",
-      "goalie": "Daniil Tarasov",
-      "opponent": "BOS",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-18",
-      "gameId": 2026020344,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -376,16 +346,6 @@
     },
     {
       "team": "MTL",
-      "goalie": "Jacob Fowler",
-      "opponent": "NJD",
-      "venue": "away",
-      "status": "confirmed",
-      "date": "2026-11-18",
-      "gameId": 2026020345,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "MTL",
       "goalie": "Jakub Dobes",
       "opponent": "CAR",
       "venue": "away",
@@ -412,16 +372,6 @@
       "status": "projected",
       "date": "2026-11-23",
       "gameId": 2026020379,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "NJD",
-      "goalie": "Connor Hellebuyck",
-      "opponent": "MTL",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-18",
-      "gameId": 2026020345,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -706,16 +656,6 @@
     },
     {
       "team": "UTA",
-      "goalie": "Sebastian Cossa",
-      "opponent": "COL",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-18",
-      "gameId": 2026020346,
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "UTA",
       "goalie": "Karel Vejmelka",
       "opponent": "ANA",
       "venue": "home",
@@ -845,5 +785,48 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     }
   ],
-  "unmatched": []
+  "unmatched": [
+    {
+      "team": "BOS",
+      "goalie": "Jeremy Swayman",
+      "opponent": "DET",
+      "venue": "away",
+      "status": "confirmed"
+    },
+    {
+      "team": "COL",
+      "goalie": "Mackenzie Blackwood",
+      "opponent": "UTA",
+      "venue": "away",
+      "status": "confirmed"
+    },
+    {
+      "team": "DET",
+      "goalie": "Daniil Tarasov",
+      "opponent": "BOS",
+      "venue": "home",
+      "status": "confirmed"
+    },
+    {
+      "team": "MTL",
+      "goalie": "Jacob Fowler",
+      "opponent": "NJD",
+      "venue": "away",
+      "status": "confirmed"
+    },
+    {
+      "team": "NJD",
+      "goalie": "Connor Hellebuyck",
+      "opponent": "MTL",
+      "venue": "home",
+      "status": "confirmed"
+    },
+    {
+      "team": "UTA",
+      "goalie": "Sebastian Cossa",
+      "opponent": "COL",
+      "venue": "home",
+      "status": "confirmed"
+    }
+  ]
 }
