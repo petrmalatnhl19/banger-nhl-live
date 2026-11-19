@@ -1,0 +1,432 @@
+"use strict";
+
+const assert = require("node:assert/strict");
+const { execFileSync } = require("node:child_process");
+const { createHash, generateKeyPairSync, sign, X509Certificate } = require("node:crypto");
+const { mkdtempSync, readFileSync, rmSync, symlinkSync, truncateSync, writeFileSync } = require("node:fs");
+const { tmpdir } = require("node:os");
+const { join } = require("node:path");
+const { setTimeout } = require("node:timers/promises");
+const { test } = require("node:test");
+const { prepare, load } = require("./core43_cal14_rehearsal.cjs");
+const { verifyTimestamp } = require("./core43_cal16_timestamp.cjs");
+const { verifyHistoricalPrediction: run } = require("./core43_cal30_historical_trust.cjs");
+const { replay } = require("./core43_cal31_replay.cjs");
+const { preparePregameRequests } = require("./core43_cal32_prepare_pregame.cjs");
+const { replayPrepared, replayTechnicalPrepared } = require("./core43_cal34_replay_prepared.cjs");
+const { replayReceipted, signArchiveReceipt } = require("./core43_cal35_archive_receipt.cjs");
+
+const { makeTsa, POLICY_OID } = require("./fixtures/core43_local_tsa.cjs");
+const json = object => Buffer.from(JSON.stringify(object));
+const sha = bytes => createHash("sha256").update(bytes).digest("hex");
+const publicDer = key => key.export({ type: "spki", format: "der" }).toString("base64url");
+const iso = time => new Date(time).toISOString();
+
+async function setup(t) {
+  const directory = mkdtempSync(join(tmpdir(), "cal30-test-"));
+  t.after(() => rmSync(directory, { recursive: true, force: true }));
+  const epoch = Math.floor(Date.now() / 1000) * 1000;
+  const exchange = join(directory, "exchange");
+  const pins = prepare(exchange, iso(epoch - 90_000));
+  const pack = load(exchange, pins.digest, pins.rootFingerprint);
+  const registryBytes = json(pack.registry);
+  const observer = generateKeyPairSync("ed25519");
+  const issuers = ["alpha-tsa", "bravo-tsa"].map(id => makeTsa(join(directory, id), id));
+  // Put the entire uncertainty interval after the certificates' notBefore values.
+  await setTimeout(2200);
+  const start = epoch - 30_000;
+  const end = epoch + 300_000;
+  const timestamps = issuers.map(issuer => issuer.evidence(pack.blob, start, end));
+  const policy = {
+    schema: "core43_cal30_policy_v1", mode: "simulation", reviewAt: iso(epoch + 240_000),
+    packageRegistry: { source: pack.trust.source, rootKey: publicDer(pack.trust.rootKey), registrySha256: sha(registryBytes) },
+    nhlObserver: { operatorId: "observer-operator", publicKey: publicDer(observer.publicKey) },
+    authorities: timestamps.map(proof => ({
+      id: proof.id, operatorId: proof.id + "-operator", policyOid: POLICY_OID, maxAccuracyMs: 1000,
+      approvalSha256: sha(proof.approval), crlSha256: proof.crls.map(sha),
+      chainSha256: proof.chain.map(bytes => sha(new X509Certificate(bytes).raw)),
+    })),
+  };
+  const report = Buffer.from("Synthetic Game Summary for testing only");
+  const { gameId, kickoffAt, awayTeam, homeTeam } = JSON.parse(pack.blob).capture.prediction;
+  const schema = "core43_cal30_nhl_start_v1";
+  const nhlStart = (overrides = {}, key = observer.privateKey) => {
+    const statement = json({ schema, gameId, kickoffAt, awayTeam, homeTeam,
+      url: "https://www.nhl.com/scores/htmlreports/20262027/GS029999.HTM", reportSha256: sha(report),
+      actualStartAt: iso(epoch + 60_000), precision: "second", observedAt: iso(epoch + 120_000), ...overrides });
+    return { report, statement, signature: sign(null, Buffer.concat([Buffer.from(schema + "\0"), statement]), key) };
+  };
+  return { directory, issuers, start, end, epoch, policy, nhlStart,
+    evidence: { packageBytes: pack.blob, registryBytes, timestamps, nhlStart: nhlStart() } };
+}
+
+function config(policy) {
+  const policyBytes = json(policy);
+  return { policyBytes, policySha256: sha(policyBytes) };
+}
+
+function rejects(evidence, verifierConfig, reason) {
+  assert.deepEqual(run(evidence, verifierConfig), { trusted: false, status: "rejected", reason });
+}
+
+function dossierFor(evidence) {
+  const encode = bytes => bytes.toString("base64url");
+  return {
+    schema: "core43_cal31_dossier_v1",
+    packageBytes: encode(evidence.packageBytes),
+    registryBytes: encode(evidence.registryBytes),
+    nhlStart: Object.fromEntries(Object.entries(evidence.nhlStart).map(([key, bytes]) => [key, encode(bytes)])),
+    timestamps: evidence.timestamps.map(({ id, request, response, chain, crls, approval }) =>
+      ({ id, request: encode(request), response: encode(response), chain: chain.map(encode),
+        crls: crls.map(encode), approval: encode(approval) })),
+  };
+}
+
+test("CAL-30 offline corroboration of signed predictions", async t => {
+  const { directory, policy, evidence, nhlStart, issuers, start, end, epoch } = await setup(t);
+  const pinned = config(policy);
+  const [alpha, bravo] = evidence.timestamps;
+  const withBravo = replacement => ({ ...evidence, timestamps: [alpha, { ...bravo, ...replacement }] });
+
+  await t.test("two valid RFC 3161 responses, complete signed CRLs and a signed game start remain simulation", () => {
+    const result = run(evidence, pinned);
+    assert.equal(result.status, "simulation_verified", JSON.stringify(result));
+    assert.equal(result.trusted, false);
+    assert.equal(result.digest, sha(evidence.packageBytes));
+    assert.equal(result.cutoffAt, iso(epoch + 60_000));
+    assert.equal(result.reviewedAt, policy.reviewAt);
+    assert.equal(result.policySha256, pinned.policySha256);
+    assert.deepEqual(run({ ...evidence, timestamps: [bravo, alpha] }, pinned), result);
+  });
+
+  await t.test("missing policy, changed policy and simulation relabeled as historical fail closed", () => {
+    rejects(evidence, undefined, "cal30_policy_pin");
+    const historical = config({ ...policy, mode: "historical" });
+    rejects(evidence, { ...historical, policySha256: pinned.policySha256 }, "cal30_policy_pin");
+    rejects(evidence, historical, "cal13_registry");
+    rejects({ ...evidence, registryBytes: Buffer.from("{}") }, pinned, "cal30_registry_pin");
+    const alteredPackage = JSON.parse(evidence.packageBytes);
+    alteredPackage.receipt.signature = "A".repeat(86);
+    rejects({ ...evidence, packageBytes: json(alteredPackage) }, pinned, "cal12_witness_signature");
+  });
+
+  await t.test("operator aliases, a reused certificate key and an observer in the package registry fail closed", () => {
+    const [first, second] = policy.authorities;
+    const duplicateOperator = { ...second, operatorId: first.operatorId };
+    rejects(evidence, config({ ...policy, authorities: [first, duplicateOperator] }), "cal30_operator_independence");
+    const sharedChain = { ...second, chainSha256: first.chainSha256 };
+    rejects(withBravo({ chain: alpha.chain }), config({ ...policy, authorities: [first, sharedChain] }), "cal30_shared_key");
+    const [publisher] = JSON.parse(evidence.registryBytes).body.keys;
+    rejects(evidence, config({ ...policy, nhlObserver: { ...policy.nhlObserver, publicKey: publisher.publicKey } }),
+      "cal30_observer_independence");
+  });
+
+  await t.test("an absent or substituted second authority is rejected", () => {
+    rejects({ ...evidence, timestamps: [alpha, alpha] }, pinned, "cal30_timestamps");
+    rejects(withBravo({ approval: Buffer.from("unapproved") }), pinned, "cal30_tsa_approval");
+    rejects(withBravo({ chain: [bravo.chain[0], bravo.chain[1], alpha.chain[2]] }), pinned, "cal30_certificate_pin");
+    rejects(withBravo({ request: alpha.request }), pinned, "cal16_signature_or_nonce");
+  });
+
+  await t.test("CAL-33 rejects incomplete or invalid tokens and expired signer chains", () => {
+    rejects({ ...evidence, timestamps: [alpha] }, pinned, "cal30_timestamps");
+    rejects(withBravo({ response: undefined }), pinned, "cal16_size");
+    rejects(withBravo({ response: Buffer.from("invalid DER") }), pinned, "cal16_response");
+    const expiresAfter = epoch + 5 * 24 * 60 * 60_000;
+    const crls = ["issuer", "root"].map(issuer => issuers[0].crl(issuer, start, expiresAfter));
+    const [first, second] = policy.authorities;
+    const expirationPolicy = config({ ...policy, reviewAt: iso(epoch + 4 * 24 * 60 * 60_000),
+      authorities: [{ ...first, crlSha256: crls.map(sha) }, second] });
+    rejects({ ...evidence, timestamps: [{ ...alpha, crls }, bravo] }, expirationPolicy, "cal30_certificate_status");
+  });
+
+  await t.test("NHL signature, raw report and same-game UTC evidence are mandatory", () => {
+    rejects({ ...evidence, nhlStart: undefined }, pinned, "cal30_nhl_statement");
+    rejects({ ...evidence, nhlStart: nhlStart({}, generateKeyPairSync("ed25519").privateKey) }, pinned, "cal30_nhl_signature");
+    rejects({ ...evidence, nhlStart: { ...nhlStart(), report: Buffer.from("modified HTML") } }, pinned, "cal30_nhl_binding");
+    for (const mismatch of [{ gameId: "2026020001" }, { awayTeam: "BOS" }, { kickoffAt: iso(epoch) },
+      { url: "https://example.org/GS029999.HTM" }, { precision: "minute", actualStartAt: iso(epoch + 1234) },
+      { observedAt: iso(epoch + 250_000) }]) {
+      rejects({ ...evidence, nhlStart: nhlStart(mismatch) }, pinned, "cal30_nhl_binding");
+    }
+  });
+
+  await t.test("uses the earlier actual start including the minute floor and strict equality", () => {
+    const minute = Math.floor(epoch / 60_000) * 60_000;
+    const rounded = nhlStart({ actualStartAt: iso(minute), precision: "minute" });
+    rejects({ ...evidence, nhlStart: rounded }, pinned, "cal30_timestamp_order");
+    const [leaf, , root] = alpha.chain;
+    const interval = verifyTimestamp({ ...alpha, packageBytes: evidence.packageBytes, authority: {
+      kind: "independent", caPem: root, signerFingerprint256: new X509Certificate(leaf).fingerprint256,
+      policyOid: POLICY_OID, maxAccuracyMs: 1000,
+    } });
+    rejects({ ...evidence, nhlStart: nhlStart({ actualStartAt: iso(interval.latestMs) }) }, pinned, "cal30_timestamp_order");
+  });
+
+  await t.test("missing, unpinned, wrong issuer, stale and revoked CRLs fail closed", () => {
+    const useCrls = (leafCrl, issuerCrl = bravo.crls[1]) => {
+      const [first, second] = policy.authorities;
+      const crls = [leafCrl, issuerCrl];
+      rejects(withBravo({ crls }), config({ ...policy, authorities: [first, { ...second, crlSha256: crls.map(sha) }] }),
+        "cal30_certificate_status");
+    };
+    rejects(withBravo({ crls: [] }), pinned, "cal30_crl_missing");
+    rejects(withBravo({ crls: [alpha.crls[0], bravo.crls[1]] }), pinned, "cal30_crl_pin");
+    useCrls(alpha.crls[0]);
+    const der = Buffer.from(bravo.crls[0].toString().split("\n").slice(1, -2).join(""), "base64");
+    der[der.length - 1] ^= 1;
+    const lines = der.toString("base64").match(/.{1,64}/g).join("\n");
+    useCrls(Buffer.from(`-----BEGIN X509 CRL-----\n${lines}\n-----END X509 CRL-----\n`));
+    useCrls(issuers[1].crl("issuer", start, epoch + 180_000));
+    useCrls(issuers[1].crl("issuer", epoch + 180_000, end));
+    useCrls(issuers[1].crl("issuer", start, end, "leaf"));
+    useCrls(bravo.crls[0], issuers[1].crl("root", start, end, "issuer"));
+  });
+
+  await t.test("CAL-31 replays the dossier offline and keeps admission closed on simulation or malformed input", () => {
+    const dossierPath = join(directory, "dossier.json");
+    const policyPath = join(directory, "policy.json");
+    const dossier = dossierFor(evidence);
+    const options = { dossierPath, policyPath, expectedPolicySha256: pinned.policySha256 };
+    writeFileSync(dossierPath, json(dossier));
+    writeFileSync(policyPath, pinned.policyBytes);
+    assert.deepEqual(replay(options), run(evidence, pinned));
+    assert.equal(replay({ ...options, expectedPolicySha256: undefined }).reason, "cal31_policy_pin_required");
+    assert.equal(replay({ ...options, expectedPolicySha256: "0".repeat(64) }).reason, "cal30_policy_pin");
+
+    const cli = join(__dirname, "core43_cal31_replay.cjs");
+    assert.throws(() => execFileSync(process.execPath, [cli, dossierPath, policyPath, pinned.policySha256]), error =>
+      error.status === 1 && JSON.parse(error.stdout).status === "simulation_verified");
+    const symlink = join(directory, "dossier-link.json");
+    symlinkSync(dossierPath, symlink);
+    assert.equal(replay({ ...options, dossierPath: symlink }).reason, "cal31_input_file");
+    for (const bytes of [
+      json({ ...dossier, policySha256: pinned.policySha256, trusted: true }),
+      json({ ...dossier, packageBytes: dossier.packageBytes + "=" }),
+      Buffer.from(json(dossier).toString().replace('{"schema":', '{"schema":"shadow","schema":')),
+    ]) {
+      writeFileSync(dossierPath, bytes);
+      assert.deepEqual(replay(options), { trusted: false, status: "rejected", reason: "cal31_dossier_format" });
+    }
+    truncateSync(dossierPath, 16 * 1024 * 1024 + 1);
+    assert.equal(replay(options).reason, "cal31_input_file");
+  });
+
+  await t.test("CAL-32 prepares two requests before kickoff for the exact verified package", async t => {
+    const { gameId, kickoffAt } = JSON.parse(evidence.packageBytes).capture.prediction;
+    const plan = {
+      schema: "core43_cal32_pregame_plan_v1", mode: "simulation", gameId, kickoffAt,
+      packageRegistry: policy.packageRegistry,
+      authorities: policy.authorities.map(({ id, operatorId, policyOid }) => ({ id, operatorId, policyOid })),
+    };
+    const withPlan = value => {
+      const planBytes = json(value);
+      return { packageBytes: evidence.packageBytes, registryBytes: evidence.registryBytes,
+        planBytes, expectedPlanSha256: sha(planBytes) };
+    };
+    const options = withPlan(plan);
+    const clock = () => epoch;
+    const prepared = preparePregameRequests(options, clock);
+    assert.equal(prepared.trusted, false);
+    assert.equal(prepared.status, "requests_prepared");
+    assert.equal(prepared.preparedAt, iso(epoch));
+    assert.equal(prepared.packageSha256, sha(evidence.packageBytes));
+    assert.equal(prepared.planSha256, options.expectedPlanSha256);
+    assert.deepEqual(Buffer.from(prepared.packageBytes, "base64url"), evidence.packageBytes);
+    assert.deepEqual(Buffer.from(prepared.registryBytes, "base64url"), evidence.registryBytes);
+    assert.notEqual(prepared.requests[0].requestSha256, prepared.requests[1].requestSha256);
+    assert.deepEqual(prepared.requests.map(request => request.id), plan.authorities.map(authority => authority.id));
+    assert.throws(() => preparePregameRequests({ ...options, expectedPlanSha256: undefined }, clock), /cal32_plan_pin/);
+    assert.throws(() => preparePregameRequests({ ...options, registryBytes: Buffer.from("{}") }, clock), /cal32_registry_pin/);
+    const altered = Buffer.concat([evidence.packageBytes, Buffer.from(" ")]);
+    assert.throws(() => preparePregameRequests({ ...options, packageBytes: altered }, clock), /cal13_package_shape/);
+    assert.throws(() => preparePregameRequests(withPlan({ ...plan, gameId: "2026020001" }), clock), /cal32_game_binding/);
+    const [first, second] = plan.authorities;
+    const sharedOperator = { ...second, operatorId: first.operatorId };
+    assert.throws(() => preparePregameRequests(withPlan({ ...plan, authorities: [first, sharedOperator] }), clock),
+      /cal32_authorities/);
+    assert.throws(() => preparePregameRequests(options, () => Date.parse(kickoffAt)), /cal32_pregame_window/);
+    assert.throws(() => preparePregameRequests(options, () => epoch - 90_000), /cal32_pregame_window/);
+    const ticks = [epoch, Date.parse(kickoffAt)];
+    assert.throws(() => preparePregameRequests(options, () => ticks.shift()), /cal32_pregame_window/);
+
+    const files = ["prep-bundle.json", "prep-registry.json", "prep-plan.json"].map(name => join(directory, name));
+    [options.packageBytes, options.registryBytes, options.planBytes].forEach((bytes, index) => writeFileSync(files[index], bytes));
+    const cli = join(__dirname, "core43_cal32_prepare_pregame.cjs");
+    const cliResult = JSON.parse(execFileSync(process.execPath, [cli, ...files, options.expectedPlanSha256]));
+    assert.equal(cliResult.status, "requests_prepared");
+    assert.equal(cliResult.packageSha256, prepared.packageSha256);
+
+    const timestamps = prepared.requests.map((entry, index) => {
+      const request = Buffer.from(entry.request, "base64url");
+      assert.equal(sha(request), entry.requestSha256);
+      return { ...evidence.timestamps[index], request, response: issuers[index].respond(request) };
+    });
+    const verified = run({ ...evidence, timestamps }, pinned);
+    assert.equal(verified.status, "simulation_verified", JSON.stringify(verified));
+    assert.equal(verified.trusted, false);
+
+    await t.test("CAL-34 compares the pinned CAL-32 archive before checking both tokens", () => {
+      const preparedBytes = Buffer.from(JSON.stringify(prepared) + "\n");
+      const expectedPreparedSha256 = sha(preparedBytes);
+      const dossier = dossierFor({ ...evidence, timestamps });
+      const inputs = { preparedBytes, expectedPreparedSha256, dossierBytes: json(dossier),
+        policyBytes: pinned.policyBytes, expectedPolicySha256: pinned.policySha256 };
+      const good = { ...verified, preparedSha256: expectedPreparedSha256, planSha256: options.expectedPlanSha256 };
+      assert.deepEqual(replayPrepared(inputs), good);
+      const [a, b] = dossier.timestamps;
+      const compare = patch => replayPrepared({ ...inputs, dossierBytes: json({ ...dossier, ...patch }) });
+      assert.deepEqual(compare({ timestamps: [b, a] }), good);
+      const reject = (result, reason) => {
+        assert.equal(result.trusted, false);
+        assert.equal(result.status, "rejected");
+        assert.equal(result.reason, reason);
+      };
+      reject(replayPrepared({ ...inputs, preparedBytes: json(prepared) }), "cal34_prepared_pin");
+      reject(replayPrepared({ ...inputs, expectedPolicySha256: "0".repeat(64) }), "cal34_policy_pin");
+      reject(compare({ packageBytes: altered.toString("base64url") }), "cal34_package_mismatch");
+      reject(compare({ registryBytes: Buffer.from("{}").toString("base64url") }), "cal34_registry_mismatch");
+      reject(compare({ timestamps: [a, a] }), "cal34_authority_mismatch");
+      reject(compare({ timestamps: [{ ...a, request: b.request }, b] }), "cal34_request_mismatch");
+      reject(compare({ timestamps: dossierFor(evidence).timestamps }), "cal34_request_mismatch");
+      reject(compare({ timestamps: [{ ...a, response: b.response }, b] }), "cal16_signature_or_nonce");
+      const changedPolicy = config({ ...policy, authorities: [
+        { ...policy.authorities[0], policyOid: "1.2.3" }, policy.authorities[1],
+      ] });
+      reject(replayPrepared({ ...inputs, policyBytes: changedPolicy.policyBytes,
+        expectedPolicySha256: changedPolicy.policySha256 }), "cal34_authority_policy_mismatch");
+      const [preparedPath, dossierPath, reviewPolicyPath] = ["prepared.json", "cal34-dossier.json", "cal34-policy.json"]
+        .map(name => join(directory, name));
+      [preparedBytes, inputs.dossierBytes, inputs.policyBytes].forEach((bytes, index) =>
+        writeFileSync([preparedPath, dossierPath, reviewPolicyPath][index], bytes));
+      const cal34 = join(__dirname, "core43_cal34_replay_prepared.cjs");
+      assert.throws(() => execFileSync(process.execPath, [cal34, preparedPath, dossierPath, reviewPolicyPath,
+        expectedPreparedSha256, pinned.policySha256]), error =>
+        error.status === 1 && JSON.parse(error.stdout).status === "simulation_verified");
+    });
+
+    await t.test("CAL-35 verifies a separately signed pregame archive receipt", () => {
+      const custodian = generateKeyPairSync("ed25519");
+      const preparedBytes = Buffer.from(JSON.stringify(prepared) + "\n");
+      const receipt = signArchiveReceipt(preparedBytes, "archive:pilot:version-1", custodian.privateKey, clock);
+      const pinOf = key => sha(key.export({ type: "spki", format: "der" }));
+      const inputs = { preparedBytes, dossierBytes: json(dossierFor({ ...evidence, timestamps })),
+        policyBytes: pinned.policyBytes, expectedPolicySha256: pinned.policySha256,
+        receiptBytes: json(receipt), custodianKey: custodian.publicKey,
+        expectedCustodianSha256: pinOf(custodian.publicKey) };
+      const result = replayReceipted(inputs);
+      assert.equal(result.trusted, false);
+      assert.equal(result.status, "simulation_verified");
+      assert.equal(result.preparedSha256, sha(preparedBytes));
+      assert.equal(result.archiveReceiptSha256, sha(json(receipt)));
+      assert.equal(result.custodyRef, "archive:pilot:version-1");
+
+      const reject = (patch, reason) => {
+        const rejected = replayReceipted({ ...inputs, ...patch });
+        assert.equal(rejected.trusted, false);
+        assert.equal(rejected.status, "rejected");
+        assert.equal(rejected.reason, reason);
+      };
+      reject({ expectedCustodianSha256: "0".repeat(64) }, "cal35_custodian_pin");
+      reject({ receiptBytes: json({ ...receipt, statement: { ...receipt.statement, custodyRef: "archive:other" } }) },
+        "cal35_receipt_signature");
+      reject({ preparedBytes: json(prepared) }, "cal34_prepared_pin");
+      assert.throws(() => signArchiveReceipt(preparedBytes, "archive:late", custodian.privateKey, () => Date.parse(kickoffAt)),
+        /cal35_receipt_format/);
+      const late = signArchiveReceipt(preparedBytes, "archive:late", custodian.privateKey, () => epoch + 60_000);
+      reject({ receiptBytes: json(late) }, "cal35_late_archive_receipt");
+      const changed = config({ ...policy, nhlObserver: { ...policy.nhlObserver, publicKey: publicDer(custodian.publicKey) } });
+      reject({ policyBytes: changed.policyBytes, expectedPolicySha256: changed.policySha256 },
+        "cal35_custodian_independence");
+    });
+  });
+});
+
+test("CAL-36 completes a no-observer rehearsal with two real local RFC 3161 responses", async t => {
+  const { directory, policy, evidence, issuers, start, epoch } = await setup(t);
+  const { gameId, kickoffAt, awayTeam, homeTeam } = JSON.parse(evidence.packageBytes).capture.prediction;
+  const authorities = policy.authorities.map(({ id, operatorId, policyOid }) => ({ id, operatorId, policyOid }));
+  const planBytes = json({ schema: "core43_cal32_pregame_plan_v1", mode: "simulation",
+    gameId, kickoffAt, packageRegistry: policy.packageRegistry, authorities });
+  const prepared = preparePregameRequests({ packageBytes: evidence.packageBytes, registryBytes: evidence.registryBytes,
+    planBytes, expectedPlanSha256: sha(planBytes) }, () => epoch);
+  const preparedBytes = Buffer.from(JSON.stringify(prepared) + "\n");
+  const dayMs = 24 * 60 * 60_000;
+  const tomorrow = Math.floor(epoch / dayMs) * dayMs + dayMs;
+  const crlEnd = epoch + 60 * 60 * 60_000;
+  const timestamps = prepared.requests.map((entry, index) => {
+    const request = Buffer.from(entry.request, "base64url");
+    const issuer = issuers[index];
+    return { ...evidence.timestamps[index], request, response: issuer.respond(request),
+      crls: ["issuer", "root"].map(name => issuer.crl(name, start, crlEnd)) };
+  });
+  const { nhlStart: _unused, ...dossier } = dossierFor({ ...evidence, timestamps });
+  const dossierBytes = json({ ...dossier, schema: "core43_cal36_dossier_v1" });
+  const calendar = new Intl.DateTimeFormat("en-US", {
+    timeZone: "UTC", weekday: "long", month: "long", day: "numeric", year: "numeric",
+  });
+  const hourMs = 60 * 60_000;
+  const sources = (day, retrievedAt, clockLabel = "5:20", zone = "EDT") => {
+    const report = Buffer.from(
+      '<table id="Visitor"><tr><td><img src="logoc' + awayTeam.toLowerCase() + '.gif"></td></tr></table>' +
+      '<table id="GameInfo"><tr><td>Game Summary</td><td>' + calendar.format(day) + '</td></tr>' +
+      '<tr><td>Start ' + clockLabel + ' ' + zone + '; End 7:54 ' + zone + '</td><td>Game ' + gameId.slice(-4) +
+      '</td><td>Final</td></tr></table><table id="Home"><tr><td><img src="logoc' +
+      homeTeam.toLowerCase() + '.gif"></td></tr></table>');
+    const boxscore = json({ id: Number(gameId), gameDate: iso(day).slice(0, 10), startTimeUTC: kickoffAt,
+      gameState: "OFF", gameOutcome: { lastPeriodType: "REG" }, awayTeam: { abbrev: awayTeam, score: 2 },
+      homeTeam: { abbrev: homeTeam, score: 3 } });
+    const season = Number(gameId.slice(0, 4));
+    const archiveSource = (url, bytes) => ({ url, retrievedAt: iso(retrievedAt), sha256: sha(bytes),
+      bytes: bytes.toString("base64url") });
+    return json({ schema: "core43_cal33_nhl_sources_v1", gameId,
+      report: archiveSource(`https://www.nhl.com/scores/htmlreports/${season}${season + 1}/GS${gameId.slice(4)}.HTM`, report),
+      boxscore: archiveSource(`https://api-web.nhle.com/v1/gamecenter/${gameId}/boxscore`, boxscore) });
+  };
+  const inputsFor = (archiveBytes, reviewAt) => {
+    const policyBytes = json({ schema: "core43_cal36_technical_review_v1", mode: "simulation", reviewAt: iso(reviewAt),
+      packageRegistry: policy.packageRegistry, nhlArchiveSha256: sha(archiveBytes),
+      authorities: policy.authorities.map((profile, index) => ({ ...profile, crlSha256: timestamps[index].crls.map(sha) })) });
+    return { preparedBytes, expectedPreparedSha256: sha(preparedBytes), dossierBytes, nhlArchiveBytes: archiveBytes,
+      policyBytes, expectedPolicySha256: sha(policyBytes) };
+  };
+
+  // The NHL dates and retrieval clocks are fixtures. OpenSSL issues both tokens at the real current time.
+  const single = inputsFor(sources(tomorrow, tomorrow + 15 * hourMs), tomorrow + 16 * hourMs);
+  const accepted = replayTechnicalPrepared(single);
+  assert.equal(accepted.status, "simulation_verified", JSON.stringify(accepted));
+  assert.equal(accepted.trusted, false);
+  assert.equal(accepted.startEvidence, "single_report_time");
+  assert.equal(accepted.cutoffAt, kickoffAt);
+  assert.equal(accepted.earliestReportStartAt, iso(tomorrow + 9 * hourMs + 20 * 60_000));
+
+  const ambiguous = replayTechnicalPrepared(inputsFor(sources(tomorrow, tomorrow + 23 * hourMs), tomorrow + 23 * hourMs));
+  assert.equal(ambiguous.status, "simulation_verified", JSON.stringify(ambiguous));
+  assert.equal(ambiguous.trusted, false);
+  assert.equal(ambiguous.startEvidence, "conservative_am_pm_bound");
+  assert.equal(ambiguous.earliestReportStartAt, accepted.earliestReportStartAt);
+
+  // Place both actual token times between the earlier and later interpretations of the same marker.
+  const easternHour = new Date(epoch - 4 * hourMs).getUTCHours();
+  const zone = easternHour === 11 || easternHour === 23 ? "CST" : "EDT";
+  const offset = zone === "CST" ? 6 : 4;
+  const localEpoch = epoch - offset * hourMs;
+  const localDay = Math.floor(localEpoch / dayMs) * dayMs;
+  const localPm = new Date(localEpoch).getUTCHours() >= 12;
+  const earlier = localDay + (offset + (localPm ? 11 : 0)) * hourMs;
+  const later = earlier + 12 * hourMs;
+  const latestToken = Date.parse(accepted.latestTimestampAt);
+  assert.ok(earlier <= latestToken && latestToken < later && latestToken < Date.parse(kickoffAt));
+  const tooLate = replayTechnicalPrepared(inputsFor(
+    sources(localDay, tomorrow + 12 * hourMs, localPm ? "11:00" : "12:00", zone), tomorrow + 16 * hourMs));
+  assert.equal(tooLate.reason, "cal30_timestamp_order");
+  assert.equal(tooLate.trusted, false);
+
+  const paths = ["technical-prepared.json", "technical-dossier.json", "technical-sources.json", "technical-policy.json"]
+    .map(name => join(directory, name));
+  [single.preparedBytes, single.dossierBytes, single.nhlArchiveBytes, single.policyBytes]
+    .forEach((bytes, index) => writeFileSync(paths[index], bytes));
+  const cli = join(__dirname, "core43_cal36_technical_review.cjs");
+  const result = execFileSync(process.execPath, [cli, ...paths, single.expectedPreparedSha256, single.expectedPolicySha256]);
+  assert.deepEqual(JSON.parse(result), accepted);
+});

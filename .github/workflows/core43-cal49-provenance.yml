@@ -1,0 +1,21 @@
+name: CORE43-CAL-49 offline provenance gate
+on:
+  pull_request:
+    paths:
+      - 'scripts/core43_cal49_provenance_gate.py'
+      - 'tests/test_core43_cal49.py'
+      - '.github/workflows/core43-cal49-provenance.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  provenance-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: CAL-49 metadata consistency and adversarial tests
+        run: python -m unittest discover -s tests -p 'test_core43_cal49.py' -v

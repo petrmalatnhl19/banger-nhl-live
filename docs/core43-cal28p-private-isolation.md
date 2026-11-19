@@ -1,0 +1,5 @@
+# CAL-28P — private archive copy isolation audit
+
+CAL-24 now recursively inspects each source archive directory before copying and each copied tree afterwards. Symlinks, hardlinked files, special filesystem nodes and excessive nesting fail closed. The temporary parent directory has owner-only permissions (0700); the private copy is verified using the existing signed archive verifier and removed on success or failure. Regression tests inject an extra source symlink after initial verification and tamper with a copied evidence file before verification. Both must reject without advancing the pin.
+
+**Residual risks:** This is process-level hardening, not isolation from the same OS user, root, compromised CI runner, or privileged writers. Recursive copy still has check/use races; a symlink can be substituted after inspection, and directory traversal is not bound to dirfds. 0700 permissions do not make a snapshot immutable. No adversarial race-proof guarantee or production readiness is claimed. All tests use synthetic signed evidence. No Supabase writes, production CORE 4.2 edits, merge or deployment.

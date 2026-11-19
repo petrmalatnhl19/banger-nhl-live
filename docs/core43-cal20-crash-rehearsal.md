@@ -1,0 +1,5 @@
+# CORE43-CAL-20 — crash-recovery rehearsal (synthetic only)
+
+The test `node --test scripts/test_core43_cal20_crash.cjs` starts separate Node processes, injects a synthetic verified digest via a **test-only callback**, and exits abruptly with status 77 at four checkpoints: lock acquisition, temporary ledger fsync, atomic ledger rename, and parent-directory fsync. It then verifies the ledger state and that the abandoned writer lock blocks new appends. A separate case modifies the ledger after a simulated crash and expects verification failure.
+
+The test-only dependency injection is not available through the production CLI. It is not evidence of a real RFC3161 timestamp or independent TSA. Process termination is simulated with `process.exit`, **not** a hardware power-loss simulation; it cannot prove physical storage durability. A stale lock requires operator review; never remove it automatically. An unconfirmed append must be checked against the externally pinned head and its archive before any manual recovery. No production writes, Supabase operations, deployment, or changes to CORE 4.2.

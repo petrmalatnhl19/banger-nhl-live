@@ -1,0 +1,5 @@
+# CAL-28M — archive directory identity continuity
+
+CAL-28B now records filesystem identities (device, inode, ctime) of the archive root and each digest-named directory, and checks each directory identity before and after verifying its evidence. CAL-24 compares these identities between the initial and precommit verification under the pin writer lock. CAL-28M regression tests swap an entire archive directory or root with a fresh copy containing the same valid signed bytes at the deterministic precommit hook. Both replacements must fail closed with unchanged pin and cleaned lock/temp file.
+
+**Limits:** This does not provide filesystem snapshots, secure dirfd/openat traversal, or continuous directory locks. An adversarial multi-process writer could still race between identity checks or after the last check. ctime is a heuristic for change detection, not a cryptographic invariant. The tests are deterministic swap simulations, not exhaustive independently scheduled multi-process race coverage. No Supabase writes, CORE 4.2 edits, deployment or merge.

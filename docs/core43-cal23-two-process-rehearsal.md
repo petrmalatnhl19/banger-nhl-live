@@ -1,0 +1,5 @@
+# CORE43-CAL-23 — two-process offline transfer rehearsal
+
+Run `node --test scripts/test_core43_cal23_two_process.cjs`. The test creates distinct sender and receiver directories and invokes the CAL-22 verifier in a separate Node process. The receiver's public trust key and pinned history are stored only in the receiver directory. The sender supplies the transfer JSON; the test rejects truncated, forked and modified histories. It also simulates an abrupt exit after successful verification but **before any trusted anchor advancement**, then verifies the original pin remains unchanged and the same package can be replayed safely.
+
+The process boundary is **not** two independent machines, network transport or a hardware power-loss simulation. The private signing key is ephemeral test data only. The receiver deliberately never updates its trusted pin; secure pin advancement remains an external, operator-approved operation. The rehearsal does not prove independent witness operation or availability of underlying archive evidence. No live collection, Supabase writes, production CORE 4.2 changes, merge or deployment.

@@ -1,0 +1,5 @@
+# CAL-28V — offline pinned auditor keyring
+
+CAL-28V adds a fail-closed offline verifier for a pinned Ed25519 auditor public key. It checks exact keyring entry fields, SHA-256 fingerprint of SPKI DER bytes, exact auditor identity, a unique selected key ID, strict validity dates, revocation state and the CAL-28U audit signature. It rejects unknown or duplicated key IDs, revoked or expired keys, future revocation declarations, key fingerprint mismatches and mismatched signing keys. Twelve synthetic regression tests are run in CI.
+
+**Scope and limitations:** Caller-provided keyrings are not trusted root-of-trust material. The test uses synthetic keys and snapshots. A passing result always retains `trusted:false`; this does not prove independent key custody, trusted time, live provider retention, effective IAM permissions or real key revocation. Rotation requires an out-of-band authenticated keyring, signed history and revocation publication before production use. The code is not wired into pin advancement or production CORE 4.2. No Supabase writes, merges, deployments or live dry-runs.

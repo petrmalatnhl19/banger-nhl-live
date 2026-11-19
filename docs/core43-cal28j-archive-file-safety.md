@@ -1,0 +1,5 @@
+# CAL-28J — archive file safety, partial hardening
+
+CAL-18B `verifyArchive` now rejects archive directories that are not real directories, and evidence files/manifest that are symlinks, nonregular files or multiply linked (`nlink !== 1`). The CAL-28J tests exercise symlink, hardlink, tampered bytes and symlinked manifest through CAL-24's writer-locked verification path. All evidence is synthetic, offline RFC3161 test material.
+
+**Residual TOCTOU:** `lstatSync` followed by `readFileSync` is not an atomic file-descriptor-bound check. A concurrent actor with write access to the archive tree can swap files or directories after checks, including between verification and pin rename. Writer lock only serializes pin writers; it does not lock the evidence tree. CAL-28J must not be represented as a complete solution for concurrent archive mutation. Next hardening should use `O_NOFOLLOW` and `fstat` on opened file descriptors, controlled immutable archive storage and/or trusted snapshot, with adversarial race tests. No Supabase writes, no production CORE 4.2 changes, no merge or deployment.

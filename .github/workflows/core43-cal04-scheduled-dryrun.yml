@@ -1,0 +1,393 @@
+name: CORE43-CAL-04 scheduled dry-run
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+    inputs:
+      bootstrap_ledger:
+        description: 'Initialize a ledger only when no previous successful run exists'
+        type: boolean
+        default: false
+  pull_request:
+    paths:
+      - 'scripts/core43_cal04_scheduled_dryrun.cjs'
+      - 'scripts/core43_cal04_restore_ledger.sh'
+      - 'scripts/test_core43_cal04_scheduled_dryrun.cjs'
+      - 'scripts/test_core43_cal04_two_run_integration.cjs'
+      - 'scripts/test_core43_cal04_failure_modes.cjs'
+      - 'scripts/test_core43_cal06_workflow_guards.cjs'
+      - 'scripts/test_core43_cal06_public_acl.cjs'
+      - 'scripts/core43_cal07_export.cjs'
+      - 'scripts/test_core43_cal07_export.cjs'
+      - 'docs/core43-cal07-signed-pregame-export.md'
+      - 'scripts/core43_cal08_receiver.cjs'
+      - 'scripts/test_core43_cal08_receiver.cjs'
+      - 'scripts/fixtures/core43_signed_export.cjs'
+      - 'docs/core43-cal08-offline-receiver.md'
+      - 'scripts/core43_cal09_ledger_transfer.cjs'
+      - 'scripts/test_core43_cal09_transfer.cjs'
+      - 'docs/core43-cal09-ledger-transfer.md'
+      - 'scripts/test_core43_cal10_chain.cjs'
+      - 'scripts/fixtures/core43_ledger_worker.cjs'
+      - 'docs/core43-cal10-integration.md'
+      - 'scripts/core43_cal11_evaluate.cjs'
+      - 'scripts/test_core43_cal11_evaluate.cjs'
+      - 'docs/core43-cal11-offline-accuracy.md'
+      - 'scripts/core43_cal12_archive.cjs'
+      - 'scripts/test_core43_cal12_archive.cjs'
+      - 'docs/core43-cal12-prospective-measurement.md'
+      - 'scripts/core43_cal13_coordinator.cjs'
+      - 'scripts/core43_cal13_transport.cjs'
+      - 'scripts/test_core43_cal13_infrastructure.cjs'
+      - 'docs/core43-cal13-collection-infrastructure.md'
+      - 'scripts/core43_cal14_rehearsal.cjs'
+      - 'scripts/test_core43_cal14_rehearsal.cjs'
+      - 'docs/core43-cal14-two-host-rehearsal.md'
+      - 'scripts/core43_cal15_netns.sh'
+      - 'scripts/test_core43_cal15_network.cjs'
+      - 'docs/core43-cal15-network-pilot-readiness.md'
+      - 'scripts/core43_cal16_timestamp.cjs'
+      - 'scripts/test_core43_cal16_timestamp.cjs'
+      - 'scripts/test_core43_cal17_safety_gates.cjs'
+      - 'scripts/core43_cal18_verify.cjs'
+      - 'scripts/test_core43_cal18_verify.cjs'
+      - 'scripts/core43_cal18_archive.cjs'
+      - 'scripts/test_core43_cal18_archive.cjs'
+      - 'docs/core43-cal18b-evidence-archive.md'
+      - 'scripts/core43_cal19_chain.cjs'
+      - 'scripts/test_core43_cal19_chain.cjs'
+      - 'scripts/test_core43_cal20_crash.cjs'
+      - 'scripts/core43_cal21_checkpoint.cjs'
+      - 'scripts/test_core43_cal21_checkpoint.cjs'
+      - 'docs/core43-cal21-signed-checkpoints.md'
+      - 'scripts/core43_cal22_transfer.cjs'
+      - 'scripts/test_core43_cal22_transfer.cjs'
+      - 'docs/core43-cal22-checkpoint-transfer.md'
+      - 'scripts/test_core43_cal23_two_process.cjs'
+      - 'docs/core43-cal23-two-process-rehearsal.md'
+      - 'scripts/core43_cal24_pin.cjs'
+      - 'scripts/test_core43_cal24_pin.cjs'
+      - 'docs/core43-cal24-receiver-pin.md'
+      - 'scripts/core43_cal25_audit.cjs'
+      - 'scripts/test_core43_cal25_audit.cjs'
+      - 'docs/core43-cal25-recovery-audit.md'
+      - 'scripts/test_core43_cal28_preflight.cjs'
+      - 'docs/core43-cal28-preflight.md'
+      - 'scripts/core43_cal28_evidence.cjs'
+      - 'scripts/test_core43_cal28_evidence.cjs'
+      - 'docs/core43-cal28-evidence.md'
+      - 'scripts/core43_cal28_approved.cjs'
+      - 'scripts/test_core43_cal28_approved.cjs'
+      - 'docs/core43-cal28-approved.md'
+      - 'scripts/test_core43_cal28_legacy_cli.cjs'
+      - 'docs/core43-cal28-legacy-cli.md'
+      - 'scripts/test_core43_cal28_lock_gate.cjs'
+      - 'scripts/test_core43_cal28_locked_evidence.cjs'
+      - 'scripts/test_core43_cal28_real_archive.cjs'
+      - 'scripts/fixtures/core43_cal28_signed_archive.cjs'
+      - 'docs/core43-cal28h-fixture-migration.md'
+      - 'docs/core43-cal28i-mandatory-archives.md'
+      - 'scripts/test_core43_cal28_archive_links.cjs'
+      - 'docs/core43-cal28j-archive-file-safety.md'
+      - 'docs/core43-cal28k-fd-verification.md'
+      - 'scripts/test_core43_cal28_precommit_race.cjs'
+      - 'docs/core43-cal28l-precommit-race.md'
+      - 'scripts/test_core43_cal28_directory_identity.cjs'
+      - 'docs/core43-cal28m-directory-identity.md'
+      - 'scripts/test_core43_cal28_multiprocess_race.cjs'
+      - 'scripts/fixtures/core43_cal28_concurrent_worker.cjs'
+      - 'docs/core43-cal28n-multiprocess-race.md'
+      - 'scripts/test_core43_cal28_private_snapshot.cjs'
+      - 'docs/core43-cal28o-private-copy.md'
+      - 'scripts/test_core43_cal28_private_isolation.cjs'
+      - 'docs/core43-cal28p-private-isolation.md'
+      - 'scripts/test_core43_cal28_copy_commit_races.cjs'
+      - 'docs/core43-cal28q-race-audit.md'
+      - 'scripts/core43_cal28r_archive_policy.cjs'
+      - 'scripts/test_core43_cal28r_archive_policy.cjs'
+      - 'docs/core43-cal28r-isolated-archive-design.md'
+      - 'scripts/core43_cal28s_receipt.cjs'
+      - 'scripts/test_core43_cal28s_receipt.cjs'
+      - 'docs/core43-cal28s-independent-receipt.md'
+      - 'scripts/core43_cal28t_provider_snapshot.cjs'
+      - 'scripts/test_core43_cal28t_provider_snapshot.cjs'
+      - 'docs/core43-cal28t-provider-metadata.md'
+      - 'scripts/core43_cal28u_independent_audit.cjs'
+      - 'scripts/test_core43_cal28u_independent_audit.cjs'
+      - 'docs/core43-cal28u-independent-audit.md'
+      - 'scripts/core43_cal28v_keyring.cjs'
+      - 'scripts/test_core43_cal28v_keyring.cjs'
+      - 'docs/core43-cal28v-keyring.md'
+      - 'scripts/core43_cal28w_rotation_history.cjs'
+      - 'scripts/test_core43_cal28w_rotation_history.cjs'
+      - 'docs/core43-cal28w-rotation-history.md'
+      - 'scripts/core43_cal28x_checkpoint_witness.cjs'
+      - 'scripts/test_core43_cal28x_checkpoint_witness.cjs'
+      - 'docs/core43-cal28x-checkpoint-witness.md'
+      - 'scripts/core43_cal28y_view_consistency.cjs'
+      - 'scripts/test_core43_cal28y_view_consistency.cjs'
+      - 'docs/core43-cal28y-view-consistency.md'
+      - 'scripts/core43_cal28z_consistency_proof.cjs'
+      - 'scripts/test_core43_cal28z_consistency_proof.cjs'
+      - 'docs/core43-cal28z-consistency-proof.md'
+      - 'scripts/core43_cal29_independent_tsa.cjs'
+      - 'scripts/test_core43_cal29_independent_tsa.cjs'
+      - 'docs/core43-cal29-independent-tsa.md'
+      - 'scripts/core43_cal30_historical_trust.cjs'
+      - 'scripts/test_core43_cal30_historical_trust.cjs'
+      - 'docs/core43-cal30-historical-trust-audit.md'
+      - 'docs/core43-cal30-tsa-candidates.json'
+      - 'scripts/core43_cal31_replay.cjs'
+      - 'docs/core43-cal31-pilot-rehearsal.md'
+      - 'scripts/core43_cal32_prepare_pregame.cjs'
+      - 'docs/core43-cal32-pregame-preparation.md'
+      - 'scripts/core43_cal33_nhl_observer.cjs'
+      - 'scripts/test_core43_cal33_nhl_observer.cjs'
+      - 'docs/core43-cal33-pilot-audit.md'
+      - 'scripts/core43_cal34_replay_prepared.cjs'
+      - 'docs/core43-cal34-replay-binding.md'
+      - 'scripts/core43_cal35_archive_receipt.cjs'
+      - 'docs/core43-cal35-pilot-custody.md'
+      - 'scripts/core43_cal34_dallas_rehearsal.cjs'
+      - 'scripts/fixtures/core43_local_tsa.cjs'
+      - 'docs/core43-cal34-dallas-rehearsal.md'
+      - 'scripts/core43_cal36_technical_review.cjs'
+      - 'docs/core43-cal36-technical-review.md'
+      - 'scripts/core43_cal38_experimental_capture.cjs'
+      - 'scripts/test_core43_cal38_experimental_capture.cjs'
+      - 'docs/core43-cal38-experimental-capture.md'
+      - 'scripts/core43_cal39_sign_snapshot.cjs'
+      - 'scripts/test_core43_cal39_sign_snapshot.cjs'
+      - 'docs/core43-cal39-pregame-source-readiness.md'
+      - 'docs/core43-cal28-lock-gate.md'
+      - 'scripts/test_core43_cal26_end_to_end.cjs'
+      - 'docs/core43-cal26-end-to-end.md'
+      - 'docs/core43-cal19-archive-chain.md'
+      - 'docs/core43-cal17-pilot-security-gates.md'
+      - 'docs/core43-cal16-timestamp-pilot-readiness.md'
+      - 'docs/sql/core43-cal06-reader-migration-draft.sql'
+      - 'scripts/core43_live_shadow_source_reader.cjs'
+      - 'scripts/core43_supabase_readonly_report.cjs'
+      - 'scripts/core43_cal03_capture_plan.cjs'
+      - '.github/workflows/core43-cal04-scheduled-dryrun.yml'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: core43-cal04-readonly
+  cancel-in-progress: false
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/test_core43_cal03_capture_plan.cjs
+      - run: node scripts/test_core43_cal04_scheduled_dryrun.cjs
+      - run: node scripts/test_core43_cal04_two_run_integration.cjs
+      - run: node scripts/test_core43_cal04_failure_modes.cjs
+      - run: node scripts/test_core43_cal06_workflow_guards.cjs
+      - name: Verify signed pregame export with synthetic data
+        run: node --test scripts/test_core43_cal07_export.cjs
+      - name: Test offline export receipt and durable deduplication
+        run: node --experimental-sqlite --test scripts/test_core43_cal08_receiver.cjs
+      - name: Test signed SQLite transfer, rollback protection and concurrent workers
+        run: node --experimental-sqlite --test scripts/test_core43_cal09_transfer.cjs
+      - name: Verify the offline end-to-end calibration chain
+        run: node --experimental-sqlite --test scripts/test_core43_cal10_chain.cjs
+      - name: Verify offline paired forecast evaluation
+        run: node --test scripts/test_core43_cal11_evaluate.cjs
+      - name: Verify independent pregame attestations and coverage
+        run: node --test scripts/test_core43_cal12_archive.cjs
+      - name: Verify loopback TLS, coordinator recovery and key rotation
+        run: node --experimental-sqlite --test scripts/test_core43_cal13_infrastructure.cjs
+      - name: Verify synthetic two-host rehearsal and failure recovery
+        run: node --experimental-sqlite --test scripts/test_core43_cal14_rehearsal.cjs
+      - name: Verify RFC 3161 responses from an ephemeral test authority
+        run: node --experimental-sqlite --test scripts/test_core43_cal16_timestamp.cjs
+      - name: Validate CAL-18 offline TSA evidence profile
+        run: node --test scripts/test_core43_cal18_verify.cjs
+      - name: Validate CAL-18B offline evidence archive
+        run: node --test scripts/test_core43_cal18_archive.cjs
+      - name: Verify CAL-19 pinned archive hash chain
+        run: node --test scripts/test_core43_cal19_chain.cjs
+      - name: Simulate CAL-20 archive crash recovery
+        run: node --test scripts/test_core43_cal20_crash.cjs
+      - name: Verify CAL-21 signed witness checkpoints
+        run: node --test scripts/test_core43_cal21_checkpoint.cjs
+      - name: Verify CAL-22 offline checkpoint transfer
+        run: node --test scripts/test_core43_cal22_transfer.cjs
+      - name: Rehearse CAL-23 two-process offline transfer
+        run: node --test scripts/test_core43_cal23_two_process.cjs
+      - name: Verify CAL-24 approved atomic receiver pin advancement
+        run: node --test scripts/test_core43_cal24_pin.cjs
+      - name: Audit CAL-25 receiver crash recovery safety
+        run: node --test scripts/test_core43_cal25_audit.cjs
+      - name: Verify CAL-26 end-to-end transfer approval and recovery
+        run: node --test scripts/test_core43_cal26_end_to_end.cjs
+      - name: Verify CAL-28 receiver preflight hardening
+        run: node --test scripts/test_core43_cal28_preflight.cjs
+      - name: Verify CAL-28B signed transfer evidence completeness
+        run: node --test scripts/test_core43_cal28_evidence.cjs
+      - name: Verify CAL-28C evidence-gated approval
+        run: node --test scripts/test_core43_cal28_approved.cjs
+      - name: Verify CAL-28D legacy CLI bypass blocked
+        run: node --test scripts/test_core43_cal28_legacy_cli.cjs
+      - name: Verify CAL-28E lock-held archive re-verification wiring
+        run: node --test scripts/test_core43_cal28_lock_gate.cjs
+      - name: Verify CAL-28F runtime locked evidence rejection
+        run: node --test scripts/test_core43_cal28_locked_evidence.cjs
+      - name: Verify CAL-28G signed RFC3161 archive end-to-end pin update
+        run: node --test scripts/test_core43_cal28_real_archive.cjs
+      - name: Verify CAL-28J and CAL-28K archive link and descriptor safety
+        run: node --test scripts/test_core43_cal28_archive_links.cjs
+      - name: Verify CAL-28L precommit archive mutation rejection
+        run: node --test scripts/test_core43_cal28_precommit_race.cjs
+      - name: Verify CAL-28M archive directory identity continuity
+        run: node --test scripts/test_core43_cal28_directory_identity.cjs
+      - name: Verify CAL-28N independent process archive mutation rejection
+        run: node --test scripts/test_core43_cal28_multiprocess_race.cjs
+      - name: Verify CAL-28O private archive copy before pin update
+        run: node --test scripts/test_core43_cal28_private_snapshot.cjs
+      - name: Verify CAL-28P private archive isolation and tamper rejection
+        run: node --test scripts/test_core43_cal28_private_isolation.cjs
+      - name: Verify CAL-28Q copy and final commit boundary races
+        run: node --test scripts/test_core43_cal28_copy_commit_races.cjs
+      - name: Verify CAL-28R isolated archive policy contract
+        run: node --test scripts/test_core43_cal28r_archive_policy.cjs
+      - name: Verify CAL-28S independent signed archive receipt
+        run: node --test scripts/test_core43_cal28s_receipt.cjs
+      - name: Verify CAL-28T offline provider retention and permissions metadata
+        run: node --test scripts/test_core43_cal28t_provider_snapshot.cjs
+      - name: Verify CAL-28U independent offline archive audit
+        run: node --test scripts/test_core43_cal28u_independent_audit.cjs
+      - name: Verify CAL-28V pinned auditor keyring and rotation
+        run: node --test scripts/test_core43_cal28v_keyring.cjs
+      - name: Verify CAL-28W signed rotation history and rollback protection
+        run: node --test scripts/test_core43_cal28w_rotation_history.cjs
+      - name: Verify CAL-28X independently signed checkpoint witnesses
+        run: node --test scripts/test_core43_cal28x_checkpoint_witness.cjs
+      - name: Verify CAL-28Y signed checkpoint cross-view consistency
+        run: node --test scripts/test_core43_cal28y_view_consistency.cjs
+      - name: Verify CAL-28Z signed append-only history consistency
+        run: node --test scripts/test_core43_cal28z_consistency_proof.cjs
+      - name: Verify CAL-29 independent TSA pregame gate
+        run: node --test scripts/test_core43_cal29_independent_tsa.cjs
+      - name: Verify CAL-30 historical trust evidence and rejection paths
+        run: node --test scripts/test_core43_cal30_historical_trust.cjs
+      - name: Verify CAL-33 NHL source acquisition and attestation
+        run: node --test scripts/test_core43_cal33_nhl_observer.cjs
+      - name: Verify CAL-38 offline experimental capture and comparison
+        run: node --test scripts/test_core43_cal38_experimental_capture.cjs
+      - name: Verify CAL-39 offline pregame export signing
+        run: node --test scripts/test_core43_cal39_sign_snapshot.cjs
+      - name: Enforce CAL-17 fail-closed pilot gates
+        run: node --test scripts/test_core43_cal17_safety_gates.cjs
+      - name: Test PUBLIC privileges in an in-memory PostgreSQL 17 database
+        shell: bash
+        run: |
+          npm install --prefix "$RUNNER_TEMP/core43-acl" --no-audit --no-fund --ignore-scripts @electric-sql/pglite@0.3.15
+          NODE_PATH="$RUNNER_TEMP/core43-acl/node_modules" node --test scripts/test_core43_cal06_public_acl.cjs
+  rehearsal-export:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      digest: ${{ steps.fixture.outputs.digest }}
+      root-fingerprint: ${{ steps.fixture.outputs.root-fingerprint }}
+      artifact-name: ${{ steps.fixture.outputs.artifact-name }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Sign synthetic package on producer VM
+        id: fixture
+        shell: bash
+        run: |
+          pins=$(node --experimental-sqlite scripts/core43_cal14_rehearsal.cjs prepare "$RUNNER_TEMP/cal14-exchange")
+          digest=$(jq -er .digest <<< "$pins")
+          root_fingerprint=$(jq -er .rootFingerprint <<< "$pins")
+          echo "digest=$digest" >> "$GITHUB_OUTPUT"
+          echo "root-fingerprint=$root_fingerprint" >> "$GITHUB_OUTPUT"
+          echo "artifact-name=cal14-synthetic-${GITHUB_RUN_ATTEMPT}" >> "$GITHUB_OUTPUT"
+      - name: Upload synthetic package and public keys only
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.fixture.outputs.artifact-name }}
+          path: |
+            ${{ runner.temp }}/cal14-exchange/bundle.json
+            ${{ runner.temp }}/cal14-exchange/registry.json
+            ${{ runner.temp }}/cal14-exchange/root-public.pem
+          if-no-files-found: error
+          retention-days: 1
+  rehearsal-receive:
+    if: github.event_name == 'pull_request'
+    needs: rehearsal-export
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Receive synthetic package on separate VM
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.rehearsal-export.outputs.artifact-name }}
+          path: ${{ runner.temp }}/cal14-received
+      - name: Verify pins, lose the reply and reopen the coordinator
+        shell: bash
+        env:
+          CAL14_DIGEST: ${{ needs.rehearsal-export.outputs.digest }}
+          CAL14_ROOT_FINGERPRINT: ${{ needs.rehearsal-export.outputs.root-fingerprint }}
+        run: |
+          node --experimental-sqlite scripts/core43_cal14_rehearsal.cjs rehearse \
+            "$RUNNER_TEMP/cal14-received" "$CAL14_DIGEST" "$CAL14_ROOT_FINGERPRINT"
+      - name: Verify mTLS between two isolated network namespaces
+        run: bash scripts/core43_cal15_netns.sh
+  dry-run:
+    # Keep disabled until the hosted role grants and JWT issuer are verified.
+    if: >-
+      false &&
+      (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') &&
+      github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    needs: unit-tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Restore last diagnostic ledger (GitHub artifacts only)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CORE43_CAL04_LEDGER_PATH: ${{ runner.temp }}/core43-cal04-ledger.json
+          CORE43_CAL04_BOOTSTRAP_LEDGER: ${{ inputs.bootstrap_ledger }}
+        shell: bash
+        run: bash scripts/core43_cal04_restore_ledger.sh
+      - name: Read-only diagnostic report
+        env:
+          CORE43_CAL04_LEDGER_PATH: ${{ runner.temp }}/core43-cal04-ledger.json
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.CORE43_SUPABASE_PUBLISHABLE_KEY }}
+          SUPABASE_READONLY_TOKEN: ${{ secrets.CORE43_SUPABASE_READONLY_TOKEN }}
+        shell: bash
+        run: |
+          if [[ -z "$SUPABASE_URL" || -z "$SUPABASE_PUBLISHABLE_KEY" || -z "$SUPABASE_READONLY_TOKEN" ]]; then
+            echo "Missing read credentials: dry-run unavailable" >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          node scripts/core43_cal04_scheduled_dryrun.cjs > core43-cal04-report.json
+          node -e 'const r=require("./core43-cal04-report.json"); console.log("Checked: "+r.checked+", ready: "+r.ready+", duplicates: "+r.duplicates+", skipped: "+r.skipped+", writes: "+r.databaseWrites)' >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload diagnostic artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: core43-cal04-readonly-report
+          path: core43-cal04-report.json
+          if-no-files-found: error
+          retention-days: 7
