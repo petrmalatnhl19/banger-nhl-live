@@ -650,22 +650,22 @@
         [
           "Cole Caufield",
           "Nick Suzuki",
-          "Juraj Slafkovsky"
+          "Alexandre Texier"
         ],
         [
           "Zachary Bolduc",
           "Phillip Danault",
-          "Alexandre Texier"
-        ],
-        [
-          "Brett Berard",
-          "Jake Evans",
-          "Owen Beck"
+          "Kirby Dach"
         ],
         [
           "Alex Newhook",
+          "Jake Evans",
+          "Juraj Slafkovsky"
+        ],
+        [
+          "Brett Berard",
           "Oliver Kapanen",
-          "Kirby Dach"
+          "Owen Beck"
         ]
       ],
       "defense": [
@@ -683,14 +683,14 @@
         ]
       ],
       "goalies": [
-        "Jacob Fowler",
-        "Jakub Dobes"
+        "Jakub Dobes",
+        "Jacob Fowler"
       ],
-      "injured": "Chris Kreider (lower body), Josh Anderson (lower body), Mike Matheson (lower body), Samuel Montembeault (lower body), Ivan Demidov (lower body)",
-      "scratched": "David Reinbacher, Florian Xhekaj",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-18T19:57:00+00:00",
-      "asOf": "2026-11-18",
+      "injured": "Chris Kreider (lower body), Josh Anderson (lower body), Samuel Montembeault (lower body), Ivan Demidov (lower body)",
+      "scratched": "David Reinbacher, Florian Xhekaj, Mike Matheson",
+      "source": "https://www.nhl.com/news/montreal-canadiens-carolina-hurricanes-game-preview-november-19-2026",
+      "publishedAt": "2026-11-19T14:32:00+00:00",
+      "asOf": "2026-11-19",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -892,8 +892,8 @@
       ],
       "injured": "Anthony Mantha (throat), Johnathan Kovacevic (ankle sprain)",
       "scratched": "Amadeus Lombardi, Anton Silaev, Vladislav Kolyachonok",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-18T19:57:00+00:00",
+      "source": "https://www.nhl.com/news/montreal-canadiens-new-jersey-devils-game-preview-november-18-2026",
+      "publishedAt": "2026-11-18T17:39:47.792000+00:00",
       "asOf": "2026-11-18",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1510,14 +1510,14 @@
           "Jackson Blake"
         ],
         [
-          "Seth Jarvis",
+          "Jordan Martinook",
           "Jordan Staal",
-          "Jordan Martinook"
+          "Seth Jarvis"
         ],
         [
           "Taylor Hall",
           "Mark Jankowski",
-          "Jesperi Kotkaniemi"
+          "Eric Robinson"
         ]
       ],
       "defense": [
@@ -1538,11 +1538,11 @@
         "Pyotr Kochetkov",
         "Brandon Bussi"
       ],
-      "injured": "",
-      "scratched": "Eric Robinson, Juuso Valimaki, Mike Reilly, Nicolas Deslauriers, Cayden Primeau",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-14T20:11:00+00:00",
-      "asOf": "2026-11-14",
+      "injured": "None",
+      "scratched": "Juuso Valimaki, Jesperi Kotkaniemi, Nicolas Deslauriers",
+      "source": "https://www.nhl.com/news/montreal-canadiens-carolina-hurricanes-game-preview-november-19-2026",
+      "publishedAt": "2026-11-19T14:32:00+00:00",
+      "asOf": "2026-11-19",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
