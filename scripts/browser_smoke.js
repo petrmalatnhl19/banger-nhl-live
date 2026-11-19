@@ -98,7 +98,11 @@ const {play, game} = require('./commentary_fixture.cjs');
     play(5, 'goal', '04:15', {eventOwnerTeamId: 1, scoringPlayerId: 10, awayScore: 1, homeScore: 0})],
     {awayTeam: {...playByPlay.awayTeam, score: 1}});
   await page.locator('#commentaryRefresh').click();
-  await page.waitForFunction(() => /GÓL|BRANKA/.test(window.voiceTrace.at(-1)?.text));
+  await page.waitForFunction(() => /GÓL|BRANKA|Góóóól/.test(window.voiceTrace.at(-1)?.text));
+  if (/Góóóól/.test((await page.evaluate(() => window.voiceTrace.at(-1)?.text)) || '')) {
+    await page.evaluate(() => speechSynthesis.finish());
+    await page.waitForFunction(() => /GÓL|BRANKA/.test(window.voiceTrace.at(-1)?.text));
+  }
   assert.equal(await page.evaluate(() => window.voiceTrace.at(-2)), 'cancel', 'A goal preempts routine narration');
 
   // NHL may edit the play list before publishing the revised scoreboard.
