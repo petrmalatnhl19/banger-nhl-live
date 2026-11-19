@@ -1,23 +1,14 @@
 {
-  "updatedAt": "2026-11-19T07:47:29.841625+00:00",
+  "updatedAt": "2026-11-19T10:44:10.068766+00:00",
   "articles": [
-    {
-      "title": "NASTARTOVALI SE",
-      "url": "https://www.nhl.com/cs/news/bruins-se-nastartovali",
-      "language": "cs",
-      "source": "NHL.com",
-      "headline": "Pastrňák zastavil útlum Bruins, porazili Detroit",
-      "publishedAt": "2026-11-19T07:01:14.364000+00:00",
-      "description": "Český útočník si připsal gól a asistenci a proti Red Wings dokázal bodovat už jedenáctkrát v řadě"
-    },
     {
       "title": "Hellebuyck zůstal krok od rekordu Gólmanova snaha o osmou výhru v dresu Devils skončila neúspěchem, po výsledku 3:2 slavili Canadiens 19. lis 2026",
       "url": "https://www.nhl.com/cs/news/hellebuyck-v-dresu-devils-poprve-neuspel",
       "language": "cs",
       "source": "NHL.com",
       "headline": "Hellebuyck zůstal krok od rekordu",
-      "publishedAt": "2026-11-19T07:26:42.685000+00:00",
-      "description": "Gólmanova snaha o osmou výhru v dresu Devils skončila neúspěchem, po výsledku 3:2 slavili Canadiens"
+      "description": "Gólmanova snaha o osmou výhru v dresu Devils skončila neúspěchem, po výsledku 3:2 slavili Canadiens",
+      "publishedAt": "2026-11-19T07:26:42.685000+00:00"
     },
     {
       "title": "Hokejová pošta: Bude Gudas rekordmanem v hitech? Michael Langr z NHL.com/cs odpovídá na dotazy čtenářů od floridského brouska až po oblíbené dresy 18. lis 2026",
@@ -90,6 +81,15 @@
       "headline": "FORČEK: Smysl mi dává Indianapolis, říká Kotalík o expanzi NHL",
       "description": "36. díl podcastu NHL.com/cs a Livesportu s někdejším útočníkem o útoku McDavida na rekord i rozšiřování NHL",
       "publishedAt": "2026-10-22T15:20:25.443000+00:00"
+    },
+    {
+      "title": "Pastrňák zastavil útlum Bruins, porazili Detroit 19. lis 2026",
+      "url": "https://www.nhl.com/cs/news/bruins-se-nastartovali",
+      "language": "cs",
+      "source": "NHL.com",
+      "headline": "Pastrňák zastavil útlum Bruins, porazili Detroit",
+      "description": "Český útočník si připsal gól a asistenci a proti Red Wings dokázal bodovat už jedenáctkrát v řadě",
+      "publishedAt": "2026-11-19T07:01:14.364000+00:00"
     },
     {
       "title": "Bedard nedohrál kvůli zranění v horní části těla 18. lis 2026",
@@ -304,8 +304,8 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "Mammoth, Avalanche stoke rivalry ahead of Winter Classic",
-      "publishedAt": "2026-11-19T07:44:23.520000+00:00",
-      "description": "Utah defeats Colorado in chippy game that features big hits, multiple fights"
+      "description": "Utah defeats Colorado in chippy game that features big hits, multiple fights",
+      "publishedAt": "2026-11-19T07:44:23.520000+00:00"
     },
     {
       "title": "Pastrnak has goal, assist, Bruins end 3-game skid Swayman makes 20 saves for Boston; Detroit has lost six of seven Nov 19, 2026",
@@ -331,8 +331,8 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "NHL Awards leader one-quarter into season, according to Dan Rosen",
-      "publishedAt": "2026-11-18T15:42:00+00:00",
-      "description": "National Hockey List looks at favorites for Calder, Adams, Vezina, Norris, Hart"
+      "description": "National Hockey List looks at favorites for Calder, Adams, Vezina, Norris, Hart",
+      "publishedAt": "2026-11-18T15:42:00+00:00"
     },
     {
       "title": "Schaefer dazzles Isles with 1st NHL hat trick Nov 18, 2026",
@@ -443,15 +443,6 @@
       "publishedAt": "2026-11-10T05:00:00+00:00"
     },
     {
-      "title": "Fantasy hockey top 50 defenseman rankings Nov 18, 2026",
-      "url": "https://www.nhl.com/news/topic/Fantasy/nhl-fantasy-hockey-top-50-defenseman-rankings-pools-282830728",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Fantasy hockey top 50 defenseman rankings",
-      "description": "Most valuable options at position in standard leagues; new podcast episodes",
-      "publishedAt": "2026-11-07T14:00:00+00:00"
-    },
-    {
       "title": "Fantasy hockey top 200 player rankings for 2026-27 Nov 18, 2026",
       "url": "https://www.nhl.com/news/topic/fantasy/nhl-fantasy-hockey-top-250-200-rankings-drafts-players-big-board-281505474",
       "language": "en",
@@ -459,6 +450,15 @@
       "headline": "Fantasy hockey top 200 player rankings for 2026-27",
       "description": "Most valuable overall options for standard leagues, impact of Hellebuyck trade on goalie landscape",
       "publishedAt": "2026-11-09T14:00:00+00:00"
+    },
+    {
+      "title": "Fantasy hockey top 50 defenseman rankings Nov 18, 2026",
+      "url": "https://www.nhl.com/news/topic/Fantasy/nhl-fantasy-hockey-top-50-defenseman-rankings-pools-282830728",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Fantasy hockey top 50 defenseman rankings",
+      "description": "Most valuable options at position in standard leagues; new podcast episodes",
+      "publishedAt": "2026-11-07T14:00:00+00:00"
     },
     {
       "title": "NHL picks, props, fantasy projections for today Nov 18, 2026",
