@@ -33,6 +33,8 @@ jobs:
         run: node --test .github/scripts/test-data-06.cjs
       - name: DATA-07 source transparency
         run: node --test .github/scripts/test-data-07.cjs
+      - name: DATA-08 coverage integrity and partial exports
+        run: node --test .github/scripts/test-data-08.cjs
       - name: Validate local scripts and HTML entrypoint
         shell: bash
         run: |
