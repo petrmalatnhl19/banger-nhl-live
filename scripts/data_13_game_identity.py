@@ -5,13 +5,19 @@ from collections import defaultdict
 def validate_game_claims(records, games):
     """Return accepted claims and diagnostics; fail closed on ambiguous games."""
     indexed = {}
+    ambiguous_ids = set()
     for game in games:
         game_id = str(game.get("gameId", ""))
         date = game.get("date")
         home = game.get("home")
         away = game.get("away")
         if game_id and date and home and away and home != away:
-            indexed[game_id] = (date, home, away)
+            identity = (date, home, away)
+            if game_id in indexed and indexed[game_id] != identity:
+                ambiguous_ids.add(game_id)
+            indexed[game_id] = identity
+    for game_id in ambiguous_ids:
+        indexed.pop(game_id, None)
     grouped = defaultdict(list)
     issues = []
     for claim in records:
@@ -21,12 +27,18 @@ def validate_game_claims(records, games):
         opponent = claim.get("opponent")
         venue = claim.get("venue")
         if not identity:
-            issues.append({"gameId": game_id, "reason": "unknown_game"})
+            issues.append({"gameId": game_id, "reason": "ambiguous_game" if game_id in ambiguous_ids else "unknown_game"})
             continue
         date, home, away = identity
         expected = (home, away) if venue == "home" else (away, home) if venue == "away" else (None, None)
         if claim.get("date") != date or (team, opponent) != expected:
             issues.append({"gameId": game_id, "team": team, "reason": "game_identity_mismatch"})
+            continue
+        if claim.get("status") not in ("projected", "confirmed"):
+            issues.append({"gameId": game_id, "team": team, "reason": "invalid_status"})
+            continue
+        if not isinstance(claim.get("goalie"), str) or not claim["goalie"].strip():
+            issues.append({"gameId": game_id, "team": team, "reason": "missing_goalie"})
             continue
         grouped[(game_id, team)].append(claim)
     accepted = []
