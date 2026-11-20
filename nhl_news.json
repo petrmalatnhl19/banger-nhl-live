@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-20T03:38:18.367717+00:00",
+  "updatedAt": "2026-11-20T04:44:20.644268+00:00",
   "articles": [
     {
       "title": "To nevypadá dobře. Bedardovi hrozí operace Kapitán Blackhawks se zranil v úterním zápase proti Torontu, vynechá přinejmenším čtyři zápasy 19. lis 2026",
@@ -295,17 +295,26 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "Hutson's second of game lifts Canadiens to OT victory against Hurricanes",
-      "publishedAt": "2026-11-20T03:01:00+00:00",
-      "description": "Defenseman wins it at 38 seconds, Dobes makes 26 saves for Montreal"
+      "description": "Defenseman wins it at 38 seconds, Dobes makes 26 saves for Montreal",
+      "publishedAt": "2026-11-20T03:01:00+00:00"
     },
     {
-      "title": "Kings win in shootout, hand Leafs 8th straight loss Los Angeles rallies from three-goal deficit; Matthews has goal, assist for Toronto Nov 20, 2026",
+      "title": "Morrissey's OT goal lifts Jets past Islanders Defenseman scores first of season at 1:58 for Winnipeg, which has won seven of eight Nov 20, 2026",
+      "url": "https://www.nhl.com/news/new-york-islanders-winnipeg-jets-game-recap-november-19-2026",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Morrissey's OT goal lifts Jets past Islanders",
+      "description": "Defenseman scores first of season at 1:58 for Winnipeg, which has won seven of eight",
+      "publishedAt": "2026-11-20T02:53:44.036000+00:00"
+    },
+    {
+      "title": "Kings win in shootout, hand Leafs 8th straight loss Nov 20, 2026",
       "url": "https://www.nhl.com/news/los-angeles-kings-toronto-maple-leafs-game-recap-november-19-2026",
       "language": "en",
       "source": "NHL.com",
       "headline": "Kings win in shootout, hand Maple Leafs eighth straight loss",
-      "publishedAt": "2026-11-20T03:13:35.829000+00:00",
-      "description": "Los Angeles rallies from three-goal deficit; Matthews has goal, assist for Toronto"
+      "description": "Los Angeles rallies from three-goal deficit; Matthews has goal, assist for Toronto",
+      "publishedAt": "2026-11-20T03:13:35.829000+00:00"
     },
     {
       "title": "Snuggerud scores 2, Thomas has 3 assists in Blues win Nov 20, 2026",
@@ -313,17 +322,17 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "Snuggerud scores twice in Blues win against Penguins",
-      "publishedAt": "2026-11-20T03:01:19.620000+00:00",
-      "description": "Thomas has three assists for St. Louis; Rakell gets two goals for Pittsburgh"
+      "description": "Thomas has three assists for St. Louis; Rakell gets two goals for Pittsburgh",
+      "publishedAt": "2026-11-20T03:01:19.620000+00:00"
     },
     {
-      "title": "Morrissey's OT goal lifts Jets past Islanders Nov 20, 2026",
-      "url": "https://www.nhl.com/news/new-york-islanders-winnipeg-jets-game-recap-november-19-2026",
+      "title": "Hughes, Kaprizov, Wild keep streaking, top Flames Nov 20, 2026",
+      "url": "https://www.nhl.com/news/minnesota-wild-calgary-flames-game-recap-november-19-2026",
       "language": "en",
       "source": "NHL.com",
-      "headline": "Morrissey's OT goal lifts Jets past Islanders",
-      "publishedAt": "2026-11-20T02:53:44.036000+00:00",
-      "description": "Defenseman scores first of season at 1:58 for Winnipeg, which has won seven of eight"
+      "headline": "Hughes, Kaprizov, Wild keep streaking in win against Flames",
+      "publishedAt": "2026-11-20T04:00:00+00:00",
+      "description": "Defenseman, forward each has points in 13 straight games, Minnesota 11-0-2 in past 13"
     },
     {
       "title": "Flyers rally from down 3, stun Senators in overtime Nov 20, 2026",
@@ -331,26 +340,17 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "Konecny scores in OT, Flyers rally from three down to stun Senators",
-      "publishedAt": "2026-11-20T03:08:00+00:00",
-      "description": "Forward has four points; Ottawa extends point streak to seven games despite loss"
+      "description": "Forward has four points; Ottawa extends point streak to seven games despite loss",
+      "publishedAt": "2026-11-20T03:08:00+00:00"
     },
     {
-      "title": "Doughty confident he’ll sign new deal with Kings Nov 19, 2026",
+      "title": "Doughty confident he’ll sign new deal with Kings Nov 20, 2026",
       "url": "https://www.nhl.com/news/drew-doughty-confident-he-will-sign-new-contract-with-kings",
       "language": "en",
       "source": "NHL.com",
       "headline": "Doughty confident he’ll sign new contract with Kings before becoming free agent",
-      "publishedAt": "2026-11-19T19:30:00+00:00",
-      "description": "Captain says he’s doesn’t ‘want to go anywhere’"
-    },
-    {
-      "title": "Bedard may need surgery, no timeline for return Nov 19, 2026",
-      "url": "https://www.nhl.com/news/blackhawks-connor-bedard-may-need-shoulder-surgery",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Bedard may need surgery for Blackhawks, will miss upcoming road trip",
-      "description": "Captain injured during face-off against Maple Leafs on Tuesday",
-      "publishedAt": "2026-11-19T17:00:00+00:00"
+      "description": "Captain says he’s doesn’t ‘want to go anywhere’",
+      "publishedAt": "2026-11-19T19:30:00+00:00"
     },
     {
       "title": "Mammoth, Avs stoke rivalry ahead of Winter Classic Nov 19, 2026",
@@ -362,22 +362,13 @@
       "publishedAt": "2026-11-19T07:44:23.520000+00:00"
     },
     {
-      "title": "McDavid, Draisaitl are works of art at Edmonton grocery Nov 20, 2026",
-      "url": "https://www.nhl.com/news/connor-mcdavid-leon-draisaitl-works-of-art-at-edmonton-grocery",
+      "title": "Blue Jackets get win in Bowness’ return to bench Nov 20, 2026",
+      "url": "https://www.nhl.com/news/columbus-blue-jackets-chicago-blackhawks-game-recap-november-19-2026",
       "language": "en",
       "source": "NHL.com",
-      "headline": "McDavid, Draisaitl are works of art at Edmonton grocery",
-      "description": "Oilers forwards featured in massive display that took three weeks to construct from soda boxes",
-      "publishedAt": "2026-11-20T01:19:37.256000+00:00"
-    },
-    {
-      "title": "Quinn scores twice, Sabres defeat Capitals to end five-game skid Nov 20, 2026",
-      "url": "https://www.nhl.com/news/buffalo-sabres-washington-capitals-game-recap-november-19-2026",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Quinn scores twice, Sabres defeat Capitals to end five-game skid",
-      "publishedAt": "2026-11-20T03:07:49.965000+00:00",
-      "description": "Dahlin has goal, assist for Buffalo; Ovechkin sets assist record for Washington"
+      "headline": "Blue Jackets defeat Blackhawks in Bowness’ return to bench",
+      "publishedAt": "2026-11-20T04:40:00+00:00",
+      "description": "Coach missed previous three games with health issue for Columbus, which ends five-game skid"
     },
     {
       "title": "Projected lineups, starting goalies for today Nov 19, 2026",
@@ -628,8 +619,8 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "Rory McIlroy cheers on Maple Leafs, reads starting lineup in locker room",
-      "publishedAt": "2026-11-20T02:56:00+00:00",
-      "description": "Six-time PGA champion attends game at Scotiabank Arena"
+      "description": "Six-time PGA champion attends game at Scotiabank Arena",
+      "publishedAt": "2026-11-20T02:56:00+00:00"
     },
     {
       "title": "Hockey Fights Cancer daily digest Nov 20, 2026",
@@ -637,8 +628,8 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "Hockey Fights Cancer daily digest",
-      "publishedAt": "2026-11-20T02:34:00+00:00",
-      "description": "Latest news, images from teams, players around the NHL"
+      "description": "Latest news, images from teams, players around the NHL",
+      "publishedAt": "2026-11-20T02:34:00+00:00"
     },
     {
       "title": "Flyers pose for Gritty’s ‘90’s-inspired calendar Nov 19, 2026",
@@ -646,8 +637,17 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "Flyers pose for Gritty’s ‘90’s-inspired calendar",
-      "publishedAt": "2026-11-19T23:26:00+00:00",
-      "description": "Team sport retro outfits, take awkward pictures with mascot"
+      "description": "Team sport retro outfits, take awkward pictures with mascot",
+      "publishedAt": "2026-11-19T23:26:00+00:00"
+    },
+    {
+      "title": "Flames, families support Huberdeau in first game back since surgery Nov 19, 2026",
+      "url": "https://www.nhl.com/news/topic/short-shifts/flames-support-jonathan-huberdeau-in-first-game-back",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Flames, families support Huberdeau in first game back since surgery",
+      "publishedAt": "2026-11-19T02:21:00+00:00",
+      "description": "Backlund, Hanley, Strome cheer on forward during AHL assignment"
     }
   ]
 }
