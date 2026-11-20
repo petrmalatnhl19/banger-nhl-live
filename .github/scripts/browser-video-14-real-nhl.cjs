@@ -30,7 +30,7 @@ const id=process.env.NHL_VIDEO_GAME_ID||'2026020335';
    const root=document.createElement('div');root.id='video14-real';document.body.appendChild(root);
    BangerHighlightsUI.render(root,clips,document);
    const anchors=[...root.querySelectorAll('a')];
-   return {goals:mapped.reduce((n,p)=>n+p.goals.length,0),validClips:clips.filter(c=>c.status==='link-available').length,rendered:anchors.length,allOfficial:anchors.every(a=>a.protocol==='https:'&&/^(?:[a-z0-9-]+\\.)*(?:nhl\\.com|nhle\\.com)$/.test(new URL(a.href).hostname)&&a.target==='_blank'&&a.rel.includes('noopener')&&a.rel.includes('noreferrer')),firstEventIds:clips.slice(0,3).map(c=>c.eventId)};
+   return {goals:mapped.reduce((n,p)=>n+p.goals.length,0),validClips:clips.filter(c=>c.status==='link-available').length,rendered:anchors.length,allOfficial:anchors.every(a=>a.protocol==='https:'&&BangerLiveHighlights.safeUrl(a.href)===a.href&&a.target==='_blank'&&a.rel.includes('noopener')&&a.rel.includes('noreferrer')),firstEventIds:clips.slice(0,3).map(c=>c.eventId)};
   },{id,landing});
   assert.equal(report.goals,goals.length,'Goal count mismatch');
   assert.equal(report.rendered,report.validClips,'Rendered links differ from official metadata');
