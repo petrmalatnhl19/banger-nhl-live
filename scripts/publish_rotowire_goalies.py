@@ -3,6 +3,13 @@ import datetime
 import json
 from pathlib import Path
 
+try:
+    from scripts.data_13_game_identity import reconcile_source_claims
+except ModuleNotFoundError as exc:
+    if exc.name != "scripts":
+        raise
+    from data_13_game_identity import reconcile_source_claims
+
 ROOT = Path(__file__).resolve().parent.parent
 def read(name):
     with (ROOT / name).open(encoding="utf-8") as file:
@@ -74,6 +81,35 @@ def main():
             continue
         abbr = item["team"]
         existing = entries.get(abbr)
+        # DATA-13: compare claims only when both reference the same verified game.
+        # Older specialist records may lack gameId; retain legacy behavior for those.
+        if existing and existing.get("gameId") is not None:
+            previous = {"gameId": existing["gameId"], "date": existing.get("date"),
+                        "team": abbr, "goalie": existing.get("name"),
+                        "status": existing.get("status"),
+                        "confirmationBasis": existing.get("confirmationBasis"),
+                        "confirmationEvidence": existing.get("confirmationEvidence")}
+            incoming = {"gameId": item["gameId"], "date": item["date"],
+                        "team": abbr, "goalie": item["goalie"],
+                        "status": item["status"],
+                        "confirmationBasis": item.get("confirmationBasis"),
+                        "confirmationEvidence": item.get("confirmationEvidence")}
+            resolved, reason = reconcile_source_claims([previous, incoming])
+            if reason:
+                conflicts.append({"date": today, "team": abbr, "gameId": item["gameId"],
+                                  "reason": "cross_source_" + reason})
+                # Do not discard an already evidenced confirmation on disagreement.
+                if (existing.get("status") == "confirmed" and existing.get("confirmationBasis") == "explicit_pregame_report" and existing.get("confirmationEvidence")):
+                    continue
+                entries.pop(abbr, None)
+                continue
+            if resolved["status"] == "confirmed" and existing.get("status") == "confirmed":
+                # Keep the original source and its confirmation evidence.
+                continue
+            item = {**item, "status": resolved["status"],
+                    **({"confirmationBasis": resolved["confirmationBasis"],
+                        "confirmationEvidence": resolved["confirmationEvidence"]}
+                       if resolved["status"] == "confirmed" else {})}
         # An existing evidenced confirmation must never be replaced by a projection.
         if existing and existing.get("status") == "confirmed" and existing.get("confirmationEvidence") and item["status"] != "confirmed":
             continue
@@ -88,8 +124,10 @@ def main():
                          "date": today, "source": diagnostic["source"],
                          "sourceLabel": "RotoWire", "checkedAt": now.isoformat(),
                          "gameId": item["gameId"],
-                         **({"confirmationEvidence": item["confirmationEvidence"]}
-                            if item["status"] == "confirmed" and item.get("confirmationEvidence") else {})}
+                         **({"confirmationBasis": item["confirmationBasis"],
+                             "confirmationEvidence": item["confirmationEvidence"]}
+                            if item["status"] == "confirmed" and item.get("confirmationEvidence")
+                            and item.get("confirmationBasis") == "explicit_pregame_report" else {})}
     confirmed_teams = {item["team"] for item in valid if item["date"] == today and item["status"] == "confirmed"}
     # A verified confirmation resolves older projection disagreements for that team.
     starters["conflicts"] = [issue for issue in starters.get("conflicts", [])
