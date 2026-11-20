@@ -162,6 +162,9 @@ jobs:
         run: node .github/scripts/test-live-monitor.cjs
       - name: VIDEO-13 Android-sized Chromium official goal links
         run: node .github/scripts/browser-video-13-mobile.cjs
+      - name: VIDEO-14 real NHL landing mobile integration (informational)
+        continue-on-error: true
+        run: node .github/scripts/browser-video-14-real-nhl.cjs
       - name: Test application startup in Chromium
         run: node .github/scripts/browser-smoke.cjs
       - name: Test FAN-08 favorite team picker on 360, 390 and 430 px
