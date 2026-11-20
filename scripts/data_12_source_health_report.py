@@ -13,6 +13,10 @@ def summarize(starters, probe=None, diagnostic=None):
                         "usableStarterClaims": "not_assessed",
                         "error": item.get("error")})
     matched = (diagnostic or {}).get("matchedCount")
+    dated_games = (diagnostic or {}).get("matches", [])
+    dated_games = dated_games if isinstance(dated_games,list) else []
+    export_day = starters.get("date")
+    today_matches = sum(isinstance(item,dict) and item.get("date")==export_day for item in dated_games) if export_day else "not_assessed"
     return {
         "exportStatus": starters.get("status", "unknown"),
         "publishedTeams": len(teams),
@@ -21,6 +25,7 @@ def summarize(starters, probe=None, diagnostic=None):
         "sourceErrors": starters.get("sourceErrors", []),
         "conflicts": len(starters.get("conflicts", [])),
         "rotowireScheduleMatchedCandidates": matched if isinstance(matched,int) else "not_assessed",
+        "rotowireCandidatesForExportDay": today_matches,
         "sourceConnectivity": sources,
         "note": "HTTP reachability does not establish starter accuracy or reuse rights."
     }
