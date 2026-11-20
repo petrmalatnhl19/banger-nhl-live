@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-11-20T02:39:57.094274+00:00",
-  "teams": 31,
+  "generatedAt": "2026-11-20T03:39:02.537467+00:00",
+  "teams": 32,
   "activeSourceCounts": {
-    "nhl.com": 31
+    "nhl.com": 32
   },
   "sources": {
     "nhl.com": {
       "role": "primary_projection_source",
-      "usedTeams": 31
+      "usedTeams": 32
     },
     "fantasy_roundup": {
       "role": "fallback_only",
@@ -214,6 +214,13 @@
     },
     {
       "team": "sabres",
+      "provider": "nhl.com",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-19T20:24:00+00:00",
+      "sourceType": null
+    },
+    {
+      "team": "senators",
       "provider": "nhl.com",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "publishedAt": "2026-11-19T20:24:00+00:00",
