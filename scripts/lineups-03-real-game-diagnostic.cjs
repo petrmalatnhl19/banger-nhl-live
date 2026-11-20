@@ -21,6 +21,7 @@ const {candidateStrengthIntervals}=require('./lineups_candidate_strength_interva
 const {candidateStrengthUnits}=require('./lineups_candidate_strength_units.cjs');
 const {annotateStrengthUnits}=require('./lineups_candidate_strength_names.cjs');
 const {summarizeSpecialTeamsCandidates}=require('./lineups_special_teams_candidate_summary.cjs');
+const {auditCandidateCoverage}=require('./lineups_candidate_coverage_audit.cjs');
 const gameId=process.argv[2]||'2026020335';
 if(!/^\d{10}$/.test(gameId)){console.error('Invalid game ID');process.exitCode=2;}
 else {
@@ -60,13 +61,14 @@ else {
    const namedStrengthSummary={status:namedStrengthUnits.status,verifiedUnits:false,teams:(namedStrengthUnits.teams||[]).map(t=>({teamId:t.teamId,byStrength:Object.fromEntries([...new Set(t.units.map(u=>u.strength))].map(k=>[k,t.units.filter(u=>u.strength===k).slice(0,3)]))}))};
    const specialTeamsCandidates=boxscore.awayTeam&&boxscore.homeTeam?summarizeSpecialTeamsCandidates(namedStrengthUnits,boxscore.awayTeam.id,boxscore.homeTeam.id):{status:'unverified',teams:[],publishable:false,verifiedUnits:false};
    const specialTeamsSummary={status:specialTeamsCandidates.status,publishable:false,verifiedUnits:false,teams:(specialTeamsCandidates.teams||[]).map(t=>({teamId:t.teamId,PP:t.PP.slice(0,3),PK:t.PK.slice(0,3),ppCandidateCount:t.PP.length,pkCandidateCount:t.PK.length}))};
+   const candidateCoverage=auditCandidateCoverage(strengthIntervalCandidates.candidates,strengthUnits,boxscore.awayTeam?.id,boxscore.homeTeam?.id);
    const boxscoreShape=boxscore.fetchError?{fetchStatus:'failed'}:{fetchStatus:'ok',topLevelKeys:Object.keys(boxscore).sort(),playerByGameKeys:Object.keys(boxscore.playerByGameStats||{}).sort(),playerByGameTypes:Object.fromEntries(Object.entries(boxscore.playerByGameStats||{}).map(([key,value])=>[key,Array.isArray(value)?'array':typeof value]))};
    const data=Array.isArray(payload.data)?payload.data:[];
    const periods=[...new Set(data.map(x=>x.period))].sort();
    const teams=[...new Set(data.map(x=>x.teamId))].sort();
    const players=new Set(data.map(x=>x.playerId));
    const result={gameId,endpoint:'NHL Stats shiftcharts',http:'200',reportedTotal:payload.total??null,rawRows:data.length,teams,players:players.size,periods,
-     accepted:parsed.shifts.length,rejected:parsed.rejected,rejectionReasons:rejectionAudit.reasons,normalizationDetails:rejectionAudit.normalizationDetails,longShiftSummary:rejectionAudit.longShiftSummary,longShiftRoleAudit:roleAudit,skaterShiftAudit:{status:skaterAudit.status,skaterShiftCount:skaterAudit.skaterShiftCount??0,goalieShiftCount:skaterAudit.goalieShiftCount??0,rejected:skaterAudit.rejected??0,verifiedUnits:false},occupancyAudit,fiveSkaterSummary,simultaneousFiveSummary,fiveUnitsSummary,namedFiveSummary,situationEvidence,eventStrengthAgreement,strengthBoundaryAudit,strengthMismatchTypes,boundaryAlternatives,strengthEvidence,strengthIntervalSummary,strengthUnitsSummary,namedStrengthSummary,specialTeamsSummary,boxscoreShape,classificationMatchesParser:rejectionAudit.accepted===parsed.shifts.length&&rejectionAudit.rejected===parsed.rejected,status:parsed.status,
+     accepted:parsed.shifts.length,rejected:parsed.rejected,rejectionReasons:rejectionAudit.reasons,normalizationDetails:rejectionAudit.normalizationDetails,longShiftSummary:rejectionAudit.longShiftSummary,longShiftRoleAudit:roleAudit,skaterShiftAudit:{status:skaterAudit.status,skaterShiftCount:skaterAudit.skaterShiftCount??0,goalieShiftCount:skaterAudit.goalieShiftCount??0,rejected:skaterAudit.rejected??0,verifiedUnits:false},occupancyAudit,fiveSkaterSummary,simultaneousFiveSummary,fiveUnitsSummary,namedFiveSummary,situationEvidence,eventStrengthAgreement,strengthBoundaryAudit,strengthMismatchTypes,boundaryAlternatives,strengthEvidence,strengthIntervalSummary,strengthUnitsSummary,namedStrengthSummary,specialTeamsSummary,candidateCoverage,boxscoreShape,classificationMatchesParser:rejectionAudit.accepted===parsed.shifts.length&&rejectionAudit.rejected===parsed.rejected,status:parsed.status,
      verifiedUnits:false,reason:'No verified strength windows or roster/goalie completeness; this diagnostic does not publish PP/PK units.'};
    console.log(JSON.stringify(result,null,2));
    if(parsed.status!=='partial'||!parsed.shifts.length)process.exitCode=3;
