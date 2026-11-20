@@ -18,7 +18,7 @@ function verifyLongShiftRoles(shiftPayload,boxscore,gameId){
   byTeam.set(t.id,{g,s});
  }
  const long=data.filter(r=>Number(r?.gameId)===Number(gameId)&&r?.typeCode===517&&r?.period>=1&&r.period<=3&&typeof r.startTime==='string'&&typeof r.endTime==='string').filter(r=>{
-  const time=x=>{const m=/^(\\d{1,2}):(\\d{2})$/.exec(x);return m&&+m[2]<60?+m[1]*60+ +m[2]:NaN};
+  const time=x=>{const m=/^(\d{1,2}):(\d{2})$/.exec(x);return m&&+m[2]<60?+m[1]*60+ +m[2]:NaN};
   const a=time(r.startTime),b=time(r.endTime);return Number.isFinite(a)&&Number.isFinite(b)&&b<=1200&&b-a>180;
  });
  let goalie=0,skater=0,unknown=0;
