@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T05:49:27.835267+00:00",
+  "generatedAt": "2026-11-20T06:49:17.171064+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -311,6 +311,13 @@
       "candidateForwardLines": 3,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
+      "gameEvidenceExceptions": [
+        {
+          "player": "Trey Taylor",
+          "role": "defense",
+          "basis": "official game boxscore on projection publication date"
+        }
+      ],
       "roleMismatches": [],
       "rejectedLines": [],
       "rejectedPlayerReasons": [],
