@@ -23,6 +23,7 @@ const {annotateStrengthUnits}=require('./lineups_candidate_strength_names.cjs');
 const {summarizeSpecialTeamsCandidates}=require('./lineups_special_teams_candidate_summary.cjs');
 const {auditCandidateCoverage}=require('./lineups_candidate_coverage_audit.cjs');
 const {publicSpecialTeamsView}=require('./lineups_public_special_teams_gate.cjs');
+const {officialSpecialTeamsTime}=require('./lineups_official_special_teams_time.cjs');
 const gameId=process.argv[2]||'2026020335';
 if(!/^\d{10}$/.test(gameId)){console.error('Invalid game ID');process.exitCode=2;}
 else {
@@ -34,7 +35,7 @@ else {
      res.on('end',()=>{try{resolve(JSON.parse(raw))}catch(e){reject(Error('Invalid JSON'))}});
    });req.on('timeout',()=>req.destroy(Error('Timeout')));req.on('error',reject);
  });
- Promise.all([fetchJson(url),fetchJson('https://api-web.nhle.com/v1/gamecenter/'+gameId+'/boxscore').catch(e=>({fetchError:e.message})),fetchJson('https://api-web.nhle.com/v1/gamecenter/'+gameId+'/play-by-play').catch(e=>({fetchError:e.message}))]).then(([payload,boxscore,playByPlay])=>{
+ Promise.all([fetchJson(url),fetchJson('https://api-web.nhle.com/v1/gamecenter/'+gameId+'/boxscore').catch(e=>({fetchError:e.message})),fetchJson('https://api-web.nhle.com/v1/gamecenter/'+gameId+'/play-by-play').catch(e=>({fetchError:e.message})),fetchJson('https://api-web.nhle.com/v1/gamecenter/'+gameId+'/landing').catch(e=>({fetchError:e.message}))]).then(([payload,boxscore,playByPlay,landing])=>{
    const parsed=parseShiftCharts(payload,gameId);
    const rejectionAudit=classifyShiftRows(payload,gameId);
    const roleAudit=boxscore.fetchError?{status:'unverified',reason:'boxscore-fetch-failed'}:verifyLongShiftRoles(payload,boxscore,gameId);
@@ -64,13 +65,15 @@ else {
    const specialTeamsSummary={status:specialTeamsCandidates.status,publishable:false,verifiedUnits:false,teams:(specialTeamsCandidates.teams||[]).map(t=>({teamId:t.teamId,PP:t.PP.slice(0,3),PK:t.PK.slice(0,3),ppCandidateCount:t.PP.length,pkCandidateCount:t.PK.length}))};
    const candidateCoverage=auditCandidateCoverage(strengthIntervalCandidates.candidates,strengthUnits,boxscore.awayTeam?.id,boxscore.homeTeam?.id);
    const publicSpecialTeams=publicSpecialTeamsView(specialTeamsCandidates,candidateCoverage);
+   const officialTime=officialSpecialTeamsTime(landing,boxscore.awayTeam?.id,boxscore.homeTeam?.id);
+   const landingStatsShape={fetchStatus:landing.fetchError?'failed':'ok',teamGameStatsCategories:(landing.summary?.teamGameStats||[]).map(x=>x.category).filter(x=>typeof x==='string'),officialTime};
    const boxscoreShape=boxscore.fetchError?{fetchStatus:'failed'}:{fetchStatus:'ok',topLevelKeys:Object.keys(boxscore).sort(),playerByGameKeys:Object.keys(boxscore.playerByGameStats||{}).sort(),playerByGameTypes:Object.fromEntries(Object.entries(boxscore.playerByGameStats||{}).map(([key,value])=>[key,Array.isArray(value)?'array':typeof value]))};
    const data=Array.isArray(payload.data)?payload.data:[];
    const periods=[...new Set(data.map(x=>x.period))].sort();
    const teams=[...new Set(data.map(x=>x.teamId))].sort();
    const players=new Set(data.map(x=>x.playerId));
    const result={gameId,endpoint:'NHL Stats shiftcharts',http:'200',reportedTotal:payload.total??null,rawRows:data.length,teams,players:players.size,periods,
-     accepted:parsed.shifts.length,rejected:parsed.rejected,rejectionReasons:rejectionAudit.reasons,normalizationDetails:rejectionAudit.normalizationDetails,longShiftSummary:rejectionAudit.longShiftSummary,longShiftRoleAudit:roleAudit,skaterShiftAudit:{status:skaterAudit.status,skaterShiftCount:skaterAudit.skaterShiftCount??0,goalieShiftCount:skaterAudit.goalieShiftCount??0,rejected:skaterAudit.rejected??0,verifiedUnits:false},occupancyAudit,fiveSkaterSummary,simultaneousFiveSummary,fiveUnitsSummary,namedFiveSummary,situationEvidence,eventStrengthAgreement,strengthBoundaryAudit,strengthMismatchTypes,boundaryAlternatives,strengthEvidence,strengthIntervalSummary,strengthUnitsSummary,namedStrengthSummary,specialTeamsSummary,candidateCoverage,publicSpecialTeams,boxscoreShape,classificationMatchesParser:rejectionAudit.accepted===parsed.shifts.length&&rejectionAudit.rejected===parsed.rejected,status:parsed.status,
+     accepted:parsed.shifts.length,rejected:parsed.rejected,rejectionReasons:rejectionAudit.reasons,normalizationDetails:rejectionAudit.normalizationDetails,longShiftSummary:rejectionAudit.longShiftSummary,longShiftRoleAudit:roleAudit,skaterShiftAudit:{status:skaterAudit.status,skaterShiftCount:skaterAudit.skaterShiftCount??0,goalieShiftCount:skaterAudit.goalieShiftCount??0,rejected:skaterAudit.rejected??0,verifiedUnits:false},occupancyAudit,fiveSkaterSummary,simultaneousFiveSummary,fiveUnitsSummary,namedFiveSummary,situationEvidence,eventStrengthAgreement,strengthBoundaryAudit,strengthMismatchTypes,boundaryAlternatives,strengthEvidence,strengthIntervalSummary,strengthUnitsSummary,namedStrengthSummary,specialTeamsSummary,candidateCoverage,publicSpecialTeams,landingStatsShape,boxscoreShape,classificationMatchesParser:rejectionAudit.accepted===parsed.shifts.length&&rejectionAudit.rejected===parsed.rejected,status:parsed.status,
      verifiedUnits:false,reason:'No verified strength windows or roster/goalie completeness; this diagnostic does not publish PP/PK units.'};
    console.log(JSON.stringify(result,null,2));
    if(parsed.status!=='partial'||!parsed.shifts.length)process.exitCode=3;
