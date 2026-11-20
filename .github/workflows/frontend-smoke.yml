@@ -43,6 +43,8 @@ jobs:
         run: python -m unittest scripts/test_data_11_goalie_feed.py
       - name: DATA-11 inspect committed goalie export
         run: python scripts/audit_data_11_goalie_feed.py
+      - name: DATA-12 goalie publisher schema regression
+        run: python -m unittest scripts/test_data_12_goalie_publisher.py
       - name: Validate local scripts and HTML entrypoint
         shell: bash
         run: |
