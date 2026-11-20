@@ -128,6 +128,8 @@ jobs:
         run: node --test tests/lineups-03-penalty-direction.test.cjs
       - name: LINEUPS-03.30 unique penalty seconds tests
         run: node --test tests/lineups-03-penalty-unique-seconds.test.cjs
+      - name: LINEUPS-03.31 penalty full coverage regression
+        run: node --test tests/lineups-03-penalty-full-coverage.test.cjs
       - name: LINEUPS-03 real-game NHL shiftcharts diagnostic (informational)
         continue-on-error: true
         timeout-minutes: 1
