@@ -83,7 +83,8 @@ def main():
     starters["conflicts"] = [issue for issue in starters.get("conflicts", [])
                              if issue.get("team") not in confirmed_teams] + conflicts
     starters["updatedAt"] = now.isoformat()
-    starters["status"] = "partial" if starters.get("conflicts") or starters.get("sourceErrors") else "ok"
+    # DATA-12: do not reintroduce the deprecated "ok" state or imply complete coverage.
+    starters["status"] = "partial" if entries else "unavailable"
     with (ROOT / "starting_goalies.json").open("w", encoding="utf-8") as file:
         json.dump(starters, file, ensure_ascii=False, indent=2)
     print("RotoWire verified future/current starts:", len(valid), "today:", sum(x["date"] == today for x in valid))
