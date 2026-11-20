@@ -16,6 +16,21 @@ class GameIdentityTests(unittest.TestCase):
         self.assertFalse(accepted)
         self.assertEqual(issues[0]["reason"], "game_identity_mismatch")
 
+    def test_ambiguous_schedule_id(self):
+        accepted, issues = validate_game_claims([CLAIM], GAME + [{**GAME[0], "away": "BOS"}])
+        self.assertFalse(accepted)
+        self.assertEqual(issues[0]["reason"], "ambiguous_game")
+
+    def test_unknown_status(self):
+        accepted, issues = validate_game_claims([{**CLAIM, "status": "unknown"}], GAME)
+        self.assertFalse(accepted)
+        self.assertEqual(issues[0]["reason"], "invalid_status")
+
+    def test_missing_goalie(self):
+        accepted, issues = validate_game_claims([{**CLAIM, "goalie": ""}], GAME)
+        self.assertFalse(accepted)
+        self.assertEqual(issues[0]["reason"], "missing_goalie")
+
     def test_correct_game(self):
         accepted, issues = validate_game_claims([CLAIM], GAME)
         self.assertEqual(len(accepted), 1)
