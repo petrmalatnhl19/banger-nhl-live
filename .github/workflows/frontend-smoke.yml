@@ -94,6 +94,8 @@ jobs:
         run: node --test tests/lineups-03-candidate-five-units.test.cjs
       - name: LINEUPS-03.13 candidate player name tests
         run: node --test tests/lineups-03-candidate-names.test.cjs
+      - name: LINEUPS-03.14 play-by-play situation evidence tests
+        run: node --test tests/lineups-03-situation-evidence.test.cjs
       - name: LINEUPS-03 real-game NHL shiftcharts diagnostic (informational)
         continue-on-error: true
         timeout-minutes: 1
