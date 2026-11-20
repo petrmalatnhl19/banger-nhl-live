@@ -162,6 +162,17 @@ jobs:
         run: node .github/scripts/test-live-monitor.cjs
       - name: VIDEO-13 Android-sized Chromium official goal links
         run: node .github/scripts/browser-video-13-mobile.cjs
+      - name: VIDEO-16 build isolated Android preview from NHL data
+        if: github.event_name == 'workflow_dispatch' && github.ref_name == 'video-01-live-highlights-audit'
+        run: node scripts/video-16-build-preview.cjs
+      - name: VIDEO-16 upload Android preview HTML
+        if: github.event_name == 'workflow_dispatch' && github.ref_name == 'video-01-live-highlights-audit'
+        uses: actions/upload-artifact@v4
+        with:
+          name: video-16-android-preview
+          path: video16-preview/index.html
+          if-no-files-found: error
+          retention-days: 7
       - name: VIDEO-14 real NHL landing mobile integration (informational)
         continue-on-error: true
         run: node .github/scripts/browser-video-14-real-nhl.cjs
