@@ -280,7 +280,7 @@
       "injured": "Connor Bedard (right shoulder) Bowen Byram (upper body)",
       "scratched": "Ethan Del Mastro, Dillon Boucher",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-20T19:52:00+00:00",
+      "publishedAt": "2026-11-20T20:13:00+00:00",
       "asOf": "2026-11-20",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -331,7 +331,7 @@
       "injured": "Kevin Bahl (lower body)",
       "scratched": "Brennan Othmann, Brayden Pachal",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-20T19:52:00+00:00",
+      "publishedAt": "2026-11-20T20:13:00+00:00",
       "asOf": "2026-11-20",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -494,24 +494,24 @@
       "name": "Oilers",
       "forwards": [
         [
-          "Colton Dach",
+          "Filip Hallander",
           "Connor McDavid",
-          "Zach Hyman"
+          "Kasperi Kapanen"
         ],
         [
           "Vasily Podkolzin",
           "Leon Draisaitl",
-          "Kasperi Kapanen"
+          "Mathieu Joseph"
         ],
         [
-          "Filip Hallander",
+          "Colton Dach",
           "Jason Dickinson",
-          "Trent Frederic"
+          "Zach Hyman"
         ],
         [
           "Alex Formenton",
           "Owen Michaels",
-          "Mathieu Joseph"
+          "Trent Frederic"
         ]
       ],
       "defense": [
@@ -529,14 +529,14 @@
         ]
       ],
       "goalies": [
-        "Devon Levi",
-        "Tristan Jarry"
+        "Tristan Jarry",
+        "Devon Levi"
       ],
       "injured": "Ryan Nugent-Hopkins (undisclosed), Frederik Andersen (undisclosed), Mattias Janmark (undisclosed), Alec Regula (undisclosed), Matt Savoie (undisclosed)",
       "scratched": "Max Jones, Jake Walman",
-      "source": "https://www.nhl.com/news/edmonton-oilers-tampa-bay-lightning-game-preview-november-19-2026",
-      "publishedAt": "2026-11-19T17:53:00+00:00",
-      "asOf": "2026-11-19",
+      "source": "https://www.nhl.com/news/edmonton-oilers-carolina-hurricanes-game-preview-november-21-2026",
+      "publishedAt": "2026-11-20T20:15:11.043000+00:00",
+      "asOf": "2026-11-20",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -631,8 +631,8 @@
       ],
       "injured": "Ryan Graves (knee), Evgeni Malkin (upper body), Nick Robertson (lower body), Bryan Rust (lower body), Elmer Soderblom (upper body)",
       "scratched": "Justin Brazeau, Declan Carlile",
-      "source": "https://www.nhl.com/news/pittsburgh-penguins-nashville-predators-game-preview-november-21-2026",
-      "publishedAt": "2026-11-20T19:57:20.638000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-20T20:13:00+00:00",
       "asOf": "2026-11-20",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1380,8 +1380,8 @@
       ],
       "injured": "William Trudeau (upper body)",
       "scratched": "Daemon Hunt, Ilya Lyubushkin, Vitali Pinchuk",
-      "source": "https://www.nhl.com/news/pittsburgh-penguins-nashville-predators-game-preview-november-21-2026",
-      "publishedAt": "2026-11-20T19:57:20.638000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-20T20:13:00+00:00",
       "asOf": "2026-11-20",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1526,11 +1526,11 @@
         "Pyotr Kochetkov",
         "Brandon Bussi"
       ],
-      "injured": "None",
+      "injured": "none",
       "scratched": "Juuso Valimaki, Jesperi Kotkaniemi, Nicolas Deslauriers",
-      "source": "https://www.nhl.com/news/montreal-canadiens-carolina-hurricanes-game-preview-november-19-2026",
-      "publishedAt": "2026-11-19T19:55:00+00:00",
-      "asOf": "2026-11-19",
+      "source": "https://www.nhl.com/news/edmonton-oilers-carolina-hurricanes-game-preview-november-21-2026",
+      "publishedAt": "2026-11-20T20:15:11.043000+00:00",
+      "asOf": "2026-11-20",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
