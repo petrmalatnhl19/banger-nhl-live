@@ -29,6 +29,8 @@ def source_shows_date(lines,day):
  return any(re.search(pattern,header,re.I) for pattern in patterns)
 def source_failure_kind(error):
  """Classify errors for diagnostics; no effect on starter acceptance."""
+ if isinstance(error,ValueError) and "no visible content" in str(error):
+  return "empty_visible_page"
  if isinstance(error,ValueError) and "does not show today's date" in str(error):
   return "missing_current_date"
  if isinstance(error,(TimeoutError,urllib.error.URLError)):
@@ -36,6 +38,14 @@ def source_failure_kind(error):
  if isinstance(error,UnicodeError):
   return "invalid_source_content"
  return "source_processing_error"
+def specialist_page_health(lines, day):
+ """Classify visible page coverage without treating an empty page as a valid projection."""
+ if not lines:
+  return "empty_visible_page"
+ if not source_shows_date(lines,day):
+  return "missing_current_date"
+ return "dated_page"
+
 def main():
  with open("nhl_rosters.json",encoding="utf-8") as f:rosters=json.load(f).get("teams",{})
  today=datetime.datetime.now(datetime.timezone.utc).date().isoformat()
@@ -50,7 +60,10 @@ def main():
   lines=[re.sub(r"\s+"," ",html.unescape(x)).strip() for x in "".join(parser.parts).splitlines()]
   lines=[x for x in lines if x]
   # A date must be present. The source may serve yesterday's page.
-  if not source_shows_date(lines, datetime.datetime.now(datetime.timezone.utc).date()):
+  page_health=specialist_page_health(lines, datetime.datetime.now(datetime.timezone.utc).date())
+  if page_health=="empty_visible_page":
+   raise ValueError("Source has no visible content")
+  if page_health=="missing_current_date":
    raise ValueError("Source does not show today's date")
   # Match only full goalie names against NHL's official current roster.
   # A player name is attributed only if a team heading appears close to it.
