@@ -1,10 +1,11 @@
 {
-  "generatedAt": "2026-11-20T06:49:18.226473+00:00",
+  "generatedAt": "2026-11-20T08:05:21.078058+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 27,
+  "currentProjections": 26,
   "needsFreshProjection": [
     "devils",
+    "mammoth",
     "panthers",
     "predators",
     "rangers",
@@ -13,6 +14,7 @@
   "missing": [],
   "olderVerified": [
     "devils",
+    "mammoth",
     "panthers",
     "predators",
     "rangers",
@@ -257,11 +259,11 @@
         "archive",
         "manual"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-18T20:05:17.814000+00:00",
       "source": "https://www.nhl.com/news/colorado-avalanche-utah-mammoth-game-preview-november-18-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "maple leafs": {
       "hasProjectedLines": true,
