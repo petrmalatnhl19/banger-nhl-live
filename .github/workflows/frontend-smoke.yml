@@ -47,6 +47,8 @@ jobs:
         run: python -m unittest scripts/test_data_12_goalie_publisher.py
       - name: VIDEO-03 official highlights metadata regression
         run: node --test tests/video-03-live-highlights.test.cjs
+      - name: VIDEO-05 official highlight link UI regression
+        run: node --test tests/video-05-highlights-ui.test.cjs
       - name: Validate local scripts and HTML entrypoint
         shell: bash
         run: |
