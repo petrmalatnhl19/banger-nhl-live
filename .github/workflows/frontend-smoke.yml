@@ -49,6 +49,8 @@ jobs:
         run: node --test tests/video-03-live-highlights.test.cjs
       - name: VIDEO-05 official highlight link UI regression
         run: node --test tests/video-05-highlights-ui.test.cjs
+      - name: VIDEO-06 goal-to-clip event matching regression
+        run: node --test tests/video-06-goal-video-map.test.cjs
       - name: Validate local scripts and HTML entrypoint
         shell: bash
         run: |
