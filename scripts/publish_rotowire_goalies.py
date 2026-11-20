@@ -11,8 +11,15 @@ def read(name):
 def preserve_explicit_confirmation(record):
     """Never manufacture an explicit confirmation basis from a timestamp alone."""
     record = dict(record)
-    if record.get("status") != "confirmed" or record.get("confirmationBasis") != "explicit_pregame_report":
+    if record.get("status") == "confirmed":
+        if record.get("confirmationBasis") != "explicit_pregame_report" or not record.get("confirmationEvidence"):
+            # A displayed status label without supporting evidence is a projection.
+            record["status"] = "projected"
+            record.pop("confirmationBasis", None)
+            record.pop("confirmationEvidence", None)
+    else:
         record.pop("confirmationBasis", None)
+        record.pop("confirmationEvidence", None)
     return record
 
 
@@ -77,7 +84,9 @@ def main():
         entries[abbr] = {"name": item["goalie"], "status": item["status"],
                          "date": today, "source": diagnostic["source"],
                          "sourceLabel": "RotoWire", "checkedAt": now.isoformat(),
-                         "gameId": item["gameId"]}
+                         "gameId": item["gameId"],
+                         **({"confirmationEvidence": item["confirmationEvidence"]}
+                            if item["status"] == "confirmed" and item.get("confirmationEvidence") else {})}
     confirmed_teams = {item["team"] for item in valid if item["date"] == today and item["status"] == "confirmed"}
     # A verified confirmation resolves older projection disagreements for that team.
     starters["conflicts"] = [issue for issue in starters.get("conflicts", [])
