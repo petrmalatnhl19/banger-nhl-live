@@ -47,6 +47,10 @@ jobs:
         run: python -m unittest scripts/test_data_12_goalie_publisher.py
       - name: DATA-13 game identity regressions
         run: python -m unittest scripts/test_data_13_game_identity.py
+      - name: DATA-14 lineup freshness audit regressions
+        run: python -m unittest scripts/test_data_14_lineup_freshness_audit.py
+      - name: DATA-14 inspect committed lineup coverage
+        run: python scripts/data_14_lineup_freshness_audit.py
       - name: DATA-12 source failure diagnostics
         run: python -m unittest scripts/test_data_12_source_failures.py
 
