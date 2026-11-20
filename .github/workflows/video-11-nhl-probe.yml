@@ -1,0 +1,26 @@
+name: VIDEO-11 NHL highlight availability probe
+
+on:
+  workflow_dispatch:
+    inputs:
+      game_id:
+        description: 'NHL game ID (10 digits)'
+        required: true
+        default: '2026020335'
+
+permissions:
+  contents: read
+
+jobs:
+  video-11-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Inspect public NHL goal clip metadata (read-only)
+        env:
+          NHL_VIDEO_GAME_ID: ${{ inputs.game_id }}
+        run: node scripts/video-11-nhl-diagnostic.cjs
