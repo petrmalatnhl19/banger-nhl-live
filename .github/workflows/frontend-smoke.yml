@@ -53,6 +53,8 @@ jobs:
         run: node --test tests/video-06-goal-video-map.test.cjs
       - name: VIDEO-07 match goal links integration regression
         run: node --test tests/video-07-match-integration.test.cjs
+      - name: VIDEO-09 safe LIVE clip refresh regression
+        run: node --test tests/video-09-live-refresh.test.cjs
       - name: Validate local scripts and HTML entrypoint
         shell: bash
         run: |
