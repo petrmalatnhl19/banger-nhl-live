@@ -1,5 +1,7 @@
 """Offline DATA-13 game identity regression cases."""
 import unittest
+import subprocess
+import sys
 from pathlib import Path
 from scripts.data_13_game_identity import validate_game_claims, reconcile_source_claims
 
@@ -61,6 +63,18 @@ class GameIdentityTests(unittest.TestCase):
         accepted, issues = validate_game_claims([CLAIM, {**CLAIM, "status": "confirmed"}], GAME)
         self.assertFalse(accepted)
         self.assertEqual(issues[0]["reason"], "conflicting_status")
+
+
+class ScriptImportTests(unittest.TestCase):
+    def test_direct_script_imports(self):
+        root = Path(__file__).resolve().parent.parent
+        for script in ("parse_rotowire_goalies", "publish_rotowire_goalies"):
+            with self.subTest(script=script):
+                result = subprocess.run(
+                    [sys.executable, "-c",
+                     "import sys; sys.path.insert(0, 'scripts'); import " + script],
+                    cwd=root, capture_output=True, text=True, timeout=10)
+                self.assertEqual(result.returncode, 0, result.stderr)
 
 
 class PublisherIntegrationTests(unittest.TestCase):
