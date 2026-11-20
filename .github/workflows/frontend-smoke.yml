@@ -39,6 +39,10 @@ jobs:
         run: python -m unittest scripts/test_data_09_goalie_status.py
       - name: DATA-10 dated goalie source validation
         run: python -m unittest scripts/test_data_10_goalie_date.py
+      - name: DATA-11 goalie feed audit regressions
+        run: python -m unittest scripts/test_data_11_goalie_feed.py
+      - name: DATA-11 inspect committed goalie export
+        run: python scripts/audit_data_11_goalie_feed.py
       - name: Validate local scripts and HTML entrypoint
         shell: bash
         run: |
