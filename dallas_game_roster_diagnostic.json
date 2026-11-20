@@ -1,10 +1,14 @@
 {
-  "checkedAt": "2026-11-20T05:48:51.444689+00:00",
+  "checkedAt": "2026-11-20T06:48:46.480351+00:00",
   "team": "DAL",
   "scope": "Recent completed NHL games; historical evidence only",
   "players": {
     "Trey Taylor": {
       "appearedInGames": [
+        {
+          "gameId": 2026020358,
+          "gameDate": "2026-11-19"
+        },
         {
           "gameId": 2026020342,
           "gameDate": "2026-11-17"
@@ -44,9 +48,6 @@
         "default": "J. Benn"
       },
       {
-        "default": "C. Blackwell"
-      },
-      {
         "default": "D. Perron"
       },
       {
@@ -54,6 +55,9 @@
       },
       {
         "default": "J. Robertson"
+      },
+      {
+        "default": "J. Kiviranta"
       }
     ],
     "missingNameEntries": 0
