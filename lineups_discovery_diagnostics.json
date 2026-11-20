@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T22:36:05.926795+00:00",
+  "generatedAt": "2026-11-20T23:27:14.947442+00:00",
   "checked": 22,
   "articlesFound": 2,
   "errors": [],
@@ -201,16 +201,6 @@
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/chicago-blackhawks-vancouver-canucks-game-preview-november-22-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/vancouver-canucks-chicago-blackhawks-game-preview-november-22-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
       "url": "https://www.nhl.com/news/columbus-blue-jackets-toronto-maple-leafs-game-preview-november-21-2026",
       "result": "no_complete_projection",
       "teams": []
@@ -237,17 +227,27 @@
         "hurricanes"
       ],
       "coversBothTeams": true
+    },
+    {
+      "url": "https://www.nhl.com/news/minnesota-wild-vancouver-canucks-game-preview-november-21-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/vancouver-canucks-minnesota-wild-game-preview-november-21-2026",
+      "result": "no_complete_projection",
+      "teams": []
     }
   ],
   "note": "Upcoming games today through two days ahead; prioritize older sources and nearest games. A fixture is not proof a preview article exists.",
   "fixturesSelected": 12,
   "fixturesDeferred": 7,
   "rotation": {
-    "window": 1994682,
+    "window": 1994685,
     "fixed": 8,
     "rotating": 4,
     "remainingPool": 11,
-    "rotationStart": 10
+    "rotationStart": 0
   },
   "selectedFixtures": [
     {
@@ -291,11 +291,6 @@
       "home": "BOS"
     },
     {
-      "date": "2026-11-22",
-      "away": "CHI",
-      "home": "VAN"
-    },
-    {
       "date": "2026-11-21",
       "away": "CBJ",
       "home": "TOR"
@@ -309,6 +304,11 @@
       "date": "2026-11-21",
       "away": "EDM",
       "home": "CAR"
+    },
+    {
+      "date": "2026-11-21",
+      "away": "MIN",
+      "home": "VAN"
     }
   ]
 }
