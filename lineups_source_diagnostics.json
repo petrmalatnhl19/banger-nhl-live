@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T19:00:32.799380+00:00",
+  "generatedAt": "2026-11-20T20:02:37.740180+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -38,8 +38,8 @@
     "hurricanes": {
       "team": "CAR",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-19T20:24:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/montreal-canadiens-carolina-hurricanes-game-preview-november-19-2026",
+      "candidatePublishedAt": "2026-11-19T19:55:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -53,8 +53,8 @@
     "kings": {
       "team": "LAK",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-19T20:24:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/los-angeles-kings-toronto-maple-leafs-game-preview-november-19-2026",
+      "candidatePublishedAt": "2026-11-19T17:48:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -68,8 +68,8 @@
     "islanders": {
       "team": "NYI",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-19T20:24:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/new-york-islanders-winnipeg-jets-game-preview-november-19-2026",
+      "candidatePublishedAt": "2026-11-19T17:56:00+00:00",
       "candidateForwardLines": 3,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -98,8 +98,8 @@
     "senators": {
       "team": "OTT",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-19T20:24:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/philadelphia-flyers-ottawa-senators-game-preview-november-19-2026",
+      "candidatePublishedAt": "2026-11-19T17:15:20.099000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -140,8 +140,8 @@
     "jets": {
       "team": "WPG",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-19T20:24:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/new-york-islanders-winnipeg-jets-game-preview-november-19-2026",
+      "candidatePublishedAt": "2026-11-19T17:56:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -174,8 +174,8 @@
     "canucks": {
       "team": "VAN",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-19T20:24:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/vancouver-canucks-seattle-kraken-game-preview-november-19-2026",
+      "candidatePublishedAt": "2026-11-19T19:54:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -189,8 +189,8 @@
     "lightning": {
       "team": "TBL",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-19T20:24:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/edmonton-oilers-tampa-bay-lightning-game-preview-november-19-2026",
+      "candidatePublishedAt": "2026-11-19T17:53:00+00:00",
       "candidateForwardLines": 3,
       "candidateDefensePairs": 4,
       "rosterValidation": "passed",
@@ -287,9 +287,9 @@
     "stars": {
       "team": "DAL",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-19T20:24:00+00:00",
-      "candidateForwardLines": 3,
+      "candidateSource": "https://www.nhl.com/news/dallas-stars-vegas-golden-knights-game-preview-november-17-2026",
+      "candidatePublishedAt": "2026-11-17T20:39:00+00:00",
+      "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
       "gameEvidenceExceptions": [
@@ -302,7 +302,7 @@
       "roleMismatches": [],
       "rejectedLines": [],
       "rejectedPlayerReasons": [],
-      "validatedForwardLines": 3,
+      "validatedForwardLines": 4,
       "validatedDefensePairs": 3,
       "accepted": true
     }
