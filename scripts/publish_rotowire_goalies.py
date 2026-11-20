@@ -3,7 +3,12 @@ import datetime
 import json
 from pathlib import Path
 
-from data_13_game_identity import reconcile_source_claims
+try:
+    from scripts.data_13_game_identity import reconcile_source_claims
+except ModuleNotFoundError as exc:
+    if exc.name != "scripts":
+        raise
+    from data_13_game_identity import reconcile_source_claims
 
 ROOT = Path(__file__).resolve().parent.parent
 def read(name):
