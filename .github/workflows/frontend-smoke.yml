@@ -90,6 +90,8 @@ jobs:
         run: node --test tests/lineups-03-five-skater-combinations.test.cjs
       - name: LINEUPS-03.11 simultaneous five-skater audit tests
         run: node --test tests/lineups-03-simultaneous-five.test.cjs
+      - name: LINEUPS-03.12 candidate five-unit tests
+        run: node --test tests/lineups-03-candidate-five-units.test.cjs
       - name: LINEUPS-03 real-game NHL shiftcharts diagnostic (informational)
         continue-on-error: true
         timeout-minutes: 1
