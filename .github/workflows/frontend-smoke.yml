@@ -55,6 +55,8 @@ jobs:
         run: python -m unittest scripts/test_data_14_multisource_readiness.py
       - name: DATA-14 licensed lineup adapter regressions
         run: python -m unittest scripts/test_data_14_licensed_lineup_adapter.py
+      - name: DATA-14 source selection dry-run regressions
+        run: python -m unittest scripts/test_data_14_source_selection_dry_run.py
       - name: DATA-14 multi-source readiness diagnostic
         run: python scripts/data_14_multisource_readiness.py
       - name: DATA-14 inspect committed lineup coverage
