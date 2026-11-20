@@ -6,6 +6,16 @@ GAME = [{"gameId": 123, "date": "2026-11-21", "home": "DAL", "away": "VGK"}]
 CLAIM = {"gameId": 123, "date": "2026-11-21", "team": "DAL", "opponent": "VGK", "venue": "home", "goalie": "Example Goalie", "status": "projected"}
 
 class GameIdentityTests(unittest.TestCase):
+    def test_duplicate_same_claim_collapses(self):
+        accepted, issues = validate_game_claims([CLAIM, dict(CLAIM)], GAME)
+        self.assertEqual(len(accepted), 1)
+        self.assertFalse(issues)
+
+    def test_wrong_venue(self):
+        accepted, issues = validate_game_claims([{**CLAIM, "venue": "away"}], GAME)
+        self.assertFalse(accepted)
+        self.assertEqual(issues[0]["reason"], "game_identity_mismatch")
+
     def test_correct_game(self):
         accepted, issues = validate_game_claims([CLAIM], GAME)
         self.assertEqual(len(accepted), 1)
