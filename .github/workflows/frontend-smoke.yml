@@ -80,6 +80,8 @@ jobs:
         run: node --test tests/lineups-03-pipeline.test.cjs
       - name: LINEUPS-03.3 rejection reason classifier tests
         run: node --test tests/lineups-03-rejection-audit.test.cjs
+      - name: LINEUPS-03.6 game roster position verification tests
+        run: node --test tests/lineups-03-game-roster-audit.test.cjs
       - name: LINEUPS-03 real-game NHL shiftcharts diagnostic (informational)
         continue-on-error: true
         timeout-minutes: 1
