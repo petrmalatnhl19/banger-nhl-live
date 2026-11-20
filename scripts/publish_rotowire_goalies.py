@@ -3,7 +3,7 @@ import datetime
 import json
 from pathlib import Path
 
-from scripts.data_13_game_identity import reconcile_source_claims
+from data_13_game_identity import reconcile_source_claims
 
 ROOT = Path(__file__).resolve().parent.parent
 def read(name):
@@ -94,7 +94,7 @@ def main():
                 conflicts.append({"date": today, "team": abbr, "gameId": item["gameId"],
                                   "reason": "cross_source_" + reason})
                 # Do not discard an already evidenced confirmation on disagreement.
-                if existing.get("status") == "confirmed" and existing.get("confirmationEvidence"):
+                if (existing.get("status") == "confirmed" and existing.get("confirmationBasis") == "explicit_pregame_report" and existing.get("confirmationEvidence")):
                     continue
                 entries.pop(abbr, None)
                 continue
