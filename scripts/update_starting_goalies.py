@@ -22,9 +22,9 @@ def source_shows_date(lines,day):
  month=day.strftime("%B")
  short_month=day.strftime("%b")
  patterns=(
-  r"(?<!\\d)"+re.escape(day.isoformat())+r"(?!\\d)",
-  r"\\b(?:"+re.escape(month)+r"|"+re.escape(short_month)+r"\\.?)\\s+"+str(day.day)+r"(?:st|nd|rd|th)?[,]?\\s*"+str(day.year)+r"\\b",
-  r"\\b"+str(day.day)+r"\\s+(?:"+re.escape(month)+r"|"+re.escape(short_month)+r"\\.?)\\s+"+str(day.year)+r"\\b",
+  r"(?<!\d)"+re.escape(day.isoformat())+r"(?!\d)",
+  r"\b(?:"+re.escape(month)+r"|"+re.escape(short_month)+r"\.?)\s+"+str(day.day)+r"(?:st|nd|rd|th)?[,]?\s*"+str(day.year)+r"\b",
+  r"\b"+str(day.day)+r"\s+(?:"+re.escape(month)+r"|"+re.escape(short_month)+r"\.?)\s+"+str(day.year)+r"\b",
  )
  return any(re.search(pattern,header,re.I) for pattern in patterns)
 def main():
