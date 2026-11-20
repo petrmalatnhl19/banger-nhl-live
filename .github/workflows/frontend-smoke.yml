@@ -120,6 +120,8 @@ jobs:
         run: node --test tests/lineups-03-public-special-teams-gate.test.cjs
       - name: LINEUPS-03.26 official PP time tests
         run: node --test tests/lineups-03-official-special-teams-time.test.cjs
+      - name: LINEUPS-03.27 landing schema shape tests
+        run: node --test tests/lineups-03-landing-shape.test.cjs
       - name: LINEUPS-03 real-game NHL shiftcharts diagnostic (informational)
         continue-on-error: true
         timeout-minutes: 1
