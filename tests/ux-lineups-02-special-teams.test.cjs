@@ -1,0 +1,4 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const s=fs.readFileSync(require('node:path').join(__dirname,'../index.html'),'utf8');
+test('lineups provide 5v5 PP and PK modes',()=>{for(const mode of ['even','pp','pk'])assert.ok(s.includes('data-lineup-mode="'+mode+'"'));assert.ok(s.includes("b.onclick=()=>renderMode(b.dataset.lineupMode)"));assert.ok(s.includes("b.setAttribute('aria-pressed',String(on))"))});
+test('special team units are not invented from boxscore',()=>{assert.ok(s.includes('Přesné složení jednotek'));assert.ok(s.includes('nezobrazujeme domnělé kombinace hráčů'));assert.ok(s.includes('nelze spolehlivě odvodit jen z boxscore'))});
+test('official roster remains available and separate from projection',()=>{assert.ok(s.includes('d.playerByGameStats?.[key]'));assert.ok(s.includes('id="lineupProjection"'));assert.ok(s.includes('id="actualLineups"'))});
