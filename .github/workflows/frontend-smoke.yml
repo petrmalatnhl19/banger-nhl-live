@@ -132,6 +132,8 @@ jobs:
         run: node --test tests/lineups-03-penalty-full-coverage.test.cjs
       - name: LINEUPS-03.32 penalty overlap provenance tests
         run: node --test tests/lineups-03-penalty-overlap-provenance.test.cjs
+      - name: LINEUPS-03.33 candidate penalty coverage gaps tests
+        run: node --test tests/lineups-03-penalty-candidate-gaps.test.cjs
       - name: LINEUPS-03 real-game NHL shiftcharts diagnostic (informational)
         continue-on-error: true
         timeout-minutes: 1
