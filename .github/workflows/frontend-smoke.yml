@@ -27,6 +27,8 @@ jobs:
         run: node --test .github/scripts/test-data-01-02.cjs
       - name: DATA-03 goalie roster and source conflicts
         run: node --test .github/scripts/test-data-03.cjs
+      - name: DATA-06 UI data freshness
+        run: node --test .github/scripts/test-data-06.cjs
       - name: Validate local scripts and HTML entrypoint
         shell: bash
         run: |
