@@ -15,6 +15,13 @@ class PublisherSchemaTests(unittest.TestCase):
  def test_explicit_confirmation_with_evidence_is_preserved(self):
   record=preserve_explicit_confirmation({"status":"confirmed","confirmationBasis":"explicit_pregame_report","confirmationEvidence":"Source explicitly reports starter"})
   self.assertEqual(record["status"],"confirmed")
+ def test_confirmed_starter_is_not_overwritten_by_projection(self):
+  tree=ast.parse((ROOT/"publish_rotowire_goalies.py").read_text(encoding="utf-8"))
+  guards=[node for node in ast.walk(tree) if isinstance(node,ast.If)
+          and "confirmationEvidence" in ast.unparse(node.test)
+          and 'item["status"] != "confirmed"' in ast.unparse(node.test)]
+  self.assertEqual(len(guards),1)
+  self.assertTrue(any(isinstance(node,ast.Continue) for node in guards[0].body))
  def test_publisher_uses_only_partial_or_unavailable(self):
   tree=ast.parse((ROOT/"publish_rotowire_goalies.py").read_text(encoding="utf-8"))
   assignments=[node for node in ast.walk(tree) if isinstance(node,ast.Assign) and any(
