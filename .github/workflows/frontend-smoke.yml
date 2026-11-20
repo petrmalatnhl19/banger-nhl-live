@@ -138,7 +138,7 @@ jobs:
         run: node --test tests/lineups-03-goal-penalty-interactions.test.cjs
       - name: LINEUPS-03.35 goal strength candidate tests
         run: node --test tests/lineups-03-goal-strength-context.test.cjs
-      - name: LINEUPS-03 real-game NHL shiftcharts diagnostic (informational)
+      - name: LINEUPS-03.36 independent benchmark regression\n        run: node --test tests/lineups-03-36-benchmark.test.cjs\n      - name: LINEUPS-03 real-game NHL shiftcharts diagnostic (informational)
         continue-on-error: true
         timeout-minutes: 1
         run: node scripts/lineups-03-real-game-diagnostic.cjs 2026020335
