@@ -47,8 +47,25 @@ jobs:
         run: python -m unittest scripts/test_data_12_goalie_publisher.py
       - name: DATA-12 source failure diagnostics
         run: python -m unittest scripts/test_data_12_source_failures.py
+
       - name: DATA-12 source health summary regressions
         run: python -m unittest scripts/test_data_12_source_health_report.py
+      - name: VIDEO-03 official highlights metadata regression
+        run: node --test tests/video-03-live-highlights.test.cjs
+      - name: VIDEO-05 official highlight link UI regression
+        run: node --test tests/video-05-highlights-ui.test.cjs
+      - name: VIDEO-06 goal-to-clip event matching regression
+        run: node --test tests/video-06-goal-video-map.test.cjs
+      - name: VIDEO-07 match goal links integration regression
+        run: node --test tests/video-07-match-integration.test.cjs
+      - name: VIDEO-09 safe LIVE clip refresh regression
+        run: node --test tests/video-09-live-refresh.test.cjs
+      - name: VIDEO-10 live goal link lifecycle integration
+        run: node --test tests/video-10-live-integration.test.cjs
+      - name: VIDEO-11 NHL clip metadata diagnostic (informational)
+        continue-on-error: true
+        run: node scripts/video-11-nhl-diagnostic.cjs
+
       - name: Validate local scripts and HTML entrypoint
         shell: bash
         run: |
@@ -149,6 +166,26 @@ jobs:
           echo $! > /tmp/banger-server.pid
       - name: Test STAB-05.14 LIVE monitoring with deterministic API fixture
         run: node .github/scripts/test-live-monitor.cjs
+      - name: VIDEO-13 Android-sized Chromium official goal links
+        run: node .github/scripts/browser-video-13-mobile.cjs
+      - name: VIDEO-16 build isolated Android preview from NHL data
+        if: github.event_name == 'workflow_dispatch' && github.ref_name == 'video-01-live-highlights-audit'
+        run: node scripts/video-16-build-preview.cjs
+      - name: VIDEO-16 upload Android preview HTML
+        if: github.event_name == 'workflow_dispatch' && github.ref_name == 'video-01-live-highlights-audit'
+        uses: actions/upload-artifact@v4
+        with:
+          name: video-16-android-preview
+          path: video16-preview/index.html
+          if-no-files-found: error
+          retention-days: 7
+      - name: VIDEO-14 real NHL landing mobile integration (informational)
+        continue-on-error: true
+        run: node .github/scripts/browser-video-14-real-nhl.cjs
+      - name: VIDEO-15 Android navigation and return from official clip
+        run: node .github/scripts/browser-video-15-navigation.cjs
+      - name: VIDEO-17 actual match modal official goal links
+        run: node .github/scripts/browser-video-17-real-match.cjs
       - name: Test application startup in Chromium
         run: node .github/scripts/browser-smoke.cjs
       - name: Test FAN-08 favorite team picker on 360, 390 and 430 px
