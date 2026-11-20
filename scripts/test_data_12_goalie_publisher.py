@@ -19,7 +19,7 @@ class PublisherSchemaTests(unittest.TestCase):
   tree=ast.parse((ROOT/"publish_rotowire_goalies.py").read_text(encoding="utf-8"))
   guards=[node for node in ast.walk(tree) if isinstance(node,ast.If)
           and "confirmationEvidence" in ast.unparse(node.test)
-          and 'item["status"] != "confirmed"' in ast.unparse(node.test)]
+          and "item['status'] != 'confirmed'" in ast.unparse(node.test)]
   self.assertEqual(len(guards),1)
   self.assertTrue(any(isinstance(node,ast.Continue) for node in guards[0].body))
  def test_publisher_uses_only_partial_or_unavailable(self):
