@@ -6,6 +6,8 @@ function classifyShiftRows(payload,gameId){
  const reasons={wrongGame:0,invalidIdentity:0,invalidPeriod:0,nonShiftEvent:0,invalidClock:0,invalidInterval:0,normalizationRejected:0};
  if(!Array.isArray(payload?.data))return {reasons,accepted:0,rejected:0,status:'invalid-response'};
  let accepted=0;
+ const longShiftSummary={uniquePlayers:0,teamCounts:{},maxSeconds:0};
+ const longPlayers=new Set();
  const normalizationDetails={over180Seconds:0,outsideRegulation:0,other:0};
  for(const r of payload.data){
   let reason=null;
@@ -19,13 +21,14 @@ function classifyShiftRows(payload,gameId){
    else if(end<=start)reason='invalidInterval';
    else if(normalizeShifts([{playerId:r.playerId,teamId:r.teamId,start:(r.period-1)*1200+start,end:(r.period-1)*1200+end}]).length!==1){
     reason='normalizationRejected';
-    if(end-start>180)normalizationDetails.over180Seconds++;
+    if(end-start>180){normalizationDetails.over180Seconds++;longPlayers.add(String(r.teamId)+':'+String(r.playerId));longShiftSummary.teamCounts[String(r.teamId)]=(longShiftSummary.teamCounts[String(r.teamId)]||0)+1;longShiftSummary.maxSeconds=Math.max(longShiftSummary.maxSeconds,end-start);}
     else if((r.period-1)*1200+end>3600)normalizationDetails.outsideRegulation++;
     else normalizationDetails.other++;
    }
   }
   if(reason)reasons[reason]++;else accepted++;
  }
- return {reasons,normalizationDetails,accepted,rejected:payload.data.length-accepted,status:'classified'};
+ longShiftSummary.uniquePlayers=longPlayers.size;
+ return {reasons,normalizationDetails,longShiftSummary,accepted,rejected:payload.data.length-accepted,status:'classified'};
 }
 module.exports={classifyShiftRows};
