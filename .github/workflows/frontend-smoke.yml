@@ -84,6 +84,8 @@ jobs:
         run: node --test tests/lineups-03-game-roster-audit.test.cjs
       - name: LINEUPS-03.8 roster-grounded skater shift tests
         run: node --test tests/lineups-03-roster-skater-shifts.test.cjs
+      - name: LINEUPS-03.9 skater occupancy audit tests
+        run: node --test tests/lineups-03-occupancy-audit.test.cjs
       - name: LINEUPS-03 real-game NHL shiftcharts diagnostic (informational)
         continue-on-error: true
         timeout-minutes: 1
