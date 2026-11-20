@@ -66,6 +66,8 @@ jobs:
         run: node --test tests/video-10-live-integration.test.cjs
       - name: VIDEO-24 official full-game recap links regression
         run: node --test tests/video-23-game-recaps.test.cjs
+      - name: UX-VIDEO-28 Goal Center prominence regression
+        run: node --test tests/ux-video-28-goal-center.test.cjs
       - name: VIDEO-11 NHL clip metadata diagnostic (informational)
         continue-on-error: true
         run: node scripts/video-11-nhl-diagnostic.cjs
