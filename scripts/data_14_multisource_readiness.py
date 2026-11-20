@@ -17,7 +17,7 @@ def build_report(usage, recovery, coverage):
     # Do not treat HTTP 200 as permission or evidence of a usable lineup.
     for name, entry in sources.items():
         entry["status"] = (
-            "active_primary" if name == "nhl.com" and entry["usedTeams"] > 0
+            "active_existing_source_permission_unverified" if name == "nhl.com" and entry["usedTeams"] > 0
             else "blocked_pending_reuse_permission" if not entry["automaticReuseAuthorized"]
             else "available_not_active"
         )
