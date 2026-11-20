@@ -7,6 +7,7 @@ const {classifyShiftRows}=require('./lineups_shiftcharts_rejection_audit.cjs');
 const {verifyLongShiftRoles}=require('./lineups_game_roster_audit.cjs');
 const {extractRosterSkaterShifts}=require('./lineups_roster_skater_shifts.cjs');
 const {summarizeSkaterOccupancy}=require('./lineups_skater_occupancy_audit.cjs');
+const {observedFiveSkaterCombinations}=require('./lineups_five_skater_combinations.cjs');
 const gameId=process.argv[2]||'2026020335';
 if(!/^\d{10}$/.test(gameId)){console.error('Invalid game ID');process.exitCode=2;}
 else {
@@ -24,13 +25,15 @@ else {
    const roleAudit=boxscore.fetchError?{status:'unverified',reason:'boxscore-fetch-failed'}:verifyLongShiftRoles(payload,boxscore,gameId);
    const skaterAudit=boxscore.fetchError?{status:'unverified',reason:'boxscore-fetch-failed'}:extractRosterSkaterShifts(payload,boxscore,gameId);
    const occupancyAudit=skaterAudit.shifts?.length&&boxscore.awayTeam&&boxscore.homeTeam?summarizeSkaterOccupancy(skaterAudit.shifts,[boxscore.awayTeam.id,boxscore.homeTeam.id]):{status:'unverified'};
+   const fiveSkaterAudit=skaterAudit.shifts?.length&&boxscore.awayTeam&&boxscore.homeTeam?observedFiveSkaterCombinations(skaterAudit.shifts,[boxscore.awayTeam.id,boxscore.homeTeam.id]):{status:'unverified'};
+   const fiveSkaterSummary={status:fiveSkaterAudit.status,verifiedUnits:false,teams:(fiveSkaterAudit.teams||[]).map(t=>({teamId:t.teamId,fiveSkaterSeconds:t.fiveSkaterSeconds,rejected:t.rejected,combinationCount:t.combinations.length,topFive:t.combinations.slice(0,5)}))};
    const boxscoreShape=boxscore.fetchError?{fetchStatus:'failed'}:{fetchStatus:'ok',topLevelKeys:Object.keys(boxscore).sort(),playerByGameKeys:Object.keys(boxscore.playerByGameStats||{}).sort(),playerByGameTypes:Object.fromEntries(Object.entries(boxscore.playerByGameStats||{}).map(([key,value])=>[key,Array.isArray(value)?'array':typeof value]))};
    const data=Array.isArray(payload.data)?payload.data:[];
    const periods=[...new Set(data.map(x=>x.period))].sort();
    const teams=[...new Set(data.map(x=>x.teamId))].sort();
    const players=new Set(data.map(x=>x.playerId));
    const result={gameId,endpoint:'NHL Stats shiftcharts',http:'200',reportedTotal:payload.total??null,rawRows:data.length,teams,players:players.size,periods,
-     accepted:parsed.shifts.length,rejected:parsed.rejected,rejectionReasons:rejectionAudit.reasons,normalizationDetails:rejectionAudit.normalizationDetails,longShiftSummary:rejectionAudit.longShiftSummary,longShiftRoleAudit:roleAudit,skaterShiftAudit:{status:skaterAudit.status,skaterShiftCount:skaterAudit.skaterShiftCount??0,goalieShiftCount:skaterAudit.goalieShiftCount??0,rejected:skaterAudit.rejected??0,verifiedUnits:false},occupancyAudit,boxscoreShape,classificationMatchesParser:rejectionAudit.accepted===parsed.shifts.length&&rejectionAudit.rejected===parsed.rejected,status:parsed.status,
+     accepted:parsed.shifts.length,rejected:parsed.rejected,rejectionReasons:rejectionAudit.reasons,normalizationDetails:rejectionAudit.normalizationDetails,longShiftSummary:rejectionAudit.longShiftSummary,longShiftRoleAudit:roleAudit,skaterShiftAudit:{status:skaterAudit.status,skaterShiftCount:skaterAudit.skaterShiftCount??0,goalieShiftCount:skaterAudit.goalieShiftCount??0,rejected:skaterAudit.rejected??0,verifiedUnits:false},occupancyAudit,fiveSkaterSummary,boxscoreShape,classificationMatchesParser:rejectionAudit.accepted===parsed.shifts.length&&rejectionAudit.rejected===parsed.rejected,status:parsed.status,
      verifiedUnits:false,reason:'No verified strength windows or roster/goalie completeness; this diagnostic does not publish PP/PK units.'};
    console.log(JSON.stringify(result,null,2));
    if(parsed.status!=='partial'||!parsed.shifts.length)process.exitCode=3;
