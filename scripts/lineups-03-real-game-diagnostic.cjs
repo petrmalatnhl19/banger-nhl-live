@@ -3,6 +3,7 @@
 // Usage: node scripts/lineups-03-real-game-diagnostic.cjs [gameId]
 const https=require('node:https');
 const {parseShiftCharts}=require('./lineups_shiftcharts_adapter.cjs');
+const {classifyShiftRows}=require('./lineups_shiftcharts_rejection_audit.cjs');
 const gameId=process.argv[2]||'2026020335';
 if(!/^\d{10}$/.test(gameId)){console.error('Invalid game ID');process.exitCode=2;}
 else {
@@ -16,12 +17,13 @@ else {
  });
  fetchJson(url).then(payload=>{
    const parsed=parseShiftCharts(payload,gameId);
+   const rejectionAudit=classifyShiftRows(payload,gameId);
    const data=Array.isArray(payload.data)?payload.data:[];
    const periods=[...new Set(data.map(x=>x.period))].sort();
    const teams=[...new Set(data.map(x=>x.teamId))].sort();
    const players=new Set(data.map(x=>x.playerId));
    const result={gameId,endpoint:'NHL Stats shiftcharts',http:'200',reportedTotal:payload.total??null,rawRows:data.length,teams,players:players.size,periods,
-     accepted:parsed.shifts.length,rejected:parsed.rejected,status:parsed.status,
+     accepted:parsed.shifts.length,rejected:parsed.rejected,rejectionReasons:rejectionAudit.reasons,classificationMatchesParser:rejectionAudit.accepted===parsed.shifts.length&&rejectionAudit.rejected===parsed.rejected,status:parsed.status,
      verifiedUnits:false,reason:'No verified strength windows or roster/goalie completeness; this diagnostic does not publish PP/PK units.'};
    console.log(JSON.stringify(result,null,2));
    if(parsed.status!=='partial'||!parsed.shifts.length)process.exitCode=3;
