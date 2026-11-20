@@ -3,6 +3,8 @@ import unittest
 import urllib.error
 from scripts.update_starting_goalies import source_failure_kind, specialist_page_health
 import datetime
+import ast
+from pathlib import Path
 class SourceFailureTests(unittest.TestCase):
  def test_undated_page(self):
   self.assertEqual(source_failure_kind(ValueError("Source does not show today's date")),"missing_current_date")
@@ -11,6 +13,13 @@ class SourceFailureTests(unittest.TestCase):
   self.assertEqual(source_failure_kind(ValueError("Source has no visible content")),"empty_visible_page")
  def test_dated_but_no_goalie_rows(self):
   self.assertEqual(specialist_page_health(["November 20, 2026"],datetime.date(2026,11,20)),"dated_page")
+ def test_schedule_failure_clears_unverified_projections(self):
+  tree=ast.parse((Path(__file__).parent/"update_starting_goalies.py").read_text(encoding="utf-8"))
+  catches=[n for n in ast.walk(tree) if isinstance(n,ast.ExceptHandler) and any(
+   isinstance(x,ast.Call) and isinstance(x.func,ast.Attribute) and isinstance(x.func.value,ast.Name)
+   and x.func.value.id=="records" and x.func.attr=="clear"
+   for x in ast.walk(n))]
+  self.assertEqual(len(catches),1)
  def test_connection_failure(self):
   self.assertEqual(source_failure_kind(urllib.error.URLError("offline")),"source_unreachable")
  def test_timeout(self):
