@@ -76,6 +76,8 @@ jobs:
         run: node --test tests/lineups-03-observed-units.test.cjs
       - name: LINEUPS-03 NHL shiftcharts adapter offline tests
         run: node --test tests/lineups-03-shiftcharts-adapter.test.cjs
+      - name: LINEUPS-03 observed units candidate pipeline
+        run: node --test tests/lineups-03-pipeline.test.cjs
       - name: VIDEO-11 NHL clip metadata diagnostic (informational)
         continue-on-error: true
         run: node scripts/video-11-nhl-diagnostic.cjs
