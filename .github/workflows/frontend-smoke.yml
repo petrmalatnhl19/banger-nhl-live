@@ -106,6 +106,8 @@ jobs:
         run: node --test tests/lineups-03-boundary-alternatives.test.cjs
       - name: LINEUPS-03.19 event strength evidence tests
         run: node --test tests/lineups-03-event-strength-evidence.test.cjs
+      - name: LINEUPS-03.20 candidate strength interval tests
+        run: node --test tests/lineups-03-candidate-strength-intervals.test.cjs
       - name: LINEUPS-03 real-game NHL shiftcharts diagnostic (informational)
         continue-on-error: true
         timeout-minutes: 1
