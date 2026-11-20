@@ -9,6 +9,10 @@ class SourceHealthReportTests(unittest.TestCase):
  def test_projected_and_confirmed_are_distinct(self):
   report=summarize({"teams":{"DAL":{"status":"projected"},"BOS":{"status":"confirmed"}}})
   self.assertEqual((report["publishedProjected"],report["publishedConfirmed"]),(1,1))
+ def test_future_matches_do_not_count_as_today(self):
+  report=summarize({"date":"2026-11-20","teams":{}},diagnostic={"matchedCount":82,"matches":[{"date":"2026-11-21"}]})
+  self.assertEqual(report["rotowireScheduleMatchedCandidates"],82)
+  self.assertEqual(report["rotowireCandidatesForExportDay"],0)
  def test_missing_diagnostic_does_not_claim_matches(self):
   self.assertEqual(summarize({})["rotowireScheduleMatchedCandidates"],"not_assessed")
 if __name__=="__main__":
