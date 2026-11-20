@@ -94,7 +94,7 @@ def main():
  except Exception as err:
   source_errors.append("NHL fallback: "+type(err).__name__+": "+str(err)[:160])
   print("NHL lineup goalie fallback unavailable:",type(err).__name__,str(err)[:160])
- with open("starting_goalies.json","w",encoding="utf-8") as f:json.dump({"date":today,"updatedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"teams":records,"conflicts":conflicts,"sourceErrors":source_errors,"status":"partial" if source_errors or conflicts else "ok"},f,ensure_ascii=False,indent=2)
+ with open("starting_goalies.json","w",encoding="utf-8") as f:json.dump({"date":today,"updatedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"teams":records,"conflicts":conflicts,"sourceErrors":source_errors,"status":"unavailable" if not records else "partial"},f,ensure_ascii=False,indent=2)
  print("Game-day goalie projections:",len(records))
 if __name__=="__main__":
  try:
@@ -104,6 +104,6 @@ if __name__=="__main__":
   # Publish a transparent empty feed rather than silently reusing yesterday's starters.
   now=datetime.datetime.now(datetime.timezone.utc)
   with open("starting_goalies.json","w",encoding="utf-8") as f:
-   json.dump({"date":now.date().isoformat(),"updatedAt":now.isoformat(),"teams":{},"status":"source_unavailable","errorType":type(exc).__name__},f,indent=2)
+   json.dump({"date":now.date().isoformat(),"updatedAt":now.isoformat(),"teams":{},"status":"unavailable","sourceErrors":["collector: "+type(exc).__name__+": "+str(exc)[:160]],"conflicts":[],"errorType":type(exc).__name__},f,indent=2)
   print("Published empty goalie feed; no starter is claimed as confirmed or projected")
 
