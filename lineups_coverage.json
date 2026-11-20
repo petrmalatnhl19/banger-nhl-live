@@ -1,13 +1,12 @@
 {
-  "generatedAt": "2026-11-20T02:39:57.755782+00:00",
+  "generatedAt": "2026-11-20T03:39:03.119407+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 27,
+  "currentProjections": 28,
   "needsFreshProjection": [
     "panthers",
     "predators",
     "rangers",
-    "senators",
     "sharks"
   ],
   "missing": [],
@@ -15,7 +14,6 @@
     "panthers",
     "predators",
     "rangers",
-    "senators",
     "sharks"
   ],
   "manualSnapshots": [],
@@ -363,13 +361,14 @@
     "senators": {
       "hasProjectedLines": true,
       "sources": [
+        "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": null,
-      "source": null,
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-19T20:24:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "sharks": {
       "hasProjectedLines": true,

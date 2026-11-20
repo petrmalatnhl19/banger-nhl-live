@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T02:39:56.259005+00:00",
+  "generatedAt": "2026-11-20T03:39:01.650563+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -102,26 +102,25 @@
       "candidatePublishedAt": "2026-11-19T20:24:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
-      "rosterValidation": "insufficient_position_matched_lines",
+      "rosterValidation": "passed",
+      "gameEvidenceExceptions": [
+        {
+          "player": "Philip Tomasino",
+          "role": "forwards",
+          "basis": "official game boxscore on projection publication date"
+        },
+        {
+          "player": "Samuel Blais",
+          "role": "forwards",
+          "basis": "official game boxscore on projection publication date"
+        }
+      ],
       "roleMismatches": [],
       "rejectedLines": [
         {
           "group": "forwards",
-          "line": 2,
-          "players": [
-            "Philip Tomasino"
-          ],
-          "sourceLine": [
-            "Philip Tomasino",
-            "Shane Pinto",
-            "Drake Batherson"
-          ]
-        },
-        {
-          "group": "forwards",
           "line": 4,
           "players": [
-            "Samuel Blais",
             "Tyler Boucher"
           ],
           "sourceLine": [
@@ -133,24 +132,14 @@
       ],
       "rejectedPlayerReasons": [
         {
-          "name": "Philip Tomasino",
-          "expectedRole": "forwards",
-          "reason": "not_in_current_roster"
-        },
-        {
-          "name": "Samuel Blais",
-          "expectedRole": "forwards",
-          "reason": "not_in_current_roster"
-        },
-        {
           "name": "Tyler Boucher",
           "expectedRole": "forwards",
           "reason": "not_in_current_roster"
         }
       ],
-      "validatedForwardLines": 2,
+      "validatedForwardLines": 3,
       "validatedDefensePairs": 3,
-      "accepted": false
+      "accepted": true
     },
     "sharks": {
       "team": "SJS",

@@ -205,30 +205,13 @@
     },
     {
       "team": "senators",
-      "status": "missing_team",
+      "status": "incomplete_projection",
       "reason": "rejected_roster_lines",
-      "missingForwardLines": 4,
-      "missingDefensePairs": 3,
-      "source": null,
-      "publishedAt": null,
+      "missingForwardLines": 1,
+      "missingDefensePairs": 0,
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-19T20:24:00+00:00",
       "rejectedLines": [
-        {
-          "group": "forwards",
-          "sourceLineNumber": 2,
-          "sourceLine": [
-            "Philip Tomasino",
-            "Shane Pinto",
-            "Drake Batherson"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Philip Tomasino",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        },
         {
           "group": "forwards",
           "sourceLineNumber": 4,
@@ -238,12 +221,6 @@
             "Tyler Boucher"
           ],
           "unverifiedPlayers": [
-            {
-              "name": "Samuel Blais",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            },
             {
               "name": "Tyler Boucher",
               "reason": "not_in_current_roster",
