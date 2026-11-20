@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-20T17:59:33.160231+00:00",
+  "fetchedAt": "2026-11-20T19:00:32.805683+00:00",
   "teams": {
     "blues": {
       "name": "Blues",
@@ -860,6 +860,10 @@
         [
           "Pavel Mintyukov",
           "Tristan Luneau"
+        ],
+        [
+          "Stian Solberg",
+          "Noah Warren"
         ]
       ],
       "goalies": [

@@ -580,63 +580,20 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "ducks": {
-      "updatedAt": "2026-11-20T00:21:57.906921+00:00",
-      "previousPublishedAt": "2026-11-17T18:29:00+00:00",
+      "updatedAt": "2026-11-20T19:00:32.803498+00:00",
+      "previousPublishedAt": "2026-11-19T20:24:00+00:00",
       "publishedAt": "2026-11-19T20:24:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
           "type": "added",
-          "player": "Alex Killorn",
-          "to": "Útok 3"
+          "player": "Stian Solberg",
+          "to": "Obrana 3"
         },
         {
           "type": "added",
-          "player": "Tim Washe",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Nikita Nesterenko",
-          "from": "Útok 3",
-          "to": "Útok 4"
-        },
-        {
-          "type": "moved",
-          "player": "Roger McQueen",
-          "from": "Útok 3",
-          "to": "Útok 4"
-        },
-        {
-          "type": "added",
-          "player": "Frank Vatrano",
-          "to": "Útok 4"
-        },
-        {
-          "type": "added",
-          "player": "Ian Moore",
-          "to": "Obrana 1"
-        },
-        {
-          "type": "moved",
-          "player": "Pavel Mintyukov",
-          "from": "Obrana 3",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "removed",
-          "player": "Drew Helleson",
-          "from": "Obrana 1"
-        },
-        {
-          "type": "removed",
-          "player": "Tyson Hinds",
-          "from": "Obrana 2"
-        },
-        {
-          "type": "removed",
           "player": "Noah Warren",
-          "from": "Obrana 3"
+          "to": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
