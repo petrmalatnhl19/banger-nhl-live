@@ -12,6 +12,8 @@ import unicodedata
 from html.parser import HTMLParser
 from pathlib import Path
 
+from scripts.data_13_game_identity import validate_game_claims
+
 ROOT = Path(__file__).resolve().parent.parent
 URL = "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
 TEAMS = re.compile(r"^(ANA|BOS|BUF|CAR|CBJ|CGY|CHI|COL|DAL|DET|EDM|FLA|LAK|MIN|MTL|NJD|NSH|NYI|NYR|OTT|PHI|PIT|SEA|SJS|STL|TBL|TOR|UTA|VAN|VGK|WPG|WSH)$")
@@ -109,9 +111,18 @@ def main():
     now = datetime.datetime.now(datetime.timezone.utc)
     schedule = json.loads(load("https://api-web.nhle.com/v1/schedule/" + now.date().isoformat()))
     candidates = extract(load(URL), rosters)
-    matches = match_schedule(candidates, schedule)
+    schedule_matches = match_schedule(candidates, schedule)
+    games = [
+        {"gameId": game.get("id"), "date": day.get("date"),
+         "home": game.get("homeTeam", {}).get("abbrev"),
+         "away": game.get("awayTeam", {}).get("abbrev")}
+        for day in schedule.get("gameWeek", [])
+        for game in day.get("games", [])
+    ]
+    matches, identity_issues = validate_game_claims(schedule_matches, games)
     result = {"checkedAt": now.isoformat(), "source": URL,
               "candidateCount": len(candidates), "matchedCount": len(matches),
+              "gameIdentityIssues": identity_issues,
               "matches": matches, "unmatched": [c for c in candidates if not any(
                   m["team"] == c["team"] and m["goalie"] == c["goalie"] and
                   m["opponent"] == c["opponent"] and m["venue"] == c["venue"]
