@@ -4,13 +4,13 @@
  if(root)root.BangerVideoRefresh=api;
 })(typeof globalThis!=='undefined'?globalThis:null,function(){
  function create({fetchLanding,apply,isCurrent,isVisible,setTimer= setInterval,clearTimer=clearInterval,intervalMs=45000}){
-  let timer=null,busy=false,epoch=0;
+  let timer=null,busyEpoch=null,epoch=0;
   async function tick(){
-   if(busy||!isCurrent()||!isVisible())return false;
-   const ticket=epoch;busy=true;
+   if(busyEpoch===epoch||!isCurrent()||!isVisible())return false;
+   const ticket=epoch;busyEpoch=ticket;
    try{const data=await fetchLanding();if(ticket!==epoch||!isCurrent()||!isVisible())return false;apply(data);return true}
    catch{return false}
-   finally{busy=false}
+   finally{if(busyEpoch===ticket)busyEpoch=null}
   }
   function stop(){epoch++;if(timer!==null){clearTimer(timer);timer=null}}
   function start(){stop();timer=setTimer(tick,Math.max(30000,intervalMs));return tick}
