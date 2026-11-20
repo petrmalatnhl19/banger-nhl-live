@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T13:52:52.760506+00:00",
+  "generatedAt": "2026-11-20T14:57:16.081509+00:00",
   "checked": 24,
   "articlesFound": 0,
   "errors": [],
@@ -201,42 +201,42 @@
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/edmonton-oilers-carolina-hurricanes-game-preview-november-21-2026",
+      "url": "https://www.nhl.com/news/buffalo-sabres-tampa-bay-lightning-game-preview-november-22-2026",
       "result": "no_complete_projection",
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/carolina-hurricanes-edmonton-oilers-game-preview-november-21-2026",
+      "url": "https://www.nhl.com/news/tampa-bay-lightning-buffalo-sabres-game-preview-november-22-2026",
       "result": "no_complete_projection",
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/minnesota-wild-vancouver-canucks-game-preview-november-21-2026",
+      "url": "https://www.nhl.com/news/chicago-blackhawks-vancouver-canucks-game-preview-november-22-2026",
       "result": "no_complete_projection",
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/vancouver-canucks-minnesota-wild-game-preview-november-21-2026",
+      "url": "https://www.nhl.com/news/vancouver-canucks-chicago-blackhawks-game-preview-november-22-2026",
       "result": "no_complete_projection",
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/philadelphia-flyers-montreal-canadiens-game-preview-november-21-2026",
+      "url": "https://www.nhl.com/news/edmonton-oilers-st-louis-blues-game-preview-november-22-2026",
       "result": "no_complete_projection",
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/montreal-canadiens-philadelphia-flyers-game-preview-november-21-2026",
+      "url": "https://www.nhl.com/news/st-louis-blues-edmonton-oilers-game-preview-november-22-2026",
       "result": "no_complete_projection",
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/vegas-golden-knights-winnipeg-jets-game-preview-november-21-2026",
+      "url": "https://www.nhl.com/news/pittsburgh-penguins-dallas-stars-game-preview-november-22-2026",
       "result": "no_complete_projection",
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/winnipeg-jets-vegas-golden-knights-game-preview-november-21-2026",
+      "url": "https://www.nhl.com/news/dallas-stars-pittsburgh-penguins-game-preview-november-22-2026",
       "result": "no_complete_projection",
       "teams": []
     }
@@ -245,11 +245,11 @@
   "fixturesSelected": 12,
   "fixturesDeferred": 7,
   "rotation": {
-    "window": 1994647,
+    "window": 1994651,
     "fixed": 8,
     "rotating": 4,
     "remainingPool": 11,
-    "rotationStart": 2
+    "rotationStart": 7
   },
   "selectedFixtures": [
     {
@@ -293,24 +293,24 @@
       "home": "BOS"
     },
     {
-      "date": "2026-11-21",
-      "away": "EDM",
-      "home": "CAR"
+      "date": "2026-11-22",
+      "away": "BUF",
+      "home": "TBL"
     },
     {
-      "date": "2026-11-21",
-      "away": "MIN",
+      "date": "2026-11-22",
+      "away": "CHI",
       "home": "VAN"
     },
     {
-      "date": "2026-11-21",
-      "away": "PHI",
-      "home": "MTL"
+      "date": "2026-11-22",
+      "away": "EDM",
+      "home": "STL"
     },
     {
-      "date": "2026-11-21",
-      "away": "VGK",
-      "home": "WPG"
+      "date": "2026-11-22",
+      "away": "PIT",
+      "home": "DAL"
     }
   ]
 }
