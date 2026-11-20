@@ -1,21 +1,27 @@
 {
-  "generatedAt": "2026-11-20T06:49:18.226473+00:00",
+  "generatedAt": "2026-11-20T11:30:53.545068+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 27,
+  "currentProjections": 24,
   "needsFreshProjection": [
+    "bruins",
     "devils",
+    "mammoth",
     "panthers",
     "predators",
     "rangers",
+    "red wings",
     "sharks"
   ],
   "missing": [],
   "olderVerified": [
+    "bruins",
     "devils",
+    "mammoth",
     "panthers",
     "predators",
     "rangers",
+    "red wings",
     "sharks"
   ],
   "manualSnapshots": [],
@@ -75,11 +81,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-18T20:07:00.572000+00:00",
       "source": "https://www.nhl.com/news/boston-bruins-detroit-red-wings-game-preview-november-18-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "canadiens": {
       "hasProjectedLines": true,
@@ -257,11 +263,11 @@
         "archive",
         "manual"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-18T20:05:17.814000+00:00",
       "source": "https://www.nhl.com/news/colorado-avalanche-utah-mammoth-game-preview-november-18-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "maple leafs": {
       "hasProjectedLines": true,
@@ -342,11 +348,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-18T20:07:00.572000+00:00",
       "source": "https://www.nhl.com/news/boston-bruins-detroit-red-wings-game-preview-november-18-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "sabres": {
       "hasProjectedLines": true,

@@ -137,6 +137,16 @@ jobs:
             cat goalie_sources_probe.json
             echo '\`\`\`'
           } >> "$GITHUB_STEP_SUMMARY"
+      - name: Summarize goalie source connectivity versus usable projections
+        if: always()
+        run: |
+          python scripts/data_12_source_health_report.py > goalie_source_health_summary.json
+          {
+            echo '### DATA-12: Source connectivity is not starter verification'
+            echo '\`\`\`json'
+            cat goalie_source_health_summary.json
+            echo '\`\`\`'
+          } >> "$GITHUB_STEP_SUMMARY"
       - name: Test RotoWire publisher health checks
         run: python -m unittest scripts.test_rotowire_publisher_health
       - name: Validate RotoWire goalie matchups

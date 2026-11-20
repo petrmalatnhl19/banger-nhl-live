@@ -47,10 +47,9 @@ jobs:
         run: python -m unittest scripts/test_data_12_goalie_publisher.py
       - name: DATA-12 source failure diagnostics
         run: python -m unittest scripts/test_data_12_source_failures.py
-        if: ${{ hashFiles('scripts/test_data_12_source_failures.py') != '' }}
+
       - name: DATA-12 source health summary regressions
         run: python -m unittest scripts/test_data_12_source_health_report.py
-        if: ${{ hashFiles('scripts/test_data_12_source_health_report.py') != '' }}
       - name: VIDEO-03 official highlights metadata regression
         run: node --test tests/video-03-live-highlights.test.cjs
       - name: VIDEO-05 official highlight link UI regression
@@ -62,10 +61,11 @@ jobs:
       - name: VIDEO-09 safe LIVE clip refresh regression
         run: node --test tests/video-09-live-refresh.test.cjs
       - name: VIDEO-10 live goal link lifecycle integration
-        run: node --test tests/video-10-live-integration.test.cjs
+        run: node --test tests/video-10-integration.test.cjs
       - name: VIDEO-11 NHL clip metadata diagnostic (informational)
         continue-on-error: true
         run: node scripts/video-11-nhl-diagnostic.cjs
+
       - name: Validate local scripts and HTML entrypoint
         shell: bash
         run: |
