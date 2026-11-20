@@ -45,6 +45,8 @@ jobs:
         run: python scripts/audit_data_11_goalie_feed.py
       - name: DATA-12 goalie publisher schema regression
         run: python -m unittest scripts/test_data_12_goalie_publisher.py
+      - name: DATA-12 source failure diagnostics
+        run: python -m unittest scripts/test_data_12_source_failures.py
       - name: Validate local scripts and HTML entrypoint
         shell: bash
         run: |
