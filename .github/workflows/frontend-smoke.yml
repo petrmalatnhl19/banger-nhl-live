@@ -35,6 +35,8 @@ jobs:
         run: node --test .github/scripts/test-data-07.cjs
       - name: DATA-08 coverage integrity and partial exports
         run: node --test .github/scripts/test-data-08.cjs
+      - name: DATA-09 goalie collector status schema
+        run: python -m unittest scripts/test_data_09_goalie_status.py
       - name: Validate local scripts and HTML entrypoint
         shell: bash
         run: |
