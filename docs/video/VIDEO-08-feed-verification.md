@@ -23,3 +23,5 @@ Date: 2026-11-20. Read-only inspection of deployed Supabase Edge Function `nhl-f
 5. Keep PR draft; do not merge until playback and regression checks are confirmed.
 
 No Supabase writes, deploys, or schema changes performed.
+
+
