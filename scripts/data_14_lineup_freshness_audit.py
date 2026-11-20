@@ -2,19 +2,20 @@
 
 Never infer confirmed next-game lineups from a recent article.
 """
-import datetime
 import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
 
-def audit(coverage, source_diagnostics):
+def audit(coverage, source_diagnostics, recovery=None):
     teams = coverage.get("teams", {})
     sources = source_diagnostics.get("teams", {})
     report = []
+    recovery_teams = {x["team"]: x for x in (recovery or {}).get("teams", []) if x.get("team")}
     for team, item in sorted(teams.items()):
         source = sources.get(team, {})
+        recovery_item = recovery_teams.get(team, {})
         forward_count = source.get("validatedForwardLines")
         defense_count = source.get("validatedDefensePairs")
         fresh = item.get("currentProjection") is True
@@ -32,6 +33,11 @@ def audit(coverage, source_diagnostics):
         else:
             reason = "recent_projection_not_game_confirmation"
         report.append({
+            "missingForwardLines": recovery_item.get("missingForwardLines"),
+            "missingDefensePairs": recovery_item.get("missingDefensePairs"),
+            "recoveryReason": recovery_item.get("reason"),
+            "rejectedLines": recovery_item.get("rejectedLines", []),
+            "nextAction": recovery_item.get("nextAction"),
             "team": team, "reason": reason, "currentProjection": fresh,
             "validatedForwardLines": forward_count,
             "validatedDefensePairs": defense_count,
@@ -49,7 +55,9 @@ def audit(coverage, source_diagnostics):
 def main():
     coverage = json.loads((ROOT / "lineups_coverage.json").read_text(encoding="utf-8"))
     diagnostics = json.loads((ROOT / "lineups_source_diagnostics.json").read_text(encoding="utf-8"))
-    result = audit(coverage, diagnostics)
+    recovery_path = ROOT / "lineup_recovery_plan.json"
+    recovery = json.loads(recovery_path.read_text(encoding="utf-8")) if recovery_path.exists() else {}
+    result = audit(coverage, diagnostics, recovery)
     print(json.dumps(result, ensure_ascii=False, indent=2))
 
 
