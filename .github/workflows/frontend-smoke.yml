@@ -51,6 +51,10 @@ jobs:
         run: python -m unittest scripts/test_data_14_lineup_freshness_audit.py
       - name: DATA-14 multi-source permission and evidence gate regressions
         run: python -m unittest scripts/test_data_14_multisource_gate.py
+      - name: DATA-14 multi-source readiness regressions
+        run: python -m unittest scripts/test_data_14_multisource_readiness.py
+      - name: DATA-14 multi-source readiness diagnostic
+        run: python scripts/data_14_multisource_readiness.py
       - name: DATA-14 inspect committed lineup coverage
         run: python scripts/data_14_lineup_freshness_audit.py
       - name: DATA-12 source failure diagnostics
