@@ -24,3 +24,19 @@ Game: 2026020335 (Edmonton @ Florida), 17 November 2026.
 
 ## Release decision
 NO-GO for verified 5v5/PP/PK publication. CI success proves regression behavior only, not correctness of real-game lineup reconstruction.
+
+## Verified historical GitHub Actions run — actual NHL data FOUND (2026-11-20)
+**Correction to earlier claim above:** the NHL endpoint was inaccessible from the assistant's web/container environment, but **the existing GitHub Actions runner did successfully fetch it**. Evidence: workflow `Frontend smoke checks`, run ID `44834218464`, job ID `136626415890`, log at 2026-11-20 23:06 UTC, `scripts/lineups-03-real-game-diagnostic.cjs 2026020335`. The report below is transcribed from that real execution, not from a synthetic fixture.
+
+- NHL shiftcharts HTTP 200, reportedTotal/rawRows **827**, 38 players, team IDs 13 (Florida) and 22 (Edmonton), periods 1–3.
+- Shift parser: **813 accepted / 14 rejected**. Rejections: 7 non-shift events, 7 long shifts (over 180s). Roster audit identifies all 7 long shifts as goalie shifts, zero skaters. Separate roster-aware audit reports 812 skater shifts and 8 goalie shifts; these figures belong to different processing stages and should not be added as though they were disjoint parser outputs.
+- On-ice occupancy: EDM 5 skaters 3360s / 4 skaters 240s; FLA 5 skaters 3171s / 4 skaters 180s / 3 skaters 101s / 6 skaters 148s. These are per-team counts, **not confirmed 5v5 time**.
+- Event strength agreement: **271 matched, 10 mismatched, 4 skipped** (281 compared). All 10 mismatches were near shift boundaries; event evidence resolves 10 only at the preceding second, **not** verified intervals.
+- Strength interval candidates: 206, 3018 seconds total; 5v5 2457s, 4v5 213s, 5v4 153s, 5v6 126s, 5v3 69s.
+- Candidate PP seconds: EDM 222, FLA 213. These are partial candidate intervals and do not equal independently validated full-game PP totals.
+- `publicSpecialTeams` remains `unavailable`; `verifiedUnits:false`.
+- Goal-strength diagnostic reports 2 potential minor-termination goals with **no candidate strength at goal second**; no PP-goal/penalty termination verification.
+- Existing real-game pipeline produces **five-skater combinations**, not the benchmark's separate forward trios and defence pairs. Thus there is still **no apples-to-apples comparison** with the independent HockeyWeights 5v5 benchmark.
+
+### Next reproducibility requirement
+Save an auditable, appropriately licensed minimal fixture or machine-readable summary from a GitHub Actions run, including provenance, then implement a 5v5-only forward-trio/defence-pair extractor and compare actual derived seconds. Do not inject benchmark values as observations or mark the public gate verified.
