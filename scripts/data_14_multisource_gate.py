@@ -6,7 +6,7 @@ parse, copy or republish third-party lineups.
 from urllib.parse import urlparse
 
 SOURCE_POLICY = {
-    "nhl.com": {"role": "primary", "automaticReuseAuthorized": True},
+    "nhl.com": {"role": "primary", "automaticReuseAuthorized": False},
     "fantasy_roundup": {"role": "fallback", "automaticReuseAuthorized": False},
     "between_the_lines": {"role": "diagnostic", "automaticReuseAuthorized": False},
 }
@@ -44,8 +44,8 @@ def source_readiness(usage_report):
             "role": source.get("role"),
             "usedTeams": source.get("usedTeams", 0),
             "reachable": source.get("reachable"),
-            "automaticReuseAuthorized": source.get("automaticReuseAuthorized", name == "nhl.com"),
-            "canAutoPublish": name == "nhl.com",
+            "automaticReuseAuthorized": source.get("automaticReuseAuthorized", False),
+            "canAutoPublish": bool(source.get("automaticReuseAuthorized", False)),
         }
         for name, source in sorted(sources.items())
     }
