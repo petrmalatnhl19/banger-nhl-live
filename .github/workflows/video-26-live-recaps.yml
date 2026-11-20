@@ -1,0 +1,23 @@
+name: VIDEO-26 live NHL recap integration
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'video/game-recaps.js'
+      - 'tests/video-26-live-recaps.cjs'
+      - '.github/workflows/video-26-live-recaps.yml'
+jobs:
+  live-recaps:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Unit tests
+        run: node --test tests/video-23-game-recaps.test.cjs
+      - name: Verify actual NHL score and recap links
+        run: node tests/video-26-live-recaps.cjs
