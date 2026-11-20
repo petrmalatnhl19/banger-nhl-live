@@ -1017,31 +1017,20 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "avalanche": {
-      "updatedAt": "2026-11-20T00:21:57.906984+00:00",
-      "previousPublishedAt": "2026-11-18T20:05:17.814000+00:00",
+      "updatedAt": "2026-11-20T15:59:25.827684+00:00",
+      "previousPublishedAt": "2026-11-19T20:24:00+00:00",
       "publishedAt": "2026-11-19T20:24:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
-          "type": "moved",
-          "player": "Logan O’Connor",
-          "from": "Útok 4",
-          "to": "Útok 3"
+          "type": "removed",
+          "player": "Alex Gagne",
+          "from": "Obrana 3"
         },
         {
           "type": "removed",
-          "player": "Gavin Brindley",
-          "from": "Útok 3"
-        },
-        {
-          "type": "removed",
-          "player": "Parker Kelly",
-          "from": "Útok 4"
-        },
-        {
-          "type": "removed",
-          "player": "Fedor Svechkov",
-          "from": "Útok 4"
+          "player": "Brent Burns",
+          "from": "Obrana 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -1201,57 +1190,25 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "senators": {
-      "updatedAt": "2026-11-10T19:28:11.318048+00:00",
-      "previousPublishedAt": "2026-11-07T17:48:55.189000+00:00",
-      "publishedAt": "2026-11-10T18:15:42.415000+00:00",
-      "source": "https://www.nhl.com/news/washington-capitals-ottawa-senators-game-preview-november-10-2026",
+      "updatedAt": "2026-11-20T15:59:25.826736+00:00",
+      "previousPublishedAt": "2026-11-19T20:24:00+00:00",
+      "publishedAt": "2026-11-19T20:24:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
-          "type": "moved",
-          "player": "Dylan Cozens",
-          "from": "Útok 3",
-          "to": "Útok 1"
-        },
-        {
-          "type": "moved",
-          "player": "Nick Cousins",
-          "from": "Útok 1",
-          "to": "Útok 2"
-        },
-        {
           "type": "added",
-          "player": "Ridly Greig",
-          "to": "Útok 3"
-        },
-        {
-          "type": "added",
-          "player": "Nikolas Matinpalo",
-          "to": "Obrana 3"
-        },
-        {
-          "type": "removed",
-          "player": "Philip Tomasino",
-          "from": "Útok 2"
-        },
-        {
-          "type": "removed",
           "player": "Samuel Blais",
-          "from": "Útok 4"
+          "to": "Útok 4"
         },
         {
-          "type": "removed",
+          "type": "added",
           "player": "Stephen Halliday",
-          "from": "Útok 4"
+          "to": "Útok 4"
         },
         {
-          "type": "removed",
-          "player": "Hayden Hodgson",
-          "from": "Útok 4"
-        },
-        {
-          "type": "removed",
-          "player": "Carter Yakemchuk",
-          "from": "Obrana 3"
+          "type": "added",
+          "player": "Tyler Boucher",
+          "to": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

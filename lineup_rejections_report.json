@@ -1,9 +1,9 @@
 {
-  "teamsWithRejectedLines": 5,
+  "teamsWithRejectedLines": 4,
   "teams": {
     "bruins": {
       "team": "BOS",
-      "rosterUpdatedAt": "2026-11-20T14:56:52.568250+00:00",
+      "rosterUpdatedAt": "2026-11-20T15:58:33.532533+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -31,7 +31,7 @@
     },
     "jets": {
       "team": "WPG",
-      "rosterUpdatedAt": "2026-11-20T14:56:54.563137+00:00",
+      "rosterUpdatedAt": "2026-11-20T15:58:41.145485+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -59,7 +59,7 @@
     },
     "lightning": {
       "team": "TBL",
-      "rosterUpdatedAt": "2026-11-20T14:56:54.201095+00:00",
+      "rosterUpdatedAt": "2026-11-20T15:58:40.053504+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 3,
       "candidateDefensePairs": 4,
@@ -92,7 +92,7 @@
     },
     "red wings": {
       "team": "DET",
-      "rosterUpdatedAt": "2026-11-20T14:56:53.108324+00:00",
+      "rosterUpdatedAt": "2026-11-20T15:58:35.600039+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -110,34 +110,6 @@
           "unverifiedPlayers": [
             {
               "name": "Nate Danielson",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ]
-    },
-    "senators": {
-      "team": "OTT",
-      "rosterUpdatedAt": "2026-11-20T14:56:53.794337+00:00",
-      "rosterSnapshotPresent": true,
-      "candidateForwardLines": 4,
-      "candidateDefensePairs": 3,
-      "validatedForwardLines": 3,
-      "validatedDefensePairs": 3,
-      "rejected": [
-        {
-          "group": "forwards",
-          "sourceLineNumber": 4,
-          "sourceLine": [
-            "Samuel Blais",
-            "Stephen Halliday",
-            "Tyler Boucher"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Tyler Boucher",
               "reason": "not_in_current_roster",
               "inLocalCurrentRoster": false,
               "requiresIndependentGameEvidence": true

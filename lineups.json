@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-20T14:57:19.667298+00:00",
+  "fetchedAt": "2026-11-20T15:59:25.829547+00:00",
   "teams": {
     "blues": {
       "name": "Blues",
@@ -348,6 +348,11 @@
           "Michael Amadio",
           "Ridly Greig",
           "Claude Giroux"
+        ],
+        [
+          "Samuel Blais",
+          "Stephen Halliday",
+          "Tyler Boucher"
         ]
       ],
       "defense": [
@@ -893,10 +898,6 @@
         [
           "Brett Kulak",
           "Noah Juulsen"
-        ],
-        [
-          "Alex Gagne",
-          "Brent Burns"
         ]
       ],
       "goalies": [
