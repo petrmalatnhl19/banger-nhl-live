@@ -33,8 +33,16 @@ const assert=require('node:assert/strict');
   assert.equal(report.target,'_blank');
   assert.match(report.rel,/noopener/);
   assert.match(report.rel,/noreferrer/);
+  // Mobile layout hides secondary tabs behind the More menu. Navigate as a user.
   const goalsTab=page.locator('[data-match-tab="goals"]');
-  if(await goalsTab.count())await goalsTab.first().click();
+  assert.equal(await goalsTab.count(),1,'Goals tab should exist');
+  if(!await goalsTab.isVisible()){
+   const more=page.locator('#matchMoreToggle');
+   assert.equal(await more.isVisible(),true,'Mobile More button should be visible');
+   await more.click();
+  }
+  await goalsTab.click();
+  assert.equal(await page.locator('[data-match-pane="goals"]').isVisible(),true,'Goals pane should be visible after mobile navigation');
   assert.equal(await page.locator('[data-match-pane="goals"] .goal-video-link a').count(),1);
   console.log('VIDEO-17 passed: actual match modal renders 3 goals, 1 official safe video link; missing/unsafe clips are hidden.');
   await context.close();
