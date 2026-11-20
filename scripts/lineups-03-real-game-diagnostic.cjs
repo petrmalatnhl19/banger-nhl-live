@@ -20,7 +20,7 @@ else {
    const parsed=parseShiftCharts(payload,gameId);
    const rejectionAudit=classifyShiftRows(payload,gameId);
    const roleAudit=boxscore.fetchError?{status:'unverified',reason:'boxscore-fetch-failed'}:verifyLongShiftRoles(payload,boxscore,gameId);
-   const boxscoreShape=boxscore.fetchError?{fetchStatus:'failed'}:{fetchStatus:'ok',topLevelKeys:Object.keys(boxscore).sort(),playerByGameKeys:Object.keys(boxscore.playerByGame||{}).sort(),playerByGameTypes:Object.fromEntries(Object.entries(boxscore.playerByGame||{}).map(([key,value])=>[key,Array.isArray(value)?'array':typeof value]))};
+   const boxscoreShape=boxscore.fetchError?{fetchStatus:'failed'}:{fetchStatus:'ok',topLevelKeys:Object.keys(boxscore).sort(),playerByGameKeys:Object.keys(boxscore.playerByGameStats||{}).sort(),playerByGameTypes:Object.fromEntries(Object.entries(boxscore.playerByGameStats||{}).map(([key,value])=>[key,Array.isArray(value)?'array':typeof value]))};
    const data=Array.isArray(payload.data)?payload.data:[];
    const periods=[...new Set(data.map(x=>x.period))].sort();
    const teams=[...new Set(data.map(x=>x.teamId))].sort();
