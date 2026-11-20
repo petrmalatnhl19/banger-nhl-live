@@ -12,7 +12,12 @@ import unicodedata
 from html.parser import HTMLParser
 from pathlib import Path
 
-from data_13_game_identity import validate_game_claims
+try:
+    from scripts.data_13_game_identity import validate_game_claims
+except ModuleNotFoundError as exc:
+    if exc.name != "scripts":
+        raise
+    from data_13_game_identity import validate_game_claims
 
 ROOT = Path(__file__).resolve().parent.parent
 URL = "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
