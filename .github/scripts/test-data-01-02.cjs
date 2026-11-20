@@ -29,7 +29,7 @@ test('DATA-02: every published starter has explicit status and same-date evidenc
   assert.ok(!Number.isNaN(Date.parse(entry.checkedAt)),team+' missing check timestamp');
  }
  for(const conflict of data.conflicts||[]) {
-  assert.ok(conflict.team&&conflict.reason,'invalid goalie conflict');
+  assert.ok(conflict.team&&conflict.rotowire&&conflict.previous,'invalid goalie conflict: '+JSON.stringify(conflict));
   assert.ok(conflict.rotowire!==conflict.previous,'identical conflict values');
  }
 });
