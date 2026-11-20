@@ -3,7 +3,7 @@
     "lineup_core_report.json",
     "lineup_rejections_report.json"
   ],
-  "incompleteTeams": 12,
+  "incompleteTeams": 11,
   "teams": [
     {
       "team": "avalanche",
@@ -62,17 +62,6 @@
       "reason": "incomplete_source_or_no_validated_replacement",
       "missingForwardLines": 0,
       "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-19T20:24:00+00:00",
-      "rejectedLines": [],
-      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
-    },
-    {
-      "team": "ducks",
-      "status": "incomplete_projection",
-      "reason": "incomplete_source_or_no_validated_replacement",
-      "missingForwardLines": 0,
-      "missingDefensePairs": 1,
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "publishedAt": "2026-11-19T20:24:00+00:00",
       "rejectedLines": [],
