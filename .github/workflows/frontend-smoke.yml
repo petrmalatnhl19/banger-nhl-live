@@ -110,6 +110,8 @@ jobs:
         run: node --test tests/lineups-03-candidate-strength-intervals.test.cjs
       - name: LINEUPS-03.21 candidate strength units tests
         run: node --test tests/lineups-03-candidate-strength-units.test.cjs
+      - name: LINEUPS-03.22 candidate unit roster names tests
+        run: node --test tests/lineups-03-strength-names.test.cjs
       - name: LINEUPS-03 real-game NHL shiftcharts diagnostic (informational)
         continue-on-error: true
         timeout-minutes: 1
