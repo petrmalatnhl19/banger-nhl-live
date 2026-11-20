@@ -74,6 +74,8 @@ jobs:
         run: node --test tests/ux-lineups-02-special-teams.test.cjs
       - name: LINEUPS-03 observed units offline strength and overlap tests
         run: node --test tests/lineups-03-observed-units.test.cjs
+      - name: LINEUPS-03 NHL shiftcharts adapter offline tests
+        run: node --test tests/lineups-03-shiftcharts-adapter.test.cjs
       - name: VIDEO-11 NHL clip metadata diagnostic (informational)
         continue-on-error: true
         run: node scripts/video-11-nhl-diagnostic.cjs
