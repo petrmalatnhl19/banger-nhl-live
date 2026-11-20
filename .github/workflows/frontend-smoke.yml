@@ -118,6 +118,8 @@ jobs:
         run: node --test tests/lineups-03-candidate-coverage.test.cjs
       - name: LINEUPS-03.25 public special teams gate tests
         run: node --test tests/lineups-03-public-special-teams-gate.test.cjs
+      - name: LINEUPS-03.26 official PP time tests
+        run: node --test tests/lineups-03-official-special-teams-time.test.cjs
       - name: LINEUPS-03 real-game NHL shiftcharts diagnostic (informational)
         continue-on-error: true
         timeout-minutes: 1
