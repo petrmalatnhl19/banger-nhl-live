@@ -1,5 +1,6 @@
 """Offline DATA-13 game identity regression cases."""
 import unittest
+from pathlib import Path
 from scripts.data_13_game_identity import validate_game_claims, reconcile_source_claims
 
 GAME = [{"gameId": 123, "date": "2026-11-21", "home": "DAL", "away": "VGK"}]
@@ -60,6 +61,18 @@ class GameIdentityTests(unittest.TestCase):
         accepted, issues = validate_game_claims([CLAIM, {**CLAIM, "status": "confirmed"}], GAME)
         self.assertFalse(accepted)
         self.assertEqual(issues[0]["reason"], "conflicting_status")
+
+
+class PublisherIntegrationTests(unittest.TestCase):
+    def test_publisher_reconciles_matching_game_claims(self):
+        source = (Path(__file__).with_name("publish_rotowire_goalies.py")).read_text(encoding="utf-8")
+        self.assertIn("reconcile_source_claims([previous, incoming])", source)
+        self.assertIn('existing.get("gameId") is not None', source)
+        self.assertIn('"cross_source_" + reason', source)
+
+    def test_publisher_keeps_confirmation_basis(self):
+        source = (Path(__file__).with_name("publish_rotowire_goalies.py")).read_text(encoding="utf-8")
+        self.assertIn('"confirmationBasis": item["confirmationBasis"]', source)
 
 
 class CrossSourceTests(unittest.TestCase):
