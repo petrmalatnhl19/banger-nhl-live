@@ -101,6 +101,31 @@ jobs:
         run: python scripts/audit_lineups.py
       - name: Fetch projected starting goalies (optional source)
         run: python scripts/update_starting_goalies.py
+      - name: Report starting goalie source health
+        if: always()
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          path = Path("starting_goalies.json")
+          print("### Starting goalie feed health")
+          with open(Path(__import__("os").environ["GITHUB_STEP_SUMMARY"]), "a", encoding="utf-8") as summary:
+              summary.write("### Starting goalie feed health\\n")
+              if not path.exists():
+                  summary.write("Export missing; no current starter claims verified.\\n")
+              else:
+                  data = json.loads(path.read_text(encoding="utf-8"))
+                  count = len(data.get("teams", {}))
+                  status = data.get("status", "unknown")
+                  errors = data.get("sourceErrors", [])
+                  conflicts = data.get("conflicts", [])
+                  summary.write(f"Status: **{status}**; projected teams: **{count}**; source errors: **{len(errors)}**; conflicts: **{len(conflicts)}**.\\n")
+                  if count == 0:
+                      summary.write("No verified game-day starter projections in this export.\\n")
+                  for error in errors:
+                      summary.write(f"- Source error: {str(error)[:200]}\\n")
+          PY
       - name: Probe public goalie sources (diagnostic only)
         if: always()
         run: |
