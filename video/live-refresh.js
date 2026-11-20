@@ -8,7 +8,7 @@
   async function tick(){
    if(busy||!isCurrent()||!isVisible())return false;
    const ticket=epoch;busy=true;
-   try{const data=await fetchLanding();if(ticket!==epoch||!isCurrent())return false;apply(data);return true}
+   try{const data=await fetchLanding();if(ticket!==epoch||!isCurrent()||!isVisible())return false;apply(data);return true}
    catch{return false}
    finally{busy=false}
   }
