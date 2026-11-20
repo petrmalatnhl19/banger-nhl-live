@@ -2,9 +2,19 @@
 import ast
 import pathlib
 import unittest
+from scripts.publish_rotowire_goalies import preserve_explicit_confirmation
 
 ROOT=pathlib.Path(__file__).resolve().parent
 class PublisherSchemaTests(unittest.TestCase):
+ def test_unsubstantiated_confirmed_downgrades_to_projected(self):
+  record=preserve_explicit_confirmation({"status":"confirmed","goalie":"Example"})
+  self.assertEqual(record["status"],"projected")
+ def test_confirmation_basis_without_evidence_is_not_enough(self):
+  record=preserve_explicit_confirmation({"status":"confirmed","confirmationBasis":"explicit_pregame_report"})
+  self.assertEqual(record["status"],"projected")
+ def test_explicit_confirmation_with_evidence_is_preserved(self):
+  record=preserve_explicit_confirmation({"status":"confirmed","confirmationBasis":"explicit_pregame_report","confirmationEvidence":"Source explicitly reports starter"})
+  self.assertEqual(record["status"],"confirmed")
  def test_publisher_uses_only_partial_or_unavailable(self):
   tree=ast.parse((ROOT/"publish_rotowire_goalies.py").read_text(encoding="utf-8"))
   assignments=[node for node in ast.walk(tree) if isinstance(node,ast.Assign) and any(
