@@ -20,26 +20,54 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "penguins": {
-      "updatedAt": "2026-11-14T16:43:29.538652+00:00",
-      "previousPublishedAt": "2026-11-11T19:57:02.373000+00:00",
-      "publishedAt": "2026-11-14T16:32:26.653000+00:00",
-      "source": "https://www.nhl.com/news/ottawa-senators-pittsburgh-penguins-game-preview-november-14-2026",
+      "updatedAt": "2026-11-20T20:02:37.743971+00:00",
+      "previousPublishedAt": "2026-11-19T20:24:00+00:00",
+      "publishedAt": "2026-11-20T19:57:20.638000+00:00",
+      "source": "https://www.nhl.com/news/pittsburgh-penguins-nashville-predators-game-preview-november-21-2026",
       "events": [
         {
           "type": "moved",
-          "player": "Nick Robertson",
-          "from": "Útok 4",
-          "to": "Útok 3"
+          "player": "Tommy Novak",
+          "from": "Útok 2",
+          "to": "Útok 1"
         },
         {
           "type": "added",
-          "player": "Rutger McGroarty",
+          "player": "Andrei Kuzmenko",
+          "to": "Útok 2"
+        },
+        {
+          "type": "added",
+          "player": "Avery Hayes",
           "to": "Útok 4"
         },
         {
+          "type": "moved",
+          "player": "Kaedan Korczak",
+          "from": "Obrana 2",
+          "to": "Obrana 1"
+        },
+        {
+          "type": "moved",
+          "player": "Trevor van Riemsdyk",
+          "from": "Obrana 3",
+          "to": "Obrana 2"
+        },
+        {
+          "type": "moved",
+          "player": "Spencer Stastney",
+          "from": "Obrana 1",
+          "to": "Obrana 3"
+        },
+        {
           "type": "removed",
-          "player": "Ville Koivunen",
-          "from": "Útok 3"
+          "player": "Evgeni Malkin",
+          "from": "Útok 1"
+        },
+        {
+          "type": "removed",
+          "player": "Nick Robertson",
+          "from": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -689,66 +717,90 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "blackhawks": {
-      "updatedAt": "2026-11-20T00:21:57.906721+00:00",
-      "previousPublishedAt": "2026-11-17T17:41:00+00:00",
-      "publishedAt": "2026-11-19T20:24:00+00:00",
+      "updatedAt": "2026-11-20T20:02:37.743667+00:00",
+      "previousPublishedAt": "2026-11-19T20:24:00+00:00",
+      "publishedAt": "2026-11-20T19:52:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
           "type": "moved",
-          "player": "Anton Frondell",
+          "player": "Oliver Moore",
           "from": "Útok 2",
           "to": "Útok 1"
         },
         {
           "type": "moved",
-          "player": "Oliver Moore",
-          "from": "Útok 3",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
           "player": "Frank Nazar",
-          "from": "Útok 3",
-          "to": "Útok 2"
+          "from": "Útok 2",
+          "to": "Útok 1"
         },
         {
           "type": "moved",
           "player": "Patrick Kane",
-          "from": "Útok 3",
+          "from": "Útok 2",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Ryan Donato",
+          "from": "Útok 4",
           "to": "Útok 2"
         },
         {
-          "type": "added",
-          "player": "Jordan Greenway",
+          "type": "moved",
+          "player": "Anton Frondell",
+          "from": "Útok 1",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Andrew Mangiapane",
+          "from": "Útok 4",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Roman Kantserov",
+          "from": "Útok 1",
           "to": "Útok 3"
         },
         {
           "type": "moved",
-          "player": "Ryan Greene",
-          "from": "Útok 4",
+          "player": "Tyler Bertuzzi",
+          "from": "Útok 1",
           "to": "Útok 3"
+        },
+        {
+          "type": "moved",
+          "player": "Jordan Greenway",
+          "from": "Útok 3",
+          "to": "Útok 4"
+        },
+        {
+          "type": "added",
+          "player": "Cole Smith",
+          "to": "Útok 4"
         },
         {
           "type": "moved",
           "player": "Teuvo Teravainen",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "added",
-          "player": "Dillon Boucher",
+          "from": "Útok 3",
           "to": "Útok 4"
         },
         {
-          "type": "removed",
-          "player": "Connor Bedard",
-          "from": "Útok 1"
+          "type": "added",
+          "player": "Wyatt Kaiser",
+          "to": "Obrana 3"
+        },
+        {
+          "type": "added",
+          "player": "Kevin Korchinski",
+          "to": "Obrana 3"
         },
         {
           "type": "removed",
-          "player": "Cole Smith",
-          "from": "Útok 2"
+          "player": "Dillon Boucher",
+          "from": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -1171,30 +1223,30 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "predators": {
-      "updatedAt": "2026-11-17T20:41:23.249624+00:00",
-      "previousPublishedAt": "2026-11-15T18:24:23.483000+00:00",
-      "publishedAt": "2026-11-17T20:36:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "updatedAt": "2026-11-20T20:02:37.744120+00:00",
+      "previousPublishedAt": "2026-11-17T18:20:00+00:00",
+      "publishedAt": "2026-11-20T19:57:20.638000+00:00",
+      "source": "https://www.nhl.com/news/pittsburgh-penguins-nashville-predators-game-preview-november-21-2026",
       "events": [
         {
           "type": "added",
-          "player": "Jonathan Marchessault",
+          "player": "Reid Schaefer",
           "to": "Útok 3"
         },
         {
-          "type": "removed",
-          "player": "Reid Schaefer",
-          "from": "Útok 3"
+          "type": "added",
+          "player": "Nicolas Hague",
+          "to": "Obrana 3"
         },
         {
-          "type": "removed",
-          "player": "Daemon Hunt",
-          "from": "Obrana 3"
-        },
-        {
-          "type": "removed",
+          "type": "added",
           "player": "Jayden Struble",
-          "from": "Obrana 3"
+          "to": "Obrana 3"
+        },
+        {
+          "type": "removed",
+          "player": "Vitali Pinchuk",
+          "from": "Útok 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

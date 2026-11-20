@@ -3,7 +3,7 @@
     "lineup_core_report.json",
     "lineup_rejections_report.json"
   ],
-  "incompleteTeams": 11,
+  "incompleteTeams": 8,
   "teams": [
     {
       "team": "avalanche",
@@ -11,19 +11,8 @@
       "reason": "incomplete_source_or_no_validated_replacement",
       "missingForwardLines": 1,
       "missingDefensePairs": 1,
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-19T20:24:00+00:00",
-      "rejectedLines": [],
-      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
-    },
-    {
-      "team": "blackhawks",
-      "status": "incomplete_projection",
-      "reason": "incomplete_source_or_no_validated_replacement",
-      "missingForwardLines": 0,
-      "missingDefensePairs": 1,
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-19T20:24:00+00:00",
+      "source": "https://www.nhl.com/news/anaheim-ducks-colorado-avalanche-game-preview-november-19-2026",
+      "publishedAt": "2026-11-19T20:22:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
@@ -62,8 +51,8 @@
       "reason": "incomplete_source_or_no_validated_replacement",
       "missingForwardLines": 0,
       "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-19T20:24:00+00:00",
+      "source": "https://www.nhl.com/news/vancouver-canucks-seattle-kraken-game-preview-november-19-2026",
+      "publishedAt": "2026-11-19T19:54:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
@@ -73,8 +62,8 @@
       "reason": "incomplete_source_or_no_validated_replacement",
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-19T20:24:00+00:00",
+      "source": "https://www.nhl.com/news/new-york-islanders-winnipeg-jets-game-preview-november-19-2026",
+      "publishedAt": "2026-11-19T17:56:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
@@ -84,8 +73,8 @@
       "reason": "rejected_roster_lines",
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-19T20:24:00+00:00",
+      "source": "https://www.nhl.com/news/new-york-islanders-winnipeg-jets-game-preview-november-19-2026",
+      "publishedAt": "2026-11-19T17:56:00+00:00",
       "rejectedLines": [
         {
           "group": "forwards",
@@ -113,8 +102,8 @@
       "reason": "incomplete_source_or_no_validated_replacement",
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-19T20:24:00+00:00",
+      "source": "https://www.nhl.com/news/vancouver-canucks-seattle-kraken-game-preview-november-19-2026",
+      "publishedAt": "2026-11-19T19:54:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
@@ -124,8 +113,8 @@
       "reason": "rejected_roster_lines",
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-19T20:24:00+00:00",
+      "source": "https://www.nhl.com/news/edmonton-oilers-tampa-bay-lightning-game-preview-november-19-2026",
+      "publishedAt": "2026-11-19T17:53:00+00:00",
       "rejectedLines": [
         {
           "group": "defense",
@@ -151,17 +140,6 @@
         }
       ],
       "nextAction": "Verify official roster and source-player identity; do not auto-approve."
-    },
-    {
-      "team": "predators",
-      "status": "incomplete_projection",
-      "reason": "incomplete_source_or_no_validated_replacement",
-      "missingForwardLines": 0,
-      "missingDefensePairs": 1,
-      "source": "https://www.nhl.com/news/nashville-predators-minnesota-wild-game-preview-november-17-2026",
-      "publishedAt": "2026-11-17T18:20:00+00:00",
-      "rejectedLines": [],
-      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
     {
       "team": "red wings",
@@ -191,17 +169,6 @@
         }
       ],
       "nextAction": "Verify official roster and source-player identity; do not auto-approve."
-    },
-    {
-      "team": "stars",
-      "status": "incomplete_projection",
-      "reason": "incomplete_source_or_no_validated_replacement",
-      "missingForwardLines": 1,
-      "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-19T20:24:00+00:00",
-      "rejectedLines": [],
-      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     }
   ],
   "policy": "Diagnostics only. Never synthesize or automatically publish unverified lines."
