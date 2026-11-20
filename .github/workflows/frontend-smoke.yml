@@ -55,6 +55,8 @@ jobs:
         run: node --test tests/video-07-match-integration.test.cjs
       - name: VIDEO-09 safe LIVE clip refresh regression
         run: node --test tests/video-09-live-refresh.test.cjs
+      - name: VIDEO-10 live goal link lifecycle integration
+        run: node --test tests/video-10-live-integration.test.cjs
       - name: Validate local scripts and HTML entrypoint
         shell: bash
         run: |
