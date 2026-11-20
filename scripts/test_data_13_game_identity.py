@@ -1,6 +1,6 @@
 """Offline DATA-13 game identity regression cases."""
 import unittest
-from scripts.data_13_game_identity import validate_game_claims
+from scripts.data_13_game_identity import validate_game_claims, reconcile_source_claims
 
 GAME = [{"gameId": 123, "date": "2026-11-21", "home": "DAL", "away": "VGK"}]
 CLAIM = {"gameId": 123, "date": "2026-11-21", "team": "DAL", "opponent": "VGK", "venue": "home", "goalie": "Example Goalie", "status": "projected"}
@@ -60,6 +60,38 @@ class GameIdentityTests(unittest.TestCase):
         accepted, issues = validate_game_claims([CLAIM, {**CLAIM, "status": "confirmed"}], GAME)
         self.assertFalse(accepted)
         self.assertEqual(issues[0]["reason"], "conflicting_status")
+
+
+class CrossSourceTests(unittest.TestCase):
+    def test_sources_disagree_on_goalie(self):
+        accepted, reason = reconcile_source_claims([CLAIM, {**CLAIM, "goalie": "Other"}])
+        self.assertIsNone(accepted)
+        self.assertEqual(reason, "conflicting_goalies")
+
+    def test_unsupported_confirmation_is_only_projection(self):
+        accepted, reason = reconcile_source_claims([CLAIM, {**CLAIM, "status": "confirmed"}])
+        self.assertIsNone(reason)
+        self.assertEqual(accepted["status"], "projected")
+
+    def test_evidenced_confirmation_survives_projection(self):
+        confirmed = {**CLAIM, "status": "confirmed",
+                     "confirmationBasis": "explicit_pregame_report",
+                     "confirmationEvidence": "Explicit pregame starter report"}
+        accepted, reason = reconcile_source_claims([CLAIM, confirmed])
+        self.assertIsNone(reason)
+        self.assertEqual(accepted["status"], "confirmed")
+        self.assertEqual(accepted["confirmationEvidence"], confirmed["confirmationEvidence"])
+
+    def test_conflicting_games_are_rejected(self):
+        accepted, reason = reconcile_source_claims([CLAIM, {**CLAIM, "gameId": 124}])
+        self.assertIsNone(accepted)
+        self.assertEqual(reason, "different_games")
+
+    def test_empty_evidence_does_not_confirm(self):
+        accepted, reason = reconcile_source_claims([{**CLAIM, "status": "confirmed",
+            "confirmationBasis": "explicit_pregame_report", "confirmationEvidence": "  "}])
+        self.assertIsNone(reason)
+        self.assertEqual(accepted["status"], "projected")
 
 if __name__ == "__main__":
     unittest.main()
