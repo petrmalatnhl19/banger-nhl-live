@@ -53,3 +53,38 @@ def validate_game_claims(records, games):
             continue
         accepted.append(claims[0])
     return accepted, issues
+
+
+def reconcile_source_claims(claims):
+    """Conservatively reconcile claims for one team/game, without upgrading certainty.
+
+    Only explicit pregame evidence qualifies a claim as confirmed. Disagreement
+    between sources is reported, never silently resolved by source priority.
+    """
+    if not claims:
+        return None, "no_claims"
+    identities = {(str(c.get("gameId", "")), c.get("date"), c.get("team")) for c in claims}
+    if len(identities) != 1 or any(not all(identity) for identity in identities):
+        return None, "different_games"
+    names = {c.get("goalie") for c in claims}
+    if len(names) != 1 or not all(isinstance(name, str) and name.strip() for name in names):
+        return None, "conflicting_goalies"
+    statuses = {c.get("status") for c in claims}
+    if not statuses.issubset({"projected", "confirmed"}):
+        return None, "invalid_status"
+    verified = [
+        c for c in claims
+        if c.get("status") == "confirmed"
+        and c.get("confirmationBasis") == "explicit_pregame_report"
+        and isinstance(c.get("confirmationEvidence"), str)
+        and c["confirmationEvidence"].strip()
+    ]
+    # A confirmed label without evidence must never raise confidence.
+    result = dict(claims[0])
+    result["status"] = "confirmed" if verified else "projected"
+    result.pop("confirmationBasis", None)
+    result.pop("confirmationEvidence", None)
+    if verified:
+        result["confirmationBasis"] = verified[0]["confirmationBasis"]
+        result["confirmationEvidence"] = verified[0]["confirmationEvidence"]
+    return result, None
