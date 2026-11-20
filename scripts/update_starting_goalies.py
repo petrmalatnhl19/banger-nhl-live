@@ -16,6 +16,17 @@ class Extract(HTMLParser):
 def normalize(value):
  import unicodedata
  return re.sub("[^a-z]","",unicodedata.normalize("NFKD",value.casefold()).encode("ascii","ignore").decode())
+def source_shows_date(lines,day):
+ """Require an explicit game-day date near the top of the visible source page."""
+ header=" ".join(lines[:150])
+ month=day.strftime("%B")
+ short_month=day.strftime("%b")
+ patterns=(
+  r"(?<!\d)"+re.escape(day.isoformat())+r"(?!\d)",
+  r"\b(?:"+re.escape(month)+r"|"+re.escape(short_month)+r"\.?)\s+"+str(day.day)+r"(?:st|nd|rd|th)?[,]?\s*"+str(day.year)+r"\b",
+  r"\b"+str(day.day)+r"\s+(?:"+re.escape(month)+r"|"+re.escape(short_month)+r"\.?)\s+"+str(day.year)+r"\b",
+ )
+ return any(re.search(pattern,header,re.I) for pattern in patterns)
 def main():
  with open("nhl_rosters.json",encoding="utf-8") as f:rosters=json.load(f).get("teams",{})
  today=datetime.datetime.now(datetime.timezone.utc).date().isoformat()
@@ -30,8 +41,7 @@ def main():
   lines=[re.sub(r"\s+"," ",html.unescape(x)).strip() for x in "".join(parser.parts).splitlines()]
   lines=[x for x in lines if x]
   # A date must be present. The source may serve yesterday's page.
-  date_tokens=[today,datetime.datetime.now(datetime.timezone.utc).strftime("%B %-d, %Y")]
-  if not any(t.lower() in " ".join(lines[:150]).lower() for t in date_tokens):
+  if not source_shows_date(lines, datetime.datetime.now(datetime.timezone.utc).date()):
    raise ValueError("Source does not show today's date")
   # Match only full goalie names against NHL's official current roster.
   # A player name is attributed only if a team heading appears close to it.
