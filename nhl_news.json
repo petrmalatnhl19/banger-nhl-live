@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-20T21:51:28.499019+00:00",
+  "updatedAt": "2026-11-20T22:35:42.805566+00:00",
   "articles": [
     {
       "title": "Téma týdne: Obavy o Bedarda, Colorado bez hvězd i konce sérií Chicago přišlo o lídra, Avalanche hrají bez největších opor a skončily jízdy McDavida s Gauthierem 20. lis 2026",
@@ -295,8 +295,8 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "Trophy Tracker: McDavid unanimous Hart pick as League MVP with Oilers",
-      "publishedAt": "2026-11-20T05:00:00+00:00",
-      "description": "Kaprizov, MacKinnon also among favorites at first quarter of season by NHL.com panel"
+      "description": "Kaprizov, MacKinnon also among favorites at first quarter of season by NHL.com panel",
+      "publishedAt": "2026-11-20T05:00:00+00:00"
     },
     {
       "title": "Flyers goalie coach steady hand during struggles Guidance of goaltending coach has elevated Vladar-Woll tandem; 'We're pretty fortunate,' GM says Nov 20, 2026",
@@ -331,8 +331,17 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "NHL Status Report: Malkin to miss at least one game for Penguins",
-      "publishedAt": "2026-11-20T21:39:00+00:00",
-      "description": "Guenther 'getting close' to return for Mammoth; Gustavsson going to Wild AHL team on rehab stint"
+      "description": "Guenther 'getting close' to return for Mammoth; Gustavsson going to Wild AHL team on rehab stint",
+      "publishedAt": "2026-11-20T21:39:00+00:00"
+    },
+    {
+      "title": "Utah stadium perfect setting for Winter Classic Nov 20, 2026",
+      "url": "https://www.nhl.com/news/utah-stadium-rice-eccles-perfect-setting-for-winter-classic-between-avalanche-mammoth",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Winter Classic at Utah football stadium between Mammoth, Avalanche ‘going to be electric’",
+      "publishedAt": "2026-11-20T16:05:09.231000+00:00",
+      "description": "New Year’s Eve game to be played outdoors in shadow of Wasatch Mountains"
     },
     {
       "title": "NHL.com writers pick best of 14-game Saturday schedule Nov 20, 2026",
@@ -340,17 +349,8 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "Oilers-Hurricanes, star defensemen battle in Detroit highlight Saturday schedule",
-      "publishedAt": "2026-11-20T21:20:00+00:00",
-      "description": "NHL.com writers discuss things to watch on 14-game slate"
-    },
-    {
-      "title": "Doughty confident he’ll sign new deal with Kings Nov 20, 2026",
-      "url": "https://www.nhl.com/news/drew-doughty-confident-he-will-sign-new-contract-with-kings",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Doughty confident he’ll sign new contract with Kings before becoming free agent",
-      "description": "Captain says he’s doesn’t ‘want to go anywhere’",
-      "publishedAt": "2026-11-20T04:31:00+00:00"
+      "description": "NHL.com writers discuss things to watch on 14-game slate",
+      "publishedAt": "2026-11-20T21:20:00+00:00"
     },
     {
       "title": "NTDP players to watch at CHL USA Prospects Challenge Nov 20, 2026",
@@ -434,24 +434,6 @@
       "publishedAt": "2026-11-20T20:03:30.601000+00:00"
     },
     {
-      "title": "Fantasy hockey top 50 defenseman rankings Nov 20, 2026",
-      "url": "https://www.nhl.com/news/topic/Fantasy/nhl-fantasy-hockey-top-50-defenseman-rankings-pools-282830728",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Fantasy hockey top 50 defenseman rankings",
-      "description": "Most valuable options at position in standard leagues; new podcast episodes",
-      "publishedAt": "2026-11-07T14:00:00+00:00"
-    },
-    {
-      "title": "Fantasy hockey top 25 goalie rankings for 2026-27 Nov 20, 2026",
-      "url": "https://www.nhl.com/news/nhl-fantasy-hockey-top-25-goaltender-rankings-pools-282860450",
-      "language": "en",
-      "source": "NHL.com",
-      "headline": "Fantasy hockey top 25 goalie rankings for 2026-27",
-      "description": "Most valuable options for standard leagues, tandems for 'NHL Fantasy Stars' game",
-      "publishedAt": "2026-11-07T14:00:00+00:00"
-    },
-    {
       "title": "Fantasy hockey top 200 player rankings for 2026-27 Nov 20, 2026",
       "url": "https://www.nhl.com/news/topic/fantasy/nhl-fantasy-hockey-top-250-200-rankings-drafts-players-big-board-281505474",
       "language": "en",
@@ -468,6 +450,24 @@
       "headline": "Fantasy hockey top 100 forward rankings for 2026-27",
       "description": "Most valuable options at position in standard leagues; new podcast episodes",
       "publishedAt": "2026-11-09T14:00:00+00:00"
+    },
+    {
+      "title": "Fantasy hockey top 50 defenseman rankings Nov 20, 2026",
+      "url": "https://www.nhl.com/news/topic/Fantasy/nhl-fantasy-hockey-top-50-defenseman-rankings-pools-282830728",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Fantasy hockey top 50 defenseman rankings",
+      "description": "Most valuable options at position in standard leagues; new podcast episodes",
+      "publishedAt": "2026-11-07T14:00:00+00:00"
+    },
+    {
+      "title": "Fantasy hockey top 25 goalie rankings for 2026-27 Nov 20, 2026",
+      "url": "https://www.nhl.com/news/nhl-fantasy-hockey-top-25-goaltender-rankings-pools-282860450",
+      "language": "en",
+      "source": "NHL.com",
+      "headline": "Fantasy hockey top 25 goalie rankings for 2026-27",
+      "description": "Most valuable options for standard leagues, tandems for 'NHL Fantasy Stars' game",
+      "publishedAt": "2026-11-07T14:00:00+00:00"
     },
     {
       "title": "'NHL Fantasy on Ice' podcast available now Nov 20, 2026",
@@ -646,8 +646,8 @@
       "language": "en",
       "source": "NHL.com",
       "headline": "NHL EDGE stats: Brady Tkachuk’s back-to-back hat tricks for Panthers",
-      "publishedAt": "2026-10-16T14:26:18.607000+00:00",
-      "description": "Offseason acquisition scoring from middle of ice, excels in shot speed, offensive zone time"
+      "description": "Offseason acquisition scoring from middle of ice, excels in shot speed, offensive zone time",
+      "publishedAt": "2026-10-16T14:26:18.607000+00:00"
     }
   ]
 }
