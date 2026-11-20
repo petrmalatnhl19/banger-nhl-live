@@ -34,3 +34,30 @@ test('DATA-08: goalie export never silently presents empty or partial data as co
   assert.equal(entry.date,data.date,team+' goalie date');
  }
 });
+
+test('DATA-08: classify missing goalie data without fabricating starter confirmations',()=>{
+ const data=read('starting_goalies.json');
+ const count=Object.keys(data.teams||{}).length;
+ const errors=data.sourceErrors||[];
+ const classification=errors.length?'source_error':count===0?'no_coverage':'available';
+ if(errors.length)assert.equal(classification,'source_error');
+ if(count===0)assert.notEqual(classification,'available');
+ if(data.status==='complete')assert.equal(classification,'available');
+ const checked=Date.parse(data.updatedAt||'');
+ assert.ok(Number.isFinite(checked),'goalie export timestamp missing');
+ assert.equal(new Date(checked).toISOString().slice(0,10),data.date,'goalie export date does not match UTC timestamp');
+});
+test('DATA-08: lineup missing and freshness categories are disjoint and exhaustive',()=>{
+ const coverage=read('lineups_coverage.json');
+ const names=Object.keys(coverage.teams);
+ const missing=new Set(coverage.missing),stale=new Set(coverage.needsFreshProjection);
+ assert.equal(missing.size,coverage.missing.length);
+ assert.equal(stale.size,coverage.needsFreshProjection.length);
+ for(const name of [...missing,...stale])assert.ok(coverage.teams[name],name+' unknown team');
+ for(const name of names){
+  const entry=coverage.teams[name];
+  assert.equal(missing.has(name),!entry.hasProjectedLines,name+' missing flag inconsistent');
+  if(entry.currentProjection)assert.ok(!stale.has(name)&&!missing.has(name),name+' fresh and stale simultaneously');
+  if(!entry.currentProjection&&entry.hasProjectedLines)assert.ok(stale.has(name),name+' stale projection not flagged');
+ }
+});
