@@ -74,6 +74,9 @@ def main():
             continue
         abbr = item["team"]
         existing = entries.get(abbr)
+        # An existing evidenced confirmation must never be replaced by a projection.
+        if existing and existing.get("status") == "confirmed" and existing.get("confirmationEvidence") and item["status"] != "confirmed":
+            continue
         # A specialist confirmation takes precedence over a projection.
         # Conflicting unconfirmed projections are suppressed, not guessed.
         if existing and existing["name"].casefold() != item["goalie"].casefold() and item["status"] != "confirmed":
