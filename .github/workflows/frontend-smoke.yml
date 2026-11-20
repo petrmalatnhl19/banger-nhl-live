@@ -45,6 +45,12 @@ jobs:
         run: python scripts/audit_data_11_goalie_feed.py
       - name: DATA-12 goalie publisher schema regression
         run: python -m unittest scripts/test_data_12_goalie_publisher.py
+      - name: DATA-12 source failure diagnostics
+        run: python -m unittest scripts/test_data_12_source_failures.py
+        if: ${{ hashFiles('scripts/test_data_12_source_failures.py') != '' }}
+      - name: DATA-12 source health summary regressions
+        run: python -m unittest scripts/test_data_12_source_health_report.py
+        if: ${{ hashFiles('scripts/test_data_12_source_health_report.py') != '' }}
       - name: VIDEO-03 official highlights metadata regression
         run: node --test tests/video-03-live-highlights.test.cjs
       - name: VIDEO-05 official highlight link UI regression
