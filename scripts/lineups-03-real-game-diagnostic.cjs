@@ -16,6 +16,7 @@ const {auditEventStrengthAgreement}=require('./lineups_event_strength_agreement.
 const {auditStrengthBoundaryMismatches}=require('./lineups_strength_boundary_audit.cjs');
 const {classifyStrengthMismatchEvents}=require('./lineups_strength_mismatch_types.cjs');
 const {auditBoundaryAlternatives}=require('./lineups_boundary_alternatives.cjs');
+const {eventStrengthEvidence}=require('./lineups_event_strength_evidence.cjs');
 const gameId=process.argv[2]||'2026020335';
 if(!/^\d{10}$/.test(gameId)){console.error('Invalid game ID');process.exitCode=2;}
 else {
@@ -46,13 +47,14 @@ else {
    const strengthBoundaryAudit=skaterAudit.shifts?.length&&Array.isArray(playByPlay.plays)&&boxscore.awayTeam&&boxscore.homeTeam?auditStrengthBoundaryMismatches(playByPlay.plays,skaterAudit.shifts,boxscore.awayTeam.id,boxscore.homeTeam.id):{status:'unverified',verifiedStrengthWindows:false};
    const strengthMismatchTypes=classifyStrengthMismatchEvents(strengthBoundaryAudit);
    const boundaryAlternatives=skaterAudit.shifts?.length&&Array.isArray(playByPlay.plays)&&boxscore.awayTeam&&boxscore.homeTeam?auditBoundaryAlternatives(playByPlay.plays,skaterAudit.shifts,boxscore.awayTeam.id,boxscore.homeTeam.id):{status:'unverified',verifiedStrengthWindows:false};
+   const strengthEvidence=skaterAudit.shifts?.length&&Array.isArray(playByPlay.plays)&&boxscore.awayTeam&&boxscore.homeTeam?eventStrengthEvidence(playByPlay.plays,skaterAudit.shifts,boxscore.awayTeam.id,boxscore.homeTeam.id):{status:'unverified',verifiedStrengthWindows:false,verifiedUnits:false};
    const boxscoreShape=boxscore.fetchError?{fetchStatus:'failed'}:{fetchStatus:'ok',topLevelKeys:Object.keys(boxscore).sort(),playerByGameKeys:Object.keys(boxscore.playerByGameStats||{}).sort(),playerByGameTypes:Object.fromEntries(Object.entries(boxscore.playerByGameStats||{}).map(([key,value])=>[key,Array.isArray(value)?'array':typeof value]))};
    const data=Array.isArray(payload.data)?payload.data:[];
    const periods=[...new Set(data.map(x=>x.period))].sort();
    const teams=[...new Set(data.map(x=>x.teamId))].sort();
    const players=new Set(data.map(x=>x.playerId));
    const result={gameId,endpoint:'NHL Stats shiftcharts',http:'200',reportedTotal:payload.total??null,rawRows:data.length,teams,players:players.size,periods,
-     accepted:parsed.shifts.length,rejected:parsed.rejected,rejectionReasons:rejectionAudit.reasons,normalizationDetails:rejectionAudit.normalizationDetails,longShiftSummary:rejectionAudit.longShiftSummary,longShiftRoleAudit:roleAudit,skaterShiftAudit:{status:skaterAudit.status,skaterShiftCount:skaterAudit.skaterShiftCount??0,goalieShiftCount:skaterAudit.goalieShiftCount??0,rejected:skaterAudit.rejected??0,verifiedUnits:false},occupancyAudit,fiveSkaterSummary,simultaneousFiveSummary,fiveUnitsSummary,namedFiveSummary,situationEvidence,eventStrengthAgreement,strengthBoundaryAudit,strengthMismatchTypes,boundaryAlternatives,boxscoreShape,classificationMatchesParser:rejectionAudit.accepted===parsed.shifts.length&&rejectionAudit.rejected===parsed.rejected,status:parsed.status,
+     accepted:parsed.shifts.length,rejected:parsed.rejected,rejectionReasons:rejectionAudit.reasons,normalizationDetails:rejectionAudit.normalizationDetails,longShiftSummary:rejectionAudit.longShiftSummary,longShiftRoleAudit:roleAudit,skaterShiftAudit:{status:skaterAudit.status,skaterShiftCount:skaterAudit.skaterShiftCount??0,goalieShiftCount:skaterAudit.goalieShiftCount??0,rejected:skaterAudit.rejected??0,verifiedUnits:false},occupancyAudit,fiveSkaterSummary,simultaneousFiveSummary,fiveUnitsSummary,namedFiveSummary,situationEvidence,eventStrengthAgreement,strengthBoundaryAudit,strengthMismatchTypes,boundaryAlternatives,strengthEvidence,boxscoreShape,classificationMatchesParser:rejectionAudit.accepted===parsed.shifts.length&&rejectionAudit.rejected===parsed.rejected,status:parsed.status,
      verifiedUnits:false,reason:'No verified strength windows or roster/goalie completeness; this diagnostic does not publish PP/PK units.'};
    console.log(JSON.stringify(result,null,2));
    if(parsed.status!=='partial'||!parsed.shifts.length)process.exitCode=3;
