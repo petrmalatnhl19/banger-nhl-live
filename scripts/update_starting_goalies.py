@@ -1,5 +1,5 @@
 """Fetch dated projected NHL starting goalies. Never infer confirmed starts."""
-import json,re,datetime,urllib.request,html
+import json,re,datetime,urllib.request,urllib.error,html
 from html.parser import HTMLParser
 SOURCE="https://themorningpuck.com/starting-goalies"
 ABBR={"ANA":"ducks","BOS":"bruins","BUF":"sabres","CAR":"hurricanes","CBJ":"blue jackets","CGY":"flames","CHI":"blackhawks","COL":"avalanche","DAL":"stars","DET":"red wings","EDM":"oilers","FLA":"panthers","LAK":"kings","MIN":"wild","MTL":"canadiens","NJD":"devils","NSH":"predators","NYI":"islanders","NYR":"rangers","OTT":"senators","PHI":"flyers","PIT":"penguins","SEA":"kraken","SJS":"sharks","STL":"blues","TBL":"lightning","TOR":"maple leafs","UTA":"mammoth","VAN":"canucks","VGK":"golden knights","WPG":"jets","WSH":"capitals"}
@@ -27,6 +27,15 @@ def source_shows_date(lines,day):
   r"\b"+str(day.day)+r"\s+(?:"+re.escape(month)+r"|"+re.escape(short_month)+r"\.?)\s+"+str(day.year)+r"\b",
  )
  return any(re.search(pattern,header,re.I) for pattern in patterns)
+def source_failure_kind(error):
+ """Classify errors for diagnostics; no effect on starter acceptance."""
+ if isinstance(error,ValueError) and "does not show today's date" in str(error):
+  return "missing_current_date"
+ if isinstance(error,(TimeoutError,urllib.error.URLError)):
+  return "source_unreachable"
+ if isinstance(error,UnicodeError):
+  return "invalid_source_content"
+ return "source_processing_error"
 def main():
  with open("nhl_rosters.json",encoding="utf-8") as f:rosters=json.load(f).get("teams",{})
  today=datetime.datetime.now(datetime.timezone.utc).date().isoformat()
@@ -60,7 +69,7 @@ def main():
     records[abbr]={"name":line,"status":status,"date":today,"source":SOURCE,"sourceLabel":"The Morning Puck","checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat()}
     break
  except Exception as err:
-  source_errors.append("specialist: "+type(err).__name__+": "+str(err)[:160])
+  source_errors.append("specialist ["+source_failure_kind(err)+"]: "+type(err).__name__+": "+str(err)[:160])
   print("Specialist source failed; using NHL fallback:",type(err).__name__,str(err)[:160])
  # Supplement the specialist feed with NHL.com's own dated projected lineups.
  # Only use a source article published recently AND a team scheduled today.
@@ -102,7 +111,7 @@ def main():
     blocked.add(abbr)
    elif not old and abbr not in blocked:records[abbr]=nhl_entry
  except Exception as err:
-  source_errors.append("NHL fallback: "+type(err).__name__+": "+str(err)[:160])
+  source_errors.append("NHL fallback ["+source_failure_kind(err)+"]: "+type(err).__name__+": "+str(err)[:160])
   print("NHL lineup goalie fallback unavailable:",type(err).__name__,str(err)[:160])
  with open("starting_goalies.json","w",encoding="utf-8") as f:json.dump({"date":today,"updatedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"teams":records,"conflicts":conflicts,"sourceErrors":source_errors,"status":"unavailable" if not records else "partial"},f,ensure_ascii=False,indent=2)
  print("Game-day goalie projections:",len(records))
