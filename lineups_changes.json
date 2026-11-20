@@ -403,34 +403,46 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "oilers": {
-      "updatedAt": "2026-11-19T18:11:45.758112+00:00",
-      "previousPublishedAt": "2026-11-17T17:08:00+00:00",
-      "publishedAt": "2026-11-19T17:53:00+00:00",
-      "source": "https://www.nhl.com/news/edmonton-oilers-tampa-bay-lightning-game-preview-november-19-2026",
+      "updatedAt": "2026-11-20T20:54:28.539961+00:00",
+      "previousPublishedAt": "2026-11-19T17:53:00+00:00",
+      "publishedAt": "2026-11-20T20:15:11.043000+00:00",
+      "source": "https://www.nhl.com/news/edmonton-oilers-carolina-hurricanes-game-preview-november-21-2026",
       "events": [
         {
           "type": "moved",
-          "player": "Colton Dach",
+          "player": "Filip Hallander",
+          "from": "Útok 3",
+          "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Kasperi Kapanen",
           "from": "Útok 2",
           "to": "Útok 1"
+        },
+        {
+          "type": "moved",
+          "player": "Mathieu Joseph",
+          "from": "Útok 4",
+          "to": "Útok 2"
+        },
+        {
+          "type": "moved",
+          "player": "Colton Dach",
+          "from": "Útok 1",
+          "to": "Útok 3"
         },
         {
           "type": "moved",
           "player": "Zach Hyman",
-          "from": "Útok 2",
-          "to": "Útok 1"
+          "from": "Útok 1",
+          "to": "Útok 3"
         },
         {
           "type": "moved",
-          "player": "Vasily Podkolzin",
-          "from": "Útok 1",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Leon Draisaitl",
-          "from": "Útok 1",
-          "to": "Útok 2"
+          "player": "Trent Frederic",
+          "from": "Útok 3",
+          "to": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
