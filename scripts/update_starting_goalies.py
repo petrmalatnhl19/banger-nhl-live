@@ -124,6 +124,9 @@ def main():
     blocked.add(abbr)
    elif not old and abbr not in blocked:records[abbr]=nhl_entry
  except Exception as err:
+  # Without the official game schedule, specialist projections cannot be
+  # tied to an actual game day. Fail closed instead of publishing guesses.
+  records.clear()
   source_errors.append("NHL fallback ["+source_failure_kind(err)+"]: "+type(err).__name__+": "+str(err)[:160])
   print("NHL lineup goalie fallback unavailable:",type(err).__name__,str(err)[:160])
  with open("starting_goalies.json","w",encoding="utf-8") as f:json.dump({"date":today,"updatedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"teams":records,"conflicts":conflicts,"sourceErrors":source_errors,"status":"unavailable" if not records else "partial"},f,ensure_ascii=False,indent=2)
