@@ -88,6 +88,8 @@ jobs:
         run: node --test tests/lineups-03-occupancy-audit.test.cjs
       - name: LINEUPS-03.10 five-skater combination tests
         run: node --test tests/lineups-03-five-skater-combinations.test.cjs
+      - name: LINEUPS-03.11 simultaneous five-skater audit tests
+        run: node --test tests/lineups-03-simultaneous-five.test.cjs
       - name: LINEUPS-03 real-game NHL shiftcharts diagnostic (informational)
         continue-on-error: true
         timeout-minutes: 1
