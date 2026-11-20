@@ -61,7 +61,7 @@ jobs:
       - name: VIDEO-09 safe LIVE clip refresh regression
         run: node --test tests/video-09-live-refresh.test.cjs
       - name: VIDEO-10 live goal link lifecycle integration
-        run: node --test tests/video-10-integration.test.cjs
+        run: node --test tests/video-10-live-integration.test.cjs
       - name: VIDEO-11 NHL clip metadata diagnostic (informational)
         continue-on-error: true
         run: node scripts/video-11-nhl-diagnostic.cjs
