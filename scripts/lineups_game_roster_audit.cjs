@@ -4,7 +4,7 @@
 function verifyLongShiftRoles(shiftPayload,boxscore,gameId){
  const data=Array.isArray(shiftPayload?.data)?shiftPayload.data:[];
  const teams=[['awayTeam',boxscore?.awayTeam],['homeTeam',boxscore?.homeTeam]];
- const roster=boxscore?.playerByGame;
+ const roster=boxscore?.playerByGameStats;
  if(!roster||teams.some(([side,t])=>!Number.isInteger(t?.id)||!roster[side]))return {status:'unverified',reason:'missing-game-roster',longShiftCount:0};
  const byTeam=new Map();
  for(const [side,t] of teams){
