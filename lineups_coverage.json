@@ -1,9 +1,10 @@
 {
-  "generatedAt": "2026-11-20T04:44:53.416425+00:00",
+  "generatedAt": "2026-11-20T05:49:29.505844+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 28,
+  "currentProjections": 27,
   "needsFreshProjection": [
+    "devils",
     "panthers",
     "predators",
     "rangers",
@@ -11,6 +12,7 @@
   ],
   "missing": [],
   "olderVerified": [
+    "devils",
     "panthers",
     "predators",
     "rangers",
@@ -122,11 +124,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-18T17:39:47.792000+00:00",
       "source": "https://www.nhl.com/news/montreal-canadiens-new-jersey-devils-game-preview-november-18-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "ducks": {
       "hasProjectedLines": true,
