@@ -72,6 +72,8 @@ jobs:
         run: node --test tests/ux-lineups-01.test.cjs
       - name: UX-LINEUPS-02 special teams navigation and data integrity
         run: node --test tests/ux-lineups-02-special-teams.test.cjs
+      - name: LINEUPS-03 observed units offline strength and overlap tests
+        run: node --test tests/lineups-03-observed-units.test.cjs
       - name: VIDEO-11 NHL clip metadata diagnostic (informational)
         continue-on-error: true
         run: node scripts/video-11-nhl-diagnostic.cjs
