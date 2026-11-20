@@ -78,6 +78,10 @@ jobs:
         run: node --test tests/lineups-03-shiftcharts-adapter.test.cjs
       - name: LINEUPS-03 observed units candidate pipeline
         run: node --test tests/lineups-03-pipeline.test.cjs
+      - name: LINEUPS-03 real-game NHL shiftcharts diagnostic (informational)
+        continue-on-error: true
+        timeout-minutes: 1
+        run: node scripts/lineups-03-real-game-diagnostic.cjs 2026020335
       - name: VIDEO-11 NHL clip metadata diagnostic (informational)
         continue-on-error: true
         run: node scripts/video-11-nhl-diagnostic.cjs
