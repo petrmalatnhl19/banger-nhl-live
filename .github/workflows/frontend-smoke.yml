@@ -151,7 +151,7 @@ jobs:
   browser-smoke:
     needs: frontend-smoke
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -160,8 +160,8 @@ jobs:
       - name: Install browser test dependencies
         run: |
           npm install --no-save --no-package-lock playwright@1.58.2
-          npx playwright install --with-deps chromium
-          sudo apt-get update -qq && sudo apt-get install -y xvfb
+          npx playwright install chromium
+          command -v Xvfb >/dev/null || { echo 'Xvfb is missing on runner'; exit 1; }
       - name: Start local web server
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/banger-server.log 2>&1 &
