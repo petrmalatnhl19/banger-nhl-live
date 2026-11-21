@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-21T13:38:10.848003+00:00",
-  "checked": 22,
-  "articlesFound": 2,
+  "generatedAt": "2026-11-21T14:36:33.888584+00:00",
+  "checked": 23,
+  "articlesFound": 1,
   "errors": [],
   "fixtures": [
     {
@@ -243,6 +243,26 @@
       "teams": []
     },
     {
+      "url": "https://www.nhl.com/news/anaheim-ducks-seattle-kraken-game-preview-november-23-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/seattle-kraken-anaheim-ducks-game-preview-november-23-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/los-angeles-kings-montreal-canadiens-game-preview-november-23-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/montreal-canadiens-los-angeles-kings-game-preview-november-23-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
       "url": "https://www.nhl.com/news/columbus-blue-jackets-toronto-maple-leafs-game-preview-november-21-2026",
       "result": "no_complete_projection",
       "teams": []
@@ -260,36 +280,17 @@
         "flames"
       ],
       "coversBothTeams": true
-    },
-    {
-      "url": "https://www.nhl.com/news/edmonton-oilers-carolina-hurricanes-game-preview-november-21-2026",
-      "result": "parsed",
-      "teams": [
-        "oilers",
-        "hurricanes"
-      ],
-      "coversBothTeams": true
-    },
-    {
-      "url": "https://www.nhl.com/news/minnesota-wild-vancouver-canucks-game-preview-november-21-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/vancouver-canucks-minnesota-wild-game-preview-november-21-2026",
-      "result": "no_complete_projection",
-      "teams": []
     }
   ],
   "note": "Upcoming games today through two days ahead; prioritize older sources and nearest games. A fixture is not proof a preview article exists.",
   "fixturesSelected": 12,
   "fixturesDeferred": 14,
   "rotation": {
-    "window": 1994742,
+    "window": 1994746,
     "fixed": 8,
     "rotating": 4,
     "remainingPool": 18,
-    "rotationStart": 0
+    "rotationStart": 16
   },
   "selectedFixtures": [
     {
@@ -333,6 +334,16 @@
       "home": "BOS"
     },
     {
+      "date": "2026-11-23",
+      "away": "ANA",
+      "home": "SEA"
+    },
+    {
+      "date": "2026-11-23",
+      "away": "LAK",
+      "home": "MTL"
+    },
+    {
       "date": "2026-11-21",
       "away": "CBJ",
       "home": "TOR"
@@ -341,16 +352,6 @@
       "date": "2026-11-21",
       "away": "CHI",
       "home": "CGY"
-    },
-    {
-      "date": "2026-11-21",
-      "away": "EDM",
-      "home": "CAR"
-    },
-    {
-      "date": "2026-11-21",
-      "away": "MIN",
-      "home": "VAN"
     }
   ]
 }
