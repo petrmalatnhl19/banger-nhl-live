@@ -138,6 +138,8 @@ jobs:
         run: node --test tests/lineups-03-goal-penalty-interactions.test.cjs
       - name: LINEUPS-03.35 goal strength candidate tests
         run: node --test tests/lineups-03-goal-strength-context.test.cjs
+      - name: LINEUPS-03.42 uncovered seconds classification tests
+        run: node --test tests/lineups-03-42-uncovered-classification.test.cjs
       - name: LINEUPS-03.41 candidate 5v5 coverage audit tests
         run: node --test tests/lineups-03-41-coverage-audit.test.cjs
       - name: LINEUPS-03.37 observed 5v5 line reconstruction tests
