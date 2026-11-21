@@ -1,0 +1,7 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict');
+const {auditRecoveryPeriodBoundaries}=require('../scripts/lineups_03_47_period_boundary_audit.cjs');
+const base={status:'candidate-only',windows:[{startSecond:1137,endSecondExclusive:1201,seconds:64,classification:'consistent-point-evidence-only'},{startSecond:2410,endSecondExclusive:2566,seconds:156,classification:'consistent-point-evidence-only'}]};
+test('flags gap crossing regulation period boundary without promoting it',()=>{const r=auditRecoveryPeriodBoundaries({triage:base});assert.equal(r.periodCrossingCount,1);assert.equal(r.periodCrossingSeconds,64);assert.equal(r.windows[0].classification,'period-boundary-risk');assert.equal(r.windows[1].classification,'consistent-point-evidence-only');assert.equal(r.publishable,false)});
+test('end exactly on period boundary does not cross',()=>{const r=auditRecoveryPeriodBoundaries({triage:{status:'candidate-only',windows:[{startSecond:1137,endSecondExclusive:1200,seconds:63,classification:'consistent-point-evidence-only'}]}});assert.equal(r.periodCrossingCount,0)});
+test('rejects malformed or out-of-regulation windows',()=>{assert.equal(auditRecoveryPeriodBoundaries({triage:{status:'unverified',windows:[]}}).status,'unverified');assert.equal(auditRecoveryPeriodBoundaries({triage:{status:'candidate-only',windows:[{startSecond:3500,endSecondExclusive:3601,seconds:101}]}}).status,'unverified')});
