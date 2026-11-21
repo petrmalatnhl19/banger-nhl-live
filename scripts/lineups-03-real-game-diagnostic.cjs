@@ -71,7 +71,7 @@ else {
      ?extractFiveOnFiveLines({shifts:skaterAudit.shifts,intervals:strengthIntervalCandidates.candidates.filter(w=>w.strength==='5v5'),boxscore})
      :{status:'unverified',reason:'missing-candidate-intervals',teams:[],verifiedUnits:false,publishable:false};
    const observedFiveOnFiveSummary={status:observedFiveOnFive.status,reason:observedFiveOnFive.reason,verifiedUnits:false,publishable:false,
-     teams:(observedFiveOnFive.teams||[]).map(t=>({teamId:t.teamId,candidateSeconds:t.candidateSeconds,
+     teams:(observedFiveOnFive.teams||[]).map(t=>({teamId:t.teamId,candidateSeconds:t.candidateSeconds,skippedNonstandardSeconds:t.skippedNonstandardSeconds,
        forwardTrioCount:t.forwardTrios.length,defencePairCount:t.defencePairs.length,
        topForwardTrios:t.forwardTrios.slice(0,8),topDefencePairs:t.defencePairs.slice(0,6)}))};
    const strengthUnits= strengthIntervalCandidates.status==='candidate-only'?candidateStrengthUnits(skaterAudit.shifts,strengthIntervalCandidates.candidates,boxscore.awayTeam.id,boxscore.homeTeam.id):{status:'unverified',teams:[],verifiedUnits:false};
