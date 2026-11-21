@@ -32,13 +32,8 @@
         {
           "sourceName": "Max Sasson",
           "expectedRole": "forwards",
-          "sameSurnameInRoster": [
-            {
-              "name": "Max Sasson",
-              "role": "forwards"
-            }
-          ],
-          "classification": "possible_name_variant_needs_review",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
           "automaticApproval": false
         }
       ]

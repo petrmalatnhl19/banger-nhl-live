@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-21T15:26:10.033747+00:00",
+  "checkedAt": "2026-11-21T16:23:23.423104+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "candidateCount": 112,
   "matchedCount": 112,
@@ -390,7 +390,7 @@
       "goalie": "Jacob Markstrom",
       "opponent": "BUF",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-21",
       "gameId": 2026020361,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -490,7 +490,7 @@
       "goalie": "Jacob Fowler",
       "opponent": "PHI",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-21",
       "gameId": 2026020365,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -660,7 +660,7 @@
       "goalie": "Linus Ullmark",
       "opponent": "LAK",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-21",
       "gameId": 2026020366,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -917,10 +917,10 @@
     },
     {
       "team": "TOR",
-      "goalie": "Sergei Bobrovsky",
+      "goalie": "Anthony Stolarz",
       "opponent": "CBJ",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-21",
       "gameId": 2026020364,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
@@ -1060,7 +1060,7 @@
       "goalie": "Stuart Skinner",
       "opponent": "VGK",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-21",
       "gameId": 2026020369,
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"

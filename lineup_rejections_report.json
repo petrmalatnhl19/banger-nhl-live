@@ -3,7 +3,7 @@
   "teams": {
     "bruins": {
       "team": "BOS",
-      "rosterUpdatedAt": "2026-11-21T15:25:38.122224+00:00",
+      "rosterUpdatedAt": "2026-11-21T16:22:36.340491+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -31,7 +31,7 @@
     },
     "canucks": {
       "team": "VAN",
-      "rosterUpdatedAt": "2026-11-21T15:25:39.823104+00:00",
+      "rosterUpdatedAt": "2026-11-21T16:22:42.446838+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -50,7 +50,7 @@
             {
               "name": "Max Sasson",
               "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": true,
+              "inLocalCurrentRoster": false,
               "requiresIndependentGameEvidence": true
             }
           ]
@@ -59,7 +59,7 @@
     },
     "jets": {
       "team": "WPG",
-      "rosterUpdatedAt": "2026-11-21T15:25:39.988094+00:00",
+      "rosterUpdatedAt": "2026-11-21T16:22:42.894815+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -87,7 +87,7 @@
     },
     "lightning": {
       "team": "TBL",
-      "rosterUpdatedAt": "2026-11-21T15:25:39.641912+00:00",
+      "rosterUpdatedAt": "2026-11-21T16:22:41.802139+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 3,
       "candidateDefensePairs": 4,
@@ -120,7 +120,7 @@
     },
     "red wings": {
       "team": "DET",
-      "rosterUpdatedAt": "2026-11-21T15:25:38.624303+00:00",
+      "rosterUpdatedAt": "2026-11-21T16:22:38.247272+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
