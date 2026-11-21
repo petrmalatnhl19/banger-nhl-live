@@ -138,6 +138,8 @@ jobs:
         run: node --test tests/lineups-03-goal-penalty-interactions.test.cjs
       - name: LINEUPS-03.35 goal strength candidate tests
         run: node --test tests/lineups-03-goal-strength-context.test.cjs
+      - name: LINEUPS-03.57 shift boundary audit tests
+        run: node --test tests/lineups-03-57-shift-boundary-audit.test.cjs
       - name: LINEUPS-03.56 short interval distribution tests
         run: node --test tests/lineups-03-56-short-interval-distribution.test.cjs
       - name: LINEUPS-03.55 complete inventory regression tests
