@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-21T07:58:42.688523+00:00",
-  "checked": 23,
-  "articlesFound": 1,
+  "generatedAt": "2026-11-21T08:53:39.704078+00:00",
+  "checked": 24,
+  "articlesFound": 0,
   "errors": [],
   "fixtures": [
     {
@@ -243,6 +243,26 @@
       "teams": []
     },
     {
+      "url": "https://www.nhl.com/news/toronto-maple-leafs-new-york-islanders-game-preview-november-23-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/new-york-islanders-toronto-maple-leafs-game-preview-november-23-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/utah-mammoth-winnipeg-jets-game-preview-november-23-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/winnipeg-jets-utah-mammoth-game-preview-november-23-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
       "url": "https://www.nhl.com/news/anaheim-ducks-seattle-kraken-game-preview-november-23-2026",
       "result": "no_complete_projection",
       "teams": []
@@ -261,36 +281,17 @@
       "url": "https://www.nhl.com/news/montreal-canadiens-los-angeles-kings-game-preview-november-23-2026",
       "result": "no_complete_projection",
       "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/columbus-blue-jackets-toronto-maple-leafs-game-preview-november-21-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/toronto-maple-leafs-columbus-blue-jackets-game-preview-november-21-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/chicago-blackhawks-calgary-flames-game-preview-november-21-2026",
-      "result": "parsed",
-      "teams": [
-        "blackhawks",
-        "flames"
-      ],
-      "coversBothTeams": true
     }
   ],
   "note": "Upcoming games today through two days ahead; prioritize older sources and nearest games. A fixture is not proof a preview article exists.",
   "fixturesSelected": 12,
   "fixturesDeferred": 14,
   "rotation": {
-    "window": 1994719,
+    "window": 1994723,
     "fixed": 8,
     "rotating": 4,
     "remainingPool": 18,
-    "rotationStart": 16
+    "rotationStart": 14
   },
   "selectedFixtures": [
     {
@@ -335,6 +336,16 @@
     },
     {
       "date": "2026-11-23",
+      "away": "TOR",
+      "home": "NYI"
+    },
+    {
+      "date": "2026-11-23",
+      "away": "UTA",
+      "home": "WPG"
+    },
+    {
+      "date": "2026-11-23",
       "away": "ANA",
       "home": "SEA"
     },
@@ -342,16 +353,6 @@
       "date": "2026-11-23",
       "away": "LAK",
       "home": "MTL"
-    },
-    {
-      "date": "2026-11-21",
-      "away": "CBJ",
-      "home": "TOR"
-    },
-    {
-      "date": "2026-11-21",
-      "away": "CHI",
-      "home": "CGY"
     }
   ]
 }
