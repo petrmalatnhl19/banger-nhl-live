@@ -138,6 +138,8 @@ jobs:
         run: node --test tests/lineups-03-goal-penalty-interactions.test.cjs
       - name: LINEUPS-03.35 goal strength candidate tests
         run: node --test tests/lineups-03-goal-strength-context.test.cjs
+      - name: LINEUPS-03.48 period split regression tests
+        run: node --test tests/lineups-03-48-split-period-windows.test.cjs
       - name: LINEUPS-03.47 period boundary audit regression tests
         run: node --test tests/lineups-03-47-period-boundary-audit.test.cjs
       - name: LINEUPS-03.46 hypothetical recovery scenario regression tests
