@@ -639,50 +639,25 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "canucks": {
-      "updatedAt": "2026-11-15T20:15:58.759423+00:00",
-      "previousPublishedAt": "2026-11-13T20:00:20.196000+00:00",
-      "publishedAt": "2026-11-15T19:32:08.037000+00:00",
-      "source": "https://www.nhl.com/news/vancouver-canucks-vegas-golden-knights-game-preview-november-15-2026",
+      "updatedAt": "2026-11-21T15:26:06.985421+00:00",
+      "previousPublishedAt": "2026-11-19T19:54:00+00:00",
+      "publishedAt": "2026-11-19T19:54:00+00:00",
+      "source": "https://www.nhl.com/news/vancouver-canucks-seattle-kraken-game-preview-november-19-2026",
       "events": [
         {
-          "type": "moved",
-          "player": "Elias Pettersson",
-          "from": "Obrana 3",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "moved",
-          "player": "Jonathan Lekkerimaki",
-          "from": "Útok 2",
-          "to": "Útok 1"
-        },
-        {
-          "type": "moved",
-          "player": "Brock Boeser",
-          "from": "Útok 1",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Tom Willander",
-          "from": "Obrana 3",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "moved",
-          "player": "Jamie Oleksiak",
-          "from": "Obrana 2",
-          "to": "Obrana 3"
-        },
-        {
-          "type": "added",
-          "player": "Cameron Crotty",
-          "to": "Obrana 3"
+          "type": "removed",
+          "player": "Drew O'Connor",
+          "from": "Útok 4"
         },
         {
           "type": "removed",
-          "player": "Guillaume Brisebois",
-          "from": "Obrana 2"
+          "player": "Max Sasson",
+          "from": "Útok 4"
+        },
+        {
+          "type": "removed",
+          "player": "Brendan Gallagher",
+          "from": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"

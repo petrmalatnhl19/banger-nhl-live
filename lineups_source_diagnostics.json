@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T14:36:38.262070+00:00",
+  "generatedAt": "2026-11-21T15:26:06.979301+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
@@ -180,9 +180,28 @@
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
       "roleMismatches": [],
-      "rejectedLines": [],
-      "rejectedPlayerReasons": [],
-      "validatedForwardLines": 4,
+      "rejectedLines": [
+        {
+          "group": "forwards",
+          "line": 4,
+          "players": [
+            "Max Sasson"
+          ],
+          "sourceLine": [
+            "Drew O'Connor",
+            "Max Sasson",
+            "Brendan Gallagher"
+          ]
+        }
+      ],
+      "rejectedPlayerReasons": [
+        {
+          "name": "Max Sasson",
+          "expectedRole": "forwards",
+          "reason": "not_in_current_roster"
+        }
+      ],
+      "validatedForwardLines": 3,
       "validatedDefensePairs": 3,
       "accepted": true
     },

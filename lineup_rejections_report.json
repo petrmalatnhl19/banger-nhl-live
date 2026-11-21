@@ -1,9 +1,9 @@
 {
-  "teamsWithRejectedLines": 4,
+  "teamsWithRejectedLines": 5,
   "teams": {
     "bruins": {
       "team": "BOS",
-      "rosterUpdatedAt": "2026-11-21T14:36:06.843597+00:00",
+      "rosterUpdatedAt": "2026-11-21T15:25:38.122224+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -29,9 +29,37 @@
         }
       ]
     },
+    "canucks": {
+      "team": "VAN",
+      "rosterUpdatedAt": "2026-11-21T15:25:39.823104+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "validatedForwardLines": 3,
+      "validatedDefensePairs": 3,
+      "rejected": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 4,
+          "sourceLine": [
+            "Drew O'Connor",
+            "Max Sasson",
+            "Brendan Gallagher"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Max Sasson",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": true,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    },
     "jets": {
       "team": "WPG",
-      "rosterUpdatedAt": "2026-11-21T14:36:10.789972+00:00",
+      "rosterUpdatedAt": "2026-11-21T15:25:39.988094+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -59,7 +87,7 @@
     },
     "lightning": {
       "team": "TBL",
-      "rosterUpdatedAt": "2026-11-21T14:36:10.137791+00:00",
+      "rosterUpdatedAt": "2026-11-21T15:25:39.641912+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 3,
       "candidateDefensePairs": 4,
@@ -92,7 +120,7 @@
     },
     "red wings": {
       "team": "DET",
-      "rosterUpdatedAt": "2026-11-21T14:36:07.958048+00:00",
+      "rosterUpdatedAt": "2026-11-21T15:25:38.624303+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
