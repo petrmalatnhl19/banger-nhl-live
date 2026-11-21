@@ -17,7 +17,7 @@ function extractFiveOnFiveLines({shifts,intervals,boxscore}={}){
    }
   }
   if(!map.size||!roster.goalies.length)return fail('incomplete-roster');
-  roles.set(id,map);teams.push({teamId:id,forwardTrioSeconds:new Map(),defencePairSeconds:new Map(),candidateSeconds:0});
+  roles.set(id,map);teams.push({teamId:id,forwardTrioSeconds:new Map(),defencePairSeconds:new Map(),candidateSeconds:0,skippedNonstandardSeconds:0});
  }
  if(roles.size!==2)return fail('duplicate-team');
  const seen=new Set();
@@ -36,7 +36,7 @@ function extractFiveOnFiveLines({shifts,intervals,boxscore}={}){
     const team=teams[i],active=activeByTeam[i],map=roles.get(team.teamId);
     const f=active.filter(s=>map.get(s.playerId).group==='forward').map(s=>s.playerId).sort((a,b)=>a-b);
     const d=active.filter(s=>map.get(s.playerId).group==='defence').map(s=>s.playerId).sort((a,b)=>a-b);
-    if(f.length!==3||d.length!==2)return fail('nonstandard-position-composition');
+    if(f.length!==3||d.length!==2){team.skippedNonstandardSeconds++;continue;}
     for(const [bucket,ids] of [[team.forwardTrioSeconds,f],[team.defencePairSeconds,d]]){
      const key=ids.join(',');bucket.set(key,(bucket.get(key)||0)+1);
     }
@@ -47,8 +47,8 @@ function extractFiveOnFiveLines({shifts,intervals,boxscore}={}){
  const mapped=teams.map(team=>{
   const map=roles.get(team.teamId);
   const list=bucket=>[...bucket].map(([key,seconds])=>({playerIds:key.split(',').map(Number),players:key.split(',').map(id=>map.get(Number(id)).name),seconds})).sort((a,b)=>b.seconds-a.seconds||a.playerIds.join(',').localeCompare(b.playerIds.join(',')));
-  return {teamId:team.teamId,candidateSeconds:team.candidateSeconds,forwardTrios:list(team.forwardTrioSeconds),defencePairs:list(team.defencePairSeconds)};
+  return {teamId:team.teamId,candidateSeconds:team.candidateSeconds,skippedNonstandardSeconds:team.skippedNonstandardSeconds,forwardTrios:list(team.forwardTrioSeconds),defencePairs:list(team.defencePairSeconds)};
  });
- return {status:'candidate-only',teams:mapped,publishable:false,verifiedUnits:false,reason:'Only candidate 5v5 intervals are covered; incomplete full-game evidence and independent agreement remain unverified.'};
+ return {status:'candidate-only',teams:mapped,publishable:false,verifiedUnits:false,reason:'Only candidate 5v5 intervals with 3 forwards and 2 defenders are counted; nonstandard composition is excluded and reported; independent agreement remains unverified.'};
 }
 module.exports={extractFiveOnFiveLines};
