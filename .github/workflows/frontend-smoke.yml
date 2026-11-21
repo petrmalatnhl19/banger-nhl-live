@@ -138,6 +138,8 @@ jobs:
         run: node --test tests/lineups-03-goal-penalty-interactions.test.cjs
       - name: LINEUPS-03.35 goal strength candidate tests
         run: node --test tests/lineups-03-goal-strength-context.test.cjs
+      - name: LINEUPS-03.60 matching gap event tests
+        run: node --test tests/lineups-03-60-matching-gap-events.test.cjs
       - name: LINEUPS-03.59 identity continuity tests
         run: node --test tests/lineups-03-59-identity-continuity.test.cjs
       - name: LINEUPS-03.58 coverage neighbor tests
