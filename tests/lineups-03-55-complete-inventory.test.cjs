@@ -1,0 +1,7 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict');
+const {auditCompleteRecoveryInventory}=require('../scripts/lineups_03_55_complete_inventory.cjs');
+const classification={status:'candidate-only',uncoveredSeconds:25,categories:{fiveVsFiveCount:15,otherSkaterCounts:10,incompleteOrAmbiguous:0},allIntervals:[{category:'fiveVsFiveCount',startSecond:0,endSecondExclusive:4,seconds:4},{category:'otherSkaterCounts',startSecond:4,endSecondExclusive:14,seconds:10},{category:'fiveVsFiveCount',startSecond:14,endSecondExclusive:25,seconds:11}]};
+test('accounts for every uncovered second including short 5v5-count intervals',()=>{const r=auditCompleteRecoveryInventory({classification,minSeconds:10});assert.equal(r.allFiveVsFiveCountSeconds,15);assert.equal(r.eligibleCandidateSeconds,11);assert.equal(r.belowMinimumSeconds,4);assert.equal(r.sourceTruncated,false);assert.equal(r.publishable,false)});
+test('fails closed on missing intervals',()=>{assert.equal(auditCompleteRecoveryInventory({classification:{...classification,allIntervals:classification.allIntervals.slice(1)}}).status,'unverified')});
+test('fails closed on overlapping intervals',()=>{const bad={...classification,allIntervals:[classification.allIntervals[0],{...classification.allIntervals[1],startSecond:3,endSecondExclusive:13}]};assert.equal(auditCompleteRecoveryInventory({classification:bad}).status,'unverified')});
