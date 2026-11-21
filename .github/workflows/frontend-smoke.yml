@@ -138,6 +138,8 @@ jobs:
         run: node --test tests/lineups-03-goal-penalty-interactions.test.cjs
       - name: LINEUPS-03.35 goal strength candidate tests
         run: node --test tests/lineups-03-goal-strength-context.test.cjs
+      - name: LINEUPS-03.44 recovery event evidence regression tests
+        run: node --test tests/lineups-03-44-recovery-event-evidence.test.cjs
       - name: LINEUPS-03.43 5v5 recovery candidate regression tests
         run: node --test tests/lineups-03-43-recovery-candidates.test.cjs
       - name: LINEUPS-03.42 uncovered seconds classification tests
