@@ -138,6 +138,8 @@ jobs:
         run: node --test tests/lineups-03-goal-penalty-interactions.test.cjs
       - name: LINEUPS-03.35 goal strength candidate tests
         run: node --test tests/lineups-03-goal-strength-context.test.cjs
+      - name: LINEUPS-03.51 skater identity regression tests
+        run: node --test tests/lineups-03-51-skater-identity-audit.test.cjs
       - name: LINEUPS-03.50 same-period neighbor regression tests
         run: node --test tests/lineups-03-50-same-period-neighbors.test.cjs
       - name: LINEUPS-03.49 split segment event regression tests
