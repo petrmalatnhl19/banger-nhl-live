@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-21T15:26:10.739757+00:00",
-  "rostersUpdatedAt": "2026-11-21T15:25:40.081949+00:00",
+  "updatedAt": "2026-11-21T16:23:24.149334+00:00",
+  "rostersUpdatedAt": "2026-11-21T16:22:43.097860+00:00",
   "projectionDate": "2026-11-21",
   "teamCount": 32,
-  "goalieCount": 73,
+  "goalieCount": 74,
   "goalies": [
     {
       "name": "Mackenzie Blackwood",
@@ -135,6 +135,14 @@
       "starterStatus": "projected",
       "starterGameDate": "2026-11-21",
       "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+    },
+    {
+      "name": "Nikita Tolopilo",
+      "team": "VAN",
+      "teamKey": "canucks",
+      "playerId": 8484268,
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Charlie Lindgren",
@@ -391,8 +399,9 @@
       "team": "TOR",
       "teamKey": "maple leafs",
       "playerId": 8476932,
-      "starterStatus": "unknown",
-      "starterGameDate": null
+      "starterStatus": "projected",
+      "starterGameDate": "2026-11-21",
+      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "name": "Frederik Andersen",
