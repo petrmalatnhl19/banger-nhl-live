@@ -32,6 +32,7 @@ const {auditPenaltyOverlapProvenance}=require('./lineups_penalty_overlap_provena
 const {auditUnattributedSpecialTeamsCandidates}=require('./lineups_penalty_candidate_gaps.cjs');
 const {auditGoalPenaltyInteractions}=require('./lineups_goal_penalty_interactions.cjs');
 const {auditGoalStrengthContext}=require('./lineups_goal_strength_context.cjs');
+const {extractFiveOnFiveLines}=require('./lineups_03_37_five_on_five_lines.cjs');
 const gameId=process.argv[2]||'2026020335';
 if(!/^\d{10}$/.test(gameId)){console.error('Invalid game ID');process.exitCode=2;}
 else {
@@ -65,6 +66,14 @@ else {
    const strengthEvidence=skaterAudit.shifts?.length&&Array.isArray(playByPlay.plays)&&boxscore.awayTeam&&boxscore.homeTeam?eventStrengthEvidence(playByPlay.plays,skaterAudit.shifts,boxscore.awayTeam.id,boxscore.homeTeam.id):{status:'unverified',verifiedStrengthWindows:false,verifiedUnits:false};
    const strengthIntervalCandidates=skaterAudit.shifts?.length&&Array.isArray(playByPlay.plays)&&boxscore.awayTeam&&boxscore.homeTeam?candidateStrengthIntervals(playByPlay.plays,skaterAudit.shifts,boxscore.awayTeam.id,boxscore.homeTeam.id):{status:'unverified',verifiedStrengthWindows:false,verifiedUnits:false};
    const strengthIntervalSummary={status:strengthIntervalCandidates.status,candidateCount:strengthIntervalCandidates.candidates?.length??0,totalSeconds:strengthIntervalCandidates.totalSeconds??0,byStrength:Object.fromEntries([...new Set((strengthIntervalCandidates.candidates??[]).map(x=>x.strength))].map(k=>[k,{count:strengthIntervalCandidates.candidates.filter(x=>x.strength===k).length,seconds:strengthIntervalCandidates.candidates.filter(x=>x.strength===k).reduce((n,x)=>n+x.seconds,0)}])),verifiedStrengthWindows:false,verifiedUnits:false};
+   // LINEUPS-03.38: independent, non-publishable 5v5 trio/pair diagnostics.
+   const observedFiveOnFive=strengthIntervalCandidates.status==='candidate-only'&&skaterAudit.shifts?.length
+     ?extractFiveOnFiveLines({shifts:skaterAudit.shifts,intervals:strengthIntervalCandidates.candidates.filter(w=>w.strength==='5v5'),boxscore})
+     :{status:'unverified',reason:'missing-candidate-intervals',teams:[],verifiedUnits:false,publishable:false};
+   const observedFiveOnFiveSummary={status:observedFiveOnFive.status,reason:observedFiveOnFive.reason,verifiedUnits:false,publishable:false,
+     teams:(observedFiveOnFive.teams||[]).map(t=>({teamId:t.teamId,candidateSeconds:t.candidateSeconds,
+       forwardTrioCount:t.forwardTrios.length,defencePairCount:t.defencePairs.length,
+       topForwardTrios:t.forwardTrios.slice(0,8),topDefencePairs:t.defencePairs.slice(0,6)}))};
    const strengthUnits= strengthIntervalCandidates.status==='candidate-only'?candidateStrengthUnits(skaterAudit.shifts,strengthIntervalCandidates.candidates,boxscore.awayTeam.id,boxscore.homeTeam.id):{status:'unverified',teams:[],verifiedUnits:false};
    const strengthUnitsSummary={status:strengthUnits.status,verifiedUnits:false,teams:(strengthUnits.teams||[]).map(t=>({teamId:t.teamId,seconds:t.seconds,unitCount:t.units.length,byStrength:Object.fromEntries([...new Set(t.units.map(u=>u.strength))].map(k=>[k,{unitCount:t.units.filter(u=>u.strength===k).length,topThree:t.units.filter(u=>u.strength===k).slice(0,3)}]))}))};
    const namedStrengthUnits=annotateStrengthUnits(strengthUnits,boxscore);
@@ -90,7 +99,7 @@ else {
    const teams=[...new Set(data.map(x=>x.teamId))].sort();
    const players=new Set(data.map(x=>x.playerId));
    const result={gameId,endpoint:'NHL Stats shiftcharts',http:'200',reportedTotal:payload.total??null,rawRows:data.length,teams,players:players.size,periods,
-     accepted:parsed.shifts.length,rejected:parsed.rejected,rejectionReasons:rejectionAudit.reasons,normalizationDetails:rejectionAudit.normalizationDetails,longShiftSummary:rejectionAudit.longShiftSummary,longShiftRoleAudit:roleAudit,skaterShiftAudit:{status:skaterAudit.status,skaterShiftCount:skaterAudit.skaterShiftCount??0,goalieShiftCount:skaterAudit.goalieShiftCount??0,rejected:skaterAudit.rejected??0,verifiedUnits:false},occupancyAudit,fiveSkaterSummary,simultaneousFiveSummary,fiveUnitsSummary,namedFiveSummary,situationEvidence,eventStrengthAgreement,strengthBoundaryAudit,strengthMismatchTypes,boundaryAlternatives,strengthEvidence,strengthIntervalSummary,strengthUnitsSummary,namedStrengthSummary,specialTeamsSummary,candidateCoverage,publicSpecialTeams,landingStatsShape,landingSchema,penaltyEvidenceSummary,penaltyDirection,penaltyUniqueSeconds,penaltyOverlapProvenance,penaltyCandidateGaps,goalPenaltyInteractions,goalStrengthContext,boxscoreShape,classificationMatchesParser:rejectionAudit.accepted===parsed.shifts.length&&rejectionAudit.rejected===parsed.rejected,status:parsed.status,
+     accepted:parsed.shifts.length,rejected:parsed.rejected,rejectionReasons:rejectionAudit.reasons,normalizationDetails:rejectionAudit.normalizationDetails,longShiftSummary:rejectionAudit.longShiftSummary,longShiftRoleAudit:roleAudit,skaterShiftAudit:{status:skaterAudit.status,skaterShiftCount:skaterAudit.skaterShiftCount??0,goalieShiftCount:skaterAudit.goalieShiftCount??0,rejected:skaterAudit.rejected??0,verifiedUnits:false},occupancyAudit,fiveSkaterSummary,simultaneousFiveSummary,fiveUnitsSummary,namedFiveSummary,situationEvidence,eventStrengthAgreement,strengthBoundaryAudit,strengthMismatchTypes,boundaryAlternatives,strengthEvidence,strengthIntervalSummary,observedFiveOnFiveSummary,strengthUnitsSummary,namedStrengthSummary,specialTeamsSummary,candidateCoverage,publicSpecialTeams,landingStatsShape,landingSchema,penaltyEvidenceSummary,penaltyDirection,penaltyUniqueSeconds,penaltyOverlapProvenance,penaltyCandidateGaps,goalPenaltyInteractions,goalStrengthContext,boxscoreShape,classificationMatchesParser:rejectionAudit.accepted===parsed.shifts.length&&rejectionAudit.rejected===parsed.rejected,status:parsed.status,
      verifiedUnits:false,reason:'No verified strength windows or roster/goalie completeness; this diagnostic does not publish PP/PK units.'};
    console.log(JSON.stringify(result,null,2));
    if(parsed.status!=='partial'||!parsed.shifts.length)process.exitCode=3;
