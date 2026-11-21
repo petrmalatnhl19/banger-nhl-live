@@ -1,9 +1,10 @@
 {
-  "generatedAt": "2026-11-21T07:58:50.959528+00:00",
+  "generatedAt": "2026-11-21T08:53:54.498365+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 8,
+  "currentProjections": 6,
   "needsFreshProjection": [
+    "avalanche",
     "blue jackets",
     "blues",
     "bruins",
@@ -11,6 +12,7 @@
     "canucks",
     "capitals",
     "devils",
+    "ducks",
     "flyers",
     "golden knights",
     "islanders",
@@ -31,6 +33,7 @@
   ],
   "missing": [],
   "olderVerified": [
+    "avalanche",
     "blue jackets",
     "blues",
     "bruins",
@@ -38,6 +41,7 @@
     "canucks",
     "capitals",
     "devils",
+    "ducks",
     "flyers",
     "golden knights",
     "islanders",
@@ -65,11 +69,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-19T20:22:00+00:00",
       "source": "https://www.nhl.com/news/anaheim-ducks-colorado-avalanche-game-preview-november-19-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "blackhawks": {
       "hasProjectedLines": true,
@@ -174,11 +178,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": true,
+      "currentProjection": false,
       "publishedAt": "2026-11-19T20:22:00+00:00",
       "source": "https://www.nhl.com/news/anaheim-ducks-colorado-avalanche-game-preview-november-19-2026",
-      "needsFreshProjection": false,
-      "status": "recent_verified"
+      "needsFreshProjection": true,
+      "status": "older_verified"
     },
     "flames": {
       "hasProjectedLines": true,
