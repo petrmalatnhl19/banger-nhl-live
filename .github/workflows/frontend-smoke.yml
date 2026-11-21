@@ -138,6 +138,8 @@ jobs:
         run: node --test tests/lineups-03-goal-penalty-interactions.test.cjs
       - name: LINEUPS-03.35 goal strength candidate tests
         run: node --test tests/lineups-03-goal-strength-context.test.cjs
+      - name: LINEUPS-03.53 event transition regression tests
+        run: node --test tests/lineups-03-53-event-transition-audit.test.cjs
       - name: LINEUPS-03.52 recovery readiness regression tests
         run: node --test tests/lineups-03-52-recovery-readiness.test.cjs
       - name: LINEUPS-03.51 skater identity regression tests
