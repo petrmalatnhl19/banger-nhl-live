@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-20T23:27:19.786653+00:00",
+  "fetchedAt": "2026-11-21T07:58:49.629433+00:00",
   "teams": {
     "oilers": {
       "name": "Oilers",
@@ -46,8 +46,8 @@
       ],
       "injured": "Ryan Nugent-Hopkins (undisclosed), Frederik Andersen (undisclosed), Mattias Janmark (undisclosed), Alec Regula (undisclosed), Matt Savoie (undisclosed)",
       "scratched": "Max Jones, Jake Walman",
-      "source": "https://www.nhl.com/news/edmonton-oilers-carolina-hurricanes-game-preview-november-21-2026",
-      "publishedAt": "2026-11-20T20:15:11.043000+00:00"
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-21T05:07:00+00:00"
     },
     "hurricanes": {
       "name": "Hurricanes",
@@ -91,10 +91,10 @@
         "Pyotr Kochetkov",
         "Brandon Bussi"
       ],
-      "injured": "none",
+      "injured": "None",
       "scratched": "Juuso Valimaki, Jesperi Kotkaniemi, Nicolas Deslauriers",
-      "source": "https://www.nhl.com/news/edmonton-oilers-carolina-hurricanes-game-preview-november-21-2026",
-      "publishedAt": "2026-11-20T20:15:11.043000+00:00"
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-21T05:07:00+00:00"
     },
     "blackhawks": {
       "name": "Blackhawks",
@@ -141,7 +141,7 @@
       "injured": "Connor Bedard (right shoulder) Bowen Byram (upper body)",
       "scratched": "Ethan Del Mastro, Dillon Boucher",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-20T20:13:00+00:00"
+      "publishedAt": "2026-11-21T05:07:00+00:00"
     },
     "flames": {
       "name": "Flames",
@@ -188,7 +188,7 @@
       "injured": "Kevin Bahl (lower body)",
       "scratched": "Brennan Othmann, Brayden Pachal",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-20T20:13:00+00:00"
+      "publishedAt": "2026-11-21T05:07:00+00:00"
     },
     "penguins": {
       "name": "Penguins",
@@ -235,7 +235,7 @@
       "injured": "Ryan Graves (knee), Evgeni Malkin (upper body), Nick Robertson (lower body), Bryan Rust (lower body), Elmer Soderblom (upper body)",
       "scratched": "Justin Brazeau, Declan Carlile",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-20T20:13:00+00:00"
+      "publishedAt": "2026-11-21T05:07:00+00:00"
     },
     "predators": {
       "name": "Predators",
@@ -282,7 +282,7 @@
       "injured": "William Trudeau (upper body)",
       "scratched": "Daemon Hunt, Ilya Lyubushkin, Vitali Pinchuk",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-20T20:13:00+00:00"
+      "publishedAt": "2026-11-21T05:07:00+00:00"
     },
     "ducks": {
       "name": "Ducks",
