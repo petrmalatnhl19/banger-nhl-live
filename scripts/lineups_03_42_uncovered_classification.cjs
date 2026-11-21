@@ -33,6 +33,6 @@ function classifyUncoveredSeconds({intervals,shifts,awayId,homeId,regulationSeco
   }
   if(kind)categories[kind]++;
  }
- return {status:'candidate-only',categories,uncoveredSeconds:Object.values(categories).reduce((a,b)=>a+b,0),topIntervals:intervalsByCategory.sort((a,b)=>b.seconds-a.seconds||a.startSecond-b.startSecond).slice(0,20),verifiedStrength:false,publishable:false,note:'Counts reflect shift overlap only. Equal skater counts can include special situations; no independent strength verification.'};
+ return {status:'candidate-only',categories,uncoveredSeconds:Object.values(categories).reduce((a,b)=>a+b,0),allIntervals:intervalsByCategory.sort((a,b)=>a.startSecond-b.startSecond),topIntervals:intervalsByCategory.slice().sort((a,b)=>b.seconds-a.seconds||a.startSecond-b.startSecond).slice(0,20),verifiedStrength:false,publishable:false,note:'Counts reflect shift overlap only. Equal skater counts can include special situations; no independent strength verification.'};
 }
 module.exports={classifyUncoveredSeconds};
