@@ -138,6 +138,8 @@ jobs:
         run: node --test tests/lineups-03-goal-penalty-interactions.test.cjs
       - name: LINEUPS-03.35 goal strength candidate tests
         run: node --test tests/lineups-03-goal-strength-context.test.cjs
+      - name: LINEUPS-03.55 complete inventory regression tests
+        run: node --test tests/lineups-03-55-complete-inventory.test.cjs
       - name: LINEUPS-03.54 event gap regression tests
         run: node --test tests/lineups-03-54-event-gap-audit.test.cjs
       - name: LINEUPS-03.53 event transition regression tests
