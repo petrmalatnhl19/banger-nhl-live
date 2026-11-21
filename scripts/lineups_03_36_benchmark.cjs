@@ -12,7 +12,7 @@ const BENCHMARK_2026020335=Object.freeze({
 });
 function compareBenchmark({gameId,sourceRows,rosterCovered,verifiedStrength,observedLines,toleranceSeconds=2}={}){
  const base={status:'unverified',publishable:false,verifiedUnits:false,matched:0,checked:0,discrepancies:[]};
- if(gameId!==BENCHMARK_2026020335||!Number.isInteger(sourceRows)||sourceRows<=0||rosterCovered!==true||verifiedStrength!==true||!Array.isArray(observedLines)||!Number.isInteger(toleranceSeconds)||toleranceSeconds<0)return {...base,reason:'missing independently verified raw data, roster, strength, or observations'};
+ if(gameId!==BENCHMARK_2026020335.gameId||!Number.isInteger(sourceRows)||sourceRows<=0||rosterCovered!==true||verifiedStrength!==true||!Array.isArray(observedLines)||!Number.isInteger(toleranceSeconds)||toleranceSeconds<0)return {...base,reason:'missing independently verified raw data, roster, strength, or observations'};
  const key=x=>[x.team,x.kind,...x.players.map(s=>String(s).toLowerCase()).sort()].join('|');
  const observed=new Map();
  for(const line of observedLines){
