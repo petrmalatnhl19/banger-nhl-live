@@ -39,6 +39,7 @@ const {auditRecoveryCandidates}=require('./lineups_03_43_recovery_candidates.cjs
 const {auditRecoveryEventEvidence}=require('./lineups_03_44_recovery_event_evidence.cjs');
 const {triageRecoveryBoundaries}=require('./lineups_03_45_recovery_boundary_triage.cjs');
 const {simulateRecoveryCoverage}=require('./lineups_03_46_recovery_scenario.cjs');
+const {auditRecoveryPeriodBoundaries}=require('./lineups_03_47_period_boundary_audit.cjs');
 const gameId=process.argv[2]||'2026020335';
 if(!/^\d{10}$/.test(gameId)){console.error('Invalid game ID');process.exitCode=2;}
 else {
@@ -86,7 +87,8 @@ else {
    const recoveryCandidates=auditRecoveryCandidates({classification:uncoveredClassification});
    const recoveryEventEvidence=playByPlay.fetchError?{status:'unverified',reason:'play-by-play-fetch-failed',verifiedStrength:false,publishable:false}:auditRecoveryEventEvidence({recoveryCandidates:recoveryCandidates.recoveryCandidates||[],plays:playByPlay.plays});
    const recoveryBoundaryTriage=triageRecoveryBoundaries(recoveryEventEvidence);
-   const recoveryCoverageScenario=simulateRecoveryCoverage({triage:recoveryBoundaryTriage,baselineSeconds:fiveOnFiveCoverage.candidateFiveOnFiveSeconds});
+   const recoveryPeriodBoundaries=auditRecoveryPeriodBoundaries({triage:recoveryBoundaryTriage});
+   const recoveryCoverageScenario=simulateRecoveryCoverage({triage:recoveryPeriodBoundaries,baselineSeconds:fiveOnFiveCoverage.candidateFiveOnFiveSeconds});
    const strengthUnits= strengthIntervalCandidates.status==='candidate-only'?candidateStrengthUnits(skaterAudit.shifts,strengthIntervalCandidates.candidates,boxscore.awayTeam.id,boxscore.homeTeam.id):{status:'unverified',teams:[],verifiedUnits:false};
    const strengthUnitsSummary={status:strengthUnits.status,verifiedUnits:false,teams:(strengthUnits.teams||[]).map(t=>({teamId:t.teamId,seconds:t.seconds,unitCount:t.units.length,byStrength:Object.fromEntries([...new Set(t.units.map(u=>u.strength))].map(k=>[k,{unitCount:t.units.filter(u=>u.strength===k).length,topThree:t.units.filter(u=>u.strength===k).slice(0,3)}]))}))};
    const namedStrengthUnits=annotateStrengthUnits(strengthUnits,boxscore);
@@ -112,7 +114,7 @@ else {
    const teams=[...new Set(data.map(x=>x.teamId))].sort();
    const players=new Set(data.map(x=>x.playerId));
    const result={gameId,endpoint:'NHL Stats shiftcharts',http:'200',reportedTotal:payload.total??null,rawRows:data.length,teams,players:players.size,periods,
-     accepted:parsed.shifts.length,rejected:parsed.rejected,rejectionReasons:rejectionAudit.reasons,normalizationDetails:rejectionAudit.normalizationDetails,longShiftSummary:rejectionAudit.longShiftSummary,longShiftRoleAudit:roleAudit,skaterShiftAudit:{status:skaterAudit.status,skaterShiftCount:skaterAudit.skaterShiftCount??0,goalieShiftCount:skaterAudit.goalieShiftCount??0,rejected:skaterAudit.rejected??0,verifiedUnits:false},occupancyAudit,fiveSkaterSummary,simultaneousFiveSummary,fiveUnitsSummary,namedFiveSummary,situationEvidence,eventStrengthAgreement,strengthBoundaryAudit,strengthMismatchTypes,boundaryAlternatives,strengthEvidence,strengthIntervalSummary,observedFiveOnFiveSummary,fiveOnFiveCoverageSummary,uncoveredClassification,recoveryCandidates,recoveryEventEvidence,recoveryBoundaryTriage,recoveryCoverageScenario,strengthUnitsSummary,namedStrengthSummary,specialTeamsSummary,candidateCoverage,publicSpecialTeams,landingStatsShape,landingSchema,penaltyEvidenceSummary,penaltyDirection,penaltyUniqueSeconds,penaltyOverlapProvenance,penaltyCandidateGaps,goalPenaltyInteractions,goalStrengthContext,boxscoreShape,classificationMatchesParser:rejectionAudit.accepted===parsed.shifts.length&&rejectionAudit.rejected===parsed.rejected,status:parsed.status,
+     accepted:parsed.shifts.length,rejected:parsed.rejected,rejectionReasons:rejectionAudit.reasons,normalizationDetails:rejectionAudit.normalizationDetails,longShiftSummary:rejectionAudit.longShiftSummary,longShiftRoleAudit:roleAudit,skaterShiftAudit:{status:skaterAudit.status,skaterShiftCount:skaterAudit.skaterShiftCount??0,goalieShiftCount:skaterAudit.goalieShiftCount??0,rejected:skaterAudit.rejected??0,verifiedUnits:false},occupancyAudit,fiveSkaterSummary,simultaneousFiveSummary,fiveUnitsSummary,namedFiveSummary,situationEvidence,eventStrengthAgreement,strengthBoundaryAudit,strengthMismatchTypes,boundaryAlternatives,strengthEvidence,strengthIntervalSummary,observedFiveOnFiveSummary,fiveOnFiveCoverageSummary,uncoveredClassification,recoveryCandidates,recoveryEventEvidence,recoveryBoundaryTriage,recoveryPeriodBoundaries,recoveryCoverageScenario,strengthUnitsSummary,namedStrengthSummary,specialTeamsSummary,candidateCoverage,publicSpecialTeams,landingStatsShape,landingSchema,penaltyEvidenceSummary,penaltyDirection,penaltyUniqueSeconds,penaltyOverlapProvenance,penaltyCandidateGaps,goalPenaltyInteractions,goalStrengthContext,boxscoreShape,classificationMatchesParser:rejectionAudit.accepted===parsed.shifts.length&&rejectionAudit.rejected===parsed.rejected,status:parsed.status,
      verifiedUnits:false,reason:'No verified strength windows or roster/goalie completeness; this diagnostic does not publish PP/PK units.'};
    console.log(JSON.stringify(result,null,2));
    if(parsed.status!=='partial'||!parsed.shifts.length)process.exitCode=3;
