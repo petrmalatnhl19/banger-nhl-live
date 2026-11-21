@@ -21,3 +21,17 @@ test('only eligible candidate windows are counted, not whole-game shifts',()=>{
  const r=extractFiveOnFiveLines({...base,intervals:[{strength:'5v5',startSecond:5,endSecondExclusive:7}]});
  assert.equal(r.teams[0].candidateSeconds,2);assert.equal(r.teams[1].defencePairs[0].seconds,2);
 });
+
+test('nonstandard positional seconds are excluded without discarding valid 5v5 time',()=>{
+ const boxscore=structuredClone(roster);
+ boxscore.playerByGameStats.awayTeam.defense.push({playerId:7,name:{default:'EDM 7'}});
+ const altered=shifts.map(s=>s.teamId===22&&s.playerId===3?{...s,end:10}:s);
+ altered.push({teamId:22,playerId:7,start:10,end:20});
+ const result=extractFiveOnFiveLines({boxscore,shifts:altered,intervals:[{strength:'5v5',startSecond:2,endSecondExclusive:18}]});
+ assert.equal(result.status,'candidate-only');
+ assert.equal(result.teams[0].candidateSeconds,8);
+ assert.equal(result.teams[0].skippedNonstandardSeconds,8);
+ assert.equal(result.teams[1].candidateSeconds,16);
+ assert.equal(result.teams[0].forwardTrios[0].seconds,8);
+ assert.equal(result.verifiedUnits,false);
+});
