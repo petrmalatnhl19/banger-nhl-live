@@ -1,37 +1,18 @@
 {
-  "generatedAt": "2026-11-21T16:23:20.427175+00:00",
+  "generatedAt": "2026-11-22T00:15:13.907232+00:00",
   "teams": {
     "bruins": {
       "team": "BOS",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/boston-bruins-detroit-red-wings-game-preview-november-18-2026",
-      "candidatePublishedAt": "2026-11-18T20:07:00.572000+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-21T22:59:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
       "roleMismatches": [],
-      "rejectedLines": [
-        {
-          "group": "forwards",
-          "line": 2,
-          "players": [
-            "Michael Eyssiont"
-          ],
-          "sourceLine": [
-            "Michael Eyssiont",
-            "Fraser Minten",
-            "Morgan Geekie"
-          ]
-        }
-      ],
-      "rejectedPlayerReasons": [
-        {
-          "name": "Michael Eyssiont",
-          "expectedRole": "forwards",
-          "reason": "not_in_current_roster"
-        }
-      ],
-      "validatedForwardLines": 3,
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
       "validatedDefensePairs": 3,
       "accepted": true
     },
@@ -39,7 +20,7 @@
       "team": "CAR",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "candidatePublishedAt": "2026-11-21T05:07:00+00:00",
+      "candidatePublishedAt": "2026-11-21T22:59:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -53,8 +34,8 @@
     "kings": {
       "team": "LAK",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/los-angeles-kings-toronto-maple-leafs-game-preview-november-19-2026",
-      "candidatePublishedAt": "2026-11-19T17:48:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-21T22:59:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -68,23 +49,23 @@
     "islanders": {
       "team": "NYI",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/new-york-islanders-winnipeg-jets-game-preview-november-19-2026",
-      "candidatePublishedAt": "2026-11-19T17:56:00+00:00",
-      "candidateForwardLines": 3,
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-21T22:59:00+00:00",
+      "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
       "roleMismatches": [],
       "rejectedLines": [],
       "rejectedPlayerReasons": [],
-      "validatedForwardLines": 3,
+      "validatedForwardLines": 4,
       "validatedDefensePairs": 3,
       "accepted": true
     },
     "rangers": {
       "team": "NYR",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/montreal-canadiens-new-york-rangers-game-preview-november-16-2026",
-      "candidatePublishedAt": "2026-11-16T17:29:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-21T22:59:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -98,50 +79,8 @@
     "senators": {
       "team": "OTT",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/philadelphia-flyers-ottawa-senators-game-preview-november-19-2026",
-      "candidatePublishedAt": "2026-11-19T17:15:20.099000+00:00",
-      "candidateForwardLines": 4,
-      "candidateDefensePairs": 3,
-      "rosterValidation": "passed",
-      "gameEvidenceExceptions": [
-        {
-          "player": "Philip Tomasino",
-          "role": "forwards",
-          "basis": "official game boxscore on projection publication date"
-        },
-        {
-          "player": "Samuel Blais",
-          "role": "forwards",
-          "basis": "official game boxscore on projection publication date"
-        }
-      ],
-      "roleMismatches": [],
-      "rejectedLines": [],
-      "rejectedPlayerReasons": [],
-      "validatedForwardLines": 4,
-      "validatedDefensePairs": 3,
-      "accepted": true
-    },
-    "sharks": {
-      "team": "SJS",
-      "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/calgary-flames-san-jose-sharks-game-preview-november-17-2026",
-      "candidatePublishedAt": "2026-11-17T19:59:00+00:00",
-      "candidateForwardLines": 4,
-      "candidateDefensePairs": 3,
-      "rosterValidation": "passed",
-      "roleMismatches": [],
-      "rejectedLines": [],
-      "rejectedPlayerReasons": [],
-      "validatedForwardLines": 4,
-      "validatedDefensePairs": 3,
-      "accepted": true
-    },
-    "jets": {
-      "team": "WPG",
-      "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/new-york-islanders-winnipeg-jets-game-preview-november-19-2026",
-      "candidatePublishedAt": "2026-11-19T17:56:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-21T22:59:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -151,20 +90,83 @@
           "group": "forwards",
           "line": 4,
           "players": [
-            "Danny Zhilkin"
+            "Samuel Blais"
           ],
           "sourceLine": [
-            "Cole Koepke",
-            "Morgan Barron",
-            "Danny Zhilkin"
+            "Samuel Blais",
+            "Stephen Halliday",
+            "Nick Cousins"
+          ]
+        }
+      ],
+      "rejectedPlayerReasons": [
+        {
+          "name": "Samuel Blais",
+          "expectedRole": "forwards",
+          "reason": "not_in_current_roster"
+        }
+      ],
+      "validatedForwardLines": 3,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "sharks": {
+      "team": "SJS",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-21T22:59:00+00:00",
+      "candidateForwardLines": 3,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 3,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "jets": {
+      "team": "WPG",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-21T22:59:00+00:00",
+      "candidateForwardLines": 3,
+      "candidateDefensePairs": 4,
+      "rosterValidation": "passed",
+      "roleMismatches": [
+        {
+          "sourcePair": 1,
+          "players": [
+            "Danny Zhilkin",
+            "Alex Iafallo"
+          ],
+          "reason": "forward_in_defense_row"
+        }
+      ],
+      "rejectedLines": [
+        {
+          "group": "defense",
+          "line": 1,
+          "players": [
+            "Danny Zhilkin",
+            "Alex Iafallo"
+          ],
+          "sourceLine": [
+            "Danny Zhilkin",
+            "Alex Iafallo"
           ]
         }
       ],
       "rejectedPlayerReasons": [
         {
           "name": "Danny Zhilkin",
-          "expectedRole": "forwards",
+          "expectedRole": "defense",
           "reason": "not_in_current_roster"
+        },
+        {
+          "name": "Alex Iafallo",
+          "expectedRole": "defense",
+          "reason": "other_position_group"
         }
       ],
       "validatedForwardLines": 3,
@@ -174,34 +176,15 @@
     "canucks": {
       "team": "VAN",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/vancouver-canucks-seattle-kraken-game-preview-november-19-2026",
-      "candidatePublishedAt": "2026-11-19T19:54:00+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-21T22:59:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
       "roleMismatches": [],
-      "rejectedLines": [
-        {
-          "group": "forwards",
-          "line": 4,
-          "players": [
-            "Max Sasson"
-          ],
-          "sourceLine": [
-            "Drew O'Connor",
-            "Max Sasson",
-            "Brendan Gallagher"
-          ]
-        }
-      ],
-      "rejectedPlayerReasons": [
-        {
-          "name": "Max Sasson",
-          "expectedRole": "forwards",
-          "reason": "not_in_current_roster"
-        }
-      ],
-      "validatedForwardLines": 3,
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
       "validatedDefensePairs": 3,
       "accepted": true
     },
@@ -257,8 +240,8 @@
     "mammoth": {
       "team": "UTA",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/colorado-avalanche-utah-mammoth-game-preview-november-18-2026",
-      "candidatePublishedAt": "2026-11-18T20:05:17.814000+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-21T22:59:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -272,8 +255,8 @@
     "red wings": {
       "team": "DET",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/boston-bruins-detroit-red-wings-game-preview-november-18-2026",
-      "candidatePublishedAt": "2026-11-18T20:07:00.572000+00:00",
+      "candidateSource": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "candidatePublishedAt": "2026-11-21T22:59:00+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -290,6 +273,17 @@
             "Nate Danielson",
             "J.T. Compher"
           ]
+        },
+        {
+          "group": "defense",
+          "line": 3,
+          "players": [
+            "Albert Johannson"
+          ],
+          "sourceLine": [
+            "Andreas Englund",
+            "Albert Johannson"
+          ]
         }
       ],
       "rejectedPlayerReasons": [
@@ -297,10 +291,15 @@
           "name": "Nate Danielson",
           "expectedRole": "forwards",
           "reason": "not_in_current_roster"
+        },
+        {
+          "name": "Albert Johannson",
+          "expectedRole": "defense",
+          "reason": "not_in_current_roster"
         }
       ],
       "validatedForwardLines": 3,
-      "validatedDefensePairs": 3,
+      "validatedDefensePairs": 2,
       "accepted": true
     },
     "stars": {
