@@ -78,6 +78,9 @@ jobs:
         continue-on-error: true
         run: node scripts/video-11-nhl-diagnostic.cjs
 
+      - name: BANGER TV historical NHL proxy regression
+        run: node --test tests/banger-tv-history-proxy.test.cjs
+
       - name: Validate local scripts and HTML entrypoint
         shell: bash
         run: |
