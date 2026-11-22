@@ -156,6 +156,22 @@ jobs:
           print('Frontend smoke checks passed')
           PY
 
+  database-grants:
+    runs-on: ubuntu-24.04
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: grants_fixture
+          POSTGRES_HOST_AUTH_METHOD: trust
+        options: >-
+          --health-cmd "pg_isready -U postgres -d grants_fixture"
+          --health-interval 2s --health-timeout 3s --health-retries 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rehearse minimal grant change on disposable PostgreSQL
+        run: docker exec -i ${{ job.services.postgres.id }} psql -X -v ON_ERROR_STOP=1 -U postgres -d grants_fixture < .github/scripts/test-db-grants.sql
+
   browser-smoke:
     needs: frontend-smoke
     runs-on: ubuntu-24.04
@@ -196,6 +212,8 @@ jobs:
         run: node .github/scripts/browser-video-15-navigation.cjs
       - name: VIDEO-17 actual match modal official goal links
         run: node .github/scripts/browser-video-17-real-match.cjs
+      - name: Check TV panel with available, restricted and failed data sources
+        run: node .github/scripts/browser-tv-grants.cjs
       - name: Test application startup in Chromium
         run: node .github/scripts/browser-smoke.cjs
       - name: Test FAN-08 favorite team picker on 360, 390 and 430 px
