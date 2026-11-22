@@ -103,7 +103,7 @@ function mount(){
    }catch(e){if(token===generation&&section.isConnected)section.textContent='Historické statistiky se nepodařilo načíst. Predikce CORE zůstávají dostupné.';}
   }
   sel.addEventListener('change',drawHistory);drawHistory();status.textContent='Modelové predikce Supabase + historické statistiky NHL';
- }catch(e){status.textContent='Načtení TV statistik selhalo: '+e.message;}})();
+ }catch(e){status.textContent='Načtení TV statistik se nepodařilo. Zkuste to později.';}})();
 }
 const obs=new MutationObserver(()=>{if(document.getElementById('banger-prediction-hub')&&!document.getElementById('banger-tv-stats'))mount();});
 function start(){obs.observe(document.body,{childList:true,subtree:true});mount();}
