@@ -1,0 +1,10 @@
+'use strict';
+const test=require('node:test');const assert=require('node:assert/strict');
+const {clock,parseShiftCharts}=require('../scripts/lineups_shiftcharts_adapter.cjs');
+const gameId=2026020335;
+const row=(overrides={})=>({gameId,playerId:8471234,teamId:13,period:1,typeCode:517,startTime:'01:02',endTime:'01:43',...overrides});
+test('parses NHL shift clock into absolute game seconds',()=>{const r=parseShiftCharts({data:[row({period:2})]},gameId);assert.equal(r.status,'partial');assert.deepEqual(r.shifts,[{playerId:8471234,teamId:13,start:1262,end:1303}])});
+test('empty and malformed feeds fail closed',()=>{assert.equal(parseShiftCharts({data:[]},gameId).status,'unavailable');assert.equal(parseShiftCharts({},gameId).status,'invalid-response');assert.equal(parseShiftCharts({data:[row()]},'bad').status,'invalid-game')});
+test('rejects goal events, wrong game and invalid shifts',()=>{const r=parseShiftCharts({data:[row(),row({typeCode:505}),row({gameId:2026020336}),row({endTime:'99:99'}),row({period:4})]},gameId);assert.equal(r.shifts.length,1);assert.equal(r.rejected,4)});
+test('does not infer powerplay, penalty kill or complete rosters',()=>{const r=parseShiftCharts({data:[row()]},gameId);assert.equal(r.status,'partial');assert.match(r.warning,/Nezobrazovat jako potvrzené jednotky/);assert.equal('units' in r,false)});
+test('validates clock boundaries',()=>{assert.equal(clock('04:59'),299);assert.equal(clock('04:60'),null);assert.equal(clock('foo'),null)});

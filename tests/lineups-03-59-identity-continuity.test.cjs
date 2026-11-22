@@ -1,0 +1,10 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict');
+const {auditShortGapIdentityContinuity}=require('../scripts/lineups_03_59_identity_continuity.cjs');
+const classification={status:'candidate-only',allIntervals:[{category:'fiveVsFiveCount',startSecond:10,endSecondExclusive:11,seconds:1}]};
+const coverage={status:'candidate-only',gaps:[{startSecond:10,endSecondExclusive:11,seconds:1}]};
+const mk=(change=false)=>[...Array.from({length:5},(_,i)=>({teamId:1,playerId:i+1,start:0,end:20})),...Array.from({length:5},(_,i)=>({teamId:2,playerId:i+11,start:0,end:change&&i===0?11:20})),...(change?[{teamId:2,playerId:99,start:11,end:20}]:[])];
+test('matching five-player sets on both sides remain candidate-only',()=>{const r=auditShortGapIdentityContinuity({classification,coverage,shifts:mk(),awayId:1,homeId:2});assert.equal(r.matchingBothTeams,1);assert.equal(r.publishable,false)});
+test('detects changed skater set',()=>{const r=auditShortGapIdentityContinuity({classification,coverage,shifts:mk(true),awayId:1,homeId:2});assert.equal(r.changedAtLeastOneTeam,1)});
+test('missing identity does not count as match',()=>{const r=auditShortGapIdentityContinuity({classification,coverage,shifts:[],awayId:1,homeId:2});assert.equal(r.unavailableIdentity,1)});
+test('partial coverage adjacency cannot be compared',()=>{const r=auditShortGapIdentityContinuity({classification,coverage:{...coverage,gaps:[{startSecond:10,endSecondExclusive:12,seconds:2}]},shifts:mk(),awayId:1,homeId:2});assert.equal(r.notBothSidesCovered,1)});

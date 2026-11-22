@@ -64,7 +64,21 @@ const {play, game} = require('./commentary_fixture.cjs');
   await page.waitForFunction(() => document.querySelector('#status')?.textContent.includes('zápasů · aktualizováno'), { timeout: 10000 });
   await page.locator('#content [data-game]').first().click();
   await page.locator('#liveArena:not(.hidden) #closeArena').waitFor({ timeout: 10000 });
-  await page.locator('#arenaBody [data-match-tab="lineups"]').first().click();
+  // UX-LINEUPS-02: exercise mobile tabs and accessibility state.
+   await page.locator('#arenaBody [data-match-tab="actual-lineups"]').first().click();
+   await page.locator('#arenaBody [data-match-pane="actual-lineups"]:not(.hidden)').waitFor();
+   for (const mode of ['even', 'pp', 'pk']) {
+     const tab = page.locator('#arenaBody [data-lineup-mode="' + mode + '"]');
+     await tab.click();
+     assert.equal(await tab.getAttribute('aria-pressed'), 'true', mode + ' selected');
+     assert.equal(await page.locator('#arenaBody [data-lineup-mode][aria-pressed="true"]').count(), 1);
+     if (mode !== 'even') {
+       await page.locator('#actualLineups .actual-special-status').waitFor();
+       assert.match(await page.locator('#actualLineups').innerText(), /nezobrazujeme domnělé kombinace hráčů/);
+     }
+   }
+   await page.locator('#arenaBody [data-lineup-mode="even"]').click();
+   await page.locator('#arenaBody [data-match-tab="lineups"]').first().click();
   await page.locator('#arenaBody [data-match-pane="lineups"]:not(.hidden)').waitFor({ timeout: 10000 });
   await page.locator('#matchMoreToggle').click();
   await page.locator('#matchMoreMenu:not(.hidden) [data-match-tab="players"]').click();
