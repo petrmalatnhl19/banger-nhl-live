@@ -44,3 +44,24 @@ test("audit SQL is read-only and includes all eight views", () => {
   assert.match(executable, /pg_get_viewdef/);
   assert.match(executable, /pg_policies/);
 });
+
+test("explicit frontend REST projections match verified Supabase view columns", () => {
+  const columns = JSON.parse(read("tests/fixtures/security-public-core-view-columns.json"));
+  assert.equal(Object.keys(columns).length, 8, "all eight views need a verified schema snapshot");
+  const clients = [performance, tv, verified];
+  const tracked = Object.keys(columns);
+  let explicit = 0;
+  for (const src of clients) {
+    for (const match of src.matchAll(/([a-z][a-z0-9_]+)\?select=([^'"\s&]+)/g)) {
+      const [, view, projection] = match;
+      if (!tracked.includes(view) || projection === "*") continue;
+      explicit++;
+      const allowed = new Set(columns[view]);
+      for (const column of projection.split(",")) {
+        assert.ok(allowed.has(column), view + " requests nonexistent column " + column);
+      }
+    }
+  }
+  assert.ok(explicit >= 3, "expected explicit REST projections for TV and schedule");
+  assert.deepEqual(columns.nhl_core43_public_schedule_evidence, ["game_id", "kickoff_at", "away_team", "home_team"]);
+});
