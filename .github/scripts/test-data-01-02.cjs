@@ -49,6 +49,8 @@ test('DATA-02: frontend preserves projected vs confirmed wording',()=>{
 test('DATA-02: both producers use accepted conflict contracts without weakening suppression', () => {
  const valid = [
   {team:'SEA',specialist:'Goalie A',nhl:'Goalie B'},
+  // Exact conflict shape emitted by the automated refresh in PR #408.
+  {team:'STL',specialist:'Joel Hofer',nhl:'Jordan Binnington',nhlSource:'https://www.nhl.com/news/new-jersey-devils-st-louis-blues-game-preview-november-21-2026'},
   {team:'BUF',rotowire:'Goalie A',previous:'Goalie B'},
   {team:'PIT',gameId:2026020001,reason:'cross_source_goalie_mismatch'}
  ];
