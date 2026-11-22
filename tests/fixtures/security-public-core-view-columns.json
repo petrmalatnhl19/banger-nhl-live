@@ -1,0 +1,84 @@
+{
+  "core43_shadow_predictions_v1": [
+    "game_id",
+    "game_date",
+    "away_team",
+    "home_team",
+    "status",
+    "core42_away",
+    "core42_home",
+    "away_gsax_per100",
+    "home_gsax_per100",
+    "ready_sides",
+    "total_sides",
+    "core43_away",
+    "core43_home",
+    "experiment_status",
+    "model_version"
+  ],
+  "core43_shadow_preview_v1": [
+    "game_id",
+    "game_date",
+    "away_team",
+    "home_team",
+    "core42_predicted_at",
+    "away_gsax_per100",
+    "home_gsax_per100",
+    "confirmed_sides",
+    "core43_preview_away",
+    "core43_preview_home",
+    "preview_status",
+    "version"
+  ],
+  "core43_shadow_readiness_v1": [
+    "game_id",
+    "game_date",
+    "side",
+    "team_code",
+    "goalie_name",
+    "goalie_id",
+    "prediction_at",
+    "evidence_status",
+    "source_published_at",
+    "verified_at",
+    "gsax",
+    "shots_against",
+    "gsax_fetched_at",
+    "readiness"
+  ],
+  "nhl_core42_status": [
+    "pending_predictions",
+    "finalized_predictions",
+    "reviewed_goalies"
+  ],
+  "nhl_core43_public_schedule_evidence": [
+    "game_id",
+    "kickoff_at",
+    "away_team",
+    "home_team"
+  ],
+  "nhl_core_model_accuracy": [
+    "model",
+    "games",
+    "goal_mae",
+    "winner_evaluable",
+    "winner_correct",
+    "winner_accuracy_pct",
+    "total_goals_mae"
+  ],
+  "nhl_core_model_head_to_head": [
+    "model",
+    "games",
+    "goal_mae",
+    "correct_winner",
+    "winner_accuracy_pct"
+  ],
+  "nhl_core_model_trend": [
+    "model",
+    "game_id",
+    "game_date",
+    "games",
+    "winner_accuracy_pct",
+    "goal_mae"
+  ]
+}
