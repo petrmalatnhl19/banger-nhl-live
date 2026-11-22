@@ -23,9 +23,13 @@ async function main() {
     });
     // Log status only; never log payload, authorization headers or individual rows.
     console.log(view + ": HTTP " + response.status);
-    assert.equal(response.status, 200, view + " must currently be accessible with the public key");
-    assert.ok(Array.isArray(await response.json()), view + " must return a JSON array");
+    if (view === "core43_shadow_readiness_v1") {
+      assert.ok([401, 403].includes(response.status), "internal readiness view must reject public access");
+    } else {
+      assert.equal(response.status, 200, view + " must remain publicly readable");
+      assert.ok(Array.isArray(await response.json()), view + " must return a JSON array");
+    }
   }
-  console.log("Public REST baseline verified; no SQL was executed.");
+  console.log("Post-deployment REST permissions verified; no SQL was executed.");
 }
 main().catch(error => { console.error(error.message); process.exitCode = 1; });
