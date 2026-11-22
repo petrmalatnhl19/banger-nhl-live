@@ -1,4 +1,4 @@
-name: SECURITY CORE43 readiness ACL proposal
+name: SECURITY CORE43 readiness access regression
 
 on:
   pull_request:
@@ -23,5 +23,5 @@ jobs:
           node-version: '22'
       - name: Verify minimal ACL proposal and frontend contracts
         run: node --test tests/security-core43-readiness-acl.test.cjs tests/security-public-core-views.test.cjs
-      - name: Read-only public REST baseline (no SQL writes)
+      - name: Read-only post-deployment REST access regression
         run: node scripts/security_core43_public_rest_smoke.cjs
