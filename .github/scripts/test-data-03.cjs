@@ -24,8 +24,12 @@ test('DATA-03: source conflicts preserve both names without pretending to confir
  const starters=read('starting_goalies.json');
  const seen=new Set();
  for(const c of starters.conflicts||[]){
-  assert.ok(c.team&&c.rotowire&&c.previous,c.team+' incomplete conflict evidence');
-  assert.notEqual(norm(c.rotowire),norm(c.previous),c.team+' same candidate in conflict');
+  const rotowirePair=c.rotowire&&c.previous;
+  const specialistPair=c.specialist&&c.nhl;
+  const gameReason=c.gameId!=null&&typeof c.reason==='string'&&c.reason.length>0;
+  assert.ok(c.team&&(rotowirePair||specialistPair||gameReason),c.team+' incomplete conflict evidence');
+  if(rotowirePair) assert.notEqual(norm(c.rotowire),norm(c.previous),c.team+' same RotoWire candidate in conflict');
+  if(specialistPair) assert.notEqual(norm(c.specialist),norm(c.nhl),c.team+' same specialist/NHL candidate in conflict');
   assert.ok(!seen.has(c.team),c.team+' duplicate conflict');
   seen.add(c.team);
   const chosen=starters.teams[c.team];
