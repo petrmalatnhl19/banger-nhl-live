@@ -49,3 +49,23 @@ test('DATA-04: goalie evidence from the future is rejected by the game panel',()
  const html=fs.readFileSync(path.join(__dirname,'..','..','index.html'),'utf8');
  assert.ok(html.includes('Date.now()-Date.parse(checkedAt)>=0&&Date.now()-Date.parse(checkedAt)<24*3600000'));
 });
+
+const {selectPregameGoalie} = require('../../goalie-selection.js');
+test('GOALIE-01: NHL game day, conflict, identity, confirmation and observation cutoff', () => {
+ const date = '2026-11-21', checkedAt = date+'T16:23:24Z';
+ const game = {id:2026020365, gameDate:date, startTimeUTC:'2026-11-22T00:00:00Z',
+               awayTeam:{abbrev:'PHI'}, homeTeam:{abbrev:'MTL'}};
+ const row = {name:'Jacob Fowler',date,gameId:game.id,status:'confirmed',source:'https://example.org',checkedAt};
+ const daily = {date,updatedAt:checkedAt,teams:{MTL:row}};
+ const secondary = {updatedAt:checkedAt,games:[{...row,team:'MTL',opponent:'PHI',goalie:row.name}]};
+ const now = Date.parse(date+'T17:30:00Z');
+ const select = (feed, time=now) => selectPregameGoalie(game,'MTL',feed,secondary,time);
+ assert.equal(select(daily).status,'projected');
+ assert.equal(select({...daily,conflicts:[{team:'MTL',date,gameId:game.id}]}),null);
+ assert.equal(select({...daily,teams:{}}),null);
+ assert.equal(select({...daily,teams:{MTL:{...row,gameId:123}}}),null);
+ const confirmed = {...row,confirmationBasis:'explicit_pregame_report',confirmationEvidence:'Named starter'};
+ assert.equal(select({...daily,teams:{MTL:confirmed}}).status,'confirmed');
+ assert.equal(select({...daily,teams:{MTL:{...confirmed,checkedAt:game.startTimeUTC}}},Date.parse(game.startTimeUTC)),null);
+ assert.equal(select({...daily,updatedAt:'2026-11-18T12:00:00Z'}),null);
+});

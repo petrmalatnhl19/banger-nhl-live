@@ -102,12 +102,12 @@ def match_schedule(candidates, schedule):
                 home = game.get("homeTeam", {}).get("abbrev")
                 away = game.get("awayTeam", {}).get("abbrev")
                 if candidate["venue"] == "home" and home == candidate["team"] and away == candidate["opponent"]:
-                    possibilities.append((day["date"], game.get("id")))
+                    possibilities.append((day["date"], game.get("id"), game.get("startTimeUTC")))
                 elif candidate["venue"] == "away" and away == candidate["team"] and home == candidate["opponent"]:
-                    possibilities.append((day["date"], game.get("id")))
+                    possibilities.append((day["date"], game.get("id"), game.get("startTimeUTC")))
         if len(possibilities) == 1:
-            date, game_id = possibilities[0]
-            matches.append({**candidate, "date": date, "gameId": game_id, "source": URL})
+            date, game_id, start = possibilities[0]
+            matches.append({**candidate, "date": date, "gameId": game_id, "startTimeUTC": start, "source": URL})
     return matches
 
 def main():
@@ -125,6 +125,9 @@ def main():
         for game in day.get("games", [])
     ]
     matches, identity_issues = validate_game_claims(schedule_matches, games)
+    dates = {str(game["gameId"]): game["date"] for game in games}
+    for issue in identity_issues:
+        issue["date"] = dates.get(str(issue.get("gameId")))
     result = {"checkedAt": now.isoformat(), "source": URL,
               "candidateCount": len(candidates), "matchedCount": len(matches),
               "gameIdentityIssues": identity_issues,
