@@ -3,7 +3,7 @@
     "lineup_core_report.json",
     "lineup_rejections_report.json"
   ],
-  "incompleteTeams": 8,
+  "incompleteTeams": 9,
   "teams": [
     {
       "team": "avalanche",
@@ -17,71 +17,24 @@
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
     {
-      "team": "bruins",
-      "status": "incomplete_projection",
-      "reason": "rejected_roster_lines",
-      "missingForwardLines": 1,
-      "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/boston-bruins-detroit-red-wings-game-preview-november-18-2026",
-      "publishedAt": "2026-11-18T20:07:00.572000+00:00",
-      "rejectedLines": [
-        {
-          "group": "forwards",
-          "sourceLineNumber": 2,
-          "sourceLine": [
-            "Michael Eyssiont",
-            "Fraser Minten",
-            "Morgan Geekie"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Michael Eyssiont",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ],
-      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
-    },
-    {
-      "team": "canucks",
-      "status": "incomplete_projection",
-      "reason": "rejected_roster_lines",
-      "missingForwardLines": 1,
-      "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/vancouver-canucks-seattle-kraken-game-preview-november-19-2026",
-      "publishedAt": "2026-11-19T19:54:00+00:00",
-      "rejectedLines": [
-        {
-          "group": "forwards",
-          "sourceLineNumber": 4,
-          "sourceLine": [
-            "Drew O'Connor",
-            "Max Sasson",
-            "Brendan Gallagher"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Max Sasson",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ],
-      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
-    },
-    {
-      "team": "islanders",
+      "team": "canadiens",
       "status": "incomplete_projection",
       "reason": "incomplete_source_or_no_validated_replacement",
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/new-york-islanders-winnipeg-jets-game-preview-november-19-2026",
-      "publishedAt": "2026-11-19T17:56:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-21T22:59:00+00:00",
+      "rejectedLines": [],
+      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
+    },
+    {
+      "team": "flyers",
+      "status": "incomplete_projection",
+      "reason": "incomplete_source_or_no_validated_replacement",
+      "missingForwardLines": 1,
+      "missingDefensePairs": 0,
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-21T22:59:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
@@ -91,22 +44,27 @@
       "reason": "rejected_roster_lines",
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/new-york-islanders-winnipeg-jets-game-preview-november-19-2026",
-      "publishedAt": "2026-11-19T17:56:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-21T22:59:00+00:00",
       "rejectedLines": [
         {
-          "group": "forwards",
-          "sourceLineNumber": 4,
+          "group": "defense",
+          "sourceLineNumber": 1,
           "sourceLine": [
-            "Cole Koepke",
-            "Morgan Barron",
-            "Danny Zhilkin"
+            "Danny Zhilkin",
+            "Alex Iafallo"
           ],
           "unverifiedPlayers": [
             {
               "name": "Danny Zhilkin",
               "reason": "not_in_current_roster",
               "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            },
+            {
+              "name": "Alex Iafallo",
+              "reason": "other_position_group",
+              "inLocalCurrentRoster": true,
               "requiresIndependentGameEvidence": true
             }
           ]
@@ -120,8 +78,8 @@
       "reason": "incomplete_source_or_no_validated_replacement",
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/vancouver-canucks-seattle-kraken-game-preview-november-19-2026",
-      "publishedAt": "2026-11-19T19:54:00+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-21T22:59:00+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
@@ -164,9 +122,9 @@
       "status": "incomplete_projection",
       "reason": "rejected_roster_lines",
       "missingForwardLines": 1,
-      "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/boston-bruins-detroit-red-wings-game-preview-november-18-2026",
-      "publishedAt": "2026-11-18T20:07:00.572000+00:00",
+      "missingDefensePairs": 1,
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-21T22:59:00+00:00",
       "rejectedLines": [
         {
           "group": "forwards",
@@ -184,9 +142,65 @@
               "requiresIndependentGameEvidence": true
             }
           ]
+        },
+        {
+          "group": "defense",
+          "sourceLineNumber": 3,
+          "sourceLine": [
+            "Andreas Englund",
+            "Albert Johannson"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Albert Johannson",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
         }
       ],
       "nextAction": "Verify official roster and source-player identity; do not auto-approve."
+    },
+    {
+      "team": "senators",
+      "status": "incomplete_projection",
+      "reason": "rejected_roster_lines",
+      "missingForwardLines": 1,
+      "missingDefensePairs": 0,
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-21T22:59:00+00:00",
+      "rejectedLines": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 4,
+          "sourceLine": [
+            "Samuel Blais",
+            "Stephen Halliday",
+            "Nick Cousins"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Samuel Blais",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ],
+      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
+    },
+    {
+      "team": "sharks",
+      "status": "incomplete_projection",
+      "reason": "incomplete_source_or_no_validated_replacement",
+      "missingForwardLines": 1,
+      "missingDefensePairs": 0,
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-21T22:59:00+00:00",
+      "rejectedLines": [],
+      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     }
   ],
   "policy": "Diagnostics only. Never synthesize or automatically publish unverified lines."

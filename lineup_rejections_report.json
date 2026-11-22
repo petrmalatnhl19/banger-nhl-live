@@ -1,84 +1,33 @@
 {
-  "teamsWithRejectedLines": 5,
+  "teamsWithRejectedLines": 4,
   "teams": {
-    "bruins": {
-      "team": "BOS",
-      "rosterUpdatedAt": "2026-11-21T16:22:36.340491+00:00",
-      "rosterSnapshotPresent": true,
-      "candidateForwardLines": 4,
-      "candidateDefensePairs": 3,
-      "validatedForwardLines": 3,
-      "validatedDefensePairs": 3,
-      "rejected": [
-        {
-          "group": "forwards",
-          "sourceLineNumber": 2,
-          "sourceLine": [
-            "Michael Eyssiont",
-            "Fraser Minten",
-            "Morgan Geekie"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Michael Eyssiont",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ]
-    },
-    "canucks": {
-      "team": "VAN",
-      "rosterUpdatedAt": "2026-11-21T16:22:42.446838+00:00",
-      "rosterSnapshotPresent": true,
-      "candidateForwardLines": 4,
-      "candidateDefensePairs": 3,
-      "validatedForwardLines": 3,
-      "validatedDefensePairs": 3,
-      "rejected": [
-        {
-          "group": "forwards",
-          "sourceLineNumber": 4,
-          "sourceLine": [
-            "Drew O'Connor",
-            "Max Sasson",
-            "Brendan Gallagher"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Max Sasson",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ]
-    },
     "jets": {
       "team": "WPG",
-      "rosterUpdatedAt": "2026-11-21T16:22:42.894815+00:00",
+      "rosterUpdatedAt": "2026-11-22T00:14:42.701922+00:00",
       "rosterSnapshotPresent": true,
-      "candidateForwardLines": 4,
-      "candidateDefensePairs": 3,
+      "candidateForwardLines": 3,
+      "candidateDefensePairs": 4,
       "validatedForwardLines": 3,
       "validatedDefensePairs": 3,
       "rejected": [
         {
-          "group": "forwards",
-          "sourceLineNumber": 4,
+          "group": "defense",
+          "sourceLineNumber": 1,
           "sourceLine": [
-            "Cole Koepke",
-            "Morgan Barron",
-            "Danny Zhilkin"
+            "Danny Zhilkin",
+            "Alex Iafallo"
           ],
           "unverifiedPlayers": [
             {
               "name": "Danny Zhilkin",
               "reason": "not_in_current_roster",
               "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            },
+            {
+              "name": "Alex Iafallo",
+              "reason": "other_position_group",
+              "inLocalCurrentRoster": true,
               "requiresIndependentGameEvidence": true
             }
           ]
@@ -87,7 +36,7 @@
     },
     "lightning": {
       "team": "TBL",
-      "rosterUpdatedAt": "2026-11-21T16:22:41.802139+00:00",
+      "rosterUpdatedAt": "2026-11-22T00:14:42.001499+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 3,
       "candidateDefensePairs": 4,
@@ -120,12 +69,12 @@
     },
     "red wings": {
       "team": "DET",
-      "rosterUpdatedAt": "2026-11-21T16:22:38.247272+00:00",
+      "rosterUpdatedAt": "2026-11-22T00:14:39.734101+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "validatedForwardLines": 3,
-      "validatedDefensePairs": 3,
+      "validatedDefensePairs": 2,
       "rejected": [
         {
           "group": "forwards",
@@ -138,6 +87,50 @@
           "unverifiedPlayers": [
             {
               "name": "Nate Danielson",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        },
+        {
+          "group": "defense",
+          "sourceLineNumber": 3,
+          "sourceLine": [
+            "Andreas Englund",
+            "Albert Johannson"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Albert Johannson",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    },
+    "senators": {
+      "team": "OTT",
+      "rosterUpdatedAt": "2026-11-22T00:14:41.119237+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "validatedForwardLines": 3,
+      "validatedDefensePairs": 3,
+      "rejected": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 4,
+          "sourceLine": [
+            "Samuel Blais",
+            "Stephen Halliday",
+            "Nick Cousins"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Samuel Blais",
               "reason": "not_in_current_roster",
               "inLocalCurrentRoster": false,
               "requiresIndependentGameEvidence": true

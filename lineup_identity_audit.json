@@ -1,24 +1,13 @@
 {
   "teams": {
-    "bruins": {
+    "senators": {
       "players": [
         {
-          "sourceName": "Michael Eyssiont",
-          "expectedRole": "forwards",
-          "sameSurnameInRoster": [],
-          "classification": "not_on_current_roster",
-          "automaticApproval": false
-        }
-      ]
-    },
-    "jets": {
-      "players": [
-        {
-          "sourceName": "Danny Zhilkin",
+          "sourceName": "Samuel Blais",
           "expectedRole": "forwards",
           "sameSurnameInRoster": [
             {
-              "name": "Danil Zhilkin",
+              "name": "Sammy Blais",
               "role": "forwards"
             }
           ],
@@ -27,13 +16,30 @@
         }
       ]
     },
-    "canucks": {
+    "jets": {
       "players": [
         {
-          "sourceName": "Max Sasson",
-          "expectedRole": "forwards",
-          "sameSurnameInRoster": [],
-          "classification": "not_on_current_roster",
+          "sourceName": "Danny Zhilkin",
+          "expectedRole": "defense",
+          "sameSurnameInRoster": [
+            {
+              "name": "Danil Zhilkin",
+              "role": "forwards"
+            }
+          ],
+          "classification": "possible_name_variant_needs_review",
+          "automaticApproval": false
+        },
+        {
+          "sourceName": "Alex Iafallo",
+          "expectedRole": "defense",
+          "sameSurnameInRoster": [
+            {
+              "name": "Alex Iafallo",
+              "role": "forwards"
+            }
+          ],
+          "classification": "possible_name_variant_needs_review",
           "automaticApproval": false
         }
       ]
@@ -71,6 +77,13 @@
         {
           "sourceName": "Nate Danielson",
           "expectedRole": "forwards",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
+          "automaticApproval": false
+        },
+        {
+          "sourceName": "Albert Johannson",
+          "expectedRole": "defense",
           "sameSurnameInRoster": [],
           "classification": "not_on_current_roster",
           "automaticApproval": false
