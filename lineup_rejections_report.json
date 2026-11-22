@@ -1,9 +1,9 @@
 {
-  "teamsWithRejectedLines": 4,
+  "teamsWithRejectedLines": 3,
   "teams": {
     "jets": {
       "team": "WPG",
-      "rosterUpdatedAt": "2026-11-22T02:33:53.034748+00:00",
+      "rosterUpdatedAt": "2026-11-22T03:28:35.403842+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 3,
       "candidateDefensePairs": 4,
@@ -36,7 +36,7 @@
     },
     "lightning": {
       "team": "TBL",
-      "rosterUpdatedAt": "2026-11-22T02:33:51.950815+00:00",
+      "rosterUpdatedAt": "2026-11-22T03:28:35.111173+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 3,
       "candidateDefensePairs": 4,
@@ -69,7 +69,7 @@
     },
     "red wings": {
       "team": "DET",
-      "rosterUpdatedAt": "2026-11-22T02:33:48.468234+00:00",
+      "rosterUpdatedAt": "2026-11-22T03:28:33.941519+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -103,34 +103,6 @@
           "unverifiedPlayers": [
             {
               "name": "Albert Johannson",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ]
-    },
-    "senators": {
-      "team": "OTT",
-      "rosterUpdatedAt": "2026-11-22T02:33:50.670040+00:00",
-      "rosterSnapshotPresent": true,
-      "candidateForwardLines": 4,
-      "candidateDefensePairs": 3,
-      "validatedForwardLines": 3,
-      "validatedDefensePairs": 3,
-      "rejected": [
-        {
-          "group": "forwards",
-          "sourceLineNumber": 4,
-          "sourceLine": [
-            "Samuel Blais",
-            "Stephen Halliday",
-            "Nick Cousins"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Samuel Blais",
               "reason": "not_in_current_roster",
               "inLocalCurrentRoster": false,
               "requiresIndependentGameEvidence": true

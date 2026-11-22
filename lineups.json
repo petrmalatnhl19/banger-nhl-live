@@ -1,6 +1,6 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "fetchedAt": "2026-11-22T02:34:22.970772+00:00",
+  "fetchedAt": "2026-11-22T03:28:55.686354+00:00",
   "teams": {
     "oilers": {
       "name": "Oilers",
@@ -897,6 +897,11 @@
           "Michael Amadio",
           "Ridly Greig",
           "Claude Giroux"
+        ],
+        [
+          "Samuel Blais",
+          "Stephen Halliday",
+          "Nick Cousins"
         ]
       ],
       "defense": [
