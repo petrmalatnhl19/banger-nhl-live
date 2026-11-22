@@ -17,3 +17,9 @@ Checked 2026-11-22 against the live `app-development` project (read-only).
 5. If an essential client fails, restore the previous view ACL only after review. Keep base tables and CORE model logic untouched.
 
 The SQL file is a proposal, not an applied migration. This PR must remain Draft until gates are completed.
+
+## Additional access verification (2026-11-22)
+
+- Read-only catalog check confirms `anon` and `authenticated` have `SELECT`, and `service_role` retains `SELECT`. The `anon` role also has catalog grants for `UPDATE` and `TRUNCATE` on this view; this **does not prove those operations can execute** on a non-updatable view.
+- Public application source contains a Supabase publishable key, but a live HTTP REST smoke test from the available runtime could not connect to the Supabase host (connection error). **Do not claim HTTP endpoint behavior was verified.**
+- The intended change remains unexecuted. The remaining gate is an authenticated HTTP smoke test from an environment with network access, plus explicit authorization before applying the SQL.
