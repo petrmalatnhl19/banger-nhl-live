@@ -1,42 +1,24 @@
 {
   "date": "2026-11-22",
-  "updatedAt": "2026-11-22T05:36:33.814640+00:00",
+  "updatedAt": "2026-11-22T11:23:41.378666+00:00",
   "teams": {
-    "CHI": {
-      "name": "Drew Commesso",
-      "status": "projected",
-      "date": "2026-11-22",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-22T05:36:33.814640+00:00",
-      "gameId": 2026020377
-    },
     "CAR": {
       "name": "Brandon Bussi",
       "status": "projected",
       "date": "2026-11-22",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-22T05:36:33.814640+00:00",
+      "checkedAt": "2026-11-22T11:23:41.378666+00:00",
       "gameId": 2026020373
     },
-    "NYR": {
-      "name": "Dylan Garand",
+    "CHI": {
+      "name": "Drew Commesso",
       "status": "projected",
       "date": "2026-11-22",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-22T05:36:33.814640+00:00",
-      "gameId": 2026020373
-    },
-    "EDM": {
-      "name": "Tristan Jarry",
-      "status": "projected",
-      "date": "2026-11-22",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-22T05:36:33.814640+00:00",
-      "gameId": 2026020375
+      "checkedAt": "2026-11-22T11:23:41.378666+00:00",
+      "gameId": 2026020377
     },
     "DAL": {
       "name": "Jake Oettinger",
@@ -44,8 +26,26 @@
       "date": "2026-11-22",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-22T05:36:33.814640+00:00",
+      "checkedAt": "2026-11-22T11:23:41.378666+00:00",
       "gameId": 2026020376
+    },
+    "EDM": {
+      "name": "Tristan Jarry",
+      "status": "projected",
+      "date": "2026-11-22",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-22T11:23:41.378666+00:00",
+      "gameId": 2026020375
+    },
+    "NYR": {
+      "name": "Dylan Garand",
+      "status": "projected",
+      "date": "2026-11-22",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-22T11:23:41.378666+00:00",
+      "gameId": 2026020373
     },
     "TBL": {
       "name": "Andrei Vasilevskiy",
@@ -53,11 +53,17 @@
       "date": "2026-11-22",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
       "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-22T05:36:33.814640+00:00",
+      "checkedAt": "2026-11-22T11:23:41.378666+00:00",
       "gameId": 2026020374
     }
   },
   "conflicts": [
+    {
+      "team": "STL",
+      "specialist": "Joel Hofer",
+      "nhl": "Jordan Binnington",
+      "nhlSource": "https://www.nhl.com/news/new-jersey-devils-st-louis-blues-game-preview-november-21-2026"
+    },
     {
       "date": "2026-11-22",
       "team": "BUF",
@@ -74,21 +80,12 @@
     },
     {
       "date": "2026-11-22",
-      "team": "STL",
-      "reason": "source disagreement",
-      "rotowire": "Joel Hofer",
-      "previous": "Jordan Binnington"
-    },
-    {
-      "date": "2026-11-22",
       "team": "VAN",
       "reason": "source disagreement",
       "rotowire": "Nikita Tolopilo",
-      "previous": "Leevi Merilainen"
+      "previous": "Leevi Meriläinen"
     }
   ],
-  "sourceErrors": [
-    "specialist [missing_current_date]: ValueError: Source does not show today's date"
-  ],
+  "sourceErrors": [],
   "status": "partial"
 }
