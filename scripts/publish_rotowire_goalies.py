@@ -115,8 +115,15 @@ def main():
             continue
         # A specialist confirmation takes precedence over a projection.
         # Conflicting unconfirmed projections are suppressed, not guessed.
-        if existing and existing["name"].casefold() != item["goalie"].casefold() and item["status"] != "confirmed":
-            entries.pop(abbr, None)
+        if existing and existing["name"].casefold() != item["goalie"].casefold():
+            # A conflicting incoming confirmation must not override a different
+            # projection without resolving the underlying source disagreement.
+            # Keep only an already evidenced confirmation; otherwise fail closed.
+            if not (existing.get("status") == "confirmed"
+                    and existing.get("confirmationBasis") == "explicit_pregame_report"
+                    and isinstance(existing.get("confirmationEvidence"), str)
+                    and existing["confirmationEvidence"].strip()):
+                entries.pop(abbr, None)
             conflicts.append({"date": today, "team": abbr, "reason": "source disagreement",
                               "rotowire": item["goalie"], "previous": existing["name"]})
             continue
@@ -128,7 +135,12 @@ def main():
                              "confirmationEvidence": item["confirmationEvidence"]}
                             if item["status"] == "confirmed" and item.get("confirmationEvidence")
                             and item.get("confirmationBasis") == "explicit_pregame_report" else {})}
-    confirmed_teams = {item["team"] for item in valid if item["date"] == today and item["status"] == "confirmed"}
+    confirmed_teams = {item["team"] for item in valid if item["date"] == today
+                       and item["status"] == "confirmed"
+                       and item.get("confirmationBasis") == "explicit_pregame_report"
+                       and isinstance(item.get("confirmationEvidence"), str)
+                       and item["confirmationEvidence"].strip()
+                       and entries.get(item["team"], {}).get("name", "").casefold() == item["goalie"].casefold()}
     # A verified confirmation resolves older projection disagreements for that team.
     starters["conflicts"] = [issue for issue in starters.get("conflicts", [])
                              if issue.get("team") not in confirmed_teams] + conflicts
