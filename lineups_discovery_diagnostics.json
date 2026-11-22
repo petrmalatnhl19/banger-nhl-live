@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-22T12:22:10.756469+00:00",
+  "generatedAt": "2026-11-22T13:27:42.190113+00:00",
   "checked": 23,
   "articlesFound": 1,
   "errors": [],
@@ -164,16 +164,6 @@
       "teams": []
     },
     {
-      "url": "https://www.nhl.com/news/minnesota-wild-san-jose-sharks-game-preview-november-23-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
-      "url": "https://www.nhl.com/news/san-jose-sharks-minnesota-wild-game-preview-november-23-2026",
-      "result": "no_complete_projection",
-      "teams": []
-    },
-    {
       "url": "https://www.nhl.com/news/utah-mammoth-winnipeg-jets-game-preview-november-23-2026",
       "result": "no_complete_projection",
       "teams": []
@@ -202,17 +192,27 @@
       "url": "https://www.nhl.com/news/new-jersey-devils-columbus-blue-jackets-game-preview-november-23-2026",
       "result": "no_complete_projection",
       "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/los-angeles-kings-montreal-canadiens-game-preview-november-23-2026",
+      "result": "no_complete_projection",
+      "teams": []
+    },
+    {
+      "url": "https://www.nhl.com/news/montreal-canadiens-los-angeles-kings-game-preview-november-23-2026",
+      "result": "no_complete_projection",
+      "teams": []
     }
   ],
   "note": "Upcoming games today through two days ahead; prioritize older sources and nearest games. A fixture is not proof a preview article exists.",
   "fixturesSelected": 12,
   "fixturesDeferred": 1,
   "rotation": {
-    "window": 1994833,
+    "window": 1994837,
     "fixed": 8,
     "rotating": 4,
     "remainingPool": 5,
-    "rotationStart": 2
+    "rotationStart": 3
   },
   "selectedFixtures": [
     {
@@ -257,11 +257,6 @@
     },
     {
       "date": "2026-11-23",
-      "away": "MIN",
-      "home": "SJS"
-    },
-    {
-      "date": "2026-11-23",
       "away": "UTA",
       "home": "WPG"
     },
@@ -274,6 +269,11 @@
       "date": "2026-11-23",
       "away": "CBJ",
       "home": "NJD"
+    },
+    {
+      "date": "2026-11-23",
+      "away": "LAK",
+      "home": "MTL"
     }
   ]
 }
