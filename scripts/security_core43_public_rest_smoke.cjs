@@ -18,7 +18,7 @@ async function main() {
     url.searchParams.set("select", view === "nhl_core42_status" ? "pending_predictions" : "game_id");
     url.searchParams.set("limit", "1");
     const response = await fetch(url, {
-      headers: { apikey: key[1], Authorization: "Bearer " + key[1], Accept: "application/json" },
+      headers: { apikey: key[1], Accept: "application/json" },
       signal: AbortSignal.timeout(12000)
     });
     // Log status only; never log payload, authorization headers or individual rows.
