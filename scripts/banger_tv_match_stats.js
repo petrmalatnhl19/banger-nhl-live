@@ -6,7 +6,15 @@ const fmt=v=>v==null||!Number.isFinite(Number(v))?'—':Number(v).toLocaleString
 const safe=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 async function fetchRows(q){const r=await fetch(base+q,{headers});if(!r.ok)throw Error('HTTP '+r.status);return r.json();}
 
-async function nhl(path){const ctrl=new AbortController();const timer=setTimeout(()=>ctrl.abort(),7000);try{const r=await fetch('https://api-web.nhle.com/v1/'+path,{signal:ctrl.signal});if(!r.ok)throw Error('NHL '+r.status);return await r.json();}finally{clearTimeout(timer);}}
+// Browser-safe NHL requests use the existing, allowlisted Supabase Edge proxy.
+// The proxy supports clubhistory and boxscore; right-rail is optional until proxied.
+async function nhl(path){
+ const match=path.match(/^gamecenter\/(\d{8,12})\/boxscore$/);
+ if(!match)throw Error('Unsupported browser NHL path');
+ const r=await fetch('https://xxwqeiuyislnoxsmjuul.supabase.co/functions/v1/nhl-feed?kind=boxscore&id='+match[1],{headers,signal:AbortSignal.timeout(12000)});
+ if(!r.ok)throw Error('NHL proxy '+r.status);
+ return r.json();
+}
 function skaterStats(data,team){
  const side=data.awayTeam?.abbrev===team?'awayTeam':data.homeTeam?.abbrev===team?'homeTeam':null;
  const group=side&&data.playerByGameStats?.[side];if(!group)return null;
@@ -38,9 +46,12 @@ async function history(team,gameDate){
  const key=team+':'+gameDate;if(historicalCache.has(key))return historicalCache.get(key);
  const task=(async()=>{
   const season=Number(gameDate.slice(5,7))>=9?Number(gameDate.slice(0,4)):Number(gameDate.slice(0,4))-1;
-  const schedule=await nhl('club-schedule-season/'+encodeURIComponent(team)+'/'+season+(season+1)).catch(async()=>{const r=await fetch('https://xxwqeiuyislnoxsmjuul.supabase.co/functions/v1/nhl-feed?kind=clubhistory&team='+encodeURIComponent(team)+'&season='+season+(season+1),{headers});if(!r.ok)throw Error('Rozpis nedostupný');return r.json();});
-  const games=(schedule.games||[]).filter(g=>g.gameDate<gameDate&&g.gameState==='OFF').sort((a,b)=>b.gameDate.localeCompare(a.gameDate)).slice(0,5);
-  const results=await Promise.all(games.map(async g=>{const [box,rail]=await Promise.allSettled([nhl('gamecenter/'+g.id+'/boxscore'),nhl('gamecenter/'+g.id+'/right-rail')]);return {box:box.status==='fulfilled'?box.value:null,rail:rail.status==='fulfilled'?rail.value:null};}));
+  const response=await fetch('https://xxwqeiuyislnoxsmjuul.supabase.co/functions/v1/nhl-feed?kind=clubhistory&team='+encodeURIComponent(team)+'&season='+season+(season+1),{headers,signal:AbortSignal.timeout(12000)});
+  if(!response.ok)throw Error('NHL schedule proxy '+response.status);
+  const schedule=await response.json();
+  if(!Array.isArray(schedule.games))throw Error('NHL schedule payload invalid');
+  const games=(schedule.games||[]).filter(g=>g.gameDate<gameDate&&(g.gameState==='OFF'||g.gameState==='FINAL')).sort((a,b)=>b.gameDate.localeCompare(a.gameDate)).slice(0,5);
+  const results=await Promise.all(games.map(async g=>{const [box,rail]=await Promise.allSettled([nhl('gamecenter/'+g.id+'/boxscore'),Promise.reject(new Error('right-rail proxy not yet available'))]);return {box:box.status==='fulfilled'?box.value:null,rail:rail.status==='fulfilled'?rail.value:null};}));
   const records=results.map(x=>({sk:x.box&&skaterStats(x.box,team),goalie:x.box&&goalieStats(x.box,team),special:x.rail&&specialStats(x.rail,team)}));
   const sk=records.map(x=>x.sk).filter(Boolean),gl=records.map(x=>x.goalie).filter(Boolean),sp=records.map(x=>x.special).filter(Boolean);
   const mean=(rows,k)=>rows.length>=3?rows.reduce((a,x)=>a+x[k],0)/rows.length:null;
@@ -93,10 +104,10 @@ function mount(){
    try{
     const [ar,hr]=await Promise.allSettled([history(g.away_team,g.game_date),history(g.home_team,g.game_date)]);
     const empty={n:0,shots:null,hits:null,blocks:null,pim:null,goalieN:0,savePct:null,specialN:0,ppPct:null,pkPct:null};
-    const away=ar.status==='fulfilled'?ar.value:empty,home=hr.status==='fulfilled'?hr.value:empty;
+    const away=ar.status==='fulfilled'?ar.value:empty,home=hr.status==='fulfilled'?hr.value:empty;\n    const historyFailed=ar.status==='rejected'||hr.status==='rejected';
     if(token!==generation||!section.isConnected)return;
     const line=(label,k,suffix='')=>'<tr><td style="text-align:center">'+(away[k]==null?'—':fmt(away[k])+suffix)+'</td><td style="text-align:center;color:#a9d4e5">'+label+'</td><td style="text-align:center">'+(home[k]==null?'—':fmt(home[k])+suffix)+'</td></tr>';
-    section.innerHTML='<div style="color:#70eaff;text-align:center;font-weight:800;margin-bottom:7px">POSLEDNÍCH AŽ 5 ZÁPASŮ · PRŮMĚRY</div><table style="width:100%;table-layout:fixed;font-size:12px"><tbody>'+
+    section.innerHTML=(historyFailed?'<p role="status" style="color:#ffd18a">Historie alespoň jednoho týmu se nepodařila načíst. Pomlčky nejsou nulové statistiky.</p>':'')+'<div style="color:#70eaff;text-align:center;font-weight:800;margin-bottom:7px">POSLEDNÍCH AŽ 5 ZÁPASŮ · PRŮMĚRY</div><table style="width:100%;table-layout:fixed;font-size:12px"><tbody>'+
      line('Střely na branku','shots')+line('Hity','hits')+line('Blokované střely','blocks')+line('Trestné minuty','pim')+
      line('Úspěšnost zákroků','savePct',' %')+line('Přesilovky','ppPct',' %')+line('Oslabení','pkPct',' %')+
      '</tbody></table><p style="font-size:11px;color:#9dbed2">Vzorek týmových boxscore: '+away.n+' / '+home.n+' zápasů. Úspěšnost brankářů vychází ze startujících brankářů v posledních zápasech, nikoliv z potvrzené sestavy příštího utkání. U speciálních týmů je požadováno alespoň 3 utkání. Historické průměry nejsou predikce CORE. Nedostupné hodnoty zobrazujeme jako pomlčku.</p>';
