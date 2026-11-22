@@ -28,7 +28,7 @@ const assert=require("node:assert/strict");
    };
   });
   await page.addScriptTag({path:"scripts/banger_tv_match_stats.js"});
-  await page.waitForFunction(()=>document.querySelector("#banger-tv-table")?.innerText.includes("Vzorek týmových boxscore: 5 / 5"),{timeout:10000});
+  await page.waitForFunction(()=>document.querySelector("#banger-tv-table")?.innerText.includes("Vzorek týmových boxscore: 5 / 5"),null,{timeout:10000}).catch(async error=>{const state=await page.evaluate(()=>({status:document.querySelector("#banger-tv-status")?.textContent,board:document.querySelector("#banger-tv-board")?.innerText,ready:document.readyState}));throw Error("BANGER TV render diagnostic: "+JSON.stringify(state)+"; "+error.message);});
   const text=await page.locator("#banger-tv-table").innerText();
   for(const label of ["Střely na branku","Hity","Blokované střely","Trestné minuty","Vzorek týmových boxscore: 5 / 5"])assert.ok(text.includes(label),label);
   assert.ok(!text.includes("Historie alespoň jednoho týmu"));
