@@ -9,7 +9,7 @@ from scripts import publish_rotowire_goalies as publisher
 
 
 class GoalieConflictSuppressionTests(unittest.TestCase):
-    def run_case(self, existing, incoming):
+    def run_case(self, existing, incoming, conflicts=None):
         today = datetime.datetime.now(datetime.timezone.utc).date().isoformat()
         incoming = {"date": today, "team": "DAL", "gameId": 2026020001,
                     "goalie": "Goalie B", "status": "confirmed", **incoming}
@@ -22,7 +22,7 @@ class GoalieConflictSuppressionTests(unittest.TestCase):
                     "goalies": ["Goalie A", "Goalie B"], "playerIds": {}}}},
                 "starting_goalies.json": {"date": today, "teams": {"DAL": {
                     "name": "Goalie A", "date": today, "status": "projected",
-                    **existing}}, "conflicts": []},
+                    **existing}}, "conflicts": conflicts or []},
             }
             for name, data in fixtures.items():
                 (root / name).write_text(json.dumps(data), encoding="utf-8")
@@ -33,6 +33,14 @@ class GoalieConflictSuppressionTests(unittest.TestCase):
     def test_conflicting_confirmed_incoming_does_not_override_projection(self):
         output = self.run_case({}, {"confirmationBasis": "explicit_pregame_report",
                                     "confirmationEvidence": "https://example.org/evidence"})
+        self.assertNotIn("DAL", output["teams"])
+        self.assertTrue(any(c.get("team") == "DAL" for c in output["conflicts"]))
+
+    def test_existing_specialist_nhl_conflict_blocks_rotowire_projection(self):
+        output = self.run_case({}, {"status": "projected"}, [
+            {"team": "DAL", "specialist": "Goalie B", "nhl": "Goalie A",
+             "nhlSource": "https://www.nhl.com/news/example"}
+        ])
         self.assertNotIn("DAL", output["teams"])
         self.assertTrue(any(c.get("team") == "DAL" for c in output["conflicts"]))
 

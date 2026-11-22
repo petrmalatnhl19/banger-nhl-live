@@ -80,6 +80,19 @@ def main():
         if item["date"] != today:
             continue
         abbr = item["team"]
+        # Do not republish a projected goalie after the specialist/NHL collector
+        # already rejected contradictory evidence for this team.
+        prior_conflicts = [issue for issue in starters.get("conflicts", [])
+                           if issue.get("team") == abbr]
+        evidenced_confirmation = (
+            item["status"] == "confirmed"
+            and item.get("confirmationBasis") == "explicit_pregame_report"
+            and isinstance(item.get("confirmationEvidence"), str)
+            and bool(item["confirmationEvidence"].strip())
+        )
+        if prior_conflicts and not evidenced_confirmation:
+            entries.pop(abbr, None)
+            continue
         existing = entries.get(abbr)
         # DATA-13: compare claims only when both reference the same verified game.
         # Older specialist records may lack gameId; retain legacy behavior for those.
