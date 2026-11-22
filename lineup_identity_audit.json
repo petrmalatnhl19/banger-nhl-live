@@ -1,21 +1,5 @@
 {
   "teams": {
-    "senators": {
-      "players": [
-        {
-          "sourceName": "Samuel Blais",
-          "expectedRole": "forwards",
-          "sameSurnameInRoster": [
-            {
-              "name": "Sammy Blais",
-              "role": "forwards"
-            }
-          ],
-          "classification": "possible_name_variant_needs_review",
-          "automaticApproval": false
-        }
-      ]
-    },
     "jets": {
       "players": [
         {

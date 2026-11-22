@@ -1377,25 +1377,25 @@
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
     "senators": {
-      "updatedAt": "2026-11-22T00:15:13.911461+00:00",
-      "previousPublishedAt": "2026-11-19T17:15:20.099000+00:00",
+      "updatedAt": "2026-11-22T03:28:55.684626+00:00",
+      "previousPublishedAt": "2026-11-21T22:59:00+00:00",
       "publishedAt": "2026-11-21T22:59:00+00:00",
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
       "events": [
         {
-          "type": "removed",
+          "type": "added",
           "player": "Samuel Blais",
-          "from": "Útok 4"
+          "to": "Útok 4"
         },
         {
-          "type": "removed",
+          "type": "added",
           "player": "Stephen Halliday",
-          "from": "Útok 4"
+          "to": "Útok 4"
         },
         {
-          "type": "removed",
-          "player": "Tyler Boucher",
-          "from": "Útok 4"
+          "type": "added",
+          "player": "Nick Cousins",
+          "to": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
