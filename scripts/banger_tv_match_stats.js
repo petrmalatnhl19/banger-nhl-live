@@ -104,7 +104,8 @@ function mount(){
    try{
     const [ar,hr]=await Promise.allSettled([history(g.away_team,g.game_date),history(g.home_team,g.game_date)]);
     const empty={n:0,shots:null,hits:null,blocks:null,pim:null,goalieN:0,savePct:null,specialN:0,ppPct:null,pkPct:null};
-    const away=ar.status==='fulfilled'?ar.value:empty,home=hr.status==='fulfilled'?hr.value:empty;\n    const historyFailed=ar.status==='rejected'||hr.status==='rejected';
+    const away=ar.status==='fulfilled'?ar.value:empty,home=hr.status==='fulfilled'?hr.value:empty;
+    const historyFailed=ar.status==='rejected'||hr.status==='rejected';
     if(token!==generation||!section.isConnected)return;
     const line=(label,k,suffix='')=>'<tr><td style="text-align:center">'+(away[k]==null?'—':fmt(away[k])+suffix)+'</td><td style="text-align:center;color:#a9d4e5">'+label+'</td><td style="text-align:center">'+(home[k]==null?'—':fmt(home[k])+suffix)+'</td></tr>';
     section.innerHTML=(historyFailed?'<p role="status" style="color:#ffd18a">Historie alespoň jednoho týmu se nepodařila načíst. Pomlčky nejsou nulové statistiky.</p>':'')+'<div style="color:#70eaff;text-align:center;font-weight:800;margin-bottom:7px">POSLEDNÍCH AŽ 5 ZÁPASŮ · PRŮMĚRY</div><table style="width:100%;table-layout:fixed;font-size:12px"><tbody>'+
