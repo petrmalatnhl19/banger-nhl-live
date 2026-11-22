@@ -1,0 +1,24 @@
+name: SECURITY CORE43 readiness ACL proposal
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/sql/security_core43_readiness_revoke_proposal.sql'
+      - 'tests/security-core43-readiness-acl.test.cjs'
+      - '.github/workflows/security-core43-readiness-acl.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acl-proposal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify minimal ACL proposal and frontend contracts
+        run: node --test tests/security-core43-readiness-acl.test.cjs tests/security-public-core-views.test.cjs
