@@ -6,6 +6,7 @@
 <div class="stats"><div class="stat"><strong id="total">—</strong><small>Brankářů</small></div><div class="stat"><strong id="teams">—</strong><small>Týmů</small></div><div class="stat"><strong id="matches">—</strong><small>Projekcí zápasů</small></div></div>
 <div class="controls"><input id="search" type="search" placeholder="Hledat brankáře nebo tým…"><select id="team"><option value="">Všechny týmy</option></select><select id="status"><option value="">Všechny stavy</option><option value="confirmed">Confirmed</option><option value="projected">Projected</option><option value="unknown">Unknown</option></select><input id="date" type="date" aria-label="Datum zápasů"></div>
 <p id="info">Načítám NHL data…</p><h2>Startující brankáři podle zápasů</h2><section id="games" class="games"></section><h2>Kompletní seznam brankářů</h2><section id="roster" class="roster"></section></main>
+<script src="./goalie-selection.js"></script>
 <script>
 const $=id=>document.getElementById(id),esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),dateLocal=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')};
 let catalog=[],projections=[],stamp='',ready=false;
@@ -28,10 +29,15 @@ $('info').textContent='Zdroj projekcí: RotoWire · poslední aktualizace: '+(st
 async function load(){
 try{
 const fetchJSON=async p=>{const r=await fetch('./'+p+'?v='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error(p+' HTTP '+r.status);return r.json()};
-const [c,g]=await Promise.all([fetchJSON('nhl_goalies.json'),fetchJSON('rotowire_goalies.json')]);
+const [c,g,starters]=await Promise.all([fetchJSON('nhl_goalies.json'),fetchJSON('rotowire_goalies.json'),fetchJSON('starting_goalies.json')]);
 if(!Array.isArray(c.goalies)||!Array.isArray(g.games))throw Error('Neplatný formát NHL dat');
-catalog=c.goalies;projections=g.games;stamp=g.updatedAt;ready=true;
-$('total').textContent=c.goalieCount||catalog.length;$('teams').textContent=c.teamCount||new Set(catalog.map(x=>x.team)).size;$('matches').textContent=projections.length;
+catalog=c.goalies;projections=g.games.map(row=>{
+ const home=row.venue==='home'?row.team:row.opponent,away=row.venue==='away'?row.team:row.opponent;
+ const game={id:row.gameId,gameDate:row.date,startTimeUTC:row.startTimeUTC,homeTeam:{abbrev:home},awayTeam:{abbrev:away}};
+ const selected=selectPregameGoalie(game,row.team,starters,g);
+ return {...row,goalie:selected?.name||'',status:selected?.status||'unknown'};
+});stamp=g.updatedAt;ready=true;
+$('total').textContent=c.goalieCount||catalog.length;$('teams').textContent=c.teamCount||new Set(catalog.map(x=>x.team)).size;$('matches').textContent=projections.filter(p=>p.goalie).length;
 for(const t of [...new Set(catalog.map(x=>x.team))].sort()){const o=document.createElement('option');o.value=t;o.textContent=t;$('team').appendChild(o)}
 render();
 }catch(e){$('info').textContent='Data se nepodařilo načíst: '+e.message;$('games').innerHTML='<div class="empty">Zkuste stránku obnovit.</div>'}}

@@ -57,3 +57,25 @@ class GoalieConflictSuppressionTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class CollectorRefreshTests(unittest.TestCase):
+    def test_rejects_previous_opponent_preview_on_back_to_back(self):
+        from scripts.update_starting_goalies import preview_matches_game
+        url = "https://www.nhl.com/news/new-jersey-devils-st-louis-blues-game-preview-november-21-2026"
+        game = {"awayTeam": {"commonName": {"default": "Devils"}},
+                "homeTeam": {"commonName": {"default": "Blues"}}}
+        self.assertTrue(preview_matches_game(url, "2026-11-21", game))
+        self.assertFalse(preview_matches_game(url, "2026-11-22", game))
+        game["awayTeam"]["commonName"]["default"] = "Blackhawks"
+        self.assertFalse(preview_matches_game(url, "2026-11-21", game))
+
+    def test_only_same_game_conflict_survives_refresh(self):
+        from scripts.update_starting_goalies import retain_game_evidence
+        day = "2026-11-21"
+        previous = {"date": day, "conflicts": [{"team": "MTL", "gameId": 365}]}
+        for game_id, blocked in [(365, True), (366, False)]:
+            records, conflicts = {"MTL": {"name": "Jacob Fowler"}}, []
+            retain_game_evidence(previous, day, {"MTL": {"id": game_id}}, records, conflicts)
+            self.assertEqual(bool(conflicts), blocked)
+            self.assertEqual("MTL" in records, not blocked)

@@ -19,7 +19,7 @@ def preserve_explicit_confirmation(record):
     """Never manufacture an explicit confirmation basis from a timestamp alone."""
     record = dict(record)
     if record.get("status") == "confirmed":
-        if record.get("confirmationBasis") != "explicit_pregame_report" or not record.get("confirmationEvidence"):
+        if record.get("confirmationBasis") != "explicit_pregame_report" or not isinstance(record.get("confirmationEvidence"), str) or not record["confirmationEvidence"].strip():
             # A displayed status label without supporting evidence is a projection.
             record["status"] = "projected"
             record.pop("confirmationBasis", None)
@@ -49,10 +49,16 @@ def main():
             continue
         if item["date"] < today or item["status"] not in ("confirmed", "projected"):
             continue
+        if item.get("startTimeUTC") and diagnostic.get("checkedAt"):
+            start = datetime.datetime.fromisoformat(item["startTimeUTC"].replace("Z", "+00:00"))
+            observed = datetime.datetime.fromisoformat(diagnostic["checkedAt"].replace("Z", "+00:00"))
+            if observed >= start:
+                continue
         key = (item["date"], item["team"], item["gameId"])
         by_game.setdefault(key, []).append(item)
     valid = []
-    conflicts = []
+    conflicts = [issue for issue in diagnostic.get("gameIdentityIssues", [])
+                 if issue.get("reason") in ("conflicting_goalies", "conflicting_status") and issue.get("date")]
     for key, items in sorted(by_game.items()):
         distinct = {(item["goalie"], item["status"]) for item in items}
         if len(distinct) != 1:
@@ -76,6 +82,9 @@ def main():
         print("Starter feed date mismatch; only future RotoWire feed published")
         return
     entries = starters.setdefault("teams", {})
+    for conflict in conflicts:
+        if conflict.get("date") == today:
+            entries.pop(conflict["team"], None)
     for item in valid:
         if item["date"] != today:
             continue
@@ -83,14 +92,15 @@ def main():
         # Do not republish a projected goalie after the specialist/NHL collector
         # already rejected contradictory evidence for this team.
         prior_conflicts = [issue for issue in starters.get("conflicts", [])
-                           if issue.get("team") == abbr]
+                           if issue.get("team") == abbr and issue.get("date", today) == today
+                           and issue.get("gameId", item["gameId"]) == item["gameId"]]
         evidenced_confirmation = (
             item["status"] == "confirmed"
             and item.get("confirmationBasis") == "explicit_pregame_report"
             and isinstance(item.get("confirmationEvidence"), str)
             and bool(item["confirmationEvidence"].strip())
         )
-        if prior_conflicts and not evidenced_confirmation:
+        if prior_conflicts and not (evidenced_confirmation and all(c.get("gameId") == item["gameId"] for c in prior_conflicts)):
             entries.pop(abbr, None)
             continue
         existing = entries.get(abbr)
@@ -110,7 +120,8 @@ def main():
             resolved, reason = reconcile_source_claims([previous, incoming])
             if reason:
                 conflicts.append({"date": today, "team": abbr, "gameId": item["gameId"],
-                                  "reason": "cross_source_" + reason})
+                                  "reason": "cross_source_" + reason,
+                                  "previous": existing["name"], "rotowire": item["goalie"]})
                 # Do not discard an already evidenced confirmation on disagreement.
                 if (existing.get("status") == "confirmed" and existing.get("confirmationBasis") == "explicit_pregame_report" and existing.get("confirmationEvidence")):
                     continue
@@ -137,18 +148,18 @@ def main():
                     and isinstance(existing.get("confirmationEvidence"), str)
                     and existing["confirmationEvidence"].strip()):
                 entries.pop(abbr, None)
-            conflicts.append({"date": today, "team": abbr, "reason": "source disagreement",
+            conflicts.append({"date": today, "team": abbr, "gameId": item["gameId"], "reason": "source disagreement",
                               "rotowire": item["goalie"], "previous": existing["name"]})
             continue
         entries[abbr] = {"name": item["goalie"], "status": item["status"],
                          "date": today, "source": diagnostic["source"],
-                         "sourceLabel": "RotoWire", "checkedAt": now.isoformat(),
+                         "sourceLabel": "RotoWire", "checkedAt": diagnostic.get("checkedAt", now.isoformat()),
                          "gameId": item["gameId"],
                          **({"confirmationBasis": item["confirmationBasis"],
                              "confirmationEvidence": item["confirmationEvidence"]}
                             if item["status"] == "confirmed" and item.get("confirmationEvidence")
                             and item.get("confirmationBasis") == "explicit_pregame_report" else {})}
-    confirmed_teams = {item["team"] for item in valid if item["date"] == today
+    confirmed_teams = {(item["team"], item["gameId"], item["date"]) for item in valid if item["date"] == today
                        and item["status"] == "confirmed"
                        and item.get("confirmationBasis") == "explicit_pregame_report"
                        and isinstance(item.get("confirmationEvidence"), str)
@@ -156,7 +167,7 @@ def main():
                        and entries.get(item["team"], {}).get("name", "").casefold() == item["goalie"].casefold()}
     # A verified confirmation resolves older projection disagreements for that team.
     starters["conflicts"] = [issue for issue in starters.get("conflicts", [])
-                             if issue.get("team") not in confirmed_teams] + conflicts
+                             if (issue.get("team"), issue.get("gameId"), issue.get("date")) not in confirmed_teams] + [c for c in conflicts if c.get("date") == today and c not in starters.get("conflicts", [])]
     starters["updatedAt"] = now.isoformat()
     # DATA-12: do not reintroduce the deprecated "ok" state or imply complete coverage.
     starters["status"] = "partial" if entries else "unavailable"
