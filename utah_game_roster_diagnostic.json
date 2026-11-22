@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-22T04:35:28.225921+00:00",
+  "checkedAt": "2026-11-22T05:35:55.662361+00:00",
   "team": "UTA",
   "scope": "Recent completed NHL games; historical evidence only",
   "players": {
@@ -30,9 +30,6 @@
   "nameFieldDiagnostics": {
     "sampleNames": [
       {
-        "default": "C. Keller"
-      },
-      {
         "default": "V. Trocheck"
       },
       {
@@ -46,6 +43,9 @@
       },
       {
         "default": "D. But"
+      },
+      {
+        "default": "M. Carcone"
       }
     ],
     "missingNameEntries": 0
