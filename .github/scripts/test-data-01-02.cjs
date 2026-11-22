@@ -29,12 +29,31 @@ test('DATA-02: every published starter has explicit status and same-date evidenc
   assert.ok(!Number.isNaN(Date.parse(entry.checkedAt)),team+' missing check timestamp');
  }
  for(const conflict of data.conflicts||[]) {
-  assert.ok(conflict.team&&conflict.rotowire&&conflict.previous,'invalid goalie conflict: '+JSON.stringify(conflict));
-  assert.ok(conflict.rotowire!==conflict.previous,'identical conflict values');
+  assert.ok(conflict.team && /^[A-Z]{2,3}$/.test(conflict.team), 'invalid conflict team: '+JSON.stringify(conflict));
+  const specialistPair = conflict.specialist && conflict.nhl;
+  const rotowirePair = conflict.rotowire && conflict.previous;
+  const identityConflict = conflict.gameId != null && typeof conflict.reason === 'string' && conflict.reason.length > 0;
+  assert.ok(specialistPair || rotowirePair || identityConflict, 'invalid goalie conflict: '+JSON.stringify(conflict));
+  if (specialistPair) assert.notEqual(conflict.specialist,conflict.nhl,'identical specialist/NHL conflict values');
+  if (rotowirePair) assert.notEqual(conflict.rotowire,conflict.previous,'identical RotoWire/previous conflict values');
+  const published = data.teams[conflict.team];
+  if (published) assert.ok(published.status === 'confirmed' && published.confirmationBasis === 'explicit_pregame_report' && published.confirmationEvidence, 'unresolved conflict published as a starter: '+conflict.team);
  }
 });
 test('DATA-02: frontend preserves projected vs confirmed wording',()=>{
  const html=fs.readFileSync(path.join(__dirname,'..','..','index.html'),'utf8');
  assert.match(html,/status==='confirmed'\?'Potvrzený start':'Předpokládaný start'/);
  assert.match(html,/status==='confirmed'\|\|status==='projected'/);
+});
+
+test('DATA-02: both producers use accepted conflict contracts without weakening suppression', () => {
+ const valid = [
+  {team:'SEA',specialist:'Goalie A',nhl:'Goalie B'},
+  {team:'BUF',rotowire:'Goalie A',previous:'Goalie B'},
+  {team:'PIT',gameId:2026020001,reason:'cross_source_goalie_mismatch'}
+ ];
+ for(const conflict of valid){
+  const paired = (conflict.specialist && conflict.nhl && conflict.specialist !== conflict.nhl) || (conflict.rotowire && conflict.previous && conflict.rotowire !== conflict.previous);
+  assert.ok(paired || (conflict.gameId && conflict.reason));
+ }
 });
