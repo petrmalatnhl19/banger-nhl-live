@@ -27,9 +27,11 @@ test("CAR and NYR: five completed games each produce real boxscore averages thro
     ...Array.from({length:5},(_,i)=>({id:2026020300+i,gameDate:"2026-11-"+String(15+i).padStart(2,"0"),gameState:i%2?"FINAL":"OFF"}))
    ]})};
   }
-  assert.equal(u.searchParams.get("kind"),"boxscore");
+  const kind=u.searchParams.get("kind");
+  assert.ok(["boxscore","right-rail"].includes(kind));
   const id=Number(u.searchParams.get("id"));
   assert.ok(id>=2026020300&&id<=2026020304);
+  if(kind==="right-rail")return {ok:true,json:async()=>({awayTeam:{abbrev:"CAR"},homeTeam:{abbrev:"NYR"},teamGameStats:[{category:"powerPlay",awayValue:"2/5",homeValue:"1/4"}]})};
   const players=[{sog:3,hits:2,blockedShots:1,pim:4}];
   return {ok:true,json:async()=>({
    awayTeam:{abbrev:"CAR"},homeTeam:{abbrev:"NYR"},
@@ -57,10 +59,13 @@ test("CAR and NYR: five completed games each produce real boxscore averages thro
   assert.equal(result.pim,4);
   assert.equal(result.goalieN,5);
   assert.ok(result.savePct>93&&result.savePct<94);
-  assert.equal(result.specialN,0);
+  assert.equal(result.specialN,5);
+  assert.equal(result.ppPct,team==="CAR"?40:25);
+  assert.equal(result.pkPct,team==="CAR"?75:60);
  }
  assert.equal(requested.filter(u=>u.searchParams.get("kind")==="clubhistory").length,2);
  assert.equal(requested.filter(u=>u.searchParams.get("kind")==="boxscore").length,10);
+ assert.equal(requested.filter(u=>u.searchParams.get("kind")==="right-rail").length,10);
 });
 
 test("special-teams proxy is allowlisted and calculates PP/PK from right-rail",async()=>{
