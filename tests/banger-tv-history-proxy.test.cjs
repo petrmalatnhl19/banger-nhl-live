@@ -6,7 +6,8 @@ const vm=require("node:vm");
 const src=fs.readFileSync("scripts/banger_tv_match_stats.js","utf8");
 test("BANGER TV history is browser-safe and keeps CORE untouched",()=>{
  assert.match(src,/kind=clubhistory/);
- assert.match(src,/kind=boxscore/);
+ assert.match(src,/\(boxscore\|right-rail\)/);
+ assert.match(src,/encodeURIComponent\(match\[2\]\)/);
  assert.doesNotMatch(src,/fetch\('https:\/\/api-web\.nhle\.com/);
  assert.match(src,/gameState==='FINAL'/);
  assert.match(src,/Historie alespoň jednoho týmu/);
