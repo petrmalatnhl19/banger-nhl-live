@@ -13,4 +13,16 @@
  console.log("teamGameStats:",JSON.stringify(sample(data.teamGameStats)));
  console.log("summary keys:",JSON.stringify(keys(data.summary)));
  console.log("summary.teamGameStats:",JSON.stringify(sample(data.summary?.teamGameStats)));
+ const proxy="https://xxwqeiuyislnoxsmjuul.supabase.co/functions/v1/nhl-feed";
+ const headers={apikey:"sb_publishable_SfeHMIvUkYTuD3jCrWub8w_fPIY0B-G"};
+ const viaProxy=await fetch(proxy+"?kind=right-rail&id="+id,{headers,signal:AbortSignal.timeout(15000)});
+ console.log("deployed right-rail proxy HTTP:",viaProxy.status);
+ if(!viaProxy.ok)throw Error("Deployed right-rail proxy HTTP "+viaProxy.status);
+ const proxied=await viaProxy.json();
+ const pp=proxied.teamGameStats?.find(x=>x.category==="powerPlay");
+ if(!pp||pp.awayValue!=="2/4"||pp.homeValue!=="0/2")throw Error("Deployed right-rail PP data mismatch");
+ console.log("deployed right-rail PP verified:",JSON.stringify({away:pp.awayValue,home:pp.homeValue}));
+ const invalid=await fetch(proxy+"?kind=right-rail&id=invalid",{headers,signal:AbortSignal.timeout(15000)});
+ console.log("deployed invalid right-rail ID HTTP:",invalid.status);
+ if(invalid.ok)throw Error("Invalid game ID unexpectedly accepted");
 })().catch(e=>{console.error("right-rail diagnostic failed:",e.message);process.exitCode=1});
