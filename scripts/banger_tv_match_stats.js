@@ -31,9 +31,9 @@ function goalieStats(data,team){
  const match=String(g.saveShotsAgainst||'').match(new RegExp('([0-9]+)\\s*/\\s*([0-9]+)'));
  return match&&Number(match[2])>0&&Number(match[1])<=Number(match[2])?{saves:Number(match[1]),faced:Number(match[2])}:null;
 }
-function specialStats(data,team){
- const away=data.awayTeam?.abbrev===team;
- const home=data.homeTeam?.abbrev===team;if(!away&&!home)return null;
+function specialStats(data,team,box){
+ const away=(box?.awayTeam?.abbrev||data.awayTeam?.abbrev)===team;
+ const home=(box?.homeTeam?.abbrev||data.homeTeam?.abbrev)===team;if(!away&&!home)return null;
  const row=(data.teamGameStats||data.summary?.teamGameStats||[]).find(x=>/power.?play/i.test(String(x.category||x.name||'')));
  if(!row)return null;
  const parse=v=>{const m=String(v??'').match(new RegExp('([0-9]+)\\s*/\\s*([0-9]+)'));return m?[Number(m[1]),Number(m[2])]:null;};
@@ -52,7 +52,7 @@ async function history(team,gameDate){
   if(!Array.isArray(schedule.games))throw Error('NHL schedule payload invalid');
   const games=(schedule.games||[]).filter(g=>g.gameDate<gameDate&&(g.gameState==='OFF'||g.gameState==='FINAL')).sort((a,b)=>b.gameDate.localeCompare(a.gameDate)).slice(0,5);
   const results=await Promise.all(games.map(async g=>{const [box,rail]=await Promise.allSettled([nhl('gamecenter/'+g.id+'/boxscore'),nhl('gamecenter/'+g.id+'/right-rail')]);return {box:box.status==='fulfilled'?box.value:null,rail:rail.status==='fulfilled'?rail.value:null};}));
-  const records=results.map(x=>({sk:x.box&&skaterStats(x.box,team),goalie:x.box&&goalieStats(x.box,team),special:x.rail&&specialStats(x.rail,team)}));
+  const records=results.map(x=>({sk:x.box&&skaterStats(x.box,team),goalie:x.box&&goalieStats(x.box,team),special:x.rail&&specialStats(x.rail,team,x.box)}));
   const sk=records.map(x=>x.sk).filter(Boolean),gl=records.map(x=>x.goalie).filter(Boolean),sp=records.map(x=>x.special).filter(Boolean);
   const mean=(rows,k)=>rows.length>=3?rows.reduce((a,x)=>a+x[k],0)/rows.length:null;
   const total=(rows,k)=>rows.reduce((a,x)=>a+x[k],0);
