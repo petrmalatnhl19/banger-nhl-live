@@ -31,7 +31,7 @@ test("CAR and NYR: five completed games each produce real boxscore averages thro
   assert.ok(["boxscore","right-rail"].includes(kind));
   const id=Number(u.searchParams.get("id"));
   assert.ok(id>=2026020300&&id<=2026020304);
-  if(kind==="right-rail")return {ok:true,json:async()=>({awayTeam:{abbrev:"CAR"},homeTeam:{abbrev:"NYR"},teamGameStats:[{category:"powerPlay",awayValue:"2/5",homeValue:"1/4"}]})};
+  if(kind==="right-rail")return {ok:true,json:async()=>({teamGameStats:[{category:"powerPlay",awayValue:"2/5",homeValue:"1/4"}]})};
   const players=[{sog:3,hits:2,blockedShots:1,pim:4}];
   return {ok:true,json:async()=>({
    awayTeam:{abbrev:"CAR"},homeTeam:{abbrev:"NYR"},
@@ -77,7 +77,7 @@ test("special-teams proxy is allowlisted and calculates PP/PK from right-rail",a
  const ctx={document:{readyState:"loading",addEventListener(){}},MutationObserver:class{observe(){}},Map,Promise,Number,String,RegExp};
  const instrumented=src.replace(/\}\)\(\);\s*$/, "globalThis.__specialStats=specialStats;})();");
  vm.runInNewContext(instrumented,ctx);
- const stats=ctx.__specialStats({awayTeam:{abbrev:"CAR"},homeTeam:{abbrev:"NYR"},teamGameStats:[{category:"powerPlay",awayValue:"2/5",homeValue:"1/4"}]},"CAR");
+ const stats=ctx.__specialStats({teamGameStats:[{category:"powerPlay",awayValue:"2/5",homeValue:"1/4"}]},"CAR",{awayTeam:{abbrev:"CAR"},homeTeam:{abbrev:"NYR"}});
  assert.equal(stats.ppGoals,2);
  assert.equal(stats.ppChances,5);
  assert.equal(stats.pkAllowed,1);
