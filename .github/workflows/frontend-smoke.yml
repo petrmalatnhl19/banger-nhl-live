@@ -85,6 +85,10 @@ jobs:
         if: github.event_name == 'pull_request' && github.event.pull_request.number == 424
         run: node scripts/diagnose-banger-tv-real-history.cjs
 
+      - name: BANGER TV real NHL right-rail schema diagnostic (PR 425 only)
+        if: github.event_name == 'pull_request' && github.event.pull_request.number == 425
+        run: node scripts/diagnose-banger-tv-real-right-rail.cjs
+
       - name: Validate local scripts and HTML entrypoint
         shell: bash
         run: |

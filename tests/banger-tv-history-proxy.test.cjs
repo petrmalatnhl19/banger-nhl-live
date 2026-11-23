@@ -6,7 +6,8 @@ const vm=require("node:vm");
 const src=fs.readFileSync("scripts/banger_tv_match_stats.js","utf8");
 test("BANGER TV history is browser-safe and keeps CORE untouched",()=>{
  assert.match(src,/kind=clubhistory/);
- assert.match(src,/kind=boxscore/);
+ assert.match(src,/\(boxscore\|right-rail\)/);
+ assert.match(src,/encodeURIComponent\(match\[2\]\)/);
  assert.doesNotMatch(src,/fetch\('https:\/\/api-web\.nhle\.com/);
  assert.match(src,/gameState==='FINAL'/);
  assert.match(src,/Historie alespoň jednoho týmu/);
@@ -26,9 +27,11 @@ test("CAR and NYR: five completed games each produce real boxscore averages thro
     ...Array.from({length:5},(_,i)=>({id:2026020300+i,gameDate:"2026-11-"+String(15+i).padStart(2,"0"),gameState:i%2?"FINAL":"OFF"}))
    ]})};
   }
-  assert.equal(u.searchParams.get("kind"),"boxscore");
+  const kind=u.searchParams.get("kind");
+  assert.ok(["boxscore","right-rail"].includes(kind));
   const id=Number(u.searchParams.get("id"));
   assert.ok(id>=2026020300&&id<=2026020304);
+  if(kind==="right-rail")return {ok:true,json:async()=>({teamGameStats:[{category:"powerPlay",awayValue:"2/5",homeValue:"1/4"}]})};
   const players=[{sog:3,hits:2,blockedShots:1,pim:4}];
   return {ok:true,json:async()=>({
    awayTeam:{abbrev:"CAR"},homeTeam:{abbrev:"NYR"},
@@ -56,8 +59,29 @@ test("CAR and NYR: five completed games each produce real boxscore averages thro
   assert.equal(result.pim,4);
   assert.equal(result.goalieN,5);
   assert.ok(result.savePct>93&&result.savePct<94);
-  assert.equal(result.specialN,0);
+  assert.equal(result.specialN,5);
+  assert.equal(result.ppPct,team==="CAR"?40:25);
+  assert.equal(result.pkPct,team==="CAR"?75:60);
  }
  assert.equal(requested.filter(u=>u.searchParams.get("kind")==="clubhistory").length,2);
  assert.equal(requested.filter(u=>u.searchParams.get("kind")==="boxscore").length,10);
+ assert.equal(requested.filter(u=>u.searchParams.get("kind")==="right-rail").length,10);
+});
+
+test("special-teams proxy is allowlisted and calculates PP/PK from right-rail",async()=>{
+ const proxy=fs.readFileSync("supabase/functions/nhl-feed/index.ts","utf8");
+ assert.match(proxy,/kind==="right-rail"/);
+ assert.match(proxy,/kind==="right-rail"&&\/\^\\d\{8,12\}\$\//);
+ assert.doesNotMatch(proxy,/kind==="right-rail"&&\/\^\\\\d/);
+ assert.match(proxy,/\/right-rail"/);
+ assert.match(src,/encodeURIComponent\(match\[2\]\)/);
+ assert.match(src,/nhl\('gamecenter\/'\+g.id\+'\/right-rail'\)/);
+ const ctx={document:{readyState:"loading",addEventListener(){}},MutationObserver:class{observe(){}},Map,Promise,Number,String,RegExp};
+ const instrumented=src.replace(/\}\)\(\);\s*$/, "globalThis.__specialStats=specialStats;})();");
+ vm.runInNewContext(instrumented,ctx);
+ const stats=ctx.__specialStats({teamGameStats:[{category:"powerPlay",awayValue:"2/5",homeValue:"1/4"}]},"CAR",{awayTeam:{abbrev:"CAR"},homeTeam:{abbrev:"NYR"}});
+ assert.equal(stats.ppGoals,2);
+ assert.equal(stats.ppChances,5);
+ assert.equal(stats.pkAllowed,1);
+ assert.equal(stats.pkFaced,4);
 });
