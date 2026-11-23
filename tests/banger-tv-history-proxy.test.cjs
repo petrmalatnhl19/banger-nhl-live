@@ -61,3 +61,19 @@ test("CAR and NYR: five completed games each produce real boxscore averages thro
  assert.equal(requested.filter(u=>u.searchParams.get("kind")==="clubhistory").length,2);
  assert.equal(requested.filter(u=>u.searchParams.get("kind")==="boxscore").length,10);
 });
+
+test("special-teams proxy is allowlisted and calculates PP/PK from right-rail",async()=>{
+ const proxy=fs.readFileSync("supabase/functions/nhl-feed/index.ts","utf8");
+ assert.match(proxy,/kind==="right-rail"/);
+ assert.match(proxy,/\/right-rail"/);
+ assert.match(src,/encodeURIComponent\(match\[2\]\)/);
+ assert.match(src,/nhl\('gamecenter\/'\+g.id\+'\/right-rail'\)/);
+ const ctx={document:{readyState:"loading",addEventListener(){}},MutationObserver:class{observe(){}},Map,Promise,Number,String,RegExp};
+ const instrumented=src.replace(/\}\)\(\);\s*$/, "globalThis.__specialStats=specialStats;})();");
+ vm.runInNewContext(instrumented,ctx);
+ const stats=ctx.__specialStats({awayTeam:{abbrev:"CAR"},homeTeam:{abbrev:"NYR"},teamGameStats:[{category:"powerPlay",awayValue:"2/5",homeValue:"1/4"}]},"CAR");
+ assert.equal(stats.ppGoals,2);
+ assert.equal(stats.ppChances,5);
+ assert.equal(stats.pkAllowed,1);
+ assert.equal(stats.pkFaced,4);
+});
