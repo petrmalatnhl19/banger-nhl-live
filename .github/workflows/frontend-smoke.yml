@@ -78,6 +78,13 @@ jobs:
         continue-on-error: true
         run: node scripts/video-11-nhl-diagnostic.cjs
 
+      - name: BANGER TV historical NHL proxy regression
+        run: node --test tests/banger-tv-history-proxy.test.cjs
+
+      - name: BANGER TV live CAR NYR proxy diagnostic (PR 424 only)
+        if: github.event_name == 'pull_request' && github.event.pull_request.number == 424
+        run: node scripts/diagnose-banger-tv-real-history.cjs
+
       - name: Validate local scripts and HTML entrypoint
         shell: bash
         run: |
@@ -198,6 +205,8 @@ jobs:
         run: node .github/scripts/browser-video-15-navigation.cjs
       - name: VIDEO-17 actual match modal official goal links
         run: node .github/scripts/browser-video-17-real-match.cjs
+      - name: BANGER TV browser historical stats rendering regression
+        run: node .github/scripts/browser-banger-tv-history.cjs
       - name: Test application startup in Chromium
         run: node .github/scripts/browser-smoke.cjs
       - name: Test FAN-08 favorite team picker on 360, 390 and 430 px
