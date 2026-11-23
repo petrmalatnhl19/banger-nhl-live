@@ -71,6 +71,8 @@ test("CAR and NYR: five completed games each produce real boxscore averages thro
 test("special-teams proxy is allowlisted and calculates PP/PK from right-rail",async()=>{
  const proxy=fs.readFileSync("supabase/functions/nhl-feed/index.ts","utf8");
  assert.match(proxy,/kind==="right-rail"/);
+ assert.match(proxy,/kind==="right-rail"&&\/\^\\d\{8,12\}\$\//);
+ assert.doesNotMatch(proxy,/kind==="right-rail"&&\/\^\\\\d/);
  assert.match(proxy,/\/right-rail"/);
  assert.match(src,/encodeURIComponent\(match\[2\]\)/);
  assert.match(src,/nhl\('gamecenter\/'\+g.id\+'\/right-rail'\)/);
