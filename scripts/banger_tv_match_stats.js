@@ -11,7 +11,7 @@ async function fetchRows(q){const r=await fetch(base+q,{headers});if(!r.ok)throw
 async function nhl(path){
  const match=path.match(/^gamecenter\/(\d{8,12})\/(boxscore|right-rail)$/);
  if(!match)throw Error('Unsupported browser NHL path');
- const r=await fetch('https://xxwqeiuyislnoxsmjuul.supabase.co/functions/v1/nhl-feed?kind=boxscore&id='+match[1],{headers,signal:AbortSignal.timeout(12000)});
+ const r=await fetch('https://xxwqeiuyislnoxsmjuul.supabase.co/functions/v1/nhl-feed?kind='+encodeURIComponent(match[2])+'&id='+match[1],{headers,signal:AbortSignal.timeout(12000)});
  if(!r.ok)throw Error('NHL proxy '+r.status);
  return r.json();
 }
