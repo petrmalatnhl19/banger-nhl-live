@@ -50,7 +50,7 @@ test('DATA-04: goalie evidence from the future is rejected by the game panel',()
  assert.ok(html.includes('Date.now()-Date.parse(checkedAt)>=0&&Date.now()-Date.parse(checkedAt)<24*3600000'));
 });
 
-const {selectPregameGoalie} = require('../../goalie-selection.js');
+const {selectPregameGoalie, selectOfficialStarter} = require('../../goalie-selection.js');
 test('GOALIE-01: NHL game day, conflict, identity, confirmation and observation cutoff', () => {
  const date = '2026-11-21', checkedAt = date+'T16:23:24Z';
  const game = {id:2026020365, gameDate:date, startTimeUTC:'2026-11-22T00:00:00Z',
@@ -68,4 +68,13 @@ test('GOALIE-01: NHL game day, conflict, identity, confirmation and observation 
  assert.equal(select({...daily,teams:{MTL:confirmed}}).status,'confirmed');
  assert.equal(select({...daily,teams:{MTL:{...confirmed,checkedAt:game.startTimeUTC}}},Date.parse(game.startTimeUTC)),null);
  assert.equal(select({...daily,updatedAt:'2026-11-18T12:00:00Z'}),null);
+});
+
+test('Official starter is unique even when relief appears first and plays longer', () => {
+ const relief = {playerId:8483532, starter:false, toi:'30:51'};
+ const starter = {playerId:8479973, starter:true, toi:'29:09'};
+ assert.equal(selectOfficialStarter([relief, starter]), starter);
+ assert.equal(selectOfficialStarter([relief, {...starter, starter:null}]), null);
+ assert.equal(selectOfficialStarter([{...relief, starter:'N'}]), null);
+ assert.equal(selectOfficialStarter([{...relief, starter:true}, starter]), null);
 });
