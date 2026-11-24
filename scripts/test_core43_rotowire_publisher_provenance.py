@@ -48,18 +48,30 @@ class PublishedReportTests(unittest.TestCase):
         article = {"about": {"name": "Devon Levi"}, "datePublished": "2026-11-24T08:49:56-08:00",
                    "description": "Levi will defend the home net in Tuesday's clash against the Golden Knights."}
         observed = datetime.datetime.fromisoformat("2026-11-24T20:45:00Z")
-        result = match_report(article, row, "golden knights", observed)
+        result = match_report(article, row, ["golden knights"], observed)
         self.assertEqual(result["sourcePublishedAt"], "2026-11-24T16:49:56Z")
         self.assertEqual(result["confirmationEvidence"], article["description"])
         for override in ({"about": {"name": "Carter Hart"}}, {"datePublished": None},
-                         {"datePublished": "2026-11-23T08:49:56-08:00"},
+                         {"datePublished": "2026-11-22T08:49:56-08:00"},
                          {"datePublished": "2026-11-24T22:00:00Z"},
                          {"datePublished": "2026-11-24T08:49:56"},
                          {"description": article["description"].replace("will", "may")}):
             with self.subTest(override=override):
-                self.assertIsNone(match_report({**article, **override}, row, "golden knights", observed))
-        self.assertIsNone(match_report(article, row, "oilers", observed))
-        self.assertIsNone(match_report(article, {**row, "venue": "away"}, "golden knights", observed))
+                self.assertIsNone(match_report({**article, **override}, row, ["golden knights"], observed))
+        self.assertIsNone(match_report(article, row, ["oilers"], observed))
+        self.assertIsNone(match_report(article, {**row, "venue": "away"}, ["golden knights"], observed))
+
+
+    def test_day_before_announcement_with_schedule_city(self):
+        row = {"goalie": "Daniil Tarasov", "venue": "home", "date": "2026-11-25",
+               "startTimeUTC": "2026-11-26T00:30:00Z"}
+        # Use the article clock from the real published report.
+        article = {"about": {"name": "Daniil Tarasov"},
+                   "description": "Tarasov will patrol the home crease against Vancouver on Wednesday, per Max Bultman of The Athletic.",
+                   "datePublished": "2026-11-24T10:11:36-08:00"}
+        observed = datetime.datetime.fromisoformat("2026-11-24T20:55:00Z")
+        self.assertIsNotNone(match_report(article, row, ["Canucks", "Vancouver"], observed))
+        self.assertIsNone(match_report(article, row, ["Oilers", "Edmonton"], observed))
 
 
 if __name__ == "__main__":

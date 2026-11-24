@@ -115,7 +115,7 @@ def match_schedule(candidates, schedule):
 NEWS = "https://www.rotowire.com/hockey/news.php?pos=G"
 
 
-def attach_reports(rows, rosters, observed):
+def attach_reports(rows, schedule, observed):
     candidates = [row for row in rows if row["status"] == "confirmed"]
     if not candidates:
         return
@@ -125,7 +125,13 @@ def attach_reports(rows, rosters, observed):
         print("RotoWire news index unavailable:", type(exc).__name__)
         return
     paths = re.findall(r'href="(/hockey/headlines/[a-z0-9-]+-\d+)"', index)
-    opponents = {team["abbrev"]: name for name, team in rosters.items()}
+    opponents = {}
+    for day in schedule.get("gameWeek", []):
+        for game in day.get("games", []):
+            for side in ("awayTeam", "homeTeam"):
+                team = game[side]
+                names = [team.get(field, {}).get("default") for field in ("commonName", "placeName")]
+                opponents[team["abbrev"]] = [name for name in names if name]
     for row in candidates:
         slug = "-".join(norm(word) for word in row["goalie"].split())
         prefix = "/hockey/headlines/" + slug + "-"
@@ -163,7 +169,8 @@ def match_report(article, row, opponent, observed):
     if published.tzinfo is None or not published <= observed < kickoff:
         return
     day = datetime.date.fromisoformat(row["date"])
-    if published.astimezone(ZoneInfo("America/New_York")).date() != day:
+    published_day = published.astimezone(ZoneInfo("America/New_York")).date()
+    if (day - published_day).days not in (0, 1):
         return
     # Accept a direct starter announcement for this venue, opponent and weekday.
     # Keep unfamiliar, conditional and retrospective wording unverified.
@@ -171,9 +178,11 @@ def match_report(article, row, opponent, observed):
     surname = re.escape(row["goalie"].split()[-1])
     venue = "home" if row["venue"] == "home" else "road"
     weekday = day.strftime("%A")
-    rival = re.escape(opponent)
-    matchup = rf"(?:against the {rival} on {weekday}|in {weekday}'s clash against the {rival})"
-    if not isinstance(text, str) or not re.fullmatch(rf"{surname} will defend the {venue} net {matchup}(?:, (?:according to|per) [^.!?]+)?[.]", text, re.I):
+    if not opponent:
+        return
+    rival = "(?:" + "|".join(re.escape(name) for name in opponent) + ")"
+    matchup = rf"(?:against (?:the )?{rival} on {weekday}|in {weekday}'s clash against (?:the )?{rival})"
+    if not isinstance(text, str) or not re.fullmatch(rf"{surname} will (?:defend the {venue} net|patrol the {venue} crease) {matchup}(?:, (?:according to|per) [^.!?]+)?[.]", text, re.I):
         return
     return {"confirmationBasis": "explicit_pregame_report", "confirmationEvidence": text,
             "sourcePublishedAt": published.astimezone(datetime.timezone.utc).isoformat().replace("+00:00", "Z")}
@@ -194,7 +203,7 @@ def main():
         for game in day.get("games", [])
     ]
     matches, identity_issues = validate_game_claims(schedule_matches, games)
-    attach_reports(matches, rosters, now)
+    attach_reports(matches, schedule, now)
     dates = {str(game["gameId"]): game["date"] for game in games}
     for issue in identity_issues:
         issue["date"] = dates.get(str(issue.get("gameId")))

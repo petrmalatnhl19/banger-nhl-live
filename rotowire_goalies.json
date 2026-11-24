@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-24T20:50:21.345319+00:00",
+  "updatedAt": "2026-11-24T20:57:13.344662+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "goalieCount": 102,
   "games": [
@@ -146,11 +146,14 @@
       "goalie": "Daniil Tarasov",
       "opponent": "VAN",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-25",
       "gameId": 2026020394,
       "startTimeUTC": "2026-11-26T00:30:00Z",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "source": "https://www.rotowire.com/hockey/headlines/daniil-tarasov-news-tending-twine-wednesday-600965",
+      "confirmationBasis": "explicit_pregame_report",
+      "confirmationEvidence": "Tarasov will patrol the home crease against Vancouver on Wednesday, per Max Bultman of The Athletic.",
+      "sourcePublishedAt": "2026-11-24T18:11:36Z",
       "goalieId": "8480193"
     },
     {
