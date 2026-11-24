@@ -46,7 +46,7 @@ jobs:
       - name: DATA-11 inspect committed goalie export
         run: python scripts/audit_data_11_goalie_feed.py
       - name: DATA-12 goalie publisher schema regression
-        run: python -m unittest scripts/test_data_12_goalie_publisher.py
+        run: python -m unittest scripts/test_data_12_goalie_publisher.py scripts.test_core43_rotowire_publisher_provenance
       - name: DATA-13 game identity regressions
         run: python -m unittest scripts/test_data_13_game_identity.py
       - name: DATA-13 conflicting goalie confirmation suppression
