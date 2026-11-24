@@ -1,10 +1,14 @@
 {
-  "checkedAt": "2026-11-22T15:23:49.169210+00:00",
+  "checkedAt": "2026-11-24T08:50:51.957901+00:00",
   "team": "DAL",
   "scope": "Recent completed NHL games; historical evidence only",
   "players": {
     "Trey Taylor": {
       "appearedInGames": [
+        {
+          "gameId": 2026020376,
+          "gameDate": "2026-11-22"
+        },
         {
           "gameId": 2026020358,
           "gameDate": "2026-11-19"
