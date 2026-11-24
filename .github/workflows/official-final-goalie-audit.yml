@@ -9,7 +9,7 @@ on:
   schedule:
     - cron: '17 */6 * * *'
 permissions:
-  contents: write
+  contents: read
 concurrency:
   group: official-goalie-audit-publish
   cancel-in-progress: false
@@ -23,18 +23,30 @@ jobs:
           python-version: '3.12'
       - run: python -m unittest discover -s scripts -p 'test_official_final_goalies.py'
       - run: python scripts/audit_official_final_goalies.py --days 10
-      - name: Publish verified audit for GitHub Pages
-        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add diagnostics/official-final-goalies.json
-          if ! git diff --cached --quiet; then
-            git commit -m "data: refresh official final NHL goalies [skip ci]"
-            git push origin HEAD:main
-          fi
       - uses: actions/upload-artifact@v4
         with:
           name: official-final-goalie-audit
           path: diagnostics/official-final-goalies.json
           retention-days: 14
+          if-no-files-found: error
+      - name: Require a complete NHL collection before publication
+        run: |
+          python - <<'PYTHON'
+          import json
+          from pathlib import Path
+          summary = json.loads(Path("diagnostics/official-final-goalies.json").read_text())["summary"]
+          if summary["fetchFailures"] or not summary["finalGames"]:
+              raise SystemExit(f"Final goalie audit incomplete: {summary}")
+          PYTHON
+      - name: Propose verified audit for GitHub Pages
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.LINEUPS_PR_TOKEN }}
+          base: main
+          branch: automation/official-final-goalie-audit
+          draft: true
+          title: Refresh verified official NHL final goalies
+          commit-message: Refresh verified official NHL final goalies
+          body: Review official final-game starter evidence and required checks before publication.
+          add-paths: diagnostics/official-final-goalies.json

@@ -1,0 +1,40 @@
+name: SECURITY public CORE view contracts
+
+on:
+  pull_request:
+    paths:
+      - 'core-performance.js'
+      - 'scripts/banger_tv_match_stats.js'
+      - 'scripts/core43_verified_dashboard.js'
+      - 'scripts/sql/core43_public_schedule_evidence.sql'
+      - 'scripts/sql/security_public_core_views_audit.sql'
+      - 'tests/security-public-core-views.test.cjs'
+      - 'tests/fixtures/security-public-core-view-columns.json'
+      - '.github/workflows/security-public-core-views.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'core-performance.js'
+      - 'scripts/banger_tv_match_stats.js'
+      - 'scripts/core43_verified_dashboard.js'
+      - 'scripts/sql/core43_public_schedule_evidence.sql'
+      - 'scripts/sql/security_public_core_views_audit.sql'
+      - 'tests/security-public-core-views.test.cjs'
+      - 'tests/fixtures/security-public-core-view-columns.json'
+      - '.github/workflows/security-public-core-views.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  public-core-view-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check public REST consumers and SQL audit safety
+        run: node --test tests/security-public-core-views.test.cjs

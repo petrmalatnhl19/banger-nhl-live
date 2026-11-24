@@ -23,6 +23,8 @@ jobs:
         run: node --test scripts/test_commentary_facts.cjs
       - name: Test VOICE-08 Android commentary rules
         run: node --test .github/scripts/test-voice-08.cjs
+      - name: SECURITY-274 TV error disclosure regression
+        run: node .github/scripts/test-security274-tv-error.cjs
       - name: DATA-01/02 lineup and goalie integrity
         run: node --test .github/scripts/test-data-01-02.cjs
       - name: DATA-03 goalie roster and source conflicts
@@ -44,7 +46,7 @@ jobs:
       - name: DATA-11 inspect committed goalie export
         run: python scripts/audit_data_11_goalie_feed.py
       - name: DATA-12 goalie publisher schema regression
-        run: python -m unittest scripts/test_data_12_goalie_publisher.py
+        run: python -m unittest scripts/test_data_12_goalie_publisher.py scripts.test_core43_rotowire_publisher_provenance
       - name: DATA-13 game identity regressions
         run: python -m unittest scripts/test_data_13_game_identity.py
       - name: DATA-13 conflicting goalie confirmation suppression
@@ -75,6 +77,17 @@ jobs:
       - name: VIDEO-11 NHL clip metadata diagnostic (informational)
         continue-on-error: true
         run: node scripts/video-11-nhl-diagnostic.cjs
+
+      - name: BANGER TV historical NHL proxy regression
+        run: node --test tests/banger-tv-history-proxy.test.cjs
+
+      - name: BANGER TV live CAR NYR proxy diagnostic (PR 424 only)
+        if: github.event_name == 'pull_request' && github.event.pull_request.number == 424
+        run: node scripts/diagnose-banger-tv-real-history.cjs
+
+      - name: BANGER TV real NHL right-rail schema diagnostic (PR 425 only)
+        if: github.event_name == 'pull_request' && github.event.pull_request.number == 425
+        run: node scripts/diagnose-banger-tv-real-right-rail.cjs
 
       - name: Validate local scripts and HTML entrypoint
         shell: bash
@@ -212,6 +225,8 @@ jobs:
         run: node .github/scripts/browser-video-15-navigation.cjs
       - name: VIDEO-17 actual match modal official goal links
         run: node .github/scripts/browser-video-17-real-match.cjs
+      - name: BANGER TV browser historical stats rendering regression
+        run: node .github/scripts/browser-banger-tv-history.cjs
       - name: Check TV panel with available, restricted and failed data sources
         run: node .github/scripts/browser-tv-grants.cjs
       - name: Test application startup in Chromium

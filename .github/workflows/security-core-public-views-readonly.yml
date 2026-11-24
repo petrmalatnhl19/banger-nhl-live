@@ -1,0 +1,24 @@
+name: SECURITY CORE public reporting views ACL proposal
+on:
+  pull_request:
+    paths:
+      - 'scripts/sql/security_core_public_views_readonly_proposal.sql'
+      - 'docs/security-core-public-views-readonly-gate.md'
+      - 'tests/security-core-public-views-readonly.test.cjs'
+      - '.github/workflows/security-core-public-views-readonly.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify scoped proposal and existing public-view contracts
+        run: node --test tests/security-core-public-views-readonly.test.cjs tests/security-public-core-views.test.cjs
+      - name: Read-only post-deployment REST regression
+        run: node scripts/security_core43_public_rest_smoke.cjs

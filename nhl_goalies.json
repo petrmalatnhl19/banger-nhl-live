@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-22T15:24:20.429304+00:00",
-  "rostersUpdatedAt": "2026-11-22T15:23:45.405909+00:00",
-  "projectionDate": "2026-11-22",
+  "updatedAt": "2026-11-24T08:51:16.547875+00:00",
+  "rostersUpdatedAt": "2026-11-24T08:50:50.330960+00:00",
+  "projectionDate": "2026-11-24",
   "teamCount": 32,
-  "goalieCount": 73,
+  "goalieCount": 72,
   "goalies": [
     {
       "name": "Mackenzie Blackwood",
@@ -26,9 +26,8 @@
       "team": "CHI",
       "teamKey": "blackhawks",
       "playerId": 8482123,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-22",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Spencer Knight",
@@ -103,14 +102,6 @@
       "starterGameDate": null
     },
     {
-      "name": "Samuel Montembeault",
-      "team": "MTL",
-      "teamKey": "canadiens",
-      "playerId": 8478470,
-      "starterStatus": "unknown",
-      "starterGameDate": null
-    },
-    {
       "name": "Thatcher Demko",
       "team": "VAN",
       "teamKey": "canucks",
@@ -131,14 +122,6 @@
       "team": "VAN",
       "teamKey": "canucks",
       "playerId": 8482447,
-      "starterStatus": "unknown",
-      "starterGameDate": null
-    },
-    {
-      "name": "Nikita Tolopilo",
-      "team": "VAN",
-      "teamKey": "canucks",
-      "playerId": 8484268,
       "starterStatus": "unknown",
       "starterGameDate": null
     },
@@ -251,9 +234,8 @@
       "team": "CAR",
       "teamKey": "hurricanes",
       "playerId": 8483548,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-22",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Pyotr Kochetkov",
@@ -340,9 +322,8 @@
       "team": "TBL",
       "teamKey": "lightning",
       "playerId": 8476883,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-22",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Sebastian Cossa",
@@ -397,9 +378,8 @@
       "team": "EDM",
       "teamKey": "oilers",
       "playerId": 8477465,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-22",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Devon Levi",
@@ -462,9 +442,8 @@
       "team": "NYR",
       "teamKey": "rangers",
       "playerId": 8482193,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-22",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Joonas Korpisalo",
@@ -487,6 +466,14 @@
       "team": "DET",
       "teamKey": "red wings",
       "playerId": 8476434,
+      "starterStatus": "unknown",
+      "starterGameDate": null
+    },
+    {
+      "name": "Samuel Montembeault",
+      "team": "DET",
+      "teamKey": "red wings",
+      "playerId": 8478470,
       "starterStatus": "unknown",
       "starterGameDate": null
     },
@@ -567,9 +554,8 @@
       "team": "DAL",
       "teamKey": "stars",
       "playerId": 8479979,
-      "starterStatus": "projected",
-      "starterGameDate": "2026-11-22",
-      "starterSource": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+      "starterStatus": "unknown",
+      "starterGameDate": null
     },
     {
       "name": "Filip Gustavsson",
