@@ -8,6 +8,8 @@ import html
 import json
 import re
 import urllib.request
+from urllib.error import URLError
+from zoneinfo import ZoneInfo
 import unicodedata
 from html.parser import HTMLParser
 from pathlib import Path
@@ -110,6 +112,73 @@ def match_schedule(candidates, schedule):
             matches.append({**candidate, "date": date, "gameId": game_id, "startTimeUTC": start, "source": URL})
     return matches
 
+NEWS = "https://www.rotowire.com/hockey/news.php?pos=G"
+
+
+def attach_reports(rows, rosters, observed):
+    candidates = [row for row in rows if row["status"] == "confirmed"]
+    if not candidates:
+        return
+    try:
+        index = load(NEWS)
+    except (URLError, TimeoutError) as exc:
+        print("RotoWire news index unavailable:", type(exc).__name__)
+        return
+    paths = re.findall(r'href="(/hockey/headlines/[a-z0-9-]+-\d+)"', index)
+    opponents = {team["abbrev"]: name for name, team in rosters.items()}
+    for row in candidates:
+        slug = "-".join(norm(word) for word in row["goalie"].split())
+        prefix = "/hockey/headlines/" + slug + "-"
+        for path in dict.fromkeys(p for p in paths if p.startswith(prefix)):
+            url = "https://www.rotowire.com" + path
+            try:
+                page = load(url)
+                blocks = re.findall(r'<script\b[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>', page, re.S | re.I)
+                for block in blocks:
+                    data = json.loads(block)
+                    for article in data if isinstance(data, list) else [data]:
+                        if not isinstance(article, dict) or article.get("@type") != "NewsArticle":
+                            continue
+                        evidence = match_report(article, row, opponents[row["opponent"]], observed)
+                        if evidence:
+                            row.update(evidence, source=url)
+                            break
+                    if "confirmationEvidence" in row:
+                        break
+            except (URLError, TimeoutError, ValueError) as exc:
+                print("RotoWire report unavailable:", path, type(exc).__name__)
+            if "confirmationEvidence" in row:
+                break
+
+
+def match_report(article, row, opponent, observed):
+    about = article.get("about")
+    if not isinstance(about, dict) or about.get("name") != row["goalie"]:
+        return
+    try:
+        published = datetime.datetime.fromisoformat(article["datePublished"])
+    except (KeyError, TypeError, ValueError):
+        return
+    kickoff = datetime.datetime.fromisoformat(row["startTimeUTC"])
+    if published.tzinfo is None or not published <= observed < kickoff:
+        return
+    day = datetime.date.fromisoformat(row["date"])
+    if published.astimezone(ZoneInfo("America/New_York")).date() != day:
+        return
+    # Accept a direct starter announcement for this venue, opponent and weekday.
+    # Keep unfamiliar, conditional and retrospective wording unverified.
+    text = article.get("description") or ""
+    surname = re.escape(row["goalie"].split()[-1])
+    venue = "home" if row["venue"] == "home" else "road"
+    weekday = day.strftime("%A")
+    rival = re.escape(opponent)
+    matchup = rf"(?:against the {rival} on {weekday}|in {weekday}'s clash against the {rival})"
+    if not isinstance(text, str) or not re.fullmatch(rf"{surname} will defend the {venue} net {matchup}(?:, (?:according to|per) [^.!?]+)?[.]", text, re.I):
+        return
+    return {"confirmationBasis": "explicit_pregame_report", "confirmationEvidence": text,
+            "sourcePublishedAt": published.astimezone(datetime.timezone.utc).isoformat().replace("+00:00", "Z")}
+
+
 def main():
     with (ROOT / "nhl_rosters.json").open(encoding="utf-8") as handle:
         rosters = json.load(handle)["teams"]
@@ -125,6 +194,7 @@ def main():
         for game in day.get("games", [])
     ]
     matches, identity_issues = validate_game_claims(schedule_matches, games)
+    attach_reports(matches, rosters, now)
     dates = {str(game["gameId"]): game["date"] for game in games}
     for issue in identity_issues:
         issue["date"] = dates.get(str(issue.get("gameId")))

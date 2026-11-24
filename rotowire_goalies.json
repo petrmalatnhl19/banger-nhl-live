@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-24T08:51:16.402115+00:00",
+  "updatedAt": "2026-11-24T20:50:21.345319+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
   "goalieCount": 102,
   "games": [
@@ -8,11 +8,14 @@
       "goalie": "Devon Levi",
       "opponent": "VGK",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-24",
       "gameId": 2026020385,
       "startTimeUTC": "2026-11-25T01:00:00Z",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "source": "https://www.rotowire.com/hockey/headlines/devon-levi-news-battling-golden-knights-600954",
+      "confirmationBasis": "explicit_pregame_report",
+      "confirmationEvidence": "Levi will defend the home net in Tuesday's clash against the Golden Knights.",
+      "sourcePublishedAt": "2026-11-24T16:49:56Z",
       "goalieId": "8482221"
     },
     {
@@ -20,11 +23,14 @@
       "goalie": "Carter Hart",
       "opponent": "EDM",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-24",
       "gameId": 2026020385,
       "startTimeUTC": "2026-11-25T01:00:00Z",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "source": "https://www.rotowire.com/hockey/headlines/carter-hart-news-starting-in-edmonton-600976",
+      "confirmationBasis": "explicit_pregame_report",
+      "confirmationEvidence": "Hart will defend the road net against the Oilers on Tuesday, according to Jason Gregor of Sports 1440 Edmonton.",
+      "sourcePublishedAt": "2026-11-24T18:24:24Z",
       "goalieId": "8479394"
     },
     {
@@ -137,7 +143,7 @@
     },
     {
       "team": "DET",
-      "goalie": "John Gibson",
+      "goalie": "Daniil Tarasov",
       "opponent": "VAN",
       "venue": "home",
       "status": "projected",
@@ -145,7 +151,7 @@
       "gameId": 2026020394,
       "startTimeUTC": "2026-11-26T00:30:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8476434"
+      "goalieId": "8480193"
     },
     {
       "team": "FLA",
@@ -221,7 +227,7 @@
     },
     {
       "team": "NYR",
-      "goalie": "Dylan Garand",
+      "goalie": "Joonas Korpisalo",
       "opponent": "BUF",
       "venue": "away",
       "status": "projected",
@@ -229,7 +235,7 @@
       "gameId": 2026020387,
       "startTimeUTC": "2026-11-26T00:00:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-      "goalieId": "8482193"
+      "goalieId": "8476914"
     },
     {
       "team": "OTT",
