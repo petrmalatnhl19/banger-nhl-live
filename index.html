@@ -3169,7 +3169,9 @@ async function analyzeGame(id,opener=document.activeElement){
   const data=result.data;if(!result.ok||!data)return null;
   const side=data.awayTeam?.abbrev===code?'awayTeam':data.homeTeam?.abbrev===code?'homeTeam':null;
   const list=side?data.playerByGameStats?.[side]?.goalies:null;if(!Array.isArray(list)||!list.length)return null;
-  const g=list.find(x=>x.starter)||list[0],name=g.name?.default||[g.firstName?.default,g.lastName?.default].filter(Boolean).join(' ')||'Brankář';
+  const g=selectOfficialStarter(list);
+  if(!g)return null;
+  const name=g.name?.default||[g.firstName?.default,g.lastName?.default].filter(Boolean).join(' ')||'Brankář';
   const match=String(g.saveShotsAgainst||'').match(/(\d+)\s*\/\s*(\d+)/);
   return {name,save:match&&Number(match[2])>0?fmt(100*Number(match[1])/Number(match[2]))+' %':'neuvedena',saved:match?Number(match[1]):null,shots:match?Number(match[2]):null,date:data.gameDate||null,against:Number.isFinite(Number(g.goalsAgainst))?Number(g.goalsAgainst):null};
  };
@@ -3227,7 +3229,7 @@ async function analyzeGame(id,opener=document.activeElement){
    const side=data.awayTeam?.abbrev===code?'awayTeam':data.homeTeam?.abbrev===code?'homeTeam':null;
    const goalies=side?data.playerByGameStats?.[side]?.goalies:null;
    if(!Array.isArray(goalies)||!goalies.length)continue;
-   const starter=goalies.find(g=>g.starter===true||g.starter==='Y'||g.starter===1);
+   const starter=selectOfficialStarter(goalies);
    if(!starter)continue; // Never infer the starting goalie from array order.
    const match=String(starter.saveShotsAgainst||'').match(/(\d+)\s*\/\s*(\d+)/);
    if(!match||Number(match[2])<=0)continue;

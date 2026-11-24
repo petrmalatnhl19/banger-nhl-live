@@ -29,4 +29,9 @@ function selectPregameGoalie(game, team, starters, rotowire, now = Date.now()) {
     typeof row.confirmationEvidence === 'string' && row.confirmationEvidence.trim() && Number.isFinite(start);
   return {...row, status: confirmed ? 'confirmed' : 'projected'};
 }
-if (typeof module !== 'undefined') module.exports = {selectPregameGoalie};
+function selectOfficialStarter(goalies) {
+  if (!Array.isArray(goalies)) return null;
+  const starters = goalies.filter(g => g && (g.starter === true || g.starter === 'Y' || g.starter === 1));
+  return starters.length === 1 ? starters[0] : null;
+}
+if (typeof module !== 'undefined') module.exports = {selectPregameGoalie, selectOfficialStarter};
