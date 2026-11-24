@@ -1,10 +1,26 @@
 {
   "teams": {
+    "islanders": {
+      "players": [
+        {
+          "sourceName": "Matt Kessel",
+          "expectedRole": "defense",
+          "sameSurnameInRoster": [
+            {
+              "name": "Matthew Kessel",
+              "role": "defense"
+            }
+          ],
+          "classification": "possible_name_variant_needs_review",
+          "automaticApproval": false
+        }
+      ]
+    },
     "jets": {
       "players": [
         {
           "sourceName": "Danny Zhilkin",
-          "expectedRole": "defense",
+          "expectedRole": "forwards",
           "sameSurnameInRoster": [
             {
               "name": "Danil Zhilkin",
@@ -15,12 +31,12 @@
           "automaticApproval": false
         },
         {
-          "sourceName": "Alex Iafallo",
-          "expectedRole": "defense",
+          "sourceName": "Tyrel Bauer",
+          "expectedRole": "forwards",
           "sameSurnameInRoster": [
             {
-              "name": "Alex Iafallo",
-              "role": "forwards"
+              "name": "Tyrel Bauer",
+              "role": "defense"
             }
           ],
           "classification": "possible_name_variant_needs_review",
@@ -31,27 +47,10 @@
     "lightning": {
       "players": [
         {
-          "sourceName": "Jeffrey Viel",
-          "expectedRole": "defense",
-          "sameSurnameInRoster": [
-            {
-              "name": "Jeffrey Viel",
-              "role": "forwards"
-            }
-          ],
-          "classification": "possible_name_variant_needs_review",
-          "automaticApproval": false
-        },
-        {
-          "sourceName": "Scott Sabourin",
-          "expectedRole": "defense",
-          "sameSurnameInRoster": [
-            {
-              "name": "Scott Sabourin",
-              "role": "forwards"
-            }
-          ],
-          "classification": "possible_name_variant_needs_review",
+          "sourceName": "Jansen Harkins",
+          "expectedRole": "forwards",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
           "automaticApproval": false
         }
       ]
@@ -60,6 +59,13 @@
       "players": [
         {
           "sourceName": "Nate Danielson",
+          "expectedRole": "forwards",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
+          "automaticApproval": false
+        },
+        {
+          "sourceName": "Sheldon Dries",
           "expectedRole": "forwards",
           "sameSurnameInRoster": [],
           "classification": "not_on_current_roster",
