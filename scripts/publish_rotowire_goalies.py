@@ -152,7 +152,8 @@ def main():
                               "rotowire": item["goalie"], "previous": existing["name"]})
             continue
         entries[abbr] = {"name": item["goalie"], "status": item["status"],
-                         "date": today, "source": diagnostic["source"],
+                         "date": today, "source": item.get("source") or diagnostic["source"],
+                         **{k: item[k] for k in ("goalieId", "sourcePublishedAt") if k in item},
                          "sourceLabel": "RotoWire", "checkedAt": diagnostic.get("checkedAt", now.isoformat()),
                          "gameId": item["gameId"],
                          **({"confirmationBasis": item["confirmationBasis"],
