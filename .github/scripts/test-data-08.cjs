@@ -7,7 +7,13 @@ test('DATA-08: projected lineup coverage and report represent exactly the same N
  const coverage=read('lineups_coverage.json'),report=read('lineup_core_report.json');
  const names=Object.keys(coverage.teams).sort();
  assert.equal(names.length,32);assert.deepEqual(names,Object.keys(report.teams).sort());
- assert.equal(coverage.totalTeams,32);assert.equal(report.summary.teams,32);
+ const live=read('lineups.json').teams;
+ assert.equal(coverage.totalTeams,32);
+ assert.equal(report.summary.expectedTeams,names.length);
+ assert.deepEqual(Object.keys(live).sort(),names.filter(k=>report.teams[k].status!=='missing_team'));
+ assert.equal(report.summary.teams,Object.keys(live).length);
+ assert.equal(report.summary.teams+report.summary.missing,names.length);
+ assert.equal(report.summary.coveragePercent,Math.round(1000*report.summary.teams/names.length)/10);
  assert.equal(coverage.withProjectedLines,names.filter(k=>coverage.teams[k].hasProjectedLines).length);
  assert.equal(report.summary.complete,names.filter(k=>report.teams[k].complete).length);
  assert.equal(report.summary.incomplete,names.filter(k=>!report.teams[k].complete&&report.teams[k].status!=='missing_team').length);
