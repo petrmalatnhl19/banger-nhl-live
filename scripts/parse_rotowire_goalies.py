@@ -176,13 +176,19 @@ def match_report(article, row, opponent, observed):
     # Keep unfamiliar, conditional and retrospective wording unverified.
     text = article.get("description") or ""
     surname = re.escape(row["goalie"].split()[-1])
+    if row.get("venue") not in ("home", "away"):
+        return
     venue = "home" if row["venue"] == "home" else "road"
     weekday = day.strftime("%A")
     if not opponent:
         return
     rival = "(?:" + "|".join(re.escape(name) for name in opponent) + ")"
     matchup = rf"(?:against (?:the )?{rival} on {weekday}|in {weekday}'s clash against (?:the )?{rival})"
-    if not isinstance(text, str) or not re.fullmatch(rf"{surname} will (?:defend the {venue} net|patrol the {venue} crease) {matchup}(?:, (?:according to|per) [^.!?]+)?[.]", text, re.I):
+    crease_report = rf"(?:defend the {venue} net|patrol the {venue} crease) {matchup}(?:, (?:according to|per) [^.!?]+)?"
+    # A reporter credit may follow the complete, schedule-bound start announcement.
+    start_report = rf"start {weekday}'s {venue} game against (?:the )?{rival}(?:, [\w’' -]+ of [\w’' -]+ reports)?"
+    if not isinstance(text, str) or not re.fullmatch(
+            rf"{surname} will (?:{crease_report}|{start_report})[.]", text, re.I):
         return
     return {"confirmationBasis": "explicit_pregame_report", "confirmationEvidence": text,
             "sourcePublishedAt": published.astimezone(datetime.timezone.utc).isoformat().replace("+00:00", "Z")}

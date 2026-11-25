@@ -62,6 +62,29 @@ class PublishedReportTests(unittest.TestCase):
         self.assertIsNone(match_report(article, {**row, "venue": "away"}, ["golden knights"], observed))
 
 
+    def test_reported_starts_match_player_venue_opponent_day_and_clocks(self):
+        cases = [
+            ("Jacob Fowler", "Colorado", "Eric Engels of Sportsnet", "11:00:42", "19:00:42", "02:30"),
+            ("Alex Nedeljkovic", "Anaheim", "Sheng Peng of San Jose Hockey Now", "11:57:49", "19:57:49", "03:00"),
+        ]
+        observed = datetime.datetime.fromisoformat("2026-11-25T20:40:01Z")
+        for player, opponent, credit, published, utc, kickoff in cases:
+            row = {"goalie": player, "venue": "away", "date": "2026-11-25",
+                   "startTimeUTC": f"2026-11-26T{kickoff}:00Z"}
+            text = f"{player.split()[-1]} will start Wednesday's road game against {opponent}, {credit} reports."
+            article = {"about": {"name": player}, "datePublished": f"2026-11-25T{published}-08:00",
+                       "description": text}
+            with self.subTest(player=player):
+                result = match_report(article, row, [opponent], observed)
+                self.assertEqual(result["confirmationEvidence"], text)
+                self.assertEqual(result["sourcePublishedAt"], f"2026-11-25T{utc}Z")
+                for old, new in (("road", "home"), ("Wednesday", "Thursday"), ("will start", "may start"),
+                                 ("will start", "is expected to start"), (opponent, "Buffalo")):
+                    self.assertIsNone(match_report({**article, "description": text.replace(old, new)},
+                                                   row, [opponent], observed))
+                self.assertIsNone(match_report({**article, "about": {"name": "Other Goalie"}}, row, [opponent], observed))
+                self.assertIsNone(match_report(article, row, [opponent], datetime.datetime.fromisoformat(row["startTimeUTC"])))
+
     def test_day_before_announcement_with_schedule_city(self):
         row = {"goalie": "Daniil Tarasov", "venue": "home", "date": "2026-11-25",
                "startTimeUTC": "2026-11-26T00:30:00Z"}

@@ -1,5 +1,8 @@
 name: CORE 4.3 confirmed starter feed
 on:
+  push:
+    branches: [main]
+    paths: ['scripts/parse_rotowire_goalies.py']
   workflow_dispatch:
   schedule:
     - cron: '*/15 * * * *'
