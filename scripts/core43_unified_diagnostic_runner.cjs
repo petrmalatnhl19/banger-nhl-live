@@ -7,7 +7,7 @@ const TABLES={
  schedules:["nhl_core43_schedule_snapshots","game_id,fetched_at,kickoff_at,away_team,home_team"],
  goalies:["nhl_core43_rotowire_observations","game_id,team_code,goalie_name,observed_status,observed_at,source_snapshot_at"],
  identityMap:["nhl_core43_goalie_identity_map","goalie_id,goalie_name,team_code,observed_at"],
- starterEvidence:["nhl_core43_starter_evidence","game_id,team_code,goalie_id,evidence_status,source_url,source_published_at,verified_at"]
+ starterEvidence:["core43_verified_starter_evidence","game_id,team_code,goalie_id,evidence_status,source_url,source_published_at,verified_at"]
 };
 function buildReport(data){
  const coverage=auditArchive(data);

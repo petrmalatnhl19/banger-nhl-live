@@ -8,7 +8,7 @@ const {run}=require("./core43_scheduled_pregame_monitor.cjs");
   nhl_prediction_archive:[],
   nhl_core43_rotowire_observations:[{game_id:123,team_code:"TBL",goalie_name:"Goalie A",observed_status:"projected",observed_at:"2026-11-12T19:00:00Z",source_snapshot_at:"2026-11-12T18:59:00Z"}],
   nhl_core43_goalie_identity_map:[],
-  nhl_core43_starter_evidence:[]
+  core43_verified_starter_evidence:[]
  };
  const methods=[];
  const fetchImpl=async(url,opts)=>{methods.push(opts.method);const table=new URL(url).pathname.split("/").at(-1);return {ok:true,status:200,json:async()=>rows[table]||[]};};

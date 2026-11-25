@@ -7,6 +7,11 @@ import urllib.request
 from pathlib import Path
 from urllib.parse import urlsplit
 
+if __package__:
+    from .core43_article_provenance import article_metadata
+else:
+    from core43_article_provenance import article_metadata
+
 def main():
     url=os.environ.get("SUPABASE_URL","").strip().rstrip("/")
     key=os.environ.get("SUPABASE_SERVICE_ROLE_KEY","").strip()
@@ -40,7 +45,8 @@ def main():
         if pair in seen:
             raise ValueError("Ambiguous duplicate game/team observation")
         seen.add(pair)
-        rows.append({"game_id":game,"team_code":team,"goalie_name":name.strip(),"observed_status":status,"observed_at":now.isoformat(),"source_snapshot_at":observed.isoformat(),"source_url":source})
+        metadata = article_metadata(item)
+        rows.append({"game_id":game,"team_code":team,"goalie_name":name.strip(),"observed_status":status,"observed_at":now.isoformat(),"source_snapshot_at":observed.isoformat(),"source_url":source, **{k: metadata.get(k) for k in ("article_text", "article_published_at", "article_goalie_id")}})
     if not rows:
         raise ValueError("No valid RotoWire observations")
     req=urllib.request.Request(url+"/rest/v1/nhl_core43_rotowire_observations?on_conflict=game_id,team_code,observed_at",
