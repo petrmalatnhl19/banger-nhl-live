@@ -7,7 +7,7 @@ const {loadAndCompute,readAllProvenance,readAllCoreInputs,summarizeReadiness}=re
   nhl_core43_schedule_snapshots:[{game_id:42,away_team:"DAL",home_team:"NJD",kickoff_at:"2026-11-09T20:00:00Z"}],
   nhl_core43_starter_evidence:[],
   nhl_core43_rotowire_observations:[],
-  nhl_core43_shadow_inputs:["away","home"].map((side,i)=>({game_id:42,side,team_code:side==="away"?"DAL":"NJD",goalie_id:String(100+i),readiness:"ready",starter_status:"confirmed",gsax:i===0?2:-1,shots_against:100,prediction_at:now,captured_at:"2026-11-09T14:00:00Z",gsax_fetched_at:"2026-11-09T13:00:00Z",starter_published_at:"2026-11-09T12:00:00Z",starter_verified_at:"2026-11-09T13:00:00Z"}))
+  core43_verified_shadow_inputs:["away","home"].map((side,i)=>({game_id:42,side,team_code:side==="away"?"DAL":"NJD",goalie_id:String(100+i),readiness:"ready",starter_status:"confirmed",gsax:i===0?2:-1,shots_against:100,prediction_at:now,captured_at:"2026-11-09T14:00:00Z",gsax_fetched_at:"2026-11-09T13:00:00Z",starter_published_at:"2026-11-09T12:00:00Z",starter_verified_at:"2026-11-09T13:00:00Z"}))
  };
  const calls=[];
  const fetchImpl=async(url,opts)=>{calls.push({url,opts});const table=url.split("/rest/v1/")[1].split("?")[0];return {ok:true,json:async()=>rows[table]};};
@@ -28,7 +28,7 @@ const {loadAndCompute,readAllProvenance,readAllCoreInputs,summarizeReadiness}=re
  assert.equal(blocked.results[0].reason,"suspect_away_starter_provenance");
  rows.nhl_core43_starter_evidence.length=0;
  rows.nhl_core43_rotowire_observations.length=0;
- rows.nhl_core43_shadow_inputs.pop();
+ rows.core43_verified_shadow_inputs.pop();
  assert.equal((await loadAndCompute({url:"https://example.supabase.co",key:"test",now,fetchImpl})).available,0);
  const many=Array.from({length:5},(_,i)=>({game_id:i}));
  const pagedFetch=async(url)=>{

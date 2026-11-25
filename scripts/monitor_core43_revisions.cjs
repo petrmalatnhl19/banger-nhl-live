@@ -35,7 +35,7 @@ async function main(){
  const [predictions,schedules,evidence]=await Promise.all([
   readTable(url,key,"nhl_prediction_archive","select=game_id,away_team,home_team,core41_predicted_at&core41_predicted_at=not.is.null&limit=1000"),
   readTable(url,key,"nhl_core43_schedule_snapshots","select=game_id,away_team,home_team,kickoff_at&kickoff_at=gt."+encodeURIComponent(now)+"&limit=1000"),
-  readTable(url,key,"nhl_core43_starter_evidence","select=game_id,team_code,goalie_id,evidence_status,source_name,source_url,source_published_at,verified_at&verified_at=lte."+encodeURIComponent(now)+"&limit=1000")
+  readTable(url,key,"core43_verified_starter_evidence","select=game_id,team_code,goalie_id,evidence_status,source_name,source_url,source_published_at,verified_at&verified_at=lte."+encodeURIComponent(now)+"&limit=1000")
  ]);
  const active=new Set(schedules.map(s=>String(s.game_id)));
  const results=evaluateCandidates({predictions:predictions.filter(p=>active.has(String(p.game_id))),schedules,evidence,now});

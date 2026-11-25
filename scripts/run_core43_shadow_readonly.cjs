@@ -41,7 +41,7 @@ async function loadAndCompute({url,key,now=new Date().toISOString(),fetchImpl=fe
  const [archive,schedules,shadowInputs,evidence,observations]=await Promise.all([
   readAllCoreInputs(base,key,"nhl_prediction_archive","select=game_id,away_team,home_team,core41_predicted_at,core41_away,core41_home&core41_predicted_at=not.is.null","game_id.asc,core41_predicted_at.asc",fetchImpl),
   readAllCoreInputs(base,key,"nhl_core43_schedule_snapshots","select=game_id,away_team,home_team,kickoff_at&kickoff_at=gt."+encodeURIComponent(now),"game_id.asc,kickoff_at.asc",fetchImpl),
-  readAllCoreInputs(base,key,"nhl_core43_shadow_inputs","select=game_id,side,team_code,goalie_id,prediction_at,captured_at,gsax,shots_against,gsax_fetched_at,starter_status,starter_published_at,starter_verified_at,readiness&prediction_at=lte."+encodeURIComponent(now),"game_id.asc,side.asc,prediction_at.asc",fetchImpl),
+  readAllCoreInputs(base,key,"core43_verified_shadow_inputs","select=game_id,side,team_code,goalie_id,prediction_at,captured_at,gsax,shots_against,gsax_fetched_at,starter_status,starter_published_at,starter_verified_at,readiness&prediction_at=lte."+encodeURIComponent(now),"game_id.asc,side.asc,prediction_at.asc",fetchImpl),
   readAllProvenance(base,key,"nhl_core43_starter_evidence","game_id,team_code,goalie_id,source_name,source_published_at",fetchImpl),
   readAllProvenance(base,key,"nhl_core43_rotowire_observations","game_id,team_code,source_snapshot_at",fetchImpl)
  ]);

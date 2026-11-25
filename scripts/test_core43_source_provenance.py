@@ -1,6 +1,7 @@
 """Regression tests: source fetch time must never become a confirmation publication time."""
 import unittest
 from scripts.audit_core43_rotowire_evidence import audit
+from scripts.core43_article_provenance import article_metadata
 
 class EvidenceProvenanceTests(unittest.TestCase):
     def test_confirmed_without_publication_time_is_not_eligible(self):
@@ -43,6 +44,19 @@ class EvidenceProvenanceTests(unittest.TestCase):
               "gameId":2026020283,"sourcePublishedAt":"2026-11-09T12:00:00Z",
               "confirmationBasis":"explicit_pregame_report"}]}
         self.assertEqual(audit(data)["eligible_evidence_candidates"],1)
+
+class ArticleProvenanceTest(unittest.TestCase):
+    def test_only_explicit_article_fields_supply_publication(self):
+        report = dict(status="confirmed", confirmationBasis="explicit_pregame_report",
+                      confirmationEvidence="Tarasov will start.", goalieId="8480193",
+                      source="https://www.rotowire.com/hockey/headlines/report-600965",
+                      sourcePublishedAt="2026-11-24T18:11:36Z", updatedAt="2026-11-25T03:46:25Z")
+        self.assertEqual(article_metadata(report)["article_published_at"], report["sourcePublishedAt"])
+        for field in ("confirmationBasis", "confirmationEvidence", "goalieId", "sourcePublishedAt"):
+            self.assertEqual(article_metadata({**report, field: None}), {})
+        self.assertEqual(article_metadata({**report, "status": "projected"}), {})
+        self.assertEqual(article_metadata({**report, "source": "https://www.rotowire.com/hockey/starting-goalies.php"}), {})
+
 
 if __name__=="__main__":
     unittest.main()

@@ -34,7 +34,7 @@ async function run({url,key,now=new Date().toISOString(),fetchImpl=fetch}={}){
   const [observations,identities,starterEvidence]=await Promise.all([
    fetchRows({url,key,table:"nhl_core43_rotowire_observations",select:"game_id,team_code,goalie_name,observed_status,observed_at,source_snapshot_at",gameId:game.gameId,fetchImpl}),
    fetchRows({url,key,table:"nhl_core43_goalie_identity_map",select:"goalie_id,goalie_name,team_code,observed_at",fetchImpl}),
-   fetchRows({url,key,table:"nhl_core43_starter_evidence",select:"game_id,team_code,goalie_id,evidence_status,source_published_at,verified_at",gameId:game.gameId,fetchImpl})
+   fetchRows({url,key,table:"core43_verified_starter_evidence",select:"game_id,team_code,goalie_id,evidence_status,source_published_at,verified_at",gameId:game.gameId,fetchImpl})
   ]);
   const goalieDiagnostics=diagnoseGoalies({gameId:game.gameId,awayTeam:game.awayTeam,homeTeam:game.homeTeam,asOf:now,observations,identities,starterEvidence});
   if(!game.baselineReady){const entry={...game,ready:false,reason:game.reason,goalieDiagnostics};

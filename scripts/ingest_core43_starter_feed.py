@@ -17,6 +17,11 @@ import urllib.request
 from pathlib import Path
 from urllib.parse import urlsplit
 
+if __package__:
+    from .core43_article_provenance import article_metadata
+else:
+    from core43_article_provenance import article_metadata
+
 def stamp(value):
     if not isinstance(value,str) or not value.endswith("Z"):
         raise ValueError("Timestamp must be UTC ISO 8601 with Z")
@@ -71,7 +76,7 @@ def main():
             raise ValueError("Invalid secure endpoint")
     if not urlsplit(sb).hostname.endswith(".supabase.co"):
         raise ValueError("Unexpected Supabase host")
-    observed=dt.datetime.now(dt.timezone.utc)
+    started=dt.datetime.now(dt.timezone.utc)
     if use_remote:
         req=urllib.request.Request(url,headers={"Authorization":"Bearer "+token,"Accept":"application/json"})
         with urllib.request.urlopen(req,timeout=25) as response:
@@ -80,7 +85,7 @@ def main():
         local=Path("rotowire_goalies.json")
         raw=json.loads(local.read_text(encoding="utf-8"))
         snapshot=dt.datetime.fromisoformat(str(raw.get("updatedAt","")).replace("Z","+00:00"))
-        if snapshot.tzinfo is None or snapshot > observed+dt.timedelta(minutes=2) or snapshot < observed-dt.timedelta(hours=2):
+        if snapshot.tzinfo is None or snapshot > started+dt.timedelta(minutes=2) or snapshot < started-dt.timedelta(hours=2):
             raise ValueError("Native RotoWire snapshot is stale or invalid; refusing starter evidence ingestion")
         reports=[]
         for item in raw.get("games",[]):
@@ -89,15 +94,17 @@ def main():
             # A source snapshot time is NOT the publication time of an individual confirmation.
             # Never substitute updatedAt or checkedAt for sourcePublishedAt.
             if (item.get("confirmationBasis")!="explicit_pregame_report"
-                    or not item.get("sourcePublishedAt") or not item.get("goalieId")):
+                    or not article_metadata(item)):
                 continue
             reports.append({"gameId":item.get("gameId"),"teamCode":item.get("team"),
                 "goalieId":item.get("goalieId"),"status":"confirmed",
                 "confirmationBasis":"explicit_pregame_report",
                 "sourceName":"RotoWire","sourceUrl":item.get("source"),
+                "confirmationEvidence":item["confirmationEvidence"],
                 "sourcePublishedAt":item.get("sourcePublishedAt")})
         feed={"reports":reports}
         print(f"Native RotoWire bridge: {len(reports)} explicitly timestamped confirmed reports; source snapshot timestamps alone are insufficient")
+    observed=dt.datetime.now(dt.timezone.utc)
     if not isinstance(feed,dict) or not isinstance(feed.get("reports"),list):
         raise ValueError("Invalid feed format")
     if len(feed["reports"])>500:
@@ -132,9 +139,16 @@ def main():
             kickoff=dt.datetime.fromisoformat(g["kickoff_at"].replace("Z","+00:00"))
         except (ValueError,TypeError):
             continue
-        if not published<=observed<kickoff:
+        text = r.get("confirmationEvidence")
+        if not isinstance(text, str) or not text.strip():
             continue
-        valid.append({"game_id":r["gameId"],"team_code":r["teamCode"],"goalie_id":str(r["goalieId"]),"evidence_status":"confirmed","source_name":name,"source_url":source,"source_published_at":published.isoformat(),"verified_at":observed.isoformat()})
+        if not published<=observed<kickoff or (not use_remote and not published<=snapshot<=observed):
+            continue
+        verified = dt.datetime.now(dt.timezone.utc)
+        if verified >= kickoff:
+            continue
+        valid.append({"game_id":r["gameId"],"team_code":r["teamCode"],"goalie_id":str(r["goalieId"]),"evidence_status":"confirmed","source_name":name,"source_url":source,"source_published_at":published.isoformat(),"article_text":text, "source_snapshot_at":None if use_remote else snapshot.isoformat(),
+            "observed_at":observed.isoformat(), "verified_at":verified.isoformat()})
     valid, conflicts = reject_conflicting_starters(valid)
     if conflicts:
         print(f"::warning title=CORE 4.3 conflicting starters::Skipped {len(conflicts)} game/team pairs with contradictory confirmed goalie IDs")
