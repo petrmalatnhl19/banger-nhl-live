@@ -8,6 +8,11 @@ class Parser(HTMLParser):
  def handle_endtag(self,tag):
   if tag in ("p","h1","h2","h3","h4","li"):self.parts.append("\n")
  def handle_data(self,data):self.parts.append(data)
+def split_projection_row(text):
+ # A double dash is unambiguous even when NHL omits a space on one side.
+ # Keep single hyphens inside player names, e.g. Jean-Gabriel Pageau.
+ return [name.strip() for name in re.split(r"\s*--\s*|\s+[-–—]{1,2}\s+", text) if name.strip()]
+
 req=urllib.request.Request(URL,headers={"User-Agent":"Mozilla/5.0 (compatible; BangerNHL/1.0)","Accept":"text/html"})
 with urllib.request.urlopen(req,timeout=25) as resp: page=resp.read().decode("utf-8","replace")
 main_published=re.search(r'"datePublished"\s*:\s*"([^"]+)"',page)
@@ -29,7 +34,7 @@ for i,line in enumerate(lines):
   if re.search(r"projected (?:lineup|lines)$|^Status report|^More from|^RELATED|^\d{1,2}:\d{2} [ap]\.m\.",x,re.I):break
   if x.startswith("Injured:"):injured=x[8:].strip();continue
   if x.startswith("Scratched:"):scratched=x[10:].strip();continue
-  names=[y.strip() for y in re.split(r"\s+[-–—]{1,2}\s+",x) if y.strip()]
+  names=split_projection_row(x)
   if len(names)==3 and len(forwards)<4:forwards.append(names)
   elif len(names)==2 and len(forwards)>=3 and len(defense)<8:defense.append(names)
   elif len(names)==1 and len(forwards)>=3 and len(defense)>=2 and len(goalies)<2 and re.fullmatch(r"[\wÀ-ž.'’ -]{5,55}",x):goalies.append(x)
@@ -45,6 +50,24 @@ def normalize(name):
  # NHL.com previews may use a familiar given name while the official roster
  # uses a formal name. Only explicitly verified full-name aliases are allowed.
  return {"mikeyeyssimont":"michaeleyssimont", "williamborgen":"willborgen", "jacobslavin":"jaccobslavin", "ivanstenberg":"ivarstenberg", "eliasnilspettersson":"eliaspettersson"}.get(key,key)
+
+def projection_aliases(abbr, roster):
+ # Confirm the NHL ID, official full name and position group on this club's roster.
+ known = {
+  "MTL": ("forwards", 8482737, "Zach Bolduc", "Zachary Bolduc"),
+  "NYI": ("defensemen", 8482516, "Matt Kessel", "Matthew Kessel"),
+  "WPG": ("forwards", 8483526, "Danny Zhilkin", "Danil Zhilkin"),
+ }
+ if abbr not in known:
+  return {}
+ group, player_id, article_name, official_name = known[abbr]
+ for player in roster.get(group, []):
+  if player.get("id") != player_id:
+   continue
+  name = " ".join(player.get(key, {}).get("default", "") for key in ("firstName", "lastName"))
+  if name == official_name:
+   return {article_name: official_name}
+ return {}
 
 # Also collect individual NHL.com matchup previews, but only those published
 # within the last 36 hours. Never mix historical lineups into today's games.
@@ -81,7 +104,7 @@ def parse_preview(article_url):
    if re.search(r"projected (?:lineup|lines)$|^Status report|^RELATED",item,re.I):break
    if item.startswith("Injured:"):injured=item[8:].strip();continue
    if item.startswith("Scratched:"):scratched=item[10:].strip();continue
-   names=[x.strip() for x in re.split(r"\s+[-–—]{1,2}\s+",item) if x.strip()]
+   names=split_projection_row(item)
    if len(names)==3 and len(forwards)<4:forwards.append(names)
    elif len(names)==2 and len(forwards)>=3 and len(defense)<8:defense.append(names)
    elif len(names)==1 and len(forwards)>=3 and len(defense)>=2 and len(goalies)<2 and re.fullmatch(r"[\wÀ-ž.'’ -]{5,55}",item):goalies.append(item)
@@ -270,7 +293,7 @@ if "lightning" in source_diagnostics:
   for block in raw.get("blocks",[]):
    for line in block.get("followingLines",[]):
     if re.search(r"projected (?:lineup|lines)$",line,re.I):break
-    parts=[x.strip() for x in re.split(r"\s+[-–—]{1,2}\s+",line) if x.strip()]
+    parts=split_projection_row(line)
     if len(parts)==2 and parts==["Jeffrey Viel","Zemgus Girgensons"]:
      fragments.append({"players":parts,"missingPlayers":1,"role":"forwards","sourceStatus":"incomplete"})
   source_diagnostics["lightning"]["incompleteForwardFragments"]=fragments
@@ -337,8 +360,9 @@ for name,team in teams.items():
   # Only NHL-roster-verified defender pairs become published defense lines.
   # Classify each parsed row by NHL roster position, not by its order in HTML.
   # An unrelated two-name line must never become a defensive pair.
-  original_forwards=[list(row) for row in team.get("forwards",[])]
-  original_defense=[list(row) for row in team.get("defense",[])]
+  aliases = projection_aliases(abbr, roster)
+  original_forwards = [[aliases.get(p, p) for p in row] for row in team.get("forwards", [])]
+  original_defense = [[aliases.get(p, p) for p in row] for row in team.get("defense", [])]
   all_rows=original_forwards+original_defense
   # Do not let an invalid 2-player forward fragment masquerade as a D pair.
   # Recover only complete 3-player rows already present in source data.

@@ -13,7 +13,7 @@ module.exports = async function testGameLineups(page, assert) {
         const position = n === count ? 'G' : 'C';
         const surname = 'Player' + String.fromCharCode(64 + n);
         players.push({playerId: id, sweaterNumber: n, position});
-        play.rosterSpots.push({teamId: index + 1, playerId: id, sweaterNumber: n, firstName: {default: side}, lastName: {default: surname}});
+        play.rosterSpots.push({teamId: index + 1, playerId: id, sweaterNumber: n, positionCode: position, firstName: {default: side}, lastName: {default: surname}});
         tags.push('<font title="Position - ' + side + ' ' + surname + '">' + n + '</font>');
       }
       box.playerByGameStats[side] = { players };
@@ -35,6 +35,14 @@ module.exports = async function testGameLineups(page, assert) {
     event.situationCode = '1541';
     play.plays.push(event);
     cases.push(counts());
+    play.plays = [event];
+    play.rosterSpots[0].positionCode = 'D';
+    try {
+      counts();
+      throw Error('Mismatched roster role was accepted');
+    } catch (error) {
+      if (error.message !== 'Nejednoznačná soupiska') throw error;
+    }
     return cases;
   });
   assert.deepEqual(results[0], [0,0,1,0,0,1]);

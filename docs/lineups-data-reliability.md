@@ -49,3 +49,22 @@ Zdroje pro reprodukci pilotu: [NHL boxscore](https://api-web.nhle.com/v1/gamecen
 - Chromium: všech 11 reálných sad odpovědí přes detail zápasu na šířkách 390 a 1 366 px, včetně přepnutí projekce, soupisky, 5v5, PP a PK. Dalších pět scénářů kontrolovalo LIVE, FUT, nedostupný boxscore, chybné ID a nedostupný report. Jde o lokální přehrání odpovědí NHL, nikoli nasazení do produkce.
 - Browser smoke pokrývá i nejednoznačné vhazování, nesouhlas identity, jiné utkání a prázdnou branku. Kontrola úplnosti projekcí vrací exit 1 pro osm již neúplných týmů. Kontrola pokrytí včetně archivu vrací exit 0.
 - Verze rozhraní je určena pro review rozsahu pozorovaných buly. Pro sloučení pod původním zadáním celého modulu zůstává doporučení **NE**. Chybí dostatečná shoda pro publikaci společného času, zdroj pořadí speciálních formací a historicky přiřazené projekce pro srovnání. CORE, produkční databáze a jiné PR nejsou součástí změny.
+
+## Závěrečná kontrola ověřené části
+
+Rozsah schválení k review je užší než úplný modul. Pro zveřejnění soupisek a doložených hráčů při vhazování je verdikt **GO** po zelených kontrolách. Přesný společný čas a číslování speciálních jednotek zůstávají mimo tento rozsah. Nesouhlas identifikátoru nebo poziční skupiny mezi boxscore a PBP uzavírá výstup pozorování.
+
+Porovnali jsme články NHL z 19.–23. listopadu s klubovými soupiskami uloženými při importu 24. listopadu. Izolované přehrání zdrojových řádků původním importérem reprodukovalo uložené útoky a obrany všech osmi klubů. Stejné vstupy prošly i opraveným importérem. U ověřených variant křestního jména je podmínkou shodné NHL ID, klub, skupina pozice a oficiální jméno.
+
+| Klub | Zjištění | Útoky / obrany po přehrání |
+|---|---|---|
+| Montréal | Zach Bolduc je na soupisce Zachary Bolduc, ID 8482737. | 4 / 3 |
+| Islanders | Matt Kessel je na soupisce Matthew Kessel, ID 8482516. | 4 / 3 |
+| Philadelphia | Zdroj napsal `--Sean Couturier` bez mezery. | 4 / 3 |
+| San Jose | Zdroj napsal `--Adam Gaudette` bez mezery. | 4 / 3 |
+| Winnipeg | Danny Zhilkin odpovídá Danilu Zhilkinovi, ID 8483526. Ve stejné projektované trojici je Tyrel Bauer, v oficiální soupisce obránce. | 3 / 3 |
+| Tampa Bay | Jansen Harkins je v zápisu 2026020374 z 22. listopadu, chybí však na soupisce použité při importu 24. listopadu. Zápis jiného dne sám nestačí pro aktuální projekci. | 3 / 3 |
+| Chicago | NHL v článku uvádí Dillona Bouchera. V klubovém snímku ani v zápisu 2026020377 není. | 3 / 3 |
+| Colorado | Čtvrtý útok zdroj uvádí jako Kelly–Svechkov bez třetího hráče. Ve třetí obraně uvádí Alexe Gagneho s Brentem Burnsem. Gagne chybí v klubovém snímku i v zápisu 2026020356. | 3 / 2 |
+
+Jde o přehrání historických zdrojů. Produkční datový soubor se řídí běžným publikačním procesem.

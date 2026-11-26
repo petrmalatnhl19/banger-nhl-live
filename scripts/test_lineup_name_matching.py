@@ -7,13 +7,25 @@ from pathlib import Path
 
 source=Path("scripts/update_lineups.py").read_text(encoding="utf-8")
 tree=ast.parse(source)
-node=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=="normalize")
-module=ast.Module(body=[node],type_ignores=[])
+nodes=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in {"normalize","split_projection_row","projection_aliases"}]
+module=ast.Module(body=nodes,type_ignores=[])
 namespace={"re":re,"unicodedata":unicodedata}
 exec(compile(ast.fix_missing_locations(module),"<normalize>","exec"),namespace)
 normalize=namespace["normalize"]
 
 class NameNormalizationTests(unittest.TestCase):
+ def test_nhl_spacing_and_hyphenated_names(self):
+  split = namespace["split_projection_row"]
+  self.assertEqual(split("Trevor Zegras --Sean Couturier -- Noel Acciari"), ["Trevor Zegras", "Sean Couturier", "Noel Acciari"])
+  self.assertEqual(split("Jean-Gabriel Pageau -- Ty Dellandrea --Adam Gaudette"), ["Jean-Gabriel Pageau", "Ty Dellandrea", "Adam Gaudette"])
+  self.assertEqual(split("Parker Kelly -- Fedor Svechkov"), ["Parker Kelly", "Fedor Svechkov"])
+ def test_alias_requires_roster_id_team_and_role(self):
+  resolve = namespace["projection_aliases"]
+  player = {"id":8482516,"firstName":{"default":"Matthew"},"lastName":{"default":"Kessel"}}
+  self.assertEqual(resolve("NYI", {"defensemen":[player]}), {"Matt Kessel":"Matthew Kessel"})
+  self.assertFalse(resolve("NYI", {"forwards":[player]}))
+  self.assertFalse(resolve("NYI", {"defensemen":[dict(player,id=1)]}))
+  self.assertFalse(resolve("MTL", {"defensemen":[player]}))
  def test_projected_line_heading_variants(self):
   headings = ["Blackhawks projected lines", "Bruins projected lineup"]
   for heading in headings:

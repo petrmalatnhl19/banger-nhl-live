@@ -11,13 +11,20 @@ window.BangerGameLineups = (() => {
     if (!Number.isFinite(day.valueOf())) return result;
     const reportDate = day.toLocaleDateString('en-US', {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC'});
     if (!info.includes(reportDate) || !info.includes('Game ' + String(box.id).slice(-4)) || !info.includes('Final')) return result;
+    const ids = new Set();
+    const role = position => ['C','L','R','LW','RW','F'].includes(position) ? 'F' : position;
     const rosters = sides.map(side => {
       const team = box[side];
       const entries = Object.values(box.playerByGameStats?.[side] || {}).flat();
       const map = new Map();
       for (const player of entries) {
         const spot = play.rosterSpots.find(p => p.teamId === team.id && p.playerId === player.playerId && p.sweaterNumber === player.sweaterNumber);
-        if (!spot || map.has(player.sweaterNumber)) throw Error('Nejednoznačná soupiska');
+        if (!Number.isInteger(player.playerId) || player.playerId <= 0 || ids.has(player.playerId) ||
+            !spot?.firstName?.default || !spot.lastName?.default || map.has(player.sweaterNumber) ||
+            !['F','D','G'].includes(role(player.position)) || role(spot.positionCode) !== role(player.position)) {
+          throw Error('Nejednoznačná soupiska');
+        }
+        ids.add(player.playerId);
         map.set(player.sweaterNumber, { ...player, full: spot.firstName.default + ' ' + spot.lastName.default });
       }
       return map;
