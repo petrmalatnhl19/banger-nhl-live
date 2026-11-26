@@ -1,35 +1,10 @@
 {
-  "date": "2026-11-24",
-  "updatedAt": "2026-11-24T20:57:13.344662+00:00",
-  "teams": {
-    "EDM": {
-      "name": "Devon Levi",
-      "status": "confirmed",
-      "date": "2026-11-24",
-      "source": "https://www.rotowire.com/hockey/headlines/devon-levi-news-battling-golden-knights-600954",
-      "goalieId": "8482221",
-      "sourcePublishedAt": "2026-11-24T16:49:56Z",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-24T20:49:58.130217+00:00",
-      "gameId": 2026020385,
-      "confirmationBasis": "explicit_pregame_report",
-      "confirmationEvidence": "Levi will defend the home net in Tuesday's clash against the Golden Knights."
-    },
-    "VGK": {
-      "name": "Carter Hart",
-      "status": "confirmed",
-      "date": "2026-11-24",
-      "source": "https://www.rotowire.com/hockey/headlines/carter-hart-news-starting-in-edmonton-600976",
-      "goalieId": "8479394",
-      "sourcePublishedAt": "2026-11-24T18:24:24Z",
-      "sourceLabel": "RotoWire",
-      "checkedAt": "2026-11-24T20:49:58.130217+00:00",
-      "gameId": 2026020385,
-      "confirmationBasis": "explicit_pregame_report",
-      "confirmationEvidence": "Hart will defend the road net against the Oilers on Tuesday, according to Jason Gregor of Sports 1440 Edmonton."
-    }
-  },
+  "date": "2026-11-26",
+  "updatedAt": "2026-11-26T20:11:42.374169+00:00",
+  "teams": {},
   "conflicts": [],
-  "sourceErrors": [],
-  "status": "partial"
+  "sourceErrors": [
+    "specialist [missing_current_date]: ValueError: Source does not show today's date"
+  ],
+  "status": "unavailable"
 }

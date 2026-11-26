@@ -1,27 +1,16 @@
 {
-  "checkedAt": "2026-11-24T20:56:49.458953+00:00",
+  "checkedAt": "2026-11-26T20:11:40.033290+00:00",
   "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
-  "candidateCount": 102,
-  "matchedCount": 102,
+  "candidateCount": 96,
+  "matchedCount": 96,
   "gameIdentityIssues": [],
   "matches": [
     {
       "team": "ANA",
-      "goalie": "Lukas Dostal",
-      "opponent": "SJS",
-      "venue": "home",
-      "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020398,
-      "startTimeUTC": "2026-11-26T03:00:00Z",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "ANA",
-      "goalie": "Lukas Dostal",
+      "goalie": "Laurent Brossoit",
       "opponent": "LAK",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-27",
       "gameId": 2026020409,
       "startTimeUTC": "2026-11-27T21:00:00Z",
@@ -39,14 +28,14 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "BOS",
-      "goalie": "Jeremy Swayman",
-      "opponent": "WPG",
+      "team": "ANA",
+      "goalie": "Lukas Dostal",
+      "opponent": "MIN",
       "venue": "home",
       "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020386,
-      "startTimeUTC": "2026-11-26T00:00:00Z",
+      "date": "2026-12-01",
+      "gameId": 2026020443,
+      "startTimeUTC": "2026-12-02T03:00:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -72,14 +61,14 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "BUF",
-      "goalie": "Alex Lyon",
-      "opponent": "NYR",
+      "team": "BOS",
+      "goalie": "Jeremy Swayman",
+      "opponent": "COL",
       "venue": "home",
       "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020387,
-      "startTimeUTC": "2026-11-26T00:00:00Z",
+      "date": "2026-12-01",
+      "gameId": 2026020440,
+      "startTimeUTC": "2026-12-02T01:00:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -94,14 +83,14 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "CAR",
-      "goalie": "Pyotr Kochetkov",
-      "opponent": "TBL",
+      "team": "BUF",
+      "goalie": "Alex Lyon",
+      "opponent": "EDM",
       "venue": "away",
       "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020388,
-      "startTimeUTC": "2026-11-26T00:00:00Z",
+      "date": "2026-12-01",
+      "gameId": 2026020441,
+      "startTimeUTC": "2026-12-02T01:00:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -128,21 +117,10 @@
     },
     {
       "team": "CBJ",
-      "goalie": "Cam Talbot",
-      "opponent": "NJD",
-      "venue": "home",
-      "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020393,
-      "startTimeUTC": "2026-11-26T00:00:00Z",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "CBJ",
-      "goalie": "Cam Talbot",
+      "goalie": "Jet Greaves",
       "opponent": "DET",
       "venue": "home",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-27",
       "gameId": 2026020407,
       "startTimeUTC": "2026-11-27T20:00:00Z",
@@ -157,17 +135,6 @@
       "date": "2026-11-30",
       "gameId": 2026020432,
       "startTimeUTC": "2026-12-01T00:00:00Z",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "CGY",
-      "goalie": "Dustin Wolf",
-      "opponent": "PIT",
-      "venue": "away",
-      "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020391,
-      "startTimeUTC": "2026-11-26T00:00:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -193,14 +160,14 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "CHI",
-      "goalie": "Spencer Knight",
-      "opponent": "SEA",
+      "team": "CGY",
+      "goalie": "Dustin Wolf",
+      "opponent": "DET",
       "venue": "away",
       "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020399,
-      "startTimeUTC": "2026-11-26T02:40:00Z",
+      "date": "2026-12-01",
+      "gameId": 2026020436,
+      "startTimeUTC": "2026-12-02T00:00:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -239,17 +206,6 @@
     {
       "team": "COL",
       "goalie": "Mackenzie Blackwood",
-      "opponent": "MTL",
-      "venue": "home",
-      "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020397,
-      "startTimeUTC": "2026-11-26T02:30:00Z",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "COL",
-      "goalie": "Mackenzie Blackwood",
       "opponent": "MIN",
       "venue": "away",
       "status": "projected",
@@ -270,14 +226,14 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "DAL",
-      "goalie": "Jake Oettinger",
-      "opponent": "NSH",
-      "venue": "home",
+      "team": "COL",
+      "goalie": "Mackenzie Blackwood",
+      "opponent": "BOS",
+      "venue": "away",
       "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020395,
-      "startTimeUTC": "2026-11-26T01:00:00Z",
+      "date": "2026-12-01",
+      "gameId": 2026020440,
+      "startTimeUTC": "2026-12-02T01:00:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -303,18 +259,15 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "DET",
-      "goalie": "Daniil Tarasov",
-      "opponent": "VAN",
-      "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-25",
-      "gameId": 2026020394,
-      "startTimeUTC": "2026-11-26T00:30:00Z",
-      "source": "https://www.rotowire.com/hockey/headlines/daniil-tarasov-news-tending-twine-wednesday-600965",
-      "confirmationBasis": "explicit_pregame_report",
-      "confirmationEvidence": "Tarasov will patrol the home crease against Vancouver on Wednesday, per Max Bultman of The Athletic.",
-      "sourcePublishedAt": "2026-11-24T18:11:36Z"
+      "team": "DAL",
+      "goalie": "Jake Oettinger",
+      "opponent": "SEA",
+      "venue": "away",
+      "status": "projected",
+      "date": "2026-12-01",
+      "gameId": 2026020442,
+      "startTimeUTC": "2026-12-02T02:40:00Z",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "team": "DET",
@@ -339,18 +292,15 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "EDM",
-      "goalie": "Devon Levi",
-      "opponent": "VGK",
+      "team": "DET",
+      "goalie": "John Gibson",
+      "opponent": "CGY",
       "venue": "home",
-      "status": "confirmed",
-      "date": "2026-11-24",
-      "gameId": 2026020385,
-      "startTimeUTC": "2026-11-25T01:00:00Z",
-      "source": "https://www.rotowire.com/hockey/headlines/devon-levi-news-battling-golden-knights-600954",
-      "confirmationBasis": "explicit_pregame_report",
-      "confirmationEvidence": "Levi will defend the home net in Tuesday's clash against the Golden Knights.",
-      "sourcePublishedAt": "2026-11-24T16:49:56Z"
+      "status": "projected",
+      "date": "2026-12-01",
+      "gameId": 2026020436,
+      "startTimeUTC": "2026-12-02T00:00:00Z",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "team": "EDM",
@@ -375,14 +325,14 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "FLA",
-      "goalie": "Jacob Markstrom",
-      "opponent": "OTT",
+      "team": "EDM",
+      "goalie": "Devon Levi",
+      "opponent": "BUF",
       "venue": "home",
       "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020389,
-      "startTimeUTC": "2026-11-26T00:00:00Z",
+      "date": "2026-12-01",
+      "gameId": 2026020441,
+      "startTimeUTC": "2026-12-02T01:00:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -408,6 +358,17 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
+      "team": "FLA",
+      "goalie": "Jacob Markstrom",
+      "opponent": "NYI",
+      "venue": "away",
+      "status": "projected",
+      "date": "2026-12-01",
+      "gameId": 2026020438,
+      "startTimeUTC": "2026-12-02T00:00:00Z",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+    },
+    {
       "team": "LAK",
       "goalie": "Darcy Kuemper",
       "opponent": "ANA",
@@ -430,14 +391,14 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "MIN",
-      "goalie": "Jesper Wallstedt",
-      "opponent": "UTA",
+      "team": "LAK",
+      "goalie": "Darcy Kuemper",
+      "opponent": "VGK",
       "venue": "home",
       "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020396,
-      "startTimeUTC": "2026-11-26T01:00:00Z",
+      "date": "2026-12-01",
+      "gameId": 2026020444,
+      "startTimeUTC": "2026-12-02T03:00:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -463,19 +424,19 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "MTL",
-      "goalie": "Jacob Fowler",
-      "opponent": "COL",
+      "team": "MIN",
+      "goalie": "Jesper Wallstedt",
+      "opponent": "ANA",
       "venue": "away",
       "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020397,
-      "startTimeUTC": "2026-11-26T02:30:00Z",
+      "date": "2026-12-01",
+      "gameId": 2026020443,
+      "startTimeUTC": "2026-12-02T03:00:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "team": "MTL",
-      "goalie": "Jacob Fowler",
+      "goalie": "Jakub Dobes",
       "opponent": "VGK",
       "venue": "away",
       "status": "projected",
@@ -496,14 +457,14 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "NJD",
-      "goalie": "Connor Hellebuyck",
-      "opponent": "CBJ",
-      "venue": "away",
+      "team": "MTL",
+      "goalie": "Jakub Dobes",
+      "opponent": "TBL",
+      "venue": "home",
       "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020393,
-      "startTimeUTC": "2026-11-26T00:00:00Z",
+      "date": "2026-12-02",
+      "gameId": 2026020445,
+      "startTimeUTC": "2026-12-03T00:30:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -529,14 +490,14 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "NSH",
-      "goalie": "Juuse Saros",
-      "opponent": "DAL",
-      "venue": "away",
+      "team": "NJD",
+      "goalie": "Connor Hellebuyck",
+      "opponent": "SJS",
+      "venue": "home",
       "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020395,
-      "startTimeUTC": "2026-11-26T01:00:00Z",
+      "date": "2026-12-01",
+      "gameId": 2026020437,
+      "startTimeUTC": "2026-12-02T00:30:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -575,17 +536,6 @@
     {
       "team": "NYI",
       "goalie": "Ilya Sorokin",
-      "opponent": "STL",
-      "venue": "home",
-      "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020390,
-      "startTimeUTC": "2026-11-26T00:00:00Z",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "NYI",
-      "goalie": "Ilya Sorokin",
       "opponent": "WPG",
       "venue": "home",
       "status": "projected",
@@ -606,14 +556,14 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "NYR",
-      "goalie": "Joonas Korpisalo",
-      "opponent": "BUF",
-      "venue": "away",
+      "team": "NYI",
+      "goalie": "Ilya Sorokin",
+      "opponent": "FLA",
+      "venue": "home",
       "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020387,
-      "startTimeUTC": "2026-11-26T00:00:00Z",
+      "date": "2026-12-01",
+      "gameId": 2026020438,
+      "startTimeUTC": "2026-12-02T00:00:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -652,17 +602,6 @@
     {
       "team": "OTT",
       "goalie": "Linus Ullmark",
-      "opponent": "FLA",
-      "venue": "away",
-      "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020389,
-      "startTimeUTC": "2026-11-26T00:00:00Z",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "OTT",
-      "goalie": "Linus Ullmark",
       "opponent": "TBL",
       "venue": "away",
       "status": "projected",
@@ -691,17 +630,6 @@
       "date": "2026-11-30",
       "gameId": 2026020430,
       "startTimeUTC": "2026-11-30T18:00:00Z",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "PHI",
-      "goalie": "Dan Vladar",
-      "opponent": "WSH",
-      "venue": "away",
-      "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020392,
-      "startTimeUTC": "2026-11-26T00:00:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -740,17 +668,6 @@
     {
       "team": "PIT",
       "goalie": "Arturs Silovs",
-      "opponent": "CGY",
-      "venue": "home",
-      "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020391,
-      "startTimeUTC": "2026-11-26T00:00:00Z",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "PIT",
-      "goalie": "Arturs Silovs",
       "opponent": "BUF",
       "venue": "away",
       "status": "projected",
@@ -782,14 +699,14 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "SEA",
-      "goalie": "Philipp Grubauer",
-      "opponent": "CHI",
-      "venue": "home",
+      "team": "PIT",
+      "goalie": "Arturs Silovs",
+      "opponent": "STL",
+      "venue": "away",
       "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020399,
-      "startTimeUTC": "2026-11-26T02:40:00Z",
+      "date": "2026-12-02",
+      "gameId": 2026020446,
+      "startTimeUTC": "2026-12-03T01:00:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -815,14 +732,14 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "SJS",
-      "goalie": "Yaroslav Askarov",
-      "opponent": "ANA",
-      "venue": "away",
+      "team": "SEA",
+      "goalie": "Philipp Grubauer",
+      "opponent": "DAL",
+      "venue": "home",
       "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020398,
-      "startTimeUTC": "2026-11-26T03:00:00Z",
+      "date": "2026-12-01",
+      "gameId": 2026020442,
+      "startTimeUTC": "2026-12-02T02:40:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -848,14 +765,14 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "STL",
-      "goalie": "Joel Hofer",
-      "opponent": "NYI",
+      "team": "SJS",
+      "goalie": "Yaroslav Askarov",
+      "opponent": "NJD",
       "venue": "away",
       "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020390,
-      "startTimeUTC": "2026-11-26T00:00:00Z",
+      "date": "2026-12-01",
+      "gameId": 2026020437,
+      "startTimeUTC": "2026-12-02T00:30:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -881,14 +798,14 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "TBL",
-      "goalie": "Andrei Vasilevskiy",
-      "opponent": "CAR",
+      "team": "STL",
+      "goalie": "Joel Hofer",
+      "opponent": "PIT",
       "venue": "home",
       "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020388,
-      "startTimeUTC": "2026-11-26T00:00:00Z",
+      "date": "2026-12-02",
+      "gameId": 2026020446,
+      "startTimeUTC": "2026-12-03T01:00:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -914,11 +831,22 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "TOR",
-      "goalie": "Sergei Bobrovsky",
-      "opponent": "BOS",
+      "team": "TBL",
+      "goalie": "Andrei Vasilevskiy",
+      "opponent": "MTL",
       "venue": "away",
       "status": "projected",
+      "date": "2026-12-02",
+      "gameId": 2026020445,
+      "startTimeUTC": "2026-12-03T00:30:00Z",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+    },
+    {
+      "team": "TOR",
+      "goalie": "Anthony Stolarz",
+      "opponent": "BOS",
+      "venue": "away",
+      "status": "confirmed",
       "date": "2026-11-27",
       "gameId": 2026020400,
       "startTimeUTC": "2026-11-27T18:00:00Z",
@@ -926,10 +854,10 @@
     },
     {
       "team": "TOR",
-      "goalie": "Anthony Stolarz",
+      "goalie": "Sergei Bobrovsky",
       "opponent": "PIT",
       "venue": "away",
-      "status": "projected",
+      "status": "confirmed",
       "date": "2026-11-28",
       "gameId": 2026020420,
       "startTimeUTC": "2026-11-29T00:00:00Z",
@@ -944,17 +872,6 @@
       "date": "2026-11-30",
       "gameId": 2026020433,
       "startTimeUTC": "2026-12-01T00:30:00Z",
-      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
-    },
-    {
-      "team": "UTA",
-      "goalie": "Karel Vejmelka",
-      "opponent": "MIN",
-      "venue": "away",
-      "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020396,
-      "startTimeUTC": "2026-11-26T01:00:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -991,14 +908,14 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "VAN",
-      "goalie": "Leevi Meriläinen",
-      "opponent": "DET",
-      "venue": "away",
+      "team": "UTA",
+      "goalie": "Karel Vejmelka",
+      "opponent": "WPG",
+      "venue": "home",
       "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020394,
-      "startTimeUTC": "2026-11-26T00:30:00Z",
+      "date": "2026-12-02",
+      "gameId": 2026020447,
+      "startTimeUTC": "2026-12-03T02:30:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -1024,18 +941,15 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "VGK",
-      "goalie": "Carter Hart",
-      "opponent": "EDM",
+      "team": "VAN",
+      "goalie": "Leevi Meriläinen",
+      "opponent": "WSH",
       "venue": "away",
-      "status": "confirmed",
-      "date": "2026-11-24",
-      "gameId": 2026020385,
-      "startTimeUTC": "2026-11-25T01:00:00Z",
-      "source": "https://www.rotowire.com/hockey/headlines/carter-hart-news-starting-in-edmonton-600976",
-      "confirmationBasis": "explicit_pregame_report",
-      "confirmationEvidence": "Hart will defend the road net against the Oilers on Tuesday, according to Jason Gregor of Sports 1440 Edmonton.",
-      "sourcePublishedAt": "2026-11-24T18:24:24Z"
+      "status": "projected",
+      "date": "2026-12-01",
+      "gameId": 2026020439,
+      "startTimeUTC": "2026-12-02T00:00:00Z",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
       "team": "VGK",
@@ -1060,14 +974,14 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "WPG",
-      "goalie": "Stuart Skinner",
-      "opponent": "BOS",
+      "team": "VGK",
+      "goalie": "Carter Hart",
+      "opponent": "LAK",
       "venue": "away",
       "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020386,
-      "startTimeUTC": "2026-11-26T00:00:00Z",
+      "date": "2026-12-01",
+      "gameId": 2026020444,
+      "startTimeUTC": "2026-12-02T03:00:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -1104,14 +1018,14 @@
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
-      "team": "WSH",
-      "goalie": "Logan Thompson",
-      "opponent": "PHI",
-      "venue": "home",
+      "team": "WPG",
+      "goalie": "Stuart Skinner",
+      "opponent": "UTA",
+      "venue": "away",
       "status": "projected",
-      "date": "2026-11-25",
-      "gameId": 2026020392,
-      "startTimeUTC": "2026-11-26T00:00:00Z",
+      "date": "2026-12-02",
+      "gameId": 2026020447,
+      "startTimeUTC": "2026-12-03T02:30:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     },
     {
@@ -1134,6 +1048,17 @@
       "date": "2026-11-28",
       "gameId": 2026020422,
       "startTimeUTC": "2026-11-29T00:00:00Z",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
+    },
+    {
+      "team": "WSH",
+      "goalie": "Logan Thompson",
+      "opponent": "VAN",
+      "venue": "home",
+      "status": "projected",
+      "date": "2026-12-01",
+      "gameId": 2026020439,
+      "startTimeUTC": "2026-12-02T00:00:00Z",
       "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams"
     }
   ],

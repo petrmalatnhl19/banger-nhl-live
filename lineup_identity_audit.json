@@ -1,35 +1,7 @@
 {
   "teams": {
-    "islanders": {
-      "players": [
-        {
-          "sourceName": "Matt Kessel",
-          "expectedRole": "defense",
-          "sameSurnameInRoster": [
-            {
-              "name": "Matthew Kessel",
-              "role": "defense"
-            }
-          ],
-          "classification": "possible_name_variant_needs_review",
-          "automaticApproval": false
-        }
-      ]
-    },
     "jets": {
       "players": [
-        {
-          "sourceName": "Danny Zhilkin",
-          "expectedRole": "forwards",
-          "sameSurnameInRoster": [
-            {
-              "name": "Danil Zhilkin",
-              "role": "forwards"
-            }
-          ],
-          "classification": "possible_name_variant_needs_review",
-          "automaticApproval": false
-        },
         {
           "sourceName": "Tyrel Bauer",
           "expectedRole": "forwards",
@@ -44,33 +16,8 @@
         }
       ]
     },
-    "lightning": {
-      "players": [
-        {
-          "sourceName": "Jansen Harkins",
-          "expectedRole": "forwards",
-          "sameSurnameInRoster": [],
-          "classification": "not_on_current_roster",
-          "automaticApproval": false
-        }
-      ]
-    },
     "red wings": {
       "players": [
-        {
-          "sourceName": "Nate Danielson",
-          "expectedRole": "forwards",
-          "sameSurnameInRoster": [],
-          "classification": "not_on_current_roster",
-          "automaticApproval": false
-        },
-        {
-          "sourceName": "Sheldon Dries",
-          "expectedRole": "forwards",
-          "sameSurnameInRoster": [],
-          "classification": "not_on_current_roster",
-          "automaticApproval": false
-        },
         {
           "sourceName": "Albert Johannson",
           "expectedRole": "defense",

@@ -1,5 +1,40 @@
 {
   "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-  "blocks": [],
+  "blocks": [
+    {
+      "heading": "Lightning projected lineup",
+      "followingLines": [
+        "Brandon Hagel -- Anthony Cirelli -- Nikita Kucherov",
+        "Jake Guentzel -- Brayden Point -- Yanni Gourde",
+        "Ilya Mikheyev -- Zemgus Girgensons -- Gage Goncalves",
+        "Jeffrey Viel -- Sam O'Reilly -- Scott Sabourin",
+        "Charle-Edouard D'Astous -- John Carlson",
+        "Ryan McDonagh -- Erik Cernak",
+        "Victor Hedman -- J.J. Moser",
+        "Dennis Hildeby",
+        "Andrei Vasilevskiy",
+        "Scratched: Max Crozier, Emil Lilleberg",
+        "Injured: Conor Geekie (shoulder surgery), Pontus Holmberg (undisclosed)",
+        "Status Report",
+        "Ersson is expected to start after Ullmark made 27 saves in a 5-3 loss to the Florida Panthers on Wednesday. ...Holmberg, a forward, is out indefinitely.",
+        "AVALANCHE (14-7-3) AT WILD (18-4-5)",
+        "4 p.m. ET; Wild+, MINNHL, ALT, TVAS",
+        "Avalanche projected lineup",
+        "Artturi Lehkonen -- Brock Nelson -- Martin Necas",
+        "Gabriel Landeskog -- Nazem Kadri -- Nicolas Roy",
+        "Jaden Schwartz -- Fedor Svechkov -- T.J. Hughes",
+        "Adam Beckman -- Parker Kelly -- Logan O’Connor",
+        "Devon Toews -- Sam Malinski",
+        "Brett Kulak -- Cale Makar",
+        "Mike Reilly -- Brent Burns",
+        "Mackenzie Blackwood",
+        "Scott Wedgewood",
+        "Scratched: Noah Juulsen",
+        "Injured: Gavin Brindley (upper body), Nathan MacKinnon (lower body), Zachary L'Heureux (upper body), Josh Manson (lower body)",
+        "Wild projected lineup",
+        "Kirill Kaprizov -- Joel Eriksson Ek -- Matt Boldy"
+      ]
+    }
+  ],
   "warning": "Raw source excerpts for debugging only; no roster changes."
 }
