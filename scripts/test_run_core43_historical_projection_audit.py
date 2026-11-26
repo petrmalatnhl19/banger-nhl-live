@@ -57,6 +57,29 @@ class RunnerTests(unittest.TestCase):
    return response
   with patch.object(runner.urllib.request,"urlopen",side_effect=fake_urlopen):
    return runner.read_table("https://example.supabase.co","test","observations","game_id,observed_at")
+ def test_stable_cutoff_and_same_count_replacement(self):
+  first=[{"game_id":1,"observed_at":"2026-11-01T00:00:00Z"}]
+  second=[{"game_id":2,"observed_at":"2026-11-01T00:00:00Z"}]
+  cutoff="2026-11-26T20:00:00+00:00"
+  with patch.object(runner,"read_table",side_effect=[first,second]) as read:
+   with self.assertRaisesRegex(ValueError,"changed between verification"):
+    runner.read_stable_table("https://example.supabase.co","test","observations","game_id,observed_at",cutoff,"observed_at")
+   self.assertEqual(read.call_count,2)
+   for call in read.call_args_list:
+    self.assertEqual(call.kwargs["cutoff"],cutoff)
+    self.assertEqual(call.kwargs["time_field"],"observed_at")
+  with patch.object(runner,"read_table",side_effect=[first,first]):
+   self.assertEqual(runner.read_stable_table("https://example.supabase.co","test","observations","game_id,observed_at",cutoff,"observed_at"),first)
+ def test_cutoff_sent_to_server(self):
+  cutoff="2026-11-26T20:00:00+00:00"
+  def fake_urlopen(request,timeout):
+   params=urllib.parse.parse_qs(urllib.parse.urlsplit(request.full_url).query)
+   self.assertEqual(params["observed_at"],["lt."+cutoff])
+   response=io.BytesIO(b"[]")
+   response.headers={"Content-Range":"*/0"}
+   return response
+  with patch.object(runner.urllib.request,"urlopen",side_effect=fake_urlopen):
+   self.assertEqual(runner.read_table("https://example.supabase.co","test","observations","game_id,observed_at",cutoff=cutoff,time_field="observed_at"),[])
  def test_latest_pregame_schedule(self):
   rows=[
    {"game_id":42,"kickoff_at":"2026-11-09T20:00:00Z","fetched_at":"2026-11-09T18:00:00Z","away_team":"DAL","home_team":"NJD"},
