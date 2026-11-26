@@ -59,11 +59,20 @@ const {play, game} = require('./commentary_fixture.cjs');
   });
   await page.goto(pathToFileURL(path.resolve('index.html')).href, { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => document.querySelector('#status')?.textContent.includes('Dashboard · aktualizováno'), { timeout: 15000 });
+  await require('./test-game-lineups.cjs')(page, assert);
   if (errors.length) throw Error('JavaScript errors on startup: ' + errors.join(' | '));
   await page.locator('#uxMobileNav [data-ux-tab="games"]').click();
   await page.waitForFunction(() => document.querySelector('#status')?.textContent.includes('zápasů · aktualizováno'), { timeout: 10000 });
   await page.locator('#content [data-game]').first().click();
   await page.locator('#liveArena:not(.hidden) #closeArena').waitFor({ timeout: 10000 });
+  await page.locator('#arenaBody [data-match-tab="actual-lineups"]').first().click();
+  for (const mode of ['pp', 'pk', 'even']) {
+    const button = page.locator('[data-lineup-mode="' + mode + '"]');
+    await button.click();
+    assert.equal(await button.getAttribute('aria-pressed'), 'true');
+    assert.equal(await page.locator('[data-lineup-mode][aria-pressed="true"]').count(), 1);
+    assert.match(await page.locator('#actualLineups').innerText(), /až po konečném zápisu/);
+  }
   await page.locator('#arenaBody [data-match-tab="lineups"]').first().click();
   await page.locator('#arenaBody [data-match-pane="lineups"]:not(.hidden)').waitFor({ timeout: 10000 });
   await page.locator('#matchMoreToggle').click();

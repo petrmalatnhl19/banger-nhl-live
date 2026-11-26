@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'index.html'
+      - 'game-lineups.js'
+      - 'scripts/test-game-lineups.cjs'
       - 'engine-lab.js'
       - 'scripts/audit_official_final_goalies.py'
       - 'scripts/test_official_final_goalies.py'
@@ -13,6 +15,8 @@ on:
   pull_request:
     paths:
       - 'index.html'
+      - 'game-lineups.js'
+      - 'scripts/test-game-lineups.cjs'
       - 'engine-lab.js'
       - 'scripts/check_app.js'
       - 'scripts/browser_smoke.js'
