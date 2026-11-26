@@ -1,36 +1,9 @@
 {
-  "teamsWithRejectedLines": 4,
+  "teamsWithRejectedLines": 2,
   "teams": {
-    "islanders": {
-      "team": "NYI",
-      "rosterUpdatedAt": "2026-11-24T08:50:48.845506+00:00",
-      "rosterSnapshotPresent": true,
-      "candidateForwardLines": 4,
-      "candidateDefensePairs": 3,
-      "validatedForwardLines": 4,
-      "validatedDefensePairs": 2,
-      "rejected": [
-        {
-          "group": "defense",
-          "sourceLineNumber": 3,
-          "sourceLine": [
-            "Ben Hutton",
-            "Matt Kessel"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Matt Kessel",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ]
-    },
     "jets": {
       "team": "WPG",
-      "rosterUpdatedAt": "2026-11-24T08:50:50.267737+00:00",
+      "rosterUpdatedAt": "2026-11-26T20:11:17.261889+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -41,17 +14,11 @@
           "group": "forwards",
           "sourceLineNumber": 4,
           "sourceLine": [
-            "Alex Iafallo",
-            "Danny Zhilkin",
+            "Cole Koepke",
+            "Morgan Barron",
             "Tyrel Bauer"
           ],
           "unverifiedPlayers": [
-            {
-              "name": "Danny Zhilkin",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            },
             {
               "name": "Tyrel Bauer",
               "reason": "other_position_group",
@@ -62,83 +29,21 @@
         }
       ]
     },
-    "lightning": {
-      "team": "TBL",
-      "rosterUpdatedAt": "2026-11-24T08:50:49.795075+00:00",
-      "rosterSnapshotPresent": true,
-      "candidateForwardLines": 4,
-      "candidateDefensePairs": 3,
-      "validatedForwardLines": 3,
-      "validatedDefensePairs": 3,
-      "rejected": [
-        {
-          "group": "forwards",
-          "sourceLineNumber": 4,
-          "sourceLine": [
-            "Jeffrey Viel",
-            "Jansen Harkins",
-            "Scott Sabourin"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Jansen Harkins",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ]
-    },
     "red wings": {
       "team": "DET",
-      "rosterUpdatedAt": "2026-11-24T08:50:47.922713+00:00",
+      "rosterUpdatedAt": "2026-11-26T20:11:16.378920+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
-      "validatedForwardLines": 2,
+      "validatedForwardLines": 4,
       "validatedDefensePairs": 2,
       "rejected": [
         {
-          "group": "forwards",
-          "sourceLineNumber": 3,
-          "sourceLine": [
-            "Carter Mazur",
-            "Nate Danielson",
-            "J.T. Compher"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Nate Danielson",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        },
-        {
-          "group": "forwards",
-          "sourceLineNumber": 4,
-          "sourceLine": [
-            "Michael Rasmussen",
-            "Sheldon Dries",
-            "Keegan Kolesar"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Sheldon Dries",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        },
-        {
           "group": "defense",
-          "sourceLineNumber": 3,
+          "sourceLineNumber": 2,
           "sourceLine": [
-            "Andreas Englund",
-            "Albert Johannson"
+            "Albert Johannson",
+            "Justin Faulk"
           ],
           "unverifiedPlayers": [
             {

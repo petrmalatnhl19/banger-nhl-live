@@ -1,44 +1,16 @@
 {
-  "generatedAt": "2026-11-24T08:51:14.118333+00:00",
+  "generatedAt": "2026-11-26T20:11:38.454408+00:00",
   "totalTeams": 32,
   "withProjectedLines": 32,
-  "currentProjections": 16,
+  "currentProjections": 30,
   "needsFreshProjection": [
-    "avalanche",
-    "blackhawks",
-    "blues",
-    "bruins",
-    "canucks",
-    "capitals",
-    "flyers",
     "golden knights",
-    "hurricanes",
-    "lightning",
-    "oilers",
-    "panthers",
-    "predators",
-    "rangers",
-    "red wings",
-    "sabres"
+    "oilers"
   ],
   "missing": [],
   "olderVerified": [
-    "avalanche",
-    "blackhawks",
-    "blues",
-    "bruins",
-    "canucks",
-    "capitals",
-    "flyers",
     "golden knights",
-    "hurricanes",
-    "lightning",
-    "oilers",
-    "panthers",
-    "predators",
-    "rangers",
-    "red wings",
-    "sabres"
+    "oilers"
   ],
   "manualSnapshots": [],
   "freshnessDefinition": "Publication within 36h; not a confirmed next-game lineup",
@@ -49,11 +21,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-19T20:22:00+00:00",
-      "source": "https://www.nhl.com/news/anaheim-ducks-colorado-avalanche-game-preview-november-19-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-26T14:23:43.359000+00:00",
+      "source": "https://www.nhl.com/news/colorado-avalanche-minnesota-wild-game-preview-november-27-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "blackhawks": {
       "hasProjectedLines": true,
@@ -61,11 +33,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-22T18:02:00+00:00",
-      "source": "https://www.nhl.com/news/chicago-blackhawks-vancouver-canucks-game-preview-november-22-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-26T20:08:27.248000+00:00",
+      "source": "https://www.nhl.com/news/new-york-rangers-chicago-blackhawks-game-preview-november-27-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "blue jackets": {
       "hasProjectedLines": true,
@@ -74,8 +46,8 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-23T19:55:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-26T19:29:28.639000+00:00",
+      "source": "https://www.nhl.com/news/detroit-red-wings-columbus-blue-jackets-game-preview-november-27-2026",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -85,11 +57,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-22T16:13:58.262000+00:00",
-      "source": "https://www.nhl.com/news/edmonton-oilers-st-louis-blues-game-preview-november-22-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-26T16:07:37.627000+00:00",
+      "source": "https://www.nhl.com/news/dallas-stars-st-louis-blues-game-preview-november-27-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "bruins": {
       "hasProjectedLines": true,
@@ -97,11 +69,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-21T17:46:15.657000+00:00",
-      "source": "https://www.nhl.com/news/washington-capitals-boston-bruins-game-preview-november-21-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-26T15:54:26.688000+00:00",
+      "source": "https://www.nhl.com/news/toronto-maple-leafs-boston-bruins-game-preview-november-27-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "canadiens": {
       "hasProjectedLines": true,
@@ -110,8 +82,8 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-23T19:55:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-25T19:31:27.212000+00:00",
+      "source": "https://www.nhl.com/news/montreal-canadiens-colorado-avalanche-game-preview-november-25-2026",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -121,11 +93,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-22T18:02:00+00:00",
-      "source": "https://www.nhl.com/news/chicago-blackhawks-vancouver-canucks-game-preview-november-22-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-25T18:09:18.357000+00:00",
+      "source": "https://www.nhl.com/news/vancouver-canucks-detroit-red-wings-game-preview-november-25-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "capitals": {
       "hasProjectedLines": true,
@@ -134,11 +106,11 @@
         "archive",
         "manual"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-21T17:46:15.657000+00:00",
-      "source": "https://www.nhl.com/news/washington-capitals-boston-bruins-game-preview-november-21-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-26T18:32:23.436000+00:00",
+      "source": "https://www.nhl.com/news/florida-panthers-washington-capitals-game-preview-november-27-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "devils": {
       "hasProjectedLines": true,
@@ -147,8 +119,8 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-23T19:55:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-26T18:27:20.046000+00:00",
+      "source": "https://www.nhl.com/news/calgary-flames-new-jersey-devils-game-preview-november-27-2026",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -159,8 +131,8 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-23T20:29:20.567000+00:00",
-      "source": "https://www.nhl.com/news/anaheim-ducks-seattle-kraken-game-preview-november-23-2026",
+      "publishedAt": "2026-11-26T19:39:03.039000+00:00",
+      "source": "https://www.nhl.com/news/los-angeles-kings-anaheim-ducks-game-preview-november-27-2026",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -171,8 +143,8 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-23T19:55:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-26T18:27:20.046000+00:00",
+      "source": "https://www.nhl.com/news/calgary-flames-new-jersey-devils-game-preview-november-27-2026",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -182,11 +154,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-21T18:36:40.244000+00:00",
-      "source": "https://www.nhl.com/news/philadelphia-flyers-montreal-canadiens-game-preview-november-21-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-25T16:55:01.323000+00:00",
+      "source": "https://www.nhl.com/news/philadelphia-flyers-washington-capitals-game-preview-november-25-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "golden knights": {
       "hasProjectedLines": true,
@@ -195,8 +167,8 @@
         "archive"
       ],
       "currentProjection": false,
-      "publishedAt": "2026-11-21T18:22:56.180000+00:00",
-      "source": "https://www.nhl.com/news/vegas-golden-knights-winnipeg-jets-game-preview-november-21-2026",
+      "publishedAt": "2026-11-24T18:37:21.759000+00:00",
+      "source": "https://www.nhl.com/news/vegas-golden-knights-edmonton-oilers-game-preview-november-24-2026",
       "needsFreshProjection": true,
       "status": "older_verified"
     },
@@ -206,11 +178,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-21T22:00:51.984000+00:00",
-      "source": "https://www.nhl.com/news/carolina-hurricanes-new-york-rangers-game-preview-november-22-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-25T17:47:58.245000+00:00",
+      "source": "https://www.nhl.com/news/carolina-hurricanes-tampa-bay-lightning-game-preview-november-25-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "islanders": {
       "hasProjectedLines": true,
@@ -219,8 +191,8 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-23T19:55:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-25T17:01:14.644000+00:00",
+      "source": "https://www.nhl.com/news/st-louis-blues-new-york-islanders-game-preview-november-25-2026",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -231,8 +203,8 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-23T19:55:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-25T18:05:49.837000+00:00",
+      "source": "https://www.nhl.com/news/winnipeg-jets-boston-bruins-game-preview-november-25-2026",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -243,8 +215,8 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-23T19:55:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-26T19:39:03.039000+00:00",
+      "source": "https://www.nhl.com/news/los-angeles-kings-anaheim-ducks-game-preview-november-27-2026",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -255,8 +227,8 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-23T20:29:20.567000+00:00",
-      "source": "https://www.nhl.com/news/anaheim-ducks-seattle-kraken-game-preview-november-23-2026",
+      "publishedAt": "2026-11-25T19:17:47.330000+00:00",
+      "source": "https://www.nhl.com/news/chicago-blackhawks-seattle-kraken-game-preview-november-25-2026",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -266,11 +238,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-22T15:29:15.319000+00:00",
-      "source": "https://www.nhl.com/news/buffalo-sabres-tampa-bay-lightning-game-preview-november-22-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-26T14:20:26.221000+00:00",
+      "source": "https://www.nhl.com/news/ottawa-senators-tampa-bay-lightning-game-preview-november-27-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "mammoth": {
       "hasProjectedLines": true,
@@ -280,8 +252,8 @@
         "manual"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-23T19:55:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-26T14:27:47.287000+00:00",
+      "source": "https://www.nhl.com/news/utah-mammoth-nashville-predators-game-preview-november-27-2026",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -293,8 +265,8 @@
         "manual"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-23T19:55:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-26T15:54:26.688000+00:00",
+      "source": "https://www.nhl.com/news/toronto-maple-leafs-boston-bruins-game-preview-november-27-2026",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -305,8 +277,8 @@
         "archive"
       ],
       "currentProjection": false,
-      "publishedAt": "2026-11-22T16:13:58.262000+00:00",
-      "source": "https://www.nhl.com/news/edmonton-oilers-st-louis-blues-game-preview-november-22-2026",
+      "publishedAt": "2026-11-24T18:37:21.759000+00:00",
+      "source": "https://www.nhl.com/news/vegas-golden-knights-edmonton-oilers-game-preview-november-24-2026",
       "needsFreshProjection": true,
       "status": "older_verified"
     },
@@ -316,11 +288,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-21T16:26:22.654000+00:00",
-      "source": "https://www.nhl.com/news/buffalo-sabres-florida-panthers-game-preview-november-21-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-26T18:32:23.436000+00:00",
+      "source": "https://www.nhl.com/news/florida-panthers-washington-capitals-game-preview-november-27-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "penguins": {
       "hasProjectedLines": true,
@@ -329,8 +301,8 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-22T22:33:00+00:00",
-      "source": "https://www.nhl.com/news/pittsburgh-penguins-dallas-stars-game-preview-november-22-2026",
+      "publishedAt": "2026-11-25T16:50:34.012000+00:00",
+      "source": "https://www.nhl.com/news/calgary-flames-pittsburgh-penguins-game-preview-november-25-2026",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -340,11 +312,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-20T19:57:20.638000+00:00",
-      "source": "https://www.nhl.com/news/pittsburgh-penguins-nashville-predators-game-preview-november-21-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-26T14:27:47.287000+00:00",
+      "source": "https://www.nhl.com/news/utah-mammoth-nashville-predators-game-preview-november-27-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "rangers": {
       "hasProjectedLines": true,
@@ -352,22 +324,23 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-21T22:00:51.984000+00:00",
-      "source": "https://www.nhl.com/news/carolina-hurricanes-new-york-rangers-game-preview-november-22-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-26T20:08:27.248000+00:00",
+      "source": "https://www.nhl.com/news/new-york-rangers-chicago-blackhawks-game-preview-november-27-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "red wings": {
       "hasProjectedLines": true,
       "sources": [
+        "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": null,
-      "source": null,
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-26T19:29:28.639000+00:00",
+      "source": "https://www.nhl.com/news/detroit-red-wings-columbus-blue-jackets-game-preview-november-27-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "sabres": {
       "hasProjectedLines": true,
@@ -375,11 +348,11 @@
         "automatic",
         "archive"
       ],
-      "currentProjection": false,
-      "publishedAt": "2026-11-22T15:29:15.319000+00:00",
-      "source": "https://www.nhl.com/news/buffalo-sabres-tampa-bay-lightning-game-preview-november-22-2026",
-      "needsFreshProjection": true,
-      "status": "older_verified"
+      "currentProjection": true,
+      "publishedAt": "2026-11-25T17:09:49.924000+00:00",
+      "source": "https://www.nhl.com/news/new-york-rangers-buffalo-sabres-game-preview-november-25-2026",
+      "needsFreshProjection": false,
+      "status": "recent_verified"
     },
     "senators": {
       "hasProjectedLines": true,
@@ -388,8 +361,8 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-23T19:55:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-26T14:20:26.221000+00:00",
+      "source": "https://www.nhl.com/news/ottawa-senators-tampa-bay-lightning-game-preview-november-27-2026",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -400,8 +373,8 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-23T19:58:28.624000+00:00",
-      "source": "https://www.nhl.com/news/minnesota-wild-san-jose-sharks-game-preview-november-23-2026",
+      "publishedAt": "2026-11-25T20:12:12.309000+00:00",
+      "source": "https://www.nhl.com/news/san-jose-sharks-anaheim-ducks-game-preview-november-25-2026",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -413,8 +386,8 @@
         "manual"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-22T22:33:00+00:00",
-      "source": "https://www.nhl.com/news/pittsburgh-penguins-dallas-stars-game-preview-november-22-2026",
+      "publishedAt": "2026-11-26T16:07:37.627000+00:00",
+      "source": "https://www.nhl.com/news/dallas-stars-st-louis-blues-game-preview-november-27-2026",
       "needsFreshProjection": false,
       "status": "recent_verified"
     },
@@ -425,8 +398,8 @@
         "archive"
       ],
       "currentProjection": true,
-      "publishedAt": "2026-11-23T19:58:28.624000+00:00",
-      "source": "https://www.nhl.com/news/minnesota-wild-san-jose-sharks-game-preview-november-23-2026",
+      "publishedAt": "2026-11-26T14:23:43.359000+00:00",
+      "source": "https://www.nhl.com/news/colorado-avalanche-minnesota-wild-game-preview-november-27-2026",
       "needsFreshProjection": false,
       "status": "recent_verified"
     }

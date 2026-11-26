@@ -3,79 +3,40 @@
     "lineup_core_report.json",
     "lineup_rejections_report.json"
   ],
-  "incompleteTeams": 9,
+  "incompleteTeams": 6,
   "teams": [
-    {
-      "team": "avalanche",
-      "status": "incomplete_projection",
-      "reason": "incomplete_source_or_no_validated_replacement",
-      "missingForwardLines": 1,
-      "missingDefensePairs": 1,
-      "source": "https://www.nhl.com/news/anaheim-ducks-colorado-avalanche-game-preview-november-19-2026",
-      "publishedAt": "2026-11-19T20:22:00+00:00",
-      "rejectedLines": [],
-      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
-    },
     {
       "team": "blackhawks",
       "status": "incomplete_projection",
       "reason": "incomplete_source_or_no_validated_replacement",
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/chicago-blackhawks-vancouver-canucks-game-preview-november-22-2026",
-      "publishedAt": "2026-11-22T18:02:00+00:00",
+      "source": "https://www.nhl.com/news/new-york-rangers-chicago-blackhawks-game-preview-november-27-2026",
+      "publishedAt": "2026-11-26T20:08:27.248000+00:00",
       "rejectedLines": [],
       "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
     {
-      "team": "canadiens",
+      "team": "devils",
       "status": "incomplete_projection",
       "reason": "incomplete_source_or_no_validated_replacement",
-      "missingForwardLines": 1,
-      "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-23T19:55:00+00:00",
-      "rejectedLines": [],
-      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
-    },
-    {
-      "team": "flyers",
-      "status": "incomplete_projection",
-      "reason": "incomplete_source_or_no_validated_replacement",
-      "missingForwardLines": 1,
-      "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/philadelphia-flyers-montreal-canadiens-game-preview-november-21-2026",
-      "publishedAt": "2026-11-21T18:36:40.244000+00:00",
-      "rejectedLines": [],
-      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
-    },
-    {
-      "team": "islanders",
-      "status": "incomplete_projection",
-      "reason": "rejected_roster_lines",
       "missingForwardLines": 0,
       "missingDefensePairs": 1,
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-23T19:55:00+00:00",
-      "rejectedLines": [
-        {
-          "group": "defense",
-          "sourceLineNumber": 3,
-          "sourceLine": [
-            "Ben Hutton",
-            "Matt Kessel"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Matt Kessel",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ],
-      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
+      "source": "https://www.nhl.com/news/calgary-flames-new-jersey-devils-game-preview-november-27-2026",
+      "publishedAt": "2026-11-26T18:27:20.046000+00:00",
+      "rejectedLines": [],
+      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
+    },
+    {
+      "team": "flames",
+      "status": "incomplete_projection",
+      "reason": "incomplete_source_or_no_validated_replacement",
+      "missingForwardLines": 1,
+      "missingDefensePairs": 1,
+      "source": "https://www.nhl.com/news/calgary-flames-new-jersey-devils-game-preview-november-27-2026",
+      "publishedAt": "2026-11-26T18:27:20.046000+00:00",
+      "rejectedLines": [],
+      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
     {
       "team": "jets",
@@ -83,24 +44,18 @@
       "reason": "rejected_roster_lines",
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-23T19:55:00+00:00",
+      "source": "https://www.nhl.com/news/winnipeg-jets-boston-bruins-game-preview-november-25-2026",
+      "publishedAt": "2026-11-25T18:05:49.837000+00:00",
       "rejectedLines": [
         {
           "group": "forwards",
           "sourceLineNumber": 4,
           "sourceLine": [
-            "Alex Iafallo",
-            "Danny Zhilkin",
+            "Cole Koepke",
+            "Morgan Barron",
             "Tyrel Bauer"
           ],
           "unverifiedPlayers": [
-            {
-              "name": "Danny Zhilkin",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            },
             {
               "name": "Tyrel Bauer",
               "reason": "other_position_group",
@@ -113,83 +68,31 @@
       "nextAction": "Verify official roster and source-player identity; do not auto-approve."
     },
     {
-      "team": "lightning",
+      "team": "maple leafs",
       "status": "incomplete_projection",
-      "reason": "rejected_roster_lines",
+      "reason": "incomplete_source_or_no_validated_replacement",
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/buffalo-sabres-tampa-bay-lightning-game-preview-november-22-2026",
-      "publishedAt": "2026-11-22T15:29:15.319000+00:00",
-      "rejectedLines": [
-        {
-          "group": "forwards",
-          "sourceLineNumber": 4,
-          "sourceLine": [
-            "Jeffrey Viel",
-            "Jansen Harkins",
-            "Scott Sabourin"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Jansen Harkins",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        }
-      ],
-      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
+      "source": "https://www.nhl.com/news/toronto-maple-leafs-boston-bruins-game-preview-november-27-2026",
+      "publishedAt": "2026-11-26T15:54:26.688000+00:00",
+      "rejectedLines": [],
+      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     },
     {
       "team": "red wings",
-      "status": "missing_team",
+      "status": "incomplete_projection",
       "reason": "rejected_roster_lines",
-      "missingForwardLines": 4,
-      "missingDefensePairs": 3,
-      "source": null,
-      "publishedAt": null,
+      "missingForwardLines": 0,
+      "missingDefensePairs": 1,
+      "source": "https://www.nhl.com/news/detroit-red-wings-columbus-blue-jackets-game-preview-november-27-2026",
+      "publishedAt": "2026-11-26T19:29:28.639000+00:00",
       "rejectedLines": [
         {
-          "group": "forwards",
-          "sourceLineNumber": 3,
-          "sourceLine": [
-            "Carter Mazur",
-            "Nate Danielson",
-            "J.T. Compher"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Nate Danielson",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        },
-        {
-          "group": "forwards",
-          "sourceLineNumber": 4,
-          "sourceLine": [
-            "Michael Rasmussen",
-            "Sheldon Dries",
-            "Keegan Kolesar"
-          ],
-          "unverifiedPlayers": [
-            {
-              "name": "Sheldon Dries",
-              "reason": "not_in_current_roster",
-              "inLocalCurrentRoster": false,
-              "requiresIndependentGameEvidence": true
-            }
-          ]
-        },
-        {
           "group": "defense",
-          "sourceLineNumber": 3,
+          "sourceLineNumber": 2,
           "sourceLine": [
-            "Andreas Englund",
-            "Albert Johannson"
+            "Albert Johannson",
+            "Justin Faulk"
           ],
           "unverifiedPlayers": [
             {
@@ -202,17 +105,6 @@
         }
       ],
       "nextAction": "Verify official roster and source-player identity; do not auto-approve."
-    },
-    {
-      "team": "sharks",
-      "status": "incomplete_projection",
-      "reason": "incomplete_source_or_no_validated_replacement",
-      "missingForwardLines": 1,
-      "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/minnesota-wild-san-jose-sharks-game-preview-november-23-2026",
-      "publishedAt": "2026-11-23T19:58:28.624000+00:00",
-      "rejectedLines": [],
-      "nextAction": "Look for newer complete NHL.com preview; do not infer missing lines."
     }
   ],
   "policy": "Diagnostics only. Never synthesize or automatically publish unverified lines."
