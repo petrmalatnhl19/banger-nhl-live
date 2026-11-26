@@ -16,19 +16,55 @@ TABLES = {
     "schedules": ("nhl_core43_schedule_snapshots", "game_id,kickoff_at,away_team,home_team,fetched_at"),
     "identityMap": ("nhl_core43_goalie_identity_map", "goalie_id,goalie_name,team_code,source,observed_at"),
 }
-def read_table(base, key, table, columns, max_rows=20000, order_by="game_id"):
+def read_table(base, key, table, columns, order_by="game_id"):
     if order_by not in ("game_id", "goalie_id"):
         raise ValueError("Unsupported pagination order")
-    rows=[]
-    for start in range(0,max_rows,500):
-        params=urllib.parse.urlencode({"select":columns,"order":order_by+".asc","limit":"500","offset":str(start)})
-        req=urllib.request.Request(f"{base}/rest/v1/{table}?{params}",headers={"apikey":key,"Authorization":"Bearer "+key,"Accept":"application/json"})
-        with urllib.request.urlopen(req,timeout=30) as response:
-            batch=json.load(response)
-        if not isinstance(batch,list):raise ValueError("Unexpected Supabase response")
+    # Sort by every selected field to break ties between repeated game IDs.
+    fields = columns.split(",")
+    if order_by not in fields:
+        raise ValueError("Pagination order must be selected")
+    order = ",".join(f"{field}.asc.nullslast" for field in
+                     [order_by] + [field for field in fields if field != order_by])
+    rows = []
+    seen = set()
+    expected = None
+    while True:
+        start = len(rows)
+        params = urllib.parse.urlencode({"select": columns, "order": order,
+                                        "limit": "500", "offset": str(start)})
+        req = urllib.request.Request(f"{base}/rest/v1/{table}?{params}",
+            headers={"apikey": key, "Authorization": "Bearer " + key,
+                     "Accept": "application/json", "Prefer": "count=exact"})
+        with urllib.request.urlopen(req, timeout=30) as response:
+            batch = json.load(response)
+            content_range = response.headers.get("Content-Range", "")
+        if not isinstance(batch, list) or len(batch) > 500:
+            raise ValueError("Unexpected Supabase response")
+        interval, sep, total = content_range.partition("/")
+        if not sep or not total.isdigit():
+            raise ValueError("Missing exact pagination count")
+        count = int(total)
+        if expected is None:
+            expected = count
+        if count != expected:
+            raise ValueError("Historical table changed during pagination; retry audit")
+        if batch:
+            if interval != f"{start}-{start + len(batch) - 1}":
+                raise ValueError("Unexpected pagination range")
+        elif start != expected:
+            raise ValueError("Incomplete historical audit: premature empty page")
+        for row in batch:
+            if not isinstance(row, dict) or any(field not in row for field in fields):
+                raise ValueError("Incomplete historical row")
+            signature = json.dumps(row, sort_keys=True, separators=(",", ":"))
+            if signature in seen:
+                raise ValueError("Duplicate historical row: refusing ambiguous pagination")
+            seen.add(signature)
         rows.extend(batch)
-        if len(batch)<500:return rows
-    raise ValueError("Row cap reached: refusing incomplete historical audit")
+        if len(rows) > expected:
+            raise ValueError("Historical pagination exceeded exact count")
+        if len(rows) == expected:
+            return rows
 
 def latest_schedule(rows):
     result={}
