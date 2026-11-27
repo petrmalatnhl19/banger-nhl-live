@@ -1,0 +1,45 @@
+name: Projected lineups read-only audit
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/update_lineups.py'
+      - '.github/workflows/projected-lineups-readonly-audit.yml'
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Run isolated live import
+        run: |
+          python -m py_compile scripts/update_lineups.py
+          cp lineups.json /tmp/lineups-before.json
+          python scripts/update_lineups.py
+      - name: Report coverage and partial formations
+        run: |
+          python - <<'PY'
+          import json
+          before=json.load(open('/tmp/lineups-before.json'))['teams']
+          after=json.load(open('lineups.json'))['teams']
+          diag=json.load(open('lineups_source_diagnostics.json'))['teams']
+          assert len(diag)==32, f'Diagnostics coverage: {len(diag)}'
+          for key,d in sorted(diag.items()):
+              a=after.get(key,{})
+              b=before.get(key,{})
+              print(key, 'before',len(b.get('forwards',[])),len(b.get('defense',[])), 'after',len(a.get('forwards',[])),len(a.get('defense',[])), 'diagnostics',json.dumps(d,ensure_ascii=False), 'partial',json.dumps(a.get('partialFormations',[])), 'alignment',json.dumps(a.get('projectedAlignment')))
+          print('Accepted live projections:',len(after))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: isolated-lineups-audit
+          path: |
+            lineups.json
+            lineups_source_diagnostics.json
+            lineups_archive.json
+            lineups_changes.json
