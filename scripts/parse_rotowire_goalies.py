@@ -158,6 +158,8 @@ def attach_reports(rows, schedule, observed):
 
 
 def match_report(article, row, opponent, observed):
+    if row.get("status") != "confirmed":
+        return
     about = article.get("about")
     if not isinstance(about, dict) or about.get("name") != row["goalie"]:
         return
@@ -168,6 +170,14 @@ def match_report(article, row, opponent, observed):
     kickoff = datetime.datetime.fromisoformat(row["startTimeUTC"])
     if published.tzinfo is None or not published <= observed < kickoff:
         return
+    # A changed article cannot prove that its current wording existed at publication.
+    if article.get("dateModified") is not None:
+        try:
+            modified = datetime.datetime.fromisoformat(article["dateModified"])
+        except (TypeError, ValueError):
+            return
+        if modified.tzinfo is None or modified != published:
+            return
     day = datetime.date.fromisoformat(row["date"])
     published_day = published.astimezone(ZoneInfo("America/New_York")).date()
     if (day - published_day).days not in (0, 1):
@@ -184,7 +194,7 @@ def match_report(article, row, opponent, observed):
         return
     rival = "(?:" + "|".join(re.escape(name) for name in opponent) + ")"
     matchup = rf"(?:against (?:the )?{rival} on {weekday}|in {weekday}'s clash against (?:the )?{rival})"
-    credit = r"(?:, (?:[\w’\x27 -]+ of NHL\.com reports|(?:according to|per) [\w’\x27 -]+(?:\.com)?))?"
+    credit = r"(?:, (?:[\w’\x27 -]+ of NHL\.com reports|(?:according to|per) [^.!?]+(?:\.com)?))?"
     crease_report = rf"(?:defend the {venue} net|patrol the {venue} crease|guard the {venue} net|patrol the {venue} net) {matchup}{credit}"
     # A reporter credit may follow the complete, schedule-bound start announcement.
     start_report = rf"start {weekday}'s {venue} game against (?:the )?{rival}(?:, [\w’' -]+ of [\w’' -]+ reports)?"
