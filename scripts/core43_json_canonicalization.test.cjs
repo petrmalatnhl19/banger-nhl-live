@@ -20,6 +20,6 @@ test("JCS ordering, number and string serialization",()=>{
  assert.equal(canonicalize({n:1e-7,m:-0,s:"é"}),'{"m":0,"n":1e-7,"s":"é"}');
  assert.throws(()=>canonicalize({bad:NaN}),/invalid_number/);
  assert.throws(()=>canonicalize({bad:undefined}),/invalid_json_value/);
- assert.throws(()=>canonicalize({bad:"\\ud800"}),/invalid_unicode/);
+ assert.throws(()=>canonicalize({bad:String.fromCharCode(0xd800)}),/invalid_unicode/);
  assert.throws(()=>hashRecord({serializationVersion:"unknown"}),/unsupported_serialization_version/);
 });
