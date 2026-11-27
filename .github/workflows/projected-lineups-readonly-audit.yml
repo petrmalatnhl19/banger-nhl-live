@@ -15,6 +15,24 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - name: Verify disputed player identities against official roster
+        run: |
+          python - <<'PY'
+          import json, urllib.request
+          targets={'CHI':['glendening'],'CGY':['morton'],'WPG':['bauer'],'NJD':['kolyachonok']}
+          for club, names in targets.items():
+              url=f'https://api-web.nhle.com/v1/roster/{club}/current'
+              req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'})
+              with urllib.request.urlopen(req,timeout=25) as response:
+                  roster=json.load(response)
+              for target in names:
+                  matches=[]
+                  for group in ('forwards','defensemen','goalies'):
+                      for p in roster.get(group,[]):
+                          if p.get('lastName',{}).get('default','').casefold()==target:
+                              matches.append({'id':p.get('id'),'firstName':p.get('firstName'),'lastName':p.get('lastName'),'positionCode':p.get('positionCode'),'group':group})
+                  print(club,target,json.dumps(matches))
+          PY
       - name: Run isolated live import
         run: |
           python -m py_compile scripts/update_lineups.py
