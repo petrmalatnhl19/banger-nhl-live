@@ -484,6 +484,16 @@ for key,team in teams.items():
  previous_date=previous.get("publishedAt") or previous.get("asOf") or ""
  current_date=team.get("publishedAt") or team.get("asOf") or ""
  if previous_date and current_date and current_date<previous_date:continue
+ # Incomplete snapshots cannot establish additions, removals or moves:
+ # missing rows also shift the ordinal of subsequent complete formations.
+ def complete_for_comparison(record):
+  return (len(record.get("forwards",[]))==4
+          and len(record.get("defense",[]))==3
+          and not record.get("partialFormations"))
+ if not complete_for_comparison(previous) or not complete_for_comparison(team):
+  # Do not retain an old alert as if it described this incomplete snapshot.
+  changes.pop(key,None)
+  continue
  before=positions(previous);after=positions(team)
  events=[]
  for player,(display,pos) in after.items():
