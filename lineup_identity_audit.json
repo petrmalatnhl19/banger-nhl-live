@@ -1,5 +1,16 @@
 {
   "teams": {
+    "flames": {
+      "players": [
+        {
+          "sourceName": "Sam Morton",
+          "expectedRole": "forwards",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
+          "automaticApproval": false
+        }
+      ]
+    },
     "jets": {
       "players": [
         {
@@ -16,10 +27,10 @@
         }
       ]
     },
-    "red wings": {
+    "devils": {
       "players": [
         {
-          "sourceName": "Albert Johannson",
+          "sourceName": "Vladislav Kolyachonok",
           "expectedRole": "defense",
           "sameSurnameInRoster": [],
           "classification": "not_on_current_roster",
