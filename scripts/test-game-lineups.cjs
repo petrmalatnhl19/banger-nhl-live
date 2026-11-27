@@ -47,4 +47,38 @@ module.exports = async function testGameLineups(page, assert) {
   });
   assert.deepEqual(results[0], [0,0,1,0,0,1]);
   results.slice(1).forEach(actual => assert.deepEqual(actual, [0,0,0,0,0,0]));
+  // Render the actual projection function with isolated, fresh fixtures.
+  const projections = await page.evaluate(async () => {
+    const oldFetch = window.fetch;
+    const root = document.createElement('div');
+    root.id = 'lineupProjection';
+    root.style.width = '100%';
+    document.body.append(root);
+    const f = [['A One','B Two','C Three'],['D Four','E Five','F Six'],['G Seven','H Eight','I Nine']];
+    const d = [['J Ten','K Eleven'],['L Twelve','M Thirteen'],['N Fourteen','O Fifteen']];
+    const base = {publishedAt:new Date().toISOString(),forwards:f,defense:d,goalies:[]};
+    const teams = {
+      blackhawks:{...base,forwards:[...f,['P Sixteen','Q Seventeen','R Eighteen']]},
+      jets:{...base,projectedAlignment:{forwards:11,defense:7,extraForwardUnit:['Cole Koepke','Morgan Barron'],extraDefenders:['Tyrel Bauer']}},
+      flames:{...base,partialFormations:[{group:'forwards',verifiedPlayers:['Brennan Othmann','Maxim Tsyplakov']}]},
+      devils:{...base,forwards:[...f,['P Sixteen','Q Seventeen','R Eighteen']],defense:d.slice(0,2),partialFormations:[{group:'defense',verifiedPlayers:['Declan Chisholm']}]}
+    };
+    window.fetch = async url => ({ok:true,json:async()=>String(url).includes('./lineups.json?')?{fetchedAt:new Date().toISOString(),rosterValidated:true,teams}:{}});
+    try {
+      const results=[];
+      for(const [away,home] of [['CHI','WPG'],['CGY','NJD']]){
+        await loadLineupProjection({gameState:'FUT',awayTeam:{abbrev:away},homeTeam:{abbrev:home}});
+        results.push({text:root.innerText,overflow:root.scrollWidth>root.clientWidth+2});
+      }
+      return results;
+    } finally {window.fetch=oldFetch;root.remove();}
+  });
+  assert.match(projections[0].text,/Projekce 11\+7/);
+  assert.match(projections[0].text,/Tyrel Bauer/);
+  assert.match(projections[0].text,/Cole Koepke/);
+  assert.doesNotMatch(projections[0].text,/Neúplná projekce/);
+  assert.match(projections[1].text,/Neúplná projekce/);
+  assert.match(projections[1].text,/Brennan Othmann/);
+  assert.match(projections[1].text,/Declan Chisholm/);
+  assert.equal(projections.some(x=>x.overflow),false);
 };
