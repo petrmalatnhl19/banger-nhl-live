@@ -4,6 +4,8 @@ on:
     branches: [main]
     paths:
       - 'scripts/update_lineups.py'
+      - 'index.html'
+      - 'scripts/test-game-lineups.cjs'
       - '.github/workflows/projected-lineups-readonly-audit.yml'
 permissions:
   contents: read
@@ -34,6 +36,29 @@ jobs:
                           if p.get('lastName',{}).get('default','').casefold()==target:
                               matches.append({'id':p.get('id'),'firstName':p.get('firstName'),'lastName':p.get('lastName'),'positionCode':p.get('positionCode'),'group':group})
                   print(club,target,json.dumps(matches))
+          PY
+      - name: Inspect recent official game evidence for unresolved players
+        run: |
+          python - <<'PY'
+          import json, urllib.request
+          def get(path):
+              req=urllib.request.Request('https://api-web.nhle.com/v1/'+path,headers={'User-Agent':'Mozilla/5.0'})
+              with urllib.request.urlopen(req,timeout=25) as response:
+                  return json.load(response)
+          for club,target in [('CGY','morton'),('NJD','kolyachonok')]:
+              schedule=get('club-schedule-season/'+club+'/now')
+              games=sorted((g for g in schedule.get('games',[]) if g.get('gameState') in ('OFF','FINAL')),key=lambda g:g['gameDate'],reverse=True)[:3]
+              for game in games:
+                  box=get('gamecenter/'+str(game['id'])+'/boxscore')
+                  matches=[]
+                  for side in ('awayTeam','homeTeam'):
+                      if box.get(side,{}).get('abbrev')!=club: continue
+                      for group,players in box.get('playerByGameStats',{}).get(side,{}).items():
+                          if not isinstance(players,list): continue
+                          for p in players:
+                              if target in str(p.get('name','')).casefold():
+                                  matches.append({'id':p.get('playerId'),'name':p.get('name'),'position':p.get('position'),'toi':p.get('toi')})
+                  print(club,game['gameDate'],game['id'],json.dumps(matches))
           PY
       - name: Run isolated live import
         run: |
