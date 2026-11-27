@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - 'scripts/diagnose_rotowire_confirmation.py'
+      - 'scripts/parse_rotowire_goalies.py'
+      - 'scripts/test_rotowire_confirmation_diagnostic.py'
       - '.github/workflows/rotowire-confirmation-diagnostic.yml'
 permissions:
   contents: read
@@ -17,5 +19,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Regression tests
+        run: python -m unittest scripts.test_rotowire_confirmation_diagnostic scripts.test_core43_source_provenance scripts.test_core43_rotowire_publisher_provenance scripts.test_core43_goalie_id_validation scripts.test_core43_conflicting_starters
       - name: Inspect public article metadata only
         run: python -m scripts.diagnose_rotowire_confirmation
