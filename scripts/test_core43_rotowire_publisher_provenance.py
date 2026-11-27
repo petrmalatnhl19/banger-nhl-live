@@ -43,7 +43,7 @@ class ExplicitConfirmationBasisTests(unittest.TestCase):
 
 class PublishedReportTests(unittest.TestCase):
     def test_game_and_publication_must_match_original_report(self):
-        row = {"goalie": "Devon Levi", "venue": "home", "date": "2026-11-24",
+        row = {"goalie": "Devon Levi", "status": "confirmed", "venue": "home", "date": "2026-11-24",
                "startTimeUTC": "2026-11-25T01:00:00Z"}
         article = {"about": {"name": "Devon Levi"}, "datePublished": "2026-11-24T08:49:56-08:00",
                    "description": "Levi will defend the home net in Tuesday's clash against the Golden Knights."}
@@ -69,7 +69,7 @@ class PublishedReportTests(unittest.TestCase):
         ]
         observed = datetime.datetime.fromisoformat("2026-11-25T20:40:01Z")
         for player, opponent, credit, published, utc, kickoff in cases:
-            row = {"goalie": player, "venue": "away", "date": "2026-11-25",
+            row = {"goalie": player, "status": "confirmed", "venue": "away", "date": "2026-11-25",
                    "startTimeUTC": f"2026-11-26T{kickoff}:00Z"}
             text = f"{player.split()[-1]} will start Wednesday's road game against {opponent}, {credit} reports."
             article = {"about": {"name": player}, "datePublished": f"2026-11-25T{published}-08:00",
@@ -86,7 +86,7 @@ class PublishedReportTests(unittest.TestCase):
                 self.assertIsNone(match_report(article, row, [opponent], datetime.datetime.fromisoformat(row["startTimeUTC"])))
 
     def test_day_before_announcement_with_schedule_city(self):
-        row = {"goalie": "Daniil Tarasov", "venue": "home", "date": "2026-11-25",
+        row = {"goalie": "Daniil Tarasov", "status": "confirmed", "venue": "home", "date": "2026-11-25",
                "startTimeUTC": "2026-11-26T00:30:00Z"}
         # Use the article clock from the real published report.
         article = {"about": {"name": "Daniil Tarasov"},
