@@ -22,9 +22,44 @@
 @media(max-width:340px){.arena .modules{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:no-preference){.arena .hero .eyebrow:before{animation:arena-breathe 4s ease-in-out infinite}@keyframes arena-breathe{50%{opacity:.55}}}
 @media(forced-colors:active){.arena .panel{border:1px solid CanvasText}.arena .hero .eyebrow:before{display:none}}
-</style></head><body><main class="arena"><header><div class="brand">BANGER<small>NHL LIVE</small></div><label>Klub <select id="team"></select></label></header><section class="hero"><div class="eyebrow">FAN ARENA · MŮJ TÝM</div><h1 id="name"></h1><p id="tagline"></p></section><div class="section-heading"><h2>Klubové centrum</h2><span>Vývojový náhled</span></div><div class="modules"><section class="panel"><span class="kicker">01 / VÝSLEDEK</span><h2>Poslední zápas</h2><p>Čeká na napojení ověřených dat.</p></section><section class="panel"><span class="kicker">02 / PROGRAM</span><h2>Další zápas</h2><p>Čeká na napojení rozpisu.</p></section><section class="panel"><span class="kicker">03 / PŘEHLED</span><h2>Forma týmu</h2><p>Čeká na napojení výsledků.</p></section></div><p class="notice">Vývojový náhled · bez živých dat · pouze Dallas má vlastní obrazový banner.</p></main><script src="themes.js"></script><script>
+</style></head><body><main class="arena"><header><div class="brand">BANGER<small>NHL LIVE</small></div><label>Klub <select id="team"></select></label></header><section class="hero"><div class="eyebrow">FAN ARENA · MŮJ TÝM</div><h1 id="name"></h1><p id="tagline"></p></section><div class="section-heading"><h2>Klubové centrum</h2><span>Vývojový náhled</span></div><div class="modules"><section class="panel"><span class="kicker">01 / VÝSLEDEK</span><h2>Poslední zápas</h2><p>Čeká na napojení ověřených dat.</p></section><section class="panel"><span class="kicker">02 / PROGRAM</span><h2>Další zápas</h2><p>Čeká na napojení rozpisu.</p></section><section class="panel"><span class="kicker">03 / PŘEHLED</span><h2>Forma týmu</h2><p>Čeká na napojení výsledků.</p></section><section class="panel"><span class="kicker">04 / TABULKA</span><h2>Postavení týmu</h2><p>Načítám…</p></section></div><p class="notice">Vývojový náhled · živé rozhraní v testování · pouze Dallas má vlastní obrazový banner.</p></main><script src="themes.js"></script><script>
 const select=document.getElementById('team'),arena=document.querySelector('.arena'),heading=document.getElementById('name'),tag=document.getElementById('tagline');
 for(const code of BangerArenaThemes.codes){const o=document.createElement('option');o.value=code;o.textContent=code==='DAL'?'Dallas Stars':code;select.append(o)}
 function render(){const t=BangerArenaThemes.get(select.value);if(!t)return;arena.dataset.team=t.code;arena.style.setProperty('--accent',t.accent);arena.style.setProperty('--secondary',t.secondary);heading.textContent=t.code==='DAL'?'DALLAS STARS':t.code;tag.textContent=t.code==='DAL'?'Victory Green · atmosféra domácí arény':'Společný týmový motiv'}
 select.value='DAL';select.addEventListener('change',render);render();
+
+let requestId=0;
+const panels=[...document.querySelectorAll('.panel p')];
+async function readClub(kind,code,signal){
+ const url=new URL('https://xxwqeiuyislnoxsmjuul.supabase.co/functions/v1/nhl-feed');
+ url.searchParams.set('kind',kind);if(kind!=='standings')url.searchParams.set('team',code);
+ const response=await fetch(url,{headers:{apikey:'sb_publishable_SfeHMIvUkYTuD3jCrWub8w_fPIY0B-G'},signal});
+ if(!response.ok)throw Error('HTTP '+response.status);return response.json();
+}
+let controller;
+async function loadClub(){
+ const id=++requestId,code=select.value;
+ controller?.abort();controller=new AbortController();const signal=controller.signal;
+ panels.forEach(p=>p.textContent='Načítám…');
+ const timer=setTimeout(()=>controllerForRequest.abort(),12000),controllerForRequest=controller;
+ const show=(i,value)=>{if(id===requestId)panels[i].textContent=value};
+ const valid=g=>g?.id!=null&&[g.homeTeam?.abbrev,g.awayTeam?.abbrev].includes(code)&&Number.isFinite(Date.parse(g.startTimeUTC));
+ const score=g=>Number.isInteger(g.homeTeam?.score)&&Number.isInteger(g.awayTeam?.score)&&g.homeTeam.score!==g.awayTeam.score;
+ const label=g=>g.awayTeam.abbrev+' '+g.awayTeam.score+' : '+g.homeTeam.score+' '+g.homeTeam.abbrev;
+ try{await Promise.allSettled([
+ (async()=>{try{const d=await readClub('clubschedule',code,signal);if(!Array.isArray(d.games))throw Error('schema');
+ const games=[...new Map(d.games.filter(valid).map(g=>[String(g.id),g])).values()].sort((a,b)=>Date.parse(a.startTimeUTC)-Date.parse(b.startTimeUTC));
+ const past=games.filter(g=>['OFF','FINAL'].includes(g.gameState)&&score(g)&&Date.parse(g.startTimeUTC)<=Date.now()).reverse();
+ const next=games.find(g=>['FUT','PRE'].includes(g.gameState)&&Date.parse(g.startTimeUTC)>Date.now());
+ show(0,past.length?label(past[0]):'Výsledek není dostupný.');
+ show(1,next?next.awayTeam.abbrev+' – '+next.homeTeam.abbrev+' · '+new Date(next.startTimeUTC).toLocaleString('cs-CZ',{timeZone:'Europe/Prague'}):'Nadcházející zápas není dostupný.');
+ const form=n=>past.slice(0,n).map(g=>((g.homeTeam.abbrev===code)===(g.homeTeam.score>g.awayTeam.score))?'V':'P').join(' ');
+ show(2,past.length?'Posledních '+Math.min(5,past.length)+': '+form(5)+' · Posledních '+Math.min(10,past.length)+': '+form(10):'Forma není dostupná.');
+ }catch{[0,1,2].forEach(i=>show(i,'Data nejsou dostupná.'))}})(),
+ (async()=>{try{const d=await readClub('standings',code,signal);const row=Array.isArray(d.standings)?d.standings.find(r=>(r.teamAbbrev?.default??r.teamAbbrev)===code):null;
+ show(3,row?'Body: '+(row.points??'—')+' · Divize: '+(row.divisionSequence??'—')+' · Konference: '+(row.conferenceSequence??'—'):'Tabulka není dostupná.');
+ }catch{show(3,'Tabulka není dostupná.')}})()
+ ]);}finally{clearTimeout(timer)}
+}
+select.addEventListener('change',loadClub);loadClub();
 </script></body></html>
