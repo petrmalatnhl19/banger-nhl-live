@@ -374,6 +374,24 @@ for name,team in teams.items():
   team["forwards"]=forwards[:4]
   team["defense"]=defense[:3]
   team["goalies"]=goalies[:2]
+  # Preserve verified members of incomplete source formations separately.
+  # Never publish a position mismatch as a verified player in that role.
+  partial=[]
+  for role,rows,expected in (("forwards",original_forwards,3),("defense",original_defense,2)):
+   for index,row in enumerate(rows,1):
+    if not 1<=len(row)<=expected:
+     continue
+    verified=[player for player in row if normalize(player) in groups[role]]
+    if not verified or len(verified)==expected:
+     continue
+    # A complete formation reclassified into another role is not partial.
+    if row in forwards or row in defense:
+     continue
+    partial.append({"group":role,"sourceLine":index,"verifiedPlayers":verified,
+                    "expectedPlayers":expected,"complete":False,
+                    "unverifiedCount":len(row)-len(verified)})
+  team["partialFormations"]=partial
+
   # Explain rejected lines without weakening roster validation.
   if name in source_diagnostics:
    # Diagnose role mismatches explicitly (e.g. Winnipeg forward fragments
