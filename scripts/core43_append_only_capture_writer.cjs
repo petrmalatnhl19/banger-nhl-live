@@ -1,13 +1,13 @@
 "use strict";
 /* Explicitly enabled server-only append-only experimental archive writer. */
-const crypto=require("node:crypto");
+const {hashRecord}=require("./core43_json_canonicalization.cjs");
 const valid=x=>typeof x==="string"&&Number.isFinite(Date.parse(x));
 function prepareArchiveRow(result,{now=new Date().toISOString()}={}){
  if(!result||result.captured!==true||!result.record||!result.provenance||!valid(now))throw Error("unverified_capture");
  const r=result.record;
  if(r.schema!=="core43_shadow_capture_v1"||r.production!==false||r.persistable!==false||r.experimental!==true||r.calibrated!==false||r.frozenBeforeKickoff!==true||!valid(r.predictedAt)||!valid(r.frozenAt)||!valid(r.kickoffAt)||Date.parse(r.predictedAt)>Date.parse(r.frozenAt)||Date.parse(r.frozenAt)>=Date.parse(r.kickoffAt)||Date.parse(now)<Date.parse(r.frozenAt)||Date.parse(now)-Date.parse(r.frozenAt)>120000)throw Error("invalid_capture_provenance");
  if(!result.provenance.gsaxArchiveId||result.provenance.baselineModel!=="core42")throw Error("missing_source_provenance");
- const digest=crypto.createHash("sha256").update(JSON.stringify(r)).digest("hex");
+ const digest=hashRecord(r);
  if(digest!==result.sha256)throw Error("capture_hash_mismatch");
  return {game_id:String(r.gameId),model_version:"core43_gsax_sensitivity_v0",predicted_at:r.predictedAt,frozen_at:r.frozenAt,kickoff_at:r.kickoffAt,capture_sha256:digest,source_archive_id:result.provenance.gsaxArchiveId,payload:r,production:false,experimental:true};
 }

@@ -1,7 +1,7 @@
 "use strict";
 /* New-only pregame capture. Never reconstruct a past freeze or modify archived predictions. */
 const fs=require("node:fs");
-const crypto=require("node:crypto");
+const {VERSION,hashRecord}=require("./core43_json_canonicalization.cjs");
 const {calculatePregameTwoGoalieShadow}=require("./core43_two_goalie_pregame_shadow.cjs");
 const time=x=>typeof x==="string"&&Number.isFinite(Date.parse(x))?Date.parse(x):NaN;
 function capture({payload,now=new Date().toISOString()}={}){
@@ -12,14 +12,13 @@ function capture({payload,now=new Date().toISOString()}={}){
  if(!payload.baseline||time(payload.baseline.predictedAt)>time(payload.predictionAt))return fail("invalid_baseline");
  const shadow=calculatePregameTwoGoalieShadow(payload);
  if(!shadow.available)return fail(shadow.reason);
- const frozen={schema:"core43_shadow_capture_v1",gameId:payload.gameId,awayTeam:payload.awayTeam,homeTeam:payload.homeTeam,
+ const frozen={schema:"core43_shadow_capture_v1",serializationVersion:VERSION,gameId:payload.gameId,awayTeam:payload.awayTeam,homeTeam:payload.homeTeam,
   kickoffAt:payload.kickoffAt,predictedAt:payload.predictionAt,inputAsOf:payload.predictionAt,frozenAt:now,
   frozenBeforeKickoff:true,production:false,persistable:false,calibrated:false,experimental:true,
   away:shadow.expectedAwayGoals,home:shadow.expectedHomeGoals,baseline:shadow.baseline,
   goalies:shadow.goalies,coefficient:shadow.coefficient,gsaxFetchedAt:payload.gsaxFetchedAt,
   warning:"Uncalibrated sensitivity, not a production forecast. Capture must be independently retained."};
- const canonical=JSON.stringify(frozen);
- return {captured:true,record:frozen,sha256:crypto.createHash("sha256").update(canonical).digest("hex"),production:false,persistable:false};
+ return {captured:true,record:frozen,sha256:hashRecord(frozen),production:false,persistable:false};
 }
 if(require.main===module){
  const input=process.argv[2],output=process.argv[3];
