@@ -57,6 +57,7 @@ def projection_aliases(abbr, roster):
   "MTL": ("forwards", 8482737, "Zach Bolduc", "Zachary Bolduc"),
   "NYI": ("defensemen", 8482516, "Matt Kessel", "Matthew Kessel"),
   "WPG": ("forwards", 8483526, "Danny Zhilkin", "Danil Zhilkin"),
+  "DET": ("defensemen", 8481607, "Albert Johannson", "Albert Johansson"),
  }
  if abbr not in known:
   return {}
