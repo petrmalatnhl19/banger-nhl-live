@@ -184,7 +184,8 @@ def match_report(article, row, opponent, observed):
         return
     rival = "(?:" + "|".join(re.escape(name) for name in opponent) + ")"
     matchup = rf"(?:against (?:the )?{rival} on {weekday}|in {weekday}'s clash against (?:the )?{rival})"
-    crease_report = rf"(?:defend the {venue} net|patrol the {venue} crease) {matchup}(?:, (?:according to|per) [^.!?]+)?"
+    credit = r"(?:, (?:[\w’\x27 -]+ of NHL\.com reports|(?:according to|per) [\w’\x27 -]+(?:\.com)?))?"
+    crease_report = rf"(?:defend the {venue} net|patrol the {venue} crease|guard the {venue} net|patrol the {venue} net) {matchup}{credit}"
     # A reporter credit may follow the complete, schedule-bound start announcement.
     start_report = rf"start {weekday}'s {venue} game against (?:the )?{rival}(?:, [\w’' -]+ of [\w’' -]+ reports)?"
     if not isinstance(text, str) or not re.fullmatch(
