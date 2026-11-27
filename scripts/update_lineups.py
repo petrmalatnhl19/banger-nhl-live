@@ -37,7 +37,7 @@ for i,line in enumerate(lines):
   names=split_projection_row(x)
   if len(names)==3 and len(forwards)<4:forwards.append(names)
   elif len(names)==2 and len(forwards)>=3 and len(defense)<8:defense.append(names)
-  elif len(names)==1 and len(forwards)>=3 and len(defense)>=2 and len(goalies)<2 and re.fullmatch(r"[\wÀ-ž.'’ -]{5,55}",x):goalies.append(x)
+  elif len(names)==1 and len(forwards)>=3 and len(defense)>=2 and len(goalies)<8 and re.fullmatch(r"[\wÀ-ž.'’ -]{5,55}",x):goalies.append(x)
  if len(forwards)>=3 and len(defense)>=2:teams[name.lower()]={"name":name,"forwards":forwards,"defense":defense,"goalies":goalies,"injured":injured,"scratched":scratched,"source":URL,"publishedAt":main_stamp.isoformat() if main_stamp else None}
 # Verify projected players against the NHL's current roster for the named club.
 # This prevents mixed-up article sections from appearing as trusted lineups.
@@ -108,7 +108,7 @@ def parse_preview(article_url):
    names=split_projection_row(item)
    if len(names)==3 and len(forwards)<4:forwards.append(names)
    elif len(names)==2 and len(forwards)>=3 and len(defense)<8:defense.append(names)
-   elif len(names)==1 and len(forwards)>=3 and len(defense)>=2 and len(goalies)<2 and re.fullmatch(r"[\wÀ-ž.'’ -]{5,55}",item):goalies.append(item)
+   elif len(names)==1 and len(forwards)>=3 and len(defense)>=2 and len(goalies)<8 and re.fullmatch(r"[\wÀ-ž.'’ -]{5,55}",item):goalies.append(item)
   if len(forwards)>=3 and len(defense)>=2:
    found[key]={"name":match.group(1).strip(),"forwards":forwards,"defense":defense,"goalies":goalies,"injured":injured,"scratched":scratched,"source":article_url,"publishedAt":stamp.isoformat()}
  return found
@@ -369,7 +369,8 @@ for name,team in teams.items():
   # Recover only complete 3-player rows already present in source data.
   forwards=[row for row in all_rows if len(row)==3 and all(normalize(x) in groups["forwards"] for x in row)]
   defense=[row for row in all_rows if len(row)==2 and all(normalize(x) in groups["defense"] for x in row)]
-  goalies=[x for x in team.get("goalies",[]) if normalize(x) in groups["goalies"]]
+  original_single_rows=list(team.get("goalies",[]))
+  goalies=[x for x in original_single_rows if normalize(x) in groups["goalies"]]
   # If a defender was incorrectly parsed as a goalie, discard it.
   # Preserve the source order and do not invent missing lines.
   team["forwards"]=forwards[:4]
@@ -391,6 +392,22 @@ for name,team in teams.items():
     partial.append({"group":role,"sourceLine":index,"verifiedPlayers":verified,
                     "expectedPlayers":expected,"complete":False,
                     "unverifiedCount":len(row)-len(verified)})
+  # Preserve explicitly listed extra skaters without inventing a formation.
+  fkeys={normalize(p) for row in team["forwards"] for p in row}
+  dkeys={normalize(p) for row in team["defense"] for p in row}
+  fragments=[row for row in all_rows if len(row)==2
+             and len({normalize(p) for p in row})==2
+             and all(normalize(p) in groups["forwards"]-fkeys for p in row)]
+  extra_d={normalize(p):p for p in original_single_rows
+           if normalize(p) in groups["defense"]-dkeys}
+  if (len(team["forwards"])==3 and len(fkeys)==9
+      and len(team["defense"])==3 and len(dkeys)==6
+      and len(fragments)==1 and len(extra_d)==1
+      and not fkeys & dkeys
+      and len(all_rows)==7):
+   team["projectedAlignment"]={"forwards":11,"defense":7,
+                               "extraForwardUnit":fragments[0],
+                               "extraDefenders":list(extra_d.values())}
   team["partialFormations"]=partial
 
   # Explain rejected lines without weakening roster validation.
