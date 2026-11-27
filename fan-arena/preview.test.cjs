@@ -21,3 +21,33 @@ test('preview is isolated and uses text rendering',()=>{
  assert.doesNotMatch(script,/\.innerHTML\s*=/);
  assert.match(script,/url\.protocol!=='https:'/);
 });
+
+function harness(fetch){
+ const panels=Array.from({length:11},()=>({textContent:''}));
+ const select={value:'DAL',append(){},addEventListener(){}};
+ const nodes={team:select,name:{},tagline:{}};
+ const context=vm.createContext({document:{getElementById:k=>nodes[k],querySelector:()=>({dataset:{},style:{setProperty(){}}}),querySelectorAll:()=>panels,createElement:()=>({})},BangerArenaThemes:{codes:['DAL','BOS'],get:code=>({code})},fetch,URL,AbortController,setTimeout,clearTimeout});
+ vm.runInContext(script.replace(/loadClub\(\);\s*$/,''),context);
+ return {panels,select,load:()=>vm.runInContext('loadClub()',context)};
+}
+test('API failures settle every panel without fabricated statistics',async()=>{
+ const h=harness(async()=>{throw Error('offline')});
+ await h.load();
+ assert.ok(h.panels.every(p=>/nedostup|nejsou dostup|není dostup/i.test(p.textContent)));
+});
+test('late previous-team response cannot overwrite current standings',async()=>{
+ let release;
+ const delayed=new Promise(r=>release=r);
+ let first=true;
+ const h=harness(async url=>{
+  if(new URL(url,'https://example.test').searchParams.get('kind')!=='standings')throw Error('fixture unavailable');
+  if(first){first=false;return delayed}
+  return {ok:true,json:async()=>({standings:[{teamAbbrev:{default:'BOS'},points:42}]})};
+ });
+ const old=h.load();h.select.value='BOS';await h.load();
+ assert.match(h.panels[3].textContent,/42/);
+ release({ok:true,json:async()=>({standings:[{teamAbbrev:{default:'DAL'},points:99}]})});
+ await old;
+ assert.match(h.panels[3].textContent,/42/);
+ assert.doesNotMatch(h.panels[3].textContent,/99/);
+});
