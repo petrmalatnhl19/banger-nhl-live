@@ -37,7 +37,7 @@ for i,line in enumerate(lines):
   names=split_projection_row(x)
   if len(names)==3 and len(forwards)<4:forwards.append(names)
   elif len(names)==2 and len(forwards)>=3 and len(defense)<8:defense.append(names)
-  elif len(names)==1 and len(forwards)>=3 and len(defense)>=2 and len(goalies)<2 and re.fullmatch(r"[\wÀ-ž.'’ -]{5,55}",x):goalies.append(x)
+  elif len(names)==1 and len(forwards)>=3 and len(defense)>=2 and len(goalies)<8 and re.fullmatch(r"[\wÀ-ž.'’ -]{5,55}",x):goalies.append(x)
  if len(forwards)>=3 and len(defense)>=2:teams[name.lower()]={"name":name,"forwards":forwards,"defense":defense,"goalies":goalies,"injured":injured,"scratched":scratched,"source":URL,"publishedAt":main_stamp.isoformat() if main_stamp else None}
 # Verify projected players against the NHL's current roster for the named club.
 # This prevents mixed-up article sections from appearing as trusted lineups.
@@ -57,6 +57,10 @@ def projection_aliases(abbr, roster):
   "MTL": ("forwards", 8482737, "Zach Bolduc", "Zachary Bolduc"),
   "NYI": ("defensemen", 8482516, "Matt Kessel", "Matthew Kessel"),
   "WPG": ("forwards", 8483526, "Danny Zhilkin", "Danil Zhilkin"),
+  "DET": ("defensemen", 8481607, "Albert Johannson", "Albert Johansson"),
+  "TOR": ("forwards", 8482691, "Aatu Rätyn", "Aatu Räty"),
+  "CGY": ("defensemen", 8478136, "Jacob Middleton", "Jake Middleton"),
+  "CHI": ("forwards", 8476822, "Lucas Glendening", "Luke Glendening"),
  }
  if abbr not in known:
   return {}
@@ -107,7 +111,7 @@ def parse_preview(article_url):
    names=split_projection_row(item)
    if len(names)==3 and len(forwards)<4:forwards.append(names)
    elif len(names)==2 and len(forwards)>=3 and len(defense)<8:defense.append(names)
-   elif len(names)==1 and len(forwards)>=3 and len(defense)>=2 and len(goalies)<2 and re.fullmatch(r"[\wÀ-ž.'’ -]{5,55}",item):goalies.append(item)
+   elif len(names)==1 and len(forwards)>=3 and len(defense)>=2 and len(goalies)<8 and re.fullmatch(r"[\wÀ-ž.'’ -]{5,55}",item):goalies.append(item)
   if len(forwards)>=3 and len(defense)>=2:
    found[key]={"name":match.group(1).strip(),"forwards":forwards,"defense":defense,"goalies":goalies,"injured":injured,"scratched":scratched,"source":article_url,"publishedAt":stamp.isoformat()}
  return found
@@ -273,9 +277,8 @@ for key,slug in SLUGS.items():
    teams[key]={"name":key.title(),"forwards":fw,"defense":df,"goalies":[],"injured":"","scratched":"","powerplay":pp,"source":url,"sourceType":"secondary"}
  except Exception as err:print("Secondary unavailable",key,str(err))
 # Diagnostic: distinguish source discovery failures from roster validation failures.
-FOCUS={"bruins":"BOS","hurricanes":"CAR","kings":"LAK","islanders":"NYI","rangers":"NYR","senators":"OTT","sharks":"SJS","jets":"WPG","canucks":"VAN","lightning":"TBL","mammoth":"UTA","red wings":"DET","stars":"DAL"}
 source_diagnostics={}
-for key,abbr in FOCUS.items():
+for key,abbr in TEAM_ABBREVS.items():
  candidate=teams.get(key)
  source_diagnostics[key]={"team":abbr,"candidateFound":bool(candidate),
   "candidateSource":candidate.get("source") if candidate else None,
@@ -368,12 +371,58 @@ for name,team in teams.items():
   # Recover only complete 3-player rows already present in source data.
   forwards=[row for row in all_rows if len(row)==3 and all(normalize(x) in groups["forwards"] for x in row)]
   defense=[row for row in all_rows if len(row)==2 and all(normalize(x) in groups["defense"] for x in row)]
-  goalies=[x for x in team.get("goalies",[]) if normalize(x) in groups["goalies"]]
+  original_single_rows=list(team.get("goalies",[]))
+  goalies=[x for x in original_single_rows if normalize(x) in groups["goalies"]]
   # If a defender was incorrectly parsed as a goalie, discard it.
   # Preserve the source order and do not invent missing lines.
   team["forwards"]=forwards[:4]
   team["defense"]=defense[:3]
   team["goalies"]=goalies[:2]
+  # Preserve verified members of incomplete source formations separately.
+  # Never publish a position mismatch as a verified player in that role.
+  partial=[]
+  for role,rows,expected in (("forwards",original_forwards,3),("defense",original_defense,2)):
+   for index,row in enumerate(rows,1):
+    if not 1<=len(row)<=expected:
+     continue
+    verified=[player for player in row if normalize(player) in groups[role]]
+    if not verified or len(verified)==expected:
+     continue
+    # A complete formation reclassified into another role is not partial.
+    if row in forwards or row in defense:
+     continue
+    partial.append({"group":role,"sourceLine":index,"verifiedPlayers":verified,
+                    "expectedPlayers":expected,"complete":False,
+                    "unverifiedCount":len(row)-len(verified)})
+  # Preserve explicitly listed extra skaters without inventing a formation.
+  fkeys={normalize(p) for row in team["forwards"] for p in row}
+  dkeys={normalize(p) for row in team["defense"] for p in row}
+  fragments=[row for row in all_rows if len(row)==2
+             and len({normalize(p) for p in row})==2
+             and all(normalize(p) in groups["forwards"]-fkeys for p in row)]
+  extra_d={normalize(p):p for p in original_single_rows
+           if normalize(p) in groups["defense"]-dkeys}
+  # A mixed source trio can explicitly list two extra forwards and a defender.
+  mixed=[row for row in all_rows if len(row)==3
+         and len({normalize(p) for p in row})==3
+         and sum(normalize(p) in groups["forwards"]-fkeys for p in row)==2
+         and sum(normalize(p) in groups["defense"]-dkeys for p in row)==1]
+  if (len(team["forwards"])==3 and len(fkeys)==9
+      and len(team["defense"])==3 and len(dkeys)==6
+      and not fkeys & dkeys and len(all_rows)==7):
+   if len(fragments)==1 and len(extra_d)==1 and not mixed:
+    team["projectedAlignment"]={"forwards":11,"defense":7,
+                                "extraForwardUnit":fragments[0],
+                                "extraDefenders":list(extra_d.values())}
+   elif len(mixed)==1 and not fragments and not extra_d:
+    row=mixed[0]
+    team["projectedAlignment"]={"forwards":11,"defense":7,
+                                "extraForwardUnit":[p for p in row if normalize(p) in groups["forwards"]],
+                                "extraDefenders":[p for p in row if normalize(p) in groups["defense"]],
+                                "basis":"mixed_source_row"}
+    partial=[p for p in partial if not (p["group"]=="forwards" and p["verifiedPlayers"]==team["projectedAlignment"]["extraForwardUnit"])]
+  team["partialFormations"]=partial
+
   # Explain rejected lines without weakening roster validation.
   if name in source_diagnostics:
    # Diagnose role mismatches explicitly (e.g. Winnipeg forward fragments
@@ -465,6 +514,16 @@ for key,team in teams.items():
  previous_date=previous.get("publishedAt") or previous.get("asOf") or ""
  current_date=team.get("publishedAt") or team.get("asOf") or ""
  if previous_date and current_date and current_date<previous_date:continue
+ # Incomplete snapshots cannot establish additions, removals or moves:
+ # missing rows also shift the ordinal of subsequent complete formations.
+ def complete_for_comparison(record):
+  return (len(record.get("forwards",[]))==4
+          and len(record.get("defense",[]))==3
+          and not record.get("partialFormations"))
+ if not complete_for_comparison(previous) or not complete_for_comparison(team):
+  # Do not retain an old alert as if it described this incomplete snapshot.
+  changes.pop(key,None)
+  continue
  before=positions(previous);after=positions(team)
  events=[]
  for player,(display,pos) in after.items():
