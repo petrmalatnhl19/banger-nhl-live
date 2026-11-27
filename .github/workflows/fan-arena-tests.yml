@@ -1,0 +1,20 @@
+name: FAN ARENA - Regression Tests
+on:
+  pull_request:
+    paths:
+      - 'fan-arena/**'
+      - '.github/workflows/fan-arena-tests.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  arena-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test all team themes and isolated preview
+        run: node --test fan-arena/themes.test.cjs fan-arena/preview.test.cjs
