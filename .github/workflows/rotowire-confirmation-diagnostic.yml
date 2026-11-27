@@ -1,0 +1,21 @@
+name: RotoWire confirmation diagnostic
+on:
+  pull_request:
+    paths:
+      - 'scripts/diagnose_rotowire_confirmation.py'
+      - '.github/workflows/rotowire-confirmation-diagnostic.yml'
+permissions:
+  contents: read
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Inspect public article metadata only
+        run: python -m scripts.diagnose_rotowire_confirmation
