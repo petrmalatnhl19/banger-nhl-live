@@ -22,7 +22,7 @@
 @media(max-width:340px){.arena .modules{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:no-preference){.arena .hero .eyebrow:before{animation:arena-breathe 4s ease-in-out infinite}@keyframes arena-breathe{50%{opacity:.55}}}
 @media(forced-colors:active){.arena .panel{border:1px solid CanvasText}.arena .hero .eyebrow:before{display:none}}
-</style></head><body><main class="arena"><header><div class="brand">BANGER<small>NHL LIVE</small></div><label>Klub <select id="team"></select></label></header><section class="hero"><div class="eyebrow">FAN ARENA · MŮJ TÝM</div><h1 id="name"></h1><p id="tagline"></p></section><div class="section-heading"><h2>Klubové centrum</h2><span>Vývojový náhled</span></div><div class="modules"><section class="panel"><span class="kicker">01 / VÝSLEDEK</span><h2>Poslední zápas</h2><p>Čeká na napojení ověřených dat.</p></section><section class="panel"><span class="kicker">02 / PROGRAM</span><h2>Další zápas</h2><p>Čeká na napojení rozpisu.</p></section><section class="panel"><span class="kicker">03 / PŘEHLED</span><h2>Forma týmu</h2><p>Čeká na napojení výsledků.</p></section><section class="panel"><span class="kicker">04 / TABULKA</span><h2>Postavení týmu</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">05 / HRÁČI</span><h2>Lídři produktivity</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">06 / BRANKÁŘI</span><h2>Brankáři</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">07 / SOUPISKA</span><h2>Aktuální soupiska</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">08 / NOVINKY</span><h2>Klubové novinky</h2><p>Načítám…</p></section></div><p class="notice">Vývojový náhled · živé rozhraní v testování · pouze Dallas má vlastní obrazový banner.</p></main><script src="themes.js"></script><script>
+</style></head><body><main class="arena"><header><div class="brand">BANGER<small>NHL LIVE</small></div><label>Klub <select id="team"></select></label></header><section class="hero"><div class="eyebrow">FAN ARENA · MŮJ TÝM</div><h1 id="name"></h1><p id="tagline"></p></section><div class="section-heading"><h2>Klubové centrum</h2><span>Vývojový náhled</span></div><div class="modules"><section class="panel"><span class="kicker">01 / VÝSLEDEK</span><h2>Poslední zápas</h2><p>Čeká na napojení ověřených dat.</p></section><section class="panel"><span class="kicker">02 / PROGRAM</span><h2>Další zápas</h2><p>Čeká na napojení rozpisu.</p></section><section class="panel"><span class="kicker">03 / PŘEHLED</span><h2>Forma týmu</h2><p>Čeká na napojení výsledků.</p></section><section class="panel"><span class="kicker">04 / TABULKA</span><h2>Postavení týmu</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">05 / HRÁČI</span><h2>Lídři produktivity</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">06 / BRANKÁŘI</span><h2>Brankáři</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">07 / SOUPISKA</span><h2>Aktuální soupiska</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">08 / NOVINKY</span><h2>Klubové novinky</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">09 / ANALYTIKA</span><h2>Pokročilé statistiky</h2><p>Načítám…</p></section></div><p class="notice">Vývojový náhled · živé rozhraní v testování · pouze Dallas má vlastní obrazový banner.</p></main><script src="themes.js"></script><script>
 const NHL_TEAMS=[['ANA','Anaheim Ducks'],['BOS','Boston Bruins'],['BUF','Buffalo Sabres'],['CGY','Calgary Flames'],['CAR','Carolina Hurricanes'],['CHI','Chicago Blackhawks'],['COL','Colorado Avalanche'],['CBJ','Columbus Blue Jackets'],['DAL','Dallas Stars'],['DET','Detroit Red Wings'],['EDM','Edmonton Oilers'],['FLA','Florida Panthers'],['LAK','Los Angeles Kings'],['MIN','Minnesota Wild'],['MTL','Montréal Canadiens'],['NSH','Nashville Predators'],['NJD','New Jersey Devils'],['NYI','New York Islanders'],['NYR','New York Rangers'],['OTT','Ottawa Senators'],['PHI','Philadelphia Flyers'],['PIT','Pittsburgh Penguins'],['SJS','San Jose Sharks'],['SEA','Seattle Kraken'],['STL','St. Louis Blues'],['TBL','Tampa Bay Lightning'],['TOR','Toronto Maple Leafs'],['UTA','Utah Mammoth'],['VAN','Vancouver Canucks'],['VGK','Vegas Golden Knights'],['WSH','Washington Capitals'],['WPG','Winnipeg Jets']];
 const names=new Map(NHL_TEAMS);
 const select=document.getElementById('team'),arena=document.querySelector('.arena'),heading=document.getElementById('name'),tag=document.getElementById('tagline');
@@ -63,6 +63,8 @@ function newsTeamFromHeadline(value){
  return matches.length===1?matches[0][0]:null;
 }
 
+
+function mpParseCSV(csv){const records=[];let row=[],cell='',quoted=false;for(let i=0;i<csv.length;i++){const c=csv[i];if(c==='"'){if(quoted&&csv[i+1]==='"'){cell+='"';i++}else quoted=!quoted}else if(c===','&&!quoted){row.push(cell);cell=''}else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&csv[i+1]==='\n')i++;row.push(cell);if(row.length>1)records.push(row);row=[];cell=''}else cell+=c}if(cell||row.length){row.push(cell);records.push(row)}const keys=records.shift()||[];return records.map(r=>Object.fromEntries(keys.map((k,i)=>[k.replace(/^\uFEFF/,'').trim(),r[i]??''])));}
 
 let requestId=0;
 const panels=[...document.querySelectorAll('.panel p')];
@@ -120,7 +122,18 @@ async function loadClub(){
  target.append(link,meta);
  }
  if(!target.childNodes.length)show(7,'Žádné jednoznačně přiřazené novinky.');
- }catch{show(7,'Novinky nejsou dostupné.')}})()
+ }catch{show(7,'Novinky nejsou dostupné.')}})(),
+ (async()=>{try{
+ const url=new URL('https://xxwqeiuyislnoxsmjuul.supabase.co/functions/v1/nhl-feed');
+ url.searchParams.set('kind','moneypuck');url.searchParams.set('entity','teams');
+ const response=await fetch(url,{headers:{apikey:'sb_publishable_SfeHMIvUkYTuD3jCrWub8w_fPIY0B-G'},signal});if(!response.ok)throw Error('HTTP');
+ const rows=mpParseCSV(await response.text()).filter(r=>r.team===code&&r.situation==='5on5');
+ if(rows.length!==1){show(8,'Jednoznačná týmová data nejsou dostupná.');return}
+ const r=rows[0],num=(...keys)=>{for(const k of keys){const v=r[k];if(typeof v==='string'&&v.trim()&&Number.isFinite(Number(v))&&Number(v)>=0)return Number(v)}return null};
+ const gf=num('xGoalsFor','xGoals'),ga=num('xGoalsAgainst'),cf=num('corsiPercentage','corsiForPercentage'),ff=num('fenwickPercentage','fenwickForPercentage');
+ const fmt=v=>v===null?'—':v.toFixed(2),pct=v=>v!==null&&v<=1?(v*100).toFixed(1)+' %':'—';
+ show(8,['MoneyPuck · 5 na 5','xGF: '+fmt(gf),'xGA: '+fmt(ga),'xGF %: '+pct(gf!==null&&ga!==null&&gf+ga>0?gf/(gf+ga):null),'Corsi: '+pct(cf),'Fenwick: '+pct(ff)].join(' · '));
+ }catch{show(8,'Data MoneyPuck nejsou dostupná.')}})()
  ]);}finally{clearTimeout(timer)}
 }
 select.addEventListener('change',loadClub);loadClub();
