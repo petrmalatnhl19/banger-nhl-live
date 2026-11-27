@@ -34,8 +34,14 @@ class Integrity(unittest.TestCase):
         self.assertNotIn("projectedAlignment",t)
     def test_mixed_role_not_verified_as_forward(self):
         t = validate(F+[["f10","f11","d7"]],D,["g1"])
-        self.assertEqual(t["partialFormations"][0]["verifiedPlayers"],["f10","f11"])
+        self.assertEqual(t["projectedAlignment"]["extraForwardUnit"],["f10","f11"])
+        self.assertEqual(t["projectedAlignment"]["extraDefenders"],["d7"])
+        self.assertEqual(t["partialFormations"],[])
         self.assertEqual(len(t["forwards"]),3)
+    def test_mixed_duplicate_defender_not_alignment(self):
+        t = validate(F+[["f10","f11","d1"]],D,["g1"])
+        self.assertNotIn("projectedAlignment",t)
+        self.assertEqual(t["partialFormations"][0]["verifiedPlayers"],["f10","f11"])
     def test_duplicate_not_eleven_seven(self):
         t = validate(F,D+[["f10","f10"]],["d7","g1"])
         self.assertNotIn("projectedAlignment",t)
