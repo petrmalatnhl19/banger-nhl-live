@@ -44,6 +44,8 @@ on:
       - 'scripts/test_core43_projected_shadow.cjs'
       - 'scripts/core43_json_canonicalization.cjs'
       - 'scripts/core43_json_canonicalization.test.cjs'
+      - 'scripts/core43_v2_automatic_dryrun.cjs'
+      - 'scripts/core43_v2_automatic_dryrun.test.cjs'
       - 'scripts/core43_capture_new_shadow.cjs'
       - 'scripts/core43_append_only_capture_writer.cjs'
       - 'scripts/test_core43_inputs.cjs'
@@ -69,6 +71,7 @@ jobs:
         with:
           node-version: '22'
       - run: node --test scripts/core43_json_canonicalization.test.cjs
+      - run: node --test scripts/core43_v2_automatic_dryrun.test.cjs
       - run: node scripts/test_core43_inputs.cjs
       - run: node scripts/test_core43_gsax.cjs
       - run: node scripts/test_core43_season_gsax.cjs
