@@ -58,6 +58,7 @@ def projection_aliases(abbr, roster):
   "NYI": ("defensemen", 8482516, "Matt Kessel", "Matthew Kessel"),
   "WPG": ("forwards", 8483526, "Danny Zhilkin", "Danil Zhilkin"),
   "DET": ("defensemen", 8481607, "Albert Johannson", "Albert Johansson"),
+  "TOR": ("forwards", 8482691, "Aatu Rätyn", "Aatu Räty"),
  }
  if abbr not in known:
   return {}
