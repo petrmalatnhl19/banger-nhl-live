@@ -82,8 +82,8 @@ def main():
                     if name != row["goalie"] and not urlsplit(url).path.startswith("/hockey/headlines/" + slug + "-"):
                         continue
                     result = parser.match_report(article, row, names.get(row["opponent"], []), observed)
-                    matches.append({"gameId": row["gameId"], "team": row["team"], "goalie": row["goalie"], "status": row["status"], "start": row["startTimeUTC"], "parser_accepts": bool(result)})
-                print(json.dumps({"url": url, "type": article.get("@type"), "about": about, "datePublished": article.get("datePublished"), "dateModified": article.get("dateModified"), "headline": article.get("headline"), "matches": matches}, ensure_ascii=False))
+                    matches.append({"gameId": row["gameId"], "team": row["team"], "goalie": row["goalie"], "status": row["status"], "start": row["startTimeUTC"], "opponent": row["opponent"], "opponent_names": names.get(row["opponent"], []), "venue": row["venue"], "date": row["date"], "parser_accepts": bool(result)})
+                print(json.dumps({"url": url, "type": article.get("@type"), "about": about, "datePublished": article.get("datePublished"), "dateModified": article.get("dateModified"), "headline": article.get("headline"), "description": article.get("description") if any(m["status"] == "confirmed" for m in matches) else None, "matches": matches}, ensure_ascii=False))
         if not found:
             print(json.dumps({"url": url, "reason": "no_news_article", "json_ld_blocks": len(doc.blocks)}))
 
