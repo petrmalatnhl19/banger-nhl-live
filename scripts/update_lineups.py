@@ -402,14 +402,25 @@ for name,team in teams.items():
              and all(normalize(p) in groups["forwards"]-fkeys for p in row)]
   extra_d={normalize(p):p for p in original_single_rows
            if normalize(p) in groups["defense"]-dkeys}
+  # A mixed source trio can explicitly list two extra forwards and a defender.
+  mixed=[row for row in all_rows if len(row)==3
+         and len({normalize(p) for p in row})==3
+         and sum(normalize(p) in groups["forwards"]-fkeys for p in row)==2
+         and sum(normalize(p) in groups["defense"]-dkeys for p in row)==1]
   if (len(team["forwards"])==3 and len(fkeys)==9
       and len(team["defense"])==3 and len(dkeys)==6
-      and len(fragments)==1 and len(extra_d)==1
-      and not fkeys & dkeys
-      and len(all_rows)==7):
-   team["projectedAlignment"]={"forwards":11,"defense":7,
-                               "extraForwardUnit":fragments[0],
-                               "extraDefenders":list(extra_d.values())}
+      and not fkeys & dkeys and len(all_rows)==7):
+   if len(fragments)==1 and len(extra_d)==1 and not mixed:
+    team["projectedAlignment"]={"forwards":11,"defense":7,
+                                "extraForwardUnit":fragments[0],
+                                "extraDefenders":list(extra_d.values())}
+   elif len(mixed)==1 and not fragments and not extra_d:
+    row=mixed[0]
+    team["projectedAlignment"]={"forwards":11,"defense":7,
+                                "extraForwardUnit":[p for p in row if normalize(p) in groups["forwards"]],
+                                "extraDefenders":[p for p in row if normalize(p) in groups["defense"]],
+                                "basis":"mixed_source_row"}
+    partial=[p for p in partial if not (p["group"]=="forwards" and p["verifiedPlayers"]==team["projectedAlignment"]["extraForwardUnit"])]
   team["partialFormations"]=partial
 
   # Explain rejected lines without weakening roster validation.
