@@ -1,5 +1,11 @@
 name: FAN ARENA - Regression Tests
 on:
+  push:
+    branches:
+      - fan-23-isolated-arena
+    paths:
+      - 'fan-arena/**'
+      - '.github/workflows/fan-arena-tests.yml'
   pull_request:
     paths:
       - 'fan-arena/**'
