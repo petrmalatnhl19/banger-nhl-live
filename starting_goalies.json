@@ -1,10 +1,290 @@
 {
-  "date": "2026-11-26",
-  "updatedAt": "2026-11-26T20:11:42.374169+00:00",
-  "teams": {},
-  "conflicts": [],
-  "sourceErrors": [
-    "specialist [missing_current_date]: ValueError: Source does not show today's date"
+  "date": "2026-11-27",
+  "updatedAt": "2026-11-27T13:08:43.615285+00:00",
+  "teams": {
+    "BOS": {
+      "name": "Jeremy Swayman",
+      "status": "projected",
+      "date": "2026-11-27",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8480280",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-27T13:08:41.345845+00:00",
+      "gameId": 2026020400
+    },
+    "CBJ": {
+      "name": "Jet Greaves",
+      "status": "projected",
+      "date": "2026-11-27",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8482982",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-27T13:08:41.345845+00:00",
+      "gameId": 2026020407
+    },
+    "CGY": {
+      "name": "Dustin Wolf",
+      "status": "projected",
+      "date": "2026-11-27",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8481692",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-27T13:08:41.345845+00:00",
+      "gameId": 2026020401
+    },
+    "COL": {
+      "name": "Mackenzie Blackwood",
+      "status": "projected",
+      "date": "2026-11-27",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8478406",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-27T13:08:41.345845+00:00",
+      "gameId": 2026020408
+    },
+    "DAL": {
+      "name": "Jake Oettinger",
+      "status": "projected",
+      "date": "2026-11-27",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8479979",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-27T13:08:41.345845+00:00",
+      "gameId": 2026020403
+    },
+    "EDM": {
+      "name": "Devon Levi",
+      "status": "projected",
+      "date": "2026-11-27",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8482221",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-27T13:08:41.345845+00:00",
+      "gameId": 2026020414
+    },
+    "FLA": {
+      "name": "Jacob Markstrom",
+      "status": "projected",
+      "date": "2026-11-27",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8474593",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-27T13:08:41.345845+00:00",
+      "gameId": 2026020406
+    },
+    "LAK": {
+      "name": "Darcy Kuemper",
+      "status": "projected",
+      "date": "2026-11-27",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8475311",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-27T13:08:41.345845+00:00",
+      "gameId": 2026020409
+    },
+    "NJD": {
+      "name": "Connor Hellebuyck",
+      "status": "projected",
+      "date": "2026-11-27",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8476945",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-27T13:08:41.345845+00:00",
+      "gameId": 2026020401
+    },
+    "NYI": {
+      "name": "Ilya Sorokin",
+      "status": "projected",
+      "date": "2026-11-27",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8478009",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-27T13:08:41.345845+00:00",
+      "gameId": 2026020412
+    },
+    "NYR": {
+      "name": "Dylan Garand",
+      "status": "projected",
+      "date": "2026-11-27",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8482193",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-27T13:08:41.345845+00:00",
+      "gameId": 2026020411
+    },
+    "PHI": {
+      "name": "Dan Vladar",
+      "status": "projected",
+      "date": "2026-11-27",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8478435",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-27T13:08:41.345845+00:00",
+      "gameId": 2026020405
+    },
+    "PIT": {
+      "name": "Arturs Silovs",
+      "status": "projected",
+      "date": "2026-11-27",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8481668",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-27T13:08:41.345845+00:00",
+      "gameId": 2026020413
+    },
+    "SJS": {
+      "name": "Yaroslav Askarov",
+      "status": "projected",
+      "date": "2026-11-27",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8482137",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-27T13:08:41.345845+00:00",
+      "gameId": 2026020410
+    },
+    "STL": {
+      "name": "Joel Hofer",
+      "status": "projected",
+      "date": "2026-11-27",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8480981",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-27T13:08:41.345845+00:00",
+      "gameId": 2026020403
+    },
+    "TOR": {
+      "name": "Anthony Stolarz",
+      "status": "projected",
+      "date": "2026-11-27",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8476932",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-27T13:08:41.345845+00:00",
+      "gameId": 2026020400
+    },
+    "VAN": {
+      "name": "Leevi Meriläinen",
+      "status": "projected",
+      "date": "2026-11-27",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8482447",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-27T13:08:41.345845+00:00",
+      "gameId": 2026020405
+    },
+    "VGK": {
+      "name": "Carter Hart",
+      "status": "projected",
+      "date": "2026-11-27",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8479394",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-27T13:08:41.345845+00:00",
+      "gameId": 2026020410
+    },
+    "WPG": {
+      "name": "Stuart Skinner",
+      "status": "projected",
+      "date": "2026-11-27",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8479973",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-27T13:08:41.345845+00:00",
+      "gameId": 2026020412
+    },
+    "WSH": {
+      "name": "Logan Thompson",
+      "status": "projected",
+      "date": "2026-11-27",
+      "source": "https://www.rotowire.com/hockey/starting-goalies.php?view=teams",
+      "goalieId": "8480313",
+      "sourceLabel": "RotoWire",
+      "checkedAt": "2026-11-27T13:08:41.345845+00:00",
+      "gameId": 2026020406
+    }
+  },
+  "conflicts": [
+    {
+      "date": "2026-11-27",
+      "gameId": 2026020409,
+      "team": "ANA",
+      "specialist": "Ville Husso",
+      "nhl": "Laurent Brossoit",
+      "nhlSource": "https://www.nhl.com/news/los-angeles-kings-anaheim-ducks-game-preview-november-27-2026"
+    },
+    {
+      "date": "2026-11-27",
+      "gameId": 2026020411,
+      "team": "CHI",
+      "specialist": "Spencer Knight",
+      "nhl": "Drew Commesso",
+      "nhlSource": "https://www.nhl.com/news/new-york-rangers-chicago-blackhawks-game-preview-november-27-2026"
+    },
+    {
+      "date": "2026-11-27",
+      "gameId": 2026020404,
+      "team": "TBL",
+      "specialist": "Andrei Vasilevskiy",
+      "nhl": "Dennis Hildeby",
+      "nhlSource": "https://www.nhl.com/news/ottawa-senators-tampa-bay-lightning-game-preview-november-27-2026"
+    },
+    {
+      "date": "2026-11-27",
+      "gameId": 2026020407,
+      "team": "DET",
+      "specialist": "Daniil Tarasov",
+      "nhl": "John Gibson",
+      "nhlSource": "https://www.nhl.com/news/detroit-red-wings-columbus-blue-jackets-game-preview-november-27-2026"
+    },
+    {
+      "date": "2026-11-27",
+      "team": "BUF",
+      "gameId": 2026020413,
+      "reason": "cross_source_conflicting_goalies",
+      "previous": "Ukko-Pekka Luukkonen",
+      "rotowire": "Alex Lyon"
+    },
+    {
+      "date": "2026-11-27",
+      "team": "MIN",
+      "gameId": 2026020408,
+      "reason": "cross_source_conflicting_goalies",
+      "previous": "Filip Gustavsson",
+      "rotowire": "Jesper Wallstedt"
+    },
+    {
+      "date": "2026-11-27",
+      "team": "NSH",
+      "gameId": 2026020402,
+      "reason": "cross_source_conflicting_goalies",
+      "previous": "Justus Annunen",
+      "rotowire": "Juuse Saros"
+    },
+    {
+      "date": "2026-11-27",
+      "team": "OTT",
+      "gameId": 2026020404,
+      "reason": "cross_source_conflicting_goalies",
+      "previous": "Samuel Ersson",
+      "rotowire": "Linus Ullmark"
+    },
+    {
+      "date": "2026-11-27",
+      "team": "SEA",
+      "gameId": 2026020414,
+      "reason": "cross_source_conflicting_goalies",
+      "previous": "Joey Daccord",
+      "rotowire": "Philipp Grubauer"
+    },
+    {
+      "date": "2026-11-27",
+      "team": "UTA",
+      "gameId": 2026020402,
+      "reason": "cross_source_conflicting_goalies",
+      "previous": "Sebastian Cossa",
+      "rotowire": "Karel Vejmelka"
+    }
   ],
-  "status": "unavailable"
+  "sourceErrors": [],
+  "status": "partial"
 }

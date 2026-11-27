@@ -72,25 +72,6 @@
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
-    "red wings": {
-      "updatedAt": "2026-11-22T00:15:13.910680+00:00",
-      "previousPublishedAt": "2026-11-18T20:07:00.572000+00:00",
-      "publishedAt": "2026-11-21T22:59:00+00:00",
-      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "events": [
-        {
-          "type": "removed",
-          "player": "Andreas Englund",
-          "from": "Obrana 3"
-        },
-        {
-          "type": "removed",
-          "player": "Jacob Bernard-Docker",
-          "from": "Obrana 3"
-        }
-      ],
-      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
-    },
     "lightning": {
       "updatedAt": "2026-11-26T20:11:37.421689+00:00",
       "previousPublishedAt": "2026-11-22T15:29:15.319000+00:00",
@@ -482,25 +463,6 @@
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
-    "devils": {
-      "updatedAt": "2026-11-26T20:11:37.423533+00:00",
-      "previousPublishedAt": "2026-11-23T19:55:00+00:00",
-      "publishedAt": "2026-11-26T18:27:20.046000+00:00",
-      "source": "https://www.nhl.com/news/calgary-flames-new-jersey-devils-game-preview-november-27-2026",
-      "events": [
-        {
-          "type": "removed",
-          "player": "Declan Chisholm",
-          "from": "Obrana 3"
-        },
-        {
-          "type": "removed",
-          "player": "Brenden Dillon",
-          "from": "Obrana 3"
-        }
-      ],
-      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
-    },
     "canadiens": {
       "updatedAt": "2026-11-26T20:11:37.423925+00:00",
       "previousPublishedAt": "2026-11-23T19:55:00+00:00",
@@ -582,62 +544,6 @@
           "type": "removed",
           "player": "Ben McCartney",
           "from": "Útok 3"
-        }
-      ],
-      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
-    },
-    "maple leafs": {
-      "updatedAt": "2026-11-26T20:11:37.420176+00:00",
-      "previousPublishedAt": "2026-11-23T19:55:00+00:00",
-      "publishedAt": "2026-11-26T15:54:26.688000+00:00",
-      "source": "https://www.nhl.com/news/toronto-maple-leafs-boston-bruins-game-preview-november-27-2026",
-      "events": [
-        {
-          "type": "moved",
-          "player": "Nick Paul",
-          "from": "Útok 2",
-          "to": "Útok 1"
-        },
-        {
-          "type": "added",
-          "player": "Kirill Marchenko",
-          "to": "Útok 1"
-        },
-        {
-          "type": "added",
-          "player": "Colton Sissons",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Brandon Duhaime",
-          "from": "Útok 4",
-          "to": "Útok 3"
-        },
-        {
-          "type": "removed",
-          "player": "Easton Cowan",
-          "from": "Útok 1"
-        },
-        {
-          "type": "removed",
-          "player": "Jack Roslovic",
-          "from": "Útok 1"
-        },
-        {
-          "type": "removed",
-          "player": "William Nylander",
-          "from": "Útok 3"
-        },
-        {
-          "type": "removed",
-          "player": "Aatu Räty",
-          "from": "Útok 4"
-        },
-        {
-          "type": "removed",
-          "player": "Zack MacEwen",
-          "from": "Útok 4"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -753,71 +659,6 @@
           "type": "removed",
           "player": "Zach Metsa",
           "from": "Obrana 3"
-        }
-      ],
-      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
-    },
-    "blackhawks": {
-      "updatedAt": "2026-11-26T20:11:37.424085+00:00",
-      "previousPublishedAt": "2026-11-22T18:02:00+00:00",
-      "publishedAt": "2026-11-26T20:08:27.248000+00:00",
-      "source": "https://www.nhl.com/news/new-york-rangers-chicago-blackhawks-game-preview-november-27-2026",
-      "events": [
-        {
-          "type": "moved",
-          "player": "Oliver Moore",
-          "from": "Útok 2",
-          "to": "Útok 1"
-        },
-        {
-          "type": "moved",
-          "player": "Frank Nazar",
-          "from": "Útok 2",
-          "to": "Útok 1"
-        },
-        {
-          "type": "moved",
-          "player": "Patrick Kane",
-          "from": "Útok 2",
-          "to": "Útok 1"
-        },
-        {
-          "type": "moved",
-          "player": "Ryan Donato",
-          "from": "Útok 1",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Roman Kantserov",
-          "from": "Útok 1",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Tyler Bertuzzi",
-          "from": "Útok 1",
-          "to": "Útok 2"
-        },
-        {
-          "type": "added",
-          "player": "Ryan Greene",
-          "to": "Útok 3"
-        },
-        {
-          "type": "added",
-          "player": "Anton Frondell",
-          "to": "Útok 3"
-        },
-        {
-          "type": "removed",
-          "player": "Cole Smith",
-          "from": "Útok 3"
-        },
-        {
-          "type": "removed",
-          "player": "Dominic Toninato",
-          "from": "Útok 3"
         }
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
@@ -1127,25 +968,6 @@
       ],
       "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
     },
-    "jets": {
-      "updatedAt": "2026-11-26T20:11:37.424430+00:00",
-      "previousPublishedAt": "2026-11-23T19:55:00+00:00",
-      "publishedAt": "2026-11-25T18:05:49.837000+00:00",
-      "source": "https://www.nhl.com/news/winnipeg-jets-boston-bruins-game-preview-november-25-2026",
-      "events": [
-        {
-          "type": "added",
-          "player": "Alex Iafallo",
-          "to": "Útok 3"
-        },
-        {
-          "type": "removed",
-          "player": "Morgan Barron",
-          "from": "Útok 3"
-        }
-      ],
-      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
-    },
     "avalanche": {
       "updatedAt": "2026-11-26T20:11:37.421871+00:00",
       "previousPublishedAt": "2026-11-19T20:22:00+00:00",
@@ -1346,100 +1168,6 @@
         {
           "type": "removed",
           "player": "Quinn Hughes",
-          "from": "Obrana 1"
-        }
-      ],
-      "basis": "Rozdíl dvou dostupných projekcí, nikoli potvrzená změna sestavy"
-    },
-    "flames": {
-      "updatedAt": "2026-11-26T20:11:37.423339+00:00",
-      "previousPublishedAt": "2026-11-23T19:55:00+00:00",
-      "publishedAt": "2026-11-26T18:27:20.046000+00:00",
-      "source": "https://www.nhl.com/news/calgary-flames-new-jersey-devils-game-preview-november-27-2026",
-      "events": [
-        {
-          "type": "moved",
-          "player": "Yegor Sharangovich",
-          "from": "Útok 3",
-          "to": "Útok 1"
-        },
-        {
-          "type": "moved",
-          "player": "Joel Farabee",
-          "from": "Útok 1",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Adam Klapka",
-          "from": "Útok 3",
-          "to": "Útok 2"
-        },
-        {
-          "type": "moved",
-          "player": "Matvei Gridin",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Jonathan Castagna",
-          "from": "Útok 4",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Aydar Suniev",
-          "from": "Útok 2",
-          "to": "Útok 3"
-        },
-        {
-          "type": "moved",
-          "player": "Joel Hanley",
-          "from": "Obrana 2",
-          "to": "Obrana 1"
-        },
-        {
-          "type": "moved",
-          "player": "Simon Nemec",
-          "from": "Obrana 2",
-          "to": "Obrana 1"
-        },
-        {
-          "type": "moved",
-          "player": "Yan Kuznetsov",
-          "from": "Obrana 3",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "moved",
-          "player": "Zayne Parekh",
-          "from": "Obrana 3",
-          "to": "Obrana 2"
-        },
-        {
-          "type": "removed",
-          "player": "Morgan Frost",
-          "from": "Útok 3"
-        },
-        {
-          "type": "removed",
-          "player": "Maxim Tsyplakov",
-          "from": "Útok 4"
-        },
-        {
-          "type": "removed",
-          "player": "Sam Morton",
-          "from": "Útok 4"
-        },
-        {
-          "type": "removed",
-          "player": "Jake Middleton",
-          "from": "Obrana 1"
-        },
-        {
-          "type": "removed",
-          "player": "Zach Whitecloud",
           "from": "Obrana 1"
         }
       ],

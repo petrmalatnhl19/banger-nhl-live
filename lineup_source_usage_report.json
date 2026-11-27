@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-26T20:11:37.938257+00:00",
+  "generatedAt": "2026-11-27T13:08:39.206751+00:00",
   "teams": 32,
   "activeSourceCounts": {
     "nhl.com": 32
@@ -68,8 +68,8 @@
     {
       "team": "canucks",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/vancouver-canucks-detroit-red-wings-game-preview-november-25-2026",
-      "publishedAt": "2026-11-25T18:09:18.357000+00:00",
+      "source": "https://www.nhl.com/news/vancouver-canucks-philadelphia-flyers-game-preview-november-27-2026",
+      "publishedAt": "2026-11-26T20:38:16.901000+00:00",
       "sourceType": null
     },
     {
@@ -103,15 +103,15 @@
     {
       "team": "flyers",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/philadelphia-flyers-washington-capitals-game-preview-november-25-2026",
-      "publishedAt": "2026-11-25T16:55:01.323000+00:00",
+      "source": "https://www.nhl.com/news/vancouver-canucks-philadelphia-flyers-game-preview-november-27-2026",
+      "publishedAt": "2026-11-26T20:38:16.901000+00:00",
       "sourceType": null
     },
     {
       "team": "golden knights",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/vegas-golden-knights-edmonton-oilers-game-preview-november-24-2026",
-      "publishedAt": "2026-11-24T18:37:21.759000+00:00",
+      "source": "https://www.nhl.com/news/vegas-golden-knights-san-jose-sharks-game-preview-november-27-2026",
+      "publishedAt": "2026-11-26T21:12:23.581000+00:00",
       "sourceType": null
     },
     {
@@ -229,8 +229,8 @@
     {
       "team": "sharks",
       "provider": "nhl.com",
-      "source": "https://www.nhl.com/news/san-jose-sharks-anaheim-ducks-game-preview-november-25-2026",
-      "publishedAt": "2026-11-25T20:12:12.309000+00:00",
+      "source": "https://www.nhl.com/news/vegas-golden-knights-san-jose-sharks-game-preview-november-27-2026",
+      "publishedAt": "2026-11-26T21:12:23.581000+00:00",
       "sourceType": null
     },
     {

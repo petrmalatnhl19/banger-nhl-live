@@ -1,6 +1,21 @@
 {
-  "generatedAt": "2026-11-26T20:11:37.415996+00:00",
+  "generatedAt": "2026-11-27T13:08:38.728721+00:00",
   "teams": {
+    "golden knights": {
+      "team": "VGK",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/vegas-golden-knights-san-jose-sharks-game-preview-november-27-2026",
+      "candidatePublishedAt": "2026-11-26T21:12:23.581000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
     "bruins": {
       "team": "BOS",
       "candidateFound": true,
@@ -16,11 +31,11 @@
       "validatedDefensePairs": 3,
       "accepted": true
     },
-    "hurricanes": {
-      "team": "CAR",
+    "red wings": {
+      "team": "DET",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/carolina-hurricanes-tampa-bay-lightning-game-preview-november-25-2026",
-      "candidatePublishedAt": "2026-11-25T17:47:58.245000+00:00",
+      "candidateSource": "https://www.nhl.com/news/detroit-red-wings-columbus-blue-jackets-game-preview-november-27-2026",
+      "candidatePublishedAt": "2026-11-26T19:29:28.639000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -31,11 +46,11 @@
       "validatedDefensePairs": 3,
       "accepted": true
     },
-    "kings": {
-      "team": "LAK",
+    "panthers": {
+      "team": "FLA",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/los-angeles-kings-anaheim-ducks-game-preview-november-27-2026",
-      "candidatePublishedAt": "2026-11-26T19:39:03.039000+00:00",
+      "candidateSource": "https://www.nhl.com/news/florida-panthers-washington-capitals-game-preview-november-27-2026",
+      "candidatePublishedAt": "2026-11-26T18:32:23.436000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -46,11 +61,11 @@
       "validatedDefensePairs": 3,
       "accepted": true
     },
-    "islanders": {
-      "team": "NYI",
+    "avalanche": {
+      "team": "COL",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/st-louis-blues-new-york-islanders-game-preview-november-25-2026",
-      "candidatePublishedAt": "2026-11-25T17:01:14.644000+00:00",
+      "candidateSource": "https://www.nhl.com/news/colorado-avalanche-minnesota-wild-game-preview-november-27-2026",
+      "candidatePublishedAt": "2026-11-26T14:23:43.359000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -61,8 +76,8 @@
       "validatedDefensePairs": 3,
       "accepted": true
     },
-    "rangers": {
-      "team": "NYR",
+    "blackhawks": {
+      "team": "CHI",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/new-york-rangers-chicago-blackhawks-game-preview-november-27-2026",
       "candidatePublishedAt": "2026-11-26T20:08:27.248000+00:00",
@@ -76,11 +91,45 @@
       "validatedDefensePairs": 3,
       "accepted": true
     },
-    "senators": {
-      "team": "OTT",
+    "flames": {
+      "team": "CGY",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/ottawa-senators-tampa-bay-lightning-game-preview-november-27-2026",
-      "candidatePublishedAt": "2026-11-26T14:20:26.221000+00:00",
+      "candidateSource": "https://www.nhl.com/news/calgary-flames-new-jersey-devils-game-preview-november-27-2026",
+      "candidatePublishedAt": "2026-11-26T18:27:20.046000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [
+        {
+          "group": "forwards",
+          "line": 4,
+          "players": [
+            "Sam Morton"
+          ],
+          "sourceLine": [
+            "Brennan Othmann",
+            "Sam Morton",
+            "Maxim Tsyplakov"
+          ]
+        }
+      ],
+      "rejectedPlayerReasons": [
+        {
+          "name": "Sam Morton",
+          "expectedRole": "forwards",
+          "reason": "not_in_current_roster"
+        }
+      ],
+      "validatedForwardLines": 3,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "sharks": {
+      "team": "SJS",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/vegas-golden-knights-san-jose-sharks-game-preview-november-27-2026",
+      "candidatePublishedAt": "2026-11-26T21:12:23.581000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -91,11 +140,26 @@
       "validatedDefensePairs": 3,
       "accepted": true
     },
-    "sharks": {
-      "team": "SJS",
+    "mammoth": {
+      "team": "UTA",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/san-jose-sharks-anaheim-ducks-game-preview-november-25-2026",
-      "candidatePublishedAt": "2026-11-25T20:12:12.309000+00:00",
+      "candidateSource": "https://www.nhl.com/news/utah-mammoth-nashville-predators-game-preview-november-27-2026",
+      "candidatePublishedAt": "2026-11-26T14:27:47.287000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "maple leafs": {
+      "team": "TOR",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/toronto-maple-leafs-boston-bruins-game-preview-november-27-2026",
+      "candidatePublishedAt": "2026-11-26T15:54:26.688000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -140,11 +204,104 @@
       "validatedDefensePairs": 3,
       "accepted": true
     },
-    "canucks": {
-      "team": "VAN",
+    "canadiens": {
+      "team": "MTL",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/vancouver-canucks-detroit-red-wings-game-preview-november-25-2026",
-      "candidatePublishedAt": "2026-11-25T18:09:18.357000+00:00",
+      "candidateSource": "https://www.nhl.com/news/montreal-canadiens-colorado-avalanche-game-preview-november-25-2026",
+      "candidatePublishedAt": "2026-11-25T19:31:27.212000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "stars": {
+      "team": "DAL",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/dallas-stars-st-louis-blues-game-preview-november-27-2026",
+      "candidatePublishedAt": "2026-11-26T16:07:37.627000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "rangers": {
+      "team": "NYR",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/new-york-rangers-chicago-blackhawks-game-preview-november-27-2026",
+      "candidatePublishedAt": "2026-11-26T20:08:27.248000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "islanders": {
+      "team": "NYI",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/st-louis-blues-new-york-islanders-game-preview-november-25-2026",
+      "candidatePublishedAt": "2026-11-25T17:01:14.644000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "devils": {
+      "team": "NJD",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/calgary-flames-new-jersey-devils-game-preview-november-27-2026",
+      "candidatePublishedAt": "2026-11-26T18:27:20.046000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [
+        {
+          "group": "defense",
+          "line": 3,
+          "players": [
+            "Vladislav Kolyachonok"
+          ],
+          "sourceLine": [
+            "Declan Chisholm",
+            "Vladislav Kolyachonok"
+          ]
+        }
+      ],
+      "rejectedPlayerReasons": [
+        {
+          "name": "Vladislav Kolyachonok",
+          "expectedRole": "defense",
+          "reason": "not_in_current_roster"
+        }
+      ],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 2,
+      "accepted": true
+    },
+    "hurricanes": {
+      "team": "CAR",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/carolina-hurricanes-tampa-bay-lightning-game-preview-november-25-2026",
+      "candidatePublishedAt": "2026-11-25T17:47:58.245000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
@@ -171,8 +328,158 @@
       "validatedDefensePairs": 3,
       "accepted": true
     },
-    "mammoth": {
-      "team": "UTA",
+    "senators": {
+      "team": "OTT",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/ottawa-senators-tampa-bay-lightning-game-preview-november-27-2026",
+      "candidatePublishedAt": "2026-11-26T14:20:26.221000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "sabres": {
+      "team": "BUF",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/new-york-rangers-buffalo-sabres-game-preview-november-25-2026",
+      "candidatePublishedAt": "2026-11-25T17:09:49.924000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "penguins": {
+      "team": "PIT",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/calgary-flames-pittsburgh-penguins-game-preview-november-25-2026",
+      "candidatePublishedAt": "2026-11-25T16:50:34.012000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "flyers": {
+      "team": "PHI",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/vancouver-canucks-philadelphia-flyers-game-preview-november-27-2026",
+      "candidatePublishedAt": "2026-11-26T20:38:16.901000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "capitals": {
+      "team": "WSH",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/florida-panthers-washington-capitals-game-preview-november-27-2026",
+      "candidatePublishedAt": "2026-11-26T18:32:23.436000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "ducks": {
+      "team": "ANA",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/los-angeles-kings-anaheim-ducks-game-preview-november-27-2026",
+      "candidatePublishedAt": "2026-11-26T19:39:03.039000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "kings": {
+      "team": "LAK",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/los-angeles-kings-anaheim-ducks-game-preview-november-27-2026",
+      "candidatePublishedAt": "2026-11-26T19:39:03.039000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "kraken": {
+      "team": "SEA",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/chicago-blackhawks-seattle-kraken-game-preview-november-25-2026",
+      "candidatePublishedAt": "2026-11-25T19:17:47.330000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "wild": {
+      "team": "MIN",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/colorado-avalanche-minnesota-wild-game-preview-november-27-2026",
+      "candidatePublishedAt": "2026-11-26T14:23:43.359000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "blues": {
+      "team": "STL",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/dallas-stars-st-louis-blues-game-preview-november-27-2026",
+      "candidatePublishedAt": "2026-11-26T16:07:37.627000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "predators": {
+      "team": "NSH",
       "candidateFound": true,
       "candidateSource": "https://www.nhl.com/news/utah-mammoth-nashville-predators-game-preview-november-27-2026",
       "candidatePublishedAt": "2026-11-26T14:27:47.287000+00:00",
@@ -186,44 +493,41 @@
       "validatedDefensePairs": 3,
       "accepted": true
     },
-    "red wings": {
-      "team": "DET",
+    "oilers": {
+      "team": "EDM",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/detroit-red-wings-columbus-blue-jackets-game-preview-november-27-2026",
-      "candidatePublishedAt": "2026-11-26T19:29:28.639000+00:00",
+      "candidateSource": "https://www.nhl.com/news/vegas-golden-knights-edmonton-oilers-game-preview-november-24-2026",
+      "candidatePublishedAt": "2026-11-24T18:37:21.759000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",
       "roleMismatches": [],
-      "rejectedLines": [
-        {
-          "group": "defense",
-          "line": 2,
-          "players": [
-            "Albert Johannson"
-          ],
-          "sourceLine": [
-            "Albert Johannson",
-            "Justin Faulk"
-          ]
-        }
-      ],
-      "rejectedPlayerReasons": [
-        {
-          "name": "Albert Johannson",
-          "expectedRole": "defense",
-          "reason": "not_in_current_roster"
-        }
-      ],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
       "validatedForwardLines": 4,
-      "validatedDefensePairs": 2,
+      "validatedDefensePairs": 3,
       "accepted": true
     },
-    "stars": {
-      "team": "DAL",
+    "canucks": {
+      "team": "VAN",
       "candidateFound": true,
-      "candidateSource": "https://www.nhl.com/news/dallas-stars-st-louis-blues-game-preview-november-27-2026",
-      "candidatePublishedAt": "2026-11-26T16:07:37.627000+00:00",
+      "candidateSource": "https://www.nhl.com/news/vancouver-canucks-philadelphia-flyers-game-preview-november-27-2026",
+      "candidatePublishedAt": "2026-11-26T20:38:16.901000+00:00",
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "rosterValidation": "passed",
+      "roleMismatches": [],
+      "rejectedLines": [],
+      "rejectedPlayerReasons": [],
+      "validatedForwardLines": 4,
+      "validatedDefensePairs": 3,
+      "accepted": true
+    },
+    "blue jackets": {
+      "team": "CBJ",
+      "candidateFound": true,
+      "candidateSource": "https://www.nhl.com/news/detroit-red-wings-columbus-blue-jackets-game-preview-november-27-2026",
+      "candidatePublishedAt": "2026-11-26T19:29:28.639000+00:00",
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
       "rosterValidation": "passed",

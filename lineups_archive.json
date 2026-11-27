@@ -42,11 +42,12 @@
         "Carter Hart",
         "Adin Hill"
       ],
-      "injured": "Noah Hanifin (undisclosed",
+      "injured": "Noah Hanifin (undisclosed)",
       "scratched": "Lukas Cromier, Raphael Lavoie",
-      "source": "https://www.nhl.com/news/vegas-golden-knights-edmonton-oilers-game-preview-november-24-2026",
-      "publishedAt": "2026-11-24T18:37:21.759000+00:00",
-      "asOf": "2026-11-24",
+      "source": "https://www.nhl.com/news/vegas-golden-knights-san-jose-sharks-game-preview-november-27-2026",
+      "publishedAt": "2026-11-26T21:12:23.581000+00:00",
+      "partialFormations": [],
+      "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -97,6 +98,7 @@
       "scratched": "Frederic Brunet, Jonathan Aspirot, Michael Eyssimont",
       "source": "https://www.nhl.com/news/toronto-maple-leafs-boston-bruins-game-preview-november-27-2026",
       "publishedAt": "2026-11-26T15:54:26.688000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -132,6 +134,10 @@
           "Moritz Seider"
         ],
         [
+          "Albert Johansson",
+          "Justin Faulk"
+        ],
+        [
           "Andreas Englund",
           "Anton Johansson"
         ]
@@ -144,6 +150,7 @@
       "scratched": "Jacob Bernard-Docker, Mason Appleton",
       "source": "https://www.nhl.com/news/detroit-red-wings-columbus-blue-jackets-game-preview-november-27-2026",
       "publishedAt": "2026-11-26T19:29:28.639000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -195,6 +202,7 @@
       "scratched": "Uvis Balinskis, Bokondji Imama",
       "source": "https://www.nhl.com/news/florida-panthers-washington-capitals-game-preview-november-27-2026",
       "publishedAt": "2026-11-26T18:32:23.436000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -246,6 +254,7 @@
       "scratched": "Noah Juulsen",
       "source": "https://www.nhl.com/news/colorado-avalanche-minnesota-wild-game-preview-november-27-2026",
       "publishedAt": "2026-11-26T14:23:43.359000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -268,6 +277,11 @@
           "Ryan Greene",
           "Anton Frondell",
           "Teuvo Teravainen"
+        ],
+        [
+          "Cole Smith",
+          "Luke Glendening",
+          "Jordan Greenway"
         ]
       ],
       "defense": [
@@ -292,6 +306,7 @@
       "scratched": "Andrew Mangiapane, Dominic Toninato",
       "source": "https://www.nhl.com/news/new-york-rangers-chicago-blackhawks-game-preview-november-27-2026",
       "publishedAt": "2026-11-26T20:08:27.248000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -318,6 +333,10 @@
       ],
       "defense": [
         [
+          "Jake Middleton",
+          "Zach Whitecloud"
+        ],
+        [
           "Joel Hanley",
           "Simon Nemec"
         ],
@@ -334,6 +353,19 @@
       "scratched": "Brayden Pachal",
       "source": "https://www.nhl.com/news/calgary-flames-new-jersey-devils-game-preview-november-27-2026",
       "publishedAt": "2026-11-26T18:27:20.046000+00:00",
+      "partialFormations": [
+        {
+          "group": "forwards",
+          "sourceLine": 4,
+          "verifiedPlayers": [
+            "Brennan Othmann",
+            "Maxim Tsyplakov"
+          ],
+          "expectedPlayers": 3,
+          "complete": false,
+          "unverifiedCount": 1
+        }
+      ],
       "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -378,14 +410,15 @@
         ]
       ],
       "goalies": [
-        "Alex Nedeljkovic",
-        "Yaroslav Askarov"
+        "Yaroslav Askarov",
+        "Alex Nedeljkovic"
       ],
       "injured": "Igor Chernyshov (upper body), Kiefer Sherwood (upper body), Jacob Trouba (lower body)",
-      "scratched": "Libor Hajek, Brett Leason",
-      "source": "https://www.nhl.com/news/san-jose-sharks-anaheim-ducks-game-preview-november-25-2026",
-      "publishedAt": "2026-11-25T20:12:12.309000+00:00",
-      "asOf": "2026-11-25",
+      "scratched": "Luca Cagnoni, Cam Lund",
+      "source": "https://www.nhl.com/news/vegas-golden-knights-san-jose-sharks-game-preview-november-27-2026",
+      "publishedAt": "2026-11-26T21:12:23.581000+00:00",
+      "partialFormations": [],
+      "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -436,6 +469,7 @@
       "scratched": "Tyson Hinds, Ville Husso, Sam Colangelo",
       "source": "https://www.nhl.com/news/los-angeles-kings-anaheim-ducks-game-preview-november-27-2026",
       "publishedAt": "2026-11-26T19:39:03.039000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -487,6 +521,7 @@
       "scratched": "Nico Sturm, Viking Gustafsson Nyberg",
       "source": "https://www.nhl.com/news/colorado-avalanche-minnesota-wild-game-preview-november-27-2026",
       "publishedAt": "2026-11-26T14:23:43.359000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -538,6 +573,7 @@
       "scratched": "Ty Emberson, Max Jones",
       "source": "https://www.nhl.com/news/vegas-golden-knights-edmonton-oilers-game-preview-november-24-2026",
       "publishedAt": "2026-11-24T18:37:21.759000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-24",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -589,6 +625,7 @@
       "scratched": "Colin Blackwell, Trey Taylor",
       "source": "https://www.nhl.com/news/dallas-stars-st-louis-blues-game-preview-november-27-2026",
       "publishedAt": "2026-11-26T16:07:37.627000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -640,6 +677,7 @@
       "scratched": "Andrei Kuzmenko, Declan Carlile",
       "source": "https://www.nhl.com/news/calgary-flames-pittsburgh-penguins-game-preview-november-25-2026",
       "publishedAt": "2026-11-25T16:50:34.012000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-25",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -691,6 +729,7 @@
       "scratched": "Brett Berard, David Reinbacher",
       "source": "https://www.nhl.com/news/montreal-canadiens-colorado-avalanche-game-preview-november-25-2026",
       "publishedAt": "2026-11-25T19:31:27.212000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-25",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -708,6 +747,11 @@
           "Gavin McKenna",
           "John Tavares",
           "Colton Sissons"
+        ],
+        [
+          "Easton Cowan",
+          "Aatu Räty",
+          "William Nylander"
         ],
         [
           "Brandon Duhaime",
@@ -737,6 +781,7 @@
       "scratched": "Cole McWard, Zack MacEwen, Dakota Mermis",
       "source": "https://www.nhl.com/news/toronto-maple-leafs-boston-bruins-game-preview-november-27-2026",
       "publishedAt": "2026-11-26T15:54:26.688000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -788,6 +833,7 @@
       "scratched": "Scott Laughton, Samuel Helenius, Kirill Kirsanov",
       "source": "https://www.nhl.com/news/los-angeles-kings-anaheim-ducks-game-preview-november-27-2026",
       "publishedAt": "2026-11-26T19:39:03.039000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -839,6 +885,7 @@
       "scratched": "Calle Rosen",
       "source": "https://www.nhl.com/news/dallas-stars-st-louis-blues-game-preview-november-27-2026",
       "publishedAt": "2026-11-26T16:07:37.627000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -886,6 +933,18 @@
       "scratched": "Lenni Hameenaho",
       "source": "https://www.nhl.com/news/calgary-flames-new-jersey-devils-game-preview-november-27-2026",
       "publishedAt": "2026-11-26T18:27:20.046000+00:00",
+      "partialFormations": [
+        {
+          "group": "defense",
+          "sourceLine": 3,
+          "verifiedPlayers": [
+            "Declan Chisholm"
+          ],
+          "expectedPlayers": 2,
+          "complete": false,
+          "unverifiedCount": 1
+        }
+      ],
       "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -937,6 +996,7 @@
       "scratched": "Ben McCartney, Gregor Biber",
       "source": "https://www.nhl.com/news/utah-mammoth-nashville-predators-game-preview-november-27-2026",
       "publishedAt": "2026-11-26T14:27:47.287000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -981,14 +1041,15 @@
         ]
       ],
       "goalies": [
-        "Joseph Woll",
-        "Dan Vladar"
+        "Dan Vladar",
+        "Joseph Woll"
       ],
       "injured": "Nikita Grebenkin (back)",
       "scratched": "David Jiricek, Simon Benoit, Michael Bunting",
-      "source": "https://www.nhl.com/news/philadelphia-flyers-washington-capitals-game-preview-november-25-2026",
-      "publishedAt": "2026-11-25T16:55:01.323000+00:00",
-      "asOf": "2026-11-25",
+      "source": "https://www.nhl.com/news/vancouver-canucks-philadelphia-flyers-game-preview-november-27-2026",
+      "publishedAt": "2026-11-26T20:38:16.901000+00:00",
+      "partialFormations": [],
+      "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -1039,6 +1100,7 @@
       "scratched": "Ethen Frank, Justin Holl",
       "source": "https://www.nhl.com/news/florida-panthers-washington-capitals-game-preview-november-27-2026",
       "publishedAt": "2026-11-26T18:32:23.436000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1090,6 +1152,7 @@
       "scratched": "Dmitri Voronkov",
       "source": "https://www.nhl.com/news/detroit-red-wings-columbus-blue-jackets-game-preview-november-27-2026",
       "publishedAt": "2026-11-26T19:29:28.639000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1139,9 +1202,10 @@
       ],
       "injured": "Elias Pettersson (upper body), Brendan Gallagher (lower body), Thatcher Demko (hip), Guillaume Brisebois (undisclosed)",
       "scratched": "Cameron Crotty, Arshdeep Bains",
-      "source": "https://www.nhl.com/news/vancouver-canucks-detroit-red-wings-game-preview-november-25-2026",
-      "publishedAt": "2026-11-25T18:09:18.357000+00:00",
-      "asOf": "2026-11-25",
+      "source": "https://www.nhl.com/news/vancouver-canucks-philadelphia-flyers-game-preview-november-27-2026",
+      "publishedAt": "2026-11-26T20:38:16.901000+00:00",
+      "partialFormations": [],
+      "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
       "basis": "Archiv projekce NHL (nemusí platit pro další zápas)"
@@ -1192,6 +1256,7 @@
       "scratched": "Alex Lyon, Zach Metsa",
       "source": "https://www.nhl.com/news/new-york-rangers-buffalo-sabres-game-preview-november-25-2026",
       "publishedAt": "2026-11-25T17:09:49.924000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-25",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1243,6 +1308,7 @@
       "scratched": "Max Crozier, Emil Lilleberg",
       "source": "https://www.nhl.com/news/ottawa-senators-tampa-bay-lightning-game-preview-november-27-2026",
       "publishedAt": "2026-11-26T14:20:26.221000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1294,6 +1360,7 @@
       "scratched": "Cale Fleury, Ville Ottavainen, Curtis Douglas",
       "source": "https://www.nhl.com/news/chicago-blackhawks-seattle-kraken-game-preview-november-25-2026",
       "publishedAt": "2026-11-25T19:17:47.330000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-25",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1345,6 +1412,7 @@
       "scratched": "Mitchell Chaffee, Scott Mayfield",
       "source": "https://www.nhl.com/news/st-louis-blues-new-york-islanders-game-preview-november-25-2026",
       "publishedAt": "2026-11-25T17:01:14.644000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-25",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1396,6 +1464,7 @@
       "scratched": "Daemon Hunt, Ilya Lyubushkin, Vitali Pinchuk",
       "source": "https://www.nhl.com/news/utah-mammoth-nashville-predators-game-preview-november-27-2026",
       "publishedAt": "2026-11-26T14:27:47.287000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1442,6 +1511,19 @@
       "scratched": "Haydn Fleury, Nino Niederreiter",
       "source": "https://www.nhl.com/news/winnipeg-jets-boston-bruins-game-preview-november-25-2026",
       "publishedAt": "2026-11-25T18:05:49.837000+00:00",
+      "projectedAlignment": {
+        "forwards": 11,
+        "defense": 7,
+        "extraForwardUnit": [
+          "Cole Koepke",
+          "Morgan Barron"
+        ],
+        "extraDefenders": [
+          "Tyrel Bauer"
+        ],
+        "basis": "mixed_source_row"
+      },
+      "partialFormations": [],
       "asOf": "2026-11-25",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1493,6 +1575,7 @@
       "scratched": "Matthew Robertson, Juuso Parssinen",
       "source": "https://www.nhl.com/news/new-york-rangers-chicago-blackhawks-game-preview-november-27-2026",
       "publishedAt": "2026-11-26T20:08:27.248000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1544,6 +1627,7 @@
       "scratched": "Juuso Valimaki, Nicolas Deslauriers",
       "source": "https://www.nhl.com/news/carolina-hurricanes-tampa-bay-lightning-game-preview-november-25-2026",
       "publishedAt": "2026-11-25T17:47:58.245000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-25",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
@@ -1595,6 +1679,7 @@
       "scratched": "Carter Yakemchuk, Tyler Boucher",
       "source": "https://www.nhl.com/news/ottawa-senators-tampa-bay-lightning-game-preview-november-27-2026",
       "publishedAt": "2026-11-26T14:20:26.221000+00:00",
+      "partialFormations": [],
       "asOf": "2026-11-26",
       "dateVerified": true,
       "sourceLabel": "NHL.com",
