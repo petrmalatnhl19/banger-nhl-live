@@ -1,0 +1,42 @@
+name: CORE 4.3 V2 automatic dry-run
+
+on:
+  schedule:
+    - cron: '15,45 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: core43-v2-automatic-dryrun
+  cancel-in-progress: false
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run V2 dry-run regression tests
+        run: |
+          node --test scripts/core43_json_canonicalization.test.cjs
+          node --test scripts/core43_v2_automatic_dryrun.test.cjs
+      - name: Require read credentials
+        run: test -n "$SUPABASE_URL" && test -n "$SUPABASE_SERVICE_ROLE_KEY"
+      - name: Inspect prospective V2 without archive writes
+        run: |
+          node scripts/core43_v2_automatic_dryrun.cjs > core43-v2-dryrun.json
+          node -e 'const fs=require("fs");const r=require("./core43-v2-dryrun.json");fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,"V2 dry-run: "+r.ready+"/"+r.checked+" eligible; archive writes: 0\\n")'
+      - name: Upload short-lived diagnostic
+        uses: actions/upload-artifact@v4
+        with:
+          name: core43-v2-dryrun
+          path: core43-v2-dryrun.json
+          retention-days: 7
