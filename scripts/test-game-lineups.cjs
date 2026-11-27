@@ -60,7 +60,7 @@ module.exports = async function testGameLineups(page, assert) {
     const teams = {
       blackhawks:{...base,forwards:[...f,['P Sixteen','Q Seventeen','R Eighteen']]},
       jets:{...base,projectedAlignment:{forwards:11,defense:7,extraForwardUnit:['Cole Koepke','Morgan Barron'],extraDefenders:['Tyrel Bauer']}},
-      flames:{...base,partialFormations:[{group:'forwards',verifiedPlayers:['Brennan Othmann','Maxim Tsyplakov']}]},
+      flames:{...base,partialFormations:[{group:'forwards',sourceLine:4,verifiedPlayers:['Brennan Othmann','Maxim Tsyplakov']}]},
       devils:{...base,forwards:[...f,['P Sixteen','Q Seventeen','R Eighteen']],defense:d.slice(0,2),partialFormations:[{group:'defense',verifiedPlayers:['Declan Chisholm']}]}
     };
     window.fetch = async url => ({ok:true,json:async()=>String(url).includes('./lineups.json?')?{fetchedAt:new Date().toISOString(),rosterValidated:true,teams}:{}});
@@ -80,5 +80,7 @@ module.exports = async function testGameLineups(page, assert) {
   assert.match(projections[1].text,/Neúplná projekce/);
   assert.match(projections[1].text,/Brennan Othmann/);
   assert.match(projections[1].text,/Declan Chisholm/);
+  assert.match(projections[1].text,/4\. útok\s+Brennan Othmann/);
+  assert.match(projections[1].text,/Neúplná formace – pořadí neověřeno\s+Declan Chisholm/);
   assert.equal(projections.some(x=>x.overflow),false);
 };
