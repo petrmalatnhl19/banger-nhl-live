@@ -1,0 +1,36 @@
+name: DATA-03 isolated live import audit
+on:
+  pull_request:
+    paths:
+      - scripts/update_starting_goalies.py
+      - .github/workflows/data03-import-audit.yml
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run real collector in temporary directory
+        shell: bash
+        run: |
+          set -euo pipefail
+          work=$(mktemp -d)
+          cp nhl_rosters.json lineups.json starting_goalies.json "$work/"
+          cd "$work"
+          python "$GITHUB_WORKSPACE/scripts/update_starting_goalies.py"
+          python - <<'PY'
+          import json
+          data=json.load(open("starting_goalies.json"))
+          print(json.dumps(data,ensure_ascii=False,indent=2))
+          assert data["teams"], "No real projections: live audit inconclusive"
+          for team,row in data["teams"].items():
+              if row["status"]=="projected":
+                  assert row.get("sourceEvidence"), (team,"missing evidence")
+                  assert row.get("goalieId"), (team,"missing NHL identity")
+          assert any(r["status"]=="projected" for r in data["teams"].values()), "No fresh projections"
+          PY
+          cp starting_goalies.json "$GITHUB_WORKSPACE/starting_goalies.json"
+          cd "$GITHUB_WORKSPACE"
+          node --test .github/scripts/test-data-03.cjs
