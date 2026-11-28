@@ -26,3 +26,42 @@ jobs:
         run: psql -h 127.0.0.1 -U postgres -d postgres -f scripts/sql/security_analytics_invoker_fixture.sql
       - name: Existing production GET-only baseline
         run: node scripts/security_core43_public_rest_smoke.cjs
+
+      - name: Real archive snapshot parity (public GET only)
+        env:
+          PGPASSWORD: local_fixture_only
+        run: |
+          set -eu
+          umask 077
+          snapshot=scripts/sql/security_analytics_snapshot_input.sql
+          trap 'rm -f "$snapshot"' EXIT
+          node <<'NODE'
+          const fs = require('node:fs');
+          const assert = require('node:assert/strict');
+          async function main() {
+            const source = fs.readFileSync('core-performance.js', 'utf8');
+            const base = source.match(/const ROOT='(https:\/\/[^']+\/rest\/v1\/)';/);
+            const key = source.match(/const APIKEY='(sb_publishable_[^']+)';/);
+            assert.ok(base && key);
+            const columns = 'actual_away,actual_home,advanced_away,advanced_home,baseline_away,baseline_home,core40_away,core40_home,core41_away,core41_home,core42_away,core42_goalie_review,core42_home,core42_predicted_at,game_date,game_id,goalie32_away,goalie32_home,special33_away,special33_home,status';
+            const url = new URL('nhl_prediction_archive', base[1]);
+            url.searchParams.set('select', columns);
+            url.searchParams.set('order', 'game_id.asc');
+            const response = await fetch(url, {headers:{apikey:key[1],Prefer:'count=exact',Range:'0-999'},redirect:'error',signal:AbortSignal.timeout(30000)});
+            console.log('Archive GET status:', response.status);
+            assert.ok(response.ok);
+            const range = response.headers.get('content-range');
+            const match = range && range.match(/^0-(\d+)\/(\d+)$/);
+            assert.ok(match);
+            const rows = await response.json();
+            assert.ok(Array.isArray(rows) && rows.length > 0 && rows.length === Number(match[2]) && rows.length === Number(match[1])+1);
+            assert.ok(rows.every(row => columns.split(',').every(c => Object.hasOwn(row,c))));
+            assert.ok(rows.every(row => Number.isSafeInteger(row.game_id)));
+            const payload = Buffer.from(JSON.stringify(rows)).toString('hex');
+            fs.writeFileSync('scripts/sql/security_analytics_snapshot_input.sql', "INSERT INTO public.nhl_prediction_archive SELECT * FROM jsonb_populate_recordset(NULL::public.nhl_prediction_archive, convert_from(decode('"+payload+"','hex'),'UTF8')::jsonb);\n", {mode:0o600,flag:'wx'});
+            console.log('Complete archive snapshot rows:',rows.length);
+          }
+          main().catch(() => { console.error('Snapshot retrieval or validation failed'); process.exitCode=1; });
+          NODE
+          psql -h 127.0.0.1 -U postgres -d postgres -v real_snapshot=1 -f scripts/sql/security_analytics_invoker_fixture.sql >/dev/null 2>&1 || { echo 'Real snapshot SQL rehearsal failed (data-bearing diagnostics suppressed)'; exit 1; }
+          echo 'Real snapshot: all role parity, RLS and rollback assertions passed'
