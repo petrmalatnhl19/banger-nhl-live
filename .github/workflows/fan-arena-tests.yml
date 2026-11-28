@@ -33,3 +33,12 @@ jobs:
         env:
           NODE_PATH: ${{ runner.temp }}/arena-browser/node_modules
         run: node fan-arena/mobile.test.cjs
+      - name: Read-only live data coverage audit
+        run: node fan-arena/live-audit.cjs
+      - name: Upload live coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fan-arena-live-report
+          path: fan-arena-live-report.json
+          if-no-files-found: warn
