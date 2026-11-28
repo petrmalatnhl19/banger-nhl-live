@@ -80,6 +80,15 @@
 .arena[data-team=DAL] .metric-track{height:9px}
 @media(min-width:601px){.arena[data-team=DAL] .panel:nth-child(5),.arena[data-team=DAL] .panel:nth-child(6){grid-column:span 3}}
 @media(max-width:600px){.arena[data-team=DAL] .panel:nth-child(-n+2){grid-column:1/-1}.arena[data-team=DAL] .hero{min-height:340px}}
+
+.arena[data-team=DAL] .match-form{margin:4px 0}
+.arena[data-team=DAL] .player-row img{width:48px;height:48px;object-fit:contain;float:left;margin-right:8px}
+.arena[data-team=DAL] .player-row{display:flow-root}
+.arena[data-team=DAL] .player-row small{overflow-wrap:normal;font-size:13px}
+.arena[data-team=DAL] .metric-row:nth-of-type(3),.arena[data-team=DAL] .metric-row:nth-of-type(4){display:inline-block;width:49%;vertical-align:top}
+.arena[data-team=DAL] .standing-tile{display:inline-block;width:33.33%;vertical-align:top;text-align:center}
+.arena[data-team=DAL] .standing-tile strong{display:block;font-size:25px;color:#a6f4c8}
+.arena[data-team=DAL] .roster-group summary{cursor:pointer;color:#d8f5e5;font-weight:700}
 </style></head><body><main class="arena"><header><div class="brand">BANGER<small>NHL LIVE</small></div><label>Klub <select id="team"></select></label></header><section class="hero"><div class="dallas-identity"><img src="https://assets.nhle.com/logos/nhl/svg/DAL_dark.svg" alt="" width="64" height="64"><span>DALLAS · TEXAS<br>VICTORY GREEN</span></div><div class="eyebrow">FAN ARENA · MŮJ TÝM</div><h1 id="name"></h1><p id="tagline"></p></section><div class="section-heading"><h2>Klubové centrum</h2><span>Vývojový náhled</span></div><div class="modules"><section class="panel"><span class="kicker">01 / VÝSLEDEK</span><h2>Poslední zápas</h2><p>Čeká na napojení ověřených dat.</p></section><section class="panel"><span class="kicker">02 / PROGRAM</span><h2>Další zápas</h2><p>Čeká na napojení rozpisu.</p></section><section class="panel"><span class="kicker">03 / PŘEHLED</span><h2>Forma týmu</h2><p>Čeká na napojení výsledků.</p></section><section class="panel"><span class="kicker">04 / TABULKA</span><h2>Postavení týmu</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">05 / HRÁČI</span><h2>Lídři produktivity</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">06 / BRANKÁŘI</span><h2>Brankáři</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">07 / SOUPISKA</span><h2>Aktuální soupiska</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">08 / NOVINKY</span><h2>Klubové novinky</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">09 / ANALYTIKA</span><h2>Pokročilé statistiky</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">10 / GSAx</span><h2>Pokročilé statistiky brankářů</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">11 / HRÁČSKÁ ANALYTIKA</span><h2>Individuální xG</h2><p>Načítám…</p></section></div><p class="notice">Vývojový náhled · živé rozhraní v testování · pouze Dallas má vlastní obrazový banner.</p></main><script src="themes.js"></script><script>
 const NHL_TEAMS=[['ANA','Anaheim Ducks'],['BOS','Boston Bruins'],['BUF','Buffalo Sabres'],['CGY','Calgary Flames'],['CAR','Carolina Hurricanes'],['CHI','Chicago Blackhawks'],['COL','Colorado Avalanche'],['CBJ','Columbus Blue Jackets'],['DAL','Dallas Stars'],['DET','Detroit Red Wings'],['EDM','Edmonton Oilers'],['FLA','Florida Panthers'],['LAK','Los Angeles Kings'],['MIN','Minnesota Wild'],['MTL','Montréal Canadiens'],['NSH','Nashville Predators'],['NJD','New Jersey Devils'],['NYI','New York Islanders'],['NYR','New York Rangers'],['OTT','Ottawa Senators'],['PHI','Philadelphia Flyers'],['PIT','Pittsburgh Penguins'],['SJS','San Jose Sharks'],['SEA','Seattle Kraken'],['STL','St. Louis Blues'],['TBL','Tampa Bay Lightning'],['TOR','Toronto Maple Leafs'],['UTA','Utah Mammoth'],['VAN','Vancouver Canucks'],['VGK','Vegas Golden Knights'],['WSH','Washington Capitals'],['WPG','Winnipeg Jets']];
 const names=new Map(NHL_TEAMS);
@@ -139,7 +148,7 @@ async function loadClub(){
  controller?.abort();controller=new AbortController();const signal=controller.signal;
  panels.forEach(p=>p.textContent='Načítám…');
  const timer=setTimeout(()=>controllerForRequest.abort(),12000),controllerForRequest=controller;
- const show=(i,value,game)=>{if(id===requestId){panels[i].textContent=value;}else{return;}
+ const show=(i,value,game,players)=>{if(id===requestId){panels[i].textContent=value;}else{return;}
  if(code!=='DAL'||typeof panels[i].replaceChildren!=='function'||typeof panels[i].setAttribute!=='function')return;
  if((i===0||i===1)&&game&&[game.awayTeam?.abbrev,game.homeTeam?.abbrev].every(t=>names.has(t))){
  const hidden=document.createElement('span');hidden.hidden=true;hidden.textContent=value;
@@ -150,14 +159,15 @@ async function loadClub(){
  if(i===1){const date=document.createElement('span');date.className='match-date';date.setAttribute('aria-hidden','true');date.textContent=new Date(game.startTimeUTC).toLocaleString('cs-CZ',{timeZone:'Europe/Prague',day:'numeric',month:'numeric',hour:'2-digit',minute:'2-digit'});panels[i].append(date)}
  return;
  }
+ if(i===3&&value.startsWith('Body: ')){const parts=[];value.split(' · ').forEach((entry,j)=>{if(j){const sep=document.createElement('span');sep.hidden=true;sep.textContent=' · ';parts.push(sep)}const tile=document.createElement('span');tile.className='standing-tile';const split=entry.indexOf(': ');tile.textContent=entry.slice(0,split+2);const strong=document.createElement('strong');strong.textContent=entry.slice(split+2);tile.append(strong);parts.push(tile)});panels[i].replaceChildren(...parts);return;}
  if(i===4||i===5){
  const entries=value.split(' | ').map(s=>s.match(/^(.+?) · (.+)$/));
  if(entries.some(e=>!e))return;
  const parts=[];entries.forEach((e,j)=>{if(j){const sep=document.createElement('span');sep.textContent=' | ';sep.hidden=true;parts.push(sep)}
- const row=document.createElement('span');row.className='player-row';const name=document.createElement('strong');name.textContent=e[1];const sep=document.createElement('span');sep.textContent=' · ';sep.hidden=true;const stats=document.createElement('small');stats.textContent=e[2];row.append(name,sep,stats);parts.push(row)});
+ const row=document.createElement('span');row.className='player-row';const name=document.createElement('strong');name.textContent=e[1];const sep=document.createElement('span');sep.textContent=' · ';sep.hidden=true;const stats=document.createElement('small');stats.textContent=e[2];const p=players?.[j];if(p&&typeof p.headshot==='string'){try{const url=new URL(p.headshot);if(url.protocol==='https:'&&url.hostname==='assets.nhle.com'){const img=document.createElement('img');img.src=url.href;img.alt='';img.width=48;img.height=48;img.addEventListener('error',()=>{img.hidden=true});row.append(img)}}catch{}}row.append(name,sep,stats);parts.push(row)});
  panels[i].replaceChildren(...parts);return;
  }
- if(i===6){const groups=value.split('\n');if(groups.length!==3)return;const parts=[];groups.forEach((g,j)=>{if(j)parts.push(document.createTextNode('\n'));const row=document.createElement('span');row.className='roster-group';row.textContent=g;parts.push(row)});panels[i].replaceChildren(...parts);return;}
+ if(i===6){const groups=value.split('\n');if(groups.length!==3)return;const parts=[];groups.forEach((g,j)=>{if(j)parts.push(document.createTextNode('\n'));const row=document.createElement('details');row.className='roster-group';const split=g.indexOf(': ');const summary=document.createElement('summary');summary.textContent=g.slice(0,split+2);const body=document.createElement('span');body.textContent=g.slice(split+2);row.append(summary,body);parts.push(row)});panels[i].replaceChildren(...parts);return;}
  if(i>=8&&i<=10&&value.startsWith('MoneyPuck · ')){
  const fields=value.split(' · '),source=fields.slice(0,2).join(' · '),body=fields.slice(2).join(' · ');
  const parts=[];const meta=document.createElement('span');meta.className='metric-source';meta.textContent=source;parts.push(meta);
@@ -198,8 +208,8 @@ async function loadClub(){
  const name=p=>[p.firstName?.default??p.firstName,p.lastName?.default??p.lastName].filter(x=>typeof x==='string').join(' ');
  const top=(rows,key)=>Array.isArray(rows)?rows.filter(p=>name(p)&&Number.isFinite(p[key])).sort((a,b)=>b[key]-a[key]).slice(0,3):[];
  const skaters=top(d.skaters,'points'),goalies=top(d.goalies,'wins');
- show(4,skaters.map(p=>name(p)+' · '+p.points+' b.').join(' | ')||'Statistiky nejsou dostupné.');
- show(5,goalies.map(p=>name(p)+' · '+p.wins+' V · SV% '+(formatSavePercentage(p))).join(' | ')||'Statistiky nejsou dostupné.');
+ show(4,skaters.map(p=>name(p)+' · '+p.points+' b.').join(' | ')||'Statistiky nejsou dostupné.',null,skaters);
+ show(5,goalies.map(p=>name(p)+' · '+p.wins+' V · SV% '+(formatSavePercentage(p))).join(' | ')||'Statistiky nejsou dostupné.',null,goalies);
  }catch{show(4,'Statistiky nejsou dostupné.');show(5,'Statistiky nejsou dostupné.')}})(),
  (async()=>{try{const d=await readClub('roster',code,signal);
  const name=p=>[p?.firstName?.default??p?.firstName,p?.lastName?.default??p?.lastName].filter(x=>typeof x==='string'&&x.trim()).join(' ');
