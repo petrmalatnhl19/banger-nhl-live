@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CORE Accuracy Lab · BANGER NHL LIVE</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <script defer src="engine.js"></script>
+  <script defer src="dashboard.js"></script>
+</head>
+<body>
+<main>
+  <header>
+    <p class="brand">BANGER NHL LIVE</p>
+    <h1>CORE Accuracy Lab</h1>
+    <p id="status" role="status">Načti lokální JSON vytvořený evaluátorem.</p>
+    <label for="load" class="file">Načíst report <input id="load" type="file" accept=".json,application/json"></label>
+  </header>
+  <form id="filters" hidden>
+    <label>Původ predikce <select name="kind">
+      <option value="archived">Archivované</option>
+      <option value="reproduced">Reprodukované</option>
+      <option value="simulation">Simulované</option>
+    </select></label>
+    <label>Model <select name="model"><option value="">Všechny modely</option></select></label>
+    <label>Tým <select name="team"><option value="">Všechny týmy</option></select></label>
+    <label>Od <input name="from" type="date"></label>
+    <label>Do <input name="through" type="date"></label>
+    <label>Výsledek <select name="target">
+      <option value="final">Včetně prodloužení a nájezdů</option>
+      <option value="regulation">Základní hrací doba</option>
+    </select></label>
+  </form>
+  <section id="pilot" aria-labelledby="pilot-title" hidden>
+    <h2 id="pilot-title">Předzápasový pilot CORE</h2>
+    <p id="pilot-game"></p>
+    <p id="pilot-countdown"></p>
+    <p id="pilot-status"></p>
+    <p id="pilot-time"></p>
+    <p id="pilot-missing" hidden></p>
+    <div id="pilot-models" class="cards"></div>
+    <details id="pilot-sources">
+      <summary>Zdroje a časy sběru</summary>
+      <div id="pilot-source-rows" class="scroll"></div>
+    </details>
+  </section>
+  <section id="pilot-security" aria-labelledby="pilot-security-title" hidden>
+    <h2 id="pilot-security-title">Bezpečnostní připravenost pilotu</h2>
+    <p id="pilot-security-summary"></p>
+    <p id="pilot-security-last-test"></p>
+    <ul id="pilot-security-checks"></ul>
+  </section>
+  <section id="replay" aria-labelledby="replay-title" hidden>
+    <h2 id="replay-title">Offline přepočet CORE</h2>
+    <p id="replay-summary"></p>
+    <p id="replay-time"></p>
+    <p id="replay-missing" hidden></p>
+    <div id="replay-results" class="cards"></div>
+    <details id="replay-details" hidden>
+      <summary>Rozdíly po zápasech</summary>
+      <div id="replay-deltas" class="scroll"></div>
+    </details>
+  </section>
+  <section id="pregame" aria-labelledby="pregame-title" hidden>
+    <h2 id="pregame-title">Předzápasové snímky</h2>
+    <p id="pregame-context"></p>
+    <div id="pregame-models" class="cards"></div>
+    <div id="pregame-games"></div>
+  </section>
+  <div id="report" hidden>
+    <section aria-labelledby="reference-title">
+      <h2 id="reference-title">Společný snímek T−60</h2>
+      <label id="reference-filter" hidden>Období
+        <select id="reference-partition">
+          <option value="pilot">Pilotní období</option>
+          <option value="validation">Validační období</option>
+        </select>
+      </label>
+      <p id="reference-context" role="status"></p>
+      <div id="reference-models" class="cards"></div>
+      <div id="reference-pairs" class="scroll"></div>
+      <details id="reference-detail" hidden>
+        <summary>Časové ověření a chybějící vstupy po zápasech</summary>
+        <div id="reference-coverage" class="scroll"></div>
+      </details>
+    </section>
+    <section aria-labelledby="overview-title">
+      <h2 id="overview-title">Výsledky podle modelu</h2>
+      <p id="context"></p>
+      <div id="models" class="cards"></div>
+    </section>
+    <section aria-labelledby="pairs-title">
+      <h2 id="pairs-title">Párové porovnání</h2>
+      <p>Každá metrika používá stejné zápasy pro oba modely. Shodný čas a shodu doložených vstupů uvádíme samostatně.</p>
+      <div id="pairs" class="scroll" tabindex="0"></div>
+    </section>
+    <section aria-labelledby="history-title">
+      <h2 id="history-title">Historie zápasů a predikcí</h2>
+      <div id="history"></div>
+    </section>
+  </div>
+</main>
+</body>
+</html>
