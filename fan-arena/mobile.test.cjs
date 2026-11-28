@@ -14,8 +14,8 @@ const path=require('node:path');
       if(u.origin!=='https://arena-test.invalid')return r.abort();
       const rel=u.pathname.slice(1)||'index.html';
       const allowed=['index.html','fan-arena/preview.html','fan-arena/themes.js','fan-arena/arena-art.js'];
-      if(!allowed.includes(rel))return r.abort();
-      return r.fulfill({body:fs.readFileSync(path.resolve(rel)),contentType:rel.endsWith('.js')?'application/javascript':'text/html'});
+      if(!allowed.includes(rel)&&!/^fan-arena\/[A-Z]{3}\.webp$/.test(rel))return r.abort();
+      return r.fulfill({body:fs.readFileSync(path.resolve(rel)),contentType:rel.endsWith('.webp')?'image/webp':rel.endsWith('.js')?'application/javascript':'text/html'});
     });
     await integration.goto('https://arena-test.invalid/index.html');
     await integration.evaluate(()=>localStorage.setItem('banger-favorite-team-v1','BOS'));
@@ -69,10 +69,8 @@ const path=require('node:path');
         assert.equal(await page.locator('.arena').getAttribute('data-team'),code);
         assert.ok(await page.locator('#name').innerText());
         assert.equal(await page.locator('.panel').count(),11);
-        if(code!=='DAL'){
-          const art=await page.evaluate(async code=>{const svg=globalThis.BangerArenaArt?.[code];if(!svg)return false;const img=new Image();img.src='data:image/svg+xml,'+encodeURIComponent(svg);await img.decode();return img.naturalWidth>0&&getComputedStyle(document.querySelector('.hero')).backgroundImage.includes('data:image/svg+xml')},code);
-          assert.ok(art,code+' banner decode and application');
-        }
+        const art=await page.evaluate(async code=>{const img=new Image();img.src=code+'.webp';await img.decode();const bg=getComputedStyle(document.querySelector('.hero')).backgroundImage;return img.naturalWidth>0&&img.naturalHeight>0&&bg.includes(code+'.webp')},code);
+        assert.ok(art,code+' WebP banner decode and application');
         assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),width+' '+code+' horizontal overflow');
         assert.ok(await page.locator('#team').evaluate(e=>{const r=e.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth+1}));
       }
