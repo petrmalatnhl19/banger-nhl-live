@@ -1,0 +1,24 @@
+name: CORE43 public projection isolated rehearsal
+on:
+  pull_request:
+    paths:
+      - scripts/sql/security_core43_public_projection_rehearsal.sql
+      - .github/workflows/security-core43-public-projection.yml
+permissions:
+  contents: read
+jobs:
+  rehearsal:
+    runs-on: ubuntu-24.04
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: projection_fixture
+          POSTGRES_HOST_AUTH_METHOD: trust
+        options: >-
+          --health-cmd "pg_isready -U postgres -d projection_fixture"
+          --health-interval 2s --health-timeout 3s --health-retries 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Isolated synthetic projection parity
+        run: docker exec -i ${{ job.services.postgres.id }} psql -X -v ON_ERROR_STOP=1 -U postgres -d projection_fixture < scripts/sql/security_core43_public_projection_rehearsal.sql
