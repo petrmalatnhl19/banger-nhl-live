@@ -366,6 +366,17 @@ CREATE POLICY read_archive ON public.nhl_prediction_archive FOR SELECT TO anon,a
 SET LOCAL ROLE anon;
 DO $$ BEGIN IF (SELECT pending_predictions+finalized_predictions+reviewed_goalies FROM public.nhl_core42_status) <> 0 OR EXISTS(SELECT 1 FROM public.nhl_core_model_accuracy) OR EXISTS(SELECT 1 FROM public.nhl_core_model_head_to_head) OR EXISTS(SELECT 1 FROM public.nhl_core_model_trend) THEN RAISE EXCEPTION 'RLS not enforced'; END IF; END $$;
 RESET ROLE;
+SET LOCAL ROLE authenticated;
+DO $$ BEGIN IF (SELECT pending_predictions+finalized_predictions+reviewed_goalies FROM public.nhl_core42_status) <> 0 OR EXISTS(SELECT 1 FROM public.nhl_core_model_accuracy) OR EXISTS(SELECT 1 FROM public.nhl_core_model_head_to_head) OR EXISTS(SELECT 1 FROM public.nhl_core_model_trend) THEN RAISE EXCEPTION 'RLS not enforced'; END IF; END $$;
+RESET ROLE;
+SET LOCAL ROLE service_role;
+DO $$ BEGIN
+IF EXISTS ((SELECT * FROM public.nhl_core42_status EXCEPT ALL SELECT * FROM before_service_role_0) UNION ALL (SELECT * FROM before_service_role_0 EXCEPT ALL SELECT * FROM public.nhl_core42_status)) THEN RAISE EXCEPTION 'row mismatch service_role nhl_core42_status'; END IF;
+IF EXISTS ((SELECT * FROM public.nhl_core_model_accuracy EXCEPT ALL SELECT * FROM before_service_role_1) UNION ALL (SELECT * FROM before_service_role_1 EXCEPT ALL SELECT * FROM public.nhl_core_model_accuracy)) THEN RAISE EXCEPTION 'row mismatch service_role nhl_core_model_accuracy'; END IF;
+IF EXISTS ((SELECT * FROM public.nhl_core_model_head_to_head EXCEPT ALL SELECT * FROM before_service_role_2) UNION ALL (SELECT * FROM before_service_role_2 EXCEPT ALL SELECT * FROM public.nhl_core_model_head_to_head)) THEN RAISE EXCEPTION 'row mismatch service_role nhl_core_model_head_to_head'; END IF;
+IF EXISTS ((SELECT * FROM public.nhl_core_model_trend EXCEPT ALL SELECT * FROM before_service_role_3) UNION ALL (SELECT * FROM before_service_role_3 EXCEPT ALL SELECT * FROM public.nhl_core_model_trend)) THEN RAISE EXCEPTION 'row mismatch service_role nhl_core_model_trend'; END IF;
+END $$;
+RESET ROLE;
 \ir security_analytics_invoker_rollback.sql
 DO $$ BEGIN IF EXISTS (SELECT 1 FROM metadata_before b JOIN pg_class c ON c.oid=b.oid WHERE c.relacl IS DISTINCT FROM b.relacl OR pg_get_viewdef(c.oid,true) IS DISTINCT FROM b.definition OR c.reloptions IS NOT NULL) THEN RAISE EXCEPTION 'metadata mismatch'; END IF; END $$;
 SET LOCAL ROLE anon;
@@ -376,4 +387,47 @@ IF EXISTS ((SELECT * FROM public.nhl_core_model_head_to_head EXCEPT ALL SELECT *
 IF EXISTS ((SELECT * FROM public.nhl_core_model_trend EXCEPT ALL SELECT * FROM before_anon_3) UNION ALL (SELECT * FROM before_anon_3 EXCEPT ALL SELECT * FROM public.nhl_core_model_trend)) THEN RAISE EXCEPTION 'row mismatch anon nhl_core_model_trend'; END IF;
 END $$;
 RESET ROLE;
+SET LOCAL ROLE authenticated;
+DO $$ BEGIN
+IF EXISTS ((SELECT * FROM public.nhl_core42_status EXCEPT ALL SELECT * FROM before_authenticated_0) UNION ALL (SELECT * FROM before_authenticated_0 EXCEPT ALL SELECT * FROM public.nhl_core42_status)) THEN RAISE EXCEPTION 'row mismatch authenticated nhl_core42_status'; END IF;
+IF EXISTS ((SELECT * FROM public.nhl_core_model_accuracy EXCEPT ALL SELECT * FROM before_authenticated_1) UNION ALL (SELECT * FROM before_authenticated_1 EXCEPT ALL SELECT * FROM public.nhl_core_model_accuracy)) THEN RAISE EXCEPTION 'row mismatch authenticated nhl_core_model_accuracy'; END IF;
+IF EXISTS ((SELECT * FROM public.nhl_core_model_head_to_head EXCEPT ALL SELECT * FROM before_authenticated_2) UNION ALL (SELECT * FROM before_authenticated_2 EXCEPT ALL SELECT * FROM public.nhl_core_model_head_to_head)) THEN RAISE EXCEPTION 'row mismatch authenticated nhl_core_model_head_to_head'; END IF;
+IF EXISTS ((SELECT * FROM public.nhl_core_model_trend EXCEPT ALL SELECT * FROM before_authenticated_3) UNION ALL (SELECT * FROM before_authenticated_3 EXCEPT ALL SELECT * FROM public.nhl_core_model_trend)) THEN RAISE EXCEPTION 'row mismatch authenticated nhl_core_model_trend'; END IF;
+END $$;
+RESET ROLE;
+SET LOCAL ROLE service_role;
+DO $$ BEGIN
+IF EXISTS ((SELECT * FROM public.nhl_core42_status EXCEPT ALL SELECT * FROM before_service_role_0) UNION ALL (SELECT * FROM before_service_role_0 EXCEPT ALL SELECT * FROM public.nhl_core42_status)) THEN RAISE EXCEPTION 'row mismatch service_role nhl_core42_status'; END IF;
+IF EXISTS ((SELECT * FROM public.nhl_core_model_accuracy EXCEPT ALL SELECT * FROM before_service_role_1) UNION ALL (SELECT * FROM before_service_role_1 EXCEPT ALL SELECT * FROM public.nhl_core_model_accuracy)) THEN RAISE EXCEPTION 'row mismatch service_role nhl_core_model_accuracy'; END IF;
+IF EXISTS ((SELECT * FROM public.nhl_core_model_head_to_head EXCEPT ALL SELECT * FROM before_service_role_2) UNION ALL (SELECT * FROM before_service_role_2 EXCEPT ALL SELECT * FROM public.nhl_core_model_head_to_head)) THEN RAISE EXCEPTION 'row mismatch service_role nhl_core_model_head_to_head'; END IF;
+IF EXISTS ((SELECT * FROM public.nhl_core_model_trend EXCEPT ALL SELECT * FROM before_service_role_3) UNION ALL (SELECT * FROM before_service_role_3 EXCEPT ALL SELECT * FROM public.nhl_core_model_trend)) THEN RAISE EXCEPTION 'row mismatch service_role nhl_core_model_trend'; END IF;
+END $$;
+RESET ROLE;
+DROP POLICY read_archive ON public.nhl_prediction_archive;
+CREATE POLICY read_archive ON public.nhl_prediction_archive FOR SELECT TO anon,authenticated USING (true);
+SET LOCAL ROLE anon;
+DO $$ BEGIN
+IF EXISTS ((SELECT * FROM public.nhl_core42_status EXCEPT ALL SELECT * FROM before_anon_0) UNION ALL (SELECT * FROM before_anon_0 EXCEPT ALL SELECT * FROM public.nhl_core42_status)) THEN RAISE EXCEPTION 'row mismatch anon nhl_core42_status'; END IF;
+IF EXISTS ((SELECT * FROM public.nhl_core_model_accuracy EXCEPT ALL SELECT * FROM before_anon_1) UNION ALL (SELECT * FROM before_anon_1 EXCEPT ALL SELECT * FROM public.nhl_core_model_accuracy)) THEN RAISE EXCEPTION 'row mismatch anon nhl_core_model_accuracy'; END IF;
+IF EXISTS ((SELECT * FROM public.nhl_core_model_head_to_head EXCEPT ALL SELECT * FROM before_anon_2) UNION ALL (SELECT * FROM before_anon_2 EXCEPT ALL SELECT * FROM public.nhl_core_model_head_to_head)) THEN RAISE EXCEPTION 'row mismatch anon nhl_core_model_head_to_head'; END IF;
+IF EXISTS ((SELECT * FROM public.nhl_core_model_trend EXCEPT ALL SELECT * FROM before_anon_3) UNION ALL (SELECT * FROM before_anon_3 EXCEPT ALL SELECT * FROM public.nhl_core_model_trend)) THEN RAISE EXCEPTION 'row mismatch anon nhl_core_model_trend'; END IF;
+END $$;
+RESET ROLE;
+SET LOCAL ROLE authenticated;
+DO $$ BEGIN
+IF EXISTS ((SELECT * FROM public.nhl_core42_status EXCEPT ALL SELECT * FROM before_authenticated_0) UNION ALL (SELECT * FROM before_authenticated_0 EXCEPT ALL SELECT * FROM public.nhl_core42_status)) THEN RAISE EXCEPTION 'row mismatch authenticated nhl_core42_status'; END IF;
+IF EXISTS ((SELECT * FROM public.nhl_core_model_accuracy EXCEPT ALL SELECT * FROM before_authenticated_1) UNION ALL (SELECT * FROM before_authenticated_1 EXCEPT ALL SELECT * FROM public.nhl_core_model_accuracy)) THEN RAISE EXCEPTION 'row mismatch authenticated nhl_core_model_accuracy'; END IF;
+IF EXISTS ((SELECT * FROM public.nhl_core_model_head_to_head EXCEPT ALL SELECT * FROM before_authenticated_2) UNION ALL (SELECT * FROM before_authenticated_2 EXCEPT ALL SELECT * FROM public.nhl_core_model_head_to_head)) THEN RAISE EXCEPTION 'row mismatch authenticated nhl_core_model_head_to_head'; END IF;
+IF EXISTS ((SELECT * FROM public.nhl_core_model_trend EXCEPT ALL SELECT * FROM before_authenticated_3) UNION ALL (SELECT * FROM before_authenticated_3 EXCEPT ALL SELECT * FROM public.nhl_core_model_trend)) THEN RAISE EXCEPTION 'row mismatch authenticated nhl_core_model_trend'; END IF;
+END $$;
+RESET ROLE;
+SET LOCAL ROLE service_role;
+DO $$ BEGIN
+IF EXISTS ((SELECT * FROM public.nhl_core42_status EXCEPT ALL SELECT * FROM before_service_role_0) UNION ALL (SELECT * FROM before_service_role_0 EXCEPT ALL SELECT * FROM public.nhl_core42_status)) THEN RAISE EXCEPTION 'row mismatch service_role nhl_core42_status'; END IF;
+IF EXISTS ((SELECT * FROM public.nhl_core_model_accuracy EXCEPT ALL SELECT * FROM before_service_role_1) UNION ALL (SELECT * FROM before_service_role_1 EXCEPT ALL SELECT * FROM public.nhl_core_model_accuracy)) THEN RAISE EXCEPTION 'row mismatch service_role nhl_core_model_accuracy'; END IF;
+IF EXISTS ((SELECT * FROM public.nhl_core_model_head_to_head EXCEPT ALL SELECT * FROM before_service_role_2) UNION ALL (SELECT * FROM before_service_role_2 EXCEPT ALL SELECT * FROM public.nhl_core_model_head_to_head)) THEN RAISE EXCEPTION 'row mismatch service_role nhl_core_model_head_to_head'; END IF;
+IF EXISTS ((SELECT * FROM public.nhl_core_model_trend EXCEPT ALL SELECT * FROM before_service_role_3) UNION ALL (SELECT * FROM before_service_role_3 EXCEPT ALL SELECT * FROM public.nhl_core_model_trend)) THEN RAISE EXCEPTION 'row mismatch service_role nhl_core_model_trend'; END IF;
+END $$;
+RESET ROLE;
+\echo All three roles: parity, restrictive RLS and rollback checks passed
 ROLLBACK;
