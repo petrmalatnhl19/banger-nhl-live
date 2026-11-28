@@ -16,6 +16,15 @@ class Extract(HTMLParser):
 def normalize(value):
  import unicodedata
  return re.sub("[^a-z]","",unicodedata.normalize("NFKD",value.casefold()).encode("ascii","ignore").decode())
+def unique_goalie_id(rosters,key,name):
+ roster=rosters.get(key,{})
+ matches=[g for g in roster.get("goalies",[]) if normalize(g)==normalize(name)]
+ if len(matches)!=1:return None
+ ids=[str(v) for n,v in roster.get("playerIds",{}).items() if normalize(n)==normalize(name)]
+ if len(ids)!=1 or not ids[0].isdigit():return None
+ owners=[k for k,r in rosters.items() for g in r.get("goalies",[]) if str(r.get("playerIds",{}).get(g))==ids[0]]
+ return ids[0] if owners==[key] else None
+
 def source_shows_date(lines,day):
  """Require an explicit game-day date near the top of the visible source page."""
  header=" ".join(lines[:150])
@@ -112,9 +121,8 @@ def main():
     if not (re.search(r"\b"+re.escape(abbr)+r"\b",neighborhood,re.I) or re.search(re.escape(key),neighborhood,re.I)):continue
     status="projected"
     context=" ".join(lines[i+1:i+4]).upper()
-    if "PROJECTED" not in context and "LIKELY" not in context:continue
-    ids=rosters.get(key,{}).get("playerIds",{})
-    goalie_id=next((str(v) for n,v in ids.items() if normalize(n)==normalize(line) and str(v).isdigit()),None)
+    if not re.search(r"\b(?:PROJECTED|LIKELY)\b",context) or re.search(r"\b(?:NOT|UNLIKELY|UNCONFIRMED)\b",context):continue
+    goalie_id=unique_goalie_id(rosters,key,line)
     if not goalie_id:continue
     records[abbr]={"name":line,"status":status,"date":today,"source":SOURCE,"sourceLabel":"The Morning Puck","goalieId":goalie_id,"checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"sourceEvidence":{"dateHeader":" ".join(lines[:150]),"teamContext":neighborhood,"goalieText":line,"statusContext":context}}
     break
@@ -159,7 +167,9 @@ def main():
    if not candidates:continue
    name=candidates[0]
    if normalize(name) not in {normalize(g) for g in rosters.get(key,{}).get("goalies",[])}:continue
-   nhl_entry={"gameId":games[abbr]["id"],"name":name,"status":"projected","date":today,"source":lineup["source"],"sourceLabel":"NHL.com projected lineup","checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"evidence":"first_listed_goalie","sourcePublishedAt":stamp}
+   goalie_id=unique_goalie_id(rosters,key,name)
+   if not goalie_id:continue
+   nhl_entry={"goalieId":goalie_id,"gameId":games[abbr]["id"],"name":name,"status":"projected","date":today,"source":lineup["source"],"sourceLabel":"NHL.com projected lineup","checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"evidence":"first_listed_goalie","sourcePublishedAt":stamp,"sourceEvidence":{"team":abbr,"date":today,"gameId":games[abbr]["id"],"startTimeUTC":games[abbr]["startTimeUTC"],"opponent":games[abbr]["awayTeam"]["abbrev"] if games[abbr]["homeTeam"]["abbrev"]==abbr else games[abbr]["homeTeam"]["abbrev"],"goalieText":name}}
    old=records.get(abbr)
    if old and normalize(old["name"])!=normalize(name):
     conflicts.append({"date":today,"gameId":games[abbr]["id"],"team":abbr,"specialist":old["name"],"nhl":name,"nhlSource":lineup["source"]})
