@@ -47,6 +47,15 @@
 .arena[data-team=DAL] .form-chip[data-result=PP]{background:#806222}
 .arena[data-team=DAL] .match-form-label{display:block;font-size:12px;color:#c4d9cf}
 @media(min-width:601px){.arena[data-team=DAL] .modules{grid-template-columns:repeat(6,minmax(0,1fr))}.arena[data-team=DAL] .panel{grid-column:span 2}.arena[data-team=DAL] .panel:nth-child(-n+2){grid-column:span 3}}
+
+/* FAN-29.3: Dallas player center. */
+.arena[data-team=DAL] .panel:nth-child(n+5):nth-child(-n+7){background:linear-gradient(145deg,#14332a,#091a18);border-color:#326b52}
+.arena[data-team=DAL] .player-row{display:block;padding:10px 8px;margin:5px 0;border-radius:8px;background:#ffffff08;border-left:2px solid #00843d}
+.arena[data-team=DAL] .player-row:first-child{background:#00843d26;border-left-color:#7de6ae}
+.arena[data-team=DAL] .player-row strong{display:block;color:#f1fff6;font-size:14px}
+.arena[data-team=DAL] .player-row small{margin:4px 0 0;color:#a9e7c4;font-size:12px}
+.arena[data-team=DAL] .panel:nth-child(7){grid-column:1/-1}
+.arena[data-team=DAL] .roster-group{display:block;padding:8px 0;border-bottom:1px solid #ffffff16}
 </style></head><body><main class="arena"><header><div class="brand">BANGER<small>NHL LIVE</small></div><label>Klub <select id="team"></select></label></header><section class="hero"><div class="dallas-identity"><img src="https://assets.nhle.com/logos/nhl/svg/DAL_dark.svg" alt="" width="64" height="64"><span>DALLAS · TEXAS<br>VICTORY GREEN</span></div><div class="eyebrow">FAN ARENA · MŮJ TÝM</div><h1 id="name"></h1><p id="tagline"></p></section><div class="section-heading"><h2>Klubové centrum</h2><span>Vývojový náhled</span></div><div class="modules"><section class="panel"><span class="kicker">01 / VÝSLEDEK</span><h2>Poslední zápas</h2><p>Čeká na napojení ověřených dat.</p></section><section class="panel"><span class="kicker">02 / PROGRAM</span><h2>Další zápas</h2><p>Čeká na napojení rozpisu.</p></section><section class="panel"><span class="kicker">03 / PŘEHLED</span><h2>Forma týmu</h2><p>Čeká na napojení výsledků.</p></section><section class="panel"><span class="kicker">04 / TABULKA</span><h2>Postavení týmu</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">05 / HRÁČI</span><h2>Lídři produktivity</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">06 / BRANKÁŘI</span><h2>Brankáři</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">07 / SOUPISKA</span><h2>Aktuální soupiska</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">08 / NOVINKY</span><h2>Klubové novinky</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">09 / ANALYTIKA</span><h2>Pokročilé statistiky</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">10 / GSAx</span><h2>Pokročilé statistiky brankářů</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">11 / HRÁČSKÁ ANALYTIKA</span><h2>Individuální xG</h2><p>Načítám…</p></section></div><p class="notice">Vývojový náhled · živé rozhraní v testování · pouze Dallas má vlastní obrazový banner.</p></main><script src="themes.js"></script><script>
 const NHL_TEAMS=[['ANA','Anaheim Ducks'],['BOS','Boston Bruins'],['BUF','Buffalo Sabres'],['CGY','Calgary Flames'],['CAR','Carolina Hurricanes'],['CHI','Chicago Blackhawks'],['COL','Colorado Avalanche'],['CBJ','Columbus Blue Jackets'],['DAL','Dallas Stars'],['DET','Detroit Red Wings'],['EDM','Edmonton Oilers'],['FLA','Florida Panthers'],['LAK','Los Angeles Kings'],['MIN','Minnesota Wild'],['MTL','Montréal Canadiens'],['NSH','Nashville Predators'],['NJD','New Jersey Devils'],['NYI','New York Islanders'],['NYR','New York Rangers'],['OTT','Ottawa Senators'],['PHI','Philadelphia Flyers'],['PIT','Pittsburgh Penguins'],['SJS','San Jose Sharks'],['SEA','Seattle Kraken'],['STL','St. Louis Blues'],['TBL','Tampa Bay Lightning'],['TOR','Toronto Maple Leafs'],['UTA','Utah Mammoth'],['VAN','Vancouver Canucks'],['VGK','Vegas Golden Knights'],['WSH','Washington Capitals'],['WPG','Winnipeg Jets']];
 const names=new Map(NHL_TEAMS);
@@ -107,7 +116,16 @@ async function loadClub(){
  panels.forEach(p=>p.textContent='Načítám…');
  const timer=setTimeout(()=>controllerForRequest.abort(),12000),controllerForRequest=controller;
  const show=(i,value)=>{if(id===requestId){panels[i].textContent=value;}else{return;}
- if(code!=='DAL'||i!==2||typeof panels[i].replaceChildren!=='function'||typeof panels[i].setAttribute!=='function')return;
+ if(code!=='DAL'||typeof panels[i].replaceChildren!=='function'||typeof panels[i].setAttribute!=='function')return;
+ if(i===4||i===5){
+ const entries=value.split(' | ').map(s=>s.match(/^(.+?) · (.+)$/));
+ if(entries.some(e=>!e))return;
+ const parts=[];entries.forEach((e,j)=>{if(j){const sep=document.createElement('span');sep.textContent=' | ';sep.hidden=true;parts.push(sep)}
+ const row=document.createElement('span');row.className='player-row';const name=document.createElement('strong');name.textContent=e[1];const sep=document.createElement('span');sep.textContent=' · ';sep.hidden=true;const stats=document.createElement('small');stats.textContent=e[2];row.append(name,sep,stats);parts.push(row)});
+ panels[i].replaceChildren(...parts);return;
+ }
+ if(i===6){const groups=value.split('\n');if(groups.length!==3)return;const parts=[];groups.forEach((g,j)=>{if(j)parts.push(document.createTextNode('\n'));const row=document.createElement('span');row.className='roster-group';row.textContent=g;parts.push(row)});panels[i].replaceChildren(...parts);return;}
+ if(i!==2)return;
  const groups=value.split(' · ').map(s=>s.match(/^(Posledních \d+:) ((?:V|PP|P\?|P)(?: (?:V|PP|P\?|P))*)$/));
  if(groups.length!==2||groups.some(g=>!g))return;
  // Preserve the original accessible text and source-audit textContent.
