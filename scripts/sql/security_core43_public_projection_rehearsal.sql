@@ -118,6 +118,42 @@ CREATE POLICY published_read ON publication.core43_shadow_predictions_v1 FOR SEL
 GRANT SELECT ON publication.core43_shadow_predictions_v1 TO anon,authenticated,service_role;
 CREATE TEMP TABLE before_core43_shadow_predictions_v1 AS SELECT * FROM public.core43_shadow_predictions_v1;
 GRANT SELECT ON before_core43_shadow_predictions_v1 TO anon,authenticated,service_role;
+CREATE VIEW publication.source_core43_shadow_predictions_v1  AS WITH inputs AS (
+         SELECT nhl_core43_shadow_inputs.game_id,
+            max(nhl_core43_shadow_inputs.gsax * 100.0 / NULLIF(nhl_core43_shadow_inputs.shots_against, 0)::numeric) FILTER (WHERE nhl_core43_shadow_inputs.side = 'away'::text) AS away_gsax_per100,
+            max(nhl_core43_shadow_inputs.gsax * 100.0 / NULLIF(nhl_core43_shadow_inputs.shots_against, 0)::numeric) FILTER (WHERE nhl_core43_shadow_inputs.side = 'home'::text) AS home_gsax_per100,
+            count(*) FILTER (WHERE nhl_core43_shadow_inputs.readiness = 'ready'::text) AS ready_sides,
+            count(*) AS total_sides
+           FROM core43_verified_shadow_inputs nhl_core43_shadow_inputs
+          GROUP BY nhl_core43_shadow_inputs.game_id
+        )
+ SELECT a.game_id,
+    a.game_date,
+    a.away_team,
+    a.home_team,
+    a.status,
+    a.core42_away,
+    a.core42_home,
+    i.away_gsax_per100,
+    i.home_gsax_per100,
+    i.ready_sides,
+    i.total_sides,
+        CASE
+            WHEN i.ready_sides = 2 AND i.total_sides = 2 AND a.core42_away IS NOT NULL AND a.core42_home IS NOT NULL THEN round(GREATEST(0.4::double precision, LEAST(6.0::double precision, a.core42_away + GREATEST('-0.3'::numeric, LEAST(0.3, (i.away_gsax_per100 - i.home_gsax_per100) * 0.06))::double precision))::numeric, 3)
+            ELSE NULL::numeric
+        END AS core43_away,
+        CASE
+            WHEN i.ready_sides = 2 AND i.total_sides = 2 AND a.core42_away IS NOT NULL AND a.core42_home IS NOT NULL THEN round(GREATEST(0.4::double precision, LEAST(6.0::double precision, a.core42_home + GREATEST('-0.3'::numeric, LEAST(0.3, (i.home_gsax_per100 - i.away_gsax_per100) * 0.06))::double precision))::numeric, 3)
+            ELSE NULL::numeric
+        END AS core43_home,
+        CASE
+            WHEN i.ready_sides = 2 AND i.total_sides = 2 THEN 'experimental_ready'::text
+            ELSE 'awaiting_verified_pregame_inputs'::text
+        END AS experiment_status,
+    'core43-shadow-gsax-v1-heuristic-unvalidated'::text AS model_version
+   FROM nhl_prediction_archive a
+     JOIN inputs i USING (game_id)
+  WHERE a.core42_predicted_at IS NOT NULL;
 CREATE OR REPLACE VIEW public.core43_shadow_predictions_v1 WITH (security_invoker=true) AS SELECT * FROM publication.core43_shadow_predictions_v1;
 CREATE VIEW public.core43_shadow_preview_v1  AS WITH paired AS (
          SELECT nhl_core43_shadow_inputs.game_id,
@@ -160,6 +196,40 @@ CREATE POLICY published_read ON publication.core43_shadow_preview_v1 FOR SELECT 
 GRANT SELECT ON publication.core43_shadow_preview_v1 TO anon,authenticated,service_role;
 CREATE TEMP TABLE before_core43_shadow_preview_v1 AS SELECT * FROM public.core43_shadow_preview_v1;
 GRANT SELECT ON before_core43_shadow_preview_v1 TO anon,authenticated,service_role;
+CREATE VIEW publication.source_core43_shadow_preview_v1  AS WITH paired AS (
+         SELECT nhl_core43_shadow_inputs.game_id,
+            count(*) AS sides,
+            count(*) FILTER (WHERE nhl_core43_shadow_inputs.goalie_id IS NOT NULL AND nhl_core43_shadow_inputs.gsax IS NOT NULL AND nhl_core43_shadow_inputs.shots_against >= 30 AND nhl_core43_shadow_inputs.gsax_fetched_at <= nhl_core43_shadow_inputs.prediction_at) AS valid_gsax_sides,
+            max(nhl_core43_shadow_inputs.gsax * 100.0 / NULLIF(nhl_core43_shadow_inputs.shots_against, 0)::numeric) FILTER (WHERE nhl_core43_shadow_inputs.side = 'away'::text) AS away_gsax_per100,
+            max(nhl_core43_shadow_inputs.gsax * 100.0 / NULLIF(nhl_core43_shadow_inputs.shots_against, 0)::numeric) FILTER (WHERE nhl_core43_shadow_inputs.side = 'home'::text) AS home_gsax_per100,
+            count(*) FILTER (WHERE nhl_core43_shadow_inputs.starter_status = 'confirmed'::text) AS confirmed_sides
+           FROM core43_verified_shadow_inputs nhl_core43_shadow_inputs
+          GROUP BY nhl_core43_shadow_inputs.game_id
+        )
+ SELECT a.game_id,
+    a.game_date,
+    a.away_team,
+    a.home_team,
+    a.core42_predicted_at,
+    p.away_gsax_per100,
+    p.home_gsax_per100,
+    p.confirmed_sides,
+        CASE
+            WHEN p.sides = 2 AND p.valid_gsax_sides = 2 AND a.core42_away IS NOT NULL THEN round(GREATEST(0.4::double precision, LEAST(6.0::double precision, a.core42_away + GREATEST('-0.3'::numeric, LEAST(0.3, (p.away_gsax_per100 - p.home_gsax_per100) * 0.06))::double precision))::numeric, 3)
+            ELSE NULL::numeric
+        END AS core43_preview_away,
+        CASE
+            WHEN p.sides = 2 AND p.valid_gsax_sides = 2 AND a.core42_home IS NOT NULL THEN round(GREATEST(0.4::double precision, LEAST(6.0::double precision, a.core42_home + GREATEST('-0.3'::numeric, LEAST(0.3, (p.home_gsax_per100 - p.away_gsax_per100) * 0.06))::double precision))::numeric, 3)
+            ELSE NULL::numeric
+        END AS core43_preview_home,
+        CASE
+            WHEN p.sides = 2 AND p.valid_gsax_sides = 2 THEN 'provisional_goalies_not_confirmed'::text
+            ELSE 'missing_pregame_gsax'::text
+        END AS preview_status,
+    'core43-gsax-preview-v1-unvalidated'::text AS version
+   FROM nhl_prediction_archive a
+     JOIN paired p USING (game_id)
+  WHERE a.core42_predicted_at IS NOT NULL;
 CREATE OR REPLACE VIEW public.core43_shadow_preview_v1 WITH (security_invoker=true) AS SELECT * FROM publication.core43_shadow_preview_v1;
 CREATE VIEW public.nhl_core43_public_schedule_evidence WITH (security_barrier=true) AS SELECT DISTINCT game_id,
     kickoff_at,
@@ -174,6 +244,12 @@ CREATE POLICY published_read ON publication.nhl_core43_public_schedule_evidence 
 GRANT SELECT ON publication.nhl_core43_public_schedule_evidence TO anon,authenticated,service_role;
 CREATE TEMP TABLE before_nhl_core43_public_schedule_evidence AS SELECT * FROM public.nhl_core43_public_schedule_evidence;
 GRANT SELECT ON before_nhl_core43_public_schedule_evidence TO anon,authenticated,service_role;
+CREATE VIEW publication.source_nhl_core43_public_schedule_evidence WITH (security_barrier=true) AS SELECT DISTINCT game_id,
+    kickoff_at,
+    away_team,
+    home_team
+   FROM nhl_core43_schedule_snapshots
+  WHERE game_id IS NOT NULL AND kickoff_at IS NOT NULL AND away_team IS NOT NULL AND home_team IS NOT NULL;
 CREATE OR REPLACE VIEW public.nhl_core43_public_schedule_evidence WITH (security_invoker=true) AS SELECT * FROM publication.nhl_core43_public_schedule_evidence;
 SET LOCAL ROLE anon;
 DO $$ BEGIN
@@ -206,4 +282,42 @@ IF has_table_privilege(current_user,'publication.nhl_core43_public_schedule_evid
 END $$;
 RESET ROLE;
 DO $$ BEGIN IF has_table_privilege('anon','public.nhl_core43_schedule_snapshots','SELECT') OR has_table_privilege('authenticated','public.core43_verified_shadow_inputs','SELECT') THEN RAISE EXCEPTION 'private access'; END IF; END $$;
+
+-- Refresh prototype: privileged transaction, no public execution grants.
+CREATE PROCEDURE publication.refresh_all() LANGUAGE plpgsql SECURITY INVOKER AS $refresh$
+BEGIN
+  PERFORM pg_advisory_xact_lock(430453);
+  LOCK TABLE public.nhl_core43_schedule_snapshots, public.nhl_core43_shadow_inputs, public.nhl_core43_starter_evidence, public.nhl_prediction_archive IN SHARE MODE;
+  DELETE FROM publication.core43_shadow_predictions_v1;
+  INSERT INTO publication.core43_shadow_predictions_v1 SELECT * FROM publication.source_core43_shadow_predictions_v1;
+  DELETE FROM publication.core43_shadow_preview_v1;
+  INSERT INTO publication.core43_shadow_preview_v1 SELECT * FROM publication.source_core43_shadow_preview_v1;
+  DELETE FROM publication.nhl_core43_public_schedule_evidence;
+  INSERT INTO publication.nhl_core43_public_schedule_evidence SELECT * FROM publication.source_nhl_core43_public_schedule_evidence;
+END;
+$refresh$;
+REVOKE ALL ON PROCEDURE publication.refresh_all() FROM PUBLIC,anon,authenticated,service_role;
+DO $$ BEGIN IF has_function_privilege('anon','publication.refresh_all()','EXECUTE') OR has_function_privilege('authenticated','publication.refresh_all()','EXECUTE') THEN RAISE EXCEPTION 'public refresh execution'; END IF; END $$;
+-- Change the source and prove stale data is replaced, including deletions.
+DELETE FROM nhl_core43_starter_evidence WHERE id=2;
+INSERT INTO nhl_core43_schedule_snapshots VALUES (3,'2020-11-29 20:00Z','DAL','VGK');
+CALL publication.refresh_all();
+DO $$ BEGIN
+IF NOT EXISTS (SELECT 1 FROM public.nhl_core43_public_schedule_evidence WHERE game_id=3) THEN RAISE EXCEPTION 'schedule refresh missing'; END IF;
+IF EXISTS (SELECT 1 FROM public.core43_shadow_predictions_v1 WHERE game_id=1 AND experiment_status='experimental_ready') THEN RAISE EXCEPTION 'revoked evidence still published'; END IF;
+IF EXISTS ((SELECT * FROM public.core43_shadow_predictions_v1 EXCEPT ALL SELECT * FROM publication.source_core43_shadow_predictions_v1) UNION ALL (SELECT * FROM publication.source_core43_shadow_predictions_v1 EXCEPT ALL SELECT * FROM public.core43_shadow_predictions_v1)) THEN RAISE EXCEPTION 'refresh parity core43_shadow_predictions_v1'; END IF;
+IF EXISTS ((SELECT * FROM public.core43_shadow_preview_v1 EXCEPT ALL SELECT * FROM publication.source_core43_shadow_preview_v1) UNION ALL (SELECT * FROM publication.source_core43_shadow_preview_v1 EXCEPT ALL SELECT * FROM public.core43_shadow_preview_v1)) THEN RAISE EXCEPTION 'refresh parity core43_shadow_preview_v1'; END IF;
+IF EXISTS ((SELECT * FROM public.nhl_core43_public_schedule_evidence EXCEPT ALL SELECT * FROM publication.source_nhl_core43_public_schedule_evidence) UNION ALL (SELECT * FROM publication.source_nhl_core43_public_schedule_evidence EXCEPT ALL SELECT * FROM public.nhl_core43_public_schedule_evidence)) THEN RAISE EXCEPTION 'refresh parity nhl_core43_public_schedule_evidence'; END IF;
+END $$;
+-- Inject a failure into the second projection; first projection must roll back too.
+CREATE FUNCTION publication.fail_refresh() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN RAISE EXCEPTION 'injected refresh failure'; END $$;
+CREATE TRIGGER fail_refresh BEFORE INSERT ON publication.core43_shadow_preview_v1 FOR EACH STATEMENT EXECUTE FUNCTION publication.fail_refresh();
+CREATE TEMP TABLE refresh_before AS SELECT * FROM public.core43_shadow_predictions_v1;
+UPDATE nhl_prediction_archive SET core42_away=4 WHERE game_id=1;
+DO $$ BEGIN
+ BEGIN CALL publication.refresh_all(); RAISE EXCEPTION 'expected failure absent'; EXCEPTION WHEN raise_exception THEN IF SQLERRM <> 'injected refresh failure' THEN RAISE; END IF; END;
+ IF EXISTS ((SELECT * FROM public.core43_shadow_predictions_v1 EXCEPT ALL SELECT * FROM refresh_before) UNION ALL (SELECT * FROM refresh_before EXCEPT ALL SELECT * FROM public.core43_shadow_predictions_v1)) THEN RAISE EXCEPTION 'partial refresh leaked'; END IF;
+END $$;
+DROP TRIGGER fail_refresh ON publication.core43_shadow_preview_v1;
+CALL publication.refresh_all();
 ROLLBACK;
