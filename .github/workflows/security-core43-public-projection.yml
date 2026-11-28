@@ -22,3 +22,37 @@ jobs:
       - uses: actions/checkout@v4
       - name: Isolated synthetic projection parity
         run: docker exec -i ${{ job.services.postgres.id }} psql -X -v ON_ERROR_STOP=1 -U postgres -d projection_fixture < scripts/sql/security_core43_public_projection_rehearsal.sql
+
+      - name: Concurrent refresh and reader visibility
+        env:
+          PG_CONTAINER: ${{ job.services.postgres.id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          sql() { docker exec -i "$PG_CONTAINER" psql -X -qAt -v ON_ERROR_STOP=1 -U postgres -d projection_fixture "$@"; }
+          # Persist only the disposable fixture for independent sessions.
+          sed '$s/^ROLLBACK;$/COMMIT;/' scripts/sql/security_core43_public_projection_rehearsal.sql | sql
+          sql -c "INSERT INTO nhl_core43_schedule_snapshots VALUES (99,'2020-11-30 20:00Z','DAL','VGK')"
+          test "$(sql -c 'SELECT count(*) FROM public.nhl_core43_public_schedule_evidence WHERE game_id=99')" = 0
+          # Hold a real refresh transaction open behind a session advisory lock.
+          sql -c "BEGIN; CALL publication.refresh_all(); SELECT pg_advisory_xact_lock(430454); SELECT pg_sleep(15); COMMIT;" > /tmp/projection-writer.log 2>&1 &
+          writer=$!
+          trap 'kill "$writer" 2>/dev/null || true' EXIT
+          ready=0
+          for i in $(seq 1 100); do
+            if [ "$(sql -c "SELECT count(*) FROM pg_locks WHERE locktype='advisory' AND objid=430454 AND granted")" = 1 ]; then ready=1; break; fi
+            sleep 0.1
+          done
+          test "$ready" = 1
+          test "$(sql -c 'SELECT pg_try_advisory_xact_lock(430453)')" = f
+          test "$(sql -c 'SET ROLE anon; SELECT count(*) FROM public.nhl_core43_public_schedule_evidence WHERE game_id=99')" = 0
+          # A second real refresh must wait for the first transaction.
+          if sql -c "SET lock_timeout='500ms'; CALL publication.refresh_all();" > /tmp/projection-contender.log 2>&1; then
+            echo "Concurrent refresh unexpectedly succeeded"; exit 1
+          fi
+          grep -q 'lock timeout' /tmp/projection-contender.log
+          wait "$writer"
+          trap - EXIT
+          test "$(sql -c 'SET ROLE anon; SELECT count(*) FROM public.nhl_core43_public_schedule_evidence WHERE game_id=99')" = 1
+          sql -c 'CALL publication.refresh_all()'
+          echo 'Concurrent refresh serialization and reader visibility passed'
