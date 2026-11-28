@@ -1,0 +1,51 @@
+name: FAN ARENA - Regression Tests
+on:
+  push:
+    branches:
+      - fan-23-isolated-arena
+    paths:
+      - 'fan-arena/**'
+      - '.github/workflows/fan-arena-tests.yml'
+  pull_request:
+    paths:
+      - 'fan-arena/**'
+      - '.github/workflows/fan-arena-tests.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  arena-regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test all team themes and isolated preview
+        run: node --test fan-arena/themes.test.cjs fan-arena/preview.test.cjs
+      - name: Install isolated browser test dependency
+        run: npm install --prefix "$RUNNER_TEMP/arena-browser" --no-audit --no-fund playwright@1.51.1
+      - name: Install Chromium
+        run: |
+          "$RUNNER_TEMP/arena-browser/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Mobile arena layout and all team switches
+        env:
+          NODE_PATH: ${{ runner.temp }}/arena-browser/node_modules
+        run: node fan-arena/mobile.test.cjs
+      - name: Read-only live data coverage audit
+        run: node fan-arena/live-audit.cjs
+      - name: Upload live coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fan-arena-live-report
+          path: fan-arena-live-report.json
+          if-no-files-found: warn
+      - name: Upload Dallas visual fixtures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dallas-mobile-screenshots
+          path: fan-arena-screenshots/
+          if-no-files-found: warn
