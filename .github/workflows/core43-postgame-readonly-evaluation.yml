@@ -1,0 +1,28 @@
+name: CORE 4.3 postgame read-only evaluation
+on:
+  workflow_dispatch:
+    inputs:
+      game_id:
+        description: "Archived NHL game ID"
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: core43-archive-pilot
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      CORE43_EVAL_GAME_ID: ${{ inputs.game_id }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test evaluator
+        run: node scripts/test_core43_postgame_readonly_evaluation.cjs
+      - name: Evaluate archived capture against final NHL score (read only)
+        run: node scripts/core43_postgame_readonly_evaluation.cjs
