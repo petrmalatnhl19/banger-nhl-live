@@ -355,4 +355,57 @@ IF (SELECT freshness FROM public.core43_projection_health) IS DISTINCT FROM 'fre
 IF has_table_privilege(current_user,'publication.refresh_state','INSERT,UPDATE,DELETE,TRUNCATE') THEN RAISE EXCEPTION 'public health write'; END IF;
 END $$;
 RESET ROLE;
+
+-- Reproduce observed production grants on the disposable raw input table.
+GRANT SELECT,INSERT,UPDATE,DELETE,REFERENCES,TRIGGER ON public.nhl_core43_shadow_inputs TO anon,authenticated;
+GRANT SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER ON public.nhl_core43_shadow_inputs TO service_role;
+ALTER ROLE service_role BYPASSRLS;
+SET LOCAL ROLE anon;
+DO $$ BEGIN IF EXISTS(SELECT 1 FROM public.nhl_core43_shadow_inputs) THEN RAISE EXCEPTION 'RLS exposed raw rows'; END IF; END $$;
+RESET ROLE;
+REVOKE ALL ON public.nhl_core43_shadow_inputs FROM PUBLIC,anon,authenticated;
+DO $audit$
+DECLARE r text; p text;
+BEGIN
+ FOREACH r IN ARRAY ARRAY['anon','authenticated'] LOOP
+  FOREACH p IN ARRAY ARRAY['SELECT','INSERT','UPDATE','DELETE','TRUNCATE','REFERENCES','TRIGGER'] LOOP
+   IF has_table_privilege(r,'public.nhl_core43_shadow_inputs',p) THEN RAISE EXCEPTION 'unexpected raw grant % %',r,p; END IF;
+  END LOOP;
+ END LOOP;
+END $audit$;
+SET LOCAL ROLE service_role;
+DO $$ BEGIN
+ IF NOT EXISTS(SELECT 1 FROM public.nhl_core43_shadow_inputs) THEN RAISE EXCEPTION 'internal read lost'; END IF;
+ UPDATE public.nhl_core43_shadow_inputs SET goalie_name=goalie_name WHERE game_id=1;
+ IF NOT FOUND THEN RAISE EXCEPTION 'internal update lost'; END IF;
+END $$;
+RESET ROLE;
+CALL publication.refresh_all();
+CREATE TEMP TABLE expected_acl_core43_shadow_predictions_v1 AS SELECT * FROM publication.source_core43_shadow_predictions_v1;
+GRANT SELECT ON expected_acl_core43_shadow_predictions_v1 TO anon,authenticated,service_role;
+CREATE TEMP TABLE expected_acl_core43_shadow_preview_v1 AS SELECT * FROM publication.source_core43_shadow_preview_v1;
+GRANT SELECT ON expected_acl_core43_shadow_preview_v1 TO anon,authenticated,service_role;
+CREATE TEMP TABLE expected_acl_nhl_core43_public_schedule_evidence AS SELECT * FROM publication.source_nhl_core43_public_schedule_evidence;
+GRANT SELECT ON expected_acl_nhl_core43_public_schedule_evidence TO anon,authenticated,service_role;
+SET LOCAL ROLE anon;
+DO $$ BEGIN
+IF EXISTS ((SELECT * FROM public.core43_shadow_predictions_v1 EXCEPT ALL SELECT * FROM expected_acl_core43_shadow_predictions_v1) UNION ALL (SELECT * FROM expected_acl_core43_shadow_predictions_v1 EXCEPT ALL SELECT * FROM public.core43_shadow_predictions_v1)) THEN RAISE EXCEPTION 'ACL parity anon core43_shadow_predictions_v1'; END IF;
+IF EXISTS ((SELECT * FROM public.core43_shadow_preview_v1 EXCEPT ALL SELECT * FROM expected_acl_core43_shadow_preview_v1) UNION ALL (SELECT * FROM expected_acl_core43_shadow_preview_v1 EXCEPT ALL SELECT * FROM public.core43_shadow_preview_v1)) THEN RAISE EXCEPTION 'ACL parity anon core43_shadow_preview_v1'; END IF;
+IF EXISTS ((SELECT * FROM public.nhl_core43_public_schedule_evidence EXCEPT ALL SELECT * FROM expected_acl_nhl_core43_public_schedule_evidence) UNION ALL (SELECT * FROM expected_acl_nhl_core43_public_schedule_evidence EXCEPT ALL SELECT * FROM public.nhl_core43_public_schedule_evidence)) THEN RAISE EXCEPTION 'ACL parity anon nhl_core43_public_schedule_evidence'; END IF;
+END $$;
+RESET ROLE;
+SET LOCAL ROLE authenticated;
+DO $$ BEGIN
+IF EXISTS ((SELECT * FROM public.core43_shadow_predictions_v1 EXCEPT ALL SELECT * FROM expected_acl_core43_shadow_predictions_v1) UNION ALL (SELECT * FROM expected_acl_core43_shadow_predictions_v1 EXCEPT ALL SELECT * FROM public.core43_shadow_predictions_v1)) THEN RAISE EXCEPTION 'ACL parity authenticated core43_shadow_predictions_v1'; END IF;
+IF EXISTS ((SELECT * FROM public.core43_shadow_preview_v1 EXCEPT ALL SELECT * FROM expected_acl_core43_shadow_preview_v1) UNION ALL (SELECT * FROM expected_acl_core43_shadow_preview_v1 EXCEPT ALL SELECT * FROM public.core43_shadow_preview_v1)) THEN RAISE EXCEPTION 'ACL parity authenticated core43_shadow_preview_v1'; END IF;
+IF EXISTS ((SELECT * FROM public.nhl_core43_public_schedule_evidence EXCEPT ALL SELECT * FROM expected_acl_nhl_core43_public_schedule_evidence) UNION ALL (SELECT * FROM expected_acl_nhl_core43_public_schedule_evidence EXCEPT ALL SELECT * FROM public.nhl_core43_public_schedule_evidence)) THEN RAISE EXCEPTION 'ACL parity authenticated nhl_core43_public_schedule_evidence'; END IF;
+END $$;
+RESET ROLE;
+SET LOCAL ROLE service_role;
+DO $$ BEGIN
+IF EXISTS ((SELECT * FROM public.core43_shadow_predictions_v1 EXCEPT ALL SELECT * FROM expected_acl_core43_shadow_predictions_v1) UNION ALL (SELECT * FROM expected_acl_core43_shadow_predictions_v1 EXCEPT ALL SELECT * FROM public.core43_shadow_predictions_v1)) THEN RAISE EXCEPTION 'ACL parity service_role core43_shadow_predictions_v1'; END IF;
+IF EXISTS ((SELECT * FROM public.core43_shadow_preview_v1 EXCEPT ALL SELECT * FROM expected_acl_core43_shadow_preview_v1) UNION ALL (SELECT * FROM expected_acl_core43_shadow_preview_v1 EXCEPT ALL SELECT * FROM public.core43_shadow_preview_v1)) THEN RAISE EXCEPTION 'ACL parity service_role core43_shadow_preview_v1'; END IF;
+IF EXISTS ((SELECT * FROM public.nhl_core43_public_schedule_evidence EXCEPT ALL SELECT * FROM expected_acl_nhl_core43_public_schedule_evidence) UNION ALL (SELECT * FROM expected_acl_nhl_core43_public_schedule_evidence EXCEPT ALL SELECT * FROM public.nhl_core43_public_schedule_evidence)) THEN RAISE EXCEPTION 'ACL parity service_role nhl_core43_public_schedule_evidence'; END IF;
+END $$;
+RESET ROLE;
 ROLLBACK;
