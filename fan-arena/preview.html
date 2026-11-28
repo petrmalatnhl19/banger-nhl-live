@@ -106,7 +106,7 @@ async function loadClub(){
  controller?.abort();controller=new AbortController();const signal=controller.signal;
  panels.forEach(p=>p.textContent='Načítám…');
  const timer=setTimeout(()=>controllerForRequest.abort(),12000),controllerForRequest=controller;
- const show=(i,value)=>{if(id!==requestId)return;panels[i].textContent=value;
+ const show=(i,value)=>{if(id===requestId){panels[i].textContent=value;}else{return;}
  if(code!=='DAL'||i!==2||typeof panels[i].replaceChildren!=='function'||typeof panels[i].setAttribute!=='function')return;
  const groups=value.split(' · ').map(s=>s.match(/^(Posledních \d+:) ((?:V|PP|P\?|P)(?: (?:V|PP|P\?|P))*)$/));
  if(groups.length!==2||groups.some(g=>!g))return;
