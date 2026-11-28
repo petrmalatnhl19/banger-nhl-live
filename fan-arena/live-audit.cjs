@@ -27,7 +27,7 @@ async function read(input,opts){
 const ctx=vm.createContext({document:{getElementById:k=>nodes[k],querySelector:()=>({dataset:{},style:{setProperty(){}}}),querySelectorAll:()=>panels,createElement:node},BangerArenaThemes:{codes,get:code=>({code})},URL,AbortController,fetch:read,setTimeout,clearTimeout});
 vm.runInContext(script.replace(/loadClub\(\);\s*$/,''),ctx);
 (async()=>{
- const report=[];
+ const report=[];const assert=require('node:assert/strict');let checked=0;const mismatches=[];
  for(const code of codes){
   select.value=code;
   await vm.runInContext('loadClub()',ctx);
@@ -37,10 +37,25 @@ vm.runInContext(script.replace(/loadClub\(\);\s*$/,''),ctx);
   const gaps=missing.filter(i=>i!==8||!newsEmpty);
   const stats=await (await read(new URL('https://xxwqeiuyislnoxsmjuul.supabase.co/functions/v1/nhl-feed?kind=clubstats&team='+code),{headers:{apikey:'sb_publishable_SfeHMIvUkYTuD3jCrWub8w_fPIY0B-G'}})).json().catch(()=>null);
   const goalieSample=stats?.goalies?.[0];
+  const verify=(label,actual,expected)=>{checked++;if(actual!==expected)mismatches.push({code,label,actual,expected});};
+  const goalieName=p=>[p.firstName?.default??p.firstName,p.lastName?.default??p.lastName].filter(x=>typeof x==='string').join(' ');
+  if(Array.isArray(stats?.goalies)){
+   const expected=stats.goalies.filter(p=>goalieName(p)&&Number.isFinite(p.wins)).sort((a,b)=>b.wins-a.wins).slice(0,3).map(p=>{
+    const sv=p.savePercentage??p.savePctg;
+    return goalieName(p)+' · '+p.wins+' V · SV% '+(typeof sv==='number'&&sv>=0&&sv<=1?(sv*100).toFixed(1)+' %':'—');
+   }).join(' | ');
+   if(expected)verify('goalie names, wins and SV%',values[5],expected);
+  }
+  const standings=await (await read(new URL('https://xxwqeiuyislnoxsmjuul.supabase.co/functions/v1/nhl-feed?kind=standings'),{headers:{apikey:'sb_publishable_SfeHMIvUkYTuD3jCrWub8w_fPIY0B-G'}})).json().catch(()=>null);
+  const row=standings?.standings?.find(r=>(r.teamAbbrev?.default??r.teamAbbrev)===code);
+  if(row)verify('standings',values[3],'Body: '+(row.points??'—')+' · Divize: '+(row.divisionSequence??'—')+' · Konference: '+(row.conferenceSequence??'—'));
+
   report.push({code,missing:gaps,newsEmpty,values,goalieSample});
   console.log(code+' diagnostic goalie: '+JSON.stringify(goalieSample??null)+'; news: '+values[7].slice(0,180));
   console.log(code+' '+(11-gaps.length)+'/11 panels; gaps: '+gaps.join(','));
  }
- fs.writeFileSync('fan-arena-live-report.json',JSON.stringify({timestamp:new Date().toISOString(),requests,report},null,2));
- if(report.every(r=>r.missing.length===11))throw Error('All panels unavailable');
+ fs.writeFileSync('fan-arena-live-report.json',JSON.stringify({timestamp:new Date().toISOString(),requests,report,checked,mismatches},null,2));
+ console.log('SOURCE COMPARISONS: '+checked+'; mismatches: '+mismatches.length);
+ assert.equal(checked,64,'Expected goalie and standings comparisons for all 32 clubs');
+ assert.deepEqual(mismatches,[]);
 })().catch(e=>{console.error(e);process.exitCode=1});
