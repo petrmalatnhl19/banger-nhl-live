@@ -1,9 +1,9 @@
 {
-  "teamsWithRejectedLines": 3,
+  "teamsWithRejectedLines": 7,
   "teams": {
     "devils": {
       "team": "NJD",
-      "rosterUpdatedAt": "2026-11-27T15:19:43.823382+00:00",
+      "rosterUpdatedAt": "2026-11-28T11:40:33.553369+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -14,7 +14,7 @@
           "group": "defense",
           "sourceLineNumber": 3,
           "sourceLine": [
-            "Declan Chisholm",
+            "Anton Silaev",
             "Vladislav Kolyachonok"
           ],
           "unverifiedPlayers": [
@@ -30,7 +30,7 @@
     },
     "flames": {
       "team": "CGY",
-      "rosterUpdatedAt": "2026-11-27T15:19:42.053433+00:00",
+      "rosterUpdatedAt": "2026-11-28T11:40:32.969953+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -56,9 +56,37 @@
         }
       ]
     },
+    "islanders": {
+      "team": "NYI",
+      "rosterUpdatedAt": "2026-11-28T11:40:33.666069+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "validatedForwardLines": 3,
+      "validatedDefensePairs": 3,
+      "rejected": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 3,
+          "sourceLine": [
+            "Anthony Duclair",
+            "Jean-Gabriel Pageau",
+            "Cal Ritchie"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Cal Ritchie",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    },
     "jets": {
       "team": "WPG",
-      "rosterUpdatedAt": "2026-11-27T15:19:47.536215+00:00",
+      "rosterUpdatedAt": "2026-11-28T11:40:34.203199+00:00",
       "rosterSnapshotPresent": true,
       "candidateForwardLines": 4,
       "candidateDefensePairs": 3,
@@ -78,6 +106,111 @@
               "name": "Tyrel Bauer",
               "reason": "other_position_group",
               "inLocalCurrentRoster": true,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    },
+    "kraken": {
+      "team": "SEA",
+      "rosterUpdatedAt": "2026-11-28T11:40:33.885425+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "validatedForwardLines": 3,
+      "validatedDefensePairs": 2,
+      "rejected": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 3,
+          "sourceLine": [
+            "Bobby McMann",
+            "Frederick Gaudreau",
+            "Mathew Wood"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Mathew Wood",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        },
+        {
+          "group": "defense",
+          "sourceLineNumber": 3,
+          "sourceLine": [
+            "Ryan Lindgren",
+            "Joshua Mahura"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Joshua Mahura",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    },
+    "sabres": {
+      "team": "BUF",
+      "rosterUpdatedAt": "2026-11-28T11:40:32.779657+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 3,
+      "candidateDefensePairs": 4,
+      "validatedForwardLines": 3,
+      "validatedDefensePairs": 3,
+      "rejected": [
+        {
+          "group": "defense",
+          "sourceLineNumber": 1,
+          "sourceLine": [
+            "Beck Malenstyn",
+            "Sam Carrick"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Beck Malenstyn",
+              "reason": "other_position_group",
+              "inLocalCurrentRoster": true,
+              "requiresIndependentGameEvidence": true
+            },
+            {
+              "name": "Sam Carrick",
+              "reason": "other_position_group",
+              "inLocalCurrentRoster": true,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ]
+    },
+    "senators": {
+      "team": "OTT",
+      "rosterUpdatedAt": "2026-11-28T11:40:33.742576+00:00",
+      "rosterSnapshotPresent": true,
+      "candidateForwardLines": 4,
+      "candidateDefensePairs": 3,
+      "validatedForwardLines": 3,
+      "validatedDefensePairs": 3,
+      "rejected": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 4,
+          "sourceLine": [
+            "Sammy Blais",
+            "Stephen Halliday",
+            "Nick Cousins"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Sammy Blais",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
               "requiresIndependentGameEvidence": true
             }
           ]

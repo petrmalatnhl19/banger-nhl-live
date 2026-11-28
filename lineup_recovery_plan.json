@@ -3,7 +3,7 @@
     "lineup_core_report.json",
     "lineup_rejections_report.json"
   ],
-  "incompleteTeams": 3,
+  "incompleteTeams": 7,
   "teams": [
     {
       "team": "devils",
@@ -12,13 +12,13 @@
       "missingForwardLines": 0,
       "missingDefensePairs": 1,
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-27T14:01:00+00:00",
+      "publishedAt": "2026-11-27T18:40:00+00:00",
       "rejectedLines": [
         {
           "group": "defense",
           "sourceLineNumber": 3,
           "sourceLine": [
-            "Declan Chisholm",
+            "Anton Silaev",
             "Vladislav Kolyachonok"
           ],
           "unverifiedPlayers": [
@@ -40,7 +40,7 @@
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
       "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
-      "publishedAt": "2026-11-27T14:01:00+00:00",
+      "publishedAt": "2026-11-27T18:40:00+00:00",
       "rejectedLines": [
         {
           "group": "forwards",
@@ -63,13 +63,42 @@
       "nextAction": "Verify official roster and source-player identity; do not auto-approve."
     },
     {
+      "team": "islanders",
+      "status": "incomplete_projection",
+      "reason": "rejected_roster_lines",
+      "missingForwardLines": 1,
+      "missingDefensePairs": 0,
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-27T18:40:00+00:00",
+      "rejectedLines": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 3,
+          "sourceLine": [
+            "Anthony Duclair",
+            "Jean-Gabriel Pageau",
+            "Cal Ritchie"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Cal Ritchie",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ],
+      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
+    },
+    {
       "team": "jets",
       "status": "incomplete_projection",
       "reason": "rejected_roster_lines",
       "missingForwardLines": 1,
       "missingDefensePairs": 0,
-      "source": "https://www.nhl.com/news/winnipeg-jets-boston-bruins-game-preview-november-25-2026",
-      "publishedAt": "2026-11-25T18:05:49.837000+00:00",
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-27T18:40:00+00:00",
       "rejectedLines": [
         {
           "group": "forwards",
@@ -84,6 +113,114 @@
               "name": "Tyrel Bauer",
               "reason": "other_position_group",
               "inLocalCurrentRoster": true,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ],
+      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
+    },
+    {
+      "team": "kraken",
+      "status": "incomplete_projection",
+      "reason": "rejected_roster_lines",
+      "missingForwardLines": 1,
+      "missingDefensePairs": 1,
+      "source": "https://www.nhl.com/news/seattle-kraken-edmonton-oilers-game-preview-november-27-2026",
+      "publishedAt": "2026-11-27T18:41:00+00:00",
+      "rejectedLines": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 3,
+          "sourceLine": [
+            "Bobby McMann",
+            "Frederick Gaudreau",
+            "Mathew Wood"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Mathew Wood",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        },
+        {
+          "group": "defense",
+          "sourceLineNumber": 3,
+          "sourceLine": [
+            "Ryan Lindgren",
+            "Joshua Mahura"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Joshua Mahura",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ],
+      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
+    },
+    {
+      "team": "sabres",
+      "status": "incomplete_projection",
+      "reason": "rejected_roster_lines",
+      "missingForwardLines": 1,
+      "missingDefensePairs": 0,
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-27T18:40:00+00:00",
+      "rejectedLines": [
+        {
+          "group": "defense",
+          "sourceLineNumber": 1,
+          "sourceLine": [
+            "Beck Malenstyn",
+            "Sam Carrick"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Beck Malenstyn",
+              "reason": "other_position_group",
+              "inLocalCurrentRoster": true,
+              "requiresIndependentGameEvidence": true
+            },
+            {
+              "name": "Sam Carrick",
+              "reason": "other_position_group",
+              "inLocalCurrentRoster": true,
+              "requiresIndependentGameEvidence": true
+            }
+          ]
+        }
+      ],
+      "nextAction": "Verify official roster and source-player identity; do not auto-approve."
+    },
+    {
+      "team": "senators",
+      "status": "incomplete_projection",
+      "reason": "rejected_roster_lines",
+      "missingForwardLines": 1,
+      "missingDefensePairs": 0,
+      "source": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "publishedAt": "2026-11-27T18:40:00+00:00",
+      "rejectedLines": [
+        {
+          "group": "forwards",
+          "sourceLineNumber": 4,
+          "sourceLine": [
+            "Sammy Blais",
+            "Stephen Halliday",
+            "Nick Cousins"
+          ],
+          "unverifiedPlayers": [
+            {
+              "name": "Sammy Blais",
+              "reason": "not_in_current_roster",
+              "inLocalCurrentRoster": false,
               "requiresIndependentGameEvidence": true
             }
           ]
