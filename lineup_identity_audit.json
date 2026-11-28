@@ -27,6 +27,22 @@
         }
       ]
     },
+    "islanders": {
+      "players": [
+        {
+          "sourceName": "Cal Ritchie",
+          "expectedRole": "forwards",
+          "sameSurnameInRoster": [
+            {
+              "name": "Calum Ritchie",
+              "role": "forwards"
+            }
+          ],
+          "classification": "possible_name_variant_needs_review",
+          "automaticApproval": false
+        }
+      ]
+    },
     "devils": {
       "players": [
         {
@@ -34,6 +50,73 @@
           "expectedRole": "defense",
           "sameSurnameInRoster": [],
           "classification": "not_on_current_roster",
+          "automaticApproval": false
+        }
+      ]
+    },
+    "senators": {
+      "players": [
+        {
+          "sourceName": "Sammy Blais",
+          "expectedRole": "forwards",
+          "sameSurnameInRoster": [],
+          "classification": "not_on_current_roster",
+          "automaticApproval": false
+        }
+      ]
+    },
+    "sabres": {
+      "players": [
+        {
+          "sourceName": "Beck Malenstyn",
+          "expectedRole": "defense",
+          "sameSurnameInRoster": [
+            {
+              "name": "Beck Malenstyn",
+              "role": "forwards"
+            }
+          ],
+          "classification": "possible_name_variant_needs_review",
+          "automaticApproval": false
+        },
+        {
+          "sourceName": "Sam Carrick",
+          "expectedRole": "defense",
+          "sameSurnameInRoster": [
+            {
+              "name": "Sam Carrick",
+              "role": "forwards"
+            }
+          ],
+          "classification": "possible_name_variant_needs_review",
+          "automaticApproval": false
+        }
+      ]
+    },
+    "kraken": {
+      "players": [
+        {
+          "sourceName": "Mathew Wood",
+          "expectedRole": "forwards",
+          "sameSurnameInRoster": [
+            {
+              "name": "Matthew Wood",
+              "role": "forwards"
+            }
+          ],
+          "classification": "possible_name_variant_needs_review",
+          "automaticApproval": false
+        },
+        {
+          "sourceName": "Joshua Mahura",
+          "expectedRole": "defense",
+          "sameSurnameInRoster": [
+            {
+              "name": "Josh Mahura",
+              "role": "defense"
+            }
+          ],
+          "classification": "possible_name_variant_needs_review",
           "automaticApproval": false
         }
       ]
