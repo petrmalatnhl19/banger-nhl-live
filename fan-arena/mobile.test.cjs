@@ -68,6 +68,7 @@ const path=require('node:path');
         await page.selectOption('#team',code);
         assert.equal(await page.locator('.arena').getAttribute('data-team'),code);
         assert.ok(await page.locator('#name').innerText());
+        assert.ok(await page.locator('#name').evaluate(e=>{const node=e.firstChild;if(!node||node.nodeType!==3)return false;const words=node.textContent.matchAll(/\S+/g);for(const w of words){const r=document.createRange();r.setStart(node,w.index);r.setEnd(node,w.index+w[0].length);const rects=[...r.getClientRects()];if(rects.length!==1||rects[0].right>e.getBoundingClientRect().right+1||rects[0].left<e.getBoundingClientRect().left-1)return false}return true}),width+' '+code+' whole-word title fit');
         assert.equal(await page.locator('.panel').count(),11);
         const art=await page.evaluate(async code=>{const img=new Image();img.src=code+'.webp';await img.decode();const bg=getComputedStyle(document.querySelector('.hero')).backgroundImage;return img.naturalWidth>0&&img.naturalHeight>0&&bg.includes(code+'.webp')},code);
         assert.ok(art,code+' WebP banner decode and application');
