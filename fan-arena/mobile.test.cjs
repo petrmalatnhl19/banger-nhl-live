@@ -1,0 +1,29 @@
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+const {pathToFileURL}=require('node:url');
+const path=require('node:path');
+(async()=>{
+  const browser=await chromium.launch({headless:true});
+  try{
+    for(const width of [360,390,430]){
+      const page=await browser.newPage({viewport:{width,height:800},reducedMotion:'reduce'});
+      const errors=[];
+      page.on('pageerror',e=>errors.push(e.message));
+      await page.route('**/*',route=>route.request().url().startsWith('file:')?route.continue():route.abort());
+      await page.goto(pathToFileURL(path.resolve('fan-arena/preview.html')).href);
+      const codes=await page.locator('#team option').evaluateAll(opts=>opts.map(o=>o.value));
+      assert.equal(codes.length,32);
+      for(const code of codes){
+        await page.selectOption('#team',code);
+        assert.equal(await page.locator('.arena').getAttribute('data-team'),code);
+        assert.ok(await page.locator('#name').innerText());
+        assert.equal(await page.locator('.panel').count(),11);
+        assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),width+' '+code+' horizontal overflow');
+        assert.ok(await page.locator('#team').evaluate(e=>{const r=e.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth+1}));
+      }
+      assert.deepEqual(errors,[]);
+      await page.close();
+      console.log('PASS '+width+'px: 32 clubs');
+    }
+  }finally{await browser.close()}
+})().catch(e=>{console.error(e);process.exitCode=1});
