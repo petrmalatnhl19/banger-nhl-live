@@ -2,7 +2,7 @@ name: Frontend smoke checks
 
 on:
   push:
-    branches: [main, master]
+    branches: [main, master, security-01-public-grants-review]
   pull_request:
   workflow_dispatch:
 
@@ -19,6 +19,42 @@ jobs:
           node-version: '22'
       - name: UX-01 mobile Games filter regression
         run: node .github/scripts/test-ux-01-games.cjs
+      - name: SECURITY-105 TV frontend migration regression (static)
+        run: node .github/scripts/test-security-105-tv-frontend-regression.cjs
+      - name: SECURITY-128 persistent replay ledger (offline)
+        run: node .github/scripts/test-security-128-durable-ledger.cjs
+      - name: SECURITY-127 replay and key policy (offline)
+        run: node .github/scripts/test-security-127-replay-key-policy.cjs
+      - name: SECURITY-126 signed snapshot integrity (offline)
+        run: node .github/scripts/test-security-126-signed-snapshot.cjs
+      - name: SECURITY-125 timestamp provenance policy (offline)
+        run: node .github/scripts/test-security-125-timestamp-provenance.cjs
+      - name: SECURITY-124 integration isolation and NO-GO regression
+        run: node .github/scripts/test-security-124-integration-gate.cjs
+      - name: SECURITY-123 narrow public TV contract (offline)
+        run: node security/local/test_security123_public_contract.cjs
+      - name: SECURITY-121 public API to TV preview end-to-end (offline)
+        run: node security/local/test_security121_tv_e2e_preview.cjs
+      - name: SECURITY-120 TV UI integration gate (offline)
+        run: node security/local/test_security120_tv_ui_gate.cjs
+      - name: SECURITY-119 TV fail-closed presentation states (offline)
+        run: node .github/scripts/test-security-119-tv-failclosed-state.cjs
+      - name: SECURITY-118 TV public snapshot freshness (offline)
+        run: node .github/scripts/test-security-118-tv-freshness.cjs
+      - name: SECURITY-117 public TV metadata and CORE join (offline)
+        run: node .github/scripts/test-security-117-tv-public-join.cjs
+      - name: SECURITY-116 public game metadata projection (offline)
+        run: node .github/scripts/test-security-116-tv-metadata.cjs
+      - name: SECURITY-115 TV public completeness and freshness contract (offline)
+        run: node .github/scripts/test-security-115-tv-contract.cjs
+      - name: SECURITY-114 adversarial TV public reader fail-closed tests
+        run: node .github/scripts/test-security-114-tv-failclosed.cjs
+      - name: SECURITY-113 browser public API reader boundary (offline)
+        run: node .github/scripts/test-security-113-tv-public-browser.cjs
+      - name: SECURITY-112 offline TV public API adapter boundary
+        run: node .github/scripts/test-security-112-tv-public-adapter.cjs
+      - name: SECURITY-106 post-merge workflow regression
+        run: node .github/scripts/test-security-106-merge-regression.cjs
       - name: Test Czech commentary facts
         run: node --test scripts/test_commentary_facts.cjs
       - name: Test VOICE-08 Android commentary rules
@@ -257,6 +293,12 @@ jobs:
         run: node .github/scripts/browser-date-races.cjs
       - name: Test browser history, match detail cleanup and reload in Chromium
         run: node .github/scripts/browser-history-reload.cjs
+      - name: Verify TV Match Stats fallback when CORE 4.3 projections become private
+        run: node .github/scripts/browser-security88-tv-grants.cjs
+      - name: SECURITY-108 isolated Chromium TV rendering states
+        run: node .github/scripts/browser-security108-tv-states.cjs
+      - name: SECURITY-109 adversarial TV rendering and safe errors
+        run: node .github/scripts/browser-security109-tv-adversarial.cjs
       - name: Diagnose real Back Forward Cache eligibility in Chromium
         continue-on-error: true
         run: timeout --signal=TERM --kill-after=5s 30s xvfb-run -a node .github/scripts/browser-bfcache-diagnostic.cjs

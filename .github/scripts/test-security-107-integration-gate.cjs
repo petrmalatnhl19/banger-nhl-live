@@ -1,0 +1,25 @@
+"use strict";
+// SECURITY-107: static NO-GO gate. Does not inspect live Supabase or deploy.
+const assert=require("node:assert/strict");
+const fs=require("node:fs");
+const read=p=>fs.readFileSync(p,"utf8");
+const plan=read("docs/security-100-staged-public-api-migration.md");
+const tv=read("scripts/banger_tv_match_stats.js");
+const adapter=read("security/local/security102-tv-adapter.cjs");
+const rollout=read("security/local/security103-tv-rollout.cjs");
+const workflow=read(".github/workflows/security-local-postgres.yml");
+const frontend=read(".github/workflows/frontend-smoke.yml");
+assert.match(plan,/NO-GO for production revocation/);
+assert.match(plan,/Data classification/);
+assert.match(plan,/Production preflight/);
+assert.match(tv,/fetchRows\('core43_shadow_predictions_v1/);
+assert.match(tv,/fetchRows\('core43_shadow_preview_v1/);
+assert.doesNotMatch(tv,/security101_tv_public_v1/);
+assert.match(adapter,/FIELDS=Object\.freeze/);
+assert.match(rollout,/mode=MODES\.LEGACY/);
+assert.match(rollout,/const rows=await fetchPublic\(\)/);
+assert.doesNotMatch(rollout,/catch\s*\([^)]*\)\s*\{[^}]*fetchLegacy/s);
+assert.match(workflow,/test-security-104-postgrest-tv-e2e\.cjs/);
+assert.match(frontend,/test-security-105-tv-frontend-regression\.cjs/);
+assert.match(frontend,/test-security-106-merge-regression\.cjs/);
+console.log("PASS SECURITY-107: production remains NO-GO; isolated tests and merged frontend guards retained");

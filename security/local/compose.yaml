@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: security_local
+      POSTGRES_PASSWORD: local_only_not_for_production
+      POSTGRES_DB: security09
+    ports:
+      - "127.0.0.1:55432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U security_local -d security09"]
+      interval: 3s
+      timeout: 3s
+      retries: 20

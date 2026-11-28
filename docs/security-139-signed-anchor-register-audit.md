@@ -1,0 +1,7 @@
+# SECURITY-139 — Offline signature-gated anchor register
+
+**Production: NO-GO.** `security/local/security139-verified-anchor-register.cjs` verifies a SECURITY-136 Ed25519 signed checkpoint and SECURITY-137 separately signed anchor before forwarding the anchor epoch and fingerprint to the disposable SECURITY-138 SQLite register. It checks the scope is in the verified checkpoint, the expected epoch matches, and the fingerprint binds to the checkpoint. The offline regression tests reject forged/tampered signatures, revoked/unknown authority, wrong scope, epoch mismatch, duplicate epoch, rollback and skipped epoch; invalid submissions must not mutate the SQLite register.
+
+**Critical boundary:** verification is in Node.js and update is performed by a Python subprocess. The Python register's `update` function remains directly callable without authentication. This wrapper is **not an authenticated or enforceable production write gate**, and does not solve the TOCTOU gap, independently pinned latest epoch, cross-process authorization, malicious caller or durable trusted anchor storage. Tests use ephemeral keys and synthetic data. Before production, integrate verification and update in one protected transactional trust boundary with real key management, authenticated callers and independent anti-rollback persistence.
+
+No Supabase writes or connections, production grants, CORE 4.2, merge or deployment. PR #274 stays Draft.

@@ -1,0 +1,78 @@
+name: Security local PostgreSQL permissions
+
+on:
+  push:
+    branches: [security-01-public-grants-review]
+  pull_request:
+    paths:
+      - 'security/local/**'
+      - '.github/workflows/security-local-postgres.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic-postgres-permissions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify Docker Compose availability
+        run: |
+          docker --version
+          docker compose version
+      - name: Run isolated PostgreSQL privilege checks
+        run: bash security/local/verify.sh
+      - name: Verify synthetic SQL role matrix (SECURITY-97)
+        run: |
+          docker compose -f security/local/compose.yaml exec -T postgres \
+            psql -X -v ON_ERROR_STOP=1 -U security_local -d security09 \
+            < security/local/security97-role-matrix.sql
+      - name: Verify transactional grants rollback (SECURITY-69)
+        run: bash security/local/security69-transaction-rollback.sh
+      - name: Verify baseline-derived privilege restoration (SECURITY-70)
+        run: bash security/local/security70-baseline-restore.sh
+      - name: Verify exact synthetic ACL restoration (SECURITY-72)
+        run: bash security/local/security72-exact-acl-restore.sh
+      - name: Verify role inheritance and grant delegation (SECURITY-73)
+        run: bash security/local/security73-inheritance-delegation.sh
+      - name: Verify multi-grantor ACL restoration (SECURITY-74)
+        run: bash security/local/security74-multigrantor-restore.sh
+      - name: Verify multi-level delegated grants (SECURITY-75)
+        run: bash security/local/security75-multilevel-grants.sh
+      - name: Verify independent grant paths (SECURITY-76)
+        run: bash security/local/security76-multipath-grants.sh
+      - name: Verify synthetic capture function privilege guard (SECURITY-81)
+        run: bash security/local/security81-capture-function-privileges.sh
+      - name: Rehearse scoped revocation, role isolation and capture (SECURITY-85/86/87)
+        run: |
+          docker compose -f security/local/compose.yaml exec -T postgres \
+            psql -X -v ON_ERROR_STOP=1 -U security_local -d security09 \
+            < security/local/security87-revocation.sql
+      - name: Create disposable public API fixture (SECURITY-99)
+        run: |
+          docker compose -f security/local/compose.yaml exec -T postgres \
+            psql -X -v ON_ERROR_STOP=1 -U security_local -d security09 \
+            < security/local/security99-public-api.sql
+      - name: Start isolated PostgREST (SECURITY-99)
+        run: docker compose -f security/local/compose.yaml -f security/local/compose.postgrest.yaml up -d --wait postgrest
+      - name: Verify real PostgREST role access (SECURITY-99)
+        run: node .github/scripts/test-security-99-postgrest.cjs
+      - name: Create isolated invoker-view contract (SECURITY-101)
+        run: |
+          docker compose -f security/local/compose.yaml exec -T postgres \
+            psql -X -v ON_ERROR_STOP=1 -U security_local -d security09 \
+            < security/local/security101-public-view.sql
+      - name: Verify private-schema PostgREST contract (SECURITY-101)
+        run: node .github/scripts/test-security-101-public-view.cjs
+      - name: Verify PostgREST to TV integration (SECURITY-104)
+        run: node .github/scripts/test-security-104-postgrest-tv-e2e.cjs
+      - name: Verify public API negative paths and fail-closed behavior (SECURITY-110)
+        run: node .github/scripts/test-security-110-public-api-negative.cjs
+      - name: Diagnose PostgreSQL initialization failure
+        if: failure()
+        run: docker compose -f security/local/compose.yaml logs --no-color postgres
+      - name: Stop local test database
+        if: always()
+        run: docker compose -f security/local/compose.yaml -f security/local/compose.postgrest.yaml down -v --remove-orphans

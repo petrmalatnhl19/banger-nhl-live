@@ -1,0 +1,20 @@
+"use strict";
+// SECURITY-115 offline gate: production UI dependencies must not silently disappear.
+const assert=require("node:assert/strict");
+const fs=require("node:fs");
+const path=require("node:path");
+const {FIELDS,DEFAULT_MODE}=require("../../security/local/security113-tv-public-browser.js");
+const production=fs.readFileSync(path.join(__dirname,"../../scripts/banger_tv_match_stats.js"),"utf8");
+const html=fs.readFileSync(path.join(__dirname,"../../index.html"),"utf8");
+const doc=fs.readFileSync(path.join(__dirname,"../../docs/security-115-tv-public-completeness-freshness.md"),"utf8");
+const required=["game_id","game_date","away_team","home_team","status","core41_away","core41_home","core42_away","core42_home","advanced_away","advanced_home","experimental_away","experimental_home"];
+for(const field of required)assert(production.includes(field),"production dependency disappeared: "+field);
+const missing=required.filter(field=>!FIELDS.includes(field));
+assert(missing.length>0,"reassess completeness before declaring NO-GO");
+for(const field of ["game_date","away_team","home_team","status"])assert(missing.includes(field),"expected missing metadata: "+field);
+assert(!FIELDS.includes("as_of"),"freshness schema changed: reassess preflight");
+assert(!FIELDS.includes("snapshot_version"),"version schema changed: reassess preflight");
+assert.equal(DEFAULT_MODE,"legacy");
+assert(!html.includes("security113-tv-public-browser.js"),"production cutover requires separate approval");
+assert(doc.includes("NO-GO")&&doc.includes("as_of"),"decision and freshness criteria required");
+console.log("PASS SECURITY-115 offline completeness and freshness NO-GO contract");
