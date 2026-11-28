@@ -36,13 +36,38 @@ test('DATA-03: source conflicts preserve both names without pretending to confir
   if(chosen) assert.notEqual(chosen.status,'confirmed',c.team+' conflicting sources must not imply confirmation');
  }
 });
-test('DATA-03: selected goalie matches same-day RotoWire game evidence',()=>{
- const starters=read('starting_goalies.json'), source=read('rotowire_goalies.json');
+function specialistEvidence(team,selected,roster){
+ const e=selected.sourceEvidence;
+ if(selected.source!=='https://themorningpuck.com/starting-goalies'||selected.status!=='projected'||!e)return false;
+ const names={NYI:'islanders',NYR:'rangers',ANA:'ducks',BOS:'bruins',BUF:'sabres',CAR:'hurricanes',CBJ:'blue jackets',CGY:'flames',CHI:'blackhawks',COL:'avalanche',DAL:'stars',DET:'red wings',EDM:'oilers',FLA:'panthers',LAK:'kings',MIN:'wild',MTL:'canadiens',NJD:'devils',NSH:'predators',OTT:'senators',PHI:'flyers',PIT:'penguins',SEA:'kraken',SJS:'sharks',STL:'blues',TBL:'lightning',TOR:'maple leafs',UTA:'mammoth',VAN:'canucks',VGK:'golden knights',WPG:'jets',WSH:'capitals'};
+ const d=new Date(selected.date+'T00:00:00Z');
+ if(!Number.isFinite(+d)||!names[team])return false;
+ const month=d.toLocaleString('en-US',{month:'long',timeZone:'UTC'}), short=month.slice(0,3), day=d.getUTCDate(), year=d.getUTCFullYear();
+ const header=String(e.dateHeader||'').toLowerCase().replace(/[,\.]/g,'').replace(/(\d)(st|nd|rd|th)\b/g,'$1');
+ const dated=[selected.date,month+' '+day+' '+year,short+' '+day+' '+year,day+' '+month+' '+year,day+' '+short+' '+year].some(x=>header.includes(x.toLowerCase()));
+ return dated&&e.team===team&&e.date===selected.date&&String(e.gameId)===String(selected.gameId)&&!!selected.gameId
+ &&norm(e.goalieText)===norm(selected.name)&&new RegExp('\\b'+team+'\\b|'+names[team],'i').test(e.teamContext||'')
+ &&/\b(PROJECTED|LIKELY)\b/i.test(e.statusContext||'')&&Number.isFinite(Date.parse(selected.checkedAt))&&Date.parse(selected.checkedAt)<Date.parse(e.startTimeUTC)
+ &&roster.some(g=>g.team===team&&norm(g.name)===norm(selected.name)&&String(g.playerId)===String(selected.goalieId));
+}
+test('DATA-03: selected goalie matches same-day source game evidence',()=>{
+ const starters=read('starting_goalies.json'), source=read('rotowire_goalies.json'), roster=read('nhl_goalies.json').goalies;
  for(const [team,selected] of Object.entries(starters.teams)){
+  if(selected.source==='https://themorningpuck.com/starting-goalies'){
+   assert.ok(specialistEvidence(team,selected,roster),team+' invalid specialist evidence');
+   continue;
+  }
   const matching=source.games.filter(g=>g.team===team&&g.date===selected.date&&norm(g.goalie)===norm(selected.name));
   assert.ok(matching.length,team+' selected goalie lacks same-day source record');
   assert.ok(matching.some(g=>String(g.gameId)===String(selected.gameId)),team+' selected goalie game mismatch');
  }
+});
+test('DATA-03: specialist projection requires matching dated identity and pregame evidence',()=>{
+ const roster=[{team:'NYI',name:'Ilya Sorokin',playerId:8478009}];
+ const row={name:'Ilya Sorokin',goalieId:'8478009',date:'2026-11-28',gameId:2026020423,status:'projected',source:'https://themorningpuck.com/starting-goalies',checkedAt:'2026-11-28T04:57:46Z',sourceEvidence:{team:'NYI',date:'2026-11-28',gameId:2026020423,dateHeader:'November 28, 2026',teamContext:'Islanders',goalieText:'Ilya Sorokin',statusContext:'PROJECTED',startTimeUTC:'2026-11-29T00:00:00Z'}};
+ assert.ok(specialistEvidence('NYI',row,roster));
+ for(const patch of [{gameId:1},{date:'2026-12-01'},{goalieId:'1'},{status:'confirmed'},{sourceEvidence:null},{checkedAt:'2026-11-29T00:00:00Z'}])assert.ok(!specialistEvidence('NYI',{...row,...patch},roster));
+ for(const patch of [{dateHeader:'December 1, 2026'},{teamContext:'Rangers'},{goalieText:'Other Goalie'},{statusContext:'UNKNOWN'}])assert.ok(!specialistEvidence('NYI',{...row,sourceEvidence:{...row.sourceEvidence,...patch}},roster));
 });
 
 test('DATA-04: goalie evidence from the future is rejected by the game panel',()=>{
