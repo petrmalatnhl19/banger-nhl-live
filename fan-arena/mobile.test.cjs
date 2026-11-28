@@ -5,6 +5,29 @@ const path=require('node:path');
 (async()=>{
   const browser=await chromium.launch({headless:true});
   try{
+    const samples=[];
+    for(let i=0;i<10;i++){
+      const page=await browser.newPage({viewport:{width:390,height:800},reducedMotion:'reduce'});
+      await page.route('**/*',r=>r.request().url().startsWith('file:')?r.continue():r.abort());
+      const start=performance.now();
+      await page.goto(pathToFileURL(path.resolve('fan-arena/preview.html')).href);
+      await page.locator('#name').waitFor({state:'visible'});
+      const ready=performance.now()-start;
+      const switches=[];
+      for(const code of ['BOS','COL','TOR','DAL']){
+        const t=performance.now();await page.selectOption('#team',code);
+        await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
+        switches.push(Math.round(performance.now()-t));
+      }
+      samples.push({readyMs:Math.round(ready),switchMs:switches});
+      await page.close();
+    }
+    const percentile=(a,p)=>[...a].sort((x,y)=>x-y)[Math.ceil(a.length*p)-1];
+    const ready=samples.map(s=>s.readyMs),switches=samples.flatMap(s=>s.switchMs);
+    const report={environment:'Headless Chromium, local files, external network blocked; not real-device or API latency',samples,readyMedianMs:percentile(ready,.5),readyP90Ms:percentile(ready,.9),switchMedianMs:percentile(switches,.5),switchP90Ms:percentile(switches,.9)};
+    console.log('ARENA PERFORMANCE '+JSON.stringify(report));
+    require('node:fs').mkdirSync('fan-arena-screenshots',{recursive:true});
+    require('node:fs').writeFileSync('fan-arena-screenshots/performance.json',JSON.stringify(report,null,2));
     for(const width of [360,390,430]){
       const page=await browser.newPage({viewport:{width,height:800},reducedMotion:'reduce'});
       const errors=[];
