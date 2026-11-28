@@ -5,6 +5,34 @@ const path=require('node:path');
 (async()=>{
   const browser=await chromium.launch({headless:true});
   try{
+    const integration=await browser.newPage({viewport:{width:390,height:800}});
+    const root=pathToFileURL(path.resolve('index.html')).href;
+    // Serve actual local documents over a shared synthetic origin to test storage and navigation.
+    const fs=require('node:fs');
+    await integration.route('**/*',async r=>{
+      const u=new URL(r.request().url());
+      if(u.origin!=='https://arena-test.invalid')return r.abort();
+      const rel=u.pathname.slice(1)||'index.html';
+      const allowed=['index.html','fan-arena/preview.html','fan-arena/themes.js','fan-arena/arena-art.js'];
+      if(!allowed.includes(rel))return r.abort();
+      return r.fulfill({body:fs.readFileSync(path.resolve(rel)),contentType:rel.endsWith('.js')?'application/javascript':'text/html'});
+    });
+    await integration.goto('https://arena-test.invalid/index.html');
+    await integration.evaluate(()=>localStorage.setItem('banger-favorite-team-v1','BOS'));
+    assert.equal(await integration.locator('#fanArenaDesktopLink').getAttribute('href'),'./fan-arena/preview.html');
+    await integration.locator('#fanArenaMobileLink').click();
+    await integration.waitForURL('**/fan-arena/preview.html');
+    assert.equal(await integration.locator('#team').inputValue(),'BOS');
+    await integration.selectOption('#team','TOR');
+    assert.equal(await integration.evaluate(()=>localStorage.getItem('banger-favorite-team-v1')),'BOS');
+    await integration.goBack();
+    await integration.waitForURL('**/index.html');
+    await integration.locator('#fanArenaMobileLink').click();
+    await integration.waitForURL('**/fan-arena/preview.html');
+    await integration.locator('.arena-back').click();
+    await integration.waitForURL('**/index.html');
+    await integration.close();
+    console.log('PASS native arena entry, favorite preference, browser back and explicit return');
     const samples=[];
     for(let i=0;i<10;i++){
       const page=await browser.newPage({viewport:{width:390,height:800},reducedMotion:'reduce'});
