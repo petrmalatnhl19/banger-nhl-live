@@ -21,18 +21,52 @@ CREATE VIEW public.core43_verified_starter_evidence WITH (security_invoker=false
     source_snapshot_at,
     observed_at
    FROM nhl_core43_starter_evidence e
-  WHERE NULLIF(btrim(article_text), ''::text) IS NOT NULL AND evidence_status = 'confirmed'::text AND source_url ~ '^https://[^/]+/.+'::text AND goalie_id ~ '^[0-9]+
-INSERT INTO nhl_core43_schedule_snapshots VALUES (1,'2026-11-28 20:00Z','DAL','VGK'),(1,'2026-11-28 20:00Z','DAL','VGK'),(2,NULL,'DAL','VGK');
-INSERT INTO nhl_prediction_archive VALUES (1,'2026-11-28','DAL','VGK','FINAL',3,2,'2026-11-28 19:00Z'),(2,'2026-11-28','DAL','VGK','FUT',NULL,2,'2026-11-28 19:00Z');
+  WHERE NULLIF(btrim(article_text), ''::text) IS NOT NULL AND evidence_status = 'confirmed'::text AND source_url ~ '^https://[^/]+/.+'::text AND goalie_id ~ '^[0-9]+$'::text AND (lower(source_name) <> 'rotowire'::text OR source_url ~ '^https://(www[.])?rotowire[.]com/hockey/headlines/[^/?#]+$'::text) AND source_published_at <= verified_at AND verified_at <= now() AND (observed_at >= source_published_at AND observed_at <= verified_at OR id = 1590740 AND observed_at IS NULL AND source_snapshot_at IS NULL) AND (source_snapshot_at IS NULL OR source_snapshot_at >= source_published_at AND source_snapshot_at <= observed_at) AND (EXISTS ( SELECT
+           FROM nhl_core43_schedule_snapshots s
+          WHERE s.game_id = e.game_id
+          GROUP BY s.game_id
+         HAVING bool_and(e.team_code = s.away_team OR e.team_code = s.home_team) AND count(DISTINCT ROW(s.away_team, s.home_team, s.kickoff_at)) = 1 AND min(s.kickoff_at) > e.verified_at));
+CREATE VIEW public.core43_verified_shadow_inputs WITH (security_invoker=false) AS SELECT s.game_id,
+    s.side,
+    s.team_code,
+    s.goalie_name,
+    s.goalie_id,
+    s.prediction_at,
+    s.captured_at,
+    s.gsax,
+    s.shots_against,
+    s.gsax_fetched_at,
+        CASE
+            WHEN v.ok THEN s.starter_status
+            ELSE NULL::text
+        END AS starter_status,
+        CASE
+            WHEN v.ok THEN s.starter_published_at
+            ELSE NULL::timestamp with time zone
+        END AS starter_published_at,
+        CASE
+            WHEN v.ok THEN s.starter_verified_at
+            ELSE NULL::timestamp with time zone
+        END AS starter_verified_at,
+        CASE
+            WHEN NOT v.ok AND (s.starter_status IS NOT NULL OR s.readiness = 'ready'::text) THEN 'missing_pregame_starter_evidence'::text
+            ELSE s.readiness
+        END AS readiness
+   FROM nhl_core43_shadow_inputs s
+     CROSS JOIN LATERAL ( SELECT (EXISTS ( SELECT
+                   FROM core43_verified_starter_evidence e
+                  WHERE e.game_id = s.game_id AND e.team_code = s.team_code AND e.goalie_id = s.goalie_id AND e.source_published_at = s.starter_published_at AND e.verified_at = s.starter_verified_at AND e.evidence_status = s.starter_status AND e.verified_at <= s.prediction_at)) AS ok) v;
+INSERT INTO nhl_core43_schedule_snapshots VALUES (1,'2020-11-28 20:00Z','DAL','VGK'),(1,'2020-11-28 20:00Z','DAL','VGK'),(2,NULL,'DAL','VGK');
+INSERT INTO nhl_prediction_archive VALUES (1,'2020-11-28','DAL','VGK','FINAL',3,2,'2020-11-28 19:00Z'),(2,'2020-11-28','DAL','VGK','FUT',NULL,2,'2020-11-28 19:00Z');
 INSERT INTO nhl_core43_shadow_inputs VALUES
-(1,'away','DAL','A','10','2026-11-28 19:00Z','2026-11-28 19:00Z',2,100,'2026-11-28 18:00Z','confirmed','2026-11-28 17:00Z','2026-11-28 18:00Z','ready'),
-(1,'home','VGK','B','11','2026-11-28 19:00Z','2026-11-28 19:00Z',-1,100,'2026-11-28 18:00Z','confirmed','2026-11-28 17:00Z','2026-11-28 18:00Z','ready'),
-(2,'away','DAL','C',NULL,'2026-11-28 19:00Z','2026-11-28 19:00Z',NULL,10,NULL,NULL,NULL,NULL,'missing');
+(1,'away','DAL','A','10','2020-11-28 19:00Z','2020-11-28 19:00Z',2,100,'2020-11-28 18:00Z','confirmed','2020-11-28 17:00Z','2020-11-28 18:00Z','ready'),
+(1,'home','VGK','B','11','2020-11-28 19:00Z','2020-11-28 19:00Z',-1,100,'2020-11-28 18:00Z','confirmed','2020-11-28 17:00Z','2020-11-28 18:00Z','ready'),
+(2,'away','DAL','C',NULL,'2020-11-28 19:00Z','2020-11-28 19:00Z',NULL,10,NULL,NULL,NULL,NULL,'missing');
 INSERT INTO nhl_core43_starter_evidence VALUES
-(1,1,'DAL','10','confirmed','rotowire','https://www.rotowire.com/hockey/headlines/a','2026-11-28 17:00Z','2026-11-28 18:00Z','2026-11-28 18:00Z','fixture',NULL,'2026-11-28 17:30Z'),
-(2,1,'VGK','11','confirmed','rotowire','https://www.rotowire.com/hockey/headlines/b','2026-11-28 17:00Z','2026-11-28 18:00Z','2026-11-28 18:00Z','fixture',NULL,'2026-11-28 17:30Z'),
-(3,1,'DAL','12','confirmed','rotowire','https://www.rotowire.com/hockey/headlines/c','2026-11-28 17:00Z','2026-11-28 21:00Z','2026-11-28 21:00Z','fixture',NULL,'2026-11-28 17:30Z');
-DO $ BEGIN IF EXISTS(SELECT 1 FROM core43_verified_starter_evidence WHERE id=3) THEN RAISE EXCEPTION 'postgame evidence accepted'; END IF; END $;
+(1,1,'DAL','10','confirmed','rotowire','https://www.rotowire.com/hockey/headlines/a','2020-11-28 17:00Z','2020-11-28 18:00Z','2020-11-28 18:00Z','fixture',NULL,'2020-11-28 17:30Z'),
+(2,1,'VGK','11','confirmed','rotowire','https://www.rotowire.com/hockey/headlines/b','2020-11-28 17:00Z','2020-11-28 18:00Z','2020-11-28 18:00Z','fixture',NULL,'2020-11-28 17:30Z'),
+(3,1,'DAL','12','confirmed','rotowire','https://www.rotowire.com/hockey/headlines/c','2020-11-28 17:00Z','2020-11-28 21:00Z','2020-11-28 21:00Z','fixture',NULL,'2020-11-28 17:30Z');
+DO $$ BEGIN IF EXISTS(SELECT 1 FROM core43_verified_starter_evidence WHERE id=3) THEN RAISE EXCEPTION 'postgame evidence accepted'; END IF; IF (SELECT count(*) FROM core43_verified_starter_evidence WHERE id IN (1,2)) <> 2 THEN RAISE EXCEPTION 'valid evidence missing'; END IF; END $$;
 ALTER TABLE nhl_core43_schedule_snapshots ENABLE ROW LEVEL SECURITY;
 ALTER TABLE nhl_core43_shadow_inputs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE nhl_core43_starter_evidence ENABLE ROW LEVEL SECURITY;
@@ -174,9 +208,9 @@ RESET ROLE;
 DO $$ BEGIN IF has_table_privilege('anon','public.nhl_core43_schedule_snapshots','SELECT') OR has_table_privilege('authenticated','public.core43_verified_shadow_inputs','SELECT') THEN RAISE EXCEPTION 'private access'; END IF; END $$;
 ROLLBACK;
 ::text AND (lower(source_name) <> 'rotowire'::text OR source_url ~ '^https://(www[.])?rotowire[.]com/hockey/headlines/[^/?#]+
-INSERT INTO nhl_core43_schedule_snapshots VALUES (1,'2026-11-28 20:00Z','DAL','VGK'),(1,'2026-11-28 20:00Z','DAL','VGK'),(2,NULL,'DAL','VGK');
-INSERT INTO nhl_prediction_archive VALUES (1,'2026-11-28','DAL','VGK','FINAL',3,2,'2026-11-28 19:00Z'),(2,'2026-11-28','DAL','VGK','FUT',NULL,2,'2026-11-28 19:00Z');
-INSERT INTO core43_verified_shadow_inputs VALUES (1,'away',2,100,'ready',10,'2026-11-28 18:00Z','2026-11-28 19:00Z','confirmed'),(1,'home',-1,100,'ready',11,'2026-11-28 18:00Z','2026-11-28 19:00Z','confirmed'),(2,'away',NULL,10,'missing',NULL,NULL,'2026-11-28 19:00Z',NULL);
+INSERT INTO nhl_core43_schedule_snapshots VALUES (1,'2020-11-28 20:00Z','DAL','VGK'),(1,'2020-11-28 20:00Z','DAL','VGK'),(2,NULL,'DAL','VGK');
+INSERT INTO nhl_prediction_archive VALUES (1,'2020-11-28','DAL','VGK','FINAL',3,2,'2020-11-28 19:00Z'),(2,'2020-11-28','DAL','VGK','FUT',NULL,2,'2020-11-28 19:00Z');
+INSERT INTO core43_verified_shadow_inputs VALUES (1,'away',2,100,'ready',10,'2020-11-28 18:00Z','2020-11-28 19:00Z','confirmed'),(1,'home',-1,100,'ready',11,'2020-11-28 18:00Z','2020-11-28 19:00Z','confirmed'),(2,'away',NULL,10,'missing',NULL,NULL,'2020-11-28 19:00Z',NULL);
 ALTER TABLE nhl_core43_schedule_snapshots ENABLE ROW LEVEL SECURITY;
 ALTER TABLE core43_verified_shadow_inputs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE nhl_prediction_archive ENABLE ROW LEVEL SECURITY;
@@ -351,9 +385,9 @@ CREATE VIEW public.core43_verified_shadow_inputs WITH (security_invoker=false) A
      CROSS JOIN LATERAL ( SELECT (EXISTS ( SELECT
                    FROM core43_verified_starter_evidence e
                   WHERE e.game_id = s.game_id AND e.team_code = s.team_code AND e.goalie_id = s.goalie_id AND e.source_published_at = s.starter_published_at AND e.verified_at = s.starter_verified_at AND e.evidence_status = s.starter_status AND e.verified_at <= s.prediction_at)) AS ok) v;
-INSERT INTO nhl_core43_schedule_snapshots VALUES (1,'2026-11-28 20:00Z','DAL','VGK'),(1,'2026-11-28 20:00Z','DAL','VGK'),(2,NULL,'DAL','VGK');
-INSERT INTO nhl_prediction_archive VALUES (1,'2026-11-28','DAL','VGK','FINAL',3,2,'2026-11-28 19:00Z'),(2,'2026-11-28','DAL','VGK','FUT',NULL,2,'2026-11-28 19:00Z');
-INSERT INTO core43_verified_shadow_inputs VALUES (1,'away',2,100,'ready',10,'2026-11-28 18:00Z','2026-11-28 19:00Z','confirmed'),(1,'home',-1,100,'ready',11,'2026-11-28 18:00Z','2026-11-28 19:00Z','confirmed'),(2,'away',NULL,10,'missing',NULL,NULL,'2026-11-28 19:00Z',NULL);
+INSERT INTO nhl_core43_schedule_snapshots VALUES (1,'2020-11-28 20:00Z','DAL','VGK'),(1,'2020-11-28 20:00Z','DAL','VGK'),(2,NULL,'DAL','VGK');
+INSERT INTO nhl_prediction_archive VALUES (1,'2020-11-28','DAL','VGK','FINAL',3,2,'2020-11-28 19:00Z'),(2,'2020-11-28','DAL','VGK','FUT',NULL,2,'2020-11-28 19:00Z');
+INSERT INTO core43_verified_shadow_inputs VALUES (1,'away',2,100,'ready',10,'2020-11-28 18:00Z','2020-11-28 19:00Z','confirmed'),(1,'home',-1,100,'ready',11,'2020-11-28 18:00Z','2020-11-28 19:00Z','confirmed'),(2,'away',NULL,10,'missing',NULL,NULL,'2020-11-28 19:00Z',NULL);
 ALTER TABLE nhl_core43_schedule_snapshots ENABLE ROW LEVEL SECURITY;
 ALTER TABLE core43_verified_shadow_inputs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE nhl_prediction_archive ENABLE ROW LEVEL SECURITY;
