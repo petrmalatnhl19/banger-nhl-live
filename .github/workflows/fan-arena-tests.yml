@@ -42,3 +42,10 @@ jobs:
           name: fan-arena-live-report
           path: fan-arena-live-report.json
           if-no-files-found: warn
+      - name: Upload Dallas visual fixtures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dallas-mobile-screenshots
+          path: fan-arena-screenshots/
+          if-no-files-found: warn
