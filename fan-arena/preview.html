@@ -175,7 +175,7 @@ async function loadClub(){
  if(typeof panels[i].replaceChildren!=='function'||typeof panels[i].setAttribute!=='function')return;
  if((i===0||i===1)&&game&&[game.awayTeam?.abbrev,game.homeTeam?.abbrev].every(t=>names.has(t))){
  const hidden=document.createElement('span');hidden.hidden=true;hidden.textContent=value;
- const board=document.createElement('span');board.className='scoreboard';board.setAttribute('aria-hidden','true');
+ const board=document.createElement('span');board.className='scoreboard';board.setAttribute('role','img');board.setAttribute('aria-label',value);
  const team=t=>{const el=document.createElement('span');el.className='score-team';const img=document.createElement('img');img.src='https://assets.nhle.com/logos/nhl/svg/'+t.abbrev+'_dark.svg';img.alt='';img.width=40;img.height=40;img.addEventListener('error',()=>{img.hidden=true});const label=document.createElement('span');label.textContent=names.get(t.abbrev);el.append(img,label);return el};
  const center=document.createElement('strong');center.className='score-value';center.textContent=i===0?game.awayTeam.score+':'+game.homeTeam.score:'VS';
  board.append(team(game.awayTeam),center,team(game.homeTeam));panels[i].replaceChildren(hidden,board);
