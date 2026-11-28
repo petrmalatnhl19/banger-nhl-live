@@ -3,7 +3,7 @@ const html=fs.readFileSync('fan-arena/preview.html','utf8');
 const script=html.match(/<script>([\s\S]*?)<\/script>/)[1];
 const codes=[...script.matchAll(/\['([A-Z]{3})','[^']+'\]/g)].slice(0,32).map(m=>m[1]);
 if(new Set(codes).size!==32)throw Error('Expected 32 clubs');
-function node(){return {textContent:'',childNodes:[],append(...x){this.childNodes.push(...x)},replaceChildren(){this.childNodes=[]},addEventListener(){}}}
+function node(){let text='';return {get textContent(){return text+this.childNodes.map(n=>n.textContent).join('')},set textContent(v){text=String(v);this.childNodes=[]},childNodes:[],append(...x){this.childNodes.push(...x)},replaceChildren(){text='';this.childNodes=[]},addEventListener(){}}}
 const panels=Array.from({length:11},node),select=node();
 const nodes={team:select,name:node(),tagline:node()};
 const cache=new Map();
@@ -31,10 +31,15 @@ vm.runInContext(script.replace(/loadClub\(\);\s*$/,''),ctx);
  for(const code of codes){
   select.value=code;
   await vm.runInContext('loadClub()',ctx);
-  const values=panels.map(p=>[p.textContent,...p.childNodes.map(n=>n.textContent)].filter(Boolean).join(' | '));
+  const values=panels.map(p=>p.textContent);
   const missing=values.map((v,i)=>!v||/nedostup|nejsou dostup|není dostup|Žádné jednoznačně|Načítám|—/.test(v)?i+1:null).filter(Boolean);
-  report.push({code,missing,values});
-  console.log(code+' '+(11-missing.length)+'/11 panels; gaps: '+missing.join(','));
+  const newsEmpty=values[7]==='Žádné jednoznačně přiřazené novinky.';
+  const gaps=missing.filter(i=>i!==8||!newsEmpty);
+  const stats=await (await read(new URL('https://xxwqeiuyislnoxsmjuul.supabase.co/functions/v1/nhl-feed?kind=clubstats&team='+code),{headers:{apikey:'sb_publishable_SfeHMIvUkYTuD3jCrWub8w_fPIY0B-G'}})).json().catch(()=>null);
+  const goalieSample=stats?.goalies?.[0];
+  report.push({code,missing:gaps,newsEmpty,values,goalieSample});
+  console.log(code+' diagnostic goalie: '+JSON.stringify(goalieSample??null)+'; news: '+values[7].slice(0,180));
+  console.log(code+' '+(11-gaps.length)+'/11 panels; gaps: '+gaps.join(','));
  }
  fs.writeFileSync('fan-arena-live-report.json',JSON.stringify({timestamp:new Date().toISOString(),requests,report},null,2));
  if(report.every(r=>r.missing.length===11))throw Error('All panels unavailable');
