@@ -18,6 +18,10 @@ const path=require('node:path');
         assert.equal(await page.locator('.arena').getAttribute('data-team'),code);
         assert.ok(await page.locator('#name').innerText());
         assert.equal(await page.locator('.panel').count(),11);
+        if(code!=='DAL'){
+          const art=await page.evaluate(async code=>{const svg=globalThis.BangerArenaArt?.[code];if(!svg)return false;const img=new Image();img.src='data:image/svg+xml,'+encodeURIComponent(svg);await img.decode();return img.naturalWidth>0&&getComputedStyle(document.querySelector('.hero')).backgroundImage.includes('data:image/svg+xml')},code);
+          assert.ok(art,code+' banner decode and application');
+        }
         assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),width+' '+code+' horizontal overflow');
         assert.ok(await page.locator('#team').evaluate(e=>{const r=e.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth+1}));
       }
@@ -44,6 +48,8 @@ const path=require('node:path');
       await page.locator('.player-row').first().waitFor();
       await page.locator('.metric-fill').first().waitFor();
       assert.equal(await page.locator('.form-chip').count(),15);
+      assert.equal(await page.locator('.scoreboard[role="img"][aria-label]').count(),2);
+      assert.match(await page.locator('.scoreboard').first().getAttribute('aria-label'),/\d+ : \d+/);
       assert.equal(await page.locator('.metric-fill').count(),3);
       assert.equal(await page.locator('.player-meta').count(),2);
       const pair=await page.locator('.metric-pair').evaluateAll(els=>els.map(e=>({x:e.offsetLeft,y:e.offsetTop})));
