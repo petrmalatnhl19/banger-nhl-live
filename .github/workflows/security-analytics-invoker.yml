@@ -1,0 +1,28 @@
+name: SECURITY analytics invoker isolated rehearsal
+on:
+  pull_request:
+    paths:
+      - 'scripts/sql/security_analytics_invoker_*.sql'
+      - '.github/workflows/security-analytics-invoker.yml'
+permissions:
+  contents: read
+jobs:
+  rehearsal:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: local_fixture_only
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Isolated fixture parity, RLS and rollback
+        env:
+          PGPASSWORD: local_fixture_only
+        run: psql -h 127.0.0.1 -U postgres -d postgres -f scripts/sql/security_analytics_invoker_fixture.sql
+      - name: Existing production GET-only baseline
+        run: node scripts/security_core43_public_rest_smoke.cjs
