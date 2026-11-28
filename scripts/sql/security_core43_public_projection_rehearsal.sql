@@ -284,6 +284,18 @@ RESET ROLE;
 DO $$ BEGIN IF has_table_privilege('anon','public.nhl_core43_schedule_snapshots','SELECT') OR has_table_privilege('authenticated','public.core43_verified_shadow_inputs','SELECT') THEN RAISE EXCEPTION 'private access'; END IF; END $$;
 
 -- Refresh prototype: privileged transaction, no public execution grants.
+-- Experimental freshness budget; not a production SLA.
+CREATE TABLE publication.refresh_state(singleton boolean PRIMARY KEY CHECK(singleton), refreshed_at timestamptz NOT NULL, generation bigint NOT NULL CHECK(generation>0));
+ALTER TABLE publication.refresh_state ENABLE ROW LEVEL SECURITY;
+CREATE POLICY refresh_state_read ON publication.refresh_state FOR SELECT TO anon,authenticated,service_role USING(true);
+GRANT SELECT ON publication.refresh_state TO anon,authenticated,service_role;
+CREATE VIEW public.core43_projection_health WITH (security_invoker=true) AS
+SELECT refreshed_at,generation,
+CASE WHEN refreshed_at > statement_timestamp() THEN 'invalid_clock'
+WHEN statement_timestamp()-refreshed_at > interval '5 minutes' THEN 'stale'
+ELSE 'fresh' END AS freshness
+FROM publication.refresh_state;
+GRANT SELECT ON public.core43_projection_health TO anon,authenticated,service_role;
 CREATE PROCEDURE publication.refresh_all() LANGUAGE plpgsql SECURITY INVOKER AS $refresh$
 BEGIN
   PERFORM pg_advisory_xact_lock(430453);
@@ -294,6 +306,8 @@ BEGIN
   INSERT INTO publication.core43_shadow_preview_v1 SELECT * FROM publication.source_core43_shadow_preview_v1;
   DELETE FROM publication.nhl_core43_public_schedule_evidence;
   INSERT INTO publication.nhl_core43_public_schedule_evidence SELECT * FROM publication.source_nhl_core43_public_schedule_evidence;
+  INSERT INTO publication.refresh_state VALUES(true,clock_timestamp(),1)
+  ON CONFLICT(singleton) DO UPDATE SET refreshed_at=EXCLUDED.refreshed_at,generation=publication.refresh_state.generation+1;
 END;
 $refresh$;
 REVOKE ALL ON PROCEDURE publication.refresh_all() FROM PUBLIC,anon,authenticated,service_role;
@@ -312,12 +326,33 @@ END $$;
 -- Inject a failure into the second projection; first projection must roll back too.
 CREATE FUNCTION publication.fail_refresh() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN RAISE EXCEPTION 'injected refresh failure'; END $$;
 CREATE TRIGGER fail_refresh BEFORE INSERT ON publication.core43_shadow_preview_v1 FOR EACH STATEMENT EXECUTE FUNCTION publication.fail_refresh();
+CREATE TEMP TABLE health_before AS SELECT * FROM publication.refresh_state;
 CREATE TEMP TABLE refresh_before AS SELECT * FROM public.core43_shadow_predictions_v1;
 UPDATE nhl_prediction_archive SET core42_away=4 WHERE game_id=1;
 DO $$ BEGIN
  BEGIN CALL publication.refresh_all(); RAISE EXCEPTION 'expected failure absent'; EXCEPTION WHEN raise_exception THEN IF SQLERRM <> 'injected refresh failure' THEN RAISE; END IF; END;
  IF EXISTS ((SELECT * FROM public.core43_shadow_predictions_v1 EXCEPT ALL SELECT * FROM refresh_before) UNION ALL (SELECT * FROM refresh_before EXCEPT ALL SELECT * FROM public.core43_shadow_predictions_v1)) THEN RAISE EXCEPTION 'partial refresh leaked'; END IF;
+ IF EXISTS ((SELECT * FROM publication.refresh_state EXCEPT ALL SELECT * FROM health_before) UNION ALL (SELECT * FROM health_before EXCEPT ALL SELECT * FROM publication.refresh_state)) THEN RAISE EXCEPTION 'failed refresh advanced health'; END IF;
 END $$;
 DROP TRIGGER fail_refresh ON publication.core43_shadow_preview_v1;
 CALL publication.refresh_all();
+-- Deterministic clock boundary and public health checks.
+DO $$ BEGIN
+IF (SELECT generation FROM publication.refresh_state) <> 2 THEN RAISE EXCEPTION 'incorrect successful generation'; END IF;
+END $$;
+UPDATE publication.refresh_state SET refreshed_at=statement_timestamp()-interval '6 minutes';
+SET LOCAL ROLE anon;
+DO $$ BEGIN IF (SELECT freshness FROM public.core43_projection_health) IS DISTINCT FROM 'stale' THEN RAISE EXCEPTION 'stale not detected'; END IF; END $$;
+RESET ROLE;
+UPDATE publication.refresh_state SET refreshed_at=statement_timestamp()+interval '1 hour';
+SET LOCAL ROLE authenticated;
+DO $$ BEGIN IF (SELECT freshness FROM public.core43_projection_health) IS DISTINCT FROM 'invalid_clock' THEN RAISE EXCEPTION 'future clock not detected'; END IF; END $$;
+RESET ROLE;
+CALL publication.refresh_all();
+SET LOCAL ROLE anon;
+DO $$ BEGIN
+IF (SELECT freshness FROM public.core43_projection_health) IS DISTINCT FROM 'fresh' THEN RAISE EXCEPTION 'fresh not detected'; END IF;
+IF has_table_privilege(current_user,'publication.refresh_state','INSERT,UPDATE,DELETE,TRUNCATE') THEN RAISE EXCEPTION 'public health write'; END IF;
+END $$;
+RESET ROLE;
 ROLLBACK;
