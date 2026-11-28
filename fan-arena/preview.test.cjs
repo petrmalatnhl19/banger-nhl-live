@@ -51,3 +51,16 @@ test('late previous-team response cannot overwrite current standings',async()=>{
  assert.match(h.panels[3].textContent,/42/);
  assert.doesNotMatch(h.panels[3].textContent,/99/);
 });
+
+test('official NHL goalie savePercentage and legacy fallback preserve valid zero and missing data',async()=>{
+ const h=harness(async url=>{
+  if(new URL(url,'https://example.test').searchParams.get('kind')!=='clubstats')throw Error('fixture unavailable');
+  return {ok:true,json:async()=>({goalies:[
+   {firstName:{default:'Official'},wins:5,savePercentage:0.922652,savePctg:0.8},
+   {firstName:{default:'Legacy'},wins:2,savePctg:0},
+   {firstName:{default:'Missing'},wins:1,savePercentage:1.2}
+  ]})};
+ });
+ await h.load();
+ assert.equal(h.panels[5].textContent,'Official · 5 V · SV% 92.3 % | Legacy · 2 V · SV% 0.0 % | Missing · 1 V · SV% —');
+});
