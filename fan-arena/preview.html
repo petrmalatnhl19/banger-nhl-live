@@ -66,6 +66,7 @@ function newsTeamFromHeadline(value){
 
 function mpParseCSV(csv){const records=[];let row=[],cell='',quoted=false;for(let i=0;i<csv.length;i++){const c=csv[i];if(c==='"'){if(quoted&&csv[i+1]==='"'){cell+='"';i++}else quoted=!quoted}else if(c===','&&!quoted){row.push(cell);cell=''}else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&csv[i+1]==='\n')i++;row.push(cell);if(row.length>1)records.push(row);row=[];cell=''}else cell+=c}if(cell||row.length){row.push(cell);records.push(row)}const keys=records.shift()||[];return records.map(r=>Object.fromEntries(keys.map((k,i)=>[k.replace(/^\uFEFF/,'').trim(),r[i]??''])));}
 
+function formatSavePercentage(p){const v=p.savePercentage??p.savePctg;return Number.isFinite(v)&&v>=0&&v<=1?(v*100).toFixed(1)+' %':'—';}
 let requestId=0;
 const panels=[...document.querySelectorAll('.panel p')];
 async function readClub(kind,code,signal){
@@ -102,7 +103,7 @@ async function loadClub(){
  const top=(rows,key)=>Array.isArray(rows)?rows.filter(p=>name(p)&&Number.isFinite(p[key])).sort((a,b)=>b[key]-a[key]).slice(0,3):[];
  const skaters=top(d.skaters,'points'),goalies=top(d.goalies,'wins');
  show(4,skaters.map(p=>name(p)+' · '+p.points+' b.').join(' | ')||'Statistiky nejsou dostupné.');
- show(5,goalies.map(p=>name(p)+' · '+p.wins+' V · SV% '+(Number.isFinite(p.savePctg)?(p.savePctg*100).toFixed(1)+' %':'—')).join(' | ')||'Statistiky nejsou dostupné.');
+ show(5,goalies.map(p=>name(p)+' · '+p.wins+' V · SV% '+(formatSavePercentage(p))).join(' | ')||'Statistiky nejsou dostupné.');
  }catch{show(4,'Statistiky nejsou dostupné.');show(5,'Statistiky nejsou dostupné.')}})(),
  (async()=>{try{const d=await readClub('roster',code,signal);
  const name=p=>[p?.firstName?.default??p?.firstName,p?.lastName?.default??p?.lastName].filter(x=>typeof x==='string'&&x.trim()).join(' ');
