@@ -1,0 +1,27 @@
+name: CORE43-CAL-55 verified SQLite reservation
+on:
+  pull_request:
+    paths:
+      - 'scripts/core43_cal49_provenance_gate.py'
+      - 'scripts/core43_cal50_signature_verify.py'
+      - 'scripts/core43_cal51_signed_bundle.py'
+      - 'scripts/core43_cal52_source_binding.py'
+      - 'scripts/core43_cal53_game_replay.py'
+      - 'scripts/core43_cal54_sqlite_ledger.py'
+      - 'scripts/core43_cal55_verified_reservation.py'
+      - 'tests/test_core43_cal55.py'
+      - '.github/workflows/core43-cal55-verified-reservation.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verified-reservation-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Offline end-to-end signed export verification and SQLite reservation
+        run: python -m unittest discover -s tests -p 'test_core43_cal55.py' -v

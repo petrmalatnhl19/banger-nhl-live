@@ -1,0 +1,42 @@
+name: CORE43-CAL-05 isolated artifact round-trip
+on:
+  pull_request:
+    paths:
+      - 'scripts/test_core43_cal05_artifact_roundtrip.cjs'
+      - 'scripts/core43_cal04_scheduled_dryrun.cjs'
+      - '.github/workflows/core43-cal05-artifact-roundtrip.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  first-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Mock first run (no Supabase)
+        run: node scripts/test_core43_cal05_artifact_roundtrip.cjs first /tmp/core43-cal05
+      - uses: actions/upload-artifact@v4
+        with:
+          name: core43-cal05-isolated-ledger
+          path: /tmp/core43-cal05/ledger.json
+          if-no-files-found: error
+          retention-days: 1
+  second-run:
+    needs: first-run
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@v4
+        with:
+          name: core43-cal05-isolated-ledger
+          path: /tmp/core43-cal05
+      - name: Mock second run uses restored artifact (no Supabase)
+        run: node scripts/test_core43_cal05_artifact_roundtrip.cjs second /tmp/core43-cal05

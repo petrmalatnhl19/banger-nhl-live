@@ -1,0 +1,5 @@
+# CAL-28X — offline independently signed checkpoint witnesses
+
+A verifier checks the CAL-28W rotation chain from an explicitly supplied checkpoint, then requires at least two distinct Ed25519 witness signatures over the same exact auditor ID, chain sequence and head hash. The witness public keys must be supplied through an explicit pinned mapping. Unknown, duplicated, stale, forged or mismatched witness statements are rejected. Twelve synthetic regression tests are included in the CAL-04 CI workflow.
+
+**Security boundary:** Witness keys and the prior checkpoint are caller-supplied and not authenticated out of band. Two signatures alone do not establish independently operated witnesses, prevent collusion, detect a fork when all witnesses are compromised or prove real provider retention. Results always include `trusted:false`. Future real-world deployment needs separately operated witness services, authenticated pinned roots, independently distributed checkpoints, cross-host consistency checks and evidence of actual key custody. No integration with pin advancement, no Supabase writes, no production CORE 4.2 changes, no merge, deployment or live dry-run.

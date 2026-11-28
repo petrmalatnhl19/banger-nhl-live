@@ -1,0 +1,5 @@
+# CORE43-CAL-28B — signed transfer and evidence completeness
+
+`verifyTransferEvidence(transfer, trustedPublicKey, witnessId, trustedAnchor, archiveRoot)` first verifies CAL-22 signature and pinned history, then requires **every** referenced CAL-18B archive to exist under the independently supplied archive root. It rejects missing archives, symlinked archive directories, malformed manifests, altered archive bytes, and mismatched package digests by invoking CAL-18B `verifyArchive` for each ledger entry.
+
+This is a **separate opt-in offline verifier**. Existing CAL-22 and CAL-24 interfaces have not been changed, so CAL-24 advancement does **not yet enforce** archive completeness. Integrating that check into any approved advancement path remains a required gate. The test suite covers rejection and empty-ledger acceptance; a positive real archive transfer scenario is not yet included. `verifyArchive` checks timestamp cryptography but does not prove independent TSA operations or official game start. No Supabase writes, deployment, production CORE 4.2 changes or live collection.

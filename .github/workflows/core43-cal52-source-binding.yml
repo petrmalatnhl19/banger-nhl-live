@@ -1,0 +1,24 @@
+name: CORE43-CAL-52 signed source bytes
+on:
+  pull_request:
+    paths:
+      - 'scripts/core43_cal49_provenance_gate.py'
+      - 'scripts/core43_cal50_signature_verify.py'
+      - 'scripts/core43_cal51_signed_bundle.py'
+      - 'scripts/core43_cal52_source_binding.py'
+      - 'tests/test_core43_cal52.py'
+      - '.github/workflows/core43-cal52-source-binding.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-binding-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify offline signed manifest and exact source bytes
+        run: python -m unittest discover -s tests -p 'test_core43_cal52.py' -v

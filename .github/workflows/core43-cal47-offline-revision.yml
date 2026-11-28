@@ -1,0 +1,21 @@
+name: CORE43-CAL-47 offline revision tests
+on:
+  pull_request:
+    paths:
+      - 'scripts/core43_cal47_offline_revision.py'
+      - 'tests/test_core43_cal47.py'
+      - '.github/workflows/core43-cal47-offline-revision.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-revision-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate CAL-47 without credentials or external services
+        run: python -m unittest discover -s tests -p 'test_core43_cal47.py' -v
