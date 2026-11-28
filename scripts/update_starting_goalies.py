@@ -113,7 +113,10 @@ def main():
     status="projected"
     context=" ".join(lines[i+1:i+4]).upper()
     if "PROJECTED" not in context and "LIKELY" not in context:continue
-    records[abbr]={"name":line,"status":status,"date":today,"source":SOURCE,"sourceLabel":"The Morning Puck","checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat()}
+    ids=rosters.get(key,{}).get("playerIds",{})
+    goalie_id=next((str(v) for n,v in ids.items() if normalize(n)==normalize(line) and str(v).isdigit()),None)
+    if not goalie_id:continue
+    records[abbr]={"name":line,"status":status,"date":today,"source":SOURCE,"sourceLabel":"The Morning Puck","goalieId":goalie_id,"checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"sourceEvidence":{"dateHeader":" ".join(lines[:150]),"teamContext":neighborhood,"goalieText":line,"statusContext":context}}
     break
  except Exception as err:
   source_errors.append("specialist ["+source_failure_kind(err)+"]: "+type(err).__name__+": "+str(err)[:160])
@@ -140,7 +143,7 @@ def main():
   playing={team for team,game in games.items() if game.get("gameState") in ("FUT","PRE") and
            game.get("startTimeUTC") and datetime.datetime.fromisoformat(game["startTimeUTC"].replace("Z","+00:00"))>now}
   with open("lineups.json",encoding="utf-8") as lineup_file:lineups=json.load(lineup_file).get("teams",{})
-  records={abbr:{**entry,"gameId":games[abbr]["id"]} for abbr,entry in records.items() if abbr in playing}
+  records={abbr:{**entry,"gameId":games[abbr]["id"],"sourceEvidence":{**entry["sourceEvidence"],"team":abbr,"date":today,"gameId":games[abbr]["id"],"startTimeUTC":games[abbr]["startTimeUTC"]}} for abbr,entry in records.items() if abbr in playing}
   # Do not present a goalie for a team whose game cannot be verified.
   for abbr in playing:
    key=ABBR[abbr]
