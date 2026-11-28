@@ -8,7 +8,11 @@ ALTER TABLE public.nhl_prediction_archive ENABLE ROW LEVEL SECURITY;
 GRANT SELECT ON public.nhl_prediction_archive TO anon,authenticated;
 GRANT ALL ON public.nhl_prediction_archive TO service_role;
 CREATE POLICY read_archive ON public.nhl_prediction_archive FOR SELECT TO anon,authenticated USING (true);
+\if :{?real_snapshot}
+\ir security_analytics_snapshot_input.sql
+\else
 INSERT INTO public.nhl_prediction_archive (actual_away,actual_home,advanced_away,advanced_home,baseline_away,baseline_home,core40_away,core40_home,core41_away,core41_home,core42_away,core42_goalie_review,core42_home,core42_predicted_at,game_date,game_id,goalie32_away,goalie32_home,special33_away,special33_home,status) VALUES (2,3,2,4,2,4,2,4,2,4,2,NULL,4,'2026-11-10 12:00:00+00','2026-11-11','2026020001',2,4,2,4,'final'),(3,3,3,3,3,3,3,3,3,3,3,NULL,3,'2026-11-10 12:00:00+00','2026-11-12','2026020002',3,3,3,3,'final'),(1,3,2,4,2,4,2,4,2,4,NULL,NULL,NULL,NULL,'2026-11-13','2026020003',2,4,2,4,'final'),(NULL,NULL,2,4,2,4,2,4,2,4,2,NULL,4,'2026-11-10 12:00:00+00','2026-11-14','2026020004',2,4,2,4,'pending');
+\endif
 CREATE VIEW public.nhl_core_model_accuracy AS  WITH forecasts AS (
          SELECT nhl_prediction_archive.game_id,
             nhl_prediction_archive.actual_away,
