@@ -63,6 +63,23 @@
 .arena[data-team=DAL] .metric-track{display:block;height:7px;margin-top:6px;border-radius:8px;background:#ffffff19;overflow:hidden}
 .arena[data-team=DAL] .metric-fill{display:block;height:100%;background:#49c88a;border-radius:8px}
 .arena[data-team=DAL] .metric-source{display:block;color:#b7cfc4;font-size:11px;margin-bottom:8px}
+
+/* FAN-29.4.2: visual polish for reference club. */
+.arena[data-team=DAL] .hero:before{background:linear-gradient(90deg,#03110edb,transparent 85%),linear-gradient(0deg,#03110ef5,transparent 65%)}
+.arena[data-team=DAL] .dallas-identity img{width:72px;height:72px}
+.arena[data-team=DAL] .panel:nth-child(4),.arena[data-team=DAL] .panel:nth-child(8){grid-column:1/-1}
+.arena[data-team=DAL] .panel:nth-child(5),.arena[data-team=DAL] .panel:nth-child(6){grid-column:span 1}
+.arena[data-team=DAL] .scoreboard{display:flex;align-items:center;justify-content:space-around;gap:6px;text-align:center}
+.arena[data-team=DAL] .score-team{display:flex;flex:1;min-width:0;flex-direction:column;align-items:center;font-size:11px}
+.arena[data-team=DAL] .score-team img{width:40px;height:40px;object-fit:contain}
+.arena[data-team=DAL] .score-value{font-size:clamp(25px,7vw,40px);font-weight:950;white-space:nowrap;color:#eafff2}
+.arena[data-team=DAL] .match-date{display:block;text-align:center;font-size:13px;color:#bce7ce;margin-top:8px}
+.arena[data-team=DAL] .player-row{position:relative;padding:12px 8px}
+.arena[data-team=DAL] .player-row small{font-size:15px;font-weight:750}
+.arena[data-team=DAL] .metric-row strong{display:block;font-size:24px;color:#a6f4c8}
+.arena[data-team=DAL] .metric-track{height:9px}
+@media(min-width:601px){.arena[data-team=DAL] .panel:nth-child(5),.arena[data-team=DAL] .panel:nth-child(6){grid-column:span 3}}
+@media(max-width:600px){.arena[data-team=DAL] .panel:nth-child(-n+2){grid-column:1/-1}.arena[data-team=DAL] .hero{min-height:340px}}
 </style></head><body><main class="arena"><header><div class="brand">BANGER<small>NHL LIVE</small></div><label>Klub <select id="team"></select></label></header><section class="hero"><div class="dallas-identity"><img src="https://assets.nhle.com/logos/nhl/svg/DAL_dark.svg" alt="" width="64" height="64"><span>DALLAS · TEXAS<br>VICTORY GREEN</span></div><div class="eyebrow">FAN ARENA · MŮJ TÝM</div><h1 id="name"></h1><p id="tagline"></p></section><div class="section-heading"><h2>Klubové centrum</h2><span>Vývojový náhled</span></div><div class="modules"><section class="panel"><span class="kicker">01 / VÝSLEDEK</span><h2>Poslední zápas</h2><p>Čeká na napojení ověřených dat.</p></section><section class="panel"><span class="kicker">02 / PROGRAM</span><h2>Další zápas</h2><p>Čeká na napojení rozpisu.</p></section><section class="panel"><span class="kicker">03 / PŘEHLED</span><h2>Forma týmu</h2><p>Čeká na napojení výsledků.</p></section><section class="panel"><span class="kicker">04 / TABULKA</span><h2>Postavení týmu</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">05 / HRÁČI</span><h2>Lídři produktivity</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">06 / BRANKÁŘI</span><h2>Brankáři</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">07 / SOUPISKA</span><h2>Aktuální soupiska</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">08 / NOVINKY</span><h2>Klubové novinky</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">09 / ANALYTIKA</span><h2>Pokročilé statistiky</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">10 / GSAx</span><h2>Pokročilé statistiky brankářů</h2><p>Načítám…</p></section><section class="panel"><span class="kicker">11 / HRÁČSKÁ ANALYTIKA</span><h2>Individuální xG</h2><p>Načítám…</p></section></div><p class="notice">Vývojový náhled · živé rozhraní v testování · pouze Dallas má vlastní obrazový banner.</p></main><script src="themes.js"></script><script>
 const NHL_TEAMS=[['ANA','Anaheim Ducks'],['BOS','Boston Bruins'],['BUF','Buffalo Sabres'],['CGY','Calgary Flames'],['CAR','Carolina Hurricanes'],['CHI','Chicago Blackhawks'],['COL','Colorado Avalanche'],['CBJ','Columbus Blue Jackets'],['DAL','Dallas Stars'],['DET','Detroit Red Wings'],['EDM','Edmonton Oilers'],['FLA','Florida Panthers'],['LAK','Los Angeles Kings'],['MIN','Minnesota Wild'],['MTL','Montréal Canadiens'],['NSH','Nashville Predators'],['NJD','New Jersey Devils'],['NYI','New York Islanders'],['NYR','New York Rangers'],['OTT','Ottawa Senators'],['PHI','Philadelphia Flyers'],['PIT','Pittsburgh Penguins'],['SJS','San Jose Sharks'],['SEA','Seattle Kraken'],['STL','St. Louis Blues'],['TBL','Tampa Bay Lightning'],['TOR','Toronto Maple Leafs'],['UTA','Utah Mammoth'],['VAN','Vancouver Canucks'],['VGK','Vegas Golden Knights'],['WSH','Washington Capitals'],['WPG','Winnipeg Jets']];
 const names=new Map(NHL_TEAMS);
@@ -122,8 +139,17 @@ async function loadClub(){
  controller?.abort();controller=new AbortController();const signal=controller.signal;
  panels.forEach(p=>p.textContent='Načítám…');
  const timer=setTimeout(()=>controllerForRequest.abort(),12000),controllerForRequest=controller;
- const show=(i,value)=>{if(id===requestId){panels[i].textContent=value;}else{return;}
+ const show=(i,value,game)=>{if(id===requestId){panels[i].textContent=value;}else{return;}
  if(code!=='DAL'||typeof panels[i].replaceChildren!=='function'||typeof panels[i].setAttribute!=='function')return;
+ if((i===0||i===1)&&game&&[game.awayTeam?.abbrev,game.homeTeam?.abbrev].every(t=>names.has(t))){
+ const hidden=document.createElement('span');hidden.hidden=true;hidden.textContent=value;
+ const board=document.createElement('span');board.className='scoreboard';board.setAttribute('aria-hidden','true');
+ const team=t=>{const el=document.createElement('span');el.className='score-team';const img=document.createElement('img');img.src='https://assets.nhle.com/logos/nhl/svg/'+t.abbrev+'_dark.svg';img.alt='';img.width=40;img.height=40;img.addEventListener('error',()=>{img.hidden=true});const label=document.createElement('span');label.textContent=names.get(t.abbrev);el.append(img,label);return el};
+ const center=document.createElement('strong');center.className='score-value';center.textContent=i===0?game.awayTeam.score+':'+game.homeTeam.score:'VS';
+ board.append(team(game.awayTeam),center,team(game.homeTeam));panels[i].replaceChildren(hidden,board);
+ if(i===1){const date=document.createElement('span');date.className='match-date';date.setAttribute('aria-hidden','true');date.textContent=new Date(game.startTimeUTC).toLocaleString('cs-CZ',{timeZone:'Europe/Prague',day:'numeric',month:'numeric',hour:'2-digit',minute:'2-digit'});panels[i].append(date)}
+ return;
+ }
  if(i===4||i===5){
  const entries=value.split(' | ').map(s=>s.match(/^(.+?) · (.+)$/));
  if(entries.some(e=>!e))return;
@@ -139,6 +165,7 @@ async function loadClub(){
  parts.push(separator(' · '));
  const entries=i===8?fields.slice(2):body.split(' | ');
  entries.forEach((entry,j)=>{if(j)parts.push(separator(i===8?' · ':' | '));const row=document.createElement('span');row.className='metric-row';row.textContent=entry;
+ if(i===8){const split=entry.indexOf(': ');if(split>0){const strong=document.createElement('strong');strong.textContent=entry.slice(split+2);row.textContent=entry.slice(0,split+2);row.append(strong)}}
  if(i===8){const match=entry.match(/: (\d+(?:\.\d+)?) %$/);if(match&&Number(match[1])<=100){const track=document.createElement('span');track.className='metric-track';track.setAttribute('aria-hidden','true');const fill=document.createElement('span');fill.className='metric-fill';fill.style.width=Number(match[1])+'%';track.append(fill);row.append(track)}}
  parts.push(row)});panels[i].replaceChildren(...parts);return;
  }
@@ -159,8 +186,8 @@ async function loadClub(){
  const games=[...new Map(d.games.filter(valid).map(g=>[String(g.id),g])).values()].sort((a,b)=>Date.parse(a.startTimeUTC)-Date.parse(b.startTimeUTC));
  const past=games.filter(g=>['OFF','FINAL'].includes(g.gameState)&&score(g)&&Date.parse(g.startTimeUTC)<=Date.now()).reverse();
  const next=games.find(g=>['FUT','PRE'].includes(g.gameState)&&Date.parse(g.startTimeUTC)>Date.now());
- show(0,past.length?label(past[0]):'Výsledek není dostupný.');
- show(1,next?(names.get(next.awayTeam.abbrev)||next.awayTeam.abbrev)+' – '+(names.get(next.homeTeam.abbrev)||next.homeTeam.abbrev)+' · '+new Date(next.startTimeUTC).toLocaleString('cs-CZ',{timeZone:'Europe/Prague'}):'Nadcházející zápas není dostupný.');
+ show(0,past.length?label(past[0]):'Výsledek není dostupný.',past[0]);
+ show(1,next?(names.get(next.awayTeam.abbrev)||next.awayTeam.abbrev)+' – '+(names.get(next.homeTeam.abbrev)||next.homeTeam.abbrev)+' · '+new Date(next.startTimeUTC).toLocaleString('cs-CZ',{timeZone:'Europe/Prague'}):'Nadcházející zápas není dostupný.',next);
  const form=n=>past.slice(0,n).map(g=>((g.homeTeam.abbrev===code)===(g.homeTeam.score>g.awayTeam.score))?'V':(['OT','SO'].includes(g.gameOutcome?.lastPeriodType)?'PP':g.gameOutcome?.lastPeriodType==='REG'?'P':'P?')).join(' ');
  show(2,past.length?'Posledních '+Math.min(5,past.length)+': '+form(5)+' · Posledních '+Math.min(10,past.length)+': '+form(10):'Forma není dostupná.');
  }catch{[0,1,2].forEach(i=>show(i,'Data nejsou dostupná.'))}})(),
